@@ -3,7 +3,7 @@
 /* Controllers */
 
 
-angular.OrdersApp.controller('ListOrdersCtrl', function ($scope, OrderService) {
+$451.app.controller('ListOrdersCtrl', function ($scope, OrderService) {
 	console.log("loading list ctrl");
 
 	$scope.orders = OrderService.getAllOrders();
@@ -11,8 +11,11 @@ angular.OrdersApp.controller('ListOrdersCtrl', function ($scope, OrderService) {
 		return encodeURIComponent(val);
 	};	
 });
+$451.app.controller('LoginCtrl', function LoginCtrl($scope, $http, Login) {
+    $scope.Login = function() {	Login.save($scope.user) };
+});
 
-angular.OrdersApp.controller('OrderDetailsCtrl', function ($scope, $routeParams, OrderService) {
+$451.app.controller('OrderDetailsCtrl', function ($scope, $routeParams, OrderService) {
 	console.log("loading details ctrl");
 	$scope.order = OrderService.getOneOrder($routeParams.orderid);
 	$scope.editItem = false;
