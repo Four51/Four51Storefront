@@ -3,7 +3,7 @@
 /* Services */
 
 angular.OrdersApp.factory('OrderService', function ($resource) {
-	var orderapi = $resource('/api/order/:orderid', { orderid: '@ID' }, {
+	var orderapi = $resource('/api/order/AppName/:orderid', { orderid: '@ID' }, {
 		'save': { method: 'PUT' },
 		'saveNew': { method: 'POST' }
 	});
