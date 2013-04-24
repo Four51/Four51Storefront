@@ -2,7 +2,7 @@
 
 /* Services */
 
-myapp.factory('OrderService', function ($resource) {
+$451.app.factory('OrderService', function ($resource) {
     var orderapi = $resource('/api/451order/order/:orderid', { orderid: '@ID' }, {
 		'save': { method: 'PUT' },
 		'saveNew': { method: 'POST' }
@@ -46,11 +46,11 @@ myapp.factory('OrderService', function ($resource) {
 	}
 });
 
-myapp.factory('OrderStats', function($resource, $http) {
+$451.app.factory('OrderStats', function($resource, $http) {
 	// query is not necessary here. it's just an example of how to add other methods
 	return $resource('/api/451order/orderstats',{},{ query: {method: 'GET', params: {}, isArray: true}});
 });
 
-myapp.factory('Login', function($resource){
+$451.app.factory('Login', function($resource){
 	return $resource('/api/451order/login');
 });

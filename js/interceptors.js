@@ -1,7 +1,7 @@
 'use strict'
 
 
-myapp.config(function($httpProvider) {
+$451.app.config(function($httpProvider) {
 	$httpProvider.interceptors.push(function($q, $rootScope) {
 		return {
 			'request': function(config) {

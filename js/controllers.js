@@ -3,7 +3,7 @@
 /* Controllers */
 
 
-myapp.controller('ListOrdersCtrl', function ($scope, OrderService) {
+$451.app.controller('ListOrdersCtrl', function ($scope, OrderService) {
 	console.log("loading list ctrl");
 
 	$scope.orders = OrderService.getAllOrders();
@@ -12,7 +12,7 @@ myapp.controller('ListOrdersCtrl', function ($scope, OrderService) {
 	};	
 });
 
-myapp.controller('Login', function LoginCtrl($scope, $http, Login) {
+$451.app.controller('Login', function LoginCtrl($scope, $http, Login) {
 	$scope.Login = function() {
 		Login.save($scope.user, function(response) {
 			//console.dir(response);
@@ -20,7 +20,7 @@ myapp.controller('Login', function LoginCtrl($scope, $http, Login) {
 	};
 });
 
-myapp.controller('OrderDetailsCtrl', function ($scope, $routeParams, OrderService) {
+$451.app.controller('OrderDetailsCtrl', function ($scope, $routeParams, OrderService) {
 	console.log("loading details ctrl");
 	$scope.order = OrderService.getOneOrder($routeParams.orderid);
 	$scope.editItem = false;
@@ -43,7 +43,7 @@ myapp.controller('OrderDetailsCtrl', function ($scope, $routeParams, OrderServic
 	}
 });
 
-myapp.controller('OrderStats', function OrderStatsCtrl($scope, $cookies, $http, $dialog, OrderStats) {
+$451.app.controller('OrderStats', function OrderStatsCtrl($scope, $cookies, $http, $dialog, OrderStats) {
 	$scope.orderstats = OrderStats.query();
 	$scope.standardorders = 'Standard Orders';
 	$scope.openDialog = function(item) {

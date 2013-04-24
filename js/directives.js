@@ -2,7 +2,7 @@
 
 /* Directives */
 
-myapp.directive('authorization', function($location, $dialog) {
+$451.app.directive('authorization', function($location, $dialog) {
 	var obj = {
 		restrict: 'C',
 		link: function(scope, elem, attrs) {
