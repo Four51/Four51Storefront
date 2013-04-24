@@ -3,7 +3,7 @@
 /* Controllers */
 
 
-$451.app.controller('ListOrdersCtrl', function ($scope, OrderService) {
+myapp.controller('ListOrdersCtrl', function ($scope, OrderService) {
 	console.log("loading list ctrl");
 
 	$scope.orders = OrderService.getAllOrders();
@@ -11,11 +11,16 @@ $451.app.controller('ListOrdersCtrl', function ($scope, OrderService) {
 		return encodeURIComponent(val);
 	};	
 });
-$451.app.controller('LoginCtrl', function LoginCtrl($scope, $http, Login) {
-    $scope.Login = function() {	Login.save($scope.user) };
+
+myapp.controller('Login', function LoginCtrl($scope, $http, Login) {
+	$scope.Login = function() {
+		Login.save($scope.user, function(response) {
+			//console.dir(response);
+		});
+	};
 });
 
-$451.app.controller('OrderDetailsCtrl', function ($scope, $routeParams, OrderService) {
+myapp.controller('OrderDetailsCtrl', function ($scope, $routeParams, OrderService) {
 	console.log("loading details ctrl");
 	$scope.order = OrderService.getOneOrder($routeParams.orderid);
 	$scope.editItem = false;
@@ -38,4 +43,11 @@ $451.app.controller('OrderDetailsCtrl', function ($scope, $routeParams, OrderSer
 	}
 });
 
+myapp.controller('OrderStats', function OrderStatsCtrl($scope, $cookies, $http, $dialog, OrderStats) {
+	$scope.orderstats = OrderStats.query();
+	$scope.standardorders = 'Standard Orders';
+	$scope.openDialog = function(item) {
+		var d = $dialog.dialog({ modalFade: false }).open('partials/modal.html', 'Modal');
+	};
+});
 
