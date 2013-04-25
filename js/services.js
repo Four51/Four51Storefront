@@ -1,9 +1,11 @@
 'use strict';
 
 /* Services */
+$451.app.factory('CategoryService', function($resource){
 
+})
 $451.app.factory('OrderService', function ($resource) {
-    var orderapi = $resource('/api/451order/order/:orderid', { orderid: '@ID' }, {
+    var orderapi = $resource($451.apiURL('order/:orderid'), { orderid: '@ID' }, {
 		'save': { method: 'PUT' },
 		'saveNew': { method: 'POST' }
 	});
@@ -48,9 +50,9 @@ $451.app.factory('OrderService', function ($resource) {
 
 $451.app.factory('OrderStats', function($resource, $http) {
 	// query is not necessary here. it's just an example of how to add other methods
-	return $resource('/api/451order/orderstats',{},{ query: {method: 'GET', params: {}, isArray: true}});
+	return $resource($451.apiURL('orderstats'),{},{ query: {method: 'GET', params: {}, isArray: true}});
 });
 
 $451.app.factory('Login', function($resource){
-	return $resource('/api/451order/login');
+	return $resource($451.apiURL('login'));
 });

@@ -11,8 +11,7 @@ var $451 = (function() {
 		});
 
 		return result;
-	};
-
+	}
 
 	function getFromSessionOrLocalStorage(key) {
 		// so when a value is set to storage that is null the value stored is the string 'undefined'. that sucks
@@ -21,14 +20,14 @@ var $451 = (function() {
 			return session;
 
 		return localStorage[key] || null;
-	};
+	}
 
 	function setToSessionOrLocalStorage(key,value,persist) {
 		persist ?
 			localStorage[key] = value :
 			sessionStorage[key] = value;
 		return value;
-	};
+	}
 
 	return {
 		filter: {
@@ -46,6 +45,12 @@ var $451 = (function() {
 		},
 		set: function(key,value,persist) {
 			setToSessionOrLocalStorage(key,value,persist);
-		}
+		},
+        clear: function(){
+            console.log('clear storage');
+            localStorage.clear();
+            sessionStorage.clear();
+        },
+        apiURL: function(path){return '/api/451Order/' + path;} //TODO:needs some smarts to build this
 	};
 })();
