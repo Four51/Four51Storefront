@@ -11,7 +11,10 @@ $451.app.controller('ListOrdersCtrl', function ($scope, OrderService) {
 		return encodeURIComponent(val);
 	};	
 });
-
+$451.app.controller('CategoryCtrl', function ($scope) {
+    console.log("loading category ctrl");
+    $scope.hello = 'fu';
+});
 $451.app.controller('Login', function LoginCtrl($scope, $http, Login) {
 	$scope.Login = function() {
 		Login.save($scope.user, function(response) {
