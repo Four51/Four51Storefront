@@ -1,6 +1,6 @@
 'use strict';
 
-$451.app.controller('CategoryCtrl', function ($scope) {
+$451.app.controller('CategoryCtrl', function ($scope, CategoryService) {
     console.log("loading category ctrl");
-    $scope.hello = 'fu';
+    $scope.categories = CategoryService.getCategories();
 });

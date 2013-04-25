@@ -6,8 +6,13 @@ $451.app.factory('OrderStatsService', function($resource, $http) {
 });
 'use strict';
 
-/* Services */
 $451.app.factory('CategoryService', function($resource){
+    var catservice = $resource($451.apiURL('category'));
+    return {
+        getCategories: function(){
+            return catservice.query();
+        }
+    }
 
 });
 
