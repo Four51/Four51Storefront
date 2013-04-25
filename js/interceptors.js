@@ -10,7 +10,7 @@ $451.app.config(function($httpProvider) {
 				return config;
 			},
 			'response': function(response) {
-				if (response.status === 202) {
+				if (response.data.AuthenticationToken) {
 					$451.set('auth', response.data.AuthenticationToken, false);
 				}
 				return response;
