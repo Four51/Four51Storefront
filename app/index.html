@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" ng-app="451orders">
+<head>
+    <meta charset="utf-8">
+    <title>My AngularJS App</title>
+    <link rel="stylesheet" href="css/app.css"/>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<body class="authorization" ng-cloak>
+  <ul class="menu">
+    <li><a href="#/listOrders">List Orders</a></li>
+    <li><a href="#/category">category</a></li>
+    <li><a href="#/orderstats">order stats</a></li>
+    <li><a href="#" onclick="$451.clear()">log out</a> </li>
+  </ul>
+
+  <div ng-view></div>
+	
+    <!-- In production use:
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+    -->
+
+  <script src="js/451.js"></script>
+  <script src="lib/angular/angular.1.1.4.js"></script>
+  <script src="lib/angular/ui-bootstrap-0.2.0.js"></script>
+  <script src="lib/angular/angular-cookies.js"></script>
+  <script src="lib/angular/angular-resource.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/directives.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/config.js"></script>
+ <script src="js/interceptors.js"></script>
+  <script src="js/routing.js"></script>
+  <script src="js/controllers/categoryCtrl.js"></script>
+  <script src="js/controllers/listOrdersCtrl.js"></script>
+  <script src="js/controllers/loginCtrl.js"></script>
+  <script src="js/controllers/orderDetailsCtrl.js"></script>
+  <script src="js/controllers/orderStatsCtrl.js"></script>
+  <script src="js/controllers/controllers.js"></script>
+  <script src="js/services/orderService.js"></script>
+  <script src="js/services/services.js"></script>
+</body>
+</html>
