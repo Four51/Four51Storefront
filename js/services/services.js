@@ -9,7 +9,7 @@ $451.app.factory('OrderStatsService', function($resource, $http) {
 $451.app.factory('CategoryService', function($resource){
     var catservice = $resource($451.apiURL('category'));
     return {
-        getCategories: function(){
+        get: function(){
             return catservice.query();
         }
     }
