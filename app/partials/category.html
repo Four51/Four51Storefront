@@ -1,5 +1,11 @@
 Categories ({{categories.length}}):
-
+{{categoryInteropID}}
 <ul>
-    <li ng-repeat="c in categories">{{c.Name}}</li>
+    <li ng-repeat="c in categories"><a href=#/category/{{c.InteropID}}>{{c.Name}}</a> </li>
 </ul>
+
+Products<br>
+        <ul>
+            <li>product 1</li>
+            <li>product 2</li>
+        </ul>

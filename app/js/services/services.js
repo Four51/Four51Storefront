@@ -16,6 +16,17 @@ $451.app.factory('CategoryService', function($resource){
 
 });
 
+$451.app.factory('ProductService', function($resource){
+    var p = [{name: 'product1', description: 'product1 desc'},{name: 'product1', description: 'product1 desc'} ];
+
+    return {
+       get: function(){
+           return p;
+       }
+   }
+
+});
+
 $451.app.factory('LoginService', function($resource){
     return $resource($451.apiURL('login'));
 });
