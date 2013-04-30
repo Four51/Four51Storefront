@@ -21,7 +21,10 @@ $451.app.factory('ProductService', function($resource){
     return {
        get: function(categoryInteropID, searchTerm){
            return p;
-       }
+       },
+        getOne: function(interopID){
+            return p[0];
+        }
    }
 
 });

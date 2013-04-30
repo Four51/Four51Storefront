@@ -6,6 +6,6 @@ Categories ({{categories.length}}):
 
 Products<br>
         <ul>
-            <li ng-repeat="p in products">{{p.Name}}</li>
+            <li ng-repeat="p in products"><a href=#/product/{{p.InteropID}}>{{p.Name}}</a></li>
 
         </ul>
