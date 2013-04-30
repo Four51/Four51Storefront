@@ -13,14 +13,13 @@ $451.app.factory('CategoryService', function($resource){
             return catservice.query();
         }
     }
-
 });
 
 $451.app.factory('ProductService', function($resource){
-    var p = [{name: 'product1', description: 'product1 desc'},{name: 'product1', description: 'product1 desc'} ];
+    var p = [{Name: 'product1', Description: 'product1 desc', InteropID: 'pinterop1'},{Name: 'product2', Description: 'product2 desc', InteropID: 'pinterop2'} ];
 
     return {
-       get: function(){
+       get: function(categoryInteropID, searchTerm){
            return p;
        }
    }
