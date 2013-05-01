@@ -5,11 +5,37 @@ $451.app.factory('OrderStatsService', function($resource, $http) {
     return $resource($451.apiURL('orderstats'),{},{ query: {method: 'GET', params: {}, isArray: true}});
 });
 
-$451.app.factory('CategoryService', function($resource){
+$451.app.factory('CategoryService', function($resource, $rootScope){
     var catservice = $resource($451.apiURL('category'));
+    var cats = null;
+
+    $rootScope.$on('LogoutEvent', function(event, e){
+        cats = null
+        console.log('logout called - category service');
+    });
+    $rootScope.$on('LoginEvent', function(event, e){
+        cats = null;
+        console.log('login called - category service');
+    })
     return {
         get: function(){
-            return catservice.query();
+            if(!cats){
+                cats = catservice.query();
+                console.log('calling api for categories');
+            }else{
+                console.log('getting cached categories');
+            }
+
+            return cats;
+        },
+        listProducts: function(){
+            //cats[i].products =
+            //return api call
+            //cache
+        },
+        clearCache: function(){
+            debugger;
+            cats = null;
         }
     }
 });

@@ -1,9 +1,9 @@
 'use strict';
 
-$451.app.controller('LoginCtrl', function LoginCtrl($scope, $http, LoginService) {
+$451.app.controller('LoginCtrl', function LoginCtrl($rootScope, $scope, $http, LoginService) {
     $scope.Login = function() {
         LoginService.save($scope.user, function(response) {
-            //console.dir(response);
+            $rootScope.$broadcast('LoginEvent');//console.dir(response);
         });
     };
 });

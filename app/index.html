@@ -8,11 +8,11 @@
 </head>
 
 <body class="authorization" ng-cloak>
-  <ul class="menu">
+  <ul class="menu" ng-controller="NavCtrl">
     <li><a href="#/listOrders">List Orders</a></li>
     <li><a href="#/catalog">category</a></li>
     <li><a href="#/orderstats">order stats</a></li>
-    <li><a href="#" onclick="$451.clear()">log out</a> </li>
+    <li><a href="#" ng-click="Logout()">log out</a> </li>
   </ul>
 
   <div ng-view></div>
