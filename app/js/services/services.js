@@ -54,39 +54,35 @@ $451.app.factory('CategoryService', function($resource, $rootScope, ProductServi
                 populateCats();
             }else{
                 console.log('getting cached categories');
-                var found = findCat({SubCategories: cats}, interopID)
-                //if(!found || !found.Products){
-                if(!found)
+                var foundCat = findCat({SubCategories: cats}, interopID)
+
+                if(!foundCat) //populateCats is probably not back yet
                 {
                     console.log('not found');
-                    found = catservice.get({ interopID: interopID }, function(){
-                        found.Products = [{Name: 'product1 from success', Description: 'product1 desc', InteropID: 'pinterop1'},{Name: 'product2', Description: 'product2 desc', InteropID: 'pinterop2'} ];
-                    }); //get from api and populate products into tree if cat
-                    //catFromAPI.products = [{Name: 'product1', Description: 'product1 desc', InteropID: 'pinterop1'},{Name: 'product2', Description: 'product2 desc', InteropID: 'pinterop2'} ];
-                    //return catFromAPI;
+                    foundCat = catservice.get({ interopID: interopID }, function(){
+                        foundCat.Products = ProductService.search(foundCat.InteropID, '');
+                    });
                 }
-                if(!found.Products)
+                if(!foundCat.Products && foundCat.InteropID)
                 {
                     console.log('products not found')
-                    found.Products = ProductService.search();
+                    foundCat.Products = ProductService.search(foundCat.InteropID, '');
                 }
-                return found;
+                return foundCat;
             }
         }
     }
 });
 
 $451.app.factory('ProductService', function($resource){
-    var productAPI = $resource($451.apiURL('product'));
-
-    var p = [{Name: 'product1', Description: 'product1 desc', InteropID: 'pinterop1'},{Name: 'product2', Description: 'product2 desc', InteropID: 'pinterop2'} ];
+    var productAPI = $resource($451.apiURL('product'), {}, {'search': {method: 'POST', isArray:true}});
 
     return {
        search: function(categoryInteropID, searchTerm){
-           return productAPI.query();
+           return productAPI.search({'CategoryInteropID': categoryInteropID, 'SearchTerms': searchTerm});
        },
         getOne: function(interopID){
-            return p[0];
+
         }
    }
 });
