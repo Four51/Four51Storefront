@@ -16,26 +16,49 @@ $451.app.factory('CategoryService', function($resource, $rootScope){
     $rootScope.$on('LoginEvent', function(event, e){
         cats = null;
         console.log('login called - category service');
-    })
-    return {
-        get: function(){
-            if(!cats){
-                cats = catservice.query();
-                console.log('calling api for categories');
-            }else{
-                console.log('getting cached categories');
-            }
+    });
 
+    function populateCats(){
+        if(!cats){
+            cats = catservice.query();
+            console.log('calling api for categories');
+        }else{
+            console.log('getting cached categories');
+        }
+    };
+    function findCat(parent, interopID){
+        if(parent.InteropID === interopID)
+            return parent;
+        var foundCat;
+        for(var i = 0; i < parent.SubCategories.length; i++){
+            var child = parent.SubCategories[i];
+            if(child.InteropID === interopID)
+                return child;
+
+            if(child.SubCategories){
+                foundCat = findCat(child, interopID)
+                if(foundCat)
+                    return foundCat;
+            }
+        }
+    }
+    return {
+        tree: function(){
+            populateCats();
             return cats;
         },
-        listProducts: function(){
+        getOne: function(interopID){
+            populateCats();
+            if(!interopID)
+                return {InteropID: 'toplevel cat', SubCategories: cats};
+
+            console.log('finding one: ' + interopID)
+
+            return findCat({InteropID: 'topcat', SubCategories: cats}, interopID)
+            //return {InteropID: interopID, Products: [{Name:'product1', Description:'product 1 description', InteropID: 'p1'},{Name:'product2', Description:'product 2 description', InteropID:'p2'} ]}
             //cats[i].products =
             //return api call
             //cache
-        },
-        clearCache: function(){
-            debugger;
-            cats = null;
         }
     }
 });

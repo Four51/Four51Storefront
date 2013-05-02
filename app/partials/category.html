@@ -1,11 +1,18 @@
-Categories ({{categories.length}}):
-{{categoryInteropID}}
+<script type="text/ng-template" id="categoryTemplate.html">
+    <a href=#/catalog/{{category.InteropID}}>{{category.Name}}</a>
+
+    <ul><li ng-repeat="category in category.SubCategories " ng-include="'categoryTemplate.html'"></li></ul>
+</script>
+
+<ul><li ng-repeat="category in tree" ng-include="'categoryTemplate.html'"></li></ul>
+
+current category: <b>{{currentCategory.Name}}</b>: {{currentCategory.InteropID}}
+Products<br>
 <ul>
-    <li ng-repeat="c in categories"><a href=#/catalog/{{c.InteropID}}>{{c.Name}}</a> </li>
+    <li ng-repeat="p in currentCategory.Products"><a href=#/product/{{p.InteropID}}>{{p.Name}}</a></li>
 </ul>
 
-Products<br>
-        <ul>
-            <li ng-repeat="p in products"><a href=#/product/{{p.InteropID}}>{{p.Name}}</a></li>
 
-        </ul>
+
+
+
