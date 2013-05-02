@@ -5,10 +5,10 @@ $451.app.factory('OrderStatsService', function($resource, $http) {
     return $resource($451.apiURL('orderstats'),{},{ query: {method: 'GET', params: {}, isArray: true}});
 });
 
-$451.app.factory('CategoryService', function($resource, $rootScope){
-    var catservice = $resource($451.apiURL('category'));
+$451.app.factory('CategoryService', function($resource, $rootScope, ProductService){
+    var catservice = $resource($451.apiURL('category/:interopID', {interopID: '@ID'}));
     var cats = null;
-
+    var catsPopulateCompleted = false;
     $rootScope.$on('LogoutEvent', function(event, e){
         cats = null
         console.log('logout called - category service');
@@ -20,13 +20,15 @@ $451.app.factory('CategoryService', function($resource, $rootScope){
 
     function populateCats(){
         if(!cats){
-            cats = catservice.query();
+            cats = catservice.query(function(){catsPopulateCompleted = true; console.log('populate category success');});
             console.log('calling api for categories');
         }else{
             console.log('getting cached categories');
         }
     };
     function findCat(parent, interopID){
+        if(!interopID)
+            return {SubCategories: cats};
         if(parent.InteropID === interopID)
             return parent;
         var foundCat;
@@ -48,17 +50,28 @@ $451.app.factory('CategoryService', function($resource, $rootScope){
             return cats;
         },
         getOne: function(interopID){
-            populateCats();
-            if(!interopID)
-                return {InteropID: 'toplevel cat', SubCategories: cats};
-
-            console.log('finding one: ' + interopID)
-
-            return findCat({InteropID: 'topcat', SubCategories: cats}, interopID)
-            //return {InteropID: interopID, Products: [{Name:'product1', Description:'product 1 description', InteropID: 'p1'},{Name:'product2', Description:'product 2 description', InteropID:'p2'} ]}
-            //cats[i].products =
-            //return api call
-            //cache
+            if(!cats){ //starting session here, so no cached cats
+                populateCats();
+            }else{
+                console.log('getting cached categories');
+                var found = findCat({SubCategories: cats}, interopID)
+                //if(!found || !found.Products){
+                if(!found)
+                {
+                    console.log('not found');
+                    found = catservice.get({ interopID: interopID }, function(){
+                        found.Products = [{Name: 'product1 from success', Description: 'product1 desc', InteropID: 'pinterop1'},{Name: 'product2', Description: 'product2 desc', InteropID: 'pinterop2'} ];
+                    }); //get from api and populate products into tree if cat
+                    //catFromAPI.products = [{Name: 'product1', Description: 'product1 desc', InteropID: 'pinterop1'},{Name: 'product2', Description: 'product2 desc', InteropID: 'pinterop2'} ];
+                    //return catFromAPI;
+                }
+                if(!found.Products)
+                {
+                    console.log('products not found')
+                    found.Products = ProductService.search();
+                }
+                return found;
+            }
         }
     }
 });
@@ -69,7 +82,7 @@ $451.app.factory('ProductService', function($resource){
     var p = [{Name: 'product1', Description: 'product1 desc', InteropID: 'pinterop1'},{Name: 'product2', Description: 'product2 desc', InteropID: 'pinterop2'} ];
 
     return {
-       get: function(categoryInteropID, searchTerm){
+       search: function(categoryInteropID, searchTerm){
            return productAPI.query();
        },
         getOne: function(interopID){
