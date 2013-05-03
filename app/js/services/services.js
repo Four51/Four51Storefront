@@ -12,7 +12,7 @@ $451.app.factory('CategoryService', function($resource, $rootScope, ProductServi
     $rootScope.$on('LogoutEvent', function(event, e){
         cats = null;
     });
-    $rootScope.$on('LoginEvent', function(event, e){
+    $rootScope.$on('event:auth-loginRequired', function(event, e){
         cats = null;
     });
 
