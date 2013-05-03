@@ -9,8 +9,9 @@ $451.app.directive('authorization', function($location, $dialog) {
 			scope.$on('event:auth-loginRequired', function() {
 				$location.path('login');
 			});
-			scope.$on('event:auth-loginConfirmed', function() {
-				console.log('auth confirmed');
+			scope.$on('event:auth-loginConfirmed', function(scope, url) {
+				var location = url.split('/');
+				$location.path(location[location.length-1]);
 			});
 		}
 	};

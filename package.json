@@ -1,11 +1,11 @@
 {
-  "name": "Facial",
+  "name": "451Order",
   "description": "The Four51 SPA Application",
   "version": "0.1.0",
   "homepage": "http://www.four51.com/",
   "repository": {
     "type": "git",
-    "url": "git://github.com/rockittsauce/facial.git"
+    "url": "git://github.com/jilse/451order.git"
   },
   "contributors": [
     {
