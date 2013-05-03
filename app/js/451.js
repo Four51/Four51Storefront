@@ -16,7 +16,7 @@ var $451 = (function() {
 	function getFromSessionOrLocalStorage(key) {
 		// so when a value is set to storage that is null the value stored is the string 'undefined'. that sucks
 		var session = sessionStorage[key];
-		if (session != null && session != 'undefined')
+		if (session != null && session != 'undefined' && session != 'null')
 			return session;
 
 		return localStorage[key] || null;
@@ -47,7 +47,6 @@ var $451 = (function() {
 			setToSessionOrLocalStorage(key,value,persist);
 		},
         clear: function(){
-            console.log('clear storage');
             localStorage.clear();
             sessionStorage.clear();
         },
