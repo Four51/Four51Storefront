@@ -42,23 +42,24 @@
             </div>
         </div>
     </div>
+
     <div class="container-fluid">
         <div class="row-fluid">
             <div ng-view></div>
         </div>
     </div>
 
-        <div ng-controller="ErrorCtrl">
-            <div class="container-fluid" modal="isError" close="close()" options="opts">
-                <h3 class="text-center">{{error.Message}}</h3>
-                <div class="well">
-                    <h5>{{error.ExceptionMessage}}</h5>
-                    <h6>({{error.ExceptionType}})</h6>
-                </div>
-                <label><small class="text-warning" ng-click="isCollapsed = !isCollapsed">Stack Trace</small></label>
-                <p class="help-block" collapse="!isCollapsed"><small class="text-error">{{error.StackTrace}}</small></p>
+    <div ng-controller="ErrorCtrl">
+        <div class="container-fluid" modal="isError" close="close()" options="opts">
+            <h3 class="text-center">{{error.Message}}</h3>
+            <div class="well">
+                <h5>{{error.ExceptionMessage}}</h5>
+                <h6>({{error.ExceptionType}})</h6>
             </div>
+            <label><small class="text-warning" ng-click="isCollapsed = !isCollapsed">Stack Trace</small></label>
+            <p class="help-block" collapse="!isCollapsed"><small class="text-error">{{error.StackTrace}}</small></p>
         </div>
+    </div>
     <!-- In production use:
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
     -->
