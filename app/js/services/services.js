@@ -14,22 +14,20 @@ $451.app.factory('OrderSearchService', function($resource, $http) {
 $451.app.factory('CategoryService', function($resource, $rootScope, ProductService){
     var catservice = $resource($451.apiURL('category/:interopID', {interopID: '@ID'}));
     var cats = null;
-    var catsPopulateCompleted = false;
+
     $rootScope.$on('LogoutEvent', function(event, e){
-        cats = null
-        console.log('logout called - category service');
-    });
-    $rootScope.$on('LoginEvent', function(event, e){
         cats = null;
-        console.log('login called - category service');
+    });
+    $rootScope.$on('event:auth-loginRequired', function(event, e){
+        cats = null;
     });
 
     function populateCats(){
         if(!cats){
-            cats = catservice.query(function(){catsPopulateCompleted = true; console.log('populate category success');});
+            cats = catservice.query();
             console.log('calling api for categories');
         }else{
-            console.log('getting cached categories');
+
         }
     };
     function findCat(parent, interopID){
@@ -59,7 +57,7 @@ $451.app.factory('CategoryService', function($resource, $rootScope, ProductServi
             if(!cats){ //starting session here, so no cached cats
                 populateCats();
             }else{
-                console.log('getting cached categories');
+
                 var foundCat = findCat({SubCategories: cats}, interopID)
 
                 if(!foundCat) //populateCats is probably not back yet
@@ -71,7 +69,6 @@ $451.app.factory('CategoryService', function($resource, $rootScope, ProductServi
                 }
                 if(!foundCat.Products && foundCat.InteropID)
                 {
-                    console.log('products not found')
                     foundCat.Products = ProductService.search(foundCat.InteropID, '');
                 }
                 return foundCat;
@@ -85,6 +82,7 @@ $451.app.factory('ProductService', function($resource){
 
     return {
        search: function(categoryInteropID, searchTerm){
+           console.log('calling product search: category:' + categoryInteropID + ' search: ' + searchTerm)
            return productAPI.search({'CategoryInteropID': categoryInteropID, 'SearchTerms': searchTerm});
        },
         getOne: function(interopID){
