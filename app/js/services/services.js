@@ -6,7 +6,7 @@ $451.app.factory('OrderStatsService', function($resource, $http) {
 });
 
 $451.app.factory('OrderSearchService', function($resource, $http) {
-	return $resource($451.apiURL('orders'), {}, {
+	return $resource($451.apiURL('ordersearch'), {}, {
 		'get': { method: 'GET', isArray: true }
 	});
 });
