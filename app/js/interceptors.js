@@ -25,6 +25,12 @@ $451.app.config(function($httpProvider) {
 				});
 				if (response.status === 401) { // unauthorized
 					$rootScope.$broadcast('event:auth-loginRequired');
+					return false;
+				}
+
+				if (response.status != 200) {
+					$rootScope.$broadcast('event:raise-Error', response);
+					return false;
 				}
 				return response;
 			}
