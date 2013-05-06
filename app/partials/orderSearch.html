@@ -1,29 +1,38 @@
-<div>
-    <h3>Incoming Orders</h3>
-    <h5>Standard Orders</h5>
-    <ul>
+<h3>Incoming Orders</h3>
+<div class="span2">
+    <ul class="well">
+        <li><h5>Standard Orders</h5></li>
         <li ng-repeat="stat in OrderStats | orderstatsFilter:'Standard'">
             <span>{{stat.Status}} <a href="#" ng-click="OrderSearch($event,{{stat}})">({{stat.Count}})</a></span>
         </li>
     </ul>
-    <h5>Replenishment Orders</h5>
-    <ul>
+</div>
+<div class="span3">
+    <ul class="well">
+        <li> <h5>Replenishment Orders</h5></li>
         <li ng-repeat="stat in OrderStats | orderstatsFilter:'Replenishment'">
             <span>{{stat.Status}} <a href="#" ng-click="OrderSearch($event,{{stat}})">({{stat.Count}})</a></span>
         </li>
     </ul>
-    <h5>Price Request</h5>
-    <ul>
+</div>
+<div class="span4">
+    <ul class="well">
+        <li><h5>Price Request</h5></li>
         <li ng-repeat="stat in OrderStats | orderstatsFilter:'PriceRequest'">
             <span>{{stat.Status}} <a href="#" ng-click="OrderSearch($event,{{stat}})">({{stat.Count}})</a></span>
         </li>
     </ul>
 </div>
 
-<div ng-show='displayOrders'>
+<div class="span10" ng-show='displayOrders'>
     <table class="table table-striped table-hover table-bordered">
-        <thead>{{orderSearchStat.Type}} - {{orderSearchStat.Status}}</thead>
+        <thead>{{orderSearchStat.Type}} - {{orderSearchStat.Status}}
+            <tr>
+                <td>ID</td><td>Type</td><td>Status</td><td>Submitted By</td><td>DateCreated/Submitted</td><td>Total</td>
+            </tr>
+        </thead>
         <tbody>
+
             <tr ng-repeat="order in orders">
                 <td><a href="#/order/{{order._ID}}">{{order.ExternalID}}</a></td>
                 <td>{{order.Type}}</td>
