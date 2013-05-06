@@ -28,19 +28,9 @@
 </head>
 
 <body class="authorization" ng-cloak>
+
     <div class="navbar navbar-fixed-top" ng-controller="NavCtrl">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <a class="brand" href="#">{{appname}}</a>
-                <ul class="nav" ng-init="active='catalog'">
-                    <li class="{{(active == 'catalog') && 'active' || ''}}"><a href="#/catalog" ng-click="active = 'catalog'">Category</a></li>
-                    <li class="divider-vertical" />
-                    <li class="{{(active == 'orders') && 'active' || ''}}"><a href="#/orderstats" ng-click="active = 'orders'">Orders</a></li>
-                    <li class="divider-vertical" />
-                    <li><a href="#" ng-click="Logout()">Log Out</a></li>
-                </ul>
-            </div>
-        </div>
+        <ng-include src="template.url" />
     </div>
 
     <div class="container-fluid">
@@ -50,15 +40,7 @@
     </div>
 
     <div ng-controller="ErrorCtrl">
-        <div class="container-fluid" modal="isError" close="close()" options="opts">
-            <h3 class="text-center">{{error.Message}}</h3>
-            <div class="well">
-                <h5>{{error.ExceptionMessage}}</h5>
-                <h6>({{error.ExceptionType}})</h6>
-            </div>
-            <label><small class="text-warning" ng-click="isCollapsed = !isCollapsed">Stack Trace</small></label>
-            <p class="help-block" collapse="!isCollapsed"><small class="text-error">{{error.StackTrace}}</small></p>
-        </div>
+        <ng-include src="template.url" />
     </div>
     <!-- In production use:
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>

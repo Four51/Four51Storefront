@@ -11,6 +11,10 @@ $451.app.factory('OrderSearchService', function($resource, $http) {
 	});
 });
 
+$451.app.factory('OrderService', function($resource, $http) {
+	return $resource($451.apiURL('order/:id'), { id: '@id' });
+});
+
 $451.app.factory('CategoryService', function($resource, $rootScope, ProductService){
     var catservice = $resource($451.apiURL('category/:interopID', {interopID: '@ID'}));
     var cats = null;

@@ -1,0 +1,13 @@
+
+<div class="navbar-inner">
+    <div class="container-fluid">
+        <a class="brand" href="#">{{appname}}</a>
+        <ul class="nav" ng-init="active='catalog'">
+            <li class="{{(active == 'catalog') && 'active' || ''}}"><a href="#/catalog" ng-click="active = 'catalog'">Category</a></li>
+            <li class="divider-vertical" />
+            <li class="{{(active == 'orders') && 'active' || ''}}"><a href="#/orderstats" ng-click="active = 'orders'">Orders</a></li>
+            <li class="divider-vertical" />
+            <li><a href="#" ng-click="Logout()">Log Out</a></li>
+        </ul>
+    </div>
+</div>

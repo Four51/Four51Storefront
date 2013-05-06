@@ -1,0 +1,9 @@
+<div class="container-fluid" modal="isError" close="close()" options="opts">
+    <h3 class="text-center">{{error.Message}}</h3>
+    <div class="well">
+        <h5>{{error.Detail}}</h5>
+        <h6>({{error.Code}})</h6>
+    </div>
+    <label><small class="text-warning" ng-click="isCollapsed = !isCollapsed">Stack Trace</small></label>
+    <p class="help-block" collapse="!isCollapsed"><small class="text-error">{{error.StackTrace}}</small></p>
+</div>

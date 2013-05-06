@@ -7,5 +7,5 @@ $451.app.controller('NavCtrl', function ($rootScope, $scope ) {
         $451.clear();
         $rootScope.$broadcast('LogoutEvent');
     }
-    //$rootScope.$broadcast('LogoutEvent');
+	$scope.template = { url: 'partials/nav.html'};
 });

@@ -9,3 +9,7 @@ $451.app.controller('OrderSearchCtrl', function OrderSearchCtrl($scope, OrderSta
 		$scope.orderSearchStat = stat;
 	};
 });
+
+$451.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $routeParams, OrderService) {
+	$scope.order = OrderService.get({ id: $routeParams.id });
+});

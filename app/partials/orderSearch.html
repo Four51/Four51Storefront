@@ -1,19 +1,19 @@
-<div class="stat_container">
+<div>
     <h3>Incoming Orders</h3>
     <h5>Standard Orders</h5>
-    <ul class="stat_items">
+    <ul>
         <li ng-repeat="stat in OrderStats | orderstatsFilter:'Standard'">
             <span>{{stat.Status}} <a href="#" ng-click="OrderSearch($event,{{stat}})">({{stat.Count}})</a></span>
         </li>
     </ul>
     <h5>Replenishment Orders</h5>
-    <ul class="stat_items">
+    <ul>
         <li ng-repeat="stat in OrderStats | orderstatsFilter:'Replenishment'">
             <span>{{stat.Status}} <a href="#" ng-click="OrderSearch($event,{{stat}})">({{stat.Count}})</a></span>
         </li>
     </ul>
     <h5>Price Request</h5>
-    <ul class="stat_items">
+    <ul>
         <li ng-repeat="stat in OrderStats | orderstatsFilter:'PriceRequest'">
             <span>{{stat.Status}} <a href="#" ng-click="OrderSearch($event,{{stat}})">({{stat.Count}})</a></span>
         </li>
@@ -25,7 +25,7 @@
         <thead>{{orderSearchStat.Type}} - {{orderSearchStat.Status}}</thead>
         <tbody>
             <tr ng-repeat="order in orders">
-                <td>{{order.ExternalID}}</td>
+                <td><a href="#/order/{{order._ID}}">{{order.ExternalID}}</a></td>
                 <td>{{order.Type}}</td>
                 <td>{{order.Status}}</td>
                 <td>{{order.FromUser}}</td>
