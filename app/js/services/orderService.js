@@ -1,5 +1,5 @@
 'use strict';
-
+/*
 $451.app.factory('OrderService', function ($resource) {
     var orderapi = $resource($451.apiURL('order/:orderid'), { orderid: '@ID' }, {
         'save': { method: 'PUT' },
@@ -43,3 +43,4 @@ $451.app.factory('OrderService', function ($resource) {
         }
     }
 });
+    */
