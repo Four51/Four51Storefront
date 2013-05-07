@@ -5,7 +5,7 @@ $451.app.config(function($httpProvider) {
 		var buffer = [];
 		return {
 			'request': function(config) {
-				var auth = $451.get('auth');
+				var auth = $451.getLocal('auth', false);
 				config.headers['Authorization'] = auth == null ? null : auth;
 				return config;
 			},
@@ -16,7 +16,7 @@ $451.app.config(function($httpProvider) {
 				}
 				// bug in FF forced angular to create workaround. hence the headers() function
 				var auth = response.headers()['www-authenticate'];
-				if (auth) $451.set('auth', auth, false);
+				if (auth) $451.setLocal('auth', auth, false);
 				return response;
 			},
 			'responseError': function(response) {

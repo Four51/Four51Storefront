@@ -2,21 +2,23 @@
 $451.app.factory('ProductService', function($resource){
     var productAPI = $resource($451.apiURL('product/:interopID'), {interopID: '@ID'}, {'search': {method: 'POST', isArray:true}});
     console.log('cached declared');
-
-    var cachedProducts = {};//{product3: {Name:'product name', Description: 'product description'},product1: {Name:'product name1', Description: 'product description1'}, product4: {Name:'product name4', Description: 'product description 4'}};
-    function findProduct(interopId){
-        return cachedProducts[0];
+    function cacheProduct(product){
+        $451.setLocal("product-" + product.InteropID, product, true)
+    }
+    function getCachedProduct(interopID){
+        return $451.getLocal("product-" + interopID, true)
     }
     return {
         search: function(categoryInteropID, searchTerm){
+
             console.log('calling product search: category:' + categoryInteropID + ' search: ' + searchTerm)
 
             var products = productAPI.search({'CategoryInteropID': categoryInteropID, 'SearchTerms': searchTerm}, function(){
 
                 for(var i = 0; i < products.length; i++){
 
-                    if(!cachedProducts[products[i].InteropID]){
-                        cachedProducts[products[i].InteropID] = (products[i]);
+                    if(!getCachedProduct(products[i].InteropID)){
+                        cacheProduct(products[i]);
                     }
                 }
             });
@@ -24,13 +26,18 @@ $451.app.factory('ProductService', function($resource){
         },
         getOne: function(interopID){
 
-            if(!cachedProducts[interopID]){
+            var cached = getCachedProduct(interopID);
+            if(!cached){
                 return productAPI.get({interopID: interopID}, function(data){
-                    cachedProducts[interopID] = data;
+                    console.log('putting prodcut to the cache')
+                    cacheProduct(data);
                 });
             }
-            else
-                return cachedProducts[interopID];
+            else{
+                console.log('returning cached product')
+                return cached;
+            }
+
         }
     }
 });
