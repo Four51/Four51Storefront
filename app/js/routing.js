@@ -11,5 +11,5 @@ $451.app.config(['$routeProvider', function($routeProvider) {
             when('/order', { templateUrl: 'partials/orderSearch.html', controller: 'OrderSearchCtrl' }).
 			when('/order/:id', { templateUrl: 'partials/orderView.html', controller: 'OrderViewCtrl' }).
 			when('/login', { templateUrl: 'partials/login.html', controller: 'LoginCtrl' }).
-			otherwise({redirectTo: '/category'});
+			otherwise({redirectTo: '/catalog'});
 	}]);
