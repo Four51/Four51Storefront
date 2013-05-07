@@ -13,25 +13,21 @@ var $451 = (function() {
 		return result;
 	}
 
-	function getLocal(key, isObject) {
-		// so when a value is set to storage that is null the value stored is the string 'undefined'. that sucks
-		//var session = sessionStorage[key];
-		//if (session != null && session != 'undefined' && session != 'null')
-
-        var local = localStorage[key];
+	function getLocalStor(key, isObject) {
+		var local = localStorage[key];
         if(local)
             return isObject ? JSON.parse(local) : local;
         else
             return null;
 	}
+    function getSessionStor(key, isObject){
+        // so when a value is set to storage that is null the value stored is the string 'undefined'. that sucks
+        var session = sessionStorage[key];
+        if (session == null || session == 'undefined' || session == 'null')
+            return null;
+        return isObject ? JSON.parse(session) : session;
 
-	function setLocal(key,value,isObject) {
-
-		localStorage[key] = isObject ? JSON.stringify(value) : value;
-			//sessionStorage[key] = value;
-		return value;
-	}
-
+    }
 	return {
 		filter: {
 			// default json property when not specified in filter attribute as Type:Standard
@@ -43,11 +39,19 @@ var $451 = (function() {
 				return json_filter(input, query);
 			}
 		},
+        getSession: function(key, isObject) {
+            return getSessionStor(key, isObject);
+        },
+        setSession: function(key,value,isObject) {
+            sessionStorage[key] = isObject ? JSON.stringify(value) : value;
+            return value;
+        },
 		getLocal: function(key, isObject) {
-            return getLocal(key, isObject);
+            return getLocalStor(key, isObject);
 		},
 		setLocal: function(key,value,isObject) {
-			setLocal(key,value,isObject);
+            localStorage[key] = isObject ? JSON.stringify(value) : value;
+            return value;
 		},
         clear: function(){
             localStorage.clear();
