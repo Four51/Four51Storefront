@@ -12,4 +12,5 @@ $451.app.controller('OrderSearchCtrl', function OrderSearchCtrl($scope, OrderSta
 
 $451.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $routeParams, OrderService) {
 	$scope.order = OrderService.get({ id: $routeParams.id });
+	//$scope.orderCostCenter = $scope.order.LineItems.length == 1 ? $scope.order.LineItems[0].CostCenter : null;
 });

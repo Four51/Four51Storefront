@@ -34,11 +34,11 @@
         <tbody>
 
             <tr ng-repeat="order in orders">
-                <td><a href="#/order/{{order._ID}}">{{order.ExternalID}}</a></td>
+                <td><a href="#/order/{{order.ID}}">{{order.ExternalID}}</a></td>
                 <td>{{order.Type}}</td>
                 <td>{{order.Status}}</td>
-                <td>{{order.FromUser}}</td>
-                <td>{{order.OrderDate | date:'short'}}</td>
+                <td>{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</td>
+                <td>{{order.DateSubmitted || order.DateCreated | date:'short'}}</td>
                 <td>{{order.Total | currency:"$"}}</td>
             </tr>
         </tbody>

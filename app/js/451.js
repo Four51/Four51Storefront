@@ -50,6 +50,7 @@ var $451 = (function() {
             localStorage.clear();
             sessionStorage.clear();
         },
-        apiURL: function(path){return '/api/451Order/' + path;} //TODO:needs some smarts to build this
+        apiURL: function(path){return '/api/451Order/' + path;},
+        debug: true//TODO:needs some smarts to build this
 	};
 })();

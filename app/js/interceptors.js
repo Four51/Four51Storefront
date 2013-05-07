@@ -17,6 +17,9 @@ $451.app.config(function($httpProvider) {
 				// bug in FF forced angular to create workaround. hence the headers() function
 				var auth = response.headers()['www-authenticate'];
 				if (auth) $451.set('auth', auth, false);
+
+				if ($451.debug) console.dir(response.data);
+
 				return response;
 			},
 			'responseError': function(response) {
