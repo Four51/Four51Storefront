@@ -3,7 +3,7 @@ $451.app.factory('CategoryService', function($resource, $rootScope, ProductServi
     var catservice = $resource($451.apiURL('category/:interopID', {interopID: '@ID'}));
     var cats = null;
 
-    $rootScope.$on('LogoutEvent', function(event, e){
+    $rootScope.$on('event:LogoutEvent', function(event, e){
         cats = null;
     });
     $rootScope.$on('event:auth-loginRequired', function(event, e){

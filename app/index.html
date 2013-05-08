@@ -17,7 +17,9 @@
     <div class="navbar navbar-fixed-top" ng-controller="NavCtrl">
         <ng-include src="template.url" />
     </div>
-
+    <div class="sidebar-nav" ng-controller="SideNavCtrl">
+        <ng-include src="'partials/sideNav.html'" />
+    </div>
     <div class="container-fluid">
         <div class="row-fluid">
             <div ng-view></div>

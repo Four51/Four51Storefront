@@ -1,12 +1,3 @@
-<script type="text/ng-template" id="categoryTemplate.html">
-    <a href=#/catalog/{{category.InteropID}}>{{category.Name}}</a>
-
-    <ul><li ng-repeat="category in category.SubCategories " ng-include="'categoryTemplate.html'"></li></ul>
-</script>
-
-<ul><li ng-repeat="category in tree" ng-include="'categoryTemplate.html'"></li></ul>
-
-<hr>
 
 current category: <b>{{currentCategory.Name}}</b>: {{currentCategory.InteropID}}
 Products<br>
