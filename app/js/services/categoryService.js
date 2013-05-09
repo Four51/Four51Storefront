@@ -23,7 +23,7 @@ $451.app.factory('CategoryService', function($resource, $rootScope, ProductServi
 
     function findCat(parent, interopID){
         if(!interopID)
-            return {SubCategories: cats};
+            return {SubCategories: cats, InteropID: null};
         if(parent.InteropID === interopID)
             return parent;
         var foundCat;

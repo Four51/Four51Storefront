@@ -1,7 +1,13 @@
 $451.app.controller('ProductListCtrl', function ($routeParams,$rootScope, $scope, ProductService) {
-    console.log('loading ' + $scope.message);
     $scope.loadSearch = function(){
-        console.log('call loading');
-        $scope.Products = ProductService.search($scope.categoryInteropID, null);
+
+        if($scope.category.products){
+            $scope.Products = $scope.category.products;
+            console.log('returing cached category products')
+            return;
+        }
+
+        if($scope.category)
+            $scope.category.products = $scope.Products = ProductService.search($scope.category.InteropID, null);
     }
 });
