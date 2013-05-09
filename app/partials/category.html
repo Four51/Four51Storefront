@@ -1,18 +1,23 @@
-<script type="text/ng-template" id="categoryTemplate.html">
-    <a href=#/catalog/{{category.InteropID}}>{{category.Name}}</a>
+<div ng-show="currentCategory.Name || currentCategory.Image">
+    current category: <b>{{currentCategory.Name}}</b>
+</div>
 
-    <ul><li ng-repeat="category in category.SubCategories " ng-include="'categoryTemplate.html'"></li></ul>
-</script>
+<div ng-show=currentCategory.SubCategories>
+    <hr>
+    <b>sub categories</b>
+    <ul>
+        <li ng-repeat="c in currentCategory.SubCategories">
+            <a href="#/catalog/{{c.InteropID}}">
+                <img ng-src="{{c.Image.URL}}"/>{{c.Name}}</a>
+        </li>
+    </ul>
+</div>
 
-<ul><li ng-repeat="category in tree" ng-include="'categoryTemplate.html'"></li></ul>
 
-<hr>
+<div ng-include="'partials/productList.html'" onload="category=currentCategory; loadSearch();" ng-controller="ProductListCtrl"></div>
 
-current category: <b>{{currentCategory.Name}}</b>: {{currentCategory.InteropID}}
-Products<br>
-<ul>
-    <li ng-repeat="p in currentCategory.Products"><a href=#/product/{{p.InteropID}}>{{p.Name}}</a></li>
-</ul>
+
+
 
 
 

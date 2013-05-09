@@ -10,19 +10,15 @@ $451.app.factory('ProductService', function($resource){
     }
     return {
         search: function(categoryInteropID, searchTerm){
-
             console.log('calling product search: category:' + categoryInteropID + ' search: ' + searchTerm)
-
-            var products = productAPI.search({'CategoryInteropID': categoryInteropID, 'SearchTerms': searchTerm}, function(){
-
-                for(var i = 0; i < products.length; i++){
-
-                    if(!getCachedProduct(products[i].InteropID)){
-                        cacheProduct(products[i]);
+            return productAPI.search({'CategoryInteropID': categoryInteropID, 'SearchTerms': searchTerm}, function(data){
+                for(var i = 0; i < data.length; i++){
+                    if(!getCachedProduct(data[i].InteropID)){
+                        cacheProduct(data[i]);
                     }
                 }
+                return data;
             });
-            return products;
         },
         getOne: function(interopID){
 

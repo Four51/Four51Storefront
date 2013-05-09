@@ -1,8 +1,16 @@
 'use strict';
 
-$451.app.controller('CategoryCtrl', function ($routeParams,$rootScope, $scope, CategoryService, ProductService) {
-    console.log("loading category ctrl");
+$451.app.controller('CategoryCtrl', function ($routeParams,$rootScope, $scope, CategoryService) {
+    $rootScope.$on('event:ClearCategory', function(event, e){
+        $scope.currentCategory = null;
+    });
+    $rootScope.$on('event:ReloadCategory', function(event, e){
+        load();
+    });
 
-    $scope.tree = CategoryService.tree();
-    $scope.currentCategory = CategoryService.getOne($routeParams.categoryInteropID);
+    function load(){
+        $scope.currentCategory = CategoryService.getOne($routeParams.categoryInteropID);
+    }
+
+    load();
 });
