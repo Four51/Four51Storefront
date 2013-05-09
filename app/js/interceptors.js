@@ -12,11 +12,13 @@ $451.app.config(function($httpProvider) {
 			'response': function(response) {
 				// using status code 201 to represent the authentication token has been created. it fits the RFC spec and makes the authentication handling much more RESTy
 				if (response.status === 201) {
-					$rootScope.$broadcast('event:auth-loginConfirmed', buffer[0] ? buffer[0].config.url : '/category');
+					$rootScope.$broadcast('event:auth-loginConfirmed', buffer[0] ? buffer[0].config.url : '/');
 				}
 				// bug in FF forced angular to create workaround. hence the headers() function
 				var auth = response.headers()['www-authenticate'];
 				if (auth) $451.setLocal('auth', auth, false);
+
+				if ($451.debug) console.dir(response.data);
 				return response;
 			},
 			'responseError': function(response) {

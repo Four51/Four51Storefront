@@ -15,8 +15,6 @@ $451.app.factory('OrderService', function($resource, $http) {
 	return $resource($451.apiURL('order/:id'), { id: '@id' });
 });
 
-
-
 $451.app.factory('LoginService', function($resource){
 	var isAuthenticated = false;
     return $resource($451.apiURL('login'));
