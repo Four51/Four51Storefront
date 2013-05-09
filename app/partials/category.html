@@ -1,9 +1,26 @@
+<div ng-show="currentCategory.Name || currentCategory.Image">
+    current category: <b>{{currentCategory.Name}}</b>
+</div>
 
-current category: <b>{{currentCategory.Name}}</b>: {{currentCategory.InteropID}}
-Products<br>
+<div ng-show=currentCategory.SubCategories>
+    <hr>
+    <b>sub categories</b>
+    <ul>
+        <li ng-repeat="c in currentCategory.SubCategories">
+            <a href="#/catalog/{{c.InteropID}}">
+                <img ng-src="{{c.Image.URL}}"/>{{c.Name}}</a>
+        </li>
+    </ul>
+</div>
+
+
+<div ng-show="currentCategory.Products">
+<hr>
+Products: <br>
 <ul>
     <li ng-repeat="p in currentCategory.Products"><a href=#/product/{{p.InteropID}}>{{p.Name}}</a></li>
 </ul>
+</div>
 
 
 
