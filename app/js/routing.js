@@ -10,6 +10,7 @@ $451.app.config(['$routeProvider', function($routeProvider) {
             when('/product/:productInteropID', {templateUrl: 'partials/product.html', controller: 'ProductCtrl'}).
             when('/order', { templateUrl: 'partials/orderSearch.html', controller: 'OrderSearchCtrl' }).
 			when('/order/:id', { templateUrl: 'partials/orderView.html', controller: 'OrderViewCtrl' }).
+			when('/lineitem/:orderid/:lineitemid/', { templateUrl: 'partials/lineItemView.html', controller: 'LineItemViewCtrl' }).
 			when('/login', { templateUrl: 'partials/login.html', controller: 'LoginCtrl' }).
 			otherwise({redirectTo: '/catalog'});
 	}]);

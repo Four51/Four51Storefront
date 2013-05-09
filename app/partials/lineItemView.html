@@ -1,0 +1,17 @@
+<div>
+    <p>Product ID: {{order.LineItems[lineItemIndex].Variant.ExternalID}}</p>
+    <p ng-show="order.LineItems[lineItemIndex].SupplierPartID">{{order.LineItems[lineItemIndex].SupplierPartID}}</p>
+    <p ng-bind-html='order.LineItems[lineItemIndex].Variant.Description | html'></p>
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <td>Quanity</td><td>Price</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="break in order.LineItems[lineItemIndex].PriceSchedule.PriceBreaks">
+                <td>{{break.Quantity}}</td><td>{{break.Price | currency:"$"}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

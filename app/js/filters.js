@@ -9,3 +9,9 @@ $451.app.filter('orderstatsFilter', function() {
 		return $451.filter.on('Type').for(input,query);
 	}
 });
+
+$451.app.filter('html', function() {
+	return function(input) {
+		return input;
+	}
+});

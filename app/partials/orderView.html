@@ -19,9 +19,35 @@
         {{order.ShipAddress.Street2}}<br ng-show="order.ShipAddress.Street2">
         {{order.ShipAddress.City}}, {{order.ShipAddress.State}} {{order.ShipAddress.Zip}}
     </address>
-    <ul>
-        <li ng-repeat="item in order.LineItems">
-            {{item.LineTotal}},{{item.UnitPrice}},{{item.VariantID}},{{item.Quantity}},{{item.CostCenter}}
-        </li>
-    </ul>
+</div>
+<div>
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <td>ID</td><td>Product</td><td>Specifications</td><td>Unit Price</td><td>Quantity</td><td>Total Quantity</td><td>Quantity Shipped</td><td>Price</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in order.LineItems">
+                <td><a href="#/lineitem/{{order.ID}}/{{$index}}">{{item.Variant.ExternalID}}</a></td>
+                <td>{{item.Variant.Name}}</td>
+                <td>
+                    <ul><!-- more complete business logic in LineItemGrid.cs line 638 -->
+                        <li ng-repeat="spec in item.Specs | filter:Selected">{{spec.Name + " : " + spec.Value}}</li>
+                    </ul>
+                </td>
+                <td>{{item.UnitPrice | currency:"$"}}</td>
+                <td>{{item.Quantity}}</td>
+                <td>{{item.Product.QuantityMultiplier * item.Quantity}}</td>
+                <td>{{item.TotalShipped}}</td>
+                <td>{{item.LineTotal | currency:"$"}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <p>Subtotal: {{order.Subtotal | currency:"$"}}</p>
+    <p>Shipping & Handling: {{order.ShippingCost | currency:"$"}}</p>
+    <p>Tax: {{order.TaxCost | currency:"$"}}</p>
+    <p><strong>Total: {{order.Total | currency:"$"}}</strong></p>
 </div>
