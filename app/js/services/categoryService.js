@@ -2,22 +2,25 @@
 $451.app.factory('CategoryService', function($resource, $rootScope, ProductService){
     var catservice = $resource($451.apiURL('category/:interopID', {interopID: '@ID'}));
     var cats = null;
-
-    $rootScope.$on('event:LogoutEvent', function(event, e){
+    function clearCache(){
+        $rootScope.$broadcast('event:ClearCategory');
         cats = null;
+    }
+    function reloadCat(){
+        $rootScope.$broadcast('event:ReloadCategory');
+    }
+    $rootScope.$on('event:Logout', function(event, e){
+        clearCache();
     });
     $rootScope.$on('event:auth-loginRequired', function(event, e){
+        clearCache();
+    });
+    $rootScope.$on('event:auth-loginConfirmed', function(event, e){
         cats = null;
+        reloadCat();
     });
 
-    function populateCats(){
-        if(!cats){
-            cats = catservice.query();
-            console.log('calling api for categories');
-        }else{
 
-        }
-    };
     function findCat(parent, interopID){
         if(!interopID)
             return {SubCategories: cats};
@@ -38,28 +41,32 @@ $451.app.factory('CategoryService', function($resource, $rootScope, ProductServi
     }
     return {
         tree: function(){
-            populateCats();
-            return cats;
+            if(!cats){
+                return catservice.query(function(data){
+                    cats = data;
+                });
+            }else
+                return cats;
         },
         getOne: function(interopID){
-            if(!cats){ //starting session here, so no cached cats
-                populateCats();
-            }else{
 
-                var foundCat = findCat({SubCategories: cats}, interopID)
+            var foundCat;
+            if(cats)
+                foundCat = findCat({SubCategories: cats}, interopID);
 
-                if(!foundCat) //populateCats is probably not back yet
-                {
-                    console.log('not found');
-                    foundCat = catservice.get({ interopID: interopID }, function(){
-                        foundCat.Products = ProductService.search(foundCat.InteropID, '');
-                    });
-                }
-                if(!foundCat.Products && foundCat.InteropID)
-                {
-                    foundCat.Products = ProductService.search(foundCat.InteropID, '');
-                }
+            if(foundCat)
                 return foundCat;
+            else{
+                console.log('one category not found. Calling api');
+                if(interopID)
+                    return catservice.get({ interopID: interopID } );
+                else{
+                    catservice.query(function(data){
+                        cats = data;
+                        reloadCat();
+
+                    })
+                }
             }
         }
     }

@@ -14,13 +14,10 @@
 </div>
 
 
-<div ng-show="currentCategory.Products">
-<hr>
-Products: <br>
-<ul>
-    <li ng-repeat="p in currentCategory.Products"><a href=#/product/{{p.InteropID}}>{{p.Name}}</a></li>
-</ul>
-</div>
+<div ng-include="'partials/productList.html'" onload="categoryInteropID=currentCategory.InteropID; loadSearch();" ng-controller="ProductListCtrl"></div>
+
+
+
 
 
 

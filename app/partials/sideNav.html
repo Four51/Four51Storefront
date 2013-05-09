@@ -3,6 +3,7 @@
 </div>
 
 <script type="text/ng-template" id="categoryTemplate.html">
-    <a ng-class="category.InteropID == currentCategory.InteropID && 'text-warning'" href=#/catalog/{{category.InteropID}}>{{category.Name}}</a>
+    <a href=#/catalog/{{category.InteropID}}>{{category.Name}}</a>
     <ul><li ng-repeat="category in category.SubCategories" ng-include="'categoryTemplate.html'"></li></ul>
 </script>
+<hr>

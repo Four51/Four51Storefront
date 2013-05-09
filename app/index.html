@@ -17,12 +17,12 @@
     <div class="navbar navbar-fixed-top" ng-controller="NavCtrl">
         <ng-include src="template.url" />
     </div>
-    <div class="sidebar-nav" ng-controller="SideNavCtrl">
-        <ng-include src="'partials/sideNav.html'" />
-    </div>
     <div class="container-fluid">
         <div class="row-fluid">
-            <div ng-view></div>
+            <div class="span2 sidebar-nav" ng-controller="SideNavCtrl">
+                <ng-include src="'partials/sideNav.html'" />
+            </div>
+            <div class="span10" ng-view />
         </div>
     </div>
 
@@ -56,5 +56,6 @@
     <script src="js/services/services.js"></script>
     <script src="js/services/productService.js"></script>
     <script src="js/services/categoryService.js"></script>
+    <script src="js/controllers/productListCtrl.js"></script>
 </body>
 </html>
