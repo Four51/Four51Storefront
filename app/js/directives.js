@@ -2,16 +2,16 @@
 
 /* Directives */
 
-$451.app.directive('authorization', function($location) {
+four51.app.directive('authorization', function($location, LoginService) {
 	var obj = {
 		restrict: 'C',
 		link: function(scope, elem, attrs) {
 			scope.$on('event:auth-loginRequired', function() {
 				$location.path('login');
 			});
-			scope.$on('event:auth-loginConfirmed', function(scope, url) {
+			scope.$on('event:auth-loginConfirmed', function(scope, url, user) {
 				var location = url.split('/');
-				$location.path(location[location.length-1]);
+				LoginService.confirmed(location[location.length-1], user);
 			});
 		}
 	};

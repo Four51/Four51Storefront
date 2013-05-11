@@ -1,6 +1,6 @@
 'use strict';
-$451.app.factory('CategoryService', function($resource, $rootScope, ProductService){
-    var catservice = $resource($451.apiURL('category/:interopID', {interopID: '@ID'}));
+four51.app.factory('CategoryService', function($resource, $rootScope, $451, ProductService){
+    var catservice = $resource($451.api('category/:interopID', {interopID: '@ID'}));
     var cats = null;
     function clearCache(){
         $rootScope.$broadcast('event:ClearCategory');

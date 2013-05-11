@@ -1,7 +1,7 @@
 'use strict'
 
 /* routing */
-$451.app.config(['$routeProvider', function($routeProvider) {
+four51.app.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.
 			when('/listOrders', { templateUrl: 'partials/listOrders.html', controller: 'ListOrdersCtrl' }).
 			when('/orderdetails/:orderid', {templateUrl: 'partials/orderDetails.html', controller: 'OrderDetailsCtrl'}).
@@ -12,5 +12,5 @@ $451.app.config(['$routeProvider', function($routeProvider) {
 			when('/order/:id', { templateUrl: 'partials/orderView.html', controller: 'OrderViewCtrl' }).
 			when('/lineitem/:orderid/:lineitemid/', { templateUrl: 'partials/lineItemView.html', controller: 'LineItemViewCtrl' }).
 			when('/login', { templateUrl: 'partials/login.html', controller: 'LoginCtrl' }).
-			otherwise({redirectTo: '/catalog'});
+			otherwise({redirectTo: '/order'});
 	}]);

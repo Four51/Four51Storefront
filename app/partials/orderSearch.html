@@ -1,24 +1,24 @@
 <h3>Incoming Orders</h3>
 <div class="span2">
     <ul class="well">
-        <li><h5>Standard Orders</h5></li>
-        <li ng-repeat="stat in OrderStats | orderstatsFilter:'Standard'">
+        <h5>Standard Orders</h5>
+        <li ng-repeat="stat in OrderStats | orderstats:'Standard'">
             <span>{{stat.Status}} <a href="#" ng-click="OrderSearch($event,{{stat}})">({{stat.Count}})</a></span>
         </li>
     </ul>
 </div>
 <div class="span3">
     <ul class="well">
-        <li> <h5>Replenishment Orders</h5></li>
-        <li ng-repeat="stat in OrderStats | orderstatsFilter:'Replenishment'">
+        <h5>Replenishment Orders</h5>
+        <li ng-repeat="stat in OrderStats | orderstats:'Replenishment'">
             <span>{{stat.Status}} <a href="#" ng-click="OrderSearch($event,{{stat}})">({{stat.Count}})</a></span>
         </li>
     </ul>
 </div>
 <div class="span4">
     <ul class="well">
-        <li><h5>Price Request</h5></li>
-        <li ng-repeat="stat in OrderStats | orderstatsFilter:'PriceRequest'">
+        <h5>Price Request</h5>
+        <li ng-repeat="stat in OrderStats | orderstats:'PriceRequest'">
             <span>{{stat.Status}} <a href="#" ng-click="OrderSearch($event,{{stat}})">({{stat.Count}})</a></span>
         </li>
     </ul>

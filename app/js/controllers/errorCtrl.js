@@ -1,4 +1,4 @@
-$451.app.controller('ErrorCtrl', function ErrorCtrl($scope, $dialog) {
+four51.app.controller('ErrorCtrl', function ErrorCtrl($scope, $dialog) {
 	$scope.open = function() {
 		$scope.isError = true;
 	};

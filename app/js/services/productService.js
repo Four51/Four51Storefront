@@ -1,6 +1,6 @@
 'use strict';
-$451.app.factory('ProductService', function($resource){
-    var productAPI = $resource($451.apiURL('product/:interopID'), {interopID: '@ID'}, {'search': {method: 'POST', isArray:true}});
+four51.app.factory('ProductService', function($resource, $451){
+    var productAPI = $resource(Global.api('product/:interopID'), {interopID: '@ID'}, {'search': {method: 'POST', isArray:true}});
     console.log('cached declared');
     function cacheProduct(product){
         $451.setLocal("product-" + product.InteropID, product, true)

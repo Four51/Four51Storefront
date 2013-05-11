@@ -1,5 +1,52 @@
 /* Four51 Global Namespace */
 
+four51.app.factory('$451', function(Cache, localStorageService) {
+	function json_filter(input,query) {
+		var result = [];
+		var query_on = query.indexOf(':') > -1 ? query.split(':') : [property,query];
+		angular.forEach(input, function(stat) {
+			if (stat[query_on[0]].toLowerCase() === query_on[1].toLowerCase())
+				result.push(stat);
+		});
+
+		return result;
+	}
+
+	function clearStorageMechanisms() {
+		Cache.removeAll();
+		localStorageService.clearAll();
+	}
+
+	return {
+		debug: false,
+		appname: four51.app.name,
+		api: function(path) {
+			return '/api/' + this.appname + "/" + path;
+		},
+		// cache is temporary. even refreshing the browser will clear the cache
+		// getter attempts to retrieve based on the persistent state longevity of each type { cache, localstorage }
+		cache: function(id, val, persist) {
+			return val ?
+				(persist ? localStorageService.add(id, val): Cache.put(id, val)) :
+				(Cache.get(id) || localStorageService.get(id));
+		},
+		clear: function() {
+			clearStorageMechanisms();
+		},
+		filter: {
+			// default json property when not specified in filter attribute as Type:Standard
+			on: function(val) {
+				property = val;
+				return this;
+			},
+			for: function(input, query) {
+				return json_filter(input, query);
+			}
+		}
+	};
+});
+
+/*
 var $451 = (function() {
 	var property = '';
 	function json_filter(input,query) {
@@ -57,7 +104,8 @@ var $451 = (function() {
             localStorage.clear();
             sessionStorage.clear();
         },
-        apiURL: function(path){return '/api/451Order/' + path;},
-        debug: true//TODO:needs some smarts to build this
+        apiURL: function(path){return '/api/451Order/' + path;}, //TODO:needs some smarts to build this
+        debug: false
 	};
 })();
+*/

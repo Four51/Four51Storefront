@@ -1,6 +1,6 @@
 'use strict';
 
-$451.app.controller('OrderDetailsCtrl', function ($scope, $routeParams, OrderService) {
+four51.app.controller('OrderDetailsCtrl', function ($scope, $routeParams, OrderService) {
     console.log("loading details ctrl");
     $scope.order = OrderService.getOneOrder($routeParams.orderid);
     $scope.editItem = false;
