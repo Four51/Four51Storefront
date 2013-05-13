@@ -5,11 +5,13 @@ four51.app.config(function($httpProvider) {
 		var buffer = [];
 		return {
 			'request': function(config) {
-				var auth = $451.cache("Auth"); // $451.getLocal('auth', false);
+				console.log('request'); console.dir(config);
+				var auth = $451.cache("Auth");
 				config.headers['Authorization'] = auth == null ? null : auth;
 				return config;
 			},
 			'response': function(response) {
+				console.log('response'); console.dir(response);
 				// using status code 202 [Created] to represent the authentication token has been created. it fits the RFC spec and makes the authentication handling much more RESTy
 				if (response.status === 202) {
 					$rootScope.$broadcast('event:auth-loginConfirmed', buffer[0] ? buffer[0].config.url : '/', response.data);
@@ -25,6 +27,7 @@ four51.app.config(function($httpProvider) {
 				return response;
 			},
 			'responseError': function(response) {
+				console.log('responseError'); console.dir(response);
 				buffer.splice(0, buffer.length,{
 					config: response.config
 				});

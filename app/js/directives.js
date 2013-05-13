@@ -4,7 +4,7 @@
 
 four51.app.directive('authorization', function($location, LoginService) {
 	var obj = {
-		restrict: 'C',
+		restrict: 'A',
 		link: function(scope, elem, attrs) {
 			scope.$on('event:auth-loginRequired', function() {
 				$location.path('login');
@@ -17,4 +17,3 @@ four51.app.directive('authorization', function($location, LoginService) {
 	};
 	return obj;
 });
-

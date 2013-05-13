@@ -1,17 +1,11 @@
-four51.app.factory('OrderService', function($resource, $http, $451) {
-	var service = $resource($451.api('order/:id'), { id: '@id' });
-
+four51.app.factory('OrderService', function($resource, $http, $451, $api) {
+	var r = $resource($451.api('order/:id'), { id: '@id' });
 	return {
-		load: function(id) {
-			return service.get(id);
-		},
-		user: function() {
-			return $451.cache("User");
+		get: function(id) {
+			return $api.resource(r).options({ persists: false, key: 'Order'}).get(id);
 		}
 	}
 });
 
-four51.app.factory('Cache', function($cacheFactory) {
-	return $cacheFactory('Cache', { });
-});
+
 

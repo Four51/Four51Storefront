@@ -17,6 +17,14 @@ four51.app.factory('$451', function(Cache, localStorageService) {
 		localStorageService.clearAll();
 	}
 
+	function putCache(id,val,persist) {
+		persist ? localStorageService.add(id,val) : Cache.put(id,val);
+		return val;
+	}
+	function getCache(id) {
+		return Cache.get(id) || localStorageService.get(id);
+	}
+
 	return {
 		debug: false,
 		appname: four51.app.name,
@@ -27,11 +35,14 @@ four51.app.factory('$451', function(Cache, localStorageService) {
 		// getter attempts to retrieve based on the persistent state longevity of each type { cache, localstorage }
 		cache: function(id, val, persist) {
 			return val ?
-				(persist ? localStorageService.add(id, val): Cache.put(id, val)) :
-				(Cache.get(id) || localStorageService.get(id));
+				putCache(id, val, persist) :
+				getCache(id);
 		},
-		clear: function() {
-			clearStorageMechanisms();
+		clear: function(key) {
+			if (!key)
+				clearStorageMechanisms();
+			else
+				Cache.remove(key); localStorageService.remove(key);
 		},
 		filter: {
 			// default json property when not specified in filter attribute as Type:Standard

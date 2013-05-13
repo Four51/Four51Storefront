@@ -1,4 +1,4 @@
-four51.app.factory('LoginService', function($resource, $location, $451){
+four51.app.factory('LoginService', function($resource, $window, $451){
 	var isAuthenticated = false;
 	var service = $resource($451.api('login'));
 
@@ -8,7 +8,7 @@ four51.app.factory('LoginService', function($resource, $location, $451){
 		},
 		confirmed: function(url, user) {
 			$451.cache("User", user);
-			$location.path(url);
+			$window.location.href = '#/' + url ;
 		}
 	};
 });
