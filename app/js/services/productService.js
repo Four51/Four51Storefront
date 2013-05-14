@@ -1,6 +1,6 @@
 'use strict';
 $451.app.factory('ProductService', function($resource){
-    var productAPI = $resource($451.apiURL('product/:interopID'), {interopID: '@ID'}, {'search': {method: 'POST', isArray:true}});
+    var productAPI = $resource($451.apiURL('Product/:interopID'), {interopID: '@ID'}, {'search': {method: 'GET', isArray:true}});
     console.log('cached declared');
     function cacheProduct(product){
         $451.setLocal("product-" + product.InteropID, product, true)
@@ -10,8 +10,11 @@ $451.app.factory('ProductService', function($resource){
     }
     return {
         search: function(categoryInteropID, searchTerm){
+            if(!categoryInteropID && !searchTerm)
+                return null;
+
             console.log('calling product search: category:' + categoryInteropID + ' search: ' + searchTerm)
-            return productAPI.search({'CategoryInteropID': categoryInteropID, 'SearchTerms': searchTerm}, function(data){
+            return productAPI.search({'CategoryInteropID': categoryInteropID, 'SearchTerms': searchTerm ? searchTerm : ''}, function(data){
                 for(var i = 0; i < data.length; i++){
                     if(!getCachedProduct(data[i].InteropID)){
                         cacheProduct(data[i]);
