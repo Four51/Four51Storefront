@@ -1,4 +1,4 @@
-four51.app.factory('$api', function($resource, $451) {
+four51.app.factory('$api', function($451) {
 	var resource, options;
 
 	function fromRest(method, data) {

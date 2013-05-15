@@ -12,5 +12,5 @@ four51.app.config(['$routeProvider', function($routeProvider) {
 			when('/order/:id', { templateUrl: 'partials/orderView.html', controller: 'OrderViewCtrl' }).
 			when('/lineitem/:orderid/:lineitemid/', { templateUrl: 'partials/lineItemView.html', controller: 'LineItemViewCtrl' }).
 			when('/login', { templateUrl: 'partials/login.html', controller: 'LoginCtrl' }).
-			otherwise({redirectTo: '/order'});
+			otherwise({redirectTo: '/catalog'});
 	}]);

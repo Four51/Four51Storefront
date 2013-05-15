@@ -9,7 +9,7 @@ four51.app.factory('CategoryService', function($resource, $rootScope, $451, Prod
     function reloadCat(){
         $rootScope.$broadcast('event:ReloadCategory');
     }
-    $rootScope.$on('event:Logout', function(event, e){
+    /*$rootScope.$on('event:Logout', function(event, e){
         clearCache();
     });
     $rootScope.$on('event:auth-loginRequired', function(event, e){
@@ -19,7 +19,7 @@ four51.app.factory('CategoryService', function($resource, $rootScope, $451, Prod
         cats = null;
         reloadCat();
     });
-
+	*/
 
     function findCat(parent, interopID){
         if(!interopID)

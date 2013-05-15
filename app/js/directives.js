@@ -2,17 +2,22 @@
 
 /* Directives */
 
-four51.app.directive('authorization', function($location, LoginService) {
+four51.app.directive('authorization', function($route, $451, LoginService) {
 	var obj = {
 		restrict: 'A',
 		link: function(scope, elem, attrs) {
+			scope.isAuthenticated = true;
+
 			scope.$on('event:auth-loginRequired', function() {
-				$location.path('login');
+				scope.isAuthenticated = false;
 			});
-			scope.$on('event:auth-loginConfirmed', function(scope, url, user) {
-				var location = url.split('/');
-				LoginService.confirmed(location[location.length-1], user);
+			scope.$on('event:auth-loginConfirmed', function() {
+				scope.isAuthenticated = true;
+				$route.reload();
 			});
+			scope.Login = function() {
+				LoginService.login(this.user);
+			};
 		}
 	};
 	return obj;

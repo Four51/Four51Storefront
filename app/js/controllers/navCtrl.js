@@ -1,10 +1,10 @@
 'use strict';
 
-four51.app.controller('NavCtrl', function ($window, $scope, $451) {
+four51.app.controller('NavCtrl', function ($location, $scope, $451) {
 	$scope.appname = $451.appname;
     $scope.Logout = function(){
         $451.clear('Auth');
-	    $window.location.href = "#/login";
+	    $location.path("/login");
     }
 	$scope.template = { url: 'partials/nav.html'};
 });

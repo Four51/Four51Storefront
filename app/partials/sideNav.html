@@ -1,9 +1,10 @@
-<div>
-    <ul><li ng-repeat="category in tree" ng-include="'categoryTemplate.html'"></li></ul>
+<div class="well sidebar-nav">
+    <ul class="nav nav-list">
+        <li class="nav-header" ng-repeat="category in tree" ng-include="'categoryTemplate.html'"></li>
+    </ul>
 </div>
 
 <script type="text/ng-template" id="categoryTemplate.html">
     <a href=#/catalog/{{category.InteropID}}>{{category.Name}}</a>
     <ul><li ng-repeat="category in category.SubCategories" ng-include="'categoryTemplate.html'"></li></ul>
 </script>
-<hr>

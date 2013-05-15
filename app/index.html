@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My AngularJS App</title>
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-responsive.css">
     <link rel="stylesheet" href="css/app.css"/>
     <style type="text/css">
 
@@ -13,20 +14,28 @@
 </head>
 
 <body authorization ng-cloak>
+    <div id="login_form" ng-hide="isAuthenticated" style="position: relative;">
+        <div id="login_box">
+            <div ng-controller='LoginCtrl'>
+               <ng-include src="template.url" />
+            </div>
+        </div>
+    </div>
 
     <div class="navbar navbar-fixed-top" ng-controller="NavCtrl">
         <ng-include src="template.url" />
     </div>
-    <!--<div class="container-fluid">
+
+    <div ng-show="isAuthenticated" id="content" class="container-fluid" ng-controller="SideNavCtrl">
         <div class="row-fluid">
-            <div class="span2 sidebar-nav" ng-controller="SideNavCtrl">
+            <div class="span3">
                 <ng-include src="'partials/sideNav.html'" />
             </div>
-            <div class="span10" ng-view />
+            <div class="span9">
+                <div ng-view />
+            </div>
         </div>
     </div>
-    -->
-    <div class="span10" ng-view />
 
     <div ng-controller="ErrorCtrl">
         <ng-include src="template.url" />
