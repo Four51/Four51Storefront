@@ -1,7 +1,7 @@
 'use strict'
 
 /* routing */
-$451.app.config(['$routeProvider', function($routeProvider) {
+four51.app.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.
 			when('/listOrders', { templateUrl: 'partials/listOrders.html', controller: 'ListOrdersCtrl' }).
 			when('/orderdetails/:orderid', {templateUrl: 'partials/orderDetails.html', controller: 'OrderDetailsCtrl'}).

@@ -1,4 +1,5 @@
 'use strict';
 
-$451.app = angular.module('451orders', ['ngResource', 'ngSanitize', 'ngCookies', 'ui.bootstrap']);
+var four51 = {};
+four51.app = angular.module('451order', ['ngResource', 'ngSanitize', 'ngCookies', 'ui.bootstrap', 'LocalStorageModule']);
 

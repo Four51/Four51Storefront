@@ -1,33 +1,36 @@
 'use strict'
 
-$451.app.config(function($httpProvider) {
-	$httpProvider.interceptors.push(function($q, $rootScope, $location) {
-		var buffer = [];
+four51.app.config(function($httpProvider) {
+	$httpProvider.interceptors.push(function($q, $injector, $location, $rootScope, $451) {
+		function appendAuth(config) {
+			// see if cache returns null as expected now
+			var auth = $451.cache("Auth");
+			config.headers['Authorization'] = auth == null ? null : auth;
+			return config;
+		}
+
 		return {
 			'request': function(config) {
-				var auth = $451.getLocal('auth', false);
-				config.headers['Authorization'] = auth == null ? null : auth;
-				return config;
+				return appendAuth(config, false);
 			},
 			'response': function(response) {
-				// using status code 201 to represent the authentication token has been created. it fits the RFC spec and makes the authentication handling much more RESTy
-				if (response.status === 201) {
-					$rootScope.$broadcast('event:auth-loginConfirmed', buffer[0] ? buffer[0].config.url : '/');
+				// using status code 202 [Created] to represent the authentication token has been created. it fits the RFC spec and makes the authentication handling much more RESTy
+				if (response.status === 202) {
+					$rootScope.$broadcast('event:auth-loginConfirmed');
 				}
-				// bug in FF forced angular to create workaround. hence the headers() function
 				var auth = response.headers()['www-authenticate'];
-				if (auth) $451.setLocal('auth', auth, false);
+				if (auth)
+					$451.cache("Auth", auth, true);
 
-				if ($451.debug) console.dir(response.data);
+				if ($451.debug)
+					console.dir(response.data);
+
 				return response;
 			},
 			'responseError': function(response) {
-				buffer.splice(0, buffer.length,{
-					config: response.config
-				});
 				if (response.status === 401) { // unauthorized
 					$rootScope.$broadcast('event:auth-loginRequired');
-					return false;
+					return $q.defer();
 				}
 
 				if (response.status != 200) {

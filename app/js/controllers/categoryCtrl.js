@@ -1,6 +1,6 @@
 'use strict';
 
-$451.app.controller('CategoryCtrl', function ($routeParams,$rootScope, $scope, CategoryService) {
+four51.app.controller('CategoryCtrl', function ($routeParams,$rootScope, $scope, CategoryService) {
     $rootScope.$on('event:ClearCategory', function(event, e){
         $scope.currentCategory = null;
     });

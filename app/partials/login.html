@@ -1,10 +1,8 @@
-<style type="text/css">
-
-</style>
-
-<form class="form-signin" name="LoginForm">
-    <h2 class="form-signin-heading">Please sign in</h2>
-    <input class="input-block-level" type="text" ng-model="user.UserName" placeholder="Username" />
-    <input class="input-block-level" type="password" ng-model="user.Password" placeholder="Password" />
-    <input class="btn btn-large btn-primary" type="submit" value="Login" ng-click="Login()" />
-</form>
+<div id="login_form">
+    <form class="form-signin" ng-submit="Login()" name="LoginForm">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <input class="input-block-level" type="text" ng-model="user.Username" placeholder="Username" />
+        <input class="input-block-level" type="password" ng-model="user.Password" placeholder="Password" />
+        <input class="btn btn-large btn-primary" type="submit" value="Login" />
+    </form>
+</div>

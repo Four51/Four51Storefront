@@ -1,7 +1,6 @@
 /* Four51 Global Namespace */
 
-var $451 = (function() {
-	var property = '';
+four51.app.factory('$451', function(Cache, localStorageService) {
 	function json_filter(input,query) {
 		var result = [];
 		var query_on = query.indexOf(':') > -1 ? query.split(':') : [property,query];
@@ -13,22 +12,38 @@ var $451 = (function() {
 		return result;
 	}
 
-	function getLocalStor(key, isObject) {
-		var local = localStorage[key];
-        if(local)
-            return isObject ? JSON.parse(local) : local;
-        else
-            return null;
+	function clearStorageMechanisms() {
+		Cache.removeAll();
+		localStorageService.clearAll();
 	}
-    function getSessionStor(key, isObject){
-        // so when a value is set to storage that is null the value stored is the string 'undefined'. that sucks
-        var session = sessionStorage[key];
-        if (session == null || session == 'undefined' || session == 'null')
-            return null;
-        return isObject ? JSON.parse(session) : session;
 
-    }
+	function putCache(id,val,persist) {
+		persist ? localStorageService.add(id,val) : Cache.put(id,val);
+		return val;
+	}
+	function getCache(id) {
+		return Cache.get(id) || localStorageService.get(id);
+	}
+
 	return {
+		debug: false,
+		appname: four51.app.name,
+		api: function(path) {
+			return '/api/' + this.appname + "/" + path;
+		},
+		// cache is temporary. even refreshing the browser will clear the cache
+		// getter attempts to retrieve based on the persistent state longevity of each type { cache, localstorage }
+		cache: function(id, val, persist) {
+			return val ?
+				putCache(id, val, persist || false) :
+				getCache(id);
+		},
+		clear: function(key) {
+			if (!key)
+				clearStorageMechanisms();
+			else
+				Cache.remove(key); localStorageService.remove(key);
+		},
 		filter: {
 			// default json property when not specified in filter attribute as Type:Standard
 			on: function(val) {
@@ -38,26 +53,6 @@ var $451 = (function() {
 			for: function(input, query) {
 				return json_filter(input, query);
 			}
-		},
-        getSession: function(key, isObject) {
-            return getSessionStor(key, isObject);
-        },
-        setSession: function(key,value,isObject) {
-            sessionStorage[key] = isObject ? JSON.stringify(value) : value;
-            return value;
-        },
-		getLocal: function(key, isObject) {
-            return getLocalStor(key, isObject);
-		},
-		setLocal: function(key,value,isObject) {
-            localStorage[key] = isObject ? JSON.stringify(value) : value;
-            return value;
-		},
-        clear: function(){
-            localStorage.clear();
-            sessionStorage.clear();
-        },
-        apiURL: function(path){return '/api/451Order/' + path;},
-        debug: true//TODO:needs some smarts to build this
+		}
 	};
-})();
+});

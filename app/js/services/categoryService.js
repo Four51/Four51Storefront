@@ -1,6 +1,6 @@
 'use strict';
-$451.app.factory('CategoryService', function($resource, $rootScope, ProductService){
-    var catservice = $resource($451.apiURL('category/:interopID', {interopID: '@ID'}));
+four51.app.factory('CategoryService', function($resource, $rootScope, $451, ProductService){
+    var catservice = $resource($451.api('category/:interopID', {interopID: '@ID'}));
     var cats = null;
     function clearCache(){
         $rootScope.$broadcast('event:ClearCategory');
@@ -9,7 +9,7 @@ $451.app.factory('CategoryService', function($resource, $rootScope, ProductServi
     function reloadCat(){
         $rootScope.$broadcast('event:ReloadCategory');
     }
-    $rootScope.$on('event:Logout', function(event, e){
+    /*$rootScope.$on('event:Logout', function(event, e){
         clearCache();
     });
     $rootScope.$on('event:auth-loginRequired', function(event, e){
@@ -19,7 +19,7 @@ $451.app.factory('CategoryService', function($resource, $rootScope, ProductServi
         cats = null;
         reloadCat();
     });
-
+	*/
 
     function findCat(parent, interopID){
         if(!interopID)

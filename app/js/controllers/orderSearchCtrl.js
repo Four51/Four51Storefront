@@ -1,16 +1,12 @@
 'use strict';
 
-$451.app.controller('OrderSearchCtrl', function OrderSearchCtrl($scope, OrderStatsService, OrderSearchService) {
+four51.app.controller('OrderSearchCtrl', function OrderSearchCtrl($scope, OrderStatsService, OrderSearchService) {
     $scope.OrderStats = OrderStatsService.query();
 	$scope.OrderSearch = function($event, stat) {
 		$event.preventDefault();
-		$scope.orders = OrderSearchService.get(stat);
+		$scope.orders = OrderSearchService.search(stat);
 		$scope.displayOrders = true;
 		$scope.orderSearchStat = stat;
 	};
 });
 
-$451.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $routeParams, OrderService) {
-	$scope.order = OrderService.get({ id: $routeParams.id });
-	//$scope.orderCostCenter = $scope.order.LineItems.length == 1 ? $scope.order.LineItems[0].CostCenter : null;
-});
