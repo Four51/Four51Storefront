@@ -14,6 +14,7 @@ files = [
 autoWatch = true;
 
 browsers = ['Chrome'];
+browsers = ['ChromeCanary'];
 
 junitReporter = {
   outputFile: 'test_out/unit.xml',
