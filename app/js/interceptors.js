@@ -2,6 +2,13 @@
 
 four51.app.config(function($httpProvider) {
 	$httpProvider.interceptors.push(function($q, $injector, $location, $rootScope, $451) {
+		function appendAuth(config) {
+			// see if cache returns null as expected now
+			var auth = $451.cache("Auth");
+			config.headers['Authorization'] = auth == null ? null : auth;
+			return config;
+		}
+
 		return {
 			'request': function(config) {
 				return appendAuth(config, false);
