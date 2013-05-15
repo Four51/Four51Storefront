@@ -2,43 +2,42 @@
 
 /* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
 
-describe('my app', function() {
+describe('451orders UI', function() {
 
   beforeEach(function() {
     browser().navigateTo('../../app/index.html');
   });
 
 
-  it('should automatically redirect to /view1 when location hash/fragment is empty', function() {
-    expect(browser().location().url()).toBe("/view1");
+  it('should automatically redirect to /catalog when location hash/fragment is empty', function() {
+    expect(browser().location().url()).toBe("/catalog");
   });
 
 
-  describe('view1', function() {
+  describe('catalog', function() {
 
     beforeEach(function() {
-      browser().navigateTo('#/view1');
+      browser().navigateTo('#/catalog');
     });
 
 
-    it('should render view1 when user navigates to /view1', function() {
-      expect(element('[ng-view] p:first').text()).
-        toMatch(/partial for view 1/);
+    it('should render catalog when user navigates to catalog', function() {
+      expect(element('[ng-view] span:first', 'label1').text()).
+        toMatch("Products partial:");
     });
 
   });
 
 
-  describe('view2', function() {
+  describe('orders', function() {
 
     beforeEach(function() {
-      browser().navigateTo('#/view2');
+      browser().navigateTo('#/orders');
     });
 
 
-    it('should render view2 when user navigates to /view2', function() {
-      expect(element('[ng-view] p:first').text()).
-        toMatch(/partial for view 2/);
+    it('should render a navigation bar on the side', function() {
+
     });
 
   });
