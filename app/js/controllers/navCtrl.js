@@ -3,7 +3,7 @@
 four51.app.controller('NavCtrl', function ($location, $scope, $451) {
 	$scope.appname = $451.appname;
     $scope.Logout = function(){
-        $451.clear('Auth');
+        $451.clear();
 	    $location.path("/login");
     }
 	$scope.template = { url: 'partials/nav.html'};
