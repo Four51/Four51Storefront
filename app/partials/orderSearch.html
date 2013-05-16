@@ -29,7 +29,7 @@
     <h3>Order Search</h3>
     <input type="text" ng-model="criteria.OrderID" placeholder="Order ID" />
     <input type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" />
-    <input type="text" ng-model="criteria.DateRangeFrom" placeholder="From:" /><input type="text" ng-model="criteria.DateRangeTo" placeholder="To:" />
+    <input type="text" ui-date ng-model="criteria.DateRangeFrom" placeholder="From:" /><input type="text" ui-date ng-model="criteria.DateRangeTo" placeholder="To:" />
     <input type="text" ng-model="criteria.LastN" placeholder="Last n Orders:" />
     <input class="btn btn-medium btn-primary" value="Search" ng-click="OrderSearch($event, criteria)" />
 </div>
