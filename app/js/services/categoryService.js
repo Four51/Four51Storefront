@@ -2,24 +2,7 @@
 four51.app.factory('CategoryService', function($resource, $rootScope, $451, ProductService){
     var catservice = $resource($451.api('category/:interopID', {interopID: '@ID'}));
     var cats = null;
-    function clearCache(){
-        $rootScope.$broadcast('event:ClearCategory');
-        cats = null;
-    }
-    function reloadCat(){
-        $rootScope.$broadcast('event:ReloadCategory');
-    }
-    /*$rootScope.$on('event:Logout', function(event, e){
-        clearCache();
-    });
-    $rootScope.$on('event:auth-loginRequired', function(event, e){
-        clearCache();
-    });
-    $rootScope.$on('event:auth-loginConfirmed', function(event, e){
-        cats = null;
-        reloadCat();
-    });
-	*/
+
 
     function findCat(parent, interopID){
         if(!interopID)
@@ -41,12 +24,13 @@ four51.app.factory('CategoryService', function($resource, $rootScope, $451, Prod
     }
     return {
         tree: function(){
-            if(!cats){
+            //if(!cats){
+
                 return catservice.query(function(data){
                     cats = data;
                 });
-            }else
-                return cats;
+            //}else
+            //    return cats;
         },
         getOne: function(interopID){
 
@@ -57,13 +41,12 @@ four51.app.factory('CategoryService', function($resource, $rootScope, $451, Prod
             if(foundCat)
                 return foundCat;
             else{
-                console.log('one category not found. Calling api');
                 if(interopID)
                     return catservice.get({ interopID: interopID } );
                 else{
                     catservice.query(function(data){
                         cats = data;
-                        reloadCat();
+                        //reloadCat();
 
                     })
                 }
