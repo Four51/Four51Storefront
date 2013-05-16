@@ -4,7 +4,7 @@
 
 describe('App Module:', function(){
   var module;
-  module = angular.module("451orders");
+  module = angular.module("451order");
 
   it('should be registered.', inject(function() {
     expect(module).not.toBe(null);
