@@ -10,16 +10,9 @@ four51.app.controller('NavCtrl', function ($location, $scope, $451) {
 });
 
 four51.app.controller('SideNavCtrl', function ($rootScope, $scope, CategoryService) {
-    $rootScope.$on('event:ClearCategory', function(){
-        $scope.tree = null;
-        console.log('clearing side nav ctrl categories')
-    });
-    $rootScope.$on('event:ReloadCategory', function(){
-        load();
-    });
-
-    function load(){
+    console.log('load side nav');
+    $rootScope.$on('event:auth-loginConfirmed', function(){
         $scope.tree = CategoryService.tree();
-    }
-    load();
+    });
+    $scope.tree = CategoryService.tree();
 });

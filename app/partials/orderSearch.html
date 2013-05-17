@@ -1,27 +1,37 @@
-<h3>Incoming Orders</h3>
 <div class="span2">
-    <ul class="well">
-        <h5>Standard Orders</h5>
-        <li ng-repeat="stat in OrderStats | orderstats:'Standard'">
-            <span>{{stat.Status}} <a href="#" ng-click="OrderSearch($event,{{stat}})">({{stat.Count}})</a></span>
-        </li>
-    </ul>
+    <h3>Incoming Orders</h3>
+    <div>
+        <ul class="well">
+            <h5>Standard Orders</h5>
+            <li ng-repeat="criteria in OrderSearchCriteria | orderstats:'Standard'">
+                <span>{{criteria.Status}} <a href="#" ng-click="OrderSearch($event,{{criteria}})">({{criteria.Count}})</a></span>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <ul class="well">
+            <h5>Replenishment Orders</h5>
+            <li ng-repeat="criteria in OrderSearchCriteria | orderstats:'Replenishment'">
+                <span>{{criteria.Status}} <a href="#" ng-click="OrderSearch($event,{{criteria}})">({{criteria.Count}})</a></span>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <ul class="well">
+            <h5>Price Request</h5>
+            <li ng-repeat="criteria in OrderSearchCriteria | orderstats:'PriceRequest'">
+                <span>{{criteria.Status}} <a href="#" ng-click="OrderSearch($event,{{criteria}})">({{criteria.Count}})</a></span>
+            </li>
+        </ul>
+    </div>
 </div>
-<div class="span3">
-    <ul class="well">
-        <h5>Replenishment Orders</h5>
-        <li ng-repeat="stat in OrderStats | orderstats:'Replenishment'">
-            <span>{{stat.Status}} <a href="#" ng-click="OrderSearch($event,{{stat}})">({{stat.Count}})</a></span>
-        </li>
-    </ul>
-</div>
-<div class="span4">
-    <ul class="well">
-        <h5>Price Request</h5>
-        <li ng-repeat="stat in OrderStats | orderstats:'PriceRequest'">
-            <span>{{stat.Status}} <a href="#" ng-click="OrderSearch($event,{{stat}})">({{stat.Count}})</a></span>
-        </li>
-    </ul>
+<div class="span5">
+    <h3>Order Search</h3>
+    <input type="text" ng-model="criteria.OrderID" placeholder="Order ID" />
+    <input type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" />
+    <input type="text" ui-date ng-model="criteria.DateRangeFrom" placeholder="From:" /><input type="text" ui-date ng-model="criteria.DateRangeTo" placeholder="To:" />
+    <input type="text" ng-model="criteria.LastN" placeholder="Last n Orders:" />
+    <input class="btn btn-medium btn-primary" value="Search" ng-click="OrderSearch($event, criteria)" />
 </div>
 
 <div class="span10" ng-show='displayOrders'>
