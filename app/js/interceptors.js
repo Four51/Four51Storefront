@@ -20,7 +20,7 @@ four51.app.config(function($httpProvider) {
 				}
 				var auth = response.headers()['www-authenticate'];
 				if (auth)
-					$451.cache("Auth", auth, false);
+					$451.cache("Auth", auth, $451.debug);
 
 				if ($451.debug)
 					console.dir(response.data);

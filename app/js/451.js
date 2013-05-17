@@ -28,7 +28,7 @@ four51.app.factory('$451', function(Cache) {
 	}
 
 	return {
-		debug: false,
+		debug: true,
 		appname: four51.app.name,
 		api: function(path) {
 			return '/api/' + this.appname + "/" + path;
