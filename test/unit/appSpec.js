@@ -2,24 +2,38 @@
 
 /* jasmine specs for modules go here */
 
-describe('App Module:', function(){
+xdescribe('App Module:', function(){
   var module;
-  module = angular.module("451orders");
+  module = angular.module("451order");
 
-  it('should be registered.', inject(function() {
+  var $injector = angular.injector([ '451order' ]);
+  var myService = $injector.get( 'myService' );
+  expect( myService.one ).toEqual(1);
+
+  xit('should be registered.', inject(function() {
     expect(module).not.toBe(null);
   }));
+});
+
+describe('451 Module:', function(){
+    var module;
+    module = angular.module("451order");
+
+    it('should be a real object.', inject(function() {
+        expect(module).not.toBe(null);
+    }));
 });
 
 //'x'ed out until it works
 xdescribe('Filters: html...', function(){
 
-    var myfilter; myfilter = $filter("html");
+    var myHtmlFilter;
+    myHtmlFilter = four51.app.filter("html");
 
-    var filterHtml = module.$filter('html');
+    //var filterHtml = module.$filter('html');
   xit("should allow HTML to pass through and NOT be htmlencoded",
-    inject(function(myfilter) {
-        expect(myfilter("<html>")).toBe("<html>");
+    inject(function(myHtmlFilter) {
+        expect(myHtmlFilter("<html>")).toBe("<html>");
 
     })
   );

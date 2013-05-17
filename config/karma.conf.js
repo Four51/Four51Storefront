@@ -6,15 +6,18 @@ files = [
   'app/lib/angular/angular.js',
   'app/lib/angular/angular-*.js',
   'test/lib/angular/angular-mocks.js',
+  'app/lib/angular/ui-bootstrap-0.2.0.js',
+  'app/js/app.js',
+  'app/js/451.js',
   'app/js/**/*.js',
   'test/unit/appSpec.js',
-  'test/unit/routingSpec.js'
+  'test/unit/routingSpec.js',
+  'test/unit/451Spec.js'
 ];
 
 autoWatch = true;
 
 browsers = ['Chrome'];
-browsers = ['ChromeCanary'];
 
 junitReporter = {
   outputFile: 'test_out/unit.xml',
