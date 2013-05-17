@@ -1,6 +1,6 @@
 /* Four51 Global Namespace */
 
-four51.app.factory('$451', function(Cache, localStorageService) {
+four51.app.factory('$451', function(Cache) {
 	function json_filter(input,query) {
 		var result = [];
 		var query_on = query.indexOf(':') > -1 ? query.split(':') : [property,query];
@@ -14,19 +14,21 @@ four51.app.factory('$451', function(Cache, localStorageService) {
 
 	function clearStorageMechanisms() {
 		Cache.removeAll();
-		localStorageService.clearAll();
+		localStorage.clear();
 	}
 
 	function putCache(id,val,persist) {
-		persist ? localStorageService.add(id,val) : Cache.put(id,val);
+		// probably going to need to test for object type. i'm not sure strings will stringify
+		persist ? localStorage.setItem(id,JSON.stringify(val)) : Cache.put(id,val);
 		return val;
 	}
 	function getCache(id) {
-		return Cache.get(id) || localStorageService.get(id);
+		// probably going to need to test for object type. pretty sure JSON.parse will yack on a string
+		return Cache.get(id) || JSON.parse(localStorage.getItem(id));
 	}
 
 	return {
-		debug: false,
+		debug: true,
 		appname: four51.app.name,
 		api: function(path) {
 			return '/api/' + this.appname + "/" + path;
@@ -42,7 +44,7 @@ four51.app.factory('$451', function(Cache, localStorageService) {
 			if (!key)
 				clearStorageMechanisms();
 			else
-				Cache.remove(key); localStorageService.remove(key);
+				Cache.remove(key); localStorage.removeItem(key);
 		},
 		filter: {
 			// default json property when not specified in filter attribute as Type:Standard

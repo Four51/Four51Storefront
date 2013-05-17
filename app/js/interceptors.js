@@ -1,7 +1,7 @@
 'use strict'
 
 four51.app.config(function($httpProvider) {
-	$httpProvider.interceptors.push(function($q, $injector, $location, $rootScope, $451) {
+	$httpProvider.interceptors.push(function($q, $rootScope, $451) {
 		function appendAuth(config) {
 			// see if cache returns null as expected now
 			var auth = $451.cache("Auth");
@@ -11,7 +11,7 @@ four51.app.config(function($httpProvider) {
 
 		return {
 			'request': function(config) {
-				return appendAuth(config, false);
+				return appendAuth(config);
 			},
 			'response': function(response) {
 				// using status code 202 [Created] to represent the authentication token has been created. it fits the RFC spec and makes the authentication handling much more RESTy
@@ -20,7 +20,7 @@ four51.app.config(function($httpProvider) {
 				}
 				var auth = response.headers()['www-authenticate'];
 				if (auth)
-					$451.cache("Auth", auth, true);
+					$451.cache("Auth", auth, $451.debug);
 
 				if ($451.debug)
 					console.dir(response.data);

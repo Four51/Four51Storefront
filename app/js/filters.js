@@ -9,9 +9,3 @@ four51.app.filter('orderstats', function($451) {
 		return $451.filter.on('Type').for(input,query);
 	}
 });
-
-four51.app.filter('html', function() {
-	return function(input) {
-		return input;
-	}
-});

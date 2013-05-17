@@ -3,23 +3,16 @@
 four51.app.controller('NavCtrl', function ($location, $scope, $451) {
 	$scope.appname = $451.appname;
     $scope.Logout = function(){
-        $451.clear('Auth');
+        $451.clear();
 	    $location.path("/login");
     }
 	$scope.template = { url: 'partials/nav.html'};
 });
 
 four51.app.controller('SideNavCtrl', function ($rootScope, $scope, CategoryService) {
-    $rootScope.$on('event:ClearCategory', function(){
-        $scope.tree = null;
-        console.log('clearing side nav ctrl categories')
-    });
-    $rootScope.$on('event:ReloadCategory', function(){
-        load();
-    });
-
-    function load(){
+    console.log('load side nav');
+    $rootScope.$on('event:auth-loginConfirmed', function(){
         $scope.tree = CategoryService.tree();
-    }
-    load();
+    });
+    $scope.tree = CategoryService.tree();
 });
