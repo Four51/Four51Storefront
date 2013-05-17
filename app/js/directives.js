@@ -15,6 +15,7 @@ four51.app.directive('authorization', function($route, $451, LoginService) {
 				scope.isAuthenticated = true;
 				$route.reload();
 			});
+
 			scope.Login = function() {
 				LoginService.login(this.user);
 			};
