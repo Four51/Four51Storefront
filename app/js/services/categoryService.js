@@ -1,6 +1,6 @@
 'use strict';
 four51.app.factory('CategoryService', function($resource, $rootScope, $451, ProductService){
-    var catservice = $resource($451.api('category/:interopID', {interopID: '@ID'}));
+    var catservice = $resource($451.api('categories/:interopID', {interopID: '@ID'}));
     var cats = null;
 
 
@@ -25,7 +25,7 @@ four51.app.factory('CategoryService', function($resource, $rootScope, $451, Prod
     return {
         tree: function(){
             //if(!cats){
-
+                console.log('category query');
                 return catservice.query(function(data){
                     cats = data;
                 });
@@ -41,8 +41,10 @@ four51.app.factory('CategoryService', function($resource, $rootScope, $451, Prod
             if(foundCat)
                 return foundCat;
             else{
-                if(interopID)
+                if(interopID){
+                    console.log('category get');
                     return catservice.get({ interopID: interopID } );
+                }
                 else{
                     catservice.query(function(data){
                         cats = data;

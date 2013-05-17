@@ -1,14 +1,17 @@
 'use strict';
 four51.app.factory('ProductService', function($resource, $451){
-    var productAPI = $resource($451.api('Product/:interopID'), {interopID: '@ID'}, {'search': {method: 'GET', isArray:true}});
+    var productAPI = $resource($451.api('Products/:interopID'), {interopID: '@ID'});
 
     return {
         search: function(categoryInteropID, searchTerm){
             if(!categoryInteropID && !searchTerm)
                 return null;
-            return productAPI.search({'CategoryInteropID': categoryInteropID, 'SearchTerms': searchTerm ? searchTerm : ''});
+
+            console.log('product query');
+            return productAPI.query({'CategoryInteropID': categoryInteropID, 'SearchTerms': searchTerm ? searchTerm : ''});
         },
         getOne: function(interopID){
+            console.log('product get');
             return productAPI.get({interopID: interopID})
         }
     }
