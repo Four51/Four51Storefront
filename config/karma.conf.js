@@ -1,14 +1,17 @@
 basePath = '../';
 
 files = [
-  JASMINE,
-  JASMINE_ADAPTER,
-  'app/lib/angular/angular.js',
-  'app/lib/angular/angular-*.js',
-  'test/lib/angular/angular-mocks.js',
-  'app/js/app.js',
-  'app/js/**/*.js',
-  'test/unit/appSpec.js'
+	JASMINE,
+	JASMINE_ADAPTER,
+	'app/lib/angular/angular.1.1.4.js',
+	'app/lib/angular/angular-*.min.js',
+	'app/lib/angular/angular-ui-date.js',
+	'test/lib/angular/angular-mocks.js',
+	'app/lib/angular/ui-bootstrap-0.2.0.js',
+	'app/js/app.js',
+	'app/js/**/*.js',
+	'test/unit/appSpec.js',
+    'test/unit/451Spec.js'
 ];
 
 autoWatch = true;
@@ -16,6 +19,6 @@ autoWatch = true;
 browsers = ['Chrome'];
 
 junitReporter = {
-  outputFile: 'test_out/unit.xml',
-  suite: 'unit'
+	outputFile: 'test_out/unit.xml',
+	suite: 'unit'
 };
