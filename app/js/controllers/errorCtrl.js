@@ -14,8 +14,8 @@ four51.app.controller('ErrorCtrl', function ErrorCtrl($scope, $rootScope, $dialo
 		var ex = exception.data ? exception.data : exception;
 		try {
 			$scope.error = {
-				Message: ex.Message || ex.message,
-				Detail: ex.ExceptionMessage || '',
+				Message: ex.Message || '',
+				Detail: ex.ExceptionMessage || ex.message,
 				Code: ex.ExceptionType || '',
 				StackTrace: ex.StackTrace || ''
 			};
