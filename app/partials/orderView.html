@@ -24,20 +24,31 @@
     <table class="table table-striped table-hover table-bordered">
         <thead>
             <tr>
-                <td>ID</td><td>Product</td><td>Specifications</td><td>Unit Price</td><td>Quantity</td><td>Total Quantity</td><td>Quantity Shipped</td><td>Price</td>
+                <td>ID</td>
+                <td>Product</td>
+                <td ng-show="hasSpecsOnAnyLineItem()">Specifications</td>
+                <td>Unit Price</td>
+                <td>Quantity</td>
+                <td ng-show="hasShipperOnAnyLineItem()">Shipper</td>
+                <td ng-show="hasShipAccountOnAnyLineItem()">"Ship Account</td>
+                <td>Total Quantity</td>
+                <td>Quantity Shipped</td>
+                <td>Price</td>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="item in order.LineItems">
                 <td><a href="#/lineitem/{{order.ID}}/{{$index}}">{{item.Variant.ExternalID}}</a></td>
-                <td>{{item.Variant.Name}}</td>
-                <td>
+                <td>{{item.Product.Name}}</td>
+                <td ng-show="hasSpecsOnAnyLineItem()">
                     <ul><!-- more complete business logic in LineItemGrid.cs line 638 -->
                         <li ng-repeat="spec in item.Specs | filter:Selected">{{spec.Name + " : " + spec.Value}}</li>
                     </ul>
                 </td>
                 <td>{{item.UnitPrice | currency:"$"}}</td>
                 <td>{{item.Quantity}}</td>
+                <td ng-show="hasShipperOnAnyLineItem()">{{item.Shipper.Name}}</td>
+                <td ng-show="hasShipAccountOnAnyLineItem()">{{item.ShipAccount}}</td>
                 <td>{{item.Product.QuantityMultiplier * item.Quantity}}</td>
                 <td>{{item.TotalShipped}}</td>
                 <td>{{item.LineTotal | currency:"$"}}</td>
