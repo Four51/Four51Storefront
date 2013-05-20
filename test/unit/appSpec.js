@@ -17,26 +17,19 @@ describe('$451 Factory:',inject(function(){
 	beforeEach(inject(function(_$451_) {
 		$451 = _$451_;
 	}));
-	console.dir($451);
+
 	it('Should return api url', function() {
 		var url = $451.api('order');
 		expect(url).toBe('/api/' + $451.appname + '/order');
 	});
+
+	it('Should return filtered JSON object', function() {
+		var obj = [
+			{ type: 'a', status: '1' },
+			{ type: 'z', status: '26' }
+		];
+		var result = $451.filter.on('type').for(obj, 'type:a');
+		expect(result.length).toBe(1);
+		expect(result[0].status).toBe('1');
+	});
 }));
-
-//'x'ed out until it works
-xdescribe('Filters: html...', function(){
-
-    var myfilter; myfilter = $filter("html");
-
-    var filterHtml = module.$filter('html');
-  xit("should allow HTML to pass through and NOT be htmlencoded",
-    inject(function(myfilter) {
-        expect(myfilter("<html>")).toBe("<html>");
-
-    })
-  );
-    //htmlfilter = new 451orders.filter(html);
-
-
-});
