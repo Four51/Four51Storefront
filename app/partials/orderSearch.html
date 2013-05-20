@@ -34,6 +34,7 @@
     <input class="btn btn-medium btn-primary" value="Search" ng-click="OrderSearch($event, criteria)" />
 </div>
 
+
 <div class="span10" ng-show='displayOrders'>
     <table class="table table-striped table-hover table-bordered">
         <thead>{{orderSearchStat.Type}} - {{orderSearchStat.Status}}
@@ -42,7 +43,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="order in orders">
+            <tr ng-repeat="order in orders" ng-animate="'slide'">
                 <td><a href="#/order/{{order.ID}}">{{order.ExternalID}}</a></td>
                 <td>{{order.Type}}</td>
                 <td>{{order.Status}}</td>

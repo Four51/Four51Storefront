@@ -34,8 +34,7 @@ four51.app.config(function($httpProvider) {
 				}
 
 				if (response.status != 200) {
-					$rootScope.$broadcast('event:raise-Error', response);
-					return false;
+					throw response;
 				}
 				return response;
 			}

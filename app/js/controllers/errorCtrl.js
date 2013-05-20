@@ -1,4 +1,4 @@
-four51.app.controller('ErrorCtrl', function ErrorCtrl($scope, $dialog) {
+four51.app.controller('ErrorCtrl', function ErrorCtrl($scope, $rootScope, $dialog, $exceptionHandler) {
 	$scope.open = function() {
 		$scope.isError = true;
 	};
@@ -10,14 +10,22 @@ four51.app.controller('ErrorCtrl', function ErrorCtrl($scope, $dialog) {
 		dialogFade: true
 	};
 
-	$scope.$on('event:raise-Error', function(scope, ex) {
-		$scope.error = {
-			Message: ex.Message || ex.data.MessageDetail || ex.data.Message,
-			Detail: ex.ExceptionMessage || ex.data.ExceptionMessage,
-			Code: ex.ExceptionType || ex.status || ex.data.ExceptionType,
-			StackTrace: ex.StackTrace || ex.data.StackTrace || ex.data.Message
-		};
-		$scope.open();
+	$scope.$on('exception', function(event, exception) {
+		var ex = exception.data ? exception.data : exception;
+		try {
+			$scope.error = {
+				Message: ex.Message || ex.message,
+				Detail: ex.ExceptionMessage || '',
+				Code: ex.ExceptionType || '',
+				StackTrace: ex.StackTrace || ''
+			};
+			$scope.open();
+		}
+		catch(e) {
+			console.log('An error occurred while handling an error. Consult the object written to the log. Keep in mind you must use the Error() if you are throwing an error in your JavaScript');
+			console.dir(event);
+			console.dir(ex);
+		}
 	});
 
 	$scope.template = { url: 'partials/error.html'};
