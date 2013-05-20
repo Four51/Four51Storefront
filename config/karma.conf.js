@@ -10,7 +10,8 @@ files = [
 	'app/lib/angular/ui-bootstrap-0.2.0.js',
 	'app/js/app.js',
 	'app/js/**/*.js',
-	'test/unit/appSpec.js'
+	'test/unit/appSpec.js',
+    'test/unit/451Spec.js'
 ];
 
 autoWatch = true;

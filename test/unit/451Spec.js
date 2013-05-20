@@ -2,16 +2,6 @@
 
 /* jasmine specs for modules go here */
 
-//let's test that caching works.
-    //test that we can instantiate a cache object
-    //test that we can store a simple string in the cache
-    //test that we can read that string back from the cache
-    //test that we can clear the cache
-    //test that the cache has been cleared
-    //test that we can store the same simple string again in the cache
-    //test that the browser can independently read the cache after being stored
-    //test that the browser can independently clear the cache
-
 describe('451 Module:', function(){
   var module;
   module = angular.module("451order");
@@ -22,99 +12,65 @@ describe('451 Module:', function(){
 
 });
 
-describe('cache object: instantiate', function() {
 
-    beforeEach(function(){
-        this.addMatchers({
-            toEqualData: function(expected) {
-                return angular.equals(this.actual, expected);
-            }
-        });
-    });
+//let's test that caching works.
+    //test that we can instantiate a cache object                            --DONE
+    //test that we can store a string and array in the cache                 --DONE
+    //test that we can read that string back from the cache                  --DONE
+    //test that we can clear the cache
+    //test that the cache has been cleared
+    //test that we can store the same simple string again in the cache
+    //test that the browser can independently read the cache after being stored
+    //test that the browser can independently clear the cache
+    //test that we can store a JSON object in the cache
+    //test that the JSON object is readable after storage
+    //test that when we store something in the cache it doesn't hit the service again
+describe('cache object:', function() {
 
+    beforeEach(module('451order'));
+    var $451;
 
-    beforeEach(angular.module('451order'));
+    it('should be able to instantiate a cache object', inject(function(_$451_){
+        $451 = _$451_;
+        var cacheObject;
+        expect($451).not.toBe(null);
 
-
-    it('should contain a $451 service', inject(function($api){
-         expect($api).not.to.equal(null);
+        cacheObject = $451.cache("something","else");
+        expect(cacheObject).not.toBe(null);
     }));
 
-    xdescribe('PhoneListCtrl', function(){
-        var scope, ctrl, $httpBackend, cache;
+    it('should be able to store a string and array in the cache', inject(function(_$451_){
+        $451 = _$451_;
+        var cacheObject;
+        expect($451).not.toBe(null);
 
-        beforeEach(inject(function(_$httpBackend_, $rootScope, $controller, $451) {
-            $httpBackend = _$httpBackend_;
-            $httpBackend.expectGET('phones/phones.json').
-                respond([{name: 'Nexus S'}, {name: 'Motorola DROID'}]);
+        cacheObject = $451.cache("blah", "blah2");  //cache this string "blah2"
+        console.dir(cacheObject);
+        expect(cacheObject).toEqual("blah2");
 
-            scope = $rootScope.$new();
-            ctrl = $controller(PhoneListCtrl, {$scope: scope});
-            cache = $451.cache("test", true)
-        }));
+        cacheObject = $451.cache("blah1",[0,1,2,3]); //cache this 4 element array
+        console.dir(cacheObject);
+        expect(cacheObject).toEqual([0,1,2,3]);
 
+        expect($451.cache("blah")).toEqual("blah2");
+        expect($451.cache("blah1")).toEqual([0,1,2,3]);
 
-        /*
-        it('should create "phones" model with 2 phones fetched from xhr', function() {
-            expect(scope.phones).toEqual([]);
-            $httpBackend.flush();
+        $451.cache("blah","blah2",true);
+        $451.cache("blah1",[0,1,2,3],true);
+    }));
 
-            expect(scope.phones).toEqualData(
-                [{name: 'Nexus S'}, {name: 'Motorola DROID'}]);
-        }); */
+    it('should be able to read that string back from the cache', inject(function(_$451_){
+        $451 = _$451_;
+        var cacheObject;
+        expect($451).not.toBe(null);
 
+        cacheObject = $451.cache("blah");  //READ FROM CACHE this string "blah2"
+        console.dir(cacheObject);
+        expect(cacheObject).toEqual("blah2");
 
-        xit('should do something', function() {
-            expect(cache).not.toBe(null);
-        });
-    });
-
-
-   xdescribe('PhoneDetailCtrl', function(){
-        var scope, $httpBackend, ctrl,
-            xyzPhoneData = function() {
-                return {
-                    name: 'phone xyz',
-                    images: ['image/url1.png', 'image/url2.png']
-                }
-            };
-
-
-        beforeEach(inject(function(_$httpBackend_, $rootScope, $routeParams, $controller) {
-            $httpBackend = _$httpBackend_;
-            $httpBackend.expectGET('phones/xyz.json').respond(xyzPhoneData());
-
-            $routeParams.phoneId = 'xyz';
-            scope = $rootScope.$new();
-            ctrl = $controller(PhoneDetailCtrl, {$scope: scope});
-        }));
-
-
-        xit('should fetch phone detail', function() {
-            expect(scope.phone).toEqualData({});
-            $httpBackend.flush();
-
-            expect(scope.phone).toEqualData(xyzPhoneData());
-        });
-    });
-});
-
-
-/*
-describe('451 module cache object: instantiate',function(){
-    var myCacheObject;
-
-    beforeEach(module('$451.cache'));
-
-   //    var module;
-   // module = angular.module("451order");
-
-    //$451.cache("blah");
-    it('is an object',
-        inject(function( $451.cache ){
-        expect($451.cache("blah").not.toBe(""));
-    }
-    ));
-
+        cacheObject = $451.cache("blah1"); //READ FROM CACHE this 4 element array
+        console.dir(cacheObject);
+        expect(cacheObject).toEqual([0,1,2,3]);
+    }));
 })
-*/
+;
