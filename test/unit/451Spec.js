@@ -1,17 +1,33 @@
 'use strict';
+//this file contains test specs for 451.js
 
-/* jasmine specs for modules go here */
+//let's test that API calls work
+describe('$451 Factory:',inject(function(){
+    var $451;
+    beforeEach(module('451order'));
+    beforeEach(inject(function(_$451_) {
+        $451 = _$451_;
+    }));
 
-describe('451 Module:', function(){
-  var module;
-  module = angular.module("451order");
+    it('Should return api url', function() {
+        var url = $451.api('order'); //won't work right now because api gets it from the window.location.etc
+        console.log($451.appname);
+        expect(url).toBe('/api/' + $451.appname + '/order');
+    });
 
-  it('should be registered.', inject(function() {
-    expect(module).not.toBe(null);
-  }));
-
-});
-
+    it('Should return filtered JSON object', function() {
+        //build this object out into a multilevel object
+        var obj = [
+            { type: 'a', status: '1' },
+            { type: 'a', status: '2' },
+            { type: 'y', status: '26' },
+            { type: 'z', status: '26' }
+        ];
+        var result = $451.filter.on('type').for(obj, 'type:a');
+        expect(result.length).toBe(2);
+        expect(result[1].status).toBe('2');
+    });
+}));
 
 //let's test that caching works.
     //test that we can instantiate a cache object                            --DONE
@@ -30,7 +46,7 @@ describe('451 Module:', function(){
     //test that the browser can independently clear the cache?
     //test that when we store something in the cache it doesn't hit the service again?  this is a test for another area
 
-describe('cache object:', function() {
+describe('$451.Cache object:', function() {
 
     beforeEach(module('451order'));
     var $451;
