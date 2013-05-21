@@ -1,6 +1,7 @@
 /* Four51 Global Namespace */
 
 four51.app.factory('$451', function(Cache) {
+	var property;
 	function json_filter(input,query) {
 		var result = [];
 		var query_on = query.indexOf(':') > -1 ? query.split(':') : [property,query];

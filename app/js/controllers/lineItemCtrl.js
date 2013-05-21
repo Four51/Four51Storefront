@@ -4,7 +4,6 @@ four51.app.controller('LineItemViewCtrl', function ($scope, $routeParams, OrderS
     $scope.order = OrderService.get({ id: $routeParams.orderid });
 	$scope.lineItemIndex = $routeParams.lineitemid;
 	$scope.hasPriceSchedule = function() {
-		console.log($scope.order.LineItems[$scope.lineItemIndex]);
-		return $scope.order.LineItems[$scope.lineItemIndex].PriceScheduleID != null;
+		return $scope.order.LineItems[$scope.lineItemIndex].PriceSchedule.PriceBreaks.length > 0;
 	}
 });

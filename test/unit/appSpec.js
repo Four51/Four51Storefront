@@ -20,7 +20,7 @@ describe('$451 Factory:',inject(function(){
 
 	it('Should return api url', function() {
 		var url = $451.api('order');
-		expect(url).toBe('/api/' + $451.appname + '/order');
+		expect(url).toBe('/api/451order/order');
 	});
 
 	it('Should return filtered JSON object', function() {
