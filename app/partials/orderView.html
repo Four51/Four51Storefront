@@ -38,7 +38,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="item in order.LineItems">
-                <td><a href="#/lineitem/{{order.ID}}/{{$index}}">{{item.Variant.ExternalID}}</a></td>
+                <td><a ng-href="#/lineitem/{{order.ID}}/{{$index}}">{{item.Variant.ExternalID}}</a></td>
                 <td>{{item.Product.Name}}</td>
                 <td ng-show="hasSpecsOnAnyLineItem()">
                     <ul><!-- more complete business logic in LineItemGrid.cs line 638 -->

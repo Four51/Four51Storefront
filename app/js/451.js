@@ -22,6 +22,7 @@ four51.app.factory('$451', function(Cache) {
 		persist ? localStorage.setItem(id,JSON.stringify(val)) : Cache.put(id,val);
 		return val;
 	}
+
 	function getCache(id) {
 		// probably going to need to test for object type. pretty sure JSON.parse will yack on a string
 		return Cache.get(id) || JSON.parse(localStorage.getItem(id));

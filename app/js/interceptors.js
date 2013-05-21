@@ -19,6 +19,7 @@ four51.app.config(function($httpProvider) {
 					$rootScope.$broadcast('event:auth-loginConfirmed');
 				}
 				var auth = response.headers()['www-authenticate'];
+
 				if (auth)
 					$451.cache("Auth", auth, $451.debug);
 
@@ -33,9 +34,15 @@ four51.app.config(function($httpProvider) {
 					return $q.defer();
 				}
 
+				if (response.status == 403) {
+					$rootScope.$broadcast('event:auth-loginFailed', response.data.Message);
+					return $q.defer();
+				}
+
 				if (response.status != 200) {
 					throw response;
 				}
+
 				return response;
 			}
 		};
