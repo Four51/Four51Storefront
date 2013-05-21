@@ -1,7 +1,7 @@
 <div class="span2">
     <h3>Incoming Orders</h3>
     <div>
-        <ul class="well">
+        <ul class="well unstyled">
             <h5>Standard Orders</h5>
             <li ng-repeat="criteria in OrderSearchCriteria | orderstats:'Standard'">
                 <span>{{criteria.Status}} <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">({{criteria.Count}})</a></span>
@@ -9,7 +9,7 @@
         </ul>
     </div>
     <div>
-        <ul class="well">
+        <ul class="well unstyled">
             <h5>Replenishment Orders</h5>
             <li ng-repeat="criteria in OrderSearchCriteria | orderstats:'Replenishment'">
                 <span>{{criteria.Status}} <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">({{criteria.Count}})</a></span>
@@ -17,7 +17,7 @@
         </ul>
     </div>
     <div>
-        <ul class="well">
+        <ul class="well unstyled">
             <h5>Price Request</h5>
             <li ng-repeat="criteria in OrderSearchCriteria | orderstats:'PriceRequest'">
                 <span>{{criteria.Status}} <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">({{criteria.Count}})</a></span>
