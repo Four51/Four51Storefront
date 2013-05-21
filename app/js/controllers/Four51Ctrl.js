@@ -5,11 +5,17 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $451, CategoryServ
 		$scope.isAuthenticated = true;
 		$route.reload();
 	});
-	$scope.Login = function() {
-		LoginService.login(this.user);
-	};
+	$scope.$on('event:auth-loginRequired', function() {
+		$scope.isAuthenticated = false;
+	});
+	$scope.$on('event:auth-loginFailed', function(event, message) {
+		$scope.errorMessage = message;
+	});
 	$scope.$on("$routeChangeSuccess", function() {
 		$scope.tree = CategoryService.tree();
 	});
+	$scope.Login = function() {
+		LoginService.login(this.user);
+	};
 });
 
