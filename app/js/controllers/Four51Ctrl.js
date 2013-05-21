@@ -8,5 +8,8 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $451, CategoryServ
 	$scope.Login = function() {
 		LoginService.login(this.user);
 	};
+	$scope.$on("$routeChangeSuccess", function() {
+		$scope.tree = CategoryService.tree();
+	});
 });
 
