@@ -1,7 +1,7 @@
 
 <div class="navbar-inner">
     <div class="container-fluid">
-        <a class="brand" href="#">{{appname}}</a>
+        <a class="brand" href="#">Welcome, {{user.FirstName + " " + user.LastName}}</a>
         <ul class="nav" ng-init="active='catalog'">
             <li class="{{(active == 'catalog') && 'active' || ''}}"><a href="#/catalog" ng-click="active = 'catalog'">Category</a></li>
             <li class="divider-vertical" />
