@@ -14,32 +14,34 @@
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 
-<body authorization ng-cloak>
-    <div id="login_form" ng-hide="isAuthenticated" style="position: relative;">
-        <div id="login_box">
-            <div ng-controller='LoginCtrl'>
-               <ng-include src="template.url" />
+<body ng-cloak>
+    <div authorization ng-controller="Four51Ctrl">
+        <div id="login_form" ng-hide="isAuthenticated" style="position: relative;">
+            <div id="login_box">
+                <div ng-controller='LoginCtrl'>
+                   <ng-include src="template.url" />
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="navbar navbar-fixed-top" ng-controller="NavCtrl">
-        <ng-include src="template.url" />
-    </div>
+        <div class="navbar navbar-fixed-top" ng-controller="NavCtrl">
+            <ng-include src="template.url" />
+        </div>
 
-    <div ng-show="isAuthenticated" id="content" class="container-fluid" ng-controller="SideNavCtrl">
-        <div class="row-fluid">
-            <div class="span3">
-                <ng-include src="'partials/sideNav.html'" />
-            </div>
-            <div class="span9">
-                <div ng-view />
+        <div ng-show="isAuthenticated" id="content" class="container-fluid" ng-controller="SideNavCtrl">
+            <div class="row-fluid">
+                <div class="span3">
+                    <ng-include src="'partials/sideNav.html'" />
+                </div>
+                <div class="span9">
+                    <div ng-view />
+                </div>
             </div>
         </div>
-    </div>
 
-    <div ng-controller="ErrorCtrl">
-        <ng-include src="template.url" />
+        <div ng-controller="ErrorCtrl">
+            <ng-include src="template.url" />
+        </div>
     </div>
     <!-- In production use:
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
@@ -62,6 +64,7 @@
     <script src="js/interceptors.js"></script>
     <script src="js/routing.js"></script>
 
+    <script src="js/controllers/four51Ctrl.js"></script>
     <script src="js/controllers/categoryCtrl.js"></script>
     <script src="js/controllers/errorCtrl.js"></script>
     <script src="js/controllers/listOrdersCtrl.js"></script>

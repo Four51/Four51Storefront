@@ -1,6 +1,7 @@
 <div id="login_form">
     <form class="form-signin" ng-submit="Login()" name="LoginForm">
         <h2 class="form-signin-heading">Please sign in</h2>
+        <p class="alert-error">{{errorMessage}}</p>
         <input class="input-block-level" type="text" ng-model="user.Username" placeholder="Username" />
         <input class="input-block-level" type="password" ng-model="user.Password" placeholder="Password" />
         <input class="btn btn-large btn-primary" type="submit" value="Login" />

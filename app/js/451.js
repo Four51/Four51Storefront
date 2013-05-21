@@ -22,6 +22,7 @@ four51.app.factory('$451', function(Cache) {
 		persist ? localStorage.setItem(id,JSON.stringify(val)) : Cache.put(id,val);
 		return val;
 	}
+
 	function getCache(id) {
 		// probably going to need to test for object type. pretty sure JSON.parse will yack on a string
 		return Cache.get(id) || JSON.parse(localStorage.getItem(id));
@@ -31,7 +32,8 @@ four51.app.factory('$451', function(Cache) {
 		debug: true,
 		appname: four51.app.name,
 		api: function(path) {
-			return '/api/' + this.appname + "/" + path;
+            //todo: get appname with out using window?
+            return '/api/' + window.location.pathname.split('/')[1] + "/" + path;
 		},
 		// cache is temporary. even refreshing the browser will clear the cache
 		// getter attempts to retrieve based on the persistent state longevity of each type { cache, localstorage }

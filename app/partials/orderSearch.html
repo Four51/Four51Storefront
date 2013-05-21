@@ -4,7 +4,7 @@
         <ul class="well">
             <h5>Standard Orders</h5>
             <li ng-repeat="criteria in OrderSearchCriteria | orderstats:'Standard'">
-                <span>{{criteria.Status}} <a href="#" ng-click="OrderSearch($event,{{criteria}})">({{criteria.Count}})</a></span>
+                <span>{{criteria.Status}} <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">({{criteria.Count}})</a></span>
             </li>
         </ul>
     </div>
@@ -12,7 +12,7 @@
         <ul class="well">
             <h5>Replenishment Orders</h5>
             <li ng-repeat="criteria in OrderSearchCriteria | orderstats:'Replenishment'">
-                <span>{{criteria.Status}} <a href="#" ng-click="OrderSearch($event,{{criteria}})">({{criteria.Count}})</a></span>
+                <span>{{criteria.Status}} <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">({{criteria.Count}})</a></span>
             </li>
         </ul>
     </div>
@@ -20,7 +20,7 @@
         <ul class="well">
             <h5>Price Request</h5>
             <li ng-repeat="criteria in OrderSearchCriteria | orderstats:'PriceRequest'">
-                <span>{{criteria.Status}} <a href="#" ng-click="OrderSearch($event,{{criteria}})">({{criteria.Count}})</a></span>
+                <span>{{criteria.Status}} <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">({{criteria.Count}})</a></span>
             </li>
         </ul>
     </div>
@@ -34,6 +34,7 @@
     <input class="btn btn-medium btn-primary" value="Search" ng-click="OrderSearch($event, criteria)" />
 </div>
 
+
 <div class="span10" ng-show='displayOrders'>
     <table class="table table-striped table-hover table-bordered">
         <thead>{{orderSearchStat.Type}} - {{orderSearchStat.Status}}
@@ -42,8 +43,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="order in orders">
-                <td><a href="#/order/{{order.ID}}">{{order.ExternalID}}</a></td>
+            <tr ng-repeat="order in orders" ng-animate="'slide'">
+                <td><a ng-href="#/order/{{order.ID}}">{{order.ExternalID}}</a></td>
                 <td>{{order.Type}}</td>
                 <td>{{order.Status}}</td>
                 <td>{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</td>
