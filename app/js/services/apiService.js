@@ -43,6 +43,9 @@ four51.app.factory('$api', function($451) {
 		},
 		save: function(data) {
 			return fromCache() || fromRest('save', data);
+		},
+		custom: function(method, data) {
+			return fromCache() || fromRest(method, data);
 		}
 	};
 });

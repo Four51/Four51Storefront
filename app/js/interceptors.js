@@ -24,7 +24,7 @@ four51.app.config(function($httpProvider) {
 					$451.cache("Auth", auth, $451.debug);
 
 				if ($451.debug)
-					console.dir(response.data);
+					console.debug(response.data);
 
 				return response;
 			},

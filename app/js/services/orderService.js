@@ -1,4 +1,4 @@
-four51.app.factory('OrderService', function($resource, $http, $451, $api) {
+four51.app.factory('OrderService', function($resource, $451, $api) {
 	var r = $resource($451.api('order/:id'), { id: '@id' });
 	return {
 		get: function(param) {

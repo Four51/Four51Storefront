@@ -2,7 +2,15 @@
 
 four51.app.factory('$451', function(Cache) {
 	var property;
-	function json_filter(input,query) {
+	function json_filter(input, options) {
+		var result = [];
+		angular.forEach(input, function(row) {
+			if (row[options.Property].toLowerCase() === options.Value.toLowerCase())
+				result.push(row);
+		});
+		return result;
+	}
+	function json_filter_old(input,query) {
 		var result = [];
 		var query_on = query.indexOf(':') > -1 ? query.split(':') : [property,query];
 		angular.forEach(input, function(stat) {
@@ -49,7 +57,10 @@ four51.app.factory('$451', function(Cache) {
 			else
 				Cache.remove(key); localStorage.removeItem(key);
 		},
-		filter: {
+		filter: function(input, options) {
+			return json_filter(input, options);
+		},
+		filter_old: {
 			// default json property when not specified in filter attribute as Type:Standard
 			on: function(val) {
 				property = val;
