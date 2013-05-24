@@ -1,23 +1,12 @@
 /* Four51 Global Namespace */
 
 four51.app.factory('$451', function(Cache) {
-	var property;
 	function json_filter(input, options) {
 		var result = [];
 		angular.forEach(input, function(row) {
 			if (row[options.Property].toLowerCase() === options.Value.toLowerCase())
 				result.push(row);
 		});
-		return result;
-	}
-	function json_filter_old(input,query) {
-		var result = [];
-		var query_on = query.indexOf(':') > -1 ? query.split(':') : [property,query];
-		angular.forEach(input, function(stat) {
-			if (stat[query_on[0]].toLowerCase() === query_on[1].toLowerCase())
-				result.push(stat);
-		});
-
 		return result;
 	}
 
@@ -35,6 +24,12 @@ four51.app.factory('$451', function(Cache) {
 	function getCache(id) {
 		// probably going to need to test for object type. pretty sure JSON.parse will yack on a string
 		return Cache.get(id) || JSON.parse(localStorage.getItem(id));
+	}
+
+	function sliceByValue(array, value) {
+		var index = array.indexOf(value);
+		array.splice(index, index+1);
+		//return array;
 	}
 
 	return {
@@ -60,15 +55,8 @@ four51.app.factory('$451', function(Cache) {
 		filter: function(input, options) {
 			return json_filter(input, options);
 		},
-		filter_old: {
-			// default json property when not specified in filter attribute as Type:Standard
-			on: function(val) {
-				property = val;
-				return this;
-			},
-			for: function(input, query) {
-				return json_filter(input, query);
-			}
+		slice: function(array, value) {
+			sliceByValue(array, value);
 		}
 	};
 });
