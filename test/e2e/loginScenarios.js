@@ -70,13 +70,19 @@ describe('Categories:', function() {
         expect(repeater('.nav-header').count()).toBeGreaterThan(0);
         //okay, there is at least one category, hooray
 
-        //console.dir(repeater('.nav-header').row(0)); //first category nav item:  category and subcategory
-        //console.dir(repeater('.nav-header').row(1)); //second category nav item:  category, no subcategory
-        //console.dir(repeater('.nav-header').row(3)); //fourth category nav item:  category, subcat, and subsubcat
-
-        element('.nav-header a').click();
         pause();
-        //why does it click the LAST nav anchor instead of the first?
+        element('.nav-list a:first').click(); //clicks first category nav link
+        pause();
+        element('.nav-header li a:first').click(); //clicks first category's subcategory nav link
+        pause();
+        element('.nav-header:nth-child(2) a:first').click(); //clicks second category nav link
+        pause();
+        element('.nav-header:nth-child(3) a:first').click(); //clicks third category nav link
+        pause();
+
+        //let's test that subcategories under categories link to the same place they do when they are displayed in the content area
+
+
     });
 
 });
