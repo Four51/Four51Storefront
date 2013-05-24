@@ -3,20 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My AngularJS App</title>
+    <title>451order</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.css">
     <link rel="stylesheet" href="css/jquery-ui.min.css">
     <link rel="stylesheet" href="css/app.css"/>
-    <style type="text/css">
-
-    </style>
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 
 <body ng-cloak>
     <div authorization ng-controller="Four51Ctrl">
-        <div id="login_form" ng-hide="isAuthenticated" style="position: relative;">
+        <div id="login_form" ng-hide="Four51User.isAuthenticated" style="position: relative;">
             <div id="login_box">
                 <div ng-controller='LoginCtrl'>
                    <ng-include src="template.url" />
@@ -28,7 +25,7 @@
             <ng-include src="template.url" />
         </div>
 
-        <div ng-show="isAuthenticated" id="content" class="container-fluid" ng-controller="SideNavCtrl">
+        <div ng-show="Four51User.isAuthenticated" id="content" class="container-fluid" ng-controller="SideNavCtrl">
             <div class="row-fluid">
                 <div class="span3">
                     <ng-include src="'partials/sideNav.html'" />
@@ -77,14 +74,16 @@
     <script src="js/controllers/navCtrl.js"></script>
     <script src="js/controllers/productCtrl.js"></script>
     <script src="js/controllers/productListCtrl.js"></script>
+    <script src="js/controllers/messageCtrl.js"></script>
 
     <script src="js/services/apiService.js"></script>
-    <script src="js/services/loginService.js"></script>
+    <script src="js/services/userService.js"></script>
     <script src="js/services/orderService.js"></script>
     <script src="js/services/orderSearchService.js"></script>
     <script src="js/services/orderStatsService.js"></script>
     <script src="js/services/productService.js"></script>
     <script src="js/services/categoryService.js"></script>
+    <script src="js/services/messageService.js"></script>
 
 </body>
 </html>

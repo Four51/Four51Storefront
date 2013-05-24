@@ -1,20 +1,17 @@
-four51.app.controller('Four51Ctrl', function ($scope, $route, $451, CategoryService, LoginService) {
+four51.app.controller('Four51Ctrl', function ($scope, $route, $451, CategoryService, UserService) {
 	$scope.appname = $451.appname;
+	$scope.Four51User = UserService;
 
-	$scope.isAuthenticated = true;
-	$scope.$on('event:auth-loginConfirmed', function(user) {
-		$scope.isAuthenticated = true;
+	$scope.$on('event:auth-loginConfirmed', function() {
+		UserService.isAuthenticated = true;
 		$route.reload();
 	});
 	$scope.$on('event:auth-loginRequired', function() {
-		$scope.isAuthenticated = false;
+		UserService.isAuthenticated = false;
 	});
 
 	$scope.$on("$routeChangeSuccess", function() {
 		$scope.tree = CategoryService.tree();
 	});
-	$scope.Login = function() {
-		LoginService.login(this.user);
-	};
 });
 

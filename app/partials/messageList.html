@@ -1,0 +1,59 @@
+<div>
+    <h3>Received Messages</h3>
+    <div>
+        <table class="table table-striped table-hover table-bordered">
+            <caption>Inbox</caption>
+            <thead>
+                <tr>
+                    <td><input type='checkbox' ng-click="checkAll($event,'Inbox')" /></td>
+                    <td>Date</td>
+                    <td>Subject</td>
+                    <td>From</td>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <input class="btn btn-small btn-info" value="Delete Selected" ng-click="deleteSelected($event, 'Inbox')" />
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr ng-repeat="message in messages | onproperty:{ 'Model': 'Message', 'Value': 'Inbox'}">
+                    <td><input type='checkbox' ng-model="message.Selected" /></td>
+                    <td>{{message.DateSent | date:'medium'}}</td>
+                    <td>{{message.Subject}}</td>
+                    <td>{{message.FromName}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <table class="table table-striped table-hover table-bordered">
+            <caption>Sent</caption>
+            <thead>
+                <tr>
+                    <td><input type='checkbox' ng-click="checkAll($event,'Sentbox')" /></td>
+                    <td>Date</td>
+                    <td>Subject</td>
+                    <td>From</td>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <input class="btn btn-small btn-info" value="Delete Selected" ng-click="deleteSelected($event, 'Sentbox')" />
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr ng-repeat="message in messages | onproperty:{ 'Model': 'Message', 'Value': 'SentBox'}">
+                    <td><input type='checkbox' ng-model="message.Selected" /></td>
+                    <td>{{message.DateSent | date:'medium'}}</td>
+                    <td>{{message.Subject}}</td>
+                    <td>{{message.FromName}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
