@@ -3,7 +3,11 @@ four51.app.factory('OrderService', function($resource, $http, $451, $api) {
 	return {
 		get: function(param) {
 			return $api.resource(r).options({ persists: true, key: 'Order.' + param.id}).get(param);
-		}
+		},
+        addToOrder: function(quantity, productInteropID, variantInteropID){
+            //if variantinteropid is null, it's a static w/out vars.
+            console.dir({quantity: quantity, productInteropID: productInteropID, variantInteropID: variantInteropID} );
+        }
 	}
 });
 
