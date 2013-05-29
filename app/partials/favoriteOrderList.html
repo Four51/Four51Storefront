@@ -1,0 +1,34 @@
+<div>
+    <h3>Favorite Orders</h3>
+    <div>
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <td><input type='checkbox' ng-click="checkAll($event)" /></td>
+                    <td>Name</td>
+                    <td>Order ID</td>
+                    <td>Date Completed</td>
+                    <td>Order Type</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="6">
+                        <input class="btn btn-small btn-danger" value="Delete Selected" ng-click="deleteSelected($event)" />
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr ng-repeat="order in favoriteorders">
+                    <td><input type='checkbox' ng-model="order.Selected" /></td>
+                    <td>{{order.FavoriteName}}</td>
+                    <td><a ng-href="#/order/{{order.ID}}">{{order.ExternalID}}</a></td>
+                    <td>{{order.DateCompleted | date:'medium'}}</td>
+                    <td>{{order.Type}}</td>
+                    <td><input type="button" class="btn btn-mini btn-info" value="Repeat Order" ng-click="repeat(order)" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

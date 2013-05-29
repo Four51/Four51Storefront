@@ -14,7 +14,7 @@
             <tfoot>
                 <tr>
                     <td colspan="4">
-                        <input class="btn btn-small btn-info" value="Delete Selected" ng-click="deleteSelected($event, 'Inbox')" />
+                        <input class="btn btn-small btn-danger" value="Delete Selected" ng-click="deleteSelected($event, 'Inbox')" />
                     </td>
                 </tr>
             </tfoot>
@@ -22,7 +22,7 @@
                 <tr ng-repeat="message in messages | onproperty:{ 'Model': 'Message', 'Value': 'Inbox'}">
                     <td><input type='checkbox' ng-model="message.Selected" /></td>
                     <td>{{message.DateSent | date:'medium'}}</td>
-                    <td>{{message.Subject}}</td>
+                    <td><a ng-href="#/message/{{message.ID}}">{{message.Subject}}</a></td>
                     <td>{{message.FromName}}</td>
                 </tr>
             </tbody>
@@ -42,7 +42,7 @@
             <tfoot>
                 <tr>
                     <td colspan="4">
-                        <input class="btn btn-small btn-info" value="Delete Selected" ng-click="deleteSelected($event, 'Sentbox')" />
+                        <input class="btn btn-small btn-danger" value="Delete Selected" ng-click="deleteSelected($event, 'Sentbox')" />
                     </td>
                 </tr>
             </tfoot>
@@ -50,7 +50,7 @@
                 <tr ng-repeat="message in messages | onproperty:{ 'Model': 'Message', 'Value': 'SentBox'}">
                     <td><input type='checkbox' ng-model="message.Selected" /></td>
                     <td>{{message.DateSent | date:'medium'}}</td>
-                    <td>{{message.Subject}}</td>
+                    <td><a ng-href="#/message/{{message.ID}}">{{message.Subject}}</a></td>
                     <td>{{message.FromName}}</td>
                 </tr>
             </tbody>

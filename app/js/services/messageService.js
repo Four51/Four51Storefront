@@ -1,22 +1,22 @@
-four51.app.factory('MessageService', function($resource, $451, $api) {
-	var resource = $resource($451.api('message'), {}, {
-		'get': { method: 'GET', isArray: true },
-		'delete': { method: 'DELETE', isArray: true }
-	});
+four51.app.factory('MessageService', function($resource, $location, $451, $api) {
+	var resource = $resource($451.api('message/:id'), { id: '@id' });
 
 	return {
-		get: function() {
-			return $api.resource(resource).options({ persists: false, key: 'Messages'}).get();
+		get: function(param) {
+			return $api.resource(resource)
+				.options({persists: true, key: 'Message.' + param.id}).get(param);
 		},
-		delete: function(m) {
-			angular.forEach(m, function(msg) {
-				if (msg.Selected) {
-					resource.delete(msg, function() {
-						$451.slice(m, msg);
-					});
-				}
+		delete: function(msg, fn) {
+			resource.delete(msg, function() {
+				$451.clear('Message.' + msg.ID).clear('Messages');
+				fn();
 			});
-			return m;
+		},
+		save: function(msg, fn) {
+			resource.save(msg, function() {
+				$451.clear('Messages');
+				fn();
+			})
 		}
 	}
 });

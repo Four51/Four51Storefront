@@ -2,7 +2,7 @@
     <h3 class="text-center">{{error.Message}}</h3>
     <div class="well" ng-show="error.Detail">
         <h5>{{error.Detail}}</h5>
-        <h6>({{error.Code}})</h6>
+        <h6 ng-show="error.Code">{{'(' + error.Code + ')'}}</h6>
     </div>
     <div ng-show="error.StackTrace">
         <label><small class="text-warning" ng-click="isCollapsed = !isCollapsed">Stack Trace</small></label>

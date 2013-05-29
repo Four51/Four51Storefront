@@ -1,0 +1,22 @@
+<div ng-hide="replying">
+    <span>Date: {{message.DateSent | date:'medium'}}</span><br />
+    <span>To: {{message.ToName}}</span><br />
+    <span>From: {{message.FromName}}</span><br />
+    <span>Subject: {{message.Subject}}</span><br />
+    <span><pre>{{message.Body}}</pre></span><br />
+    <span>
+        <input ng-click="delete($event)" type="button" class="btn btn-small btn-danger" value="Delete" />
+        <input ng-show="canReply()" type="button" class="btn btn-small btn-info" value="Reply" ng-click="replying = !replying" />
+        <input ng-click="ok()" type="button" class="btn btn-small btn-success" value="OK" />
+    </span>
+</div>
+
+<div ng-show="replying">
+    <span>To: {{message.FromName}}</span><br />
+    <span>Subject: <input type="text" ng-model="message.Subject" value="{{'RE: ' + message.Subject}}" /></span><br />
+    <span><textarea style="width: 500px; height: 300px;" ng-model="message.Body" /></span><br />
+    <span>
+        <input type="button" class="btn btn-small btn-warning" value="Cancel" ng-click="replying = !replying" />
+        <input type="button" class="btn btn-small btn-primary" value="Send" ng-click="send($event)" />
+    </span>
+</div>
