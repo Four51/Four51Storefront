@@ -5,5 +5,9 @@ four51.app.controller('LoginCtrl', function LoginCtrl($scope, $route, UserServic
 		$scope.errorMessage = message;
 	});
 
+	$scope.login = function() {
+		UserService.login(this.user);
+	};
+
 	$scope.template = { url: 'partials/login.html'};
 });

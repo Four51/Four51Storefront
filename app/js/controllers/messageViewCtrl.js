@@ -16,7 +16,6 @@ four51.app.controller('MessageViewCtrl', function($scope, $location, $routeParam
 		});
 	}
 	$scope.canReply = function() {
-		console.log($scope.message.Box);
 		return $scope.message.Box == 'Inbox';
 	}
 });
