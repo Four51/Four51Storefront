@@ -3,7 +3,7 @@
     <span>To: {{message.ToName}}</span><br />
     <span>From: {{message.FromName}}</span><br />
     <span>Subject: {{message.Subject}}</span><br />
-    <span ng-bind-html-unsafe="message.Body" /><br />
+    <span><pre>{{message.Body}}</pre></span><br />
     <span>
         <input ng-click="delete($event)" type="button" class="btn btn-small btn-danger" value="Delete" />
         <input ng-show="canReply()" type="button" class="btn btn-small btn-info" value="Reply" ng-click="replying = !replying" />
