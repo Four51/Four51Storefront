@@ -10,6 +10,7 @@ four51.app.config(['$routeProvider', function($routeProvider) {
             when('/product/:productInteropID', {templateUrl: 'partials/product.html', controller: 'ProductCtrl'}).
             when('/order', { templateUrl: 'partials/orderSearch.html', controller: 'OrderSearchCtrl' }).
 			when('/order/:id', { templateUrl: 'partials/orderView.html', controller: 'OrderViewCtrl' }).
+			when('/favoriteorders', { templateUrl: 'partials/favoriteOrderList.html', controller: 'FavoriteOrderCtrl' }).
 			when('/lineitem/:orderid/:lineitemid/', { templateUrl: 'partials/lineItemView.html', controller: 'LineItemViewCtrl' }).
 			when('/message', { templateUrl: 'partials/messageList.html', controller: 'MessageListCtrl' }).
 			when('/message/:id', { templateUrl: 'partials/messageView.html', controller: 'MessageViewCtrl' }).
