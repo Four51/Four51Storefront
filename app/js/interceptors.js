@@ -3,9 +3,8 @@
 four51.app.config(function($httpProvider) {
 	$httpProvider.interceptors.push(function($q, $rootScope, $451) {
 		function appendAuth(config) {
-			// see if cache returns null as expected now
 			var auth = $451.cache("Auth");
-			config.headers['Authorization'] = auth == null ? null : auth;
+			config.headers['Authorization'] = auth === null ? null : auth;
 			return config;
 		}
 
@@ -21,9 +20,9 @@ four51.app.config(function($httpProvider) {
 				var auth = response.headers()['www-authenticate'];
 
 				if (auth)
-					$451.cache("Auth", auth, $451.debug);
+					$451.cache("Auth", auth, { persists:  $451.debug });
 
-				if ($451.debug)
+				if ($451.debug && typeof response.data == 'object')
 					console.debug(response.data);
 
 				return response;

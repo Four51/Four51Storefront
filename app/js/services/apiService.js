@@ -16,7 +16,7 @@ four51.app.factory('$api', function($451) {
 				// then testing for the length so we don't store an empty object
 				if (typeof d == 'object' && (d.length > 0 || Object.keys(d).length > 0))
 					// persists will always be true
-					$451.cache(options.key, d, options.persists);
+					$451.cache(options.key, d, options);
 			}
 			return d;
 		});

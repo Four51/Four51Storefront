@@ -4,7 +4,7 @@ four51.app.factory('OrderSearchCriteriaService', function($resource, $http, $451
 
 	return {
 		query: function() {
-			return $api.resource(r).options({ persists: true, key: 'OrderSearchCriteria'}).query();
+			return $api.resource(r).options({ persists: true, ttl: 60000, key: 'OrderSearchCriteria'}).query();
 		}
 	}
 });

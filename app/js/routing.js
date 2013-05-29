@@ -11,7 +11,8 @@ four51.app.config(['$routeProvider', function($routeProvider) {
             when('/order', { templateUrl: 'partials/orderSearch.html', controller: 'OrderSearchCtrl' }).
 			when('/order/:id', { templateUrl: 'partials/orderView.html', controller: 'OrderViewCtrl' }).
 			when('/lineitem/:orderid/:lineitemid/', { templateUrl: 'partials/lineItemView.html', controller: 'LineItemViewCtrl' }).
-			when('/message', { templateUrl: 'partials/messageList.html', controller: 'MessageCtrl' }).
+			when('/message', { templateUrl: 'partials/messageList.html', controller: 'MessageListCtrl' }).
+			when('/message/:id', { templateUrl: 'partials/messageView.html', controller: 'MessageViewCtrl' }).
 			when('/login', { templateUrl: 'partials/login.html', controller: 'LoginCtrl' }).
 			otherwise({redirectTo: '/catalog'});
 	}]);

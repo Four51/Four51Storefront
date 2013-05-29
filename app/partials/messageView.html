@@ -1,0 +1,12 @@
+<div>
+    <span>Date: {{message.DateSent | date:'medium'}}</span><br />
+    <span>To: {{message.ToName}}</span><br />
+    <span>From: {{message.FromName}}</span><br />
+    <span>Subject: {{message.Subject}}</span><br />
+    <span ng-bind-html-unsafe="message.Body" /><br />
+    <span>
+        <input ng-click="delete($event)" type="button" class="btn btn-small btn-danger" value="Delete" />
+        <input type="button" class="btn btn-small btn-info" value="Reply" />
+        <input ng-click="ok()" type="button" class="btn btn-small btn-success" value="OK" />
+    </span>
+</div>
