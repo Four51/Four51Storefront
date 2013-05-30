@@ -1,11 +1,11 @@
 name: {{product.Name}}<br/>
 description: {{product.Description}}<br/>
 
-min: {{product.StandardPriceSchedule.MinQuantity}}<br/>
-max: {{product.StandardPriceSchedule.MaxQuantity}}<br/>
-available inventory: {{product.Inventory}}
+min: {{product.Variants[0].StandardPriceSchedule.MinQuantity}}<br/>
+max: {{product.Variants[0].StandardPriceSchedule.MaxQuantity}}<br/>
+available inventory: {{product.Variants[0].QuantityAvailable}}
 <form name="staticProductOrder">
-    <input type="number" name=qtyInput required ng-model="quantity" ui-validate="'invalidQuantityAddToOrder($value, product)'">
+    <input type="number" name=qtyInput required ng-model="quantity" ui-validate="'invalidQuantityAddToOrder($value, product.Variants[0])'">
     <button ng-disabled="staticProductOrder.$invalid" ng-click="OrderService.addToOrder(quantity, product.InteropID, null)">Add to Order</button>
 </form>
 

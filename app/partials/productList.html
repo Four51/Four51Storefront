@@ -1,5 +1,7 @@
 <hr>
     Products partial:  <br>
     <ul>
-        <li ng-repeat="p in Products"><a href=#/product/{{p.InteropID}}>{{p.Name}}</a></li>
+        <li ng-repeat="p in Products">
+            <a href=#/product/{{p.InteropID}}>{{p.Variants[0].Name}}</a>
+        </li>
     </ul>
