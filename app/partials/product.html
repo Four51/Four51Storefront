@@ -11,7 +11,7 @@ available inventory: {{product.Variants[0].QuantityAvailable}}
 
 <span ng-show="qtyErrorMessage">quantity fail: {{qtyErrorMessage}}</span>
 
-<div ng-show="product.Variants.length">variants({{product.Variants.length}})
+<div ng-show="product.Variants.length > 1">variants({{product.Variants.length}})
     <ul>
         <li ng-repeat="v in product.Variants">
             {{v.ExternalID}}: {{v.InteropID}}
