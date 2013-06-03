@@ -1,4 +1,4 @@
-four51.app.controller('Four51Ctrl', function ($scope, $route, $451, CategoryService, UserService) {
+four51.app.controller('Four51Ctrl', function ($scope, $route, $451, CategoryService, UserService, SpendingAccountService) {
 	$scope.appname = $451.appname;
 	$scope.Four51User = UserService;
 
@@ -12,6 +12,7 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $451, CategoryServ
 
 	$scope.$on("$routeChangeSuccess", function() {
 		$scope.tree = CategoryService.tree();
+        $scope.SpendingAccounts = SpendingAccountService.query();
 	});
 });
 

@@ -8,3 +8,12 @@
     <a href=#/catalog/{{category.InteropID}}>{{category.Name}}</a>
     <ul><li ng-repeat="category in category.SubCategories" ng-include="'categoryTemplate.html'"></li></ul>
 </script>
+
+<div class="well" ng-show="SpendingAccounts">
+    <h5>Spending Accounts</h5>
+    <ul class="unstyled">
+        <li ng-repeat="account in SpendingAccounts">
+            {{account.Label}}: {{ account.Balance | currency:"$" }}
+        </li>
+    </ul>
+</div>
