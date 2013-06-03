@@ -5,6 +5,8 @@ four51.app.factory('$451', function(Cache) {
 		if (input == null || options == null) return;
 		var result = [];
 		angular.forEach(input, function(row) {
+            console.log(row);
+            if (row[options.Property] === undefined) return;
 			if (row[options.Property].toLowerCase() === options.Value.toLowerCase())
 				result.push(row);
 		});
