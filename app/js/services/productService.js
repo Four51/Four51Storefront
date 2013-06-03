@@ -5,7 +5,7 @@ four51.app.factory('ProductService', function($resource, $451, $api){
     return {
         get: function(param, successCall){
             return $api.resource(resource)
-                .options({ persists: true, key: 'Product.' + param.interopID})
+                .options({ persists: false, key: 'Product.' + param.interopID})
                 .get(param, successCall);
         },
         search: function(categoryInteropID, searchTerm){
