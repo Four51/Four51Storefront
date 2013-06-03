@@ -4,6 +4,9 @@
         <table class="table table-striped table-hover table-bordered">
             <thead>
                 <tr>
+                    <td colspan="6"><input type="text" placeholder="Search" ng-model="searchTerm" /></td>
+                </tr>
+                <tr>
                     <td><input type='checkbox' ng-click="checkAll($event)" /></td>
                     <td>Name</td>
                     <td>Order ID</td>
@@ -20,7 +23,7 @@
                 </tr>
             </tfoot>
             <tbody>
-                <tr ng-repeat="order in favoriteorders">
+                <tr ng-repeat="order in favoriteorders | filter:searchTerm">
                     <td><input type='checkbox' ng-model="order.Selected" /></td>
                     <td>{{order.FavoriteName}}</td>
                     <td><a ng-href="#/order/{{order.ID}}">{{order.ExternalID}}</a></td>
