@@ -1,5 +1,9 @@
 four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductService, OrderService) {
-    $scope.product = ProductService.getOne($routeParams.productInteropID)
+    $scope.product = ProductService.get({interopID: $routeParams.productInteropID}, function(data){
+        $scope.variant = data.Variants[0];
+    }); //ProductService.getOne($routeParams.productInteropID)
+
+
     $scope.OrderService = OrderService;
 
     $scope.invalidQuantityAddToOrder = function(value, variant){
