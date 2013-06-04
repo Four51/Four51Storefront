@@ -2,104 +2,66 @@
 
 /* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
 //login and logout test Scenarios
+var C_debug = false;
 
-describe('SPA login', function() {
+describe('SPA login with valid user/pass', function() {
+   it("should navigate to the index page to login", function() {
+        browser().navigateTo('../../app/index.html');
+    });
 
-  beforeEach(function() {
-    browser().navigateTo('../../app/index.html');
-  });
+    e2eLogin("sesendpo","fails555", C_debug);
 
+    e2eLogout(C_debug);
 
-  xit('should automatically redirect to /catalog when location hash/fragment is empty', function() {
-    expect(browser().location().url()).toBe("/catalog");
-  });
+});
 
+describe('SPA login without valid user/pass', function() {
+    it("should navigate to the index page to login", function() {
+        browser().navigateTo('../../app/index.html');
+    });
 
-  describe('login_form', function() {
+    e2eLogin("failme","fails345", C_debug);
 
+    it("should display a line saying cannot find user or password", function() {
+        expect(element('p:contains("not found")').count()).toBe(1); //this won't work if the client changes the messages or we localize it.
+        //this should be done by identifying a unique element ID... I think.
+     });
 
-    it('should appear before the user performs valid login', function() {
-        expect(element('#login_box').count()).toBe(1);
+});
+
+describe('SPA attempt to view a product without authentication', function() {
+    it("tries to go to the product page", function() {
+        browser().navigateTo('../../app/index.html#/product/A0151242-FB0C-4F0E-BB59-C7FA04167A74');
+    });
+
+    it('but gets a login box instead', function() {
+        expect(element('#login_box:visible').count()).toBe(1);
         //we found a login box.  is login_box the best way to check for it's existence?
-
-    });
-
-      it('should allow us to enter a user/pass', function(){
-      //can we build an include file or link to some common function library to reuse this?
-      //if we reuse this code, pass user/pass as an argument to the function
-
-      //enter user & password
-      input("user.Username").enter("sesendpo");
-      input("user.Password").enter("fails345");
-
-      //alert("about to log in!");
-
-      //expect(input("user.Username").val().toBe("sesendpo"));
-      element("#451_btn_login").click();
-
-          it('should automatically redirect to /catalog when location hash/fragment is empty', function() {
-              expect(browser().location().url()).toBe("/catalog");
-          });
-
-      //alert("just loggeded in!");
-
-      });
-
-      //now test for logout
-      xit('should allow us to logout the current user via the logout button', function(){
-         //find the logout button and click it
-          //alert("about to logout!");
-          element("#451_btn_logout").click();
-          //alert("logged out!");
-
-      });
-
-
-  });
-
-});
-
-describe('Categories:', function() {
-
-    beforeEach(function() {
-        browser().navigateTo('#/catalog');
-    });
-
-    it('should render a navigation bar on the side', function() {
-        //check existence of categories
-        expect(repeater('.nav-header').count()).toBeGreaterThan(0);
-        //okay, there is at least one category, hooray
-
-        pause();
-        element('.nav-list a:first').click(); //clicks first category nav link
-        pause();
-        element('.nav-header li a:first').click(); //clicks first category's subcategory nav link
-        pause();
-        element('.nav-header:nth-child(2) a:first').click(); //clicks second category nav link
-        pause();
-        element('.nav-header:nth-child(3) a:first').click(); //clicks third category nav link
-        pause();
-
-        //let's test that subcategories under categories link to the same place they do when they are displayed in the content area
-
-
     });
 
 });
 
-
-describe('orders', function() {
-
-    beforeEach(function() {
-      browser().navigateTo('#/orders');
+describe('SPA attempt to view a product WITH authentication', function() {
+    it("tries to go to the product page", function() {
+        browser().navigateTo('../../app/index.html#/product/A0151242-FB0C-4F0E-BB59-C7FA04167A74');
     });
 
-      it('should display order search fields', function() {
-         //check existence of order search fields
-      });
+    it('but gets a login box instead', function() {
+        expect(element('#login_box:visible').count()).toBe(1);
+        //we found a login box.  is login_box the best way to check for it's existence?
+    });
 
-      it('should display order lists', function() {
-          //check existence of various order list controls
-      });
+    e2eLogin("sesendpo","fails555", C_debug);
+    //so we login, and should be shown the product we requested
+    it('should now show us the product page we requested and logged in for', function() {
+        expect(browser().location().url()).toBe("/product/A0151242-FB0C-4F0E-BB59-C7FA04167A74");
+    });
 
+    it('should hide the login box', function(){
+        //now let's check for that login box and make sure it DOESN'T show up
+        expect(element('#login_box:visible').count()).toBe(0);
+    });
+
+    //cleanup time, let's logout
+    e2eLogout(C_debug);
 });
