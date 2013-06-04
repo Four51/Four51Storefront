@@ -10,7 +10,7 @@
     <input type="number" required name="qtyInput" ng-model="quantity" ui-validate="'invalidQuantityAddToOrder($value, variant || product, priceSchedule)'">
     <button ng-disabled="addToOrderForm.$invalid" ng-click="OrderService.addToOrder(quantity, product.InteropID, variant.InteropID)">Add to Order</button>
     <br>
-    addToOrderForm.$invalid: {{addToOrderForm.$invalid}}<br>
+
     min: {{priceSchedule.MinQuantity}}<br/>
     max: {{priceSchedule.MaxQuantity}}<br/>
     available inventory: {{variant.QuantityAvailable || product.QuantityAvailable}}

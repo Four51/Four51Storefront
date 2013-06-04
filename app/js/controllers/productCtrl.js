@@ -14,8 +14,6 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 
     $scope.invalidQuantityAddToOrder = function(value, product, priceSchedule){
 
-        console.log("qty validator: " + value);
-
         if(!product)
             return true;
 
