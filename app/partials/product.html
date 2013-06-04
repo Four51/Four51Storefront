@@ -1,17 +1,36 @@
 name: {{product.Name}}<br/>
 description: {{product.Description}}<br/>
-
+<span ng-show="variant">vd: {{variant.Description}}<br></span>
 min: {{priceSchedule.MinQuantity}}<br/>
 max: {{priceSchedule.MaxQuantity}}<br/>
 available inventory: {{variant.QuantityAvailable}}
-<form name="staticProductOrder">
+
+<form name="addToOrderForm">
     <input type="number" name=qtyInput required ng-model="quantity" ui-validate="'invalidQuantityAddToOrder($value, variant, priceSchedule)'">
-    <button ng-disabled="staticProductOrder.$invalid" ng-click="OrderService.addToOrder(quantity, product.InteropID, variant.InteropID)">Add to Order</button>
+    <button ng-disabled="addToOrderForm.$invalid" ng-click="OrderService.addToOrder(quantity, product.InteropID, variant.InteropID)">Add to Order</button>
 </form>
 
 <span ng-show="qtyErrorMessage">quantity fail: {{qtyErrorMessage}}</span>
 
-<div ng-show="product.Variants.length > 1">variants({{product.Variants.length}})
+<span ng-show="priceSchedule">
+    Price:
+    <table border=1>
+        <tr><td>Quantity</td><td>Price</td></tr>
+        <tr ng-repeat="ps in priceSchedule.PriceBreaks">
+            <td>
+                {{ps.Quantity}}
+                <span ng-show="!priceSchedule.RestrictedQuantity">
+                    <span ng-show="priceSchedule.PriceBreaks[$index + 1].Quantity"> - {{priceSchedule.PriceBreaks[$index + 1].Quantity - 1}}</span>
+                    <span ng-show="$last && priceSchedule.MaxQuantity"> - {{priceSchedule.MaxQuantity}}</span>
+                    <span ng-show="$last && !priceSchedule.MaxQuantity"> +</span>
+                </span>
+            </td>
+            <td>{{ps.Price | currency}}</td>
+        </tr>
+    </table>
+</span>
+
+<div ng-show="product.Variants.length > 1 && !variant">variants({{product.Variants.length}})
     <ul>
         <li ng-repeat="v in product.Variants">
             <a href=#/product/{{product.InteropID}}/v/{{v.InteropID}}>{{v.ExternalID}}: {{v.InteropID}}</a>
