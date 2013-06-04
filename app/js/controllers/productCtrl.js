@@ -12,8 +12,11 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 
     $scope.OrderService = OrderService;
 
-    $scope.invalidQuantityAddToOrder = function(value, variant, priceSchedule){
-        if(!variant)
+    $scope.invalidQuantityAddToOrder = function(value, product, priceSchedule){
+
+        console.log("qty validator: " + value);
+
+        if(!product)
             return true;
 
         if(!priceSchedule)
@@ -26,13 +29,13 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
             $scope.qtyErrorMessage = "must be greater than " + priceSchedule.MinQuantity;
         }
 
-        if(priceSchedule.MaxQuantity < value){
+        if(priceSchedule.MaxQuantity && priceSchedule.MaxQuantity < value){
             $scope.qtyErrorMessage = "must be less than " + priceSchedule.MaxQuantity;
             valid = false;
         }
 
-        if(variant.QuantityAvailable && variant.QuantityAvailable < value){
-            $scope.qtyErrorMessage = "not enough available inventory " + priceSchedule.MaxQuantity;
+        if(product.QuantityAvailable && product.QuantityAvailable < value){
+            $scope.qtyErrorMessage = "not enough available inventory " +  product.QuantityAvailable;
             valid = false;
         }
         if(valid)
