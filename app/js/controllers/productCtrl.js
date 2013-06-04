@@ -12,7 +12,7 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 
     $scope.OrderService = OrderService;
 
-    $scope.invalidQuantityAddToOrder = function(value, product, priceSchedule){
+    $scope.validQuantityAddToOrder = function(value, product, priceSchedule){
 
         if(!product)
             return true;

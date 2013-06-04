@@ -7,7 +7,7 @@
 </table>
 <br>
 <form name="addToOrderForm" ng-show="variant || product.Variants.length == 0">
-    <input type="number" required name="qtyInput" ng-model="quantity" ui-validate="'invalidQuantityAddToOrder($value, variant || product, priceSchedule)'">
+    <input type="number" required name="qtyInput" ng-model="quantity" ui-validate="'validQuantityAddToOrder($value, variant || product, priceSchedule)'">
     <button ng-disabled="addToOrderForm.$invalid" ng-click="OrderService.addToOrder(quantity, product.InteropID, variant.InteropID)">Add to Order</button>
     <br>
 
@@ -21,7 +21,7 @@
 <span ng-show="priceSchedule">
     Price:
     <table border=1>
-        <tr><td>Quantity</td><td>Price</td></tr>
+        <tr><td>Quantity <span ng-show="product.QuantityMultiplier > 1"> (x {{product.QuantityMultiplier}})</span></td><td>Price <span ng-show="product.QuantityMultiplier > 1"> (per {{product.QuantityMultiplier}})</span></td></tr>
         <tr ng-repeat="ps in priceSchedule.PriceBreaks">
             <td>
                 {{ps.Quantity}}
