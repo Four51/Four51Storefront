@@ -43,10 +43,21 @@
     </table>
 </span>
 
-<div ng-show="product.Variants.length > 1 && !variant">variants({{product.Variants.length}})
+<span ng-show="product.Variants.length > 1 && !variant">variants({{product.Variants.length}})
     <ul>
         <li ng-repeat="v in product.Variants">
             <a href=#/product/{{product.InteropID}}/v/{{v.InteropID}}>{{v.ExternalID}}: {{v.InteropID}}</a>
         </li>
     </ul>
-</div>
+</span>
+
+<span ng-show="StaticSpecGroups">
+    static groups
+    <ul>
+        <li ng-repeat="sg in StaticSpecGroups">{{sg.Name}}
+            <ul>
+                <li ng-repeat="spec in sg.Specs">{{spec.Name}}: {{spec.Value}}</li>
+            </ul>
+        </li>
+    </ul>
+</span>
