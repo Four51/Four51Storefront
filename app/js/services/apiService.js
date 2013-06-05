@@ -1,7 +1,7 @@
 four51.app.factory('$api', function($451) {
 	var resource, options;
 
-	function fromRest(method, data) {
+	function fromRest(method, data, getComplete) {
 		// cache for api calls will always be stored in localStorage.
 		// to avoid caching simply do not define the options.persists property in your service
 		return resource[method](data, function(d) {
@@ -11,7 +11,11 @@ four51.app.factory('$api', function($451) {
 				if (typeof d == 'object' && (d.length > 0 || Object.keys(d).length > 0))
 					// persists will always be true
 					$451.cache(options.key, d, options);
+
+
 			}
+            if(getComplete)
+                getComplete(d);
 			return d;
 		});
 	}
@@ -32,8 +36,12 @@ four51.app.factory('$api', function($451) {
 		query: function() {
 			return fromCache() || fromRest('query');
 		},
-		get: function(data) {
-			return fromCache() || fromRest('get', data);
+		get: function(data, getComplete) {
+            var cached = fromCache();
+            if(cached && getComplete)
+                getComplete(cached);
+
+			return cached || fromRest('get', data, getComplete);
 		},
 		save: function(data) {
 			return fromCache() || fromRest('save', data);
