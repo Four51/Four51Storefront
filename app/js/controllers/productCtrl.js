@@ -1,20 +1,22 @@
 four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductService, OrderService, $451) {
 
     $scope.product = ProductService.get({interopID: $routeParams.productInteropID}, function(data){
-
         if($routeParams.variantInteropID){
             var v = $451.filter(data.Variants, {Property: 'InteropID', Value: $routeParams.variantInteropID})[0];
             $scope.variant = v;
             $scope.priceSchedule = v.StandardPriceSchedule ? v.StandardPriceSchedule : data.StandardPriceSchedule; //include user permissions to decide to show
+
         }else{
             $scope.priceSchedule = ProductService.HasVariantOverridePS(data, 'StandardPriceSchedule') ? null : data.StandardPriceSchedule; //don't show price schedule if variant overrides parent PS
+
         }
+        $scope.showInventory = (data.QuantityAvailable || ($scope.variant && $scope.variant.QuantityAvailable)) && data.DisplayInventory == true; //add some logic around user permissions
     });
     $scope.OrderService = OrderService;
 
-    $scope.validQuantityAddToOrder = function(value, product, priceSchedule){
+    $scope.validQuantityAddToOrder = function(value, variant, product, priceSchedule){
 
-        if(!product)
+        if(!product && !variant)
             return true;
 
         if(!priceSchedule)
@@ -31,8 +33,9 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
             $scope.qtyErrorMessage = "must be less than " + priceSchedule.MaxQuantity;
             valid = false;
         }
+        var qtyAvail = variant || product;
 
-        if(product.QuantityAvailable && product.QuantityAvailable < value){
+        if(qtyAvail.QuantityAvailable && qtyAvail.QuantityAvailable < value && product.AllowExceedInventory == false){
             $scope.qtyErrorMessage = "not enough available inventory " +  product.QuantityAvailable;
             valid = false;
         }
