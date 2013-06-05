@@ -1,0 +1,24 @@
+<div id="user_form">
+    <h2 class="form-actions-heading">User Information</h2>
+    <form name="userEdit" ng-submit="save()">
+        <input name="firstname" class="input-large" type="text" ng-model="user.FirstName" placeholder="First Name" /><br />
+        <input name="lastname" class="input-large" type="text" ng-model="user.LastName" placeholder="Last Name" /><br />
+        <input name="phone" class="input-large" type="text" ng-model="user.Phone" ui-mask="(999) 999-9999" placeholder="Phone Number" /><br />
+        <input name="email" class="input-large" type="email" ng-model="user.Email" required placeholder="Email Address" />
+            <span class="alert-error" ng-show="userEdit.email.$invalid">Please enter a valid email address</span><br />
+        <input name="username" class="input-large" type="text" ng-model="user.Username" required placeholder="User Name" /><br />
+
+        <ul class="unstyled" ng-if="user.CustomFields">
+            <li ng-repeat="field in user.CustomFields">
+                <textuserfield ng-if="field.Lines && field.DisplayToUser" />
+                <selectionuserfield ng-if="field.Options && !field.IsRadioButtons && field.DisplayToUser" />
+                <radiobuttonuserfield ng-if="field.Options && field.IsRadioButtons && field.DisplayToUser" />
+            </li>
+        </ul>
+
+        <input name="password" class="input-large" type="password" ng-model="user.Password" placeholder="Password" /><br />
+        <input name="confirm_password" match="'password'" class="input-large" type="password" ng-model="user.ConfirmPassword" ui-validate="'$value==user.Password'" ui-validate-watch="'user.Password'" placeholder="Confirm Password" />
+            <span class="alert-error" ng-show="userEdit.confirm_password.$error.validator">Passwords do not match!</span><br />
+        <input class="btn btn-medium btn-primary" type="submit" ng-disabled="userEdit.$invalid" id="451_btn_user" value="Save" />
+    </form>
+</div>
