@@ -1,15 +1,15 @@
 four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductService, OrderService, $451) {
 
     $scope.product = ProductService.get({interopID: $routeParams.productInteropID}, function(data){
+
         if($routeParams.variantInteropID){
             var v = $451.filter(data.Variants, {Property: 'InteropID', Value: $routeParams.variantInteropID})[0];
             $scope.variant = v;
-            $scope.priceSchedule = v.StandardPriceSchedule ? v.StandardPriceSchedule : data.StandardPriceSchedule;
+            $scope.priceSchedule = v.StandardPriceSchedule ? v.StandardPriceSchedule : data.StandardPriceSchedule; //include user permissions to decide to show
         }else{
-            $scope.priceSchedule = data.StandardPriceSchedule;
+            $scope.priceSchedule = ProductService.HasVariantOverridePS(data, 'StandardPriceSchedule') ? null : data.StandardPriceSchedule; //don't show price schedule if variant overrides parent PS
         }
     });
-
     $scope.OrderService = OrderService;
 
     $scope.validQuantityAddToOrder = function(value, product, priceSchedule){
