@@ -37,7 +37,7 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
         var qtyAvail = variant || product;
 
         if(qtyAvail.QuantityAvailable && qtyAvail.QuantityAvailable < value && product.AllowExceedInventory == false){
-            $scope.qtyErrorMessage = "not enough available inventory " +  product.QuantityAvailable;
+            $scope.qtyErrorMessage = "not enough available inventory " +  qtyAvail.QuantityAvailable;
             valid = false;
         }
         if(valid)
