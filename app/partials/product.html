@@ -28,17 +28,19 @@
 <span ng-show="priceSchedule">
     Price:
     <table border=1>
-        <tr><td>Quantity <span ng-show="product.QuantityMultiplier > 1"> (x {{product.QuantityMultiplier}})</span></td><td>Price <span ng-show="product.QuantityMultiplier > 1"> (per {{product.QuantityMultiplier}})</span></td></tr>
+        <tr><td>Quantity <span ng-show="product.QuantityMultiplier > 1 && !priceSchedule.RestrictedQuantity"> (x {{product.QuantityMultiplier}})</span></td>
+            <td>Price <span ng-show="product.QuantityMultiplier > 1 && !priceSchedule.RestrictedQuantity" > (per {{product.QuantityMultiplier}})</span></td>
+        </tr>
         <tr ng-repeat="ps in priceSchedule.PriceBreaks">
             <td>
-                {{ps.Quantity}}
+                {{ps.Quantity * (priceSchedule.RestrictedQuantity ? product.QuantityMultiplier : 1)}}
                 <span ng-show="!priceSchedule.RestrictedQuantity">
-                    <span ng-show="priceSchedule.PriceBreaks[$index + 1].Quantity"> - {{priceSchedule.PriceBreaks[$index + 1].Quantity - 1}}</span>
+                    <span ng-show="priceSchedule.PriceBreaks[$index + 1].Quantity"> - {{ priceSchedule.PriceBreaks[$index + 1].Quantity - 1  }}</span>
                     <span ng-show="$last && priceSchedule.MaxQuantity"> - {{priceSchedule.MaxQuantity}}</span>
                     <span ng-show="$last && !priceSchedule.MaxQuantity"> +</span>
                 </span>
             </td>
-            <td>{{ps.Price | currency}}</td>
+            <td>{{ps.Price * (priceSchedule.RestrictedQuantity ? ps.Quantity : 1)| currency}}</td>
         </tr>
     </table>
 </span>
