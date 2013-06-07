@@ -2,6 +2,6 @@
     Products partial:  <br>
     <ul>
         <li ng-repeat="p in Products">
-            <a href=#/product/{{p.InteropID}}>{{p.Variants[0].Name}}</a>
+            <a href=#/product/{{p.InteropID}}>{{p.Name}} variants({{p.Variants.length}})</a>
         </li>
     </ul>
