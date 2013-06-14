@@ -17,42 +17,6 @@
 
 var C_debug = false;
 
-//move these functions into a shared library
-angular.scenario.dsl('scope', function() {
-    return function(selector, entry) {
-        return this.addFutureAction('find scope variable for \'' + selector + '\'',
-            function($window, $document, done) {
-                var $ = $window.$; // jQuery inside the iframe
-                var elem = $(selector);
-                if (!elem.length) {
-                    return done('No element matched \'' + selector + '\'.');
-                }
-                var entries = entry.split('.');
-                var prop = elem.scope();
-                for (var i in entries) {
-                    prop = prop[entries[i]];
-                }
-                done(null, prop);
-            });
-    };
-});
-angular.scenario.matcher('toEqualFuture', function(future) {
-    return this.actual === future.value;
-});
-function includes(array, obj) {
-    return indexOf(array, obj) != -1;
-}
-function indexOf(array, obj) {
-    if (array.indexOf) return array.indexOf(obj);
-
-    for ( var i = 0; i < array.length; i++) {
-        if (obj === array[i]) return i;
-    }
-    return -1;
-}
-angular.scenario.matcher('toContainFuture', function(future) {
-    return includes(this.actual, future.value);
-});
 ////////////////////////////////////////////////////
 
 describe('Category login', function() {
