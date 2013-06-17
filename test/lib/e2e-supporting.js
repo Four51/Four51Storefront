@@ -47,3 +47,48 @@ function indexOf(array, obj) {
 angular.scenario.matcher('toContainFuture', function(future) {
     return includes(this.actual, future.value);
 });
+
+//navigation functions
+
+function e2eClickSideNavCategory(intCatLevel,strCatName){
+    var strNLevelsSelect = ""; //each level of depth is "ul li "
+    var strSelector = "";
+    for(var i = 0; i < intCatLevel; i++){
+        strNLevelsSelect = strNLevelsSelect + "ul li "
+    }
+
+    if(strCatName != null){
+        strSelector = ".nav-header " + strNLevelsSelect + "a:contains('" + strCatName + "')"
+    }
+    else{//if strcatname isn't specified just pick the first at the nth level
+        strSelector = ".nav-header " + strNLevelsSelect + "a:first"
+    }
+
+    element(strSelector).click();
+}
+function e2eClickMainNavCategory(intNthCat,strCatName){
+    var strSelector = "";
+
+    if(strCatName != null){
+        strSelector = "#451_lbl_subcatlist ul li a:contains('" + strCatName + "')"
+    }
+    else{//if strcatname isn't specified just pick the first at the nth level
+        strSelector = "#451_lbl_subcatlist ul li:nth-child(" + intNthCat + ") a"
+    }
+
+    element(strSelector).click();
+}
+
+//product functions
+function e2eClickProductFromList(intNthProd,strProdName){
+    var strSelector = "";
+
+    if(strProdName != null){
+        strSelector = "#451_lst_prod li a:contains('" + strProdName + "')"
+    }
+    else{//if intNthProd isn't specified just pick the first at the nth level
+        strSelector = "#451_lst_prod li:nth-child(" + intNthProd + ") a"
+    }
+
+    element(strSelector).click();
+}
