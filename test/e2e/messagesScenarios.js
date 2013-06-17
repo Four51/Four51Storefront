@@ -82,6 +82,7 @@ function e2eDeleteMessageFromList(strJQSelect, strWhichList, blnDeleteNow){
 
 ////////////////////////////////////////////////////
 
+//TODO- test "compose" functionality, when it is added.
 
 describe('Messages login', function() {
     it("should allow a user to login", function() {
@@ -269,6 +270,7 @@ describe('MessageList: Received Messages', function() {
 
     //TODO- delete message from Received list and verify it doesn't exist anymore
     //TODO- delete multiple messages from Received and verify they don't exist anymore
+    //TODO- when added, check column sorting functionality
 
 });
 
@@ -385,6 +387,7 @@ describe('MessageList: Sent Messages', function() {
     });
 
     //TODO- what happens if we check some received and check some sent?  do the buttons work independently or collectively?
+    //TODO- when added, check column sorting functionality
 
 });
 

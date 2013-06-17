@@ -88,7 +88,7 @@ describe('Category side link navigation', function() {
 
     it('should display the top level category we click', function() {
 
-        element('.nav-list a:first').click();       //clicks first category nav link
+        element('.nav-header a:first').click();       //clicks first category nav link
         //now check that the displayed category matches the nav item we clicked
         expect(binding('currentCategory.Name')).toEqualFuture(scope('.nav-header', 'category.Name'));
 
@@ -292,6 +292,24 @@ describe('Main content area category links', function() {
         //there's an LI repeater
     });
 });
+
+describe('testing e2eClickSideNavCategory nav functions', function(){
+    it('should click a specified or unspecified top level nav element', function(){
+        browser().navigateTo('#/catalog'); //start fresh on the catalog view
+        pause();
+        e2eClickSideNavCategory(2);
+        pause();
+        e2eClickSideNavCategory(1,"Testing");
+        pause();
+        browser().navigateTo('#/catalog'); //start fresh on the catalog view
+        e2eClickMainNavCategory(2);
+        pause();
+        browser().navigateTo('#/catalog'); //start fresh on the catalog view
+        e2eClickMainNavCategory(0,"Static Products FP");
+        pause();
+    });
+});
+
 
 describe('logout/cleanup', function(){
     e2eLogout(C_debug);
