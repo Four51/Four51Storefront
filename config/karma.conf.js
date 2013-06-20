@@ -9,10 +9,13 @@ files = [
 	'test/lib/angular/angular-mocks.js',
 	'app/lib/angular/ui-bootstrap-0.2.0.js',
     'app/lib/angular/ui-validate.js',
+    'app/lib/angular/ui-mask.js',
 	'app/js/app.js',
 	'app/js/**/*.js',
 	'test/unit/appSpec.js',
-    'test/unit/451Spec.js'
+    'test/unit/451Spec.js',
+    'test/unit/directivesSpec.js'
+
 ];
 
 autoWatch = true;
