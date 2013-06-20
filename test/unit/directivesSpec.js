@@ -6,7 +6,7 @@ var $451, $compile, $rootScope, scope;
 beforeEach(inject(function(_$451_, _$rootScope_, _$compile_) {
     $451 = _$451_;
     $compile = _$compile_;
-    $rootScope = _$rootScope_
+    $rootScope = _$rootScope_;
     scope = $rootScope.$new();
 }));
 
@@ -56,6 +56,15 @@ describe('$451 selectionuserfield Directive:',function(){
         scope.$apply();
 
         expect(element.html()).toEqual('<label class="ng-binding">thelabel</label><!-- ngIf: field.Options && !field.IsRadioButtons && field.DisplayToUser --><select ng-model="field.Value" ng-options="option.ID as option.Value for option in field.Options" ng-if="field.Options &amp;&amp; !field.IsRadioButtons &amp;&amp; field.DisplayToUser" class="ng-scope ng-pristine ng-valid"><option value="?" selected="selected"></option><option value="0">optionValue1</option><option value="1">optionValue2</option><option value="2">optionValue3</option></select>');
+    });
+    it('Should create specific array of option elements', function(){
+
+        scope.field = {Label: "thelabel", IsRadioButtons: false, DisplayToUser: true, Options: [{ID: "optionID1", Value: "optionValue1"},{ID: "optionID2", Value: "optionValue2"},{ID: "optionID3", Value: "optionValue3"}]};
+
+        var element=$compile("<selectionuserfield></selectionuserfield>")(scope);
+        scope.$apply();
+
+        expect(element.find('option').length).toBe(3); //we put 3 options in the Options object above
 
     });
     it('Should NOT replace selectionuserfield with a customized select/options input if radiobuttons true', function(){
@@ -70,13 +79,27 @@ describe('$451 selectionuserfield Directive:',function(){
     });
     it('Should NOT replace selectionuserfield with a customized select/options input if displaytouser false', function(){
 
-        scope.field = {Label: "thelabel", IsRadioButtons: false, DisplayToUser: false, Options: [{ID: "optionID1", Value: "optionValue1"},{ID: "optionID2", Value: "optionValue2"},{ID: "optionID3", Value: "optionValue3"}]};
+        scope.field = {Name:"selectName", Label: "thelabel", IsRadioButtons: false, DisplayToUser: false, Options: [{ID: "optionID1", Value: "optionValue1"},{ID: "optionID2", Value: "optionValue2"},{ID: "optionID3", Value: "optionValue3"}]};
 
         var element=$compile("<selectionuserfield></selectionuserfield>")(scope);
         scope.$apply();
         expect(element.html()).toEqual('<label class="ng-binding">thelabel</label><!-- ngIf: field.Options && !field.IsRadioButtons && field.DisplayToUser -->');
     });
-    //TODO- test that data binding works; when an option gets selected/clicked, verify the model works
+    it('Should update model when a select option is clicked', function(){
+
+        scope.field = {Name:"selectName", Label: "thelabel", IsRadioButtons: false, DisplayToUser: true, Options: [{Name:"optionName1", ID: "optionID1", Value: "optionValue1"},{Name:"optionName2", ID: "optionID2", Value: "optionValue2"},{Name:"optionName3",ID: "optionID3", Value: "optionValue3"}]};
+
+        var element=$compile("<selectionuserfield></selectionuserfield>")(scope);
+        scope.$apply();
+        console.dir(element.html());
+        console.dir(element.find('option'));
+        element.find('option')[2].click();
+
+        expect(scope.field.Value).toEqual("1")
+        console.dir(scope.field);
+        expect(scope.field.Value).not.toEqual("2")
+        //expect(element.html()).toEqual('<label class="ng-binding">thelabel</label><!-- ngRepeat: option in field.Options --><span ng-repeat="option in field.Options" class="ng-scope ng-binding"><input type="radio" name="fieldName" ng-model="field.Value" value="optionID1" class="ng-pristine ng-valid">optionValue1<br></span><span ng-repeat="option in field.Options" class="ng-scope ng-binding"><input type="radio" name="fieldName" ng-model="field.Value" value="optionID2" class="ng-valid ng-dirty">optionValue2<br></span><span ng-repeat="option in field.Options" class="ng-scope ng-binding"><input type="radio" name="fieldName" ng-model="field.Value" value="optionID3" class="ng-pristine ng-valid">optionValue3<br></span>');
+    });
 });
 describe('$451 radiobuttonuserfield Directive:',function(){
     it('Should only replace radiobuttonuserfield elements, not radiobuttonuserfield attributes', function(){
@@ -93,8 +116,27 @@ describe('$451 radiobuttonuserfield Directive:',function(){
         expect(element.html()).toEqual('<label class="ng-binding">thelabel</label><!-- ngRepeat: option in field.Options --><span ng-repeat="option in field.Options" class="ng-scope ng-binding"><input type="radio" name="fieldName" ng-model="field.Value" value="optionID1" class="ng-pristine ng-valid">optionValue1<br></span><span ng-repeat="option in field.Options" class="ng-scope ng-binding"><input type="radio" name="fieldName" ng-model="field.Value" value="optionID2" class="ng-pristine ng-valid">optionValue2<br></span><span ng-repeat="option in field.Options" class="ng-scope ng-binding"><input type="radio" name="fieldName" ng-model="field.Value" value="optionID3" class="ng-pristine ng-valid">optionValue3<br></span>');
 
     });
-    //TODO- test that data binding works; when an option gets selected/clicked, verify the model works
+    it('Should create specific array of radio buttons', function(){
 
+        scope.field = {Name: "fieldName", Label: "thelabel", IsRadioButtons: true, DisplayToUser: true, Options: [{ID: "optionID1", Value: "optionValue1"},{ID: "optionID2", Value: "optionValue2"},{ID: "optionID3", Value: "optionValue3"}]};
+
+        var element=$compile("<radiobuttonuserfield></radiobuttonuserfield>")(scope);
+        scope.$apply();
+        expect(element.find('input').length).toBe(3);
+
+    });
+    it('Should update model when a radio button is clicked', function(){
+
+        scope.field = {Name: "fieldName", Label: "thelabel", IsRadioButtons: true, DisplayToUser: true, Options: [{ID: "optionID1", Value: "optionValue1"},{ID: "optionID2", Value: "optionValue2"},{ID: "optionID3", Value: "optionValue3"}]};
+
+        var element=$compile("<radiobuttonuserfield></radiobuttonuserfield>")(scope);
+        scope.$apply();
+
+        element.find('input')[1].click(); //what happens is the second input item gets marked as dirty by angular (class ng-pristine changes to ng-dirty)
+        expect(scope.field.Value).toEqual("optionID2")
+        expect(scope.field.Value).not.toEqual("optionID3")
+        expect(element.html()).toEqual('<label class="ng-binding">thelabel</label><!-- ngRepeat: option in field.Options --><span ng-repeat="option in field.Options" class="ng-scope ng-binding"><input type="radio" name="fieldName" ng-model="field.Value" value="optionID1" class="ng-pristine ng-valid">optionValue1<br></span><span ng-repeat="option in field.Options" class="ng-scope ng-binding"><input type="radio" name="fieldName" ng-model="field.Value" value="optionID2" class="ng-valid ng-dirty">optionValue2<br></span><span ng-repeat="option in field.Options" class="ng-scope ng-binding"><input type="radio" name="fieldName" ng-model="field.Value" value="optionID3" class="ng-pristine ng-valid">optionValue3<br></span>');
+    });
 });
 describe('$451 authorization Directive:',function(){
 
