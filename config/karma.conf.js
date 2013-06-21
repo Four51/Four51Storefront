@@ -12,6 +12,7 @@ files = [
     'app/lib/angular/ui-mask.js',
 	'app/js/app.js',
 	'app/js/**/*.js',
+
 	'test/unit/appSpec.js',
     'test/unit/451Spec.js',
     'test/unit/directivesSpec.js',
