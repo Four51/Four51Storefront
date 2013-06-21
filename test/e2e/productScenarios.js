@@ -103,9 +103,21 @@ describe('Product View', function() {
     it('should have an image', function(){
         expect(element('#451_img_prod_lg').count()).toBe(1);
     });
+    it('should have a description', function(){
+        expect(element('#451_area_prod_desc').count()).toBe(1);
+        //verify the product name and description?
+
+
+
+
+    });
     it('should have variants', function(){
         console.dir(repeater('#451_list_vars').row(0));
         expect(repeater('#451_list_vars').count()).toBeGreaterThan(0); //there should be at least one variant
+    });
+    it('should have spec groups', function(){
+        console.dir(repeater('#451_list_specgroup').row(0));
+        expect(repeater('#451_list_specgroup').count()).toBeGreaterThan(0); //there should be at least one variant
     });
     it('should allow us to click on a variant and display it', function(){
         expect(repeater('#451_list_vars').count()).toBeGreaterThan(0); //there should be at least one variant

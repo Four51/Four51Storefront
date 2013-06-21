@@ -71,14 +71,12 @@ var objJSONmini = [
     { type: 'z', status: '26' }
 ];
 
-var $451;
-beforeEach(module('451order'));
-beforeEach(inject(function(_$451_) {
-    $451 = _$451_;
-}));
-
 describe('$451 API:',function(){
-
+    var $451;
+    beforeEach(module('451order'));
+    beforeEach(inject(function(_$451_) {
+        $451 = _$451_;
+    }));
     it('Should return api url', function() {
         var url = $451.api('order'); //won't work right now because api gets it from the window.location.etc
         console.log($451.appname);
@@ -86,7 +84,11 @@ describe('$451 API:',function(){
     });
 });
 describe('$451 Cache:', function() {
-
+    var $451;
+    beforeEach(module('451order'));
+    beforeEach(inject(function(_$451_) {
+        $451 = _$451_;
+    }));
 //let's test that caching works.
     //test that we can instantiate a cache object                            --DONE
     //test that we can store a string and array in the cache                 --DONE
@@ -242,7 +244,11 @@ describe('$451 Cache:', function() {
 
 });
 describe('$451 Filter:', function() {
-
+    var $451;
+    beforeEach(module('451order'));
+    beforeEach(inject(function(_$451_) {
+        $451 = _$451_;
+    }));
     it('Should return an object of type array', function() {
         var objOptions={};
         var objFilteredJSONResult = $451.filter({},objOptions);
@@ -268,7 +274,11 @@ describe('$451 Filter:', function() {
     });
 });
 describe('$451 Slice:', function() {
-
+    var $451;
+    beforeEach(module('451order'));
+    beforeEach(inject(function(_$451_) {
+        $451 = _$451_;
+    }));
     it('Should delete the specified item from an array, one', function() {
 
         var arrArray = ["one","two","three","four"];

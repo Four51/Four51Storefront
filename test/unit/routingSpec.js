@@ -1,11 +1,10 @@
 'use strict';
 /* these unit test specs test routing.js */
 
-var $scope, $route, $location, $httpBackend, C_debug;
-//beforeEach(module('451order')); //already did this in a previous file, we can only instantiate a module once
-C_debug = false;
+var C_debug = false;
 
 function unitTestRoute(strHttpUrl, strHttpResponse,strLocationPath,strTemplateUrl,strControllerName){
+    var $scope, $route, $location, $httpBackend;
     inject(function(_$route_, _$location_, _$rootScope_, _$httpBackend_){
         $route = _$route_;
         $location = _$location_;
@@ -28,8 +27,10 @@ function unitTestRoute(strHttpUrl, strHttpResponse,strLocationPath,strTemplateUr
     });
 }
 
-
 describe('$451 Routing:', function(){
+
+    var $scope, $route, $location, $httpBackend;
+    beforeEach(module('451order'));
 
     //test malformed URLs or URLs with missing components?
 
@@ -58,7 +59,7 @@ describe('$451 Routing:', function(){
         });
 
     });
-    it("should redirect to catelog if URL/path is invalid", function() {
+    it("should redirect to catalog if URL/path is invalid", function() {
         inject(function(_$route_, _$location_, _$rootScope_, _$httpBackend_){
             $route = _$route_;
             $location = _$location_;

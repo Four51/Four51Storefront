@@ -1,15 +1,6 @@
 'use strict';
 //this file contains test specs for directives.js
 
-var $451, $compile, $rootScope, scope;
-//beforeEach(module('451order')); //already did this in a previous file, we can only instantiate a module once
-beforeEach(inject(function(_$451_, _$rootScope_, _$compile_) {
-    $451 = _$451_;
-    $compile = _$compile_;
-    $rootScope = _$rootScope_;
-    scope = $rootScope.$new();
-}));
-
 //very helpful tutorial/article on directives:
 //http://onehungrymind.com/angularjs-directives-basics/
 
@@ -17,6 +8,15 @@ beforeEach(inject(function(_$451_, _$rootScope_, _$compile_) {
 
 //these tests don't do much other than verify the directives are applied...the text they are being compared to comes from the innerHTML of the console.dir.
 describe('$451 textuserfield Directive:',function(){
+
+    var $451, $compile, $rootScope, scope;
+    beforeEach(module('451order'));
+    beforeEach(inject(function(_$451_, _$rootScope_, _$compile_) {
+        $451 = _$451_;
+        $compile = _$compile_;
+        $rootScope = _$rootScope_;
+        scope = $rootScope.$new();
+    }));
 
     it('Should only replace textuserfield elements, not textuserfield attributes', function(){
 
@@ -42,6 +42,15 @@ describe('$451 textuserfield Directive:',function(){
 
 });
 describe('$451 selectionuserfield Directive:',function(){
+
+    var $451, $compile, $rootScope, scope;
+    beforeEach(module('451order'));
+    beforeEach(inject(function(_$451_, _$rootScope_, _$compile_) {
+        $451 = _$451_;
+        $compile = _$compile_;
+        $rootScope = _$rootScope_;
+        scope = $rootScope.$new();
+    }));
 
     it('Should only replace selectionuserfield elements, not selectionuserfield attributes', function(){
 
@@ -102,6 +111,16 @@ describe('$451 selectionuserfield Directive:',function(){
     });
 });
 describe('$451 radiobuttonuserfield Directive:',function(){
+
+    var $451, $compile, $rootScope, scope;
+    beforeEach(module('451order'));
+    beforeEach(inject(function(_$451_, _$rootScope_, _$compile_) {
+        $451 = _$451_;
+        $compile = _$compile_;
+        $rootScope = _$rootScope_;
+        scope = $rootScope.$new();
+    }));
+
     it('Should only replace radiobuttonuserfield elements, not radiobuttonuserfield attributes', function(){
 
         var element=$compile('<foo radiobuttonuserfield="bar"/>')(scope);
@@ -139,6 +158,15 @@ describe('$451 radiobuttonuserfield Directive:',function(){
     });
 });
 describe('$451 authorization Directive:',function(){
+
+    var $451, $compile, $rootScope, scope;
+    beforeEach(module('451order'));
+    beforeEach(inject(function(_$451_, _$rootScope_, _$compile_) {
+        $451 = _$451_;
+        $compile = _$compile_;
+        $rootScope = _$rootScope_;
+        scope = $rootScope.$new();
+    }));
 
     it('Should only replace authorization attributes, not authorization elements', function(){
 
