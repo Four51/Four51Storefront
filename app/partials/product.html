@@ -1,13 +1,15 @@
-<img ng-src="{{variant.LargeImageFile.Url || product.LargeImageFile.Url}}" ng-show="variant.LargeImageFile.Url || product.LargeImageFile.Url">
+<img id="451_img_prod_lg" ng-src="{{variant.LargeImageFile.Url || product.LargeImageFile.Url}}" ng-show="variant.LargeImageFile.Url || product.LargeImageFile.Url">
 
-<table border=1>
+
+<table id="451_area_prod_desc" border=1>
     <tr><td>name:</td><td>{{product.Name}}</td></tr>
     <tr><td>Description:</td><td><span ng-bind-html-unsafe="product.Description"/></td></tr>
     <tr ng-show="variant"><td>variant description:</td><td><span ng-bind-html-unsafe="variant.Description"/></td></tr>
 </table>
 <br>
 <form name="addToOrderForm" ng-show="variant || product.Variants.length == 0">
-    <input type="number" required name="qtyInput" ng-model="quantity" ui-validate="'validQuantityAddToOrder($value, variant, product, priceSchedule)'">
+    <input ng-if="!priceSchedule.RestrictedQuantity" type="number" required name="qtyInput" ng-model="quantity" ui-validate="'validQuantityAddToOrder($value, variant, product, priceSchedule)'">
+    <select ng-if="priceSchedule.RestrictedQuantity" ng-model="quantity" ng-options="pb.Quantity for pb in priceSchedule.PriceBreaks" ui-validate="'validQuantityAddToOrder($value.Quantity, variant, product, priceSchedule)'"></select>
     <button ng-disabled="addToOrderForm.$invalid" ng-click="OrderService.addToOrder(quantity, product.InteropID, variant.InteropID)">Add to Order</button>
     <br>
 
@@ -28,25 +30,38 @@
 <span ng-show="priceSchedule">
     Price:
     <table border=1>
-        <tr><td>Quantity <span ng-show="product.QuantityMultiplier > 1"> (x {{product.QuantityMultiplier}})</span></td><td>Price <span ng-show="product.QuantityMultiplier > 1"> (per {{product.QuantityMultiplier}})</span></td></tr>
-        <tr ng-repeat="ps in priceSchedule.PriceBreaks">
+        <tr><td>Quantity <span ng-show="product.QuantityMultiplier > 1 && !priceSchedule.RestrictedQuantity"> (x {{product.QuantityMultiplier}})</span></td>
+            <td>Price <span ng-show="product.QuantityMultiplier > 1 && !priceSchedule.RestrictedQuantity" > (per {{product.QuantityMultiplier}})</span></td>
+        </tr>
+        <tr id="451_list_pric_schd" ng-repeat="ps in priceSchedule.PriceBreaks">
             <td>
-                {{ps.Quantity}}
+                {{ps.Quantity * (priceSchedule.RestrictedQuantity ? product.QuantityMultiplier : 1)}}
                 <span ng-show="!priceSchedule.RestrictedQuantity">
-                    <span ng-show="priceSchedule.PriceBreaks[$index + 1].Quantity"> - {{priceSchedule.PriceBreaks[$index + 1].Quantity - 1}}</span>
+                    <span ng-show="priceSchedule.PriceBreaks[$index + 1].Quantity"> - {{ priceSchedule.PriceBreaks[$index + 1].Quantity - 1  }}</span>
                     <span ng-show="$last && priceSchedule.MaxQuantity"> - {{priceSchedule.MaxQuantity}}</span>
                     <span ng-show="$last && !priceSchedule.MaxQuantity"> +</span>
                 </span>
             </td>
-            <td>{{ps.Price | currency}}</td>
+            <td>{{ps.Price * (priceSchedule.RestrictedQuantity ? ps.Quantity : 1)| currency}}</td>
         </tr>
     </table>
 </span>
 
-<div ng-show="product.Variants.length > 1 && !variant">variants({{product.Variants.length}})
+<span id="451_list_vars" ng-show="product.Variants.length > 1 && !variant">variants({{product.Variants.length}})
     <ul>
         <li ng-repeat="v in product.Variants">
             <a href=#/product/{{product.InteropID}}/v/{{v.InteropID}}>{{v.ExternalID}}: {{v.InteropID}}</a>
         </li>
     </ul>
-</div>
+</span>
+
+<span ng-show="StaticSpecGroups">
+    static groups
+    <ul id="451_list_specgroup">
+        <li ng-repeat="sg in StaticSpecGroups">{{sg.Name}}
+            <ul>
+                <li ng-repeat="spec in sg.Specs">{{spec.Name}}: {{spec.Value}}</li>
+            </ul>
+        </li>
+    </ul>
+</span>
