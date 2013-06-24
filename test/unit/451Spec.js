@@ -273,37 +273,3 @@ describe('$451 Filter:', function() {
         console.dir(jsonObject);
     });
 });
-describe('$451 Slice:', function() {
-    var $451;
-    beforeEach(module('451order'));
-    beforeEach(inject(function(_$451_) {
-        $451 = _$451_;
-    }));
-    it('Should delete the specified item from an array, one', function() {
-
-        var arrArray = ["one","two","three","four"];
-
-        $451.slice(arrArray,"one");
-
-        expect(arrArray).toEqual(["two","three","four"]);
-
-    });
-    it('Should delete the specified item from an array, two', function() {
-
-        var arrArray = ["one","two","three","four"];
-
-        $451.slice(arrArray,"two");
-
-        expect(arrArray).toEqual(["one","three","four"]);
-
-    });
-    it('Should leave an array alone if an invalid element is specified', function() {
-
-        var arrArray = ["one","two","three","four"];
-
-        $451.slice(arrArray,"3");
-
-        expect(arrArray).toEqual(["one","two","three","four"]);
-
-    });
-});

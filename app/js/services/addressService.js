@@ -7,6 +7,7 @@ four51.app.factory('AddressService', function($resource, $location, $route, $api
         },
         save: function(address, callback) {
             service.save(address, function(response) {
+                $451.clear('Addresses');
                 $451.clear('Address.' + address.InteropID);
                 callback();
             });
@@ -34,10 +35,7 @@ four51.app.factory('AddressListService', function($resource, $451, $api) {
         delete: function(a) {
             angular.forEach(a, function(add) {
                if (add.Selected) {
-                   resource.delete(add, function() {
-                       $451.slice(a, add);
-                       $451.clear('Addresses');
-                   })
+                   resource.delete(add);
                }
             });
             return a;
