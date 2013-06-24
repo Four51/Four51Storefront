@@ -9,6 +9,6 @@ describe('App Module:', function(){
   module = angular.module("451order");
 
   it('should be registered.', inject(function() {
-    expect(module).not.toBe(null);
+    expect(module).toBeDefined;
   }));
 });

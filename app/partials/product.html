@@ -1,6 +1,7 @@
-<img ng-src="{{variant.LargeImageFile.Url || product.LargeImageFile.Url}}" ng-show="variant.LargeImageFile.Url || product.LargeImageFile.Url">
+<img id="451_img_prod_lg" ng-src="{{variant.LargeImageFile.Url || product.LargeImageFile.Url}}" ng-show="variant.LargeImageFile.Url || product.LargeImageFile.Url">
 
-<table border=1>
+
+<table id="451_area_prod_desc" border=1>
     <tr><td>name:</td><td>{{product.Name}}</td></tr>
     <tr><td>Description:</td><td><span ng-bind-html-unsafe="product.Description"/></td></tr>
     <tr ng-show="variant"><td>variant description:</td><td><span ng-bind-html-unsafe="variant.Description"/></td></tr>
@@ -32,7 +33,7 @@
         <tr><td>Quantity <span ng-show="product.QuantityMultiplier > 1 && !priceSchedule.RestrictedQuantity"> (x {{product.QuantityMultiplier}})</span></td>
             <td>Price <span ng-show="product.QuantityMultiplier > 1 && !priceSchedule.RestrictedQuantity" > (per {{product.QuantityMultiplier}})</span></td>
         </tr>
-        <tr ng-repeat="ps in priceSchedule.PriceBreaks">
+        <tr id="451_list_pric_schd" ng-repeat="ps in priceSchedule.PriceBreaks">
             <td>
                 {{ps.Quantity * (priceSchedule.RestrictedQuantity ? product.QuantityMultiplier : 1)}}
                 <span ng-show="!priceSchedule.RestrictedQuantity">
@@ -46,7 +47,7 @@
     </table>
 </span>
 
-<span ng-show="product.Variants.length > 1 && !variant">variants({{product.Variants.length}})
+<span id="451_list_vars" ng-show="product.Variants.length > 1 && !variant">variants({{product.Variants.length}})
     <ul>
         <li ng-repeat="v in product.Variants">
             <a href=#/product/{{product.InteropID}}/v/{{v.InteropID}}>{{v.ExternalID}}: {{v.InteropID}}</a>
@@ -56,7 +57,7 @@
 
 <span ng-show="StaticSpecGroups">
     static groups
-    <ul>
+    <ul id="451_list_specgroup">
         <li ng-repeat="sg in StaticSpecGroups">{{sg.Name}}
             <ul>
                 <li ng-repeat="spec in sg.Specs">{{spec.Name}}: {{spec.Value}}</li>

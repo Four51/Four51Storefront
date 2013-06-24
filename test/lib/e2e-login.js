@@ -25,7 +25,9 @@ function e2eLogin(strUsername, strPassword, blnDebug){
             pause();
         }
 
-        //expect(input("user.Username").val().toBe(strUsername));
+        expect(input("user.Username").val()).toBe(strUsername);
+        expect(input("user.Password").val()).toBe(strPassword);
+
         element("#451_btn_login").click();
 
         it('should automatically redirect to /catalog when location hash/fragment is empty', function() {
@@ -35,6 +37,12 @@ function e2eLogin(strUsername, strPassword, blnDebug){
         if(blnDebug){
             pause();
         }
+
+    });
+
+    it("should hide the login box once we've logged in", function() {
+        expect(element('#login_box:visible').count()).toBe(0);
+        //we found a login box.  is login_box the best way to check for it's existence?
 
     });
 
@@ -54,5 +62,10 @@ function e2eLogout(blnDebug){
         if(blnDebug){
             pause();
         }
+    });
+    it("should show the login box again since we've logged out", function() {
+        expect(element('#login_box:visible').count()).toBe(1);
+        //we found a login box.  is login_box the best way to check for it's existence?
+
     });
 }
