@@ -13,7 +13,7 @@
 
 <body ng-cloak>
     <div authorization ng-controller="Four51Ctrl">
-        <div id="login_form" ng-hide="Four51User.isAuthenticated" style="position: relative;">
+        <div ng-hide="Four51User.isAuthenticated" style="position: relative;">
             <div id="login_box">
                 <div ng-controller='LoginCtrl'>
                    <ng-include src="template.url" />

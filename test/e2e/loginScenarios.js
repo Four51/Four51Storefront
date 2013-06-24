@@ -2,6 +2,10 @@
 
 /* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
 //login and logout test Scenarios
+
+//handy stuff:
+//console.dir(scope('[name="LoginForm"]','user'));
+
 var C_debug = false;
 
 describe('SPA login with valid user/pass', function() {
@@ -9,7 +13,7 @@ describe('SPA login with valid user/pass', function() {
         browser().navigateTo('../../app/index.html');
     });
 
-    e2eLogin("sesendpo","fails555", C_debug);
+    e2eLogin("sesendpo","fails345", C_debug);
 
     e2eLogout(C_debug);
 
@@ -20,7 +24,7 @@ describe('SPA login without valid user/pass', function() {
         browser().navigateTo('../../app/index.html');
     });
 
-    e2eLogin("failme","fails345", C_debug);
+    e2eLogin("failme","fails543", C_debug);
 
     it("should display a line saying cannot find user or password", function() {
         expect(element('p:contains("not found")').count()).toBe(1); //this won't work if the client changes the messages or we localize it.
@@ -51,7 +55,7 @@ describe('SPA attempt to view a product WITH authentication', function() {
         //we found a login box.  is login_box the best way to check for it's existence?
     });
 
-    e2eLogin("sesendpo","fails555", C_debug);
+    e2eLogin("sesendpo","fails345", C_debug);
     //so we login, and should be shown the product we requested
     it('should now show us the product page we requested and logged in for', function() {
         expect(browser().location().url()).toBe("/product/A0151242-FB0C-4F0E-BB59-C7FA04167A74");
