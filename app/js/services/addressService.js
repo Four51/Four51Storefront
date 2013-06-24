@@ -7,6 +7,7 @@ four51.app.factory('AddressService', function($resource, $location, $route, $api
         },
         save: function(address, callback) {
             service.save(address, function(response) {
+                $451.clear('Addresses');
                 $451.clear('Address.' + address.InteropID);
                 callback();
             });

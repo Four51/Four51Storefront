@@ -1,9 +1,12 @@
 'use strict';
 
-four51.app.controller('AddressListCtrl', function ($scope, $location, $451, $routeParams, AddressListService) {
+four51.app.controller('AddressListCtrl', function ($scope, $location, $451, AddressListService) {
     $scope.addresses = AddressListService.query();
     $scope.deleteSelected = function() {
         AddressListService.delete(this.addresses);
+    };
+    $scope.newAddress = function() {
+        $location.path('address/new');
     };
     $scope.checkAll = function(event) {
         angular.forEach($scope.addresses, function(add) {
@@ -13,7 +16,7 @@ four51.app.controller('AddressListCtrl', function ($scope, $location, $451, $rou
 });
 
 four51.app.controller('AddressViewCtrl', function ($scope, $location, $451, $routeParams, AddressService, ResourcesService) {
-    $scope.address = AddressService.get({ id: $routeParams.id });
+    $scope.address = $routeParams.id === 'new' ? {} :  AddressService.get({ id: $routeParams.id });
     $scope.save = function() {
         AddressService.save(this.address, function() {
             $location.path('/address');
