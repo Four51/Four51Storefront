@@ -3,13 +3,7 @@
 /* Directives */
 
 four51.app.directive('authorization', function($route, $451) {
-	var obj = {
-		restrict: 'A',
-		link: function(scope, elem, attrs) {
-
-		}
-	};
-	return obj;
+	return { restrict: 'A'};
 });
 
 four51.app.directive('textuserfield', function($451) {
@@ -36,6 +30,15 @@ four51.app.directive('radiobuttonuserfield', function($451) {
             '<span ng-repeat="option in field.Options">' +
             '<input type="radio" name="{{field.Name}}" ng-model="field.Value" value="{{option.ID}}" />' +
             '{{option.Value}}<br /></span>'
+    }
+    return obj;
+});
+
+four51.app.directive('addressinput', function($451, AddressService) {
+    var obj = {
+        restrict: 'E',
+        templateUrl: 'partials/addressView.html',
+        controller: 'AddressCtrl'
     }
     return obj;
 });

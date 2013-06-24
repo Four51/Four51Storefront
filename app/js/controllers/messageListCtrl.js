@@ -4,13 +4,13 @@ four51.app.controller('MessageListCtrl', function($scope, MessageListService) {
 	$scope.checkAll = function(event, type) {
 		angular.forEach($scope.messages, function(msg) {
 			if (msg.Box === type)
-				msg.Selected = event.toElement.checked;
+				msg.Selected = !msg.Selected;
 		});
 	}
 
 	$scope.deleteSelected = function(event) {
 		event.preventDefault();
-		$scope.messages = MessageListService.delete($scope.messages);
+		$scope.messages = MessageListService.delete(this.messages);
 	}
 });
 
