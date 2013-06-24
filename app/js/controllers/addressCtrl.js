@@ -15,7 +15,9 @@ four51.app.controller('AddressListCtrl', function ($scope, $location, $451, $rou
 four51.app.controller('AddressViewCtrl', function ($scope, $location, $451, $routeParams, AddressService, ResourcesService) {
     $scope.address = AddressService.get({ id: $routeParams.id });
     $scope.save = function() {
-        AddressService.save(this.address);
+        AddressService.save(this.address, function() {
+            $location.path('/address');
+        });
     };
     $scope.delete = function(address) {
         AddressService.delete(this.address);
