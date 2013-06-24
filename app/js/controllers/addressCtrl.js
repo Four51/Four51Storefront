@@ -4,6 +4,9 @@ four51.app.controller('AddressListCtrl', function ($scope, $location, $451, Addr
     $scope.addresses = AddressListService.query();
     $scope.deleteSelected = function() {
         AddressListService.delete(this.addresses);
+        $scope.addresses = $.grep(this.addresses, function(n) {
+           return !n.Selected;
+        });
     };
     $scope.newAddress = function() {
         $location.path('address/new');

@@ -52,11 +52,6 @@ four51.app.factory('$451', function(Cache) {
 		return d;
 	}
 
-	function sliceByValue(array, value) {
-		var index = array.indexOf(value);
-		array.splice(index, index+1);
-	}
-
 	return {
 		debug: true,
 		appname: four51.app.name,
@@ -72,17 +67,13 @@ four51.app.factory('$451', function(Cache) {
 				getCache(id);
 		},
 		clear: function(key) {
-			if (!key)
-				clearStorageMechanisms();
-			else
+			!key ?
+				clearStorageMechanisms():
 				Cache.remove(key); localStorage.removeItem(key);
 			return this;
 		},
 		filter: function(input, options) {
 			return json_filter(input, options);
-		},
-		slice: function(array, value) {
-			sliceByValue(array, value);
 		}
 	};
 });
