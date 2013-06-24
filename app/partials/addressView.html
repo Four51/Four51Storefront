@@ -7,9 +7,9 @@
         <input name="street1" class="input-large" type="text" ng-model="address.Street1" placeholder="Address Line 1" required /><br />
         <input name="street2" class="input-large" type="text" ng-model="address.Street2" placeholder="Address Line 2" /><br />
         <input name="city" class="input-large" type="text" ng-model="address.City" placeholder="City" required /><br />
-        <input ng-show="!hasstates()" class="input-large" type="text" ng-model="address.State" placeholder="State" ng-required="!hasstates()" />
-        <select ng-show="hasstates()" ng-options="state.value as state.label for state in states | filter:country" ng-model="address.State" placeholder="State" ng-required="hasstates()" /><br />
-        <input name="zip" class="input-large" type="text" ng-model="address.Zip" placeholder="Zip" ng-required="hasstates()" /><br />
+        <input ng-show="!hasStates()" class="input-large" type="text" ng-model="address.State" placeholder="State" ng-required="!hasStates()" />
+        <select ng-show="hasStates()" ng-options="state.value as state.label for state in states | filter:country" ng-model="address.State" placeholder="State" ng-required="hasStates()" /><br />
+        <input name="zip" class="input-large" type="text" ng-model="address.Zip" placeholder="Zip" ng-required="hasStates()" /><br />
         <select name="country" ng-options="country.value as country.label for country in countries" ng-model="address.Country" placeholder="Country" required /><br />
         <input name="phone" class="input-large" type="text" ng-model="address.Phone" placeholder="Phone" /><br />
         <label><input type="checkbox" ng-checked="address.IsShipping" ng-model="address.IsShipping" />  Save to Shipping Address Book</label><br />
