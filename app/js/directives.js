@@ -40,6 +40,15 @@ four51.app.directive('radiobuttonuserfield', function($451) {
     return obj;
 });
 
+four51.app.directive('addressinput', function($451, AddressService) {
+    var obj = {
+        restrict: 'E',
+        templateUrl: 'partials/addressView.html',
+        controller: 'AddressCtrl'
+    }
+    return obj;
+});
+
 four51.app.directive('quantiityfield', function($scope){
     var select = '<select ng-if="priceSchedule.RestrictedQuantity" ng-model="quantity" ng-options="pb.Quantity for pb in priceSchedule.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value.Quantity, variant, product, priceSchedule)\'"></select>';
     var textBox = '<input ng-if="!priceSchedule.RestrictedQuantity" type="number" required name="qtyInput" ng-model="quantity" ui-validate="\'validQuantityAddToOrder($value, variant, product, priceSchedule)\'">';

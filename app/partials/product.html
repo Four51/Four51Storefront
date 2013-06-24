@@ -8,7 +8,7 @@
 </table>
 <br>
 <form name="addToOrderForm" ng-show="variant || product.Variants.length == 0">
-    <quantiityfield/>
+    <quantityfield ps='priceSchedule' v='variant' p='product'/><br>
 
     <button ng-disabled="addToOrderForm.$invalid" ng-click="OrderService.addToOrder(quantity, product.InteropID, variant.InteropID)">Add to Order</button>
     <br>
@@ -25,7 +25,6 @@
     </span>
 </form>
 
-<span ng-show="qtyErrorMessage">quantity fail: {{qtyErrorMessage}}<br></span>
 
 <span ng-show="priceSchedule">
     Price:
