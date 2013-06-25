@@ -15,7 +15,7 @@ four51.app.controller('AddressListCtrl', function ($scope, $location, $451, Addr
     }
 });
 
-four51.app.controller('AddressViewCtrl', function ($scope, $location, $451, $routeParams, AddressService, ResourcesService) {
+four51.app.controller('AddressViewCtrl', function ($scope, $location, $451, $routeParams, AddressService, ResourcesService, UserService) {
     $routeParams.id ?
         $scope.address = AddressService.get({ id: $routeParams.id }) :
         $scope.address = {};
@@ -44,4 +44,9 @@ four51.app.controller('AddressViewCtrl', function ($scope, $location, $451, $rou
     $scope.hasStates = function() {
         return $scope.address != null ? $scope.address.Country == 'US' || $scope.address.Country == 'CA' || $scope.address.Country == 'NL' : false;
     };
+
+    $scope.isPhoneRequired = function() {
+        return (UserService.permission.contains('BillingAddressPhoneRequired') && $scope.address.IsBilling) ||
+            (UserService.permission.contains('ShipAddressPhoneRequired') && $scope.address.IsShipping);
+    }
 });
