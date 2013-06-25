@@ -168,4 +168,19 @@ describe('$451 Routing:', function(){
         unitTestRoute('partials/login.html','login','/login','partials/login.html','LoginCtrl')
 
     });
+    it("should route addressList requests properly", function() {
+
+        unitTestRoute('partials/addressList.html','addresses','/addresses','partials/addressList.html','AddressListCtrl')
+
+    });
+    it("should route addressView requests properly", function() {
+
+        unitTestRoute('partials/addressView.html','address','/address','partials/addressView.html','AddressViewCtrl')
+
+    });
+    it("should route addressView (with ID) requests properly", function() {
+
+        unitTestRoute('partials/addressView.html','address','/address/:id','partials/addressView.html','AddressViewCtrl')
+
+    });
 });
