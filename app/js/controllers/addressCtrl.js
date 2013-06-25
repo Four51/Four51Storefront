@@ -31,7 +31,9 @@ four51.app.controller('AddressViewCtrl', function ($scope, $location, $451, $rou
         });
     };
     $scope.delete = function() {
-        AddressService.delete(this.address);
+        AddressService.delete(this.address, function() {
+            $location.path('/addresses');
+        });
     };
     $scope.countries = ResourcesService.countries;
     $scope.states = ResourcesService.states;

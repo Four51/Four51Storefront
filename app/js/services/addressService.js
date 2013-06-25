@@ -8,14 +8,14 @@ four51.app.factory('AddressService', function($resource, $route, $api, $451){
         save: function(address, callback) {
             service.save(address, function(response) {
                 $451.clear('Addresses');
-                $451.clear('Address.' + address.InteropID);
                 callback();
             });
         },
-        delete: function(address) {
+        delete: function(address, callback) {
             service.delete(address, function(response) {
+                $451.clear('Address.' + address.InteropID);
                 $451.clear('Addresses');
-                $route.reload();
+                callback();
             });
         }
     };
@@ -29,18 +29,17 @@ four51.app.factory('AddressListService', function($resource, $451, $api) {
 
     return {
         query: function() {
+            $451.clear('Addresses');
             return $api.resource(resource).
                 options({ persists: true, key: 'Addresses'}).query();
         },
         delete: function(addresses) {
             angular.forEach(addresses, function(address, i) {
                if (address.Selected) {
-                   resource.delete(address, function() {
-                        addresses.splice(i,1);
-                   });
+                   resource.delete(address);
                }
             });
-            return $451.cache('Addresses', addresses, { persists: true });
+            return this.query();
         }
     }
 });
