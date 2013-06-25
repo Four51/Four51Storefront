@@ -2,14 +2,16 @@
 <div class="navbar-inner">
     <div class="container-fluid">
         <a class="brand" ng-show="user" href="#">{{'Welcome, ' + user.FirstName + " " + user.LastName}}</a>
-        <ul class="nav" ng-init="active='catalog'">
-            <li class="{{(active == 'catalog') && 'active' || ''}}"><a href="#/catalog" ng-click="active = 'catalog'">Category</a></li>
+        <ul class="nav">
+            <li><a href="#/catalog">Category</a></li>
             <li class="divider-vertical" />
-            <li class="{{(active == 'orders') && 'active' || ''}}"><a href="#/order" ng-click="active = 'orders'">Orders</a></li>
+            <li><a href="#/order">Orders</a></li>
             <li class="divider-vertical" />
-            <li class="{{(active == 'message') && 'active' || ''}}"><a href="#/message" ng-click="active = 'message'">Message</a></li>
+            <li><a href="#/message">Message</a></li>
             <li class="divider-vertical" />
-            <li class="{{(active == 'admin') && 'active' || ''}}"><a href="#/admin" ng-click="active = 'admin'">Admin</a></li>
+            <li><a href="#/admin">Profile</a></li>
+            <li class="divider-vertical" />
+            <li><a href="#/addresses">Addresses</a></li>
             <li class="divider-vertical" />
             <li><a href="#" id="451_btn_logout" ng-click="Logout()">Log Out</a></li>
         </ul>

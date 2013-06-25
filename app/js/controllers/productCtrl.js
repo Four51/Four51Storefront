@@ -15,33 +15,5 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
     });
     $scope.OrderService = OrderService;
 
-    $scope.validQuantityAddToOrder = function(value, variant, product, priceSchedule){
 
-        if(!product && !variant)
-            return true;
-
-        if(!priceSchedule)
-            return true;
-
-        var valid = true;
-
-        if(priceSchedule.MinQuantity > value){
-            valid = false;
-            $scope.qtyErrorMessage = "must be greater than " + priceSchedule.MinQuantity;
-        }
-
-        if(priceSchedule.MaxQuantity && priceSchedule.MaxQuantity < value){
-            $scope.qtyErrorMessage = "must be less than " + priceSchedule.MaxQuantity;
-            valid = false;
-        }
-        var qtyAvail = variant || product;
-
-        if(qtyAvail.QuantityAvailable && qtyAvail.QuantityAvailable < value && product.AllowExceedInventory == false){
-            $scope.qtyErrorMessage = "not enough available inventory " +  qtyAvail.QuantityAvailable;
-            valid = false;
-        }
-        if(valid)
-            $scope.qtyErrorMessage = null;
-        return valid;
-    }
 });

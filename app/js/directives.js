@@ -39,3 +39,13 @@ four51.app.directive('radiobuttonuserfield', function($451) {
     }
     return obj;
 });
+
+four51.app.directive('addressinput', function($451, AddressService) {
+    var obj = {
+        restrict: 'E',
+        templateUrl: 'partials/addressView.html',
+        controller: 'AddressCtrl'
+    }
+    return obj;
+});
+
