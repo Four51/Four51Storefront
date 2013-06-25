@@ -1,4 +1,4 @@
-four51.app.factory('AddressService', function($resource, $location, $route, $api, $451){
+four51.app.factory('AddressService', function($resource, $route, $api, $451){
     var service = $resource($451.api('address/:id'), { id: '@id' });
 
     return {
@@ -32,13 +32,17 @@ four51.app.factory('AddressListService', function($resource, $451, $api) {
             return $api.resource(resource).
                 options({ persists: true, key: 'Addresses'}).query();
         },
-        delete: function(a) {
-            angular.forEach(a, function(add) {
-               if (add.Selected) {
-                   resource.delete(add);
+        delete: function(addresses) {
+            angular.forEach(addresses, function(address) {
+               if (address.Selected) {
+                   resource.delete(address);
                }
             });
-            return a;
+            // take the deleted addresses out of the cache to save on getting the list again
+            $.grep(addresses, function(n) {
+                return !n.Selected;
+            });
+            return $451.cache('Addresses', addresses);
         }
     }
 });
