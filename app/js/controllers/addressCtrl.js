@@ -9,7 +9,7 @@ four51.app.controller('AddressListCtrl', function ($scope, $location, $451, Addr
         });
     };
     $scope.newAddress = function() {
-        $location.path('address/new');
+        $location.path('address');
     };
     $scope.checkAll = function(event) {
         angular.forEach($scope.addresses, function(add) {
@@ -19,13 +19,14 @@ four51.app.controller('AddressListCtrl', function ($scope, $location, $451, Addr
 });
 
 four51.app.controller('AddressViewCtrl', function ($scope, $location, $451, $routeParams, AddressService, ResourcesService) {
-    $scope.address = $routeParams.id === 'new' ? {} :  AddressService.get({ id: $routeParams.id });
+    $routeParams.id ?
+        $scope.address = AddressService.get({ id: $routeParams.id }) :
+        $scope.address = {};
+
     // set default value to US is it's a new address and other values
-    if ($scope.address = {}) {
-        $scope.address.Country = 'US';
-        $scope.address.IsBilling = true;
-        $scope.address.IsShipping = true;
-    }
+    $scope.address.Country = $scope.address.Country || 'US';
+    $scope.address.IsBilling = $scope.address.IsBilling || true;
+    $scope.address.IsShipping = $scope.address.IsShipping || true;
 
     $scope.save = function() {
         AddressService.save(this.address, function() {
