@@ -33,16 +33,14 @@ four51.app.factory('AddressListService', function($resource, $451, $api) {
                 options({ persists: true, key: 'Addresses'}).query();
         },
         delete: function(addresses) {
-            angular.forEach(addresses, function(address) {
+            angular.forEach(addresses, function(address, i) {
                if (address.Selected) {
-                   resource.delete(address);
+                   resource.delete(address, function() {
+                        addresses.splice(i,1);
+                   });
                }
             });
-            // take the deleted addresses out of the cache to save on getting the list again
-            $.grep(addresses, function(n) {
-                return !n.Selected;
-            });
-            return $451.cache('Addresses', addresses);
+            return $451.cache('Addresses', addresses, { persists: true });
         }
     }
 });

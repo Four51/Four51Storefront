@@ -27,10 +27,10 @@ four51.app.controller('AddressViewCtrl', function ($scope, $location, $451, $rou
 
     $scope.save = function() {
         AddressService.save(this.address, function() {
-            $location.path('/address');
+            $location.path('/addresses');
         });
     };
-    $scope.delete = function(address) {
+    $scope.delete = function() {
         AddressService.delete(this.address);
     };
     $scope.countries = ResourcesService.countries;
