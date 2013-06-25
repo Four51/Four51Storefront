@@ -8,8 +8,8 @@
 </table>
 <br>
 <form name="addToOrderForm" ng-show="variant || product.Variants.length == 0">
-    <input ng-if="!priceSchedule.RestrictedQuantity" type="number" required name="qtyInput" ng-model="quantity" ui-validate="'validQuantityAddToOrder($value, variant, product, priceSchedule)'">
-    <select ng-if="priceSchedule.RestrictedQuantity" ng-model="quantity" ng-options="pb.Quantity for pb in priceSchedule.PriceBreaks" ui-validate="'validQuantityAddToOrder($value.Quantity, variant, product, priceSchedule)'"></select>
+    <quantityfield ps='priceSchedule' v='variant' p='product'/><br>
+
     <button ng-disabled="addToOrderForm.$invalid" ng-click="OrderService.addToOrder(quantity, product.InteropID, variant.InteropID)">Add to Order</button>
     <br>
 
@@ -25,7 +25,6 @@
     </span>
 </form>
 
-<span ng-show="qtyErrorMessage">quantity fail: {{qtyErrorMessage}}<br></span>
 
 <span ng-show="priceSchedule">
     Price:
