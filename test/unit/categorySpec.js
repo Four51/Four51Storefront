@@ -10,12 +10,18 @@ describe('$451 Category Controller:',function(){
     var $451, $rootScope, $routeParams, $scope, scope, $route, $location, $httpBackend, $http, ctrlCategory;
     beforeEach(module('451order'));
 
-    beforeEach(inject(function($rootScope,$controller,_$httpBackend_,$http, _$routeParams_){  //put routeparams in here?
+    beforeEach(inject(function($rootScope,$controller,_$httpBackend_,$http, _$routeParams_){
+
+        //todo- instantiate user service and set up authentication for the category service?  or mock the user for the category service mock?
+        //very convoluted here...
+
+
         scope = $rootScope.$new();
         $httpBackend = _$httpBackend_;
         $httpBackend.when("GET","/api/context.html/categories").respond(jsonCategories); //massive ugly hack warning!
-        $routeParams = _$routeParams_;
+        $httpBackend.when("GET","/api/russ/categories/:interopID").respond(jsonCategories); //massive ugly hack warning!
 
+        $routeParams = _$routeParams_;
         $routeParams.categoryInteropID = "VariableText";
 
         ctrlCategory = $controller('CategoryCtrl', {
@@ -27,9 +33,9 @@ describe('$451 Category Controller:',function(){
     }));
 
     it('Should be a defined object', function(){
-
+        expect(scope.currentCategory).toBe(jsonCategories);
+        console.dir($routeParams.categoryInteropID)
         console.dir(scope);
-        console.dir($routeParams);
     });
 
 

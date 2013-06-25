@@ -14,6 +14,7 @@ files = [
 	'app/js/**/*.js',
 
 	'test/unit/appSpec.js',
+    'test/unit/filtersSpec.js',
     'test/unit/451Spec.js',
     'test/unit/directivesSpec.js',
     'test/unit/routingSpec.js',
