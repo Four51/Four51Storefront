@@ -26,7 +26,7 @@
 </form>
 
 
-<priceScheduleTable ps='priceSchedule' p='product' />
+<priceScheduleTable ps='priceSchedule' p='product' ng-show="ps" />
 
 <span id="451_list_vars" ng-show="product.Variants.length > 1 && !variant">variants({{product.Variants.length}})
     <ul>
