@@ -5,7 +5,7 @@
     <p>Date Completed: {{order.DateCompleted | date:'medium'}}</p>
     <p>Created By: {{order.FromUserFirstName + ' ' + order.FromUserLastName}}</p>
     <p ng-show="order.Comments">Comments: {{order.Comments}}</p>
-    <p ng-show="orderCostCenter">Cost Center: {{(order.LineItems.length == 1) && $scope.order.LineItems[0].CostCenter || null}}</p>
+    <p ng-show="orderCostCenter">Cost Center: {{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</p>
     <p>Payment Method: {{order.PaymentMethod}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong></p>
     <address ng-show="order.BillAddress">
         <strong> Bill to:</strong><br>

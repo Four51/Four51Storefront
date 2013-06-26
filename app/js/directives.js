@@ -48,7 +48,7 @@ four51.app.directive('addressinput', function() {
             return: '='
         },
         templateUrl: 'partials/addressInputView.html',
-        controller: 'AddressInputViewCtrl'
+        controller: 'AddressInputCtrl'
     }
     return obj;
 });

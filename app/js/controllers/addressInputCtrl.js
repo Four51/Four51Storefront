@@ -1,6 +1,6 @@
 'use strict';
 
-four51.app.controller('AddressInputViewCtrl', function ($scope, $location, $451, $routeParams, AddressService, ResourcesService, UserService) {
+four51.app.controller('AddressInputCtrl', function ($scope, $location, $451, $routeParams, AddressService, ResourcesService, UserService) {
     // set default value to US is it's a new address and other values
     $scope.address.Country = $scope.address.Country || 'US';
     $scope.address.IsBilling = $scope.address.IsBilling || true;
