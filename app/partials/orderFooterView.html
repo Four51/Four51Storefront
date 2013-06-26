@@ -1,0 +1,7 @@
+<div>
+    <p>Subtotal: {{order.Subtotal | currency:"$"}}</p>
+    <p>Shipping & Handling: {{order.ShippingCost | currency:"$"}}</p>
+    <p>Tax: {{order.TaxCost | currency:"$"}}</p>
+    <p><strong>Total: {{order.Total | currency:"$"}}</strong></p>
+    <p>{{ 'shipping disclaimer, requirements at line 284 of CartDetail.ascx.cs' }}</p>
+</div>

@@ -61,3 +61,11 @@ four51.app.directive('orderviewheader', function() {
     return obj;
 });
 
+four51.app.directive('orderviewfooter', function() {
+    var obj = {
+        restrict: 'E',
+        templateUrl: 'partials/orderFooterView.html'
+    }
+    return obj;
+});
+

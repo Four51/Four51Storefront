@@ -36,17 +36,15 @@
     </table>
 </div>
 <hr />
-<div>
-    <p>Subtotal: {{order.Subtotal | currency:"$"}}</p>
-    <p>Shipping & Handling: {{order.ShippingCost | currency:"$"}}</p>
-    <p>Tax: {{order.TaxCost | currency:"$"}}</p>
-    <p><strong>Total: {{order.Total | currency:"$"}}</strong></p>
-</div>
+
+<orderviewfooter></orderviewfooter>
+
 <hr />
 <div>
     <input type="button" class="btn btn-small btn-info" value="Repeat Order" />
 </div>
 <hr />
+
 <div>
     <div>
         <input type="text" ng-model="order.FavoriteName" placeholder="Favorite Name" />
