@@ -1,10 +1,6 @@
 'use strict';
 
-four51.app.controller('AddressViewCtrl', function ($scope, $location, $451, $routeParams, AddressService, ResourcesService, UserService) {
-    $routeParams.id ?
-        $scope.address = AddressService.get({ id: $routeParams.id }) :
-        $scope.address = {};
-
+four51.app.controller('AddressInputViewCtrl', function ($scope, $location, $451, $routeParams, AddressService, ResourcesService, UserService) {
     // set default value to US is it's a new address and other values
     $scope.address.Country = $scope.address.Country || 'US';
     $scope.address.IsBilling = $scope.address.IsBilling || true;
@@ -12,12 +8,12 @@ four51.app.controller('AddressViewCtrl', function ($scope, $location, $451, $rou
 
     $scope.save = function() {
         AddressService.save(this.address, function() {
-            $location.path('/addresses');
+            $location.path($scope.return);
         });
     };
     $scope.delete = function() {
         AddressService.delete(this.address, function() {
-            $location.path('/addresses');
+            $location.path($scope.return);
         });
     };
     $scope.countries = ResourcesService.countries;
