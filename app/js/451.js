@@ -52,6 +52,10 @@ four51.app.factory('$451', function(Cache) {
 		return d;
 	}
 
+    function arrayContainsValue(array, value) {
+        return array.indexOf(value) > -1;
+    }
+
 	return {
 		debug: true,
 		appname: four51.app.name,
@@ -74,6 +78,9 @@ four51.app.factory('$451', function(Cache) {
 		},
 		filter: function(input, options) {
 			return json_filter(input, options);
-		}
+		},
+        contains: function(array, value) {
+            return arrayContainsValue(array, value);
+        }
 	};
 });

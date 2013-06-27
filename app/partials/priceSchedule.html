@@ -1,0 +1,18 @@
+Price:
+<table border=1>
+    <tr><td>Quantity <span ng-show="p.QuantityMultiplier > 1 && !ps.RestrictedQuantity"> (x {{p.QuantityMultiplier}})</span></td>
+        <td>Price <span ng-show="p.QuantityMultiplier > 1 && !ps.RestrictedQuantity" > (per {{p.QuantityMultiplier}})</span></td>
+    </tr>
+    <tr id="451_list_pric_schd" ng-repeat="pb in ps.PriceBreaks">
+        <td>
+            {{pb.Quantity * (ps.RestrictedQuantity ? p.QuantityMultiplier : 1)}}
+                <span ng-show="!ps.RestrictedQuantity">
+                    <span ng-show="ps.PriceBreaks[$index + 1].Quantity"> - {{ ps.PriceBreaks[$index + 1].Quantity - 1  }}</span>
+                    <span ng-show="$last && ps.MaxQuantity"> - {{ps.MaxQuantity}}</span>
+                    <span ng-show="$last && !ps.MaxQuantity"> +</span>
+                </span>
+        </td>
+        <td>{{pb.Price * (ps.RestrictedQuantity ? pb.Quantity : 1)| currency}}</td>
+    </tr>
+</table>
+        

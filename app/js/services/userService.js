@@ -1,13 +1,11 @@
 four51.app.factory('UserService', function($resource, $api, $451){
 	var service = $resource($451.api('user'));
 	var authenticated = true;
-    function clear() {
-        $451.clear('User');
-    }
+    var currentUser = $451.cache('User');
 
 	return {
 		login: function(user) {
-			clear(); // just in case the cache stuck around for some reason. we're logging in so we don't want to use the cache item
+			$451.clear('User');
 			$api.resource(service).options({persists: true, key: 'User'}).get(user);
 		},
         save: function(user) {
@@ -15,7 +13,12 @@ four51.app.factory('UserService', function($resource, $api, $451){
                 $451.cache('User', user, { persists: true, key: 'User' });
             });
         },
-		current: $451.cache('User'),
-		isAuthenticated: authenticated
+		current: currentUser,
+		isAuthenticated: authenticated,
+        permission: { // really unnecessary but I think it might make it simpler to read when used
+            contains: function(value) {
+                return $451.contains(currentUser.Permissions, value);
+            }
+        }
 	};
 });
