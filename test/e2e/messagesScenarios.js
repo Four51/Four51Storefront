@@ -11,7 +11,7 @@
 
  */
 
-var C_debug = true;
+var C_debug = false;
 
 function e2eViewMessage(strJQSelect, strMsgDate, strMsgFrom, strMsgSubject, blnReturn){
     //navigate to a message in a list/repeater, click it, verify the header information is the same, navigate back(or not)
