@@ -1,10 +1,14 @@
 <span ng-show="specs">
-    static groups
-    <ul id="451_list_specgroup">
-        <li ng-repeat="sg in specs">{{sg.Name}}
-            <ul>
-                <li ng-repeat="spec in sg.Specs">{{spec.Name}}: {{spec.Value}}</li>
-            </ul>
-        </li>
-    </ul>
+	Specifications:
+	<table border=1 id="451_list_specgroup">
+		<tbody ng-repeat="sg in specs">
+			<tr class=alert-info>
+				<td colspan=2>{{sg.Name}}</td>
+			</tr>
+			<tr ng-repeat="spec in sg.Specs">
+				<td>{{spec.Name}}</td>
+				<td>{{spec.Value}}</td>
+			</tr>
+		</tbody>
+	</table>
 </span>
