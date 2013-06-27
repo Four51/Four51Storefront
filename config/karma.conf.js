@@ -18,7 +18,8 @@ files = [
     'test/unit/451Spec.js',
     'test/unit/directivesSpec.js',
     'test/unit/routingSpec.js',
-    'test/unit/categorySpec.js'
+    'test/unit/categorySpec.js',
+    'test/unit/addressSpec.js'
 
 ];
 
