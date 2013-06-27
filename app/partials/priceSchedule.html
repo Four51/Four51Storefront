@@ -1,5 +1,6 @@
+<span ng-show="ps && p">
 Price:
-<table border=1 ng-show="ps && p">
+<table border=1 >
     <tr><td>Quantity <span ng-show="p.QuantityMultiplier > 1 && !ps.RestrictedQuantity"> (x {{p.QuantityMultiplier}})</span></td>
         <td>Price <span ng-show="p.QuantityMultiplier > 1 && !ps.RestrictedQuantity" > (per {{p.QuantityMultiplier}})</span></td>
     </tr>
@@ -15,4 +16,4 @@ Price:
         <td>{{pb.Price * (ps.RestrictedQuantity ? pb.Quantity : 1)| currency}}</td>
     </tr>
 </table>
-        
+</span>

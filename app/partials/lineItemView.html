@@ -5,4 +5,5 @@
     <p ng-bind-html-unsafe='order.LineItems[lineItemIndex].Product.Description'></p>
 
     <priceScheduleTable ps='order.LineItems[lineItemIndex].PriceSchedule' p='order.LineItems[lineItemIndex].Product' />
+    <staticspecstable specs="order.LineItems[lineItemIndex].Product.StaticSpecGroups"></staticspecstable>
 </div>
