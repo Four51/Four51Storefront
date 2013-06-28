@@ -53,6 +53,17 @@ four51.app.directive('addressinput', function() {
     return obj;
 });
 
+four51.app.directive('spendingaccounts', function(SpendingAccountService) {
+    var obj = {
+        scope: {
+            accounts: '='
+        },
+        restrict: 'E',
+        templateUrl: 'partials/spendingAccountsView.html'
+    }
+    return obj;
+});
+
 four51.app.directive('orderviewheader', function() {
     var obj = {
         restrict: 'E',
@@ -65,6 +76,14 @@ four51.app.directive('orderviewfooter', function() {
     var obj = {
         restrict: 'E',
         templateUrl: 'partials/orderFooterView.html'
+    }
+    return obj;
+});
+
+four51.app.directive('lineitemgrid', function() {
+    var obj = {
+        restrict: 'E',
+        templateUrl: 'partials/lineItemGridView.html'
     }
     return obj;
 });
