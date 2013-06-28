@@ -1,73 +1,14 @@
-<div>
-    <p>{{order.Type}} Order ID: {{order.ExternalID}}</p>
-    <p>Date Submitted: {{order.DateSubmitted | date:'medium'}}</p>
-    <p>Status: {{order.Status}}</p>
-    <p>Date Completed: {{order.DateCompleted | date:'medium'}}</p>
-    <p>Created By: {{order.FromUserFirstName + ' ' + order.FromUserLastName}}</p>
-    <p ng-show="order.Comments">Comments: {{order.Comments}}</p>
-    <p ng-show="orderCostCenter">Cost Center: {{(order.LineItems.length == 1) && $scope.order.LineItems[0].CostCenter || null}}</p>
-    <p>Payment Method: {{order.PaymentMethod}}: <strong ng-show="order.CreditCard.Type">{{order.CreditCard.DisplayName}}</strong></p>
-    <address ng-show="order.BillAddress">
-        <strong> Bill to:</strong><br>
-        {{order.BillAddress.Street1}}<br>
-        {{order.BillAddress.Street2}}<br ng-show="order.BillAddress.Street2">
-        {{order.BillAddress.City}},{{order.BillAddress.State}} {{order.BillAddress.Zip}}
-    </address>
-    <address ng-show="order.ShipAddress">
-        <strong> Ship to:</strong><br>
-        {{order.ShipAddress.Street1}}<br>
-        {{order.ShipAddress.Street2}}<br ng-show="order.ShipAddress.Street2">
-        {{order.ShipAddress.City}}, {{order.ShipAddress.State}} {{order.ShipAddress.Zip}}
-    </address>
-</div>
-<div>
-    <table class="table table-striped table-hover table-bordered">
-        <thead>
-            <tr>
-                <td>ID</td>
-                <td>Product</td>
-                <td ng-show="hasSpecsOnAnyLineItem()">Specifications</td>
-                <td>Unit Price</td>
-                <td>Quantity</td>
-                <td ng-show="hasShipperOnAnyLineItem()">Shipper</td>
-                <td ng-show="hasShipAccountOnAnyLineItem()">"Ship Account</td>
-                <td>Total Quantity</td>
-                <td>Quantity Shipped</td>
-                <td>Price</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="item in order.LineItems">
-                <td><a ng-href="#/lineitem/{{order.ID}}/{{$index}}">{{item.Variant.ExternalID}}</a></td>
-                <td>{{item.Product.Name}}</td>
-                <td ng-show="hasSpecsOnAnyLineItem()">
-                    <ul><!-- more complete business logic in LineItemGrid.cs line 638 -->
-                        <li ng-repeat="spec in item.Specs | filter:Selected">{{spec.Name + " : " + spec.Value}}</li>
-                    </ul>
-                </td>
-                <td>{{item.UnitPrice | currency:"$"}}</td>
-                <td>{{item.Quantity}}</td>
-                <td ng-show="hasShipperOnAnyLineItem()">{{item.Shipper.Name}}</td>
-                <td ng-show="hasShipAccountOnAnyLineItem()">{{item.ShipAccount}}</td>
-                <td>{{item.Product.QuantityMultiplier * item.Quantity}}</td>
-                <td>{{item.TotalShipped}}</td>
-                <td>{{item.LineTotal | currency:"$"}}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<orderviewheader></orderviewheader>
+<lineitemgrid></lineitemgrid>
 <hr />
-<div>
-    <p>Subtotal: {{order.Subtotal | currency:"$"}}</p>
-    <p>Shipping & Handling: {{order.ShippingCost | currency:"$"}}</p>
-    <p>Tax: {{order.TaxCost | currency:"$"}}</p>
-    <p><strong>Total: {{order.Total | currency:"$"}}</strong></p>
-</div>
+<orderviewfooter></orderviewfooter>
+
 <hr />
 <div>
     <input type="button" class="btn btn-small btn-info" value="Repeat Order" />
 </div>
 <hr />
+
 <div>
     <div>
         <input type="text" ng-model="order.FavoriteName" placeholder="Favorite Name" />

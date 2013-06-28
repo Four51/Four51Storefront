@@ -3,5 +3,6 @@
     <ul id="451_lst_prod">
         <li ng-repeat="p in Products">
             <a href=#/product/{{p.InteropID}}>{{p.Name}} variants({{p.Variants.length}})</a>
+            {{p.StandardPriceSchedule.PriceBreaks[0].Quantity}} <span ng-show="p.QuantityMultiplier > 1">(x {{p.QuantityMultiplier}})</span> for {{p.StandardPriceSchedule.PriceBreaks[0].Price | currency}}
         </li>
     </ul>

@@ -1,0 +1,22 @@
+<div>
+    <p>{{order.Type}} Order ID: {{order.ExternalID}}</p>
+    <p>Date Submitted: {{order.DateSubmitted | date:'medium'}}</p>
+    <p>Status: {{order.Status}}</p>
+    <p>Date Completed: {{order.DateCompleted | date:'medium'}}</p>
+    <p>Created By: {{order.FromUserFirstName + ' ' + order.FromUserLastName}}</p>
+    <p ng-show="order.Comments">Comments: {{order.Comments}}</p>
+    <p ng-show="orderCostCenter">Cost Center: {{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</p>
+    <p>Payment Method: {{order.PaymentMethod}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong></p>
+    <address ng-show="order.BillAddress">
+        <strong> Bill to:</strong><br>
+        {{order.BillAddress.Street1}}<br>
+        {{order.BillAddress.Street2}}<br ng-show="order.BillAddress.Street2">
+        {{order.BillAddress.City}},{{order.BillAddress.State}} {{order.BillAddress.Zip}}
+    </address>
+    <address ng-show="order.ShipAddress">
+        <strong> Ship to:</strong><br>
+        {{order.ShipAddress.Street1}}<br>
+        {{order.ShipAddress.Street2}}<br ng-show="order.ShipAddress.Street2">
+        {{order.ShipAddress.City}}, {{order.ShipAddress.State}} {{order.ShipAddress.Zip}}
+    </address>
+</div>

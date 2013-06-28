@@ -35,14 +35,4 @@
         </li>
     </ul>
 </span>
-
-<span ng-show="StaticSpecGroups">
-    static groups
-    <ul id="451_list_specgroup">
-        <li ng-repeat="sg in StaticSpecGroups">{{sg.Name}}
-            <ul>
-                <li ng-repeat="spec in sg.Specs">{{spec.Name}}: {{spec.Value}}</li>
-            </ul>
-        </li>
-    </ul>
-</span>
+<staticspecstable specs="StaticSpecGroups"></staticspecstable>

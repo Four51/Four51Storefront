@@ -40,11 +40,50 @@ four51.app.directive('radiobuttonuserfield', function($451) {
     return obj;
 });
 
-four51.app.directive('addressinput', function($451, AddressService) {
+four51.app.directive('addressinput', function() {
     var obj = {
         restrict: 'E',
-        templateUrl: 'partials/addressView.html',
-        controller: 'AddressViewCtrl'
+        scope: {
+            address : '=',
+            return: '='
+        },
+        templateUrl: 'partials/addressInputView.html',
+        controller: 'AddressInputCtrl'
+    }
+    return obj;
+});
+
+four51.app.directive('spendingaccounts', function(SpendingAccountService) {
+    var obj = {
+        scope: {
+            accounts: '='
+        },
+        restrict: 'E',
+        templateUrl: 'partials/spendingAccountsView.html'
+    }
+    return obj;
+});
+
+four51.app.directive('orderviewheader', function() {
+    var obj = {
+        restrict: 'E',
+        templateUrl: 'partials/orderHeaderView.html'
+    }
+    return obj;
+});
+
+four51.app.directive('orderviewfooter', function() {
+    var obj = {
+        restrict: 'E',
+        templateUrl: 'partials/orderFooterView.html'
+    }
+    return obj;
+});
+
+four51.app.directive('lineitemgrid', function() {
+    var obj = {
+        restrict: 'E',
+        templateUrl: 'partials/lineItemGridView.html'
     }
     return obj;
 });
