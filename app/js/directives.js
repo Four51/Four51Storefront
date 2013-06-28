@@ -67,7 +67,7 @@ four51.app.directive('spendingaccounts', function(SpendingAccountService) {
 four51.app.directive('orderhistoryheader', function() {
     var obj = {
         restrict: 'E',
-        templateUrl: 'partials/orderHistoryHeaderView.html'
+        templateUrl: 'partials/reporting/orderHistoryHeaderView.html'
     }
     return obj;
 });
@@ -75,7 +75,7 @@ four51.app.directive('orderhistoryheader', function() {
 four51.app.directive('orderhistoryfooter', function() {
     var obj = {
         restrict: 'E',
-        templateUrl: 'partials/orderHistoryFooterView.html'
+        templateUrl: 'partials/reporting/orderHistoryFooterView.html'
     }
     return obj;
 });
@@ -83,7 +83,7 @@ four51.app.directive('orderhistoryfooter', function() {
 four51.app.directive('lineitemhistorygrid', function() {
     var obj = {
         restrict: 'E',
-        templateUrl: 'partials/lineItemGridView.html'
+        templateUrl: 'partials/reporting/lineItemHistoryGridView.html'
     }
     return obj;
 });
