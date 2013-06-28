@@ -103,14 +103,7 @@ describe('$451 Category Service:',function(){
         expect(arrTree[1].InteropID).toBe(jsonCategories[1].InteropID);
 
         expect(arrTree[0].Description).toBe(jsonCategories[0].Description);
-        expect(arrTree[1].Image.URL).toBe(jsonCategories[1].Description);
-
-        expect(scope.currentCategory.Description).toBe(jsonCategory.Description);
-        expect(scope.currentCategory.Name).toBe(jsonCategory.Name);
-
-        //expect(scope.currentCategory).toBe(jsonCategory); //this comparison won't work right now because of an odd angular bug/nuance on the way that the result object is returned
-
-
+        expect(arrTree[1].Image.URL).toBe(jsonCategories[1].Image.URL);
     });
 });
 

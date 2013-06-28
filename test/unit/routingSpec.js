@@ -168,19 +168,24 @@ describe('$451 Routing:', function(){
         unitTestRoute('partials/login.html','login','/login','partials/login.html','LoginCtrl')
 
     });
+    it("should route cart requests properly", function() {
+
+        unitTestRoute('partials/cartView.html','cart','/cart','partials/cartView.html','CartViewCtrl')
+
+    });
     it("should route addressList requests properly", function() {
 
         unitTestRoute('partials/addressList.html','addresses','/addresses','partials/addressList.html','AddressListCtrl')
 
     });
-    it("should route addressView requests properly", function() {
+    it("should route addressEditView requests properly", function() {
 
-        unitTestRoute('partials/addressView.html','address','/address','partials/addressView.html','AddressViewCtrl')
+        unitTestRoute('partials/addressEditView.html','address','/address','partials/addressEditView.html','AddressViewCtrl')
 
     });
-    it("should route addressView (with ID) requests properly", function() {
+    it("should route addressEditView (with ID) requests properly", function() {
 
-        unitTestRoute('partials/addressView.html','address','/address/:id','partials/addressView.html','AddressViewCtrl')
+        unitTestRoute('partials/addressEditView.html','address','/address/:id','partials/addressEditView.html','AddressViewCtrl')
 
     });
 });
