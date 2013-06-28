@@ -5,6 +5,7 @@ four51.app.factory('FavoriteOrderService', function($resource, $451, $api) {
 	});
 	return {
 		query: function() {
+            $451.clear('FavoriteOrders');
 			return $api.resource(resource).options({ persists: true, key: 'FavoriteOrders'}).query();
 		},
 		save: function(order) {
@@ -14,13 +15,10 @@ four51.app.factory('FavoriteOrderService', function($resource, $451, $api) {
 		delete: function(o) {
 			angular.forEach(o, function(order) {
 				if (order.Selected) {
-					resource.delete(order, function() {
-						$451.slice(o, order);
-						$451.clear('FavoriteOrders');
-					});
+					resource.delete(order);
 				}
 			});
-			return o;
+			return this.query();
 		}
 	}
 });

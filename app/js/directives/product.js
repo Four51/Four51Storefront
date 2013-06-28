@@ -14,10 +14,11 @@ four51.app.directive('pricescheduletable', function(){
 four51.app.directive('staticspecstable', function(){
     var obj = {
         scope: {
-            specs : '='
+			specgroups : '='
         },
         restrict: 'E',
         templateUrl: 'partials/staticspecs.html'
+
     }
     return obj;
 })
