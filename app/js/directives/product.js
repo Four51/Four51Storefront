@@ -1,4 +1,28 @@
 'use strict';
+four51.app.directive('pricescheduletable', function(){
+    var obj = {
+        scope: {
+            ps : '=',
+            p : '='
+        },
+        restrict: 'E',
+        templateUrl: 'partials/priceSchedule.html'
+    }
+    return obj;
+})
+
+four51.app.directive('staticspecstable', function(){
+    var obj = {
+        scope: {
+            specs : '='
+        },
+        restrict: 'E',
+        templateUrl: 'partials/staticspecs.html'
+    }
+    return obj;
+})
+
+
 four51.app.directive('quantityfield', function(){
     var obj = {
         scope: {
