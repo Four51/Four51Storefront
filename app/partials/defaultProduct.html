@@ -9,9 +9,9 @@
 <br>
 <form name="addToOrderForm" ng-show="variant || product.Variants.length == 0">
 	<table border=1 ng-show="product.Specs.length > 0">
-		<tr ng-repeat="spec in product.Specs">
-			<td>{{spec.Prefix}}{{spec.Name}}{{spec.Suffix}}<span ng-show="spec.Required" style="color:red"> *</span> </td>
-			<td><specfield s="spec" /></td>
+		<tr ng-repeat="s in product.Specs">
+			<td>{{s.Prefix}}{{s.Name}}{{s.Suffix}}<span ng-show="s.Required" style="color:red"> *</span> </td>
+			<td><textspecfield ng-hide="Options.length > 0" spec="s"></textspecfield></td>
 		</tr>
 	</table>
 
