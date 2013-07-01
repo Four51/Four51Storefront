@@ -1,13 +1,13 @@
 <span ng-show="specgroups">
 	Specifications:
 	<table border=1 id="451_list_specgroup">
-		<tbody ng-repeat="sg in specgroups | filter:{ HasVisibleSpecs:true}">
-			<tr class=alert-info>
+		<tbody ng-repeat="sg in specgroups">
+			<tr ng-show="hasvisiblechild(sg.Specs)" class=alert-info>
 				<td colspan=2>{{sg.Name}}</td>
 			</tr>
-			<tr ng-repeat="spec in sg.Specs | filter:{VisibleToCustomer:true}">
-				<td>{{spec.Name}}</td>
-				<td>{{spec.Value}}</td>
+			<tr ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
+				<td>{{s.Name}}</td>
+				<td><a ng-show="s.FileURL" href={{s.FileURL}}>{{s.Value}}</a><span ng-show="!s.FileURL">{{s.Value}}</span></td>
 			</tr>
 		</tbody>
 	</table>
