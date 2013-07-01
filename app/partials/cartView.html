@@ -1,15 +1,22 @@
-<div>
+<div class="OrderDetailTable">
     <form name="cart" ng-submit="checkout()">
-        <p ng-if="Four51User.permission.contains('EditPOID')">{{Four51User.current.Company.SiteText.OrderID || 'Order ID'}}:
+        <p ng-if="Four51User.permission.contains('EditPOID')">
+            <label>{{Four51User.current.Company.SiteText.OrderID || 'Order ID'}}:</label>
             <input ng-disabled='order.autoID' type='text' ng-model="order.ExternalID" required ui-mask="{{Four51User.current.Company.POIDMask}}" />
             <span ng-if="Four51User.permission.contains('AllowAutoGenPOID')">
                 <input type='checkbox' ng-click="order.ExternalID = order.autoID ? 'auto' : ''" ng-model='order.autoID' /> Use system-generated ID
             </span>
         </p>
+        <label>Comments:</label><textarea rows="5" cols="100" ng-model="order.Comments" /></label><br/>
+        <p ng-if="Four51User.permission.contains('CostCenterPerOrder')">
+            <label>Cost Center:</label>
+            <select ng-if="Four51User.current.CostCenters.length > 1 && !Four51User.permission.contains('FreeFormCostCenter')" ng-options="center for center in Four51User.current.CostCenters" ng-model="order.CostCenter">
+                <option value=""></option>
+            </select></label>
+            <input ng-if="Four51User.permission.contains('FreeFormCostCenter')" ng-model="order.CostCenter" type='text' required />
+            <span ng-if="Four51User.current.CostCenters.length == 1 && !Four51User.permission.contains('FreeFormCostCenter')">{{order.CostCenter}}</span>
+        </p>
+        <br/>
         <input class="btn btn-medium btn-primary" type="submit" ng-disabled="cart.$invalid" value="{{Four51User.current.Company.SiteText.Checkout}}" />
     </form>
 </div>
-
-<hr/>
-{{order.ExternalID}}<br />
-{{Four51User.current.Company.POIDMask}}
