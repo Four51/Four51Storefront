@@ -15,7 +15,7 @@ four51.app.factory('UserService', function($resource, $api, $451){
         },
 		current: currentUser,
 		isAuthenticated: authenticated,
-        permission: { // really unnecessary but I think it might make it simpler to read when used
+        permissions: { // really unnecessary but I think it might make it simpler to read when used
             contains: function(value) {
                 return $451.contains(currentUser.Permissions, value);
             }
