@@ -16,18 +16,21 @@
             <input ng-if="Four51User.permissions.contains('FreeFormCostCenter')" ng-model="order.CostCenter" type='text' required />
             <span ng-if="Four51User.current.CostCenters.length == 1 && !Four51User.permissions.contains('FreeFormCostCenter')">{{order.CostCenter}}</span>
         </p>
-        <br/>
-        <input class="btn btn-medium btn-primary" type="submit" ng-disabled="cart.$invalid" value="{{Four51User.current.Company.SiteText.Checkout}}" />
     </form>
 </div>
 
 <div class="LineItemGrid"></div>
 
-<div class="OrderDetailFooter">
+<div class="CartDetail">
     <span ng-if="!Four51User.current.permissions.contains('HidePricing')">
         <label>Subtotal: {{order.Subtotal | currency:"$"}}</label><br/>
         <p ng-if="Four51User.current.Company.TaxMethod != 'NoTax'"><label>{{ Four51User.current.Company.SiteText.ShippingDisclaimer }}</label></p>
-        <label>Tax: {{order.TaxCost | currency:"$"}}</label><br/>
-        <label>Total: {{order.Subtotal | currency:"$"}}</label><br/>
+    </span>
+    <hr/>
+    <span>
+        <input class="btn btn-mini btn-link" ng-disabled="cart.$invalid" value="{{Four51User.current.Company.SiteText.SaveChanges || 'Save Changes'}}" /> |
+        <input class="btn btn-mini btn-link" value="Cancel Order" /> |
+        <input class="btn btn-mini btn-link" value="Continue Shopping" /> |
+        <input class="btn btn-small btn-primary" type="submit" ng-disabled="cart.$invalid" value="{{Four51User.current.Company.SiteText.Checkout}}" />
     </span>
 </div>
