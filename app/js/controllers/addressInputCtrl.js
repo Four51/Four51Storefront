@@ -27,7 +27,7 @@ four51.app.controller('AddressInputCtrl', function ($scope, $location, $451, $ro
     };
 
     $scope.isPhoneRequired = function() {
-        return (UserService.permission.contains('BillingAddressPhoneRequired') && $scope.address.IsBilling) ||
-            (UserService.permission.contains('ShipAddressPhoneRequired') && $scope.address.IsShipping);
+        return (UserService.permissions.contains('BillingAddressPhoneRequired') && $scope.address.IsBilling) ||
+            (UserService.permissions.contains('ShipAddressPhoneRequired') && $scope.address.IsShipping);
     }
 });
