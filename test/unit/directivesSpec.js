@@ -182,26 +182,3 @@ describe('$451 authorization Directive:',function(){
     });
 
 });
-describe('$451 addressinput Directive:',function(){
-
-    var $451, $compile, $rootScope, scope, addressService;
-    beforeEach(module('451order'));
-    beforeEach(inject(function(_$451_, _$rootScope_, _$compile_, AddressService) {
-        $451 = _$451_;
-        $compile = _$compile_;
-        $rootScope = _$rootScope_;
-        scope = $rootScope.$new();
-        addressService = AddressService;
-    }));
-
-    it('Should only replace addressinput elements, not addressinput attributes', function(){
-
-        var htmlAddressView = '<div id="address_edit"><form name="addressEdit" ng-submit="save()"><input name="addressname" class="input-large" type="text" ng-model="address.AddressName" placeholder="Address Name" required /><br /><input name="firstname" class="input-large" type="text" ng-model="address.FirstName" placeholder="First Name" ng-required="address.IsBilling" /><br /><input name="lastname" class="input-large" type="text" ng-model="address.LastName" placeholder="Last Name" ng-required="address.IsBilling" /><br /><input name="companyname" class="input-large" type="text" ng-model="address.CompanyName" placeholder="Company Name" /><br /><input name="street1" class="input-large" type="text" ng-model="address.Street1" placeholder="Address Line 1" required /><br /><input name="street2" class="input-large" type="text" ng-model="address.Street2" placeholder="Address Line 2" /><br /><input name="city" class="input-large" type="text" ng-model="address.City" placeholder="City" required /><br /><input ng-show="!hasStates()" class="input-large" type="text" ng-model="address.State" placeholder="State" ng-required="!hasStates()" /><select ng-show="hasStates()" ng-options="state.value as state.label for state in states | filter:country" ng-model="address.State" placeholder="State" ng-required="hasStates()" /><br /><input name="zip" class="input-large" type="text" ng-model="address.Zip" placeholder="Zip" ng-required="hasStates()" /><br /><select name="country" ng-options="country.value as country.label for country in countries" ng-model="address.Country" placeholder="Country" required /><br /><input name="phone" class="input-large" type="text" ng-model="address.Phone" placeholder="Phone" /><br /><label><input type="checkbox" ng-checked="address.IsShipping" ng-model="address.IsShipping" />  Save to Shipping Address Book</label><br /><label><input type="checkbox" ng-checked="address.IsBilling" ng-model="address.IsBilling" />  Save to Billing Address Book  </label><br /><input class="btn btn-small btn-danger" ng-click="delete()" value="Delete" type="button" /><input class="btn btn-medium btn-primary" type="submit" ng-disabled="addressEdit.$invalid" id="451_btn_user" value="Save" /></form></div><!-- need to add requirements around user permissions. see api validation in controller -->'
-
-        console.dir(addressService);
-        var element=$compile('<addressinput foo="bar"/>')($rootScope);
-        console.dir(element);
-        expect(element.html()).toEqual(htmlAddressView);
-
-    });
-});
