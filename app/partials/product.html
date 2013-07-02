@@ -14,7 +14,7 @@
 			<td><specfield   /></td>
 		</tr>
 	</table>
-	specid: {{dividingSpecValues}}<br>
+
 	<quantityfield ps='priceSchedule' v='variant' p='product'/><br>
 
 	<button ng-disabled="addToOrderForm.$invalid" ng-click="OrderService.addToOrder(quantity, product.InteropID, variant.InteropID)">Add to Order</button>

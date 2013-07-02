@@ -17,3 +17,13 @@ four51.app.factory('ProductService', function($resource, $451, $api){
         }
     }
 });
+
+four51.app.factory('VariantService', function($resource, $451, $api){
+	var resource = $resource($451.api('hiddenvariant'));
+	return {
+		search: function(productInteropID, specOptionIDs, callback){
+			console.log('hiddenvariant query');
+			return resource.get({'ProductInteropID': productInteropID, 'SpecOptionIDs': specOptionIDs}, callback);
+		}
+	}
+});
