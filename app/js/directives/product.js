@@ -17,7 +17,17 @@ four51.app.directive('staticspecstable', function(){
 			specgroups : '='
         },
         restrict: 'E',
-        templateUrl: 'partials/staticspecs.html'
+        templateUrl: 'partials/staticspecs.html',
+		link: function(scope){
+			scope.hasvisiblechild = function(specs){
+				var hasChild = false;
+				angular.forEach(specs, function(item){
+					if(item.VisibleToCustomer)
+						hasChild = true;
+				})
+				return hasChild;
+			}
+		}
 
     }
     return obj;
