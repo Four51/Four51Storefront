@@ -1,27 +1,17 @@
 'use strict';
-four51.app.directive('specfield', function($451, $compile) {
+four51.app.directive('specfield', function($compile) {
 
-	function generateTemplate(){
-		var template = '<input ng-if="!s.Options.length" placeholder="{{s.DefaultValue}}" type=text ng-required="s.Required" ng-model="s.Value">';
-		template += '<select ng-model="s.Value" type="radio" ng-options="option.ID as option.Value for option in s.Options" ng-if="s.Options.length && !s.IsRadioButtons" ng-required="s.Required" />';
-		template += '<span ng-show="s.Options.length && s.IsRadioButtons" ng-repeat="option in s.Options">' +
-			'<input type="radio" name="{{s.Name}}" ng-required="s.Required" ng-model="s.Value"  />{{option.Value}}<br /></span>';
-		return template
-	}
+	var template = '<input ng-if="!s.Options.length" placeholder="{{s.DefaultValue}}" type=text ng-required="s.Required" ng-model="s.Value">';
+	template += '<select ng-change="specChanged(s)" ng-model="s.Value" type="radio" ng-options="option.ID as option.Value for option in s.Options" ng-if="s.Options.length && !s.IsRadioButtons" ng-required="s.Required" />';
+	template += '<span ng-show="s.Options.length && s.IsRadioButtons" ng-repeat="option in s.Options">' +
+		'<input type="radio" name="{{s.Name}}" ng-checked="\'False\'" ng-model="s.Value" />{{option.Value}}<br /></span>';
+
 	var obj = {
 		restrict:"E",
-		scope: {
-			s : "="
-		},
-		link:function (scope, element, attrs) {
-			element.append(generateTemplate());
-			$compile(element.contents())(scope);
-		}
+		template: template
 	}
 	return obj;
 });
-
-
 
 four51.app.directive('pricescheduletable', function(){
     var obj = {
@@ -56,7 +46,6 @@ four51.app.directive('staticspecstable', function(){
     }
     return obj;
 })
-
 
 four51.app.directive('quantityfield', function(){
     var obj = {
