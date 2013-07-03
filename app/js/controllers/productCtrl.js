@@ -1,4 +1,5 @@
 four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductService, OrderService, VariantService, $451) {
+	$scope.LineItem = {Quantity: 1};
 	function modifyProductScope(product, variant){
 
 		if(variant){
@@ -20,6 +21,15 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 			}
 			return false;
 		}
+	}
+
+	function calcTotal(quantity){
+		var ps = $scope.priceSchedule;
+		var unitPrice = 0;
+		angular.forEach(ps.PriceBreaks, function(pb){
+			if(quantity >= pb.Quantity)
+				$scope.unitPrice = unitPrice = pb.Price;
+		})
 	}
 
 	$scope.product = ProductService.get({interopID: $routeParams.productInteropID}, function(data){
@@ -44,6 +54,8 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 
 			if(!data.IsDefaultVariant)
 				modifyProductScope($scope.product, data)
+
+
 		});
 
 	}
