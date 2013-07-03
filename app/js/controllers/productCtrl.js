@@ -1,5 +1,5 @@
 four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductService, OrderService, VariantService, $451) {
-	$scope.LineItem = {Quantity: 1};
+	$scope.LineItem = {};
 	function modifyProductScope(product, variant){
 
 		if(variant){
@@ -23,12 +23,13 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 		}
 	}
 
-	function calcTotal(quantity){
+	$scope.calcTotal = function(qty){
+		console.log('calc total called');
 		var ps = $scope.priceSchedule;
 		var unitPrice = 0;
 		angular.forEach(ps.PriceBreaks, function(pb){
-			if(quantity >= pb.Quantity)
-				$scope.unitPrice = unitPrice = pb.Price;
+			if(qty >= pb.Quantity)
+				$scope.LineItem.UnitPrice = pb.Price;
 		})
 	}
 
@@ -42,21 +43,23 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 
 	$scope.OrderService = OrderService;
 
-	$scope.specChanged = function(){
+	$scope.specChanged = function(spec){
 		//$451.filter($scope.product.Specs, {Property: 'DefinesVariant', Value:true})
-		var specOptionIDs = [];
-		$451.filter($scope.product.Specs, {Property: 'DefinesVariant', Value:true}, function(item){
-			specOptionIDs.push(item.Value);
-		})
+		if(spec.DefinesVariant)
+		{
+			var specOptionIDs = [];
+			$451.filter($scope.product.Specs, {Property: 'DefinesVariant', Value:true}, function(item){
+				specOptionIDs.push(item.Value);
+			})
 
-		var v = VariantService.search($scope.product.InteropID, specOptionIDs, function(data){
-			console.log('variant complete');
+			var v = VariantService.search($scope.product.InteropID, specOptionIDs, function(data){
+				console.log('variant complete');
 
-			if(!data.IsDefaultVariant)
-				modifyProductScope($scope.product, data)
-
-
-		});
+				if(!data.IsDefaultVariant)
+					modifyProductScope($scope.product, data)
+			});
+		}
+		$scope.calcTotal($scope.LineItem.Quantity);
 
 	}
 });

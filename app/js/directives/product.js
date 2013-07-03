@@ -55,7 +55,8 @@ four51.app.directive('quantityfield', function(){
             v : '=',
             p : '=',
 			quantity : '=',
-			error: '='
+			error: '=',
+			changed : '='
         },
         restrict: 'E',
         template: '<select ng-show="ps.RestrictedQuantity" ng-model="quantity" ng-options="pb.Quantity for pb in ps.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value.Quantity, v, p, ps)\'"></select>'+
@@ -96,7 +97,8 @@ four51.app.directive('quantityfield', function(){
                 if(scope.valid)
 					scope.error = null;
 
-
+				if(scope.changed)
+					scope.changed(value);
 				console.log("is valid: " + scope.valid);
                 return scope.valid;
             }
