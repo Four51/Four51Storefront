@@ -16,11 +16,12 @@
 	</table>
 	<br>
 	<quantityfield changed="calcTotal" ps='priceSchedule' v='variant' p='product' quantity="LineItem.Quantity" error="quantityError" /><span ng-show="quantityError">{{quantityError}}</span> <br>
+	line total: {{LineItem.LineTotal | currency}}<br>
 
 	<span ng-show="!hideLineItemDebug">
 		<hr>
-		unit price: {{LineItem.UnitPrice}}<br>
-		line total: {{LineItem.LineTotal | currency}}
+
+		<span ng-bind-html-unsafe="DebugLineTotal"></span>
 		<br>
 		specs:
 		<ul>
