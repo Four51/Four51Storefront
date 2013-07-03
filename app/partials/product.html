@@ -14,8 +14,21 @@
 			<td><specfield   /></td>
 		</tr>
 	</table>
+	<br>
+	<quantityfield changed="calcTotal" ps='priceSchedule' v='variant' p='product' quantity="LineItem.Quantity" error="quantityError" /><span ng-show="quantityError">{{quantityError}}</span> <br>
+	line total: {{LineItem.LineTotal | currency}}<br>
 
-	<quantityfield ps='priceSchedule' v='variant' p='product' quantity="LineItem.Quantity" error="quantityError" /><span ng-show="quantityError">{{quantityError}}</span> <br>
+	<span ng-show="!hideLineItemDebug">
+		<hr>
+
+		<span ng-bind-html-unsafe="DebugLineTotal"></span>
+		<br>
+		specs:
+		<ul>
+			<li ng-repeat="s in product.Specs"><span ng-show="s.MarkupType != 'NoMarkup'">markup: {{s.MarkupType}}</span> val: {{s.Value | json}}</li>
+		</ul>
+		<hr>
+	</span>
 
 	<button ng-disabled="addToOrderForm.$invalid" ng-click="OrderService.addToOrder(quantity, product.InteropID, variant.InteropID)">Add to Order</button>
 	<br>
@@ -42,4 +55,5 @@
 		</li>
 	</ul>
 </span>
-<staticspecstable specgroups="StaticSpecGroups"></staticspecstable>
+<staticspecstable specgroups="StaticSpecGroups"></staticspecstable><br>
+<a ng-click="hideLineItemDebug = !hideLineItemDebug">toggle line item debug</a><br>

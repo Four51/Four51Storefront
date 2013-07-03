@@ -2,7 +2,7 @@
 four51.app.directive('specfield', function($compile) {
 
 	var template = '<input ng-if="!s.Options.length" placeholder="{{s.DefaultValue}}" type=text ng-required="s.Required" ng-model="s.Value">';
-	template += '<select ng-change="specChanged(s)" ng-model="s.Value" type="radio" ng-options="option.ID as option.Value for option in s.Options" ng-if="s.Options.length && !s.IsRadioButtons" ng-required="s.Required" />';
+	template += '<select ng-change="specChanged(s)" ng-model="s.Value" type="radio" ng-options="option as option.Value for option in s.Options" ng-if="s.Options.length && !s.IsRadioButtons" ng-required="s.Required" />';
 	template += '<span ng-show="s.Options.length && s.IsRadioButtons" ng-repeat="option in s.Options">' +
 		'<input type="radio" name="{{s.Name}}" ng-checked="\'False\'" ng-model="s.Value" />{{option.Value}}<br /></span>';
 
@@ -55,7 +55,8 @@ four51.app.directive('quantityfield', function(){
             v : '=',
             p : '=',
 			quantity : '=',
-			error: '='
+			error: '=',
+			changed : '='
         },
         restrict: 'E',
         template: '<select ng-show="ps.RestrictedQuantity" ng-model="quantity" ng-options="pb.Quantity for pb in ps.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value.Quantity, v, p, ps)\'"></select>'+
@@ -96,7 +97,8 @@ four51.app.directive('quantityfield', function(){
                 if(scope.valid)
 					scope.error = null;
 
-
+				if(scope.changed)
+					scope.changed(value);
 				console.log("is valid: " + scope.valid);
                 return scope.valid;
             }
