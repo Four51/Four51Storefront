@@ -15,7 +15,7 @@
 		</tr>
 	</table>
 	<br>
-	<quantityfield changed="calcTotal" ps='priceSchedule' v='variant' p='product' quantity="LineItem.Quantity" error="quantityError" /><span ng-show="quantityError">{{quantityError}}</span> <br>
+	<quantityfield changed="calcTotal" ps='priceSchedule' v='variant' p='product' lineitem="LineItem" error="quantityError" /><span ng-show="quantityError">{{quantityError}}</span> <br>
 	line total: {{LineItem.LineTotal | currency}}<br>
 
 	<span ng-show="!hideLineItemDebug">
