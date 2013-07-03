@@ -88,3 +88,14 @@ four51.app.directive('lineitemhistorygrid', function() {
     return obj;
 });
 
+four51.app.directive('lineitemgrid', function() {
+    var obj = {
+        scope: {
+            order: '='
+        },
+        restrict: 'E',
+        templateUrl: 'partials/lineItemGridView.html',
+        controller: 'LineItemGridCtrl'
+    }
+    return obj;
+});

@@ -1,0 +1,42 @@
+<div>
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <td>Remove</td>
+                <td>ID</td>
+                <td>Product</td>
+                <td ng-if="hasSpecsOnAnyLineItem(order)">Specifications</td>
+                <td>Unit Price</td>
+                <td>Quantity</td>
+                <td>Total Quantity</td>
+                <td>{{Four51User.current.Company.SiteText.DateNeeded || 'Date Needed'}}</td>
+                <td>Price</td>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="11"><input class="btn btn-mini btn-link" value="Remove Selected" /></td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr ng-repeat="item in order.LineItems">
+                <td><input type='checkbox' ng-model='order.LineItems[$index].Selected' /></td>
+                <td><a ng-href="#/product/{{order.LineItems[$index].Product.InteropID}}">{{item.Variant.ExternalID}}</a></td>
+                <td>{{item.Product.Name}}</td>
+                <td ng-if="hasSpecsOnAnyLineItem(order)">
+                    <ul class="unstyled"><!-- more complete business logic in LineItemGrid.cs line 638 -->
+                        <li ng-repeat="spec in item.Specs | filter:Selected">{{spec.Name + " : " + spec.Value}}</li>
+                    </ul>
+                </td>
+                <td>{{item.UnitPrice | currency:"$"}}</td>
+                <td><quantityfield ps='item.PriceSchedule' v='item.Variant' p='item.Product' /> or {{item.Quantity}}</td>
+                <td>{{item.Product.QuantityMultiplier * item.Quantity}}</td>
+                <td>
+                    <input type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" />
+                    <input type="button" class="btn btn-mini btn-info" value="copy to all" ng-click="copyAddressToAll(order)" ng-if="$index == 0" ng-show="item.DateNeeded" />
+                </td>
+                <td>{{item.LineTotal | currency:"$"}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
