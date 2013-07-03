@@ -91,7 +91,8 @@ four51.app.directive('lineitemhistorygrid', function() {
 four51.app.directive('lineitemgrid', function() {
     var obj = {
         scope: {
-            order: '='
+            order: '=',
+            user: '='
         },
         restrict: 'E',
         templateUrl: 'partials/lineItemGridView.html',

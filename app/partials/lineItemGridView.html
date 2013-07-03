@@ -9,7 +9,8 @@
                 <td>Unit Price</td>
                 <td>Quantity</td>
                 <td>Total Quantity</td>
-                <td>{{Four51User.current.Company.SiteText.DateNeeded || 'Date Needed'}}</td>
+                <td ng-if="user.permissions.contains('CostCenterPerLine')">{{user.current.Company.SiteText.CostCenter || 'Cost Center'}}</td>
+                <td>{{user.current.Company.SiteText.DateNeeded || 'Date Needed'}}</td>
                 <td>Price</td>
             </tr>
         </thead>
@@ -29,10 +30,17 @@
                     </ul>
                 </td>
                 <td>{{item.UnitPrice | currency:"$"}}</td>
-                <td><quantityfield ps='item.PriceSchedule' v='item.Variant' p='item.Product' /> or {{item.Quantity}}</td>
+                <td><quantityfield ps='item.PriceSchedule' v='item.Variant' p='item.Product' /></td>
                 <td>{{item.Product.QuantityMultiplier * item.Quantity}}</td>
+                <td ng-if="user.permissions.contains('CostCenterPerLine')">
+                    <costcenter
+                            user="user"
+                            label="false"
+                            lineitem="order.LineItems[$index]"
+                             />
+                </td>
                 <td>
-                    <input type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" />
+                    <input type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="dateneededrequired" />
                     <input type="button" class="btn btn-mini btn-info" value="copy to all" ng-click="copyAddressToAll(order)" ng-if="$index == 0" ng-show="item.DateNeeded" />
                 </td>
                 <td>{{item.LineTotal | currency:"$"}}</td>

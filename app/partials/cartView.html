@@ -8,18 +8,17 @@
             </span>
         </p>
         <label>Comments:</label><textarea rows="5" cols="100" ng-model="order.Comments" /></label><br/>
-        <p ng-if="Four51User.permissions.contains('CostCenterPerOrder')">
-            <label>Cost Center:</label>
-            <select ng-if="Four51User.current.CostCenters.length > 1 && !Four51User.permissions.contains('FreeFormCostCenter')" ng-options="center for center in Four51User.current.CostCenters" ng-model="order.CostCenter">
-                <option value=""></option>
-            </select></label>
-            <input ng-if="Four51User.permissions.contains('FreeFormCostCenter')" ng-model="order.CostCenter" type='text' required />
-            <span ng-if="Four51User.current.CostCenters.length == 1 && !Four51User.permissions.contains('FreeFormCostCenter')">{{order.CostCenter}}</span>
-        </p>
+        <label ng-if="Four51User.permissions.contains('CostCenterPerOrder') && !Four51User.permissions.contains('CostCenterPerLine')">{{user.current.Company.SiteText.CostCenter || 'Cost Center' + ':'}}
+            <costcenter
+                user="Four51User"
+                label="true"
+                order="order"
+                ng-if="Four51User.permissions.contains('CostCenterPerOrder') && !Four51User.permissions.contains('CostCenterPerLine')" />
+        </label>
     </form>
 </div>
 
-<lineitemgrid order='order'></lineitemgrid>
+<lineitemgrid order='order' user='Four51User'></lineitemgrid>
 
 <div class="CartDetail">
     <span ng-if="!Four51User.current.permissions.contains('HidePricing')">
