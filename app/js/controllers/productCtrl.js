@@ -27,10 +27,30 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 		console.log('calc total called');
 		var ps = $scope.priceSchedule;
 		var unitPrice = 0;
+		// markuptypes
+		// NoMarkup
+		// AmountPerQuantity(fixed amount per quantity)
+		// AmountTotal (fixed amount per line)
+		// Percentage (of line total)
+		var fixedAddPerLine = 0;
+		var percentagePerLine = [];
+		var amountPerQty = 0;
+		angular.forEach($scope.product.Specs, function(spec){
+			if(spec.Options.length && spec.Value){
+				if(spec.MarkupType ==="AmountPerQuantity" )
+					amountPerQty += spec.Value.PriceMarkup;
+				//if(spec.MarkupType ==="AmountTotal" )
+
+				//if(spec.MarkupType ==="Percentage" )
+			}
+
+		});
+		console.log("amt per qty: " + amountPerQty);
 		angular.forEach(ps.PriceBreaks, function(pb){
 			if(qty >= pb.Quantity)
 				$scope.LineItem.UnitPrice = pb.Price;
-		})
+		});
+		$scope.LineItem.LineTotal = qty * $scope.LineItem.UnitPrice;
 	}
 
 	$scope.product = ProductService.get({interopID: $routeParams.productInteropID}, function(data){
@@ -48,9 +68,17 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 		if(spec.DefinesVariant)
 		{
 			var specOptionIDs = [];
+			var hasAllVarDefiningSpecs = true;
 			$451.filter($scope.product.Specs, {Property: 'DefinesVariant', Value:true}, function(item){
-				specOptionIDs.push(item.Value);
+				if(!item.Value)
+				{
+					hasAllVarDefiningSpecs = false;
+					return;
+				}
+				specOptionIDs.push(item.Value.ID);
 			})
+			if(!hasAllVarDefiningSpecs)
+				return;
 
 			var v = VariantService.search($scope.product.InteropID, specOptionIDs, function(data){
 				console.log('variant complete');
