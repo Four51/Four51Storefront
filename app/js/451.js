@@ -1,13 +1,15 @@
 /* Four51 Global Namespace */
 
 four51.app.factory('$451', function(Cache) {
-	function json_filter(input, options) {
+	function json_filter(input, options, op) {
 		if (input == null || options == null) return;
 		var result = [];
 		angular.forEach(input, function(row) {
             if (row[options.Property] === undefined) return;
-			if ((row[options.Property].toString()).toLowerCase() === (options.Value.toString()).toLowerCase())
+			if ((row[options.Property].toString()).toLowerCase() === (options.Value.toString()).toLowerCase()){
 				result.push(row);
+				if(op) op(row)
+			}
 		});
 		return result;
 	}
@@ -75,8 +77,8 @@ four51.app.factory('$451', function(Cache) {
 				Cache.remove(key); localStorage.removeItem(key);
 			return this;
 		},
-		filter: function(input, options) {
-			return json_filter(input, options);
+		filter: function(input, options, op) {
+			return json_filter(input, options, op);
 		},
         contains: function(array, value) {
             return arrayContainsValue(array, value);

@@ -11,12 +11,12 @@
 	<table border=1 ng-show="product.Specs.length > 0">
 		<tr ng-repeat="s in product.Specs">
 			<td>{{s.Prefix}}{{s.Name}}{{s.Suffix}}<span ng-show="s.Required" style="color:red"> *</span> </td>
-			<td><specfield   /></td>
+			<td><textspecfield ng-hide="Options.length > 0" spec="s"></textspecfield></td>
 		</tr>
 	</table>
 
-	<quantityfield ps='priceSchedule' v='variant' p='product' quantity="LineItem.Quantity" error="quantityError" /><span ng-show="quantityError">{{quantityError}}</span> <br>
-	<span ng-click="LineItem.Quantity = LineItem.Quantity + 1">{{LineItem.Quantity}}</span>
+	<quantityfield ps='priceSchedule' v='variant' p='product'/><br>
+
 	<button ng-disabled="addToOrderForm.$invalid" ng-click="OrderService.addToOrder(quantity, product.InteropID, variant.InteropID)">Add to Order</button>
 	<br>
 
