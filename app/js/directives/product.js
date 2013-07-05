@@ -2,19 +2,7 @@
 four51.app.directive('specfield', function($compile) { //get rid of this
 
 	var template = '<input ng-if="!s.Options.length" placeholder="{{s.DefaultValue}}" type=text ng-required="s.Required" ng-model="s.Value">';
-	/*
-	template += '<select ng-change="specChanged(s)" ' +
-		'ng-model="s.Value" '+
-		'type="radio" '+
-		'ng-options="option.ID as option.Value for option in s.Options" '+
-		'ng-if="s.Options.length && !s.IsRadioButtons" '+
-		'ng-required="s.Required" '+
-		'><option ng-if="!s.Required" value=""></option></select>';
 
-	template += '<span ng-show="s.Options.length && s.IsRadioButtons" ng-repeat="option in s.Options">';
-
-	template +=	'<input type="radio" name="{{s.Name}}" ng-checked="\'False\'" ng-model="s.Value" />{{option.Value}}<br /></span>';
-*/
 	var obj = {
 		restrict:"E",
 		template: template
@@ -30,11 +18,8 @@ four51.app.directive('selectionspec', function(){
 		'ng-required="s.Required" '+
 		'ng-change="ddlChange(s)"></select>';
 
-	template += '<span ng-show="s.AllowOtherValue" ng-click="toggleOther()">other...</span><input ng-change="otherChanged(s)" type=text ng-model="s.OtherValue" ng-show="otherVisible">';
+	template += '<span ng-show="s.AllowOtherValue" ng-click="toggleOther()">other...</span><input ng-change="otherChanged(s)" type=text ng-model="s.OtherTextValue" ng-show="otherVisible">';
 
-	//template += '<span ng-show="s.Options.length && s.IsRadioButtons" ng-repeat="option in s.Options">';
-
-	//template +=	'<input type="radio" name="{{s.Name}}" ng-checked="\'False\'" ng-model="s.Value" />{{option.Value}}<br /></span>';
 	var obj = {
 		restrict: "E",
 		link: function(scope){
@@ -44,11 +29,13 @@ four51.app.directive('selectionspec', function(){
 			};
 			scope.otherChanged = function(spec){
 				spec.Value = null;
+				if(scope.changed)
+					scope.changed(spec);
 				console.log('other text changed');
 			};
 			scope.ddlChange = function(spec){
 				scope.otherVisible = false;
-				spec.OtherValue = null;
+				spec.OtherTextValue = null;
 				if(scope.changed)
 					scope.changed(spec);
 			};
