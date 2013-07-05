@@ -31,16 +31,16 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 		// AmountTotal (fixed amount per line)
 		// Percentage (of line total)
 		var fixedAddPerLine = 0;
-		var percentagePerLine = [];
-		var totalAddForPercentMarkup = 0;
+		var percentagePerLine = 0;
 		var amountPerQty = 0;
 		var priceBreak;
+
 		angular.forEach($scope.product.Specs, function(spec){
 			if(spec.Options.length && spec.Value){
 				if(spec.MarkupType ==="AmountPerQuantity" )
 					amountPerQty += spec.Value.PriceMarkup;
 				if(spec.MarkupType ==="Percentage" )
-					percentagePerLine.push(spec.Value.PriceMarkup)
+					percentagePerLine += spec.Value.PriceMarkup;
 				if(spec.MarkupType ==="AmountTotal")
 					fixedAddPerLine += spec.Value.PriceMarkup;
 			}
@@ -55,15 +55,17 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 			console.log('no price break found');
 			return;
 		}
-		angular.forEach(percentagePerLine, function(perctage){
-			totalAddForPercentMarkup += priceBreak.Price * (perctage/100)
-		});
+		var total = qty * (priceBreak.Price + amountPerQty);
+		total += qty * priceBreak.Price * (percentagePerLine / 100);
+		total += fixedAddPerLine;
+
 		$scope.DebugLineTotal = "quantity: " + qty +"<br>" +
 			"amount added per quantity: " + amountPerQty + "<br>" +
 			"fixed ammount per line added: " + fixedAddPerLine + "<br>" +
-			"add for percentage markup: " + totalAddForPercentMarkup + "<br>" +
+			"percentage added to qty*unitprice: " + percentagePerLine + "<br>" +
 			"unit price: " + priceBreak.Price
-		$scope.LineItem.LineTotal = ((qty + amountPerQty) * priceBreak.Price) + fixedAddPerLine + totalAddForPercentMarkup;
+
+		$scope.LineItem.LineTotal = total;
 	}
 
 	$scope.product = ProductService.get({interopID: $routeParams.productInteropID}, function(data){
