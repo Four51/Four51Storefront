@@ -34,15 +34,17 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 		var percentagePerLine = 0;
 		var amountPerQty = 0;
 		var priceBreak;
-
+		//var spec = $451.filter()
 		angular.forEach($scope.product.Specs, function(spec){
 			if(spec.Options.length && spec.Value){
+				var option = $451.filter(spec.Options, {Property: 'ID', Value: spec.Value})[0];
+
 				if(spec.MarkupType ==="AmountPerQuantity" )
-					amountPerQty += spec.Value.PriceMarkup;
+					amountPerQty += option.PriceMarkup;
 				if(spec.MarkupType ==="Percentage" )
-					percentagePerLine += spec.Value.PriceMarkup;
+					percentagePerLine += option.PriceMarkup;
 				if(spec.MarkupType ==="AmountTotal")
-					fixedAddPerLine += spec.Value.PriceMarkup;
+					fixedAddPerLine += option.PriceMarkup;
 			}
 		});
 
@@ -63,7 +65,7 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 			"amount added per quantity: " + amountPerQty + "<br>" +
 			"fixed ammount per line added: " + fixedAddPerLine + "<br>" +
 			"percentage added to qty*unitprice: " + percentagePerLine + "<br>" +
-			"unit price: " + priceBreak.Price
+			"unit price: " + priceBreak.Price;
 
 		$scope.LineItem.LineTotal = total;
 	}
@@ -90,7 +92,7 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 					hasAllVarDefiningSpecs = false;
 					return;
 				}
-				specOptionIDs.push(item.Value.ID);
+				specOptionIDs.push(item.Value);
 			})
 			if(hasAllVarDefiningSpecs){
 				var v = VariantService.search($scope.product.InteropID, specOptionIDs, function(data){
@@ -105,3 +107,4 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 		$scope.calcTotal($scope.LineItem.Quantity);
 	}
 });
+
