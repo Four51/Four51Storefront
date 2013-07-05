@@ -34,11 +34,10 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 		var percentagePerLine = 0;
 		var amountPerQty = 0;
 		var priceBreak;
-		//var spec = $451.filter()
+
 		angular.forEach($scope.product.Specs, function(spec){
 			if(spec.Options.length && spec.Value){
 				var option = $451.filter(spec.Options, {Property: 'ID', Value: spec.Value})[0];
-
 				if(spec.MarkupType ==="AmountPerQuantity" )
 					amountPerQty += option.PriceMarkup;
 				if(spec.MarkupType ==="Percentage" )
@@ -81,12 +80,19 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 	$scope.OrderService = OrderService;
 
 	$scope.specChanged = function(spec){
-		//$451.filter($scope.product.Specs, {Property: 'DefinesVariant', Value:true})
+		console.log('spec changed called...');
+		console.dir(spec)
+		if(!spec){
+			console.log('spec changed called, but no spec passed');
+			return;
+		}
+
 		if(spec.DefinesVariant)
 		{
 			var specOptionIDs = [];
 			var hasAllVarDefiningSpecs = true;
 			$451.filter($scope.product.Specs, {Property: 'DefinesVariant', Value:true}, function(item){
+				console.log('item.value: ' + item.Value);
 				if(!item.Value)
 				{
 					hasAllVarDefiningSpecs = false;

@@ -11,7 +11,9 @@
 	<table border=1 ng-show="product.Specs.length > 0">
 		<tr ng-repeat="s in product.Specs">
 			<td>{{s.Prefix}}{{s.Name}}{{s.Suffix}}<span ng-show="s.Required" style="color:red"> *</span> </td>
-			<td><specfield   /></td>
+			<td><specfield ng-if="!s.Options.length"  />
+				<selectionspec changed="specChanged" ng-if="s.Options.length" s="s"></selectionspec>
+			</td>
 		</tr>
 	</table>
 	<br>

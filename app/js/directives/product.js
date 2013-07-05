@@ -1,16 +1,66 @@
 'use strict';
-four51.app.directive('specfield', function($compile) {
+four51.app.directive('specfield', function($compile) { //get rid of this
 
 	var template = '<input ng-if="!s.Options.length" placeholder="{{s.DefaultValue}}" type=text ng-required="s.Required" ng-model="s.Value">';
-	template += '<select ng-change="specChanged(s)" ng-model="s.Value" type="radio" ng-options="option.ID as option.Value for option in s.Options" ng-if="s.Options.length && !s.IsRadioButtons" ng-required="s.Required" ></select>';
-	template += '<span ng-show="s.Options.length && s.IsRadioButtons" ng-repeat="option in s.Options">' +
-		'<input type="radio" name="{{s.Name}}" ng-checked="\'False\'" ng-model="s.Value" />{{option.Value}}<br /></span>';
+	/*
+	template += '<select ng-change="specChanged(s)" ' +
+		'ng-model="s.Value" '+
+		'type="radio" '+
+		'ng-options="option.ID as option.Value for option in s.Options" '+
+		'ng-if="s.Options.length && !s.IsRadioButtons" '+
+		'ng-required="s.Required" '+
+		'><option ng-if="!s.Required" value=""></option></select>';
 
+	template += '<span ng-show="s.Options.length && s.IsRadioButtons" ng-repeat="option in s.Options">';
+
+	template +=	'<input type="radio" name="{{s.Name}}" ng-checked="\'False\'" ng-model="s.Value" />{{option.Value}}<br /></span>';
+*/
 	var obj = {
 		restrict:"E",
 		template: template
 	}
 	return obj;
+});
+
+four51.app.directive('selectionspec', function(){
+	var template = '<select " ' +
+		'ng-model="s.Value" '+
+		'ng-options="option.ID as option.Value for option in s.Options" '+
+		'ng-if="s.Options.length" '+
+		'ng-required="s.Required" '+
+		'ng-change="ddlChange(s)"></select>';
+
+	template += '<span ng-show="s.AllowOtherValue" ng-click="toggleOther()">other...</span><input ng-change="otherChanged(s)" type=text ng-model="s.OtherValue" ng-show="otherVisible">';
+
+	//template += '<span ng-show="s.Options.length && s.IsRadioButtons" ng-repeat="option in s.Options">';
+
+	//template +=	'<input type="radio" name="{{s.Name}}" ng-checked="\'False\'" ng-model="s.Value" />{{option.Value}}<br /></span>';
+	var obj = {
+		restrict: "E",
+		link: function(scope){
+
+			scope.toggleOther = function(){
+				scope.otherVisible = !scope.otherVisible;
+			};
+			scope.otherChanged = function(spec){
+				spec.Value = null;
+				console.log('other text changed');
+			};
+			scope.ddlChange = function(spec){
+				scope.otherVisible = false;
+				spec.OtherValue = null;
+				if(scope.changed)
+					scope.changed(spec);
+			};
+		},
+		scope: {
+			s: '=',
+			changed: '='
+		},
+		template: template
+	};
+	return obj;
+
 });
 
 four51.app.directive('pricescheduletable', function(){
