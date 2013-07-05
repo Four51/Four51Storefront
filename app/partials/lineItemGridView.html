@@ -30,7 +30,7 @@
                     </ul>
                 </td>
                 <td>{{item.UnitPrice | currency:"$"}}</td>
-                <td>{{item.Quantity}}<quantityfield changed='null' error='nothing' quantity='item' ps='item.PriceSchedule' v='item.Variant' p='item.Product' /></td>
+                <td><quantityfield changed='null' error='nothing' quantity='item' ps='item.PriceSchedule' v='item.Variant' p='item.Product' /></td>
                 <td>{{item.Product.QuantityMultiplier * item.Quantity}}</td>
                 <td ng-if="user.permissions.contains('CostCenterPerLine')">
                     <costcenter

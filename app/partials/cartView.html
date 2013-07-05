@@ -1,7 +1,7 @@
 <div ng-if="!order">
     <span>Your cart is currently empty. <a ng-href="#/catalog">Continue Shopping</a></span>
 </div>
-{{currentOrderID}}
+
 <div ng-if="order" class="OrderDetailTable">
     <form name="cart" ng-submit="checkout()">
         <p ng-if="Four51User.permissions.contains('EditPOID')">
