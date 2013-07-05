@@ -1,4 +1,8 @@
-<div class="OrderDetailTable">
+<div ng-if="!order">
+    <span>Your cart is currently empty. <a ng-href="#/catalog">Continue Shopping</a></span>
+</div>
+{{currentOrderID}}
+<div ng-if="order" class="OrderDetailTable">
     <form name="cart" ng-submit="checkout()">
         <p ng-if="Four51User.permissions.contains('EditPOID')">
             <label>{{Four51User.current.Company.SiteText.OrderID || 'Order ID'}}:</label>
@@ -18,9 +22,9 @@
     </form>
 </div>
 
-<lineitemgrid order='order' user='Four51User'></lineitemgrid>
+<lineitemgrid ng-if="order" order='order' user='Four51User'></lineitemgrid>
 
-<div class="CartDetail">
+<div ng-if="order" class="CartDetail">
     <span ng-if="!Four51User.current.permissions.contains('HidePricing')">
         <label>Subtotal: {{order.Subtotal | currency:"$"}}</label><br/>
         <p ng-if="Four51User.current.Company.TaxMethod != 'NoTax'"><label>{{ Four51User.current.Company.SiteText.ShippingDisclaimer }}</label></p>
