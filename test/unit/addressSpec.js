@@ -203,6 +203,7 @@ describe('$451 AddressView Controller :',function(){
     });
 });
 
+//let's test that the AddressInputCtrl Controller works
 describe('$451 AddressInputCtrl Controller :',function(){
 
     var jsonAddress = {"InteropID":"667","AddressName":"667 or Up and Bad 667","CompanyName":"CC Testing","Street1":"792 Maple","DistCompanyID":"4295x","Street2":"","City":"kjielkdk","State":"MN","Zip":"94303","Country":"US","Phone":"","CompanyID":"4300x","IsCustEditable":false,"FirstName":"CC","LastName":"Five","IsShipping":true,"IsBilling":true};
@@ -262,6 +263,9 @@ describe('$451 AddressInputCtrl Controller :',function(){
         //$httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
         //leaving it in because it should be investigated but it's not critical right now
 
+        //update:  I think this is because the addressInputCtrl is instantiating the user service, but I'm not sure how to intercept it's API call
+        //$httpBackend.expectGET("/api/russ/user").respond({}); this should* work but I think the request to the user API is getting redirected by the routing
+
         ctrlAddress('AddressViewCtrl', { //this tries to get an address and loads it into the scope
             $scope: scope
         });
@@ -281,14 +285,6 @@ describe('$451 AddressInputCtrl Controller :',function(){
 
     });
 
-//check scope.countries property and scope.states property
-
-//country
-//hasStates
-//isPhoneRequired
-
-//let's test that the AddressInputCtrl works
-
     it('Should redirect to /addresses on save', function(){
         $routeParams.id = jsonAddressNew.InteropID;
         $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
@@ -303,10 +299,8 @@ describe('$451 AddressInputCtrl Controller :',function(){
             $scope: scope
         });
 
-        expect($location.path()).not.toBe("/addresses");
+        expect($location.path()).not.toBe(scope.return);
         scope.save();
-
-
         scope.$apply(); //do the magic
         $httpBackend.flush();
 
@@ -315,6 +309,7 @@ describe('$451 AddressInputCtrl Controller :',function(){
         //clear the cache to avoid confusing shenanigans
         $451.clear("Address." + jsonAddressNew.InteropID)
     });
+
     it('Should redirect to /addresses on delete', function(){ //essentially the same as the last test, different method name
         $routeParams.id = jsonAddressNew.InteropID;
         $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
@@ -329,13 +324,7 @@ describe('$451 AddressInputCtrl Controller :',function(){
             $scope: scope
         });
 
-
-        console.dir(scope)
-        console.dir(scope.address)
-        console.dir($location.path())
-
-
-        expect($location.path()).not.toBe("/addresses");
+        expect($location.path()).not.toBe(scope.return);
         scope.delete();
 
         scope.$apply(); //do the magic
@@ -343,31 +332,201 @@ describe('$451 AddressInputCtrl Controller :',function(){
 
         expect($location.path()).toBe(scope.return);
 
+        //clear the cache to avoid confusing shenanigans
+        $451.clear("Address." + jsonAddressNew.InteropID)
+    });
+
+    it('Should have a countries property that contains a list of countries', function(){ //essentially the same as the last test, different method name
+        $routeParams.id = jsonAddressNew.InteropID;
+        $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
+        $httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
+
+        ctrlAddress('AddressViewCtrl', { //this tries to get an address and loads it into the scope
+            $scope: scope
+        });
+        ctrlAddressInput('AddressInputCtrl', { //now we've added some properties and methods
+            $scope: scope
+        });
+
+        expect(scope.countries.length).toBeGreaterThan(200); //this is a safe test, it's 245 right now but that can easily change
+        scope.$apply(); //do the magic
+        $httpBackend.flush();
 
         //clear the cache to avoid confusing shenanigans
         $451.clear("Address." + jsonAddressNew.InteropID)
     });
 
-    xit('Should set Selected=True via checkAll)', function(){
+    it('Should have a states property that contains a list of states', function(){ //essentially the same as the last test, different method name
+        $routeParams.id = jsonAddressNew.InteropID;
+        $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
+        $httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
 
-        $httpBackend.expectGET("/api/russ/address").respond(jsonAddress);
+        ctrlAddress('AddressViewCtrl', { //this tries to get an address and loads it into the scope
+            $scope: scope
+        });
+        ctrlAddressInput('AddressInputCtrl', { //now we've added some properties and methods
+            $scope: scope
+        });
 
-        ctrlAddressInput('AddressInputCtrl', {
+        expect(scope.states.length).toBeGreaterThan(60); //this is a safe test, it's 67 right now but that can easily change
+        scope.$apply(); //do the magic
+        $httpBackend.flush();
+
+        //clear the cache to avoid confusing shenanigans
+        $451.clear("Address." + jsonAddressNew.InteropID)
+    });
+
+    it('Should have a country function that returns true/false depending if the address country matches', function(){ //essentially the same as the last test, different method name
+        $routeParams.id = jsonAddressNew.InteropID;
+        $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
+        $httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
+
+        ctrlAddress('AddressViewCtrl', { //this tries to get an address and loads it into the scope
+            $scope: scope
+        });
+        ctrlAddressInput('AddressInputCtrl', { //now we've added some properties and methods
             $scope: scope
         });
 
         scope.$apply(); //do the magic
-
-        expect(ctrlAddressInput).toBeDefined();
-
         $httpBackend.flush();
 
-        expect(scope.addresses[0].Selected).toBeUndefined(); //nothing should be selected
-        expect(scope.addresses[1].Selected).toBeUndefined(); //nothing should be selected
+        var itemCountry = {};
+        itemCountry.country = "CA"; //mocking an additional address for comparison
 
-        scope.checkAll(null);
+        var itemWrongCountry = {};
+        itemWrongCountry.country = "CH"; //mocking an additional address for comparison
 
-        expect(scope.addresses[0].Selected).toBe(true); //every one should be selected
-        expect(scope.addresses[1].Selected).toBe(true); //every one should be selected
-    })
+
+        expect(scope.country(itemCountry)).toBeTruthy();
+        expect(scope.country(itemWrongCountry)).toBeFalsy();
+
+        //clear the cache to avoid confusing shenanigans
+        $451.clear("Address." + jsonAddressNew.InteropID)
+    });
+
+    it('Should have a hasStates function that returns true for the given country of CA', function(){ //essentially the same as the last test, different method name
+        $routeParams.id = jsonAddressNew.InteropID;
+        $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
+        $httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
+
+        ctrlAddress('AddressViewCtrl', { //this tries to get an address and loads it into the scope
+            $scope: scope
+        });
+        ctrlAddressInput('AddressInputCtrl', { //now we've added some properties and methods
+            $scope: scope
+        });
+        expect(scope.hasStates()).toBeTruthy(); //this address is in CA, which has states
+
+        scope.$apply(); //do the magic
+        $httpBackend.flush();
+
+        //clear the cache to avoid confusing shenanigans
+        $451.clear("Address." + jsonAddressNew.InteropID)
+    });
+
+    it('Should have a hasStates function that returns false for the given country of DE', function(){ //essentially the same as the last test, different method name
+        $routeParams.id = jsonAddressNew.InteropID;
+        $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
+        $httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
+
+        ctrlAddress('AddressViewCtrl', { //this tries to get an address and loads it into the scope
+            $scope: scope
+        });
+        ctrlAddressInput('AddressInputCtrl', { //now we've added some properties and methods
+            $scope: scope
+        });
+        scope.address.Country = "DE"; //modify test data inside the scope so we don't modify the JSON object and screw up future tests
+        expect(scope.hasStates()).toBeFalsy(); //this address is in DE, which doesn't have states
+
+        scope.$apply(); //do the magic
+        $httpBackend.flush();
+
+        //clear the cache to avoid confusing shenanigans
+        $451.clear("Address." + jsonAddressNew.InteropID)
+    });
+
+    it('Should have a hasStates function that handles invalid data', function(){ //essentially the same as the last test, different method name
+        $routeParams.id = jsonAddressNew.InteropID;
+        $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
+        $httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
+
+        ctrlAddress('AddressViewCtrl', { //this tries to get an address and loads it into the scope
+            $scope: scope
+        });
+        ctrlAddressInput('AddressInputCtrl', { //now we've added some properties and methods
+            $scope: scope
+        });
+        scope.address.Country = null; //modify test data inside the scope so we don't modify the JSON object and screw up future tests
+        expect(scope.hasStates()).toBeFalsy(); //this address is in DE, which doesn't have states
+
+        scope.$apply(); //do the magic
+        $httpBackend.flush();
+
+        //clear the cache to avoid confusing shenanigans
+        $451.clear("Address." + jsonAddressNew.InteropID)
+    });
+
+});
+
+//it appears to be impossible to test isPhoneRequired because there's no way to mock the user permissions collection.  some other day.
+xdescribe('$451 AddressInputCtrl Controller : isPhoneRequired (requires user service)',function(){
+
+    var jsonAddressNew = {"InteropID":"123","AddressName":"NewAddress","CompanyName":"CC Testing","Street1":"792 Maple","DistCompanyID":"4295x","Street2":"","City":"kjielkdk","State":"MN","Zip":"94303","Country":"CA","Phone":"","CompanyID":"4300x","IsCustEditable":false,"FirstName":"CC","LastName":"Five","IsShipping":false,"IsBilling":false};
+    var jsonUser = {"Username":"sesendpo","InteropID":"sesendpo","Password":null,"ConfirmPassword":null,"FirstName":"SE","LastName":"Send","Email":"qa@four51.com","Phone":"","Active":true,"CompanyID":"4300x","Company":{"Name":"International","POIDMask":"","SiteText":{"CostCenter":"Department","VariantID":"","NoVariantsAvailable":"<H2>No items currently available for order.</H2>","AvailableQuantity":"asdfawer","PasswordSecurityGuidelines":"OMG"},"TaxMethod":"WebService"},"TermsAccepted":null,"LastLogon":null,"PartyID":"53340x","CurrentOrderID":"17288173x","PasswordExprirationDate":null,"IsPasswordSecure":false,"Culture":{"Name":"en-US","CurrencyCode":"USD","DefaultCountry":"US"},"CultureUIOverride":null,"CultureUI":"en-US","TimeZoneIndex":20,"TimeZone":{"Name":"Central Standard Time","DisplayName":"(GMT-06:00) Central Time (US & Canada)","Index":20,"StandardName":"Central Standard Time","DaylightName":"Central Daylight Time","Bias":-360,"StandardBias":-360,"DaylightBias":-300},"CultureInfo":"en-US","Type":"Customer","CustomFields":[{"DefaultValue":"11","Lines":1,"Width":80,"MaxLength":100,"MaskedInput":"","ControlType":"Text","ListOrder":1,"Name":"11","Label":"11","IsRequired":false,"DisplayToUser":false,"Value":"113"},{"IsRadioButtons":false,"AllowOtherValue":false,"DefaultOptionID":null,"Options":[{"ID":"226x","Value":"123","InteropID":"","Selected":false},{"ID":"227x","Value":"124","InteropID":"","Selected":false}],"ControlType":"Selection","ListOrder":2,"Name":"12","Label":"12","IsRequired":false,"DisplayToUser":false,"Value":null},{"DefaultValue":"","Lines":1,"Width":80,"MaxLength":100,"MaskedInput":"","ControlType":"Text","ListOrder":5,"Name":"Title","Label":"Title","IsRequired":false,"DisplayToUser":true,"Value":"Hello"}],"Permissions":["CostCenterPerLine","SendOrderNotificationToOthers","ViewMessaging","ViewQuickOrderEntry","CreateBillToAddress","CreateShipToAddress","PayByVisa","PayByAmex","PayByDiscover","PayByMasterCard","PayByDinersClub","PayByJCB","PayByBudgetAccount","AllowSaveCreditCard","PayBySwitch","PayByDelta","PayBySolo","PayByElectron","PayByLaser","EditBillToName","EditShipToName","ViewFilePrint","BuyerSuperuserCatalog","BuyerSuperuserUsers","BuyerSuperuserCreditCard","StandardOrder","PayByPO","Comments","ViewSelfAdmin","ViewNonCustomizableSpecs","AllowAutoGenPOID","AllowSaveCreditCard","ShipToMultipleAddresses","SendOrderNotificationToOthers","DateNeededOptional","ViewNonCustomizableSpecs","ViewContactUs","ViewQuickOrderEntry","ViewPromotions"],"CostCenters":["CostCenter191","HR","Marketing","MIS","Sales"]}
+
+    var scope, $451, $httpBackend, ctrlAddress, ctrlAddressInput, ctrl451, $location, $routeParams, svcUser;
+
+    beforeEach(module('451order'));
+
+    beforeEach(inject(function(_$451_, $rootScope,$controller,_$httpBackend_, _$location_, _$routeParams_, UserService){
+        $451 = _$451_;
+        $location = _$location_;
+        $httpBackend = _$httpBackend_;
+        ctrlAddress = $controller;
+        ctrlAddressInput = $controller;
+        scope = $rootScope.$new();
+        $routeParams = _$routeParams_;
+        svcUser = UserService;
+    }));
+
+    afterEach(function() {
+        $httpBackend.verifyNoOutstandingExpectation();
+        $httpBackend.verifyNoOutstandingRequest();
+    });
+
+    it('Should have a isPhoneRequired function that determines if the user is required to supply a phone number', function(){ //essentially the same as the last test, different method name
+        $routeParams.id = jsonAddressNew.InteropID;
+
+
+        $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
+        $httpBackend.expectGET("/api/russ/user?Password=fails345&Username=sesendpo").respond(jsonUser); //intercept the API call to the service and slip in a mocked user object
+        $httpBackend.expectGET("/api/russ/user?Password=fails345&Username=sesendpo").respond(jsonUser); //intercept the API call to the service and slip in a mocked user object
+        $httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
+
+        var objUserLogin = {Username:"sesendpo",Password:"fails345"};
+
+        scope.Four51User = jsonUser;
+
+        ctrlAddress('AddressViewCtrl', { //this tries to get an address and loads it into the scope
+            $scope: scope
+        });
+        ctrlAddressInput('AddressInputCtrl', { //now we've added some properties and methods
+            $scope: scope
+        });
+
+        console.dir(svcUser.login(objUserLogin));
+
+
+        scope.$apply(); //do the magic
+        $httpBackend.flush();
+
+
+
+        expect(scope.isPhoneRequired()).toBeTruthy();
+
+        //clear the cache to avoid confusing shenanigans
+        $451.clear("Address." + jsonAddressNew.InteropID)
+        //$451.clear("User");
+    });
 });
