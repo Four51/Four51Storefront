@@ -53,7 +53,7 @@
 		<br>
 		specs:
 		<ul>
-			<li ng-repeat="s in product.Specs"><span ng-show="s.MarkupType != 'NoMarkup'">markup: {{s.MarkupType}}</span> val: {{s.Value | json}}</li>
+			<li ng-repeat="s in product.Specs"><span ng-show="s.MarkupType != 'NoMarkup'">markup: {{s.MarkupType}}</span> s.Name: {{s | json}}</li>
 		</ul>
 		<hr>
 	</span>
