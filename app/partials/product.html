@@ -8,8 +8,8 @@
 </table>
 <br>
 <form name="addToOrderForm" ng-show="variant || product.Variants.length == 0">
-	<table border=1 ng-show="product.Specs.length > 0">
-		<tr ng-repeat="s in product.Specs">
+	<table border=1 ng-show="hasLineItemSpecs(product.Specs)">
+		<tr ng-repeat="s in listLineItemSpecs(product.Specs)">
 			<td>{{s.Prefix}}{{s.Name}}{{s.Suffix}}<span ng-show="s.Required" style="color:red"> *</span> </td>
 			<td><specfield ng-if="!s.Options.length"  />
 				<selectionspec changed="specChanged" ng-if="s.Options.length" s="s"></selectionspec>
@@ -34,7 +34,6 @@
         available inventory: {{variant.QuantityAvailable || product.QuantityAvailable}}
     </span>
 </form>
-
 
 <priceScheduleTable ps='priceSchedule' p='product' ng-show="ps" />
 

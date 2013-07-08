@@ -42,6 +42,7 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 				otherValueMarkup += spec.OtherValueMarkup;
 			}else if(spec.Options.length && spec.Value){
 				var option = $451.filter(spec.Options, {Property: 'ID', Value: spec.Value})[0];
+				//console.dir({markuptype: spec.MarkupType, note: 'markup option', option: option})
 				if(spec.MarkupType ==="AmountPerQuantity" )
 					amountPerQty += option.PriceMarkup;
 				if(spec.MarkupType ==="Percentage" )
@@ -84,7 +85,13 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
     });
 
 	$scope.OrderService = OrderService;
-
+	$scope.hasLineItemSpecs = function(specs){
+		liSpecs = $451.filter(specs,{Property:'CanSetForLineItem', Value:true});
+		return (liSpecs && liSpecs.length > 0) | false;
+	};
+	$scope.listLineItemSpecs = function(specs){
+		return $451.filter(specs,{Property:'CanSetForLineItem', Value:true});
+	};
 	$scope.specChanged = function(spec){
 		console.log('spec changed called...');
 		console.dir(spec)
