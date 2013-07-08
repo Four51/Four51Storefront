@@ -1,4 +1,55 @@
 'use strict';
+four51.app.directive('specfield', function($compile) { //get rid of this
+
+	var template = '<input ng-if="!s.Options.length" placeholder="{{s.DefaultValue}}" type=text ng-required="s.Required" ng-model="s.Value">';
+
+	var obj = {
+		restrict:"E",
+		template: template
+	}
+	return obj;
+});
+
+four51.app.directive('selectionspec', function(){
+	var template = '<select " ' +
+		'ng-model="s.Value" '+
+		'ng-options="option.ID as option.Value for option in s.Options" '+
+		'ng-if="s.Options.length" '+
+		'ng-required="s.Required" '+
+		'ng-change="ddlChange(s)"></select>';
+
+	template += '<span ng-show="s.AllowOtherValue" ng-click="toggleOther()">other...</span><input ng-change="otherChanged(s)" type=text ng-model="s.OtherTextValue" ng-show="otherVisible">';
+
+	var obj = {
+		restrict: "E",
+		link: function(scope){
+
+			scope.toggleOther = function(){
+				scope.otherVisible = !scope.otherVisible;
+			};
+			scope.otherChanged = function(spec){
+				spec.Value = null;
+				if(scope.changed)
+					scope.changed(spec);
+				console.log('other text changed');
+			};
+			scope.ddlChange = function(spec){
+				scope.otherVisible = false;
+				spec.OtherTextValue = null;
+				if(scope.changed)
+					scope.changed(spec);
+			};
+		},
+		scope: {
+			s: '=',
+			changed: '='
+		},
+		template: template
+	};
+	return obj;
+
+});
+
 four51.app.directive('pricescheduletable', function(){
     var obj = {
         scope: {
@@ -33,47 +84,60 @@ four51.app.directive('staticspecstable', function(){
     return obj;
 })
 
-
 four51.app.directive('quantityfield', function(){
-    var obj = {
+
+	var obj = {
         scope: {
             ps : '=',
             v : '=',
-            p : '='
+            p : '=',
+			lineitem : '=',
+			error: '=',
+			changed : '='
         },
         restrict: 'E',
-        template: '<select ng-if="ps.RestrictedQuantity" ng-model="quantity" ng-options="pb.Quantity for pb in ps.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value.Quantity, v, p, ps)\'"></select>'+
-            '<input ng-if="!ps.RestrictedQuantity" type="number" required name="qtyInput" ng-model="quantity" ui-validate="\'validQuantityAddToOrder($value, v, p, ps)\'">'+
-            '<span ng-show="errorMessage">qty fail: {{errorMessage}}</span>',
+        template: '<select ng-if="ps.RestrictedQuantity" ng-model="lineitem.Quantity" ng-options="pb.Quantity for pb in ps.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value.Quantity, v, p, ps)\'"></select>'+
+            '<input ng-if="!ps.RestrictedQuantity" type="number" required name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, v, p, ps)\'"/>',
         link: function(scope){
             scope.validQuantityAddToOrder = function(value, variant, product, priceSchedule){
 
+				if(value == null){
+					console.log('validate called with undefined value')
+					return scope.valid | true;
+				}
+
                 if(!product && !variant)
-                    return true;
+					return scope.valid | true;
+
 
                 if(!priceSchedule)
-                    return true;
+                    return scope.valid | true;
 
-                var valid = true;
-
+				scope.valid = true;
+				console.log('validate qty: ' + value);
+				console.dir(priceSchedule);
                 if(priceSchedule.MinQuantity > value){
-                    valid = false;
-                    scope.errorMessage = "must be greater than " + priceSchedule.MinQuantity;
+					scope.valid = false;
+                    scope.error = "must be greater than " + priceSchedule.MinQuantity;
                 }
 
                 if(priceSchedule.MaxQuantity && priceSchedule.MaxQuantity < value){
-                    scope.errorMessage = "must be less than " + priceSchedule.MaxQuantity;
-                    valid = false;
+					scope.error = "must be less than " + priceSchedule.MaxQuantity;
+                    scope.valid = false;
                 }
                 var qtyAvail = variant || product;
 
                 if(qtyAvail.QuantityAvailable && qtyAvail.QuantityAvailable < value && product.AllowExceedInventory == false){
-                    scope.errorMessage = "not enough available inventory " +  qtyAvail.QuantityAvailable;
-                    valid = false;
+					scope.error = "not enough available inventory " +  qtyAvail.QuantityAvailable;
+					scope.valid = false;
                 }
-                if(valid)
-                    scope.errorMessage = null;
-                return valid;
+                if(scope.valid)
+					scope.error = null;
+
+				if(scope.changed)
+					scope.changed(value);
+				console.log("is valid: " + scope.valid);
+                return scope.valid;
             }
 
         }

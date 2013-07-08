@@ -1,22 +1,39 @@
-<div class="OrderDetailTable">
+<div ng-init="loadCart()" ng-if="!order">
+    <span>Your cart is currently empty. <a ng-href="#/catalog">Continue Shopping</a></span>
+</div>
+
+<div ng-if="order" class="OrderDetailTable">
     <form name="cart" ng-submit="checkout()">
-        <p ng-if="Four51User.permission.contains('EditPOID')">
+        <p ng-if="Four51User.permissions.contains('EditPOID')">
             <label>{{Four51User.current.Company.SiteText.OrderID || 'Order ID'}}:</label>
             <input ng-disabled='order.autoID' type='text' ng-model="order.ExternalID" required ui-mask="{{Four51User.current.Company.POIDMask}}" />
-            <span ng-if="Four51User.permission.contains('AllowAutoGenPOID')">
+            <span ng-if="Four51User.permissions.contains('AllowAutoGenPOID')">
                 <input type='checkbox' ng-click="order.ExternalID = order.autoID ? 'auto' : ''" ng-model='order.autoID' /> Use system-generated ID
             </span>
         </p>
         <label>Comments:</label><textarea rows="5" cols="100" ng-model="order.Comments" /></label><br/>
-        <p ng-if="Four51User.permission.contains('CostCenterPerOrder')">
-            <label>Cost Center:</label>
-            <select ng-if="Four51User.current.CostCenters.length > 1 && !Four51User.permission.contains('FreeFormCostCenter')" ng-options="center for center in Four51User.current.CostCenters" ng-model="order.CostCenter">
-                <option value=""></option>
-            </select></label>
-            <input ng-if="Four51User.permission.contains('FreeFormCostCenter')" ng-model="order.CostCenter" type='text' required />
-            <span ng-if="Four51User.current.CostCenters.length == 1 && !Four51User.permission.contains('FreeFormCostCenter')">{{order.CostCenter}}</span>
-        </p>
-        <br/>
-        <input class="btn btn-medium btn-primary" type="submit" ng-disabled="cart.$invalid" value="{{Four51User.current.Company.SiteText.Checkout}}" />
+        <label ng-if="Four51User.permissions.contains('CostCenterPerOrder') && !Four51User.permissions.contains('CostCenterPerLine')">{{user.current.Company.SiteText.CostCenter || 'Cost Center' + ':'}}
+            <costcenter
+                user="Four51User"
+                label="true"
+                order="order"
+                ng-if="Four51User.permissions.contains('CostCenterPerOrder') && !Four51User.permissions.contains('CostCenterPerLine')" />
+        </label>
     </form>
+</div>
+
+<lineitemgrid ng-if="order" order='order' user='Four51User'></lineitemgrid>
+
+<div ng-if="order" class="CartDetail">
+    <span ng-if="!Four51User.current.permissions.contains('HidePricing')">
+        <label>Subtotal: {{order.Subtotal | currency:"$"}}</label><br/>
+        <p ng-if="Four51User.current.Company.TaxMethod != 'NoTax'"><label>{{ Four51User.current.Company.SiteText.ShippingDisclaimer }}</label></p>
+    </span>
+    <hr/>
+    <span>
+        <input class="btn btn-mini btn-link" ng-disabled="cart.$invalid" value="{{Four51User.current.Company.SiteText.SaveChanges || 'Save Changes'}}" /> |
+        <input class="btn btn-mini btn-link" value="Cancel Order" ng-click="cancelOrder()" /> |
+        <a class="btn btn-mini btn-link" ng-href="#/catalog">Continue Shopping</a> |
+        <input class="btn btn-small btn-primary" type="submit" ng-disabled="cart.$invalid" value="{{Four51User.current.Company.SiteText.Checkout}}" />
+    </span>
 </div>
