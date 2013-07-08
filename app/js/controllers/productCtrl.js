@@ -89,6 +89,9 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 		liSpecs = $451.filter(specs,{Property:'CanSetForLineItem', Value:true});
 		return (liSpecs && liSpecs.length > 0) | false;
 	};
+	$scope.listLineItemSpecs = function(specs){
+		return $451.filter(specs,{Property:'CanSetForLineItem', Value:true});
+	};
 	$scope.specChanged = function(spec){
 		console.log('spec changed called...');
 		console.dir(spec)
