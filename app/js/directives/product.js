@@ -18,15 +18,12 @@ four51.app.directive('selectionspec', function(){
 		'ng-required="s.Required" '+
 		'ng-change="ddlChange(s)"></select>';
 
-	template += '<span ng-show="s.AllowOtherValue" ng-click="toggleOther()">other...</span><input ng-change="otherChanged(s)" type=text ng-model="s.OtherTextValue" ng-show="otherVisible">';
+	template += '<span ng-show="s.AllowOtherValue" ng-click="otherVisible = !otherVisible">other...</span><input ng-change="otherChanged(s)" type=text ng-model="s.OtherTextValue" ng-show="otherVisible">';
 
 	var obj = {
 		restrict: "E",
 		link: function(scope){
 
-			scope.toggleOther = function(){
-				scope.otherVisible = !scope.otherVisible;
-			};
 			scope.otherChanged = function(spec){
 				spec.Value = null;
 				if(scope.changed)
