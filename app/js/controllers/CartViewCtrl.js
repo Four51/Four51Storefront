@@ -5,12 +5,11 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, OrderSe
     };
     $scope.cancelOrder = function() {
         OrderService.delete($scope.order, function() {
-            UserService.current.CurrentOrderID = null;
             $location.path('#/catalog');
         });
     };
     $scope.loadCart = function() {
-        var currentOrderID = UserService.current.CurrentOrderID;
+        var currentOrderID = UserService.get().CurrentOrderID;
         $scope.order = currentOrderID != null ? OrderService.get({ id: currentOrderID }) : null;
     }
 });
