@@ -1,16 +1,16 @@
 four51.app.factory('UserService', function($resource, $api, $451){
 	var service = $resource($451.api('user'));
 	var authenticated = true;
-    var currentUser;
+    var currentUser = $451.cache('User');
 
 	return {
 		login: function(user) {
 			$451.clear('User');
-			currentUser = $api.resource(service).options({persists: true, key: 'User'}).get(user);
+			$api.resource(service).options({persists: true, key: 'User'}).get(user);
 		},
         save: function(user) {
             service.save(user, function(response) {
-                currentUser = $451.cache('User', user, { persists: true, key: 'User' });
+               $451.cache('User', user, { persists: true, key: 'User' });
             });
         },
         logout: function() {
