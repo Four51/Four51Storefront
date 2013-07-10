@@ -50,8 +50,15 @@
 Line item total debug:
 <span ng-bind-html-unsafe="DebugLineTotal"></span>
 <br>
-markup specs:
+variant specs:
+<ul>
+	<li ng-repeat="s in variant.Specs">{{s.Name}}: {{s.Value}}, markup: {{s.MarkupType}}</li>
+</ul>
+
+product specs:
 <ul>
 	<li ng-repeat="s in product.Specs">{{s.Name}}: {{s.Value}}, markup: {{s.MarkupType}}</li>
 </ul>
+
+
 <hr>
