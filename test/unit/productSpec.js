@@ -160,6 +160,7 @@ describe('$451 Product Controller:',function(){
 
         expect(scope.product.Name).toBe("Lesson 1 BC");
         expect(scope.StaticSpecGroups).toBe(jsonProduct1NoVariants.StaticSpecGroups);
+        ///hm lets setup some data to get this going
 
 
         //etc
