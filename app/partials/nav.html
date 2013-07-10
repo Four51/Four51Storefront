@@ -1,7 +1,7 @@
 
 <div class="navbar-inner">
     <div class="container-fluid">
-        <a class="brand" ng-show="user" href="#">{{'Welcome, ' + user.FirstName + " " + user.LastName}}</a>
+        <a class="brand" href="#" ng-click="refresh()">{{'Welcome, ' + Four51User.current.FirstName + " " + Four51User.current.LastName}}</a>
         <ul class="nav">
             <li><a href="#/catalog">Category</a></li>
             <li class="divider-vertical" />
