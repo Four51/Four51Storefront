@@ -1,14 +1,14 @@
-<img id="451_img_prod_lg" ng-src="{{variant.LargeImageFile.Url || product.LargeImageFile.Url}}" ng-show="variant.LargeImageFile.Url || product.LargeImageFile.Url">
+<img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url">
 
 
 <table id="451_area_prod_desc" border=1>
 	<tr><td>name:</td><td>{{product.Name}}</td></tr>
-	<tr><td>Description:</td><td><span ng-bind-html-unsafe="product.Description"/></td></tr>
-	<tr><td>ExternalID</td><td>{{product.ExternalID}}</td></tr>
-	<tr ng-show="variant"><td>variant description:</td><td><span ng-bind-html-unsafe="variant.Description"/></td></tr>
+	<tr><td>Description:</td><td><span ng-bind-html-unsafe="LineItem.Product.Description"/></td></tr>
+	<tr><td>ExternalID</td><td>{{LineItem.Product.ExternalID}}</td></tr>
+	<tr ng-show="LineItem.Variant"><td>variant description:</td><td><span ng-bind-html-unsafe="LineItem.Variant.Description"/></td></tr>
 </table>
 <br>
-<form name="addToOrderForm" ng-show="variant || product.Variants.length == 0">
+<form name="addToOrderForm" ng-show="LineItem.Variant || LineItem.Product.Variants.length == 0">
 	<table border=1 ng-show="lineItemSpecs.length">
 		<tr ng-repeat="s in lineItemSpecs">
 			<td>{{s.Prefix}}{{s.Name}}{{s.Suffix}}<span ng-show="s.Required" style="color:red"> *</span> </td>
@@ -16,30 +16,30 @@
 		</tr>
 	</table>
 	<br>
-	<quantityfield changed="calcTotal" ps='priceSchedule' v='variant' p='product' lineitem="LineItem" error="quantityError" /><span ng-show="quantityError">{{quantityError}}</span> <br>
+	<quantityfield ps='LineItem.PriceSchedule' v='LineItem.Variant' p='LineItem.Product' lineitem="LineItem" error="quantityError" /><span ng-show="quantityError">{{quantityError}}</span> <br>
 	line total: {{LineItem.LineTotal | currency}}<br>
 
-	<button ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(quantity, product.InteropID, variant.InteropID)">Add to Order</button>
+	<button ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(quantity, LineItem.Product.InteropID, LineItem.Variant.InteropID)">Add to Order</button>
 	<br>
 
-    <span ng-show="priceSchedule.MinQuantity > 1">
-        min: {{priceSchedule.MinQuantity}}<br/>
+    <span ng-show="LineItem.PriceSchedule.MinQuantity > 1">
+        min: {{LineItem.PriceSchedule.MinQuantity}}<br/>
     </span>
-    <span ng-show="priceSchedule.MaxQuantity">
-        max: {{priceSchedule.MaxQuantity}}<br/>
+    <span ng-show="LineItem.PriceSchedule.MaxQuantity">
+        max: {{LineItem.PriceSchedule.MaxQuantity}}<br/>
     </span>
 
     <span ng-show="showInventory">
-        available inventory: {{variant.QuantityAvailable || product.QuantityAvailable}}
+        available inventory: {{LineItem.Variant.QuantityAvailable || LineItem.Product.QuantityAvailable}}
     </span>
 </form>
 
-<priceScheduleTable ps='priceSchedule' p='product' ng-show="ps" />
+<priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product' ng-show="LineItem.PriceSchedule" />
 
-<span id="451_list_vars" ng-show="product.Variants.length > 1 && !variant">variants({{product.Variants.length}})
+<span id="451_list_vars" ng-show="LineItem.Product.Variants.length > 1 && !LineItem.Variant">variants({{LineItem.Product.Variants.length}})
     <ul>
-		<li ng-repeat="v in product.Variants">
-			<a href=#/product/{{product.InteropID}}/v/{{v.InteropID}}>{{v.ExternalID}}: {{v.InteropID}}</a>
+		<li ng-repeat="v in LineItem.Product.Variants">
+			<a href=#/product/{{LineItem.Product.InteropID}}/v/{{v.InteropID}}>{{v.ExternalID}}: {{v.InteropID}}</a>
 		</li>
 	</ul>
 </span>
@@ -52,12 +52,12 @@ Line item total debug:
 <br>
 variant specs:
 <ul>
-	<li ng-repeat="s in variant.Specs">{{s.Name}}: {{s.Value}}, markup: {{s.MarkupType}}</li>
+	<li ng-repeat="s in LineItem.Variant.Specs">{{s.Name}}: {{s.Value}}, markup: {{s.MarkupType}}</li>
 </ul>
 
 product specs:
 <ul>
-	<li ng-repeat="s in product.Specs">{{s.Name}}: {{s.Value}}, markup: {{s.MarkupType}}</li>
+	<li ng-repeat="s in LineItem.Product.Specs">{{s.Name}}: {{s.Value}}, markup: {{s.MarkupType}}</li>
 </ul>
 
 
