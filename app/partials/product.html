@@ -4,23 +4,22 @@
 <table id="451_area_prod_desc" border=1>
 	<tr><td>name:</td><td>{{product.Name}}</td></tr>
 	<tr><td>Description:</td><td><span ng-bind-html-unsafe="product.Description"/></td></tr>
+	<tr><td>ExternalID</td><td>{{product.ExternalID}}</td></tr>
 	<tr ng-show="variant"><td>variant description:</td><td><span ng-bind-html-unsafe="variant.Description"/></td></tr>
 </table>
 <br>
 <form name="addToOrderForm" ng-show="variant || product.Variants.length == 0">
-	<table border=1 ng-show="product.Specs.length > 0">
-		<tr ng-repeat="s in product.Specs">
+	<table border=1 ng-show="lineItemSpecs.length">
+		<tr ng-repeat="s in lineItemSpecs">
 			<td>{{s.Prefix}}{{s.Name}}{{s.Suffix}}<span ng-show="s.Required" style="color:red"> *</span> </td>
-			<td><specfield ng-if="!s.Options.length"  />
-				<selectionspec changed="specChanged" ng-if="s.Options.length" s="s"></selectionspec>
-			</td>
+			<td><vspecfield changed="specChanged" s="s"></vspecfield></td>
 		</tr>
 	</table>
 	<br>
 	<quantityfield changed="calcTotal" ps='priceSchedule' v='variant' p='product' lineitem="LineItem" error="quantityError" /><span ng-show="quantityError">{{quantityError}}</span> <br>
 	line total: {{LineItem.LineTotal | currency}}<br>
 
-	<button ng-disabled="addToOrderForm.$invalid" ng-click="OrderService.addToOrder(quantity, product.InteropID, variant.InteropID)">Add to Order</button>
+	<button ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(quantity, product.InteropID, variant.InteropID)">Add to Order</button>
 	<br>
 
     <span ng-show="priceSchedule.MinQuantity > 1">
@@ -35,7 +34,6 @@
     </span>
 </form>
 
-
 <priceScheduleTable ps='priceSchedule' p='product' ng-show="ps" />
 
 <span id="451_list_vars" ng-show="product.Variants.length > 1 && !variant">variants({{product.Variants.length}})
@@ -46,15 +44,14 @@
 	</ul>
 </span>
 <staticspecstable specgroups="StaticSpecGroups"></staticspecstable><br>
-<a ng-click="hideLineItemDebug = !hideLineItemDebug">toggle line item debug</a><br>
-<span ng-show="!hideLineItemDebug">
-		<hr>
 
-		<span ng-bind-html-unsafe="DebugLineTotal"></span>
-		<br>
-		specs:
-		<ul>
-			<li ng-repeat="s in product.Specs"><span ng-show="s.MarkupType != 'NoMarkup'">markup: {{s.MarkupType}}</span> val: {{s.Value | json}}</li>
-		</ul>
-		<hr>
-	</span>
+
+<hr>
+Line item total debug:
+<span ng-bind-html-unsafe="DebugLineTotal"></span>
+<br>
+markup specs:
+<ul>
+	<li ng-repeat="s in product.Specs">{{s.Name}}: {{s.Value}}, markup: {{s.MarkupType}}</li>
+</ul>
+<hr>

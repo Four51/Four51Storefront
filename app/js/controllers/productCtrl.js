@@ -12,6 +12,11 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 		}
 		$scope.showInventory = (product.QuantityAvailable || ($scope.variant && $scope.variant.QuantityAvailable)) && product.DisplayInventory == true; //add some logic around user permissions
 
+		$scope.lineItemSpecs = [];
+		angular.forEach(product.Specs, function(item){
+			if(item.CanSetForLineItem || item.DefinesVariant)
+				$scope.lineItemSpecs.push(item);
+		});
 		function variantHasPriceSchedule(product, scheduleType){
 			if(!product.Variants)
 				return false;
@@ -27,7 +32,7 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 		console.log('calc total called');
 		var ps = $scope.priceSchedule;
 		var unitPrice = 0;
-		// AmountPerQuantity(fixed amount per quantity)
+		// AmountPerQuantity(fixed amount per unit)
 		// AmountTotal (fixed amount per line)
 		// Percentage (of line total)
 		var fixedAddPerLine = 0;
@@ -42,6 +47,7 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 				otherValueMarkup += spec.OtherValueMarkup;
 			}else if(spec.Options.length && spec.Value){
 				var option = $451.filter(spec.Options, {Property: 'ID', Value: spec.Value})[0];
+				//console.dir({markuptype: spec.MarkupType, note: 'markup option', option: option})
 				if(spec.MarkupType ==="AmountPerQuantity" )
 					amountPerQty += option.PriceMarkup;
 				if(spec.MarkupType ==="Percentage" )
@@ -83,7 +89,9 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
         modifyProductScope(data, v , $scope)
     });
 
-	$scope.OrderService = OrderService;
+	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
+		OrderService.addToOrder(quantity, productInteropID, variantInteropID);
+	}
 
 	$scope.specChanged = function(spec){
 		console.log('spec changed called...');
