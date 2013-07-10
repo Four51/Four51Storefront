@@ -22,6 +22,12 @@ four51.app.factory('UserService', function($resource, $api, $451){
             currentUser = $451.cache('User');
             return currentUser;
         },
+        refresh: function() {
+            // retrieves the Four51User.Current from the API. Use this when other business logic may have altered the state of the user
+            // and you need that reflected in the user cache object. EX: cancelling an order and updating the CurrentOrderID
+            $451.clear('User');
+            $api.resource(service).options({ persists: true, key: 'User'}).get({});
+        },
 		current: currentUser,
 		isAuthenticated: authenticated,
         permissions: { // really unnecessary but I think it might make it simpler to read when used
