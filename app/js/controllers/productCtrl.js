@@ -61,7 +61,7 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 					fixedAddPerLine += option.PriceMarkup;
 			}
 		};
-		angular.forEach($scope.variant.Specs, addToMarkups );
+		if($scope.variant) angular.forEach($scope.variant.Specs, addToMarkups );
 		angular.forEach($scope.product.Specs, addToMarkups );
 
 		angular.forEach(ps.PriceBreaks, function(pb){
