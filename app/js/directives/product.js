@@ -72,7 +72,7 @@ four51.app.directive('staticspecstable', function(){
     return obj;
 })
 
-four51.app.directive('quantityfield', function(){
+four51.app.directive('quantityfield', function($451){
 
 	var obj = {
         scope: {
@@ -80,13 +80,15 @@ four51.app.directive('quantityfield', function(){
             v : '=',
             p : '=',
 			lineitem : '=',
-			error: '=',
-			changed : '='
+			error: '='
         },
         restrict: 'E',
-        template: '<select ng-if="ps.RestrictedQuantity" ng-model="lineitem.Quantity" ng-options="pb.Quantity as pb.Quantity for pb in ps.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value.Quantity, v, p, ps)\'"></select>'+
-            '<input ng-if="!ps.RestrictedQuantity" type="number" required name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, v, p, ps)\'"/>',
+        template: '<select ng-change="changeme(ps, v, p, lineitem)" ng-if="ps.RestrictedQuantity" ng-model="lineitem.Quantity" ng-options="pb.Quantity as pb.Quantity for pb in ps.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value, v, p, ps)\'"></select>'+
+            '<input  ng-change="changeme(ps, v, p, lineitem)" ng-if="!ps.RestrictedQuantity" type="number" required name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, v, p, ps)\'"/>',
         link: function(scope){
+			scope.changeme = function(ps, variant, product, lineitem){
+				$451.calculateLineTotal(ps, variant, product, lineitem);
+			};
             scope.validQuantityAddToOrder = function(value, variant, product, priceSchedule){
 
 				if(value == null){
@@ -96,7 +98,6 @@ four51.app.directive('quantityfield', function(){
 
                 if(!product && !variant)
 					return scope.valid | true;
-
 
                 if(!priceSchedule)
                     return scope.valid | true;
@@ -122,9 +123,6 @@ four51.app.directive('quantityfield', function(){
                 if(scope.valid)
 					scope.error = null;
 
-				if(scope.changed)
-					scope.changed(value);
-				console.log("is valid: " + scope.valid);
                 return scope.valid;
             }
 

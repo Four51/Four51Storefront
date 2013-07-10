@@ -56,6 +56,66 @@ four51.app.factory('$451', function(Cache) {
     function arrayContainsValue(array, value) {
         return array.indexOf(value) > -1;
     }
+	function calcTotal(ps, variant, product, lineItem, debugLineTotal){
+
+		console.log('calc total called');
+
+		var unitPrice = 0;
+		// AmountPerQuantity(fixed amount per unit)
+		// AmountTotal (fixed amount per line)
+		// Percentage (of line total)
+		var fixedAddPerLine = 0;
+		var percentagePerLine = 0;
+		var amountPerQty = 0;
+		var priceBreak;
+		var otherValueMarkup = 0;
+		//var specs = $scope.variant ? $scope.variant.Specs : [];
+
+		var addToMarkups = function(spec){
+			console.log('calc spec: ' + spec.Name)
+			console.dir(spec)
+			if(spec.AllowOtherValue && spec.OtherTextValue && spec.OtherValueMarkup > 0){
+				otherValueMarkup += spec.OtherValueMarkup;
+			}else if(spec.Options.length && spec.Value){
+
+				var option = json_filter(spec.Options, {Property: 'ID', Value: spec.Value})[0];
+				if(!option)
+					return;
+				//console.dir({markuptype: spec.MarkupType, note: 'markup option', option: option})
+				if(spec.MarkupType ==="AmountPerQuantity" )
+					amountPerQty += option.PriceMarkup;
+				if(spec.MarkupType ==="Percentage" )
+					percentagePerLine += option.PriceMarkup;
+				if(spec.MarkupType ==="AmountTotal")
+					fixedAddPerLine += option.PriceMarkup;
+			}
+		};
+		if(variant) angular.forEach(variant.Specs, addToMarkups );
+		angular.forEach(product.Specs, addToMarkups );
+
+		angular.forEach(ps.PriceBreaks, function(pb){
+
+			if(lineItem.Quantity >= pb.Quantity)
+				priceBreak = pb; //assumes they will be in order of smallest to largest
+		});
+		if(!priceBreak){
+			console.log('no price break found');
+			lineItem.LineTotal = 0;
+			return;
+		}
+		var total = lineItem.Quantity * (priceBreak.Price + amountPerQty);
+		total += lineItem.Quantity * priceBreak.Price * (percentagePerLine / 100);
+		total += fixedAddPerLine + otherValueMarkup;
+
+		debugLineTotal = "quantity: " + lineItem.Quantity +"<br>" +
+			"amount added per quantity: " + amountPerQty + "<br>" +
+			"fixed ammount per line added: " + fixedAddPerLine + "<br>" +
+			"percentage added to qty*unitprice: " + percentagePerLine + "<br>" +
+			"other value markups: " + otherValueMarkup + "<br>" +
+			"unit price: " + priceBreak.Price;
+
+		lineItem.LineTotal = total;
+	}
 
 	return {
 		debug: true,
@@ -82,6 +142,9 @@ four51.app.factory('$451', function(Cache) {
 		},
         contains: function(array, value) {
             return arrayContainsValue(array, value);
-        }
+        },
+		calculateLineTotal: function(qty, ps, variant, product, lineItem, debugLineTotal){
+			return calcTotal(qty, ps, variant, product, lineItem, debugLineTotal);
+		}
 	};
 });
