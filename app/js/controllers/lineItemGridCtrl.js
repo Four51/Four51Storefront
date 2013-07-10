@@ -1,6 +1,6 @@
 'use strict';
 
-four51.app.controller('LineItemGridCtrl', function ($scope) {
+four51.app.controller('LineItemGridCtrl', function ($scope, OrderService, UserService) {
     var hasSpecs = false;
     $scope.copyAddressToAll = function(order) {
         angular.forEach(order.LineItems, function(n,i) {
@@ -16,4 +16,13 @@ four51.app.controller('LineItemGridCtrl', function ($scope) {
         });
         return hasSpecs;
     };
+    $scope.removeSelected = function(order) {
+        OrderService.save(order, function() {
+            angular.forEach(order.LineItems, function(n,i) {
+                if (n.Selected)
+                    order.LineItems.splice(i,1);
+            });
+            UserService.refresh();
+        });
+    }
 });

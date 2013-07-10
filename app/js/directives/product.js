@@ -1,16 +1,6 @@
 'use strict';
-four51.app.directive('specfield', function($compile) { //get rid of this
 
-	var template = '<input ng-if="!s.Options.length" placeholder="{{s.DefaultValue}}" type=text ng-required="s.Required" ng-model="s.Value">';
-
-	var obj = {
-		restrict:"E",
-		template: template
-	}
-	return obj;
-});
-
-four51.app.directive('selectionspec', function(){
+four51.app.directive('vspecfield', function(){
 	var template = '<select " ' +
 		'ng-model="s.Value" '+
 		'ng-options="option.ID as option.Value for option in s.Options" '+
@@ -19,6 +9,7 @@ four51.app.directive('selectionspec', function(){
 		'ng-change="ddlChange(s)"></select>';
 
 	template += '<span ng-show="s.AllowOtherValue" ng-click="otherVisible = !otherVisible">other...</span><input ng-change="otherChanged(s)" type=text ng-model="s.OtherTextValue" ng-show="otherVisible">';
+	template += '<input ng-if="!s.Options.length" placeholder="{{s.DefaultValue}}" type=text ng-required="s.Required" ng-model="s.Value">';
 
 	var obj = {
 		restrict: "E",
