@@ -84,7 +84,7 @@ four51.app.directive('quantityfield', function(){
 			changed : '='
         },
         restrict: 'E',
-        template: '<select ng-if="ps.RestrictedQuantity" ng-model="lineitem.Quantity" ng-options="pb.Quantity for pb in ps.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value.Quantity, v, p, ps)\'"></select>'+
+        template: '<select ng-if="ps.RestrictedQuantity" ng-model="lineitem.Quantity" ng-options="pb.Quantity as pb.Quantity for pb in ps.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value.Quantity, v, p, ps)\'"></select>'+
             '<input ng-if="!ps.RestrictedQuantity" type="number" required name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, v, p, ps)\'"/>',
         link: function(scope){
             scope.validQuantityAddToOrder = function(value, variant, product, priceSchedule){
