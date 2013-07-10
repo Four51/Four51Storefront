@@ -76,20 +76,20 @@ four51.app.directive('quantityfield', function($451){
 
 	var obj = {
         scope: {
-            ps : '=',
-            v : '=',
-            p : '=',
-			lineitem : '=',
+            lineitem : '=',
 			error: '='
         },
         restrict: 'E',
-        template: '<select ng-change="changeme(ps, v, p, lineitem)" ng-if="ps.RestrictedQuantity" ng-model="lineitem.Quantity" ng-options="pb.Quantity as pb.Quantity for pb in ps.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value, v, p, ps)\'"></select>'+
-            '<input  ng-change="changeme(ps, v, p, lineitem)" ng-if="!ps.RestrictedQuantity" type="number" required name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, v, p, ps)\'"/>',
+        template: '<select ng-change="changeme(lineitem)" ng-if="ps.RestrictedQuantity" ng-model="lineitem.Quantity" ng-options="pb.Quantity as pb.Quantity for pb in ps.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"></select>'+
+            '<input  ng-change="changeme(lineitem)" ng-if="!ps.RestrictedQuantity" type="number" required name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"/>',
         link: function(scope){
-			scope.changeme = function(ps, variant, product, lineitem){
-				$451.calculateLineTotal(ps, variant, product, lineitem);
+			scope.changeme = function(lineitem){
+				$451.calculateLineTotal(lineitem);
 			};
-            scope.validQuantityAddToOrder = function(value, variant, product, priceSchedule){
+            scope.validQuantityAddToOrder = function(value, lineItem){
+				var variant = lineItem.Variant;
+				var product = lineItem.Product;
+				var priceSchedule = lineItem.PriceSchedule;
 
 				if(value == null){
 					console.log('validate called with undefined value')

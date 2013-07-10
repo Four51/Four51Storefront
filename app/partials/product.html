@@ -16,7 +16,7 @@
 		</tr>
 	</table>
 	<br>
-	<quantityfield ps='LineItem.PriceSchedule' v='LineItem.Variant' p='LineItem.Product' lineitem="LineItem" error="quantityError" /><span ng-show="quantityError">{{quantityError}}</span> <br>
+	<quantityfield lineitem="LineItem" error="quantityError" /><span ng-show="quantityError">{{quantityError}}</span> <br>
 	line total: {{LineItem.LineTotal | currency}}<br>
 
 	<button ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(quantity, LineItem.Product.InteropID, LineItem.Variant.InteropID)">Add to Order</button>

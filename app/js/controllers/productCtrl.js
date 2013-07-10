@@ -75,7 +75,7 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 		//$scope.product
 		//$scope.LineItem
 		//$scope.DebugLineTotal
-		$451.calculateLineTotal($scope.LineItem.PriceSchedule, $scope.LineItem.Variant, $scope.LineItem.Product, $scope.LineItem, $scope.DebugLineTotal)
+		$451.calculateLineTotal($scope.LineItem, $scope.DebugLineTotal)
 	}
 });
 

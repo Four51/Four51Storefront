@@ -56,10 +56,13 @@ four51.app.factory('$451', function(Cache) {
     function arrayContainsValue(array, value) {
         return array.indexOf(value) > -1;
     }
-	function calcTotal(ps, variant, product, lineItem, debugLineTotal){
+	function calcTotal(lineItem, debugLineTotal){
 
+		var ps = lineItem.PriceSchedule;
+		var variant = lineItem.Variant;
+		var product = lineItem.Product;
 		console.log('calc total called');
-
+		console.dir(product);
 		var unitPrice = 0;
 		// AmountPerQuantity(fixed amount per unit)
 		// AmountTotal (fixed amount per line)
@@ -90,6 +93,7 @@ four51.app.factory('$451', function(Cache) {
 					fixedAddPerLine += option.PriceMarkup;
 			}
 		};
+
 		if(variant) angular.forEach(variant.Specs, addToMarkups );
 		angular.forEach(product.Specs, addToMarkups );
 
@@ -143,8 +147,8 @@ four51.app.factory('$451', function(Cache) {
         contains: function(array, value) {
             return arrayContainsValue(array, value);
         },
-		calculateLineTotal: function(qty, ps, variant, product, lineItem, debugLineTotal){
-			return calcTotal(qty, ps, variant, product, lineItem, debugLineTotal);
+		calculateLineTotal: function(lineItem, debugLineTotal){
+			return calcTotal(lineItem, debugLineTotal);
 		}
 	};
 });
