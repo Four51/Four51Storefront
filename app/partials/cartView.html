@@ -1,4 +1,4 @@
-<div ng-init="loadCart()" ng-if="!order">
+<div ng-if="!order">
     <span>Your cart is currently empty. <a ng-href="#/catalog">Continue Shopping</a></span>
 </div>
 
@@ -34,6 +34,5 @@
         <input class="btn btn-mini btn-link" ng-disabled="cart.$invalid" value="{{Four51User.current.Company.SiteText.SaveChanges || 'Save Changes'}}" /> |
         <input class="btn btn-mini btn-link" value="Cancel Order" ng-click="cancelOrder()" /> |
         <a class="btn btn-mini btn-link" ng-href="#/catalog">Continue Shopping</a> |
-        <input class="btn btn-small btn-primary" type="submit" ng-disabled="cart.$invalid" value="{{Four51User.current.Company.SiteText.Checkout}}" />
     </span>
 </div>
