@@ -1,4 +1,5 @@
 <div>
+
     <table class="table table-striped table-hover table-bordered">
         <thead>
             <tr>
@@ -30,7 +31,7 @@
                     </ul>
                 </td>
                 <td>{{item.UnitPrice | currency:"$"}}</td>
-                <td><quantityfield error='qtyError' lineitem='item' ps='item.PriceSchedule' v='item.Variant' p='item.Product' />{{qtyError}}</td>
+                <td><quantityfield error='qtyError' lineitem='item' />{{qtyError}}</td>
                 <td>{{item.Product.QuantityMultiplier * item.Quantity}}</td>
                 <td ng-if="user.permissions.contains('CostCenterPerLine')">
                     <costcenter
