@@ -20,7 +20,7 @@
             </tfoot>
             <tbody id="451_list_msg_rcv">
                 <tr ng-repeat="message in messages | onproperty:{ 'Model': 'Message', 'Value': 'Inbox'}">
-                    <td><input type='checkbox' ng-model="message.Selected" /></td>
+                    <td><input type='checkbox' ng-model="message.Selected" />{{$index}}: {{message.Selected == true}}</td>
                     <td>{{message.DateSent | date:'medium'}}</td>
                     <td><a ng-href="#/message/{{message.ID}}">{{message.Subject}}</a></td>
                     <td>{{message.FromName}}</td>
