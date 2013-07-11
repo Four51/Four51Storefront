@@ -1,7 +1,7 @@
-<img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url">
+<img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url">
 
 <table id="451_area_prod_desc" border=1>
-	<tr><td>name:</td><td>{{product.Name}}</td></tr>
+	<tr><td>name:</td><td>{{LineItem.Product.Name}}</td></tr>
 	<tr><td>Description:</td><td><span ng-bind-html-unsafe="LineItem.Product.Description"/></td></tr>
 	<tr><td>ExternalID</td><td>{{LineItem.Product.ExternalID}}</td></tr>
 	<tr ng-show="LineItem.Variant"><td>variant description:</td><td><span ng-bind-html-unsafe="LineItem.Variant.Description"/></td></tr>
