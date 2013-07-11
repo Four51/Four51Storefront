@@ -11,7 +11,7 @@
 
  */
 
-var C_debug = false;
+var C_debug = true;
 
 function e2eViewMessage(strJQSelect, strMsgDate, strMsgFrom, strMsgSubject, blnReturn){
     //navigate to a message in a list/repeater, click it, verify the header information is the same, navigate back(or not)
@@ -89,7 +89,7 @@ describe('Messages login', function() {
         browser().navigateTo('../../app/index.html');
     });
 
-    e2eLogin("sesendpo","fails345", C_debug);
+    e2eLogin("coreproduser","fails345", C_debug);
 
 });
 
@@ -404,7 +404,7 @@ describe('Message without authentication', function() {
         if(C_debug){pause();}
     });
 
-    e2eLogin("sesendpo","fails345", C_debug);
+    e2eLogin("coreproduser","fails345", C_debug);
 
     //do we get redirected back to the message?
     it("should then redirect us to the message itself", function() {
@@ -421,7 +421,7 @@ describe('Deleted Message without authentication', function() {
         if(C_debug){pause();}
     });
 
-    e2eLogin("sesendpo","fails345", C_debug);
+    e2eLogin("coreproduser","fails345", C_debug);
 
     it("should display an error", function() {
         expect(element('#451_err').count()).toBeGreaterThan(0);
@@ -437,7 +437,7 @@ describe('Invalid Message without authentication', function() {
         if(C_debug){pause();}
     });
 
-    e2eLogin("sesendpo","fails345", C_debug);
+    e2eLogin("coreproduser","fails345", C_debug);
 
     it("should display an error", function() {
         expect(element('#451_err').count()).toBeGreaterThan(0);
