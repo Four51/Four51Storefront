@@ -9,7 +9,7 @@ four51.app.factory('OrderService', function($resource, $451, $api) {
 		repeat: function(order) {
 			//TODO: add repeat functionality when order submission is available
 		},
-        addToOrder: function(quantity, productInteropID, variantInteropID){
+        addToOrder: function(lineItem){
             //if variantinteropid is null, it's a static w/out vars.
             console.dir({quantity: quantity, productInteropID: productInteropID, variantInteropID: variantInteropID} );
         },

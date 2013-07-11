@@ -1,6 +1,5 @@
 <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url">
 
-
 <table id="451_area_prod_desc" border=1>
 	<tr><td>name:</td><td>{{product.Name}}</td></tr>
 	<tr><td>Description:</td><td><span ng-bind-html-unsafe="LineItem.Product.Description"/></td></tr>
@@ -9,32 +8,31 @@
 </table>
 <br>
 <form name="addToOrderForm" ng-show="LineItem.Variant || LineItem.Product.Variants.length == 0">
-	<table border=1 ng-show="lineItemSpecs.length">
+	<table border=1 ng-show="lineItemSpecs">
 		<tr ng-repeat="s in lineItemSpecs">
 			<td>{{s.Prefix}}{{s.Name}}{{s.Suffix}}<span ng-show="s.Required" style="color:red"> *</span> </td>
 			<td><vspecfield changed="specChanged" s="s"></vspecfield></td>
 		</tr>
 	</table>
 	<br>
-	<quantityfield lineitem="LineItem" error="quantityError" /><span ng-show="quantityError">{{quantityError}}</span> <br>
-	line total: {{LineItem.LineTotal | currency}}<br>
-
-	<button ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(quantity, LineItem.Product.InteropID, LineItem.Variant.InteropID)">Add to Order</button>
+	<quantityfield lineitem="LineItem" error="quantityError" /><span ng-show="quantityError">{{quantityError}}</span>
 	<br>
-
+	line total: {{LineItem.LineTotal | currency}}
+	<br>
+	<button ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(LineItem)">Add to Order</button>
+	<br>
     <span ng-show="LineItem.PriceSchedule.MinQuantity > 1">
         min: {{LineItem.PriceSchedule.MinQuantity}}<br/>
     </span>
     <span ng-show="LineItem.PriceSchedule.MaxQuantity">
         max: {{LineItem.PriceSchedule.MaxQuantity}}<br/>
     </span>
-
     <span ng-show="showInventory">
         available inventory: {{LineItem.Variant.QuantityAvailable || LineItem.Product.QuantityAvailable}}
     </span>
 </form>
 
-<priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product' ng-show="LineItem.PriceSchedule" />
+<priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product' />
 
 <span id="451_list_vars" ng-show="LineItem.Product.Variants.length > 1 && !LineItem.Variant">variants({{LineItem.Product.Variants.length}})
     <ul>
@@ -43,22 +41,20 @@
 		</li>
 	</ul>
 </span>
+
 <staticspecstable specgroups="StaticSpecGroups"></staticspecstable><br>
 
+<span ng-show="LineItem.LineTotal">
+	<hr>
+	Line item total debug:
+	<br>
+	variant specs:
+	<ul>
+		<li ng-repeat="s in LineItem.Variant.Specs">{{s.Name}}: {{s.Value}}, markup: {{s.MarkupType}}</li>
+	</ul>
+	product specs:
+	<ul>
+		<li ng-repeat="s in LineItem.Product.Specs">{{s.Name}}: {{s.Value}}, markup: {{s.MarkupType}}</li>
+	</ul>
+</span>
 
-<hr>
-Line item total debug:
-<span ng-bind-html-unsafe="DebugLineTotal"></span>
-<br>
-variant specs:
-<ul>
-	<li ng-repeat="s in LineItem.Variant.Specs">{{s.Name}}: {{s.Value}}, markup: {{s.MarkupType}}</li>
-</ul>
-
-product specs:
-<ul>
-	<li ng-repeat="s in LineItem.Product.Specs">{{s.Name}}: {{s.Value}}, markup: {{s.MarkupType}}</li>
-</ul>
-
-
-<hr>

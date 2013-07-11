@@ -56,13 +56,13 @@ four51.app.factory('$451', function(Cache) {
     function arrayContainsValue(array, value) {
         return array.indexOf(value) > -1;
     }
-	function calcTotal(lineItem, debugLineTotal){
+	function calcTotal(lineItem){
 
 		var ps = lineItem.PriceSchedule;
 		var variant = lineItem.Variant;
 		var product = lineItem.Product;
 		console.log('calc total called');
-		console.dir(product);
+		console.dir(lineItem);
 		var unitPrice = 0;
 		// AmountPerQuantity(fixed amount per unit)
 		// AmountTotal (fixed amount per line)
@@ -75,8 +75,6 @@ four51.app.factory('$451', function(Cache) {
 		//var specs = $scope.variant ? $scope.variant.Specs : [];
 
 		var addToMarkups = function(spec){
-			console.log('calc spec: ' + spec.Name)
-			console.dir(spec)
 			if(spec.AllowOtherValue && spec.OtherTextValue && spec.OtherValueMarkup > 0){
 				otherValueMarkup += spec.OtherValueMarkup;
 			}else if(spec.Options.length && spec.Value){
@@ -111,13 +109,13 @@ four51.app.factory('$451', function(Cache) {
 		total += lineItem.Quantity * priceBreak.Price * (percentagePerLine / 100);
 		total += fixedAddPerLine + otherValueMarkup;
 
-		debugLineTotal = "quantity: " + lineItem.Quantity +"<br>" +
-			"amount added per quantity: " + amountPerQty + "<br>" +
-			"fixed ammount per line added: " + fixedAddPerLine + "<br>" +
-			"percentage added to qty*unitprice: " + percentagePerLine + "<br>" +
-			"other value markups: " + otherValueMarkup + "<br>" +
-			"unit price: " + priceBreak.Price;
-
+		var debugLineTotal = "line total debug:\rquantity:" + lineItem.Quantity +" & " +
+			"amount added per quantity:" + amountPerQty + " & " +
+			"fixed ammount per line added:" + fixedAddPerLine + " & " +
+			"percentage added to qty*unitprice:" + percentagePerLine + " & " +
+			"'other value' markup:" + otherValueMarkup + " & " +
+			"unit price:" + priceBreak.Price;
+		console.log(debugLineTotal);
 		lineItem.LineTotal = total;
 	}
 
