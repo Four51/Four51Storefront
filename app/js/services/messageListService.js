@@ -5,19 +5,18 @@ four51.app.factory('MessageListService', function($resource, $451, $api) {
 	});
 	return {
 		query: function() {
+            $451.clear('Messages');
 			return $api.resource(resource).
 				options({ persists: true, key: 'Messages', ttl: 60000 }).query();
 		},
 		delete: function(m) {
-			angular.forEach(m, function(msg) {
+			angular.forEach(m, function(msg, i) {
+                console.log('Is ' + i + ' selected? ' + msg.Selected);
 				if (msg.Selected) {
-					resource.delete(msg, function() {
-						$451.slice(m, msg);
-						$451.clear('Messages');
-					});
+					resource.delete(msg);
 				}
 			});
-			return m;
+            return this.query();
 		}
 	}
 });

@@ -72,22 +72,24 @@ four51.app.directive('staticspecstable', function(){
     return obj;
 })
 
-four51.app.directive('quantityfield', function(){
+four51.app.directive('quantityfield', function($451){
 
 	var obj = {
         scope: {
-            ps : '=',
-            v : '=',
-            p : '=',
-			lineitem : '=',
-			error: '=',
-			changed : '='
+            lineitem : '=',
+			error: '='
         },
         restrict: 'E',
-        template: '<select ng-if="ps.RestrictedQuantity" ng-model="lineitem.Quantity" ng-options="pb.Quantity as pb.Quantity for pb in ps.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value.Quantity, v, p, ps)\'"></select>'+
-            '<input ng-if="!ps.RestrictedQuantity" type="number" required name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, v, p, ps)\'"/>',
+        template: '<select ng-change="qtyChanged(lineitem)" ng-if="ps.RestrictedQuantity" ng-model="lineitem.Quantity" ng-options="pb.Quantity as pb.Quantity for pb in ps.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"></select>'+
+            '<input  ng-change="qtyChanged(lineitem)" ng-if="!ps.RestrictedQuantity" type="number" required name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"/>',
         link: function(scope){
-            scope.validQuantityAddToOrder = function(value, variant, product, priceSchedule){
+			scope.qtyChanged = function(lineitem){
+				$451.calculateLineTotal(lineitem);
+			};
+            scope.validQuantityAddToOrder = function(value, lineItem){
+				var variant = lineItem.Variant;
+				var product = lineItem.Product;
+				var priceSchedule = lineItem.PriceSchedule;
 
 				if(value == null){
 					console.log('validate called with undefined value')
@@ -96,7 +98,6 @@ four51.app.directive('quantityfield', function(){
 
                 if(!product && !variant)
 					return scope.valid | true;
-
 
                 if(!priceSchedule)
                     return scope.valid | true;
@@ -122,9 +123,6 @@ four51.app.directive('quantityfield', function(){
                 if(scope.valid)
 					scope.error = null;
 
-				if(scope.changed)
-					scope.changed(value);
-				console.log("is valid: " + scope.valid);
                 return scope.valid;
             }
 
