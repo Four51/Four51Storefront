@@ -9,5 +9,7 @@ four51.app.controller('ProductListCtrl', function ($routeParams,$rootScope, $sco
 
         if($scope.category)
             $scope.category.products = $scope.Products = ProductService.search($scope.categoryInteropID, null);
+
+
     }
 });
