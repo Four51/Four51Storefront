@@ -389,6 +389,9 @@ describe('MessageList: Sent Messages', function() {
     //TODO- what happens if we check some received and check some sent?  do the buttons work independently or collectively?
     //TODO- when added, check column sorting functionality
 
+    //TODO - check all delete RECEIVED
+    //TODO - check all delete SENT
+
 });
 
 describe('logout/cleanup', function(){

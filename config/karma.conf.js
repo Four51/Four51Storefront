@@ -14,10 +14,13 @@ files = [
 	'app/js/**/*.js',
 
 	'test/unit/appSpec.js',
+    'test/unit/filtersSpec.js',
     'test/unit/451Spec.js',
     'test/unit/directivesSpec.js',
     'test/unit/routingSpec.js',
-    'test/unit/categorySpec.js'
+    'test/unit/categorySpec.js',
+    'test/unit/addressSpec.js',
+    'test/unit/productSpec.js'
 
 ];
 

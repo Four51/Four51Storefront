@@ -1,8 +1,6 @@
 'use strict';
 //this file contains test specs for 451.js
-
-var jsonObject;
-jsonObject = {
+var jsonObject = {
     "additionalFeatures": "Accessibility features: tactile QWERTY keyboard, trackpad, three programmable keys, camera button",
     "android": {
         "os": "Android 2.2",
@@ -83,40 +81,46 @@ describe('$451 API:',function(){
         expect(url).toBe('/api/' + $451.appname + '/order');
     });
 });
+
 describe('$451 Cache:', function() {
     var $451;
     beforeEach(module('451order'));
     beforeEach(inject(function(_$451_) {
         $451 = _$451_;
     }));
-//let's test that caching works.
-    //test that we can instantiate a cache object                            --DONE
-    //test that we can store a string and array in the cache                 --DONE
-    //test that we can read that string back from the cache                  --DONE
-    //test that we can clear the whole cache                                 --DONE
-    //test that the whole cache has been cleared                             --DONE
-    //test that a single cache element can be cleared                        --DONE
-    //test that the single cache element has been cleared                    --DONE
-    //test that we can store the same simple string again in the cache       --DONE
-    //test that we can store a JSON object in the cache                      --DONE
-    //test that the JSON object is readable after storage                    --DONE
-
-    //test that persist cache elements still exist after cache has been cleared?      --these may have to be Scenarios not unit tests
-    //test that the browser can independently read the cache after being stored?
-    //test that the browser can independently clear the cache?
-    //test that when we store something in the cache it doesn't hit the service again?  this is a test for another area
+    //let's test that caching works.
+        //TODO- test that when we store something in the cache it doesn't hit the service again?  this is a test for another area
 
     it('should be able to instantiate a cache object', function(){
 
         var cacheObject;
         var options = { persists: false};
 
-        expect($451).not.toBe(null);
+        expect($451).not.toBeNull;
 
         cacheObject = $451.cache("something","else", options);
-        expect(cacheObject).not.toBe(null);
+        expect(cacheObject).not.toBeNull;
+        expect(cacheObject).toEqual("else");
     });
+    it('should not persist a cache object if persists=false (part1)', function(){
 
+        var cacheObject;
+        var options = { persists: false};
+
+        expect($451).not.toBeNull;
+
+        cacheObject = $451.cache("something","else", options);
+        expect(cacheObject).not.toBeNull;
+        expect(cacheObject).toEqual("else");
+        //in the next test it shouldn't exist
+    });
+    it('should not persist a cache object if persists=false (part2)', function(){
+        expect($451).not.toBeNull;
+
+        expect($451.cache("something")).toBeNull();
+        expect($451.cache("something")).toEqual(null);
+
+    });
     it('should be able to store a string and array in the cache', function(){
         var cacheObject;
         var options = { persists: false};
@@ -137,7 +141,6 @@ describe('$451 Cache:', function() {
         $451.cache("blah","blah2",options);
         $451.cache("blah1",[0,1,2,3],options);
     });
-
     it('should be able to read that string and array back from the cache', function(){
 
         var cacheObject;
@@ -149,7 +152,6 @@ describe('$451 Cache:', function() {
         cacheObject = $451.cache("blah1"); //READ FROM CACHE this 4 element array
         expect(cacheObject).toEqual([0,1,2,3]);
     });
-
     it('should be able to clear the whole cache', function(){
 
         var cacheObject;
@@ -163,7 +165,6 @@ describe('$451 Cache:', function() {
         expect($451.cache("blah1")).toEqual(null);
 
     });
-
     it('should be able to clear a single cache element', function(){
 
         var cacheObject;
@@ -177,8 +178,6 @@ describe('$451 Cache:', function() {
         expect($451.cache("blah1")).toEqual([0,1,2,3]);
 
     });
-
-
     it('should be able to reuse a cache element name', function(){
 
         var cacheObject;
@@ -195,7 +194,6 @@ describe('$451 Cache:', function() {
         expect(cacheObject).toEqual("blah2");
 
     });
-
     it('should be able to store a JSON object in the cache', function(){
 
         var cacheObject;
@@ -204,13 +202,12 @@ describe('$451 Cache:', function() {
 
         cacheObject = $451.cache("json", jsonObject,options);  //create a cache JSON object
 
-        expect($451.cache("json")).not.toEqual(null);
+        expect($451.cache("json")).toEqual(jsonObject);
 
          //now persist it to set it up for the next test
         options = { persists: true};
         $451.cache("json", jsonObject, options);  //create a cache JSON object
     });
-
     it('should be able to read a JSON object from the cache', function(){
 
         var cacheObject;
@@ -218,31 +215,56 @@ describe('$451 Cache:', function() {
 
         cacheObject = $451.cache("json");  //try to read the JSON object from the cache
 
-        expect($451.cache("json")).not.toEqual(null);
+        expect($451.cache("json")).toEqual(jsonObject);
         $451.clear("json");
 
     });
-
-    xit('should persist PERSIST=TRUE cache elements after clear', function(){         //DISABLED
+    it('should be able to store cache objects for specific amounts of time, in milleseconds', function(){
         var cacheObject;
-        var options = { persists: true};
+        var options = { persists: true, ttl: 5000}; //cache it to expire 5 seconds in the future
+
+        expect($451).not.toBeNull;
+
+        cacheObject = $451.cache("json", jsonObject,options);  //create a cache JSON object
+
+        //we should store it in cache and it shouldn't expire yet
+        expect($451.cache("json")).not.toBeNull();
+
+        $451.clear("json");
+    });
+    it('should set an expiration for cached objects specifiable in milliseconds', function(){
+        var cacheObject;
+        var options = { persists: true, ttl: -1000}; //cache it to expire a second ago.  it shouldn't be readable.
+        //the reason we test this with a negative TTL is because there's no way of delaying/waiting in javascript so we can't test it 1 sec in the future.
+
+        expect($451).not.toBeNull;
+
+        cacheObject = $451.cache("json", jsonObject,options);  //create a cache JSON object
+
+        //we should store it in cache and it should expire immediately
+        expect($451.cache("json")).toBeNull();
+
+        $451.clear("json");
+    });
+    it('should not cache an object when persists=false even though TTL is set to a positive number (part1)', function(){
+
+        var cacheObject;
+        var options = { persists: false, ttl: 150000};
         expect($451).not.toBe(null);
 
-        cacheObject = $451.cache("blah", "blah2", options);  //create a cache string that we expect to persist
+        cacheObject = $451.cache("json", jsonObject,options);
 
-        //hmm.  how do we refresh the browser within a unit test?  this might have to be upgraded to a scenario.
-
-        $451.clear("blah");
-        expect($451.cache("blah")).toEqual("blah2");
-
-        cacheObject = $451.cache("blah", "blah2");  //create a cache string using the name we just cleared
-        expect($451.cache("blah")).toEqual("blah2");
-        expect(cacheObject).toEqual("blah2");
-
+        expect($451.cache("json")).toBe(jsonObject);
     });
+    it('should not cache an object when persists=false even though TTL is set to a positive number (part2)', function(){
 
+        expect($451).not.toBe(null);
+        expect($451.cache("json")).toBeNull();
 
+        $451.clear("json");
+    });
 });
+
 describe('$451 Filter:', function() {
     var $451;
     beforeEach(module('451order'));
@@ -255,21 +277,10 @@ describe('$451 Filter:', function() {
         expect(objFilteredJSONResult instanceof Array)
     });
     it('Should return filtered JSON object array on a simple filter', function() {
-        var objOptions;
+        var objOptions = {Property:'type', Value:'a'};
 
-        objOptions = {Property:'type', Value:'a'};
         var objFilteredJSONResult = $451.filter(objJSONmini,objOptions);
         expect(objFilteredJSONResult.length).toBe(2);
         expect(objFilteredJSONResult[1].status).toBe('2');
-    });
-    it('Should return filtered JSON object array on a complex filter', function() {
-
-        var objOptions;
-        objOptions = {Property:'kiddo.chews', Value:'gum'};
-        var objFilteredJSONResult = $451.filter(jsonObject,objOptions);
-        expect(objFilteredJSONResult.length).toBe(1);
-        expect(objFilteredJSONResult[1].status).toBe('1');
-        console.dir(objFilteredJSONResult);
-        console.dir(jsonObject);
     });
 });
