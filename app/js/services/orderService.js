@@ -18,14 +18,15 @@ four51.app.factory('OrderService', function($resource, $451, $api) {
             // this is just cancelling the current shopping cart
             service.delete(function(response) {
                 $451.clear('Order.' + order.ID);
-                callback();
+                if (callback) callback();
             });
         },
         save: function(order, callback) {
+            $451.clear('Order.' + order.ID);
             service.save(order, function() {
-                callback();
+                if (callback) callback();
+               // return this.get({ id: order.ID });
             });
-            return this.get({ id: order.ID });
         }
 	}
 });
