@@ -1,9 +1,0 @@
-<hr>
-    Products partial:  <br>
-
-
-<a href=#/product/{{p.InteropID}}>{{p.Name}} variants({{p.Variants.length}})</a>
-{{p.StandardPriceSchedule.PriceBreaks[0].Quantity}} <span ng-show="p.QuantityMultiplier > 1">(x {{p.QuantityMultiplier}})</span> for {{p.StandardPriceSchedule.PriceBreaks[0].Price | currency}}
-<quantityfield ng-if="p.Variants.length==0" lineitem="{Product: p}" error="quantityError" /><span ng-show="quantityError">{{quantityError}}</span>
-
-

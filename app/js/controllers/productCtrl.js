@@ -1,12 +1,10 @@
 four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, ProductService, OrderService, VariantService, $451) {
-
 	$scope.LineItem = {};
 	$scope.LineItem.Product = $scope.p;
 	ProductService.setProductScope($scope.LineItem.Product, null, $scope);
 	$scope.allowAddToOrderInProductList = $scope.allowAddToOrder && $scope.lineItemSpecs.length == 0 && $scope.LineItem.Product.Type != 'VariableText';
-
-
 });
+
 four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductService, OrderService, VariantService, $451) {
 	$scope.LineItem = {};
 
@@ -49,11 +47,6 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 				});
 			}
 		}
-//var ps = $scope.priceSchedule;
-		//$scope.variant
-		//$scope.product
-		//$scope.LineItem
-		//$scope.DebugLineTotal
 		ProductService.calculateLineTotal($scope.LineItem, $scope.DebugLineTotal)
 	}
 });
