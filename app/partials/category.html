@@ -13,9 +13,15 @@
     </ul>
 </div>
 
+<span id="451_lst_prod">
 
-<div ng-include="'partials/productList.html'" onload="category=currentCategory; categoryInteropID=categoryInteropID; loadSearch();" ng-controller="ProductListCtrl"></div>
+	<span ng-repeat="product in products">
+		<hr><shortproductview p="product" />
+	</span>
 
+</span>
+
+	<div ng-if="false" ng-include="'partials/productList.html'" onload="category=currentCategory; categoryInteropID=categoryInteropID; loadSearch();" ng-controller="ProductListCtrl"></div>
 
 
 

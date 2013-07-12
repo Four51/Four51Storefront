@@ -1,5 +1,18 @@
 'use strict';
+four51.app.directive('shortproductview', function(){
+	var obj = {
+		restrict: "E",
+		link: function(scope){
 
+		},
+		scope: {
+			p: '='
+		},
+		templateUrl:'partials/shortProductView.html',
+		controller: 'shortProductViewCtrl'
+	};
+	return obj;
+});
 four51.app.directive('vspecfield', function(){
 	var template = '<select " ' +
 		'ng-model="s.Value" '+
@@ -72,7 +85,7 @@ four51.app.directive('staticspecstable', function(){
     return obj;
 })
 
-four51.app.directive('quantityfield', function($451){
+four51.app.directive('quantityfield', function($451, ProductService){
 
 	var obj = {
         scope: {
@@ -84,7 +97,7 @@ four51.app.directive('quantityfield', function($451){
             '<input  ng-change="qtyChanged(lineitem)" ng-if="!ps.RestrictedQuantity" type="number" required name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"/>',
         link: function(scope){
 			scope.qtyChanged = function(lineitem){
-				$451.calculateLineTotal(lineitem);
+				ProductService.calculateLineTotal(lineitem);
 			};
             scope.validQuantityAddToOrder = function(value, lineItem){
 				var variant = lineItem.Variant;
@@ -93,6 +106,7 @@ four51.app.directive('quantityfield', function($451){
 
 				if(value == null){
 					console.log('validate called with undefined value')
+					scope.error = null;
 					return scope.valid | true;
 				}
 
@@ -122,7 +136,7 @@ four51.app.directive('quantityfield', function($451){
                 }
                 if(scope.valid)
 					scope.error = null;
-
+				console.log("qty valid: " + scope.valid + " " + scope.error);
                 return scope.valid;
             }
 
