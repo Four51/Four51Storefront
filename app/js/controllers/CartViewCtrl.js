@@ -7,6 +7,10 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, OrderSe
         });
     };
 
+    $scope.validateExternalID = function() {
+        return false;
+    }
+
     $scope.saveChanges = function() {
         OrderService.save($scope.order);
     };
