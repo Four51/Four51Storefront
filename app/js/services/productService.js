@@ -65,6 +65,16 @@ four51.app.factory('ProductService', function($resource, $451, $api){
 	}
 
 	function modifyProductScope(product, variant, scope){
+		function variantHasPriceSchedule(product, scheduleType){
+			if(!product.Variants)
+				return false;
+			for(var i = 0; i < product.Variants.length; i++){
+				if(product.Variants[i][scheduleType])
+					return true;
+			}
+			return false;
+		}
+
 		if(variant){
 			scope.LineItem.Variant = variant;
 			scope.LineItem.PriceSchedule = variant.StandardPriceSchedule ? variant.StandardPriceSchedule : product.StandardPriceSchedule; //include user permissions to decide to show
@@ -80,15 +90,10 @@ four51.app.factory('ProductService', function($resource, $451, $api){
 			if(item.CanSetForLineItem || item.DefinesVariant)
 				scope.lineItemSpecs.push(item);
 		});
-		function variantHasPriceSchedule(product, scheduleType){
-			if(!product.Variants)
-				return false;
-			for(var i = 0; i < product.Variants.length; i++){
-				if(product.Variants[i][scheduleType])
-					return true;
-			}
-			return false;
-		}
+
+		scope.allowAddToOrder = scope.LineItem.Variant || scope.LineItem.Product.Variants.length == 0;//this will include some order type and current order logic.
+		//short view//scope.allowAddToOrder = scope.LineItem.Product.Variants.length == 0 && scope.lineItemSpecs.length == 0 && scope.LineItem.Product.Type != 'VariableText';
+		//one view//ng-show="LineItem.Variant || LineItem.Product.Variants.length == 0"
 	}
 
     return {

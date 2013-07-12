@@ -7,7 +7,7 @@
 	<tr ng-show="LineItem.Variant"><td>variant description:</td><td><span ng-bind-html-unsafe="LineItem.Variant.Description"/></td></tr>
 </table>
 <br>
-<form name="addToOrderForm" ng-show="LineItem.Variant || LineItem.Product.Variants.length == 0">
+<form name="addToOrderForm" ng-show="allowAddToOrder">
 	<table border=1 ng-show="lineItemSpecs">
 		<tr ng-repeat="s in lineItemSpecs">
 			<td>{{s.Prefix}}{{s.Name}}{{s.Suffix}}<span ng-show="s.Required" style="color:red"> *</span> </td>

@@ -1,16 +1,18 @@
+<a href=#/product/{{LineItem.Product.InteropID}}>{{LineItem.Product.Name}}</a><br>
 
+<span ng-bind-html-unsafe="LineItem.Product.Description" ng-show="LineItem.Product.Description"><br></span>
 
-<a href=#/product/{{LineItem.Product.InteropID}}>{{LineItem.Product.Name}}</a>
-{{LineItem.PriceSchedule.PriceBreaks[0].Quantity}} <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span> for {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
+<span ng-show="LineItem.PriceSchedule.PriceBreaks[0]">
+	{{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
+	<span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>
+	for {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
+</span>
 
 <br>
-
 <span ng-show="showInventory">
 	quantity available: {{LineItem.Product.QuantityAvailable}}
 </span>
 <br>
-<span ng-show="allowAddToOrder">
-
+<span ng-show="allowAddToOrderInProductList">
 	<quantityfield lineitem="LineItem" error="quantityError" /><span ng-show="quantityError">{{quantityError}}</span>{{LineItem.LineTotal | currency}}
-
 </span>
