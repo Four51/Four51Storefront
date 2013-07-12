@@ -93,8 +93,8 @@ four51.app.directive('quantityfield', function($451, ProductService){
 			error: '='
         },
         restrict: 'E',
-        template: '<select ng-change="qtyChanged(lineitem)" ng-if="ps.RestrictedQuantity" ng-model="lineitem.Quantity" ng-options="pb.Quantity as pb.Quantity for pb in ps.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"></select>'+
-            '<input  ng-change="qtyChanged(lineitem)" ng-if="!ps.RestrictedQuantity" type="number" required name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"/>',
+        template: '<select ng-change="qtyChanged(lineitem)" ng-if="lineitem.PriceSchedule.RestrictedQuantity" ng-model="lineitem.Quantity" ng-options="pb.Quantity as pb.Quantity for pb in lineitem.PriceSchedule.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"></select>'+
+            '<input  ng-change="qtyChanged(lineitem)" ng-if="!lineitem.PriceSchedule.RestrictedQuantity" type="number" required name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"/>',
         link: function(scope){
 			scope.qtyChanged = function(lineitem){
 				ProductService.calculateLineTotal(lineitem);
