@@ -83,7 +83,14 @@ four51.app.factory('ProductService', function($resource, $451, $api){
 			scope.LineItem.PriceSchedule = variantHasPriceSchedule(product, 'StandardPriceSchedule') ? null : product.StandardPriceSchedule; //don't show price schedule if variant overrides parent PS
 			scope.StaticSpecGroups = product.StaticSpecGroups;
 		}
-		scope.showInventory = (product.QuantityAvailable || (scope.LineItem.Variant && scope.LineItem.Variant.QuantityAvailable)) && product.DisplayInventory == true; //add some logic around user permissions
+		scope.inventoryDisplay = function(product, variant){
+			if(product.IsVariantLevelInventory){
+				return variant ? variant.QuantityAvailable : null;
+			}else{
+				return product.QuantityAvailable;
+			}
+
+		}
 
 		scope.lineItemSpecs = [];
 		angular.forEach(product.Specs, function(item){
