@@ -23,9 +23,9 @@ four51.app.factory('OrderService', function($resource, $451, $api) {
         },
         save: function(order, callback) {
             $451.clear('Order.' + order.ID);
-            service.save(order, function() {
-                if (callback) callback();
-               // return this.get({ id: order.ID });
+            service.save(order, function(data) {
+                if (callback) callback(data);
+                return data;
             });
         }
 	}

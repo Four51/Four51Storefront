@@ -10,5 +10,5 @@
         <option value="" />
     </select>
     <input ng-if="user.permissions.contains('FreeFormCostCenter')" ng-model="order.CostCenter" type='text' required />
-    <span ng-if="user.current.CostCenters.length == 1 && !user.permissions.contains('FreeFormCostCenter')">{{order.CostCenter}}</span>
+    <span ng-if="user.current.CostCenters.length == 1 && !user.permissions.contains('FreeFormCostCenter')">{{user.current.Company.SiteText.CostCenter || 'Cost Center'}}: {{order.CostCenter}}</span>
 </div>
