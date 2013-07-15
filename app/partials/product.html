@@ -5,9 +5,12 @@
 	<tr><td>Description:</td><td><span ng-bind-html-unsafe="LineItem.Product.Description"/></td></tr>
 	<tr><td>ExternalID</td><td>{{LineItem.Product.ExternalID}}</td></tr>
 	<tr ng-show="LineItem.Variant"><td>variant description:</td><td><span ng-bind-html-unsafe="LineItem.Variant.Description"/></td></tr>
+	<tr ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)"><td>available inventory</td><td>{{inventoryDisplay(LineItem.Product, LineItem.Variant) }}</td></tr>
+</span>
+
 </table>
 <br>
-<form name="addToOrderForm" ng-show="LineItem.Variant || LineItem.Product.Variants.length == 0">
+<form name="addToOrderForm" ng-show="allowAddToOrder">
 	<table border=1 ng-show="lineItemSpecs">
 		<tr ng-repeat="s in lineItemSpecs">
 			<td>{{s.Prefix}}{{s.Name}}{{s.Suffix}}<span ng-show="s.Required" style="color:red"> *</span> </td>
@@ -27,19 +30,26 @@
     <span ng-show="LineItem.PriceSchedule.MaxQuantity">
         max: {{LineItem.PriceSchedule.MaxQuantity}}<br/>
     </span>
-    <span ng-show="showInventory">
-        available inventory: {{LineItem.Variant.QuantityAvailable || LineItem.Product.QuantityAvailable}}
-    </span>
+
 </form>
 
 <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product' />
 
-<span id="451_list_vars" ng-show="LineItem.Product.Variants.length > 1 && !LineItem.Variant">variants({{LineItem.Product.Variants.length}})
-    <ul>
-		<li ng-repeat="v in LineItem.Product.Variants">
-			<a href=#/product/{{LineItem.Product.InteropID}}/v/{{v.InteropID}}>{{v.ExternalID}}: {{v.InteropID}}</a>
-		</li>
-	</ul>
+<span id="451_list_vars" ng-show="LineItem.Product.Variants.length > 1 && !LineItem.Variant"><b>Please select from the following:</b><br>
+    <table border=1>
+		<tr>
+			<td>Variant ID</td>
+			<td>Description</td>
+			<td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">Available Quantity</td>
+			<td>Order Quantity</td>
+		</tr>
+		<tr ng-repeat="v in LineItem.Product.Variants">
+			<td><a href=#/product/{{LineItem.Product.InteropID}}/v/{{v.InteropID}}>{{v.ExternalID}}</a></td>
+			<td>{{v.Description}}</td>
+			<td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">{{v.QuantityAvailable}}</td>
+			<td>Order Quantity</td>
+		</tr>
+	</table>
 </span>
 
 <staticspecstable specgroups="StaticSpecGroups"></staticspecstable><br>

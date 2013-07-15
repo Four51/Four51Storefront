@@ -65,21 +65,6 @@ four51.app.factory('ProductService', function($resource, $451, $api){
 	}
 
 	function modifyProductScope(product, variant, scope){
-		if(variant){
-			scope.LineItem.Variant = variant;
-			scope.LineItem.PriceSchedule = variant.StandardPriceSchedule ? variant.StandardPriceSchedule : product.StandardPriceSchedule; //include user permissions to decide to show
-			scope.StaticSpecGroups = variant.StaticSpecGroups || product.StaticSpecGroups;
-		}else{
-			scope.LineItem.PriceSchedule = variantHasPriceSchedule(product, 'StandardPriceSchedule') ? null : product.StandardPriceSchedule; //don't show price schedule if variant overrides parent PS
-			scope.StaticSpecGroups = product.StaticSpecGroups;
-		}
-		scope.showInventory = (product.QuantityAvailable || (scope.LineItem.Variant && scope.LineItem.Variant.QuantityAvailable)) && product.DisplayInventory == true; //add some logic around user permissions
-
-		scope.lineItemSpecs = [];
-		angular.forEach(product.Specs, function(item){
-			if(item.CanSetForLineItem || item.DefinesVariant)
-				scope.lineItemSpecs.push(item);
-		});
 		function variantHasPriceSchedule(product, scheduleType){
 			if(!product.Variants)
 				return false;
@@ -89,6 +74,33 @@ four51.app.factory('ProductService', function($resource, $451, $api){
 			}
 			return false;
 		}
+
+		if(variant){
+			scope.LineItem.Variant = variant;
+			scope.LineItem.PriceSchedule = variant.StandardPriceSchedule ? variant.StandardPriceSchedule : product.StandardPriceSchedule; //include user permissions to decide to show
+			scope.StaticSpecGroups = variant.StaticSpecGroups || product.StaticSpecGroups;
+		}else{
+			scope.LineItem.PriceSchedule = variantHasPriceSchedule(product, 'StandardPriceSchedule') ? null : product.StandardPriceSchedule; //don't show price schedule if variant overrides parent PS
+			scope.StaticSpecGroups = product.StaticSpecGroups;
+		}
+		scope.inventoryDisplay = function(product, variant){
+			if(product.IsVariantLevelInventory){
+				return variant ? variant.QuantityAvailable : null;
+			}else{
+				return product.QuantityAvailable;
+			}
+
+		}
+
+		scope.lineItemSpecs = [];
+		angular.forEach(product.Specs, function(item){
+			if(item.CanSetForLineItem || item.DefinesVariant)
+				scope.lineItemSpecs.push(item);
+		});
+
+		scope.allowAddToOrder = scope.LineItem.Variant || scope.LineItem.Product.Variants.length == 0;//this will include some order type and current order logic.
+		//short view//scope.allowAddToOrder = scope.LineItem.Product.Variants.length == 0 && scope.lineItemSpecs.length == 0 && scope.LineItem.Product.Type != 'VariableText';
+		//one view//ng-show="LineItem.Variant || LineItem.Product.Variants.length == 0"
 	}
 
     return {
