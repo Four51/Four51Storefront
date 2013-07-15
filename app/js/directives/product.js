@@ -134,10 +134,11 @@ four51.app.directive('quantityfield', function($451, ProductService){
 					scope.error = "must be less than " + priceSchedule.MaxQuantity;
                     scope.valid = false;
                 }
-                var qtyAvail = variant || product;
 
-                if(qtyAvail.QuantityAvailable && qtyAvail.QuantityAvailable < value && product.AllowExceedInventory == false){
-					scope.error = "not enough available inventory " +  qtyAvail.QuantityAvailable;
+                var qtyAvail = product.IsVariantLevelInventory ? variant.QuantityAvailable : product.QuantityAvailable;
+
+                if(qtyAvail < value && product.AllowExceedInventory == false){
+					scope.error = "not enough available inventory " +  qtyAvail;
 					scope.valid = false;
                 }
                 if(scope.valid)
