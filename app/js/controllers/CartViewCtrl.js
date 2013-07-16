@@ -12,7 +12,9 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, OrderSe
     }
 
     $scope.saveChanges = function() {
-        OrderService.save($scope.order);
+        OrderService.save($scope.order, function(data) {
+            $scope.order = data;
+        });
     };
 
     $scope.user = UserService.get();
@@ -20,10 +22,10 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, OrderSe
 
 	$scope.$watch('order.LineItems', function(newval){
 		var newTotal = 0;
-
+        if (!$scope.order) return newTotal;
 		angular.forEach($scope.order.LineItems, function(item){
 			newTotal += item.LineTotal;
-		})
+		});
 		$scope.order.Subtotal = newTotal;
 	}, true);
 });

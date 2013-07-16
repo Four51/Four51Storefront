@@ -17,11 +17,8 @@ four51.app.controller('LineItemGridCtrl', function ($scope, OrderService, UserSe
         return hasSpecs;
     };
     $scope.removeSelected = function(order) {
-        OrderService.save(order, function() {
-            angular.forEach(order.LineItems, function(n,i) {
-                if (n.Selected)
-                    order.LineItems.splice(i,1);
-            });
+        OrderService.save(order, function(data) {
+            order = data;
             UserService.refresh();
         });
     }

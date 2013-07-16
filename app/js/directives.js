@@ -4,10 +4,7 @@
 
 four51.app.directive('authorization', function($route, $451) {
 	var obj = {
-		restrict: 'A',
-		link: function(scope, elem, attrs) {
-
-		}
+		restrict: 'A'
 	};
 	return obj;
 });
@@ -47,7 +44,7 @@ four51.app.directive('addressinput', function() {
             address : '=',
             return: '='
         },
-        templateUrl: 'partials/addressInputView.html',
+        templateUrl: 'partials/controls/addressInputView.html',
         controller: 'AddressInputCtrl'
     }
     return obj;
@@ -59,7 +56,7 @@ four51.app.directive('spendingaccounts', function(SpendingAccountService) {
             accounts: '='
         },
         restrict: 'E',
-        templateUrl: 'partials/spendingAccountsView.html'
+        templateUrl: 'partials/controls/spendingAccountsView.html'
     }
     return obj;
 });
@@ -84,19 +81,6 @@ four51.app.directive('lineitemhistorygrid', function() {
     var obj = {
         restrict: 'E',
         templateUrl: 'partials/reporting/lineItemHistoryGridView.html'
-    }
-    return obj;
-});
-
-four51.app.directive('lineitemgrid', function() {
-    var obj = {
-        scope: {
-            order: '=',
-            user: '='
-        },
-        restrict: 'E',
-        templateUrl: 'partials/lineItemGridView.html',
-        controller: 'LineItemGridCtrl'
     }
     return obj;
 });
