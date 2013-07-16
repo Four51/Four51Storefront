@@ -1,5 +1,18 @@
 'use strict';
+four51.app.directive('shortproductview', function(){
+	var obj = {
+		restrict: "E",
+		link: function(scope){
 
+		},
+		scope: {
+			p: '='
+		},
+		templateUrl:'partials/shortProductView.html',
+		controller: 'shortProductViewCtrl'
+	};
+	return obj;
+});
 four51.app.directive('vspecfield', function(){
 	var template = '<select " ' +
 		'ng-model="s.Value" '+
@@ -72,7 +85,7 @@ four51.app.directive('staticspecstable', function(){
     return obj;
 })
 
-four51.app.directive('quantityfield', function($451){
+four51.app.directive('quantityfield', function($451, ProductService){
 
 	var obj = {
         scope: {
@@ -80,11 +93,17 @@ four51.app.directive('quantityfield', function($451){
 			error: '='
         },
         restrict: 'E',
-        template: '<select ng-change="qtyChanged(lineitem)" ng-if="ps.RestrictedQuantity" ng-model="lineitem.Quantity" ng-options="pb.Quantity as pb.Quantity for pb in ps.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"></select>'+
-            '<input  ng-change="qtyChanged(lineitem)" ng-if="!ps.RestrictedQuantity" type="number" required name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"/>',
+        template: '<select ng-change="qtyChanged(lineitem)" ng-if="lineitem.PriceSchedule.RestrictedQuantity" ng-model="lineitem.Quantity" ng-options="pb.Quantity as getRestrictedQtyText(pb, lineitem.Product.QuantityMultiplier) for pb in lineitem.PriceSchedule.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"></select>'+
+            '<input  ng-change="qtyChanged(lineitem)" ng-if="!lineitem.PriceSchedule.RestrictedQuantity" type="number" required name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"/>',
         link: function(scope){
+			scope.getRestrictedQtyText = function(priceBreak, qtyMultiplier){
+				var qtyText = priceBreak.Quantity * qtyMultiplier;
+				if(qtyMultiplier > 1)
+					qtyText += ' (' + priceBreak.Quantity + 'x' + qtyMultiplier +')';
+				return qtyText;
+			};
 			scope.qtyChanged = function(lineitem){
-				$451.calculateLineTotal(lineitem);
+				ProductService.calculateLineTotal(lineitem);
 			};
             scope.validQuantityAddToOrder = function(value, lineItem){
 				var variant = lineItem.Variant;
@@ -93,6 +112,7 @@ four51.app.directive('quantityfield', function($451){
 
 				if(value == null){
 					console.log('validate called with undefined value')
+					scope.error = null;
 					return scope.valid | true;
 				}
 
@@ -114,15 +134,20 @@ four51.app.directive('quantityfield', function($451){
 					scope.error = "must be less than " + priceSchedule.MaxQuantity;
                     scope.valid = false;
                 }
-                var qtyAvail = variant || product;
 
-                if(qtyAvail.QuantityAvailable && qtyAvail.QuantityAvailable < value && product.AllowExceedInventory == false){
-					scope.error = "not enough available inventory " +  qtyAvail.QuantityAvailable;
-					scope.valid = false;
-                }
+				if(product.IsVariantLevelInventory && !variant){
+					console.log('variant not selected can\'t check qty available'); //in vboss the user may select the qty before the variant. we may have to change when this gets called so inventory available can be re validated if the variant is chnaged based on a selection spec. It's probably not a big deal since the api will check inventory available on adding to order.
+				}
+				else{
+					var qtyAvail = product.IsVariantLevelInventory ? variant.QuantityAvailable : product.QuantityAvailable;
+					if(qtyAvail < value && product.AllowExceedInventory == false){
+						scope.error = "not enough available inventory " +  qtyAvail;
+						scope.valid = false;
+					}
+				}
                 if(scope.valid)
 					scope.error = null;
-
+				console.log("qty valid: " + scope.valid + " " + scope.error);
                 return scope.valid;
             }
 

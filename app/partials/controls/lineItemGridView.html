@@ -23,7 +23,7 @@
         <tbody>
             <tr ng-repeat="item in order.LineItems">
                 <td><input type='checkbox' ng-model='order.LineItems[$index].Selected' /></td>
-                <td><a ng-href="#/product/{{order.LineItems[$index].Product.InteropID}}">{{item.Variant.ExternalID}}</a></td>
+                <td><a ng-href="#/cart/{{$index}}">{{item.Variant.ExternalID}}</a></td>
                 <td>{{item.Product.Name}}</td>
                 <td ng-if="hasSpecsOnAnyLineItem(order)">
                     <ul class="unstyled"><!-- more complete business logic in LineItemGrid.cs line 638 -->
@@ -41,8 +41,8 @@
                              />
                 </td>
                 <td>
-                    <input type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="dateneededrequired" />
-                    <input type="button" class="btn btn-mini btn-info" value="copy to all" ng-click="copyAddressToAll(order)" ng-if="$index == 0" ng-show="item.DateNeeded" />
+                    <input type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.permissions.contains('DateNeededRequired')" />
+                    <input type="button" class="btn btn-mini btn-info" value="copy to all" ng-click="copyAddressToAll(order)" ng-if="$index == 0 && order.LineItems.length > 1" ng-show="item.DateNeeded" />
                 </td>
                 <td>{{item.LineTotal | currency:"$"}}</td>
             </tr>

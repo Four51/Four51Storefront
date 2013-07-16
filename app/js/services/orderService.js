@@ -1,10 +1,10 @@
 four51.app.factory('OrderService', function($resource, $451, $api) {
 	var service = $resource($451.api('order/:id'), { id: '@id' });
 	return {
-		get: function(param) {
+		get: function(param, callback) {
 			return $api.resource(service)
 				.options({ persists: true, key: 'Order.' + param.id})
-				.get(param);
+				.get(param, callback);
 		},
 		repeat: function(order) {
 			//TODO: add repeat functionality when order submission is available
@@ -23,9 +23,9 @@ four51.app.factory('OrderService', function($resource, $451, $api) {
         },
         save: function(order, callback) {
             $451.clear('Order.' + order.ID);
-            service.save(order, function() {
-                if (callback) callback();
-               // return this.get({ id: order.ID });
+            service.save(order, function(data) {
+                if (callback) callback(data);
+                return data;
             });
         }
 	}

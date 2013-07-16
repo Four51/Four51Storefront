@@ -2,37 +2,37 @@
     <span>Your cart is currently empty. <a ng-href="#/catalog">Continue Shopping</a></span>
 </div>
 
-<div ng-if="order" class="OrderDetailTable">
-    <form name="cart" ng-submit="checkout()">
-        <p ng-if="Four51User.permissions.contains('EditPOID')">
-            <label>{{Four51User.current.Company.SiteText.OrderID || 'Order ID'}}:</label>
-            <input ng-disabled='order.autoID' type='text' ng-model="order.ExternalID" required ui-mask="{{Four51User.current.Company.POIDMask}}" />
-            <span ng-if="Four51User.permissions.contains('AllowAutoGenPOID')">
-                <input type='checkbox' ng-click="order.ExternalID = order.autoID ? 'auto' : ''" ng-model='order.autoID' /> Use system-generated ID
-            </span>
-        </p>
-        <label>Comments:</label><textarea rows="5" cols="100" ng-model="order.Comments" /></label><br/>
-        <label ng-if="Four51User.permissions.contains('CostCenterPerOrder') && !Four51User.permissions.contains('CostCenterPerLine')">{{user.current.Company.SiteText.CostCenter || 'Cost Center' + ':'}}
-            <costcenter
-                user="Four51User"
-                label="true"
-                order="order"
-                ng-if="Four51User.permissions.contains('CostCenterPerOrder') && !Four51User.permissions.contains('CostCenterPerLine')" />
-        </label>
-    </form>
-</div>
+<form name="cart">
+    <div ng-if="order" class="OrderDetailTable">
+            <p ng-if="Four51User.permissions.contains('EditPOID')">
+                <label>{{Four51User.current.Company.SiteText.OrderID || 'Order ID'}}:</label>
+                <input ng-disabled='order.autoID' type='text' ng-model="order.ExternalID" required ui-mask="{{Four51User.current.Company.POIDMask}}" />
+                <span ng-if="Four51User.permissions.contains('AllowAutoGenPOID')">
+                    <input type='checkbox' ng-click="order.ExternalID = order.autoID ? 'auto' : ''" ng-model='order.autoID' /> Use system-generated ID
+                </span>
+            </p>
+            <label>Comments:</label><textarea rows="5" cols="100" ng-model="order.Comments" /></label><br/>
+            <label ng-if="Four51User.permissions.contains('CostCenterPerOrder') && !Four51User.permissions.contains('CostCenterPerLine')">
+                <costcenter
+                    user="Four51User"
+                    label="true"
+                    order="order"
+                    ng-if="Four51User.permissions.contains('CostCenterPerOrder') && !Four51User.permissions.contains('CostCenterPerLine')" />
+            </label>
+    </div>
 
-<lineitemgrid ng-if="order" order='order' user='Four51User'></lineitemgrid>
+    <lineitemgrid ng-if="order" order='order' user='Four51User'></lineitemgrid>
 
-<div ng-if="order" class="CartDetail">
-    <span ng-if="!Four51User.current.permissions.contains('HidePricing')">
-        <label>Subtotal: {{order.Subtotal | currency:"$"}}</label><br/>
-        <p ng-if="Four51User.current.Company.TaxMethod != 'NoTax'"><label>{{ Four51User.current.Company.SiteText.ShippingDisclaimer }}</label></p>
-    </span>
-    <hr/>
-    <span>
-        <input class="btn btn-mini btn-link" ng-click="saveChanges()" ng-disabled="cart.$invalid" value="{{Four51User.current.Company.SiteText.SaveChanges || 'Save Changes'}}" /> |
-        <input class="btn btn-mini btn-link" value="Cancel Order" ng-click="cancelOrder()" /> |
-        <a class="btn btn-mini btn-link" ng-href="#/catalog">Continue Shopping</a> |
-    </span>
-</div>
+    <div ng-if="order" class="CartDetail">
+        <span ng-if="!Four51User.current.permissions.contains('HidePricing')">
+            <label>Subtotal: {{order.Subtotal | currency:"$"}}</label><br/>
+            <p ng-if="Four51User.current.Company.TaxMethod != 'NoTax'"><label>{{ Four51User.current.Company.SiteText.ShippingDisclaimer }}</label></p>
+        </span>
+        <hr/>
+        <span>
+            <input class="btn btn-mini btn-link" ng-click="saveChanges()" ng-disabled="cart.$invalid" value="{{Four51User.current.Company.SiteText.SaveChanges || 'Save Changes'}}" /> |
+            <input class="btn btn-mini btn-link" value="Cancel Order" ng-click="cancelOrder()" /> |
+            <a class="btn btn-mini btn-link" ng-href="#/catalog">Continue Shopping</a> |
+        </span>
+    </div>
+</form>
