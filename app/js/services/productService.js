@@ -65,7 +65,6 @@ four51.app.factory('ProductService', function($resource, $451, $api){
 	}
 
 	function modifyProductScope(scope){
-		console.log('hell');
 		function variantHasPriceSchedule(product, scheduleType){
 			if(!product.Variants)
 				return false;
@@ -120,8 +119,8 @@ four51.app.factory('ProductService', function($resource, $451, $api){
             console.log('product query');
             return resource.query({'CategoryInteropID': categoryInteropID, 'SearchTerms': searchTerm ? searchTerm : ''}, callback);
         },
-		calculateLineTotal: function(lineItem, debugLineTotal){
-			return calcTotal(lineItem, debugLineTotal);
+		calculateLineTotal: function(lineItem){
+			return calcTotal(lineItem);
 		}
     }
 });

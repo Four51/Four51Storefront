@@ -20,6 +20,7 @@ four51.app.config(['$routeProvider', function($routeProvider) {
             when('/address', { templateUrl: 'partials/addressEditView.html', controller: 'AddressViewCtrl' }).
             when('/address/:id', { templateUrl: 'partials/addressEditView.html', controller: 'AddressViewCtrl' }).
             when('/cart', { templateUrl: 'partials/cartView.html', controller: 'CartViewCtrl'}).
+			when('/cart/:lineItemIndex/', { templateUrl: 'partials/product.html', controller: 'LineItemEditCtrl'}).
 			when('/login', { templateUrl: 'partials/login.html', controller: 'LoginCtrl' }).
 			otherwise({redirectTo: '/catalog'});
 	}]);

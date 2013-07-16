@@ -1,3 +1,12 @@
+four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, ProductService, OrderService, VariantService, $451, UserService) {
+	var user = UserService.get();
+	OrderService.get({ id: user.CurrentOrderID }, function(data){
+		$scope.LineItem = data.LineItems[$routeParams.lineItemIndex];
+		ProductService.setProductScope($scope);
+		$scope.allowAddToOrderInProductList = $scope.allowAddToOrder && $scope.LineItem.Specs.length == 0 && $scope.LineItem.Product.Type != 'VariableText';
+	});
+});
+
 four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, ProductService, OrderService, VariantService, $451) {
 	$scope.LineItem = {};
 	$scope.LineItem.Product = $scope.p;
@@ -13,10 +22,8 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
         if($routeParams.variantInteropID){
 			$scope.LineItem.Variant = $451.filter(data.Variants, {Property: 'InteropID', Value: $routeParams.variantInteropID})[0];
 		}
-		console.log('call scope');
-        ProductService.setProductScope($scope)
-
-    });
+		ProductService.setProductScope($scope)
+	});
 
 	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
 		OrderService.addToOrder(quantity, productInteropID, variantInteropID);
@@ -50,7 +57,7 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 				});
 			}
 		}
-		ProductService.calculateLineTotal($scope.LineItem, $scope.DebugLineTotal)
+		ProductService.calculateLineTotal($scope.LineItem)
 	}
 });
 
