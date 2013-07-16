@@ -11,7 +11,7 @@
 
  */
 
-var C_debug = true;
+var C_debug = false;
 
 function e2eViewMessage(strJQSelect, strMsgDate, strMsgFrom, strMsgSubject, blnReturn){
     //navigate to a message in a list/repeater, click it, verify the header information is the same, navigate back(or not)
@@ -184,6 +184,7 @@ describe('Reply View', function() {
 
 describe('MessageList: Received Messages', function() {
 
+    var intReceivedMessagesBeforeDelete,intReceivedMessagesAfterDelete
     it('should display a list of Received messages, if there are any', function() {
 
         browser().navigateTo('#/message');
@@ -264,6 +265,32 @@ describe('MessageList: Received Messages', function() {
 
         //this Jquery select may need to be changed if the table structure/layout changes
         e2eViewMessage("#451_list_msg_rcv tr:last td:nth-child(3) a",strDateSent,strSentFrom,strSubject,true);
+
+        if(C_debug){pause();}
+    });
+
+    it('should let us delete ALL received messages at once', function(){ //this function should be x'ed by default when running regression tests so we don't accidentally delete real messages.
+
+        expect(browser().location().url()).toBe("/message");
+
+        intReceivedMessagesBeforeDelete = repeater("#451_list_msg_rcv tr").count();
+
+        if(C_debug){pause();}
+        pause();
+        element("#451_chk_all_rcv").click(); //check the checkbox on the header to select all messages
+        //check to ensure all RECEIVED messages are checked
+        expect(element('#451_list_msg_rcv tr td input:checked').count()).toEqualFuture(repeater("#451_list_msg_rcv tr").count()); //verify all checkboxes are checked
+        pause();
+        if(C_debug){pause();}
+        pause();
+        element("#451_btn_delsel_rcv").click();//click delete
+        pause();
+        //check to ensure all RECEIVED messages are deleted and gone
+
+        intReceivedMessagesAfterDelete = repeater("#451_list_msg_rcv tr").count();
+        pause();
+        expect(intReceivedMessagesAfterDelete).toBe(0);
+        pause();
 
         if(C_debug){pause();}
     });
@@ -386,6 +413,7 @@ describe('MessageList: Sent Messages', function() {
         if(C_debug){pause();}
     });
 
+
     //TODO- what happens if we check some received and check some sent?  do the buttons work independently or collectively?
     //TODO- when added, check column sorting functionality
 
@@ -395,6 +423,14 @@ describe('MessageList: Sent Messages', function() {
 });
 
 describe('logout/cleanup', function(){
+
+    //lets create 3 more messages so we have some in the list after having deleted them all.
+    it("should let us re-add a few messages for next time", function() {
+        e2eReplyMessage("#451_list_msg_rcv tr:first td:nth-child(3) a","MultiDeleteTest","hello, thanks for all the fish1",true);
+        e2eReplyMessage("#451_list_msg_rcv tr:first td:nth-child(3) a","MultiDeleteTest","hello, thanks for all the fish2",true);
+        e2eReplyMessage("#451_list_msg_rcv tr:first td:nth-child(3) a","MultiDeleteTest","hello, thanks for all the fish3",true);
+    });
+
     e2eLogout(C_debug);
 });
 
