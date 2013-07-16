@@ -20,6 +20,7 @@ files = [
     'test/unit/routingSpec.js',
     'test/unit/categorySpec.js',
     'test/unit/addressSpec.js',
+    'test/unit/messagesSpec.js',
     'test/unit/productSpec.js'
 
 ];
