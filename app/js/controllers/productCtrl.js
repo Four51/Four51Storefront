@@ -13,6 +13,7 @@ four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, Pr
 	$scope.LineItem = {};
 	$scope.LineItem.Product = $scope.p;
 	ProductService.setNewLineItemScope($scope);
+	ProductService.setProductViewScope($scope);
 	$scope.allowAddToOrderInProductList = $scope.allowAddToOrder && $scope.LineItem.Specs.length == 0 && $scope.LineItem.Product.Type != 'VariableText';
 });
 
