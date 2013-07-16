@@ -63,7 +63,21 @@ four51.app.factory('ProductService', function($resource, $451, $api){
 		console.log(debugLineTotal);
 		lineItem.LineTotal = total;
 	}
-
+	function productViewScope(scope){
+		scope.inventoryDisplay = function(product, variant){
+			if(product.IsVariantLevelInventory){
+				return variant ? variant.QuantityAvailable : null;
+			}else{
+				return product.QuantityAvailable;
+			}
+		}
+		if(scope.LineItem.Variant){
+			//scope.LineItem.Variant = variant;
+			scope.StaticSpecGroups = scope.LineItem.Variant.StaticSpecGroups || scope.LineItem.Product.StaticSpecGroups;
+		}else{
+			scope.StaticSpecGroups = scope.LineItem.Product.StaticSpecGroups;
+		}
+	}
 	function newLineItemScope(scope){
 		function variantHasPriceSchedule(product, scheduleType){
 			if(!product.Variants)
@@ -76,21 +90,21 @@ four51.app.factory('ProductService', function($resource, $451, $api){
 		}
 
 		if(scope.LineItem.Variant){
-			//scope.LineItem.Variant = variant;
 			scope.LineItem.PriceSchedule = scope.LineItem.Variant.StandardPriceSchedule ? scope.LineItem.Variant.StandardPriceSchedule : scope.LineItem.Product.StandardPriceSchedule; //include user permissions to decide to show
-			scope.StaticSpecGroups = scope.LineItem.Variant.StaticSpecGroups || scope.LineItem.Product.StaticSpecGroups;
+			//moved to productViewScope scope.StaticSpecGroups = scope.LineItem.Variant.StaticSpecGroups || scope.LineItem.Product.StaticSpecGroups;
 		}else{
 			scope.LineItem.PriceSchedule = variantHasPriceSchedule(scope.LineItem.Product, 'StandardPriceSchedule') ? null : scope.LineItem.Product.StandardPriceSchedule; //don't show price schedule if variant overrides parent PS
-			scope.StaticSpecGroups = scope.LineItem.Product.StaticSpecGroups;
+			//moved to productViewScope scope.StaticSpecGroups = scope.LineItem.Product.StaticSpecGroups;
 		}
 
-		scope.inventoryDisplay = function(product, variant){
+		//moved to productViewScope
+		/*scope.inventoryDisplay = function(product, variant){
 			if(product.IsVariantLevelInventory){
 				return variant ? variant.QuantityAvailable : null;
 			}else{
 				return product.QuantityAvailable;
 			}
-		}
+		}*/
 
 		scope.LineItem.Specs = [];
 		angular.forEach(scope.LineItem.Product.Specs, function(item){
@@ -121,6 +135,9 @@ four51.app.factory('ProductService', function($resource, $451, $api){
         },
 		calculateLineTotal: function(lineItem){
 			return calcTotal(lineItem);
+		},
+		setProductViewScope: function(scope){
+			productViewScope(scope)
 		}
     }
 });

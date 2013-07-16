@@ -3,17 +3,8 @@ four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Produc
 	var user = UserService.get();
 	OrderService.get({ id: user.CurrentOrderID }, function(data){
 		$scope.LineItem = data.LineItems[$routeParams.lineItemIndex];
-		//ProductService.setProductScope($scope);
-
-		//copied from newLineScope
 		$scope.allowAddToOrder = true;
-		$scope.inventoryDisplay = function(product, variant){
-			if(product.IsVariantLevelInventory){
-				return variant ? variant.QuantityAvailable : null;
-			}else{
-				return product.QuantityAvailable;
-			}
-		}
+		ProductService.setProductViewScope($scope);
 
 	});
 });
@@ -33,7 +24,8 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
         if($routeParams.variantInteropID){
 			$scope.LineItem.Variant = $451.filter(data.Variants, {Property: 'InteropID', Value: $routeParams.variantInteropID})[0];
 		}
-		ProductService.setNewLineItemScope($scope)
+		ProductService.setNewLineItemScope($scope);
+		ProductService.setProductViewScope($scope);
 	});
 
 	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
