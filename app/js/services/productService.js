@@ -64,7 +64,7 @@ four51.app.factory('ProductService', function($resource, $451, $api){
 		lineItem.LineTotal = total;
 	}
 
-	function modifyProductScope(scope){
+	function newLineItemScope(scope){
 		function variantHasPriceSchedule(product, scheduleType){
 			if(!product.Variants)
 				return false;
@@ -104,8 +104,8 @@ four51.app.factory('ProductService', function($resource, $451, $api){
 	}
 
     return {
-		setProductScope: function(scope){
-			modifyProductScope(scope);
+		setNewLineItemScope: function(scope){
+			newLineItemScope(scope);
 		},
         get: function(param, successCall){
             return $api.resource(resource)

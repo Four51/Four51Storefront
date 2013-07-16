@@ -1,16 +1,27 @@
 four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, ProductService, OrderService, VariantService, $451, UserService) {
+	$scope.LineItem = {};
 	var user = UserService.get();
 	OrderService.get({ id: user.CurrentOrderID }, function(data){
 		$scope.LineItem = data.LineItems[$routeParams.lineItemIndex];
-		ProductService.setProductScope($scope);
-		$scope.allowAddToOrderInProductList = $scope.allowAddToOrder && $scope.LineItem.Specs.length == 0 && $scope.LineItem.Product.Type != 'VariableText';
+		//ProductService.setProductScope($scope);
+
+		//copied from newLineScope
+		$scope.allowAddToOrder = true;
+		$scope.inventoryDisplay = function(product, variant){
+			if(product.IsVariantLevelInventory){
+				return variant ? variant.QuantityAvailable : null;
+			}else{
+				return product.QuantityAvailable;
+			}
+		}
+
 	});
 });
 
 four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, ProductService, OrderService, VariantService, $451) {
 	$scope.LineItem = {};
 	$scope.LineItem.Product = $scope.p;
-	ProductService.setProductScope($scope);
+	ProductService.setNewLineItemScope($scope);
 	$scope.allowAddToOrderInProductList = $scope.allowAddToOrder && $scope.LineItem.Specs.length == 0 && $scope.LineItem.Product.Type != 'VariableText';
 });
 
@@ -22,7 +33,7 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
         if($routeParams.variantInteropID){
 			$scope.LineItem.Variant = $451.filter(data.Variants, {Property: 'InteropID', Value: $routeParams.variantInteropID})[0];
 		}
-		ProductService.setProductScope($scope)
+		ProductService.setNewLineItemScope($scope)
 	});
 
 	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
@@ -53,7 +64,7 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 				VariantService.search($scope.LineItem.Product.InteropID, specOptionIDs, function(data){
 					if(!data.IsDefaultVariant)
 						$scope.LineItem.Variant = data;
-						ProductService.setProductScope($scope)
+						ProductService.setNewLineItemScope($scope)
 				});
 			}
 		}
