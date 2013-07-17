@@ -83,38 +83,51 @@ describe('$451 MessageList Controller :',function(){
 
         expect(scope.messages.length).toBe(10);
 
-        expect(scope.messages[0].Selected).toBeFalsy(); //in the JSON object above all the Selected props are False by default
-        expect(scope.messages[9].Selected).toBeFalsy(); //this one (and [8]) will get switched by checkAll
+        //in the JSON object above all the Selected props are False by default
+        for(var i = 0; i < 10; i++){
+            expect(scope.messages[i].Selected).toBeFalsy();
+        }
 
-        scope.checkAll(event,"SentBox");
+        scope.checkAll(event,"SentBox"); //[8] and [9] will get switched by to True checkAll because it should only check SentBox messages
 
-        expect(scope.messages[0].Selected).toBeFalsy();
-        expect(scope.messages[7].Selected).toBeFalsy();
+        for(var i = 0; i < 8; i++){
+            expect(scope.messages[i].Selected).toBeFalsy();
+        }
         expect(scope.messages[8].Selected).toBeTruthy();
         expect(scope.messages[9].Selected).toBeTruthy();
+
 
         scope.checkAll(event,"Inbox");
 
-        expect(scope.messages[0].Selected).toBeTruthy();
-        expect(scope.messages[7].Selected).toBeTruthy();
-        expect(scope.messages[8].Selected).toBeTruthy();
-        expect(scope.messages[9].Selected).toBeTruthy();
+        for(var i = 0; i < 10; i++){
+            expect(scope.messages[i].Selected).toBeTruthy(); //now they should ALL be truthy because last time we called checkAll it turned the SentBox items Selected=true;
+        }
 
         scope.checkAll(event,"Inbox");
 
-        expect(scope.messages[0].Selected).toBeFalsy();
-        expect(scope.messages[7].Selected).toBeFalsy();
-        expect(scope.messages[8].Selected).toBeTruthy();
-        expect(scope.messages[9].Selected).toBeTruthy();
+        for(var i = 0; i < 8; i++){
+            expect(scope.messages[i].Selected).toBeFalsy(); //now they should all be Selected=False because we're effectively UNchecking them all
+        }
+
+        scope.messages[0].Selected = false;
+        scope.messages[1].Selected = true;
+        scope.messages[2].Selected = false;
+        scope.messages[3].Selected = true;
+        scope.messages[4].Selected = false;
+        scope.messages[5].Selected = true;
+        scope.messages[6].Selected = false;
+        scope.messages[7].Selected = true;
+
+        scope.checkAll(event,"Inbox");
+
+        for(var i = 0; i < 8; i++){
+            expect(scope.messages[i].Selected).toBeTruthy(); //all Selected=true again even though we monkeyed with some of them on the way
+        }
 
         scope.checkAll(event,"SentBox");
 
-        expect(scope.messages[0].Selected).toBeFalsy();
-        expect(scope.messages[7].Selected).toBeFalsy();
         expect(scope.messages[8].Selected).toBeFalsy();
         expect(scope.messages[9].Selected).toBeFalsy();
-
-        console.dir(scope)
 
     })
     it('Should delete via API when deleteSelected is called by the view(delete button)', function(){
@@ -132,14 +145,65 @@ describe('$451 MessageList Controller :',function(){
 
         expect(scope.messages.length).toBe(10);
 
+        scope.messages[0].Selected = true;
         scope.messages[1].Selected = true;
 
         //deleteSelected() accepts a JQuery $event which we mockup with jasmine createSpy so it doesn't break
         scope.deleteSelected(event); //we can't test whether a single element is deleted or not because the API call deletes the cache and re-gets them after deleting.
 
+        $httpBackend.expectDELETE("/api/russ/message?Body=null&Box=Inbox&DateSent=2013-07-15T10:23:01.693&FromName=Core+Prod+User&ID=39539254x&Selected=true&Subject=MultiDeleteTest&ToName=Core+Prod+User").respond();
+        $httpBackend.expectDELETE("/api/russ/message?Body=null&Box=Inbox&DateSent=2013-07-15T10:22:54.363&FromName=Core+Prod+User&ID=39539253x&Selected=true&Subject=MultiDeleteTest&ToName=Core+Prod+User").respond();
+        $httpBackend.expectGET("/api/russ/message").respond(jsonMessageList.slice(2));
+
+        scope.$apply(); //do the magic
+        $httpBackend.flush();
+
+        expect(event.preventDefault).toHaveBeenCalled();
+        expect(scope.messages.length).toBe(8);
+
+    })
+    it('Should delete ALL messages after checkAll (both in and sent)', function(){
+
+        var event = {preventDefault: jasmine.createSpy()}; //we do this to mock the event passed to deleteSelected, it doesn't do anything but avoids the script breaking on preventDefault.
+
+        $httpBackend.expectGET("/api/russ/message").respond(jsonMessageList);
+
+        ctrlMsgList('MessageListCtrl', {
+            $scope: scope
+        });
+
+        scope.$apply(); //do the magic
+        $httpBackend.flush();
+
+        expect(scope.messages.length).toBe(10);
+
+        scope.checkAll(event,"Inbox");
+        scope.checkAll(event,"SentBox");
+
+        //deleteSelected() accepts a JQuery $event which we mockup with jasmine createSpy so it doesn't break
+        scope.deleteSelected(event); //we can't test whether a single element is deleted or not because the API call deletes the cache and re-gets them after deleting.
+
+        $httpBackend.expectDELETE("/api/russ/message?Body=null&Box=Inbox&DateSent=2013-07-15T10:23:01.693&FromName=Core+Prod+User&ID=39539254x&Selected=true&Subject=MultiDeleteTest&ToName=Core+Prod+User").respond();
+        $httpBackend.expectDELETE("/api/russ/message?Body=null&Box=Inbox&DateSent=2013-07-15T10:22:54.363&FromName=Core+Prod+User&ID=39539253x&Selected=true&Subject=MultiDeleteTest&ToName=Core+Prod+User").respond();
+        $httpBackend.expectDELETE("/api/russ/message?Body=null&Box=Inbox&DateSent=2013-07-15T10:22:49.083&FromName=Core+Prod+User&ID=39539252x&Selected=true&Subject=MultiDeleteTest&ToName=Core+Prod+User").respond();
+        $httpBackend.expectDELETE("/api/russ/message?Body=null&Box=Inbox&DateSent=2013-07-15T10:22:27.74&FromName=Core+Prod+User&ID=39539251x&Selected=true&Subject=Test+Sent+List+Reply+Subject&ToName=Core+Prod+User").respond();
+        $httpBackend.expectDELETE("/api/russ/message?Body=null&Box=Inbox&DateSent=2013-07-15T10:21:22.817&FromName=Core+Prod+User&ID=39539250x&Selected=true&Subject=Test+Delete+Sent-Reply+Message&ToName=Core+Prod+User").respond();
+        $httpBackend.expectDELETE("/api/russ/message?Body=null&Box=Inbox&DateSent=2013-07-11T11:19:19.633&FromName=Core+Prod+User&ID=39539241x&Selected=true&Subject=Test+Sent+List+Reply+Subject&ToName=Core+Prod+User").respond();
+        $httpBackend.expectDELETE("/api/russ/message?Body=null&Box=Inbox&DateSent=2013-07-11T11:16:24.043&FromName=Core+Prod+User&ID=39539240x&Selected=true&Subject=Test+Delete+Sent-Reply+Message&ToName=Core+Prod+User").respond();
+        $httpBackend.expectDELETE("/api/russ/message?Body=null&Box=Inbox&DateSent=2013-07-11T11:14:47.107&FromName=Core+Prod+User&ID=39539239x&Selected=true&Subject=RE:+Test+Message&ToName=Core+Prod+User").respond();
+        $httpBackend.expectDELETE("/api/russ/message?Body=null&Box=SentBox&DateSent=2013-07-11T11:14:47.107&FromName=Core+Prod+User&ID=39539239x&Selected=true&Subject=RE:+Test+Message&ToName=Core+Prod+User").respond();
+        $httpBackend.expectDELETE("/api/russ/message?Body=null&Box=SentBox&DateSent=2013-07-11T11:13:58.497&FromName=Core+Prod+User&ID=39539238x&Selected=true&Subject=Test+Message&ToName=Core+Prod+Admin").respond();
+
+        $httpBackend.expectGET("/api/russ/message").respond();
+
+        scope.$apply(); //do the magic
+        $httpBackend.flush();
+
         expect(event.preventDefault).toHaveBeenCalled();
         expect(scope.messages.length).toBe(0);
+
     })
+
  });
 
 //let's test that the MessageView Controller works
