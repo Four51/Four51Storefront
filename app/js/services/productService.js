@@ -63,8 +63,22 @@ four51.app.factory('ProductService', function($resource, $451, $api){
 		console.log(debugLineTotal);
 		lineItem.LineTotal = total;
 	}
-
-	function modifyProductScope(product, variant, scope){
+	function productViewScope(scope){
+		scope.inventoryDisplay = function(product, variant){
+			if(product.IsVariantLevelInventory){
+				return variant ? variant.QuantityAvailable : null;
+			}else{
+				return product.QuantityAvailable;
+			}
+		}
+		if(scope.LineItem.Variant){
+			//scope.LineItem.Variant = variant;
+			scope.StaticSpecGroups = scope.LineItem.Variant.StaticSpecGroups || scope.LineItem.Product.StaticSpecGroups;
+		}else{
+			scope.StaticSpecGroups = scope.LineItem.Product.StaticSpecGroups;
+		}
+	}
+	function newLineItemScope(scope){
 		function variantHasPriceSchedule(product, scheduleType){
 			if(!product.Variants)
 				return false;
@@ -75,27 +89,27 @@ four51.app.factory('ProductService', function($resource, $451, $api){
 			return false;
 		}
 
-		if(variant){
-			scope.LineItem.Variant = variant;
-			scope.LineItem.PriceSchedule = variant.StandardPriceSchedule ? variant.StandardPriceSchedule : product.StandardPriceSchedule; //include user permissions to decide to show
-			scope.StaticSpecGroups = variant.StaticSpecGroups || product.StaticSpecGroups;
+		if(scope.LineItem.Variant){
+			scope.LineItem.PriceSchedule = scope.LineItem.Variant.StandardPriceSchedule ? scope.LineItem.Variant.StandardPriceSchedule : scope.LineItem.Product.StandardPriceSchedule; //include user permissions to decide to show
+			//moved to productViewScope scope.StaticSpecGroups = scope.LineItem.Variant.StaticSpecGroups || scope.LineItem.Product.StaticSpecGroups;
 		}else{
-			scope.LineItem.PriceSchedule = variantHasPriceSchedule(product, 'StandardPriceSchedule') ? null : product.StandardPriceSchedule; //don't show price schedule if variant overrides parent PS
-			scope.StaticSpecGroups = product.StaticSpecGroups;
+			scope.LineItem.PriceSchedule = variantHasPriceSchedule(scope.LineItem.Product, 'StandardPriceSchedule') ? null : scope.LineItem.Product.StandardPriceSchedule; //don't show price schedule if variant overrides parent PS
+			//moved to productViewScope scope.StaticSpecGroups = scope.LineItem.Product.StaticSpecGroups;
 		}
-		scope.inventoryDisplay = function(product, variant){
+
+		//moved to productViewScope
+		/*scope.inventoryDisplay = function(product, variant){
 			if(product.IsVariantLevelInventory){
 				return variant ? variant.QuantityAvailable : null;
 			}else{
 				return product.QuantityAvailable;
 			}
+		}*/
 
-		}
-
-		scope.lineItemSpecs = [];
-		angular.forEach(product.Specs, function(item){
+		scope.LineItem.Specs = [];
+		angular.forEach(scope.LineItem.Product.Specs, function(item){
 			if(item.CanSetForLineItem || item.DefinesVariant)
-				scope.lineItemSpecs.push(item);
+				scope.LineItem.Specs.push(item);
 		});
 
 		scope.allowAddToOrder = scope.LineItem.Variant || scope.LineItem.Product.Variants.length == 0;//this will include some order type and current order logic.
@@ -104,8 +118,8 @@ four51.app.factory('ProductService', function($resource, $451, $api){
 	}
 
     return {
-		setProductScope: function(product, variant, scope){
-			return modifyProductScope(product, variant, scope);
+		setNewLineItemScope: function(scope){
+			newLineItemScope(scope);
 		},
         get: function(param, successCall){
             return $api.resource(resource)
@@ -119,8 +133,11 @@ four51.app.factory('ProductService', function($resource, $451, $api){
             console.log('product query');
             return resource.query({'CategoryInteropID': categoryInteropID, 'SearchTerms': searchTerm ? searchTerm : ''}, callback);
         },
-		calculateLineTotal: function(lineItem, debugLineTotal){
-			return calcTotal(lineItem, debugLineTotal);
+		calculateLineTotal: function(lineItem){
+			return calcTotal(lineItem);
+		},
+		setProductViewScope: function(scope){
+			productViewScope(scope)
 		}
     }
 });

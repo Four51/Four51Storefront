@@ -23,7 +23,7 @@
         <tbody>
             <tr ng-repeat="item in order.LineItems">
                 <td><input type='checkbox' ng-model='order.LineItems[$index].Selected' /></td>
-                <td><a ng-href="#/product/{{order.LineItems[$index].Product.InteropID}}">{{item.Variant.ExternalID}}</a></td>
+                <td><a ng-href="#/cart/{{$index}}">{{item.Variant.ExternalID}}</a></td>
                 <td>{{item.Product.Name}}</td>
                 <td ng-if="hasSpecsOnAnyLineItem(order)">
                     <ul class="unstyled"><!-- more complete business logic in LineItemGrid.cs line 638 -->

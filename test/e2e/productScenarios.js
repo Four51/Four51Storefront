@@ -21,7 +21,7 @@
  element('.nav-header:nth-child(3) a:first').click(); //clicks third category nav link
  */
 
-var C_debug = false;
+var C_debug = true;
 
 ////////////////////////////////////////////////////
 //TODO - add a e2eLoginProduct function that logs in to a specific product automatically, for product scenarios
@@ -31,7 +31,7 @@ describe('Product login', function() {
         browser().navigateTo('../../app/index.html');
     });
 
-    e2eLogin("sesendpo","fails345", C_debug);
+    e2eLogin("coreproduser","fails345", C_debug);
 
 });
 
@@ -60,8 +60,8 @@ describe('ProductList: ', function() {
 
         expect(repeater('#451_lst_prod').count()).toBeGreaterThan(0); //there should be at least one product
 
-        var strClickedProductName = element('#451_lst_prod li:nth-child(2) a').text(); //get the product name for comparison later
-        e2eClickProductFromList(2); //in this case we'll click the second product because the first currently throws an error
+        var strClickedProductName = element('#451_lst_prod li:nth-child(1) a').text(); //get the product name for comparison later
+        e2eClickProductFromList(1);
 
         var strShowedProductName = binding('product.Name');
 
@@ -92,13 +92,16 @@ describe('ProductList: ', function() {
 
     });
 
+    //TODO- add some expectations around line-item type productlist display
+
 });
 
-describe('Product View', function() {
+describe('Product View - Static No Variants', function() {
     it('should display a product', function(){
         browser().navigateTo('#/catalog'); //start fresh on the catalog view
         e2eClickSideNavCategory(0);
-        e2eClickProductFromList(0,"Bus Card6 NO&TAX"); //here's a nice product to work with for now
+        if(C_debug){pause();}
+        e2eClickProductFromList(1); //here's a nice product to work with for now
     });
     it('should have an image', function(){
         expect(element('#451_img_prod_lg').count()).toBe(1);
@@ -108,7 +111,29 @@ describe('Product View', function() {
         //verify the product name and description?
 
 
+    });
+    it('should have variants', function(){
+        console.dir(repeater('#451_list_vars').row(0));
+        expect(repeater('#451_list_vars').count()).toBeGreaterThan(0); //there should be at least one variant
+    });
+    it('should have spec groups', function(){
+        console.dir(repeater('#451_list_specgroup').row(0));
+        expect(repeater('#451_list_specgroup').count()).toBeGreaterThan(0); //there should be at least one variant
+    });
+});
 
+
+describe('Product View - Static With Variants', function() {
+    e2eLogout(false)
+    e2eLoginProduct("coreproduser","fails345",false,"BC-ImageUpload");
+
+    it('should have an image', function(){
+        if(C_debug){pause();}
+        expect(element('#451_img_prod_lg').count()).toBe(1);
+    });
+    it('should have a description', function(){
+        expect(element('#451_area_prod_desc').count()).toBe(1);
+        //verify the product name and description?
 
     });
     it('should have variants', function(){
@@ -122,22 +147,17 @@ describe('Product View', function() {
     it('should allow us to click on a variant and display it', function(){
         expect(repeater('#451_list_vars').count()).toBeGreaterThan(0); //there should be at least one variant
         element('#451_list_vars ul li a').click(); //click the first variant
-        pause();
+        if(C_debug){pause();}
     });
 });
 
 //TODO:  add a ton of product scenarios once the product list view and product view are fleshed out.
 
-describe('testing e2eClickSideNavCategory nav functions', function(){
-    it('should click a specified or unspecified top level product', function(){
-        browser().navigateTo('#/catalog'); //start fresh on the catalog view
-        e2eClickSideNavCategory(0);
-        e2eClickProductFromList(1); //click first product found
-        pause();
-        e2eClickSideNavCategory(0); //go back and try another
-        e2eClickProductFromList(0,"Bus Card6 NO&TAX");
-        pause();
-    });
+describe('testing e2eLoginProduct nav functions', function(){
+
+    e2eLoginProduct("coreproduser","fails345",false,"Static%20Prod")
+
+
 });
 describe('logout/cleanup', function(){
     e2eLogout(C_debug);

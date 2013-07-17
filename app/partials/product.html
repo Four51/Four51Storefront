@@ -10,9 +10,10 @@
 
 </table>
 <br>
+
 <form name="addToOrderForm" ng-show="allowAddToOrder">
-	<table border=1 ng-show="lineItemSpecs">
-		<tr ng-repeat="s in lineItemSpecs">
+	<table border=1 ng-show="LineItem.Specs">
+		<tr ng-repeat="s in LineItem.Specs">
 			<td>{{s.Prefix}}{{s.Name}}{{s.Suffix}}<span ng-show="s.Required" style="color:red"> *</span> </td>
 			<td><vspecfield changed="specChanged" s="s"></vspecfield></td>
 		</tr>
