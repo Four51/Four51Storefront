@@ -33,35 +33,6 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 		OrderService.addToOrder(quantity, productInteropID, variantInteropID);
 	}
 
-	$scope.specChanged = function(spec){
-		console.log('spec changed called...');
-		console.dir(spec)
-		if(!spec){
-			console.log('spec changed called, but no spec passed');
-			return;
-		}
 
-		if(spec.DefinesVariant)
-		{
-			var specOptionIDs = [];
-			var hasAllVarDefiningSpecs = true;
-			$451.filter($scope.LineItem.Specs, {Property: 'DefinesVariant', Value:true}, function(item){
-				if(!item.Value)
-				{
-					hasAllVarDefiningSpecs = false;
-					return;
-				}
-				specOptionIDs.push(item.Value);
-			})
-			if(hasAllVarDefiningSpecs){
-				VariantService.search($scope.LineItem.Product.InteropID, specOptionIDs, function(data){
-					if(!data.IsDefaultVariant)
-						$scope.LineItem.Variant = data;
-						ProductService.setNewLineItemScope($scope)
-				});
-			}
-		}
-		ProductService.calculateLineTotal($scope.LineItem)
-	}
 });
 

@@ -4,7 +4,8 @@
 	<tr><td>name:</td><td>{{LineItem.Product.Name}}</td></tr>
 	<tr><td>Description:</td><td><span ng-bind-html-unsafe="LineItem.Product.Description"/></td></tr>
 	<tr><td>ExternalID</td><td>{{LineItem.Product.ExternalID}}</td></tr>
-	<tr ng-show="LineItem.Variant"><td>variant description:</td><td><span ng-bind-html-unsafe="LineItem.Variant.Description"/></td></tr>
+	<tr ng-show="LineItem.Variant.Description"><td>variant description:</td><td><span ng-bind-html-unsafe="LineItem.Variant.Description"/></td></tr>
+	<tr ng-show="LineItem.Variant.ExternalID"><td>variant id:</td><td>{{LineItem.Variant.ExternalID}}</td></tr>
 	<tr ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)"><td>available inventory</td><td>{{inventoryDisplay(LineItem.Product, LineItem.Variant) }}</td></tr>
 </span>
 
@@ -12,7 +13,7 @@
 <br>
 
 <form name="addToOrderForm" ng-show="allowAddToOrder">
-	<table border=1 ng-show="LineItem.Specs">
+	<table border=1 ng-show="true">
 		<tr ng-repeat="s in LineItem.Specs">
 			<td>{{s.Prefix}}{{s.Name}}{{s.Suffix}}<span ng-show="s.Required" style="color:red"> *</span> </td>
 			<td><vspecfield changed="specChanged" s="s"></vspecfield></td>
