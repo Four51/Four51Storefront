@@ -74,7 +74,7 @@ four51.app.directive('customradiobuttonfield', function($451) {
         restrict: 'E',
         template: '<label>{{customfield.Label}}</label>' +
             '<span ng-repeat="option in customfield.Options">' +
-            '<input type="radio" ng-checked="{{true}}" ng-change="changed()" name="{{customfield.Name}}" ng-model="$parent.item" ng-value="{{option}}" />{{option.Value}}<br />' +
+            '<input type="radio" ng-change="changed()" name="{{customfield.Name}}" ng-model="$parent.item" ng-value="{{option}}" />{{option.Value}}<br />' +
             '</span>' +
             '<input type="text" ng-change="otherChanged()" ng-model="other" ng-show="isOtherSelected" /><br />',
         link: function(scope, element, attr) {
@@ -88,22 +88,22 @@ four51.app.directive('customradiobuttonfield', function($451) {
             };
             scope.otherChanged = function() {
                 scope.customfield.Value = scope.other;
-                //scope.changed();
             };
-            scope.item = {};
-            //scope.init = function() {
-                var id = scope.customfield.Value != null ? scope.customfield.Options[scope.customfield.Options.length-1].ID : scope.customfield.DefaultOptionID;
-                var matched = false;
-                angular.forEach(scope.customfield.Options, function(n,i) {
-                    if (matched) return;
-                    if (scope.customfield.Value == n.Value) {
-                        id = n.ID;
-                        matched = true;
-                    }
-                });
-                scope.item = $451.filter(scope.customfield.Options, { 'Property': 'ID', 'Value': id })[0];
-                console.debug(scope.item);
-            //};
+            var id = scope.customfield.Value != null ? scope.customfield.Options[scope.customfield.Options.length-1].ID : scope.customfield.DefaultOptionID;
+            var matched = false;
+            angular.forEach(scope.customfield.Options, function(n,i) {
+                if (matched) return;
+                if (scope.customfield.Value == n.Value) {
+                    id = n.ID;
+                    matched = true;
+                }
+            });
+            scope.item = $451.filter(scope.customfield.Options, { 'Property': 'ID', 'Value': id })[0];
+            scope.changed();
+
+            scope.getVal = function() {
+                return scope.item.Value;
+            }
         }
     }
     return obj;
