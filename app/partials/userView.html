@@ -10,9 +10,9 @@
 
         <ul class="unstyled" ng-if="user.CustomFields">
             <li ng-repeat="field in user.CustomFields">
-                <textuserfield ng-if="field.Lines && field.DisplayToUser" />
-                <selectionuserfield ng-if="field.Options && !field.IsRadioButtons && field.DisplayToUser" />
-                <radiobuttonuserfield ng-if="field.Options && field.IsRadioButtons && field.DisplayToUser" />
+                <customtextfield customfield="field" ng-if="field.Lines && field.DisplayToUser" />
+                <customselectionfield customfield="field" ng-if="field.Options && !field.IsRadioButtons && field.DisplayToUser" />
+                <customradiobuttonfield customfield="field" ng-if="field.Options && field.IsRadioButtons && field.DisplayToUser" />
             </li>
         </ul>
 
@@ -22,3 +22,23 @@
         <input class="btn btn-medium btn-primary" type="submit" ng-disabled="userEdit.$invalid" id="451_btn_user" value="Save" />
     </form>
 </div>
+<hr />
+IsRadioButtons: {{user.CustomFields[2].IsRadioButtons}}<br />
+AllowOtherValue: {{user.CustomFields[2].AllowOtherValue}}<br />
+DefaultOptionID: {{user.CustomFields[2].DefaultOptionID}}<br />
+ControlType: {{user.CustomFields[2].ControlType}}<br />
+ListOrder: {{user.CustomFields[2].ListOrder}}<br />
+Name: {{user.CustomFields[2].Name}}<br />
+Label: {{user.CustomFields[2].Label}}<br />
+IsRequired: {{user.CustomFields[2].IsRequired}}<br />
+DisplayToUser: {{user.CustomFields[2].DisplayToUser}}<br />
+Value: {{user.CustomFields[2].Value}}<br />
+<hr />
+<ul class="unstyled">
+    <li ng-repeat="option in user.CustomFields[2].Options">
+        ID: {{option.ID}}<br />
+        Value: {{option.Value}}<br />
+        InteropID: {{option.InteropID}}<br />
+        Selected: {{option.Selected}}<hr />
+    </li>
+</ul>

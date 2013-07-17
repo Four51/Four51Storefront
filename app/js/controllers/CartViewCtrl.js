@@ -1,5 +1,9 @@
 
 four51.app.controller('CartViewCtrl', function ($scope, $location, $451, OrderService, UserService) {
+    $scope.continueShopping = function() {
+        $location.path('catalog');
+    };
+
     $scope.cancelOrder = function() {
         OrderService.delete($scope.order, function() {
             $scope.order = null;
@@ -7,14 +11,15 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, OrderSe
         });
     };
 
-    $scope.validateExternalID = function() {
-        return false;
-    }
-
     $scope.saveChanges = function() {
         OrderService.save($scope.order, function(data) {
             $scope.order = data;
         });
+    };
+
+    $scope.checkOut = function() {
+        OrderService.save($scope.order);
+        $location.path('checkout');
     };
 
     $scope.user = UserService.get();
