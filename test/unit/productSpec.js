@@ -131,13 +131,13 @@ describe('$451 Product Controller:',function(){
         $httpBackend.flush();
 
         //let's just test that a few properties are applied and match
-        expect(scope.LineItem).toEqual({});
+        console.dir(scope)
 
-        expect(scope.product.Name).toBe("Lesson 1 BC");
-        expect(scope.product.IsVBOSS).toBeFalsy();
-        expect(scope.product.Active).toBeTruthy();
-        expect(scope.product.Specs.length).toBe(5);
-        expect(scope.product.Specs[0].Name).toBe("V01Name");
+        expect(scope.LineItem.Product.Name).toBe("Lesson 1 BC");
+        expect(scope.LineItem.Product.IsVBOSS).toBeFalsy();
+        expect(scope.LineItem.Product.Active).toBeTruthy();
+        expect(scope.LineItem.Product.Specs.length).toBe(5);
+        expect(scope.LineItem.Product.Specs[0].Name).toBe("V01Name");
         //etc
 
         //now follow 1,001 variations of this theme
@@ -158,7 +158,7 @@ describe('$451 Product Controller:',function(){
         console.dir(scope)
         console.dir(jsonProduct1NoVariants)
 
-        expect(scope.product.Name).toBe("Lesson 1 BC");
+        expect(scope.LineItem.Product.Name).toBe("Lesson 1 BC");
         expect(scope.StaticSpecGroups).toBe(jsonProduct1NoVariants.StaticSpecGroups);
         ///hm lets setup some data to get this going
 
@@ -184,7 +184,7 @@ describe('$451 Product Controller:',function(){
         $httpBackend.flush();
 
         //let's just test that a few properties are applied and match
-        expect(scope.variant.InteropID).toEqual(jsonProduct1.Variants[0].InteropID);
+        expect(scope.LineItem.Variant.InteropID).toEqual(jsonProduct1.Variants[0].InteropID);
 
         //okay, we got a variant in the scope now.
     });
@@ -204,11 +204,11 @@ describe('$451 Product Controller:',function(){
         $httpBackend.flush();
 
         //let's just test that a few properties are applied and match
-        expect(scope.variant.InteropID).toEqual(jsonProduct1.Variants[0].InteropID);
+        expect(scope.LineItem.Variant.InteropID).toEqual(jsonProduct1.Variants[0].InteropID);
 
         console.dir(scope)
         console.dir(scope.priceSchedule)
-        console.dir(scope.product.priceSchedule)
+        console.dir(scope.LineItem.Product.priceSchedule)
     });
 });
 

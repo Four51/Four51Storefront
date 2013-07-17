@@ -1,7 +1,7 @@
-<div class="well" ng-show="SpendingAccounts">
+<div class="well" ng-if="accounts">
     <h5>Spending Accounts</h5>
     <ul class="unstyled">
-        <li ng-repeat="account in SpendingAccounts">
+        <li ng-repeat="account in accounts">
             {{account.Label}}: {{ account.Balance | currency:"$" }}
         </li>
     </ul>

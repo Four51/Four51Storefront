@@ -10,9 +10,9 @@
 
         <ul class="unstyled" ng-if="user.CustomFields">
             <li ng-repeat="field in user.CustomFields">
-                <textuserfield ng-if="field.Lines && field.DisplayToUser" />
-                <selectionuserfield ng-if="field.Options && !field.IsRadioButtons && field.DisplayToUser" />
-                <radiobuttonuserfield ng-if="field.Options && field.IsRadioButtons && field.DisplayToUser" />
+                <customtextfield customfield="field" ng-if="field.Lines && field.DisplayToUser" />
+                <customselectionfield customfield="field" ng-if="field.Options && !field.IsRadioButtons && field.DisplayToUser" />
+                <customradiobuttonfield customfield="field" ng-if="field.Options && field.IsRadioButtons && field.DisplayToUser" />
             </li>
         </ul>
 

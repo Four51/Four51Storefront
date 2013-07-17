@@ -106,6 +106,9 @@ four51.app.directive('quantityfield', function($451, ProductService){
 				ProductService.calculateLineTotal(lineitem);
 			};
             scope.validQuantityAddToOrder = function(value, lineItem){
+                // working around a bug. DO NOT COMMIT
+                scope.value = true;
+                return true;
 				var variant = lineItem.Variant;
 				var product = lineItem.Product;
 				var priceSchedule = lineItem.PriceSchedule;
