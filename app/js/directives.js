@@ -15,7 +15,7 @@ four51.app.directive('customtextfield', function($451) {
             customfield : '='
         },
         restrict: 'E',
-        template: '<input placeholder="{{customfield.Label}}" ui-mask="{{customfield.MaskedInput}}" type="text" ng-required="{{customfield.IsRequired}}" ng-model="customfield.Value" />{{customfield.Value}}'
+        template: '<input placeholder="{{customfield.Label}}" ui-mask="{{customfield.MaskedInput}}" type="text" ng-required="{{customfield.IsRequired}}" ng-model="customfield.Value" />'
     }
     return obj;
 });
