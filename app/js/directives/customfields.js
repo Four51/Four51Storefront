@@ -15,15 +15,16 @@ four51.app.directive('customselectionfield', function($451) {
             customfield : '='
         },
         restrict: 'E',
-        template: '<label>{{customfield.Label}}</label>' +
+        template: '<label>{{customfield.Label}}</label> {{customfield.Value}}' +
             '<select ng-init="init()" ng-change="changed()" ng-model="item" ng-options="option.Value for option in customfield.Options" ng-if="customfield.Options && !customfield.IsRadioButtons">' +
             '<option ng-if="!customfield.IsRequired" value="" /></select>' +
             '<input type="text" ng-change="otherChanged()" ng-model="other" ng-show="isOtherSelected" />',
         link: function(scope, element, attr) {
             scope.changed = function() {
+                console.log(this.item.Value);
                 scope.customfield.Value = this.item.Value;
                 scope.isOtherSelected = false;
-                if (this.item.ID.indexOf('other') > -1) {
+                if (this.item.Value.indexOf('Other') > -1) {
                     scope.isOtherSelected = true;
                     scope.customfield.Value = scope.other;
                 }
