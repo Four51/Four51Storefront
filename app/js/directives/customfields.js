@@ -4,6 +4,7 @@ four51.app.directive('customtextfield', function($451) {
             customfield : '='
         },
         restrict: 'E',
+        transclude: true,
         template: '<input placeholder="{{customfield.Label}}" ui-mask="{{customfield.MaskedInput}}" type="text" ng-required="{{customfield.IsRequired}}" ng-model="customfield.Value" />'
     }
     return obj;
@@ -15,13 +16,13 @@ four51.app.directive('customselectionfield', function($451) {
             customfield : '='
         },
         restrict: 'E',
-        template: '<label>{{customfield.Label}}</label> {{customfield.Value}}' +
+        transclude: true,
+        template: '<label>{{customfield.Label}}</label>' +
             '<select ng-init="init()" ng-change="changed()" ng-model="item" ng-options="option.Value for option in customfield.Options" ng-if="customfield.Options && !customfield.IsRadioButtons">' +
             '<option ng-if="!customfield.IsRequired" value="" /></select>' +
             '<input type="text" ng-change="otherChanged()" ng-model="other" ng-show="isOtherSelected" />',
         link: function(scope, element, attr) {
             scope.changed = function() {
-                console.log(this.item.Value);
                 scope.customfield.Value = this.item.Value;
                 scope.isOtherSelected = false;
                 if (this.item.Value.indexOf('Other') > -1) {
@@ -62,6 +63,7 @@ four51.app.directive('customradiobuttonfield', function($451) {
             customfield : '='
         },
         restrict: 'E',
+        transclude: true,
         template: '<label>{{customfield.Label}}</label>' +
             '<span ng-repeat="option in customfield.Options">' +
             '<input type="radio" ng-change="changed()" name="{{customfield.Name}}" ng-model="$parent.item" ng-value="{{option}}" />{{option.Value}}<br />' +
