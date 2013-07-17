@@ -26,6 +26,9 @@ four51.app.directive('vspecfield', function(){
 
 	var obj = {
 		restrict: "E",
+		controller: function($scope){
+			$scope.otherVisible = $scope.s.OtherTextValue;
+		},
 		link: function(scope){
 
 			scope.otherChanged = function(spec){
