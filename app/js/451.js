@@ -63,8 +63,8 @@ four51.app.factory('$451', function(Cache) {
 		appname: four51.app.name,
 		api: function(path) {
             //todo: get appname with out using window?
-			var appName = four51.app.ApiAppName ? four51.app.ApiAppName : window.location.pathname.split('/')[1];
-            return '/api/' + appName + "/" + path;
+			var apiName = four51.app.ApiAppName ? four51.app.ApiAppName : window.location.pathname.split('/')[1];
+            return '/api/' + apiName + "/" + path;
 			//return '/api/451Order/' + path;
 		},
 		// cache is temporary. even refreshing the browser will clear the cache
