@@ -1,14 +1,10 @@
 <div ng-if="lineitem">
-    <select required ng-if="user.current.CostCenters.length > 1 && !user.permissions.contains('FreeFormCostCenter')" ng-options="center for center in user.current.CostCenters" ng-model="lineitem.CostCenter">
-        <option value="" />
-    </select>
+    <select required ng-if="user.current.CostCenters.length > 1 && !user.permissions.contains('FreeFormCostCenter')" ng-options="center for center in user.current.CostCenters" ng-model="lineitem.CostCenter"></select>
     <input ng-if="user.permissions.contains('FreeFormCostCenter')" ng-model="lineitem.CostCenter" type='text' required />
     <span ng-if="user.current.CostCenters.length == 1 && !user.permissions.contains('FreeFormCostCenter')">{{lineitem.CostCenter}}</span>
 </div>
 <div ng-if="order">
-    <select required ng-if="user.current.CostCenters.length > 1 && !user.permissions.contains('FreeFormCostCenter')" ng-options="center for center in user.current.CostCenters" ng-model="order.CostCenter">
-        <option value="" />
-    </select>
+    <select required ng-if="user.current.CostCenters.length > 1 && !user.permissions.contains('FreeFormCostCenter')" ng-options="center for center in user.current.CostCenters" ng-model="order.CostCenter"></select>
     <input ng-if="user.permissions.contains('FreeFormCostCenter')" ng-model="order.CostCenter" type='text' required />
     <span ng-if="user.current.CostCenters.length == 1 && !user.permissions.contains('FreeFormCostCenter')">{{user.current.Company.SiteText.CostCenter || 'Cost Center'}}: {{order.CostCenter}}</span>
 </div>

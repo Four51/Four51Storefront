@@ -1,5 +1,5 @@
 'use strict';
-four51.app.factory('ProductService', function($resource, $451, $api){
+four51.app.factory('ProductService', function($resource, $451, $api, VariantService){
     var resource = $resource($451.api('Products/:interopID'), {interopID: '@ID'});
 	function calcTotal(lineItem){
 
@@ -16,29 +16,31 @@ four51.app.factory('ProductService', function($resource, $451, $api){
 		var percentagePerLine = 0;
 		var amountPerQty = 0;
 		var priceBreak;
-		var otherValueMarkup = 0;
+		//var otherValueMarkup = 0;
 		//var specs = $scope.variant ? $scope.variant.Specs : [];
 
 		var addToMarkups = function(spec){
-			if(spec.AllowOtherValue && spec.OtherTextValue && spec.OtherValueMarkup > 0){
-				otherValueMarkup += spec.OtherValueMarkup;
-			}else if(spec.Options.length && spec.Value){
+			var otherMarkup;
+			if(spec.AllowOtherValue && spec.OtherTextValue && spec.OtherValueMarkup > 0)
+				otherMarkup = spec.OtherValueMarkup;
 
-				var option = $451.filter(spec.Options, {Property: 'ID', Value: spec.Value})[0];
-				if(!option)
+			if((spec.Options.length && spec.Value) || otherMarkup){
+
+				var option = !spec.Value ? null : $451.filter(spec.Options, {Property: 'ID', Value: spec.Value})[0];
+				if(!option && !otherMarkup)
 					return;
 				//console.dir({markuptype: spec.MarkupType, note: 'markup option', option: option})
 				if(spec.MarkupType ==="AmountPerQuantity" )
-					amountPerQty += option.PriceMarkup;
+					amountPerQty += otherMarkup || option.PriceMarkup;
 				if(spec.MarkupType ==="Percentage" )
-					percentagePerLine += option.PriceMarkup;
+					percentagePerLine += otherMarkup || option.PriceMarkup;
 				if(spec.MarkupType ==="AmountTotal")
-					fixedAddPerLine += option.PriceMarkup;
+					fixedAddPerLine += otherMarkup || option.PriceMarkup;
 			}
 		};
 
 		if(variant) angular.forEach(variant.Specs, addToMarkups );
-		angular.forEach(product.Specs, addToMarkups );
+		angular.forEach(lineItem.Specs, addToMarkups );
 
 		angular.forEach(ps.PriceBreaks, function(pb){
 
@@ -52,18 +54,47 @@ four51.app.factory('ProductService', function($resource, $451, $api){
 		}
 		var total = lineItem.Quantity * (priceBreak.Price + amountPerQty);
 		total += lineItem.Quantity * priceBreak.Price * (percentagePerLine / 100);
-		total += fixedAddPerLine + otherValueMarkup;
+		total += fixedAddPerLine; //+ otherValueMarkup;
 
 		var debugLineTotal = "line total debug:\rquantity:" + lineItem.Quantity +" & " +
 			"amount added per quantity:" + amountPerQty + " & " +
 			"fixed ammount per line added:" + fixedAddPerLine + " & " +
-			"percentage added to qty*unitprice:" + percentagePerLine + " & " +
-			"'other value' markup:" + otherValueMarkup + " & " +
+			"percentage added to qty*unitprice:" + percentagePerLine + " & " + //"'other value' markup:" + otherValueMarkup + " & " +
 			"unit price:" + priceBreak.Price;
 		console.log(debugLineTotal);
 		lineItem.LineTotal = total;
 	}
 	function productViewScope(scope){
+		scope.specChanged = function(spec){
+			console.log('spec changed called...');
+			console.dir(spec)
+			if(!spec){
+				console.log('spec changed called, but no spec passed');
+				return;
+			}
+
+			if(spec.DefinesVariant)
+			{
+				var specOptionIDs = [];
+				var hasAllVarDefiningSpecs = true;
+				$451.filter(scope.LineItem.Specs, {Property: 'DefinesVariant', Value:true}, function(item){
+					if(!item.Value)
+					{
+						hasAllVarDefiningSpecs = false;
+						return;
+					}
+					specOptionIDs.push(item.Value);
+				})
+				if(hasAllVarDefiningSpecs){
+					VariantService.search(scope.LineItem.Product.InteropID, specOptionIDs, function(data){
+						if(!data.IsDefaultVariant)
+							scope.LineItem.Variant = data;
+						newLineItemScope(scope)
+					});
+				}
+			}
+			calcTotal(scope.LineItem);
+		}
 		scope.inventoryDisplay = function(product, variant){
 			if(product.IsVariantLevelInventory){
 				return variant ? variant.QuantityAvailable : null;

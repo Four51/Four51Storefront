@@ -3,7 +3,7 @@ four51.app.factory('OrderService', function($resource, $451, $api) {
 	return {
 		get: function(param, callback) {
 			return $api.resource(service)
-				.options({ persists: true, key: 'Order.' + param.id})
+				.options({ persists: false, key: 'Order.' + param.id})
 				.get(param, callback);
 		},
 		repeat: function(order) {
@@ -14,7 +14,7 @@ four51.app.factory('OrderService', function($resource, $451, $api) {
             console.dir({quantity: quantity, productInteropID: productInteropID, variantInteropID: variantInteropID} );
         },
         delete: function(order, callback) {
-            // we dont' actually allow the deletion of orders.
+            // we don't actually allow the deletion of orders.
             // this is just cancelling the current shopping cart
             service.delete(function(response) {
                 $451.clear('Order.' + order.ID);
@@ -28,8 +28,32 @@ four51.app.factory('OrderService', function($resource, $451, $api) {
                 return data;
             });
         }
-	}
+	};
 });
 
+// used to define order properties as dictated by business requirements
+four51.app.factory('OrderConfigService', function() {
+    var user, order;
+    var setCostCenter = function() {
+        // set the cost center if the user only has 1 assigned to them and the order doesn't already have a cost center assigned
+        if (user.CostCenters.length == 1 && order.CostCenter == null) {
+            order.CostCenter = user.CostCenters[0];
+            // also need to set each individual lineitem because Order doesn't actually save the CostCenter
+            angular.forEach(order.LineItems, function(n,i) {
+                n.CostCenter = user.CostCenters[0];
+            });
+        }
+    };
+
+    return {
+        configure: function(o, u) {
+            order = o; user = u;
+            if (order.Status == 'Unsubmitted') {
+                setCostCenter();
+            }
+            return this;
+        }
+    };
+});
 
 

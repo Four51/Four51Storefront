@@ -14,9 +14,9 @@
 	for {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
 </span>
 
-<span ng-show="showInventory">
+<span ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
 	<br>
-	quantity available: {{LineItem.Product.QuantityAvailable}}
+	quantity available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
 </span>
 
 <span ng-show="allowAddToOrderInProductList">

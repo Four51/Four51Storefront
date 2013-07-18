@@ -15,12 +15,11 @@
         <label ng-if="Four51User.permissions.contains('CostCenterPerOrder') && !Four51User.permissions.contains('CostCenterPerLine')">
             <costcenter
                 user="Four51User"
-                label="true"
                 order="order"
                 ng-if="Four51User.permissions.contains('CostCenterPerOrder') && !Four51User.permissions.contains('CostCenterPerLine')" />
         </label>
         <ul class="unstyled" ng-if="Four51User.current.OrderFields">
-            <li ng-repeat="field in Four51User.current.OrderFields">
+            <li ng-repeat="field in order.OrderFields">
                 <customtextfield customfield="field" ng-if="field.Lines" />
                 <customselectionfield customfield="field" ng-if="field.Options && !field.IsRadioButtons" />
                 <customradiobuttonfield customfield="field" ng-if="field.Options && field.IsRadioButtons" />

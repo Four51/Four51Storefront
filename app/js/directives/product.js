@@ -26,6 +26,9 @@ four51.app.directive('vspecfield', function(){
 
 	var obj = {
 		restrict: "E",
+		controller: function($scope){
+			$scope.otherVisible = $scope.s.OtherTextValue;
+		},
 		link: function(scope){
 
 			scope.otherChanged = function(spec){
@@ -106,6 +109,7 @@ four51.app.directive('quantityfield', function($451, ProductService){
 				ProductService.calculateLineTotal(lineitem);
 			};
             scope.validQuantityAddToOrder = function(value, lineItem){
+
 				var variant = lineItem.Variant;
 				var product = lineItem.Product;
 				var priceSchedule = lineItem.PriceSchedule;
