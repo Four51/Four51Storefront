@@ -1,5 +1,5 @@
 
-four51.app.controller('CartViewCtrl', function ($scope, $location, $451, OrderService, UserService) {
+four51.app.controller('CartViewCtrl', function ($scope, $location, $451, OrderService, UserService, OrderConfigService) {
     $scope.continueShopping = function() {
         $location.path('catalog');
     };
@@ -23,9 +23,14 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, OrderSe
     };
 
     $scope.user = UserService.get();
-    $scope.order = $scope.user.CurrentOrderID != null ? OrderService.get({ id: $scope.user.CurrentOrderID }) : null;
+    $scope.order = $scope.user.CurrentOrderID != null ? OrderService.get({ id: $scope.user.CurrentOrderID },
+        function(o) {
+            // I'm deciding to handle the auto assignment of certain properties here. It's essentially the load of the cart view page
+            // it's the first time we'd display information about the order where these auto assigned values
+            OrderConfigService.configure(o,$scope.user);
+        }) : null;
 
-	$scope.$watch('order.LineItems', function(newval){
+	$scope.$watch('order.LineItems', function(newval) {
 		var newTotal = 0;
         if (!$scope.order) return newTotal;
 		angular.forEach($scope.order.LineItems, function(item){
@@ -33,4 +38,5 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, OrderSe
 		});
 		$scope.order.Subtotal = newTotal;
 	}, true);
+
 });
