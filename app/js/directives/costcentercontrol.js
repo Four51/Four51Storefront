@@ -3,8 +3,7 @@ four51.app.directive('costcenter', function() {
         scope: {
             user: '=',
             order: '=',
-            lineitem: '=',
-            label: '@'
+            lineitem: '='
         },
         restrict: 'E',
         templateUrl: 'partials/controls/costCenterView.html'
