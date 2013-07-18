@@ -42,7 +42,7 @@ describe('$451 Category Controller:',function(){
 
         $routeParams.categoryInteropID = jsonCategory.InteropID;
 
-        $httpBackend.expectGET("/api/russ/categories/" + jsonCategory.InteropID).respond(jsonCategory); //intercept the API call to the service and slip in a mocked category object
+        $httpBackend.expectGET("/api/" + four51.app.ApiAppName + "/categories/" + jsonCategory.InteropID).respond(jsonCategory); //intercept the API call to the service and slip in a mocked category object
 
         ctrlCategory('CategoryCtrl', {
             $scope: scope
@@ -78,8 +78,8 @@ describe('$451 Category Service:',function(){
         $httpBackend = _$httpBackend_;
         scope = $rootScope.$new();
 
-        //$httpBackend.expectGET("/api/russ/categories/").respond(jsonCategories);
-        //$httpBackend.expectGET("/api/russ/categories/VariableText").respond(jsonCategory);
+        //$httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/categories/").respond(jsonCategories);
+        //$httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/categories/VariableText").respond(jsonCategory);
 
         svcCategory = CategoryService;
 
@@ -92,7 +92,7 @@ describe('$451 Category Service:',function(){
     });
     it('Should get a tree', function(){
 
-        $httpBackend.expectGET("/api/russ/categories").respond(jsonCategories); //intercept the API call to the service and slip in a mocked category object
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/categories").respond(jsonCategories); //intercept the API call to the service and slip in a mocked category object
         var arrTree = svcCategory.tree();
 
         scope.$apply(); //this does all the magic that triggers the controller and makes the service get the mocked request we set up before
