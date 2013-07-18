@@ -44,7 +44,7 @@ describe('$451 AddressList Controller :',function(){
     });
     it('Should get data from the service and apply it to the scope (no address specified)', function(){
 
-        $httpBackend.expectGET("/api/russ/address").respond(jsonAddresses);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/address").respond(jsonAddresses);
 
         ctrlAddress('AddressListCtrl', {
             $scope: scope
@@ -65,7 +65,7 @@ describe('$451 AddressList Controller :',function(){
     });
     it('Should allow deletion)', function(){
 
-        $httpBackend.expectGET("/api/russ/address").respond(jsonAddresses);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/address").respond(jsonAddresses);
 
         ctrlAddress('AddressListCtrl', {
             $scope: scope
@@ -84,7 +84,7 @@ describe('$451 AddressList Controller :',function(){
     })
     it('Should redirect on "addition")', function(){
 
-        $httpBackend.expectGET("/api/russ/address").respond(jsonAddresses);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/address").respond(jsonAddresses);
 
         ctrlAddress('AddressListCtrl', {
             $scope: scope
@@ -103,7 +103,7 @@ describe('$451 AddressList Controller :',function(){
     })
     it('Should set Selected=True via checkAll)', function(){
 
-        $httpBackend.expectGET("/api/russ/address").respond(jsonAddresses);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/address").respond(jsonAddresses);
 
         ctrlAddress('AddressListCtrl', {
             $scope: scope
@@ -175,7 +175,7 @@ describe('$451 AddressView Controller :',function(){
     it('Should get data from the service and apply it to the scope when address specified', function(){
         $routeParams.id = jsonAddress.InteropID;
 
-        $httpBackend.expectGET("/api/russ/address/" + jsonAddress.InteropID).respond(jsonAddress);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/address/" + jsonAddress.InteropID).respond(jsonAddress);
         //problem here... spaces get URLencoded.. do we use a different address object or figure out how to get around this, cuz it's gonna happen again...??
 
         //$httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
@@ -259,12 +259,12 @@ describe('$451 AddressInputCtrl Controller :',function(){
     it('Should not override values to default for existing address object', function(){
 
         $routeParams.id = jsonAddressNew.InteropID;
-        $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
         //$httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
         //leaving it in because it should be investigated but it's not critical right now
 
         //update:  I think this is because the addressInputCtrl is instantiating the user service, but I'm not sure how to intercept it's API call
-        //$httpBackend.expectGET("/api/russ/user").respond({}); this should* work but I think the request to the user API is getting redirected by the routing
+        //$httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/user").respond({}); this should* work but I think the request to the user API is getting redirected by the routing
 
         ctrlAddress('AddressViewCtrl', { //this tries to get an address and loads it into the scope
             $scope: scope
@@ -287,8 +287,8 @@ describe('$451 AddressInputCtrl Controller :',function(){
 
     it('Should redirect to /addresses on save', function(){
         $routeParams.id = jsonAddressNew.InteropID;
-        $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
-        $httpBackend.expectPOST("/api/russ/address").respond({}); //not sure what we're doing here but we're calling a POST method to save the address
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
+        $httpBackend.expectPOST("/api/"+ four51.app.ApiAppName +"/address").respond({}); //not sure what we're doing here but we're calling a POST method to save the address
         $httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
         $httpBackend.expectGET("partials/addressList.html").respond("<empty/>");
 
@@ -312,8 +312,8 @@ describe('$451 AddressInputCtrl Controller :',function(){
 
     it('Should redirect to /addresses on delete', function(){ //essentially the same as the last test, different method name
         $routeParams.id = jsonAddressNew.InteropID;
-        $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
-        $httpBackend.expectDELETE("/api/russ/address?Country=US&IsBilling=true&IsShipping=true").respond({}); //not sure what we're doing here but we're calling a POST method to delete the address
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
+        $httpBackend.expectDELETE("/api/"+ four51.app.ApiAppName +"/address?Country=US&IsBilling=true&IsShipping=true").respond({}); //not sure what we're doing here but we're calling a POST method to delete the address
         $httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
         $httpBackend.expectGET("partials/addressList.html").respond("<empty/>");
 
@@ -338,7 +338,7 @@ describe('$451 AddressInputCtrl Controller :',function(){
 
     it('Should have a countries property that contains a list of countries', function(){ //essentially the same as the last test, different method name
         $routeParams.id = jsonAddressNew.InteropID;
-        $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
         $httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
 
         ctrlAddress('AddressViewCtrl', { //this tries to get an address and loads it into the scope
@@ -358,7 +358,7 @@ describe('$451 AddressInputCtrl Controller :',function(){
 
     it('Should have a states property that contains a list of states', function(){ //essentially the same as the last test, different method name
         $routeParams.id = jsonAddressNew.InteropID;
-        $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
         $httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
 
         ctrlAddress('AddressViewCtrl', { //this tries to get an address and loads it into the scope
@@ -378,7 +378,7 @@ describe('$451 AddressInputCtrl Controller :',function(){
 
     it('Should have a country function that returns true/false depending if the address country matches', function(){ //essentially the same as the last test, different method name
         $routeParams.id = jsonAddressNew.InteropID;
-        $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
         $httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
 
         ctrlAddress('AddressViewCtrl', { //this tries to get an address and loads it into the scope
@@ -407,7 +407,7 @@ describe('$451 AddressInputCtrl Controller :',function(){
 
     it('Should have a hasStates function that returns true for the given country of CA', function(){ //essentially the same as the last test, different method name
         $routeParams.id = jsonAddressNew.InteropID;
-        $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
         $httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
 
         ctrlAddress('AddressViewCtrl', { //this tries to get an address and loads it into the scope
@@ -427,7 +427,7 @@ describe('$451 AddressInputCtrl Controller :',function(){
 
     it('Should have a hasStates function that returns false for the given country of DE', function(){ //essentially the same as the last test, different method name
         $routeParams.id = jsonAddressNew.InteropID;
-        $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
         $httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
 
         ctrlAddress('AddressViewCtrl', { //this tries to get an address and loads it into the scope
@@ -448,7 +448,7 @@ describe('$451 AddressInputCtrl Controller :',function(){
 
     it('Should have a hasStates function that handles invalid data', function(){ //essentially the same as the last test, different method name
         $routeParams.id = jsonAddressNew.InteropID;
-        $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
         $httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
 
         ctrlAddress('AddressViewCtrl', { //this tries to get an address and loads it into the scope
@@ -499,9 +499,9 @@ xdescribe('$451 AddressInputCtrl Controller : isPhoneRequired (requires user ser
         $routeParams.id = jsonAddressNew.InteropID;
 
 
-        $httpBackend.expectGET("/api/russ/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
-        $httpBackend.expectGET("/api/russ/user?Password=fails345&Username=sesendpo").respond(jsonUser); //intercept the API call to the service and slip in a mocked user object
-        $httpBackend.expectGET("/api/russ/user?Password=fails345&Username=sesendpo").respond(jsonUser); //intercept the API call to the service and slip in a mocked user object
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/address/" + jsonAddressNew.InteropID).respond(jsonAddressNew);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/user?Password=fails345&Username=sesendpo").respond(jsonUser); //intercept the API call to the service and slip in a mocked user object
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/user?Password=fails345&Username=sesendpo").respond(jsonUser); //intercept the API call to the service and slip in a mocked user object
         $httpBackend.expectGET("partials/category.html").respond("<empty/>"); //no idea why this is happening, probably something is triggering a redirect
 
         var objUserLogin = {Username:"sesendpo",Password:"fails345"};
