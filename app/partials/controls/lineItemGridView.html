@@ -11,7 +11,7 @@
                 <td>Quantity</td>
                 <td>Total Quantity</td>
                 <td ng-if="user.permissions.contains('CostCenterPerLine')">{{user.current.Company.SiteText.CostCenter || 'Cost Center'}}</td>
-                <td>{{user.current.Company.SiteText.DateNeeded || 'Date Needed'}}</td>
+                <td ng-if="user.permissions.contains('DateNeededRequired') || user.permissions.contains('DateNeededOptional')">{{user.current.Company.SiteText.DateNeeded || 'Date Needed'}}</td>
                 <td>Price</td>
             </tr>
         </thead>
@@ -36,11 +36,10 @@
                 <td ng-if="user.permissions.contains('CostCenterPerLine')">
                     <costcenter
                             user="user"
-                            label="false"
                             lineitem="order.LineItems[$index]"
                              />
                 </td>
-                <td>
+                <td ng-if="user.permissions.contains('DateNeededRequired') || user.permissions.contains('DateNeededOptional')">
                     <input type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.permissions.contains('DateNeededRequired')" />
                     <input type="button" class="btn btn-mini btn-info" value="copy to all" ng-click="copyAddressToAll(order)" ng-if="$index == 0 && order.LineItems.length > 1" ng-show="item.DateNeeded" />
                 </td>

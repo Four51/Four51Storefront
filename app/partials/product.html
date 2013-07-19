@@ -4,7 +4,8 @@
 	<tr><td>name:</td><td>{{LineItem.Product.Name}}</td></tr>
 	<tr><td>Description:</td><td><span ng-bind-html-unsafe="LineItem.Product.Description"/></td></tr>
 	<tr><td>ExternalID</td><td>{{LineItem.Product.ExternalID}}</td></tr>
-	<tr ng-show="LineItem.Variant"><td>variant description:</td><td><span ng-bind-html-unsafe="LineItem.Variant.Description"/></td></tr>
+	<tr ng-show="LineItem.Variant.Description"><td>variant description:</td><td><span ng-bind-html-unsafe="LineItem.Variant.Description"/></td></tr>
+	<tr ng-show="LineItem.Variant.ExternalID"><td>variant id:</td><td>{{LineItem.Variant.ExternalID}}</td></tr>
 	<tr ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)"><td>available inventory</td><td>{{inventoryDisplay(LineItem.Product, LineItem.Variant) }}</td></tr>
 </span>
 
@@ -12,7 +13,7 @@
 <br>
 
 <form name="addToOrderForm" ng-show="allowAddToOrder">
-	<table border=1 ng-show="LineItem.Specs">
+	<table border=1 ng-show="true">
 		<tr ng-repeat="s in LineItem.Specs">
 			<td>{{s.Prefix}}{{s.Name}}{{s.Suffix}}<span ng-show="s.Required" style="color:red"> *</span> </td>
 			<td><vspecfield changed="specChanged" s="s"></vspecfield></td>
@@ -31,7 +32,6 @@
     <span ng-show="LineItem.PriceSchedule.MaxQuantity">
         max: {{LineItem.PriceSchedule.MaxQuantity}}<br/>
     </span>
-
 </form>
 
 <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product' />
@@ -45,7 +45,7 @@
 			<td>Order Quantity</td>
 		</tr>
 		<tr ng-repeat="v in LineItem.Product.Variants">
-			<td><a href=#/product/{{LineItem.Product.InteropID}}/v/{{v.InteropID}}>{{v.ExternalID}}</a></td>
+			<td><a href=#/product/{{LineItem.Product.InteropID}}/{{v.InteropID}}>{{v.ExternalID}}</a></td>
 			<td>{{v.Description}}</td>
 			<td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">{{v.QuantityAvailable}}</td>
 			<td>Order Quantity</td>

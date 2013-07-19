@@ -125,7 +125,7 @@ describe('$451 Routing:', function(){
     });
     it("should route variant detail requests properly", function() {
 
-        unitTestRoute('partials/product.html','v','/product/:productInteropID/v/:variantInteropID','partials/product.html','ProductCtrl')
+        unitTestRoute('partials/product.html','v','/product/:productInteropID/:variantInteropID','partials/product.html','ProductCtrl')
 
     });
     it("should route order requests properly", function() {
