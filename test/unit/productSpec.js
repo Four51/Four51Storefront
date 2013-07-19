@@ -49,8 +49,8 @@ describe('$451 ProductList Controller:',function(){
 
         $routeParams.categoryInteropID = jsonCategory.InteropID;
 
-        $httpBackend.expectGET("/api/russ/categories/" + jsonCategory.InteropID).respond(jsonCategory); //intercept the API call to the service and slip in a mocked category object
-        $httpBackend.expectGET("/api/russ/Products?CategoryInteropID=" + jsonCategory.InteropID+ "&SearchTerms=").respond(jsonProducts); //intercept the API call to the service and slip in a mocked productlist object
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/categories/" + jsonCategory.InteropID).respond(jsonCategory); //intercept the API call to the service and slip in a mocked category object
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/Products?CategoryInteropID=" + jsonCategory.InteropID+ "&SearchTerms=").respond(jsonProducts); //intercept the API call to the service and slip in a mocked productlist object
 
         ctrlCategory('CategoryCtrl', {
             $scope: scope
@@ -120,7 +120,7 @@ describe('$451 Product Controller:',function(){
     it('Should get product from the service and apply it to the scope (product specified)', function(){
         $routeParams.productInteropID = jsonProduct1.InteropID;
 
-        $httpBackend.expectGET("/api/russ/Products/" + jsonProduct1.InteropID).respond(jsonProduct1); //intercept the API call to the service and slip in a mocked productlist object
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/Products/" + jsonProduct1.InteropID).respond(jsonProduct1); //intercept the API call to the service and slip in a mocked productlist object
 
         ctrlProduct('ProductCtrl', {
             $scope: scope
@@ -145,7 +145,7 @@ describe('$451 Product Controller:',function(){
     it('Should default some product properties without a variant specified', function(){
         $routeParams.productInteropID = jsonProduct1NoVariants.InteropID;
 
-        $httpBackend.expectGET("/api/russ/Products/" + jsonProduct1NoVariants.InteropID).respond(jsonProduct1NoVariants); //intercept the API call to the service and slip in a mocked productlist object
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/Products/" + jsonProduct1NoVariants.InteropID).respond(jsonProduct1NoVariants); //intercept the API call to the service and slip in a mocked productlist object
 
         ctrlProduct('ProductCtrl', {
             $scope: scope
@@ -173,7 +173,7 @@ describe('$451 Product Controller:',function(){
         $routeParams.productInteropID = jsonProduct1.InteropID;
         $routeParams.variantInteropID = jsonProduct1.Variants[0].InteropID;
 
-        $httpBackend.expectGET("/api/russ/Products/" + jsonProduct1.InteropID).respond(jsonProduct1); //intercept the API call to the service and slip in a mocked productlist object
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/Products/" + jsonProduct1.InteropID).respond(jsonProduct1); //intercept the API call to the service and slip in a mocked productlist object
 
         ctrlProduct('ProductCtrl', {
             $scope: scope
@@ -193,7 +193,7 @@ describe('$451 Product Controller:',function(){
         $routeParams.productInteropID = jsonProduct1.InteropID;
         $routeParams.variantInteropID = jsonProduct1.Variants[0].InteropID;
 
-        $httpBackend.expectGET("/api/russ/Products/" + jsonProduct1.InteropID).respond(jsonProduct1); //intercept the API call to the service and slip in a mocked productlist object
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/Products/" + jsonProduct1.InteropID).respond(jsonProduct1); //intercept the API call to the service and slip in a mocked productlist object
 
         ctrlProduct('ProductCtrl', {
             $scope: scope

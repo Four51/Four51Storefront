@@ -47,7 +47,7 @@ describe('$451 MessageList Controller :',function(){
     });
     it('Should get data from the service and apply it to the scope', function(){
 
-        $httpBackend.expectGET("/api/russ/message").respond(jsonMessageList);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/message").respond(jsonMessageList);
 
         ctrlMsgList('MessageListCtrl', {
             $scope: scope
@@ -72,7 +72,7 @@ describe('$451 MessageList Controller :',function(){
 
         var event = {preventDefault: jasmine.createSpy()};
 
-        $httpBackend.expectGET("/api/russ/message").respond(jsonMessageList);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/message").respond(jsonMessageList);
 
         ctrlMsgList('MessageListCtrl', {
             $scope: scope
@@ -121,7 +121,7 @@ describe('$451 MessageList Controller :',function(){
 
         var event = {preventDefault: jasmine.createSpy()}; //we do this to mock the event passed to deleteSelected, it doesn't do anything but avoids the script breaking on preventDefault.
 
-        $httpBackend.expectGET("/api/russ/message").respond(jsonMessageList);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/message").respond(jsonMessageList);
 
         ctrlMsgList('MessageListCtrl', {
             $scope: scope
@@ -177,7 +177,7 @@ describe('$451 MessageView Controller :',function(){
     it('Should get data from the service and apply it to the scope when message specified', function(){
         $routeParams.id = jsonMessage.ID;
 
-        $httpBackend.expectGET("/api/russ/message/" + jsonMessage.ID).respond(jsonMessage);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/message/" + jsonMessage.ID).respond(jsonMessage);
         ctrlMessageView('MessageViewCtrl', {
             $scope: scope
         });
@@ -201,7 +201,7 @@ describe('$451 MessageView Controller :',function(){
     it('Should add the canReply method to scope, which should check Box and return true/false', function(){
         $routeParams.id = jsonMessage.ID;
 
-        $httpBackend.expectGET("/api/russ/message/" + jsonMessage.ID).respond(jsonMessage);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/message/" + jsonMessage.ID).respond(jsonMessage);
         ctrlMessageView('MessageViewCtrl', {
             $scope: scope
         });
@@ -221,7 +221,7 @@ describe('$451 MessageView Controller :',function(){
     it('Should add the ok method to scope, which should just redirect', function(){
         $routeParams.id = jsonMessage.ID;
 
-        $httpBackend.expectGET("/api/russ/message/" + jsonMessage.ID).respond(jsonMessage);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/message/" + jsonMessage.ID).respond(jsonMessage);
         ctrlMessageView('MessageViewCtrl', {
             $scope: scope
         });
@@ -239,7 +239,7 @@ describe('$451 MessageView Controller :',function(){
     it('Should add the send method to scope, which should save via API and redirect', function(){
         $routeParams.id = jsonMessage.ID;
 
-        $httpBackend.expectGET("/api/russ/message/" + jsonMessage.ID).respond(jsonMessage);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/message/" + jsonMessage.ID).respond(jsonMessage);
         ctrlMessageView('MessageViewCtrl', {
             $scope: scope
         });
@@ -253,7 +253,7 @@ describe('$451 MessageView Controller :',function(){
 
         scope.send();
 
-        $httpBackend.expectPOST("/api/russ/message").respond();
+        $httpBackend.expectPOST("/api/"+ four51.app.ApiAppName +"/message").respond();
         scope.$apply();
         $httpBackend.flush();
 
@@ -267,7 +267,7 @@ describe('$451 MessageView Controller :',function(){
 
         $routeParams.id = jsonMessage.ID;
 
-        $httpBackend.expectGET("/api/russ/message/" + jsonMessage.ID).respond(jsonMessage);
+        $httpBackend.expectGET("/api/"+ four51.app.ApiAppName +"/message/" + jsonMessage.ID).respond(jsonMessage);
 
         ctrlMessageView('MessageViewCtrl', {
             $scope: scope
@@ -282,7 +282,7 @@ describe('$451 MessageView Controller :',function(){
 
         scope.delete(event);
 
-        $httpBackend.expectDELETE("/api/russ/message?Body=Reply+to+Test+Compose+Message&Box=SentBox&DateSent=2013-07-16T13:42:11.943&FromName=Core+Prod+User&ID=39539271x&Selected=false&Subject=RE:+Test+Compose+Message&ToName=Core+Prod+User").respond();
+        $httpBackend.expectDELETE("/api/"+ four51.app.ApiAppName +"/message?Body=Reply+to+Test+Compose+Message&Box=SentBox&DateSent=2013-07-16T13:42:11.943&FromName=Core+Prod+User&ID=39539271x&Selected=false&Subject=RE:+Test+Compose+Message&ToName=Core+Prod+User").respond();
 
         scope.$apply(); //do the magic, fire the delete event and let the service call the mocked API
         $httpBackend.flush();
