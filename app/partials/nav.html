@@ -1,21 +1,25 @@
 
 <div class="navbar-inner">
     <div class="container-fluid">
-        <a class="brand" ng-show="Four51User.current" href="#" ng-click="refresh()">{{'Welcome, ' + Four51User.current.FirstName + " " + Four51User.current.LastName}}</a>
+        <a class="brand" ng-show="Four51User.current" href="#" ng-click="refresh()"> <i class="icon-cloud"></i> {{'Welcome, ' + Four51User.current.FirstName + " " + Four51User.current.LastName}}</a>
         <ul class="nav">
-            <li><a href="#/catalog">Category</a></li>
+            <li><a href="#"><i class="icon-home"></i> Home</a></li>
             <li class="divider-vertical" />
-            <li><a href="#/cart">View Cart</a></li>
+            <li><a href="#/catalog"><i class="icon-folder-open"></i> Category</a></li>
             <li class="divider-vertical" />
-            <li><a href="#/order">Orders</a></li>
+            <li><a href="#/cart"><i class="icon-shopping-cart"></i> View Cart</a></li>
             <li class="divider-vertical" />
-            <li><a href="#/message">Message</a></li>
+            <li><a href="#/order"><i class="icon-bar-chart"></i> Orders</a></li>
             <li class="divider-vertical" />
-            <li><a href="#/admin">Profile</a></li>
+            <li><a href="#/message"><i class="icon-inbox"></i> Message</a></li>
             <li class="divider-vertical" />
-            <li><a href="#/addresses">Addresses</a></li>
+            <li><a href="#"><i class="icon-envelope-alt"></i> Contact</a></li>
             <li class="divider-vertical" />
-            <li><a href="#" id="451_btn_logout" ng-click="Logout()">Log Out</a></li>
+            <li><a href="#/admin"><i class="icon-user"></i> Profile</a></li>
+            <li class="divider-vertical" />
+            <li><a href="#/addresses"><i class="icon-bug"></i> Addresses</a></li>
+            <li class="divider-vertical" />
+            <li><a href="#" id="451_btn_logout" ng-click="Logout()"><i class="icon-off"></i> Log Out</a></li>
         </ul>
     </div>
 </div>
