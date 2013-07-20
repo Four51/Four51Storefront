@@ -1,25 +1,26 @@
-
-<div class="navbar-inner">
-    <div class="container-fluid">
-        <a class="brand" ng-show="Four51User.current" href="#" ng-click="refresh()"> <i class="icon-cloud"></i> {{'Welcome, ' + Four51User.current.FirstName + " " + Four51User.current.LastName}}</a>
+ <div class="navbar-inner">
+    <div class="container-fluid admin-navigation">
+        <a class="brand" ng-show="Four51User.current" href="#" ng-click="refresh()"><i class="icon-cloud"></i> {{'Welcome ' + Four51User.current.FirstName + " " + Four51User.current.LastName}}</a></li>
         <ul class="nav">
-            <li><a href="#"><i class="icon-home"></i> Home</a></li>
             <li class="divider-vertical" />
-            <li><a href="#/catalog"><i class="icon-folder-open"></i> Category</a></li>
+            <li><a href="#/admin"><i class="icon-user"></i></a></li>
             <li class="divider-vertical" />
-            <li><a href="#/cart"><i class="icon-shopping-cart"></i> View Cart</a></li>
+            <li><a href="#"><i class="icon-envelope-alt"></i></a></li>
             <li class="divider-vertical" />
-            <li><a href="#/order"><i class="icon-bar-chart"></i> Orders</a></li>
+            <li><a href="#" id="451_btn_logout" ng-click="Logout()"><i class="icon-off"></i></a></li>
             <li class="divider-vertical" />
-            <li><a href="#/message"><i class="icon-inbox"></i> Message</a></li>
-            <li class="divider-vertical" />
-            <li><a href="#"><i class="icon-envelope-alt"></i> Contact</a></li>
-            <li class="divider-vertical" />
-            <li><a href="#/admin"><i class="icon-user"></i> Profile</a></li>
-            <li class="divider-vertical" />
-            <li><a href="#/addresses"><i class="icon-bug"></i> Addresses</a></li>
-            <li class="divider-vertical" />
-            <li><a href="#" id="451_btn_logout" ng-click="Logout()"><i class="icon-off"></i> Log Out</a></li>
         </ul>
     </div>
+</div>
+<div class="container-fluid content-navigation">
+    <nav class="nav">
+        <ul>
+            <li><a href="#/catalog"><span class="icon"><i class="icon-folder-open"></i></span>Category</a></li>
+            <li><a href="#/order"><span class="icon"><i class="icon-bar-chart"></i></span>Orders</a></li>
+            <li><a href="#/message"><span class="icon"><i class="icon-inbox"></i></span>Messages</a></li>
+            <li><a href="#/addresses"><span class="icon"><i class="icon-bug"></i></span>Addresses</a></li>
+            <li><a href="#/cart"><span class="icon"><i class="icon-shopping-cart"></i></span>View Cart</a></li>
+            <li><a href="#"><span class="icon"><i class="icon-search"></i></span></a></li>
+        </ul>
+    </nav>
 </div>

@@ -3,5 +3,200 @@
 /* ----------------------------------------------------------------------------------------------- */
 
 
+/*  media queries as breakpoints
+    1024+   Desktop/Tablet Landscape
+    768     Tablet Portrait
+    480     Phone Landscape
+    320     Phone Mobile
+----------------------------------------------------------------------------------------------- */
+
+/* Desktop & tablet landscape - 100% width - 1024+ */
+@media (min-width: 64em) {
+
+    body {
+        background-color:#2C3E50;
+    }
+
+    #content {
+        margin: 260px 0 40px;
+    }
+
+    .content-navigation .nav {
+        float: none !important; /* bootstrap adds a float where we dont want it */
+    }
+    .content-navigation {
+        padding: .75em;
+        background-color:#34495E;clear: both; overlfow: hidden;
+        -moz-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
+        -webkit-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
+        box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
+    }
 
 
+    /* Transforms the list into a horizontal navigation */
+    .content-navigation .nav li {
+        width: auto;display: table-cell;
+        padding: 0 1em;
+        text-align: center;
+        -webkit-transition: border .5s;
+        -moz-transition: border .5s;
+        -o-transition: border .5s;
+        -ms-transition: border .5s;
+        transition: border .5s;
+    }
+    .content-navigation .nav ul {
+        display: table;
+        width: 100%;
+    }
+
+    .content-navigation .nav a {
+        display: block;
+        width: auto;
+    }
+
+    /* hover, focused and active effects that add a little colored border to the different items */
+    .content-navigation .nav li:nth-child(8n+1) a:hover,
+    .content-navigation .nav li:nth-child(8n+1) a:active,
+    .content-navigation .nav li:nth-child(8n+1) a:focus {
+        border-bottom: 8px solid rgb(174, 78, 1);
+    }
+
+    .content-navigation .nav li:nth-child(8n+2) a:hover,
+    .content-navigation .nav li:nth-child(8n+2) a:active,
+    .content-navigation .nav li:nth-child(8n+2) a:focus {
+        border-bottom: 8px solid rgb(191, 117, 20);
+    }
+
+    .content-navigation .nav li:nth-child(8n+5) a:hover,
+    .content-navigation .nav li:nth-child(8n+5) a:active,
+    .content-navigation .nav li:nth-child(8n+5) a:focus {
+        border-bottom: 8px solid rgb(12, 110, 149);
+    }
+
+    .content-navigation .nav li:nth-child(8n+6) a:hover,
+    .content-navigation .nav li:nth-child(8n+6) a:active,
+    .content-navigation .nav li:nth-child(8n+6) a:focus {
+        border-bottom: 8px solid rgb(10, 75, 117);
+    }
+
+    .content-navigation .nav li:nth-child(8n+4) a:hover,
+    .content-navigation .nav li:nth-child(8n+4) a:active,
+    .content-navigation .nav li:nth-child(8n+4) a:focus {
+        border-bottom: 8px solid rgb(46, 204, 113);
+    }
+
+    .content-navigation .nav li:nth-child(8n+7) a:hover,
+    .content-navigation .nav li:nth-child(8n+7) a:active,
+    .content-navigation .nav li:nth-child(8n+7) a:focus {
+        border-bottom: 8px solid rgb(242, 94, 70);
+    }
+
+    .content-navigation .nav li:nth-child(8n+3) a:hover,
+    .content-navigation .nav li:nth-child(8n+3) a:active,
+    .content-navigation .nav li:nth-child(8n+3) a:focus {
+        border-bottom: 8px solid rgb(26, 188, 156);
+    }
+    .content-navigation .nav li:nth-child(8n+8) a:hover,
+    .content-navigation .nav li:nth-child(8n+8) a:active,
+    .content-navigation .nav li:nth-child(8n+8) a:focus {
+        border-bottom: 8px solid rgb(171, 8, 9);
+    }
+    /* Placing the icon */
+
+    .content-navigation .icon {
+        padding-top: 1em;
+    }
+
+    .content-navigation .icon + span {
+        margin-top: .75em;
+        -webkit-transition: margin .5s;
+        -moz-transition: margin .5s;
+        -o-transition: margin .5s;
+        -ms-transition: margin .5s;
+        transition: margin .5s;
+    }
+
+    /* Animating the height of the element*/
+    .content-navigation .nav a {
+        height: 7.6em;
+    }
+
+
+
+    /* Making the text follow the height animation */
+    .content-navigation .nav a:hover .icon + span {
+
+        -webkit-transition: margin .5s;
+        -moz-transition: margin .5s;
+        -o-transition: margin .5s;
+        -ms-transition: margin .5s;
+        transition: margin .5s;
+    }
+
+    /* Positioning the icons and preparing for the animation*/
+    .content-navigation .nav i {
+        position: relative;
+        display: inline-block;
+        margin: 0 auto;
+        padding: 0.4em ;
+        border-radius: 50%;
+        font-size: 1.8em;
+        box-shadow: 0 0 0 30px transparent;
+        background: rgba(255,255,255,0.1);
+        -webkit-transform: translate3d(0, 0, 0);
+        -moz-transform: translate3d(0, 0, 0);
+        -o-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        -webkit-transition: box-shadow .6s ease-in-out;
+        -moz-transition: box-shadow .6s ease-in-out;
+        -o-transition: box-shadow .6s ease-in-out;
+        -ms-transition: box-shadow .6s ease-in-out;
+        transition: box-shadow .6s ease-in-out;
+    }
+
+    /* Animate the box-shadow to create the effect */
+    .content-navigation .nav a:hover i,
+    .content-navigation .nav a:active i,
+    .content-navigation .nav a:focus i {
+        box-shadow: 0 0 0 0 rgba(255,255,255,0.2);
+        -webkit-transition: box-shadow .4s ease-in-out;
+        -moz-transition: box-shadow .4s ease-in-out;
+        -o-transition: box-shadow .4s ease-in-out;
+        -ms-transition: box-shadow .4s ease-in-out;
+        transition: box-shadow .4s ease-in-out;
+    }
+
+}
+
+
+
+/* Size and font adjustments to make it fit into in-between screens 800-980 */
+@media (min-width: 50em) and (max-width: 61.250em) {
+    body {background-color:blue;}
+
+}
+
+
+
+
+/* Tablet - portrait - 798 */
+@media (min-width:32.5em) and (max-width: 49.938em) {
+    body {background-color:black;}
+
+}
+
+
+
+/* Size and font adjustments to make it fit into in-between screens 520-618 */
+@media (min-width: 32.5em) and (max-width: 38.688em) {
+    body {background-color:green;}
+}
+
+
+
+/* Phone - portrait and landscape up to - 518 */
+@media (max-width: 32.438em) {
+    body {background-color:orange;}
+
+}

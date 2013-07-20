@@ -10,7 +10,7 @@
  0. Structure
  1. Branding
  2. Admin Navigation
- 3. Category Navigation
+ 3. Content Navigation
  4. Product Navigation
  5. Main Content
  6. Footer
@@ -24,8 +24,15 @@
 /* ----------------------------------------------------------------------------------------------- */
 
 body {
-    padding-top: 60px;
-    padding-bottom: 40px;
+
+}
+hr {
+    border: none !important;
+    clear: both;
+    height: 1px; /* height is for hr only, unfortunately we cannot change height of a br */
+    margin: 0 !important; /* override inline style */
+    padding: 0 !important; /* override inline style */
+    background-color: transparent;
 }
 
 .sidebar-nav {
@@ -40,6 +47,9 @@ body {
 
         padding-right: 5px;
     }
+}
+.user-name {
+    font-size: 12px !important;
 }
 
 .form-signin {
@@ -109,8 +119,98 @@ body {
 
 
 /* ----------------------------------------------------------------------------------------------- */
-/*** 4. CATEGORY NAVIGATION ***/
+/*** 4. CONTENT NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
+
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+.content-navigation .nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 1.3em;
+    font-weight: 300;
+}
+
+.content-navigation .nav li span {
+    display: block;
+}
+
+.content-navigation .nav a {
+    display: block;
+    color: rgba(249, 249, 249, .9);
+    text-decoration: none;
+    -webkit-transition: color .5s, background .5s, height .5s;
+    -moz-transition: color .5s, background .5s, height .5s;
+    -o-transition: color .5s, background .5s, height .5s;
+    -ms-transition: color .5s, background .5s, height .5s;
+    transition: color .5s, background .5s, height .5s;
+}
+
+.content-navigation .nav i {
+    /* Make the font smoother for Chrome */
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.content-navigation .nav a, .nav li {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Remove the blue Webkit background when element is tapped */
+.content-navigation a, .category-navigation button {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Hover effect for the whole navigation to make the hovered item stand out */
+.content-navigation .nav ul:hover a {
+    color: rgba(249, 249, 249, .35);
+}
+
+.content-navigation .nav ul:hover a:hover {
+    color: rgba(249, 249, 249, 0.99);
+}
+
+/* Adding some background color to the different menu items */
+.content-navigation .nav li:nth-child(8n+1) {
+    background: rgb(208, 101, 3);
+}
+
+.content-navigation .nav li:nth-child(8n+2) {
+    background: rgb(233, 147, 26);
+}
+
+.content-navigation .nav li:nth-child(8n+5) {
+    background: rgb(22, 145, 190);
+}
+
+.content-navigation .nav li:nth-child(8n+6) {
+    background: rgb(22, 107, 162);
+}
+
+.content-navigation .nav li:nth-child(8n+4) {
+    background: rgb(39, 174, 96)
+}
+
+.content-navigation .nav li:nth-child(8n+7) {
+    background: rgb(226, 84, 61);
+}
+
+.content-navigation .nav li:nth-child(8n+3) {
+    background: rgb(22, 160, 133);
+}
+.content-navigation .nav li:nth-child(8n+8) {
+    background: rgb(192, 57, 43);
+}
+
 
 
 /* ----------------------------------------------------------------------------------------------- */
@@ -121,6 +221,7 @@ body {
 /* ----------------------------------------------------------------------------------------------- */
 /*** 6. MAIN CONTENT ***/
 /* ----------------------------------------------------------------------------------------------- */
+
 
 
 /* ----------------------------------------------------------------------------------------------- */
