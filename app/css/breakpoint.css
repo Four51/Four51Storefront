@@ -14,19 +14,22 @@
 @media (min-width: 64em) {
 
     body {
-        background-color:#2C3E50;
+        background-color:#fff;
     }
 
     #content {
-        margin: 260px 0 40px;
+        margin: 130px 0 40px;
     }
 
     .content-navigation .nav {
         float: none !important; /* bootstrap adds a float where we dont want it */
+        margin: 0 !important;
     }
+
+
     .content-navigation {
-        padding: .75em;
-        background-color:#34495E;clear: both; overlfow: hidden;
+        padding: .25em;
+        background-color:#fff;
         -moz-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
         -webkit-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
         box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
@@ -35,8 +38,9 @@
 
     /* Transforms the list into a horizontal navigation */
     .content-navigation .nav li {
-        width: auto;display: table-cell;
-        padding: 0 1em;
+        width: auto;
+        display: table-cell;
+        padding: 0;
         text-align: center;
         -webkit-transition: border .5s;
         -moz-transition: border .5s;
@@ -58,53 +62,53 @@
     .content-navigation .nav li:nth-child(8n+1) a:hover,
     .content-navigation .nav li:nth-child(8n+1) a:active,
     .content-navigation .nav li:nth-child(8n+1) a:focus {
-        border-bottom: 8px solid rgb(174, 78, 1);
+        background-color: rgb(174, 78, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+2) a:hover,
     .content-navigation .nav li:nth-child(8n+2) a:active,
     .content-navigation .nav li:nth-child(8n+2) a:focus {
-        border-bottom: 8px solid rgb(191, 117, 20);
+        background-color:  rgb(191, 117, 20);
     }
 
     .content-navigation .nav li:nth-child(8n+5) a:hover,
     .content-navigation .nav li:nth-child(8n+5) a:active,
     .content-navigation .nav li:nth-child(8n+5) a:focus {
-        border-bottom: 8px solid rgb(12, 110, 149);
+        background-color: rgb(12, 110, 149);
     }
 
     .content-navigation .nav li:nth-child(8n+6) a:hover,
     .content-navigation .nav li:nth-child(8n+6) a:active,
     .content-navigation .nav li:nth-child(8n+6) a:focus {
-        border-bottom: 8px solid rgb(10, 75, 117);
+        background-color:  rgb(10, 75, 117);
     }
 
     .content-navigation .nav li:nth-child(8n+4) a:hover,
     .content-navigation .nav li:nth-child(8n+4) a:active,
     .content-navigation .nav li:nth-child(8n+4) a:focus {
-        border-bottom: 8px solid rgb(46, 204, 113);
+        background-color:  rgb(46, 204, 113);
     }
 
     .content-navigation .nav li:nth-child(8n+7) a:hover,
     .content-navigation .nav li:nth-child(8n+7) a:active,
     .content-navigation .nav li:nth-child(8n+7) a:focus {
-        border-bottom: 8px solid rgb(242, 94, 70);
+        background-color:  rgb(242, 94, 70);
     }
 
     .content-navigation .nav li:nth-child(8n+3) a:hover,
     .content-navigation .nav li:nth-child(8n+3) a:active,
     .content-navigation .nav li:nth-child(8n+3) a:focus {
-        border-bottom: 8px solid rgb(26, 188, 156);
+        background-color:  rgb(26, 188, 156);
     }
     .content-navigation .nav li:nth-child(8n+8) a:hover,
     .content-navigation .nav li:nth-child(8n+8) a:active,
     .content-navigation .nav li:nth-child(8n+8) a:focus {
-        border-bottom: 8px solid rgb(171, 8, 9);
+        background-color: rgb(171, 8, 9);
     }
     /* Placing the icon */
 
     .content-navigation .icon {
-        padding-top: 1em;
+        padding-top: .25em;
     }
 
     .content-navigation .icon + span {
@@ -118,7 +122,7 @@
 
     /* Animating the height of the element*/
     .content-navigation .nav a {
-        height: 7.6em;
+        height: 4.6em;
     }
 
 
@@ -140,9 +144,9 @@
         margin: 0 auto;
         padding: 0.4em ;
         border-radius: 50%;
-        font-size: 1.8em;
+        font-size: 1.2em;
         box-shadow: 0 0 0 30px transparent;
-        background: rgba(255,255,255,0.1);
+        /* background: rgba(255,255,255,0.1); */
         -webkit-transform: translate3d(0, 0, 0);
         -moz-transform: translate3d(0, 0, 0);
         -o-transform: translate3d(0, 0, 0);
@@ -198,5 +202,4 @@
 /* Phone - portrait and landscape up to - 518 */
 @media (max-width: 32.438em) {
     body {background-color:orange;}
-
 }

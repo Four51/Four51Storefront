@@ -24,8 +24,9 @@
 **  I want to see breakpoints in window size added as a body class for device widths for ie: https://github.com/snapjay/angularjs-breakpoint
     another example: https://github.com/xoxco/breakpoints
 
-    Breakpoints will provide more bulletproof design for content with custom breakpoints, alongside the Bootstrap-responive.css media queries
+    Breakpoints will provide more bulletproof design for content alongside the Bootstrap-responive.css media queries
     Default Breakpoints: (can be modified to fit a clients needs for specific devices)
+    See breakpoint.css for app responsive defaults
         1024    Desktop
                 Tablet      Landscape
         798     Tablet      Portrait
