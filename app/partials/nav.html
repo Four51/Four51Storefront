@@ -1,11 +1,8 @@
- <header>
+ <header class="header">
 <div class="navbar-inner">
     <div class="container-fluid admin-navigation">
         <a class="brand" ng-show="Four51User.current" href="#" ng-click="refresh()"><i class="icon-cloud"></i> {{'Welcome ' + Four51User.current.FirstName + " " + Four51User.current.LastName}}</a>
-        <ul class="nav">
-            <li class="divider-vertical" />
-            <li><a href="#"><span class="icon"><i class="icon-search"></i></span></a></li>
-        </ul>
+
         <ul class="nav user-links">
             <li class="divider-vertical" />
             <li class="admin"><a href="#/admin"><i class="icon-user"></i></a></li>
@@ -14,6 +11,10 @@
             <li class="divider-vertical" />
             <li class="logout"><a href="#" id="451_btn_logout" ng-click="Logout()"><i class="icon-off"></i></a></li>
             <li class="divider-vertical" />
+        </ul>
+        <ul class="nav">
+            <li class="divider-vertical" />
+            <li><a href="#"><span class="icon"><i class="icon-search"></i></span></a></li>
         </ul>
     </div>
 </div>
