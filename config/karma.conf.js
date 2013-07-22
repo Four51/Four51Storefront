@@ -13,7 +13,7 @@ files = [
 	'app/js/app.js',
 	'app/js/**/*.js',
 
-	'config/Four51AppName.js',
+	'config/Four51ApiAppName.js',
 	'test/unit/appSpec.js',
     'test/unit/filtersSpec.js',
     'test/unit/451Spec.js',
