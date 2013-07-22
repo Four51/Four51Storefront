@@ -179,7 +179,14 @@
     body {
         background-color:black;
     }
+    li.divider-vertical {
+        display: none;
+    }
 
+    /* bootstrap-responsive.css removes for mobile, applying rule here for window size as well */
+    .admin-navigation a.brand {
+        display: none;
+    }
     .content-navigation {
         padding: 0;
     }
@@ -248,7 +255,7 @@
     .content-navigation .nav li {
         display: block;
         float: left;
-        width: 50%;
+        width: 33.325%;
     }
 
     .content-navigation .nav a {

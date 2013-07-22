@@ -106,6 +106,13 @@ hr {
   padding: 0;
 }
 
+a:focus {
+    outline: none;
+}
+button::-moz-focus-inner {
+    border: 0;
+}
+
 
 
 /* ----------------------------------------------------------------------------------------------- */
@@ -151,6 +158,9 @@ hr {
 .header div.navbar-inner {
     background-image: none;
     background-color:#fff;
+}
+.header .navbar-inner {
+    padding: 0;
 }
 
 .content-navigation {
