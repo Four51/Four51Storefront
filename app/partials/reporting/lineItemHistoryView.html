@@ -1,9 +1,7 @@
 <div>
-    <p><img src="/Images/Product/{{order.LineItems[lineItemIndex].LargeImageFile.FileName}}"</p>
-    <p>Product ID: {{order.LineItems[lineItemIndex].Variant.ExternalID}}</p>
-    <p ng-show="order.LineItems[lineItemIndex].SupplierPartID">{{order.LineItems[lineItemIndex].SupplierPartID}}</p>
-    <p ng-bind-html-unsafe='order.LineItems[lineItemIndex].Product.Description'></p>
-
-    <priceScheduleTable ps='order.LineItems[lineItemIndex].PriceSchedule' p='order.LineItems[lineItemIndex].Product' />
-    <staticspecstable specGroups="order.LineItems[lineItemIndex].Product.StaticSpecGroups"></staticspecstable>
+    <p><img ng-src="LineItem.LargeImageFile.URL"></p>
+    <p>Product ID: {{LineItem.ProductIDText}}</p>
+    <p ng-bind-html-unsafe='LineItem.Product.Description'></p>
+    <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product' />
+    <staticspecstable specGroups="StaticSpecGroups"></staticspecstable>
 </div>
