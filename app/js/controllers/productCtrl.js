@@ -1,4 +1,5 @@
 four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, ProductService, OrderService, VariantService, $451, UserService) {
+	//TODO:pull live product data. line item doesn't come back with enough.
 	$scope.LineItem = {};
 	var user = UserService.get();
 	OrderService.get({ id: user.CurrentOrderID }, function(data){
@@ -23,7 +24,9 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 	$scope.LineItem.Product = ProductService.get({interopID: $routeParams.productInteropID}, function(data){
         var v = null;
         if($routeParams.variantInteropID){
-			$scope.LineItem.Variant = $451.filter(data.Variants, {Property: 'InteropID', Value: $routeParams.variantInteropID})[0];
+			//Product.Variants doesn't return all details on variable text products, so go back for the rest.
+			$scope.LineItem.Variant = data.Type == 'VariableText' ? VariantService.get({VariantInteropID: $routeParams.variantInteropID, ProductInteropID: data.InteropID })
+				: $451.filter(data.Variants, {Property: 'InteropID', Value: $routeParams.variantInteropID})[0];
 		}
 		ProductService.setNewLineItemScope($scope);
 		ProductService.setProductViewScope($scope);
