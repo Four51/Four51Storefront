@@ -86,7 +86,8 @@ four51.app.factory('ProductService', function($resource, $451, $api, VariantServ
 					specOptionIDs.push(item.Value);
 				})
 				if(hasAllVarDefiningSpecs){
-					VariantService.search(scope.LineItem.Product.InteropID, specOptionIDs, function(data){
+					//{'ProductInteropID': productInteropID, 'SpecOptionIDs': specOptionIDs}
+					VariantService.get({'ProductInteropID': scope.LineItem.Product.InteropID, 'SpecOptionIDs': specOptionIDs}, function(data){
 						if(!data.IsDefaultVariant)
 							scope.LineItem.Variant = data;
 						newLineItemScope(scope)
@@ -174,11 +175,11 @@ four51.app.factory('ProductService', function($resource, $451, $api, VariantServ
 });
 
 four51.app.factory('VariantService', function($resource, $451, $api){
-	var resource = $resource($451.api('hiddenvariant'));
+	var resource = $resource($451.api('variant'));
 	return {
-		search: function(productInteropID, specOptionIDs, callback){
-			console.log('hiddenvariant query');
-			return resource.get({'ProductInteropID': productInteropID, 'SpecOptionIDs': specOptionIDs}, callback);
+		get: function(params, callback){
+			console.log('variant Search');
+			return resource.get(params, callback);
 		}
 	}
 });
