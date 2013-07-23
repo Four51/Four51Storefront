@@ -1,3 +1,12 @@
-<div>
-    <shipperselection user="user" order="order" />
-</div>
+<form name="cart">
+    <div>
+        <addressselector user="user" model="order.ShipAddressID" required />
+        <shipperselection user="user" order="order" />
+    </div>
+    <div class="btn-group">
+        <button class="btn btn-small btn-action" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{Four51User.current.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
+        <button class="btn btn-small btn-warning" ng-click="cancelOrder()">Cancel Order</button>
+        <button class="btn btn-small btn-info" ng-click="continueShopping()">Continue Shopping</button>
+    </div>
+</form>
+

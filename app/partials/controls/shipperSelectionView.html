@@ -1,8 +1,9 @@
-<div class="shipper" ng-if="allowShipperInput()">
-    <input type="text" ng-if="user.ShipMethod.ShipperSelectionType == 'UserOpenField'" /><br />
-    <select ng-if="user.ShipMethod.ShipperSelectionType == 'UserDropDown'" ng-model="order.Shipper" ng-options="shipper.Name for shipper in order.Shippers" />
-</div>
+<p class="shipper" ng-if="allowShipperInput()">
+    <input type="text" ng-if="user.ShipMethod.ShipperSelectionType == 'UserOpenField'" />
+    <select ng-if="user.ShipMethod.ShipperSelectionType == 'UserDropDown'" ng-model="order.Shipper"
+            ng-options="(shipper.ShippingRate == null ? shipper.Name : shipper.ShippingRate.Description) for shipper in order.Shippers" /><br />Order: {{order.Shipper}} <br />LineItem: {{order.LineItems[0].Shipper}}
+</p>
 
-<div class="account" ng-if="user.ShipMethod.AskForAccountNumber">
-    <input type="text" />
-</div>
+<p class="account" ng-if="user.ShipMethod.AskForAccountNumber">
+    <input placeholder="Shipping Account Number" type="text" ng-model="order.LineItems[0].ShipAccount" />{{order.LineItems[0].ShipAccount}}
+</p>

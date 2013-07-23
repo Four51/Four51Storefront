@@ -18,8 +18,9 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, OrderSe
     };
 
     $scope.checkOut = function() {
-        OrderService.save($scope.order);
-        $location.path('checkout');
+        OrderService.save($scope.order, function() {
+            $location.path('checkout');
+        });
     };
 
     $scope.user = UserService.get();
