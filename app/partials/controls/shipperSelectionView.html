@@ -1,9 +1,9 @@
 <p class="shipper" ng-if="allowShipperInput()">
     <input type="text" ng-if="user.ShipMethod.ShipperSelectionType == 'UserOpenField'" />
     <select ng-if="user.ShipMethod.ShipperSelectionType == 'UserDropDown'" ng-model="order.Shipper"
-            ng-options="(shipper.ShippingRate == null ? shipper.Name : shipper.ShippingRate.Description) for shipper in order.Shippers" /><br />Order: {{order.Shipper}} <br />LineItem: {{order.LineItems[0].Shipper}}
+            ng-options="(shipper.ShippingRate == null ? shipper.Name : shipper.ShippingRate.Description) for shipper in order.Shippers" />
 </p>
 
 <p class="account" ng-if="user.ShipMethod.AskForAccountNumber">
-    <input placeholder="Shipping Account Number" type="text" ng-model="order.LineItems[0].ShipAccount" />{{order.LineItems[0].ShipAccount}}
+    <input placeholder="Shipping Account Number" type="text" ng-model="order.LineItems[0].ShipAccount" />
 </p>
