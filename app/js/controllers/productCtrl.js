@@ -1,4 +1,5 @@
 four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, ProductService, OrderService, VariantService, $451, UserService) {
+	//TODO:pull live product data. line item doesn't come back with enough.
 	$scope.LineItem = {};
 	var user = UserService.get();
 	OrderService.get({ id: user.CurrentOrderID }, function(data){
