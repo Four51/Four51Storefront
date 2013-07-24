@@ -119,6 +119,7 @@ describe('SPA login of user that hasnt accepted terms/conditions yet', function(
     it("should display the terms and conditions and allow the user to accept them, then set that flag on their account that they have", function() {
         expect(element('p:contains("terms and conditions")').count()).toBe(1); //this won't work if the client changes the messages or we localize it.
     });
+    e2eLogout(C_debug);
 
 });
 
@@ -129,7 +130,7 @@ describe('SPA login of punchout user', function() {
 
     e2eLoginNoTest("coreprodautopunchoutuser","fails345", C_debug);
 
-    it("should display the terms and conditions and allow the user to accept them, then set that flag on their account that they have", function() {
+    it("should not let them login and display an error about them being a Punchout user", function() {
         expect(element('p:contains("Punchout user")').count()).toBe(1); //this won't work if the client changes the messages or we localize it.
     });
 

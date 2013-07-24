@@ -48,25 +48,6 @@ function e2eLogin(strUsername, strPassword, blnDebug){
 
 }
 
-function e2eLoginProduct(strUsername, strPassword, blnDebug, strProductID){ //this version logs in and goes straight to a product view
-
-    it('should display the requested product once authorization is granted', function(){
-
-        browser().navigateTo('../../app/index.html#/product/' + strProductID);
-
-        input("user.Username").enter(strUsername);
-        input("user.Password").enter(strPassword);
-        if(blnDebug){
-            pause();
-        }
-        element("#451_btn_login").click();
-
-        if(blnDebug){
-            pause();
-        }
-    });
-}
-
 function e2eLoginNoTest(strUsername, strPassword, blnDebug){ //this version doesn't perform tests, just logs in
 
     it('should allow us to enter a user/pass', function(){
@@ -103,5 +84,25 @@ function e2eLogout(blnDebug){
         expect(element('#login_form:visible').count()).toBe(1);
         //we found a login box.  is login_box the best way to check for it's existence?
 
+    });
+}
+
+//specific login functions (login directly to product, message, order, category, whatever)
+function e2eLoginProduct(strUsername, strPassword, blnDebug, strProductID){ //this version logs in and goes straight to a product view
+
+    it('should display the requested product once authorization is granted', function(){
+
+        browser().navigateTo('../../app/index.html#/product/' + strProductID);
+
+        input("user.Username").enter(strUsername);
+        input("user.Password").enter(strPassword);
+        if(blnDebug){
+            pause();
+        }
+        element("#451_btn_login").click();
+
+        if(blnDebug){
+            pause();
+        }
     });
 }
