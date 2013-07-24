@@ -4,8 +4,11 @@ four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Produc
 	var user = UserService.get();
 	OrderService.get({ id: user.CurrentOrderID }, function(data){
 		$scope.LineItem = data.LineItems[$routeParams.lineItemIndex];
+		$scope.LineItem.Product = ProductService.get({interopID: $scope.LineItem.Product.InteropID}, function(data){
+			ProductService.setProductViewScope($scope);
+		});
 		$scope.allowAddToOrder = true;
-		ProductService.setProductViewScope($scope);
+
 
 	});
 });
@@ -25,8 +28,9 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
         var v = null;
         if($routeParams.variantInteropID){
 			//Product.Variants doesn't return all details on variable text products, so go back for the rest.
-			$scope.LineItem.Variant = data.Type == 'VariableText' ? VariantService.get({VariantInteropID: $routeParams.variantInteropID, ProductInteropID: data.InteropID })
-				: $451.filter(data.Variants, {Property: 'InteropID', Value: $routeParams.variantInteropID})[0];
+			$scope.LineItem.Variant = data.Type == 'VariableText' ?
+				VariantService.get({VariantInteropID: $routeParams.variantInteropID, ProductInteropID: data.InteropID }) :
+				$451.filter(data.Variants, {Property: 'InteropID', Value: $routeParams.variantInteropID})[0];
 		}
 		ProductService.setNewLineItemScope($scope);
 		ProductService.setProductViewScope($scope);

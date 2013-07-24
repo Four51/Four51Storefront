@@ -53,7 +53,22 @@ four51.app.directive('vspecfield', function(){
 	return obj;
 
 });
+four51.app.directive('tempspecvalue', function(){ //not sure how spec values will be dealt with, but need a place holder for them
+	var obj = {
+		restrict: 'E',
+		scope: {
+			s: '='
+		},
+		controller: function($scope){
+			var s = $scope.s;
 
+			$scope.textValue = s.Options.length ? "select option" : s.Value;
+
+		},
+		template: '{{textValue}}'
+	};
+	return obj;
+});
 four51.app.directive('pricescheduletable', function(){
     var obj = {
         scope: {
@@ -151,7 +166,7 @@ four51.app.directive('quantityfield', function($451, ProductService){
 				}
                 if(scope.valid)
 					scope.error = null;
-				console.log("qty valid: " + scope.valid + " " + scope.error);
+
                 return scope.valid;
             }
 

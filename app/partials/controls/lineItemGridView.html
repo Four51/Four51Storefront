@@ -23,11 +23,11 @@
         <tbody>
             <tr ng-repeat="item in order.LineItems">
                 <td><input type='checkbox' ng-model='order.LineItems[$index].Selected' /></td>
-                <td><a ng-href="#/cart/{{$index}}">{{item.Variant.ExternalID}}</a></td>
+                <td><a ng-href="#/cart/{{$index}}">{{item.ProductIDText}}</a></td>
                 <td>{{item.Product.Name}}</td>
                 <td ng-if="hasSpecsOnAnyLineItem(order)">
                     <ul class="unstyled"><!-- more complete business logic in LineItemGrid.cs line 638 -->
-                        <li ng-repeat="spec in item.Specs | filter:Selected">{{spec.Name + " : " + spec.Value}}</li>
+                        <li ng-repeat="spec in item.Specs | onproperty: {Property: 'CanSetForLineItem' ,Value:true}">{{spec.Name}} : <tempspecvalue s='spec'/></li>
                     </ul>
                 </td>
                 <td>{{item.UnitPrice | currency:"$"}}</td>
