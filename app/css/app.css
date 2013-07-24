@@ -23,15 +23,13 @@
 /*** 0. STRUCTURE ***/
 /* ----------------------------------------------------------------------------------------------- */
 
-body {
 
-}
 hr {
-    border: none !important;
+    border: none;
     clear: both;
-    height: 1px; /* height is for hr only, unfortunately we cannot change height of a br */
-    margin: 0 !important; /* override inline style */
-    padding: 0 !important; /* override inline style */
+    height: 1px;
+    margin: 0;
+    padding: 0;
     background-color: transparent;
 }
 
@@ -119,7 +117,15 @@ button::-moz-focus-inner {
 /*** 2. BRANDING ***/
 /* ----------------------------------------------------------------------------------------------- */
 
-.admin-navigation a.brand {font-size: 11px; color:#52BAD5;}
+.admin-navigation a.brand {
+    font-size: 11px;
+    color: rgb(22, 145, 190);
+}
+
+.admin-navigation a.brand:hover {
+
+    color: rgb(44, 168, 219);
+}
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 3. ADMIN NAVIGATION ***/
@@ -128,18 +134,26 @@ button::-moz-focus-inner {
 .admin-navigation {
     background-color:#fff;
 }
+
 .admin-navigation ul.nav:nth-of-type(2) {
     float: right;
 }
 
 .admin-navigation li a i {
-    color:#52BAD5;
+    color:rgb(22, 145, 190);
 }
 
 .admin-navigation li a:hover i {
-    color:#2c9ab7;
+    color:rgb(44, 168, 219);
 }
 
+.admin-navigation li.logout a i {
+    color: rgb(226, 84, 61);
+}
+
+.admin-navigation li.logout a:hover i {
+    color: rgb(242, 94, 70);
+}
 /* ----------------------------------------------------------------------------------------------- */
 /*** 4. CONTENT NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */

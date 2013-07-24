@@ -12,11 +12,6 @@
 
 /* Desktop & tablet landscape - 100% width - 1024+ */
 @media (min-width: 50em) {
-
-    body {
-        background-color:#fff;
-    }
-
     #content {
         margin: 130px 0 40px;
     }
@@ -159,15 +154,13 @@
 
 /* Size and font adjustments to make it fit into in-between screens 800-980 */
 @media (min-width: 50em) and (max-width: 61.250em) {
-    body {
-        background-color:blue;
-    }
-
     .nav ul {
         font-size: .90em;
 
     }
-
+    #content {
+        margin: 0;
+    }
 }
 
 
@@ -175,18 +168,10 @@
 
 /* Tablet - portrait - 798 */
 @media (min-width:32.5em) and (max-width: 49.938em) {
-
-    body {
-        background-color:black;
-    }
     li.divider-vertical {
         display: none;
     }
 
-    /* bootstrap-responsive.css removes for mobile, applying rule here for window size as well */
-    .admin-navigation a.brand {
-        display: none;
-    }
     .content-navigation {
         padding: 0;
     }
@@ -250,7 +235,9 @@
 
 /* CSS specific to the 2x3 columns version */
 @media (min-width:32.5em) and (max-width: 49.938em) {
-
+    .admin-navigation a.brand {
+        display: none;
+    }
     /* Creating the 2 column layout using floating elements once again */
     .content-navigation .nav li {
         display: block;
@@ -310,10 +297,6 @@
 
 /* Size and font adjustments to make it fit into in-between screens 520-618 */
 @media (min-width: 32.5em) and (max-width: 38.688em) {
-    body {
-        background-color:green;
-    }
-
     .content-navigation .nav li span.icon {
         width: 50%;
     }
@@ -326,10 +309,6 @@
 
 /* Phone - portrait and landscape up to - 518 */
 @media (max-width: 32.438em) {
-    body {
-        background-color:orange;
-    }
-
     li.divider-vertical {
         display: none;
     }
