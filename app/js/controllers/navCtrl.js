@@ -7,7 +7,8 @@ four51.app.controller('NavCtrl', function ($location, $scope, $451, UserService)
 	    $location.path("/login");
     };
 	$scope.template = { url: 'partials/nav.html'};
-    $scope.refresh = function() {
+    $scope.refresh = function(e) {
+        e.preventDefault();
         UserService.refresh();
     }
 });

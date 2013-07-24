@@ -18,8 +18,9 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, OrderSe
     };
 
     $scope.checkOut = function() {
-        OrderService.save($scope.order);
-        $location.path('checkout');
+        OrderService.save($scope.order, function() {
+            $location.path('checkout');
+        });
     };
 
     $scope.user = UserService.get();
@@ -27,7 +28,7 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, OrderSe
         function(o) {
             // I'm deciding to handle the auto assignment of certain properties here. It's essentially the load of the cart view page
             // it's the first time we'd display information about the order where these auto assigned values
-            OrderConfigService.configure(o,$scope.user);
+            OrderConfigService.costcenter(o,$scope.user);
         }) : null;
 
 	$scope.$watch('order.LineItems', function(newval) {

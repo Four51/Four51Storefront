@@ -1,7 +1,7 @@
 <header class="header">
 <div class="navbar-inner">
     <div class="container-fluid admin-navigation">
-        <a class="brand" ng-show="Four51User.current" href="#" ng-click="refresh()"><i class="icon-cloud"></i> {{'Welcome ' + Four51User.current.FirstName + " " + Four51User.current.LastName}}</a>
+        <a class="brand" ng-show="Four51User.current" href="#" ng-click="refresh($event)"><i class="icon-cloud"></i> {{'Welcome ' + Four51User.current.FirstName + " " + Four51User.current.LastName}}</a>
         <ul class="nav user-links">
             <li class="divider-vertical" />
             <li class="admin"><a href="#/admin"><i class="icon-user"></i></a></li>

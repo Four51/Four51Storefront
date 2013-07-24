@@ -32,9 +32,6 @@
     <div ng-if="order" class="CartDetail">
         <span ng-if="!Four51User.current.permissions.contains('HidePricing')">
             <p>Subtotal: {{order.Subtotal | currency}}</p>
-            <p>Shipping & Handling: {{ order.ShippingCost | currency }}</p>
-            <p>Tax: {{ order.TaxCost | currency }}</p>
-            <p>Total: {{ order.Total | currency }}</p>
             <p ng-if="Four51User.current.Company.TaxMethod != 'NoTax'"><label>{{ Four51User.current.Company.SiteText.ShippingDisclaimer }}</label></p>
         </span>
         <hr/>
