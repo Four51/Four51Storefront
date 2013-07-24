@@ -7,7 +7,7 @@
 //console.dir(scope('[name="LoginForm"]','user'));
 
 var C_debug = false;
-
+//standard login/logout functionality
 describe('SPA login with valid user/pass', function() {
    it("should navigate to the index page to login", function() {
         browser().navigateTo('../../app/index.html');
@@ -93,4 +93,44 @@ describe('SPA attempt to view a product WITH authentication', function() {
 
     //cleanup time, let's logout
     e2eLogout(C_debug);
+});
+
+//test some permissions
+describe('SPA login of inactive user', function() {
+    it("should navigate to the index page to login", function() {
+        browser().navigateTo('../../app/index.html');
+    });
+
+    e2eLoginNoTest("coreprodautoinactiveuser","fails345", C_debug);
+
+    it("should display a line saying cannot find user or password", function() {
+        expect(element('p:contains("not found")').count()).toBe(1); //this won't work if the client changes the messages or we localize it.
+    });
+
+});
+
+describe('SPA login of user that hasnt accepted terms/conditions yet', function() {
+    it("should navigate to the index page to login", function() {
+        browser().navigateTo('../../app/index.html');
+    });
+
+    e2eLoginNoTest("coreprodautonotermsuser","fails345", C_debug);
+
+    it("should display the terms and conditions and allow the user to accept them, then set that flag on their account that they have", function() {
+        expect(element('p:contains("terms and conditions")').count()).toBe(1); //this won't work if the client changes the messages or we localize it.
+    });
+
+});
+
+describe('SPA login of punchout user', function() {
+    it("should navigate to the index page to login", function() {
+        browser().navigateTo('../../app/index.html');
+    });
+
+    e2eLoginNoTest("coreprodautopunchoutuser","fails345", C_debug);
+
+    it("should display the terms and conditions and allow the user to accept them, then set that flag on their account that they have", function() {
+        expect(element('p:contains("Punchout user")').count()).toBe(1); //this won't work if the client changes the messages or we localize it.
+    });
+
 });
