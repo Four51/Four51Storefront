@@ -1,0 +1,1 @@
+<select ng-options="address.ID as address.AddressName for address in addresses | onproperty:{ 'Property': 'IsShipping', 'Value': 'true'} " ng-model="model" />
