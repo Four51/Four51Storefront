@@ -1,21 +1,31 @@
-
+<header class="header">
 <div class="navbar-inner">
-    <div class="container-fluid">
-        <a class="brand" ng-show="Four51User.current" href="#" ng-click="refresh($event)">{{'Welcome, ' + Four51User.current.FirstName + " " + Four51User.current.LastName}}</a>
+    <div class="container-fluid admin-navigation">
+        <a class="brand" ng-show="Four51User.current" href="#" ng-click="refresh($event)"><i class="icon-cloud"></i> {{'Welcome ' + Four51User.current.FirstName + " " + Four51User.current.LastName}}</a>
+        <ul class="nav user-links">
+            <li class="divider-vertical" />
+            <li class="admin"><a href="#/admin"><i class="icon-user"></i></a></li>
+            <!--- <li class="messages"><a href="#/message"><i class="icon-inbox"></i></a></li> in agreement, messages to sunset, or be included under user profile/admin becuase it does not need to be a main nav item --->
+            <li class="divider-vertical" />
+            <li class="contact"><a href="#"><i class="icon-envelope-alt"></i></a></li>
+            <li class="divider-vertical" />
+            <li class="logout"><a href="#" id="451_btn_logout" ng-click="Logout()"><i class="icon-off"></i></span></a></li>
+            <li class="divider-vertical" />
+        </ul>
         <ul class="nav">
-            <li><a href="#/catalog">Category</a></li>
             <li class="divider-vertical" />
-            <li><a href="#/cart">View Cart</a></li>
-            <li class="divider-vertical" />
-            <li><a href="#/order">Orders</a></li>
-            <li class="divider-vertical" />
-            <li><a href="#/message">Message</a></li>
-            <li class="divider-vertical" />
-            <li><a href="#/admin">Profile</a></li>
-            <li class="divider-vertical" />
-            <li><a href="#/addresses">Addresses</a></li>
-            <li class="divider-vertical" />
-            <li><a href="#" id="451_btn_logout" ng-click="Logout()">Log Out</a></li>
+            <li><a href="#"><span class="icon"><i class="icon-search"></i></span></a></li>
         </ul>
     </div>
 </div>
+<div class="container-fluid content-navigation">
+    <nav class="nav">
+        <ul><!--- default content-navigation is styled up to 8 buttons --->
+            <li class="category"><a href="#/catalog"><span class="icon"><i class="icon-folder-open"></i></span>Categories</a></li>
+            <li class="orders"><a href="#/order"><span class="icon"><i class="icon-bar-chart"></i></span>Orders</a></li>
+            <!--- <li class="addresses"><a href="#/addresses"><span class="icon"><i class="icon-bug"></i></span>Addresses</a></li> will be included under user profile/admin --->
+            <li class="cart"><a href="#/cart"><span class="icon"><i class="icon-shopping-cart"></i></span>View Cart</a></li>
+        </ul>
+    </nav>
+</div>
+</header>
