@@ -12,7 +12,7 @@
 function e2eLogin(strUsername, strPassword, blnDebug){
 
     it('should appear before the user performs valid login', function() {
-        expect(element('#login_box:visible').count()).toBe(1);
+        expect(element('#login_form:visible').count()).toBe(1);
         //we found a login box.  is login_box the best way to check for it's existence?
 
     });
@@ -40,8 +40,8 @@ function e2eLogin(strUsername, strPassword, blnDebug){
 
     });
 
-    it("should hide the login box once we've logged in", function() {
-        expect(element('#login_box:visible').count()).toBe(0);
+    it("should hide the login form once we've logged in", function() {
+        expect(element('#login_form:visible').count()).toBe(0);
         //we found a login box.  is login_box the best way to check for it's existence?
 
     });
@@ -99,8 +99,8 @@ function e2eLogout(blnDebug){
             pause();
         }
     });
-    it("should show the login box again since we've logged out", function() {
-        expect(element('#login_box:visible').count()).toBe(1);
+    it("should show the login form again since we've logged out", function() {
+        expect(element('#login_form:visible').count()).toBe(1);
         //we found a login box.  is login_box the best way to check for it's existence?
 
     });

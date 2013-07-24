@@ -33,13 +33,38 @@ describe('SPA login without valid user/pass', function() {
 
 });
 
+describe('SPA logout', function() {
+    e2eLoginNoTest("coreproduser","fails345", C_debug);
+
+    it("should display welcome message before logout", function() {
+        expect(element('#451_topnav a:contains("Welcome"):visible').count()).toBe(1);
+        if(C_debug){pause();}
+    });
+
+    e2eLogout(C_debug);
+
+    it("should display login form and hide welcome message", function() {
+        if(C_debug){pause();}
+        expect(element('#login_form:visible').count()).toBe(1);
+        expect(element('#451_topnav a:contains("Welcome"):hidden').count()).toBe(1);
+        if(C_debug){pause();}
+    });
+
+    xit("should remove all data", function() {
+        if(C_debug){pause();}
+        //this is x'ed out because it appears there's no good way of accessing localStorage from TestRunner.
+        expect(localStorage.getItem("User")).not.toBeDefined();
+
+    });
+});
+
 describe('SPA attempt to view a product without authentication', function() {
     it("tries to go to the product page", function() {
         browser().navigateTo('../../app/index.html#/product/Static%20Prod');
     });
 
-    it('but gets a login box instead', function() {
-        expect(element('#login_box:visible').count()).toBe(1);
+    it('but gets a login form instead', function() {
+        expect(element('#login_form:visible').count()).toBe(1);
         //we found a login box.  is login_box the best way to check for it's existence?
     });
 
@@ -50,8 +75,8 @@ describe('SPA attempt to view a product WITH authentication', function() {
         browser().navigateTo('../../app/index.html#/product/Static%20Prod');
     });
 
-    it('but gets a login box instead', function() {
-        expect(element('#login_box:visible').count()).toBe(1);
+    it('but gets a login form instead', function() {
+        expect(element('#login_form:visible').count()).toBe(1);
         //we found a login box.  is login_box the best way to check for it's existence?
     });
 
@@ -61,9 +86,9 @@ describe('SPA attempt to view a product WITH authentication', function() {
         expect(browser().location().url()).toBe("/product/Static%20Prod");
     });
 
-    it('should hide the login box', function(){
+    it('should hide the login form', function(){
         //now let's check for that login box and make sure it DOESN'T show up
-        expect(element('#login_box:visible').count()).toBe(0);
+        expect(element('#login_form:visible').count()).toBe(0);
     });
 
     //cleanup time, let's logout
