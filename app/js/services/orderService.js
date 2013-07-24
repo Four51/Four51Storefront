@@ -46,7 +46,7 @@ four51.app.factory('OrderConfigService', function() {
     };
 
     return {
-        configure: function(o, u) {
+        costcenter: function(o, u) {
             order = o; user = u;
             if (order.Status == 'Unsubmitted') {
                 setCostCenter();
