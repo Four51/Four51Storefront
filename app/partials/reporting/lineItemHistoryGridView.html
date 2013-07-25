@@ -4,7 +4,7 @@
         <tr>
             <td>ID</td>
             <td>Product</td>
-            <td ng-show="hasSpecsOnAnyLineItem()">Specifications</td>
+            <td ng-show="hasSpecsOnAnyLineItem">Specifications</td>
             <td>Unit Price</td>
             <td>Quantity</td>
             <td ng-show="hasShipperOnAnyLineItem()">Shipper</td>
@@ -18,7 +18,7 @@
         <tr ng-repeat="item in order.LineItems">
             <td><a ng-href="#/order/{{order.ID}}/{{$index}}">{{item.ProductIDText}}</a></td>
             <td>{{item.Product.Name}}</td>
-            <td ng-show="hasSpecsOnAnyLineItem()">
+            <td ng-show="hasSpecsOnAnyLineItem">
                 <ul><!-- more complete business logic in LineItemGrid.cs line 638 -->
                     <li ng-repeat="spec in item.Specs | filter:Selected">{{spec.Name + " : " + spec.Value}}</li>
                 </ul>
