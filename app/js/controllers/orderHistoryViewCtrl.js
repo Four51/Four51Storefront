@@ -1,11 +1,14 @@
 four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $routeParams, OrderService, FavoriteOrderService) {
-	$scope.order = OrderService.get({ id: $routeParams.id });
-	$scope.hasSpecsOnAnyLineItem = function() {
-		angular.forEach($scope.order.LineItems, function(item) {
-			if (item.Specs) return true;
-		});
-		return false;
-	};
+	$scope.order = OrderService.get({ id: $routeParams.id }, function(data){
+		$scope.hasSpecsOnAnyLineItem = false;
+		for(var i = 0; i < data.LineItems.length ; i++) {
+			if (data.LineItems[i].Specs) {
+				$scope.hasSpecsOnAnyLineItem = true;
+				break;
+			}
+		}
+	});
+
 	$scope.hasShipperOnAnyLineItem = function() {
 		angular.forEach($scope.order.LineItems, function(item) {
 			if (item.Shipper) return true;
