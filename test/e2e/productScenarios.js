@@ -152,12 +152,12 @@ describe('Product View - Price Schedules 1 "pstest1"', function(){
         //1-4 $3, 5-14 $2.50, 15-34 $2.25, 35-74 $2.00, 75+ $1.50
         pause();
         input("lineitem.Quantity").enter(1);
-        console.dir(binding(LineItem.LineTotal))
-        expect(binding(LineItem.LineTotal)).toEqual(3);
+        console.dir(binding("LineItem.LineTotal"))
+        expect(binding("LineItem.LineTotal")).toEqual(3);
         pause();
         select("lineitem.Quantity").option(14);
         input("lineitem.Quantity").enter(14);
-        expect(binding(LineItem.LineTotal)).toEqual(35);
+        expect(binding("LineItem.LineTotal")).toEqual(35);
 
 
         pause();
