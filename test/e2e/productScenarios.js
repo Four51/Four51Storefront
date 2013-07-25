@@ -10,18 +10,7 @@
 //console.dir(scope('.nav-header', 'category.InteropID'));
 //console.dir(binding('currentCategory.Name'));
 
-//console.dir(repeater('#451_lst_prod').row(0));
-//console.dir(repeater('#451_lst_prod').column('p.Variants.length'));
-//console.dir(scope('#451_lst_prod', 'p.StandardPriceSchedule.Name'));
-//console.dir(scope('#451_lst_prod', 'p'));
-
-/*
- element('.nav-header li a:first').click(); //clicks first category's subcategory nav link
- element('.nav-header:nth-child(2) a:first').click(); //clicks second category nav link
- element('.nav-header:nth-child(3) a:first').click(); //clicks third category nav link
- */
-
-var C_debug = true;
+var C_debug = false;
 
 ////////////////////////////////////////////////////
 //TODO - add a e2eLoginProduct function that logs in to a specific product automatically, for product scenarios
@@ -60,10 +49,10 @@ describe('ProductList: ', function() {
 
         expect(repeater('#451_lst_prod').count()).toBeGreaterThan(0); //there should be at least one product
 
-        var strClickedProductName = element('#451_lst_prod li:nth-child(1) a').text(); //get the product name for comparison later
+        var strClickedProductName = element('#451_lst_prod span:nth-child(1) shortproductview a').text(); //get the product name for comparison later
         e2eClickProductFromList(1);
 
-        var strShowedProductName = binding('product.Name');
+        var strShowedProductName = binding('LineItem.Product.Name');
 
         console.dir(strClickedProductName);
         console.dir(strShowedProductName);
@@ -78,10 +67,10 @@ describe('ProductList: ', function() {
         e2eClickSideNavCategory(1); //click first subcat
         expect(repeater('#451_lst_prod').count()).toBeGreaterThan(0); //there should be at least one product
 
-        var strClickedProductName = element('#451_lst_prod li:nth-child(1) a').text(); //get the product name for comparison later
+        var strClickedProductName = element('#451_lst_prod span:nth-child(1) shortproductview a').text(); //get the product name for comparison later
         e2eClickProductFromList(1);
 
-        var strShowedProductName = binding('product.Name');
+        var strShowedProductName = binding('LineItem.Product.Name');
 
         console.dir(strClickedProductName);
         console.dir(strShowedProductName);
@@ -118,14 +107,13 @@ describe('Product View - Static No Variants', function() {
     });
     it('should have spec groups', function(){
         console.dir(repeater('#451_list_specgroup').row(0));
-        expect(repeater('#451_list_specgroup').count()).toBeGreaterThan(0); //there should be at least one variant
+        expect(repeater('#451_list_specgroup').count()).toBeGreaterThan(0); //there should be at least one variable spec
     });
 });
 
-
 describe('Product View - Static With Variants', function() {
     e2eLogout(false)
-    e2eLoginProduct("coreproduser","fails345",false,"BC-ImageUpload");
+    e2eLoginProduct("coreproduser","fails345",false,"StaticProdWithVar");
 
     it('should have an image', function(){
         if(C_debug){pause();}
@@ -145,21 +133,67 @@ describe('Product View - Static With Variants', function() {
         expect(repeater('#451_list_specgroup').count()).toBeGreaterThan(0); //there should be at least one variant
     });
     it('should allow us to click on a variant and display it', function(){
-        expect(repeater('#451_list_vars').count()).toBeGreaterThan(0); //there should be at least one variant
-        element('#451_list_vars ul li a').click(); //click the first variant
+        expect(repeater('#451_list_vars table tr').count()).toBeGreaterThan(1); //there should be at least one variant
+        element('#451_list_vars table tr:nth-child(2) td a').click(); //click the first variant
         if(C_debug){pause();}
     });
 });
 
 //TODO:  add a ton of product scenarios once the product list view and product view are fleshed out.
 
-describe('testing e2eLoginProduct nav functions', function(){
+describe('Product View - Price Schedules 1 "pstest1"', function(){
+    it('should display product containing price schedules',function(){
+        e2eViewProductFromInteropID("pstest1") //this test is setup to have 5 price breaks and set to a specific price schedule (associated with this user)
+        if(C_debug){pause();}
+    });
+    it('should have 5 price breaks', function(){
+        console.dir(repeater('#451_list_pric_schd').row(0));
+        expect(repeater('#451_list_pric_schd').count()).toBe(5); //there should be 5 price breaks
+        //1-4 $3, 5-14 $2.50, 15-34 $2.25, 35-74 $2.00, 75+ $1.50
+        pause();
+        input("lineitem.Quantity").enter(1);
+        console.dir(binding(LineItem.LineTotal))
+        expect(binding(LineItem.LineTotal)).toEqual(3);
+        pause();
+        select("lineitem.Quantity").option(14);
+        input("lineitem.Quantity").enter(14);
+        expect(binding(LineItem.LineTotal)).toEqual(35);
 
-    e2eLoginProduct("coreproduser","fails345",false,"Static%20Prod")
 
+        pause();
+    });
+
+    e2eLogout(C_debug);
 
 });
+
+
+
+
+
+describe('testing e2eProduct nav functions', function(){
+    e2eLogout(C_debug);
+    e2eLoginProduct("coreproduser","fails345",false,"BC-ImageUpload");
+
+    it(':e2eClickProductFromList(nth-child method) should display product',function(){
+        if(C_debug){pause();}
+        e2eClickSideNavCategory("Products")
+        e2eClickProductFromList(1)
+    });
+
+    it(':e2eClickProductFromList(product name method) should display product',function(){
+        if(C_debug){pause();}
+        e2eClickSideNavCategory("Products")
+        e2eClickProductFromList(0,"Simple")
+    });
+    it(':e2eViewProductFromInteropID should display product when given an interopid',function(){
+
+        e2eViewProductFromInteropID("BC-ImageUpload")
+        if(C_debug){pause();}
+    });
+});
 describe('logout/cleanup', function(){
+    if(C_debug){pause();}
     e2eLogout(C_debug);
 });
 
