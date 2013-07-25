@@ -27,7 +27,7 @@
                 <td>{{item.Product.Name}}</td>
                 <td ng-if="hasSpecsOnAnyLineItem(order)">
                     <ul class="unstyled"><!-- more complete business logic in LineItemGrid.cs line 638 -->
-                        <li ng-repeat="spec in item.Specs | onproperty: {Property: 'CanSetForLineItem' ,Value:true}">{{spec.Name}} : <tempspecvalue s='spec'/></li>
+                        <li ng-repeat="spec in item.Specs | onproperty: {Property: 'CanSetForLineItem' ,Value:true}">{{spec.Name}} : {{spec.Value}}</li>
                     </ul>
                 </td>
                 <td>{{item.UnitPrice | currency:"$"}}</td>
