@@ -8,8 +8,6 @@ four51.app.factory('$451', function(Cache) {
             if (row[options.Property] === undefined && !options instanceof Array) return;
 
 			var checkRow = function(opt){
-				console.log('check row called');
-				console.dir(opt);
 				if ((row[opt.Property].toString()).toLowerCase() === (opt.Value.toString()).toLowerCase()){
 					return row;
 				}
