@@ -26,7 +26,7 @@
 
     Breakpoints will provide more bulletproof design for content alongside the Bootstrap-responive.css media queries
     Default Breakpoints: (can be modified to fit a clients needs for specific devices)
-    See breakpoint.css for app responsive defaults
+    See breakpoint.css for app responsive defaults via media queries for now
         1024    Desktop
                 Tablet      Landscape
         798     Tablet      Portrait
