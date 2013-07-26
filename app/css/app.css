@@ -114,11 +114,10 @@ button::-moz-focus-inner {
 .gridStyle {
     border: 1px solid rgb(212,212,212);
     width: auto;
-    height: 200px;
+    min-height: 200px;
     clear: both;
     overflow: hidden;
     margin-bottom: 15px;
-    padding-bottom: 15px;
 
 }
 
