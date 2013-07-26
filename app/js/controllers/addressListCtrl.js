@@ -15,11 +15,8 @@ four51.app.controller('AddressListCtrl', function ($scope, $location, $451, Addr
     }
 
     // my ng-grid first configuration
-    var self = this;
-    self.pluginOne = ngGridFlexibleHeightPlugin();
     $scope.gridOptions = {
         data: 'addresses',
-        plugins: [ self.pluginOne ],
         columnDefs: [
             {field:'Selected', displayName:'Select', cellTemplate : 'partials/gridCheckbox.html'},
             {field:'AddressName', displayName:'Name', cellTemplate : '<a class="ngLink" ng-model="row.entity[col.field]" ng-href="#/address/{{address.ID}}">AddressName</a>'},
