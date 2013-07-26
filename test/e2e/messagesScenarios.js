@@ -11,7 +11,7 @@
 
  */
 
-var C_debug = false;
+var C_debug = true;
 
 function e2eViewMessage(strJQSelect, strMsgDate, strMsgFrom, strMsgSubject, blnReturn){
     //navigate to a message in a list/repeater, click it, verify the header information is the same, navigate back(or not)
@@ -453,7 +453,7 @@ describe('Message without authentication', function() {
 
 describe('Deleted Message without authentication', function() {
     it("should force a user to login", function() {
-        browser().navigateTo('../../app/index.html#/message/39538883x'); //39538883x is a deleted message
+        browser().navigateTo('../../app/index.html#/message/39539271x'); //39539271x is a deleted message
         if(C_debug){pause();}
     });
 

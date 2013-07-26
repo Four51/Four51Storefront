@@ -12,7 +12,7 @@
 function e2eLogin(strUsername, strPassword, blnDebug){
 
     it('should appear before the user performs valid login', function() {
-        expect(element('#login_box:visible').count()).toBe(1);
+        expect(element('#login_form:visible').count()).toBe(1);
         //we found a login box.  is login_box the best way to check for it's existence?
 
     });
@@ -40,31 +40,12 @@ function e2eLogin(strUsername, strPassword, blnDebug){
 
     });
 
-    it("should hide the login box once we've logged in", function() {
-        expect(element('#login_box:visible').count()).toBe(0);
+    it("should hide the login form once we've logged in", function() {
+        expect(element('#login_form:visible').count()).toBe(0);
         //we found a login box.  is login_box the best way to check for it's existence?
 
     });
 
-}
-
-function e2eLoginProduct(strUsername, strPassword, blnDebug, strProductID){ //this version logs in and goes straight to a product view
-
-    it('should display the requested product once authorization is granted', function(){
-
-        browser().navigateTo('../../app/index.html#/product/' + strProductID);
-
-        input("user.Username").enter(strUsername);
-        input("user.Password").enter(strPassword);
-        if(blnDebug){
-            pause();
-        }
-        element("#451_btn_login").click();
-
-        if(blnDebug){
-            pause();
-        }
-    });
 }
 
 function e2eLoginNoTest(strUsername, strPassword, blnDebug){ //this version doesn't perform tests, just logs in
@@ -99,9 +80,29 @@ function e2eLogout(blnDebug){
             pause();
         }
     });
-    it("should show the login box again since we've logged out", function() {
-        expect(element('#login_box:visible').count()).toBe(1);
+    it("should show the login form again since we've logged out", function() {
+        expect(element('#login_form:visible').count()).toBe(1);
         //we found a login box.  is login_box the best way to check for it's existence?
 
+    });
+}
+
+//specific login functions (login directly to product, message, order, category, whatever)
+function e2eLoginProduct(strUsername, strPassword, blnDebug, strProductID){ //this version logs in and goes straight to a product view
+
+    it('should display the requested product once authorization is granted', function(){
+
+        browser().navigateTo('../../app/index.html#/product/' + strProductID);
+
+        input("user.Username").enter(strUsername);
+        input("user.Password").enter(strPassword);
+        if(blnDebug){
+            pause();
+        }
+        element("#451_btn_login").click();
+
+        if(blnDebug){
+            pause();
+        }
     });
 }
