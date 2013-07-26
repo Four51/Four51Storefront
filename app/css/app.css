@@ -111,7 +111,21 @@ button::-moz-focus-inner {
     border: 0;
 }
 
+.gridStyle {
+    border: 1px solid rgb(212,212,212);
+    width: auto;
+    height: 100%;
+    clear: both;
+    overflow: hidden;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
 
+}
+
+.ngRow {
+    clear: both;
+    overflow: hidden;
+}
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 2. BRANDING ***/

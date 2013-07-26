@@ -4,6 +4,7 @@ four51.app.controller('AddressListCtrl', function ($scope, $location, $451, Addr
     $scope.deleteSelected = function() {
         $scope.addresses = AddressListService.delete(this.addresses);
     };
+
     $scope.newAddress = function() {
         $location.path('address');
     };
@@ -12,6 +13,22 @@ four51.app.controller('AddressListCtrl', function ($scope, $location, $451, Addr
             add.Selected = !add.Selected;
         });
     }
+
+    // my ng-grid first configuration
+    var self = this;
+    self.pluginOne = ngGridFlexibleHeightPlugin();
+    $scope.gridOptions = {
+        data: 'addresses',
+        plugins: [ self.pluginOne ],
+        columnDefs: [
+            {field:'Selected', displayName:'Select', cellTemplate : 'partials/gridCheckbox.html'},
+            {field:'AddressName', displayName:'Name', cellTemplate : '<a class="ngLink" ng-model="row.entity[col.field]" ng-href="#/address/{{address.ID}}">AddressName</a>'},
+            {field:'City', displayName:'City'},
+            {field:'State', displayName:'State'},
+            {field:'IsShipping', displayName:'Shipping', cellTemplate: 'partials/gridCheckbox.html' },
+            {field:'IsBilling', displayName:'Billing', cellTemplate : 'partials/gridCheckbox.html'}]
+    };
+
 });
 
 four51.app.controller('AddressViewCtrl', function ($scope, $routeParams, AddressService) {
@@ -20,3 +37,9 @@ four51.app.controller('AddressViewCtrl', function ($scope, $routeParams, Address
         $scope.address = {};
     $scope.return = '/addresses';
 });
+
+
+
+
+
+
