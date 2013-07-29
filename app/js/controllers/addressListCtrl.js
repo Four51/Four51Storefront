@@ -9,7 +9,7 @@ four51.app.controller('AddressListCtrl', function ($scope, $location, $451, Addr
     };
     $scope.checkAll = function(event) {
         angular.forEach($scope.addresses, function(add) {
-            add.Selected = !add.Selected;
+            add.Selected = event.currentTarget.checked;
         });
     }
 });

@@ -5,16 +5,13 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, OrderSe
     };
 
     $scope.cancelOrder = function() {
-        OrderService.delete($scope.order, function() {
-            $scope.order = null;
+        $scope.order = OrderService.delete($scope.order, function() {
             UserService.refresh();
         });
     };
 
     $scope.saveChanges = function() {
-        OrderService.save($scope.order, function(data) {
-            $scope.order = data;
-        });
+        $scope.order = OrderService.save($scope.order);
     };
 
     $scope.checkOut = function() {
