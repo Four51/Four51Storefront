@@ -5,8 +5,26 @@ four51.app.factory('$451', function(Cache) {
 		if (input == null || options == null) return;
 		var result = [];
 		angular.forEach(input, function(row) {
-            if (row[options.Property] === undefined) return;
-			if ((row[options.Property].toString()).toLowerCase() === (options.Value.toString()).toLowerCase()){
+            if (row[options.Property] === undefined && !options instanceof Array) return;
+
+			var checkRow = function(opt){
+				if ((row[opt.Property].toString()).toLowerCase() === (opt.Value.toString()).toLowerCase()){
+					return row;
+				}
+			}
+
+			var add;
+			if (options instanceof Array){ //does an OR on the list of conditions. could add to it to optionally have OR/AND
+				for(var i = 0; i < options.length; i++){
+					add = checkRow(options[i]);
+					if(add)
+						break;
+				}
+			}else{
+				add = checkRow(options);
+			}
+
+			if(add){
 				result.push(row);
 				if(op) op(row)
 			}

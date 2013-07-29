@@ -24,9 +24,9 @@ four51.app.factory('ProductService', function($resource, $451, $api, VariantServ
 			if(spec.AllowOtherValue && spec.OtherTextValue && spec.OtherValueMarkup > 0)
 				otherMarkup = spec.OtherValueMarkup;
 
-			if((spec.Options.length && spec.Value) || otherMarkup){
+			if((spec.Options.length && spec.SelectedOptionID) || otherMarkup){
 
-				var option = !spec.Value ? null : $451.filter(spec.Options, {Property: 'ID', Value: spec.Value})[0];
+				var option = !spec.SelectedOptionID ? null : $451.filter(spec.Options, {Property: 'ID', Value: spec.SelectedOptionID})[0];
 				if(!option && !otherMarkup)
 					return;
 				//console.dir({markuptype: spec.MarkupType, note: 'markup option', option: option})
@@ -78,12 +78,12 @@ four51.app.factory('ProductService', function($resource, $451, $api, VariantServ
 				var specOptionIDs = [];
 				var hasAllVarDefiningSpecs = true;
 				$451.filter(scope.LineItem.Specs, {Property: 'DefinesVariant', Value:true}, function(item){
-					if(!item.Value)
+					if(!item.SelectedOptionID)
 					{
 						hasAllVarDefiningSpecs = false;
 						return;
 					}
-					specOptionIDs.push(item.Value);
+					specOptionIDs.push(item.SelectedOptionID);
 				})
 				if(hasAllVarDefiningSpecs){
 					//{'ProductInteropID': productInteropID, 'SpecOptionIDs': specOptionIDs}

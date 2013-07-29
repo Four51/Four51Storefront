@@ -72,14 +72,17 @@ describe('$451 AddressList Controller :',function(){
         });
 
         scope.$apply(); //do the magic
-
-        console.dir(scope)
-        expect(ctrlAddress).toBeDefined();
-
-        $httpBackend.flush();
+        //$httpBackend.flush();
 
         scope.deleteSelected(); //we can't test whether a single element is deleted or not because the API call deletes the cache and re-gets them after deleting, so the scope is all gone
         expect(scope.addresses.length).toBe(0);
+
+        $httpBackend.expectDELETE("/api/russ/address").respond(jsonAddresses);
+
+        scope.$apply(); //do the magic
+        $httpBackend.flush();
+
+
 
     })
     it('Should redirect on "addition")', function(){

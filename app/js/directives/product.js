@@ -13,9 +13,9 @@ four51.app.directive('shortproductview', function(){
 	};
 	return obj;
 });
-four51.app.directive('vspecfield', function(){
+four51.app.directive('vspecfield', function($451){
 	var template = '<select " ' +
-		'ng-model="s.Value" '+
+		'ng-model="s.SelectedOptionID" '+
 		'ng-options="option.ID as option.Value for option in s.Options" '+
 		'ng-if="s.Options.length" '+
 		'ng-required="s.Required" '+
@@ -32,7 +32,8 @@ four51.app.directive('vspecfield', function(){
 		link: function(scope){
 
 			scope.otherChanged = function(spec){
-				spec.Value = null;
+				spec.Value = spec.OtherTextValue;
+				spec.SelectedOptionID = null;
 				if(scope.changed)
 					scope.changed(spec);
 				console.log('other text changed');
@@ -40,6 +41,7 @@ four51.app.directive('vspecfield', function(){
 			scope.ddlChange = function(spec){
 				scope.otherVisible = false;
 				spec.OtherTextValue = null;
+				spec.Value = $451.filter(spec.Options, {Property:'ID', Value: spec.SelectedOptionID})[0].Value;
 				if(scope.changed)
 					scope.changed(spec);
 			};
@@ -53,22 +55,7 @@ four51.app.directive('vspecfield', function(){
 	return obj;
 
 });
-four51.app.directive('tempspecvalue', function(){ //not sure how spec values will be dealt with, but need a place holder for them
-	var obj = {
-		restrict: 'E',
-		scope: {
-			s: '='
-		},
-		controller: function($scope){
-			var s = $scope.s;
 
-			$scope.textValue = s.Options.length ? "select option" : s.Value;
-
-		},
-		template: '{{textValue}}'
-	};
-	return obj;
-});
 four51.app.directive('pricescheduletable', function(){
     var obj = {
         scope: {

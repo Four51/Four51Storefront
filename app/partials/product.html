@@ -14,9 +14,9 @@
 
 <form name="addToOrderForm" ng-show="allowAddToOrder">
 	<table border=1 ng-show="true">
-		<tr ng-repeat="s in LineItem.Specs | onproperty:{Property: 'CanSetForLineItem', Value: true}">
-			<td>{{s.Prefix}}{{s.Name}}{{s.Suffix}}<span ng-show="s.Required" style="color:red"> *</span> </td>
-			<td><vspecfield changed="specChanged" s="s"></vspecfield></td>
+		<tr ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
+			<td>{{s.Name}}<span ng-show="s.Required" style="color:red"> *</span> </td>
+			<td>{{s.Prefix}}<vspecfield changed="specChanged" s="s"></vspecfield>{{s.Suffix}}</td>
 		</tr>
 	</table>
 	<br>
