@@ -76,9 +76,7 @@ describe('$451 API:',function(){
         $451 = _$451_;
     }));
     it('Should return api url', function() {
-        var url = $451.api('order'); //won't work right now because api gets it from the window.location.etc
-        console.log($451.appname);
-        expect(url).toBe('/api/' + $451.appname + '/order');
+        expect($451.api("message")).toBe('/api/' + four51.app.ApiAppName + "/message");
     });
 });
 

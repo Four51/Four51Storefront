@@ -84,11 +84,14 @@ function e2eClickProductFromList(intNthProd,strProdName){
     var strSelector = "";
 
     if(strProdName != null){
-        strSelector = "#451_lst_prod li a:contains('" + strProdName + "')"
+        strSelector = "#451_lst_prod span shortproductview a:contains('" + strProdName + "')";
     }
-    else{//if intNthProd isn't specified just pick the first at the nth level
-        strSelector = "#451_lst_prod li:nth-child(" + intNthProd + ") a"
+    else{//if strProdName isn't specified just pick the first at the nth level
+        strSelector = "#451_lst_prod span:nth-child(" + intNthProd + ") shortproductview a";
     }
 
     element(strSelector).click();
+}
+function e2eViewProductFromInteropID(strProdInteropID){
+    browser().navigateTo('../../app/index.html#/product/' + strProdInteropID);
 }
