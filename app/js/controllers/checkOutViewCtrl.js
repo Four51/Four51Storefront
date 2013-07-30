@@ -1,6 +1,7 @@
-four51.app.controller('CheckOutViewCtrl', function ($scope, $451, UserService, OrderService, AddressService) {
+four51.app.controller('CheckOutViewCtrl', function ($scope, $451, UserService, OrderService, AddressService, ShipperService) {
     $scope.user = UserService.get();
     $scope.order = $scope.user.CurrentOrderID != null ? OrderService.get({ id: $scope.user.CurrentOrderID }) : null;
+    $scope.shippers = ShipperService.query();
 
     $scope.continueShopping = function() {
         $location.path('catalog');
@@ -15,7 +16,9 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $451, UserService, O
 
     $scope.saveChanges = function() {
         OrderService.save($scope.order, function(data) {
-            $scope.order = data;
+            //console.dir('data ' + data);
+            //$scope.order = data;
+            //console.dir('scope ' + $scope.order);
         });
     };
 

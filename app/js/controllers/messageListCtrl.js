@@ -4,7 +4,7 @@ four51.app.controller('MessageListCtrl', function($scope, MessageListService) {
 	$scope.checkAll = function(event, type) {
 		angular.forEach($scope.messages, function(msg) {
 			if (msg.Box === type)
-				msg.Selected = !msg.Selected;
+				msg.Selected = event.currentTarget.checked;
 		});
 	}
 
