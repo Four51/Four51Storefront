@@ -10,6 +10,8 @@ files = [
 	'app/lib/angular/ui-bootstrap-0.2.0.js',
     'app/lib/angular/ui-validate.js',
     'app/lib/angular/ui-mask.js',
+    'app/lib/jquery-2.0.0.js',
+    'app/lib/angular/ng-grid.js',
 	'app/js/app.js',
 	'app/js/**/*.js',
 
