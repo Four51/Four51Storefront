@@ -23,7 +23,7 @@
     }
 
     .content-navigation .nav li {
-        width: auto;
+        width: 33%;
         display: table-cell;
         padding: 0;
         text-align: center;
@@ -88,7 +88,7 @@
     }
 
     .content-navigation .icon {
-        padding-top: .25em;
+        padding-top: 1em;
     }
 
     .content-navigation .icon + span {
@@ -102,7 +102,7 @@
 
     /* Animating the height of the element*/
     .content-navigation .nav a {
-        height: 4.6em;
+        height: 5.6em;
     }
 
     /* Making the text follow the height animation */
@@ -152,7 +152,9 @@
     .product-navigation li.nav-header {
         width: 12.5%;
     }
-
+    .product-navigation nav.nav .details-show {
+        width: auto;
+    }
 
 
 }
@@ -189,7 +191,7 @@
     .admin-navigation .brand {
         position: absolute;
         top: 0;
-        left: 43%;
+        left: 39%;
     }
 
     .product-navigation li.nav-header {
@@ -214,7 +216,7 @@
     .admin-navigation .brand {
         position: absolute;
         top: 0;
-        left: 42%;
+        left: 37%;
     }
 
     .content-navigation .nav ul li:nth-child(8n+1) a:hover,
@@ -322,7 +324,7 @@
         border: 4px solid transparent;
         border-radius: 50%;
         font-size: 1.5em;
-        background: rgba(255,255,255,0.1);
+        background:transparent;
         -webkit-transition: border .5s;
         -moz-transition: border .5s;
         -o-transition: border .5s;
@@ -370,14 +372,7 @@
     .product-navigation li.nav-header a {
         padding: 20px;
     }
-    .admin-navigation .brand {
-        position: absolute;
-        top: 0;
-        left: 48%;
-    }
-    .admin-navigation .brand-name {
-        visibility: hidden;
-    }
+
     .category-product.product-navigation li.nav-header {
         width: 100%;
     }
@@ -435,15 +430,6 @@
         width: 100%;
     }
 
-    .admin-navigation .brand {
-        position: absolute;
-        top: 0;
-        left: 46%;
-    }
-
-    .admin-navigation .brand-name {
-        visibility: hidden;
-    }
 
 
 }

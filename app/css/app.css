@@ -134,8 +134,9 @@ button::-moz-focus-inner {
 /* ----------------------------------------------------------------------------------------------- */
 
 .admin-navigation a.brand {
-    font-size: 11px;
+    font-size: 13px;
     color: rgb(22, 145, 190);
+    padding: 15px;
 }
 
 .admin-navigation a.brand:hover {
@@ -212,7 +213,6 @@ button::-moz-focus-inner {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-
 
 .content-navigation nav.nav {
     float: none;
@@ -325,17 +325,14 @@ button::-moz-focus-inner {
     line-height: normal;
 }
 
-
-.product-navigation li.nav-header:last-child {
-  display: none;
+.product-navigation .details-show {
+    text-align: center;
 }
 
-.product-navigation li.details-show i {
+.product-navigation .details-show i {
     display: block;
-    padding: 13px;
+    font-size: 22px;
     cursor: pointer;
-
-
 }
 
 .product-navigation li.nav-header {
@@ -345,7 +342,6 @@ button::-moz-focus-inner {
 .product-navigation li.nav-header a {
     padding: 10px;
     display: block;
-
 }
 
 .product-navigation li.nav-header ul li {
@@ -363,7 +359,6 @@ button::-moz-focus-inner {
 }
 
 .product-nav-details.hidden {
-
 }
 
 .product-navigation nav.nav {
@@ -373,7 +368,6 @@ button::-moz-focus-inner {
 
 .product-navigation {
     padding: 0;
-
 }
 
 .product-navigation .nav ul {
