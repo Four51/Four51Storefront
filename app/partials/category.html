@@ -1,10 +1,8 @@
-<div id="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image">
-    current category: <b>{{currentCategory.Name}}</b>
+<div class="visible-desktop" id="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image">
+    <h4>{{currentCategory.Name}}</h4>
 </div>
 
 <div id="451_lbl_subcatlist" ng-show=currentCategory.SubCategories>
-    <hr>
-    <b>sub categories</b>
     <ul>
         <li ng-repeat="c in currentCategory.SubCategories">
             <a href="#/catalog/{{c.InteropID}}">
@@ -13,11 +11,11 @@
     </ul>
 </div>
 
-<span id="451_lst_prod">
-	<span ng-repeat="product in products">
-		<hr><shortproductview p="product" />
+<div id="451_lst_prod">
+	<span class="span4 thumbnail" ng-repeat="product in products">
+		<shortproductview p="product" />
 	</span>
-</span>
+</div>
 
 
 

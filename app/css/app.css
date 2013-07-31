@@ -23,6 +23,9 @@
 /*** 0. STRUCTURE ***/
 /* ----------------------------------------------------------------------------------------------- */
 
+body {
+    background-color:#F9F9F9;
+}
 
 hr {
     border: none;
@@ -148,25 +151,45 @@ button::-moz-focus-inner {
     background-color:#fff;
 }
 
-.admin-navigation ul.nav:nth-of-type(2) {
+.admin-navigation .user-links ul {
     float: right;
 }
 
-.admin-navigation li a i {
+.admin-navigation ul.nav-search {
+    float: right;
+}
+
+.user-links {
+    float: left;
+}
+
+.admin-navigation li a span, .admin-navigation li a i {
     color:rgb(22, 145, 190);
 }
 
-.admin-navigation li a:hover i {
+.admin-navigation li a:hover span, .admin-navigation li a:hover i {
     color:rgb(44, 168, 219);
 }
 
-.admin-navigation li.logout a i {
+.admin-navigation .dropdown-menu > li.logout > a i {
     color: rgb(226, 84, 61);
 }
 
-.admin-navigation li.logout a:hover i {
+.admin-navigation .dropdown-menu > li.logout > a:hover i {
     color: rgb(242, 94, 70);
 }
+.navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+    background-color:#F5F5F5;
+}
+
+.user-links span {
+    margin: 0 8px;
+}
+
+.user-links .caret  {
+    margin: 0 0 0 8px;
+}
+
 /* ----------------------------------------------------------------------------------------------- */
 /*** 4. CONTENT NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
@@ -287,11 +310,141 @@ button::-moz-focus-inner {
 /* ----------------------------------------------------------------------------------------------- */
 
 
+.product-navigation li.nav-header {
+    float: left;
+    font-size: 11px;
+    border: 1px solid #f9f9f9;
+    background-color:#d8eff5;
+    text-align: center;
+    min-height: 70px;
+}
+
+.product-navigation li.nav-header:first-child {
+    width: auto;
+    clear: both;
+    overflow: hidden;
+}
+.product-navigation li.details-show i {
+    display: block;
+    padding: 13px;
+    cursor: pointer;
+
+
+}
+
+.product-navigation li.nav-header a {
+    padding: 10px 15px;
+    display: block;
+
+}
+
+.product-navigation li.nav-header ul li {
+    text-align: left;
+}
+
+.product-navigation li.nav-header ul li > a {
+    text-transform: capitalize;
+    padding: 2px 0;
+}
+
+.product-navigation .nav li + .nav-header {
+    margin-top: 0;
+}
+
+.product-nav-detials.hidden {
+
+}
+
+.product-navigation nav.nav {
+    float: none;
+    margin: 0;
+}
+
+.product-navigation {
+    padding: 0;
+
+}
+
+.product-navigation .nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 1em;
+    font-weight: 300;
+}
+
+.product-navigation .nav li span {
+    display: block;
+}
+
+.product-navigation .nav a {
+    display: block;
+    color:#3A3A3A;
+    text-decoration: none;
+    -webkit-transition: color .2s, background .5s, height .5s;
+    -moz-transition: color .2s, background .5s, height .5s;
+    -o-transition: color .2s, background .5s, height .5s;
+    -ms-transition: color .2s, background .5s, height .5s;
+    transition: color .2s, background .5s, height .5s;
+}
+
+.product-navigation .nav i {
+    /* Make the font smoother for Chrome */
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.product-navigation .nav a, .nav li {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Remove the blue Webkit background when element is tapped */
+.product-navigation a, .product-navigation button {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.product-navigation .nav ul:hover li:hover {
+    background-color:#B1E0EC;
+
+}
+
+.product-navigation .nav ul ul > li {
+
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 0 10px;
+}
+
+.product-navigation .nav ul ul:hover li:hover {
+    background-color:#D8EFF5;;
+    border: 1px solid #f9f9f9;
+    border-radius: 4px;
+
+
+}
+
+.product-navigation .nav ul .product-nav-details li a:hover {
+
+}
+
+.product-nav-details li:first-child {
+  margin-top: 5px;
+}
+
+.product-navigation .nav ul .product-nav-details li:last-child {
+    margin-bottom: 5px;
+}
+
 /* ----------------------------------------------------------------------------------------------- */
 /*** 6. MAIN CONTENT ***/
 /* ----------------------------------------------------------------------------------------------- */
 
-
+.container-content {
+    margin-top: 20px;
+}
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 7. FOOTER  ***/
