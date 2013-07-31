@@ -369,6 +369,14 @@
     .product-navigation li.nav-header a {
         padding: 20px;
     }
+    .admin-navigation .brand {
+        position: absolute;
+        top: 0;
+        left: 48%;
+    }
+    .admin-navigation .brand-name {
+        visibility: hidden;
+    }
 
 }
 
@@ -419,4 +427,15 @@
         padding: 20px;
         min-height: 110px;
     }
+    .admin-navigation .brand {
+        position: absolute;
+        top: 0;
+        left: 46%;
+    }
+
+    .admin-navigation .brand-name {
+        visibility: hidden;
+    }
+
+
 }

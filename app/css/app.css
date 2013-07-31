@@ -415,7 +415,7 @@ button::-moz-focus-inner {
 
     border: 1px solid transparent;
     border-radius: 4px;
-    padding: 3px 10px;
+    padding: 0 10px;
 }
 
 .product-navigation .nav ul ul:hover li:hover {

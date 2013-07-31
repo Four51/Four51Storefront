@@ -25,7 +25,7 @@
                         <li class="logout visible-desktop"><a href="#" id="451_btn_logout" ng-click="Logout()"><i class="icon-off"></i><span>Log Out</span></a></li>
                         <li class="divider-vertical" />
                     </ul>
-                    <a class="brand hidden-phone" ng-show="Four51User.current" href="#" ng-click="refresh($event)"><i class="icon-cloud"></i> {{'Welcome ' + Four51User.current.FirstName + " " + Four51User.current.LastName}}</a>
+                    <a class="brand" ng-show="Four51User.current" href="#" ng-click="refresh($event)"><i class="icon-cloud"></i> <span class="brand-name">{{'Welcome ' + Four51User.current.FirstName + " " + Four51User.current.LastName}}</span></a>
             </div>
             <ul class="nav nav-search">
                 <li class="divider-vertical" />
