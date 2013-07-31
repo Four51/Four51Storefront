@@ -82,7 +82,7 @@ describe('ProductList: ', function() {
 
     //TODO- add some expectations around line-item type productlist display
 
-});
+}); //TODO - validate various fields on Product List display view
 
 describe('Product View - Static No Variants "Static%20Prod"', function() {
     it('should display a product', function(){
@@ -128,37 +128,58 @@ describe('Product View - Static With Variants "StaticProdWithVar"', function() {
     });
 });
 
-//TODO:  add a ton of product scenarios once the product list view and product view are fleshed out.
-describe('Product View - quantity field tests "pstest1"', function(){
+describe('Product View - Price Schedules 1 Display Tests "pstest1", nonrestricted quantity, no markups, input field', function(){
     it('should display product containing price 5 price breaks',function(){
         e2eViewProductFromInteropID("pstest1") //this test is setup to have 5 price breaks and set to a specific price schedule (associated with this user)
+        expect(repeater('#451_list_pric_schd tbody tr').count()).toBe(6); //there should be 5 price breaks, but 1 header row (for now)
         if(C_debug){pause();}
     });
-    it('should have 5 price breaks', function(){
-        expect(repeater('#451_list_pric_schd').count()).toBe(5); //there should be 5 price breaks
+    it('should have a header for the price schedule table', function(){
         //1-4 $3, 5-14 $2.50, 15-34 $2.25, 35-74 $2.00, 75+ $1.50
+
+        //check the headers
+        expect(element('#451_list_pric_schd tr:nth-child(1) td:nth-child(1)').text()).toContain("Quantity"); //quantity
+        expect(element('#451_list_pric_schd tr:nth-child(1) td:nth-child(1) span:hidden').text()).toContainFuture(binding("p.QuantityMultiplier")); //the multiplier should be hidden unless quantity is restricted
+
+        expect(element('#451_list_pric_schd tr:nth-child(1) td:nth-child(2)').text()).toContain("Price");
+        expect(element('#451_list_pric_schd tr:nth-child(1) td:nth-child(2) span:hidden').text()).toContainFuture(binding("p.QuantityMultiplier")); //the multiplier should be hidden unless quantity is restricted
+
+    });
+    it('should have 5 price breaks', function(){
+
+        //TODO- jeff will write a function that will provide the content of the Quantity column in a more readable fashion so this next check will be usable
+        //expect(element('#451_list_pric_schd tr:nth-child(2) td:first-child').text()).toBe("1 - 4"); //quantity
+        //repeat for each row
+
+        //row 1 is the header row
+        expect(element('#451_list_pric_schd tr:nth-child(2) td:nth-child(2)').text()).toBe((3).formatMoney(2)); //price
+        expect(element('#451_list_pric_schd tr:nth-child(3) td:nth-child(2)').text()).toBe((2.5).formatMoney(2)); //price
+        expect(element('#451_list_pric_schd tr:nth-child(4) td:nth-child(2)').text()).toBe((2.25).formatMoney(2)); //price
+        expect(element('#451_list_pric_schd tr:nth-child(5) td:nth-child(2)').text()).toBe((2).formatMoney(2)); //price
+        expect(element('#451_list_pric_schd tr:nth-child(6) td:nth-child(2)').text()).toBe((1.50).formatMoney(2)); //price
+
+
         if(C_debug){pause();}
         e2eChangeProdQty(false,1);
-        expect(binding("LineItem.LineTotal")).toEqual(C_currSymbol + "3.00");
+        expect(binding("LineItem.LineTotal")).toEqual((3).formatMoney(2));
         if(C_debug){pause();}
         e2eChangeProdQty(false,5);
-        expect(binding("LineItem.LineTotal")).toEqual(C_currSymbol + "12.50");
+        expect(binding("LineItem.LineTotal")).toEqual((12.50).formatMoney(2));
         if(C_debug){pause();}
         e2eChangeProdQty(false,14);
-        expect(binding("LineItem.LineTotal")).toEqual(C_currSymbol + "35.00");
-        if(C_debug){pause();}
-     });
-
-});
-
-describe('Product View - Price Schedules 1 "pstest1"', function(){
-    it('should display product containing price schedules',function(){
-        e2eViewProductFromInteropID("pstest1") //this test is setup to have 5 price breaks and set to a specific price schedule (associated with this user)
+        expect(binding("LineItem.LineTotal")).toEqual((35).formatMoney(2));
         if(C_debug){pause();}
     });
-    it('should have 5 price breaks', function(){
-        console.dir(repeater('#451_list_pric_schd').row(0));
-        expect(repeater('#451_list_pric_schd').count()).toBe(5); //there should be 5 price breaks
+});
+
+describe('Product View - Price Schedules 1 Value Tests "pstest1", nonrestricted quantity, no markups, input field', function(){
+    it('should display product containing price 5 price breaks',function(){
+        e2eViewProductFromInteropID("pstest1") //this test is setup to have 5 price breaks and set to a specific price schedule (associated with this user)
+        expect(repeater('#451_list_pric_schd tbody tr').count()).toBe(6); //there should be 5 price breaks, but 1 header row (for now)
+        if(C_debug){pause();}
+    });
+    it('should apply 5 price breaks based on quantity', function(){
+
         //1-4 $3, 5-14 $2.50, 15-34 $2.25, 35-74 $2.00, 75+ $1.50
         if(C_debug){pause();}
         e2eChangeProdQty(false,1);
@@ -186,17 +207,96 @@ describe('Product View - Price Schedules 1 "pstest1"', function(){
         expect(binding("LineItem.LineTotal")).toEqual((168).formatMoney(2));
         if(C_debug){pause();}
     });
+    it('should allow changing the quantity INPUT field and prevent invalid values, disabling Add To Order button', function(){
 
+        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0); //button should be disabled by default
+
+        e2eChangeProdQty(false,"foo");
+        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0);
+        e2eChangeProdQty(false,1);
+        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0); //nope, still need a required spec
+        e2eChangeProdQty(false,0);
+        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0);
+        e2eChangeProdQty(false,100);
+        using('#451_list_vspec tbody tr:nth-child(2) td:nth-child(2)').input("s.Value").enter("playstation portable");
+        expect(element("#451_btn_orderadd:enabled").count()).toBeGreaterThan(0); //now we should have an enabled button
+        e2eChangeProdQty(false,"foo");
+        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0); //now back to disabled
+        e2eChangeProdQty(false,1);
+        expect(element("#451_btn_orderadd:enabled").count()).toBeGreaterThan(0); //enabled
+        e2eChangeProdQty(false,0);
+        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0); //will you make up your mind?
+
+        if(C_debug){pause();}
+        e2eChangeProdQty(false,1);
+        expect(binding("LineItem.LineTotal")).toEqual((3).formatMoney(2));
+        if(C_debug){pause();}
+        e2eChangeProdQty(false,5);
+        expect(binding("LineItem.LineTotal")).toEqual((12.50).formatMoney(2));
+        if(C_debug){pause();}
+        e2eChangeProdQty(false,14);
+        expect(binding("LineItem.LineTotal")).toEqual((35).formatMoney(2));
+        if(C_debug){pause();}
+     });
 });
-describe('Product View - Price Schedules 2 "pstest2", restricted quantity', function(){
+
+describe('Product View - Price Schedules 2 Display Tests "pstest2", restricted quantity, no markup, select field', function(){
     it('should display product containing 10 price breaks',function(){
         e2eViewProductFromInteropID("pstest2"); //this test is setup to have 10 price breaks and set to a specific price schedule (associated with this user)
+        expect(repeater('#451_list_pric_schd tbody tr').count()).toBe(11); //there should be 10 price breaks (incl header row). restricted to multiples of 250
         if(C_debug){pause();}
     });
-    it('should have 10 price breaks', function(){
-        console.dir(repeater('#451_list_pric_schd').row(0));
-        expect(repeater('#451_list_pric_schd').count()).toBe(10); //there should be 10 price breaks. restricted to multiples of 250
+    it('should have a header for the price schedule table', function(){
         //1 250, 2 480, 3 675, 4 800, 5 950, 6 1050, 7 1050, 8 1000, 9 900, 10 750
+
+        //check the headers
+        expect(element('#451_list_pric_schd tr:nth-child(1) td:nth-child(1)').text()).toContain("Quantity"); //quantity
+        expect(element('#451_list_pric_schd tr:nth-child(1) td:nth-child(1) span:hidden').text()).toContainFuture(binding("p.QuantityMultiplier")); //the multiplier shouldn't appear here
+
+        expect(element('#451_list_pric_schd tr:nth-child(1) td:nth-child(2)').text()).toContain("Price");
+        expect(element('#451_list_pric_schd tr:nth-child(1) td:nth-child(2) span:hidden').text()).toContainFuture(binding("p.QuantityMultiplier")); //the multiplier shouldn't appear here
+
+        //right now the QuantityMultiplier is hidden, to match the live site, this may be a future feature addition
+    });
+    it('should have 10 price breaks', function(){
+
+        //TODO- jeff will write a function that will provide the content of the Quantity column in a more readable fashion so this next check will be usable
+        //expect(element('#451_list_pric_schd tr:nth-child(2) td:first-child').text()).toBe("1 - 4"); //quantity
+        //repeat for each row
+
+        //row 1 is the header row
+        expect(element('#451_list_pric_schd tr:nth-child(2) td:nth-child(2)').text()).toBe((250).formatMoney(2)); //price
+        expect(element('#451_list_pric_schd tr:nth-child(3) td:nth-child(2)').text()).toBe((480).formatMoney(2)); //price
+        expect(element('#451_list_pric_schd tr:nth-child(4) td:nth-child(2)').text()).toBe((675).formatMoney(2)); //price
+        expect(element('#451_list_pric_schd tr:nth-child(5) td:nth-child(2)').text()).toBe((800).formatMoney(2)); //price
+        expect(element('#451_list_pric_schd tr:nth-child(6) td:nth-child(2)').text()).toBe((950).formatMoney(2)); //price
+        expect(element('#451_list_pric_schd tr:nth-child(7) td:nth-child(2)').text()).toBe((1050).formatMoney(2)); //price
+        expect(element('#451_list_pric_schd tr:nth-child(8) td:nth-child(2)').text()).toBe((1050).formatMoney(2)); //price
+        expect(element('#451_list_pric_schd tr:nth-child(9) td:nth-child(2)').text()).toBe((1000).formatMoney(2)); //price
+        expect(element('#451_list_pric_schd tr:nth-child(10) td:nth-child(2)').text()).toBe((900).formatMoney(2)); //price
+        expect(element('#451_list_pric_schd tr:nth-child(11) td:nth-child(2)').text()).toBe((750).formatMoney(2)); //price
+
+
+        if(C_debug){pause();}
+        e2eChangeProdQty(true,0);
+        expect(binding("LineItem.LineTotal")).toEqual((250).formatMoney(2));
+        if(C_debug){pause();}
+        e2eChangeProdQty(true,4);
+        expect(binding("LineItem.LineTotal")).toEqual((950).formatMoney(2));
+        if(C_debug){pause();}
+        e2eChangeProdQty(true,9);
+        expect(binding("LineItem.LineTotal")).toEqual((750).formatMoney(2));
+        if(C_debug){pause();}
+    });
+});
+
+describe('Product View - Price Schedules 2 Value Tests "pstest2", restricted quantity, no markup, select field', function(){
+    it('should display product containing 10 price breaks',function(){
+        e2eViewProductFromInteropID("pstest2") //this test is setup to have 10 price breaks and set to a specific price schedule (associated with this user)
+        if(C_debug){pause();}
+    });
+    it('should apply 10 price breaks (no markup yet)', function(){
+
         if(C_debug){pause();}
         e2eChangeProdQty(true,0); //The select box is 0 based instead of 1 based
         expect(binding("LineItem.LineTotal")).toEqual((250).formatMoney(2));
@@ -229,14 +329,49 @@ describe('Product View - Price Schedules 2 "pstest2", restricted quantity', func
         expect(binding("LineItem.LineTotal")).toEqual((750).formatMoney(2));
         if(C_debug){pause();}
     });
+    it('should allow changing the quantity SELECT field and enable/disable Add To Order button', function(){
 
+        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0); //button should be disabled by default
+
+        e2eChangeProdQty(true,"foo");
+
+        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0);
+        e2eChangeProdQty(true,1);
+
+        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0); //nope, still need a required spec
+        e2eChangeProdQty(true,0);
+
+        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0);
+        e2eChangeProdQty(true,100);
+
+        using('#451_list_vspec tbody tr:nth-child(2) td:nth-child(2)').input("s.Value").enter("playstation portable");
+        expect(element("#451_btn_orderadd:enabled").count()).toBeGreaterThan(0); //now we should have an enabled button
+        e2eChangeProdQty(true,"foo");
+
+        e2eChangeProdQty(true,1);
+        expect(element("#451_btn_orderadd:enabled").count()).toBeGreaterThan(0); //enabled
+        e2eChangeProdQty(true,"##");
+        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0); //will you make up your mind?
+
+        if(C_debug){pause();}
+        e2eChangeProdQty(true,0);
+        expect(binding("LineItem.LineTotal")).toEqual((250).formatMoney(2));
+        if(C_debug){pause();}
+        e2eChangeProdQty(true,4);
+        expect(binding("LineItem.LineTotal")).toEqual((950).formatMoney(2));
+        if(C_debug){pause();}
+        e2eChangeProdQty(true,9);
+        expect(binding("LineItem.LineTotal")).toEqual((750).formatMoney(2));
+        if(C_debug){pause();}
+    });
 });
-describe('Product View - Required Variable Specs With Markup 1 "reqvarspecmarkuptest1"', function(){
+
+describe('Product View - Required Variable Specs With Markup 1 Display Tests "reqvarspecmarkuptest1", required variable specs, restricted quantity, markups, select field', function(){
     it('should display product containing with required variable specs with markups',function(){
         e2eViewProductFromInteropID("reqvarspecmarkuptest1") //this test is setup to have 10 price breaks with variable specs that add markups
         if(C_debug){pause();}
     });
-    it('should have 7 variable specs in a particular order', function(){
+    it('should display 7 variable specs in a particular order', function(){
         expect(repeater('#451_list_vspec tr').count()).toBe(7); //there should be 7 variable specs
         //test display order of specs
         expect(element('#451_list_vspec tr:nth-child(1) td:nth-child(1):contains("ReqVarTextSpec1")').count()).toEqual(1); //expects the first rows first cell to be ReqVarDropMarkupUnitSpec1
@@ -247,10 +382,47 @@ describe('Product View - Required Variable Specs With Markup 1 "reqvarspecmarkup
         expect(element('#451_list_vspec tr:nth-child(6) td:nth-child(1):contains("VariableSpecTextNonReq1")').count()).toEqual(1); //expects the first rows first cell to be VariableSpecTextNonReq1
         expect(element('#451_list_vspec tr:nth-child(7) td:nth-child(1):contains("VariableSpecTextReq1")').count()).toEqual(1); //expects the first rows first cell to be VariableSpecTextNonReq1
 
+        expect(element('#451_list_vspec tr:nth-child(1) td:nth-child(2):contains("mr")').count()).toEqual(1); //should have the prefix "mr"
+        expect(element('#451_list_vspec tr:nth-child(1) td:nth-child(2) input[placeholder="foo1"]').count()).toEqual(1); //this spec should be set to "foo1" by default
+        expect(element('#451_list_vspec tr:nth-child(1) td:nth-child(2):contains("son")').count()).toEqual(1); //should have the prefix "son"
+        //TODO- check text spec inputs for rows, width, and character length, not implemented yet
+
+        expect(element('#451_list_vspec tr:nth-child(2) td:nth-child(2):contains("mr")').count()).toEqual(1); //should have the prefix "mr"
+        expect(element('#451_list_vspec tr:nth-child(2) td:nth-child(2) select:contains("Torgo")').count()).toEqual(1); //no default but it should have 3 values populated in the options
+        expect(element('#451_list_vspec tr:nth-child(2) td:nth-child(2) select:contains("Fergu")').count()).toEqual(1); //no default but it should have 3 values populated in the options
+        expect(element('#451_list_vspec tr:nth-child(2) td:nth-child(2) select:contains("Ander")').count()).toEqual(1); //no default but it should have 3 values populated in the options
+        expect(element('#451_list_vspec tr:nth-child(2) td:nth-child(2) select:contains("Melan")').count()).toEqual(0); //should definitely not include this value
+        expect(element('#451_list_vspec tr:nth-child(2) td:nth-child(2):contains("son")').count()).toEqual(1); //should have the prefix "son"
+
+        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(2):contains("mr")').count()).toEqual(1); //should have the prefix "mr"
+        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(2) input[type="radio"] + label:contains("Cooper")').count()).toEqual(1); //radio button exists next to a text label
+        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(2) input[type="radio"] + label:contains("Jagger")').count()).toEqual(1); //radio button exists next to a text label
+        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(2) input[type="radio"] + label:contains("Petty")').count()).toEqual(1); //radio button exists next to a text label
+        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(2) input[type="radio"] + label:contains("Gilmour")').count()).toEqual(1); //radio button exists next to a text label
+        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(2) input[type="radio"] + label:contains("Other")').count()).toEqual(1); //have the Other option
+
+
+        //when we click the Other radio button, a new field should appear to allow us to enter an "other" value
+        //element('#451_list_vspec tr:nth-child(3) td:nth-child(2) input[type="radio"] + label:contains("Other")').click(); //click the other radio
+
+        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(2) input[ng-Model="s.OtherTextValue"]:hidden ').count()).toEqual(1);
+        element('#451_list_vspec tr:nth-child(3) td:nth-child(2) span:contains("other")').click(); //click the other radio/text
+        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(2) input[ng-Model="s.OtherTextValue"]:visible ').count()).toEqual(1);
+
+    });
+    it('should display 7 variable specs in a particular order (pt 2)', function(){
+
+        pause();
+        //next 2 spec fields aren't implemented yet and no idea how we will, so it's pointless to write tests for them yet
+        expect(element('#451_list_vspec tr:nth-child(4) td:nth-child(2):contains("ReqVarImageSpec1")').count()).toEqual(1); //expects the first rows first cell to be ReqVarTextDefToolSpec1
+        expect(element('#451_list_vspec tr:nth-child(5) td:nth-child(2):contains("ReqVarTextDefToolSpec1")').count()).toEqual(1); //expects the first rows first cell to be ReqVarTextSpec1
+        expect(element('#451_list_vspec tr:nth-child(6) td:nth-child(2):contains("VariableSpecTextNonReq1")').count()).toEqual(1); //expects the first rows first cell to be VariableSpecTextNonReq1
+        expect(element('#451_list_vspec tr:nth-child(7) td:nth-child(2):contains("VariableSpecTextReq1")').count()).toEqual(1); //expects the first rows first cell to be VariableSpecTextNonReq1
+
         if(C_debug){pause();}
 
     });
-    it('should have 7 variable specs most of which are required', function(){
+    it('should display 7 variable specs most of which are required', function(){
         //test that specs are required
 
         expect(element('#451_list_vspec tr:nth-child(1) td:nth-child(1):contains("*")').count()).toEqual(1); //expects the first rows first cell to be required and thus have an *
@@ -261,9 +433,7 @@ describe('Product View - Required Variable Specs With Markup 1 "reqvarspecmarkup
         //6 is not required
         expect(element('#451_list_vspec tr:nth-child(7) td:nth-child(1):contains("*")').count()).toEqual(1); //expects the seventh rows first cell to be required and thus have an *
 
-        expect(element())
-        pause();
-        //todo - check Add to Order button is disabled until required fields are populated.
+        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0); //add to order button should be disabled by default
 
     });
     it('should apply markup values as specified', function(){
