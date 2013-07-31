@@ -26,12 +26,13 @@
             <ng-include src="template.url" />
         </div>
 
-        <div ng-show="Four51User.isAuthenticated" id="content" class="container-fluid" ng-controller="SideNavCtrl">
+        <div ng-show="Four51User.isAuthenticated"  class="container-fluid" id="content"  ng-
+             controller="SideNavCtrl">
             <div class="row-fluid">
-                <div class="span3">
+                <div>
                     <ng-include src="'partials/sideNav.html'" />
                 </div>
-                <div class="span9">
+                <div class="container-content">
                     <div ng-view />
                 </div>
             </div>

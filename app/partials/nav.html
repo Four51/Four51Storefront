@@ -1,29 +1,46 @@
 <header class="header">
-<div class="navbar-inner">
-    <div class="container-fluid admin-navigation">
-        <a class="brand" ng-show="Four51User.current" href="#" ng-click="refresh($event)"><i class="icon-cloud"></i> {{'Welcome ' + Four51User.current.FirstName + " " + Four51User.current.LastName}}</a>
-        <ul class="nav user-links">
-            <li class="divider-vertical" />
-            <li class="admin"><a href="#/admin"><i class="icon-user"></i></a></li>
-            <li class="divider-vertical" />
-            <li class="contact"><a href="#"><i class="icon-envelope-alt"></i></a></li>
-            <li class="divider-vertical" />
-            <li class="logout"><a href="#" id="451_btn_logout" ng-click="Logout()"><i class="icon-off"></i></span></a></li>
-            <li class="divider-vertical" />
-        </ul>
-        <ul class="nav">
-            <li class="divider-vertical" />
-            <li><a href="#"><span class="icon"><i class="icon-search"></i></span></a></li>
-        </ul>
+    <div class="navbar-inner">
+        <div class="container-fluid admin-navigation">
+            <div class="user-links">
+                    <ul class="nav">
+                        <li class="divider-vertical hidden-tablet hidden-phone" />
+                        <li class="dropdown admin-user">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i><span class="hidden-phone hidden-tablet">User</span><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-header">Admin</li>
+                                <li class="admin"><a href="#/admin">User Information</a></li>
+                                <li class="addresses"><a href="#/addresses">Addresses</a></li>
+                                <li class="messages"><a href="#/message">Messages</a></li>
+                                <li class="contact hidden-desktop"><a href="#">Contact</a></li>
+                                <li class="divider hidden-desktop"></li>
+                                <li class="nav-header hidden-desktop">Reports</li>
+                                <li class="orders hidden-desktop"><a href="#/order">Orders</a></li>
+                                <li class="divider hidden-desktop"></li>
+                                <li class="logout hidden-desktop"><a href="#" id="451_btn_logout" ng-click="Logout()"><i class="icon-off"></i>Log Out</a></li>
+                            </ul>
+                        </li>
+                        <li class="divider-vertical visible-desktop" />
+                        <li class="contact visible-desktop"><a href="#"><i class="icon-envelope-alt"></i><span>Contact</span></a></li>
+                        <li class="divider-vertical visible-desktop" />
+                        <li class="logout visible-desktop"><a href="#" id="451_btn_logout" ng-click="Logout()"><i class="icon-off"></i><span>Log Out</span></a></li>
+                        <li class="divider-vertical" />
+                    </ul>
+                    <a class="brand hidden-phone" ng-show="Four51User.current" href="#" ng-click="refresh($event)"><i class="icon-cloud"></i> {{'Welcome ' + Four51User.current.FirstName + " " + Four51User.current.LastName}}</a>
+            </div>
+            <ul class="nav nav-search">
+                <li class="divider-vertical" />
+                <li><a href="#"><span class="icon"><i class="icon-search"></i></span></a></li>
+                <li class="divider-vertical hidden-tablet hidden-phone"></li>
+            </ul>
+        </div>
     </div>
-</div>
-<div class="container-fluid content-navigation">
-    <nav class="nav">
-        <ul>
-            <li class="category"><a href="#/catalog"><span class="icon"><i class="icon-folder-open"></i></span>Categories</a></li>
-            <li class="orders"><a href="#/order"><span class="icon"><i class="icon-bar-chart"></i></span>Orders</a></li>
-            <li class="cart"><a href="#/cart"><span class="icon"><i class="icon-shopping-cart"></i></span>View Cart</a></li>
-        </ul>
-    </nav>
-</div>
+    <div class="container-fluid content-navigation">
+        <nav class="nav">
+            <ul>
+                <li class="category"><a href="#/catalog"><span class="icon"><i class="icon-folder-open"></i></span>Categories</a></li>
+                <li class="orders hidden-phone hidden-tablet"><a href="#/order"><span class="icon"><i class="icon-bar-chart"></i></span>Orders</a></li>
+                <li class="cart"><a href="#/cart"><span class="icon"><i class="icon-shopping-cart"></i></span>View Cart</a></li>
+            </ul>
+        </nav>
+    </div>
 </header>

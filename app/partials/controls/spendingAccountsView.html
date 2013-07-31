@@ -1,5 +1,4 @@
 <div class="well" ng-if="accounts">
-    <h5>Spending Accounts</h5>
     <ul class="unstyled">
         <li ng-repeat="account in accounts">
             {{account.Label}}: {{ account.Balance | currency:"$" }}
