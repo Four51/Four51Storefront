@@ -147,8 +147,18 @@ button::-moz-focus-inner {
 /*** 3. ADMIN NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
 
+.header div.navbar-inner {
+    background-image: none;
+    background-color:#fff;
+}
+.header .navbar-inner {
+    padding: 0;
+    border: none;
+}
+
 .admin-navigation {
     background-color:#fff;
+    border-bottom: 1px solid #d6d6d6;
 }
 
 .admin-navigation .user-links ul {
@@ -179,7 +189,7 @@ button::-moz-focus-inner {
     color: rgb(242, 94, 70);
 }
 .navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
-    background-color:#F5F5F5;
+    background-color:#fff;
 }
 
 .user-links span {
@@ -190,6 +200,9 @@ button::-moz-focus-inner {
     margin: 0 0 0 8px;
 }
 
+.admin-navigation .nav > li > a {padding: 15px;}
+
+.admin-navigation .nav > li  {min-height: 50px;}
 /* ----------------------------------------------------------------------------------------------- */
 /*** 4. CONTENT NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
@@ -205,21 +218,7 @@ button::-moz-focus-inner {
     float: none;
     margin: 0;
 }
-.header div.navbar-inner {
-    background-image: none;
-    background-color:#fff;
-}
-.header .navbar-inner {
-    padding: 0;
-}
 
-.content-navigation {
-    padding: .25em;
-    background-color:#fff;
-    -moz-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
-    -webkit-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
-    box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
-}
 
 .content-navigation .nav ul {
     margin: 0;
@@ -227,6 +226,13 @@ button::-moz-focus-inner {
     list-style: none;
     font-size: 1em;
     font-weight: 300;
+
+}
+
+.content-navigation .nav ul li {
+    -moz-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
+    -webkit-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
 }
 
 .content-navigation .nav li span {
@@ -309,7 +315,6 @@ button::-moz-focus-inner {
 /*** 5. PRODUCT NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
 
-
 .product-navigation li.nav-header {
     float: left;
     font-size: 11px;
@@ -317,13 +322,14 @@ button::-moz-focus-inner {
     background-color:#d8eff5;
     text-align: center;
     min-height: 70px;
+    line-height: normal;
 }
 
-.product-navigation li.nav-header:first-child {
-    width: auto;
-    clear: both;
-    overflow: hidden;
+
+.product-navigation li.nav-header:last-child {
+  display: none;
 }
+
 .product-navigation li.details-show i {
     display: block;
     padding: 13px;
@@ -332,8 +338,12 @@ button::-moz-focus-inner {
 
 }
 
+.product-navigation li.nav-header {
+    padding: 10px;
+}
+
 .product-navigation li.nav-header a {
-    padding: 10px 15px;
+    padding: 10px;
     display: block;
 
 }
@@ -344,14 +354,15 @@ button::-moz-focus-inner {
 
 .product-navigation li.nav-header ul li > a {
     text-transform: capitalize;
-    padding: 2px 0;
+    padding: 3px 0;
+    line-height: normal;
 }
 
 .product-navigation .nav li + .nav-header {
     margin-top: 0;
 }
 
-.product-nav-detials.hidden {
+.product-nav-details.hidden {
 
 }
 
@@ -415,29 +426,24 @@ button::-moz-focus-inner {
 
     border: 1px solid transparent;
     border-radius: 4px;
-    padding: 0 10px;
+    padding: 0 5px;
 }
 
 .product-navigation .nav ul ul:hover li:hover {
     background-color:#D8EFF5;;
     border: 1px solid #f9f9f9;
     border-radius: 4px;
-
-
 }
 
 .product-navigation .nav ul .product-nav-details li a:hover {
 
 }
 
-.product-nav-details li:first-child {
-  margin-top: 5px;
-}
-
 .product-navigation .nav ul .product-nav-details li:last-child {
     margin-bottom: 5px;
 }
 
+.category-product.product-navigation  li.nav-header { width: 33.3%}
 /* ----------------------------------------------------------------------------------------------- */
 /*** 6. MAIN CONTENT ***/
 /* ----------------------------------------------------------------------------------------------- */
