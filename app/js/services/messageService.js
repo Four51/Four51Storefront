@@ -6,17 +6,17 @@ four51.app.factory('MessageService', function($resource, $location, $451, $api) 
 			return $api.resource(resource)
 				.options({persists: true, key: 'Message.' + param.id}).get(param);
 		},
-		delete: function(msg, fn) {
-			resource.delete(msg, function() {
+		delete: function(msg, callback) {
+			$api.resource(resource).delete(msg, function() {
 				$451.clear('Message.' + msg.ID).clear('Messages');
-				fn();
+                callback();
 			});
 		},
-		save: function(msg, fn) {
-			resource.save(msg, function() {
+		save: function(msg, callback) {
+			$api.resource(resource).save(msg, function() {
 				$451.clear('Messages');
-				fn();
-			})
+                callback();
+			});
 		}
 	}
 });

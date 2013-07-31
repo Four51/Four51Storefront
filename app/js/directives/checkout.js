@@ -20,7 +20,8 @@ four51.app.directive('shipperselection', function() {
         },
         restrict: 'E',
         templateUrl: 'partials/controls/shipperSelectionView.html',
-        controller: function($scope) {
+        controller: function($scope, ShipperService) {
+            $scope.shippers = ShipperService.query();
             $scope.allowShipperInput = function() {
                 return $scope.user.ShipMethod.ShipperSelectionType == 'UserDropDown' || $scope.user.ShipMethod.ShipperSelectionType == 'UserOpenField';
             };

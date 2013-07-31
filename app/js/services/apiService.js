@@ -1,7 +1,7 @@
 four51.app.factory('$api', function($451) {
 	var resource, options;
 
-	function fromRest(method, data, getComplete) {
+	function fromRest(method, data, callback) {
 		// cache for api calls will always be stored in localStorage.
 		// to avoid caching simply do not define the options.persists property in your service
 		return resource[method](data, function(d) {
@@ -11,17 +11,16 @@ four51.app.factory('$api', function($451) {
 				if (typeof d == 'object' && (d.length > 0 || Object.keys(d).length > 0))
 					// persists will always be true
 					$451.cache(options.key, d, options);
-
-
 			}
-            if(getComplete)
-                getComplete(d);
+            if(callback && d) callback(d);
 			return d;
 		});
 	}
 
-	function fromCache() {
-		return $451.cache(options.key);
+	function fromCache(callback) {
+		var c = $451.cache(options.key);
+        if (callback && c) callback(c);
+        return c;
 	}
 
 	return {
@@ -33,24 +32,17 @@ four51.app.factory('$api', function($451) {
 			resource = r;
 			return this;
 		},
-		query: function() {
-			return fromCache() || fromRest('query');
+		query: function(callback) {
+			return fromCache(callback) || fromRest('query', callback);
 		},
-		get: function(data, getComplete) {
-            var cached = fromCache();
-            if(cached && getComplete)
-                getComplete(cached);
-
-			return cached || fromRest('get', data, getComplete);
+		get: function(data, callback) {
+            return fromCache(callback) || fromRest('get', data, callback);
 		},
-		save: function(data) {
-			return fromCache() || fromRest('save', data);
+		save: function(data, callback) {
+			return fromRest('save', data, callback);
 		},
-		delete: function(data) {
-			fromRest('delete', data);
-		},
-		custom: function(method, data) {
-			return fromCache() || fromRest(method, data);
-		}
+		delete: function(data, callback) {
+			fromRest('delete', data, callback);
+        }
 	};
 });

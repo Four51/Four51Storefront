@@ -3,7 +3,7 @@ four51.app.factory('OrderService', function($resource, $451, $api) {
 	return {
 		get: function(param, callback) {
 			return $api.resource(service)
-				.options({ persists: false, key: 'Order.' + param.id})
+				.options({ persists: true, key: 'Order.' + param.id})
 				.get(param, callback);
 		},
 		repeat: function(order) {
@@ -16,17 +16,16 @@ four51.app.factory('OrderService', function($resource, $451, $api) {
         delete: function(order, callback) {
             // we don't actually allow the deletion of orders.
             // this is just cancelling the current shopping cart
-            service.delete(function(response) {
-                $451.clear('Order.' + order.ID);
-                if (callback) callback();
+            $api.resource(service)
+                .delete(function() {
+                    $451.clear('Order.' + order.ID);
+                    callback();
             });
         },
         save: function(order, callback) {
-            $451.clear('Order.' + order.ID);
-            service.save(order, function(data) {
-                if (callback) callback(data);
-                return data;
-            });
+            $api.resource(service)
+                .options({ persists: true, key: 'Order.' + order.ID})
+                .save(order, callback);
         }
 	};
 });

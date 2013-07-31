@@ -9,9 +9,7 @@ four51.app.factory('UserService', function($resource, $api, $451){
 			$api.resource(service).options({persists: true, key: 'User'}).get(user);
 		},
         save: function(user) {
-            service.save(user, function(response) {
-               $451.cache('User', user, { persists: true, key: 'User' });
-            });
+            $api.resource(service).options({ persists: true, key: 'User' }).save(user);
         },
         logout: function() {
             currentUser = null;
