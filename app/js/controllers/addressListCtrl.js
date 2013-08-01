@@ -20,12 +20,12 @@ four51.app.controller('AddressListCtrl', function ($scope, $location, $451, Addr
         data: 'addresses',
         showFilter: true,
         columnDefs: [
-            {field:'Selected', displayName:'Select', cellTemplate: 'partials\\controls\\ngGridCheckBox.html' },
-            {field:'AddressName', displayName:'Name', cellTemplate : '<div class="ngSelectionCell"><a ng-href=#/address/{{row.getProperty("ID")}}>{{row.getProperty(col.field)}}</a></div>'},
-            {field:'City', displayName:'City'},
-            {field:'State', displayName:'State'},
-            {field:'IsShipping', displayName:'Shipping', cellTemplate: 'partials\\controls\\ngGridCheckBox.html' },
-            {field:'IsBilling', displayName:'Billing', cellTemplate : 'partials\\controls\\ngGridCheckBox.html' }]
+            { displayName:'Select', field:'Selected', cellTemplate: 'partials\\controls\\ngGridCheckBox.html' },
+            { displayName:'Name', field:'AddressName', cellTemplate : '<div class="ngSelectionCell"><a ng-href=#/address/{{row.getProperty("ID")}}>{{row.getProperty(col.field)}}</a></div>'},
+            { displayName:'City', field:'City'},
+            { displayName:'State', field:'State' },
+            { displayName:'Shipping', field:'IsShipping', cellTemplate: 'partials\\controls\\ngGridCheckBox.html' },
+            { displayName:'Billing', field:'IsBilling', cellTemplate : 'partials\\controls\\ngGridCheckBox.html' }]
     };
 });
 

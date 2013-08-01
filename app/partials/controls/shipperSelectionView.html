@@ -1,6 +1,6 @@
 <p class="shipper" ng-if="allowShipperInput()">
     <input type="text" ng-if="user.ShipMethod.ShipperSelectionType == 'UserOpenField'" />
-    <select ng-if="user.ShipMethod.ShipperSelectionType == 'UserDropDown'" ng-model="order.ShipperID"
+    <select ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown' && shippers.length > 0" ng-model="order.ShipperID"
             ng-options="shipper.ID as shipper.Name for shipper in shippers" />
 </p>
 
