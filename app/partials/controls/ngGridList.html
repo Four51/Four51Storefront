@@ -1,0 +1,3 @@
+<ul class="unstyled">
+    <li ng-repeat="spec in row.entity[col.field] | onproperty: {Property: 'CanSetForLineItem' ,Value:true}">{{spec.Name}} : {{spec.Value}}</li>
+</ul>
