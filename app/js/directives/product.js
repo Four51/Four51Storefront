@@ -129,8 +129,7 @@ four51.app.directive('quantityfield', function($451, ProductService){
                     return scope.valid | true;
 
 				scope.valid = true;
-				console.log('validate qty: ' + value);
-				console.dir(priceSchedule);
+
                 if(priceSchedule.MinQuantity > value){
 					scope.valid = false;
                     scope.error = "must be greater than " + priceSchedule.MinQuantity;

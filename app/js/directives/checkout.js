@@ -21,10 +21,18 @@ four51.app.directive('shipperselection', function() {
         restrict: 'E',
         templateUrl: 'partials/controls/shipperSelectionView.html',
         controller: function($scope, ShipperService) {
-            $scope.shippers = ShipperService.query();
+            function getShippers() {
+                if ($scope.order.ShipAddressID != null)
+                    $scope.shippers = ShipperService.query();
+            }
+
             $scope.allowShipperInput = function() {
                 return $scope.user.ShipMethod.ShipperSelectionType == 'UserDropDown' || $scope.user.ShipMethod.ShipperSelectionType == 'UserOpenField';
             };
+            $scope.$on('event:shipAddressUpdate', function() {
+                getShippers();
+            });
+            getShippers();
         },
         link: function(scope,element,attr) {
 
