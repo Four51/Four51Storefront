@@ -1,6 +1,7 @@
 'use strict';
 
 four51.app.controller('NavCtrl', function ($location, $scope, $451, UserService) {
+    $scope.scroll = 0;
     $scope.Logout = function(){
         $451.clear();
         UserService.logout();

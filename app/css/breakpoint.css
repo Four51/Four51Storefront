@@ -21,6 +21,14 @@
         width: 100%;
         margin-top: 70px;
     }
+    .header .content-navigation, .header .content-navigation.big {position: fixed; left: 0; right: 0; top: 0; background-color:#f9f9f9; z-index: 1}
+
+    .header .content-navigation.small { transition: .5s;
+        display:none;}
+
+    .product-navigation nav.nav {
+        margin-top: 125px;
+    }
 
     .content-navigation .nav li {
         width: 33%; /* default is three buttons~ change to auto if more than three buttons or adjust percentage of width to scale */
@@ -168,6 +176,14 @@
         display: block;
         float: left;
         width: 50%;
+    }
+
+    .header .content-navigation, .header .content-navigation.big {
+        position: relative;
+    }
+
+    .product-navigation nav.nav {
+        margin-top: 0;
     }
 
     #content {
