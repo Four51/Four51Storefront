@@ -49,6 +49,7 @@ hr {
         padding-right: 5px;
     }
 }
+
 .user-name {
     font-size: 12px !important;
 }
@@ -66,10 +67,12 @@ hr {
     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
     box-shadow: 0 1px 2px rgba(0,0,0,.05);
 }
+
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
     margin-bottom: 10px;
 }
+
 .form-signin input[type="text"],
 .form-signin input[type="password"] {
     font-size: 16px;
@@ -201,9 +204,14 @@ button::-moz-focus-inner {
     margin: 0 0 0 8px;
 }
 
-.admin-navigation .nav > li > a {padding: 15px;}
+.admin-navigation .nav > li > a {
+    padding: 15px;
+}
 
-.admin-navigation .nav > li  {min-height: 50px;}
+.admin-navigation .nav > li  {
+    min-height: 50px;
+}
+
 /* ----------------------------------------------------------------------------------------------- */
 /*** 4. CONTENT NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
@@ -218,7 +226,6 @@ button::-moz-focus-inner {
     float: none;
     margin: 0;
 }
-
 
 .content-navigation .nav ul {
     margin: 0;
@@ -308,8 +315,6 @@ button::-moz-focus-inner {
 .content-navigation .nav li:nth-child(8n+8) {
     background: rgb(192, 57, 43);
 }
-
-
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 5. PRODUCT NAVIGATION ***/
@@ -417,10 +422,10 @@ button::-moz-focus-inner {
 }
 
 .product-navigation .nav ul ul > li {
-
     border: 1px solid transparent;
     border-radius: 4px;
-    padding: 0 5px;
+    padding: 0;
+    font-size: 12px;
 }
 
 .product-navigation .nav ul ul:hover li:hover {
@@ -437,7 +442,10 @@ button::-moz-focus-inner {
     margin-bottom: 5px;
 }
 
-.category-product.product-navigation  li.nav-header { width: 33.3%}
+.category-product.product-navigation  li.nav-header {
+    width: 33.3%
+}
+
 /* ----------------------------------------------------------------------------------------------- */
 /*** 6. MAIN CONTENT ***/
 /* ----------------------------------------------------------------------------------------------- */

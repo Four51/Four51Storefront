@@ -25,7 +25,7 @@
                         <li class="logout visible-desktop"><a href="#" class="451_btn_logout" ng-click="Logout()"><i class="icon-off"></i></a></li>
                         <li class="divider-vertical" />
                     </ul>
-                    <a class="brand hidden-phone" ng-show="Four51User.current" href="#" ng-click="refresh($event)"><i class="icon-cloud"></i> {{'Welcome ' + Four51User.current.FirstName + " " + Four51User.current.LastName}}</a>
+                <a class="brand" ng-show="Four51User.current" href="#" ng-click="refresh($event)"><i class="icon-cloud"></i> <span class="brand-name">{{'Welcome ' + Four51User.current.FirstName + " " + Four51User.current.LastName}}</span></a>
             </div>
             <ul class="nav nav-search">
                 <li class="divider-vertical" />
@@ -37,12 +37,11 @@
     <div class="container-fluid content-navigation">
         <nav class="nav">
             <ul>
-                <!--- considering removing categories. It is left over "product home" page static site mentality and I would like to see this type of thinking out of the spa --->
+                <!--- Removing link to categories. It is left over "product home" static site mentality and I would like to see this type of ui design out of spa --->
                 <!--- <li class="category"><a href="#/catalog"><span class="icon"><i class="icon-folder-open"></i></span>Categories</a></li> --->
-
                 <li class="orders hidden-phone hidden-tablet"><a href="#/order"><span class="icon"><i class="icon-bar-chart"></i></span>Orders</a></li>
                 <li class="cart"><a href="#/cart"><span class="icon"><i class="icon-shopping-cart"></i></span>View Cart</a></li>
-                <li class="checkout"><a href="#"><span class="icon"><i class="icon-dollar"></i></span>Checkout</a></li>
+                <li class="checkout"><a href="#/checkout"><span class="icon"><i class="icon-dollar"></i></span>Checkout</a></li>
             </ul>
         </nav>
     </div>
