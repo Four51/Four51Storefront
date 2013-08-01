@@ -56,3 +56,10 @@ four51.app.directive('lineitemhistorygrid', function() {
     }
     return obj;
 });
+
+four51.app.directive('scrollposition', function() {
+    var obj = {
+        restrict: 'E'
+    }
+    return obj;
+});

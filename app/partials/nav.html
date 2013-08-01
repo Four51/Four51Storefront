@@ -34,10 +34,10 @@
             </ul>
         </div>
     </div>
-    <div class="container-fluid content-navigation">
+    <div class="container-fluid content-navigation" ng-class="{small: scroll > 50, big: scroll <= 50}">
         <nav class="nav">
             <ul>
-                <!--- Removing link to categories. It is left over "product home" static site mentality and I would like to see this type of ui design out of spa --->
+                <!--- Removing link to categories. It is left over "product home" static site and I would like to see this type of ui design out of spa --->
                 <!--- <li class="category"><a href="#/catalog"><span class="icon"><i class="icon-folder-open"></i></span>Categories</a></li> --->
                 <li class="orders hidden-phone hidden-tablet"><a href="#/order"><span class="icon"><i class="icon-bar-chart"></i></span>Orders</a></li>
                 <li class="cart"><a href="#/cart"><span class="icon"><i class="icon-shopping-cart"></i></span>View Cart</a></li>
@@ -46,3 +46,4 @@
         </nav>
     </div>
 </header>
+<span class='scroll-debug' scroll-position="scroll">{{scroll}}</span>
