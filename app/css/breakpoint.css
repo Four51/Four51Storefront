@@ -13,16 +13,17 @@
 /* Desktop & tablet landscape - 100% width - 1024+ */
 @media (min-width: 50em) {
     #content {
-        margin: 140px 0 40px;
+        margin: 0;
     }
 
     .content-navigation .nav ul {
         display: table;
         width: 100%;
+        margin-top: 70px;
     }
 
     .content-navigation .nav li {
-        width: auto;
+        width: 33%; /* default is three buttons~ change to auto if more than three buttons or adjust percentage of width to scale */
         display: table-cell;
         padding: 0;
         text-align: center;
@@ -87,7 +88,7 @@
     }
 
     .content-navigation .icon {
-        padding-top: .25em;
+        padding-top: 1em;
     }
 
     .content-navigation .icon + span {
@@ -101,7 +102,7 @@
 
     /* Animating the height of the element*/
     .content-navigation .nav a {
-        height: 4.6em;
+        height: 5.6em;
     }
 
     /* Making the text follow the height animation */
@@ -149,14 +150,9 @@
     }
 
     .product-navigation li.nav-header {
-        width: 13%;
+        width: 12.5%;
     }
-
-
-
 }
-
-
 
 /* Size and font adjustments to make it fit into in-between screens 800-980 */
 @media (min-width: 50em) and (max-width: 61.250em) {
@@ -164,6 +160,10 @@
         font-size: .90em;
 
     }
+    .content-navigation .nav ul {
+        margin-top: 0;
+    }
+
     .content-navigation .nav li {
         display: block;
         float: left;
@@ -178,14 +178,10 @@
         float: left;
     }
 
-    .content-navigation {
-        padding: 0;
-    }
-
     .admin-navigation .brand {
         position: absolute;
         top: 0;
-        left: 43%;
+        left: 39%;
     }
 
     .product-navigation li.nav-header {
@@ -196,24 +192,17 @@
         padding: 20px;
     }
 }
-
-
-
-
 /* Tablet - portrait - 798 */
 @media (min-width:32.5em) and (max-width: 49.938em) {
     .admin-navigation .user-links ul {
         float: left;
     }
 
-    .content-navigation {
-        padding: 0;
-    }
 
     .admin-navigation .brand {
         position: absolute;
         top: 0;
-        left: 42%;
+        left: 37%;
     }
 
     .content-navigation .nav ul li:nth-child(8n+1) a:hover,
@@ -281,7 +270,6 @@
 
 }
 
-
 /* CSS specific to the 2x3 columns version */
 @media (min-width:32.5em) and (max-width: 49.938em) {
     /* Creating the 2 column layout using floating elements once again */
@@ -314,26 +302,13 @@
         top: -0.2em;
     }
 
-    /* animate the size and border of the rounded background in a more discreet way */
     .content-navigation .nav li i {
         display: inline-block;
-        padding: 8% 9%;
+        padding: 8% 10%;
         border: 4px solid transparent;
         border-radius: 50%;
         font-size: 1.5em;
-        background: rgba(255,255,255,0.1);
-        -webkit-transition: border .5s;
-        -moz-transition: border .5s;
-        -o-transition: border .5s;
-        -ms-transition: border .5s;
-        transition: border .5s;
-    }
-
-    /* Transition effect on the border color */
-    .content-navigation .nav li:hover i,
-    .content-navigation .nav li:active i,
-    .content-navigation .nav li:focus i {
-        border: 4px solid rgba(255,255,255,0.1);
+        background:transparent;
     }
 
     .product-navigation li.nav-header {
@@ -345,9 +320,6 @@
     }
 
 }
-
-
-
 
 /* Size and font adjustments to make it fit into in-between screens 520-618 */
 @media (min-width: 32.5em) and (max-width: 38.688em) {
@@ -363,12 +335,13 @@
     }
 
     .product-navigation li.nav-header {
-        width: 50%;
+        width: 100%;
     }
 
     .product-navigation li.nav-header a {
         padding: 20px;
     }
+
     .admin-navigation .brand {
         position: absolute;
         top: 0;
@@ -377,6 +350,11 @@
     .admin-navigation .brand-name {
         visibility: hidden;
     }
+
+    .category-product.product-navigation li.nav-header {
+        width: 100%;
+    }
+
 
 }
 
@@ -397,9 +375,6 @@
         display: inline-block;
         height: 100%;
     }
-    .content-navigation {
-        padding: 0;
-    }
 
     .content-navigation .nav a {
         padding: 0.5em;
@@ -414,18 +389,22 @@
     .content-navigation .nav a {
         padding: 1.5em;
     }
+
     .content-navigation .nav i {
         margin-right: .5em;
     }
 
     .product-navigation li.nav-header {
-        width: 50%;
-
+        width: 100%;
+        min-height: 70px;
     }
 
     .product-navigation li.nav-header a {
         padding: 20px;
-        min-height: 110px;
+
+    }
+    .category-product.product-navigation li.nav-header {
+        width: 100%;
     }
     .admin-navigation .brand {
         position: absolute;
@@ -436,6 +415,5 @@
     .admin-navigation .brand-name {
         visibility: hidden;
     }
-
 
 }
