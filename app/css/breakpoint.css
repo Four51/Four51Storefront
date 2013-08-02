@@ -20,10 +20,28 @@
         display: table;
         width: 100%;
         margin-top: 70px;
+
+    }
+
+    .header .content-navigation, .header .content-navigation.fadeIn {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        background-color:#f9f9f9;
+        z-index: 1;
+    }
+
+    .product-navigation nav.nav {
+        margin-top: 145px;
+    }
+
+    .category-product.product-navigation nav.nav {
+        margin-top: 0;
     }
 
     .content-navigation .nav li {
-        width: 33%; /* default is three buttons~ change to auto if more than three buttons or adjust percentage of width to scale */
+        width: 50%; /* default is two buttons~ change to auto if more than two buttons or adjust percentage of width to scale for number of buttons */
         display: table-cell;
         padding: 0;
         text-align: center;
@@ -81,6 +99,7 @@
     .content-navigation .nav li:nth-child(8n+3) a:focus {
         background-color:  rgb(26, 188, 156);
     }
+
     .content-navigation .nav li:nth-child(8n+8) a:hover,
     .content-navigation .nav li:nth-child(8n+8) a:active,
     .content-navigation .nav li:nth-child(8n+8) a:focus {
@@ -160,7 +179,21 @@
         font-size: .90em;
 
     }
+
     .content-navigation .nav ul {
+        margin-top: 0;
+    }
+
+    .header .content-navigation, .header .content-navigation.fadeIn {
+        position: relative;
+        left: 0;
+        right: 25px;
+        top: auto;
+        background-color: transparent;
+        z-index: auto;
+    }
+
+    .product-navigation nav.nav {
         margin-top: 0;
     }
 
@@ -168,6 +201,10 @@
         display: block;
         float: left;
         width: 50%;
+    }
+
+    .product-navigation nav.nav {
+        margin-top: 0;
     }
 
     #content {
@@ -185,7 +222,7 @@
     }
 
     .product-navigation li.nav-header {
-        width: 33%;
+        width: 33.3%;
     }
 
     .product-navigation li.nav-header a {
@@ -197,7 +234,6 @@
     .admin-navigation .user-links ul {
         float: left;
     }
-
 
     .admin-navigation .brand {
         position: absolute;
@@ -261,7 +297,7 @@
     }
 
     .product-navigation li.nav-header {
-        width: 33%;
+        width: 33.3%;
     }
 
     .product-navigation li.nav-header a {
@@ -312,7 +348,7 @@
     }
 
     .product-navigation li.nav-header {
-        width: 33%;
+        width: 33.3%;
     }
 
     .product-navigation li.nav-header a {
@@ -326,6 +362,7 @@
     .content-navigation .nav li span.icon {
         width: 50%;
     }
+
     .admin-navigation .user-links ul {
         float: left;
     }
@@ -347,6 +384,7 @@
         top: 0;
         left: 48%;
     }
+
     .admin-navigation .brand-name {
         visibility: hidden;
     }
