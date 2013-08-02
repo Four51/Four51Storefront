@@ -36,8 +36,6 @@ hr {
     background-color: transparent;
 }
 
-
-
 .sidebar-nav {
     padding: 9px 0;
 }
@@ -157,6 +155,7 @@ button::-moz-focus-inner {
     background-image: none;
     background-color:#fff;
 }
+
 .header .navbar-inner {
     padding: 0;
     border: none;
