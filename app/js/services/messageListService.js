@@ -11,9 +11,7 @@ four51.app.factory('MessageListService', function($resource, $451, $api) {
 		},
 		delete: function(m) {
 			angular.forEach(m, function(msg, i) {
-				if (msg.Selected) {
-					$api.resource(service).delete(msg);
-				}
+				$api.resource(service).delete(msg);
 			});
             return this.query();
 		}
