@@ -1,4 +1,4 @@
-four51.app.controller('CheckOutViewCtrl', function ($scope, $rootScope, $451, UserService, OrderService, AddressService, OrderConfigService) {
+four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $rootScope, $451, UserService, OrderService, AddressService, OrderConfigService) {
     $scope.user = UserService.get();
     $scope.order = $scope.user.CurrentOrderID != null ? OrderService.get({ id: $scope.user.CurrentOrderID },
         function(o) {
