@@ -34,7 +34,7 @@
             </ul>
         </div>
     </div>
-    <div class="container-fluid content-navigation animate" ng-class="{fadeOutUp: scroll > 200, big: scroll <= 200}">
+    <div class="container-fluid content-navigation animated" ng-class="{fadeOutUpBig: scroll > 250, fadeIn: scroll <= 250}">
         <nav class="nav">
             <ul>
                 <!--- Removing link to categories. It is left over "product home" static site and I would like to see this type of ui design out of spa --->
@@ -47,4 +47,4 @@
     </div>
 </header>
 <!--- show scroll position --->
-<span class='scroll-debug' scroll-position="scroll">{{scroll}}</span>
+<span scroll-position="scroll">{{scroll}}</span>

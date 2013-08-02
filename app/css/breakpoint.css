@@ -21,10 +21,14 @@
         width: 100%;
         margin-top: 70px;
     }
-    .header .content-navigation, .header .content-navigation.big {position: fixed; left: 0; right: 0; top: 0; background-color:#f9f9f9; z-index: 1}
-
-    .header .content-navigation.small { transition: .5s;
-        display:none;}
+    .header .content-navigation, .header .content-navigation.fadeIn {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        background-color:#f9f9f9;
+        z-index: 1;
+    }
 
     .product-navigation nav.nav {
         margin-top: 125px;
@@ -170,16 +174,12 @@
     }
     .content-navigation .nav ul {
         margin-top: 0;
-    }
+     .header .content-navigation {position: relative;}   }
 
     .content-navigation .nav li {
         display: block;
         float: left;
         width: 50%;
-    }
-
-    .header .content-navigation, .header .content-navigation.big {
-        position: relative;
     }
 
     .product-navigation nav.nav {
