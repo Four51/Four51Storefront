@@ -35,9 +35,15 @@
 
 //TODO remove tables and add ng-grid https://github.com/angular-ui/ng-grid
 
-2.  Priorities              -   top to bottom
+2.  Animations
+    https://github.com/daneden/animate.css
 
-    Navigation              -   gesature based is the primary goal
+    Simply add the class".animated" and the class for the type of animation you would like to see.
+
+
+3.  Priorities              -   top to bottom
+
+    Navigation              -   gesture based is the primary goal
         AdminNav
         CategoryNav
         ProductNav

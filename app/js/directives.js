@@ -56,3 +56,15 @@ four51.app.directive('lineitemhistorygrid', function() {
     }
     return obj;
 });
+
+// http://stackoverflow.com/questions/13549216/changing-css-on-scrolling-angular-style
+four51.app.directive('scrollPosition', function($window) {
+    return function(scope, element, attrs) {
+        var windowEl = angular.element($window);
+        windowEl.on('scroll', function() {
+            scope.$apply(function() {
+                scope[attrs.scrollPosition] = windowEl.scrollTop();
+            });
+        });
+    };
+});
