@@ -1,9 +1,36 @@
 <form name="cart">
-    <div>
+    <div ng-if="order" class="span3 well OrderDetailTable">
+        <p ng-if="Four51User.permissions.contains('EditPOID')">
+            <label>{{Four51User.current.Company.SiteText.OrderID || 'Order ID'}}:</label>
+            <input ng-disabled='order.autoID' type='text' ng-model="order.ExternalID" required ui-mask="{{Four51User.current.Company.POIDMask}}" />
+            <span ng-if="Four51User.permissions.contains('AllowAutoGenPOID')">
+                <input type='checkbox' ng-click="order.ExternalID = order.autoID ? 'auto' : ''" ng-model='order.autoID' /> Use system-generated ID
+            </span>
+        </p>
+        <label>Comments:</label><textarea rows="5" cols="100" ng-model="order.Comments" /></label><br/>
+        <label ng-if="Four51User.permissions.contains('CostCenterPerOrder') && !Four51User.permissions.contains('CostCenterPerLine')">
+            <costcenter
+                    user="Four51User"
+                    order="order"
+                    ng-if="Four51User.permissions.contains('CostCenterPerOrder') && !Four51User.permissions.contains('CostCenterPerLine')" />
+        </label>
+        <ul class="unstyled" ng-if="Four51User.current.OrderFields">
+            <li ng-repeat="field in order.OrderFields">
+                <customtextfield customfield="field" ng-if="field.Lines" />
+                <customselectionfield customfield="field" ng-if="field.Options && !field.IsRadioButtons" />
+                <customradiobuttonfield customfield="field" ng-if="field.Options && field.IsRadioButtons" />
+            </li>
+        </ul>
+    </div>
+
+    <div class="span3 well Shipping">
         <addressselector user="user" model="order.ShipAddressID" required />
         <shipperselection user="user" order="order" />
     </div>
-    <div class="btn-group">
+
+    <div class="span3 well Billing"></div>
+
+    <div class="span10 btn-group">
         <button class="btn btn-small btn-action" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{Four51User.current.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
         <button class="btn btn-small btn-warning" ng-click="cancelOrder()">Cancel Order</button>
         <button class="btn btn-small btn-info" ng-click="continueShopping()">Continue Shopping</button>

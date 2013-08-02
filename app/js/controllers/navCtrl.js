@@ -1,6 +1,6 @@
 'use strict';
 
-four51.app.controller('NavCtrl', function ($location, $scope, $451, UserService) {
+four51.app.controller('NavCtrl', function ($location, $scope, $451, UserService, OrderService) {
     $scope.scroll = 0;
     $scope.Logout = function(){
         $451.clear();
@@ -11,7 +11,7 @@ four51.app.controller('NavCtrl', function ($location, $scope, $451, UserService)
     $scope.refresh = function(e) {
         e.preventDefault();
         UserService.refresh();
-    }
+    };
 });
 
 four51.app.controller('SideNavCtrl', function ($rootScope, $scope, CategoryService) {

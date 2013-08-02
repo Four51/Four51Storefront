@@ -9,7 +9,7 @@
 
 <script type="text/ng-template" id="categoryTemplate.html">
     <a href=#/catalog/{{category.InteropID}}>{{category.Name}}</a>
-    <ul class="product-nav-details" ng-class="{ 'hidden': ! showDetails }" >
+    <ul ng-if="category.SubCategories.length" class="product-nav-details" ng-class="{ 'hidden': ! showDetails }" >
         <li ng-repeat="category in category.SubCategories" ng-include="'categoryTemplate.html'"></li>
     </ul>
 </script>
