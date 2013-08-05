@@ -13,7 +13,7 @@
 <br>
 
 <form name="addToOrderForm" ng-show="allowAddToOrder">
-	<table border=1 ng-show="true">
+	<table id="451_list_vspec" border=1 ng-show="true">
 		<tr ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
 			<td>{{s.Name}}<span ng-show="s.Required" style="color:red"> *</span> </td>
 			<td>{{s.Prefix}}<vspecfield changed="specChanged" s="s"></vspecfield>{{s.Suffix}}</td>
@@ -24,7 +24,7 @@
 	<br>
 	line total: {{LineItem.LineTotal | currency}}
 	<br>
-	<button ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(LineItem)">Add to Order</button>
+	<button id="451_btn_orderadd" ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(LineItem)">Add to Order</button>
 	<br>
     <span ng-show="LineItem.PriceSchedule.MinQuantity > 1">
         min: {{LineItem.PriceSchedule.MinQuantity}}<br/>

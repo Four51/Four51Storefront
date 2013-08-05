@@ -48,8 +48,23 @@ angular.scenario.matcher('toContainFuture', function(future) {
     return includes(this.actual, future.value);
 });
 
-//navigation functions
+//localization value constants
+const C_currSymbol = "$"; const C_currThousandSeparator = ","; const C_currDecimalSeparator = ".";
 
+Number.prototype.formatMoney = function(c){ //found this currency formatting function on stackoverflow, modified a little
+
+    var n = this,
+        c = isNaN(c = Math.abs(c)) ? 2 : c,
+        cn = C_currSymbol,
+        d = C_currDecimalSeparator,
+        t = C_currThousandSeparator,
+        s = n < 0 ? "-" : "",
+        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
+    return s + cn + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+};
+
+//navigation functions
 function e2eClickSideNavCategory(intCatLevel,strCatName){
     var strNLevelsSelect = ""; //each level of depth is "ul li "
     var strSelector = "";
@@ -94,4 +109,31 @@ function e2eClickProductFromList(intNthProd,strProdName){
 }
 function e2eViewProductFromInteropID(strProdInteropID){
     browser().navigateTo('../../app/index.html#/product/' + strProdInteropID);
+}
+
+function e2eClickVariantFromProductList(intNthVariant,strVariantName){
+    var strSelector = "";
+
+    if(strVariantName != null){
+        strSelector = "#451_list_vars table tbody tr td a:contains('" + strVariantName + "')";
+
+    }
+    else{//if strProdName isn't specified just pick the first at the nth level
+        strSelector = "#451_list_vars table tbody tr:nth-child(" + intNthVariant + ") td a"; //this may function incorrectly until the header <TR> is changed to <TH> or something else
+    }
+
+    element(strSelector).click();
+}
+
+//inside product functions (changing, checking, etc)
+function e2eChangeProdQty(blnRestrictedQty,intQty){
+
+    if(blnRestrictedQty){ //if restricted quantity we use the select box, otherwise the input box
+        //keep in mind the selectbox is 0 based, conditional upon the options presented, so the 1st option is 0, 2nd option is 1, and so on, not necessarily qty 0, qty 2, qty 4, etc
+        select("lineitem.Quantity").option(intQty);
+    }
+    else{
+        input("lineitem.Quantity").enter(intQty);
+    }
+
 }
