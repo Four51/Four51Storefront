@@ -1,14 +1,18 @@
 <div class="visible-desktop" id="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image">
-    <h4>{{currentCategory.Name}}</h4>
+    <h4 ui-toggle>{{currentCategory.Name}}</h4>
 </div>
 
-<div id="451_lbl_subcatlist" ng-show=currentCategory.SubCategories>
-    <ul>
-        <li ng-repeat="c in currentCategory.SubCategories">
-            <a href="#/catalog/{{c.InteropID}}">
-                <img ng-src="{{c.Image.URL}}"/>{{c.Name}}</a>
-        </li>
-    </ul>
+<div class="container-fluid category-product product-navigation" id="451_lbl_subcatlist" ng-show=currentCategory.SubCategories>
+    <nav class="nav">
+        <ul>
+            <li class="nav-header" ng-repeat="c in currentCategory.SubCategories">
+                <a href="#/catalog/{{c.InteropID}}">
+                    <img ng-src="{{c.Image.URL}}"/>
+                    <hr />
+                    {{c.Name}}</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 <div id="451_lst_prod">
