@@ -23,7 +23,7 @@ describe('Product login', function() {
 
 });
 
-describe('ProductList: ', function() {
+describe('Product List: ', function() {
 
     it('should display some products after a top level category has been clicked', function() {
 
@@ -36,7 +36,7 @@ describe('ProductList: ', function() {
         e2eClickSideNavCategory(0);
 
         //now check that the displayed category matches the nav item we clicked
-        expect(binding('currentCategory.Name')).toEqualFuture(scope('.nav-header', 'category.Name'));
+        expect(binding('currentCategory.Name')).toEqualFuture(scope('.nav-header a', 'category.Name'));
 
         if(C_debug){pause();}
 
@@ -101,6 +101,25 @@ describe('Product View - Static No Variants "Static%20Prod"', function() {
 
     });
 });
+
+//after 8/2/13 here are some new products to write test cases with (created 8/2 will not be copied to qaweb till monday
+// stat_prod_stat_specs_bc_autotest
+// stat_prod_stat_specs_env_autotest
+// stat_prod_stat_specs_pap_autotest
+// stat_prod_stat_specs_cont_autotest
+// stat_prod_stat_specs_unitset_autotest
+// stat_prod_stat_specs_pads_autotest
+// stat_prod_stat_specs_fastening_autotest
+// stat_prod_stat_specs_number_autotest
+// stat_prod_stat_specs_ink_autotest
+// stat_prod_stat_specs_marg_autotest
+// stat_prod_stat_specs_label_autotest
+// stat_prod_stat_specs_custom_autotest
+// stat_prod_stat_specs_variant_autotest
+    //stat_prod_stat_specs_variant_autotest_var1_all_override
+    //stat_prod_stat_specs_variant_autotest_var1_some_override
+    //stat_prod_stat_specs_variant_autotest_var1_no_override
+
 
 describe('Product View - Static With Variants "StaticProdWithVar"', function() {
     e2eLogout(false)
@@ -350,8 +369,8 @@ describe('Product View - Price Schedules 2 Value Tests "pstest2", restricted qua
 
         e2eChangeProdQty(true,1);
         expect(element("#451_btn_orderadd:enabled").count()).toBeGreaterThan(0); //enabled
-        e2eChangeProdQty(true,"##");
-        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0); //will you make up your mind?
+        e2eChangeProdQty(false,"##"); //angular's UI controls should handle some of these invalid values
+        expect(element("#451_btn_orderadd:enabled").count()).toBeGreaterThan(0);
 
         if(C_debug){pause();}
         e2eChangeProdQty(true,0);
@@ -541,17 +560,18 @@ describe('testing e2eProduct nav functions', function(){
 
         e2eViewProductFromInteropID("StaticProdWithVar")
         pause();
-        e2eClickVariantFromProductList(1);
+        e2eClickVariantFromProductList(2); //uses TRs right now and there's a header row
 
         if(C_debug){pause();}
         pause();
         e2eViewProductFromInteropID("StaticProdWithVar")
         pause();
-        e2eClickVariantFromProductList("Blue");
+        e2eClickVariantFromProductList(0,"Blue");
         if(C_debug){pause();}
     });
 
 });
+
 describe('logout/cleanup', function(){
     if(C_debug){pause();}
     e2eLogout(C_debug);
