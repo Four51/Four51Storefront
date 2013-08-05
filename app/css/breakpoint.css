@@ -158,7 +158,7 @@
     }
 
     /* Positioning the icons */
-    .content-navigation .nav i {
+    .content-navigation .nav i, .product-navigation .nav i {
         position: relative;
         display: inline-block;
         margin: 0 auto;
@@ -344,7 +344,7 @@
 
     /* Displaying the icons on the left */
     .content-navigation .nav li span,
-    .content-navigation .nav li span.icon {
+    .content-navigation .nav li span.icon, .product-navigation .nav li span.icon {
         display: inline-block;
     }
 
