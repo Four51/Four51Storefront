@@ -25,7 +25,8 @@
 
     <div class="span3 well Shipping">
         <addressselector user="user" model="order.ShipAddressID" required />
-        <shipperselection user="user" order="order" />
+        <shipperselection ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown' && order.Shippers.length > 0"
+                          user="user" order="order" />
     </div>
 
     <div class="span3 well Billing"></div>
