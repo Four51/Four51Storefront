@@ -15,7 +15,7 @@
  element('.nav-header:nth-child(3) a:first').click(); //clicks third category nav link
  */
 
-var C_debug = false;
+var C_debug = true;
 
 ////////////////////////////////////////////////////
 
@@ -43,14 +43,13 @@ describe('Category side link navigation', function() {
       expect(repeater('.nav-header').count()).toBeGreaterThan(0);
 
       //check existence of categories, displaywise
-      expect(element('.nav-list a:first').text()).toBeDefined(); //do we have a displayed top level category?
+      expect(element('.451_cat_nav ul li a:first').text()).toBeDefined(); //do we have a displayed top level category?
 
       //check the text of the A tag to make sure it matches the top level category name
-      expect(element('.nav-list a:first').text()).toEqualFuture(binding('category.Name'));
+      expect(element('.451_cat_nav ul li a:first').text()).toEqualFuture(binding('category.Name'));
 
-      console.dir(element('.nav-list a:first').text())
       //check the href of the A tag to make sure it matches the top level category InteropID
-      expect(element('.nav-list a:first').attr('href')).toContainFuture(scope('.nav-header', 'category.InteropID'));
+      expect(element('.451_cat_nav ul li a:first').attr('href')).toContainFuture(scope('.451_cat_nav ul li a', 'category.InteropID'));
 
       //okay, there is at least one category, continue
 
@@ -71,7 +70,7 @@ describe('Category side link navigation', function() {
         expect(element('.nav-header li a:first').text()).toEqualFuture(scope('.nav-header li', 'category.Name'));
 
         //check the href of the A tag to make sure it matches the top level category InteropID
-        expect(element('.nav-list a:first').attr('href')).toContainFuture(scope('.nav-header', 'category.InteropID'));
+        expect(element('.451_cat_nav a:first').attr('href')).toContainFuture(scope('.451_cat_nav ul li a', 'category.InteropID'));
 
         //let's see what this has in it:
         if(C_debug){
@@ -92,11 +91,11 @@ describe('Category side link navigation', function() {
 
         element('.nav-header a:first').click();       //clicks first category nav link
         //now check that the displayed category matches the nav item we clicked
-        expect(binding('currentCategory.Name')).toEqualFuture(scope('.nav-header', 'category.Name'));
+        expect(binding('currentCategory.Name')).toEqualFuture(scope('.nav-header a', 'category.Name'));
 
         //for a given link, find the interopID of the category
         //the URL hash fragment should have the interopID in it
-        expect(browser().window().hash()).toContainFuture(scope('.nav-header', 'category.InteropID'));
+        expect(browser().window().hash()).toContainFuture(scope('.nav-header a', 'category.InteropID'));
 
       if(C_debug){pause();}
 
@@ -131,8 +130,7 @@ describe('Category side link navigation', function() {
         if(C_debug){pause();}
     });
 
-    //this user doesn't have a third category nav link, X'ed out.
-    xit('should display the 3rd top level category we clicked', function(){
+    it('should display the 3rd top level category we clicked', function(){
 
         element('.nav-header:nth-child(3) a:first').query(function (selectedElements, done) {
 
@@ -178,9 +176,9 @@ describe('Main content area category links', function() {
         //check existence of categories, datawise
         expect(repeater('.nav-header').count()).toBeGreaterThan(0);
 
-        element('.nav-list a:first').query(function (selectedElements, done) {
+        element('.451_cat_nav a:first').query(function (selectedElements, done) {
 
-            element('.nav-list a:first').click();       //clicks first category nav link on side nav
+            element('.451_cat_nav a:first').click();       //clicks first category nav link on side nav
             expect(binding('currentCategory.Name')).toEqual(selectedElements.text());
             expect(element('#451_lbl_curcat').text()).toContain(selectedElements.text());
             done();

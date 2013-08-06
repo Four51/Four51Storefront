@@ -328,8 +328,8 @@ button::-moz-focus-inner {
     border: 1px solid #f9f9f9;
     background-color:#d8eff5;
     text-align: center;
-    min-height: 70px;
     line-height: normal;
+    padding: 0;
 }
 
 .product-navigation .details-show {
@@ -342,13 +342,8 @@ button::-moz-focus-inner {
     cursor: pointer;
 }
 
-.product-navigation li.nav-header {
-    padding: 10px;
-}
-
 .product-navigation li.nav-header a {
     padding: 10px;
-    display: block;
 }
 
 .product-navigation li.nav-header ul li {
@@ -425,23 +420,17 @@ button::-moz-focus-inner {
 
 .product-navigation .nav ul ul > li {
     border: 1px solid transparent;
-    border-radius: 4px;
     padding: 0;
     font-size: 12px;
 }
 
 .product-navigation .nav ul ul:hover li:hover {
     background-color:#D8EFF5;;
-    border: 1px solid #f9f9f9;
-    border-radius: 4px;
+    border: 1px solid transparent;
 }
 
 .product-navigation .nav ul .product-nav-details li a:hover {
-
-}
-
-.product-navigation .nav ul .product-nav-details li:last-child {
-    margin-bottom: 5px;
+    text-decoration: underline;
 }
 
 .category-product.product-navigation  li.nav-header {
@@ -454,7 +443,10 @@ button::-moz-focus-inner {
 
 .container-content {
     margin-top: 20px;
+
 }
+
+.container-content .category-well {}
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 7. FOOTER  ***/

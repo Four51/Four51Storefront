@@ -40,8 +40,30 @@
         margin-top: 0;
     }
 
+    .product-navigation nav.nav ul li.nav-header a{
+        min-height: 60px;
+        padding: 10px;
+    }
+
+    .product-navigation nav.nav ul li.nav-header ul.product-nav-details li a {
+        min-height: 0;
+        padding-top: 5px;
+    }
+    .product-navigation nav.nav ul li.nav-header ul ul.product-nav-details > li  {
+        padding-left: 10px;
+    }
+
+    .product-navigation nav.nav ul li.nav-header ul.product-nav-details {
+
+    }
+
+    .product-navigation nav.nav ul  li.nav-header .icon-caret-down {
+        min-height: 60px;
+        padding-top: 10px;
+    }
+
     .content-navigation .nav li {
-        width: 50%; /* default is two buttons~ change to auto if more than two buttons or adjust percentage of width to scale for number of buttons */
+        width: 33.3%; /* default is two buttons~ change to auto if more than two buttons or adjust percentage of width to scale for number of buttons */
         display: table-cell;
         padding: 0;
         text-align: center;
@@ -56,6 +78,7 @@
         display: block;
         width: auto;
     }
+
 
     /* hover, focused and active effects */
     .content-navigation .nav li:nth-child(8n+1) a:hover,
@@ -135,7 +158,7 @@
     }
 
     /* Positioning the icons */
-    .content-navigation .nav i {
+    .content-navigation .nav i, .product-navigation .nav i {
         position: relative;
         display: inline-block;
         margin: 0 auto;
@@ -169,7 +192,7 @@
     }
 
     .product-navigation li.nav-header {
-        width: 12.5%;
+        width: 16.6%;
     }
 }
 
@@ -321,7 +344,7 @@
 
     /* Displaying the icons on the left */
     .content-navigation .nav li span,
-    .content-navigation .nav li span.icon {
+    .content-navigation .nav li span.icon, .product-navigation .nav li span.icon {
         display: inline-block;
     }
 

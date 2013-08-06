@@ -6,7 +6,7 @@
     <nav class="nav">
         <ul>
             <li class="nav-header" ng-repeat="c in currentCategory.SubCategories">
-                <a href="#/catalog/{{c.InteropID}}">
+                <a ng-href="#/catalog/{{c.InteropID}}">
                     <img ng-src="{{c.Image.URL}}"/>
                     <hr />
                     {{c.Name}}</a>
@@ -15,8 +15,8 @@
     </nav>
 </div>
 
-<div id="451_lst_prod">
-	<span class="span4 thumbnail" ng-repeat="product in products">
+<div id="451_lst_prod" class="container-content">
+	<span class="category-well span4 well" ng-repeat="product in products">
 		<shortproductview p="product" />
 	</span>
 </div>

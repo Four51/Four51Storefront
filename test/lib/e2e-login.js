@@ -74,7 +74,7 @@ function e2eLogout(blnDebug){
         }
 
         //find the logout button and click it
-        element("#451_btn_logout").click();
+        element(".451_btn_logout").click();
 
         if(blnDebug){
             pause();
