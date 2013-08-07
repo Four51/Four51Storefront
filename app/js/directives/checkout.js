@@ -21,18 +21,34 @@ four51.app.directive('shipperselection', function() {
         restrict: 'E',
         templateUrl: 'partials/controls/shipperSelectionView.html',
         controller: function($scope, ShipperService) {
-            function getShippers() {
-                if ($scope.order.ShipAddressID != null)
-                    $scope.shippers = ShipperService.query();
-            }
-
             $scope.allowShipperInput = function() {
                 return $scope.user.ShipMethod.ShipperSelectionType == 'UserDropDown' || $scope.user.ShipMethod.ShipperSelectionType == 'UserOpenField';
             };
             $scope.$on('event:shipAddressUpdate', function() {
-                getShippers();
+                // only update shippers if there are actual rates involved
+                var update = false;
+                angular.forEach($scope.order.Shippers, function(n,i) {
+                    update = update || n.ShippingRate.ShipperType != "Custom";
+                });
+                if (update) {
+                    $scope.order.Shipper = null;
+                    $scope.order.Shippers = ShipperService.query();
+                }
             });
-            getShippers();
+
+            $scope.order.Shippers = ShipperService.query();
+            $scope.gridOptions = {
+                data: 'order.Shippers',
+                showSelectionCheckbox: true,
+                multiSelect: false,
+                afterSelectionChange: function(row) {
+                    $scope.order.Shipper = row.entity;
+                },
+                columnDefs: [
+                    { displayName: 'Name', field: 'Name' },
+                    { displayName: 'Rate', field: 'ShippingRate.Price', cellFilter: 'currency'}
+                ]
+            }
         },
         link: function(scope,element,attr) {
 
