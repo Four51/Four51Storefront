@@ -36,8 +36,8 @@
 
 <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product' />
 
-<span id="451_list_vars" ng-show="LineItem.Product.Variants.length > 1 && !LineItem.Variant"><b>Please select from the following:</b><br>
-    <table border=1>
+<span ng-show="LineItem.Product.Variants.length > 1 && !LineItem.Variant"><b>Please select from the following:</b><br>
+    <table border=1 class="451_list_vars">
 		<tr>
 			<td>Variant ID</td>
 			<td>Description</td>
