@@ -10,6 +10,26 @@
 //console.dir(scope('.nav-header', 'category.InteropID'));
 //console.dir(binding('currentCategory.Name'));
 
+// test product interopIDs
+/////////////////////////////////////
+// stat_prod_stat_specs_ALL_autotest
+// stat_prod_stat_specs_bc_autotest
+// stat_prod_stat_specs_env_autotest
+// stat_prod_stat_specs_pap_autotest
+// stat_prod_stat_specs_cont_autotest
+// stat_prod_stat_specs_unitset_autotest
+// stat_prod_stat_specs_pads_autotest
+// stat_prod_stat_specs_fastening_autotest
+// stat_prod_stat_specs_number_autotest
+// stat_prod_stat_specs_ink_autotest
+// stat_prod_stat_specs_marg_autotest
+// stat_prod_stat_specs_label_autotest
+// stat_prod_stat_specs_custom_autotest
+// stat_prod_stat_specs_variant_autotest !!! next test cases start here
+//stat_prod_stat_specs_variant_autotest_var1_all_override !!!
+//stat_prod_stat_specs_variant_autotest_var1_some_override !!!
+//stat_prod_stat_specs_variant_autotest_var1_no_override !!!
+
 var C_debug = false;
 
 ////////////////////////////////////////////////////
@@ -82,70 +102,278 @@ describe('Product List: ', function() {
 
     //TODO- add some expectations around line-item type productlist display
 
-}); //TODO - validate various fields on Product List display view
+}); //TODO - validate various fields on Product List display view, validate Product sort order based on category options
 
-describe('Product View - Static No Variants "Static%20Prod"', function() {
+//TODO - verify permissions are applied.  specifically, there is a permission setting for static specs, verify the page observes and follows it.
+//TODO - more permissions?
+
+describe('Product View - Static No Variants "stat_prod_stat_specs_ALL_autotest"', function() {
     it('should display a product', function(){
         browser().navigateTo('#/catalog'); //start fresh on the catalog view
-        e2eClickSideNavCategory(0);
+        e2eClickSideNavCategory(0,"Auto Static Products");
         if(C_debug){pause();}
-        e2eClickProductFromList(1); //here's a nice product to work with for now "Static%20Prod"
+        e2eClickProductFromList(0,"Static Prod With Static Specs-ALL Auto Test Product");
     });
     it('should have an image', function(){
-        expect(element('#451_img_prod_lg').count()).toBe(1);
+        expect(element('#451_img_prod_lg[src]').count()).toBe(1);
+    });
+    it('should have a name', function(){
+        expect(element('#451_area_prod_desc').count()).toBe(1);
+        expect(element('#451_area_prod_desc tr td:contains("Static Prod With Static Specs-ALL Auto Test Product")').count()).toBe(1); //name
     });
     it('should have a description', function(){
-        expect(element('#451_area_prod_desc').count()).toBe(1);
-        //verify the product name and description?
+        expect(element('#451_area_prod_desc tr td:contains("Static Prod With Static Specs Auto Test Product")').count()).toBe(1);  //description
+    });
+    it('should have a price box', function(){
+        expect(element("input[name]='qtyInput'").count()).toBe(1);
+    });
+    it('should display a long list of all static specs', function(){
+        expect(element('#451_list_specgroup tbody tr').count()).toBe(266); //this number includes the TRs that display the spec group names
+    });
+    it('should have grouped sets of static specs', function(){
+        expect(element('tr.451_hdr_spec_grp:contains("Business Card") ~ tr').count()).toBe(9); //this finds all the TR siblings underneath the header TR
+        expect(element('tr.451_hdr_spec_grp:contains("Continuous") ~ tr').count()).toBe(22);
+        expect(element('tr.451_hdr_spec_grp:contains("Custom Spec Group 1") ~ tr').count()).toBe(3); //interesting. (there's an invisible spec in it) it counts as 3, though only 2 are "displayed"
+        expect(element('tr.451_hdr_spec_grp:contains("Custom Spec Group 2") ~ tr').count()).toBe(1);
+        expect(element('tr.451_hdr_spec_grp:contains("Custom Spec Group 3") ~ tr').count()).toBe(1); //this should have a file link in it.  TODO- add check for file link.
+        expect(element('tr.451_hdr_spec_grp:contains("Envelope") ~ tr').count()).toBe(16);
+        expect(element('tr.451_hdr_spec_grp:contains("Fastening") ~ tr').count()).toBe(18);
+        expect(element('tr.451_hdr_spec_grp:contains("Ink") ~ tr').count()).toBe(91); //holy vegetable based inks, batman!
+        expect(element('tr.451_hdr_spec_grp:contains("Label") ~ tr').count()).toBe(24);
+        expect(element('tr.451_hdr_spec_grp:contains("Marginal Words") ~ tr').count()).toBe(12); //there is a possibility that there's a bug on the existing app that is not showing 7 fields that SHOULD be here. may want to add a TODO- here
+        expect(element('tr.451_hdr_spec_grp:contains("Numbering") ~ tr').count()).toBe(15);
+        expect(element('tr.451_hdr_spec_grp:contains("Pads") ~ tr').count()).toBe(2);
+        expect(element('tr.451_hdr_spec_grp:contains("Paper") ~ tr').count()).toBe(9);
+        expect(element('tr.451_hdr_spec_grp:contains("Unit Set") ~ tr').count()).toBe(29);
+    });
+    it('should have several specs in each spec group', function(){
+        expect(element('tr.451_hdr_spec_grp:contains("Business Card") ~ tr').count()).toBe(9);
+            verifyStaticSpecRow("Business Card",0,"# of Inks","4");
+            verifyStaticSpecRow("Business Card",1,"# of Inks Back","1");
+            verifyStaticSpecRow("Business Card",2,"# of Inks Front","3");
+            verifyStaticSpecRow("Business Card",3,"Additional Comments","BC Comment");
+            verifyStaticSpecRow("Business Card",4,"Ink Colors","Cyan Magenta Yellow Black");
+            verifyStaticSpecRow("Business Card",5,"Ink Colors on Back","Black");
+            verifyStaticSpecRow("Business Card",6,"Ink Colors on Front","Cyan Magenta Yellow");
+            verifyStaticSpecRow("Business Card",7,"Size","2 x 3-1/2");
+            verifyStaticSpecRow("Business Card",8,"Stock","Aluminum");
 
+        expect(element('tr.451_hdr_spec_grp:contains("Continuous") ~ tr').count()).toBe(22);
+            verifyStaticSpecRow("Continuous",0,"Additional Comments","Continuous Comment");
+            verifyStaticSpecRow("Continuous",1,"Carbonless attr. Ply 1","CFB");
+            verifyStaticSpecRow("Continuous",2,"Carbonless attr. Ply 2","CB");
+            verifyStaticSpecRow("Continuous",3,"Carbonless attr. Ply 3","CB");
+            verifyStaticSpecRow("Continuous",4,"Carbonless attr. Ply 4","CF");
+            verifyStaticSpecRow("Continuous",5,"Carbonless attr. Ply 5","CF");
+            verifyStaticSpecRow("Continuous",6,"Carbonless attr. Ply 6","CF");
+            verifyStaticSpecRow("Continuous",7,"Color Ply 1","CANARY");
+            verifyStaticSpecRow("Continuous",8,"Color Ply 2","PINK");
+            verifyStaticSpecRow("Continuous",9,"Color Ply 3","BLUE");
+            verifyStaticSpecRow("Continuous",10,"Color Ply 4","WHITE");
+            verifyStaticSpecRow("Continuous",11,"Color Ply 5","GOLDENROD");
+            verifyStaticSpecRow("Continuous",12,"Color Ply 6","GREEN");
+            verifyStaticSpecRow("Continuous",13,"Detached Size","3\" x 2 1/2\"");
+            verifyStaticSpecRow("Continuous",14,"Number of Ply's","6");
+            verifyStaticSpecRow("Continuous",15,"Size","4\" x 2 1/2\"");
+            verifyStaticSpecRow("Continuous",16,"Weight Ply 1","5lb");
+            verifyStaticSpecRow("Continuous",17,"Weight Ply 2","7lb");
+            verifyStaticSpecRow("Continuous",18,"Weight Ply 3","30lb");
+            verifyStaticSpecRow("Continuous",19,"Weight Ply 4","1lb");
+            verifyStaticSpecRow("Continuous",20,"Weight Ply 5","1#");
+            verifyStaticSpecRow("Continuous",21,"Weight Ply 6","25#");
+
+        expect(element('tr.451_hdr_spec_grp:contains("Custom Spec Group 1") ~ tr').count()).toBe(3); //1 is hidden, but the row exists in HTML form
+            verifyStaticSpecRow("Custom Spec Group 1",0,"Custom Spec 1","CustomSpecValue1");
+            verifyStaticSpecRow("Custom Spec Group 1",1,"Custom Spec 2","CustomSpecValue2");
+            verifyStaticSpecRow("Custom Spec Group 1",2,"Custom Spec 3 INVISIBLE","CustomSpecValue3");
+
+        expect(element('tr.451_hdr_spec_grp:contains("Custom Spec Group 2") ~ tr').count()).toBe(1);
+            verifyStaticSpecRow("Custom Spec Group 2",0,"Custom Spec 1 Group 2","CustomSpecValue2Spec1Group2");
+
+        expect(element('tr.451_hdr_spec_grp:contains("Custom Spec Group 3") ~ tr').count()).toBe(1);
+            verifyStaticSpecRow("Custom Spec Group 3",0,"Custom Spec 1 Group 3 FILE","441725_Four51logo2008.eps.jpg");
+
+        expect(element('tr.451_hdr_spec_grp:contains("Envelope") ~ tr').count()).toBe(16);
+            verifyStaticSpecRow("Envelope",0,"# Ink Back","2");
+            verifyStaticSpecRow("Envelope",1,"# Ink Front","1");
+            verifyStaticSpecRow("Envelope",2,"Additional Comments","Envelope Comments");
+            verifyStaticSpecRow("Envelope",3,"Commercial Style","#10 4-1/8\" x 9-1/2\"");
+            verifyStaticSpecRow("Envelope",4,"Ink Colors Back","Red Cyan");
+            verifyStaticSpecRow("Envelope",5,"Ink Colors Front","Black");
+            verifyStaticSpecRow("Envelope",6,"Open End Catalog","#15 Catalog 10 x 15");
+            verifyStaticSpecRow("Envelope",7,"Open Side Booklet","#9 1/2 9\" x 12\"");
+            verifyStaticSpecRow("Envelope",8,"Paper Stock","Granite");
+            verifyStaticSpecRow("Envelope",9,"Paper Weight","15lb");
+            verifyStaticSpecRow("Envelope",10,"Social Style","3-5/8\" x 5-1/2\"");
+            verifyStaticSpecRow("Envelope",11,"Type","Commercial");
+            verifyStaticSpecRow("Envelope",12,"Window","Yes");
+            //verifyStaticSpecRow("Envelope",13,"Window from Bottom","1\"");  //TODO-SORTING BUG FOUND.  re-enable these statements once bug is fixed.
+            //verifyStaticSpecRow("Envelope",14,"Window from Left","2\"");
+            //verifyStaticSpecRow("Envelope",15,"Window Size","2 1/2\" 3\"");
+
+        expect(element('tr.451_hdr_spec_grp:contains("Fastening") ~ tr').count()).toBe(18);
+            verifyStaticSpecRow("Fastening",0,"Crimp Left","No");
+            verifyStaticSpecRow("Fastening",1,"Crimp Right","Yes");
+            verifyStaticSpecRow("Fastening",2,"Edge Glue","Yes");
+            verifyStaticSpecRow("Fastening",3,"Edge Glue At","Left");
+            verifyStaticSpecRow("Fastening",4,"Line Glue","Yes");
+            verifyStaticSpecRow("Fastening",5,"Line Glue - Cont Form L","Yes");
+            verifyStaticSpecRow("Fastening",6,"Line Glue - Cont Form R","No");
+            verifyStaticSpecRow("Fastening",7,"Line Glue At","Top");
+            verifyStaticSpecRow("Fastening",8,"Line Glue Carbon","Yes");
+            verifyStaticSpecRow("Fastening",9,"Line Glue Paper","Yes");
+            verifyStaticSpecRow("Fastening",10,"Line Glue Points","1");
+            verifyStaticSpecRow("Fastening",11,"Notes","Fastening Notes");
+            verifyStaticSpecRow("Fastening",12,"Spot Glue","Yes");
+            verifyStaticSpecRow("Fastening",13,"Spot Glue At","Left Center Right Top");
+            verifyStaticSpecRow("Fastening",14,"Spot Glue Carbon","Probably");
+            verifyStaticSpecRow("Fastening",15,"Spot Glue Paper","Yes?");
+            verifyStaticSpecRow("Fastening",16,"Spot Glue Pts","3");
+            verifyStaticSpecRow("Fastening",17,"Standard Glueing","Yes");
+
+        //ink is a long beast...
+
+        expect(element('tr.451_hdr_spec_grp:contains("Label") ~ tr').count()).toBe(24);
+            verifyStaticSpecRow("Label",0,"# of labels per roll","150");
+            verifyStaticSpecRow("Label",1,"Adhesive","Permanent");
+            verifyStaticSpecRow("Label",2,"Center to Center Width","1.5\"");
+            verifyStaticSpecRow("Label",3,"Horizontal center to center","Center");
+            verifyStaticSpecRow("Label",4,"Ink Colors -Back","Red");
+            verifyStaticSpecRow("Label",5,"Ink Colors -Front","Black Yellow");
+            verifyStaticSpecRow("Label",6,"Ink Quantity -Back","1");
+            verifyStaticSpecRow("Label",7,"Ink Quantity -Front","2");
+            verifyStaticSpecRow("Label",8,"Label Depth","3\"");
+            verifyStaticSpecRow("Label",9,"Label Width","6\"");
+            verifyStaticSpecRow("Label",10,"Labels Across -Qty.","1");
+            verifyStaticSpecRow("Label",11,"Liner Material","Stuff");
+            verifyStaticSpecRow("Label",12,"Liner Width","2\"");
+            verifyStaticSpecRow("Label",13,"Paper Stock","Waxy");
+            verifyStaticSpecRow("Label",14,"Perforation locations","Each");
+            verifyStaticSpecRow("Label",15,"Perforations","Yes");
+            verifyStaticSpecRow("Label",16,"Punching","Yes");
+            verifyStaticSpecRow("Label",17,"Punching locations","Around");
+            verifyStaticSpecRow("Label",18,"Repeat Length","1");
+            verifyStaticSpecRow("Label",19,"Roll diameter (inside)","3\"");
+            verifyStaticSpecRow("Label",20,"roll max. diameter","4\"");  //TODO-SORTING BUG FOUND. probably same reason as above (Capitalization affects sorting somehow)
+            verifyStaticSpecRow("Label",21,"Type","CONTINUIOUS"); //(SIC)
+            verifyStaticSpecRow("Label",22,"Unwind Direction","Forward");
+            verifyStaticSpecRow("Label",23,"Usage Information","Peel sticker and apply");
+
+        //there are plenty more static specs to check on this product, but after a certain point these tests become redundant.  optionally this can be expanded.
 
     });
+
+    it('should NOT display custom static specs that are set to be NOT visible to customer (visibletocustomer=false)', function(){
+        expect(element('#451_list_specgroup tbody tr td:contains("INVISIBLE")').count()).toBe(1); //row with the INVISIBLE custom spec exists...
+        expect(element('#451_list_specgroup tbody tr td:contains("INVISIBLE"):hidden').count()).toBe(1); //but should NOT be displayed (should be hidden)
+        expect(element('#451_list_specgroup tbody tr td:contains("INVISIBLE"):visible').count()).toBe(0); //but should NOT be displayed (should be hidden)
+        //this custom static spec actually has INVISIBLE in the spec name, that's just an easy way of selecting the element
+    });
+    it('should display an A tag around custom specs that are FILE specs', function(){
+        expect(element('#451_list_specgroup tbody tr td:contains("441725_Four51logo2008.eps.jpg") a').count()).toBe(1); //this should have a filename in it.
+        expect(element('#451_list_specgroup tbody tr td:contains("441725_Four51logo2008.eps.jpg") a[href]:contains("441725_Four51logo2008.eps.jpg")').count()).toBe(1); //this should have a file link in it.
+    });
+    e2eLogout(false)
 });
 
-//after 8/2/13 here are some new products to write test cases with (created 8/2 will not be copied to qaweb till monday
-// stat_prod_stat_specs_bc_autotest
-// stat_prod_stat_specs_env_autotest
-// stat_prod_stat_specs_pap_autotest
-// stat_prod_stat_specs_cont_autotest
-// stat_prod_stat_specs_unitset_autotest
-// stat_prod_stat_specs_pads_autotest
-// stat_prod_stat_specs_fastening_autotest
-// stat_prod_stat_specs_number_autotest
-// stat_prod_stat_specs_ink_autotest
-// stat_prod_stat_specs_marg_autotest
-// stat_prod_stat_specs_label_autotest
-// stat_prod_stat_specs_custom_autotest
-// stat_prod_stat_specs_variant_autotest
-    //stat_prod_stat_specs_variant_autotest_var1_all_override
-    //stat_prod_stat_specs_variant_autotest_var1_some_override
-    //stat_prod_stat_specs_variant_autotest_var1_no_override
 
-
-describe('Product View - Static With Variants "StaticProdWithVar"', function() {
-    e2eLogout(false)
-    e2eLoginProduct("coreproduser","fails345",false,"StaticProdWithVar");
+describe('Product View - Static With Variants "stat_prod_stat_specs_variant_autotest"', function() {
+    e2eLoginProduct("coreproduser","fails345",false,"stat_prod_stat_specs_variant_autotest");
 
     it('should have an image', function(){
         if(C_debug){pause();}
-        expect(element('#451_img_prod_lg').count()).toBe(1);
-    });
-    it('should have a description', function(){
-        expect(element('#451_area_prod_desc').count()).toBe(1);
-        //verify the product name and description?
-
+        expect(element('#451_img_prod_lg[src]').count()).toBe(1);
     });
     it('should have variants', function(){
-        expect(repeater('#451_list_vars').count()).toBeGreaterThan(0); //there should be at least one variant
+        expect(repeater('.451_list_vars tr').count()).toBe(4); //there should be 3 variants, including a header row
+            //test variant display...
+                //check link
+                //check description
+                //check order input box exists
+                //check add to order button exists
+
+        verifyVariantRow(1,"stat_prod_stat_specs_variant_autotest_var1_all_override","Variant 1\r\nstat_prod_stat_specs_variant_autotest_var1_all_override\r\n(Business Card Static Specs, All Override)");
+        verifyVariantRow(2,"stat_prod_stat_specs_variant_autotest_var1_no_override","Variant 3\r\nstat_prod_stat_specs_variant_autotest_var1_no_override\r\n(Business Card - No Specs Override)");
+        verifyVariantRow(3,"stat_prod_stat_specs_variant_autotest_var1_some_override","Variant 2\r\nstat_prod_stat_specs_variant_autotest_var1_some_override\r\n(Business Card Specs, Some Override)");
+        pause();
     });
-    it('should have spec groups', function(){
-        expect(repeater('#451_list_specgroup').count()).toBeGreaterThan(0); //there should be at least one spec group?
+    it('should have a static spec group', function(){
+        expect(element('tr.451_hdr_spec_grp:contains("Business Card") ~ tr').count()).toBe(9);
+            verifyStaticSpecRow("Business Card",0,"# of Inks","6");
+            verifyStaticSpecRow("Business Card",1,"# of Inks Back","1");
+            verifyStaticSpecRow("Business Card",2,"# of Inks Front","1");
+            verifyStaticSpecRow("Business Card",3,"Additional Comments","Product Comments");
+            verifyStaticSpecRow("Business Card",4,"Ink Colors","Inky Pinky Blinky Clyde Sue Snagglepuss");
+            verifyStaticSpecRow("Business Card",5,"Ink Colors on Back","Black");
+            verifyStaticSpecRow("Business Card",6,"Ink Colors on Front","Red");
+            verifyStaticSpecRow("Business Card",7,"Size","2 x 3-1/2");
+            verifyStaticSpecRow("Business Card",8,"Stock","Gold Leaf");
+
     });
     it('should allow us to click on a variant and display it', function(){
-        expect(repeater('#451_list_vars table tr').count()).toBeGreaterThan(1); //there should be at least one variant
-        element('#451_list_vars table tr:nth-child(2) td a').click(); //click the first variant
+        expect(repeater('.451_list_vars tr').count()).toBeGreaterThan(1); //there should be at least one variant
+        element('.451_list_vars tr:nth-child(2) td a').click(); //click the first variant
+
         if(C_debug){pause();}
     });
+    it('should display specs for the 1st variant (all override)', function(){
+        expect(repeater('.451_list_vars tr:hidden').count()).toBe(4); //there should be no variants displayed
+
+        expect(element('tr.451_hdr_spec_grp:contains("Business Card") ~ tr').count()).toBe(9);
+        verifyStaticSpecRow("Business Card",0,"# of Inks","2");
+        verifyStaticSpecRow("Business Card",1,"# of Inks Back","2");
+        verifyStaticSpecRow("Business Card",2,"# of Inks Front","2");
+        verifyStaticSpecRow("Business Card",3,"Additional Comments","Variant Comment");
+        verifyStaticSpecRow("Business Card",4,"Ink Colors","PacMan Mrs.PacMan");
+        verifyStaticSpecRow("Business Card",5,"Ink Colors on Back","Red Blue");
+        verifyStaticSpecRow("Business Card",6,"Ink Colors on Front","Yellow Green");
+        verifyStaticSpecRow("Business Card",7,"Size","2 x 3-1/2"); //strictly speaking this isn't overriding the original spec, but that's because there's only one possible value
+        verifyStaticSpecRow("Business Card",8,"Stock","Silver Leaf");
+
+        if(C_debug){pause();}
+        e2eViewProductFromInteropID("stat_prod_stat_specs_variant_autotest") //go back to our parent product preparing for the next variant
+
+    });
+    it('should display specs for the 3rd variant (no override)', function(){
+        expect(repeater('.451_list_vars tr:hidden').count()).toBe(4); //there should be no variants displayed
+
+        expect(element('tr.451_hdr_spec_grp:contains("Business Card") ~ tr').count()).toBe(9);
+        verifyStaticSpecRow("Business Card",0,"# of Inks","6");
+        verifyStaticSpecRow("Business Card",1,"# of Inks Back","1");
+        verifyStaticSpecRow("Business Card",2,"# of Inks Front","1");
+        verifyStaticSpecRow("Business Card",3,"Additional Comments","Product Comments");
+        verifyStaticSpecRow("Business Card",4,"Ink Colors","Inky Pinky Blinky Clyde Sue Snagglepuss");
+        verifyStaticSpecRow("Business Card",5,"Ink Colors on Back","Black");
+        verifyStaticSpecRow("Business Card",6,"Ink Colors on Front","Red");
+        verifyStaticSpecRow("Business Card",7,"Size","2 x 3-1/2");
+        verifyStaticSpecRow("Business Card",8,"Stock","Gold Leaf");
+
+        if(C_debug){pause();}
+        e2eViewProductFromInteropID("stat_prod_stat_specs_variant_autotest") //go back to our parent product preparing for the next variant
+
+    });
+    it('should display specs for the 2nd variant (some override)', function(){
+        expect(repeater('.451_list_vars tr:hidden').count()).toBe(4); //there should be no variants displayed
+
+        expect(element('tr.451_hdr_spec_grp:contains("Business Card") ~ tr').count()).toBe(9);
+        verifyStaticSpecRow("Business Card",0,"# of Inks","6");
+        verifyStaticSpecRow("Business Card",1,"# of Inks Back","1");
+        verifyStaticSpecRow("Business Card",2,"# of Inks Front","1");
+        verifyStaticSpecRow("Business Card",3,"Additional Comments","Variant 2 Comments");
+        verifyStaticSpecRow("Business Card",4,"Ink Colors","Inky Pinky Blinky Clyde Sue Snagglepuss");
+        verifyStaticSpecRow("Business Card",5,"Ink Colors on Back","Override Red");
+        verifyStaticSpecRow("Business Card",6,"Ink Colors on Front","Red");
+        verifyStaticSpecRow("Business Card",7,"Size","2 x 3-1/2");
+        verifyStaticSpecRow("Business Card",8,"Stock","Copper Leaf");
+
+        if(C_debug){pause();}
+        e2eViewProductFromInteropID("stat_prod_stat_specs_variant_autotest") //go back to our parent product preparing for the next variant
+
+    });
 });
+//TODO - test inventory
+//TODO - test Variant Level Inventory
+
 
 describe('Product View - Price Schedules 1 Display Tests "pstest1", nonrestricted quantity, no markups, input field', function(){
     it('should display product containing price 5 price breaks',function(){
