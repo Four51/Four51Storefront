@@ -137,3 +137,14 @@ function e2eChangeProdQty(blnRestrictedQty,intQty){
     }
 
 }
+
+function verifyStaticSpecRow(strGroup,intRow,strLabel,strValue){
+    expect(element('tr.451_hdr_spec_grp:contains("' + strGroup + '") ~ tr:eq(' + intRow + ') td:first').text()).toBe(strLabel);
+    expect(element('tr.451_hdr_spec_grp:contains("' + strGroup + '") ~ tr:eq(' + intRow + ') td:nth-child(2)').text()).toBe(strValue);
+}
+
+function verifyVariantRow(intRow,strLabel,strDescription){
+    expect(element('.451_list_vars tr:eq(' + intRow + ') td:first').text()).toBe(strLabel);
+    expect(element('.451_list_vars tr:eq(' + intRow + ') td:nth-child(2)').text()).toBe(strDescription);
+
+}
