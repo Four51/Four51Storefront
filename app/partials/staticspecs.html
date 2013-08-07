@@ -7,7 +7,8 @@
 			</tr>
 			<tr ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
 				<td>{{s.Name}}</td>
-				<td><a ng-show="s.FileURL" href={{s.FileURL}}>{{s.Value}}</a><span ng-show="!s.FileURL">{{s.Value}}</span></td>
+				<td ng-if="s.FileURL"><a href={{s.FileURL}}>{{s.Value}}</a></td>
+				<td ng-if="!s.FileURL">{{s.Value}}</td>
 			</tr>
 		</tbody>
 	</table>
