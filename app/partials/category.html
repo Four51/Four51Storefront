@@ -1,8 +1,8 @@
-<div class="visible-desktop" id="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image">
+<div class="visible-desktop 451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image">
     <h4 ui-toggle>{{currentCategory.Name}}</h4>
 </div>
 
-<div class="container-fluid category-product product-navigation" id="451_lbl_subcatlist" ng-show=currentCategory.SubCategories>
+<div class="container-fluid category-product product-navigation 451_lbl_subcatlist" ng-show=currentCategory.SubCategories>
     <nav class="nav">
         <ul>
             <li class="nav-header" ng-repeat="c in currentCategory.SubCategories">

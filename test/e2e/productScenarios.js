@@ -30,7 +30,7 @@
 //stat_prod_stat_specs_variant_autotest_var1_some_override !!!
 //stat_prod_stat_specs_variant_autotest_var1_no_override !!!
 
-var C_debug = false;
+var C_debug = true;
 
 ////////////////////////////////////////////////////
 
@@ -49,14 +49,14 @@ describe('Product List: ', function() {
 
         browser().navigateTo('#/catalog');
         //check existence of categories, datawise
-        expect(repeater('.nav-header').count()).toBeGreaterThan(0);
+        expect(repeater('.451_cat_item').count()).toBeGreaterThan(0);
 
         if(C_debug){pause();}
 
         e2eClickSideNavCategory(0);
 
         //now check that the displayed category matches the nav item we clicked
-        expect(binding('currentCategory.Name')).toEqualFuture(scope('.nav-header a', 'category.Name'));
+        expect(binding('currentCategory.Name')).toEqualFuture(scope('.451_cat_item a', 'category.Name'));
 
         if(C_debug){pause();}
 
@@ -65,6 +65,7 @@ describe('Product List: ', function() {
     });
 
     it('should let us click a product from a top level category and display it', function() {
+        if(C_debug){pause();}
 
         expect(repeater('#451_lst_prod').count()).toBeGreaterThan(0); //there should be at least one product
 
@@ -312,7 +313,8 @@ describe('Product View - Static With Variants "stat_prod_stat_specs_variant_auto
     });
     it('should allow us to click on a variant and display it', function(){
         expect(repeater('.451_list_vars tr').count()).toBeGreaterThan(1); //there should be at least one variant
-        element('.451_list_vars tr:nth-child(2) td a').click(); //click the first variant
+        e2eClickVariantFromProductList(1); //click the first variant
+        //element('.451_list_vars tr:nth-child(2) td a').click();
 
         if(C_debug){pause();}
     });

@@ -73,10 +73,10 @@ function e2eClickSideNavCategory(intCatLevel,strCatName){
     }
 
     if(strCatName != null){
-        strSelector = ".nav-header " + strNLevelsSelect + "a:contains('" + strCatName + "')"
+        strSelector = ".451_cat_item " + strNLevelsSelect + "a:contains('" + strCatName + "'):first"
     }
     else{//if strcatname isn't specified just pick the first at the nth level
-        strSelector = ".nav-header " + strNLevelsSelect + "a:first"
+        strSelector = ".451_cat_item " + strNLevelsSelect + "a:first"
     }
 
     element(strSelector).click();
@@ -85,10 +85,10 @@ function e2eClickMainNavCategory(intNthCat,strCatName){
     var strSelector = "";
 
     if(strCatName != null){
-        strSelector = "#451_lbl_subcatlist ul li a:contains('" + strCatName + "')"
+        strSelector = ".451_lbl_subcatlist ul li a:contains('" + strCatName + "'):first"
     }
     else{//if strcatname isn't specified just pick the first at the nth level
-        strSelector = "#451_lbl_subcatlist ul li:nth-child(" + intNthCat + ") a"
+        strSelector = ".451_lbl_subcatlist ul li:nth-child(" + intNthCat + ") a"
     }
 
     element(strSelector).click();
@@ -115,11 +115,11 @@ function e2eClickVariantFromProductList(intNthVariant,strVariantName){
     var strSelector = "";
 
     if(strVariantName != null){
-        strSelector = "#451_list_vars table tbody tr td a:contains('" + strVariantName + "')";
+        strSelector = ".451_list_vars tr td a:contains('" + strVariantName + "')";
 
     }
     else{//if strProdName isn't specified just pick the first at the nth level
-        strSelector = "#451_list_vars table tbody tr:nth-child(" + intNthVariant + ") td a"; //this may function incorrectly until the header <TR> is changed to <TH> or something else
+        strSelector = ".451_list_vars tr:nth-child(" + intNthVariant + ") td a"; //this may function incorrectly until the header <TR> is changed to <TH> or something else
     }
 
     element(strSelector).click();
