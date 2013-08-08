@@ -40,6 +40,8 @@ four51.app.factory('$451', function(Cache) {
 	function putCache(id,val,options) {
 		// probably going to need to test for object type. i'm not sure strings will stringify
 		var current = new Date();
+        if (options.persists && id == 'Addresses')
+            debugger;
 		options.persists ?
 			localStorage.setItem(id, JSON.stringify({ ttl: options.ttl ? addMillisecondsToDate(options.ttl).getTime() : null, data: val })) :
 			Cache.put(id,val);

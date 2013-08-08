@@ -3,7 +3,7 @@ four51.app.factory('AddressService', function($resource, $route, $api, $451){
 
     return {
         get: function(param) {
-            return $api.resource(service).options({ persists: true, key: 'Address.' + param.id}).get(param);
+            return $api.resource(service).options({ persists: true, key: 'Address.' + param.id}).get({ id: param });
         },
         save: function(address, callback) {
             $api.resource(service)
@@ -31,7 +31,6 @@ four51.app.factory('AddressListService', function($resource, $451, $api) {
 
     return {
         query: function() {
-            $451.clear('Addresses');
             return $api.resource(service).
                 options({ persists: true, key: 'Addresses'}).query();
         },
@@ -41,6 +40,7 @@ four51.app.factory('AddressListService', function($resource, $451, $api) {
                    $api.resource(service).delete(address);
                }
             });
+            $451.clear('Addresses');
             return this.query();
         }
     }
