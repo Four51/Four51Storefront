@@ -24,45 +24,42 @@
 /* ----------------------------------------------------------------------------------------------- */
 
 body {
-    background-color:#F9F9F9;
+    background-color: rgb(249, 249, 249); /* fallback */
+    background-color: rgba(249, 249, 249, 1);
 }
 
 hr {
     border: none;
     clear: both;
-    height: 1px;
+    height: 0.071em;
     margin: 0;
     padding: 0;
     background-color: transparent;
 }
 
 .sidebar-nav {
-    padding: 9px 0;
+    padding: 0.643em 0;
 }
 
 @media (max-width: 980px) {
     /* Enable use of floated navbar text */
     .navbar-text.pull-right {
         float: none;
-        padding-left: 5px;
-
-        padding-right: 5px;
+        padding-left: 0.357em;
+        padding-right: 0.357em;
     }
 }
 
-.user-name {
-    font-size: 12px !important;
-}
-
 .form-signin {
-    max-width: 300px;
-    padding: 19px 29px 29px;
-    margin: 0 auto 20px;
-    background-color: #fff;
-    border: 5px solid #e5e5e5;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    max-width: 21.429em;
+    padding: 1.357em 2.071em 2.071em;
+    margin: 0 auto 1.429em;
+    background-color: rgb(255, 255, 255); /* fallback */
+    background-color: rgba(255, 255, 255, 1);
+    border: 0.357em solid rgb(214, 214, 214);
+    -webkit-border-radius: 0.357em;
+    -moz-border-radius: 0.357em;
+    border-radius: 0.357em;
     -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
     box-shadow: 0 1px 2px rgba(0,0,0,.05);
@@ -70,20 +67,20 @@ hr {
 
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
-    margin-bottom: 10px;
+    margin-bottom: 0.714em;
 }
 
 .form-signin input[type="text"],
 .form-signin input[type="password"] {
-    font-size: 16px;
+    font-size: 1.143em;
     height: auto;
-    margin-bottom: 15px;
-    padding: 7px 9px;
+    margin-bottom: 1.071em;
+    padding: 0.500em 0.643em;
 }
 
 .menu {
   list-style: none;
-  border-bottom: 0.1em solid black;
+  border-bottom: 0.1em solid rgb(0, 0, 0);
   margin-bottom: 2em;
   padding: 0 0 0.5em;
 }
@@ -118,12 +115,12 @@ button::-moz-focus-inner {
 }
 
 .gridStyle {
-    border: 1px solid rgb(212,212,212);
+    border: 0.071em solid rgb(212,212,212);
     width: auto;
-    min-height: 200px;
+    min-height: 14.286em;
     clear: both;
     overflow: hidden;
-    margin-bottom: 15px;
+    margin-bottom: 1.071em;
 
 }
 
@@ -137,14 +134,16 @@ button::-moz-focus-inner {
 /* ----------------------------------------------------------------------------------------------- */
 
 .admin-navigation a.brand {
-    font-size: 13px;
-    color: rgb(22, 145, 190);
-    padding: 15px;
+    font-size: 0.929em;
+    color: rgb(22, 145, 190); /* fallback */
+    color: rgba(22, 145, 190, 1);
+    padding: 1.071em;
 }
 
 .admin-navigation a.brand:hover {
 
-    color: rgb(44, 168, 219);
+    color: rgb(44, 168, 219); /* fallback */
+    color: rgba(44, 168, 219, 1);
 }
 
 /* ----------------------------------------------------------------------------------------------- */
@@ -153,7 +152,8 @@ button::-moz-focus-inner {
 
 .header div.navbar-inner {
     background-image: none;
-    background-color:#fff;
+    background-color: rgb(255, 255, 255); /* fallback */
+    background-color: rgba(255, 255, 255, 1);
 }
 
 .header .navbar-inner {
@@ -163,7 +163,7 @@ button::-moz-focus-inner {
 
 .admin-navigation {
     background-color:#fff;
-    border-bottom: 1px solid #d6d6d6;
+    border-bottom: 0.071em solid rgb(214, 214, 214);
 }
 
 .admin-navigation .user-links ul {
@@ -194,30 +194,32 @@ button::-moz-focus-inner {
     color: rgb(242, 94, 70);
 }
 .navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
-    background-color:#fff;
+    background-color: rgb(255, 255, 255); /* fallback */
+    background-color: rgba(255, 255, 255, 1);
 }
 
 .user-links span {
-    margin: 0 8px;
+    margin: 0 0.571em;
 }
 
 .user-links .caret  {
-    margin: 0 0 0 8px;
+    margin: 0 0 0 0.571em;
 }
 
 .admin-navigation .nav > li > a {
-    padding: 15px;
+    padding: 1.071em;
 }
 
 .admin-navigation .nav > li  {
-    min-height: 50px;
+    min-height: 3.571em;
 }
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 4. CONTENT NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
 
-*, *:after, *:before {
+
+*, *:after, *:before { /* BOOM! */
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -235,7 +237,6 @@ button::-moz-focus-inner {
     list-style: none;
     font-size: 1em;
     font-weight: 300;
-
 }
 
 .content-navigation .nav ul li {
@@ -250,6 +251,7 @@ button::-moz-focus-inner {
 
 .content-navigation .nav a {
     display: block;
+    color: rgb(249, 249, 249); /* fallback */
     color: rgba(249, 249, 249, .9);
     text-decoration: none;
     -webkit-transition: color .5s, background .5s, height .5s;
@@ -260,7 +262,6 @@ button::-moz-focus-inner {
 }
 
 .content-navigation .nav i {
-    /* Make the font smoother for Chrome */
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -o-transform: translate3d(0, 0, 0);
@@ -272,12 +273,11 @@ button::-moz-focus-inner {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-/* Remove the blue Webkit background when element is tapped */
 .content-navigation a, .category-navigation button {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-/* Hover effect for the whole navigation to make the hovered item stand out */
+/* Hover effect for the whole navigation */
 .content-navigation .nav ul:hover a {
     color: rgba(249, 249, 249, .35);
 }
@@ -288,34 +288,43 @@ button::-moz-focus-inner {
 
 /* Adding some background color to the different menu items */
 .content-navigation .nav li:nth-child(8n+1) {
-    background: rgb(208, 101, 3);
+    background: rgb(208, 101, 3); /* fallback */
+    background: rgba(208, 101, 3, 1);
 }
 
 .content-navigation .nav li:nth-child(8n+2) {
-    background: rgb(233, 147, 26);
+    background: rgb(233, 147, 26); /* fallback */
+    background: rgba(233, 147, 26, 1);
 }
 
 .content-navigation .nav li:nth-child(8n+5) {
-    background: rgb(22, 145, 190);
+    background: rgb(22, 145, 190); /* fallback */
+    background: rgba(22, 145, 190, 1);
 }
 
 .content-navigation .nav li:nth-child(8n+6) {
-    background: rgb(22, 107, 162);
+    background: rgb(22, 107, 162); /* fallback */
+    background: rgba(22, 107, 162, 1);
 }
 
 .content-navigation .nav li:nth-child(8n+4) {
-    background: rgb(39, 174, 96)
+    background: rgb(39, 174, 96); /* fallback */
+    background: rgba(39, 174, 96, 1);
 }
 
 .content-navigation .nav li:nth-child(8n+7) {
-    background: rgb(226, 84, 61);
+    background: rgb(226, 84, 61); /* fallback */
+    background: rgba(226, 84, 61, 1);
 }
 
 .content-navigation .nav li:nth-child(8n+3) {
-    background: rgb(22, 160, 133);
+    background: rgb(22, 160, 133); /* fallback */
+    background: rgba(22, 160, 133, 1);
 }
 .content-navigation .nav li:nth-child(8n+8) {
-    background: rgb(192, 57, 43);
+    background: rgb(192, 57, 43); /* fallback */
+    background: rgba(192, 57, 43, 1);
+
 }
 
 /* ----------------------------------------------------------------------------------------------- */
@@ -324,9 +333,10 @@ button::-moz-focus-inner {
 
 .product-navigation li.nav-header {
     float: left;
-    font-size: 11px;
-    border: 1px solid #f9f9f9;
-    background-color:#d8eff5;
+    font-size: 0.786em;
+    border: 0.071em solid rgb(249, 249, 249);
+    background-color: rgb(216, 239, 245); /* fallback */
+    background-color: rgba(216, 239, 245, 1);
     text-align: center;
     line-height: normal;
     padding: 0;
@@ -338,12 +348,12 @@ button::-moz-focus-inner {
 
 .product-navigation .details-show i {
     display: block;
-    font-size: 22px;
+    font-size: 1.571em;
     cursor: pointer;
 }
 
 .product-navigation li.nav-header a {
-    padding: 10px;
+    padding: 0.714em;
 }
 
 .product-navigation li.nav-header ul li {
@@ -352,7 +362,7 @@ button::-moz-focus-inner {
 
 .product-navigation li.nav-header ul li > a {
     text-transform: capitalize;
-    padding: 3px 0;
+    padding: 0.214em 0;
     line-height: normal;
 }
 
@@ -386,7 +396,8 @@ button::-moz-focus-inner {
 
 .product-navigation .nav a {
     display: block;
-    color:#3A3A3A;
+    color: rgb(58, 58, 58); /* fallback */
+    color: rgba(58, 58, 58, 1);
     text-decoration: none;
     -webkit-transition: color .2s, background .5s, height .5s;
     -moz-transition: color .2s, background .5s, height .5s;
@@ -396,7 +407,6 @@ button::-moz-focus-inner {
 }
 
 .product-navigation .nav i {
-    /* Make the font smoother for Chrome */
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -o-transform: translate3d(0, 0, 0);
@@ -414,19 +424,20 @@ button::-moz-focus-inner {
 }
 
 .product-navigation .nav ul:hover li:hover {
-    background-color:#B1E0EC;
-
+    background-color: rgb(177, 224, 236); /* fallback */
+    background-color: rgba(177, 224, 236, 1);
 }
 
 .product-navigation .nav ul ul > li {
-    border: 1px solid transparent;
+    border: 0.071em solid transparent;
     padding: 0;
-    font-size: 12px;
+    font-size: 1.05em;
 }
 
 .product-navigation .nav ul ul:hover li:hover {
-    background-color:#D8EFF5;;
-    border: 1px solid transparent;
+    background-color: rgb(216, 239, 245); /* fallback */
+    background-color: rgba(216, 239, 245, 1);
+    border: 0.071em solid transparent;
 }
 
 .product-navigation .nav ul .product-nav-details li a:hover {
@@ -442,11 +453,15 @@ button::-moz-focus-inner {
 /* ----------------------------------------------------------------------------------------------- */
 
 .container-content {
-    margin-top: 20px;
+    margin-top: 1.429em;
 
 }
 
 .container-content .category-well {}
+
+
+
+
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 7. FOOTER  ***/
