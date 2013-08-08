@@ -82,34 +82,6 @@
         width: auto;
     }
 
-    .view-enter, .view-leave {
-        -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) .75s;
-        -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) .75s;
-        -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) .75s;
-        transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) .75s;
-    }
-
-    .view-enter {
-        opacity:0;
-        left:1000px;
-        width:100%;
-        position:absolute;
-    }
-    .view-enter.view-enter-active {
-        left:20px;
-        opacity:1;
-    }
-
-    .view-leave {
-        position:absolute;
-        left:20px;
-        width:100%;
-        opacity:1;
-    }
-    .view-leave.view-leave-active {
-        left:-1000px;
-        opacity:0;
-    }
 
     /* hover, focused and active effects */
     .content-navigation .nav li:nth-child(8n+1) a:hover,
@@ -374,34 +346,6 @@
     }
 
 
-    .view-enter, .view-leave {
-        -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
-        -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
-        -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
-        transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
-    }
-
-    .view-enter {
-        opacity:0;
-        left:1000px;
-        width:100%;
-        position:absolute;
-    }
-    .view-enter.view-enter-active {
-        left:20px;
-        opacity:1;
-    }
-
-    .view-leave {
-        position:absolute;
-        left:20px;
-        width:100%;
-        opacity:1;
-    }
-    .view-leave.view-leave-active {
-        left:-1000px;
-        opacity:0;
-    }
 
 }
 
@@ -553,33 +497,6 @@
         visibility: hidden;
     }
 
-    .view-enter, .view-leave {
-        -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
-        -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
-        -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
-        transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1s;
-    }
 
-    .view-enter {
-        opacity:0;
-        left:1000px;
-        width:100%;
-        position:absolute;
-    }
-    .view-enter.view-enter-active {
-        left:20px;
-        opacity:1;
-    }
-
-    .view-leave {
-        position:absolute;
-        left:20px;
-        width:100%;
-        opacity:1;
-    }
-    .view-leave.view-leave-active {
-        left:-1000px;
-        opacity:0;
-    }
 
 }
