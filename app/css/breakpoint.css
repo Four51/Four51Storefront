@@ -14,8 +14,7 @@
 @media (min-width: 50em) {
     /* ng-view animations - remove horizontal scroll bar that appears on desktop */
     body {
-        overflow-y: scroll;
-        overflow-x:hidden;
+
     }
 
 
