@@ -15,8 +15,8 @@
     /* ng-view animations - remove horizontal scroll bar that appears on desktop */
     body {
 
+        overflow-x:hidden;
     }
-
 
     #content {
         margin: 0;
@@ -64,11 +64,12 @@
     }
 
     .product-navigation .icon-caret-down {
-        /* min-height: 4.286em; */
-        padding-top: 0.714em;
+        /* min-height: 4.286em;
+        padding-top: 0.714em; */
         display: block;
         width: 100%;
         cursor: pointer;
+        font-size: 18px;
     }
 
     .content-navigation .nav li {

@@ -30,11 +30,11 @@
         <div ng-show="Four51User.isAuthenticated"  class="container-fluid" id="content"  ng-
              controller="SideNavCtrl">
             <div class="row-fluid">
-                <div class="animated bounce">
+                <div>
                     <ng-include src="'partials/sideNav.html'" />
                 </div>
                 <div class="container-content">
-                    <div ng-view data-ng-animate="{enter: 'view-enter', leave: 'view-leave'}" />
+                    <div class="container-view" ng-view data-ng-animate="{enter: 'view-enter', leave: 'view-leave'}" class="animated fadeIn"/>
                 </div>
             </div>
         </div>
