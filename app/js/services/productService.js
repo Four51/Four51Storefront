@@ -164,7 +164,16 @@ four51.app.factory('ProductDisplayService', function($451, VariantService){
 	}
 
 	function productViewName(p){
-		p.ViewName = 'default'//add logic to find correct view
+		p.ViewName = staticSpecSPAConfig(p, 'ViewName') || 'default';
+	}
+	function staticSpecSPAConfig(product, specName){
+		if(!product.StaticSpecGroups)
+			return null;
+		if(!product.StaticSpecGroups.SPAProductConfig)
+			return null;
+		if(!product.StaticSpecGroups.SPAProductConfig.Specs[specName])
+			return null;
+		return product.StaticSpecGroups.SPAProductConfig.Specs[specName].Value || escapeNull;
 	}
 
 	return{
@@ -180,6 +189,9 @@ four51.app.factory('ProductDisplayService', function($451, VariantService){
 		},
 		calculateLineTotal: function(lineItem){
 			return calcTotal(lineItem);
+		},
+		getStaticSpecSPAConfig: function(product, specName){
+			return staticSpecSPAConfig(product, specName);
 		}
 	}
 });
