@@ -12,20 +12,8 @@
 
 /* Desktop & tablet landscape - 100% width - 1024+ */
 @media (min-width: 50em) {
-    /* ng-view animations - remove scroll bar that appears on desktop */
-    body {
-       overflow: hidden;
-    }
 
-    .container-view {
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: -30px;
-        bottom: 0;
-        padding-right: 15px;
-        overflow-y: scroll;
-    }
+
 
     #content {
         margin: 0;
