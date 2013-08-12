@@ -149,6 +149,9 @@ four51.app.factory('ProductService', function($resource, $451, $api, VariantServ
 		//one view//ng-show="LineItem.Variant || LineItem.Product.Variants.length == 0"
 	}
 
+	function productViewName(p){
+		p.ViewName = 'default'//add logic to find correct view
+	}
     return {
 		setNewLineItemScope: function(scope){
 			newLineItemScope(scope);
@@ -169,7 +172,11 @@ four51.app.factory('ProductService', function($resource, $451, $api, VariantServ
 			return calcTotal(lineItem);
 		},
 		setProductViewScope: function(scope){
-			productViewScope(scope)
+			productViewScope(scope);
+			productViewName(scope.LineItem.Product);
+		},
+		setProductViewName: function(p){
+			productViewName(p);
 		}
     }
 });

@@ -1,5 +1,5 @@
 'use strict';
-four51.app.directive('productview', function($compile, $http, $templateCache){
+/*four51.app.directive('productview', function($compile, $http, $templateCache){
 	var obj = {
 		restrict: "E",
 		link: function(scope, element, attrs) {
@@ -16,7 +16,7 @@ four51.app.directive('productview', function($compile, $http, $templateCache){
 	};
 	return obj;
 });
-
+*/
 four51.app.directive('shortproductview', function(){
 	var obj = {
 		restrict: "E",
