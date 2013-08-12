@@ -46,7 +46,7 @@
 			<td>Order Quantity</td>
 		</tr>
 		<tr ng-repeat="v in LineItem.Product.Variants">
-			<td><a href=#/product/{{LineItem.Product.InteropID}}/{{v.InteropID}}>{{v.ExternalID}}</a></td>
+			<td><a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>{{v.ExternalID}}</a></td>
 			<td>{{v.Description}}</td>
 			<td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">{{v.QuantityAvailable}}</td>
 			<td>Order Quantity</td>

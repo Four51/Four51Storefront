@@ -5,7 +5,6 @@ four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Produc
 		$scope.LineItem = data.LineItems[$routeParams.lineItemIndex];
 		$scope.LineItem.Product = ProductService.get({interopID: $scope.LineItem.Product.InteropID}, function(data){
 			ProductService.setProductViewScope($scope);
-			$scope.setTemplate();
 		});
 		$scope.allowAddToOrder = true;
 	});
@@ -32,7 +31,6 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 		}
 		ProductService.setNewLineItemScope($scope);
 		ProductService.setProductViewScope($scope);
-		$scope.setTemplate();
 	});
 
 	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
