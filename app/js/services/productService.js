@@ -1,6 +1,31 @@
 'use strict';
 four51.app.factory('ProductService', function($resource, $451, $api, VariantService){
     var resource = $resource($451.api('Products/:interopID'), {interopID: '@ID'});
+	return {
+        get: function(param, successCall){
+            return $api.resource(resource)
+                .options({ persists: false, key: 'Product.' + param.interopID})
+                .get(param, successCall);
+        },
+        search: function(categoryInteropID, searchTerm, callback){
+            if(!categoryInteropID && !searchTerm)
+                return null;
+            return resource.query({'CategoryInteropID': categoryInteropID, 'SearchTerms': searchTerm ? searchTerm : ''}, callback);
+        }
+    }
+});
+
+four51.app.factory('VariantService', function($resource, $451, $api){
+	var resource = $resource($451.api('variant'));
+	return {
+		get: function(params, callback){
+			console.log('variant Search');
+			return resource.get(params, callback);
+		}
+	}
+});
+
+four51.app.factory('ProductDisplayService', function($451, VariantService){
 	function calcTotal(lineItem){
 
 		var ps = lineItem.PriceSchedule;
@@ -126,18 +151,7 @@ four51.app.factory('ProductService', function($resource, $451, $api, VariantServ
 			//moved to productViewScope scope.StaticSpecGroups = scope.LineItem.Variant.StaticSpecGroups || scope.LineItem.Product.StaticSpecGroups;
 		}else{
 			scope.LineItem.PriceSchedule = variantHasPriceSchedule(scope.LineItem.Product, 'StandardPriceSchedule') ? null : scope.LineItem.Product.StandardPriceSchedule; //don't show price schedule if variant overrides parent PS
-			//moved to productViewScope scope.StaticSpecGroups = scope.LineItem.Product.StaticSpecGroups;
 		}
-
-		//moved to productViewScope
-		/*scope.inventoryDisplay = function(product, variant){
-			if(product.IsVariantLevelInventory){
-				return variant ? variant.QuantityAvailable : null;
-			}else{
-				return product.QuantityAvailable;
-			}
-		}*/
-
 		scope.LineItem.Specs = [];
 		angular.forEach(scope.LineItem.Product.Specs, function(item){
 			if(item.CanSetForLineItem || item.DefinesVariant)
@@ -152,24 +166,10 @@ four51.app.factory('ProductService', function($resource, $451, $api, VariantServ
 	function productViewName(p){
 		p.ViewName = 'default'//add logic to find correct view
 	}
-    return {
+
+	return{
 		setNewLineItemScope: function(scope){
 			newLineItemScope(scope);
-		},
-        get: function(param, successCall){
-            return $api.resource(resource)
-                .options({ persists: false, key: 'Product.' + param.interopID})
-                .get(param, successCall);
-        },
-        search: function(categoryInteropID, searchTerm, callback){
-            if(!categoryInteropID && !searchTerm)
-                return null;
-
-            console.log('product query');
-            return resource.query({'CategoryInteropID': categoryInteropID, 'SearchTerms': searchTerm ? searchTerm : ''}, callback);
-        },
-		calculateLineTotal: function(lineItem){
-			return calcTotal(lineItem);
 		},
 		setProductViewScope: function(scope){
 			productViewScope(scope);
@@ -177,16 +177,9 @@ four51.app.factory('ProductService', function($resource, $451, $api, VariantServ
 		},
 		setProductViewName: function(p){
 			productViewName(p);
-		}
-    }
-});
-
-four51.app.factory('VariantService', function($resource, $451, $api){
-	var resource = $resource($451.api('variant'));
-	return {
-		get: function(params, callback){
-			console.log('variant Search');
-			return resource.get(params, callback);
+		},
+		calculateLineTotal: function(lineItem){
+			return calcTotal(lineItem);
 		}
 	}
 });
