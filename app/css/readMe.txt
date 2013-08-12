@@ -1,3 +1,13 @@
+0.  Bootstrap Strategy
+    No images - font icons
+    No Pixels - .em or %        -       base pixel size = 14px
+    No hex colors - RGBA values
+    No tables - grids
+    Animations
+    Scroll position
+    Gestures
+    Responsive breakpoints
+
 1.  Bootstrap CSS
     What's inside
 
