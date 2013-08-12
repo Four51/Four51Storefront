@@ -12,11 +12,7 @@
 
 /* Desktop & tablet landscape - 100% width - 1024+ */
 @media (min-width: 50em) {
-    /* ng-view animations - remove horizontal scroll bar that appears on desktop */
-    body {
-        overflow-y: scroll;
-        overflow-x:hidden;
-    }
+
 
 
     #content {
@@ -65,11 +61,12 @@
     }
 
     .product-navigation .icon-caret-down {
-        /* min-height: 4.286em; */
-        padding-top: 0.714em;
+        /* min-height: 4.286em;
+        padding-top: 0.714em; */
         display: block;
         width: 100%;
         cursor: pointer;
+        font-size: 18px;
     }
 
     .content-navigation .nav li {
