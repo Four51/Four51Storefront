@@ -16,27 +16,30 @@
     #content {
         margin: 0;
     }
-
     .content-navigation .nav ul {
         display: table;
         width: 100%;
         margin-top: 5.000em;
     }
-
+    .container-view {max-width: 1024px; margin: 0 auto;}
+    .header {min-height: 140px;}
     .header .content-navigation, .header .content-navigation.fadeIn {
         position: fixed;
-        left: 0;
-        right: 0;
+        margin-left: -512px;
+        max-width: 1024px;
         top: 0;
+        lefT: 50%;
+        right: 0;
         background-color: rgb(249, 249, 249); /* fallback */
         background-color: rgba(249, 249, 249, 1);
+        background-color:#ECF8FF;
         z-index: 1;
     }
-
+/*
     .product-navigation nav.nav {
         margin-top: 10.357em;
     }
-
+*/
     .category-product.product-navigation nav.nav {
         margin-top: 0;
     }
@@ -68,7 +71,7 @@
     }
 
     .content-navigation .nav li {
-        width: 33.3%; /* default is two buttons~ change to auto if more than two buttons or adjust percentage of width to scale for number of buttons */
+        width: 33.3%; /* default is three buttons~ change to auto if more than two buttons or adjust percentage of width to scale for number of buttons */
         display: table-cell;
         padding: 0;
         text-align: center;
@@ -221,6 +224,7 @@
 
     .header .content-navigation, .header .content-navigation.fadeIn {
         position: relative;
+        margin-left: 0;
         left: 0;
         right: 1.786em;
         top: auto;

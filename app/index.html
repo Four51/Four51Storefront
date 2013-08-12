@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/breakpoint.css"/>
 </head>
 
-<body ng-cloak>
+<body ng-cloak scroll-position="scroll" class="static" ng-class="{scroll: scroll > 2, static: scroll <= 2}">
     <div authorization ng-controller="Four51Ctrl" class="container-view">
         <div ng-hide="Four51User.isAuthenticated" style="position: relative;">
             <div id="login_box">
@@ -33,8 +33,8 @@
                 <div>
                     <ng-include src="'partials/sideNav.html'" />
                 </div>
-                <div class="container-content">
-                    <div ng-view data-ng-animate="{enter: 'view-enter', leave: 'view-leave'}"/>
+                <div class="container-content span9">
+                    <div ng-view ng-animate="{enter: 'view-enter', leave: 'view-leave'}"/>
                 </div>
             </div>
         </div>

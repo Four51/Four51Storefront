@@ -27,17 +27,22 @@ html {
     height: 100%;
     background-color: rgb(249, 249, 249); /* fallback */
     background-color: rgba(249, 249, 249, 1);
+    background-color:#ECF8FF;
 }
 
 body {
     background-color: rgb(249, 249, 249); /* fallback */
     background-color: rgba(249, 249, 249, 1);
-    overflow: hidden;  /* ng-view animation (1) - remove scroll bar that appears on desktop */
+    background-color:#ECF8FF;
+    /* overflow: hidden;  ng-view animation (1) - remove scroll bar that appears on desktop */
 }
 
+
 /* ng-view animation (2) */
-/* need to add scroll bar back in to maintain scrolling, but now lets move the view over */
-/* ----------------------------------------------------------------------------------------------- */
+/* need to add scroll bar back in to maintain scrolling, but now lets move the view over
+
+
+
 .container-view {
     position: absolute;
     left: 0;
@@ -47,7 +52,20 @@ body {
     padding-right: 15px;
     overflow-y: scroll;
 }
+/* ----------------------------------------------------------------------------------------------- */
 
+select, input, .uneditable-input {width: auto;} /* bootstrap uses a fixed width :( */
+
+
+.partial-view {
+    border: 1px solid #d6d6d6;
+    background-color:#fff;
+    margin: 0 0 20px;
+    padding: 10px;
+
+}
+
+.view-cap {height: 5px; background-color: #18ABD7;}
 hr {
     border: none;
     clear: both;
@@ -257,7 +275,7 @@ button::-moz-focus-inner {
 
 .content-navigation .nav ul li {
 
-    border: 5px solid #f9f9f9;
+    border: 2px solid #ECF8FF;
 }
 
 .content-navigation .nav li span {
@@ -349,18 +367,26 @@ button::-moz-focus-inner {
 /* ----------------------------------------------------------------------------------------------- */
 /*** 5. PRODUCT NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
-
+/* TODO check color */
 .product-navigation {  background-color: rgb(249, 249, 249); /* fallback */
-    background-color: rgba(249, 249, 249, 1);}
+    background-color: rgba(249, 249, 249, 1);
+
+background-color:#ECF8FF;}
 .product-navigation li.nav-header {
     float: left;
     font-size: 0.786em;
-    border: 0.071em solid rgb(249, 249, 249);
+    border: 0.1em solid rgb(249, 249, 249);
     background-color: rgb(216, 239, 245); /* fallback */
     background-color: rgba(216, 239, 245, 1);
+    background-color:#C4E9F4;
     text-align: center;
     line-height: normal;
     padding: 0;
+    -webkit-transition: color .5s, background .5s, height .5s;
+    -moz-transition: color .5s, background .5s, height .5s;
+    -o-transition: color .5s, background .5s, height .5s;
+    -ms-transition: color .5s, background .5s, height .5s;
+    transition: color .5s, background .5s, height .5s;
 }
 
 .product-navigation .details-show {
@@ -411,33 +437,23 @@ button::-moz-focus-inner {
     font-weight: 300;
 }
 
-.product-navigation .nav li span {
-    display: block;
-}
+
 
 .product-navigation .nav a {
     display: block;
     color: rgb(58, 58, 58); /* fallback */
     color: rgba(58, 58, 58, 1);
     text-decoration: none;
-    -webkit-transition: color .2s, background .5s, height .5s;
-    -moz-transition: color .2s, background .5s, height .5s;
-    -o-transition: color .2s, background .5s, height .5s;
-    -ms-transition: color .2s, background .5s, height .5s;
-    transition: color .2s, background .5s, height .5s;
+    /*
+    -webkit-transition: color .5s, background .5s, height .5s;
+    -moz-transition: color .5s, background .5s, height .5s;
+    -o-transition: color .5s, background .5s, height .5s;
+    -ms-transition: color .5s, background .5s, height .5s;
+    transition: color .5s, background .5s, height .5s;
+    */
 }
 
-.product-navigation .nav i {
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0);
-    -ms-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-}
 
-.product-navigation .nav a, .nav li {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
 
 /* Remove the blue Webkit background when element is tapped */
 .product-navigation a, .product-navigation button {
@@ -447,6 +463,7 @@ button::-moz-focus-inner {
 .product-navigation .nav ul:hover li:hover {
     background-color: rgb(177, 224, 236); /* fallback */
     background-color: rgba(177, 224, 236, 1);
+    background-color:#60C2E0;
 }
 
 .product-navigation .nav ul ul > li {
@@ -543,6 +560,7 @@ button::-moz-focus-inner {
     -moz-animation-name: view-enter;
     -o-animation-name: view-enter;
     animation-name: view-enter;
+
 }
 
 .view-enter.view-enter-active {
