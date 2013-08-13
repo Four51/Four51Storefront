@@ -61,6 +61,7 @@
 
     }
 
+
     .product-navigation .icon-caret-down {
         /* min-height: 4.286em;
         padding-top: 0.714em; */
@@ -205,14 +206,31 @@
         -ms-transition: box-shadow .4s ease-in-out;
         transition: box-shadow .4s ease-in-out;
     }
-
     .product-navigation li.nav-header {
-        width: 16.6%;
+        float: none;
+
+
+    }
+    .product-navigation li.nav-header a {
+
+
+
+    }
+
+    .category-product.product-navigation li.nav-header {
+       float: left;
     }
 }
 
 /* Size and font adjustments to make it fit into in-between screens 800-980 */
 @media (min-width: 50em) and (max-width: 61.250em) {
+    .product-navigation.span3{width: 100%;}
+    .product-navigation li.nav-header {
+        float: left;
+
+
+    }
+
     .nav ul {
         font-size: .90em;
 
@@ -357,6 +375,14 @@
 
 /* CSS specific to the 2x3 columns version */
 @media (min-width:32.5em) and (max-width: 49.938em) {
+    .product-navigation.span3{width: 100%;}
+    .product-navigation li.nav-header {
+        float: left;
+
+
+    }
+
+
     /* Creating the 2 column layout using floating elements once again */
     .content-navigation .nav li {
         display: block;

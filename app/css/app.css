@@ -57,7 +57,7 @@ body {
 select, input, .uneditable-input {width: auto;} /* bootstrap uses a fixed width :( */
 
 
-.partial-view {
+.view-partial{
     border: 1px solid #d6d6d6;
     background-color:#fff;
     margin: 0 0 20px;
