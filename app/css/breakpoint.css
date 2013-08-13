@@ -13,32 +13,33 @@
 /* Desktop & tablet landscape - 100% width - 1024+ */
 @media (min-width: 50em) {
 
-
-
     #content {
         margin: 0;
     }
-
     .content-navigation .nav ul {
         display: table;
         width: 100%;
         margin-top: 5.000em;
     }
-
+    .container-view {max-width: 1024px; margin: 0 auto;}
+    .header {min-height: 140px;}
     .header .content-navigation, .header .content-navigation.fadeIn {
         position: fixed;
-        left: 0;
-        right: 0;
+        margin-left: -512px;
+        max-width: 1024px;
         top: 0;
+        lefT: 50%;
+        right: 0;
         background-color: rgb(249, 249, 249); /* fallback */
         background-color: rgba(249, 249, 249, 1);
+        background-color:#ECF8FF;
         z-index: 1;
     }
-
+/*
     .product-navigation nav.nav {
         margin-top: 10.357em;
     }
-
+*/
     .category-product.product-navigation nav.nav {
         margin-top: 0;
     }
@@ -60,6 +61,7 @@
 
     }
 
+
     .product-navigation .icon-caret-down {
         /* min-height: 4.286em;
         padding-top: 0.714em; */
@@ -70,7 +72,7 @@
     }
 
     .content-navigation .nav li {
-        width: 33.3%; /* default is two buttons~ change to auto if more than two buttons or adjust percentage of width to scale for number of buttons */
+        width: 33.3%; /* default is three buttons~ change to auto if more than two buttons or adjust percentage of width to scale for number of buttons */
         display: table-cell;
         padding: 0;
         text-align: center;
@@ -204,14 +206,31 @@
         -ms-transition: box-shadow .4s ease-in-out;
         transition: box-shadow .4s ease-in-out;
     }
-
     .product-navigation li.nav-header {
-        width: 16.6%;
+        float: none;
+
+
+    }
+    .product-navigation li.nav-header a {
+
+
+
+    }
+
+    .category-product.product-navigation li.nav-header {
+       float: left;
     }
 }
 
 /* Size and font adjustments to make it fit into in-between screens 800-980 */
 @media (min-width: 50em) and (max-width: 61.250em) {
+    .product-navigation.span3{width: 100%;}
+    .product-navigation li.nav-header {
+        float: left;
+
+
+    }
+
     .nav ul {
         font-size: .90em;
 
@@ -223,6 +242,7 @@
 
     .header .content-navigation, .header .content-navigation.fadeIn {
         position: relative;
+        margin-left: 0;
         left: 0;
         right: 1.786em;
         top: auto;
@@ -355,6 +375,14 @@
 
 /* CSS specific to the 2x3 columns version */
 @media (min-width:32.5em) and (max-width: 49.938em) {
+    .product-navigation.span3{width: 100%;}
+    .product-navigation li.nav-header {
+        float: left;
+
+
+    }
+
+
     /* Creating the 2 column layout using floating elements once again */
     .content-navigation .nav li {
         display: block;
