@@ -108,7 +108,7 @@ four51.app.directive('staticspecstable', function(){
     return obj;
 })
 
-four51.app.directive('quantityfield', function($451, ProductService){
+four51.app.directive('quantityfield', function($451, ProductDisplayService){
 
 	var obj = {
         scope: {
@@ -126,7 +126,7 @@ four51.app.directive('quantityfield', function($451, ProductService){
 				return qtyText;
 			};
 			scope.qtyChanged = function(lineitem){
-				ProductService.calculateLineTotal(lineitem);
+				ProductDisplayService.calculateLineTotal(lineitem);
 			};
             scope.validQuantityAddToOrder = function(value, lineItem){
 
