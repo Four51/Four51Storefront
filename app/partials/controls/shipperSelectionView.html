@@ -1,6 +1,6 @@
 <div ng-if="user.ShipMethod.ShipperSelectionType == 'UserDropDown'">
     <div ng-repeat="shipper in Shippers">
-        <span>{{shipper.Name}} ~ {{shipper.ShippingRate.Price | currency}}</span>
+        <span>{{shipper.Name}}</span>
     </div>
 </div>
 <input ng-if="user.ShipMethod.AskForAccountNumber" placeholder="Shipping Account Number" type="text" ng-model="order.LineItems[0].ShipAccount" />
