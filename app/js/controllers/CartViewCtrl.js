@@ -1,7 +1,7 @@
 
 four51.app.controller('CartViewCtrl', function ($scope, $location, $451, OrderService, UserService, OrderConfigService) {
     $scope.user = UserService.get();
-    $scope.order = $scope.user.CurrentOrderID != null ? OrderService.get({ id: $scope.user.CurrentOrderID }) : null;
+    $scope.order = $scope.user.CurrentOrderID != null ? OrderService.get($scope.user.CurrentOrderID) : null;
 
     $scope.continueShopping = function() {
         $location.path('catalog');
