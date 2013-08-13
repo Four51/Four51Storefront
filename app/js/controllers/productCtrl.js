@@ -1,27 +1,25 @@
-four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, ProductService, OrderService, VariantService, $451, UserService) {
-	//TODO:pull live product data. line item doesn't come back with enough.
+four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, ProductService,ProductDisplayService, OrderService, VariantService, $451, UserService) {
 	$scope.LineItem = {};
 	var user = UserService.get();
 	OrderService.get(user.CurrentOrderID, function(data){
 		$scope.LineItem = data.LineItems[$routeParams.lineItemIndex];
 		$scope.LineItem.Product = ProductService.get({interopID: $scope.LineItem.Product.InteropID}, function(data){
-			ProductService.setProductViewScope($scope);
+			ProductDisplayService.setProductViewScope($scope);
 		});
 		$scope.allowAddToOrder = true;
 	});
 });
 
-four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, ProductService, OrderService, VariantService, $451) {
+four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, ProductService,ProductDisplayService, OrderService, VariantService, $451) {
 	$scope.LineItem = {};
 	$scope.LineItem.Product = $scope.p;
-	ProductService.setNewLineItemScope($scope);
-	ProductService.setProductViewScope($scope);
+	ProductDisplayService.setNewLineItemScope($scope);
+	ProductDisplayService.setProductViewScope($scope);
 	$scope.allowAddToOrderInProductList = $scope.allowAddToOrder && $scope.LineItem.Specs.length == 0 && $scope.LineItem.Product.Type != 'VariableText';
 });
 
-four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductService, OrderService, VariantService, $451) {
+four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductService,ProductDisplayService, OrderService, VariantService, $451) {
 	$scope.LineItem = {};
-
 	$scope.LineItem.Product = ProductService.get({interopID: $routeParams.productInteropID}, function(data){
         var v = null;
         if($routeParams.variantInteropID){
@@ -29,15 +27,14 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 			$scope.LineItem.Variant = data.Type == 'VariableText' ?
 				VariantService.get({VariantInteropID: $routeParams.variantInteropID, ProductInteropID: data.InteropID }) :
 				$451.filter(data.Variants, {Property: 'InteropID', Value: $routeParams.variantInteropID})[0];
+
 		}
-		ProductService.setNewLineItemScope($scope);
-		ProductService.setProductViewScope($scope);
+		ProductDisplayService.setNewLineItemScope($scope);
+		ProductDisplayService.setProductViewScope($scope);
 	});
 
 	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
 		OrderService.addToOrder(quantity, productInteropID, variantInteropID);
 	}
-
-
 });
 
