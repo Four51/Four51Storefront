@@ -1,4 +1,4 @@
-{{order.Shippers.length}}<div ng-if="user.ShipMethod.ShipperSelectionType == 'UserDropDown'">
+<div ng-if="user.ShipMethod.ShipperSelectionType == 'UserDropDown'">
     <div ng-repeat="shipper in Shippers">
         <span>{{shipper.Name}} ~ {{shipper.ShippingRate.Price | currency}}</span>
     </div>
