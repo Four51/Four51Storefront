@@ -1,0 +1,75 @@
+<div class="view-cap"></div>
+<div class="container-fluid view-partial">
+
+<img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url">
+
+<table id="451_area_prod_desc" border=1>
+	<tr><td>name:</td><td>{{LineItem.Product.Name}}</td></tr>
+	<tr><td>Description:</td><td><span ng-bind-html-unsafe="LineItem.Product.Description"/></td></tr>
+	<tr><td>ExternalID</td><td>{{LineItem.Product.ExternalID}}</td></tr>
+	<tr ng-show="LineItem.Variant.Description"><td>variant description:</td><td><span ng-bind-html-unsafe="LineItem.Variant.Description"/></td></tr>
+	<tr ng-show="LineItem.Variant.ExternalID"><td>variant id:</td><td>{{LineItem.Variant.ExternalID}}</td></tr>
+	<tr ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)"><td>available inventory</td><td>{{inventoryDisplay(LineItem.Product, LineItem.Variant) }}</td></tr>
+	</span>
+
+</table>
+<br>
+
+<form name="addToOrderForm" ng-show="allowAddToOrder">
+	<table id="451_list_vspec" border=1 ng-show="true">
+		<tr ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
+			<td>{{s.Name}}<span ng-show="s.Required" style="color:red"> *</span> </td>
+			<td>{{s.Prefix}}<vspecfield changed="specChanged" s="s"></vspecfield>{{s.Suffix}}</td>
+		</tr>
+	</table>
+	<br>
+	<quantityfield lineitem="LineItem" error="quantityError" /><span ng-show="quantityError">{{quantityError}}</span>
+	<br>
+	line total: {{LineItem.LineTotal | currency}}
+	<br>
+	<button id="451_btn_orderadd" ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(LineItem)">Add to Order</button>
+	<br>
+    <span ng-show="LineItem.PriceSchedule.MinQuantity > 1">
+        min: {{LineItem.PriceSchedule.MinQuantity}}<br/>
+    </span>
+    <span ng-show="LineItem.PriceSchedule.MaxQuantity">
+        max: {{LineItem.PriceSchedule.MaxQuantity}}<br/>
+    </span>
+</form>
+
+<priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product' />
+
+<span id="451_list_vars" ng-show="LineItem.Product.Variants.length > 1 && !LineItem.Variant"><b>Please select from the following:</b><br>
+    <table border=1>
+		<tr>
+			<td>Variant ID</td>
+			<td>Description</td>
+			<td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">Available Quantity</td>
+			<td>Order Quantity</td>
+		</tr>
+		<tr ng-repeat="v in LineItem.Product.Variants">
+			<td><a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>{{v.ExternalID}}</a></td>
+			<td>{{v.Description}}</td>
+			<td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">{{v.QuantityAvailable}}</td>
+			<td>Order Quantity</td>
+		</tr>
+	</table>
+</span>
+
+<staticspecstable specgroups="StaticSpecGroups"></staticspecstable><br>
+
+<span ng-show="LineItem.LineTotal">
+	<hr>
+	Line item total debug:
+	<br>
+	variant specs:
+	<ul>
+		<li ng-repeat="s in LineItem.Variant.Specs">{{s.Name}}: {{s.Value}}, markup: {{s.MarkupType}}</li>
+	</ul>
+	product specs:
+	<ul>
+		<li ng-repeat="s in LineItem.Product.Specs">{{s.Name}}: {{s.Value}}, markup: {{s.MarkupType}}</li>
+	</ul>
+</span>
+
+</div>
