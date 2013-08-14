@@ -25,12 +25,19 @@
 // stat_prod_stat_specs_marg_autotest
 // stat_prod_stat_specs_label_autotest
 // stat_prod_stat_specs_custom_autotest
-// stat_prod_stat_specs_variant_autotest !!! next test cases start here
-//stat_prod_stat_specs_variant_autotest_var1_all_override !!!
-//stat_prod_stat_specs_variant_autotest_var1_some_override !!!
-//stat_prod_stat_specs_variant_autotest_var1_no_override !!!
+// stat_prod_stat_specs_variant_autotest
+    //stat_prod_stat_specs_variant_autotest_var1_all_override
+    //stat_prod_stat_specs_variant_autotest_var1_some_override
+    //stat_prod_stat_specs_variant_autotest_var1_no_override
+//reqvarspecmarkup_vboss_test1
+    //vboss_variant_torgo_cooper
+    //vboss_variant_fergu_cooper
+    //vboss_variant_ander_cooper
+    //vboss_variant_torgo_jagger
+    //vboss_variant_fergu_jagger
 
-var C_debug = true;
+
+var C_debug = false;
 
 ////////////////////////////////////////////////////
 
@@ -288,15 +295,12 @@ describe('Product View - Static With Variants "stat_prod_stat_specs_variant_auto
     it('should have variants', function(){
         expect(repeater('.451_list_vars tr').count()).toBe(4); //there should be 3 variants, including a header row
             //test variant display...
-                //check link
-                //check description
                 //check order input box exists
                 //check add to order button exists
 
         verifyVariantRow(1,"stat_prod_stat_specs_variant_autotest_var1_all_override","Variant 1\r\nstat_prod_stat_specs_variant_autotest_var1_all_override\r\n(Business Card Static Specs, All Override)");
         verifyVariantRow(2,"stat_prod_stat_specs_variant_autotest_var1_no_override","Variant 3\r\nstat_prod_stat_specs_variant_autotest_var1_no_override\r\n(Business Card - No Specs Override)");
         verifyVariantRow(3,"stat_prod_stat_specs_variant_autotest_var1_some_override","Variant 2\r\nstat_prod_stat_specs_variant_autotest_var1_some_override\r\n(Business Card Specs, Some Override)");
-        pause();
     });
     it('should have a static spec group', function(){
         expect(element('tr.451_hdr_spec_grp:contains("Business Card") ~ tr').count()).toBe(9);
@@ -313,8 +317,23 @@ describe('Product View - Static With Variants "stat_prod_stat_specs_variant_auto
     });
     it('should allow us to click on a variant and display it', function(){
         expect(repeater('.451_list_vars tr').count()).toBeGreaterThan(1); //there should be at least one variant
-        e2eClickVariantFromProductList(1); //click the first variant
+        e2eClickVariantFromProductList(2); //click the first variant
         //element('.451_list_vars tr:nth-child(2) td a').click();
+
+        if(C_debug){pause();}
+    });
+    it('should display existing product description and pricing', function(){
+        expect(repeater('.451_list_vars tr:hidden').count()).toBe(4); //there should be no variants displayed (they're there, they are just hidden)
+
+
+
+
+
+
+
+
+
+        expect(element('tr.451_hdr_spec_grp:contains("Business Card") ~ tr').count()).toBe(9);
 
         if(C_debug){pause();}
     });
@@ -337,6 +356,7 @@ describe('Product View - Static With Variants "stat_prod_stat_specs_variant_auto
 
     });
     it('should display specs for the 3rd variant (no override)', function(){
+        e2eClickVariantFromProductList(3);
         expect(repeater('.451_list_vars tr:hidden').count()).toBe(4); //there should be no variants displayed
 
         expect(element('tr.451_hdr_spec_grp:contains("Business Card") ~ tr').count()).toBe(9);
@@ -355,6 +375,7 @@ describe('Product View - Static With Variants "stat_prod_stat_specs_variant_auto
 
     });
     it('should display specs for the 2nd variant (some override)', function(){
+        e2eClickVariantFromProductList(4);
         expect(repeater('.451_list_vars tr:hidden').count()).toBe(4); //there should be no variants displayed
 
         expect(element('tr.451_hdr_spec_grp:contains("Business Card") ~ tr').count()).toBe(9);
@@ -369,12 +390,14 @@ describe('Product View - Static With Variants "stat_prod_stat_specs_variant_auto
         verifyStaticSpecRow("Business Card",8,"Stock","Copper Leaf");
 
         if(C_debug){pause();}
-        e2eViewProductFromInteropID("stat_prod_stat_specs_variant_autotest") //go back to our parent product preparing for the next variant
+        e2eViewProductFromInteropID("stat_prod_stat_specs_variant_autotest") //go back to our parent product
 
     });
 });
 //TODO - test inventory
-//TODO - test Variant Level Inventory
+
+
+//TODO - test Variant Level Inventory //stat_prod_stat_specs_inventory_variant_autotest
 
 
 describe('Product View - Price Schedules 1 Display Tests "pstest1", nonrestricted quantity, no markups, input field', function(){
@@ -764,6 +787,9 @@ describe('Product View - Required Variable Specs With Markup 1 Display Tests "re
 //TODO - required/non static specs with / without markups
 
 //TODO- cumulative price breaks per price schedule (not per line item) - this probably belongs in order or checkout script
+
+//TODO - VBOSS product - reqvarspecmarkup_vboss_test1
+
 
 
 describe('testing e2eProduct nav functions', function(){
