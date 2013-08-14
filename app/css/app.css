@@ -62,6 +62,8 @@ select, input, .uneditable-input {width: auto;} /* bootstrap uses a fixed width 
     background-color:#fff;
     margin: 0 0 20px;
     padding: 10px;
+    clear: both;
+    overflow: hidden;
 
 }
 
@@ -388,6 +390,7 @@ background-color:#ECF8FF;}
     -ms-transition: color .5s, background .5s, height .5s;
     transition: color .5s, background .5s, height .5s;
 }
+
 
 .product-navigation .details-show {
     text-align: center;

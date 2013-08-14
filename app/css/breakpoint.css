@@ -206,6 +206,13 @@
         -ms-transition: box-shadow .4s ease-in-out;
         transition: box-shadow .4s ease-in-out;
     }
+    .product-navigation.product-navigation-top li.nav-header {
+        float: left;
+        width: 14.2%;
+
+
+    }
+
     .product-navigation li.nav-header {
         float: none;
 
