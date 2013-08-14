@@ -213,13 +213,13 @@ describe('Main content area category links', function() {
         //check existence of categories, datawise
         expect(repeater('.451_cat_item').count()).toBeGreaterThan(0);
         e2eClickSideNavCategory(0,"SubCatTest");
-        expect(repeater('.451_lbl_subcatlist nav ul li:first').count()).toBeGreaterThan(0); //has subcategory items
+        expect(repeater('.451_lbl_subcatlist ul li:first').count()).toBeGreaterThan(0); //has subcategory items
 
-        element('.451_lbl_subcatlist nav ul li:first a:first').query(function (selectedElements, done) {
+        element('.451_lbl_subcatlist ul li:first a:first').query(function (selectedElements, done) {
 
-            var strClickedSubCat = element('.451_lbl_subcatlist nav ul li:first a:first').text();
+            var strClickedSubCat = element('.451_lbl_subcatlist ul li:first a:first').text();
 
-            element('.451_lbl_subcatlist nav ul li:first a:first').click();       //clicks first category's subcategory nav link
+            element('.451_lbl_subcatlist ul li:first a:first').click();       //clicks first category's subcategory nav link
 
             expect(element('.451_lbl_curcat').text()).toContainFuture(binding('currentCategory.Name'));
             expect(strClickedSubCat).toContainFuture(binding('currentCategory.Name'));
@@ -239,13 +239,13 @@ describe('Main content area category links', function() {
 
         e2eClickSideNavCategory(0,"SubCatTest");
 
-        expect(repeater('.451_lbl_subcatlist nav ul li a').count()).toBeGreaterThan(0); //has subcategory items
+        expect(repeater('.451_lbl_subcatlist ul li a').count()).toBeGreaterThan(0); //has subcategory items
 
-        element('.451_lbl_subcatlist nav ul li a:first').query(function (selectedElements, done) {
+        element('.451_lbl_subcatlist ul li a:first').query(function (selectedElements, done) {
 
-            var strClickedSubCat = element('.451_lbl_subcatlist nav ul li a:first').text();
+            var strClickedSubCat = element('.451_lbl_subcatlist ul li a:first').text();
 
-            element('.451_lbl_subcatlist nav ul li a:first').click();       //clicks first category's subcategory nav link
+            element('.451_lbl_subcatlist ul li a:first').click();       //clicks first category's subcategory nav link
 
             expect(element('.451_lbl_curcat').text()).toContainFuture(binding('currentCategory.Name'));
             expect(strClickedSubCat).toContainFuture(binding('currentCategory.Name'));

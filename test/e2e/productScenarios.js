@@ -29,7 +29,8 @@
     //stat_prod_stat_specs_variant_autotest_var1_all_override
     //stat_prod_stat_specs_variant_autotest_var1_some_override
     //stat_prod_stat_specs_variant_autotest_var1_no_override
-//reqvarspecmarkup_vboss_test1
+
+//reqvarspecmarkup_vboss_test1 TODO-__start new tests at this product
     //vboss_variant_torgo_cooper
     //vboss_variant_fergu_cooper
     //vboss_variant_ander_cooper
@@ -282,6 +283,7 @@ describe('Product View - Static No Variants "stat_prod_stat_specs_ALL_autotest"'
         expect(element('#451_list_specgroup tbody tr td:contains("441725_Four51logo2008.eps.jpg") a[href]:contains("441725_Four51logo2008.eps.jpg")').count()).toBe(1); //this should have a file link in it.
     });
     e2eLogout(false)
+
 });
 
 
@@ -324,7 +326,7 @@ describe('Product View - Static With Variants "stat_prod_stat_specs_variant_auto
     });
     it('should display existing product description and pricing', function(){
         expect(repeater('.451_list_vars tr:hidden').count()).toBe(4); //there should be no variants displayed (they're there, they are just hidden)
-
+        //todo-rerun tests that check description and pricing, maybe turn those checks into functions
 
 
 

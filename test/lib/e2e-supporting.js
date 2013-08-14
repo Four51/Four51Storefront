@@ -108,7 +108,7 @@ function e2eClickProductFromList(intNthProd,strProdName){
     element(strSelector).click();
 }
 function e2eViewProductFromInteropID(strProdInteropID){
-    browser().navigateTo('../../app/index.html#/product/' + strProdInteropID);
+    browser().navigateTo('../../app/index.html#/product/default/' + strProdInteropID);
 }
 
 function e2eClickVariantFromProductList(intNthVariant,strVariantName){
