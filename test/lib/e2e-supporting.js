@@ -115,11 +115,11 @@ function e2eClickVariantFromProductList(intNthVariant,strVariantName){
     var strSelector = "";
 
     if(strVariantName != null){
-        strSelector = ".451_list_vars tr td a:contains('" + strVariantName + "')";
+        strSelector = ".451_list_vars tbody tr td a:contains('" + strVariantName + "'):first";
 
     }
     else{//if strProdName isn't specified just pick the first at the nth level
-        strSelector = ".451_list_vars tr:nth-child(" + intNthVariant + ") td a"; //this may function incorrectly until the header <TR> is changed to <TH> or something else
+        strSelector = ".451_list_vars tbody tr:nth-child(" + intNthVariant + ") td a"; //this may function incorrectly until the header <TR> is changed to <TH> or something else
     }
 
     element(strSelector).click();
