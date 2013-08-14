@@ -1,8 +1,6 @@
-<p class="shipper" ng-if="allowShipperInput()">
-    <input type="text" ng-if="user.ShipMethod.ShipperSelectionType == 'UserOpenField'" />
-    <div class="gridStyle" ng-grid="gridOptions"></div>
-</p>
-
-<p class="account" ng-if="user.ShipMethod.AskForAccountNumber">
-    <input placeholder="Shipping Account Number" type="text" ng-model="order.LineItems[0].ShipAccount" />
-</p>
+<div ng-if="user.ShipMethod.ShipperSelectionType == 'UserDropDown'">
+    <div ng-repeat="shipper in Shippers">
+        <span>{{shipper.Name}} ~ {{shipper.ShippingRate.Price | currency}}</span>
+    </div>
+</div>
+<input ng-if="user.ShipMethod.AskForAccountNumber" placeholder="Shipping Account Number" type="text" ng-model="order.LineItems[0].ShipAccount" />

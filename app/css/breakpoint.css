@@ -12,58 +12,67 @@
 
 /* Desktop & tablet landscape - 100% width - 1024+ */
 @media (min-width: 50em) {
+
     #content {
         margin: 0;
     }
-
     .content-navigation .nav ul {
         display: table;
         width: 100%;
-        margin-top: 70px;
-
+        margin-top: 5.000em;
     }
-
+    .container-view {max-width: 1024px; margin: 0 auto;}
+    .header {min-height: 140px;}
     .header .content-navigation, .header .content-navigation.fadeIn {
         position: fixed;
-        left: 0;
-        right: 0;
+        margin-left: -512px;
+        max-width: 1024px;
         top: 0;
-        background-color:#f9f9f9;
+        lefT: 50%;
+        right: 0;
+        background-color: rgb(249, 249, 249); /* fallback */
+        background-color: rgba(249, 249, 249, 1);
+        background-color:#ECF8FF;
         z-index: 1;
     }
-
+/*
     .product-navigation nav.nav {
-        margin-top: 145px;
+        margin-top: 10.357em;
     }
-
+*/
     .category-product.product-navigation nav.nav {
         margin-top: 0;
     }
 
     .product-navigation nav.nav ul li.nav-header a{
-        min-height: 60px;
-        padding: 10px;
+        min-height: 4.286em;
+        padding: 0.714em;
     }
 
     .product-navigation nav.nav ul li.nav-header ul.product-nav-details li a {
         min-height: 0;
-        padding-top: 5px;
+        padding-top: 0.357em;
     }
-    .product-navigation nav.nav ul li.nav-header ul ul.product-nav-details > li  {
-        padding-left: 10px;
+    .product-navigation nav.nav ul li.nav-header ul ul.product-nav-details > li {
+        padding-left: 0.714em;
     }
 
     .product-navigation nav.nav ul li.nav-header ul.product-nav-details {
 
     }
 
-    .product-navigation nav.nav ul  li.nav-header .icon-caret-down {
-        min-height: 60px;
-        padding-top: 10px;
+
+    .product-navigation .icon-caret-down {
+        /* min-height: 4.286em;
+        padding-top: 0.714em; */
+        display: block;
+        width: 100%;
+        cursor: pointer;
+        font-size: 18px;
     }
 
     .content-navigation .nav li {
-        width: 33.3%; /* default is two buttons~ change to auto if more than two buttons or adjust percentage of width to scale for number of buttons */
+        width: 33.3%; /* default is three buttons~ change to auto if more than two buttons or adjust percentage of width to scale for number of buttons */
         display: table-cell;
         padding: 0;
         text-align: center;
@@ -84,49 +93,57 @@
     .content-navigation .nav li:nth-child(8n+1) a:hover,
     .content-navigation .nav li:nth-child(8n+1) a:active,
     .content-navigation .nav li:nth-child(8n+1) a:focus {
-        background-color: rgb(174, 78, 1);
+        background-color: rgb(174, 78, 1); /* fallback */
+        background-color: rgba(174, 78, 1, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+2) a:hover,
     .content-navigation .nav li:nth-child(8n+2) a:active,
     .content-navigation .nav li:nth-child(8n+2) a:focus {
-        background-color:  rgb(191, 117, 20);
+        background-color:  rgb(191, 117, 20); /* fallback */
+        background-color:  rgba(191, 117, 20, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+5) a:hover,
     .content-navigation .nav li:nth-child(8n+5) a:active,
     .content-navigation .nav li:nth-child(8n+5) a:focus {
-        background-color: rgb(12, 110, 149);
+        background-color: rgb(12, 110, 149); /* fallback */
+        background-color: rgba(12, 110, 149, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+6) a:hover,
     .content-navigation .nav li:nth-child(8n+6) a:active,
     .content-navigation .nav li:nth-child(8n+6) a:focus {
-        background-color:  rgb(10, 75, 117);
+        background-color:  rgb(10, 75, 117); /* fallback */
+        background-color:  rgba(10, 75, 117, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+4) a:hover,
     .content-navigation .nav li:nth-child(8n+4) a:active,
     .content-navigation .nav li:nth-child(8n+4) a:focus {
-        background-color:  rgb(46, 204, 113);
+        background-color:  rgb(46, 204, 113); /* fallback */
+        background-color:  rgba(46, 204, 113, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+7) a:hover,
     .content-navigation .nav li:nth-child(8n+7) a:active,
     .content-navigation .nav li:nth-child(8n+7) a:focus {
-        background-color:  rgb(242, 94, 70);
+        background-color:  rgb(242, 94, 70); /* fallback */
+        background-color:  rgba(242, 94, 70);
     }
 
     .content-navigation .nav li:nth-child(8n+3) a:hover,
     .content-navigation .nav li:nth-child(8n+3) a:active,
     .content-navigation .nav li:nth-child(8n+3) a:focus {
-        background-color:  rgb(26, 188, 156);
+        background-color:  rgb(26, 188, 156); /* fallback */
+        background-color:  rgba(26, 188, 156, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+8) a:hover,
     .content-navigation .nav li:nth-child(8n+8) a:active,
     .content-navigation .nav li:nth-child(8n+8) a:focus {
-        background-color: rgb(171, 8, 9);
+        background-color: rgb(171, 8, 9); /* fallback */
+        background-color: rgba(171, 8, 9);
     }
 
     .content-navigation .icon {
@@ -165,8 +182,7 @@
         padding: 0.4em ;
         border-radius: 50%;
         font-size: 1.2em;
-        box-shadow: 0 0 0 30px transparent;
-        /* background: rgba(255,255,255,0.1); */
+        box-shadow: 0 0 0 2.143em transparent;
         -webkit-transform: translate3d(0, 0, 0);
         -moz-transform: translate3d(0, 0, 0);
         -o-transform: translate3d(0, 0, 0);
@@ -190,14 +206,31 @@
         -ms-transition: box-shadow .4s ease-in-out;
         transition: box-shadow .4s ease-in-out;
     }
-
     .product-navigation li.nav-header {
-        width: 16.6%;
+        float: none;
+
+
+    }
+    .product-navigation li.nav-header a {
+
+
+
+    }
+
+    .category-product.product-navigation li.nav-header {
+       float: left;
     }
 }
 
 /* Size and font adjustments to make it fit into in-between screens 800-980 */
 @media (min-width: 50em) and (max-width: 61.250em) {
+    .product-navigation.span3{width: 100%;}
+    .product-navigation li.nav-header {
+        float: left;
+
+
+    }
+
     .nav ul {
         font-size: .90em;
 
@@ -209,8 +242,9 @@
 
     .header .content-navigation, .header .content-navigation.fadeIn {
         position: relative;
+        margin-left: 0;
         left: 0;
-        right: 25px;
+        right: 1.786em;
         top: auto;
         background-color: transparent;
         z-index: auto;
@@ -249,7 +283,7 @@
     }
 
     .product-navigation li.nav-header a {
-        padding: 20px;
+        padding: 1.429em .05em;
     }
 }
 /* Tablet - portrait - 798 */
@@ -267,48 +301,56 @@
     .content-navigation .nav ul li:nth-child(8n+1) a:hover,
     .content-navigation .nav ul li:nth-child(8n+1) a:active,
     .content-navigation .nav ul li:nth-child(8n+1) a:focus {
-        background: rgb(227, 119, 20);
+        background: rgb(227, 119, 20); /* fallback */
+        background: rgba(227, 119, 20, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+2) a:hover,
     .content-navigation .nav li:nth-child(8n+2) a:active,
     .content-navigation .nav li:nth-child(8n+2) a:focus {
-        background: rgb(245, 160, 41);
+        background: rgb(245, 160, 41); /* fallback */
+        background: rgba(245, 160, 41, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+5) a:hover,
     .content-navigation .nav li:nth-child(8n+5) a:active,
     .content-navigation .nav li:nth-child(8n+5) a:focus {
-        background: rgb(44, 168, 219);
+        background: rgb(44, 168, 219); /* fallback */
+        background: rgba(44, 168, 219, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+6) a:hover,
     .content-navigation .nav li:nth-child(8n+6) a:active,
     .content-navigation .nav li:nth-child(8n+6) a:focus {
-        background: rgb(31, 120, 176);
+        background: rgb(31, 120, 176); /* fallback */
+        background: rgba(31, 120, 176, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+4) a:hover,
     .content-navigation .nav li:nth-child(8n+4) a:active,
     .content-navigation .nav li:nth-child(8n+4) a:focus {
-        background: rgb(46, 204, 113);
+        background: rgb(46, 204, 113); /* fallback */
+        background: rgba(46, 204, 113, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+7) a:hover,
     .content-navigation .nav li:nth-child(8n+7) a:active,
     .content-navigation .nav li:nth-child(8n+7) a:focus {
-        background: rgb(242, 94, 70);
+        background: rgb(242, 94, 70); /* fallback */
+        background: rgba(242, 94, 70, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+3) a:hover,
     .content-navigation .nav li:nth-child(8n+3) a:active,
     .content-navigation .nav li:nth-child(8n+3) a:focus {
-        background: rgb(26, 188, 156);
+        background: rgb(26, 188, 156); /* fallback */
+        background: rgba(26, 188, 156, 1);
     }
     .content-navigation .nav li:nth-child(8n+8) a:hover,
     .content-navigation .nav li:nth-child(8n+8) a:active,
     .content-navigation .nav li:nth-child(8n+8) a:focus {
-        background: rgb(171, 8, 9);
+        background: rgb(171, 8, 9); /* fallback */
+        background: rgba(171, 8, 9, 1);
     }
 
     .content-navigation .nav ul li {
@@ -324,13 +366,23 @@
     }
 
     .product-navigation li.nav-header a {
-        padding: 20px;
+        padding: 1.429em .05em;
     }
+
+
 
 }
 
 /* CSS specific to the 2x3 columns version */
 @media (min-width:32.5em) and (max-width: 49.938em) {
+    .product-navigation.span3{width: 100%;}
+    .product-navigation li.nav-header {
+        float: left;
+
+
+    }
+
+
     /* Creating the 2 column layout using floating elements once again */
     .content-navigation .nav li {
         display: block;
@@ -364,7 +416,7 @@
     .content-navigation .nav li i {
         display: inline-block;
         padding: 8% 10%;
-        border: 4px solid transparent;
+        border: 0.286em solid transparent;
         border-radius: 50%;
         font-size: 1.5em;
         background:transparent;
@@ -375,7 +427,7 @@
     }
 
     .product-navigation li.nav-header a {
-        padding: 20px;
+        padding: 1.429em .05em;
     }
 
 }
@@ -399,7 +451,7 @@
     }
 
     .product-navigation li.nav-header a {
-        padding: 20px;
+        padding: 1.429em .05em;
     }
 
     .admin-navigation .brand {
@@ -457,11 +509,11 @@
 
     .product-navigation li.nav-header {
         width: 100%;
-        min-height: 70px;
+        min-height: 5.000em;
     }
 
     .product-navigation li.nav-header a {
-        padding: 20px;
+        padding: 1.429em .05em;
 
     }
     .category-product.product-navigation li.nav-header {
@@ -476,5 +528,7 @@
     .admin-navigation .brand-name {
         visibility: hidden;
     }
+
+
 
 }

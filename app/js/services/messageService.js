@@ -4,7 +4,7 @@ four51.app.factory('MessageService', function($resource, $location, $451, $api) 
 	return {
 		get: function(param) {
 			return $api.resource(resource)
-				.options({persists: true, key: 'Message.' + param.id}).get(param);
+				.options({persists: true, key: 'Message.' + param.id}).get({ id: param });
 		},
 		delete: function(msg, callback) {
 			$api.resource(resource).delete(msg, function() {

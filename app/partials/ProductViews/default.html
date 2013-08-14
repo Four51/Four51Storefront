@@ -1,3 +1,6 @@
+<div class="view-cap"></div>
+<div class="container-fluid view-partial">
+
 <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url">
 
 <table id="451_area_prod_desc" border=1>
@@ -7,7 +10,7 @@
 	<tr ng-show="LineItem.Variant.Description"><td>variant description:</td><td><span ng-bind-html-unsafe="LineItem.Variant.Description"/></td></tr>
 	<tr ng-show="LineItem.Variant.ExternalID"><td>variant id:</td><td>{{LineItem.Variant.ExternalID}}</td></tr>
 	<tr ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)"><td>available inventory</td><td>{{inventoryDisplay(LineItem.Product, LineItem.Variant) }}</td></tr>
-</span>
+	</span>
 
 </table>
 <br>
@@ -45,7 +48,7 @@
 			<td>Order Quantity</td>
 		</tr>
 		<tr ng-repeat="v in LineItem.Product.Variants">
-			<td><a href=#/product/{{LineItem.Product.InteropID}}/{{v.InteropID}}>{{v.ExternalID}}</a></td>
+			<td><a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>{{v.ExternalID}}</a></td>
 			<td>{{v.Description}}</td>
 			<td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">{{v.QuantityAvailable}}</td>
 			<td>Order Quantity</td>
@@ -69,3 +72,4 @@
 	</ul>
 </span>
 
+</div>

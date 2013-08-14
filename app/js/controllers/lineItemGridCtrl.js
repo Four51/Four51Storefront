@@ -1,6 +1,6 @@
 'use strict';
 
-four51.app.controller('LineItemGridCtrl', function ($scope, OrderService, UserService) {
+four51.app.controller('LineItemGridCtrl', function ($scope, OrderService, UserService, ProductService) {
     var hasSpecs = false;
     $scope.copyAddressToAll = function(order) {
         angular.forEach(order.LineItems, function(n,i) {
@@ -28,7 +28,7 @@ four51.app.controller('LineItemGridCtrl', function ($scope, OrderService, UserSe
         data: 'order.LineItems',
         columnDefs: [
             { displayName: 'Remove', field: 'Selected', cellTemplate: 'partials\\controls\\ngGridCheckBox.html' },
-            { displayName: 'ID', cellTemplate: "<a href='#/cart/{{row.rowIndex}}'>{{row.getProperty('ProductIDText')}}</a>"},
+            { displayName: 'ID', cellTemplate: "<a href=\"#/cart/{{row.getProperty('Product.ViewName')}}/{{row.rowIndex}}\">{{row.getProperty('ProductIDText')}}</a>"},
             { displayName: 'Product', field: 'Product.Name'},
             { displayName: 'Specifications', field: 'Specs', cellTemplate: 'partials\\controls\\ngGridList.html'},
             { displayName: 'Unit Price', field: 'UnitPrice', cellFilter: 'currency' },
