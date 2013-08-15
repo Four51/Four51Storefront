@@ -2,7 +2,7 @@
 	Specifications:
 	<table border=1 id="451_list_specgroup">
 		<tbody ng-repeat="sg in specgroups">
-			<tr ng-show="hasvisiblechild(sg.Specs)" class=alert-info>
+			<tr ng-show="hasvisiblechild(sg.Specs)" class="alert-info 451_hdr_spec_grp">
 				<td colspan=2>{{sg.Name}}</td>
 			</tr>
 			<tr ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
