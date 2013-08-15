@@ -1,5 +1,4 @@
-<section class="partial-view">
-<form name="cart" class="view-partial">
+<form name="cart">
     <div ng-if="order" class="span3 well OrderDetailTable">
         <p ng-if="Four51User.permissions.contains('EditPOID')">
             <label>{{Four51User.current.Company.SiteText.OrderID || 'Order ID'}}:</label>
@@ -23,19 +22,19 @@
             </li>
         </ul>
     </div>
-
-    <div class="span3 well Shipping">
-        <addressselector user="user" model="order.ShipAddressID" required />
-        <shipperselection ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown' && order.Shippers.length > 0"
-                          user="user" order="order" />
+    <div class="span4 well Shipping" ng-if="order">
+        <addressselector user="user" model="order.ShipAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address">Add New Address</a>
+        <shipperselection user="user" order="order" />
+        <span>Shipping Costs: {{order.ShippingCost}}</span><br />
+        {{order.ShipAddressID}}
     </div>
 
-    <div class="span3 well Billing"></div>
+    <div class="span3 well Billing" ng-if="order"></div>
 
-    <div class="span10 btn-group">
+    <div class="span10 btn-group" ng-if="order">
         <button class="btn btn-small btn-action" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{Four51User.current.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
         <button class="btn btn-small btn-warning" ng-click="cancelOrder()">Cancel Order</button>
         <button class="btn btn-small btn-info" ng-click="continueShopping()">Continue Shopping</button>
     </div>
 </form>
-</section>
+

@@ -3,7 +3,7 @@ four51.app.factory('ShipperService', function($resource, $api, $451) {
 
     return {
         query: function() {
-            return $api.resource(service).options({ perists: false, key: 'Shippers' }).query();
+            return $api.resource(service).options({ persists: false, key: 'Shippers' }).query();
         }
     };
 });

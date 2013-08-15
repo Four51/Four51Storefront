@@ -1,7 +1,7 @@
 'use strict';
 
 four51.app.controller('LineItemViewCtrl', function ($scope, $routeParams, OrderService, ProductService) {
-    $scope.order = OrderService.get({ id: $routeParams.orderid }, function(data){
+    $scope.order = OrderService.get($routeParams.orderid, function(data){
 
 		$scope.LineItem = data.LineItems[$routeParams.lineitemindex];
 
