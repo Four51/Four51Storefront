@@ -21,7 +21,7 @@ four51.app.config(function($httpProvider) {
 				var auth = response.headers()['www-authenticate'];
 
 				if (auth)
-					$451.cache("Auth", auth, { persists:  $451.debug });
+					$451.cache("Auth", auth, { persists: true });//  $451.debug });
 
 				if ($451.debug && typeof response.data == 'object')
 					console.debug(response.data);
@@ -31,19 +31,20 @@ four51.app.config(function($httpProvider) {
 			'responseError': function(response) {
 				if (response.status === 401) { // unauthorized
 					$rootScope.$broadcast('event:auth-loginRequired');
-					return $q.defer();
+                    return $q.reject(response);
 				}
 
 				if (response.status == 403) {
 					$rootScope.$broadcast('event:auth-loginFailed', response.data.Message);
-					return $q.defer();
+                    return $q.reject(response);
 				}
 
 				if (response.status != 200) {
-					throw response;
+                    return $q.reject(response);
+					//throw response;
 				}
 
-				return response;
+				return $q.reject(response);
 			}
 		};
 	});

@@ -84,6 +84,8 @@ hr {
     }
 }
 
+#login_form {margin-top: 150px;}
+
 .form-signin {
     max-width: 21.429em;
     padding: 1.357em 2.071em 2.071em;
