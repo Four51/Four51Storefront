@@ -92,7 +92,7 @@ function e2eLoginProduct(strUsername, strPassword, blnDebug, strProductID){ //th
 
     it('should display the requested product once authorization is granted', function(){
 
-        browser().navigateTo('../../app/index.html#/product/' + strProductID);
+        browser().navigateTo('../../app/index.html#/product/default/' + strProductID);
 
         input("user.Username").enter(strUsername);
         input("user.Password").enter(strPassword);
@@ -104,5 +104,6 @@ function e2eLoginProduct(strUsername, strPassword, blnDebug, strProductID){ //th
         if(blnDebug){
             pause();
         }
+
     });
 }

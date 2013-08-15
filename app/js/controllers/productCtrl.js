@@ -1,7 +1,7 @@
 four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, ProductService,ProductDisplayService, OrderService, VariantService, $451, UserService) {
 	$scope.LineItem = {};
 	var user = UserService.get();
-	OrderService.get({ id: user.CurrentOrderID }, function(data){
+	OrderService.get(user.CurrentOrderID, function(data){
 		$scope.LineItem = data.LineItems[$routeParams.lineItemIndex];
 		$scope.LineItem.Product = ProductService.get({interopID: $scope.LineItem.Product.InteropID}, function(data){
 			ProductDisplayService.setProductViewScope($scope);

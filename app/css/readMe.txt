@@ -5,7 +5,7 @@
     No tables - grids
     Animations
     Scroll position
-    Gestures
+    Gestures - https://github.com/wzr1337/angular-gestures
     Responsive breakpoints
 
 1.  Bootstrap CSS

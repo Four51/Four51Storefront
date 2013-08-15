@@ -1,5 +1,5 @@
 four51.app.controller('MessageViewCtrl', function($scope, $location, $routeParams, MessageService) {
-	$scope.message = MessageService.get({ id: $routeParams.id });
+	$scope.message = MessageService.get($routeParams.id);
 	$scope.delete = function(event) {
 		event.preventDefault();
 		MessageService.delete($scope.message, function() {
