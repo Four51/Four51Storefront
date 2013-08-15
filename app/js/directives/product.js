@@ -1,22 +1,12 @@
 'use strict';
-/*four51.app.directive('productview', function($compile, $http, $templateCache){
+four51.app.directive('productSpecMatrix', function(){
 	var obj = {
 		restrict: "E",
-		link: function(scope, element, attrs) {
-			scope.setTemplate = function(){
-				var file = 'default.html'; // add logic to find custom partials
-				var loader = $http.get('partials/ProductViews/' + file, {cache: $templateCache});
-				var promise = loader.success(function(html) {
-					element.html(html);
-				}).then(function (response) {
-						element.replaceWith($compile(element.html())(scope));
-					});
-			}
-		}
+
 	};
 	return obj;
-});
-*/
+
+})
 four51.app.directive('shortproductview', function(){
 	var obj = {
 		restrict: "E",
