@@ -4,19 +4,19 @@
 
 <form name="cart">
 
-    <lineitemgrid ng-if="order" order='order' user='Four51User'></lineitemgrid>
+    <lineitemgrid ng-if="order" order='order' user='user'></lineitemgrid>
 
     <div ng-if="order" class="CartDetail">
-        <span ng-if="!Four51User.current.permissions.contains('HidePricing')">
+        <span ng-if="!user.Permissions.contains('HidePricing')">
             <p>Subtotal: {{order.Subtotal | currency}}</p>
-            <p ng-if="Four51User.current.Company.TaxMethod != 'NoTax'"><label>{{ Four51User.current.Company.SiteText.ShippingDisclaimer }}</label></p>
+            <p ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
         </span>
         <hr/>
         <span class="btn-group">
-            <button class="btn btn-small btn-action" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{Four51User.current.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
+            <button class="btn btn-small btn-action" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
             <button class="btn btn-small btn-warning" ng-click="cancelOrder()">Cancel Order</button>
             <button class="btn btn-small btn-info" ng-click="continueShopping()">Continue Shopping</button>
-            <button class="btn btn-small btn-success" ng-click="checkOut()" ng-disabled="cart.$invalid">{{Four51User.current.Company.SiteText.CheckOut || 'Check Out >' }}</button>
+            <button class="btn btn-small btn-success" ng-click="checkOut()" ng-disabled="cart.$invalid">{{user.Company.SiteText.CheckOut || 'Check Out >' }}</button>
        </span>
     </div>
 </form>

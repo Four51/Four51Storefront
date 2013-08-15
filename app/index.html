@@ -15,7 +15,7 @@
 
 <body ng-cloak scroll-position="scroll" class="static" ng-class="{scroll: scroll > 2, static: scroll <= 2}">
     <div authorization ng-controller="Four51Ctrl" class="container-view">
-        <div ng-hide="Four51User.isAuthenticated" style="position: relative;">
+        <div ng-hide="Four51User.isAuthenticated()" style="position: relative;">
             <div id="login_box">
                 <div ng-controller='LoginCtrl'>
                    <ng-include src="template.url" />
@@ -27,8 +27,7 @@
             <ng-include src="template.url" />
         </div>
 
-        <div ng-show="Four51User.isAuthenticated" class="container-fluid" id="content"  ng-
-             controller="SideNavCtrl">
+        <div ng-show="Four51User.isAuthenticated()" class="container-fluid" id="content"  ng-controller="SideNavCtrl">
             <div class="row-fluid">
                 <div>
                     <ng-include src="'partials/sideNav.html'" />
@@ -92,6 +91,7 @@
     <script src="js/controllers/checkOutViewCtrl.js"></script>
 
     <script src="js/services/apiService.js"></script>
+    <script src="js/services/securityService.js"></script>
     <script src="js/services/userService.js"></script>
     <script src="js/services/orderService.js"></script>
     <script src="js/services/orderConfigService.js"></script>

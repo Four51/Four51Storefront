@@ -25,7 +25,7 @@
                     <li class="logout visible-desktop"><a href="#" class="451_btn_logout" ng-click="Logout()"><i class="icon-off"></i></a></li>
                     <li class="divider-vertical" />
                 </ul>
-                <a class="brand" ng-show="Four51User.current" href="#/catalog" ng-click="refresh($event)"><i class="icon-cloud"></i> <span class="brand-name">{{'Welcome ' + Four51User.current.FirstName + " " + Four51User.current.LastName}}</span></a>
+                <a class="brand" ng-show="Four51User.isAuthenticated()" href="#/catalog" ng-click="refresh($event)"><i class="icon-cloud"></i> <span class="brand-name">{{'Welcome ' + user.FirstName + " " + user.LastName}}</span></a>
             </div>
             <ul class="nav nav-search">
                 <li class="divider-vertical" />
@@ -34,12 +34,12 @@
             </ul>
         </div>
     </div>
-    <div scroll-position="scroll" class="container-fluid content-navigation animated" ng-class="{fadeOutUpBig: scroll > 210, fadeIn: scroll <= 210}">
+    <div ng-show="Four51User.isAuthenticated()" scroll-position="scroll" class="container-fluid content-navigation animated" ng-class="{fadeOutUpBig: scroll > 210, fadeIn: scroll <= 210}">
         <nav class="nav">
             <ul>
                 <li class="favorites hidden-tablet hidden-phone"> <a href="#/favoriteorders"><span class="icon"><i class="icon-star"></i></span>Favorites</a></li>
-                <li ng-show="Four51User.current.CurrentOrderID" class="cart"><a href="#/cart"><span class="icon"><i class="icon-shopping-cart"></i></span>View Cart</a></li>
-                <li ng-show="Four51User.current.CurrentOrderID" class="checkout"><a href="#/checkout"><span class="icon"><i class="icon-dollar"></i></span>Checkout</a></li>
+                <li ng-show="user.CurrentOrderID && user.Permissions.contains('StandardOrder')" class="cart"><a href="#/cart"><span class="icon"><i class="icon-shopping-cart"></i></span>View Cart</a></li>
+                <li ng-show="user.CurrentOrderID" class="checkout"><a href="#/checkout"><span class="icon"><i class="icon-dollar"></i></span>Checkout</a></li>
             </ul>
         </nav>
     </div>
