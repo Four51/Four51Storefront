@@ -57,6 +57,18 @@ four51.app.directive('lineitemhistorygrid', function() {
     return obj;
 });
 
+four51.app.directive('panel', function () {
+    return {
+        restrict:'E',
+        transclude:true,
+        scope:{ title:'@title' },
+        template:'<li class="nav-header visible-desktop animated fadeIn">' +
+            '<a ng-href=#/catalog ng-transclude></a>' +
+            '</li>',
+        replace:true
+    };
+});
+
 // http://stackoverflow.com/questions/13549216/changing-css-on-scrolling-angular-style
 four51.app.directive('scrollPosition', function($window) {
     return function(scope, element, attrs) {

@@ -86,6 +86,7 @@ hr {
     }
 }
 
+
 .form-signin {
     max-width: 21.429em;
     padding: 1.357em 2.071em 2.071em;
@@ -493,8 +494,13 @@ background-color:#ECF8FF;}
 /*** 6. MAIN CONTENT ***/
 /* ----------------------------------------------------------------------------------------------- */
 
-.container-content {
+
+.container-content-side {
     margin-top: 1.429em;
+
+}
+.container-content-top {
+    margin-top: 1em;
 
 }
 

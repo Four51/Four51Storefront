@@ -212,6 +212,27 @@
 
 
     }
+    .product-navigation.product-navigation-top {
+      width: 100%;
+
+
+    }
+
+    .container-content-top {width: 100%;}
+
+    .product-navigation.product-navigation-top {
+        width: 100%;
+
+
+    }
+
+    .container-content-side {width: 700px; float: right; }
+
+    .product-navigation.product-navigation-side {
+        width: 23.0769%; float: left;
+
+
+    }
 
     .product-navigation li.nav-header {
         float: none;
