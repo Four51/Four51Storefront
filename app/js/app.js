@@ -1,5 +1,5 @@
 'use strict';
 
 var four51 = {};
-four51.app = angular.module('451order', ['ngResource', 'ngSanitize', 'ngCookies', 'ui.bootstrap', 'ui.date', 'ui.validate', 'ui.mask', 'ngGrid', 'angular-gestures']);
+four51.app = angular.module('451order', ['ngResource', 'ngSanitize', 'ngCookies', 'ui.bootstrap', 'ui.date', 'ui.validate', 'ui.mask', 'ngGrid', 'angular-gestures', 'ajoslin.promise-tracker']);
 

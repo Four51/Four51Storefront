@@ -13,18 +13,18 @@
     <link rel="stylesheet" href="css/breakpoint.css"/>
 </head>
 
-<body ng-cloak scroll-position="scroll" class="static" ng-class="{scroll: scroll > 2, static: scroll <= 2}">
+<body ng-cloak scroll-position="scroll" class="static ng-cloak" ng-class="{scroll: scroll > 2, static: scroll <= 2}">
     <div authorization ng-controller="Four51Ctrl" class="container-view">
         <div ng-hide="Four51User.isAuthenticated" style="position: relative;">
-            <div id="login_box">
+            <div id="login_box" class="animated bounceIn">
                 <div ng-controller='LoginCtrl'>
                    <ng-include src="template.url" />
                 </div>
             </div>
         </div>
 
-        <div class="navbar" ng-controller="NavCtrl">
-            <ng-include src="template.url" />
+        <div ng-show="Four51User.isAuthenticated"  class="navbar" ng-controller="NavCtrl" class="ng-cloak">
+       <ng-include src="template.url" />
         </div>
 
         <div ng-show="Four51User.isAuthenticated" class="container-fluid" id="content"  ng-
@@ -59,6 +59,7 @@
     <script src="lib/angular/ui-mask.js"></script>
     <script src="lib/angular/ng-grid.js"></script>
     <script src="lib/angular/gestures.js"></script>
+    <script src="lib/angular/promise-tracker.js"></script>
 
     <script src="js/app.js"></script>
     <script src="js/451.js"></script>

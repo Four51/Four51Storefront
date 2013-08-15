@@ -73,6 +73,7 @@ four51.app.directive('panel', function () {
 four51.app.directive('scrollPosition', function($window) {
     return function(scope, element, attrs) {
         var windowEl = angular.element($window);
+        console.debug(windowEl);
         windowEl.on('scroll', function() {
             scope.$apply(function() {
                 scope[attrs.scrollPosition] = windowEl.scrollTop();

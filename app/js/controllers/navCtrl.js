@@ -6,6 +6,11 @@ four51.app.controller('NavCtrl', function ($location, $scope, $451, UserService,
         UserService.logout();
 	    $location.path("/login");
     };
+    $scope.ninjaTracker = promiseTracker('ninjasWin');
+    var timeoutPromise = $timeout(function() {
+        alert('ninjas have arrived! uh oh!');
+    }, 2000);
+    $scope.ninjaTracker.addPromise(timeoutPromise);
 	$scope.template = { url: 'partials/nav.html'};
     $scope.refresh = function(e) {
         e.preventDefault();
