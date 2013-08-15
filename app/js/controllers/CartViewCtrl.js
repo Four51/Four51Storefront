@@ -1,5 +1,5 @@
 
-four51.app.controller('CartViewCtrl', function ($scope, $location, $451, OrderService, UserService, OrderConfigService, ProductDisplayService) {
+four51.app.controller('CartViewCtrl', function ($scope, $location, $451, OrderService, OrderConfigService, ProductDisplayService) {
 	$scope.order = $scope.user.CurrentOrderID != null ? OrderService.get($scope.user.CurrentOrderID, function(data){
 		angular.forEach(data.LineItems, function(item){
 			ProductDisplayService.setProductViewName(item.Product);
