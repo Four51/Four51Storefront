@@ -62,7 +62,7 @@ four51.app.directive('panel', function () {
         restrict:'E',
         transclude:true,
         scope:{ title:'@title' },
-        template:'<li class="nav-header visible-desktop animated fadeIn">' +
+        template:'<li class="nav-header animated fadeIn">' +
             '<a ng-href=#/catalog ng-transclude></a>' +
             '</li>',
         replace:true
