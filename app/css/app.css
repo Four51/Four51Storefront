@@ -40,6 +40,7 @@ body {
     background-color: rgb(249, 249, 249); /* fallback */
     background-color: rgba(249, 249, 249, 1);
     background-color:#ECF8FF;
+    font-family: 'Droid Sans', serif;
     /* overflow: hidden;  ng-view animation (1) - remove scroll bar that appears on desktop */
 }
 
@@ -92,12 +93,15 @@ hr {
     }
 }
 
-.order-cloud {width: 1000px; height: 1000px;background: url(images/orderCloud.jpg);}
+.order-cloud {    width:100%; height:100%; position:fixed; left:0;top:0;overflow:hidden;background: url(images/orderCloud.jpg);}
 .form-signin {
     max-width: 26em;
     padding: 1.357em 2.071em 2.071em;
-    margin: 2em auto;
-    background: rgba(22, 145, 190, .05);
+    margin: 5em auto;
+    background: rgba(22, 145, 190, .25);
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    border-radius: 1em;
 }
 
 .form-signin .form-signin-heading,
@@ -383,6 +387,7 @@ background-color:#ECF8FF;}
     text-align: center;
     line-height: normal;
     padding: 0;
+    text-transform: capitalize;
     -webkit-transition: color .5s, background .5s, height .5s;
     -moz-transition: color .5s, background .5s, height .5s;
     -o-transition: color .5s, background .5s, height .5s;
