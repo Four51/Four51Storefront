@@ -5,7 +5,7 @@
         <section class="view-partial">
 <form name="cart">
 
-    <lineitemgrid ng-if="order" order='order' user='user'></lineitemgrid>
+    <lineitemgrid ng-if="order"></lineitemgrid>
 
     <div ng-if="order" class="CartDetail">
         <span ng-if="!user.Permissions.contains('HidePricing')">

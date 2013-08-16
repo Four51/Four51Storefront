@@ -15,6 +15,6 @@ four51.app.controller('NavCtrl', function ($location, $scope, $451, UserService)
 
 });
 
-four51.app.controller('SideNavCtrl', function ($rootScope, $scope) {
-	//$scope.tree = CategoryService.tree();
+four51.app.controller('SideNavCtrl', function ($scope) {
+
 });
