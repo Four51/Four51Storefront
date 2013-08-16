@@ -3,14 +3,18 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $451, SecurityServ
     $scope.appname = $451.appname;
 	$scope.Four51User = SecurityService;
 
-	$scope.$on('event:auth-loginConfirmed', function() {
-		$scope.user = UserService.get();
-	});
 	$scope.$on('event:auth-loginRequired', function() {	});
+
+    $scope.$on('event:auth-loginConfirmed', function() {
+        $scope.user = UserService.get();
+        $scope.tree = CategoryService.tree();
+       // $scope.SpendingAccounts = SpendingAccountService.query();
+    });
 
 	$scope.$on("$routeChangeSuccess", function() {
 		$scope.tree = CategoryService.tree();
-        $scope.SpendingAccounts = SpendingAccountService.query();
+        //$scope.SpendingAccounts = SpendingAccountService.query();
+        $scope.user = UserService.get();
 	});
 });
 

@@ -1,6 +1,6 @@
 'use strict';
 
-four51.app.controller('NavCtrl', function ($location, $scope, $451, UserService, OrderService) {
+four51.app.controller('NavCtrl', function ($location, $scope, $451, UserService) {
     $scope.Logout = function(){
         UserService.logout();
         $location.path("/catalog");
@@ -13,10 +13,8 @@ four51.app.controller('NavCtrl', function ($location, $scope, $451, UserService,
         UserService.refresh();
     };
 
-    $scope.user = UserService.get();
 });
 
-four51.app.controller('SideNavCtrl', function ($rootScope, $scope, UserService) {
-	//$scope.tree = CategoryService.tree();
-    $scope.user = UserService.get();
+four51.app.controller('SideNavCtrl', function ($scope) {
+
 });
