@@ -8,10 +8,10 @@
         </ul>
     </nav>
 </div>
+
 <script type="text/ng-template" id="categoryTemplate.html">
     <a ng-href=#/catalog/{{category.InteropID}}>{{category.Name}}</a>
     <ul ng-if="category.SubCategories.length" class="product-nav-details" ng-class="{ 'hidden': ! showDetails }" >
         <li ng-repeat="category in category.SubCategories" ng-include="'categoryTemplate.html'"></li>
     </ul>
 </script>
-<spendingaccounts accounts="SpendingAccounts" style="display: none;" />

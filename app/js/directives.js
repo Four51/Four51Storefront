@@ -24,9 +24,6 @@ four51.app.directive('addressinput', function() {
 
 four51.app.directive('spendingaccounts', function() {
     var obj = {
-        scope: {
-            accounts: '='
-        },
         restrict: 'E',
         templateUrl: 'partials/controls/spendingAccountsView.html'
     }

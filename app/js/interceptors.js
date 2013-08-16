@@ -15,6 +15,7 @@ four51.app.config(function($httpProvider) {
 				// using status code 202 [Created] to represent the authentication token has been created. it fits the RFC spec and makes the authentication handling much more RESTy
 				if (response.status === 202) {
                     SecurityService.init(response.data, response.headers()["www-authenticate"]);
+                    $rootScope.$broadcast('event:auth-loginConfirmed', response.data);
 				}
 
 				if ($451.debug && typeof response.data == 'object')
