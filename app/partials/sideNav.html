@@ -1,15 +1,17 @@
 <div class="container-fluid product-navigation product-navigation-side">
     <nav class="nav 451_cat_nav">
-        <div class="nav-header hidden-desktop favorites" ng-show="Four51User.current.CurrentOrderID"> <a href="#/favoriteorders">Favorites</a></div>
+        <div class="nav-header hidden-desktop favorites" ng-show="user.CurrentOrderID"> <a href="#/favoriteorders">Favorites</a></div>
         <div class="visible-desktop details-show" ng-click="showDetails = ! showDetails" href="#"><a class="icon-caret-down"></a></div>
         <ul>
+            <li class="nav-header visible-desktop animated fadeIn"><a ng-href=#/catalog>All Products</a></li>
+            <li class="nav-header animated fadeIn 451_cat_item" ng-repeat="category in tree" ng-include="'categoryTemplate.html'"></li>
             <panel title="view all">All Products</panel>
             <li class="nav-header animated fadeIn" ng-repeat="category in tree" ng-include="'categoryTemplate.html'"></li>
         </ul>
     </nav>
 </div>
 <script type="text/ng-template" id="categoryTemplate.html">
-    <a ng-href=#/catalog/{{category.InteropID}} ng-class="getClass('/catalog/{{category.InteropID}}')">{{category.Name}}</a>
+    <a ng-href=#/catalog/{{category.InteropID}}>{{category.Name}}</a>
     <ul ng-if="category.SubCategories.length" class="product-nav-details" ng-class="{ 'hidden': ! showDetails }" >
         <li ng-repeat="category in category.SubCategories" ng-include="'categoryTemplate.html'"></li>
     </ul>

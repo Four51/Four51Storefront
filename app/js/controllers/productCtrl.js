@@ -31,6 +31,7 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 		}
 		ProductDisplayService.setNewLineItemScope($scope);
 		ProductDisplayService.setProductViewScope($scope);
+		$scope.$broadcast('ProductGetComplete');
 	});
 
 	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
@@ -38,3 +39,17 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 	}
 });
 
+four51.app.controller('CustomProductCtrlMatrix', function($scope,$451){
+
+	$scope.matrixLineTotal = 0;
+	$scope.addMatrixToOrder = function(){
+
+	};
+
+	$scope.$on('ProductGetComplete', function(){
+		var specs = $451.filter($scope.LineItem.Product.Specs, {Property: 'DefinesVariant', Value: true});
+		$scope.matrixSpec1 = specs[0];
+		$scope.matrixSpec2 = specs[1];
+	});
+
+});

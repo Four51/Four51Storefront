@@ -1,5 +1,4 @@
 four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $rootScope, $451, UserService, OrderService, AddressService, OrderConfigService) {
-    $scope.user = UserService.get();
     $scope.order = $scope.user.CurrentOrderID != null ? OrderService.get($scope.user.CurrentOrderID,
         function(o) {
             // I'm deciding to handle the auto assignment of certain properties here. It's essentially the load of the cart view page

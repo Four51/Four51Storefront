@@ -33,14 +33,13 @@ html {
     height: 100%;
     background-color: rgb(249, 249, 249); /* fallback */
     background-color: rgba(249, 249, 249, 1);
-    background-color:#ECF8FF; overflow-y: scroll;
+    background-color:#ECF8FF;
 }
 
 body {
     background-color: rgb(249, 249, 249); /* fallback */
     background-color: rgba(249, 249, 249, 1);
     background-color:#ECF8FF;
-
     /* overflow: hidden;  ng-view animation (1) - remove scroll bar that appears on desktop */
 }
 
@@ -63,7 +62,7 @@ body {
 
 select, input, .uneditable-input {width: auto;} /* bootstrap uses a fixed width :( */
 
-#login_form {margin-top: 300px;}
+
 .view-partial{
     border: 1px solid #d6d6d6;
     background-color:#fff;
@@ -92,7 +91,6 @@ hr {
         padding-right: 0.357em;
     }
 }
-
 
 .form-signin {
     max-width: 21.429em;
@@ -398,7 +396,6 @@ background-color:#ECF8FF;}
     -ms-transition: color .5s, background .5s, height .5s;
     transition: color .5s, background .5s, height .5s;
 }
-
 
 .product-navigation .details-show {
     text-align: center;
