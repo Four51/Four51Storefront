@@ -1,9 +1,10 @@
 <div id="login_form">
     <form class="form-signin" ng-submit="login()" name="LoginForm">
-        <h2 class="form-signin-heading"><i class="icon-user"></i> Please sign in</h2>
+        <h2 class="form-signin-heading animated fadeIn" style="text-align: center;"><i class="icon-cloud"></i><br />Order Cloud</h2>
+
         <p class="alert-error">{{errorMessage}}</p>
-        <input class="input-block-level" type="text" ng-model="user.Username" placeholder="Username" />
-        <input class="input-block-level" type="password" ng-model="user.Password" placeholder="Password" />
-        <input class="btn btn-large btn-primary btn-block" id="451_btn_login" type="submit" value="Login" />
+        <input class="animated bounceIn input-block-level" type="text" ng-model="user.Username" placeholder="Username" />
+        <input class="animated bounceIn input-block-level" type="password" ng-model="user.Password" placeholder="Password" />
+        <input class="animated bounceIn btn btn-large btn-primary btn-block" id="451_btn_login" type="submit" value="Login" />
     </form>
 </div>
