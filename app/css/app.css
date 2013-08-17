@@ -34,13 +34,22 @@ html {
     background-color: rgb(249, 249, 249); /* fallback */
     background-color: rgba(249, 249, 249, 1);
     background-color:#ECF8FF;
+    background-color:#9FC9E1;
 }
 
 body {
     background-color: rgb(249, 249, 249); /* fallback */
     background-color: rgba(249, 249, 249, 1);
     background-color:#ECF8FF;
-    font-family: 'Droid Sans', serif;
+    background-color:#9FC9E1;
+    font-family: 'Droid Sans', sans-serif;
+    font-smooth:always;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    -webkit-text-stroke: 1px transparent;
+    margin: 0;
+    padding: 0;
+
     /* overflow: hidden;  ng-view animation (1) - remove scroll bar that appears on desktop */
 }
 
@@ -62,19 +71,22 @@ body {
 /* ----------------------------------------------------------------------------------------------- */
 
 select, input, .uneditable-input {width: auto;} /* bootstrap uses a fixed width :( */
-
-
+.navbar-fixed-top {
+    margin-bottom: 0
+}
+.navbar-inner {box-shadow: none;}
+.container-fluid {padding-left: 0; padding-right: 0;}
 .view-partial{
-    border: 1px solid #d6d6d6;
-    background-color:#fff;
+background-color:#ECF8FF;
+
     margin: 0 0 20px;
-    padding: 10px;
+padding: 10px;
     clear: both;
     overflow: hidden;
 
 }
 
-.view-cap {height: 5px; background-color: #18ABD7;}
+.view-cap {height: 5px; background-color: #5496BB;}
 hr {
     border: none;
     clear: both;
@@ -97,12 +109,20 @@ hr {
 .form-signin {
     max-width: 26em;
     padding: 1.357em 2.071em 2.071em;
-    margin: 5em auto;
-    background: rgba(22, 145, 190, .25);
+    margin: 10% auto 5em;
+    background: rgba(22, 145, 190, .15);
     -webkit-border-radius: 1em;
     -moz-border-radius: 1em;
     border-radius: 1em;
 }
+
+input::-webkit-input-placeholder { color:#EB866A; }
+input::-moz-placeholder { color:#EB866A; opacity: 1; }
+input:-ms-input-placeholder { color:#EB866A;opacity: 1; }
+input:-moz-placeholder { color:#EB866A; }
+
+/* iOS placeholder needs help to disappear on focus */
+:focus::-webkit-input-placeholder{color:transparent;}
 
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
@@ -117,6 +137,55 @@ hr {
     padding: 0.500em 0.643em;
 }
 
+.form-signin .btn-primary  {
+    background: rgb(208, 101, 3); /* fallback */
+    background: rgba(208, 101, 3, 1);
+    letter-spacing: .04em;
+    padding: 15px;
+    border-radius: 3px 3px 3px 3px;
+    text-shadow: 0 -1px 0 #666;
+    box-shadow: 0 1px 0 #666, 0 4px 0 #444, 0 3px 3px rgba(0,0,0,0.6);
+    border: none;
+    -webkit-transition: all 150ms ease;
+    transition: all 150ms ease;
+
+}
+
+@-webkit-keyframes pulsate
+{
+    0%   { color: #ddd; text-shadow: 0 -1px 0 #000; }
+    50%  { color: #fff; text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff; }
+    100% { color: #ddd; text-shadow: 0 -1px 0 #000; }
+}
+
+@keyframes pulsate
+{
+    0%   { color: #ddd; text-shadow: 0 -1px 0 #000; }
+    50%  { color: #fff; text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff; }
+    100% { color: #ddd; text-shadow: 0 -1px 0 #000; }
+}
+
+.form-signin .btn-primary:hover {
+    -webkit-animation: pulsate 1.2s linear infinite;
+    animation: pulsate 1.2s linear infinite;
+    background-color: rgb(174, 78, 1); /* fallback */
+    background-color: rgba(174, 78, 1, 1);
+}
+
+.form-signin .btn-primary:active
+{
+    color: #fff;
+    text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff;
+    box-shadow: 0 1px 0 #666, 0 2px 0 #444, 0 2px 2px rgba(0,0,0,0.9);
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
+    -webkit-animation: none;
+    animation: none;
+    outline: none;
+
+}
+
+.form-signin .btn-primary:focus {outline: none;}
 .menu {
   list-style: none;
   border-bottom: 0.1em solid rgb(0, 0, 0);
@@ -173,10 +242,13 @@ button::-moz-focus-inner {
 /* ----------------------------------------------------------------------------------------------- */
 
 .admin-navigation a.brand {
-    font-size: 0.929em;
+    font-size: 16px;
     color: rgb(22, 145, 190); /* fallback */
-    color: rgba(22, 145, 190, 1);
+    color: #fff;
     padding: 1.071em;
+    text-shadow: none;
+    margin-left: 10px;
+
 }
 
 .admin-navigation a.brand:hover {
@@ -189,6 +261,7 @@ button::-moz-focus-inner {
 /*** 3. ADMIN NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
 
+.admin-navigation .divider-vertical {border-color:#87bcda;}
 .header div.navbar-inner {
     background-image: none;
     background-color: rgb(255, 255, 255); /* fallback */
@@ -201,8 +274,8 @@ button::-moz-focus-inner {
 }
 
 .admin-navigation {
-    background-color:#fff;
-    border-bottom: 0.071em solid rgb(214, 214, 214);
+    background-color:#73B2D7;
+
 }
 
 .admin-navigation .user-links ul {
@@ -218,7 +291,8 @@ button::-moz-focus-inner {
 }
 
 .admin-navigation li a span, .admin-navigation li a i {
-    color:rgb(22, 145, 190);
+    color:#fff; text-shadow: none;
+    font-size: 16px;
 }
 
 .admin-navigation li a:hover span, .admin-navigation li a:hover i {
@@ -274,14 +348,23 @@ button::-moz-focus-inner {
     margin: 0;
     padding: 0;
     list-style: none;
-    font-size: 1em;
-    font-weight: 300;
+
 }
 
 .content-navigation .nav ul li {
 
-    border: 2px solid #ECF8FF;
+
 }
+.content-navigation .nav ul li:last-child {
+
+
+}
+.content-navigation .nav a {
+    min-height: 5.6em;
+    font-size: 1em;
+    font-weight: 300;
+}
+
 
 .content-navigation .nav li span {
     display: block;
@@ -292,9 +375,10 @@ button::-moz-focus-inner {
     color: rgb(249, 249, 249); /* fallback */
     color: rgba(249, 249, 249, .9);
     text-decoration: none;
-    -moz-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
+
+   /* -moz-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
     -webkit-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
-    box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16); */
     -webkit-transition: color .5s, background .5s, height .5s;
     -moz-transition: color .5s, background .5s, height .5s;
     -o-transition: color .5s, background .5s, height .5s;
@@ -373,21 +457,25 @@ button::-moz-focus-inner {
 /*** 5. PRODUCT NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
 /* TODO check color */
+
+
 .product-navigation {  background-color: rgb(249, 249, 249); /* fallback */
     background-color: rgba(249, 249, 249, 1);
 
-background-color:#ECF8FF;}
+background-color:#9FC9E1;}
 .product-navigation li.nav-header {
     float: left;
-    font-size: 0.786em;
-    border: 0.1em solid rgb(249, 249, 249);
+    font-size: 1em;
+    border: 0.05em solid #9FC9E1;
     background-color: rgb(216, 239, 245); /* fallback */
     background-color: rgba(216, 239, 245, 1);
-    background-color:#C4E9F4;
+    background-color:#73B2D7;
     text-align: center;
     line-height: normal;
     padding: 0;
     text-transform: capitalize;
+    text-shadow: none;
+    font-weight: normal;
     -webkit-transition: color .5s, background .5s, height .5s;
     -moz-transition: color .5s, background .5s, height .5s;
     -o-transition: color .5s, background .5s, height .5s;
@@ -449,6 +537,8 @@ background-color:#ECF8FF;}
     display: block;
     color: rgb(58, 58, 58); /* fallback */
     color: rgba(58, 58, 58, 1);
+    color:#fff;
+
     text-decoration: none;
     /*
     -webkit-transition: color .5s, background .5s, height .5s;
@@ -466,10 +556,14 @@ background-color:#ECF8FF;}
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+
+
+
+
 .product-navigation .nav ul:hover li:hover {
     background-color: rgb(177, 224, 236); /* fallback */
     background-color: rgba(177, 224, 236, 1);
-    background-color:#60C2E0;
+    background-color:#4588AE;
 }
 
 .product-navigation .nav ul ul > li {
@@ -481,6 +575,7 @@ background-color:#ECF8FF;}
 .product-navigation .nav ul ul:hover li:hover {
     background-color: rgb(216, 239, 245); /* fallback */
     background-color: rgba(216, 239, 245, 1);
+    background-color:#1E648C;
     border: 0.071em solid transparent;
 }
 
@@ -491,18 +586,27 @@ background-color:#ECF8FF;}
 .category-product.product-navigation  li.nav-header {
     width: 33.3%
 }
+.category-product.product-navigation .nav ul li.nav-header {background-color:#4588AE; }
+.category-product.product-navigation .nav ul li.nav-header:hover {background-color:#1E648C;}
+.category-product.product-navigation nav.nav ul li.nav-header a img{
+  margin-top: -20px;
+}
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 6. MAIN CONTENT ***/
 /* ----------------------------------------------------------------------------------------------- */
 
+li.active a, li.active a:hover {background-color:#1E648C !important;}
+.container-view {clear: both; overflow: hidden;}
 
 .container-content-side {
     margin-top: 1.429em;
 
+
 }
 .container-content-top {
     margin-top: 1em;
+
 
 }
 

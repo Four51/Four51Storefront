@@ -12,7 +12,7 @@
 
 /* Desktop & tablet landscape - 100% width - 1024+ */
 @media (min-width: 50em) {
-    .admin-navigation {padding: 20px; }
+    .admin-navigation {padding: 18px 0; }
     #content {
         margin: 0;
     }
@@ -22,9 +22,10 @@
     .content-navigation .nav ul {
         display: table;
         width: 100%;
-        margin-top: 8.48em;
+        margin-top: 6.45em;
     }
-    .container-view {max-width: 1024px; margin: 0 auto;}
+
+    .container-view, .container-admin  {max-width: 1024px; margin: 0 auto; }
     .header {min-height: 140px;}
     .header .content-navigation, .header .content-navigation.fadeIn {
         position: fixed;
@@ -35,7 +36,7 @@
         right: 0;
         background-color: rgb(249, 249, 249); /* fallback */
         background-color: rgba(249, 249, 249, 1);
-        background-color:#ECF8FF;
+        background-color:#9FC9E1;
         z-index: 1;
     }
 
@@ -49,8 +50,9 @@
 
     .product-navigation nav.nav ul li.nav-header a{
         min-height: 4.286em;
-        padding: 0.714em;
+        padding: 20px 0;
     }
+
 
     .product-navigation nav.nav ul li.nav-header ul.product-nav-details li a {
         min-height: 0;
@@ -65,13 +67,14 @@
     }
 
 
-    .product-navigation .icon-caret-down {
+    .product-navigation a.icon-caret-down {
         /* min-height: 4.286em;
         padding-top: 0.714em; */
         display: block;
         width: 100%;
         cursor: pointer;
         font-size: 18px;
+        color:#333;
     }
 
     .content-navigation .nav li {
@@ -94,57 +97,57 @@
 
     /* hover, focused and active effects */
     .content-navigation .nav li:nth-child(8n+1) a:hover,
-    .content-navigation .nav li:nth-child(8n+1) a:active,
-    .content-navigation .nav li:nth-child(8n+1) a:focus {
+    .content-navigation .nav li:nth-child(8n+1) a:active
+   {
         background-color: rgb(174, 78, 1); /* fallback */
         background-color: rgba(174, 78, 1, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+2) a:hover,
-    .content-navigation .nav li:nth-child(8n+2) a:active,
-    .content-navigation .nav li:nth-child(8n+2) a:focus {
+    .content-navigation .nav li:nth-child(8n+2) a:active
+   {
         background-color:  rgb(191, 117, 20); /* fallback */
         background-color:  rgba(191, 117, 20, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+5) a:hover,
-    .content-navigation .nav li:nth-child(8n+5) a:active,
-    .content-navigation .nav li:nth-child(8n+5) a:focus {
+    .content-navigation .nav li:nth-child(8n+5) a:active
+ {
         background-color: rgb(12, 110, 149); /* fallback */
         background-color: rgba(12, 110, 149, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+6) a:hover,
-    .content-navigation .nav li:nth-child(8n+6) a:active,
-    .content-navigation .nav li:nth-child(8n+6) a:focus {
+    .content-navigation .nav li:nth-child(8n+6) a:active
+    {
         background-color:  rgb(10, 75, 117); /* fallback */
         background-color:  rgba(10, 75, 117, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+4) a:hover,
-    .content-navigation .nav li:nth-child(8n+4) a:active,
-    .content-navigation .nav li:nth-child(8n+4) a:focus {
+    .content-navigation .nav li:nth-child(8n+4) a:active
+   {
         background-color:  rgb(46, 204, 113); /* fallback */
         background-color:  rgba(46, 204, 113, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+7) a:hover,
-    .content-navigation .nav li:nth-child(8n+7) a:active,
-    .content-navigation .nav li:nth-child(8n+7) a:focus {
+    .content-navigation .nav li:nth-child(8n+7) a:active
+     {
         background-color:  rgb(242, 94, 70); /* fallback */
         background-color:  rgba(242, 94, 70);
     }
 
     .content-navigation .nav li:nth-child(8n+3) a:hover,
-    .content-navigation .nav li:nth-child(8n+3) a:active,
-    .content-navigation .nav li:nth-child(8n+3) a:focus {
+    .content-navigation .nav li:nth-child(8n+3) a:active
+   {
         background-color:  rgb(26, 188, 156); /* fallback */
         background-color:  rgba(26, 188, 156, 1);
     }
 
     .content-navigation .nav li:nth-child(8n+8) a:hover,
-    .content-navigation .nav li:nth-child(8n+8) a:active,
-    .content-navigation .nav li:nth-child(8n+8) a:focus {
+    .content-navigation .nav li:nth-child(8n+8) a:active
+     {
         background-color: rgb(171, 8, 9); /* fallback */
         background-color: rgba(171, 8, 9);
     }
@@ -155,16 +158,12 @@
 
     .content-navigation .icon + span {
         margin-top: .75em;
-        -webkit-transition: margin .5s;
+       /* -webkit-transition: margin .5s;
         -moz-transition: margin .5s;
         -o-transition: margin .5s;
         -ms-transition: margin .5s;
         transition: margin .5s;
-    }
-
-    /* Animating the height of the element*/
-    .content-navigation .nav a {
-        height: 5.6em;
+        */
     }
 
     /* Making the text follow the height animation */
@@ -186,6 +185,7 @@
         border-radius: 50%;
         font-size: 1.2em;
         box-shadow: 0 0 0 2.143em transparent;
+        /*
         -webkit-transform: translate3d(0, 0, 0);
         -moz-transform: translate3d(0, 0, 0);
         -o-transform: translate3d(0, 0, 0);
@@ -196,9 +196,10 @@
         -o-transition: box-shadow .6s ease-in-out;
         -ms-transition: box-shadow .6s ease-in-out;
         transition: box-shadow .6s ease-in-out;
+        */
     }
 
-    /* Animate the box-shadow */
+    /* Animate the box-shadow
     .content-navigation .nav a:hover i,
     .content-navigation .nav a:active i,
     .content-navigation .nav a:focus i {
@@ -208,7 +209,7 @@
         -o-transition: box-shadow .4s ease-in-out;
         -ms-transition: box-shadow .4s ease-in-out;
         transition: box-shadow .4s ease-in-out;
-    }
+    }*/
     .product-navigation.product-navigation-top li.nav-header {
         float: left;
         width: 14.2%;
