@@ -35,6 +35,8 @@ html {
     background-color: rgba(249, 249, 249, 1);
     background-color:#ECF8FF;
     background-color:#9FC9E1;
+    background-color:#F4F4F4;
+
 }
 
 body {
@@ -42,6 +44,7 @@ body {
     background-color: rgba(249, 249, 249, 1);
     background-color:#ECF8FF;
     background-color:#9FC9E1;
+    background-color:#f4f4f4;
     font-family: 'Droid Sans', sans-serif;
     font-smooth:always;
     -webkit-font-smoothing: antialiased;
@@ -70,14 +73,17 @@ body {
 }
 /* ----------------------------------------------------------------------------------------------- */
 
+
+
+
 select, input, .uneditable-input {width: auto;} /* bootstrap uses a fixed width :( */
 .navbar-fixed-top {
     margin-bottom: 0
 }
-.navbar-inner {box-shadow: none;}
+.navbar-inner {box-shadow: none;  }
 .container-fluid {padding-left: 0; padding-right: 0;}
 .view-partial{
-background-color:#ECF8FF;
+background-color:#fff;
 
     margin: 0 0 20px;
 padding: 10px;
@@ -242,12 +248,14 @@ button::-moz-focus-inner {
 /* ----------------------------------------------------------------------------------------------- */
 
 .admin-navigation a.brand {
-    font-size: 16px;
+font-size: 14px;
     color: rgb(22, 145, 190); /* fallback */
     color: #fff;
-    padding: 1.071em;
+    padding:1.071em;
     text-shadow: none;
-    margin-left: 10px;
+   margin-left: 10px;
+
+
 
 }
 
@@ -255,13 +263,14 @@ button::-moz-focus-inner {
 
     color: rgb(44, 168, 219); /* fallback */
     color: rgba(44, 168, 219, 1);
+    color:#333;
 }
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 3. ADMIN NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
 
-.admin-navigation .divider-vertical {border-color:#87bcda;}
+.admin-navigation .divider-vertical {border-color:#9FC9E1;}
 .header div.navbar-inner {
     background-image: none;
     background-color: rgb(255, 255, 255); /* fallback */
@@ -274,7 +283,9 @@ button::-moz-focus-inner {
 }
 
 .admin-navigation {
+
     background-color:#73B2D7;
+
 
 }
 
@@ -292,11 +303,12 @@ button::-moz-focus-inner {
 
 .admin-navigation li a span, .admin-navigation li a i {
     color:#fff; text-shadow: none;
-    font-size: 16px;
+
 }
 
 .admin-navigation li a:hover span, .admin-navigation li a:hover i {
     color:rgb(44, 168, 219);
+    color:#333;
 }
 
 .admin-navigation .dropdown-menu > li.logout > a i {
@@ -323,8 +335,9 @@ button::-moz-focus-inner {
     padding: 1.071em;
 }
 
+
 .admin-navigation .nav > li  {
-    min-height: 3.571em;
+
 }
 
 /* ----------------------------------------------------------------------------------------------- */
@@ -351,18 +364,12 @@ button::-moz-focus-inner {
 
 }
 
-.content-navigation .nav ul li {
 
 
-}
-.content-navigation .nav ul li:last-child {
-
-
-}
 .content-navigation .nav a {
-    min-height: 5.6em;
-    font-size: 1em;
-    font-weight: 300;
+    min-height: 5.2em;
+
+  color:#fff;
 }
 
 
@@ -376,9 +383,9 @@ button::-moz-focus-inner {
     color: rgba(249, 249, 249, .9);
     text-decoration: none;
 
-   /* -moz-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
     -webkit-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
-    box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16); */
+    box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
     -webkit-transition: color .5s, background .5s, height .5s;
     -moz-transition: color .5s, background .5s, height .5s;
     -o-transition: color .5s, background .5s, height .5s;
@@ -414,8 +421,8 @@ button::-moz-focus-inner {
 
 /* Adding some background color to the different menu items */
 .content-navigation .nav li:nth-child(8n+1) {
-    background: rgb(208, 101, 3); /* fallback */
-    background: rgba(208, 101, 3, 1);
+    background-color: rgb(174, 78, 1); /* fallback */
+    background-color: rgba(174, 78, 1, 1);
 }
 
 .content-navigation .nav li:nth-child(8n+2) {
@@ -452,26 +459,29 @@ button::-moz-focus-inner {
     background: rgba(192, 57, 43, 1);
 
 }
-
+.admin-navigation {border-bottom: 2px solid #f7f7f7; }
 /* ----------------------------------------------------------------------------------------------- */
 /*** 5. PRODUCT NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
 /* TODO check color */
+.product-navigation li.nav-header a {
+    padding: 1.2em .05em;
 
+}
 
-.product-navigation {  background-color: rgb(249, 249, 249); /* fallback */
-    background-color: rgba(249, 249, 249, 1);
-
-background-color:#9FC9E1;}
+.product-navigation {  /*background-color: rgb(249, 249, 249);
+    background-color: rgba(249, 249, 249, 1); margin-bottom: 40px;
+background-color:#fff; */
+}
 .product-navigation li.nav-header {
     float: left;
-    font-size: 1em;
-    border: 0.05em solid #9FC9E1;
+    font-size: .9em;
+    border: 1px solid #F4F4F4;
     background-color: rgb(216, 239, 245); /* fallback */
     background-color: rgba(216, 239, 245, 1);
     background-color:#73B2D7;
     text-align: center;
-    line-height: normal;
+
     padding: 0;
     text-transform: capitalize;
     text-shadow: none;
@@ -493,9 +503,7 @@ background-color:#9FC9E1;}
     cursor: pointer;
 }
 
-.product-navigation li.nav-header a {
-    padding: 0.714em;
-}
+
 
 .product-navigation li.nav-header ul li {
     text-align: left;
@@ -533,7 +541,7 @@ background-color:#9FC9E1;}
 
 
 
-.product-navigation .nav a {
+.product-navigation .nav li.nav-header a {
     display: block;
     color: rgb(58, 58, 58); /* fallback */
     color: rgba(58, 58, 58, 1);
@@ -560,28 +568,30 @@ background-color:#9FC9E1;}
 
 
 
-.product-navigation .nav ul:hover li:hover {
+.product-navigation .nav ul li:hover {
     background-color: rgb(177, 224, 236); /* fallback */
     background-color: rgba(177, 224, 236, 1);
     background-color:#4588AE;
-}
 
+
+}
+.product-navigation .nav lir:hover  {
+}
 .product-navigation .nav ul ul > li {
-    border: 0.071em solid transparent;
+
     padding: 0;
     font-size: 1.05em;
 }
 
-.product-navigation .nav ul ul:hover li:hover {
+.product-navigation .nav ul ul li:hover {
     background-color: rgb(216, 239, 245); /* fallback */
     background-color: rgba(216, 239, 245, 1);
     background-color:#1E648C;
-    border: 0.071em solid transparent;
+
+
 }
 
-.product-navigation .nav ul .product-nav-details li a:hover {
-    text-decoration: underline;
-}
+
 
 .category-product.product-navigation  li.nav-header {
     width: 33.3%
@@ -596,14 +606,17 @@ background-color:#9FC9E1;}
 /*** 6. MAIN CONTENT ***/
 /* ----------------------------------------------------------------------------------------------- */
 
-li.active a, li.active a:hover {background-color:#1E648C !important;}
+h4 {font-size: 22px;  color:#444;font-weight: normal; margin: 30px 0;}
+.product-navigation li.active , .product-navigation li.active:hover {background-color:#333 !important;}
 .container-view {clear: both; overflow: hidden;}
 
 .container-content-side {
-    margin-top: 1.429em;
+    margin-top: 0; min-height: 500px;
 
 
 }
+
+.container-icon
 .container-content-top {
     margin-top: 1em;
 
