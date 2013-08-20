@@ -1,12 +1,5 @@
 'use strict';
-four51.app.directive('productSpecMatrix', function(){
-	var obj = {
-		restrict: "E",
 
-	};
-	return obj;
-
-})
 four51.app.directive('shortproductview', function(){
 	var obj = {
 		restrict: "E",

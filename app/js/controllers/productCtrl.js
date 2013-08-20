@@ -39,17 +39,53 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 	}
 });
 
-four51.app.controller('CustomProductCtrlMatrix', function($scope,$451){
-
+four51.app.controller('CustomProductCtrlMatrix', function($scope, $451, VariantService, ProductDisplayService){
+	//just a little experiment on extending the product view
 	$scope.matrixLineTotal = 0;
-	$scope.addMatrixToOrder = function(){
+	$scope.LineItems = {};
+	$scope.LineKeys = [];
+	$scope.lineChanged = function(){
+		var addToOrderTotal = 0;
+		angular.forEach($scope.LineKeys, function(key){
+			if($scope.LineItems[key].Variant){
+				ProductDisplayService.calculateLineTotal($scope.LineItems[key]);
+				addToOrderTotal += $scope.LineItems[key].LineTotal;
+			}
+		$scope.matrixLineTotal = addToOrderTotal;
 
+		});
 	};
+	$scope.addMatrixToOrder = function(){
+	};
+	$scope.setFocusVariant = function(opt1, opt2){
+
+		if($scope.LineItems[opt1.Value.toString() + opt2.Value.toString()].Variant){
+			$scope.LineItem.Variant = $scope.LineItems[opt1.Value.toString() + opt2.Value.toString()].Variant;
+			return;
+		}
+
+		VariantService.get({'ProductInteropID': $scope.LineItem.Product.InteropID, 'SpecOptionIDs': [opt1.ID, opt2.ID]}, function(data){
+			$scope.LineItems[opt1.Value.toString() + opt2.Value.toString()].Variant = data;
+			$scope.LineItem.Variant = data;
+		});
+	};
+	$scope.$watch("LineItems", function(){
+		$scope.lineChanged();
+	}, true);
 
 	$scope.$on('ProductGetComplete', function(){
 		var specs = $451.filter($scope.LineItem.Product.Specs, {Property: 'DefinesVariant', Value: true});
 		$scope.matrixSpec1 = specs[0];
 		$scope.matrixSpec2 = specs[1];
+		angular.forEach(specs[0].Options, function(option1){
+			angular.forEach(specs[1].Options, function(option2){
+				$scope.LineKeys.push(option1.Value.toString() + option2.Value.toString());
+				$scope.LineItems[option1.Value.toString() + option2.Value.toString()] = {
+					Product: $scope.LineItem.Product,
+					PriceSchedule: $scope.LineItem.PriceSchedule,
+					Specs: $scope.LineItem.Specs
+				};
+			});
+		});
 	});
-
 });
