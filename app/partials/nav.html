@@ -7,9 +7,9 @@
                     <ul class="nav">
 
                         <li class="dropdown admin-user ">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i><span class="hidden-phone hidden-tablet">Admin</span><b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i><span class="hidden-phone hidden-tablet">My Account</span><b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li class="nav-header">My Account</li>
+                                <li class="nav-header">Admin</li>
                                 <li class="admin"><a href="#/admin">User Information</a></li>
                                 <li class="addresses"><a href="#/addresses">Addresses</a></li>
                                 <li class="messages"><a href="#/message">Messages</a></li>
@@ -22,29 +22,36 @@
                             </ul>
                         </li>
 
-                        <li class="contact visible-desktop"><a href="#"><i class="icon-envelope-alt"></i></a></li>
+                        <li class="" ng-class="getClass('/favoriteorders')"><a href="#"><i class="icon-star"></i></a></li>
 
                         <li class="logout visible-desktop"><a href="#" class="451_btn_logout" ng-click="Logout()"><i class="icon-off"></i></a></li>
 
+
+
                     </ul>
-                    <a class="brand" ng-show="Four51User.isAuthenticated()" href="#/catalog" ng-click="refresh($event)"><i class="icon-cloud"></i> <span class="brand-name">{{'Welcome ' + user.FirstName + " " + user.LastName}}</span></a>
+                 <a class="brand" ng-show="Four51User.isAuthenticated()" href="#/catalog" ng-click="refresh($event)"><i class="icon-cloud"></i> <span class="brand-name">{{'Welcome ' + user.FirstName + " " + user.LastName}}</span></a>
                 </div>
 
                 <ul class="nav nav-search">
-
                     <li><a href="#/search"><span class="icon"><i class="icon-search"></i></span></a></li>
+
+
+
 
                 </ul>
             </div>
 
         </div>
     </div>
-    <div ng-show="Four51User.isAuthenticated()" scroll-position="scroll" class="container-fluid content-navigation animated" ng-class="{fadeOutUpBig: scroll > 210, fadeIn: scroll <= 210}">
+    <div ng-show="Four51User.isAuthenticated()" scroll-position="scroll" style="background-color:#fff;"class="container-fluid content-navigation animated" ng-class="{fadeOutUpBig: scroll > 210, fadeIn: scroll <= 210}">
         <nav class="nav">
             <ul>
+                <li class="favorites hidden-tablet hidden-phone" ng-class="getClass('/favoriteorders')"> <a href="#/favoriteorders"><span class="icon"><i class="icon-star"></i></span>Home</a></li>
+                <li class="favorites hidden-tablet hidden-phone" ng-class="getClass('/favoriteorders')"> <a href="#/favoriteorders"><span class="icon"><i class="icon-star"></i></span>Orders</a></li>
                 <li class="favorites hidden-tablet hidden-phone" ng-class="getClass('/favoriteorders')"> <a href="#/favoriteorders"><span class="icon"><i class="icon-star"></i></span>Favorites</a></li>
                 <li ng-show="user.CurrentOrderID && user.Permissions.contains('StandardOrder')" class="cart" ng-class="getClass('/cart')"><a href="#/cart"><span class="icon"><i class="icon-shopping-cart"></i></span>View Cart</a></li>
                 <li ng-show="user.CurrentOrderID" class="checkout" ng-class="getClass('/checkout')"><a href="#/checkout"><span class="icon"><i class="icon-dollar"></i></span>Checkout</a></li>
+
             </ul>
         </nav>
     </div>
