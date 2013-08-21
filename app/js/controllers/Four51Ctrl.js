@@ -6,6 +6,7 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $451, SecurityServ
 	$scope.$on('event:auth-loginRequired', function() {	});
 
     $scope.$on('event:auth-loginConfirmed', function() {
+        // a change
         $scope.user = UserService.get();
         $scope.tree = CategoryService.tree();
         $scope.SpendingAccounts = SpendingAccountService.query();
