@@ -1,4 +1,4 @@
-<div class="container-fluid product-view">
+<div class="container-fluid product-view" ng-controller="CustomProductCtrlMatrix">
 	<img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url">
 
 	<table id="451_area_prod_desc" border=1>
@@ -8,39 +8,46 @@
 		<tr ng-show="LineItem.Variant.Description"><td>variant description:</td><td><span ng-bind-html-unsafe="LineItem.Variant.Description"/></td></tr>
 		<tr ng-show="LineItem.Variant.ExternalID"><td>variant id:</td><td>{{LineItem.Variant.ExternalID}}</td></tr>
 		<tr ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)"><td>available inventory</td><td>{{inventoryDisplay(LineItem.Product, LineItem.Variant) }}</td></tr>
+
 		</span>
 
 	</table>
 	<br>
 
-	<form name="addToOrderForm" ng-show="allowAddToOrder">
+	<form name="addToOrderForm" ng-show="allowAddToOrder" >
 		<table border=1 ng-show="true">
 			<tr ng-repeat="s in LineItem.Specs | onproperty:{Property: 'CanSetForLineItem', Value: true}">
 				<td>{{s.Name}}<span ng-show="s.Required" style="color:red"> *</span> </td>
-				<td>{{s.Prefix}}<vspecfield changed="specChanged" s="s"></vspecfield>{{s.Suffix}}</td>
+				<td>{{s.Prefix}}<vspecfield changed="lineChanged" s="s"></vspecfield>{{s.Suffix}}</td>
 			</tr>
 		</table>
-
-
-		<span ng-controller="CustomProductCtrlMatrix">
+		<span>
 			<table border=1 >
 				<tr>
 					<td>{{matrixSpec2.Name}} / {{matrixSpec1.Name}}</td>
-					<td ng-repeat='opt in matrixSpec1.Options'>
-						{{opt.Value}}
+					<td ng-repeat='spec1Opt in matrixSpec1.Options'>
+						{{spec1Opt.Value}}
 					</td>
 				</tr>
-				<tr ng-repeat='opt in matrixSpec2.Options'>
-					<td>{{opt.Value}}</td>
-					<td ng-repeat='opt in matrixSpec1.Options'>
-						<input type=text>
+				<tr ng-repeat='spec2Opt in matrixSpec2.Options'>
+					<td>{{spec2Opt.Value}}</td>
+					<td
+						ng-class="LineItems[spec1Opt.Value.toString() + spec2Opt.Value.toString()].errorText && 'ui-state-error'"
+						ng-repeat='spec1Opt in matrixSpec1.Options'>
+						<span ng-click="setFocusVariant(spec1Opt, spec2Opt)">
+							<quantityfield
+								ng-if="LineItems[spec1Opt.Value.toString() + spec2Opt.Value.toString()].Variant"
+								lineItem="LineItems[spec1Opt.Value.toString() + spec2Opt.Value.toString()]"
+								error="LineItems[spec1Opt.Value.toString() + spec2Opt.Value.toString()].errorText" />
+								{{LineItems[spec1Opt.Value.toString() + spec2Opt.Value.toString()].errorText}}
+							<a ng-show="!LineItems[spec1Opt.Value.toString() + spec2Opt.Value.toString()].Variant">add item</a>
+						</span>
 					</td>
 				</tr>
 			</table>
 		</span>
-
-		line total: {{matrixLineTotal | currency}}
 		<br>
+		add to order total: {{matrixLineTotal | currency}}<br>
 		<button id="451_btn_orderadd" ng-click="addMatrixToOrder()">Add to Order</button>
 		<br>
 		<span ng-show="LineItem.PriceSchedule.MinQuantity > 1">
@@ -50,11 +57,6 @@
 			max: {{LineItem.PriceSchedule.MaxQuantity}}<br/>
 		</span>
 	</form>
-
 	<priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product' />
-
-
-
-
-
+	<span ng-repeat="key in LineKeys">{{key}}: {{LineItems[key].Quantity}} - {{LineItems[key].LineTotal}}<br></span>
 </div>

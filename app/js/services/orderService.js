@@ -3,7 +3,7 @@ four51.app.factory('OrderService', function($resource, $451, $api) {
 	return {
 		get: function(param, callback) {
 			return $api.resource(service)
-				.options({ persists: true, key: 'Order.' + param.id})
+				.options({ persists: true, key: 'Order{0}{1}'.replace(/\{0}/g, '.' || '').replace(/\{1}/g, param || '') })
 				.get({id: param}, callback);
 		},
 		repeat: function(order) {
