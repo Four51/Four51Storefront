@@ -11,106 +11,110 @@
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/app.css"/>
     <link rel="stylesheet" href="css/breakpoint.css"/>
+    <script src="lib/angular/angular-loader.js"></script>
 </head>
 
 <body ng-cloak scroll-position="scroll" class="static" ng-class="{scroll: scroll > 2, static: scroll <= 2}">
-    <div authorization ng-controller="Four51Ctrl" class="container-view">
-        <div ng-hide="Four51User.isAuthenticated()" style="position: relative;">
-            <div id="login_box">
-                <div ng-controller='LoginCtrl'>
-                   <ng-include src="template.url" />
-                </div>
+<div authorization ng-controller="Four51Ctrl" class="container-view">
+    <div ng-hide="Four51User.isAuthenticated()" style="position: relative;">
+        <div id="login_box">
+            <div ng-controller='LoginCtrl'>
+                <ng-include src="template.url" />
             </div>
-        </div>
-
-        <div class="navbar" ng-controller="NavCtrl">
-            <ng-include src="template.url" />
-        </div>
-
-        <div ng-show="Four51User.isAuthenticated()" class="container-fluid" id="content"  ng-controller="SideNavCtrl">
-            <div class="row-fluid">
-                <div>
-                    <ng-include src="'partials/sideNav.html'" />
-                </div>
-                <div class="container-content span9">
-                    <div ng-view ng-animate="{enter: 'view-enter', leave: 'view-leave'}"/>
-                </div>
-            </div>
-        </div>
-
-        <div ng-controller="ErrorCtrl">
-            <ng-include src="template.url" />
         </div>
     </div>
-    <!-- In production use:
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
-    -->
 
-    <script src="lib/jquery-2.0.0.js"></script>
-    <script src="lib/jquery-ui.min.js"></script>
-    <script src="lib/angular/angular.1.1.5.js"></script>
-    <script src="lib/angular/angular-sanitize.js"></script>
-    <script src="lib/angular/ui-bootstrap-0.2.0.js"></script>
-    <script src="lib/angular/angular-cookies.js"></script>
-    <script src="lib/angular/angular-resource.js"></script>
-    <script src="lib/angular/ui-date.js"></script>
-    <script src="lib/angular/ui-validate.js"></script>
-    <script src="lib/angular/ui-mask.js"></script>
-    <script src="lib/angular/ng-grid.js"></script>
-    <script src="lib/angular/gestures.js"></script>
+    <div class="navbar" ng-controller="NavCtrl">
+        <ng-include src="template.url" />
+    </div>
 
-    <script src="js/app.js"></script>
-    <script src="js/451.js"></script>
-    <script src="js/directives.js"></script>
-    <script src="js/filters.js"></script>
-    <script src="js/config.js"></script>
-    <script src="js/interceptors.js"></script>
-    <script src="js/routing.js"></script>
+    <div ng-show="Four51User.isAuthenticated()" class="container-fluid" id="content"  ng-controller="SideNavCtrl">
+        <div class="row-fluid">
+            <div>
+                <ng-include src="'partials/sideNav.html'" />
+            </div>
+            <div class="container-content span9">
+                <div ng-view ng-class="{enter: 'view-enter', leave: 'view-leave'}"/>
+            </div>
+        </div>
+    </div>
 
-    <script src="js/controllers/four51Ctrl.js"></script>
-    <script src="js/controllers/categoryCtrl.js"></script>
-    <script src="js/controllers/errorCtrl.js"></script>
-    <script src="js/controllers/listOrdersCtrl.js"></script>
-    <script src="js/controllers/loginCtrl.js"></script>
-    <script src="js/controllers/orderDetailsCtrl.js"></script>
-    <script src="js/controllers/orderSearchCtrl.js"></script>
-    <script src="js/controllers/orderHistoryViewCtrl.js"></script>
-    <script src="js/controllers/lineItemHistoryCtrl.js"></script>
-    <script src="js/controllers/navCtrl.js"></script>
-    <script src="js/controllers/productCtrl.js"></script>
-    <script src="js/controllers/productListCtrl.js"></script>
-    <script src="js/controllers/messageListCtrl.js"></script>
-    <script src="js/controllers/messageViewCtrl.js"></script>
-    <script src="js/controllers/favoriteOrderCtrl.js"></script>
-    <script src="js/controllers/userEditCtrl.js"></script>
-    <script src="js/controllers/addressInputCtrl.js"></script>
-    <script src="js/controllers/addressListCtrl.js"></script>
-    <script src="js/controllers/addressViewCtrl.js"></script>
-    <script src="js/controllers/cartViewCtrl.js"></script>
-    <script src="js/controllers/lineItemGridCtrl.js"></script>
-    <script src="js/controllers/checkOutViewCtrl.js"></script>
+    <div ng-controller="ErrorCtrl">
+        <ng-include src="template.url" />
+    </div>
+</div>
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+-->
 
-    <script src="js/services/apiService.js"></script>
-    <script src="js/services/securityService.js"></script>
-    <script src="js/services/userService.js"></script>
-    <script src="js/services/orderService.js"></script>
-    <script src="js/services/orderConfigService.js"></script>
-    <script src="js/services/orderSearchService.js"></script>
-    <script src="js/services/orderStatsService.js"></script>
-    <script src="js/services/productService.js"></script>
-    <script src="js/services/categoryService.js"></script>
-    <script src="js/services/messageService.js"></script>
-    <script src="js/services/messageListService.js"></script>
-    <script src="js/services/favoriteOrderService.js"></script>
-    <script src="js/services/accountsService.js"></script>
-    <script src="js/services/addressService.js"></script>
-    <script src="js/services/shipperService.js"></script>
-    <script src="js/services/resourceService.js"></script>
+<script src="lib/jquery-2.0.0.js"></script>
+<script src="lib/jquery-ui.min.js"></script>
+<script src="lib/angular/angular.1.2.0.js"></script>
+<script src="lib/angular/angular-sanitize.js"></script>
+<script src="lib/angular/angular-cookies.js"></script>
+<script src="lib/angular/angular-animate.js"></script>
+<script src="lib/angular/angular-resource.js"></script>
+<script src="lib/angular/angular-route.js"></script>
+<script src="lib/angular/angular-touch.js"></script>
 
-    <script src="js/directives/product.js"></script>
-    <script src="js/directives/costcentercontrol.js"></script>
-    <script src="js/directives/checkout.js"></script>
-    <script src="js/directives/customfields.js"></script>
-    <script src="js/directives/addressselector.js"></script>
+<script src="lib/angular/ui-bootstrap-0.2.0.js"></script>
+<script src="lib/angular/ui-date.js"></script>
+<script src="lib/angular/ui-validate.js"></script>
+<script src="lib/angular/ui-mask.js"></script>
+<script src="lib/angular/ng-grid.js"></script>
+
+<script src="js/app.js"></script>
+<script src="js/451.js"></script>
+<script src="js/directives.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/config.js"></script>
+<script src="js/interceptors.js"></script>
+<script src="js/routing.js"></script>
+
+<script src="js/controllers/four51Ctrl.js"></script>
+<script src="js/controllers/categoryCtrl.js"></script>
+<script src="js/controllers/errorCtrl.js"></script>
+<script src="js/controllers/listOrdersCtrl.js"></script>
+<script src="js/controllers/loginCtrl.js"></script>
+<script src="js/controllers/orderDetailsCtrl.js"></script>
+<script src="js/controllers/orderSearchCtrl.js"></script>
+<script src="js/controllers/orderHistoryViewCtrl.js"></script>
+<script src="js/controllers/lineItemHistoryCtrl.js"></script>
+<script src="js/controllers/navCtrl.js"></script>
+<script src="js/controllers/productCtrl.js"></script>
+<script src="js/controllers/productListCtrl.js"></script>
+<script src="js/controllers/messageListCtrl.js"></script>
+<script src="js/controllers/messageViewCtrl.js"></script>
+<script src="js/controllers/favoriteOrderCtrl.js"></script>
+<script src="js/controllers/userEditCtrl.js"></script>
+<script src="js/controllers/addressInputCtrl.js"></script>
+<script src="js/controllers/addressListCtrl.js"></script>
+<script src="js/controllers/addressViewCtrl.js"></script>
+<script src="js/controllers/cartViewCtrl.js"></script>
+<script src="js/controllers/lineItemGridCtrl.js"></script>
+<script src="js/controllers/checkOutViewCtrl.js"></script>
+
+<script src="js/services/apiService.js"></script>
+<script src="js/services/securityService.js"></script>
+<script src="js/services/userService.js"></script>
+<script src="js/services/orderService.js"></script>
+<script src="js/services/orderConfigService.js"></script>
+<script src="js/services/orderSearchService.js"></script>
+<script src="js/services/orderStatsService.js"></script>
+<script src="js/services/productService.js"></script>
+<script src="js/services/categoryService.js"></script>
+<script src="js/services/messageService.js"></script>
+<script src="js/services/messageListService.js"></script>
+<script src="js/services/favoriteOrderService.js"></script>
+<script src="js/services/accountsService.js"></script>
+<script src="js/services/addressService.js"></script>
+<script src="js/services/shipperService.js"></script>
+<script src="js/services/resourceService.js"></script>
+
+<script src="js/directives/product.js"></script>
+<script src="js/directives/costcentercontrol.js"></script>
+<script src="js/directives/checkout.js"></script>
+<script src="js/directives/customfields.js"></script>
+<script src="js/directives/addressselector.js"></script>
 </body>
 </html>
