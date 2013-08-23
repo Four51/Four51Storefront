@@ -37,6 +37,11 @@ body {
     /* overflow: hidden; ng-view animation (1) - remove scroll bar that appears on desktop */
 }
 
+.order-cloud {    width:100%; height:100%; position:fixed; left:0;top:0;overflow:hidden;background: url(images/orderCloud.jpg) no-repeat center center fixed; -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;}
+
 
 /* ng-view animation (2) */
 /* need to add scroll bar back in to maintain scrolling, but now lets move the view over
@@ -84,20 +89,24 @@ hr {
     }
 }
 
+
 .form-signin {
-    max-width: 21.429em;
+    max-width: 26em;
     padding: 1.357em 2.071em 2.071em;
-    margin: 0 auto 1.429em;
-    background-color: rgb(255, 255, 255); /* fallback */
-    background-color: rgba(255, 255, 255, 1);
-    border: 0.357em solid rgb(214, 214, 214);
-    -webkit-border-radius: 0.357em;
-    -moz-border-radius: 0.357em;
-    border-radius: 0.357em;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    margin: 10% auto 5em;
+    background: rgba(22, 145, 190, .15);
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    border-radius: 1em;
 }
+
+input::-webkit-input-placeholder { color:#EB866A; }
+input::-moz-placeholder { color:#EB866A; opacity: 1; }
+input:-ms-input-placeholder { color:#EB866A;opacity: 1; }
+input:-moz-placeholder { color:#EB866A; }
+
+/* iOS placeholder needs help to disappear on focus */
+:focus::-webkit-input-placeholder{color:transparent;}
 
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
@@ -110,6 +119,62 @@ hr {
     height: auto;
     margin-bottom: 1.071em;
     padding: 0.500em 0.643em;
+}
+
+.form-signin .btn-primary  {
+    background: rgb(208, 101, 3); /* fallback */
+    background: rgba(208, 101, 3, 1);
+    letter-spacing: .04em;
+    padding: 15px;
+    border-radius: 3px 3px 3px 3px;
+    text-shadow: 0 -1px 0 #666;
+    box-shadow: 0 1px 0 #666, 0 4px 0 #444, 0 3px 3px rgba(0,0,0,0.6);
+    border: none;
+    -webkit-transition: all 150ms ease;
+    transition: all 150ms ease;
+
+}
+
+@-webkit-keyframes pulsate
+{
+    0%   { color: #ddd; text-shadow: 0 -1px 0 #000; }
+    50%  { color: #fff; text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff; }
+    100% { color: #ddd; text-shadow: 0 -1px 0 #000; }
+}
+
+@keyframes pulsate
+{
+    0%   { color: #ddd; text-shadow: 0 -1px 0 #000; }
+    50%  { color: #fff; text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff; }
+    100% { color: #ddd; text-shadow: 0 -1px 0 #000; }
+}
+
+.form-signin .btn-primary:hover {
+    -webkit-animation: pulsate 1.2s linear infinite;
+    animation: pulsate 1.2s linear infinite;
+    background-color: rgb(174, 78, 1); /* fallback */
+    background-color: rgba(174, 78, 1, 1);
+}
+
+.form-signin .btn-primary:active
+{
+    color: #fff;
+    text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff;
+    box-shadow: 0 1px 0 #666, 0 2px 0 #444, 0 2px 2px rgba(0,0,0,0.9);
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
+    -webkit-animation: none;
+    animation: none;
+    outline: none;
+
+}
+
+.form-signin .btn-primary:focus {outline: none;}
+.menu {
+    list-style: none;
+    border-bottom: 0.1em solid rgb(0, 0, 0);
+    margin-bottom: 2em;
+    padding: 0 0 0.5em;
 }
 
 .menu {
