@@ -72,7 +72,7 @@ padding-top: 0.714em; */
     }
 
     .content-navigation .nav li {
-        width: 33.3%; /* default is three buttons~ change to auto if more than two buttons or adjust percentage of width to scale for number of buttons */
+        width: 12.5%; /* default is three buttons~ change to auto if more than two buttons or adjust percentage of width to scale for number of buttons */
         display: table-cell;
         padding: 0;
         text-align: center;
@@ -161,7 +161,7 @@ padding-top: 0.714em; */
 
     /* Animating the height of the element*/
     .content-navigation .nav a {
-        height: 5.6em;
+        height: 5em;
     }
 
     /* Making the text follow the height animation */
@@ -206,6 +206,8 @@ padding-top: 0.714em; */
         -ms-transition: box-shadow .4s ease-in-out;
         transition: box-shadow .4s ease-in-out;
     }
+
+
     .product-navigation li.nav-header {
         float: none;
 
@@ -391,7 +393,7 @@ padding-top: 0.714em; */
     }
 
     .content-navigation .nav a {
-        padding: 0.8em;
+        padding: 0.3em;
     }
 
     /* Displaying the icons on the left */
