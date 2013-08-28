@@ -1,12 +1,25 @@
-0.  Bootstrap Strategy
-    No images - font icons
-    No Pixels - .em or %        -       base pixel size = 14px
-    No hex colors - RGBA values
-    No tables - grids
-    Animations
-    Scroll position
-    Gestures - https://github.com/wzr1337/angular-gestures
-    Responsive breakpoints
+0.  App Front End Strategy
+    Bootstrap                   -       Twitter Bootstrap
+                                        http://getbootstrap.com/2.3.2/
+    Font                        -       Google web font ~ Driod Sans
+                                        Droid Sans was optimized for user interfaces and to be comfortable for reading on a mobile handset in menus, web browser and other screen text.
+                                        http://www.google.com/fonts/specimen/Droid+Sans
+                                        developer ~ https://developers.google.com/fonts/
+                                        blog ~ http://googlewebfonts.blogspot.com/
+    No static icons             -       Font icons
+                                        http://fontawesome.io/icons/
+    No pixels                   -       .em or % ~ base pixel size = 14px
+    No hex colors               -       RGB/A values
+    No tables                   -       Grids
+                                        https://github.com/angular-ui/ng-grid
+    Animations                  -       ng-animate and animate.css
+                                        http://code.angularjs.org/1.1.4/docs/api/ng.directive:ngAnimate
+                                        https://github.com/daneden/animate.css
+    Scroll breakpoints          -       Directive
+    Gestures                    -       ...in progress??
+                                        https://github.com/wzr1337/angular-gestures
+    Responsive breakpoints      -       app media queries that play nice with Twitter Bootstrap
+                                        breakpoint.css
 
 1.  Bootstrap CSS
     What's inside
@@ -31,27 +44,18 @@
     Bootstrap Font Icons CSS (Font Awesome)
     http://fontawesome.io/icons/
 
-**  I want to see breakpoints in window size added as a body class for device widths for ie: https://github.com/snapjay/angularjs-breakpoint
+**  ?? mauyber pixel breakpoints in window size added as a body class for device widths for ie: https://github.com/snapjay/angularjs-breakpoint
     another example: https://github.com/xoxco/breakpoints
 
-    Breakpoints will provide more bulletproof design for content alongside the Bootstrap-responive.css media queries
-    Default Breakpoints: (can be modified to fit a clients needs for specific devices)
-    See breakpoint.css for app responsive defaults via media queries for now
+    Default Breakpoints:
+    See breakpoint.css for responsive styles
         1024    Desktop
                 Tablet      Landscape
         798     Tablet      Portrait
         518     Phone       Landscape
                             Portrait
 
-//TODO remove tables and add ng-grid https://github.com/angular-ui/ng-grid
-
-2.  Animations
-    https://github.com/daneden/animate.css
-
-    Simply add the class".animated" and the class for the type of animation you would like to see.
-
-
-3.  Priorities              -   top to bottom
+2.  Priorities              -   top to bottom
 
     Navigation              -   gesture based is the primary goal
         AdminNav
