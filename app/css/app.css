@@ -314,7 +314,7 @@ button::-moz-focus-inner {
 
 
 .admin-navigation li a span, .admin-navigation li a i {
-    color:rgb(22, 145, 190);
+    color:#444;
 }
 
 .admin-navigation li a:hover span, .admin-navigation li a:hover i {
@@ -329,6 +329,8 @@ button::-moz-focus-inner {
 .admin-navigation .dropdown-menu > li.logout > a:hover i {
     color: rgb(242, 94, 70);
 }
+
+header.header .user-links ul.nav li.active a, header.header .user-links ul.nav li.active a span {color:#bfbfbf; background-color:transparent; box-shadow: none; }
 .navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
     background-color: rgb(255, 255, 255); /* fallback */
     background-color: rgba(255, 255, 255, 1);
@@ -450,7 +452,7 @@ border-right: 1px solid #d6d6d6;
     display: inline-block;
 }
 
-.admin-navigation .nav li.brand-a {margin-left: 10px;}
+.admin-navigation .nav li.brand-a {margin-left: 20px;}
 .admin-navigation .nav li.brand-a span {
     display: inline-block;
 }
