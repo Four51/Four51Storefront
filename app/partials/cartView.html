@@ -2,21 +2,34 @@
     <span>Your cart is currently empty. <a ng-href="#/catalog">Continue Shopping</a></span>
 </div>
 
+        <section class="view-partial">
 <form name="cart">
+    <div style="width: 700px; float: left;">
+    <h4 style="background-color:#555; color:#fff; padding: 10px 25px; margin: 0;"> XX items in your cart</h4>
+    <lineitemgrid ng-if="order"></lineitemgrid></div>
+    <div style="border: 1px solid #d6d6d6; float: right;">
+        <h4 style="background-color:#444; color:#fff; padding: 10px 25px; margin: 0;">Cart Summary</h4>
 
-    <lineitemgrid ng-if="currentOrder"></lineitemgrid>
-
+                 <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
     <div ng-if="currentOrder" class="CartDetail">
-        <span ng-if="!user.Permissions.contains('HidePricing')">
-            <p>Subtotal: {{currentOrder.Subtotal | currency}}</p>
-            <p ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
-        </span>
-        <hr/>
+                    <p>Subtotal: {{order.Subtotal | currency}}</p>
+                    <p ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
+                </div>
+        <div style="padding: 25px; border-top: 1px solid #d6d6d6; text-align: center;">
+            <button class="btn btn-small btn-success" ng-click="checkOut()" ng-disabled="cart.$invalid">{{user.Company.SiteText.CheckOut || 'Check Out' }}</button>
+        </div>
+    </div>
+    <div ng-if="order" class="CartDetail">
+
+
         <span class="btn-group">
             <button class="btn btn-small btn-action" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
             <button class="btn btn-small btn-warning" ng-click="cancelOrder()">Cancel Order</button>
             <button class="btn btn-small btn-info" ng-click="continueShopping()">Continue Shopping</button>
-            <button class="btn btn-small btn-success" ng-click="checkOut()" ng-disabled="cart.$invalid">{{user.Company.SiteText.CheckOut || 'Check Out >' }}</button>
+
        </span>
     </div>
 </form>
+
+</section>
+

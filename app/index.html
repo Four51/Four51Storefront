@@ -6,6 +6,8 @@
     <title>451order</title>
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/jquery-ui.min.css">
     <link rel="stylesheet" href="css/ng-grid.css">
     <link rel="stylesheet" href="css/animate.css">
@@ -14,35 +16,42 @@
     <script src="lib/angular/angular-loader.js"></script>
 </head>
 
-<body ng-cloak scroll-position="scroll" class="static" ng-class="{scroll: scroll > 2, static: scroll <= 2}">
+<body ng-cloak scroll-position="scroll" class="static ng-cloak" ng-class="{scroll: scroll > 2, static: scroll <= 2}">
+
 <div authorization ng-controller="Four51Ctrl" class="container-view">
-    <div ng-hide="Four51User.isAuthenticated()" style="position: relative;">
+        <div ng-hide="Four51User.isAuthenticated()" style="position: relative;" >
+
+            <section class="order-cloud">
         <div id="login_box">
             <div ng-controller='LoginCtrl'>
                 <ng-include src="template.url" />
             </div>
         </div>
+            </section>
+
     </div>
 
-    <div class="navbar" ng-controller="NavCtrl">
-        <ng-include src="template.url" />
-    </div>
 
-    <div ng-show="Four51User.isAuthenticated()" class="container-fluid" id="content"  ng-controller="SideNavCtrl">
-        <div class="row-fluid">
-            <div>
-                <ng-include src="'partials/sideNav.html'" /><br />
+
+        <div ng-show="Four51User.isAuthenticated()" class="container-fluid" id="content"  ng-controller="SideNavCtrl">
+            <div class="navbar" ng-controller="NavCtrl">
+                <ng-include src="template.url" />
             </div>
-            <div class="container-content span9">
+
+        <div class="row-fluid">
+
+                <div class="container-fluid container-content">
                 <div ng-view ng-class="{enter: 'view-enter', leave: 'view-leave'}"/>
             </div>
         </div>
     </div>
 
+
     <div ng-controller="ErrorCtrl">
         <ng-include src="template.url" />
     </div>
 </div>
+<hr />
 <!-- In production use:
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
 -->
