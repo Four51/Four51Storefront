@@ -1,9 +1,9 @@
 'use strict'
 
 four51.app.config(function($httpProvider) {
-	$httpProvider.interceptors.push(function($q, $rootScope, $451, SecurityService) {
+	$httpProvider.interceptors.push(function($q, $rootScope, $451, Security) {
 		function appendAuth(config) {
-			config.headers['Authorization'] = SecurityService.authHeader();
+			config.headers['Authorization'] = Security.authHeader();
 			return config;
 		}
 
@@ -14,7 +14,7 @@ four51.app.config(function($httpProvider) {
 			'response': function(response) {
 				// using status code 202 [Created] to represent the authentication token has been created. it fits the RFC spec and makes the authentication handling much more RESTy
 				if (response.status === 202) {
-                    SecurityService.init(response.data, response.headers()["www-authenticate"]);
+                    Security.init(response.data, response.headers()["www-authenticate"]);
                     $rootScope.$broadcast('event:auth-loginConfirmed', response.data);
 				}
 

@@ -1,38 +1,39 @@
 <form name="cart">
 
-    <div ng-if="order" class="span3 well OrderDetailTable">
-        <p ng-if="Four51User.permissions.contains('EditPOID')">
+    <div ng-if="currentOrder" class="span10 well OrderDetailTable">
+        <p ng-if="user.Permissions.contains('EditPOID')">
             <label>{{user.Company.SiteText.OrderID || 'Order ID'}}:</label>
-            <input ng-disabled='order.autoID' type='text' ng-model="order.ExternalID" required ui-mask="{{user.Company.POIDMask}}" />
-            <span ng-if="Four51User.permissions.contains('AllowAutoGenPOID')">
-                <input type='checkbox' ng-click="order.ExternalID = order.autoID ? 'auto' : ''" ng-model='order.autoID' /> Use system-generated ID
+            <input ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" required ui-mask="{{user.Company.POIDMask}}" />
+            <span ng-if="user.Permissions.contains('AllowAutoGenPOID')">
+                <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? 'auto' : ''" ng-model='currentOrder.autoID' /> Use system-generated ID
             </span>
         </p>
-        <label>Comments:</label><textarea rows="5" cols="100" ng-model="order.Comments" /></label><br/>
-        <label ng-if="Four51User.permissions.contains('CostCenterPerOrder') && !Four51User.permissions.contains('CostCenterPerLine')">
+        <label>Comments:</label><textarea rows="5" cols="100" ng-model="currentOrder.Comments" /></label><br/>
+        <label ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')">
             <costcenter
-                    user="Four51User"
-                    order="order"
-                    ng-if="Four51User.permissions.contains('CostCenterPerOrder') && !Four51User.permissions.contains('CostCenterPerLine')" />
+                    user="user"
+                    order="currentOrder"
+                    ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')" />
         </label>
         <ul class="unstyled" ng-if="user.OrderFields">
-            <li ng-repeat="field in order.OrderFields">
+            <li ng-repeat="field in currentOrder.OrderFields">
                 <customtextfield customfield="field" ng-if="field.Lines" />
                 <customselectionfield customfield="field" ng-if="field.Options && !field.IsRadioButtons" />
                 <customradiobuttonfield customfield="field" ng-if="field.Options && field.IsRadioButtons" />
             </li>
         </ul>
     </div>
-    <div class="span4 well Shipping" ng-if="order">
-        <addressselector user="user" model="order.ShipAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address">Add New Address</a>
-        <shipperselection user="user" order="order" />
+
+    <div class="span10 well Shipping" ng-if="currentOrder">
+        <addressselector user="user" model="currentOrder.ShipAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address">Add New Address</a>
+        <shipperselection user="user" order="currentOrder" />
         <span>Shipping Costs: {{order.ShippingCost}}</span><br />
         {{order.ShipAddressID}}
     </div>
 
-    <div class="span3 well Billing" ng-if="order"></div>
+    <div class="span10 well Billing" ng-if="currentOrder"></div>
 
-    <div class="span10 btn-group" ng-if="order">
+    <div class="span10 btn-group" ng-if="currentOrder">
         <button class="btn btn-small btn-action" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
         <button class="btn btn-small btn-warning" ng-click="cancelOrder()">Cancel Order</button>
         <button class="btn btn-small btn-info" ng-click="continueShopping()">Continue Shopping</button>

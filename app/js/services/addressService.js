@@ -1,47 +1,51 @@
-four51.app.factory('AddressService', function($resource, $route, $api, $451){
-    var service = $resource($451.api('address/:id'), { id: '@id' });
+four51.app.factory('Address', function($resource, $451){
+    var _get = function(id, success) {
+        return $resource($451.api('address/:id'), { id: '@id' }).get({ id: id }).$promise.then(function(add) {
+            if (angular.isFunction(success))
+                success(add);
+        });
+    }
+
+    var _save = function(address, success) {
+        return $resource($451.api('address')).save(address).$promise.then(function(add) {
+            if (angular.isFunction(success))
+                success(add);
+        });
+    }
+
+    var _delete = function(address, success) {
+        return  $resource($451.api('address')).delete(address).$promise.then(function() {
+            if (angular.isFunction(success))
+                success();
+        });
+    }
 
     return {
-        get: function(param) {
-            return $api.resource(service).options({ persists: true, key: 'Address.' + param.id}).get({ id: param });
-        },
-        save: function(address, callback) {
-            $api.resource(service)
-                .options({ persists: true, key: 'Address.' + address.ID })
-                .save(address, function() {
-                    if (callback) callback();
-                });
-        },
-        delete: function(address, callback) {
-            $api.resource(service)
-                .delete(address, function() {
-                    $451.clear('Address.' + address.InteropID);
-                    $451.clear('Addresses');
-                    if (callback) callback();
-                });
-        }
+        get: _get,
+        save: _save,
+        delete: _delete
     };
 });
 
-four51.app.factory('AddressListService', function($resource, $451, $api) {
-    var service = $resource($451.api('address'), {}, {
-        'query': { method: 'GET', isArray: true },
-        'delete': { method: 'DELETE' }
-    });
+four51.app.factory('AddressList', function($resource, $451) {
+
+    var _query = function(success) {
+        return $resource($451.api('address')).query().$promise.then(function(list) {
+            if (angular.isFunction(success))
+                success(list);
+        });
+    }
+
+    var _delete = function(addresses, success) {
+        angular.forEach(addresses, function(add) {
+            if (add.Selected) $resource($451.api('address')).delete(add);
+        });
+        if (angular.isFunction(success))
+            success();
+    }
 
     return {
-        query: function() {
-            return $api.resource(service).
-                options({ persists: true, key: 'Addresses'}).query();
-        },
-        delete: function(addresses) {
-            angular.forEach(addresses, function(address, i) {
-               if (address.Selected) {
-                   $api.resource(service).delete(address);
-               }
-            });
-            $451.clear('Addresses');
-            return this.query();
-        }
+        query: _query,
+        delete: _delete
     }
 });

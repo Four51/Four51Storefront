@@ -1,31 +1,21 @@
 'use strict';
 
-four51.app.controller('LineItemGridCtrl', function ($scope, OrderService, UserService, ProductService) {
-    var hasSpecs = false;
-    $scope.copyAddressToAll = function(order) {
-        angular.forEach(order.LineItems, function(n,i) {
-            n.DateNeeded = order.LineItems[0].DateNeeded;
+four51.app.controller('LineItemGridCtrl', function ($scope, Order, ProductService) {
+    $scope.copyAddressToAll = function() {
+        angular.forEach($scope.currentOrder.LineItems, function(n) {
+            n.DateNeeded = $scope.currentOrder.LineItems[0].DateNeeded;
         });
     };
-    $scope.hasSpecsOnAnyLineItem = function(order) {
-        if (hasSpecs) return true;
-        angular.forEach(order.LineItems, function(item) {
-            if (item.Specs) {
-                hasSpecs = true;
-            }
-        });
-        return hasSpecs;
-    };
-    $scope.removeSelected = function(order) {
-        OrderService.save(order, function(data) {
-            order = data;
-            UserService.refresh();
+
+    $scope.removeSelected = function() {
+        Order.save($scope.currentOrder, function(o) {
+            $scope.currentOrder = o;
         });
     };
 
     // ng grid implementation
     $scope.gridOptions = {
-        data: 'order.LineItems',
+        data: 'currentOrder.LineItems',
         columnDefs: [
             { displayName: 'Remove', field: 'Selected', cellTemplate: 'partials\\controls\\ngGridCheckBox.html' },
             { displayName: 'ID', cellTemplate: "<a href=\"#/cart/{{row.getProperty('Product.ViewName')}}/{{row.rowIndex}}\">{{row.getProperty('ProductIDText')}}</a>"},

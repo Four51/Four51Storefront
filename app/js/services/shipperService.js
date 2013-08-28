@@ -1,9 +1,13 @@
-four51.app.factory('ShipperService', function($resource, $api, $451) {
-    var service = $resource($451.api('shipper'));
+four51.app.factory('Shipper', function($resource, $451) {
+
+    var _query = function(success) {
+        $resource($451.api('shipper')).query().$promise.then(function(list) {
+            if (angular.isFunction(success))
+                success(list);
+        })
+    }
 
     return {
-        query: function() {
-            return $api.resource(service).options({ persists: false, key: 'Shippers' }).query();
-        }
-    };
+        query: _query
+    }
 });

@@ -1,26 +1,33 @@
 'use strict';
-four51.app.factory('ProductService', function($resource, $451, $api, VariantService){
-    var resource = $resource($451.api('Products/:interopID'), {interopID: '@ID'});
+four51.app.factory('ProductService', function($resource, $451){
+    var product_api = $resource($451.api('Products/:interopID'), {interopID: '@ID'});
 	return {
-        get: function(param, successCall){
-            return $api.resource(resource)
-                .options({ persists: false, key: 'Product.' + param.interopID})
-                .get(param, successCall);
+        get: function(param, success){
+            return product_api.get(param, function(product) {
+                if (success) success(product);
+                return product;
+            });
         },
-        search: function(categoryInteropID, searchTerm, callback){
-            if(!categoryInteropID && !searchTerm)
-                return null;
-            return resource.query({'CategoryInteropID': categoryInteropID, 'SearchTerms': searchTerm ? searchTerm : ''}, callback);
+        search: function(categoryInteropID, searchTerm, success) {
+            if(!categoryInteropID && !searchTerm) return null;
+            return product_api.query({
+                'CategoryInteropID': categoryInteropID,
+                'SearchTerms': searchTerm ? searchTerm : ''}, function(products) {
+                if (success) success(products);
+                return products;
+            });
         }
     }
 });
 
-four51.app.factory('VariantService', function($resource, $451, $api){
-	var resource = $resource($451.api('variant'));
+four51.app.factory('VariantService', function($resource, $451){
+	var variant_api = $resource($451.api('variant'));
 	return {
-		get: function(params, callback){
-			console.log('variant Search');
-			return resource.get(params, callback);
+		get: function(params, success){
+			return variant_api.get(params, function(variant) {
+                if (success) success(variant);
+                return variant;
+            });
 		}
 	}
 });

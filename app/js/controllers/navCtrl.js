@@ -1,8 +1,8 @@
 'use strict';
 
-four51.app.controller('NavCtrl', function ($location, $scope, $451, UserService) {
+four51.app.controller('NavCtrl', function ($location, $scope, $451, User) {
     $scope.Logout = function(){
-        UserService.logout();
+        User.logout();
         $location.path("/catalog");
     };
 
@@ -10,7 +10,8 @@ four51.app.controller('NavCtrl', function ($location, $scope, $451, UserService)
 
     $scope.refresh = function(e) {
         e.preventDefault();
-        UserService.refresh();
+        $451.clear('user');
+        User.get();
     };
 
 });

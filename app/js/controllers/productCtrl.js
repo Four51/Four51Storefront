@@ -1,16 +1,16 @@
-four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, ProductService,ProductDisplayService, OrderService, VariantService, $451, UserService) {
+four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, ProductService,ProductDisplayService, Order, VariantService, $451, User) {
 	$scope.LineItem = {};
-	var user = UserService.get();
-	OrderService.get(user.CurrentOrderID, function(data){
+
+	Order.get(user.CurrentOrderID, function(data){
 		$scope.LineItem = data.LineItems[$routeParams.lineItemIndex];
-		$scope.LineItem.Product = ProductService.get({interopID: $scope.LineItem.Product.InteropID}, function(data){
+		$scope.LineItem.Product = ProductService.get({interopID: $scope.LineItem.Product.InteropID}, function(){
 			ProductDisplayService.setProductViewScope($scope);
 		});
 		$scope.allowAddToOrder = true;
 	});
 });
 
-four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, ProductService,ProductDisplayService, OrderService, VariantService, $451) {
+four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, ProductService,ProductDisplayService, Order, VariantService, $451) {
 	$scope.LineItem = {};
 	$scope.LineItem.Product = $scope.p;
 	ProductDisplayService.setNewLineItemScope($scope);
@@ -18,7 +18,7 @@ four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, Pr
 	$scope.allowAddToOrderInProductList = $scope.allowAddToOrder && $scope.LineItem.Specs.length == 0 && $scope.LineItem.Product.Type != 'VariableText';
 });
 
-four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductService,ProductDisplayService, OrderService, VariantService, $451) {
+four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductService,ProductDisplayService, Order, VariantService, $451) {
 	$scope.LineItem = {};
 	$scope.LineItem.Product = ProductService.get({interopID: $routeParams.productInteropID}, function(data){
         var v = null;
@@ -35,7 +35,7 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductServ
 	});
 
 	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
-		OrderService.addToOrder(quantity, productInteropID, variantInteropID);
+		Order.addToOrder(quantity, productInteropID, variantInteropID);
 	}
 });
 

@@ -1,14 +1,14 @@
-<div ng-if="!order">
+<div ng-if="!currentOrder">
     <span>Your cart is currently empty. <a ng-href="#/catalog">Continue Shopping</a></span>
 </div>
 
 <form name="cart">
 
-    <lineitemgrid ng-if="order"></lineitemgrid>
+    <lineitemgrid ng-if="currentOrder"></lineitemgrid>
 
-    <div ng-if="order" class="CartDetail">
+    <div ng-if="currentOrder" class="CartDetail">
         <span ng-if="!user.Permissions.contains('HidePricing')">
-            <p>Subtotal: {{order.Subtotal | currency}}</p>
+            <p>Subtotal: {{currentOrder.Subtotal | currency}}</p>
             <p ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
         </span>
         <hr/>

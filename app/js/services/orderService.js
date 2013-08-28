@@ -1,31 +1,28 @@
-four51.app.factory('OrderService', function($resource, $451, $api) {
-	var service = $resource($451.api('order/:id'), { id: '@id' });
-	return {
-		get: function(param, callback) {
-			return $api.resource(service)
-				.options({ persists: true, key: 'Order{0}{1}'.replace(/\{0}/g, '.' || '').replace(/\{1}/g, param || '') })
-				.get({id: param}, callback);
-		},
-		repeat: function(order) {
-			//TODO: add repeat functionality when order submission is available
-		},
-        addToOrder: function(lineItem){
-            //if variantinteropid is null, it's a static w/out vars.
-            console.dir({quantity: quantity, productInteropID: productInteropID, variantInteropID: variantInteropID} );
-        },
-        delete: function(order, callback) {
-            // we don't actually allow the deletion of orders.
-            // this is just cancelling the current shopping cart
-            $api.resource(service)
-                .delete(function() {
-                    $451.clear('Order.' + order.ID);
-                    callback();
-            });
-        },
-        save: function(order, callback) {
-            $api.resource(service)
-                .options({ persists: true, key: 'Order.' + order.ID})
-                .save(order, callback);
-        }
-	};
+four51.app.factory('Order', function($resource, $451) {
+    var _get = function(id, success) {
+        return $resource($451.api('order')).get({'id': id }).$promise.then(function(o) {
+            if (angular.isFunction(success))
+                success(o);
+        });
+    }
+
+    var _save = function(order, success) {
+        return $resource($451.api('order')).save(order).$promise.then(function(o) {
+            if (angular.isFunction(success))
+                success(o);
+        });
+    }
+
+    var _delete = function(success) {
+        return $resource($451.api('order')).delete().$promise.then(function() {
+            if (angular.isFunction(success))
+                success();
+        });
+    }
+
+    return {
+        get: _get,
+        save: _save,
+        delete: _delete
+    }
 });

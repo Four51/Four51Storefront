@@ -1,9 +1,12 @@
-four51.app.factory('SpendingAccountService', function($resource, $api, $451){
-    var service = $resource($451.api('spendingaccount'));
+four51.app.factory('SpendingAccountService', function($resource, $451){
 
+    var _query = function(success) {
+        return $resource($451.api('spendingaccount')).query().$promise.then(function(list) {
+            if (angular.isFunction(success))
+                success(list);
+        });
+    }
     return {
-        query: function() {
-            return $api.resource(service).options({ persists: true, key: 'SpendingAccounts' }).query();
-        }
+        query: _query
     };
 });

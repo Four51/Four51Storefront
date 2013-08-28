@@ -8,9 +8,9 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i><span class="hidden-phone hidden-tablet">Admin</span><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li class="nav-header">Admin</li>
-                            <li class="admin"><a href="#/admin">User Information</a></li>
+                            <li ng-if="user.Permissions.contains('ViewSelfAdmin')" class="admin"><a href="#/admin">User Information</a></li>
                             <li class="addresses"><a href="#/addresses">Addresses</a></li>
-                            <li class="messages"><a href="#/message">Messages</a></li>
+                            <li ng-if="user.Permissions.contains('ViewMessaging')" class="messages"><a href="#/message">Messages</a></li>
                             <li class="contact hidden-desktop"><a href="#">Contact</a></li>
                             <li class="divider"></li>
                             <li class="nav-header">Reports</li>
@@ -38,8 +38,8 @@
         <nav class="nav">
             <ul>
                 <li class="favorites hidden-tablet hidden-phone"> <a href="#/favoriteorders"><span class="icon"><i class="icon-star"></i></span>Favorites</a></li>
-                <li ng-show="user.CurrentOrderID && user.Permissions.contains('StandardOrder')" class="cart"><a href="#/cart"><span class="icon"><i class="icon-shopping-cart"></i></span>View Cart</a></li>
-                <li ng-show="user.CurrentOrderID" class="checkout"><a href="#/checkout"><span class="icon"><i class="icon-dollar"></i></span>Checkout</a></li>
+                <li ng-show="currentOrder" class="cart"><a href="#/cart"><span class="icon"><i class="icon-shopping-cart"></i></span>View Cart</a></li>
+                <li ng-show="currentOrder" class="checkout"><a href="#/checkout"><span class="icon"><i class="icon-dollar"></i></span>Checkout</a></li>
             </ul>
         </nav>
     </div>

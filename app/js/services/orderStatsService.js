@@ -1,10 +1,14 @@
 
-four51.app.factory('OrderSearchCriteriaService', function($resource, $http, $451, $api) {
-	var r = $resource($451.api('orderstats'));
+four51.app.factory('OrderSearchCriteria', function($resource, $http, $451) {
+
+    var _query = function(success) {
+        $resource($451.api('orderstats')).query().$promise.then(function(stats) {
+            if (angular.isFunction(success))
+                success(stats);
+        });
+    }
 
 	return {
-		query: function() {
-			return $api.resource(r).options({ persists: true, ttl: 60000, key: 'OrderSearchCriteria'}).query();
-		}
+		query: _query
 	}
 });

@@ -1,9 +1,9 @@
 'use strict';
 
-four51.app.controller('LineItemViewCtrl', function ($scope, $routeParams, OrderService, ProductService) {
-    $scope.order = OrderService.get($routeParams.orderid, function(data){
-
-		$scope.LineItem = data.LineItems[$routeParams.lineitemindex];
+four51.app.controller('LineItemViewCtrl', function ($scope, $routeParams, Order, ProductService) {
+    Order.get($routeParams.orderid, function(data){
+        $scope.order = data;
+        $scope.LineItem = data.LineItems[$routeParams.lineitemindex];
 
 		//static spec groups are not captured on line item so they require another product.get if we want them shown here.
 		//not setting this product to scope to avoid confusion between live product data and line item history data.

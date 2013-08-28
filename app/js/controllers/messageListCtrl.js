@@ -1,5 +1,7 @@
-four51.app.controller('MessageListCtrl', function($scope, MessageListService) {
-	$scope.messages = MessageListService.query();
+four51.app.controller('MessageListCtrl', function($scope, MessageList) {
+	MessageList.query(function(list) {
+        $scope.messages = list;
+    });
 
 	$scope.checkAll = function(event, type) {
 		angular.forEach($scope.messages, function(msg) {
@@ -10,7 +12,7 @@ four51.app.controller('MessageListCtrl', function($scope, MessageListService) {
 
 	$scope.deleteSelected = function(event) {
 		event.preventDefault();
-		$scope.messages = MessageListService.delete($scope.selectedMessages);
+		MessageList.delete($scope.selectedMessages);
 	};
 
     $scope.selectedMessages = [];

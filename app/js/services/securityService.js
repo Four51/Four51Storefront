@@ -1,4 +1,4 @@
-four51.app.factory('SecurityService', function($451) {
+four51.app.factory('Security', function($451) {
     return {
         init: function(user, auth) {
             this.currentUser = {

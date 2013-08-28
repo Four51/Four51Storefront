@@ -1,8 +1,10 @@
 
-four51.app.controller('AddressListCtrl', function ($scope, $location, $451, AddressListService) {
-    $scope.addresses = AddressListService.query();
+four51.app.controller('AddressListCtrl', function ($scope, $location, $451, AddressList) {
+    AddressList.query(function(list) {
+        $scope.addresses = list;
+    });
     $scope.deleteSelected = function() {
-        $scope.addresses = AddressListService.delete(this.addresses);
+        AddressList.delete(this.addresses);
     };
 
     $scope.newAddress = function() {

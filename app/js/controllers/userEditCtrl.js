@@ -1,7 +1,7 @@
 'use strict';
 
-four51.app.controller('UserEditCtrl', function ($scope, UserService) {
+four51.app.controller('UserEditCtrl', function ($scope, User) {
     $scope.save = function() {
-        UserService.save(this.user);
+        User.save($scope.user);
     };
 });

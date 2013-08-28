@@ -1,6 +1,5 @@
 four51.app.directive('lineitemgrid', function() {
     var obj = {
-
         restrict: 'E',
         templateUrl: 'partials/controls/lineItemGridView.html',
         controller: 'LineItemGridCtrl'
@@ -10,13 +9,9 @@ four51.app.directive('lineitemgrid', function() {
 
 four51.app.directive('shipperselection', function() {
     var obj = {
-        scope: {
-            user: '=',
-            order: '='
-        },
         restrict: 'E',
         templateUrl: 'partials/controls/shipperSelectionView.html',
-        controller: function($scope, ShipperService) {
+        controller: function($scope, Shipper) {
             $scope.$on('event:shipAddressUpdate', function() {
                 // only update shippers if there are actual rates involved
                 //var update = false;
@@ -24,14 +19,15 @@ four51.app.directive('shipperselection', function() {
                 //    update = update || n.ShippingRate.ShipperType != "Custom";
                 //});
                 //if (update) {
-                    $scope.order.Shipper = null;
-                    $scope.Shippers = ShipperService.query();
+                    $scope.currentOrder.Shipper = null;
+                    Shipper.query(function(shippers) {
+                        $scope.Shippers = shippers;
+                    });
                 //}
             });
-            $scope.Shippers = ShipperService.query();
-        },
-        link: function(scope,element,attr) {
-
+            Shipper.query(function(shippers) {
+                $scope.Shippers = shippers;
+            });
         }
     };
     return obj;

@@ -14,7 +14,8 @@ four51.app.directive('addressinput', function() {
         restrict: 'E',
         scope: {
             address : '=',
-            return: '='
+            return: '=',
+            user: '='
         },
         templateUrl: 'partials/controls/addressInputView.html',
         controller: 'AddressInputCtrl'

@@ -1,11 +1,15 @@
-four51.app.factory('OrderSearchService', function($resource, $http, $api, $451) {
-	var r = $resource($451.api('order'), {}, {
-		'get': { method: 'GET', isArray: true }
-	});
+four51.app.factory('OrderSearch', function($resource, $451) {
+
+    var _search = function(stat, success) {
+        $resource($451.api('order'),{},
+            { 'get': { method: 'GET', isArray: true }}
+        ).get(stat).$promise.then(function(list) {
+            if (angular.isFunction(success))
+                success(list);
+        });
+    }
 
 	return {
-		search: function(stat) {
-			return $api.resource(r).options({ key: 'OrderSearch'}).get(stat);
-		}
+		search: _search
 	};
 });

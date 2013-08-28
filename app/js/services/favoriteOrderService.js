@@ -1,24 +1,31 @@
-four51.app.factory('FavoriteOrderService', function($resource, $451, $api) {
-	var service = $resource($451.api('favoriteorder'), { }, {
-		'query': { method: 'GET', isArray: true },
-		'delete': { method: 'DELETE' }
-	});
+four51.app.factory('FavoriteOrder', function($resource, $451) {
+
+    var _query = function(success) {
+        return $resource($451.api('favoriteorder')).query(function(fav) {
+            if (angular.isFunction(success))
+                success(fav);
+        });
+    }
+
+    var _save = function(order,success) {
+        $resource($451.api('favoriteorder')).save(order).$promise.then(function(fav) {
+            if (angular.isFunction(success))
+                success(fav);
+        });
+    }
+
+    var _delete = function(orders,success) {
+        angular.forEach(orders, function(order) {
+            if (order.Selected)
+                $resource($451.api('favoriteorder')).delete(order);
+        });
+        if (angular.isFunction(success))
+            success();
+    }
+
 	return {
-		query: function() {
-            $451.clear('FavoriteOrders');
-			return $api.resource(service).options({ persists: true, key: 'FavoriteOrders'}).query();
-		},
-		save: function(order) {
-            $451.clear('Order.' + order.ID);
-            $api.resource(service).save(order);
-		},
-		delete: function(o) {
-			angular.forEach(o, function(order) {
-				if (order.Selected) {
-					$api.resource(service).delete(order);
-				}
-			});
-			return this.query();
-		}
+		query: _query,
+		save: _save,
+		delete: _delete
 	}
 });
