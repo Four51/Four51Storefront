@@ -38,10 +38,10 @@
             </div>
 
             <div class="row-fluid">
-                <div>
+                <div ngHide="{{index}}">
                     <ng-include src="'partials/sideNav.html'" />
                 </div>
-                <div class="container-fluid container-content span9">
+                <div class="container-fluid container-content">
                     <div ng-view ng-animate="{enter: 'view-enter', leave: 'view-leave'}"/>
                 </div>
             </div>

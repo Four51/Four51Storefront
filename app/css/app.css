@@ -45,6 +45,8 @@ body {
 
     /* overflow: hidden; ng-view animation (1) - remove scroll bar that appears on desktop */
 }
+
+img {display: inline-block; background-color:#d6d6d6;height: 200px; width: 200px;}
 h4 {font-family: 'Lato', sans-serif; }
 .order-cloud {    width:100%; height:100%; position:fixed; left:0;top:0;overflow:hidden;background: url(images/orderCloud.jpg) no-repeat center center fixed; -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -90,10 +92,10 @@ select, input, .uneditable-input {width: auto;} /* bootstrap uses a fixed width 
     color: #3498db;
 }
 .view-partial{
-    border: 1px solid #d6d6d6;
+
     background-color:#fff;
     margin: 0 0 20px;
-    padding: 10px;
+
 
 }
 .container-view {clear: both; overflow: hidden;}
@@ -243,6 +245,7 @@ button::-moz-focus-inner {
 .gridStyle {
     border: 0.071em solid rgb(212,212,212);
     width: auto;
+
     min-height: 14.286em;
     clear: both;
     overflow: hidden;
@@ -250,10 +253,12 @@ button::-moz-focus-inner {
 
 }
 
-.ngRow {
+.ngRow, .ngCell {
     clear: both;
     overflow: hidden;
 }
+
+
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 2. BRANDING ***/
@@ -263,7 +268,7 @@ button::-moz-focus-inner {
     font-size: 0.929em;
     color: rgb(22, 145, 190); /* fallback */
     color: rgba(22, 145, 190, 1);
-    padding: 1.071em;
+
 }
 
 .admin-navigation a.brand:hover {
@@ -272,6 +277,7 @@ button::-moz-focus-inner {
     color: rgba(44, 168, 219, 1);
 }
 
+.admin-navigation a.brand {margin-left: 0;}
 /* ----------------------------------------------------------------------------------------------- */
 /*** 3. ADMIN NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
@@ -290,8 +296,7 @@ button::-moz-focus-inner {
 .admin-navigation {
     background-color:#fff;
 
-
-    border-bottom: 0.071em solid rgb(214, 214, 214);
+    border-bottom: 1px solid rgb(214, 214, 214);
 }
 
 .admin-navigation .user-links ul {
@@ -305,6 +310,8 @@ button::-moz-focus-inner {
 .user-links {
     float: left;
 }
+
+
 
 .admin-navigation li a span, .admin-navigation li a i {
     color:rgb(22, 145, 190);
@@ -340,9 +347,26 @@ button::-moz-focus-inner {
     padding: 25px 1.071em;
 }
 
+/*
 .admin-navigation .nav > li {
     min-height: 3.571em;
 }
+
+*/
+
+.admin-navigation .nav .cart a:hover i {
+    background: rgb(26, 188, 156); /* fallback */
+    background: rgba(26, 188, 156, 1) !important; color:#fff;
+
+}
+
+.admin-navigation .nav .cart a:hover i {
+    background: rgb(26, 188, 156); /* fallback */
+    background: rgba(26, 188, 156, 1) !important;
+
+}
+.container-fluid .admin-navigation {padding: 0;}
+.navbar .admin-navigation .cart a i { text-shadow: none; background-color: rgb(22, 160, 133); color:#fff; }
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 4. CONTENT NAVIGATION ***/
@@ -363,38 +387,34 @@ button::-moz-focus-inner {
 
 .content-navigation .nav ul {
     margin: 0;
-    padding: 0;
+    padding: 10px 0;
     list-style: none;
     font-size: 1em;
     font-weight: 300;
 }
 
-.content-navigation .nav ul li {
 
-    border: 2px solid #ECF8FF;
+.content-navigation .nav ul li:first-child {text-align: left;}
+
+.content-navigation .nav ul li.search-products {
+border-right: 1px solid #d6d6d6;
+
 }
 
 .content-navigation .nav li span {
-    display: block;
+    display: inline-block;
 }
 
-.content-navigation .nav a {
-    display: block;
-    color: rgb(249, 249, 249); /* fallback */
-    color: rgba(249, 249, 249, .9);color:#000;
-    text-decoration: none;
-    -moz-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
-    -webkit-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
-    box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
-    -webkit-transition: color .5s, background .5s, height .5s;
-    -moz-transition: color .5s, background .5s, height .5s;
-    -o-transition: color .5s, background .5s, height .5s;
-    -ms-transition: color .5s, background .5s, height .5s;
-    transition: color .5s, background .5s, height .5s;
 
-}
-.header {border-bottom: 1px solid #000;}
-.content-navigation .nav i {
+
+
+
+
+.container-fluid.content-navigation .nav {border-bottom: 1px solid #d6d6d6;}
+
+
+
+.admin-navigation .nav i {
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     -o-transform: translate3d(0, 0, 0);
@@ -402,71 +422,102 @@ button::-moz-focus-inner {
     transform: translate3d(0, 0, 0);
 }
 
-.content-navigation .nav a, .nav li {
+.admin-navigation .nav a, admin-navigation .nav li {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.content-navigation a, .category-navigation button {
+.admin-navigation a, admin-navigation button {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-/* Hover effect for the whole navigation */
-.content-navigation .nav ul:hover a {
-    color: rgba(249, 249, 249, .35);
-}
 
-.content-navigation .nav ul:hover a:hover {
-    color: rgba(249, 249, 249, 0.99);
-}
 
-/* Adding some background color to the different menu items */
-.content-navigation .nav li:nth-child(8n+1) {
-    background: rgb(208, 101, 3); /* fallback */
-    background: rgba(208, 101, 3, 1);
-    background-color:#fff;
-}
-
-.content-navigation .nav li:nth-child(8n+2) {
-    background: rgb(233, 147, 26); /* fallback */
-    background: rgba(233, 147, 26, 1);
-    background-color:#fff;
-}
-
-.content-navigation .nav li:nth-child(8n+5) {
-    background: rgb(22, 145, 190); /* fallback */
-    background: rgba(22, 145, 190, 1);
-    background-color:#fff;
-}
-
-.content-navigation .nav li:nth-child(8n+6) {
-    background: rgb(22, 107, 162); /* fallback */
-    background: rgba(22, 107, 162, 1);
-    background-color:#fff;
-}
-
-.content-navigation .nav li:nth-child(8n+4) {
-    background: rgb(39, 174, 96); /* fallback */
-    background: rgba(39, 174, 96, 1);background-color:#fff;
+.admin-navigation nav.nav {
+    float: none;
+    margin: 0;
 
 }
 
-.content-navigation .nav li:nth-child(8n+7) {
-    background: rgb(226, 84, 61); /* fallback */
-    background: rgba(226, 84, 61, 1);background-color:#fff;
+.admin-navigation .nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 1em;
+    font-weight: 300;
+}
+
+.admin-navigation .nav li span {
+    display: inline-block;
+}
+
+.admin-navigation .nav li.brand-a {margin-left: 10px;}
+.admin-navigation .nav li.brand-a span {
+    display: inline-block;
+}
+
+.admin-navigation .nav a {
+    display: block;
+
+
+
+    -webkit-transition: color .5s, background .5s, height .5s;
+    -moz-transition: color .5s, background .5s, height .5s;
+    -o-transition: color .5s, background .5s, height .5s;
+    -ms-transition: color .5s, background .5s, height .5s;
+    transition: color .5s, background .5s, height .5s;
 
 }
 
-.content-navigation .nav li:nth-child(8n+3) {
-    background: rgb(22, 160, 133); /* fallback */
-    background: rgba(22, 160, 133, 1);
-    background-color:#fff;
+.admin-navigation .nav li {
+    width: auto; /* default is three buttons~ change to auto if more than two buttons or adjust percentage of width to scale for number of buttons */
+
+    padding: 0;
+    text-align: center;
 }
-.content-navigation .nav li:nth-child(8n+8) {
-    background: rgb(192, 57, 43); /* fallback */
-    background: rgba(192, 57, 43, 1);background-color:#fff;
+
+.admin-navigation.nav a {
+    display: block;
+    width: auto;
+}
 
 
+/* hover, focused and active effects */
+.admin-navigation .nav li.checkout a:hover,
+.admin-navigation .nav li.checkout a:active,
+.admin-navigation .nav li.checkout a:focus {
+    background-color: rgb(26, 188, 156); /* fallback */
+    background-color: rgba(26, 188, 156, 1);
 }
+
+
+.content-navigation .icon {font-size: 20px;}
+
+.admin-navigation-navigation .icon {
+
+}
+
+.admin-navigation-navigation .icon + span {
+
+    -webkit-transition: margin .5s;
+    -moz-transition: margin .5s;
+    -o-transition: margin .5s;
+    -ms-transition: margin .5s;
+    transition: margin .5s;
+}
+
+
+/* Making the text follow the height animation */
+.admin-navigation .nav a:hover .icon + span {
+
+    -webkit-transition: margin .5s;
+    -moz-transition: margin .5s;
+    -o-transition: margin .5s;
+    -ms-transition: margin .5s;
+    transition: margin .5s;
+}
+
+
+
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 5. PRODUCT NAVIGATION ***/
@@ -565,8 +616,9 @@ background-color:#fff; */
     */
 }
 
-
-
+.view-product-default {}
+.test input {width: 50px !important; display: inline-block; }
+#451_btn_orderadd {margin-lefT: 100px; display: block; }
 /* Remove the blue Webkit background when element is tapped */
 .product-navigation a, .product-navigation button {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -604,24 +656,23 @@ background-color:#fff; */
 .category-product.product-navigation  li.nav-header {
     width: 33.3%
 }
+
+/*
 .category-product.product-navigation .nav ul li.nav-header {background-color:#4588AE; }
 .category-product.product-navigation .nav ul li.nav-header:hover {background-color:#1E648C;}
-.category-product.product-navigation nav.nav ul li.nav-header a img{
-    margin-top: -20px;
+.category-product.product-navigation nav.nav ul li.nav-header{
+
 }
 
 
-/* ----------------------------------------------------------------------------------------------- */
+ ----------------------------------------------------------------------------------------------- */
 /*** 6. MAIN CONTENT ***/
 /* ----------------------------------------------------------------------------------------------- */
 
-.container-content {
-    margin-top: 1.429em;
 
-}
 
 .container-content .category-well {}
-
+.container-fluid.container-content  {   margin-top: 1.429em; min-height: 700px; padding: 0;}
 /* ng-view animations */
 
 @-webkit-keyframes view-enter {

@@ -21,7 +21,7 @@
         width: 100%;
         margin-top: 5.000em;
     }
-    .container-view {max-width: 1024px; margin: 0 auto;}
+    .container-view, .container-admin{max-width: 1024px; margin: 0 auto;}
     .header {min-height: 140px;}
     .header .content-navigation, .header .content-navigation.fadeIn {
         position: fixed;
@@ -44,9 +44,15 @@
         margin-top: 0;
     }
 
+    .product-navigation li.nav-header {
+
+        width: 14.2%;border: 1px solid #d6d6d6; background-color: transparent;
+
+    }
+
     .product-navigation nav.nav ul li.nav-header a{
         min-height: 4.286em;
-        padding: 0.714em;
+        padding: 0.714em; color:#777;
     }
 
     .product-navigation nav.nav ul li.nav-header ul.product-nav-details li a {
@@ -72,15 +78,11 @@ padding-top: 0.714em; */
     }
 
     .content-navigation .nav li {
-        width: 12.5%; /* default is three buttons~ change to auto if more than two buttons or adjust percentage of width to scale for number of buttons */
+        width: 50%; /* default is three buttons~ change to auto if more than two buttons or adjust percentage of width to scale for number of buttons */
         display: table-cell;
         padding: 0;
         text-align: center;
-        -webkit-transition: border .5s;
-        -moz-transition: border .5s;
-        -o-transition: border .5s;
-        -ms-transition: border .5s;
-        transition: border .5s;
+
     }
 
     .content-navigation .nav a {
@@ -88,63 +90,6 @@ padding-top: 0.714em; */
         width: auto;
     }
 
-
-    /* hover, focused and active effects */
-    .content-navigation .nav li:nth-child(8n+1) a:hover,
-    .content-navigation .nav li:nth-child(8n+1) a:active,
-    .content-navigation .nav li:nth-child(8n+1) a:focus {
-        background-color: rgb(174, 78, 1); /* fallback */
-        background-color: rgba(174, 78, 1, 1);
-    }
-
-    .content-navigation .nav li:nth-child(8n+2) a:hover,
-    .content-navigation .nav li:nth-child(8n+2) a:active,
-    .content-navigation .nav li:nth-child(8n+2) a:focus {
-        background-color: rgb(191, 117, 20); /* fallback */
-        background-color: rgba(191, 117, 20, 1);
-    }
-
-    .content-navigation .nav li:nth-child(8n+5) a:hover,
-    .content-navigation .nav li:nth-child(8n+5) a:active,
-    .content-navigation .nav li:nth-child(8n+5) a:focus {
-        background-color: rgb(12, 110, 149); /* fallback */
-        background-color: rgba(12, 110, 149, 1);
-    }
-
-    .content-navigation .nav li:nth-child(8n+6) a:hover,
-    .content-navigation .nav li:nth-child(8n+6) a:active,
-    .content-navigation .nav li:nth-child(8n+6) a:focus {
-        background-color: rgb(10, 75, 117); /* fallback */
-        background-color: rgba(10, 75, 117, 1);
-    }
-
-    .content-navigation .nav li:nth-child(8n+4) a:hover,
-    .content-navigation .nav li:nth-child(8n+4) a:active,
-    .content-navigation .nav li:nth-child(8n+4) a:focus {
-        background-color: rgb(46, 204, 113); /* fallback */
-        background-color: rgba(46, 204, 113, 1);
-    }
-
-    .content-navigation .nav li:nth-child(8n+7) a:hover,
-    .content-navigation .nav li:nth-child(8n+7) a:active,
-    .content-navigation .nav li:nth-child(8n+7) a:focus {
-        background-color: rgb(242, 94, 70); /* fallback */
-        background-color: rgba(242, 94, 70);
-    }
-
-    .content-navigation .nav li:nth-child(8n+3) a:hover,
-    .content-navigation .nav li:nth-child(8n+3) a:active,
-    .content-navigation .nav li:nth-child(8n+3) a:focus {
-        background-color: rgb(26, 188, 156); /* fallback */
-        background-color: rgba(26, 188, 156, 1);
-    }
-
-    .content-navigation .nav li:nth-child(8n+8) a:hover,
-    .content-navigation .nav li:nth-child(8n+8) a:active,
-    .content-navigation .nav li:nth-child(8n+8) a:focus {
-        background-color: rgb(171, 8, 9); /* fallback */
-        background-color: rgba(171, 8, 9);
-    }
 
     .content-navigation .icon {
         padding-top: 1em;
@@ -161,7 +106,7 @@ padding-top: 0.714em; */
 
     /* Animating the height of the element*/
     .content-navigation .nav a {
-        height: 5em;
+        height: 3em;
     }
 
     /* Making the text follow the height animation */
@@ -174,45 +119,10 @@ padding-top: 0.714em; */
         transition: margin .5s;
     }
 
-    /* Positioning the icons */
-    .content-navigation .nav i, .product-navigation .nav i {
-        position: relative;
-        display: inline-block;
-        margin: 0 auto;
-        padding: 0.4em ;
-        border-radius: 50%;
-        font-size: 1.2em;
-        box-shadow: 0 0 0 2.143em transparent;
-        -webkit-transform: translate3d(0, 0, 0);
-        -moz-transform: translate3d(0, 0, 0);
-        -o-transform: translate3d(0, 0, 0);
-        -ms-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-        -webkit-transition: box-shadow .6s ease-in-out;
-        -moz-transition: box-shadow .6s ease-in-out;
-        -o-transition: box-shadow .6s ease-in-out;
-        -ms-transition: box-shadow .6s ease-in-out;
-        transition: box-shadow .6s ease-in-out;
-    }
-
-    /* Animate the box-shadow */
-    .content-navigation .nav a:hover i,
-    .content-navigation .nav a:active i,
-    .content-navigation .nav a:focus i {
-        box-shadow: 0 0 0 0 rgba(255,255,255,0.2);
-        -webkit-transition: box-shadow .4s ease-in-out;
-        -moz-transition: box-shadow .4s ease-in-out;
-        -o-transition: box-shadow .4s ease-in-out;
-        -ms-transition: box-shadow .4s ease-in-out;
-        transition: box-shadow .4s ease-in-out;
-    }
 
 
-    .product-navigation li.nav-header {
-        float: none;
 
 
-    }
     .product-navigation li.nav-header a {
 
 
@@ -222,6 +132,8 @@ padding-top: 0.714em; */
     .category-product.product-navigation li.nav-header {
         float: left;
     }
+
+
 }
 
 /* Size and font adjustments to make it fit into in-between screens 800-980 */
@@ -231,6 +143,15 @@ padding-top: 0.714em; */
         float: left;
 
 
+    }
+    .admin-navigation .nav li.brand-a span {
+        display: block;
+    }
+    .admin-navigation .nav li span {
+        display: block;
+    }
+    .admin-navigation .brand-name {
+        visibility: hidden;
     }
 
     .nav ul {
@@ -273,13 +194,13 @@ padding-top: 0.714em; */
     .admin-navigation .user-links ul {
         float: left;
     }
-
+/*
     .admin-navigation .brand {
         position: absolute;
         top: 0;
         left: 39%;
     }
-
+*/
     .product-navigation li.nav-header {
         width: 33.3%;
     }
@@ -290,16 +211,28 @@ padding-top: 0.714em; */
 }
 /* Tablet - portrait - 798 */
 @media (min-width:32.5em) and (max-width: 49.938em) {
+
+    .admin-navigation .nav li.brand-a span {
+        display: block;
+    }
+    .admin-navigation .nav li span {
+        display: block;
+    }
+    .admin-navigation .brand-name {
+        visibility: hidden;
+    }
+
+
     .admin-navigation .user-links ul {
         float: left;
     }
-
+/*
     .admin-navigation .brand {
         position: absolute;
         top: 0;
         left: 37%;
     }
-
+*/
     .content-navigation .nav ul li:nth-child(8n+1) a:hover,
     .content-navigation .nav ul li:nth-child(8n+1) a:active,
     .content-navigation .nav ul li:nth-child(8n+1) a:focus {
