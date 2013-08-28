@@ -18,15 +18,15 @@
             </span>
         </table>
         <br />
-        <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product' />
+
     </div>
     <div style="float: right; width: 300px; ">
-       <div style="border-bottom: 1px solid #d6d6d6; margin: 10px 0;">
+       <div style="border-bottom: 1px solid #d6d6d6; margin: 10px 0; padding: 0 0 10px;">
         <h4>{{LineItem.Product.Name}}</h4>
         <h5>Model {{LineItem.Product.ExternalID}}</h5>
 
 
-
+           <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product' />
 
 
        </div>

@@ -19,10 +19,10 @@
     .content-navigation .nav ul {
         display: table;
         width: 100%;
-        margin-top: 5.000em;
+
     }
     .container-view, .container-admin{max-width: 1024px; margin: 0 auto;}
-    .header {min-height: 140px;}
+    .header {min-height: 74px;}
     .header .content-navigation, .header .content-navigation.fadeIn {
         position: fixed;
         margin-left: -512px;

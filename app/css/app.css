@@ -672,7 +672,7 @@ background-color:#fff; */
 
 
 .container-content .category-well {}
-.container-fluid.container-content  {   margin-top: 1.429em; min-height: 700px; padding: 0;}
+.container-fluid.container-content  {   margin-top: 1.429em; min-height: 200px; padding: 0;}
 /* ng-view animations */
 
 @-webkit-keyframes view-enter {
