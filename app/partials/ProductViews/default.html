@@ -1,60 +1,47 @@
-
 <div class="container-fluid view-partial view-default-product">
-
-    <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url">
-
-    <section  id="451_area_prod_desc" style="  clear: both; overflow: hidden;margin: 10px 0;" class="span8">
-
-        <div style="border: 1px solid #d6d6d6; clear: both; overflow: hidden;">
-
-
-
-
-<div style="background-color:#2C3E50; clear: both; overflow: hidden;">
-            <h4  ng-click="selected=1" class="span6"  style="background-color:#1A242F; cursor: pointer; color:#fff; padding: 10px 25px; margin: 0; text-align: center;">Information</h4>
-            <h4  ng-click="selected=2" class="span6 hidden-phone" ng-show="StaticSpecGroups"  style="background-color:#2C3E50; color:#fff;cursor: pointer;padding: 10px 25px;margin: 0;text-align: center;">Tech Specs</h4>
-    <hr/>
-        </div>
-
-
-               <div ng-hide="selected == 2">
+        <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url">
+        <section  id="451_area_prod_desc" style="  clear: both; overflow: hidden;margin: 10px 0;" class="span8">
+            <div style="border: 1px solid #d6d6d6; clear: both; overflow: hidden;">
+                <div style="background-color:#2C3E50; clear: both; overflow: hidden;">
+                    <h4  ng-click="selected=1" class="span6"  style="background-color:#1A242F; cursor: pointer; color:#fff; padding: 10px 25px; margin: 0; text-align: center;">Information</h4>
+                    <h4  ng-click="selected=2" class="span6 hidden-phone" ng-show="StaticSpecGroups"  style="background-color:#2C3E50; color:#fff;cursor: pointer;padding: 10px 25px;margin: 0;text-align: center;">Tech Specs</h4>
+                    <hr/>
+                </div>
+                <div ng-hide="selected == 2">
                     <div ng-show="LineItem.Product.Description"><p class="text-info">Description:</p> <p ng-bind-html-unsafe="LineItem.Product.Description" /></div>
                     <p ng-show="LineItem.Variant.Description"><span class="text-info">Variant Description:</span>  <span ng-bind-html-unsafe="LineItem.Variant.Description"/> </p>
                     <p ng-show="LineItem.Variant.ExternalID"> <span class="text-info">Variant ID:</span>  {{LineItem.Variant.ExternalID}}   </p>
                     <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)"> <span class="text-info">Available Inventory:</span>  {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}  </p>
                 </div>
-
-               <div ng-show="selected == 2">
+                <div ng-show="selected == 2">
                    <p><staticspecstable specgroups="StaticSpecGroups"></staticspecstable></p>
-               </div>
-        </div>
-<div class="visible-phone" style="border: 1px solid #d6d6d6;">
-    <h4 ng-show="StaticSpecGroups" class="span6" ng-click="selected=2" style="background-color:#2C3E50; color:#fff;cursor: pointer;padding: 10px 25px; display: inline; float: left;margin: 0;text-align: center;">Tech Specs</h4>
-    <div >
-        <staticspecstable specgroups="StaticSpecGroups"></staticspecstable>
-    </div>
-</div>
-<hr />
-        <div ng-show="LineItem.Product.Variants.length > 1 && !LineItem.Variant">
-            <p class="text-warning">Please select from the following:</p>
-            <table border=1 class="451_list_vars">
-                <tr>
-                    <td>Variant ID</td>
-                    <td>Description</td>
-                    <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">Available Quantity</td>
-                    <td>Order Quantity</td>
-                </tr>
-                <tr ng-repeat="v in LineItem.Product.Variants">
-                    <td><a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>{{v.ExternalID}}</a></td>
-                    <td>{{v.Description}}</td>
-                    <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">{{v.QuantityAvailable}}</td>
-                    <td>Order Quantity</td>
-                </tr>
-            </table>
-        </div>
-
-
-    </section>
+                </div>
+            </div>
+            <div class="visible-phone" style="border: 1px solid #d6d6d6;">
+                <h4 ng-show="StaticSpecGroups" class="span6" ng-click="selected=2" style="background-color:#2C3E50; color:#fff;cursor: pointer;padding: 10px 25px; display: inline; float: left;margin: 0;text-align: center;">Tech Specs</h4>
+                <div >
+                    <staticspecstable specgroups="StaticSpecGroups"></staticspecstable>
+                </div>
+            </div>
+            <hr />
+            <div ng-show="LineItem.Product.Variants.length > 1 && !LineItem.Variant">
+                <p class="text-warning">Please select from the following:</p>
+                <table border=1 class="451_list_vars">
+                    <tr>
+                        <td>Variant ID</td>
+                        <td>Description</td>
+                        <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">Available Quantity</td>
+                        <td>Order Quantity</td>
+                    </tr>
+                    <tr ng-repeat="v in LineItem.Product.Variants">
+                        <td><a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>{{v.ExternalID}}</a></td>
+                        <td>{{v.Description}}</td>
+                        <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">{{v.QuantityAvailable}}</td>
+                        <td>Order Quantity</td>
+                    </tr>
+                </table>
+             </div>
+        </section>
 
     <section class="span4" style="float: right;">
 
