@@ -65,7 +65,11 @@ four51.app.controller('CustomProductCtrlMatrix', function($scope, $451, VariantS
 		}
 
 		VariantService.get({'ProductInteropID': $scope.LineItem.Product.InteropID, 'SpecOptionIDs': [opt1.ID, opt2.ID]}, function(data){
-			$scope.LineItems[opt1.Value.toString() + opt2.Value.toString()].Variant = data;
+			var li = $scope.LineItems[opt1.Value.toString() + opt2.Value.toString()];
+			li.Variant = data;
+			//for line item calc if spec markups used
+			li.Specs.push({CanSetForLineItem:$scope.matrixSpec1.CanSetForLineItem,  MarkupType: $scope.matrixSpec1.MarkupType, SelectedOptionID: opt1.ID, Options: [opt1]  });
+			li.Specs.push({CanSetForLineItem:$scope.matrixSpec2.CanSetForLineItem, MarkupType: $scope.matrixSpec2.MarkupType, SelectedOptionID: opt2.ID, Options: [opt2]  });
 			$scope.LineItem.Variant = data;
 		});
 	};
@@ -79,11 +83,15 @@ four51.app.controller('CustomProductCtrlMatrix', function($scope, $451, VariantS
 		$scope.matrixSpec2 = specs[1];
 		angular.forEach(specs[0].Options, function(option1){
 			angular.forEach(specs[1].Options, function(option2){
+				var specs = [];
+				angular.forEach($scope.LineItem.Specs, function(item){
+					specs.push(item);
+				});//copy specs so each line item has its own reference
 				$scope.LineKeys.push(option1.Value.toString() + option2.Value.toString());
 				$scope.LineItems[option1.Value.toString() + option2.Value.toString()] = {
 					Product: $scope.LineItem.Product,
 					PriceSchedule: $scope.LineItem.PriceSchedule,
-					Specs: $scope.LineItem.Specs
+					Specs: specs
 				};
 			});
 		});

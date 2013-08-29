@@ -46,6 +46,8 @@ four51.app.factory('ProductDisplayService', function($451, VariantService){
 
 		var addToMarkups = function(spec){
 			var otherMarkup;
+			console.log('add to markup');
+			console.dir(spec);
 			if(spec.AllowOtherValue && spec.OtherTextValue && spec.OtherValueMarkup > 0)
 				otherMarkup = spec.OtherValueMarkup;
 
