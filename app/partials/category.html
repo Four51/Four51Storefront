@@ -5,29 +5,15 @@
         </ul>
     </nav>
 
-<!--- some partials may have their own sideNav of sub navigation, much like current COS replaces side nav with different links based on page, in this case I only want catalog/product links on the catalog pages and will create a catalognav partial
-<div>
-    <ng-include src="'partials/sideNav.html'" />
+
+<div class="container-fluid product-navigation product-navigation-top">
+    <nav class="nav 451_cat_nav">
+        <div class="nav-header hidden-desktop favorites"> <a href="#/favoriteorders">View Favorite Orders</a></div>
+        <div class="nav-header icon-caret-down visible-desktop details-show" ng-click="showDetails = !showDetails" href="#"></div>
+        <div ng-show='showDetails'><categorytree tree='tree' current='currentCategory' /></div>
+    </nav>
+
 </div>
---->
-  <div class="container-fluid product-navigation product-navigation-top">
-      <nav class="nav 451_cat_nav">
-          <div class="nav-header hidden-desktop favorites" ng-show="user.CurrentOrderID"> <a href="#/favoriteorders">View Favorite Orders</a></div>
-          <div class="nav-header icon-caret-down visible-desktop details-show" ng-click="showDetails = ! showDetails" href="#"></div>
-          <ul>
-
-
-              <li class="nav-header animated fadeInRight" ng-class="getClass('/catalog/{{category.InteropID}}')" ng-repeat="category in tree" ng-include="'categoryTemplate.html'"></li>
-          </ul>
-      </nav>
-  </div>
-  <script type="text/ng-template" id="categoryTemplate.html">
-      <a ng-href=#/catalog/{{category.InteropID}}>{{category.Name}}</a>
-      <ul ng-if="category.SubCategories.length" class="product-nav-details" ng-class="{ 'hidden': ! showDetails }" >
-          <li ng-class="getClass('/catalog/{{category.InteropID}}')" ng-repeat="category in category.SubCategories" ng-include="'categoryTemplate.html'"></li>
-      </ul>
-  </script>
-
 <div class="container-fluid category-product product-navigation" ng-show=currentCategory.SubCategories>
     <div class="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image">
         <h4 ui-toggle>{{currentCategory.Name}}</h4>
