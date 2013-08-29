@@ -26,9 +26,10 @@ four51.app.controller('Four51Ctrl', function ($scope, $location, $451, User, Ord
                 });
             }
         });
-        CategoryService.tree(function(data) {
-            $scope.tree = data;
-        });
+        //CategoryService.tree(function(data) {
+        //    $scope.tree = data;
+        //});
+        $scope.tree = CategoryService.tree();
         SpendingAccountService.query(function(data) {
             $scope.SpendingAccounts = data;
         });

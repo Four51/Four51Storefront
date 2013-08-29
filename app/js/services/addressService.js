@@ -1,20 +1,20 @@
 four51.app.factory('Address', function($resource, $451){
     var _get = function(id, success) {
-        return $resource($451.api('address/:id'), { id: '@id' }).get({ id: id }).$promise.then(function(add) {
+        $resource($451.api('address/:id'), { id: '@id' }).get({ id: id }).$promise.then(function(add) {
             if (angular.isFunction(success))
                 success(add);
         });
     }
 
     var _save = function(address, success) {
-        return $resource($451.api('address')).save(address).$promise.then(function(add) {
+        $resource($451.api('address')).save(address).$promise.then(function(add) {
             if (angular.isFunction(success))
                 success(add);
         });
     }
 
     var _delete = function(address, success) {
-        return  $resource($451.api('address')).delete(address).$promise.then(function() {
+        $resource($451.api('address')).delete(address).$promise.then(function() {
             if (angular.isFunction(success))
                 success();
         });
@@ -30,7 +30,7 @@ four51.app.factory('Address', function($resource, $451){
 four51.app.factory('AddressList', function($resource, $451) {
 
     var _query = function(success) {
-        return $resource($451.api('address')).query().$promise.then(function(list) {
+        $resource($451.api('address')).query().$promise.then(function(list) {
             if (angular.isFunction(success))
                 success(list);
         });

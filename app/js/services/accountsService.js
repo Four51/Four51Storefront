@@ -1,7 +1,7 @@
 four51.app.factory('SpendingAccountService', function($resource, $451){
 
     var _query = function(success) {
-        return $resource($451.api('spendingaccount')).query().$promise.then(function(list) {
+        $resource($451.api('spendingaccount')).query().$promise.then(function(list) {
             if (angular.isFunction(success))
                 success(list);
         });

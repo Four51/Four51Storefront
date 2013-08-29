@@ -10,21 +10,19 @@ four51.app.factory('User', function($resource, $451, Security) {
             _extend(u);
             if (angular.isFunction(success))
                 success(u);
-            return u;
         });
     }
 
     var _save = function(user, success) {
-        return $resource($451.api('user')).save(user).$promise.then(function(u) {
+        $resource($451.api('user')).save(user).$promise.then(function(u) {
             _extend(u);
             if (angular.isFunction(success))
                 success(u);
-            return u;
         });
     }
 
     var _login = function(credentials,success) {
-        return $resource($451.api('login')).get(credentials).$promise.then(function(u) {
+        $resource($451.api('login')).get(credentials).$promise.then(function(u) {
             if (angular.isFunction(success))
                 success(u);
         });
