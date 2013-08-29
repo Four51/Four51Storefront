@@ -8,7 +8,7 @@ four51.app.factory('UserService', function($resource, $api, $451, SecurityServic
 
 	return {
         login: function(user) {
-            $api.resource(service).options({persists: true, key: 'User'}).get(user, function(u) { extend(u); });
+            $resource($451.api('login')).get(user);
         },
         logout: function() {
             $451.clear();
