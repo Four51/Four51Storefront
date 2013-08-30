@@ -1,23 +1,19 @@
-  <nav class="nav">
+  <div class="container-fluid nav-cat-search">
+<nav class="nav">
         <ul>
-            <li class="favorites " ng-class="getClass('/catalog')"> <a href="#/catalog"><span class="icon"><i class="icon-folder-open"></i></span> Products /</a></li>
+            <li class="nav-header icon-eye-open hidden-phone details-show" ng-click="showMega = ! showMega" href="#" style="display: block; font-size: 18px;cursor: pointer;"></li>
+            <li class="favorites " ng-class="getClass('/catalog')"> <a href="#/catalog"><span class="icon"><i class="icon-folder-open"></i></span> Products</a> {{currentCategory.Name}}</li>
             <li class="search-products"><a href="#/search"><span class="icon"><i class="icon-search"></i></span> Search <i class="icon-caret-down"></i></a></li>
         </ul>
     </nav>
-
-<!--- some partials may have their own sideNav of sub navigation, much like current COS replaces side nav with different links based on page, in this case I only want catalog/product links on the catalog pages and will create a catalognav partial
-<div>
-    <ng-include src="'partials/sideNav.html'" />
-</div>
---->
-  <div class="container-fluid product-navigation product-navigation-top">
+  </div>
+<!--- lets include navigation for each section in line with the content, in this case I only want catalog/product links on the catalog view , will be deleting sideNav.html --->
+  <div class="container-fluid product-navigation" ng-class="{ 'hidden': ! showMega }" style="margin-bottom: 20px;">
       <nav class="nav 451_cat_nav">
-          <div class="nav-header hidden-desktop favorites" ng-show="user.CurrentOrderID"> <a href="#/favoriteorders">View Favorite Orders</a></div>
-          <div class="nav-header icon-caret-down visible-desktop details-show" ng-click="showDetails = ! showDetails" href="#"></div>
           <ul>
+              <li class="nav-header visible-desktop icon-caret-down details-show" ng-click="showDetails = ! showDetails" href="#"></li>
 
-
-              <li class="nav-header animated fadeInRight" ng-class="getClass('/catalog/{{category.InteropID}}')" ng-repeat="category in tree" ng-include="'categoryTemplate.html'"></li>
+              <li class="nav-header animated fadeInRight 451_cat_item" ng-class="getClass('/catalog/{{category.InteropID}}')" ng-repeat="category in tree" ng-include="'categoryTemplate.html'"></li>
           </ul>
       </nav>
   </div>
@@ -30,7 +26,7 @@
 
 <div class="container-fluid category-product product-navigation" ng-show=currentCategory.SubCategories>
     <div class="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image">
-        <h4 ui-toggle>{{currentCategory.Name}}</h4>
+
     </div>
     <nav class="nav 451_lbl_subcatlist">
         <ul>
