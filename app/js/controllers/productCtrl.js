@@ -1,16 +1,17 @@
-four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, ProductService,ProductDisplayService, Order, VariantService, $451, User) {
+four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Product,ProductDisplayService, Order, VariantService, $451, User) {
 	$scope.LineItem = {};
 
 	Order.get(user.CurrentOrderID, function(data){
 		$scope.LineItem = data.LineItems[$routeParams.lineItemIndex];
-		$scope.LineItem.Product = ProductService.get({interopID: $scope.LineItem.Product.InteropID}, function(){
-			ProductDisplayService.setProductViewScope($scope);
+		Product.get($scope.LineItem.Product.InteropID, function(product){
+            $scope.LineItem.Product = product;
+            ProductDisplayService.setProductViewScope($scope);
 		});
 		$scope.allowAddToOrder = true;
 	});
 });
 
-four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, ProductService,ProductDisplayService, Order, VariantService, $451) {
+four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, ProductDisplayService, Order, VariantService, $451) {
 	$scope.LineItem = {};
 	$scope.LineItem.Product = $scope.p;
 	ProductDisplayService.setNewLineItemScope($scope);
@@ -18,10 +19,10 @@ four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, Pr
 	$scope.allowAddToOrderInProductList = $scope.allowAddToOrder && $scope.LineItem.Specs.length == 0 && $scope.LineItem.Product.Type != 'VariableText';
 });
 
-four51.app.controller('ProductCtrl', function ($routeParams, $scope, ProductService,ProductDisplayService, Order, VariantService, $451) {
+four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, ProductDisplayService, Order, VariantService, $451) {
 	$scope.LineItem = {};
-	$scope.LineItem.Product = ProductService.get({interopID: $routeParams.productInteropID}, function(data){
-        var v = null;
+	Product.get($routeParams.productInteropID, function(data){
+        $scope.LineItem.Product = data;
         if($routeParams.variantInteropID){
 			//Product.Variants doesn't return all details on variable text products, so go back for the rest.
 			$scope.LineItem.Variant = data.Type == 'VariableText' ?

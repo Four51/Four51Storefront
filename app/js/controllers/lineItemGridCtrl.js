@@ -1,6 +1,6 @@
 'use strict';
 
-four51.app.controller('LineItemGridCtrl', function ($scope, Order, ProductService) {
+four51.app.controller('LineItemGridCtrl', function ($scope, Order) {
     $scope.copyAddressToAll = function() {
         angular.forEach($scope.currentOrder.LineItems, function(n) {
             n.DateNeeded = $scope.currentOrder.LineItems[0].DateNeeded;

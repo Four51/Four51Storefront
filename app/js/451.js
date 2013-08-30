@@ -4,6 +4,7 @@ four51.app.factory('$451', function(Cache) {
 	function json_filter(input, options, op) {
 		if (input == null || options == null) return;
 		var result = [];
+
 		angular.forEach(input, function(row) {
             if (row[options.Property] === undefined && !options instanceof Array) return;
 

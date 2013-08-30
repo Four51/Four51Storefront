@@ -1,4 +1,4 @@
-four51.app.controller('Four51Ctrl', function ($scope, $location, $451, User, Order, Security, OrderConfig, CategoryService, SpendingAccountService) {
+four51.app.controller('Four51Ctrl', function ($scope, $routeParams, $location, $451, User, Order, Security, OrderConfig, Category, SpendingAccountService) {
     $scope.scroll = 0;
     $scope.appname = $451.appname;
 	$scope.Four51User = Security;
@@ -26,10 +26,9 @@ four51.app.controller('Four51Ctrl', function ($scope, $location, $451, User, Ord
                 });
             }
         });
-        //CategoryService.tree(function(data) {
-        //    $scope.tree = data;
-        //});
-        $scope.tree = CategoryService.tree();
+        Category.tree(function(data) {
+            $scope.tree = data;
+        });
         SpendingAccountService.query(function(data) {
             $scope.SpendingAccounts = data;
         });

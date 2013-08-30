@@ -1,4 +1,4 @@
-four51.app.controller('ProductListCtrl', function ($routeParams,$rootScope, $scope, ProductService) {
+four51.app.controller('ProductListCtrl', function ($routeParams,$rootScope, $scope, Product) {
     $scope.loadSearch = function(){
 
         if($scope.category && $scope.category.products){
@@ -7,9 +7,10 @@ four51.app.controller('ProductListCtrl', function ($routeParams,$rootScope, $sco
             return;
         }
 
-        if($scope.category)
-            $scope.category.products = $scope.Products = ProductService.search($scope.categoryInteropID, null);
-
-
+        if($scope.category) {
+            Product.search($scope.categoryInteropID, null, function(data) {
+                $scope.category.products = $scope.Products = data;
+            });
+        }
     }
 });

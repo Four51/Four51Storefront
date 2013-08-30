@@ -1,22 +1,27 @@
 'use strict';
-four51.app.factory('ProductService', function($resource, $451){
-    var product_api = $resource($451.api('Products/:interopID'), {interopID: '@ID'});
+four51.app.factory('Product', function($resource, $451){
+     var _get = function(param, success) {
+        $resource($451.api('Products/:interopID'), {interopID: '@ID'}).get({interopID: param}).$promise.then(function(product) {
+            if (angular.isFunction(success))
+                success(product);
+        });
+    }
+
+    var _search = function(categoryInteropID, searchTerm, success) {
+        if(!categoryInteropID && !searchTerm) return null;
+        var criteria = {
+            'CategoryInteropID': categoryInteropID,
+            'SearchTerms': searchTerm ? searchTerm : ''
+        };
+        $resource($451.api('Products')).query(criteria).$promise.then(function(products) {
+            if (angular.isFunction(success))
+                success(products);
+        });
+    }
+
 	return {
-        get: function(param, success){
-            return product_api.get(param, function(product) {
-                if (success) success(product);
-                return product;
-            });
-        },
-        search: function(categoryInteropID, searchTerm, success) {
-            if(!categoryInteropID && !searchTerm) return null;
-            return product_api.query({
-                'CategoryInteropID': categoryInteropID,
-                'SearchTerms': searchTerm ? searchTerm : ''}, function(products) {
-                if (success) success(products);
-                return products;
-            });
-        }
+        get: _get,
+        search: _search
     }
 });
 

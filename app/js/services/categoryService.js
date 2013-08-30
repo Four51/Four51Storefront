@@ -1,59 +1,22 @@
 'use strict';
-four51.app.factory('CategoryService', function($resource, $rootScope, $451, ProductService){
-    var catservice = $resource($451.api('categories/:interopID', {interopID: '@ID'}));
-    var cats = null;
-
-
-    function findCat(parent, interopID){
-        if(!interopID)
-            return {SubCategories: cats, InteropID: null};
-        if(parent.InteropID === interopID)
-            return parent;
-        var foundCat;
-        for(var i = 0; i < parent.SubCategories.length; i++){
-            var child = parent.SubCategories[i];
-            if(child.InteropID === interopID)
-                return child;
-
-            if(child.SubCategories){
-                foundCat = findCat(child, interopID)
-                if(foundCat)
-                    return foundCat;
-            }
-        }
+four51.app.factory('Category', function($resource, $451){
+    var _get = function(interopID,success) {
+        $resource($451.api('categories/:interopID', {interopID: '@ID'})).get({ 'interopID': interopID}).$promise.then(function(cat) {
+            if (angular.isFunction(success))
+                success(cat);
+        });
     }
+
+    var _query = function(success){
+        $resource($451.api('categories')).query().$promise.then(function(data){
+            if (angular.isFunction(success))
+                success(data);
+        });
+    }
+
     return {
-        tree: function(){
-            //if(!cats){
-                console.log('category query');
-                return catservice.query(function(data){
-                    cats = data;
-                });
-            //}else
-            //    return cats;
-        },
-        getOne: function(interopID){
-
-            var foundCat;
-            if(cats)
-                foundCat = findCat({SubCategories: cats}, interopID);
-
-            if(foundCat)
-                return foundCat;
-            else{
-                if(interopID){
-                    console.log('category get');
-                    return catservice.get({ interopID: interopID } );
-                }
-                else{
-                    catservice.query(function(data){
-                        cats = data;
-                        //reloadCat();
-
-                    })
-                }
-            }
-        }
+        tree: _query,
+        get: _get
     }
 });
 
