@@ -1,6 +1,12 @@
 <section class="view-partial">
 <div id="user_form">
-    <h2 class="form-actions-heading">User Information</h2>
+    <h2 class="form-actions-heading">My Account</h2>
+    <ul>
+        <li class="addresses"><a href="#/addresses">Addresses</a></li>
+        <li class="messages"><a href="#/message">Messages</a></li>
+
+    </ul>
+
     <form name="user_form" ng-submit="save()">
         <input name="firstname" class="input-large" type="text" ng-model="user.FirstName" placeholder="First Name" /><br />
         <input name="lastname" class="input-large" type="text" ng-model="user.LastName" placeholder="Last Name" /><br />
@@ -22,4 +28,5 @@
         <input class="btn btn-medium btn-primary" type="submit" ng-disabled="user_form.$invalid" id="451_btn_user" value="Save" />
     </form>
 </div>
+
 </section>

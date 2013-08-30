@@ -21,6 +21,7 @@
         width: 100%;
 
     }
+
     .container-view, .container-admin{max-width: 1024px; margin: 0 auto;}
     .header {min-height: 74px;}
     .header .content-navigation, .header .content-navigation.fadeIn {
@@ -138,21 +139,34 @@ padding-top: 0.714em; */
 
 /* Size and font adjustments to make it fit into in-between screens 800-980 */
 @media (min-width: 50em) and (max-width: 61.250em) {
-    .product-navigation.span3{width: 100%;}
-    .product-navigation li.nav-header {
-        float: left;
-
-
-    }
     .admin-navigation .nav li.brand-a span {
         display: block;
     }
+    li.cart a   {margin-top:4px;}
     .admin-navigation .nav li span {
         display: block;
     }
     .admin-navigation .brand-name {
         visibility: hidden;
     }
+
+
+    .admin-navigation .user-links ul {
+        float: left;
+    }
+
+    .user-links .nav a i {font-size: 15px;}
+
+    .admin-navigation .user-links .nav a    {
+        padding: 15px 1.071em;
+    }
+    a.cart {padding: 20px 0 0  !important;}
+
+
+    .admin-navigation .user-links ul {
+        float: left;
+    }
+
 
     .nav ul {
         font-size: .90em;
@@ -162,7 +176,9 @@ padding-top: 0.714em; */
     .content-navigation .nav ul {
         margin-top: 0;
     }
-
+    .admin-navigation .user-links .nav a    {
+        padding: 15px 1.071em;
+    }
     .header .content-navigation, .header .content-navigation.fadeIn {
         position: relative;
         margin-left: 0;
@@ -222,10 +238,17 @@ padding-top: 0.714em; */
         visibility: hidden;
     }
 
-
+    li.cart a   {margin-top:4px;}
     .admin-navigation .user-links ul {
         float: left;
     }
+
+    .user-links .nav a i {font-size: 15px;}
+
+    .admin-navigation .user-links .nav a    {
+    padding: 15px 1.071em;
+    }
+ a.cart {padding: 20px 0 0  !important;}
 /*
     .admin-navigation .brand {
         position: absolute;
@@ -324,7 +347,27 @@ padding-top: 0.714em; */
         float: left;
         width: 50%;
     }
+    .admin-navigation .nav li.brand-a span {
+        display: block;
+    }
+    .admin-navigation .nav li span {
+        display: block;
+    }
+    .admin-navigation .brand-name {
+        visibility: hidden;
+    }
 
+
+    .admin-navigation .user-links ul {
+        float: left;
+    }
+
+    .user-links .nav a i {font-size: 15px;}
+
+    .admin-navigation .user-links .nav a    {
+        padding: 15px 1.071em;
+    }
+    a.cart {padding: 20px 0 0  !important;}
     .content-navigation .nav a {
         padding: 0.3em;
     }
@@ -369,10 +412,28 @@ padding-top: 0.714em; */
 
 /* Size and font adjustments to make it fit into in-between screens 520-618 */
 @media (min-width: 32.5em) and (max-width: 38.688em) {
-    .content-navigation .nav li span.icon {
-        width: 50%;
+
+
+    .navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top {
+        margin-left: 0;
+        margin-right: 0;
     }
 
+    .admin-navigation .nav > li   {font-size: 20px;}
+
+
+    .admin-navigation .nav > li > a {
+        padding: 23px .7em;
+    }
+
+    li.cart {margin-right: 0;}
+    .navbar .nav {margin:0 !important;}
+
+    .content-navigation .nav li {
+        display: block;
+        float: left;
+        width: 50%;
+    }
     .admin-navigation .user-links ul {
         float: left;
     }
@@ -409,6 +470,23 @@ padding-top: 0.714em; */
 
 /* Phone - portrait and landscape up to - 518 */
 @media (max-width: 32.438em) {
+
+
+    .navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .admin-navigation .nav > li   {font-size: 15px; display: none;}
+
+
+    .admin-navigation .nav > li > a {border-left: 1px solid #d6d6d6;
+padding: 23px .45em;
+    }
+
+    li.cart {margin-right: 0; }
+    .navbar .nav {margin:0 !important;}
+
     .content-navigation .nav li {
         display: block;
         float: left;

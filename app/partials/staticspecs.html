@@ -1,6 +1,7 @@
-<span ng-show="specgroups">
-	Specifications:
-	<table border=1 id="451_list_specgroup">
+<div ng-show="specgroups">
+	<p class="text-info">Specifications</p>
+
+    <table border=1 id="451_list_specgroup" style="margin: 10px;">
 		<tbody ng-repeat="sg in specgroups">
 			<tr ng-show="hasvisiblechild(sg.Specs)" class="alert-info 451_hdr_spec_grp">
 				<td colspan=2>{{sg.Name}}</td>
@@ -12,4 +13,4 @@
 			</tr>
 		</tbody>
 	</table>
-</span>
+</div>
