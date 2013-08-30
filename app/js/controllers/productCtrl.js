@@ -1,4 +1,4 @@
-four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Product,ProductDisplayService, Order, Variant, $451, User) {
+four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Product,ProductDisplayService, Order) {
 	$scope.LineItem = {};
 
 	Order.get(user.CurrentOrderID, function(data){
@@ -11,7 +11,7 @@ four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Produc
 	});
 });
 
-four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, ProductDisplayService, Order, Variant, $451) {
+four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, ProductDisplayService) {
 	$scope.LineItem = {};
 	$scope.LineItem.Product = $scope.p;
 	ProductDisplayService.setNewLineItemScope($scope);
@@ -67,7 +67,6 @@ four51.app.controller('CustomProductCtrlMatrix', function($scope, $451, Variant,
 		}
 
 		Variant.get({'ProductInteropID': $scope.LineItem.Product.InteropID, 'SpecOptionIDs': [opt1.ID, opt2.ID]}, function(data){
-			$scope.LineItems[opt1.Value.toString() + opt2.Value.toString()].Variant = data;
 			$scope.LineItem.Variant = data;
 		});
 	};
@@ -85,7 +84,6 @@ four51.app.controller('CustomProductCtrlMatrix', function($scope, $451, Variant,
 				$scope.LineItems[option1.Value.toString() + option2.Value.toString()] = {
 					Product: $scope.LineItem.Product,
 					PriceSchedule: $scope.LineItem.PriceSchedule,
-					Specs: $scope.LineItem.Specs
 				};
 			});
 		});

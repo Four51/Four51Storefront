@@ -42,18 +42,29 @@ body {
     font-smoothing: antialiased;
     -webkit-text-stroke: 1px transparent;
     color:#2C3E50;
+    padding: 0;
+    margin: 0;
 
-    /* overflow: hidden; ng-view animation (1) - remove scroll bar that appears on desktop */
+
 }
 
-img {display: inline-block; background-color:#d6d6d6;height: 200px; width: 200px;}
-h4 {font-family: 'Lato', sans-serif; }
+.howdy {}
+.view-default-product p {margin: 10px;}
+img {display: block; background-color:#d6d6d6; height: 200px;width: 200px; margin: 0 auto;} /* just to see image as cells for now */
+h4 {font-family: 'Lato', sans-serif; line-height: 2em;   letter-spacing: 0.10em;}
 .order-cloud {    width:100%; height:100%; position:fixed; left:0;top:0;overflow:hidden;background: url(images/orderCloud.jpg) no-repeat center center fixed; -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;}
 
-
+.ui-show {
+    opacity: 1;
+    transition: all 0.5s ease;
+}
+.ui-hide {
+    opacity: 0;
+    transition: all 0.5s ease;
+}
 /* ng-view animation (2) */
 /* need to add scroll bar back in to maintain scrolling, but now lets move the view over
 
@@ -98,7 +109,7 @@ select, input, .uneditable-input {width: auto;} /* bootstrap uses a fixed width 
 
 
 }
-.container-view {clear: both; overflow: hidden;}
+.container-view {clear: both; overflow: hidden; }
 .view-cap {height: 5px; background-color: #18ABD7;}
 hr {
     border: none;
@@ -282,6 +293,10 @@ button::-moz-focus-inner {
 /*** 3. ADMIN NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
 
+.user-links ul.nav li.admin-user .dropdown-menu > li > a {
+    padding: 3px 20px;
+}
+
 .header div.navbar-inner {
     background-image: none;
     background-color: rgb(255, 255, 255); /* fallback */
@@ -311,10 +326,11 @@ button::-moz-focus-inner {
     float: left;
 }
 
-
+h4.emphasis-title {color:#D06503;  text-transform: uppercase;
+  }
 
 .admin-navigation li a span, .admin-navigation li a i {
-    color:rgb(22, 145, 190);
+    color:#2C3E50;
 }
 
 .admin-navigation li a:hover span, .admin-navigation li a:hover i {
@@ -326,9 +342,32 @@ button::-moz-focus-inner {
 
 }
 
+
+
+.emphasis-btn {
+    background-color:#f5f5f5;
+    border: 1px solid #DFDBDB;
+    border-radius: 7px 7px 7px 7px;
+    color: #222222;
+    margin: 0 auto;
+    display: block;
+    font-size: 0.75em;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0.10em;
+    padding: 15px 20px 13px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: auto;
+}
+
 .admin-navigation .dropdown-menu > li.logout > a:hover i {
     color: rgb(242, 94, 70);
 }
+
+header.header .user-links ul.nav li.active a, header.header .user-links ul.nav li.active a span, header.header .user-links ul.nav li.active a:focus, header.header .user-links ul.nav li.active a:focus span,  .navbar ul.nav li.cart a,  .navbar ul.nav li.cart a:focus,  .navbar ul.nav li.cart a:hover {color:#bfbfbf; background-color:transparent; box-shadow: none; }
+
 .navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
     background-color: rgb(255, 255, 255); /* fallback */
     background-color: rgba(255, 255, 255, 1);
@@ -365,14 +404,16 @@ button::-moz-focus-inner {
     background: rgba(26, 188, 156, 1) !important;
 
 }
-.container-fluid .admin-navigation {padding: 0;}
+#content.container-fluid {padding: 0;}
+#content .container-fluid.container-content {padding: 0 20px;}
 .navbar .admin-navigation .cart a i { text-shadow: none; background-color: rgb(22, 160, 133); color:#fff; }
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 4. CONTENT NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
-
-
+.nav.view-cart ul {clear: both; overflow: hidden;border-bottom: 1px solid #d6d6d6;padding: 0; margin: 0;}
+.nav.view-cart ul li {display: inline-block; float: left; }
+.nav:nth-of-type(1) {}
 *, *:after, *:before { /* BOOM! */
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -450,7 +491,8 @@ border-right: 1px solid #d6d6d6;
     display: inline-block;
 }
 
-.admin-navigation .nav li.brand-a {margin-left: 10px;}
+.admin-navigation .nav .brand {margin-left: 20px; color:#2CA8DB;}
+.admin-navigation .nav .brand span, .admin-navigation .nav .brand i { color:#2CA8DB; cursor: default;}
 .admin-navigation .nav li.brand-a span {
     display: inline-block;
 }
@@ -532,13 +574,14 @@ border-right: 1px solid #d6d6d6;
     background-color: rgba(249, 249, 249, 1); margin-bottom: 40px;
 background-color:#fff; */
 }
+
+li.cart {line-height: normal; }
 .product-navigation li.nav-header {
     float: left;
     font-size: .9em;
-    border: 1px solid #F4F4F4;
-    background-color: rgb(216, 239, 245); /* fallback */
-    background-color: rgba(216, 239, 245, 1);
-    background-color:#73B2D7;
+    border: 1px solid #d6d6d6;
+
+
     text-align: center;
 
     padding: 0;
@@ -602,9 +645,7 @@ background-color:#fff; */
 
 .product-navigation .nav li.nav-header a {
     display: block;
-    color: rgb(58, 58, 58); /* fallback */
-    color: rgba(58, 58, 58, 1);
-    color:#fff;
+color:#777;
 
     text-decoration: none;
     /*
@@ -626,12 +667,12 @@ background-color:#fff; */
 
 
 
-
+.product-navigation .nav ul li > a:hover {text-decoration: underline;}
 
 .product-navigation .nav ul li:hover {
-    background-color: rgb(177, 224, 236); /* fallback */
+   /* background-color: rgb(177, 224, 236);
     background-color: rgba(177, 224, 236, 1);
-    background-color:#4588AE;
+    background-color:#4588AE;*/
 
 
 }
@@ -644,9 +685,10 @@ background-color:#fff; */
 }
 
 .product-navigation .nav ul ul li:hover {
-    background-color: rgb(216, 239, 245); /* fallback */
+   /* background-color: rgb(216, 239, 245);
     background-color: rgba(216, 239, 245, 1);
     background-color:#1E648C;
+    */
 
 
 }
@@ -669,10 +711,16 @@ background-color:#fff; */
 /*** 6. MAIN CONTENT ***/
 /* ----------------------------------------------------------------------------------------------- */
 
+.nav-cat-search {margin-bottom: 20px; border-bottom: 1px solid #d6d6d6;padding: 10px 0;}
+.nav-cat-search ul  {list-style-type: none;}
+.nav-cat-search ul li {display: inline;float: left;}
+.nav-cat-search ul li a {}
+.nav-cat-search ul li:last-child {float: right;}
 
-
+li.cart {margin-right: 10px;}
+.admin-navigation .nav li > ul li {font-size: 14px; text-align: left;}
 .container-content .category-well {}
-.container-fluid.container-content  {   margin-top: 1.429em; min-height: 200px; padding: 0;}
+.container-fluid.container-content  {   padding: 0;}
 /* ng-view animations */
 
 @-webkit-keyframes view-enter {
