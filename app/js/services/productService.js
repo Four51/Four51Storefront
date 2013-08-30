@@ -25,19 +25,20 @@ four51.app.factory('Product', function($resource, $451){
     }
 });
 
-four51.app.factory('VariantService', function($resource, $451){
-	var variant_api = $resource($451.api('variant'));
+four51.app.factory('Variant', function($resource, $451){
+
+    var _get = function(params, success) {
+        $resource($451.api('variant')).get(params).$promise.then(function(variant) {
+            if (angular.isFunction(success))
+                success(variant);
+        });
+    }
 	return {
-		get: function(params, success){
-			return variant_api.get(params, function(variant) {
-                if (success) success(variant);
-                return variant;
-            });
-		}
+		get: _get
 	}
 });
 
-four51.app.factory('ProductDisplayService', function($451, VariantService){
+four51.app.factory('ProductDisplayService', function($451, Variant){
 	function calcTotal(lineItem){
 
 		var ps = lineItem.PriceSchedule;
@@ -124,10 +125,10 @@ four51.app.factory('ProductDisplayService', function($451, VariantService){
 				})
 				if(hasAllVarDefiningSpecs){
 					//{'ProductInteropID': productInteropID, 'SpecOptionIDs': specOptionIDs}
-					VariantService.get({'ProductInteropID': scope.LineItem.Product.InteropID, 'SpecOptionIDs': specOptionIDs}, function(data){
+					Variant.get({'ProductInteropID': scope.LineItem.Product.InteropID, 'SpecOptionIDs': specOptionIDs}, function(data){
 						if(!data.IsDefaultVariant)
 							scope.LineItem.Variant = data;
-						newLineItemScope(scope)
+						newLineItemScope(scope);
 					});
 				}
 			}
