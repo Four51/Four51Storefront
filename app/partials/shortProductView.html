@@ -5,7 +5,7 @@
 
 {{LineItem.Product.Name}}</a><br>
 
-<span ng-bind-html-unsafe="LineItem.Product.Description" ng-show="LineItem.Product.Description"></span>
+<span ng-bind-html="LineItem.Product.Description" ng-show="LineItem.Product.Description"></span>
 
 <span ng-show="LineItem.PriceSchedule.PriceBreaks[0]">
 	<br>
