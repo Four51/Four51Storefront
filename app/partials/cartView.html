@@ -1,30 +1,31 @@
 <section class="view-partial view-cart">
-<nav class="nav view-cart">
-    <ul>
-      <li>Your Cart</li>
-        <li class="print hidden-phone hidden-tablet" style="float: right;"><span class="icon"><i class="icon-print" style="font-size: 20px;"></i></span> Print</li>
-    </ul>
-</nav>
-<hr />
-<div ng-if="!currentOrder">
-    <span>Your cart is currently empty. <a ng-href="#/catalog">Continue Shopping</a></span>
-</div>
+    <nav class="nav view-cart">
+        <ul>
+            <li>Your Cart</li>
+            <li class="print hidden-phone hidden-tablet" style="float: right;"><span class="icon"><i class="icon-print" style="font-size: 20px;"></i></span> Print</li>
+        </ul>
+    </nav>
+    <hr />
+    <div ng-if="!currentOrder">
+        <span>Your cart is currently empty. <a ng-href="#/catalog">Continue Shopping</a></span>
+    </div>
 
 
-            <h4 class="emphasis-title">Review your order</h4>
-<form name="cart">
-    <div class="span9">
-    <h4 style="background-color:#2C3E50; color:#fff; padding: 10px 25px; margin: 0;text-align: center;"> {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} items in your cart</h4>
-    <lineitemgrid ng-if="currentOrder"></lineitemgrid></div>
-    <div class="span3" style="border:1px solid #d6d6d6;">
-        <h4 style="background-color:#2C3E50; color:#fff; padding: 10px 25px; margin: 0;text-align: center;">Cart Summary</h4>
-
+    <h4 class="emphasis-title">Review your order</h4>
+    <form name="cart">
+        <div class="span9">
+            <h4 style="background-color:#2C3E50; color:#fff; padding: 10px 25px; margin: 0;text-align: center;"> {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} items in your cart</h4>
+            <lineitemgrid ng-if="currentOrder"></lineitemgrid>
+        </div>
+        <div class="span3" style="border:1px solid #d6d6d6;">
+            <h4 style="background-color:#2C3E50; color:#fff; padding: 10px 25px; margin: 0;text-align: center;">Cart Summary</h4>
                  <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
                     <p>Subtotal: {{currentOrder.Subtotal | currency}}</p>
                     <p ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
                 </div>
-        <div style="padding: 25px; border-top: 1px solid #d6d6d6;">
-            <button class="btn emphasis-btn" ng-click="checkOut()" ng-disabled="cart.$invalid">{{user.Company.SiteText.CheckOut || 'Check Out' }}</button>
+            <div style="padding: 25px; border-top: 1px solid #d6d6d6;">
+                <button class="btn emphasis-btn" ng-click="checkOut()" ng-disabled="cart.$invalid">{{user.Company.SiteText.CheckOut || 'Check Out' }}</button>
+            </div>
         </div>
         <div ng-if="currentOrder" class="CartDetail">
             <span class="btn-group">
