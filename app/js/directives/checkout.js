@@ -7,27 +7,19 @@ four51.app.directive('lineitemgrid', function() {
     return obj;
 });
 
-four51.app.directive('shipperselection', function() {
+four51.app.directive('shipperselection', function(Shipper) {
     var obj = {
         restrict: 'E',
         templateUrl: 'partials/controls/shipperSelectionView.html',
-        controller: function($scope, Shipper) {
-            $scope.$on('event:shipAddressUpdate', function() {
-                // only update shippers if there are actual rates involved
-                //var update = false;
-                //angular.forEach($scope.order.Shippers, function(n,i) {
-                //    update = update || n.ShippingRate.ShipperType != "Custom";
-                //});
-                //if (update) {
-                    $scope.currentOrder.Shipper = null;
-                    Shipper.query(function(shippers) {
-                        $scope.Shippers = shippers;
-                    });
-                //}
-            });
+        link: function(scope, elem, attrs) {
             Shipper.query(function(shippers) {
-                $scope.Shippers = shippers;
+                scope.Shippers = shippers;
             });
+        },
+        controller: function($scope, $rootScope) {
+            $scope.setShipper = function(shipper) {
+                $rootScope.$broadcast('event:shipperChange', shipper);
+            }
         }
     };
     return obj;

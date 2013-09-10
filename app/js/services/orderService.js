@@ -1,8 +1,9 @@
-four51.app.factory('Order', function($resource, $451) {
+four51.app.factory('Order', function($resource, $rootScope, $451) {
     var _get = function(id, success) {
         $resource($451.api('order')).get({'id': id }).$promise.then(function(o) {
             if (angular.isFunction(success))
                 success(o);
+            $rootScope.$broadcast('api:orderGetComplete');
         });
     }
 

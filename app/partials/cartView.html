@@ -24,7 +24,7 @@
                     <p ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
                 </div>
             <div style="padding: 25px; border-top: 1px solid #d6d6d6;">
-                <button class="btn emphasis-btn" ng-click="checkOut()" ng-disabled="cart.$invalid">{{user.Company.SiteText.CheckOut || 'Check Out' }}</button>
+                <button class="btn emphasis-btn" ng-click="checkOut()" ng-disabled="cart.$invalid">{{user.Company.SiteText.Checkout || 'Check Out' }}</button>
             </div>
         </div>
         <div ng-if="currentOrder" class="CartDetail">

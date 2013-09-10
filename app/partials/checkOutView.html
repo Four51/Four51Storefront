@@ -1,8 +1,8 @@
 <form name="cart">
 
-    <div ng-if="currentOrder" class="span10 well OrderDetailTable">
+    <div ng-if="currentOrder" class="span9 well OrderDetailTable">
         <p ng-if="user.Permissions.contains('EditPOID')">
-            <label>{{user.Company.SiteText.OrderID || 'Order ID'}}:</label>
+            <label>{{user.Company.SiteText.OrderID || 'Order ID'}}:</label><br />
             <input ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" required ui-mask="{{user.Company.POIDMask}}" />
             <span ng-if="user.Permissions.contains('AllowAutoGenPOID')">
                 <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? 'auto' : ''" ng-model='currentOrder.autoID' /> Use system-generated ID
@@ -23,17 +23,26 @@
             </li>
         </ul>
     </div>
-
-    <div class="span10 well Shipping" ng-if="currentOrder">
-        <addressselector user="user" model="currentOrder.ShipAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address">Add New Address</a>
-        <shipperselection user="user" order="currentOrder" />
-        <span>Shipping Costs: {{order.ShippingCost}}</span><br />
-        {{order.ShipAddressID}}
+    <div class="span3" style="border:1px solid #d6d6d6;">
+        <h4 style="background-color:#2C3E50; color:#fff; padding: 10px 25px; margin: 0;text-align: center;">Cart Summary</h4>
+        <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
+            <p>Shipping Costs: {{currentOrder.ShippingCost | currency}}</p>
+            <p>Subtotal: {{currentOrder.Subtotal | currency}}</p>
+            <p>Tax: {{currentOrder.Tax | currency}}</p>
+            <hr/>
+            <p>Total: {{currentOrder.Total | currency}}</p>
+            <p ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
+        </div>
     </div>
 
-    <div class="span10 well Billing" ng-if="currentOrder"></div>
+    <div ng-if="currentOrder" class="span9 well Shipping">
+        <addressselector user="user" selectedid="currentOrder.ShipAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address">Add New Address</a>
+        <shipperselection user="user" order="currentOrder" />
+    </div>
 
-    <div class="span10 btn-group" ng-if="currentOrder">
+    <div class="span9 well Billing" ng-if="currentOrder"></div>
+
+    <div class="btn-group" ng-if="currentOrder">
         <button class="btn btn-small btn-action" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
         <button class="btn btn-small btn-warning" ng-click="cancelOrder()">Cancel Order</button>
         <button class="btn btn-small btn-info" ng-click="continueShopping()">Continue Shopping</button>

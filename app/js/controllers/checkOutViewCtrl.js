@@ -7,6 +7,28 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $rootScop
         }) : null;
     */
 
+    function init() {
+        $scope.$on('event:shipperChange', function(event,shipper) {
+            $scope.currentOrder.Shipper = shipper;
+            angular.forEach($scope.currentOrder.LineItems, function(li) {
+                li.Shipper = shipper;
+            });
+            Order.save($scope.currentOrder, function(order) {
+                $scope.currentOrder = order;
+            });
+        });
+
+        $scope.$on('event:addressChange', function(event,id) {
+            $scope.currentOrder.ShipAddressID = id;
+            angular.forEach($scope.currentOrder.LineItems, function(li) {
+                li.ShipAddressID = id;
+            });
+            Order.save($scope.currentOrder, function(order) {
+                $scope.currentOrder = order;
+            });
+        });
+    }
+
     function saveOrder() {
         Order.save($scope.currentOrder, function(data) {
             $scope.currentOrder = data;
@@ -29,15 +51,5 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $rootScop
        saveOrder();
     };
 
-    $scope.$watch('currentOrder.Shipper', function(n,o) {
-        if (!n || n == o) return;
-        saveOrder();
-    });
-
-    $scope.$watch('currentOrder.ShipAddressID', function(n,o) {
-        if (!n || n == o) return;
-        Order.save($scope.currentOrder, function() {
-            $rootScope.$broadcast('event:shipAddressUpdate');
-        });
-    });
+    $scope.$on('api:orderGetComplete', init);
 });
