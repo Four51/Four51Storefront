@@ -15,7 +15,7 @@
     <form name="cart">
         <div class="span9">
             <h4 style="background-color:#2C3E50; color:#fff; padding: 10px 25px; margin: 0;text-align: center;"> {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} items in your cart</h4>
-            <lineitemgrid ng-if="currentOrder"></lineitemgrid>
+            <div class="gridStyle" ng-grid="gridOptions"></div>
         </div>
         <div class="span3" style="border:1px solid #d6d6d6;">
             <h4 style="background-color:#2C3E50; color:#fff; padding: 10px 25px; margin: 0;text-align: center;">Cart Summary</h4>

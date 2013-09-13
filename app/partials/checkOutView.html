@@ -28,7 +28,7 @@
         <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
             <p>Shipping Costs: {{currentOrder.ShippingCost | currency}}</p>
             <p>Subtotal: {{currentOrder.Subtotal | currency}}</p>
-            <p>Tax: {{currentOrder.Tax | currency}}</p>
+            <p>Tax: {{currentOrder.Tax || 0 | currency}}</p>
             <hr/>
             <p>Total: {{currentOrder.Total | currency}}</p>
             <p ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
