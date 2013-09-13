@@ -1,7 +1,7 @@
 <div>
     <p><img ng-src="LineItem.LargeImageFile.URL"></p>
     <p>Product ID: {{LineItem.ProductIDText}}</p>
-    <p ng-bind-html-unsafe='LineItem.Product.Description'></p>
+    <p ng-bind-html='LineItem.Product.Description'></p>
     <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product' />
     <staticspecstable specGroups="StaticSpecGroups"></staticspecstable>
 </div>

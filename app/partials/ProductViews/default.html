@@ -13,11 +13,11 @@
                     <p class="text-info">
                         Description:
                     </p>
-                    <p ng-bind-html-unsafe="LineItem.Product.Description" />
+                    <p ng-bind-html="LineItem.Product.Description" />
                 </div>
                 <p ng-show="LineItem.Variant.Description">
                     <span class="text-info">Variant Description:</span>
-                    <span ng-bind-html-unsafe="LineItem.Variant.Description"/>
+                    <span ng-bind-html="LineItem.Variant.Description"/>
                 </p>
                 <p ng-show="LineItem.Variant.ExternalID">
                     <span class="text-info">Variant ID:</span>
@@ -38,11 +38,11 @@
                 <p class="text-info">
                     Description:
                 </p>
-                <p ng-bind-html-unsafe="LineItem.Product.Description" />
+                <p ng-bind-html="LineItem.Product.Description" />
             </div>
             <p ng-show="LineItem.Variant.Description">
                 <span class="text-info">Variant Description:</span>
-                <span ng-bind-html-unsafe="LineItem.Variant.Description"/>
+                <span ng-bind-html="LineItem.Variant.Description"/>
             </p>
             <p ng-show="LineItem.Variant.ExternalID">
                 <span class="text-info">Variant ID:</span>
