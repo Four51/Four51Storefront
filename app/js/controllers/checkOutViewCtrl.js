@@ -18,11 +18,18 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $rootScop
             });
         });
 
-        $scope.$on('event:addressChange', function(event,id) {
+        $scope.$on('shipAddressChange', function(event,id) {
             $scope.currentOrder.ShipAddressID = id;
             angular.forEach($scope.currentOrder.LineItems, function(li) {
                 li.ShipAddressID = id;
             });
+            Order.save($scope.currentOrder, function(order) {
+                $scope.currentOrder = order;
+            });
+        });
+
+        $scope.$on('billAddressChange', function(event,id) {
+            $scope.currentOrder.BillAddressID = id;
             Order.save($scope.currentOrder, function(order) {
                 $scope.currentOrder = order;
             });

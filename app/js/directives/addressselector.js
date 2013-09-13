@@ -1,20 +1,19 @@
-four51.app.directive('addressselector', function() {
+four51.app.directive('addressselector', function(AddressList) {
     var obj = {
         scope: {
-            selectedid: '='
+            selected: '=',
+            onchange: '@'
         },
         restrict: 'E',
         templateUrl: 'partials/controls/addressSelectorView.html',
         link: function(scope, elem, attrs) {
-
-        },
-        controller: function($scope, $rootScope, AddressList) {
             AddressList.query(function(list) {
-                $scope.addresses = list;
+                scope.addresses = list;
             });
-
+        },
+        controller: function($scope, $rootScope) {
             $scope.changed = function() {
-                $rootScope.$broadcast('event:addressChange', $scope.selectedid);
+                $rootScope.$broadcast($scope.onchange, $scope.selected);
             }
         }
     };

@@ -7,7 +7,15 @@ four51.app.directive('lineitemgrid', function() {
     return obj;
 });
 
-four51.app.directive('shipperselection', function(Shipper) {
+four51.app.directive('paymentselector', function() {
+   var obj = {
+       restrict: 'E',
+       templateUrl: 'partials/controls/paymentSelectionView.html'
+   }
+   return obj;
+});
+
+four51.app.directive('shipperselector', function(Shipper) {
     var obj = {
         restrict: 'E',
         templateUrl: 'partials/controls/shipperSelectionView.html',
