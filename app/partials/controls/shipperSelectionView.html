@@ -1,6 +1,6 @@
 <div ng-if="user.ShipMethod.ShipperSelectionType == 'UserDropDown'">
     <div ng-repeat="shipper in Shippers">
-        <span ng-class="{highlight: currentOrder.LineItems[0].ShipperName == shipper.Name }" ng-click="setShipper(shipper)">{{shipper.Name}}</span>
+        <span ng-class="{'icon-ok': currentOrder.LineItems[0].ShipperName == shipper.Name }" ng-click="setShipper(shipper)">{{shipper.Name}}</span>
     </div>
 </div>
 <input ng-if="user.ShipMethod.AskForAccountNumber" placeholder="Shipping Account Number" type="text" ng-model="currentOrder.LineItems[0].ShipAccount" />
