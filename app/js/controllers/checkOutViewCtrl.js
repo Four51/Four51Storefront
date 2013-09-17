@@ -1,4 +1,4 @@
-four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $rootScope, $451, User, Order, OrderConfig) {
+four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $rootScope, $451, User, Order, FavoriteOrder, OrderConfig) {
     /*$scope.order = $scope.user.CurrentOrderID != null ? Order.get($scope.user.CurrentOrderID,
         function(o) {
             // I'm deciding to handle the auto assignment of certain properties here. It's essentially the load of the cart view page
@@ -8,38 +8,48 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $rootScop
     */
 
     function init() {
-        $scope.$on('event:shipperChange', function(event,shipper) {
-            $scope.currentOrder.Shipper = shipper;
-            angular.forEach($scope.currentOrder.LineItems, function(li) {
-                li.Shipper = shipper;
-            });
-            Order.save($scope.currentOrder, function(order) {
-                $scope.currentOrder = order;
-            });
-        });
+        $scope.orderIsEditable = $scope.currentOrder.Status == 'Unsubmitted' ||
+            $scope.currentOrder.Status == 'Open';
 
-        $scope.$on('shipAddressChange', function(event,id) {
-            $scope.currentOrder.ShipAddressID = id;
-            angular.forEach($scope.currentOrder.LineItems, function(li) {
-                li.ShipAddressID = id;
+        if ($scope.orderIsEditable) {
+            $scope.$on('event:shipperChange', function(event,shipper) {
+                $scope.currentOrder.Shipper = shipper;
+                angular.forEach($scope.currentOrder.LineItems, function(li) {
+                    li.Shipper = shipper;
+                });
+                Order.save($scope.currentOrder, function(order) {
+                    $scope.currentOrder = order;
+                });
             });
-            Order.save($scope.currentOrder, function(order) {
-                $scope.currentOrder = order;
-            });
-        });
 
-        $scope.$on('billAddressChange', function(event,id) {
-            $scope.currentOrder.BillAddressID = id;
-            Order.save($scope.currentOrder, function(order) {
-                $scope.currentOrder = order;
+            $scope.$on('shipAddressChange', function(event,id) {
+                $scope.currentOrder.ShipAddressID = id;
+                angular.forEach($scope.currentOrder.LineItems, function(li) {
+                    li.ShipAddressID = id;
+                });
+                Order.save($scope.currentOrder, function(order) {
+                    $scope.currentOrder = order;
+                });
             });
+
+            $scope.$on('billAddressChange', function(event,id) {
+                $scope.currentOrder.BillAddressID = id;
+                Order.save($scope.currentOrder, function(order) {
+                    $scope.currentOrder = order;
+                });
+            });
+        }
+    }
+
+    function submitOrder() {
+        Order.submit($scope.currentOrder, function(data) {
+            $scope.currentOrder = data;
         });
     }
 
-    function saveOrder() {
+    function saveChanges() {
         Order.save($scope.currentOrder, function(data) {
             $scope.currentOrder = data;
-            OrderConfig.costcenter(data, $scope.user);
         });
     }
 
@@ -55,7 +65,15 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $rootScop
     };
 
     $scope.saveChanges = function() {
-       saveOrder();
+        saveChanges();
+    }
+
+    $scope.submitOrder = function() {
+       submitOrder();
+    };
+
+    $scope.saveFavorite = function() {
+        FavoriteOrder.save($scope.currentOrder);
     };
 
     $scope.$on('api:orderGetComplete', init);

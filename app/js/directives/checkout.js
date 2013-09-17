@@ -10,7 +10,12 @@ four51.app.directive('lineitemgrid', function() {
 four51.app.directive('paymentselector', function() {
    var obj = {
        restrict: 'E',
-       templateUrl: 'partials/controls/paymentSelectionView.html'
+       templateUrl: 'partials/controls/paymentSelectionView.html',
+       controller: function($scope) {
+           $scope.setPaymentMethod = function(type) {
+               $scope.currentOrder.PaymentMethod = type;
+           }
+       }
    }
    return obj;
 });

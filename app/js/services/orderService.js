@@ -21,9 +21,17 @@ four51.app.factory('Order', function($resource, $rootScope, $451) {
         });
     }
 
+    var _submit = function(order, success) {
+        $resource($451.api('order'), { }, { submit: { method: 'PUT' }}).submit(order).$promise.then(function(o) {
+            if (angular.isFunction(success))
+                success();
+        });
+    }
+
     return {
         get: _get,
         save: _save,
-        delete: _delete
+        delete: _delete,
+        submit: _submit
     }
 });

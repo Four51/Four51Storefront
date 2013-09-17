@@ -1,55 +1,80 @@
 <form name="cart">
+    <div class="OrderHistory" ng-hide="orderIsEditable">
+        <div>Thank you. Your order has been submitted.</div>
+        <!-- currently a duplicate of the orderHistoryView -->
+        <orderhistoryheader order="currentOrder"></orderhistoryheader>
+        <lineitemhistorygrid order="currentOrder"></lineitemhistorygrid>
+        <hr />
+        <orderhistoryfooter order="currentOrder"></orderhistoryfooter>
 
-    <div ng-if="currentOrder" class="span9 well OrderDetailTable">
-        <p ng-if="user.Permissions.contains('EditPOID')">
-            <label>{{user.Company.SiteText.OrderID || 'Order ID'}}:</label><br />
-            <input ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" required ui-mask="{{user.Company.POIDMask}}" />
-            <span ng-if="user.Permissions.contains('AllowAutoGenPOID')">
-                <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? 'auto' : ''" ng-model='currentOrder.autoID' /> Use system-generated ID
-            </span>
-        </p>
-        <label>Comments:</label><textarea rows="5" cols="100" ng-model="currentOrder.Comments" /></label><br/>
-        <label ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')">
-            <costcenter
-                    user="user"
-                    order="currentOrder"
-                    ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')" />
-        </label>
-        <ul class="unstyled" ng-if="user.OrderFields">
-            <li ng-repeat="field in currentOrder.OrderFields">
-                <customtextfield customfield="field" ng-if="field.Lines" />
-                <customselectionfield customfield="field" ng-if="field.Options && !field.IsRadioButtons" />
-                <customradiobuttonfield customfield="field" ng-if="field.Options && field.IsRadioButtons" />
-            </li>
-        </ul>
-    </div>
-    <div class="span3" style="border:1px solid #d6d6d6;">
-        <h4 style="background-color:#2C3E50; color:#fff; padding: 10px 25px; margin: 0;text-align: center;">Order Summary</h4>
-        <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
-            <p>Subtotal: {{currentOrder.Subtotal | currency}}</p>
-            <p>Shipping Costs: {{currentOrder.ShippingCost | currency}}</p>
-            <p>Tax: {{currentOrder.Tax || 0 | currency}}</p>
-            <hr/>
-            <p>Total: {{currentOrder.Total | currency}}</p>
-            <p ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
+        <div>
+            <input type="button" class="btn btn-small btn-info" value="Repeat Order" />
+        </div>
+        <br />
+        <div>
+            <div>
+                <input type="text" ng-model="currentOrder.FavoriteName" placeholder="Favorite Name" />
+                <input ng-click="saveFavorite()" type="button" class="btn btn-small btn-primary" value="Save as Favorite" />
+            </div>
         </div>
     </div>
 
-    <div ng-if="currentOrder" class="span9 well Shipping">
-        <addressselector onchange="shipAddressChange" selected="currentOrder.ShipAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address">Add New Address</a>
-        <shipperselector />
-    </div>
+    <div class="Order" ng-show="orderIsEditable">
+        <div ng-if="currentOrder" class="span9 well OrderDetailTable">
+            <p ng-if="user.Permissions.contains('EditPOID')">
+                <label>{{user.Company.SiteText.OrderID || 'Order ID'}}:</label><br />
+                <input ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" required ui-mask="{{user.Company.POIDMask}}" />
+                <span ng-if="user.Permissions.contains('AllowAutoGenPOID')">
+                    <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? 'auto' : ''" ng-model='currentOrder.autoID' /> Use system-generated ID
+                </span>
+            </p>
+            <label>Comments:</label><textarea rows="5" cols="100" ng-model="currentOrder.Comments" /></label><br/>
+            <label ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')">
+                <costcenter
+                        user="user"
+                        order="currentOrder"
+                        ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')" />
+            </label>
+            <ul class="unstyled" ng-if="user.OrderFields">
+                <li ng-repeat="field in currentOrder.OrderFields">
+                    <customtextfield customfield="field" ng-if="field.Lines" />
+                    <customselectionfield customfield="field" ng-if="field.Options && !field.IsRadioButtons" />
+                    <customradiobuttonfield customfield="field" ng-if="field.Options && field.IsRadioButtons" />
+                </li>
+            </ul>
+        </div>
+        <div class="span3" style="border:1px solid #d6d6d6;">
+            <h4 style="background-color:#2C3E50; color:#fff; padding: 10px 25px; margin: 0;text-align: center;">Order Summary</h4>
+            <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
+                <p>Subtotal: {{currentOrder.Subtotal | currency}}</p>
+                <p>Shipping Costs: {{currentOrder.ShippingCost | currency}}</p>
+                <p>Tax: {{currentOrder.Tax || 0 | currency}}</p>
+                <hr/>
+                <p>Total: {{currentOrder.Total | currency}}</p>
+                <p ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
+            </div>
+        </div>
 
-    <div class="span9 well Billing" ng-if="currentOrder">
-        {{currentOrder.PaymentMethod}}<br />
-        <addressselector onchange="billAddressChange" selected="currentOrder.BillAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address">Add New Address</a>
-        <paymentselector />
-    </div>
+        <div ng-if="currentOrder" class="span9 well Shipping">
+            <addressselector onchange="shipAddressChange" selected="currentOrder.ShipAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address">Add New Address</a>
+            <shipperselector />
+        </div>
 
-    <div class="btn-group" ng-if="currentOrder">
-        <button class="btn btn-small btn-action" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
-        <button class="btn btn-small btn-warning" ng-click="cancelOrder()">Cancel Order</button>
-        <button class="btn btn-small btn-info" ng-click="continueShopping()">Continue Shopping</button>
+        <div class="span9 well Billing" ng-if="currentOrder">
+            <addressselector onchange="billAddressChange" selected="currentOrder.BillAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address">Add New Address</a>
+            <paymentselector />
+        </div>
+
+        <div class="span9 well Send" ng-if="user.Permissions.contains('SendOrderNotificationToOthers')">
+            Email Order Details to: <input ng-disabled="cart.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
+        </div>
+
+        <div class="btn-group" ng-if="currentOrder">
+            <button class="btn btn-small btn-action" ng-click="submitOrder()" ng-disabled="cart.$invalid">Submit</button>
+            <button class="btn btn-small btn-action" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
+            <button class="btn btn-small btn-warning" ng-click="cancelOrder()">Cancel Order</button>
+            <button class="btn btn-small btn-info" ng-click="continueShopping()">Continue Shopping</button>
+        </div>
     </div>
 </form>
 
