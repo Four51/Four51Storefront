@@ -1,4 +1,4 @@
-four51.app.factory('Security', function($451) {
+four51.app.factory('Security', function($451, $cookies) {
     return {
         init: function(user, auth) {
             this.currentUser = {
@@ -9,10 +9,12 @@ four51.app.factory('Security', function($451) {
                 Email: user.Email,
                 Auth: auth
             };
+            $cookies.Authorization = auth;
             $451.cache('Security', this.currentUser, { ttl: 86400000, persists: true });
         },
         authHeader: function() {
-            return this.currentUser ? this.currentUser.Auth : null;
+            return $cookies.Authorization;
+            //return this.currentUser ? this.currentUser.Auth : null;
         },
         isAuthenticated: function() {
             //TODO: this is temporary. I don't want to only rely on caching the user for authentication. It's in place now so we, developers, aren't required to log in when we refresh
