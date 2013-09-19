@@ -1,3 +1,8 @@
 <div>
-    <span ng-if="user.Permissions.contains('PayByPO')" ng-class="{'icon-ok': currentOrder.PaymentMethod == 'PurchaseOrder' }" ng-click="setPaymentMethod('PurchaseOrder')">Purchase Order</span>
+    <span
+        ng-if="user.Permissions.contains('PayByPO')"
+        ng-class="{'icon-ok': currentOrder.PaymentMethod == 'PurchaseOrder' }"
+        ng-click="setPaymentMethod('PurchaseOrder')"
+     >Purchase Order</span>
+    <input type='text' ng-model='currentOrder.PaymentMethod' style='display: none;' />
 </div>

@@ -38,6 +38,12 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $rootScop
                     $scope.currentOrder = order;
                 });
             });
+
+            $scope.$on('event:paymentMethodChange', function(event, method) {
+                $scope.cart.$setValidity('paymentMethod', method != 'Undetermined');
+            });
+
+            $scope.cart.$setValidity('paymentMethod', $scope.currentOrder.PaymentMethod != 'Undetermined');
         }
     }
 

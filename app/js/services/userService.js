@@ -1,4 +1,4 @@
-four51.app.factory('User', function($resource, $451, Security) {
+four51.app.factory('User', function($rootScope, $resource, $451, Security) {
     function _extend(u) {
         u.Permissions.contains = function(value) {
             return $451.contains(u.Permissions, value);
@@ -10,6 +10,7 @@ four51.app.factory('User', function($resource, $451, Security) {
             _extend(u);
             if (angular.isFunction(success))
                 success(u);
+            $rootScope.$broadcast('api:userGetComplete');
         });
     }
 

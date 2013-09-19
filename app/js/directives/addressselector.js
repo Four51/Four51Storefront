@@ -2,7 +2,8 @@ four51.app.directive('addressselector', function(AddressList) {
     var obj = {
         scope: {
             selected: '=',
-            onchange: '@'
+            onchange: '@',
+            required: '='
         },
         restrict: 'E',
         templateUrl: 'partials/controls/addressSelectorView.html',
