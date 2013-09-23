@@ -1,4 +1,4 @@
-four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $rootScope, $451, User, Order, FavoriteOrder, OrderConfig) {
+four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, OrderConfig) {
     /*$scope.order = $scope.user.CurrentOrderID != null ? Order.get($scope.user.CurrentOrderID,
         function(o) {
             // I'm deciding to handle the auto assignment of certain properties here. It's essentially the load of the cart view page
@@ -6,19 +6,17 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $rootScop
             OrderConfigService.costcenter(o,$scope.user);
         }) : null;
     */
-
+    $scope.orderIsEditable = false;
     function init() {
-        $scope.orderIsEditable = $scope.currentOrder.Status == 'Unsubmitted' ||
-            $scope.currentOrder.Status == 'Open';
+        $scope.orderIsEditable = $scope.currentOrder != null &&
+            ($scope.currentOrder.Status == 'Unsubmitted' || $scope.currentOrder.Status == 'Open');
 
         if ($scope.orderIsEditable) {
             $scope.$on('event:shipperChange', function(event,shipper) {
                 $scope.currentOrder.Shipper = shipper;
                 angular.forEach($scope.currentOrder.LineItems, function(li) {
                     li.Shipper = shipper;
-                });
-                Order.save($scope.currentOrder, function(order) {
-                    $scope.currentOrder = order;
+                    li.ShipperName = shipper.Name;
                 });
             });
 
@@ -34,17 +32,39 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $rootScop
 
             $scope.$on('billAddressChange', function(event,id) {
                 $scope.currentOrder.BillAddressID = id;
-                Order.save($scope.currentOrder, function(order) {
-                    $scope.currentOrder = order;
-                });
             });
 
             $scope.$on('event:paymentMethodChange', function(event, method) {
-                $scope.cart.$setValidity('paymentMethod', method != 'Undetermined');
+                $scope.cart.$setValidity('paymentMethod', validatePaymentMethod(method));
             });
 
-            $scope.cart.$setValidity('paymentMethod', $scope.currentOrder.PaymentMethod != 'Undetermined');
+            $scope.cart.$setValidity('paymentMethod', validatePaymentMethod($scope.currentOrder.PaymentMethod));
         }
+    }
+
+    function validatePaymentMethod(method) {
+        var valid = false;
+        switch (method) {
+            case 'Undetermined':
+                valid = $scope.user.Permissions.contains('SubmitForApproval');
+                break;
+            case 'PurchaseOrder':
+                valid = $scope.user.Permissions.contains('PayByPO');
+                break;
+            case 'BudgetAccount':
+                valid = $scope.user.Permissions.contains('PayByBudgetAccount');
+                var account;
+                angular.forEach($scope.SpendingAccounts, function(a) {
+                    if (a.ID == $scope.currentOrder.BudgetAccountID)
+                        account = a;
+                });
+                if (account)
+                    valid = (account.AccountType.MaxPercentageOfOrderTotal == 100) && ((account.Balance >= $scope.currentOrder.Total) || account.AccountType.AllowExceed)
+                break;
+            default:
+                return false;
+        }
+        return valid;
     }
 
     function submitOrder() {

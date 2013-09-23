@@ -1,5 +1,9 @@
 <form name="cart">
-    <div class="OrderHistory" ng-hide="orderIsEditable">
+    <div ng-if="!currentOrder">
+        <span>Your cart is currently empty. <a ng-href="#/catalog">Continue Shopping</a></span>
+    </div>
+
+    <div class="OrderHistory" ng-show="currentOrder && !orderIsEditable">
         <div>Thank you. Your order has been submitted.</div>
         <!-- currently a duplicate of the orderHistoryView -->
         <orderhistoryheader order="currentOrder"></orderhistoryheader>
@@ -19,7 +23,7 @@
         </div>
     </div>
 
-    <div class="Order" ng-show="orderIsEditable">
+    <div class="Order" ng-show="currentOrder && orderIsEditable">
         <div ng-if="currentOrder" class="span9 well OrderDetailTable">
             <p ng-if="user.Permissions.contains('EditPOID')">
                 <label>{{user.Company.SiteText.OrderID || 'Order ID'}}:</label><br />

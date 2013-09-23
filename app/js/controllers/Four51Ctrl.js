@@ -25,6 +25,8 @@ four51.app.controller('Four51Ctrl', function ($scope, $routeParams, $location, $
                     OrderConfig.costcenter(ordr, user);
                 });
             }
+            else
+                $scope.currentOrder = null;
         });
         Category.tree(function(data) {
             $scope.tree = data;
@@ -33,7 +35,14 @@ four51.app.controller('Four51Ctrl', function ($scope, $routeParams, $location, $
             $scope.SpendingAccounts = data;
         });
     }
+
+    function cleanup() {
+        Security.clear();
+    }
+
     $scope.$on('event:auth-loginConfirmed', init);
 	$scope.$on("$routeChangeSuccess", init);
+    $scope.$on('event:auth-loginRequired', cleanup);
+
 });
 

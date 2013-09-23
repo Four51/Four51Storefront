@@ -1,8 +1,15 @@
 <div>
-    <span
-        ng-if="user.Permissions.contains('PayByPO')"
-        ng-class="{'icon-ok': currentOrder.PaymentMethod == 'PurchaseOrder' }"
-        ng-click="setPaymentMethod('PurchaseOrder')"
-     >Purchase Order</span>
+    <div ng-if="user.Permissions.contains('PayByPO')" ng-class="{'icon-ok': currentOrder.PaymentMethod == 'PurchaseOrder' }" ng-click="setPaymentMethod('PurchaseOrder')">Purchase Order</div>
+    <div ng-if="user.Permissions.contains('SubmitForApproval')" ng-class="{'icon-ok': currentOrder.PaymentMethod == 'Undetermined' }" ng-click="setPaymentMethod('Undetermined')">Submit order for approval</div>
+    <div ng-if="user.Permissions.contains('PayByBudgetAccount')" ng-class="{'icon-ok': currentOrder.PaymentMethod == 'BudgetAccount' }" ng-click="setPaymentMethod('BudgetAccount')">
+        Spending Account:
+    </div>
+    <select ng-options="account.ID as (account.Label + ' - Balance: ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{AccountType.PurchaseCredit:true}"
+            ng-model="currentOrder.BudgetAccountID"
+            ng-change="setPaymentMethod('BudgetAccount')"
+            ng-disabled="currentOrder.PaymentMethod != 'BudgetAccount'"
+            ng-required="currentOrder.PaymentMethod == 'BudgetAccount'"
+            /><br />
+    <span class="alert-error" ng-show="cart.$error.paymentMethod">The order total is not covered by the selected account.</span><br />
     <input type='text' ng-model='currentOrder.PaymentMethod' style='display: none;' />
 </div>

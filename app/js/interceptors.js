@@ -1,7 +1,7 @@
 'use strict'
 
 four51.app.config(function($httpProvider) {
-	$httpProvider.interceptors.push(function($q, $rootScope, $cookies, $451, Security) {
+	$httpProvider.interceptors.push(function($q, $rootScope, $451, Security) {
 		function appendAuth(config) {
 			config.headers['Authorization'] = Security.auth();
 			return config;

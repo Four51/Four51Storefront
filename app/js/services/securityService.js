@@ -1,4 +1,5 @@
 four51.app.factory('Security', function($451, $cookieStore) {
+
     return {
         init: function(user, auth) {
             this.currentUser = {
@@ -10,6 +11,9 @@ four51.app.factory('Security', function($451, $cookieStore) {
                 Auth: auth
             };
             $cookieStore.put('User', this.currentUser);
+        },
+        clear: function() {
+            $cookieStore.remove('User');
         },
         auth: function() {
             var user = $cookieStore.get('User');
