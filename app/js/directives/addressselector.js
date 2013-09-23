@@ -3,7 +3,8 @@ four51.app.directive('addressselector', function(AddressList) {
         scope: {
             selected: '=',
             onchange: '@',
-            required: '='
+            required: '=',
+            filter: '='
         },
         restrict: 'E',
         templateUrl: 'partials/controls/addressSelectorView.html',

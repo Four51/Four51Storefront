@@ -73,7 +73,15 @@ four51.app.factory('$451', function(Cache) {
 	}
 
     function arrayContainsValue(array, value) {
-        return array.indexOf(value) > -1;
+        if (angular.isArray(value)) {
+            var found = false;
+            angular.forEach(value, function(v) {
+                found = !found ? array.indexOf(v) > -1 : found;
+            })
+            return found;
+        }
+        else
+            return array.indexOf(value) > -1;
     }
 
 

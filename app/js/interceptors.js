@@ -35,8 +35,8 @@ four51.app.config(function($httpProvider) {
 				}
 
 				if (response.status != 200) {
-                    return $q.reject(response);
-					//throw response;
+                    //return $q.reject(response);
+					throw response;
 				}
 
 				return $q.reject(response);

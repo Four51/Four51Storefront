@@ -3,6 +3,8 @@ four51.app.factory('User', function($rootScope, $resource, $451, Security) {
         u.Permissions.contains = function(value) {
             return $451.contains(u.Permissions, value);
         };
+        if ($451.contains(u.Permissions, ['PayByVisa', 'PayByMasterCard', 'PayByAmex', 'PayByDiscover', 'PayByDinersClub', 'PayByJCB', 'PayByDelta', 'PayBySwitch', 'PayBySolo', 'PayByElectron', 'PayByLaser']))
+            u.Permissions.push('PayByCreditCard');
     }
 
     var _get = function(success) {

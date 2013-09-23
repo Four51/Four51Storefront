@@ -1,4 +1,11 @@
-<select ng-options="address.ID as address.AddressName for address in addresses | onproperty:{ 'Property': 'IsShipping', 'Value': 'true'}"
+<select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
         ng-model="selected"
         ng-change="changed()"
-        ng-required='required' />
+        ng-required='required'
+        ng-if="filter == 'Shipping'" />
+
+<select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}"
+        ng-model="selected"
+        ng-change="changed()"
+        ng-required='required'
+        ng-if="filter == 'Billing'" />

@@ -18,6 +18,9 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
                     li.Shipper = shipper;
                     li.ShipperName = shipper.Name;
                 });
+                Order.save($scope.currentOrder, function(order) {
+                    $scope.currentOrder = order;
+                });
             });
 
             $scope.$on('shipAddressChange', function(event,id) {
@@ -61,6 +64,9 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
                 if (account)
                     valid = (account.AccountType.MaxPercentageOfOrderTotal == 100) && ((account.Balance >= $scope.currentOrder.Total) || account.AccountType.AllowExceed)
                 break;
+            case 'CreditCard':
+                valid = $scope.user.Permissions.contains('PayByCreditCard');
+                break;
             default:
                 return false;
         }
@@ -70,6 +76,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     function submitOrder() {
         Order.submit($scope.currentOrder, function(data) {
             $scope.currentOrder = data;
+            //$scope.user.CurrentOrderID = null;
         });
     }
 
