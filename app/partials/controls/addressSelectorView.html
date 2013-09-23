@@ -2,10 +2,10 @@
         ng-model="selected"
         ng-change="changed()"
         ng-required='required'
-        ng-if="filter == 'Shipping'" />
+        ng-if="add == 'shipping'" />
 
 <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}"
         ng-model="selected"
         ng-change="changed()"
         ng-required='required'
-        ng-if="filter == 'Billing'" />
+        ng-if="add == 'billing'" />

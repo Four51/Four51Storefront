@@ -60,12 +60,12 @@
         </div>
 
         <div ng-if="currentOrder" class="span9 well Shipping">
-            <addressselector filter='Shipping' onchange="shipAddressChange" selected="currentOrder.ShipAddressID" required='true' /><a class="btn btn-mini btn-action" ng-href="#/address">Add New Address</a>
+            <addressselector onchange="shipAddressChange" selected="currentOrder.ShipAddressID" required="true" add="shipping" /><a class="btn btn-mini btn-action" ng-href="#/address">Add New Address</a>
             <shipperselector />
         </div>
 
         <div class="span9 well Billing" ng-if="currentOrder">
-            <addressselector filter='Billing' onchange="billAddressChange" selected="currentOrder.BillAddressID" required='true' /><a class="btn btn-mini btn-action" ng-href="#/address">Add New Address</a>
+            <addressselector onchange="billAddressChange" selected="currentOrder.BillAddressID" required="true" add="billing" /><a class="btn btn-mini btn-action" ng-href="#/address">Add New Address</a>
             <paymentselector />
         </div>
 
