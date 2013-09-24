@@ -3,8 +3,8 @@
 <hr />
 <orderhistoryfooter order="order"></orderhistoryfooter>
 
-<div>
-    <input type="button" class="btn btn-small btn-info" value="Repeat Order" />
+<div ng-if="!currentOrder">
+    <input type="button" class="btn btn-small btn-info" value="Repeat Order" ng-click="repeatOrder()" />
 </div>
 <br />
 <div>
