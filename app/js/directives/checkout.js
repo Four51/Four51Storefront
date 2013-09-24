@@ -38,3 +38,11 @@ four51.app.directive('shipperselector', function(Shipper) {
     };
     return obj;
 });
+
+four51.app.directive('approvallist', function() {
+    var obj = {
+        restrict: 'E',
+        templateUrl: 'partials/controls/approvalRuleSummary.html'
+    };
+    return obj;
+})

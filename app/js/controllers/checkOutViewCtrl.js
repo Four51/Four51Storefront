@@ -1,4 +1,4 @@
-four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, OrderConfig) {
+four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList, OrderConfig) {
     /*$scope.order = $scope.user.CurrentOrderID != null ? Order.get($scope.user.CurrentOrderID,
         function(o) {
             // I'm deciding to handle the auto assignment of certain properties here. It's essentially the load of the cart view page
@@ -10,6 +10,10 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     function init() {
         $scope.orderIsEditable = $scope.currentOrder != null &&
             ($scope.currentOrder.Status == 'Unsubmitted' || $scope.currentOrder.Status == 'Open');
+
+        AddressList.query(function(list) {
+            $scope.addresses = list;
+        });
 
         if ($scope.orderIsEditable) {
             $scope.$on('event:shipperChange', function(event,shipper) {
@@ -28,9 +32,9 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
                 angular.forEach($scope.currentOrder.LineItems, function(li) {
                     li.ShipAddressID = id;
                 });
-                Order.save($scope.currentOrder, function(order) {
-                    $scope.currentOrder = order;
-                });
+                //Order.save($scope.currentOrder, function(order) {
+                //    $scope.currentOrder = order;
+                //});
             });
 
             $scope.$on('billAddressChange', function(event,id) {
