@@ -71,6 +71,10 @@
             <paymentselector />
         </div>
 
+        <div class="span9 well Approvals">
+            <approvalrulelist order="currentOrder" />
+        </div>
+
         <div class="span9 well Send" ng-if="user.Permissions.contains('SendOrderNotificationToOthers')">
             Email Order Details to: <input ng-disabled="cart.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
         </div>

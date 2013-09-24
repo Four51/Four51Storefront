@@ -1,9 +1,11 @@
+Approval Rules
 <ul>
-    <li ng-repeat="rule in currentOrder.ApprovalRules">
-        <ul>
-            <li ng-repeat="summary in rule.Summary">
-                {{summary}}
-            </li>
-        </ul>
+    <li ng-repeat="rule in order.Approvals">
+        <span>
+            <ul>
+                <li ng-repeat="summary in rule.Summary">{{summary}}</li>
+            </ul>
+             | {{rule.ApprovingPartyName}} | {{rule.ApprovalStatus}} | {{rule.ApprovedByUserName}} | {{rule.Comments}}
+        </span>
     </li>
 </ul>
