@@ -12,7 +12,7 @@ four51.app.factory('FavoriteOrder', function($resource, $451, $angularCacheFacto
 		    _then(success, favorites);
 	    }
 	    else {
-	        return $resource($451.api('favoriteorder')).query(function(fav) {
+	        return $resource($451.api('favoriteorder'), {}, { isArray: true}).query(function(fav) {
 	           _then(success, fav);
 	        });
 	    }
