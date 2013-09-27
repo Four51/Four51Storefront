@@ -1,10 +1,15 @@
-four51.app.controller('FavoriteOrderCtrl', function FavoriteOrderCtrl($scope, $routeParams, FavoriteOrder) {
+four51.app.controller('FavoriteOrderCtrl', function FavoriteOrderCtrl($scope, $location, $routeParams, FavoriteOrder, Order) {
     FavoriteOrder.query(function(favs) {
         $scope.favoriteorders = favs;
     });
 
 	$scope.repeat = function(order) {
-		console.log('repeat order: ' + order.ID);
+		order.Repeat = true;
+		Order.save(order, function(data) {
+			$scope.currentOrder = data;
+			$scope.user.CurrentOrderID = data.ID;
+			$location.path('/cart');
+		});
 	};
 
 	$scope.checkAll = function(event) {
