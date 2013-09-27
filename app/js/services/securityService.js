@@ -24,6 +24,7 @@ four51.app.factory('Security', function($451, $cookieStore) {
             return !!this.currentUser;
         },
         logout: function() {
+            $cookieStore.remove('User');
             delete this.currentUser;
         }
     }

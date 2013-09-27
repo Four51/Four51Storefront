@@ -17,23 +17,25 @@ four51.app.controller('Four51Ctrl', function ($scope, $routeParams, $location, $
     };
 
     function init() {
-        User.get(function(user) {
-            $scope.user = user;
-            if (user.CurrentOrderID) {
-                Order.get(user.CurrentOrderID, function(ordr) {
-                    $scope.currentOrder = ordr;
-                    OrderConfig.costcenter(ordr, user);
-                });
-            }
-            else
-                $scope.currentOrder = null;
-        });
-        Category.tree(function(data) {
-            $scope.tree = data;
-        });
-        SpendingAccountService.query(function(data) {
-            $scope.SpendingAccounts = data;
-        });
+        if (Security.isAuthenticated()) {
+            User.get(function(user) {
+                $scope.user = user;
+                if (user.CurrentOrderID) {
+                    Order.get(user.CurrentOrderID, function(ordr) {
+                        $scope.currentOrder = ordr;
+                        OrderConfig.costcenter(ordr, user);
+                    });
+                }
+                else
+                    $scope.currentOrder = null;
+            });
+            Category.tree(function(data) {
+                $scope.tree = data;
+            });
+            SpendingAccountService.query(function(data) {
+                $scope.SpendingAccounts = data;
+            });
+        }
     }
 
     function cleanup() {

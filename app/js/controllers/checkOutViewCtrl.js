@@ -1,53 +1,28 @@
-four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList, OrderConfig) {
-    /*$scope.order = $scope.user.CurrentOrderID != null ? Order.get($scope.user.CurrentOrderID,
-        function(o) {
-            // I'm deciding to handle the auto assignment of certain properties here. It's essentially the load of the cart view page
-            // it's the first time we'd display information about the order where these auto assigned values
-            OrderConfigService.costcenter(o,$scope.user);
-        }) : null;
-    */
-    $scope.orderIsEditable = false;
-    function init() {
-        $scope.orderIsEditable = $scope.currentOrder != null &&
-            ($scope.currentOrder.Status == 'Unsubmitted' || $scope.currentOrder.Status == 'Open');
+four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList) {
+    AddressList.query(function(list) {
+        $scope.addresses = list;
+    });
 
-        AddressList.query(function(list) {
-            $scope.addresses = list;
+    $scope.$on('event:shipperChange', function(event,shipper) {
+        $scope.currentOrder.Shipper = shipper;
+        angular.forEach($scope.currentOrder.LineItems, function(li) {
+            li.Shipper = shipper;
+            li.ShipperName = shipper.Name;
         });
+        Order.save($scope.currentOrder, function(order) {
+            $scope.currentOrder = order;
+        });
+    });
 
-        if ($scope.orderIsEditable) {
-            $scope.$on('event:shipperChange', function(event,shipper) {
-                $scope.currentOrder.Shipper = shipper;
-                angular.forEach($scope.currentOrder.LineItems, function(li) {
-                    li.Shipper = shipper;
-                    li.ShipperName = shipper.Name;
-                });
-                Order.save($scope.currentOrder, function(order) {
-                    $scope.currentOrder = order;
-                });
-            });
+    $scope.$watch('currentOrder.ShipAddressID', function() {
+        angular.forEach($scope.currentOrder.LineItems, function(li) {
+            li.ShipAddressID = $scope.currentOrder.ShipAddressID;
+        });
+    });
 
-            $scope.$on('shipAddressChange', function(event,id) {
-                $scope.currentOrder.ShipAddressID = id;
-                angular.forEach($scope.currentOrder.LineItems, function(li) {
-                    li.ShipAddressID = id;
-                });
-                //Order.save($scope.currentOrder, function(order) {
-                //    $scope.currentOrder = order;
-                //});
-            });
-
-            $scope.$on('billAddressChange', function(event,id) {
-                $scope.currentOrder.BillAddressID = id;
-            });
-
-            $scope.$on('event:paymentMethodChange', function(event, method) {
-                $scope.cart.$setValidity('paymentMethod', validatePaymentMethod(method));
-            });
-
-            $scope.cart.$setValidity('paymentMethod', validatePaymentMethod($scope.currentOrder.PaymentMethod));
-        }
-    }
+    $scope.$on('event:paymentMethodChange', function(event, method) {
+        $scope.cart.$setValidity('paymentMethod', validatePaymentMethod(method));
+    });
 
     function validatePaymentMethod(method) {
         var valid = false;
@@ -80,7 +55,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     function submitOrder() {
         Order.submit($scope.currentOrder, function(data) {
             $scope.currentOrder = data;
-            //$scope.user.CurrentOrderID = null;
+            $scope.user.CurrentOrderID = null;
         });
     }
 
@@ -113,5 +88,5 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
         FavoriteOrder.save($scope.currentOrder);
     };
 
-    $scope.$on('api:orderGetComplete', init);
+    //$scope.$on('api:orderGetComplete', init);
 });

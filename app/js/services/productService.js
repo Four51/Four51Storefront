@@ -1,10 +1,23 @@
 'use strict';
-four51.app.factory('Product', function($resource, $451){
+four51.app.factory('Product', function($resource, $451, $angularCacheFactory){
+	var cache = $angularCacheFactory.get('451Cache');
+
+	function _then(fn, data) {
+		if (angular.isFunction(fn))
+			fn(data);
+	}
+
      var _get = function(param, success) {
-        $resource($451.api('Products/:interopID'), {interopID: '@ID'}).get({interopID: param}).$promise.then(function(product) {
-            if (angular.isFunction(success))
-                success(product);
-        });
+	     if (cache.get('product' + param)) {
+		     var product = cache.get('product' + param);
+		     _then(success, product);
+	     }
+	     else {
+	        $resource($451.api('Products/:interopID'), {interopID: '@ID'}).get({interopID: param}).$promise.then(function(product) {
+		        cache.put('product' + product.InteropID, product);
+	            _then(success, product);
+	        });
+	     }
     }
 
     var _search = function(categoryInteropID, searchTerm, success) {
@@ -13,10 +26,17 @@ four51.app.factory('Product', function($resource, $451){
             'CategoryInteropID': categoryInteropID,
             'SearchTerms': searchTerm ? searchTerm : ''
         };
-        $resource($451.api('Products')).query(criteria).$promise.then(function(products) {
-            if (angular.isFunction(success))
-                success(products);
-        });
+	    var cacheID = 'products' + criteria.CategoryInteropID + criteria.SearchTerms.replace(/ /g, "");
+	    if (cache.get(cacheID)) {
+		    var products = cache.get(cacheID);
+		    _then(success, products)
+	    }
+	    else {
+	        $resource($451.api('Products')).query(criteria).$promise.then(function(products) {
+		        cache.put(cacheID, products);
+	            _then(success, products);
+	        });
+	    }
     }
 
 	return {
@@ -25,14 +45,28 @@ four51.app.factory('Product', function($resource, $451){
     }
 });
 
-four51.app.factory('Variant', function($resource, $451){
+four51.app.factory('Variant', function($resource, $451, $angularCacheFactory){
+	var cache = $angularCacheFactory.get('451Cache');
+
+	function _then(fn, data) {
+		if (angular.isFunction(fn))
+			fn(data);
+	}
 
     var _get = function(params, success) {
-        $resource($451.api('variant')).get(params).$promise.then(function(variant) {
-            if (angular.isFunction(success))
-                success(variant);
-        });
+	    console.info('getting a variant');
+	    if (cache.get('variant' + params.VariantInteropID + params.ProductInteropID)) {
+			var variant = cache.get('variant' + params.VariantInteropID + params.ProductInteropID);
+		    _then(success, variant);
+	    }
+	    else {
+	        $resource($451.api('variant')).get(params).$promise.then(function(variant) {
+		        cache.put('variant' + variant.InteropID, variant);
+	            _then(success, variant);
+	        });
+	    }
     }
+
 	return {
 		get: _get
 	}

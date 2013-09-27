@@ -3,7 +3,7 @@
 four51.app.controller('AddressInputCtrl', function ($scope, $location, User, Address, ResourcesService) {
     $scope.save = function() {
         Address.save(this.address, function() {
-            $location.path($scope.return);
+           $location.path($scope.return);
         });
     };
     $scope.delete = function() {

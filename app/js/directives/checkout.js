@@ -25,15 +25,15 @@ four51.app.directive('shipperselector', function(Shipper) {
     var obj = {
         restrict: 'E',
         templateUrl: 'partials/controls/shipperSelectionView.html',
-        link: function(scope, elem, attrs, ctrl) {
-            Shipper.query(function(shippers) {
-                scope.Shippers = shippers;
-            });
-        },
         controller: function($scope, $rootScope) {
             $scope.setShipper = function(shipper) {
                 $rootScope.$broadcast('event:shipperChange', shipper);
             }
+	        $scope.$watch('currentOrder.ShipAddressID', function() {
+		        Shipper.query($scope.currentOrder, function(shippers) {
+			        $scope.Shippers = shippers;
+		        });
+	        });
         }
     };
     return obj;

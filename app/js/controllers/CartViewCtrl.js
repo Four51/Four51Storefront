@@ -11,7 +11,7 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
     };
 
     $scope.cancelOrder = function() {
-        Order.delete(function() {
+        Order.delete($scope.currentOrder, function() {
             $scope.user.CurrentOrderID = null;
             $scope.currentOrder = null;
         });

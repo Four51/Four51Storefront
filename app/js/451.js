@@ -1,6 +1,6 @@
 /* Four51 Global Namespace */
 
-four51.app.factory('$451', function(Cache) {
+four51.app.factory('$451', function() {
 	function json_filter(input, options, op) {
 		if (input == null || options == null) return;
 		var result = [];
@@ -33,45 +33,6 @@ four51.app.factory('$451', function(Cache) {
 		return result;
 	}
 
-	function clearStorageMechanisms() {
-		Cache.removeAll();
-		localStorage.clear();
-	}
-
-	function putCache(id,val,options) {
-		// probably going to need to test for object type. i'm not sure strings will stringify
-		var current = new Date();
-		options.persists ?
-			localStorage.setItem(id, JSON.stringify({ ttl: options.ttl ? addMillisecondsToDate(options.ttl).getTime() : null, data: val })) :
-			Cache.put(id,val);
-		return val;
-	}
-
-	function getCache(id) {
-		// probably going to need to test for object type. pretty sure JSON.parse will yack on a string
-		var temp = Cache.get(id);
-		if (temp) return temp;
-
-		var local = JSON.parse(localStorage.getItem(id));
-		if (local === null) return null;
-
-		return checkCacheTTL(local);
-	}
-
-	function checkCacheTTL(cache) {
-		if (cache.ttl === null) return cache.data;
-		var current = new Date();
-		if (cache.ttl - current.getTime() >= 0)
-			return cache.data;
-		return null;
-	}
-
-	function addMillisecondsToDate(ms) {
-		var d = new Date();
-		d.setMilliseconds(d.getMilliseconds() + ms);
-		return d;
-	}
-
     function arrayContainsValue(array, value) {
         if (angular.isArray(value)) {
             var found = false;
@@ -93,19 +54,6 @@ four51.app.factory('$451', function(Cache) {
 			var apiName = four51.app.ApiAppName ? four51.app.ApiAppName : window.location.pathname.split('/')[1];
             return '/api/' + apiName + "/" + path;
 			//return '/api/451Order/' + path;
-		},
-		// cache is temporary. even refreshing the browser will clear the cache
-		// getter attempts to retrieve based on the persistent state longevity of each type { cache, localstorage }
-		cache: function(id, val, options) {
-			return val ?
-				putCache(id, val, options) :
-				getCache(id);
-		},
-		clear: function(key) {
-			!key ?
-				clearStorageMechanisms():
-				Cache.remove(key); localStorage.removeItem(key);
-			return this;
 		},
 		filter: function(input, options, op) {
 			return json_filter(input, options, op);

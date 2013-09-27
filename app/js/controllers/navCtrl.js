@@ -6,14 +6,13 @@ four51.app.controller('NavCtrl', function ($location, $scope, $451, User) {
         $location.path("/catalog");
     };
 
+	$scope.refreshUser = function() {
+		User.refresh(function(user) {
+			$scope.currentUser = user;
+		});
+	}
+
 	$scope.template = { url: 'partials/nav.html'};
-
-    $scope.refresh = function(e) {
-        e.preventDefault();
-        $451.clear('user');
-        User.get();
-    };
-
 });
 
 four51.app.controller('SideNavCtrl', function ($scope) {

@@ -3,7 +3,7 @@
         <span>Your cart is currently empty. <a ng-href="#/catalog">Continue Shopping</a></span>
     </div>
 
-    <div class="OrderHistory" ng-show="currentOrder && !orderIsEditable">
+    <div class="OrderHistory" ng-show="currentOrder && !currentOrder.isEditable">
         <div>Thank you. Your order has been submitted.</div>
         <!-- currently a duplicate of the orderHistoryView -->
         <orderhistoryheader order="currentOrder"></orderhistoryheader>
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div class="Order" ng-show="currentOrder && orderIsEditable">
+    <div class="Order" ng-show="currentOrder && currentOrder.isEditable">
         <div ng-if="currentOrder" class="span9 well OrderDetailTable">
             <p ng-if="user.Permissions.contains('EditPOID')">
                 <label>{{user.Company.SiteText.OrderID || 'Order ID'}}:</label><br />
@@ -71,7 +71,7 @@
             <paymentselector />
         </div>
 
-        <div class="span9 well Approvals">
+        <div ng-if="currentOrder.Approvals" class="span9 well Approvals">
             <approvalrulelist order="currentOrder" />
         </div>
 

@@ -4,16 +4,20 @@
             <div class="container-admin">
                 <div class="user-links">
                     <ul class="nav">
-                        <li class="brand-a hidden-phone">   <a class="brand" style="border-lefT: 1px solid #d6d6d6; border-right: 1px solid #d6d6d6;" ng-show="Four51User.isAuthenticated()" href="#/catalog" ng-click="refresh($event)"><i class="icon-cloud"></i><span class="hidden-phone">Welcome</span><span class="hidden-tablet hidden-phone">{{user.FirstName + " " + user.LastName}}</span></a>
+                        <li class="brand-a hidden-phone">
+                            <a class="brand" style="border-lefT: 1px solid #d6d6d6; border-right: 1px solid #d6d6d6;" ng-show="Four51User.isAuthenticated()" href="#/catalog">
+                                <i class="icon-cloud"></i><span class="hidden-phone">Welcome</span><span ng-click="refreshUser()" class="hidden-tablet hidden-phone">{{user.FirstName + " " + user.LastName}}</span>
+                            </a>
                         </li>
                         <li>  <a href="#/admin" class="visible-tablet visible-phone"><span class="icon"><i class="icon-user"></i></span><span class="hidden-phone">My Account</span></a></li>
                         <li class="dropdown admin-user hidden-phone hidden-tablet">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="icon"><i class="icon-user hidden-desktop"></i></span><span class="hidden-phone">My Account</span><b class="caret hidden-tablet hidden-phone"></b></a>
                             <ul class="dropdown-menu">
+
                                 <li class="nav-header">Admin</li>
-                                <li ng-if="user.Permissions.contains('ViewSelfAdmin')" class="admin"><a href="#/admin">User Information</a></li>
+                                <li ng-show="user.Permissions.contains('ViewSelfAdmin')" class="admin"><a href="#/admin">User Information</a></li>
                                 <li class="addresses"><a href="#/addresses">Addresses</a></li>
-                                <li ng-if="user.Permissions.contains('ViewMessaging')" class="messages"><a href="#/message">Messages</a></li>
+                                <li ng-show="user.Permissions.contains('ViewMessaging')" class="messages"><a href="#/message">Messages</a></li>
                                 <li class="divider hidden-desktop"></li>
                                 <li class="nav-header hidden-desktop">Reports</li>
                                 <li class="orders hidden-desktop"><a href="#/order">Orders</a></li>
@@ -24,7 +28,7 @@
                         <li class="products" ng-class="getClass('/catalog')"> <a href="#/catalog"><span class="icon hidden-desktop"><i class="icon-folder-open"></i></span><span class="hidden-phone">Products</span></a></li>
                         <li class="order" ng-class="getClass('/order')"> <a href="#/order"><span class="icon hidden-desktop"><i class="icon-bar-chart"></i></span><span class="hidden-phone">Orders</span></a></li>
                         <!--- only show if user has favorites --->
-                        <li class="favorites" ng-show="user.CurrentOrderID" ng-class="getClass('/favoriteorders')"> <a href="#/favoriteorders"><span class="icon hidden-desktop"><i class="icon-star"></i></span><span class="hidden-phone">Favorites</span></a></li>
+                        <li class="favorites" ng-class="getClass('/favoriteorders')"> <a href="#/favoriteorders"><span class="icon hidden-desktop"><i class="icon-star"></i></span><span class="hidden-phone">Favorites</span></a></li>
                     </ul>
                 </div>
                 <ul class="nav nav-search">
