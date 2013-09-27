@@ -6,14 +6,23 @@ four51.app.factory('Address', function($resource, $451, $angularCacheFactory){
             fn(data);
     }
 
+	function _extend(address) {
+		//set default value to US if it's a new address and other values
+		address.Country = address.Country || 'US';
+		address.IsBilling = address.IsBilling || true;
+		address.IsShipping = address.IsShipping || true;
+	}
+
     var _get = function(id, success) {
         if (cache.get('address' + id)) {
             var address = cache.get('address' + id);
+	        _extend(address);
             _then(success, address);
         }
         else {
             return $resource($451.api('address/:id'), { id: '@id' }).get({ id: id }).$promise.then(function(add) {
                 cache.put('address' + id, add);
+	            _extend(add);
                 _then(success, add);
             });
         }
@@ -22,6 +31,7 @@ four51.app.factory('Address', function($resource, $451, $angularCacheFactory){
     var _save = function(address, success) {
         return $resource($451.api('address')).save(address).$promise.then(function(add) {
             cache.put('address' + add.ID, add);
+	        _extend(add);
             _then(success, add);
         });
     }

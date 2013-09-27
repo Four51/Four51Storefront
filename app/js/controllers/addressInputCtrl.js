@@ -12,27 +12,18 @@ four51.app.controller('AddressInputCtrl', function ($scope, $location, User, Add
         });
     };
 
-    function init() {
-        //set default value to US if it's a new address and other values
-        $scope.address.Country = $scope.address.Country || 'US';
-        $scope.address.IsBilling = $scope.address.IsBilling || true;
-        $scope.address.IsShipping = $scope.address.IsShipping || true;
+    $scope.countries = ResourcesService.countries;
+    $scope.states = ResourcesService.states;
 
-        $scope.countries = ResourcesService.countries;
-        $scope.states = ResourcesService.states;
+    $scope.country = function(item) {
+        return $scope.address != null ? $scope.address.Country == item.country : false;
+    };
+    $scope.hasStates = function() {
+        return $scope.address != null ? $scope.address.Country == 'US' || $scope.address.Country == 'CA' || $scope.address.Country == 'NL' : false;
+    };
 
-        $scope.country = function(item) {
-            return $scope.address != null ? $scope.address.Country == item.country : false;
-        };
-        $scope.hasStates = function() {
-            return $scope.address != null ? $scope.address.Country == 'US' || $scope.address.Country == 'CA' || $scope.address.Country == 'NL' : false;
-        };
-
-        $scope.isPhoneRequired = function() {
-            return ($scope.user.Permissions.contains('BillingAddressPhoneRequired') && $scope.address.IsBilling) ||
-                ($scope.user.Permissions.contains('ShipAddressPhoneRequired') && $scope.address.IsShipping);
-        }
+    $scope.isPhoneRequired = function() {
+        return ($scope.user.Permissions.contains('BillingAddressPhoneRequired') && $scope.address.IsBilling) ||
+            ($scope.user.Permissions.contains('ShipAddressPhoneRequired') && $scope.address.IsShipping);
     }
-
-    $scope.$on('api:userGetComplete', init);
 });
