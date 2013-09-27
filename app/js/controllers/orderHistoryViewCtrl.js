@@ -25,7 +25,8 @@ four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $location,
 	$scope.repeatOrder = function() {
 		$scope.order.Repeat = true;
         Order.save($scope.order, function(data) {
-            $scope.currentOrder = data;
+	        $scope.currentOrder = data;
+	        $scope.user.CurrentOrderID = data.ID;
             $location.path('/cart');
         });
 	};
