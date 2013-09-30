@@ -120,7 +120,7 @@
                 </table>
                 <div style="float: left;">
                     <span class="text-info">Quantity</span>
-                    {{LineItem.LineTotal | currency}}<quantityfield lineitem="LineItem" error="quantityError" class="test"/><span ng-show="quantityError">{{quantityError}}</span>
+                    <quantityfield lineitem="LineItem" error="quantityError" class="test"/>{{LineItem.LineTotal | currency}}<span ng-show="quantityError">{{quantityError}}</span>
                 </div>
                 <div style=" display: inline;float: right;">
                     <button id="451_btn_orderadd" ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(LineItem)" class="btn emphasis-btn">
