@@ -1,4 +1,4 @@
-four51.app.factory('ResourcesService', function() {
+four51.app.factory('Resources', function() {
     var countries = [
         { "label": "United States of America", "value": "US"},
         { "label": "Afghanistan", "value": "AF"},

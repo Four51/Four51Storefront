@@ -1,6 +1,4 @@
-'use strict';
-
-four51.app.controller('AddressInputCtrl', function ($scope, $location, User, Address, ResourcesService) {
+four51.app.controller('AddressInputCtrl', function ($scope, $location, User, Address, Resources) {
     $scope.save = function() {
         Address.save(this.address, function() {
            $location.path($scope.return);
@@ -12,8 +10,8 @@ four51.app.controller('AddressInputCtrl', function ($scope, $location, User, Add
         });
     };
 
-    $scope.countries = ResourcesService.countries;
-    $scope.states = ResourcesService.states;
+    $scope.countries = Resources.countries;
+    $scope.states = Resources.states;
 
     $scope.country = function(item) {
         return $scope.address != null ? $scope.address.Country == item.country : false;

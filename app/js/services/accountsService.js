@@ -1,4 +1,4 @@
-four51.app.factory('SpendingAccountService', function($resource, $451, $angularCacheFactory){
+four51.app.factory('SpendingAccount', function($resource, $451, $angularCacheFactory){
     var cache = $angularCacheFactory.get('451Cache');
     function _then(fn, data) {
         if (angular.isFunction(fn))
