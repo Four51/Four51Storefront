@@ -4,12 +4,10 @@ four51.app.factory('Order', function($resource, $rootScope, $451, $angularCacheF
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
-		$rootScope.$broadcast('api:orderGetComplete');
 	}
 
 	function _extend(order) {
 		order.isEditable = order.Status == 'Unsubmitted' || order.Status == 'Open';
-		console.info('extending order: ' + order.isEditable);
 	}
 
 	var _get = function(id, success) {

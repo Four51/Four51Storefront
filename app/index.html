@@ -23,13 +23,11 @@
             <login />
         </div>
 
-        <div ng-show="Four51User.isAuthenticated()" class="container-fluid" id="content"  ng-controller="SideNavCtrl">
-            <div class="navbar" ng-controller="NavCtrl">
-                <ng-include src="template.url" />
+        <div ng-show="Four51User.isAuthenticated()" class="container-fluid" id="content">
+            <div class="navbar">
+                <navigation />
             </div>
-
             <div class="row-fluid">
-
                 <div class="container-fluid container-content">
                     <h4 class="visible-phone text-warning">Hello, Phone</h4>
                     <h4 class="visible-tablet text-warning">Hello, Tablet</h4>
@@ -39,84 +37,86 @@
             </div>
         </div>
 
-
         <div ng-controller="ErrorCtrl">
             <ng-include src="template.url" />
         </div>
     </div>
-<hr />
+
+    <hr />
     <!-- In production use:
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
     -->
 
-<script src="lib/jquery-2.0.0.js"></script>
-<script src="lib/jquery-ui.min.js"></script>
-<script src="lib/angular/angular.1.2.0.js"></script>
-<script src="lib/angular/angular-sanitize.js"></script>
-<script src="lib/angular/angular-cookies.js"></script>
-<script src="lib/angular/angular-animate.js"></script>
-<script src="lib/angular/angular-resource.js"></script>
-<script src="lib/angular/angular-route.js"></script>
-<script src="lib/angular/angular-touch.js"></script>
-<script src="lib/angular/angular-cache.js"></script>
+    <script src="lib/jquery-2.0.0.js"></script>
+    <script src="lib/jquery-ui.min.js"></script>
+    <script src="lib/angular/angular.1.2.0.js"></script>
+    <script src="lib/angular/angular-sanitize.js"></script>
+    <script src="lib/angular/angular-cookies.js"></script>
+    <script src="lib/angular/angular-animate.js"></script>
+    <script src="lib/angular/angular-resource.js"></script>
+    <script src="lib/angular/angular-route.js"></script>
+    <script src="lib/angular/angular-touch.js"></script>
+    <script src="lib/angular/angular-cache.js"></script>
 
-<script src="lib/angular/ui-bootstrap-0.2.0.js"></script>
-<script src="lib/angular/ui-date.js"></script>
-<script src="lib/angular/ui-validate.js"></script>
-<script src="lib/angular/ui-mask.js"></script>
-<script src="lib/angular/ng-grid.js"></script>
+    <script src="lib/angular/ui-bootstrap-0.2.0.js"></script>
+    <script src="lib/angular/ui-date.js"></script>
+    <script src="lib/angular/ui-validate.js"></script>
+    <script src="lib/angular/ui-mask.js"></script>
+    <script src="lib/angular/ng-grid.js"></script>
 
-<script src="js/app.js"></script>
-<script src="js/451.js"></script>
-<script src="js/filters.js"></script>
-<script src="js/config.js"></script>
-<script src="js/routing.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/451.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/routing.js"></script>
 
-<script src="js/controllers/Four51Ctrl.js"></script>
-<script src="js/controllers/categoryCtrl.js"></script>
-<script src="js/controllers/errorCtrl.js"></script>
-<script src="js/controllers/loginCtrl.js"></script>
-<script src="js/controllers/orderSearchCtrl.js"></script>
-<script src="js/controllers/orderHistoryViewCtrl.js"></script>
-<script src="js/controllers/lineItemHistoryCtrl.js"></script>
-<script src="js/controllers/navCtrl.js"></script>
-<script src="js/controllers/productCtrl.js"></script>
-<script src="js/controllers/productListCtrl.js"></script>
-<script src="js/controllers/messageListCtrl.js"></script>
-<script src="js/controllers/messageViewCtrl.js"></script>
-<script src="js/controllers/favoriteOrderCtrl.js"></script>
-<script src="js/controllers/userEditCtrl.js"></script>
-<script src="js/controllers/addressInputCtrl.js"></script>
-<script src="js/controllers/addressListCtrl.js"></script>
-<script src="js/controllers/addressViewCtrl.js"></script>
-<script src="js/controllers/cartViewCtrl.js"></script>
-<script src="js/controllers/lineItemGridCtrl.js"></script>
-<script src="js/controllers/checkOutViewCtrl.js"></script>
+    <script src="js/controllers/Four51Ctrl.js"></script>
+    <script src="js/controllers/categoryCtrl.js"></script>
+    <script src="js/controllers/errorCtrl.js"></script>
+    <script src="js/controllers/loginCtrl.js"></script>
+    <script src="js/controllers/orderSearchCtrl.js"></script>
+    <script src="js/controllers/orderHistoryViewCtrl.js"></script>
+    <script src="js/controllers/lineItemHistoryCtrl.js"></script>
+    <script src="js/controllers/navCtrl.js"></script>
+    <script src="js/controllers/productCtrl.js"></script>
+    <script src="js/controllers/productListCtrl.js"></script>
+    <script src="js/controllers/messageListCtrl.js"></script>
+    <script src="js/controllers/messageViewCtrl.js"></script>
+    <script src="js/controllers/favoriteOrderCtrl.js"></script>
+    <script src="js/controllers/userEditCtrl.js"></script>
+    <script src="js/controllers/addressInputCtrl.js"></script>
+    <script src="js/controllers/addressListCtrl.js"></script>
+    <script src="js/controllers/addressViewCtrl.js"></script>
+    <script src="js/controllers/cartViewCtrl.js"></script>
+    <script src="js/controllers/lineItemGridCtrl.js"></script>
+    <script src="js/controllers/checkOutViewCtrl.js"></script>
 
-<script src="js/services/interceptors.js"></script>
-<script src="js/services/securityService.js"></script>
-<script src="js/services/userService.js"></script>
-<script src="js/services/orderService.js"></script>
-<script src="js/services/orderConfigService.js"></script>
-<script src="js/services/orderSearchService.js"></script>
-<script src="js/services/orderStatsService.js"></script>
-<script src="js/services/productService.js"></script>
-<script src="js/services/categoryService.js"></script>
-<script src="js/services/messageService.js"></script>
-<script src="js/services/favoriteOrderService.js"></script>
-<script src="js/services/accountsService.js"></script>
-<script src="js/services/addressService.js"></script>
-<script src="js/services/shipperService.js"></script>
-<script src="js/services/resourceService.js"></script>
+    <script src="js/services/interceptors.js"></script>
+    <script src="js/services/securityService.js"></script>
+    <script src="js/services/userService.js"></script>
+    <script src="js/services/orderService.js"></script>
+    <script src="js/services/orderConfigService.js"></script>
+    <script src="js/services/orderSearchService.js"></script>
+    <script src="js/services/orderStatsService.js"></script>
+    <script src="js/services/productService.js"></script>
+    <script src="js/services/categoryService.js"></script>
+    <script src="js/services/messageService.js"></script>
+    <script src="js/services/favoriteOrderService.js"></script>
+    <script src="js/services/accountsService.js"></script>
+    <script src="js/services/addressService.js"></script>
+    <script src="js/services/shipperService.js"></script>
+    <script src="js/services/resourceService.js"></script>
 
-<script src="js/directives/product.js"></script>
-<script src="js/directives/costcentercontrol.js"></script>
-<script src="js/directives/checkout.js"></script>
-<script src="js/directives/customfields.js"></script>
-<script src="js/directives/approvalrulelist.js"></script>
-<script src="js/directives/tree.js"></script>
-<script src="js/directives/addressinput.js"></script>
-<script src="js/directives/reporting.js"></script>
-<script src="js/directives/panel.js"></script>
+    <script src="js/directives/product.js"></script>
+    <script src="js/directives/costcentercontrol.js"></script>
+    <script src="js/directives/checkout.js"></script>
+    <script src="js/directives/customfields.js"></script>
+    <script src="js/directives/approvalrulelist.js"></script>
+    <script src="js/directives/tree.js"></script>
+    <script src="js/directives/addressinput.js"></script>
+    <script src="js/directives/reporting.js"></script>
+    <script src="js/directives/panel.js"></script>
+    <script src="js/directives/nav.js"></script>
+    <script src="js/directives/login.js"></script>
 </body>
 </html>

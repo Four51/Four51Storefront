@@ -26,7 +26,7 @@ four51.app.config(['$routeProvider', function($routeProvider) {
             when('/cart', { templateUrl: 'partials/cartView.html', controller: 'CartViewCtrl'}).
             when('/checkout', { templateUrl: 'partials/checkOutView.html', controller: 'CheckOutViewCtrl' }).
 			when('/cart/:view/:lineItemIndex', { templateUrl: concatProductView, controller: 'LineItemEditCtrl'}).
-			when('/login', { templateUrl: 'partials/login.html', controller: 'LoginCtrl' }).
+			when('/login', { templateUrl: 'partials/controls/loginView.html', controller: 'LoginCtrl' }).
             when('/search', { templateUrl: 'partials/search.html', controller: 'Four51Ctrl' }).
 			otherwise({redirectTo: '/catalog'});
 	}]);

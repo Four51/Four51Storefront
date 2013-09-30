@@ -11,10 +11,4 @@ four51.app.controller('NavCtrl', function ($location, $scope, $451, User) {
 			$scope.currentUser = user;
 		});
 	}
-
-	$scope.template = { url: 'partials/nav.html'};
-});
-
-four51.app.controller('SideNavCtrl', function ($scope) {
-
 });
