@@ -1,9 +1,12 @@
 <div>
-    <approvalrulelist order="order" />
-</div>
-<div>
     <p>Subtotal: {{order.Subtotal | currency:"$"}}</p>
     <p>Shipping & Handling: {{order.ShippingCost | currency:"$"}}</p>
     <p>Tax: {{order.TaxCost | currency:"$"}}</p>
     <p><strong>Total: {{order.Total | currency:"$"}}</strong></p>
+</div>
+<div>
+    <approvalrulelist order="order" />
+</div>
+<div>
+    <approval order="order" ng-show="order.Status == 'AwaitingApproval' && (order.UserCanApprove || user.Permissions.contains('ApproveAllOrders'))" />
 </div>

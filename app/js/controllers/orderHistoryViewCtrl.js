@@ -34,5 +34,6 @@ four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $location,
 	$scope.saveFavorite = function() {
         FavoriteOrder.save($scope.order);
 	};
+
 });
 
