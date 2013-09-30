@@ -28,5 +28,5 @@ four51.app.controller('ErrorCtrl', function ErrorCtrl($scope, $rootScope, $dialo
 		}
 	});
 
-	$scope.template = { url: 'partials/error.html'};
+	$scope.template = { url: 'partials/errorView.html'};
 });

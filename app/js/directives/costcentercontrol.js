@@ -6,7 +6,7 @@ four51.app.directive('costcenter', function() {
             lineitem: '='
         },
         restrict: 'E',
-        templateUrl: 'partials/controls/costCenterView.html'
+        templateUrl: 'partials/controls/costCenter.html'
     }
     return obj;
 });

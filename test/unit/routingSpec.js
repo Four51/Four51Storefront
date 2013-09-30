@@ -43,7 +43,7 @@ describe('$451 Routing:', function(){
 
             //here we go, this is the first mock in 451 history!  well, besides all the mocking that goes on within the dev team
             //basically we are overriding the HTTPBackend service to not have a hissy fit when this virtual browser tries to grab that partial file
-            $httpBackend.when("GET",'partials/category.html').respond('category');
+            $httpBackend.when("GET",'partials/categoryView.html').respond('category');
 
             expect($route.current).toBeUndefined();
 
@@ -54,7 +54,7 @@ describe('$451 Routing:', function(){
             expect($route.current).toBeDefined();
 
             //by default we should end up at the category display
-            expect($route.current.templateUrl).toBe('partials/category.html');
+            expect($route.current.templateUrl).toBe('partials/categoryView.html');
             expect($route.current.controller).toBe('CategoryCtrl');
         });
 
@@ -67,7 +67,7 @@ describe('$451 Routing:', function(){
             $httpBackend = _$httpBackend_;
 
             //because we expect to be redirected to the category route, set up this mock
-            $httpBackend.when("GET",'partials/category.html').respond('category');
+            $httpBackend.when("GET",'partials/categoryView.html').respond('category');
 
             expect($route.current).toBeUndefined();
 
@@ -78,7 +78,7 @@ describe('$451 Routing:', function(){
             expect($route.current).toBeDefined();
 
             //by default or in the case of an unrecognized URL/path, we should always end up at the category display
-            expect($route.current.templateUrl).toBe('partials/category.html');
+            expect($route.current.templateUrl).toBe('partials/categoryView.html');
             expect($route.current.controller).toBe('CategoryCtrl');
         });
 
@@ -110,12 +110,12 @@ describe('$451 Routing:', function(){
     });
     it("should route catalog requests properly", function() {
 
-        unitTestRoute('partials/category.html','catalog','/catalog','partials/category.html','CategoryCtrl')
+        unitTestRoute('partials/categoryView.html','catalog','/catalog','partials/categoryView.html','CategoryCtrl')
 
     });
     it("should route catalog detail requests properly", function() {
 
-        unitTestRoute('partials/category.html','catalog','/catalog/:categoryInteropID','partials/category.html','CategoryCtrl')
+        unitTestRoute('partials/categoryView.html','catalog','/catalog/:categoryInteropID','partials/categoryView.html','CategoryCtrl')
 
     });
     it("should route product detail requests properly", function() {
@@ -130,7 +130,7 @@ describe('$451 Routing:', function(){
     });
     it("should route order requests properly", function() {
 
-        unitTestRoute('partials/orderSearch.html','order','/order','partials/orderSearch.html','OrderSearchCtrl')
+        unitTestRoute('partials/orderSearchView.html','order','/order','partials/orderSearchView.html','OrderSearchCtrl')
 
     });
     it("should route order detail requests properly", function() {
@@ -140,7 +140,7 @@ describe('$451 Routing:', function(){
     });
     it("should route favorite order requests properly", function() {
 
-        unitTestRoute('partials/favoriteOrderList.html','favoriteorders','/favoriteorders','partials/favoriteOrderList.html','FavoriteOrderCtrl')
+        unitTestRoute('partials/favoriteOrderListView.html','favoriteorders','/favoriteorders','partials/favoriteOrderListView.html','FavoriteOrderCtrl')
 
     });
     it("should route line item requests properly", function() {
@@ -150,7 +150,7 @@ describe('$451 Routing:', function(){
     });
     it("should route message list requests properly", function() {
 
-        unitTestRoute('partials/messageList.html','message','/message','partials/messageList.html','MessageListCtrl')
+        unitTestRoute('partials/messageListView.html','message','/message','partials/messageListView.html','MessageListCtrl')
 
     });
     it("should route message detail requests properly", function() {
@@ -175,17 +175,17 @@ describe('$451 Routing:', function(){
     });
     it("should route addressList requests properly", function() {
 
-        unitTestRoute('partials/addressList.html','addresses','/addresses','partials/addressList.html','AddressListCtrl')
+        unitTestRoute('partials/addressListView.html','addresses','/addresses','partials/addressListView.html','AddressListCtrl')
 
     });
     it("should route addressEditView requests properly", function() {
 
-        unitTestRoute('partials/addressEditView.html','address','/address','partials/addressEditView.html','AddressViewCtrl')
+        unitTestRoute('partials/addressView.html','address','/address','partials/addressView.html','AddressViewCtrl')
 
     });
     it("should route addressEditView (with ID) requests properly", function() {
 
-        unitTestRoute('partials/addressEditView.html','address','/address/:id','partials/addressEditView.html','AddressViewCtrl')
+        unitTestRoute('partials/addressView.html','address','/address/:id','partials/addressView.html','AddressViewCtrl')
 
     });
 });

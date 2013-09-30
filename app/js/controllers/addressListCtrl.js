@@ -17,7 +17,7 @@ four51.app.controller('AddressListCtrl', function ($scope, $location, $451, Addr
     }
 
     // ng-grid first configuration
-    // There may be a way to configure ShowSelectionCheckbox: true, to bind but could not find a way. I added 'Selected' as a cellTemplate with a 'Toggle Selection' in addressList.html
+    // There may be a way to configure ShowSelectionCheckbox: true, to bind but could not find a way. I added 'Selected' as a cellTemplate with a 'Toggle Selection' in addressListView.html
     $scope.gridOptions = {
         data: 'addresses',
         showFilter: true,

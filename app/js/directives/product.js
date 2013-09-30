@@ -64,7 +64,7 @@ four51.app.directive('pricescheduletable', function(){
             p : '='
         },
         restrict: 'E',
-        templateUrl: 'partials/priceSchedule.html'
+        templateUrl: 'partials/priceScheduleView.html'
     }
     return obj;
 })
@@ -75,7 +75,7 @@ four51.app.directive('staticspecstable', function(){
 			specgroups : '='
         },
         restrict: 'E',
-        templateUrl: 'partials/staticspecs.html',
+        templateUrl: 'partials/controls/staticSpecs.html',
 		link: function(scope){
 			scope.hasvisiblechild = function(specs){
 				var hasChild = false;
