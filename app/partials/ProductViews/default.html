@@ -141,19 +141,5 @@
         <div class="hidden-tablet hidden-phone"  style="border: 1px solid #d6d6d6; height: 200px;">
         </div>
     </section>
-    <hr/><span ng-show="LineItem.LineTotal"><hr>Line item total debug:
-        <br>
-        variant specs:
-        <ul>
-            <li ng-repeat="s in LineItem.Variant.Specs">
-                {{s.Name}}: {{s.Value}}, markup: {{s.MarkupType}}
-            </li>
-        </ul>
-        product specs:
-        <ul>
-            <li ng-repeat="s in LineItem.Product.Specs">
-                {{s.Name}}: {{s.Value}}, markup: {{s.MarkupType}}
-            </li>
-        </ul>
-    </span>
+    <hr/>
 </div>
