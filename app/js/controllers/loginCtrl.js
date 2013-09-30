@@ -9,6 +9,4 @@ four51.app.controller('LoginCtrl', function LoginCtrl($scope, $route, $angularCa
 	$scope.login = function() {
 		User.login(this.credentials);
 	};
-
-	$scope.template = { url: 'partials/login.html'};
 });
