@@ -1,7 +1,7 @@
-four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Product,ProductDisplayService, Order) {
+four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Product,ProductDisplayService, Order, $location) {
 	$scope.LineItem = {};
 
-	Order.get(user.CurrentOrderID, function(data){
+	Order.get($scope.user.CurrentOrderID, function(data){
 		$scope.LineItem = data.LineItems[$routeParams.lineItemIndex];
 		Product.get($scope.LineItem.Product.InteropID, function(product){
             $scope.LineItem.Product = product;
@@ -9,6 +9,17 @@ four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Produc
 		});
 		$scope.allowAddToOrder = true;
 	});
+	$scope.addToOrderText = "Save Line Item";
+	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
+		console.log('saving lineitem');
+		console.log($scope.LineItem);
+		console.log($scope.currentOrder);
+		Order.save($scope.currentOrder, function(){
+			console.log('save order complete');
+			$location.path('/cart');
+		});
+	}
+
 });
 
 four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, ProductDisplayService) {
@@ -21,6 +32,7 @@ four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, Pr
 
 four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, ProductDisplayService, Order, Variant, $451, Order, $location) {
 	$scope.LineItem = {};
+	$scope.addToOrderText = "add to cart";
 	function ProductVariantGetsDone (){
 		ProductDisplayService.setNewLineItemScope($scope);
 		ProductDisplayService.setProductViewScope($scope);

@@ -124,7 +124,7 @@
                 </div>
                 <div style=" display: inline;float: right;">
                     <button id="451_btn_orderadd" ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(LineItem)" class="btn emphasis-btn">
-                        Add to Cart
+                        {{addToOrderText}}
                     </button>
                 </div>
                 <p ng-show="LineItem.PriceSchedule.MinQuantity > 1">
