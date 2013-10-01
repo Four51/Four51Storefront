@@ -19,7 +19,7 @@ four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, Pr
 	$scope.allowAddToOrderInProductList = $scope.allowAddToOrder && $scope.LineItem.Specs.length == 0 && $scope.LineItem.Product.Type != 'VariableText';
 });
 
-four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, ProductDisplayService, Order, Variant, $451) {
+four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, ProductDisplayService, Order, Variant, $451, Order, $location) {
 	$scope.LineItem = {};
 	Product.get($routeParams.productInteropID, function(data){
         $scope.LineItem.Product = data;
@@ -37,7 +37,14 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 	});
 
 	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
-		Order.addToOrder(quantity, productInteropID, variantInteropID);
+		//$scope.currentOrder.LineItems.push($scope.LineItem);
+		console.log('adding new lineitem');
+		console.log($scope.LineItem);
+		$scope.currentOrder.LineItems.push($scope.LineItem);
+		Order.save($scope.currentOrder, function(){
+			$location.path('/cart')
+			//console.log('add to order complete');
+		});
 	}
 });
 
