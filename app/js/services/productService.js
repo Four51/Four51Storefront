@@ -207,6 +207,8 @@ four51.app.factory('ProductDisplayService', function($451, Variant){
 				scope.LineItem.Specs.push(item);
 		});
 
+		console.log('checking add to order')
+		console.log(scope.LineItem.Variant);
 		scope.allowAddToOrder = scope.LineItem.Variant || scope.LineItem.Product.Variants.length == 0;//this will include some order type and current order logic.
 		//short view//scope.allowAddToOrder = scope.LineItem.Product.Variants.length == 0 && scope.lineItemSpecs.length == 0 && scope.LineItem.Product.Type != 'VariableText';
 		//one view//ng-show="LineItem.Variant || LineItem.Product.Variants.length == 0"

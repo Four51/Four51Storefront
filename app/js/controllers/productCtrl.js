@@ -21,19 +21,26 @@ four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, Pr
 
 four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, ProductDisplayService, Order, Variant, $451, Order, $location) {
 	$scope.LineItem = {};
-	Product.get($routeParams.productInteropID, function(data){
-        $scope.LineItem.Product = data;
-        if($routeParams.variantInteropID){
-			//Product.Variants doesn't return all details on variable text products, so go back for the rest.
-            data.Type == 'VariableText' ?
-                Variant.get({VariantInteropID: $routeParams.variantInteropID, ProductInteropID: data.InteropID }, function(variant) {
-                    $scope.LineItem.Variant = variant;
-                }) :
-				$scope.LineItem.Variant = $451.filter(data.Variants, {Property: 'InteropID', Value: $routeParams.variantInteropID})[0];
-		}
+	function ProductVariantGetsDone (){
 		ProductDisplayService.setNewLineItemScope($scope);
 		ProductDisplayService.setProductViewScope($scope);
 		$scope.$broadcast('ProductGetComplete');
+	}
+
+	Product.get($routeParams.productInteropID, function(data){
+        $scope.LineItem.Product = data;
+        if($routeParams.variantInteropID){
+			if(data.Type == 'VariableText'){
+				Variant.get({VariantInteropID: $routeParams.variantInteropID, ProductInteropID: data.InteropID }, function(variant) {
+					$scope.LineItem.Variant = variant;
+					ProductVariantGetsDone();})
+			} else {
+				$scope.LineItem.Variant = $451.filter(data.Variants, {Property: 'InteropID', Value: $routeParams.variantInteropID})[0];
+				ProductVariantGetsDone();
+			}
+		}
+		else
+			ProductVariantGetsDone();
 	});
 
 	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
