@@ -56,12 +56,19 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 	});
 
 	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
-		console.log('adding new lineitem');
-		console.log($scope.LineItem);
+
+		console.log('addding to order')
+		console.log($scope.currentOrder)
+		if(!$scope.currentOrder){
+			$scope.currentOrder = {};
+			$scope.currentOrder.LineItems = [];
+		}
+
 		$scope.currentOrder.LineItems.push($scope.LineItem);
-		console.log($scope.currentOrder);
-		Order.save($scope.currentOrder, function(){
+
+		Order.save($scope.currentOrder, function(o){
 			console.log('add to order complete');
+			$scope.user.CurrentOrderID = o.ID;
 			$location.path('/cart');
 		});
 	}
