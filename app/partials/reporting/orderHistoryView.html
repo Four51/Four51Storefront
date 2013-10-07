@@ -1,3 +1,4 @@
+<section class="view-partial order-history-view">
 <orderhistoryheader order="order"></orderhistoryheader>
 <lineitemhistorygrid order="order"></lineitemhistorygrid>
 <hr />
@@ -6,10 +7,10 @@
 <div ng-if="order.FromUserID == user.ID">
     <input type="button" class="btn btn-small btn-info" value="Repeat Order" ng-click="repeatOrder()" />
 </div>
-<br />
-<div>
+<br />                          f
     <div ng-if="order.FromUserID == user.ID">
         <input type="text" ng-model="order.FavoriteName" placeholder="Favorite Name" />
         <input ng-click="saveFavorite()" type="button" class="btn btn-small btn-primary" value="Save as Favorite" />
     </div>
 </div>
+</section>
