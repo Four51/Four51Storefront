@@ -15,6 +15,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     });
 
     $scope.$watch('currentOrder.ShipAddressID', function() {
+	    if (!$scope.currentOrder) return;
         angular.forEach($scope.currentOrder.LineItems, function(li) {
             li.ShipAddressID = $scope.currentOrder.ShipAddressID;
         });

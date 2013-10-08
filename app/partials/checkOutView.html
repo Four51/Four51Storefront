@@ -61,13 +61,13 @@
 
         <div ng-if="currentOrder" class="span9 well Shipping">
             <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
-                    ng-model="currentOrder.ShipAddressID" /><a class="btn btn-mini btn-action" ng-href="#/address">Add New Address</a>
+                    ng-model="currentOrder.ShipAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address">Add New Address</a>
             <shipperselector />
         </div>
 
         <div ng-if="currentOrder" class="span9 well Billing">
             <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}"
-                    ng-model="currentOrder.BillAddressID" /><a class="btn btn-mini btn-action" ng-href="#/address">Add New Address</a>
+                    ng-model="currentOrder.BillAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address">Add New Address</a>
             <paymentselector />
         </div>
 
@@ -81,7 +81,7 @@
 
         <div class="btn-group" ng-if="currentOrder">
             <button class="btn btn-small btn-action" ng-click="submitOrder()" ng-disabled="cart.$invalid">Submit</button>
-            <button class="btn btn-small btn-action" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
+            <button class="btn btn-small btn-action" ng-click="saveChanges()">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
             <button class="btn btn-small btn-warning" ng-click="cancelOrder()">Cancel Order</button>
             <button class="btn btn-small btn-info" ng-click="continueShopping()">Continue Shopping</button>
         </div>
