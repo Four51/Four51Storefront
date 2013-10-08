@@ -201,10 +201,10 @@ four51.app.factory('ProductDisplayService', function($451, Variant){
 		}else{
 			scope.LineItem.PriceSchedule = variantHasPriceSchedule(scope.LineItem.Product, 'StandardPriceSchedule') ? null : scope.LineItem.Product.StandardPriceSchedule; //don't show price schedule if variant overrides parent PS
 		}
-		scope.LineItem.Specs = [];
+		scope.LineItem.Specs = {};
 		angular.forEach(scope.LineItem.Product.Specs, function(item){
 			if(item.CanSetForLineItem || item.DefinesVariant)
-				scope.LineItem.Specs.push(item);
+				scope.LineItem.Specs[item.Name] = item;
 		});
 
 		console.log('checking add to order')
