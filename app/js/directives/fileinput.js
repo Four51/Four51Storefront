@@ -2,7 +2,7 @@
  <div file-input="file"></div>
 */
 
-four51.app.directive('customfilefield', function($parse, $451, fileReader, resampler) {
+four51.app.directive('customfilefield', function($parse, $451, fileReader, Security, resampler) {
 	var obj = {
 		scope: {
 			customfield: '='
@@ -13,7 +13,7 @@ four51.app.directive('customfilefield', function($parse, $451, fileReader, resam
 		link: function(scope, element, attrs) {
 			var file_input = $parse("file");
 
-			scope.imageSrc = $451.appname + "/app/" + scope.customfield.File.Url;
+			scope.imageSrc = scope.customfield.File.Url + "&auth=" + Security.auth();
 
 			var resampleImage = function (imageData) {
 				return resampler.resample(
