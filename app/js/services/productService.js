@@ -98,7 +98,7 @@ four51.app.factory('ProductDisplayService', function($451, Variant){
 			if(spec.AllowOtherValue && spec.OtherTextValue && spec.OtherValueMarkup > 0)
 				otherMarkup = spec.OtherValueMarkup;
 
-			if((spec.Options.length && spec.SelectedOptionID) || otherMarkup){
+			if((spec.Options && spec.SelectedOptionID) || otherMarkup){
 
 				var option = !spec.SelectedOptionID ? null : $451.filter(spec.Options, {Property: 'ID', Value: spec.SelectedOptionID})[0];
 				if(!option && !otherMarkup)
@@ -201,11 +201,17 @@ four51.app.factory('ProductDisplayService', function($451, Variant){
 		}else{
 			scope.LineItem.PriceSchedule = variantHasPriceSchedule(scope.LineItem.Product, 'StandardPriceSchedule') ? null : scope.LineItem.Product.StandardPriceSchedule; //don't show price schedule if variant overrides parent PS
 		}
-		scope.LineItem.Specs = {};
-		angular.forEach(scope.LineItem.Product.Specs, function(item){
-			if(item.CanSetForLineItem || item.DefinesVariant)
-				scope.LineItem.Specs[item.Name] = item;
-		});
+		if(!scope.LineItem.Specs){//it's possible we're reloading this due to changing a variant and we don't want to leave the spec values behind
+			scope.LineItem.Specs = {};
+			console.log('calling specs on new lineitem');
+			angular.forEach(scope.LineItem.Product.Specs, function(item){
+				if(item.CanSetForLineItem || item.DefinesVariant)
+				{
+					//TODO:doesn't mesh with caching
+					scope.LineItem.Specs[item.Name] = item;
+				}
+			});
+		}
 
 		console.log('checking add to order')
 		console.log(scope.LineItem.Variant);
