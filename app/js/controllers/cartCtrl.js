@@ -18,11 +18,18 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
     };
 
     $scope.saveChanges = function() {
-        Order.save($scope.currentOrder, function(data) {
-            $scope.currentOrder = data;
-            OrderConfig.costcenter(data, $scope.user);
-        });
-    };
+		if($scope.currentOrder.LineItems.length == $451.filter($scope.currentOrder.LineItems, {Property:'Selected', Value: true}).length){
+			Order.delete($scope.currentOrder, function(){
+				$scope.currentOrder = null;
+				$scope.user.CurrentOrderID = null;
+			});
+		}else{
+			Order.save($scope.currentOrder, function(data) {
+				$scope.currentOrder = data;
+				OrderConfig.costcenter(data, $scope.user);
+			});
+		}
+	};
 
     $scope.checkOut = function() {
         Order.save($scope.currentOrder, function(data) {
@@ -43,12 +50,6 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
     $scope.copyAddressToAll = function() {
         angular.forEach($scope.currentOrder.LineItems, function(n) {
             n.DateNeeded = $scope.currentOrder.LineItems[0].DateNeeded;
-        });
-    };
-
-    $scope.removeSelected = function() {
-        Order.save($scope.currentOrder, function(o) {
-            $scope.currentOrder = o;
         });
     };
 
