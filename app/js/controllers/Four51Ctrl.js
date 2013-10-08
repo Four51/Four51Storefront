@@ -1,4 +1,4 @@
-four51.app.controller('Four51Ctrl', function (resampler, $scope, $routeParams, $location, $451, User, Order, Security, OrderConfig, Category, SpendingAccount, fileReader) {
+four51.app.controller('Four51Ctrl', function ($scope, $routeParams, $location, $451, User, Order, Security, OrderConfig, Category, SpendingAccount, fileReader) {
     $scope.scroll = 0;
     $scope.appname = $451.appname;
 	$scope.Four51User = Security;

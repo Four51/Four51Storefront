@@ -1,5 +1,5 @@
 
-four51.app.factory('fileReader', function($q, $log, resampler) {
+four51.app.factory('fileReader', function($q, $log) {
 	var onLoad = function(reader, deferred, scope) {
 		return function () {
 			scope.$apply(function () {
