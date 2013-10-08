@@ -19,7 +19,7 @@ four51.app.config(function($httpProvider) {
 				}
 
 				if ($451.debug && typeof response.data == 'object')
-					console.debug(response.data);
+					console.log(response.data);
 
 				return response || $q.when(response);
 			},

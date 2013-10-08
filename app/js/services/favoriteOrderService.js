@@ -19,7 +19,7 @@ four51.app.factory('FavoriteOrder', function($resource, $451, $angularCacheFacto
     }
 
     var _save = function(order,success) {
-        $resource($451.api('favoriteorder')).save(order).$promise.then(function(fav) {
+        $resource($451.api('favoriteorder'), {},  { 'save': { method: 'POST', isArray: true }}).save(order).$promise.then(function(fav) {
 	        cache.put('favoriteorders', fav);
             _then(success, fav);
         });
