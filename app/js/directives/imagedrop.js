@@ -1,5 +1,5 @@
 
-four51.app.directive("imageDrop", function ($parse, fileReader, resampler) {
+four51.app.directive("imageDrop", function ($parse, fileReader) {
 	return {
 		restrict: "EA",
 		link: function (scope, element, attrs) {
@@ -20,17 +20,9 @@ four51.app.directive("imageDrop", function ($parse, fileReader, resampler) {
 				accesor.assign(scope, imageData);
 			};
 
-			var resampleImage = function (imageData) {
-				return resampler.resample(
-					imageData,
-					element.width(), element.height(),
-					scope);
-			};
-
 			var loadFile = function (file) {
 				fileReader
 					.readAsDataUrl(file, scope)
-					.then(resampleImage)
 					.then(placeImage);
 			};
 
