@@ -2,6 +2,6 @@
     <div ng-repeat="shipper in Shippers">
         <span ng-class="{'icon-ok': currentOrder.LineItems[0].ShipperName == shipper.Name }" ng-click="setShipper(shipper)">{{shipper.Name}}</span>
     </div>
-    <input type='text' required ng-model='currentOrder.LineItems[0].ShipperName' style='display: none;' />
+    <input type='text' ng-required="Shippers.length > 0" ng-model='currentOrder.LineItems[0].ShipperName' style='display: none;' />
 </div>
 <input ng-if="user.ShipMethod.AskForAccountNumber" placeholder="Shipping Account Number" type="text" ng-model="currentOrder.LineItems[0].ShipAccount" />

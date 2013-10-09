@@ -23,9 +23,9 @@ four51.app.directive('customselectionfield', function($451) {
             '<input type="text" ng-change="otherChanged()" ng-model="other" ng-show="isOtherSelected" />',
         link: function(scope, element, attr) {
             scope.changed = function() {
-                scope.customfield.Value = this.item.Value;
+                scope.customfield.Value = this.item == null ? null : this.item.Value;
                 scope.isOtherSelected = false;
-                if (this.item.Value.indexOf('Other') > -1) {
+                if (this.item != null && this.item.Value.indexOf('Other') > -1) {
                     scope.isOtherSelected = true;
                     scope.customfield.Value = scope.other;
                 }

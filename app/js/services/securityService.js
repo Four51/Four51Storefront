@@ -3,6 +3,7 @@ four51.app.factory('Security', function($451, $cookieStore) {
     return {
         init: function(user, auth) {
             this.currentUser = {
+	            SiteID: user.SiteID,
                 Username: user.Username,
                 InteropID: user.InteropID,
                 FirstName: user.FirstName,
