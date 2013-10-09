@@ -1,6 +1,4 @@
-four51.app.factory('User', function($q, $rootScope, $resource, $451, $angularCacheFactory, Security) {
-    var cache = $angularCacheFactory.get('451Cache');
-
+four51.app.factory('User', function($q, $rootScope, $resource, $451, Security) {
     function _then(fn, data) {
         if (angular.isFunction(fn))
             fn(data);
@@ -15,43 +13,37 @@ four51.app.factory('User', function($q, $rootScope, $resource, $451, $angularCac
     }
 
 	var _refresh = function() {
-		cache.remove('user');
+		store.remove('451Cache.User');
 		_get();
 	}
 
     var _get = function(success) {
-        if (cache.get('user')) {
-            var user = cache.get('user');
-	        _extend(user);
-            _then(success,user);
-        }
-        else {
-            return $resource($451.api('user')).get().$promise.then(function(u) {
+        var user = store.get('451Cache.User');
+	    user ? (function() { _extend(user); _then(success,user); })() :
+            $resource($451.api('user')).get().$promise.then(function(u) {
                 _extend(u);
                 _then(success,u);
-                cache.put('user', u);
-                $rootScope.$broadcast('api:userGetComplete');
+                store.set('451Cache.User', u);
             });
-        }
     }
 
     var _save = function(user, success) {
         $resource($451.api('user')).save(user).$promise.then(function(u) {
             _extend(u);
             _then(success,u);
-            cache.put('user', u);
+            store.set('451Cache.User', u);
         });
     }
 
     var _login = function(credentials,success) {
-        cache.removeAll();
+	    store.clear();
         $resource($451.api('login')).get(credentials).$promise.then(function(u) {
             _then(success,u);
         });
     }
 
     var _logout = function() {
-        cache.removeAll();
+        store.clear();
         Security.logout();
     }
 
