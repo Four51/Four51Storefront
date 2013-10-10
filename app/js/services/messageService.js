@@ -1,32 +1,28 @@
-four51.app.factory('Message', function($resource, $451, $angularCacheFactory) {
-	var cache = $angularCacheFactory.get('451Cache');
-
+four51.app.factory('Message', function($resource, $451) {
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
 	}
 
     var _get = function(id, success) {
-	    if (cache.get('message' + id)) {
-		    var message = cache.get('message' + id);
-		    _then(success, message);
-	    }
-        $resource($451.api('message/:id'), { id: '@id' }).get({ 'id': id}).$promise.then(function(msg) {
-	        cache.put('message' + msg.ID, msg);
-            _then(success, msg);
-        });
+		var message = store.get('451Cache.Message.' + id);
+		message ? _then(success, message) :
+	        $resource($451.api('message/:id'), { id: '@id' }).get({ 'id': id}).$promise.then(function(msg) {
+		        store.set('451Cache.Message.' + msg.ID, msg);
+	            _then(success, msg);
+	        });
     }
 
     var _delete = function(msg, success) {
         $resource($451.api('message')).delete(msg, function() {
-	        cache.remove('message' + msg.ID);
+	        store.remove('451Cache.Message.' + msg.ID);
             _then(success);
         });
     }
 
     var _save = function(msg, success) {
         $resource($451.api('message')).save(msg).$promise.then(function(m) {
-	        cache.put('message' + m.ID, m);
+	        store.set('451Cache.Message.' + m.ID, m);
             _then(success, m);
         });
     }
@@ -38,25 +34,19 @@ four51.app.factory('Message', function($resource, $451, $angularCacheFactory) {
 	}
 });
 
-four51.app.factory('MessageList', function($resource, $451, $angularCacheFactory) {
-	var cache = $angularCacheFactory.get('451Cache');
-
+four51.app.factory('MessageList', function($resource, $451) {
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
 	}
 
     var _query = function(success) {
-	    if (cache.get('messages')) {
-		    var messages = cache.get('messages');
-		    _then(success, messages);
-	    }
-	    else {
+		var messages = store.get('451Cache.Messages');
+		messages ? _then(success, messages) :
 	        $resource($451.api('message')).query().$promise.then(function(list) {
-		        cache.put('messages', list);
+		        store.set('451Cache.Messages', list);
 	            _then(success, list);
 	        });
-	    }
     }
 
     var _delete = function(messages, success) {
@@ -64,7 +54,7 @@ four51.app.factory('MessageList', function($resource, $451, $angularCacheFactory
             if (msg.Selected)
                 $resource($451.api('message')).delete(msg);
         });
-	    cache.put('messages', messages);
+	    store.set('451Cache.Messages', messages);
        _then(success,messages);
     }
 

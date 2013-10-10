@@ -18,8 +18,8 @@ four51.app.config(function($httpProvider) {
                     $rootScope.$broadcast('event:auth-loginConfirmed', response.data);
 				}
 
-				if ($451.debug && typeof response.data == 'object')
-					console.log(response.data);
+				//if ($451.debug && typeof response.data == 'object')
+				//	console.log(response.data);
 
 				return response || $q.when(response);
 			},

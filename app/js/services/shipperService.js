@@ -1,31 +1,25 @@
-four51.app.factory('Shipper', function($resource, $451, $angularCacheFactory) {
-	var cache = $angularCacheFactory.get('451Cache');
-
+four51.app.factory('Shipper', function($resource, $451) {
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
 	}
 
 	function buildCacheID(order) {
-		var cacheID = "shippers" + order.ID;
-		angular.forEach(order.LineItems, function(item, i) {
+		var cacheID = "451Cache.Shippers." + order.ID;
+		angular.forEach(order.LineItems, function(item) {
 			cacheID += item.Quantity + item.Product.InteropID + item.ShipAddressID;
 		});
 		return cacheID;
 	}
 
     var _query = function(order, success) {
-	    var id = buildCacheID(order);
-	    if (cache.get(id)) {
-		    var shippers = cache.get(id);
-		    _then(success, shippers);
-	    }
-	    else {
+	    var id = buildCacheID(order),
+		    shippers = store.get(id);
+		shippers ? _then(success, shippers) :
 	        $resource($451.api('shipper')).query().$promise.then(function(list) {
-		        cache.put(id, list);
+		        store.set(id, list);
 	            _then(success, list);
 	        });
-	    }
     }
 
     return {

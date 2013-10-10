@@ -1,6 +1,4 @@
-four51.app.factory('Address', function($resource, $451, $angularCacheFactory){
-    var cache = $angularCacheFactory.get('451Cache');
-
+four51.app.factory('Address', function($resource, $451){
     function _then(fn, data) {
         if (angular.isFunction(fn))
             fn(data);
@@ -14,23 +12,18 @@ four51.app.factory('Address', function($resource, $451, $angularCacheFactory){
 	}
 
     var _get = function(id, success) {
-        if (cache.get('address' + id)) {
-            var address = cache.get('address' + id);
-	        _extend(address);
-            _then(success, address);
-        }
-        else {
-            return $resource($451.api('address/:id'), { id: '@id' }).get({ id: id }).$promise.then(function(add) {
-                cache.put('address' + id, add);
+		var address = store.get('451Cache.Address.' + id);
+	    address ? (function() { _extend(address); _then(success, address); })() :
+            $resource($451.api('address/:id'), { id: '@id' }).get({ id: id }).$promise.then(function(add) {
+                store.set('451Cache.Address.' + id, add);
 	            _extend(add);
                 _then(success, add);
             });
-        }
     }
 
     var _save = function(address, success) {
         return $resource($451.api('address')).save(address).$promise.then(function(add) {
-            cache.put('address' + add.ID, add);
+            store.set('451Cache.Address.' + add.ID, add);
 	        _extend(add);
             _then(success, add);
         });
@@ -38,7 +31,7 @@ four51.app.factory('Address', function($resource, $451, $angularCacheFactory){
 
     var _delete = function(address, success) {
         return $resource($451.api('address')).delete(address).$promise.then(function() {
-            cache.remove('address' + address.ID);
+            store.remove('451Cache.Address.' + address.ID);
             _then(success);
         });
     }
@@ -50,25 +43,19 @@ four51.app.factory('Address', function($resource, $451, $angularCacheFactory){
     };
 });
 
-four51.app.factory('AddressList', function($resource, $451, $angularCacheFactory) {
-	var cache = $angularCacheFactory.get('451Cache');
-
+four51.app.factory('AddressList', function($resource, $451) {
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
 	}
 
     var _query = function(success) {
-	    if (cache.get('addresses')) {
-		    var addresses = cache.get('addresses');
-		    _then(success, addresses);
-	    }
-	    else {
+		var addresses = store.get('451Cache.Addresses');
+		addresses ? _then(success, addresses) :
 	        $resource($451.api('address')).query().$promise.then(function(list) {
-		        cache.put('addresses', list);
+		        store.set('451Cache.Addresses', list);
 	            _then(success, list);
 	        });
-	    }
     }
 
     var _delete = function(addresses, success) {
@@ -77,7 +64,7 @@ four51.app.factory('AddressList', function($resource, $451, $angularCacheFactory
 	            $resource($451.api('address')).delete(add);
             }
         });
-	    cache.put('addresses');
+	    store.set('451Cache.Addresses');
         _then(success);
     }
 

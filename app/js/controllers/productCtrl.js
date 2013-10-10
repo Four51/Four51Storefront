@@ -11,11 +11,7 @@ four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Produc
 	});
 	$scope.addToOrderText = "Save Line Item";
 	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
-		console.log('saving lineitem');
-		console.log($scope.LineItem);
-		console.log($scope.currentOrder);
 		Order.save($scope.currentOrder, function(){
-			console.log('save order complete');
 			$location.path('/cart');
 		});
 	}
@@ -39,6 +35,11 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 		$scope.$broadcast('ProductGetComplete');
 	}
 
+	$scope.getSpec = function() {
+		if (!localStorage["angular-cache.caches.451Cache.data.productARIHome"]) return "null";
+		return JSON.parse(localStorage["angular-cache.caches.451Cache.data.productARIHome"]).value.Specs.Size.Value;
+	}
+
 	Product.get($routeParams.productInteropID, function(data){
         $scope.LineItem.Product = data;
         if($routeParams.variantInteropID){
@@ -57,8 +58,6 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 
 	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
 
-		console.log('addding to order')
-		console.log($scope.currentOrder)
 		if(!$scope.currentOrder){
 			$scope.currentOrder = {};
 			$scope.currentOrder.LineItems = [];
@@ -67,7 +66,6 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 		$scope.currentOrder.LineItems.push($scope.LineItem);
 
 		Order.save($scope.currentOrder, function(o){
-			console.log('add to order complete');
 			$scope.user.CurrentOrderID = o.ID;
 			$location.path('/cart');
 		});
@@ -90,8 +88,9 @@ four51.app.controller('CustomProductCtrlMatrix', function($scope, $451, Variant,
 
 		});
 	};
-	$scope.addMatrixToOrder = function(){
-	};
+
+	$scope.addMatrixToOrder = function(){ };
+
 	$scope.setFocusVariant = function(opt1, opt2){
 
 		if($scope.LineItems[opt1.Value.toString() + opt2.Value.toString()].Variant){
