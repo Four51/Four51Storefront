@@ -6,7 +6,7 @@
                     <ul class="nav">
                         <li class="brand-a hidden-phone">
                             <a class="brand" style="border-lefT: 1px solid #d6d6d6; border-right: 1px solid #d6d6d6;" ng-show="Four51User.isAuthenticated()" href="#/catalog">
-                                <i class="icon-cloud"></i><span class="hidden-phone">Welcome</span><span ng-click="refreshUser()" class="hidden-tablet hidden-phone">{{user.FirstName + " " + user.LastName}}</span>
+                                <i ng-click="refreshUser()" class="icon-cloud"></i><span class="hidden-phone">Welcome</span><span class="hidden-tablet hidden-phone">{{user.FirstName + " " + user.LastName}}</span>
                             </a>
                         </li>
                         <li>
