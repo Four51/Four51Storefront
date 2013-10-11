@@ -23,12 +23,17 @@
 @media (min-width: 75em) {
     .nav li span.hidden-sm {float:right;}
     .header-nav-c1 {width: 1200px; margin: 0 auto; }
-
+    .category-product.product-navigation li.nav-header {
+        width: 25%;
+    }
 }
 
 /* Desktop & tablet landscape - 1024+ */
-@media (min-width: 50em) {
+@media (min-width: 50em) and (max-width: 74.9em) {
 
+    .category-product.product-navigation li.nav-header {
+        width: 33.3%;
+    }
 
 
     #content {
@@ -40,7 +45,7 @@
 
     }
 
-    .container-view, .container-admin{max-width: 1024px; margin: 0 auto;}
+
 
     .header .content-navigation, .header .content-navigation.fadeIn {
         position: fixed;
@@ -63,11 +68,7 @@ margin-top: 10.357em;
         margin-top: 0;
     }
 
-    .product-navigation li.nav-header {
 
-        width: 14.2%;border: 1px solid #d6d6d6;
-
-    }
     .product-navigation li.nav-header.cat-parent {width: auto;}
 
     .product-navigation nav.nav ul li.nav-header a{
@@ -157,6 +158,10 @@ width to scale for number of buttons */
 
 }
 
+
+
+
+
 /* Size and font adjustments to make it fit into in-between screens 800-980 */
 @media (min-width: 50em) and (max-width: 61.250em) {
     .admin-navigation .nav li.brand-a span {
@@ -237,17 +242,20 @@ width to scale for number of buttons */
     left: 39%;
     }
     */
-    .product-navigation li.nav-header {
-        width: 33.3%;
-    }
+
 
     .product-navigation li.nav-header a {
         padding: 1.429em .05em;
     }
 }
+
+
+
 /* Tablet - portrait - 798 */
 @media (min-width:32.5em) and (max-width: 49.938em) {
-
+    .category-product.product-navigation li.nav-header {
+        width: 50%;
+    }
     .admin-navigation .nav li.brand-a span {
         display: block;
     }
@@ -339,14 +347,11 @@ width to scale for number of buttons */
         transition: background 0.5s;
     }
 
-    .product-navigation li.nav-header {
-        width: 33.3%;
-    }
+
 
     .product-navigation li.nav-header a {
         padding: 1.429em .05em;
     }
-
 
 
 }
@@ -420,9 +425,7 @@ width to scale for number of buttons */
         background:transparent;
     }
 
-    .product-navigation li.nav-header {
-        width: 33.3%;
-    }
+
 
     .product-navigation li.nav-header a {
         padding: 1.429em .05em;
