@@ -10,8 +10,25 @@
 320 Phone Mobile
 ----------------------------------------------------------------------------------------------- */
 
-/* Desktop & tablet landscape - 100% width - 1024+ */
+/* using breakpoints as defined by bootstrap 3.0 */
+/* Extra small devices (phones, up to 480px) */
+/* No media query since this is the default in Bootstrap, default styles in app.css */
+/* Small devices (tablets, 768px and up) screen-sm */
+/* Medium devices (desktops, 992px and up)  screen-md */
+/* Large devices (large desktops, 1200px and up) screen-lg */
+
+
+
+/* Desktop  1200+ */
+@media (min-width: 75em) {
+    .nav li span.hidden-sm {float:right;}
+    .header-nav-c1 {width: 1024px; margin: 0 auto; }
+}
+
+/* Desktop & tablet landscape - 1024+ */
 @media (min-width: 50em) {
+
+
 
     #content {
         margin: 0;
@@ -37,10 +54,10 @@
         z-index: 1;
     }
     /*
-    .product-navigation nav.nav {
-    margin-top: 10.357em;
-    }
-    */
+.product-navigation nav.nav {
+margin-top: 10.357em;
+}
+*/
     .category-product.product-navigation nav.nav {
         margin-top: 0;
     }
@@ -50,6 +67,7 @@
         width: 14.2%;border: 1px solid #d6d6d6; background-color: transparent;
 
     }
+    .product-navigation li.nav-header.cat-parent {width: auto;}
 
     .product-navigation nav.nav ul li.nav-header a{
         min-height: 4.286em;
@@ -79,7 +97,8 @@ padding-top: 0.714em; */
     }
 
     .content-navigation .nav li {
-        width: 50%; /* default is three buttons~ change to auto if more than two buttons or adjust percentage of width to scale for number of buttons */
+        width: 50%; /* default is three buttons~ change to auto if more than two buttons or adjust percentage of
+width to scale for number of buttons */
         display: table-cell;
         padding: 0;
         text-align: center;
@@ -142,7 +161,7 @@ padding-top: 0.714em; */
     .admin-navigation .nav li.brand-a span {
         display: block;
     }
-    li.cart a   {margin-top:4px;}
+    li.cart a {margin-top:4px;}
     .admin-navigation .nav li span {
         display: block;
     }
@@ -157,10 +176,10 @@ padding-top: 0.714em; */
 
     .user-links .nav a i {font-size: 15px;}
 
-    .admin-navigation .user-links .nav a    {
+    .admin-navigation .user-links .nav a {
         padding: 15px 1.071em;
     }
-    a.cart {padding: 20px 0 0  !important;}
+    a.cart {padding: 20px 0 0 !important;}
 
 
     .admin-navigation .user-links ul {
@@ -176,7 +195,7 @@ padding-top: 0.714em; */
     .content-navigation .nav ul {
         margin-top: 0;
     }
-    .admin-navigation .user-links .nav a    {
+    .admin-navigation .user-links .nav a {
         padding: 15px 1.071em;
     }
     .header .content-navigation, .header .content-navigation.fadeIn {
@@ -210,13 +229,13 @@ padding-top: 0.714em; */
     .admin-navigation .user-links ul {
         float: left;
     }
-/*
+    /*
     .admin-navigation .brand {
-        position: absolute;
-        top: 0;
-        left: 39%;
+    position: absolute;
+    top: 0;
+    left: 39%;
     }
-*/
+    */
     .product-navigation li.nav-header {
         width: 33.3%;
     }
@@ -238,24 +257,24 @@ padding-top: 0.714em; */
         visibility: hidden;
     }
 
-    li.cart a   {margin-top:4px;}
+    li.cart a {margin-top:4px;}
     .admin-navigation .user-links ul {
         float: left;
     }
 
     .user-links .nav a i {font-size: 15px;}
 
-    .admin-navigation .user-links .nav a    {
-    padding: 15px 1.071em;
+    .admin-navigation .user-links .nav a {
+        padding: 15px 1.071em;
     }
- a.cart {padding: 20px 0 0  !important;}
-/*
+    a.cart {padding: 20px 0 0 !important;}
+    /*
     .admin-navigation .brand {
-        position: absolute;
-        top: 0;
-        left: 37%;
+    position: absolute;
+    top: 0;
+    left: 37%;
     }
-*/
+    */
     .content-navigation .nav ul li:nth-child(8n+1) a:hover,
     .content-navigation .nav ul li:nth-child(8n+1) a:active,
     .content-navigation .nav ul li:nth-child(8n+1) a:focus {
@@ -364,10 +383,10 @@ padding-top: 0.714em; */
 
     .user-links .nav a i {font-size: 15px;}
 
-    .admin-navigation .user-links .nav a    {
+    .admin-navigation .user-links .nav a {
         padding: 15px 1.071em;
     }
-    a.cart {padding: 20px 0 0  !important;}
+    a.cart {padding: 20px 0 0 !important;}
     .content-navigation .nav a {
         padding: 0.3em;
     }
@@ -419,7 +438,7 @@ padding-top: 0.714em; */
         margin-right: 0;
     }
 
-    .admin-navigation .nav > li   {font-size: 20px;}
+    .admin-navigation .nav > li {font-size: 20px;}
 
 
     .admin-navigation .nav > li > a {
@@ -477,11 +496,11 @@ padding-top: 0.714em; */
         margin-right: 0;
     }
 
-    .admin-navigation .nav > li   {font-size: 15px; display: none;}
+    .admin-navigation .nav > li {font-size: 15px; display: none;}
 
 
     .admin-navigation .nav > li > a {border-left: 1px solid #d6d6d6;
-padding: 23px .45em;
+        padding: 23px .45em;
     }
 
     li.cart {margin-right: 0; }
@@ -545,3 +564,4 @@ padding: 23px .45em;
 
 
 }
+

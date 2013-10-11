@@ -1,12 +1,16 @@
-//TODO: doesn't appear to be used
-// http://stackoverflow.com/questions/13549216/changing-css-on-scrolling-angular-style
-four51.app.directive('scrollposition', function($window) {
-	return function(scope, element, attrs) {
-		var windowEl = angular.element($window);
-		windowEl.on('scroll', function() {
-			scope.$apply(function() {
-				scope[attrs.scrollposition] = windowEl.scrollTop();
-			});
-		});
-	};
+//stackoverflow.com/questions/14878761/angularjs-bind-scroll-toggle-class
+//body class="scroll || static" is global scroll check
+four51.app.directive("scroll", function ($window) {
+    return function(scope, element, attrs) {
+        angular.element($window).bind("scroll", function() {
+            if (this.pageYOffset >= 1) {
+                scope.boolChangeClass = true;
+                element.removeClass('static');
+            } else {
+                scope.boolChangeClass = false;
+                element.addClass('static');
+            }
+            scope.$apply();
+        });
+    };
 });
