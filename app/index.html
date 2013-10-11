@@ -32,6 +32,13 @@
                     <h4 class="visible-phone text-warning">Hello, Phone</h4>
                     <h4 class="visible-tablet text-warning">Hello, Tablet</h4>
                     <h4 class="visible-desktop text-warning">Hello, Desktop</h4>
+                    <div data-ng-controller="FirebaseChatCtrl">
+                        <div id="messagesDiv" class="well">
+                            <div ng-repeat="msg in messages"><em>{{msg.from}}</em>: {{msg.body}}</div>
+                        </div>
+                        <input type="text" ng-model="name" placeholder="Name">
+                        <input type="text" ng-model="msg" ng-keydown="addMessage($event)" placeholder="Message...">
+                    </div>
                     <div ng-view ng-animate="{enter: 'view-enter', leave: 'view-leave'}"/>
                 </div>
             </div>
@@ -63,6 +70,10 @@
     <script src="lib/angular/ui-mask.js"></script>
     <script src="lib/angular/ng-grid.js"></script>
 
+    <!--Firebase & AngularFire            !-->
+    <script src='https://cdn.firebase.com/v0/firebase.js'></script>
+    <script src='https://cdn.firebase.com/libs/angularfire/0.3.0/angularfire.min.js'></script>
+
     <script src="js/app.js"></script>
     <script src="js/451.js"></script>
     <script src="js/filters.js"></script>
@@ -82,6 +93,7 @@
     <script src="js/controllers/messageListCtrl.js"></script>
     <script src="js/controllers/messageViewCtrl.js"></script>
     <script src="js/controllers/favoriteOrderCtrl.js"></script>
+    <script src="js/controllers/firebaseCtrl.js"></script>
     <script src="js/controllers/userEditCtrl.js"></script>
     <script src="js/controllers/addressInputCtrl.js"></script>
     <script src="js/controllers/addressListCtrl.js"></script>
