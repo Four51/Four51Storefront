@@ -25,7 +25,7 @@
         <nav class="nav 451_lbl_subcatlist">
             <ul>
                 <li class="nav-header" ng-repeat="c in tree">
-                    <a ng-href="#/catalog/{{c.InteropID}}"><img ng-src="{{c.Image.URL}}"/><hr />{{c.Name}}</a>
+                    <a ng-href="#/catalog/{{c.InteropID}}"><img ng-src="{{c.Image.URL}}"/><hr /><div ng-bind-html="c.Name"></div></a>
                 </li>
             </ul>
         </nav>

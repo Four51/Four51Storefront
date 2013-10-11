@@ -1,23 +1,17 @@
 'use strict';
-four51.app.factory('Product', function($resource, $451, $angularCacheFactory){
-	var cache = $angularCacheFactory.get('451Cache');
-
+four51.app.factory('Product', function($resource, $451){
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
 	}
 
      var _get = function(param, success) {
-	     if (cache.get('product' + param)) {
-		     var product = cache.get('product' + param);
-		     _then(success, product);
-	     }
-	     else {
-	        $resource($451.api('Products/:interopID'), {interopID: '@ID'}).get({interopID: param}).$promise.then(function(product) {
-		        cache.put('product' + product.InteropID, product);
+	     var product = store.get('451Cache.Product.' + param);
+	     product ? _then(success, product) :
+		     $resource($451.api('Products/:interopID'), { interopID: '@ID' }).get({ interopID: param }).$promise.then(function(product) {
+		        store.set('451Cache.Product.' + product.InteropID, product);
 	            _then(success, product);
-	        });
-	     }
+	         });
     }
 
     var _search = function(categoryInteropID, searchTerm, success) {
@@ -26,17 +20,13 @@ four51.app.factory('Product', function($resource, $451, $angularCacheFactory){
             'CategoryInteropID': categoryInteropID,
             'SearchTerms': searchTerm ? searchTerm : ''
         };
-	    var cacheID = 'products' + criteria.CategoryInteropID + criteria.SearchTerms.replace(/ /g, "");
-	    if (cache.get(cacheID)) {
-		    var products = cache.get(cacheID);
-		    _then(success, products)
-	    }
-	    else {
+	    var cacheID = '451Cache.Products.' + criteria.CategoryInteropID + criteria.SearchTerms.replace(/ /g, "");
+		var products = store.get(cacheID);
+	    products ? _then(success, products) :
 	        $resource($451.api('Products')).query(criteria).$promise.then(function(products) {
-		        cache.put(cacheID, products);
+		        store.put(cacheID, products);
 	            _then(success, products);
 	        });
-	    }
     }
 
 	return {
@@ -45,26 +35,19 @@ four51.app.factory('Product', function($resource, $451, $angularCacheFactory){
     }
 });
 
-four51.app.factory('Variant', function($resource, $451, $angularCacheFactory){
-	var cache = $angularCacheFactory.get('451Cache');
-
+four51.app.factory('Variant', function($resource, $451){
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
 	}
 
     var _get = function(params, success) {
-	    console.info('getting a variant');
-	    if (cache.get('variant' + params.VariantInteropID + params.ProductInteropID)) {
-			var variant = cache.get('variant' + params.VariantInteropID + params.ProductInteropID);
-		    _then(success, variant);
-	    }
-	    else {
+		var variant = store.get('variant' + params.VariantInteropID + params.ProductInteropID);
+	    variant ? _then(success, variant) :
 	        $resource($451.api('variant')).get(params).$promise.then(function(variant) {
-		        cache.put('variant' + variant.InteropID, variant);
+		        store.put('variant' + variant.InteropID, variant);
 	            _then(success, variant);
 	        });
-	    }
     }
 
 	return {
@@ -78,8 +61,6 @@ four51.app.factory('ProductDisplayService', function($451, Variant){
 		var ps = lineItem.PriceSchedule;
 		var variant = lineItem.Variant;
 		var product = lineItem.Product;
-		console.log('calc total called');
-		console.dir(lineItem);
 		var unitPrice = 0;
 		// AmountPerQuantity(fixed amount per unit)
 		// AmountTotal (fixed amount per line)
@@ -93,17 +74,14 @@ four51.app.factory('ProductDisplayService', function($451, Variant){
 
 		var addToMarkups = function(spec){
 			var otherMarkup;
-			console.log('add to markup');
-			console.dir(spec);
 			if(spec.AllowOtherValue && spec.OtherTextValue && spec.OtherValueMarkup > 0)
 				otherMarkup = spec.OtherValueMarkup;
 
-			if((spec.Options.length && spec.SelectedOptionID) || otherMarkup){
+			if((spec.Options && spec.SelectedOptionID) || otherMarkup){
 
 				var option = !spec.SelectedOptionID ? null : $451.filter(spec.Options, {Property: 'ID', Value: spec.SelectedOptionID})[0];
 				if(!option && !otherMarkup)
 					return;
-				//console.dir({markuptype: spec.MarkupType, note: 'markup option', option: option})
 				if(spec.MarkupType ==="AmountPerQuantity" )
 					amountPerQty += otherMarkup || option.PriceMarkup;
 				if(spec.MarkupType ==="Percentage" )
@@ -122,7 +100,6 @@ four51.app.factory('ProductDisplayService', function($451, Variant){
 				priceBreak = pb; //assumes they will be in order of smallest to largest
 		});
 		if(!priceBreak){
-			console.log('no price break found');
 			lineItem.LineTotal = 0;
 			return;
 		}
@@ -135,15 +112,11 @@ four51.app.factory('ProductDisplayService', function($451, Variant){
 			"fixed ammount per line added:" + fixedAddPerLine + " & " +
 			"percentage added to qty*unitprice:" + percentagePerLine + " & " + //"'other value' markup:" + otherValueMarkup + " & " +
 			"unit price:" + priceBreak.Price;
-		console.log(debugLineTotal);
 		lineItem.LineTotal = total;
 	}
 	function productViewScope(scope){
 		scope.specChanged = function(spec){
-			console.log('spec changed called...');
-			console.dir(spec)
 			if(!spec){
-				console.log('spec changed called, but no spec passed');
 				return;
 			}
 
@@ -201,14 +174,17 @@ four51.app.factory('ProductDisplayService', function($451, Variant){
 		}else{
 			scope.LineItem.PriceSchedule = variantHasPriceSchedule(scope.LineItem.Product, 'StandardPriceSchedule') ? null : scope.LineItem.Product.StandardPriceSchedule; //don't show price schedule if variant overrides parent PS
 		}
-		scope.LineItem.Specs = [];
-		angular.forEach(scope.LineItem.Product.Specs, function(item){
-			if(item.CanSetForLineItem || item.DefinesVariant)
-				scope.LineItem.Specs.push(item);
-		});
+		if(!scope.LineItem.Specs){//it's possible we're reloading this due to changing a variant and we don't want to leave the spec values behind
+			scope.LineItem.Specs = {};
+			angular.forEach(scope.LineItem.Product.Specs, function(item){
+				if(item.CanSetForLineItem || item.DefinesVariant)
+				{
+					//TODO:doesn't mesh with caching
+					scope.LineItem.Specs[item.Name] = item;// Object.create(item);
+				}
+			});
+		}
 
-		console.log('checking add to order')
-		console.log(scope.LineItem.Variant);
 		scope.allowAddToOrder = scope.LineItem.Variant || scope.LineItem.Product.Variants.length == 0;//this will include some order type and current order logic.
 		//short view//scope.allowAddToOrder = scope.LineItem.Product.Variants.length == 0 && scope.lineItemSpecs.length == 0 && scope.LineItem.Product.Type != 'VariableText';
 		//one view//ng-show="LineItem.Variant || LineItem.Product.Variants.length == 0"

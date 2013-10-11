@@ -1,22 +1,18 @@
-four51.app.factory('SpendingAccount', function($resource, $451, $angularCacheFactory){
-    var cache = $angularCacheFactory.get('451Cache');
+four51.app.factory('SpendingAccount', function($resource, $451){
     function _then(fn, data) {
         if (angular.isFunction(fn))
             fn(data);
     }
 
     var _query = function(success) {
-        if (cache.get('accounts')) {
-            var accounts = cache.get('accounts');
-	        _then(success, accounts);
-        }
-        else {
-            return $resource($451.api('spendingaccount')).query().$promise.then(function(list) {
-                cache.put('accounts', list);
+		var accounts = store.get('451Cache.Accounts');
+	    accounts ? _then(success, accounts) :
+            $resource($451.api('spendingaccount')).query().$promise.then(function(list) {
+                store.set('451Cache.Accounts', list);
                _then(success, list);
             });
-        }
     }
+
     return {
         query: _query
     };
