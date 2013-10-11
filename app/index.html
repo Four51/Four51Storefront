@@ -18,25 +18,31 @@
 
 <body ng-cloak class="static ng-cloak" scroll ng-class="{scroll:boolChangeClass}">
 
-    <div ng-controller="Four51Ctrl" class="container">
-        <div ng-hide="Four51User.isAuthenticated()" style="position: relative;" >
+    <div ng-controller="Four51Ctrl">
+        <div ng-hide="Four51User.isAuthenticated()" class="container" style="position: relative;" >
             <login />
         </div>
 
-        <div ng-show="Four51User.isAuthenticated()" class="container" id="content">
-            <div class="navbar">
+        <div ng-show="Four51User.isAuthenticated()" id="content">
+            <div class="navbar" class="container">
                 <navigation />
             </div>
-            <div class="row">
-                <div class="container container-content">
+            <div class="jumbotron">
+                <div class="container">
+                    <h2>Branding</h2>
                     <h4 class="hidden-sm hidden-md hidden-lg text-warning">Hello, Phone</h4>
                     <h4 class="visible-sm text-warning">Hello, Tablet Portrait</h4>
                     <h4 class="visible-md text-warning">Hello, Tablet Landscape / Desktop Small</h4>
                     <h4 class="visible-lg text-warning">Hello, Desktop Large</h4>
+                </div>
+            </div>
+
+                <div class="container-content">
+
                     <div ng-view />
                 </div>
             </div>
-        </div>
+
         <div ng-controller="ErrorCtrl">
             <ng-include src="template.url" />
         </div>

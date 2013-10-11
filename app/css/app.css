@@ -30,17 +30,16 @@ div.catDropdown.open ul li ul {display: none;}
 
 html {
     height: 100%;
-    background-color: rgb(249, 249, 249); /* fallback */
-    background-color: rgba(249, 249, 249, 1);
-    background-color:#ECF8FF;
-    background-color:#fff;
+
+}
+.navbar {
+       margin-bottom: 0;
+
 }
 
 body {
-    background-color: rgb(249, 249, 249); /* fallback */
-    background-color: rgba(249, 249, 249, 1);
-    background-color:#ECF8FF;
-    background-color:#fff;
+
+
     font-family: 'Droid Sans', sans-serif;
     font-smooth:always;
     -webkit-font-smoothing: antialiased;

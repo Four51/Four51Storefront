@@ -22,7 +22,8 @@
 /* Desktop  1200+ */
 @media (min-width: 75em) {
     .nav li span.hidden-sm {float:right;}
-    .header-nav-c1 {width: 1024px; margin: 0 auto; }
+    .header-nav-c1 {width: 1200px; margin: 0 auto; }
+
 }
 
 /* Desktop & tablet landscape - 1024+ */
@@ -40,7 +41,7 @@
     }
 
     .container-view, .container-admin{max-width: 1024px; margin: 0 auto;}
-    .header {min-height: 74px;}
+
     .header .content-navigation, .header .content-navigation.fadeIn {
         position: fixed;
         margin-left: -512px;
@@ -64,7 +65,7 @@ margin-top: 10.357em;
 
     .product-navigation li.nav-header {
 
-        width: 14.2%;border: 1px solid #d6d6d6; background-color: transparent;
+        width: 14.2%;border: 1px solid #d6d6d6;
 
     }
     .product-navigation li.nav-header.cat-parent {width: auto;}
