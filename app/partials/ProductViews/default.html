@@ -1,14 +1,40 @@
-<div id="451_area_prod_desc" class="well view-default-product">
-    <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url"><!--- phone name display ---><h4 class="emphasis-title visible-phone">{{LineItem.Product.Name}}</h4>
-    <section style="  clear: both; overflow: hidden;margin: 10px 0;" class="span8">
-        <!--- desktop and tablet info display --->
-        <div style="border: 1px solid #d6d6d6; clear: both; overflow: hidden;margin-bottom: 20px;" class="hidden-phone">
-            <div style="background-color:#2C3E50; clear: both; overflow: hidden;">
-                <h4 ng-click="selected=1" class="span6" style="background-color:#1A242F; cursor: pointer; color:#fff; padding: 10px 25px; margin: 0; text-align: center;">Information</h4>
-                <h4 ng-click="selected=2" class="span6" ng-show="StaticSpecGroups" style="background-color:#2C3E50; color:#fff;cursor: pointer;padding: 10px 25px;margin: 0;text-align: center;">Tech Specs</h4>
-                <hr/>
-            </div>
-            <div ng-hide="selected == 2">
+<section class="container">
+    <div id="451_area_prod_desc" class="well view-default-product">
+        <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url"><!--- phone name display ---><h4 class="emphasis-title visible-phone">{{LineItem.Product.Name}}</h4>
+        <section style="  clear: both; overflow: hidden;margin: 10px 0;" class="span8">
+            <!--- desktop and tablet info display --->
+            <div style="border: 1px solid #d6d6d6; clear: both; overflow: hidden;margin-bottom: 20px;" class="hidden-phone">
+                <div style="background-color:#2C3E50; clear: both; overflow: hidden;">
+                    <h4 ng-click="selected=1" class="span6" style="background-color:#1A242F; cursor: pointer; color:#fff; padding: 10px 25px; margin: 0; text-align: center;">Information</h4>
+                    <h4 ng-click="selected=2" class="span6" ng-show="StaticSpecGroups" style="background-color:#2C3E50; color:#fff;cursor: pointer;padding: 10px 25px;margin: 0;text-align: center;">Tech Specs</h4>
+                    <hr/>
+                </div>
+                <div ng-hide="selected == 2">
+                    <div ng-show="LineItem.Product.Description">
+                        <p class="text-info">
+                            Description:
+                        </p>
+                        <p ng-bind-html="LineItem.Product.Description" />
+                    </div>
+                    <p ng-show="LineItem.Variant.Description">
+                        <span class="text-info">Variant Description:</span>
+                        <span ng-bind-html="LineItem.Variant.Description"/>
+                    </p>
+                    <p ng-show="LineItem.Variant.ExternalID">
+                        <span class="text-info">Variant ID:</span>
+                        {{LineItem.Variant.ExternalID}}
+                    </p>
+                    <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
+                        <span class="text-info">Available Inventory:</span>
+                        {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
+                    </p>
+                </div>
+                <div ng-show="selected == 2">
+                    <staticspecstable specgroups="StaticSpecGroups"/>
+                </div>
+            </div><!--- phone info display --->
+            <div class="visible-phone" style="border: 1px solid #d6d6d6; margin-bottom: 10px;">
+                <h4 class="span6" style="background-color:#1A242F;  color:#fff; padding: 10px 25px; margin: 0; text-align: center;">Information</h4>
                 <div ng-show="LineItem.Product.Description">
                     <p class="text-info">
                         Description:
@@ -28,119 +54,95 @@
                     {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
                 </p>
             </div>
-            <div ng-show="selected == 2">
-                <staticspecstable specgroups="StaticSpecGroups"/>
-            </div>
-        </div><!--- phone info display --->
-        <div class="visible-phone" style="border: 1px solid #d6d6d6; margin-bottom: 10px;">
-            <h4 class="span6" style="background-color:#1A242F;  color:#fff; padding: 10px 25px; margin: 0; text-align: center;">Information</h4>
-            <div ng-show="LineItem.Product.Description">
-                <p class="text-info">
-                    Description:
+            <div class="visible-phone" ng-show="StaticSpecGroups" style="border: 1px solid #d6d6d6; margin-bottom: 10px;">
+                <h4 class="span6" style="background-color:#2C3E50; color:#fff;padding: 10px 25px; margin: 0;text-align: center;">Tech Specs</h4>
+                <p>
+                    <staticspecstable specgroups="StaticSpecGroups"/>
                 </p>
-                <p ng-bind-html="LineItem.Product.Description" />
             </div>
-            <p ng-show="LineItem.Variant.Description">
-                <span class="text-info">Variant Description:</span>
-                <span ng-bind-html="LineItem.Variant.Description"/>
-            </p>
-            <p ng-show="LineItem.Variant.ExternalID">
-                <span class="text-info">Variant ID:</span>
-                {{LineItem.Variant.ExternalID}}
-            </p>
-            <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
-                <span class="text-info">Available Inventory:</span>
-                {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
-            </p>
-        </div>
-        <div class="visible-phone" ng-show="StaticSpecGroups" style="border: 1px solid #d6d6d6; margin-bottom: 10px;">
-            <h4 class="span6" style="background-color:#2C3E50; color:#fff;padding: 10px 25px; margin: 0;text-align: center;">Tech Specs</h4>
-            <p>
-                <staticspecstable specgroups="StaticSpecGroups"/>
-            </p>
-        </div>
-        <hr />
+            <hr />
 
-        <div ng-show="LineItem.Product.Variants.length > 1 && !LineItem.Variant">
-            <h4 class="hidden-phone" style="background-color:#f5f5f5;color:#444;text-align: center; font-weight: normal;border: 1px solid #d6d6d6; border-bottom: none;padding: 10px 25px; margin: 0;">
-                Please select from the following:
-          </h4>
-            <div style="border: 1px solid #d6d6d6; padding: 10px;">
-            <table border=1 class="451_list_vars">
-                <tr>
-                    <td>
-                        Variant ID
-                    </td>
-                    <td>
-                        Description
-                    </td>
-                    <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
-                        Available Quantity
-                    </td>
-                    <td>
-                        Order Quantity
-                    </td>
-                </tr>
-                <tr ng-repeat="v in LineItem.Product.Variants">
-                    <td>
-                        <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>{{v.ExternalID}}</a>
-                    </td>
-                    <td>
-                        {{v.Description}}
-                    </td>
-                    <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
-                        {{v.QuantityAvailable}}
-                    </td>
-                    <td>
-                        Order Quantity
-                    </td>
-                </tr>
-            </table>
-            </div>
-        </div>
-
-    </section>
-    <section class="span4">
-        <h4 class="emphasis-title hidden-phone">{{LineItem.Product.Name}}</h4>
-        <h5 class="hidden-phone">ID {{LineItem.Product.ExternalID}}</h5>
-        <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product'/>
-        <div style="margin: 20px 0">
-            <form name="addToOrderForm" ng-show="allowAddToOrder" style=";clear: both; overflow: hidden; padding: 20px 0; border-top: 1px solid #d6d6d6; border-bottom: 1px solid #d6d6d6;">
-                <table id="451_list_vspec" border=1 ng-show="true">
-                    <tr ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
+            <div ng-show="LineItem.Product.Variants.length > 1 && !LineItem.Variant">
+                <h4 class="hidden-phone" style="background-color:#f5f5f5;color:#444;text-align: center; font-weight: normal;border: 1px solid #d6d6d6; border-bottom: none;padding: 10px 25px; margin: 0;">
+                    Please select from the following:
+              </h4>
+                <div style="border: 1px solid #d6d6d6; padding: 10px;">
+                <table border=1 class="451_list_vars">
+                    <tr>
                         <td>
-                            {{s.Name}}<span ng-show="s.Required" style="color:red"> *</span>
+                            Variant ID
                         </td>
                         <td>
-                            {{s.Prefix}}
-                            <vspecfield changed="specChanged" s="s">
-                            </vspecfield>{{s.Suffix}}
+                            Description
+                        </td>
+                        <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
+                            Available Quantity
+                        </td>
+                        <td>
+                            Order Quantity
+                        </td>
+                    </tr>
+                    <tr ng-repeat="v in LineItem.Product.Variants">
+                        <td>
+                            <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>{{v.ExternalID}}</a>
+                        </td>
+                        <td>
+                            {{v.Description}}
+                        </td>
+                        <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
+                            {{v.QuantityAvailable}}
+                        </td>
+                        <td>
+                            Order Quantity
                         </td>
                     </tr>
                 </table>
-                <div style="float: left;">
-                    <span class="text-info">Quantity</span>
-                    <quantityfield lineitem="LineItem" error="quantityError" class="test"/>{{LineItem.LineTotal | currency}}<span ng-show="quantityError">{{quantityError}}</span>
                 </div>
-                <div style=" display: inline;float: right;">
-                    <button id="451_btn_orderadd" ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(LineItem)" class="btn emphasis-btn">
-                        {{addToOrderText}}
-                    </button>
-                </div>
-                <p ng-show="LineItem.PriceSchedule.MinQuantity > 1">
-                    min: {{LineItem.PriceSchedule.MinQuantity}}
-                </p>
-                <p ng-show="LineItem.PriceSchedule.MaxQuantity">
-                    max: {{LineItem.PriceSchedule.MaxQuantity}}
-                </p>
-            </form>
-        </div>
-        <div>{{getSpec()}} ~ {{LineItem.Product.Specs.Size.Value}}</div>
-        <h4 class="hidden-tablet hidden-phone" style="background-color:#f5f5f5;color:#444;text-align: center; font-weight: normal;border: 1px solid #d6d6d6; border-bottom: none;padding: 10px 25px; margin: 0;">Related Products</h4>
-        <div class="hidden-tablet hidden-phone"  style="border: 1px solid #d6d6d6; height: 200px; ">
-        </div>
-        <div class="hidden-tablet hidden-phone"  style="border: 1px solid #d6d6d6; height: 200px;">
-        </div>
-    </section>
-    <hr/>
-</div>
+            </div>
+
+        </section>
+        <section class="span4">
+            <h4 class="emphasis-title hidden-phone">{{LineItem.Product.Name}}</h4>
+            <h5 class="hidden-phone">ID {{LineItem.Product.ExternalID}}</h5>
+            <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product'/>
+            <div style="margin: 20px 0">
+                <form name="addToOrderForm" ng-show="allowAddToOrder" style=";clear: both; overflow: hidden; padding: 20px 0; border-top: 1px solid #d6d6d6; border-bottom: 1px solid #d6d6d6;">
+                    <table id="451_list_vspec" border=1 ng-show="true">
+                        <tr ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
+                            <td>
+                                {{s.Name}}<span ng-show="s.Required" style="color:red"> *</span>
+                            </td>
+                            <td>
+                                {{s.Prefix}}
+                                <vspecfield changed="specChanged" s="s">
+                                </vspecfield>{{s.Suffix}}
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="float: left;">
+                        <span class="text-info">Quantity</span>
+                        <quantityfield lineitem="LineItem" error="quantityError" class="test"/>{{LineItem.LineTotal | currency}}<span ng-show="quantityError">{{quantityError}}</span>
+                    </div>
+                    <div style=" display: inline;float: right;">
+                        <button id="451_btn_orderadd" ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(LineItem)" class="btn emphasis-btn">
+                            {{addToOrderText}}
+                        </button>
+                    </div>
+                    <p ng-show="LineItem.PriceSchedule.MinQuantity > 1">
+                        min: {{LineItem.PriceSchedule.MinQuantity}}
+                    </p>
+                    <p ng-show="LineItem.PriceSchedule.MaxQuantity">
+                        max: {{LineItem.PriceSchedule.MaxQuantity}}
+                    </p>
+                </form>
+            </div>
+            <div>{{getSpec()}} ~ {{LineItem.Product.Specs.Size.Value}}</div>
+            <h4 class="hidden-tablet hidden-phone" style="background-color:#f5f5f5;color:#444;text-align: center; font-weight: normal;border: 1px solid #d6d6d6; border-bottom: none;padding: 10px 25px; margin: 0;">Related Products</h4>
+            <div class="hidden-tablet hidden-phone"  style="border: 1px solid #d6d6d6; height: 200px; ">
+            </div>
+            <div class="hidden-tablet hidden-phone"  style="border: 1px solid #d6d6d6; height: 200px;">
+            </div>
+        </section>
+        <hr/>
+    </div>
+</section>
