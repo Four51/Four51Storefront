@@ -762,7 +762,16 @@ li.cart {margin-right: 10px;}
 
 /* bootstrap */
 
+.navbar-nav > li {
+    float: left;
+}
 
+.nav.navbar-right > li {float: right;}
+.nav.navbar-left {float: left;}
+.jumbotron {
+    padding-bottom: 24px;
+    padding-top: 24px;
+}
 /* ----------------------------------------------------------------------------------------------- */
 /*** 7. FOOTER ***/
 /* ----------------------------------------------------------------------------------------------- */

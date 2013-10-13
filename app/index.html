@@ -24,31 +24,32 @@
         </div>
 
         <div ng-show="Four51User.isAuthenticated()" id="content">
-            <div class="navbar" class="container">
-                <navigation />
-            </div>
-            <div class="jumbotron">
-                <div class="container">
-                    <h2>Howdy</h2>
-                    <h4 class="hidden-sm hidden-md hidden-lg text-warning">Hello, Phone</h4>
-                    <h4 class="visible-sm text-warning">Hello, Tablet Portrait</h4>
-                    <h4 class="visible-md text-warning">Hello, Tablet Landscape / Desktop Small</h4>
-                    <h4 class="visible-lg text-warning">Hello, Desktop Large</h4>
+                <div class="navbar" class="container">
+                    <navigation />
                 </div>
-            </div>
+                <div class="jumbotron">
+                    <div class="container">
+                        <h3 ng-show="Four51User.isAuthenticated()">
+                            Welcome {{user.FirstName + " " + user.LastName}}</span>
 
-                <div class="container-content">
-
-                    <div ng-view />
+                        </h3>
+                        <h4 class="hidden-sm hidden-md hidden-lg text-warning">Hello, Phone</h4>
+                        <h4 class="visible-sm text-warning">Hello, Tablet Portrait</h4>
+                        <h4 class="visible-md text-warning">Hello, Tablet Landscape / Desktop Small</h4>
+                        <h4 class="visible-lg text-warning">Hello, Desktop Large</h4>
+                    </div>
                 </div>
+                    <div class="container-content">
+                        <div ng-view />
+                    </div>
             </div>
 
-        <div ng-controller="ErrorCtrl">
-            <ng-include src="template.url" />
+                <div ng-controller="ErrorCtrl">
+                    <ng-include src="template.url" />
+                </div>
         </div>
+        <hr />
     </div>
-
-    <hr />
     <!-- In production use:
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
     -->
