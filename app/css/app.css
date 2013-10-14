@@ -669,6 +669,7 @@ li.details-show {
 .nav-cat-search ul li a {}
 .nav-cat-search ul li.search-products {float: right; }
 .nav-cat-search ul li.search-products i {font-size: 18px; padding: 0 15px;}
+li.search-products span {display: inline-block;float: left;}
 li.cart {margin-right: 10px;}
 .admin-navigation .nav li > ul li {font-size: 14px; text-align: left;}
 .container-content .category-well {}
