@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>451order</title>
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap-451.css">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -15,33 +15,28 @@
     <link rel="stylesheet" href="css/breakpoint.css"/>
     <script src="lib/angular/angular-loader.js"></script>
 </head>
-
-<body ng-cloak scroll-position="scroll" class="static ng-cloak" ng-class="{scroll: scroll > 2, static: scroll <= 2}">
-
-    <div ng-controller="Four51Ctrl" class="container-view">
-        <div ng-hide="Four51User.isAuthenticated()" style="position: relative;" >
+<body ng-cloak class="static ng-cloak" scroll ng-class="{scroll:boolChangeClass}">
+    <section ng-controller="Four51Ctrl" class="container-view">
+        <section ng-hide="Four51User.isAuthenticated()" class="container">
             <login />
-        </div>
-
-        <div ng-show="Four51User.isAuthenticated()" class="container-fluid" id="content">
-            <div class="navbar">
+        </section>
+        <section ng-show="Four51User.isAuthenticated()" id="content">
+            <section>
                 <navigation />
-            </div>
-            <div class="row-fluid">
-                <div class="container-fluid container-content">
-                    <h4 class="visible-phone text-warning">Hello, Phone</h4>
-                    <h4 class="visible-tablet text-warning">Hello, Tablet</h4>
-                    <h4 class="visible-desktop text-warning">Hello, Desktop</h4>
-                    <div ng-view ng-animate="{enter: 'view-enter', leave: 'view-leave'}"/>
-                </div>
-            </div>
-        </div>
-        <div ng-controller="ErrorCtrl">
-            <ng-include src="template.url" />
-        </div>
-    </div>
+            </section>
+            <section>
+                <branding />
+            </section>
+            <section class="container-content">
+                <div ng-view />
+            </dsection>
+            <section ng-controller="ErrorCtrl">
+                <ng-include src="template.url" />
+            </section>
+        <hr />
+        </section>
+    </section>
 
-    <hr />
     <!-- In production use:
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
     -->
@@ -119,9 +114,24 @@
     <script src="js/directives/reporting.js"></script>
     <script src="js/directives/panel.js"></script>
     <script src="js/directives/nav.js"></script>
+    <script src="js/directives/branding.js"></script>
     <script src="js/directives/login.js"></script>
     <script src="js/directives/approval.js"></script>
+    <script src="js/directives/scrollposition.js"></script>
     <script src="js/directives/fileinput.js"></script>
     <script src="js/directives/imagedrop.js"></script>
+
+    <script src="js/bootstrap/affix.js"></script>
+    <script src="js/bootstrap/alert.js"></script>
+    <script src="js/bootstrap/button.js"></script>
+    <script src="js/bootstrap/carousel.js"></script>
+    <script src="js/bootstrap/collapse.js"></script>
+    <script src="js/bootstrap/dropdown.js"></script>
+    <script src="js/bootstrap/modal.js"></script>
+    <script src="js/bootstrap/scrollspy.js"></script>
+    <script src="js/bootstrap/tab.js"></script>
+    <script src="js/bootstrap/tooltip.js"></script>
+    <script src="js/bootstrap/transition.js"></script>
+
 </body>
 </html>

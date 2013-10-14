@@ -24,7 +24,7 @@ four51.app.factory('Product', function($resource, $451){
 		var products = store.get(cacheID);
 	    products ? _then(success, products) :
 	        $resource($451.api('Products')).query(criteria).$promise.then(function(products) {
-		        store.put(cacheID, products);
+		        store.set(cacheID, products);
 	            _then(success, products);
 	        });
     }
