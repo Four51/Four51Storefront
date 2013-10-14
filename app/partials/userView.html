@@ -20,7 +20,7 @@
                     <customtextfield customfield="field" ng-if="field.ControlType == 'Text' && field.DisplayToUser" />
                     <customselectionfield customfield="field" ng-if="field.ControlType == 'Selection' && !field.IsRadioButtons && field.DisplayToUser" />
                     <customradiobuttonfield customfield="field" ng-if="field.ControlType == 'Selection' && field.IsRadioButtons && field.DisplayToUser" />
-                    <customfilefield customfield="field" ng-if="field.ControlType == 'File' && field.DisplayToUser"></customfilefield>
+                    <customfilefield2 customfield="field" ng-if="field.ControlType == 'File' && field.DisplayToUser"></customfilefield>
                 </li>
             </ul>
             <input name="password" class="input-large" type="password" ng-model="user.Password" placeholder="Password" /><br />

@@ -1,5 +1,20 @@
 <div class="fileInput">
     {{customfield.Label}}
-    <img ng-show="imageSrc" ng-src="{{imageSrc}}" />
-    <input type="file" />
+    <img ng-show="customfield.File.IsImage" /><a ng-show="!customfield.File.IsImage" ng-href="{{concatUrl()}}">{{customfield.File.OriginalName}}</a><br />
+    <input id="replace" type="checkbox" ng-model="replace" /> Replace  <input id="delete" type="checkbox" /> Delete<br />
+    <input id="upload" ng-show="replace" type="file" /><br />
+    <div ng-show="replace">
+        <div class="ui-state-error-text" id="errors"></div>
+        {{customfield.UploadInstructions}}
+        <ul ng-show="replace">
+            <li>Allowed File Types: {{customfield.AllowedExt}}</li>
+            <li ng-if="customfield.MinSize > 0">Minimum File Size: {{(customfield.MinSize | kb) + ' KB'}}</li>
+            <li ng-if="customfield.MaxSize > 0">Maximum File Size: {{(customfield.MaxSize | kb) + ' KB'}}</li>
+            <li ng-if="customfield.MinHeight > 0 && customfield.IsImage">Minimum Height: {{customfield.MinHeight + ' px'}}</li>
+            <li ng-if="customfield.MaxHeight > 0 && customfield.IsImage">Maximum Height: {{customfield.MaxHeight + ' px'}}</li>
+            <li ng-if="customfield.MinWidth > 0 && customfield.IsImage">Minimum Width: {{customfield.MinWidth + ' px'}}</li>
+            <li ng-if="customfield.MaxHeight > 0 && customfield.IsImage">Maximum Width: {{customfield.MaxHeight + ' px'}}</li>
+            <li ng-if="customfield.MaxDPI > 0 && customfield.IsImage">Maximum DPI: {{customfield.MaxDPI + ' dpi'}}</li>
+        </ul>
+    </div>
 </div>
