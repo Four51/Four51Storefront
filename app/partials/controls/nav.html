@@ -1,4 +1,4 @@
-<header class="header navbar-inner animated" scroll-position="scroll" ng-class="{fadeOutUpBig: scroll > 310, fadeIn: scroll <= 310}">
+<header class="header navbar navbar-inner animated" scroll-position="scroll" ng-class="{fadeOutUpBig: scroll > 310, fadeIn: scroll <= 310}">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <section class="header-nav-c1">
             <div class="navbar-header">
@@ -13,9 +13,9 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse visible-xs">
                 <ul class="nav navbar-nav navbar-left">
                     <li><a class="navbar-brand" ng-click="refreshUser()" ng-show="Four51User.isAuthenticated()" href="#/catalog"><i class="icon-home"></i></a></li>
-                    <li><a href="#/admin" class="visible-sm visible-xs"><span class="icon"><i class="icon-user"></i></span><span class="hidden-sm hidden-xs">My Account</span></a></li>
+                    <li><a href="#/admin" class="visible-sm visible-xs"><span class="icon"><i class="icon-user"></i></span><span class="nav-name hidden-sm hidden-xs">My Account</span></a></li>
                     <li class="dropdown admin-user visible-md visible-lg">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="icon"><i class="icon-user"></i></span>My Account <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="icon"><i class="icon-user"></i></span> My Account <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li ng-show="user.Permissions.contains('ViewSelfAdmin')" class="admin"><a href="#/admin">User Information</a></li>
                             <li class="addresses"><a href="#/addresses">Addresses</a></li>
@@ -24,9 +24,9 @@
                             <li class="logout"><a href="#" class="451_btn_logout" ng-click="Logout()"><i class="icon-off"></i>Log Out</a></li>
                         </ul>
                     </li>
-                    <li class="products hidden-sm hidden-xs" ng-class="getClass('/catalog')"> <a href="#/catalog"><span class="icon"><i class="icon-folder-open"></i></span><span class="hidden-sm hidden-xs">Products</span></a></li>
-                    <li class="order hidden-xs" ng-class="getClass('/order')"> <a href="#/order"><span class="icon"><i class="icon-bar-chart"></i></span><span class="hidden-sm hidden-xs">Orders</span></a></li>
-                    <li class="favorites" ng-class="getClass('/favoriteorders')"> <a href="#/favoriteorders"><span class="icon"><i class="icon-star"></i></span><span class="hidden-sm hidden-xs">Favorites</span></a></li>
+                    <li class="products hidden-sm hidden-xs" ng-class="getClass('/catalog')"> <a href="#/catalog"><span class="icon"><i class="icon-folder-open"></i></span><span class="nav-name hidden-sm hidden-xs">Products</span></a></li>
+                    <li class="order hidden-xs" ng-class="getClass('/order')"> <a href="#/order"><span class="icon"><i class="icon-bar-chart"></i></span><span class="nav-name hidden-sm hidden-xs">Orders</span></a></li>
+                    <li class="favorites" ng-class="getClass('/favoriteorders')"> <a href="#/favoriteorders"><span class="icon"><i class="icon-star"></i></span><span class="nav-name hidden-sm hidden-xs">Favorites</span></a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
 

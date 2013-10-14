@@ -15,41 +15,28 @@
     <link rel="stylesheet" href="css/breakpoint.css"/>
     <script src="lib/angular/angular-loader.js"></script>
 </head>
-
 <body ng-cloak class="static ng-cloak" scroll ng-class="{scroll:boolChangeClass}">
-
-    <div ng-controller="Four51Ctrl" class="container-view">
-        <div ng-hide="Four51User.isAuthenticated()" class="container" style="position: relative;" >
+    <section ng-controller="Four51Ctrl" class="container-view">
+        <section ng-hide="Four51User.isAuthenticated()" class="container">
             <login />
-        </div>
-
-        <div ng-show="Four51User.isAuthenticated()" id="content">
-                <div class="navbar" class="container">
-                    <navigation />
-                </div>
-                <div class="jumbotron">
-                    <div class="container">
-                        <h3 ng-show="Four51User.isAuthenticated()">
-                            Welcome {{user.FirstName + " " + user.LastName}}</span>
-
-                        </h3>
-                        <h4 class="hidden-sm hidden-md hidden-lg text-warning">Hello, Phone</h4>
-                        <h4 class="visible-sm text-warning">Hello, Tablet Portrait</h4>
-                        <h4 class="visible-md text-warning">Hello, Tablet Landscape / Desktop Small</h4>
-                        <h4 class="visible-lg text-warning">Hello, Desktop Large</h4>
-                    </div>
-                </div>
-                    <div class="container-content">
-                        <div ng-view />
-                    </div>
-            </div>
-
-                <div ng-controller="ErrorCtrl">
-                    <ng-include src="template.url" />
-                </div>
-        </div>
+        </section>
+        <section ng-show="Four51User.isAuthenticated()" id="content">
+            <section>
+                <navigation />
+            </section>
+            <section>
+                <branding />
+            </section>
+            <section class="container-content">
+                <div ng-view />
+            </dsection>
+            <section ng-controller="ErrorCtrl">
+                <ng-include src="template.url" />
+            </section>
         <hr />
-    </div>
+        </section>
+    </section>
+
     <!-- In production use:
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
     -->
@@ -127,6 +114,7 @@
     <script src="js/directives/reporting.js"></script>
     <script src="js/directives/panel.js"></script>
     <script src="js/directives/nav.js"></script>
+    <script src="js/directives/branding.js"></script>
     <script src="js/directives/login.js"></script>
     <script src="js/directives/approval.js"></script>
     <script src="js/directives/scrollposition.js"></script>

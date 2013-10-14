@@ -568,6 +568,6 @@ width to scale for number of buttons */
     }
 
    .collapse {padding: 0;}
-
+    .current-cat-name {width: 215px;}
 }
 
