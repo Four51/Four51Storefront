@@ -1,3 +1,15 @@
+four51.app.controller('ProductSearchCtrl', function($scope, Product, $routeParams, $location){
+
+	if($routeParams.searchTerm){
+		$scope.searchTerm = $routeParams.searchTerm;
+		Product.search(null, $scope.searchTerm, function(products) {
+			$scope.products = products;
+		});
+	}
+	$scope.search = function(){
+		$location.path('/search/' + $scope.searchTerm);
+	}
+})
 four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Product,ProductDisplayService, Order, $location) {
 	$scope.LineItem = {};
 	$scope.LineItem = $scope.currentOrder.LineItems[$routeParams.lineItemIndex];
