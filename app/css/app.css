@@ -116,13 +116,10 @@ select, input, .uneditable-input {width: auto;} /* bootstrap uses a fixed width 
 .container-view {clear: both; overflow: hidden; margin-bottom: 100px;}
 .view-cap {}
 hr {
-    border: none;
-    /* border: none; */
     clear: both;
     height: 1px;
     margin: 0;
     padding: 0;
-    /* background-color: transparent; */
 }
 
 

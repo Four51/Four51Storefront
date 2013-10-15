@@ -16,6 +16,7 @@
     .nav li span.hidden-sm {float:right;}
     .header-nav-c1 {width: 1140px; margin: 0 auto; }
     .jumbotron { padding-bottom: 48px;padding-top: 48px; }
+    .category-product.product-navigation li.nav-header { width: 25%; }
 
 }
 
@@ -25,13 +26,14 @@
 
     .header-nav-c1 {width: 950px; margin: 0 auto; }
     .nav li span.hidden-sm {float:right;}
+    .category-product.product-navigation li.nav-header { width: 33.3%; }
 
 }
 
 
 /* x-sm */
 @media (min-width:768px) and (max-width: 1023px) {
-
+    .category-product.product-navigation li.nav-header { width: 50%; }
 
 }
 
