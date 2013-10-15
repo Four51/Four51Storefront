@@ -16,28 +16,24 @@
     <script src="lib/angular/angular-loader.js"></script>
 </head>
 <body ng-cloak class="static ng-cloak" scroll ng-class="{scroll:boolChangeClass}">
-    <section ng-controller="Four51Ctrl" class="container-view">
-        <section ng-hide="Four51User.isAuthenticated()" class="container">
-            <login />
-        </div>
-
-        <div ng-show="Four51User.isAuthenticated()" class="container-fluid" id="content">
-            <div class="navbar">
+<section ng-controller="Four51Ctrl" class="container-view">
+    <section ng-hide="Four51User.isAuthenticated()" class="container">
+        <login />
+    </section>
+    <section ng-show="Four51User.isAuthenticated()" id="content">
+        <section>
+            <navigation />
         </section>
-        <section ng-show="Four51User.isAuthenticated()" id="content">
-            <section>
-                <navigation />
-            </section>
-            <section>
-                <branding />
-            </section>
-            <section class="container-content">
-                <div ng-view />
+        <section>
+            <branding />
+        </section>
+        <section class="container-content">
+            <div ng-view />
             </dsection>
             <section ng-controller="ErrorCtrl">
                 <ng-include src="template.url" />
             </section>
-        <hr />
+            <hr />
         </section>
     </section>
 
@@ -123,7 +119,6 @@
     <script src="js/directives/approval.js"></script>
     <script src="js/directives/scrollposition.js"></script>
     <script src="js/directives/fileinput.js"></script>
-    <script src="js/directives/fileUpload.js"></script>
 
     <script src="js/bootstrap/affix.js"></script>
     <script src="js/bootstrap/alert.js"></script>

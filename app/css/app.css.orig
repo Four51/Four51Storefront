@@ -1,0 +1,791 @@
+/*
+
+Theme: Four51 Single Page App Default
+Author: Ken Buras (http://www.kenburas.com/)
+Version: 1.0
+
+** If there is question on something the answer is most likely found in readMe.txt
+
+Layout Styles Outline:
+0. Structure
+1. navbar-branding
+2. Admin Navigation
+3. Content Navigation
+4. Product Navigation
+5. Main Content
+6. Footer
+7. Footer Navigation
+8. Forms
+9. Unique
+
+test push
+
+/* ----------------------------------------------------------------------------------------------- */
+/*** 0. STRUCTURE ***/
+/* ----------------------------------------------------------------------------------------------- */
+div.catDropdown ul li ul {display: block;}
+div.catDropdown.open ul li ul {display: none;}
+
+.cat-body.col-sm-9 {opacity: .5; overflow: hidden;}
+
+html {
+    height: 100%;
+
+}
+.navbar {
+       margin-bottom: 0;border: none;
+
+}
+
+body {
+    font-family: 'Droid Sans', sans-serif;
+    font-smooth:always;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    -webkit-text-stroke: 1px transparent;
+    padding: 0;
+    margin: 0;
+
+
+}
+
+.view-default-product p {margin: 10px;}
+<<<<<<< HEAD
+img {display: block; background-color:#d6d6d6;} /* just to see image as cells for now */
+h4 {font-family: 'Lato', sans-serif; line-height: 2em;   letter-spacing: 0.10em;}
+=======
+img {display: block;  height: 200px;max-width: 100%; margin: 0 auto;}
+h1, h2, h3, h4, h5 {font-family: 'Lato', sans-serif;}
+>>>>>>> 62ff930e54b01e99776097ba4f09b2a4d91e812e
+.order-cloud {    width:100%; height:100%; position:fixed; left:0;top:0;overflow:hidden;background: url(images/orderCloud.jpg) no-repeat center center fixed; -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;}
+
+.ui-show {
+    opacity: 1;
+    transition: all 0.5s ease;
+}
+.ui-hide {
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+/* ng-view animation (2) */
+/* need to add scroll bar back in to maintain scrolling, but now lets move the view over
+
+
+
+.container-view {
+position: absolute;
+left: 0;
+top: 0;
+right: -30px;
+bottom: 0;
+padding-right: 15px;
+overflow-y: scroll;
+}
+/* ----------------------------------------------------------------------------------------------- */
+
+select, input, .uneditable-input {width: auto;} /* bootstrap uses a fixed width :( */
+
+
+.container-view {clear: both; overflow: hidden; margin-bottom: 100px;}
+.view-cap {}
+hr {
+    /* border: none; */
+    clear: both;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    /* background-color: transparent; */
+}
+
+
+@media (max-width: 980px) {
+    /* Enable use of floated navbar text */
+    .navbar-text.pull-right {
+        float: none;
+        padding-left: 0.357em;
+        padding-right: 0.357em;
+    }
+}
+
+
+.form-signin {
+    max-width: 26em;
+    padding: 1.357em 2.071em 2.071em;
+    margin: 10% auto 5em;
+    background: rgba(22, 145, 190, .15);
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    border-radius: 1em;
+}
+
+input::-webkit-input-placeholder { color:#EB866A; }
+input::-moz-placeholder { color:#EB866A; opacity: 1; }
+input:-ms-input-placeholder { color:#EB866A;opacity: 1; }
+input:-moz-placeholder { color:#EB866A; }
+
+/* iOS placeholder needs help to disappear on focus */
+:focus::-webkit-input-placeholder{color:transparent;}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 0.714em;
+}
+
+.form-signin input[type="text"],
+.form-signin input[type="password"] {
+    font-size: 1.143em;
+    height: auto;
+    margin-bottom: 1.071em;
+    padding: 0.500em 0.643em;
+}
+
+.form-signin .btn-primary  {
+    letter-spacing: .04em;
+    padding: 15px;
+    border-radius: 3px 3px 3px 3px;
+    text-shadow: 0 -1px 0 #666;
+    -webkit-transition: all 150ms ease;
+    transition: all 150ms ease;
+
+}
+
+@-webkit-keyframes pulsate
+{
+    0%   { color: #ddd; text-shadow: 0 -1px 0 #000; }
+    50%  { color: #fff; text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff; }
+    100% { color: #ddd; text-shadow: 0 -1px 0 #000; }
+}
+
+@keyframes pulsate
+{
+    0%   { color: #ddd; text-shadow: 0 -1px 0 #000; }
+    50%  { color: #fff; text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff; }
+    100% { color: #ddd; text-shadow: 0 -1px 0 #000; }
+}
+
+.form-signin .btn-primary:hover {
+    -webkit-animation: pulsate 1.2s linear infinite;
+    animation: pulsate 1.2s linear infinite;
+  /*  background-color: rgb(174, 78, 1); /* fallback */
+   /*  background-color: rgba(174, 78, 1, 1); */
+}
+
+.form-signin .btn-primary:active
+{
+    text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff;
+    box-shadow: 0 1px 0 #666, 0 1px 0 #444, 0 1px 1px rgba(0,0,0,0.9);
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
+    -webkit-animation: none;
+    animation: none;
+    outline: none;
+}
+
+.form-signin .btn-primary:focus {outline: none;}
+.menu {
+    list-style: none;
+    border-bottom: 0.1em solid rgb(0, 0, 0);
+    margin-bottom: 2em;
+    padding: 0 0 0.5em;
+}
+
+.menu {
+    list-style: none;
+    border-bottom: 0.1em solid rgb(0, 0, 0);
+    margin-bottom: 2em;
+    padding: 0 0 0.5em;
+}
+
+.menu:before {
+    content: "[";
+}
+
+.menu:after {
+    content: "]";
+}
+
+.menu > li {
+    display: inline;
+}
+
+.menu > li:before {
+    content: "|";
+    padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+    content: "";
+    padding: 0;
+}
+
+a:focus {
+    outline: none;
+}
+button::-moz-focus-inner {
+    border: 0;
+}
+
+.gridStyle {
+    border: 0.071em solid rgb(212,212,212);
+    width: auto;
+
+    min-height: 14.286em;
+    clear: both;
+    overflow: hidden;
+    margin-bottom: 1.071em;
+
+}
+
+.ngRow, .ngCell {
+    clear: both;
+    overflow: hidden;
+}
+
+
+.nav-name { margin-left: 5px;}
+/* ----------------------------------------------------------------------------------------------- */
+/*** 2. navbar-brandING ***/
+/* ----------------------------------------------------------------------------------------------- */
+
+a.navbar-brand {
+
+    border-left: 1px solid #d6d6d6; border-right: 1px solid #d6d6d6;
+
+}
+
+/* ----------------------------------------------------------------------------------------------- */
+/*** 3. ADMIN NAVIGATION ***/
+/* ----------------------------------------------------------------------------------------------- */
+
+.user-links ul.nav li.admin-user .dropdown-menu > li > a {
+    padding: 3px 20px;
+}
+
+
+
+.header .navbar-inner {
+    padding: 0;
+    border: none;
+}
+
+.admin-navigation {
+
+
+
+}
+
+.admin-navigation .user-links ul {
+    float: right;
+}
+
+.admin-navigation ul.nav-search {
+    float: right;
+}
+
+.user-links {
+    float: left;
+}
+
+h4.emphasis-title {text-transform: uppercase;
+}
+
+.admin-navigation li a span, .admin-navigation li a i {
+
+}
+
+.admin-navigation li a:hover span, .admin-navigation li a:hover i {
+
+}
+
+.admin-navigation .dropdown-menu > li.logout > a i {
+
+
+}
+
+
+
+.emphasis-btn {
+
+    border: 1px solid #DFDBDB;
+    border-radius: 7px 7px 7px 7px;
+    margin: 0 auto;
+    display: block;
+    font-size: 0.75em;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0.10em;
+    padding: 15px 20px 13px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: auto;
+}
+
+.admin-navigation .dropdown-menu > li.logout > a:hover i {
+
+}
+
+header.header .user-links ul.nav li.active a, header.header .user-links ul.nav li.active a span, header.header .user-links ul.nav li.active a:focus, header.header .user-links ul.nav li.active a:focus span,  .navbar ul.nav li.cart a,  .navbar ul.nav li.cart a:focus,  .navbar ul.nav li.cart a:hover {  box-shadow: none; }
+
+.navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+
+}
+.navbar-inner {box-shadow: none;}
+.user-links span {
+    margin: 0 0.571em;
+}
+
+.user-links .caret {
+    margin: 0 0 0 0.571em;
+}
+
+.admin-navigation .nav > li > a {
+    padding: 1.071em;
+    padding: 25px 1.071em;
+}
+
+/*
+.admin-navigation .nav > li {
+    min-height: 3.571em;
+}
+
+*/
+
+.admin-navigation .nav .cart a:hover i {
+
+
+}
+
+.admin-navigation .nav .cart a:hover i {
+
+
+}
+#content.container {padding: 0;}
+#content .container.container-content {padding: 0 20px;}
+.navbar .admin-navigation .cart a i { text-shadow: none;  }
+
+/* ----------------------------------------------------------------------------------------------- */
+/*** 4. CONTENT NAVIGATION ***/
+/* ----------------------------------------------------------------------------------------------- */
+.nav.view-cart ul {clear: both; overflow: hidden;border-bottom: 1px solid #d6d6d6;padding: 0; margin: 0;}
+.nav.view-cart ul li {display: inline-block; float: left; }
+.nav:nth-of-type(1) {}
+
+
+.content-navigation nav.nav {
+    float: none;
+    margin: 0;
+
+}
+
+.content-navigation .nav ul {
+    margin: 0;
+    padding: 10px 0;
+    list-style: none;
+    font-size: 1em;
+    font-weight: 300;
+}
+
+
+.content-navigation .nav ul li:first-child {text-align: left;}
+
+.content-navigation .nav ul li.search-products {
+
+
+}
+
+.content-navigation .nav li span {
+   /*  display: inline-block; */
+}
+
+
+
+
+
+
+.container.content-navigation .nav {/* border-bottom: 1px solid #d6d6d6; */}
+
+
+
+.admin-navigation .nav i {
+   /*  -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    */
+}
+
+.admin-navigation .nav a, admin-navigation .nav li {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.admin-navigation a, admin-navigation button {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+
+.admin-navigation nav.nav {
+  /*  float: none;
+    margin: 0;
+*/
+}
+
+.admin-navigation .nav ul {
+  /*  margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 1em;
+    font-weight: 300; */
+}
+
+.admin-navigation .nav li span {
+    display: inline-block;
+}
+
+.admin-navigation .nav .navbar-brand {}
+.admin-navigation .nav .navbar-brand span, .admin-navigation .nav .navbar-brand i {  cursor: default;}
+.admin-navigation .nav li.navbar-brand-a span {
+    display: inline-block;
+}
+
+.admin-navigation .nav a {
+    display: block;
+
+
+
+    -webkit-transition: color .5s, background .5s, height .5s;
+    -moz-transition: color .5s, background .5s, height .5s;
+    -o-transition: color .5s, background .5s, height .5s;
+    -ms-transition: color .5s, background .5s, height .5s;
+    transition: color .5s, background .5s, height .5s;
+
+}
+
+.admin-navigation .nav li {
+    width: auto; /* default is three buttons~ change to auto if more than two buttons or adjust percentage of width to scale for number of buttons */
+
+    padding: 0;
+    text-align: center;
+}
+
+.admin-navigation.nav a {
+    display: block;
+    width: auto;
+}
+
+
+/* hover, focused and active effects */
+.admin-navigation .nav li.checkout a:hover,
+.admin-navigation .nav li.checkout a:active,
+.admin-navigation .nav li.checkout a:focus {
+    background-color: rgb(26, 188, 156); /* fallback */
+    background-color: rgba(26, 188, 156, 1);
+}
+
+
+.content-navigation .icon {font-size: 20px;}
+
+.admin-navigation-navigation .icon {
+
+}
+
+.admin-navigation-navigation .icon + span {
+
+    -webkit-transition: margin .5s;
+    -moz-transition: margin .5s;
+    -o-transition: margin .5s;
+    -ms-transition: margin .5s;
+    transition: margin .5s;
+}
+
+
+/* Making the text follow the height animation */
+.admin-navigation .nav a:hover .icon + span {
+
+    -webkit-transition: margin .5s;
+    -moz-transition: margin .5s;
+    -o-transition: margin .5s;
+    -ms-transition: margin .5s;
+    transition: margin .5s;
+}
+
+
+
+
+/* ----------------------------------------------------------------------------------------------- */
+/*** 5. PRODUCT NAVIGATION ***/
+/* ----------------------------------------------------------------------------------------------- */
+
+.product-navigation li.nav-header a {
+    padding: .75em;
+
+}
+.product-navigation {margin-bottom: 40px;]}
+.product-navigation ul li {  background-color: rgb(249, 249, 249);
+    background-color: rgba(249, 249, 249, 1);
+background-color:#fff;
+}
+
+li.cart {line-height: normal; }
+.product-navigation li.nav-header {
+    float: left;
+    font-size: .9em;
+
+    text-align: center;
+    padding: 0;
+    text-transform: capitalize;
+    text-shadow: none;
+    font-weight: normal;
+
+    -webkit-transition: color .5s, background .5s, height .5s;
+    -moz-transition: color .5s, background .5s, height .5s;
+    -o-transition: color .5s, background .5s, height .5s;
+    -ms-transition: color .5s, background .5s, height .5s;
+    transition: color .5s, background .5s, height .5s;
+}
+
+
+.details-nav li {width: 100%;}
+li.details-show {
+    display: block;
+    float: none;
+    font-size: 1.571em; text-align: center;
+    cursor: pointer;margin-right: 5px; width: 45px;
+}
+.product-navigation .details-show {margin-bottom: 1px; height: 45px;width: 100%;}
+
+
+.product-navigation li.nav-header ul li {
+    text-align: left;
+}
+
+.product-navigation li.nav-header ul li > a {
+    text-transform: capitalize;
+    padding: 0.214em 0;
+    line-height: normal;
+}
+
+.product-navigation .nav li + .nav-header {
+    margin-top: 0;
+}
+
+.product-nav-details.hidden {
+}
+
+.product-navigation nav.nav {
+    float: none;
+    margin: 0;
+}
+
+.product-navigation {
+    padding: 0;
+}
+
+.product-navigation .nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 1em;
+    font-weight: 300;
+
+}
+
+
+
+.product-navigation .nav li.nav-header a {
+    display: block;
+    color:#777;
+
+    text-decoration: none;
+    /*
+    -webkit-transition: color .5s, background .5s, height .5s;
+    -moz-transition: color .5s, background .5s, height .5s;
+    -o-transition: color .5s, background .5s, height .5s;
+    -ms-transition: color .5s, background .5s, height .5s;
+    transition: color .5s, background .5s, height .5s;
+    */
+}
+
+.view-product-default {}
+.test input {width: 50px !important; display: inline-block; }
+#451_btn_orderadd {margin-lefT: 100px; display: block; }
+/* Remove the blue Webkit background when element is tapped */
+.product-navigation a, .product-navigation button {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+
+.product-navigation .nav ul li > a:hover {text-decoration: underline;}
+
+.product-navigation .nav ul li:hover {
+    /* background-color: rgb(177, 224, 236);
+     background-color: rgba(177, 224, 236, 1);
+     background-color:#4588AE;*/
+
+
+}
+.product-navigation .nav lir:hover  {
+}
+.product-navigation .nav ul ul > li {
+
+    padding: 0;
+    font-size: 1.05em;
+}
+
+.product-navigation .nav ul ul li:hover {
+    /* background-color: rgb(216, 239, 245);
+     background-color: rgba(216, 239, 245, 1);
+     background-color:#1E648C;
+     */
+
+
+}
+
+
+
+.category-product.product-navigation  li.nav-header {
+    width: 100%;
+    border: none;
+    margin: 0;
+    border-radius: 0;
+}
+
+/*
+.category-product.product-navigation .nav ul li.nav-header {background-color:#4588AE; }
+.category-product.product-navigation .nav ul li.nav-header:hover {background-color:#1E648C;}
+.category-product.product-navigation nav.nav ul li.nav-header{
+
+}
+
+
+ ----------------------------------------------------------------------------------------------- */
+/*** 6. MAIN CONTENT ***/
+/* ----------------------------------------------------------------------------------------------- */
+
+.nav-cat-search  {margin-bottom: 20px; padding: 0;}
+.nav-cat-search ul  {list-style-type: none;  clear: both; overflow: hidden;margin: 0;padding: 0;}
+.nav-cat-search ul li {display: inline; float: left; padding: 15px 0;}
+.nav-cat-search ul li a {}
+.nav-cat-search ul li.search-products {float: right; }
+.nav-cat-search ul li.search-products i {font-size: 18px; padding: 0 15px;}
+li.search-products span {display: inline-block;float: left;}
+li.cart {margin-right: 10px;}
+.admin-navigation .nav li > ul li {font-size: 14px; text-align: left;}
+.container-content .category-well {}
+.container.container-content  {   padding: 0;}
+/* ng-view animations */
+
+@-webkit-keyframes view-enter {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(2000px);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+}
+
+@-moz-keyframes view-enter {
+    0% {
+        opacity: 0;
+        -moz-transform: translateY(2000px);
+    }
+
+    100% {
+        opacity: 1;
+        -moz-transform: translateY(0);
+    }
+}
+
+@-o-keyframes view-enter {
+    0% {
+        opacity: 0;
+        -o-transform: translateY(2000px);
+    }
+
+    100% {
+        opacity: 1;
+        -o-transform: translateY(0);
+    }
+}
+
+@keyframes view-enter {
+    0% {
+        opacity: 0;
+        transform: translateY(2000px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ng-enter {
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: view-enter;
+    -moz-animation-name: view-enter;
+    -o-animation-name: view-enter;
+    animation-name: view-enter;
+
+}
+
+.ng-enter-active {
+    opacity:1;
+}
+
+
+.ng-leave {
+    opacity: 0;
+}
+
+.ng-leave-active{
+    opacity:0;
+}
+
+
+/* bootstrap */
+
+.navbar-nav > li {
+    float: left;
+}
+
+.nav.navbar-right > li {float: right;}
+.nav.navbar-left {float: left;}
+.jumbotron {
+    padding-bottom: 24px;
+    padding-top: 24px;
+}
+/* ----------------------------------------------------------------------------------------------- */
+/*** 7. FOOTER ***/
+/* ----------------------------------------------------------------------------------------------- */
+
+
+/* ----------------------------------------------------------------------------------------------- */
+/*** 8. FOOTER NAVIGATION ***/
+/* ----------------------------------------------------------------------------------------------- */
+
+
+/* ----------------------------------------------------------------------------------------------- */
+/*** 9. FORMS ***/
+/* ----------------------------------------------------------------------------------------------- */
+
+
+/* ----------------------------------------------------------------------------------------------- */
+/*** 9. UNIQUE ***/
+/* ----------------------------------------------------------------------------------------------- */
