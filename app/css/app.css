@@ -6,27 +6,10 @@ Version: 1.0
 
 ** If there is question on something the answer is most likely found in readMe.txt
 
-Layout Styles Outline:
-0. Structure
-1. navbar-branding
-2. Admin Navigation
-3. Content Navigation
-4. Product Navigation
-5. Main Content
-6. Footer
-7. Footer Navigation
-8. Forms
-9. Unique
-
-test push
-
 /* ----------------------------------------------------------------------------------------------- */
 /*** 0. STRUCTURE ***/
 /* ----------------------------------------------------------------------------------------------- */
-div.catDropdown ul li ul {display: block;}
-div.catDropdown.open ul li ul {display: none;}
 
-.cat-body.col-sm-9 {opacity: .5; overflow: hidden;}
 
 html {
     height: 100%;
@@ -268,15 +251,10 @@ button::-moz-focus-inner {
 
 
 .nav-name { margin-left: 5px;}
+
 /* ----------------------------------------------------------------------------------------------- */
 /*** 2. navbar-brandING ***/
 /* ----------------------------------------------------------------------------------------------- */
-
-a.navbar-brand {
-
-    border-left: 1px solid #d6d6d6; border-right: 1px solid #d6d6d6;font-size: 14px;
-
-}
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 3. ADMIN NAVIGATION ***/
@@ -287,7 +265,7 @@ a.navbar-brand {
 }
 
 
-
+.icon-shopping-cart {border: 1px solid #fff;;font-size: 15px; border-radius: 25px;padding: 15px;}
 .header .navbar-inner {
     padding: 0;
     border: none;
@@ -392,11 +370,15 @@ header.header .user-links ul.nav li.active a, header.header .user-links ul.nav l
 /* ----------------------------------------------------------------------------------------------- */
 /*** 4. CONTENT NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
-.nav.view-cart ul {clear: both; overflow: hidden;border-bottom: 1px solid #d6d6d6;padding: 0; margin: 0;}
-.nav.view-cart ul li {display: inline-block; float: left; }
-.nav:nth-of-type(1) {}
 
 
+
+
+
+div.catDropdown ul li ul {display: block;}
+div.catDropdown.open ul li ul {display: none;}
+
+.cat-body.col-sm-9 {opacity: .5; overflow: hidden;}
 .content-navigation nav.nav {
     float: none;
     margin: 0;
@@ -672,7 +654,7 @@ li.details-show {
 
 
 .category-product.product-navigation  li.nav-header {
-    width: 100%;
+
     border: none;
     margin: 0;
     border-radius: 0;

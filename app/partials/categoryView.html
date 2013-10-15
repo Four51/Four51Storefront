@@ -26,7 +26,7 @@
             </div>
             <nav class="nav 451_lbl_subcatlist">
                 <ul>
-                    <li class="nav-header well" ng-repeat="c in tree">
+                    <li class="nav-header well col-lg-3 col-md-4  col-sm-6 col-xs-12" ng-repeat="c in tree">
                         <a ng-href="#/catalog/{{c.InteropID}}"><img ng-src="{{c.Image.URL}}"/><hr /><div ng-bind-html="c.Name"></div></a>
                     </li>
                 </ul>
@@ -37,14 +37,14 @@
             </div>
             <nav class="nav 451_lbl_subcatlist">
                 <ul>
-                    <li class="nav-header well" ng-repeat="c in currentCategory.SubCategories">
+                    <li class="nav-header well col-lg-3 col-md-4  col-sm-6 col-xs-12" ng-repeat="c in currentCategory.SubCategories">
                         <a ng-href="#/catalog/{{c.InteropID}}"><img ng-src="{{c.Image.URL}}"/><hr />{{c.Name}}</a>
                     </li>
                 </ul>
             </nav>
         </div>
         <div id="451_lst_prod" ng-if="currentCategory">
-            <div class="well" ng-repeat="product in products">
+            <div class="well col-lg-3 col-md-4  col-sm-6 col-xs-12" ng-repeat="product in products">
                 <shortproductview p="product" />
             </div>
         </div>
