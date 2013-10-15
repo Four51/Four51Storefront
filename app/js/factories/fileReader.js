@@ -3,7 +3,7 @@ four51.app.factory('fileReader', function($q, $log) {
 	var onLoad = function(reader, deferred, scope) {
 		return function () {
 			scope.$apply(function () {
-				deferred.resolve(reader.result);
+				deferred.resolve(reader);
 			});
 		};
 	};
@@ -11,7 +11,7 @@ four51.app.factory('fileReader', function($q, $log) {
 	var onError = function (reader, deferred, scope) {
 		return function () {
 			scope.$apply(function () {
-				deferred.reject(reader.result);
+				deferred.reject(reader);
 			});
 		};
 	};

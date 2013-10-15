@@ -24,7 +24,7 @@ four51.app.factory('Product', function($resource, $451){
 		var products = store.get(cacheID);
 	    products ? _then(success, products) :
 	        $resource($451.api('Products')).query(criteria).$promise.then(function(products) {
-		        store.put(cacheID, products);
+		        store.set(cacheID, products);
 	            _then(success, products);
 	        });
     }
@@ -42,10 +42,10 @@ four51.app.factory('Variant', function($resource, $451){
 	}
 
     var _get = function(params, success) {
-		var variant = store.get('variant' + params.VariantInteropID + params.ProductInteropID);
+		var variant = store.get('451Cache.Variants.' + params.ProductInteropID + params.VariantInteropID );
 	    variant ? _then(success, variant) :
 	        $resource($451.api('variant')).get(params).$promise.then(function(variant) {
-		        store.put('variant' + variant.InteropID, variant);
+		        store.set('451Cache.Variants.' + params.ProductInteropID + params.VariantInteropID, variant);
 	            _then(success, variant);
 	        });
     }

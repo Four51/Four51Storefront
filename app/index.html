@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>451order</title>
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap-451.css">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -15,42 +15,28 @@
     <link rel="stylesheet" href="css/breakpoint.css"/>
     <script src="lib/angular/angular-loader.js"></script>
 </head>
+<body ng-cloak class="static ng-cloak" scroll ng-class="{scroll:boolChangeClass}">
+<section ng-controller="Four51Ctrl" class="container-view">
+    <section ng-hide="Four51User.isAuthenticated()" class="container">
+        <login />
+    </section>
+    <section ng-show="Four51User.isAuthenticated()" id="content">
+        <section>
+            <navigation />
+        </section>
+        <section>
+            <branding />
+        </section>
+        <section class="container-content">
+            <div ng-view />
+            </dsection>
+            <section ng-controller="ErrorCtrl">
+                <ng-include src="template.url" />
+            </section>
+            <hr />
+        </section>
+    </section>
 
-<body ng-cloak scroll-position="scroll" class="static ng-cloak" ng-class="{scroll: scroll > 2, static: scroll <= 2}">
-
-    <div ng-controller="Four51Ctrl" class="container-view">
-        <div ng-hide="Four51User.isAuthenticated()" style="position: relative;" >
-            <login />
-        </div>
-
-        <div ng-show="Four51User.isAuthenticated()" class="container-fluid" id="content">
-            <div class="navbar">
-                <navigation />
-            </div>
-            <div class="row-fluid">
-                <div class="container-fluid container-content">
-                    <h4 class="visible-phone text-warning">Hello, Phone</h4>
-                    <h4 class="visible-tablet text-warning">Hello, Tablet</h4>
-                    <h4 class="visible-desktop text-warning">Hello, Desktop</h4>
-                    <div data-ng-controller="FirebaseChatCtrl">
-                        <div id="messagesDiv" class="well">
-                            <div ng-repeat="msg in messages"><em>{{msg.from}}</em>: {{msg.body}}</div>
-                        </div>
-                        <input type="text" ng-model="name" placeholder="Name">
-                        <input type="text" ng-model="msg" ng-keydown="addMessage($event)" placeholder="Message...">
-                        <button id="msg-clear" name="clear" class="btn btn-primary">Clear</button>
-                    </div>
-
-                    <div ng-view ng-animate="{enter: 'view-enter', leave: 'view-leave'}"/>
-                </div>
-            </div>
-        </div>
-        <div ng-controller="ErrorCtrl">
-            <ng-include src="template.url" />
-        </div>
-    </div>
-
-    <hr />
     <!-- In production use:
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
     -->
@@ -72,10 +58,6 @@
     <script src="lib/angular/ui-mask.js"></script>
     <script src="lib/angular/ng-grid.js"></script>
 
-    <!--Firebase & AngularFire            !-->
-    <script src='https://cdn.firebase.com/v0/firebase.js'></script>
-    <script src='https://cdn.firebase.com/libs/angularfire/0.3.0/angularfire.min.js'></script>
-
     <script src="js/app.js"></script>
     <script src="js/451.js"></script>
     <script src="js/filters.js"></script>
@@ -95,7 +77,6 @@
     <script src="js/controllers/messageListCtrl.js"></script>
     <script src="js/controllers/messageViewCtrl.js"></script>
     <script src="js/controllers/favoriteOrderCtrl.js"></script>
-    <script src="js/controllers/firebaseCtrl.js"></script>
     <script src="js/controllers/userEditCtrl.js"></script>
     <script src="js/controllers/addressInputCtrl.js"></script>
     <script src="js/controllers/addressListCtrl.js"></script>
@@ -133,9 +114,23 @@
     <script src="js/directives/reporting.js"></script>
     <script src="js/directives/panel.js"></script>
     <script src="js/directives/nav.js"></script>
+    <script src="js/directives/branding.js"></script>
     <script src="js/directives/login.js"></script>
     <script src="js/directives/approval.js"></script>
+    <script src="js/directives/scrollposition.js"></script>
     <script src="js/directives/fileinput.js"></script>
-    <script src="js/directives/imagedrop.js"></script>
+
+    <script src="js/bootstrap/affix.js"></script>
+    <script src="js/bootstrap/alert.js"></script>
+    <script src="js/bootstrap/button.js"></script>
+    <script src="js/bootstrap/carousel.js"></script>
+    <script src="js/bootstrap/collapse.js"></script>
+    <script src="js/bootstrap/dropdown.js"></script>
+    <script src="js/bootstrap/modal.js"></script>
+    <script src="js/bootstrap/scrollspy.js"></script>
+    <script src="js/bootstrap/tab.js"></script>
+    <script src="js/bootstrap/tooltip.js"></script>
+    <script src="js/bootstrap/transition.js"></script>
+
 </body>
 </html>

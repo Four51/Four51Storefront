@@ -1,52 +1,52 @@
-<section class="view-partial">
-    <div class="container-fluid nav-cat-search">
-        <nav class="nav">
+<section class="container category-view">
+    <nav class="nav nav-cat-search">
+        <hr />
             <ul>
-                <li class="nav-header icon-eye-open hidden-phone details-show" ng-click="showMega = ! showMega" href="#" style="display: block; font-size: 18px;cursor: pointer;"></li>
-                <li class="favorites " ng-class="getClass('/catalog')"> <a href="#/catalog"><span class="icon"><i class="icon-folder-open"></i></span> Products</a> {{currentCategory.Name}}</li>
-                <li class="search-products"><a href="#/search"><span class="icon"><i class="icon-search"></i></span> Search <i class="icon-caret-down"></i></a></li>
+                <li class="nav-header icon-plus hidden-sm hidden-xs details-show" ng-click="showMega = ! showMega" href="#" style="display: block; font-size: 18px;cursor: pointer;"></li>
+                <li class="current-cat-name">{{currentCategory.Name}}</li>
+                <li class="search-products">
+                    <a href="#/search"><span class="icon"><i class="icon-search"></i></span> <span class="hidden-sm hidden-xs"> Search <i class="icon-caret-down"></i></span></a>
+                </li>
             </ul>
-        </nav>
-    </div>
-<!--- lets include navigation for each section in line with the content, in this case I only want catalog/product links on the catalog view , will be deleting sideNavView.html --->
-    <div class="container-fluid product-navigation" ng-class="{ 'hidden': ! showMega }" style="margin-bottom: 20px;">
+        <hr />
+    </nav>
+    <aside class="product-navigation col-sm-3" ng-class="{ 'hidden': ! showMega }">
         <nav class="nav 451_cat_nav">
-            <ul>
-                <li class="nav-header visible-desktop icon-caret-down details-show" ng-click="showDetails = !showDetails" href="#"></li>
-                <li ng-class="getClass('/catalog/{{category.InteropID}}')" class="nav-header animated fadeInRight 451_cat_item"><div ng-show='showDetails'><categorytree tree='tree' current='currentCategory' /></div></li>
+            <ul class="details-nav">
+                <li class="nav-header visible-md visible-lg icon-caret-down details-show" ng-click="showDetails = !showDetails" href="#"></li>
+                <li class="nav-header" style="text-align: left;"><a href="#/catalog">All Products</a></li>
+                <li class="nav-header 451_cat_item"><div class="catDropdown" ng-class="{ 'open': ! showDetails }"><categorytree tree='tree' current='currentCategory' /></div></li>
             </ul>
         </nav>
-    </div>
-
-    <div class="container-fluid category-product product-navigation" ng-show=!currentCategory>
-        <div class="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image">
-
+    </aside>
+    <div class="cat-body" ng-class="{ 'col-sm-9': showMega }">
+        <h3>Products</h3>
+        <div class="category-product product-navigation" ng-show=!currentCategory>
+            <div class="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image">
+            </div>
+            <nav class="nav 451_lbl_subcatlist">
+                <ul>
+                    <li class="nav-header well" ng-repeat="c in tree">
+                        <a ng-href="#/catalog/{{c.InteropID}}"><img ng-src="{{c.Image.URL}}"/><hr /><div ng-bind-html="c.Name"></div></a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <nav class="nav 451_lbl_subcatlist">
-            <ul>
-                <li class="nav-header" ng-repeat="c in tree">
-                    <a ng-href="#/catalog/{{c.InteropID}}"><img ng-src="{{c.Image.URL}}"/><hr /><div ng-bind-html="c.Name"></div></a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-
-    <div class="container-fluid category-product product-navigation" ng-show=currentCategory>
-        <div class="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image">
-
+        <div class="category-product product-navigation" ng-show=currentCategory>
+            <div class="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image">
+            </div>
+            <nav class="nav 451_lbl_subcatlist">
+                <ul>
+                    <li class="nav-header well" ng-repeat="c in currentCategory.SubCategories">
+                        <a ng-href="#/catalog/{{c.InteropID}}"><img ng-src="{{c.Image.URL}}"/><hr />{{c.Name}}</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <nav class="nav 451_lbl_subcatlist">
-            <ul>
-                <li class="nav-header" ng-repeat="c in currentCategory.SubCategories">
-                    <a ng-href="#/catalog/{{c.InteropID}}"><img ng-src="{{c.Image.URL}}"/><hr />{{c.Name}}</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-
-    <div id="451_lst_prod" class="container-content" ng-if="currentCategory">
-        <span class="category-well span4 well" ng-repeat="product in products">
-            <shortproductview p="product" />
-        </span>
+        <div id="451_lst_prod" ng-if="currentCategory">
+            <div class="well" ng-repeat="product in products">
+                <shortproductview p="product" />
+            </div>
+        </div>
     </div>
 </section>

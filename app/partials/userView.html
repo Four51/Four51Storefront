@@ -1,10 +1,11 @@
-<section class="view-partial">
+<section class="container">
     <div id="user_form">
-        <h2 class="form-actions-heading">My Account</h2>
-        <ul>
+        <h3 class="form-actions-heading">My Account</h3>
+        <ul class="visible-sm visible-xs">
+            <li class="addresses"> <a href="#/order">Orders</a></li>
             <li class="addresses"><a href="#/addresses">Addresses</a></li>
             <li class="messages"><a href="#/message">Messages</a></li>
-            <li class="logout hidden-desktop "><a href="#" class="451_btn_logout" ng-click="Logout()">Log Out</a></li>
+            <li class="logout"><a href="#" class="451_btn_logout" ng-click="Logout()">Log Out</a></li>
         </ul>
 
         <form name="user_form" ng-submit="save()">
@@ -30,4 +31,3 @@
         </form>
     </div>
 </section>
-{{user.CustomFields[2].Value}}

@@ -1,1 +1,13 @@
-<h3>Product Search</h3>
+<section class="container">
+    <h3>Product Search</h3>
+    <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+            <input type="text" ng-model="searchTerm"  class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" ng-click="search()" class="btn btn-default">Submit</button>
+		<hr>
+		<div ng-show="products" class="well" ng-repeat="product in products">
+			<shortproductview p="product" />
+		</div>
+    </form>
+</section>
