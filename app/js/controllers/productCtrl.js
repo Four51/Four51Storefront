@@ -1,21 +1,30 @@
+four51.app.controller('ProductSearchCtrl', function($scope, Product, $routeParams, $location){
+
+	if($routeParams.searchTerm){
+		$scope.searchTerm = $routeParams.searchTerm;
+		Product.search(null, $scope.searchTerm, function(products) {
+			$scope.products = products;
+		});
+	}
+	$scope.search = function(){
+		$location.path('/search/' + $scope.searchTerm);
+	}
+})
 four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Product,ProductDisplayService, Order, $location) {
 	$scope.LineItem = {};
-
-	Order.get($scope.user.CurrentOrderID, function(data){
-		$scope.LineItem = data.LineItems[$routeParams.lineItemIndex];
-		Product.get($scope.LineItem.Product.InteropID, function(product){
-            $scope.LineItem.Product = product;
-            ProductDisplayService.setProductViewScope($scope);
-		});
-		$scope.allowAddToOrder = true;
+	$scope.LineItem = $scope.currentOrder.LineItems[$routeParams.lineItemIndex];
+	Product.get($scope.LineItem.Product.InteropID, function(product){
+		$scope.LineItem.Product = product;
+		ProductDisplayService.setProductViewScope($scope);
 	});
+	$scope.allowAddToOrder = true;
 	$scope.addToOrderText = "Save Line Item";
 	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
-		Order.save($scope.currentOrder, function(){
+		Order.save($scope.currentOrder, function(o){
+			$scope.currentOrder = o;
 			$location.path('/cart');
 		});
 	}
-
 });
 
 four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, ProductDisplayService) {
@@ -26,7 +35,7 @@ four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, Pr
 	$scope.allowAddToOrderInProductList = $scope.allowAddToOrder && $scope.LineItem.Specs.length == 0 && $scope.LineItem.Product.Type != 'VariableText';
 });
 
-four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, ProductDisplayService, Order, Variant, $451, Order, $location) {
+four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, ProductDisplayService, Order, Variant, $451, $location, User) {
 	$scope.LineItem = {};
 	$scope.addToOrderText = "add to cart";
 	function ProductVariantGetsDone (){
@@ -67,7 +76,9 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 
 		Order.save($scope.currentOrder, function(o){
 			$scope.user.CurrentOrderID = o.ID;
-			$location.path('/cart');
+			User.save($scope.user, function(){
+				$location.path('/cart');
+			});
 		});
 	}
 });

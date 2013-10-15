@@ -15,3 +15,9 @@ four51.app.filter('onproperty', function($451) {
 		return $451.filter(input, query);
 	}
 });
+
+four51.app.filter('kb', function() {
+	return function(value) {
+		return isNaN(value) ? value : parseFloat(value) / 1024;
+	}
+});

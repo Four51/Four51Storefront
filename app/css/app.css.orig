@@ -50,10 +50,13 @@ body {
 }
 
 .view-default-product p {margin: 10px;}
-img {display: block;  height: 200px;max-width: 100%; margin: 0 auto;}
-h1, h2, h3, h4, h5 {font-family: 'Lato', sans-serif;}
+<<<<<<< HEAD
 img {display: block; background-color:#d6d6d6;} /* just to see image as cells for now */
 h4 {font-family: 'Lato', sans-serif; line-height: 2em;   letter-spacing: 0.10em;}
+=======
+img {display: block;  height: 200px;max-width: 100%; margin: 0 auto;}
+h1, h2, h3, h4, h5 {font-family: 'Lato', sans-serif;}
+>>>>>>> 62ff930e54b01e99776097ba4f09b2a4d91e812e
 .order-cloud {    width:100%; height:100%; position:fixed; left:0;top:0;overflow:hidden;background: url(images/orderCloud.jpg) no-repeat center center fixed; -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -85,38 +88,10 @@ overflow-y: scroll;
 
 select, input, .uneditable-input {width: auto;} /* bootstrap uses a fixed width :( */
 
-.text-primary {
-    color: #2c3e50;
-}
 
-.text-success {
-    color: #18bc9c;
-}
-
-.text-danger {
-    color: #e74c3c;
-}
-
-.text-warning {
-    color: #f39c12;
-}
-
-.text-info {
-    color: #3498db;
-}
-.view-partial{
-
-    background-color:#fff;
-    margin: 0 0 20px;
-
-
-}
-.container-view {clear: both; overflow: hidden; }
-.view-cap {height: 5px; background-color: #18ABD7;}
 .container-view {clear: both; overflow: hidden; margin-bottom: 100px;}
 .view-cap {}
 hr {
-    border: none;
     /* border: none; */
     clear: both;
     height: 1px;
@@ -277,14 +252,14 @@ button::-moz-focus-inner {
 
 a.navbar-brand {
 
-    border-left: 1px solid #d6d6d6; border-right: 1px solid #d6d6d6;font-size: 14px;
+    border-left: 1px solid #d6d6d6; border-right: 1px solid #d6d6d6;
 
 }
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 3. ADMIN NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
-.icon-off {margin-right: 5px;}
+
 .user-links ul.nav li.admin-user .dropdown-menu > li > a {
     padding: 3px 20px;
 }
@@ -556,7 +531,7 @@ header.header .user-links ul.nav li.active a, header.header .user-links ul.nav l
 background-color:#fff;
 }
 
-
+li.cart {line-height: normal; }
 .product-navigation li.nav-header {
     float: left;
     font-size: .9em;
@@ -700,7 +675,7 @@ li.details-show {
 .nav-cat-search ul li.search-products {float: right; }
 .nav-cat-search ul li.search-products i {font-size: 18px; padding: 0 15px;}
 li.search-products span {display: inline-block;float: left;}
-
+li.cart {margin-right: 10px;}
 .admin-navigation .nav li > ul li {font-size: 14px; text-align: left;}
 .container-content .category-well {}
 .container.container-content  {   padding: 0;}
@@ -786,26 +761,16 @@ li.search-products span {display: inline-block;float: left;}
 
 /* bootstrap */
 
-.navbar-collapse {max-height: inherit; padding: 0;}
-
 .navbar-nav > li {
-    display: inline;float: left;
-}
-.navbar-collapse li a.visible-sm.visible-xs {
-    display: inline-block !important;
+    float: left;
 }
 
-.nav.navbar-right {float: right;}
+.nav.navbar-right > li {float: right;}
 .nav.navbar-left {float: left;}
-.navbar-nav {
-    margin: 0;
-}
 .jumbotron {
     padding-bottom: 24px;
     padding-top: 24px;
 }
-.navbar-nav > li > a {padding: 15px 20px;}
-
 /* ----------------------------------------------------------------------------------------------- */
 /*** 7. FOOTER ***/
 /* ----------------------------------------------------------------------------------------------- */
