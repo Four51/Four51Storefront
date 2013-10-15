@@ -6,9 +6,9 @@ four51.app.controller('NavCtrl', function ($location, $scope, $451, User) {
         $location.path("/catalog");
     };
 
-	$scope.refreshUser = function() {
-		User.refresh(function(user) {
-			$scope.currentUser = user;
-		});
-	}
+    $scope.refreshUser = function() {
+        User.refresh(function(user) {
+            $scope.currentUser = user;
+        });
+    }
 });

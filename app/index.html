@@ -38,7 +38,9 @@
                         </div>
                         <input type="text" ng-model="name" placeholder="Name">
                         <input type="text" ng-model="msg" ng-keydown="addMessage($event)" placeholder="Message...">
+                        <button id="msg-clear" name="clear" class="btn btn-primary">Clear</button>
                     </div>
+
                     <div ng-view ng-animate="{enter: 'view-enter', leave: 'view-leave'}"/>
                 </div>
             </div>

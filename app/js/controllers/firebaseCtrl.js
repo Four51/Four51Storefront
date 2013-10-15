@@ -1,5 +1,5 @@
 function FirebaseChatCtrl($scope, angularFire) {
-    var ref = new Firebase('https://m9t7ys4lhh4.firebaseio-demo.com/');
+    var ref = new Firebase('https://451.firebaseio.com/');
     $scope.messages = [];
     angularFire(ref, $scope, "messages");
     $scope.addMessage = function(e) {
