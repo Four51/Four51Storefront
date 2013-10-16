@@ -251,10 +251,15 @@ button::-moz-focus-inner {
 
 
 .nav-name { margin-left: 5px;}
-
 /* ----------------------------------------------------------------------------------------------- */
 /*** 2. navbar-brandING ***/
 /* ----------------------------------------------------------------------------------------------- */
+
+a.navbar-brand {
+
+    border-left: 1px solid #d6d6d6; border-right: 1px solid #d6d6d6;font-size: 14px;
+
+}
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 3. ADMIN NAVIGATION ***/
@@ -660,6 +665,10 @@ li.details-show {
     border-radius: 0;
 }
 
+
+
+
+
 /*
 .category-product.product-navigation .nav ul li.nav-header {background-color:#4588AE; }
 .category-product.product-navigation .nav ul li.nav-header:hover {background-color:#1E648C;}
@@ -784,6 +793,8 @@ li.search-products span {display: inline-block;float: left;}
     padding-top: 24px;
 }
 .navbar-nav > li > a {padding: 15px 20px;}
+
+
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 7. FOOTER ***/

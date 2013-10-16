@@ -4,7 +4,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse visible-xs">
                 <ul class="nav navbar-nav navbar-left">
                     <li class="hidden-sm hidden-xs"><a class="navbar-brand" ng-click="refreshUser()" ng-show="Four51User.isAuthenticated()" href="#/catalog"><i class="icon-home"></i></a></li>
-                    <li class="products" ng-class="getClass('/catalog')"> <a href="#/catalog"><span class="icon"><i class="icon-folder-open"></i></span><span class="nav-name">Products</span></a></li>
+                    <li class="products" ng-class="getClass('/catalog')"> <a href="#/catalog" ng-click="main.hide = !main.hide"><span class="icon"><i class="icon-folder-open"></i></span><span class="nav-name">Products</span></a></li>
                     <li class="order hidden-xs" ng-class="getClass('/order')"> <a href="#/order"><span class="icon"><i class="icon-bar-chart"></i></span><span class="nav-name hidden-sm hidden-xs">Orders</span></a></li>
                     <li class="favorites" ng-class="getClass('/favoriteorders')"> <a href="#/favoriteorders"><span class="icon"><i class="icon-star"></i></span><span class="nav-name hidden-sm hidden-xs">Favorites</span></a></li>
                     <li><a href="#/admin" class="hidden-md hidden-lg"><span class="icon"><i class="icon-user"></i></span></a></li>
