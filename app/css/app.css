@@ -33,7 +33,6 @@ body {
 }
 
 .view-default-product p {margin: 10px;}
-img {display: block;  height: 200px;max-width: 100%; margin: 0 auto;}
 h1, h2, h3, h4, h5 {font-family: 'Lato', sans-serif;}
 img {display: block; background-color:#d6d6d6;} /* just to see image as cells for now */
 h4 {font-family: 'Lato', sans-serif; line-height: 2em;   letter-spacing: 0.10em;}
