@@ -31,11 +31,19 @@ body {
 
 
 }
+img {display: block;}
 
 .view-default-product p {margin: 10px;}
-h1, h2, h3, h4, h5 {font-family: 'Lato', sans-serif;}
-img {display: block; background-color:#d6d6d6;} /* just to see image as cells for now */
-h4 {font-family: 'Lato', sans-serif; line-height: 2em;   letter-spacing: 0.10em;}
+h1, h2, h3, h4, h5 {font-family: 'Lato', sans-serif;line-height: 2em;}
+.cat-image {min-height: 200px;}
+.cat-image img { margin: 0 auto; max-width: 100%; max-height: 200px;}
+.empty { width: 100%;height: 200px; }
+.empty .icon {display: block; }
+.empty.icon i {font-size: 25px;display: block; opacity: .25; padding-top: 75px;}
+
+
+.cat-description {display: none;}
+.cat-link a:hover .cat-description {display: block; position: absolute; bottom: 0; left: 0; right: 0; background-color:#fff; padding: 10px;}
 .order-cloud {    width:100%; height:100%; position:fixed; left:0;top:0;overflow:hidden;background: url(images/orderCloud.jpg) no-repeat center center fixed; -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -794,6 +802,9 @@ li.search-products span {display: inline-block;float: left;}
 .navbar-nav > li > a {padding: 15px 20px;}
 
 
+.navbar-collapse .navbar-nav.navbar-left:first-child {
+    margin-left: 0;
+}
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 7. FOOTER ***/

@@ -14,3 +14,18 @@ four51.app.directive("scroll", function ($window) {
         });
     };
 });
+
+//http://stackoverflow.com/questions/12790854/angular-directive-to-scroll-to-a-given-item
+//focus on products by scrolling past bootstrap .jumbotron branding section while still allowing user ability to scroll back
+//TODO works intermittently, tried several variations os animating the html, body but does not always work grr
+four51.app.directive('scrollIf', function () {
+    return function () {
+
+        setTimeout(function () {
+            $('html').animate({
+                scrollTop: 150
+            }, 800);
+            return false;
+        }, 1000);
+    }
+});
