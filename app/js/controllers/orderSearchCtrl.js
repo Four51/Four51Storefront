@@ -12,5 +12,6 @@ four51.app.controller('OrderSearchCtrl', function OrderSearchCtrl($scope, OrderS
 		$scope.displayOrders = true;
 		$scope.orderSearchStat = criteria;
 	};
+    $scope.showMega = true;
 });
 
