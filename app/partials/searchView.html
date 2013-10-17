@@ -1,13 +1,19 @@
-<section class="container">
-    <h3>Product Search</h3>
-    <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-            <input type="text" ng-model="searchTerm"  class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" ng-click="search()" class="btn btn-default">Submit</button>
-		<hr>
-		<div ng-show="products" class="well" ng-repeat="product in products">
-			<shortproductview p="product" />
-		</div>
-    </form>
+<section class="container cat-body">
+    <div style="clear: both; overflow: hidden;" ng-hide="products">
+        <form class="navbar-form navbar-left" role="search" style="display: block; width: 100%;padding: 0;">
+            <input type="text" ng-model="searchTerm"  class="form-control search-view-search" placeholder="Search">
+            <div class="search-view-cancel">Press enter to search <a href="#/catalog"><span class="icon" style="float: right;margin-left: 5px;"><i class="icon-remove-sign" style="font-size: 16px;"></i></span></a></div>
+            <button type="submit" ng-click="search()" class="btn btn-default" style="visibility:hidden;" >Submit</button>
+         </form>
+    </div>
+    <div ng-show="products" class="product-navigation">
+        <p>Search <a href="#/catalog"><span class="icon"><i class="icon-remove-sign" style="font-size: 16px;"></i></span></a></p>
+            <nav class="nav">
+                <ul>
+                    <li class="nav-header well col-lg-3 col-md-4  col-sm-6 col-xs-12" ng-repeat="product in products">
+                        <shortproductview p="product" />
+                    </li>
+                </ul>
+            </nav>
+    </div>
 </section>
