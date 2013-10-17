@@ -42,8 +42,12 @@ h1, h2, h3, h4, h5 {font-family: 'Lato', sans-serif;line-height: 2em;}
 .empty.icon i {font-size: 25px;display: block; opacity: .25; padding-top: 75px;}
 
 
-.cat-description {display: none;}
-.cat-link a:hover .cat-description {display: block; position: absolute; bottom: 0; left: 0; right: 0; background-color:#fff; padding: 10px;}
+.category-description {display: none; margin: 0.75em; }
+
+.shortproduct-view:hover .shortproduct-name, .shortproduct-view .shortproduct-toggle {display: none;}
+.shortproduct-view:hover .shortproduct-toggle {display: block;}
+a.cat-link:hover .category-description {display: block; position: absolute; bottom: 0; left: 0; right: 0; background-color:#fff; padding: 10px; background-color:#f4f4f4; border: 1px solid #fff;height: 100px;}
+
 .order-cloud {    width:100%; height:100%; position:fixed; left:0;top:0;overflow:hidden;background: url(images/orderCloud.jpg) no-repeat center center fixed; -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -616,16 +620,10 @@ li.details-show {
 .product-navigation .nav li.nav-header a {
     display: block;
     color:#777;
-
+text-align: center;
     text-decoration: none;
-    /*
-    -webkit-transition: color .5s, background .5s, height .5s;
-    -moz-transition: color .5s, background .5s, height .5s;
-    -o-transition: color .5s, background .5s, height .5s;
-    -ms-transition: color .5s, background .5s, height .5s;
-    transition: color .5s, background .5s, height .5s;
-    */
 }
+.product-navigation .nav li.nav-header a img {margin: 0 auto;}
 
 .view-product-default {}
 .test input {width: 50px !important; display: inline-block; }
@@ -637,7 +635,6 @@ li.details-show {
 
 
 
-.product-navigation .nav ul li > a:hover {text-decoration: underline;}
 
 .product-navigation .nav ul li:hover {
     /* background-color: rgb(177, 224, 236);
@@ -665,8 +662,7 @@ li.details-show {
 
 
 
-.category-product.product-navigation  li.nav-header {
-
+.product-navigation  li.nav-header {
     border: none;
     margin: 0;
     border-radius: 0;
@@ -676,15 +672,7 @@ li.details-show {
 
 
 
-/*
-.category-product.product-navigation .nav ul li.nav-header {background-color:#4588AE; }
-.category-product.product-navigation .nav ul li.nav-header:hover {background-color:#1E648C;}
-.category-product.product-navigation nav.nav ul li.nav-header{
-
-}
-
-
- ----------------------------------------------------------------------------------------------- */
+ /* ----------------------------------------------------------------------------------------------- */
 /*** 6. MAIN CONTENT ***/
 /* ----------------------------------------------------------------------------------------------- */
 
