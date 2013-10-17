@@ -1,7 +1,24 @@
 <section class="container">
-    <div>
-        <h3>Incoming Orders</h3>
-        <div class="span3">
+        <nav class="nav nav-cat-search">
+            <hr />
+            <ul>
+                <li class="nav-header icon-plus details-show" ng-show='displayOrders' ng-click="showMega = ! showMega" href="#" style="display: block; font-size: 18px;cursor: pointer;"></li>
+                <li >Orders</li>
+                <li class="search-products" ng-click="toggle = !toggle">
+                    <span class="icon"><i class="icon-search"></i></span> <span class="hidden-sm hidden-xs"> Search <i class="icon-caret-down"></i></span>
+                </li>
+            </ul>
+            <hr />
+        </nav>
+        <div class=" order-search-toggle" ng-show="toggle" >
+            <input type="text" ng-model="criteria.OrderID" placeholder="Order ID" /><br />
+            <input type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" /><br />
+            <input type="text" ui-date ng-model="criteria.DateRangeFrom" placeholder="From:" /><input type="text" ui-date ng-model="criteria.DateRangeTo" placeholder="To:" /><br />
+            <input type="text" ng-model="criteria.LastN" placeholder="Last n Orders:" /><br />
+            <input class="btn btn-small btn-info btn-block" value="Search" ng-click="OrderSearch($event, criteria); toggle = !toggle; showMega = ! showMega" /><br />
+        </div>
+    <div class="order-types"  ng-show="!toggle" ng-class="{ 'hidden': ! showMega }" >
+        <div class="col-md-3">
             <ul class="well unstyled">
                 <h5>Standard Orders</h5>
                 <li ng-repeat="criteria in OrderSearchCriteria | onproperty:{ 'Model': 'OrderStats', 'Value': 'Standard'}">
@@ -9,7 +26,7 @@
                 </li>
             </ul>
         </div>
-        <div class="span3">
+        <div class="col-md-3">
             <ul class="well unstyled">
                 <h5>Replenishment Orders</h5>
                 <li ng-repeat="criteria in OrderSearchCriteria | onproperty:{ 'Model': 'OrderStats', 'Value': 'Replenishment'}">
@@ -17,7 +34,7 @@
                 </li>
             </ul>
         </div>
-        <div class="span3">
+        <div class="col-md-3">
             <ul class="well unstyled">
                 <h5>Price Request</h5>
                 <li ng-repeat="criteria in OrderSearchCriteria | onproperty:{ 'Model': 'OrderStats', 'Value': 'PriceRequest'}">
@@ -26,18 +43,7 @@
             </ul>
         </div>
     </div>
-
-    <div class="span5">
-        <h3>Order Search</h3>
-        <input type="text" ng-model="criteria.OrderID" placeholder="Order ID" /><br />
-        <input type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" /><br />
-        <input type="text" ui-date ng-model="criteria.DateRangeFrom" placeholder="From:" /><input type="text" ui-date ng-model="criteria.DateRangeTo" placeholder="To:" /><br />
-        <input type="text" ng-model="criteria.LastN" placeholder="Last n Orders:" /><br />
-        <input class="btn btn-small btn-info btn-block" value="Search" ng-click="OrderSearch($event, criteria)" /><br />
-    </div>
-
-
-    <div class="span10" ng-show='displayOrders'>
+    <div class="container" ng-show='displayOrders' ng-hide="toggle">
         <table class="table table-striped table-hover table-bordered">
             <caption>{{orderSearchStat.Type}} - {{orderSearchStat.Status}}</caption>
             <thead>
