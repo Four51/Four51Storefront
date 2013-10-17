@@ -12,6 +12,7 @@ four51.app.directive('shortproductview', function(){
 		templateUrl:'partials/shortProductView.html',
 		controller: 'shortProductViewCtrl'
 	};
+
 	return obj;
 });
 four51.app.directive('vspecfield', function($451){

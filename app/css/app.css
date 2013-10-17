@@ -6,27 +6,10 @@ Version: 1.0
 
 ** If there is question on something the answer is most likely found in readMe.txt
 
-Layout Styles Outline:
-0. Structure
-1. navbar-branding
-2. Admin Navigation
-3. Content Navigation
-4. Product Navigation
-5. Main Content
-6. Footer
-7. Footer Navigation
-8. Forms
-9. Unique
-
-test push
-
 /* ----------------------------------------------------------------------------------------------- */
 /*** 0. STRUCTURE ***/
 /* ----------------------------------------------------------------------------------------------- */
-div.catDropdown ul li ul {display: block;}
-div.catDropdown.open ul li ul {display: none;}
 
-.cat-body.col-sm-9 {opacity: .5; overflow: hidden;}
 
 html {
     height: 100%;
@@ -48,11 +31,23 @@ body {
 
 
 }
+img {display: block;}
 
 .view-default-product p {margin: 10px;}
-h1, h2, h3, h4, h5 {font-family: 'Lato', sans-serif;}
-img {display: block; background-color:#d6d6d6;} /* just to see image as cells for now */
-h4 {font-family: 'Lato', sans-serif; line-height: 2em;   letter-spacing: 0.10em;}
+h1, h2, h3, h4, h5 {font-family: 'Lato', sans-serif;line-height: 2em;}
+.cat-image {min-height: 200px;}
+.cat-image img { margin: 0 auto; max-width: 100%; max-height: 200px;}
+.empty { width: 100%;height: 200px; }
+.empty .icon {display: block; }
+.empty.icon i {font-size: 25px;display: block; opacity: .25; padding-top: 75px;}
+
+
+.category-description {display: none; margin: 0.75em; }
+
+.shortproduct-view:hover .shortproduct-name, .shortproduct-view .shortproduct-toggle {display: none;}
+.shortproduct-view:hover .shortproduct-toggle {display: block;}
+a.cat-link:hover .category-description {display: block; position: absolute; bottom: 0; left: 0; right: 0; background-color:#fff; padding: 10px; background-color:#f4f4f4; border: 1px solid #fff;height: 100px;}
+
 .order-cloud {    width:100%; height:100%; position:fixed; left:0;top:0;overflow:hidden;background: url(images/orderCloud.jpg) no-repeat center center fixed; -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -286,7 +281,7 @@ a.navbar-brand {
 }
 
 
-
+.icon-shopping-cart {border: 1px solid #fff;;font-size: 15px; border-radius: 25px;padding: 15px;}
 .header .navbar-inner {
     padding: 0;
     border: none;
@@ -391,11 +386,15 @@ header.header .user-links ul.nav li.active a, header.header .user-links ul.nav l
 /* ----------------------------------------------------------------------------------------------- */
 /*** 4. CONTENT NAVIGATION ***/
 /* ----------------------------------------------------------------------------------------------- */
-.nav.view-cart ul {clear: both; overflow: hidden;border-bottom: 1px solid #d6d6d6;padding: 0; margin: 0;}
-.nav.view-cart ul li {display: inline-block; float: left; }
-.nav:nth-of-type(1) {}
 
 
+
+
+
+div.catDropdown ul li ul {display: block;}
+div.catDropdown.open ul li ul {display: none;}
+
+.cat-body.col-sm-9 {opacity: .5; overflow: hidden;}
 .content-navigation nav.nav {
     float: none;
     margin: 0;
@@ -621,16 +620,10 @@ li.details-show {
 .product-navigation .nav li.nav-header a {
     display: block;
     color:#777;
-
+text-align: center;
     text-decoration: none;
-    /*
-    -webkit-transition: color .5s, background .5s, height .5s;
-    -moz-transition: color .5s, background .5s, height .5s;
-    -o-transition: color .5s, background .5s, height .5s;
-    -ms-transition: color .5s, background .5s, height .5s;
-    transition: color .5s, background .5s, height .5s;
-    */
 }
+.product-navigation .nav li.nav-header a img {margin: 0 auto;}
 
 .view-product-default {}
 .test input {width: 50px !important; display: inline-block; }
@@ -642,7 +635,6 @@ li.details-show {
 
 
 
-.product-navigation .nav ul li > a:hover {text-decoration: underline;}
 
 .product-navigation .nav ul li:hover {
     /* background-color: rgb(177, 224, 236);
@@ -670,22 +662,17 @@ li.details-show {
 
 
 
-.category-product.product-navigation  li.nav-header {
-    width: 100%;
+.product-navigation  li.nav-header {
     border: none;
     margin: 0;
     border-radius: 0;
 }
 
-/*
-.category-product.product-navigation .nav ul li.nav-header {background-color:#4588AE; }
-.category-product.product-navigation .nav ul li.nav-header:hover {background-color:#1E648C;}
-.category-product.product-navigation nav.nav ul li.nav-header{
-
-}
 
 
- ----------------------------------------------------------------------------------------------- */
+
+
+ /* ----------------------------------------------------------------------------------------------- */
 /*** 6. MAIN CONTENT ***/
 /* ----------------------------------------------------------------------------------------------- */
 
@@ -801,6 +788,11 @@ li.search-products span {display: inline-block;float: left;}
     padding-top: 24px;
 }
 .navbar-nav > li > a {padding: 15px 20px;}
+
+
+.navbar-collapse .navbar-nav.navbar-left:first-child {
+    margin-left: 0;
+}
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 7. FOOTER ***/
