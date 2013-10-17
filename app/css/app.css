@@ -32,7 +32,25 @@ body {
 
 }
 img {display: block;}
+.search-view-search {border-radius: 7px 0 0 7px;
+    border-right: 0 none;
+    float: left;background-color: transparent;box-shadow: none;
+    padding: 2px 2% 0 1%;
+    width: 62.5%;}
+.search-view-cancel {border: 1px solid #ccc;   border-left: 0 none;
+    border-radius: 0 7px 7px 0;
+    color: #BFBFBF;
+    display: block;
+    float: left;
+    color: #555555;
 
+    font-size: 14px;
+    height: 34px;
+    line-height: 1.42857;
+    padding: 5px 10px 0 0;
+
+    text-align: right;
+    width: 34%;}
 .view-default-product p {margin: 10px;}
 h1, h2, h3, h4, h5 {font-family: 'Lato', sans-serif;line-height: 2em;}
 .cat-image {min-height: 200px;}
