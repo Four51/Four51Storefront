@@ -50,13 +50,14 @@ img {display: block;}
     width: 34%;}
 .view-default-product p {margin: 10px;}
 h1, h2, h3, h4, h5 {font-family: 'Lato', sans-serif;line-height: 2em;}
+
 .cat-image {min-height: 200px;}
 .cat-image img { margin: 0 auto; max-width: 100%; max-height: 200px;}
 .empty { width: 100%;height: 200px; }
 .empty .icon {display: block; }
 .empty.icon i {font-size: 25px;display: block; opacity: .25; padding-top: 75px;}
 
-
+.cart .well{padding: 0 !important;}
 .category-description {display: none; margin: 0.75em; }
 
 .shortproduct-view:hover .shortproduct-name, .shortproduct-view .shortproduct-toggle {display: none;}
@@ -76,6 +77,14 @@ a.cat-link:hover .category-description {display: block; position: absolute; bott
     opacity: 0;
     transition: all 0.5s ease;
 }
+
+
+
+.quantity input {background-color:#F5F5F5;
+    border: 1px solid #BFBFBF;
+  width: 30px;
+    padding: 5px 0 2px 1px;
+    text-align: center;}
 /* ng-view animation (2) */
 /* need to add scroll bar back in to maintain scrolling, but now lets move the view over
 
@@ -808,6 +817,13 @@ li.search-products span {display: inline-block;float: left;}
 .navbar-collapse .navbar-nav.navbar-left:first-child {
     margin-left: 0;
 }
+.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
+
+    padding: 10px 15px;vertical-align: middle;
+
+}
+.table {margin-bottom: 0;}
+.table-responsive {margin-bottom: 0;}
 
 /* ----------------------------------------------------------------------------------------------- */
 /*** 7. FOOTER ***/
