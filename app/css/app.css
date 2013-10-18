@@ -41,14 +41,11 @@ img {display: block;}
     border-radius: 0 7px 7px 0;
     color: #BFBFBF;
     display: block;
-    float: left;
-    color: #555555;
-
+    float: left;text-transform: uppercase;
     font-size: 14px;
     height: 34px;
     line-height: 1.42857;
     padding: 5px 10px 0 0;
-
     text-align: right;
     width: 34%;}
 .view-default-product p {margin: 10px;}

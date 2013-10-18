@@ -1,8 +1,4 @@
-<section class="container view-cart">
-    <div ng-if="!currentOrder">
-        <span>Your cart is currently empty. <a ng-href="#/catalog">Continue Shopping</a></span>
-    </div>
-
+<section class="container cart-view">
     <div ng-if="currentOrder" class="CartDetail">
         <nav class="nav view-cart">
             <ul>
@@ -14,11 +10,11 @@
 
         <h4 class="emphasis-title">Review your order</h4>
         <form name="cart">
-            <div class="span9">
+            <div class="col-md-9">
                 <h4 style="background-color:#2C3E50; color:#fff; padding: 10px 25px; margin: 0;text-align: center;"> {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} items in your cart</h4>
                 <div class="gridStyle" ng-grid="gridOptions"></div>
             </div>
-            <div class="span3" style="border:1px solid #d6d6d6;">
+            <div class="col-md-3" style="border:1px solid #d6d6d6;">
                 <h4 style="background-color:#2C3E50; color:#fff; padding: 10px 25px; margin: 0;text-align: center;">Cart Summary</h4>
                      <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
                         <p>Subtotal: {{currentOrder.Subtotal | currency}}</p>
