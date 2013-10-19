@@ -56,6 +56,12 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
     };
 
 
+    $scope.onPrint = function()  {
+             window.print();
+    };
+
+
+
     // ng grid implementation TODO remove this when no longer needed
     $scope.gridOptions = {
         data: 'currentOrder.LineItems',

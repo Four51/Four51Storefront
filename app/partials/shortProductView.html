@@ -1,14 +1,18 @@
-    <div class="shortproduct-view">
-        <a class="cat-link" href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}>
-            <div ng-show="LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url" class="cat-image">
-                <img ng-src="{{LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url}}"/>
-            </div>
-            <div class="empty" ng-hide="LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url">
-                <span class="icon empty"><i class="icon-camera"></i></span>
-            </div>
-        </a>
-            <div><p class="shortproduct-name">{{LineItem.Product.Name}}</p>  <p class="shortproduct-toggle" ng-click="toggle = !toggle">Quick View</p></div>
+<div class="shortproduct-view">
+    <a class="cat-link" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
+        <figure ng-show="LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url" class="cat-image">
+            <img ng-src="{{LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url}}"/>
+        </figure>
+        <div class="empty" ng-hide="LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url">
+            <span class="icon empty"><i class="icon-camera"></i></span>
+        </div>
+    </a>
+    <div>
+        <figcaption class="shortproduct-name">{{LineItem.Product.Name}}</figcaption>
+        <figcaption class="shortproduct-toggle" ng-click="toggle = !toggle">Quick View</figcaption>
     </div>
+</div>
+
 <section class="shortproduct-info" ng-show="toggle">
     <span ng-bind-html="LineItem.Product.Description" ng-show="LineItem.Product.Description"></span>
     <span ng-show="LineItem.PriceSchedule.PriceBreaks[0]">
@@ -27,5 +31,5 @@
         <span ng-show="quantityError"><br>{{quantityError}} </span>
         <span ng-show="!quantityError">{{LineItem.LineTotal | currency}}</span>
     </span>
-    <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}>More Info</a>
+    <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">More Info</a>
  </section>

@@ -4,7 +4,7 @@
             <hr />
             <ul>
                 <li class="nav-header">Your Cart</li>
-                <li class="nav-header print hidden-xs" style="float: right;"><span class="icon"><i class="icon-print" style="font-size: 20px;"></i></span> Print</li>
+                <li class="nav-header print hidden-xs" style="float: right;" ng-click="onPrint()"><span class="icon"><i class="icon-print" style="font-size: 20px;"></i></span>Print</li>
             </ul>
             <hr />
         </nav>
@@ -15,19 +15,22 @@
                     <table class="table">
                         <tbody>
                             <tr ng-repeat="Item in currentOrder.LineItems">
-                                <td>{{Item.ProductIDText}}</td>
+                                <!--- going to put ID in expanded block
+                                    <td>{{Item.ProductIDText}}</td>
+                                --->
                                 <td>{{Item.Product.Name}}</td>
-                                <td>
+                                <!--- TODO needs styling and expression going to put variants into expanded block <td>
                                     <ul class="unstyled">
                                         <li ng-repeat="spec in row.entity[col.field] | onproperty: {Property: 'CanSetForLineItem' ,Value:true}">{{spec.Name}} : {{spec.Value}}</li>
                                     </ul>
                                 </td>
-                                <td>{{Item.UnitPrice | currency}}</td>
+                                --->
+                                <td>{{Item.UnitPrice | currency}}</td><!--- TODO error needs styling --->
                                 <td><quantityfield error="qtyError" lineitem="Item" class="quantity"/>{{qtyError}}</td>
                                 <td>{{Item.LineTotal | currency}}</td>
                                 <td>
-                                    <div>
-                                        <span class="icon"><i class="icon-remove-sign" ng-model="item" style="color:#bfbfbf; display: block; padding: 15px;"></i></span>
+                                    <div><!--- TODO needs to remove selected item --->
+                                        <span class="icon" style="text-align: center;"><i class="icon-remove-sign" ng-model="item" style="color:#bfbfbf; display: block; padding: 15px;"></i></span>
                                     </div>
                                 </td>
                             </tr>
