@@ -1,39 +1,60 @@
-<section class="container view-cart">
-    <div ng-if="!currentOrder">
-        <span>Your cart is currently empty. <a ng-href="#/catalog">Continue Shopping</a></span>
-    </div>
-
+<section class="container cart-view">
     <div ng-if="currentOrder" class="CartDetail">
-        <nav class="nav view-cart">
+        <nav class="nav nav-cat-search">
+            <hr />
             <ul>
-                <li>Your Cart</li>
-                <li class="print hidden-phone hidden-tablet" style="float: right;"><span class="icon"><i class="icon-print" style="font-size: 20px;"></i></span> Print</li>
+                <li class="nav-header">Your Cart</li>
+                <li class="nav-header print hidden-xs" style="float: right;" ng-click="onPrint()"><span class="icon"><i class="icon-print" style="font-size: 20px;"></i></span>Print</li>
             </ul>
+            <hr />
         </nav>
-        <hr />
-
-        <h4 class="emphasis-title">Review your order</h4>
         <form name="cart">
-            <div class="span9">
-                <h4 style="background-color:#2C3E50; color:#fff; padding: 10px 25px; margin: 0;text-align: center;"> {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} items in your cart</h4>
-                <div class="gridStyle" ng-grid="gridOptions"></div>
-            </div>
-            <div class="span3" style="border:1px solid #d6d6d6;">
-                <h4 style="background-color:#2C3E50; color:#fff; padding: 10px 25px; margin: 0;text-align: center;">Cart Summary</h4>
-                     <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
-                        <p>Subtotal: {{currentOrder.Subtotal | currency}}</p>
-                        <p ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
-                    </div>
-                <div style="padding: 25px; border-top: 1px solid #d6d6d6;">
-                    <button class="btn emphasis-btn" ng-click="checkOut()" ng-disabled="cart.$invalid">{{user.Company.SiteText.Checkout || 'Check Out' }}</button>
+            <div class="col-md-8 well" style="padding: 0;">
+                <h4 style="letter-spacing: 0.18em; text-transform: uppercase;font-size: 1em;background-color:#3D3D3D; color:#fff; padding: 10px; margin: 0;text-align: center;">{{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr ng-repeat="Item in currentOrder.LineItems">
+                                <!--- going to put ID in expanded block
+                                    <td>{{Item.ProductIDText}}</td>
+                                --->
+                                <td>{{Item.Product.Name}}</td>
+                                <!--- TODO needs styling and expression going to put variants into expanded block <td>
+                                    <ul class="unstyled">
+                                        <li ng-repeat="spec in row.entity[col.field] | onproperty: {Property: 'CanSetForLineItem' ,Value:true}">{{spec.Name}} : {{spec.Value}}</li>
+                                    </ul>
+                                </td>
+                                --->
+                                <td>{{Item.UnitPrice | currency}}</td><!--- TODO error needs styling --->
+                                <td><quantityfield error="qtyError" lineitem="Item" class="quantity"/>{{qtyError}}</td>
+                                <td>{{Item.LineTotal | currency}}</td>
+                                <td>
+                                    <div><!--- TODO needs to remove selected item --->
+                                        <span class="icon" style="text-align: center;"><i class="icon-remove-sign" ng-model="item" style="color:#bfbfbf; display: block; padding: 15px;"></i></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="background: none repeat scroll 0 0 #F5F5F5; border-top: 1px solid #E6E6E6; padding: 30px 15px;">
+                    <span class="btn-group">
+                        <button class="btn btn-small btn-default" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
+                        <button class="btn btn-small btn-default" ng-click="cancelOrder()">Cancel Order</button>
+                        <button class="btn btn-small btn-default" ng-click="continueShopping()" style="float: right;">Continue Shopping</button>
+                    </span>
                 </div>
             </div>
-            <div>
-                <span class="btn-group">
-                    <button class="btn btn-small btn-action" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
-                    <button class="btn btn-small btn-warning" ng-click="cancelOrder()">Cancel Order</button>
-                    <button class="btn btn-small btn-info" ng-click="continueShopping()">Continue Shopping</button>
-                </span>
+            <div class="col-md-3 col-md-offset-1 well"  style="padding: 0;text-align: center;">
+                <h4 style="letter-spacing: 0.18em; text-transform: uppercase;font-size: 1em;background-color:#3D3D3D; color:#fff; padding: 10px; margin: 0;text-align: center;">Cart Summary</h4>
+                <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
+                    <h4 style="letter-spacing: 0.18em; text-transform: uppercase;font-size: 1em;  padding: 10px; text-align: left;margin: 0;">SubTotal
+                        <span style="float: right;">{{currentOrder.Subtotal | currency}}</span></h4>
+                    <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
+                </div>
+                <div style="padding: 25px; border-top: 1px solid #d6d6d6;">
+                    <button class="btn btn-primary" ng-click="checkOut()" ng-disabled="cart.$invalid">{{user.Company.SiteText.Checkout || 'Check Out' }}</button>
+                </div>
             </div>
         </form>
     </div>

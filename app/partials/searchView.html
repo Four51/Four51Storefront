@@ -1,13 +1,21 @@
-<section class="container cat-body">
-    <div style="clear: both; overflow: hidden;" ng-hide="products">
-        <form class="navbar-form navbar-left" role="search" style="display: block; width: 100%;padding: 0;">
-            <input type="text" ng-model="searchTerm"  class="form-control search-view-search" placeholder="Search">
-            <div class="search-view-cancel">Press enter to search <a href="#/catalog"><span class="icon" style="float: right;margin-left: 5px;"><i class="icon-remove-sign" style="font-size: 16px;"></i></span></a></div>
-            <button type="submit" ng-click="search()" class="btn btn-default" style="visibility:hidden;" >Submit</button>
-         </form>
+<section class="container cat-body search-view">
+    <div ng-hide="products">
+        <form role="search">
+            <div>
+                <input type="text" ng-model="searchTerm"  class="form-control search-view-search" placeholder="Search" />
+                <div class="search-view-cancel">
+                    <a href="#/catalog"> <span class="icon"><i class="icon-remove-sign"></i></span></a>
+                    <div class="hidden-xs search-view-cancel-name">Press enter to search</div>
+                </div>
+                <button type="submit" ng-click="search()" class="btn btn-default" style="visibility:hidden;">Submit</button>
+            </div>
+        </form>
     </div>
     <div ng-show="products" class="product-navigation">
-        <p>Search <a href="#/catalog"><span class="icon"><i class="icon-remove-sign" style="font-size: 16px;"></i></span></a></p>
+        <div>Search results
+            <a href="#/catalog"><span class="icon"><i class="icon-remove-sign"></i></span></a>
+        </div>
+         <div>
             <nav class="nav">
                 <ul>
                     <li class="nav-header well col-lg-3 col-md-4  col-sm-6 col-xs-12" ng-repeat="product in products">
@@ -15,5 +23,6 @@
                     </li>
                 </ul>
             </nav>
+         </div>
     </div>
 </section>

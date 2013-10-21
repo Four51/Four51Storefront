@@ -25,14 +25,13 @@
                 <ul>
                     <li class="nav-header well col-lg-3 col-md-4  col-sm-6 col-xs-12" ng-repeat="c in tree">
                         <a class="cat-link" ng-href="#/catalog/{{c.InteropID}}">
-                            <div ng-show="c.Image.URL" class="cat-image">
+                            <figure ng-show="c.Image.URL" class="cat-image">
                                 <img ng-src="{{c.Image.URL}}"/>
-                            </div>
+                            </figure>
                             <div class="empty" ng-show="!c.Image.URL">
                                 <span class="icon empty"><i class="icon-camera"></i></span>
                             </div>
-                            <hr />
-                            <p class="category-description">{{c.Description}}</p>
+                            <figcaption class="category-description">{{c.Description}}</figcaption>
                             <div ng-bind-html="c.Name"></div>
                         </a>
                     </li>
@@ -46,14 +45,13 @@
                 <ul>
                     <li class="nav-header well col-lg-3 col-md-4  col-sm-6 col-xs-12" ng-repeat="c in currentCategory.SubCategories">
                         <a class="cat-link" ng-href="#/catalog/{{c.InteropID}}">
-                            <div ng-show="c.Image.URL" class="cat-image">
+                            <figure ng-show="c.Image.URL" class="cat-image">
                                 <img ng-src="{{c.Image.URL}}"/>
-                            </div>
+                            </figure>
                             <div class="empty" ng-show="!c.Image.URL">
                                 <span class="icon empty"><i class="icon-camera"></i></span>
                             </div>
-                            <hr />
-                            <p class="category-description">{{c.Description}}</p>
+                            <figcaption class="category-description">{{c.Description}}</figcaption>
                             <div>{{c.Name}}</div>
                         </a>
                     </li>
