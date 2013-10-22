@@ -1,29 +1,35 @@
-<section class="container">
-    <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}>
-    <span ng-show="LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url">
-        <img ng-src="{{LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url}}"><br>
-    </span>
+<div class="shortproduct-view">
+    <a class="cat-link" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
+        <figure ng-show="LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url" class="cat-image">
+            <img ng-src="{{LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url}}"/>
+        </figure>
+        <div class="empty" ng-hide="LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url">
+            <span class="icon empty"><i class="icon-camera"></i></span>
+        </div>
+    </a>
+    <div>
+        <figcaption class="shortproduct-name">{{LineItem.Product.Name}}</figcaption>
+        <figcaption class="shortproduct-toggle" ng-click="toggle = !toggle">Quick View</figcaption>
+    </div>
+</div>
 
-    {{LineItem.Product.Name}}</a><br>
-
+<section class="shortproduct-info" ng-show="toggle">
     <span ng-bind-html="LineItem.Product.Description" ng-show="LineItem.Product.Description"></span>
-
     <span ng-show="LineItem.PriceSchedule.PriceBreaks[0]">
         <br>
         {{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
         <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>
         for {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
     </span>
-
     <span ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
         <br>
         quantity available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
     </span>
-
     <span ng-show="allowAddToOrderInProductList">
         <br>
         <quantityfield lineitem="LineItem" error="quantityError" />
         <span ng-show="quantityError"><br>{{quantityError}} </span>
         <span ng-show="!quantityError">{{LineItem.LineTotal | currency}}</span>
     </span>
-</section>
+    <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">More Info</a>
+ </section>

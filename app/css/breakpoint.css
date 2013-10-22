@@ -15,9 +15,26 @@
 
     .nav li span.hidden-sm {float:right;}
     .header-nav-c1 {width: 1140px; margin: 0 auto; }
-    .jumbotron { padding-bottom: 48px;padding-top: 48px; }
-    .category-product.product-navigation li.nav-header { width: 25%; }
 
+/* start working swipe as a hover for desktop
+    .category-description {
+        display: none;
+        margin: 0.75em;
+    }
+
+    a.cat-link:hover .category-description {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color:#fff;
+        padding: 10px;
+        background-color:#f4f4f4;
+        border: 1px solid #fff;
+        height: 100px;
+    }
+*/
 }
 
 
@@ -26,14 +43,13 @@
 
     .header-nav-c1 {width: 950px; margin: 0 auto; }
     .nav li span.hidden-sm {float:right;}
-    .category-product.product-navigation li.nav-header { width: 33.3%; }
+
 
 }
 
 
 /* x-sm */
 @media (min-width:768px) and (max-width: 1023px) {
-    .category-product.product-navigation li.nav-header { width: 50%; }
 
 }
 

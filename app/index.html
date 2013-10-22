@@ -29,13 +29,13 @@
         </section>
         <section class="container-content">
             <div ng-view />
-            </dsection>
-            <section ng-controller="ErrorCtrl">
-                <ng-include src="template.url" />
-            </section>
-            <hr />
         </section>
+        <section ng-controller="ErrorCtrl">
+            <ng-include src="template.url" />
+        </section>
+
     </section>
+</section>
 
     <!-- In production use:
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
@@ -56,8 +56,9 @@
     <script src="lib/angular/ui-date.js"></script>
     <script src="lib/angular/ui-validate.js"></script>
     <script src="lib/angular/ui-mask.js"></script>
-    <script src="lib/angular/ng-grid.js"></script>
-
+    <!--- <script src="lib/angular/ng-grid.js"></script>
+    removing ng-grid; more trouble than I need right now until they develop it more
+    --->
     <script src="js/app.js"></script>
     <script src="js/451.js"></script>
     <script src="js/filters.js"></script>
