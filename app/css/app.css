@@ -130,30 +130,12 @@ button::-moz-focus-inner {
     padding-top: 75px;
 }
 
-.category-description {
-    display: none;
-    margin: 0.75em;
-}
-
 .shortproduct-view:hover .shortproduct-name, .shortproduct-view .shortproduct-toggle {
     display: none;
 }
 
 .shortproduct-view:hover .shortproduct-toggle {
     display: block;
-}
-
-a.cat-link:hover .category-description {
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color:#fff;
-    padding: 10px;
-    background-color:#f4f4f4;
-    border: 1px solid #fff;
-    height: 100px;
 }
 
 .order-cloud {
@@ -504,6 +486,7 @@ li.search-products span {
 .cart-view-summary {padding: 0;text-align: center;}
 .cart-view .icon-remove-sign {color:#bfbfbf; display: block; padding: 15px;}
 .cart-view-summary h5 {letter-spacing: 0.18em; text-transform: uppercase;font-size: 1em;  padding: 10px; text-align: left;margin: 0;}
+li.cart span.badge {position: absolute; top: 10px; left: 10px; z-index: 999999999;background-color:#3D3D3D;padding: 4px 7px;}
 /* ----------------------------------------------------------------------------------------------- */
 /* bootstrap tweaks */
 /* ----------------------------------------------------------------------------------------------- */

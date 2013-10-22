@@ -20,7 +20,7 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li ng-show="currentOrder" class="cart" ng-class="getClass('/cart')"><a class="cart" href="#/cart"><span class="icon"><i class="icon-shopping-cart"></i></span></a></li>
+                    <li ng-show="currentOrder" class="cart" ng-class="getClass('/cart')"><span ng-show="currentOrder.LineItems.length" class="badge">{{currentOrder.LineItems.length}}</span><a class="cart" href="#/cart"><span class="icon"><i class="icon-shopping-cart"></i></span></a></li>
                 </ul>
             </div>
         </section>
