@@ -21,7 +21,7 @@
                             <p>
                                 {{Item.Product.Name}}
                             </p>
-                            <ul>
+                            <ul><!--- TODO this is still using ng-grid --->
                                 <li ng-repeat="spec in row.entity[col.field] | onproperty: {Property: 'CanSetForLineItem' ,Value:true}">{{spec.Name}} : {{spec.Value}}</li>
                             </ul>
                         </div>
