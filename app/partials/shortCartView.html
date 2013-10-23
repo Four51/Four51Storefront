@@ -1,0 +1,56 @@
+<div class="shortproduct-view">
+    <div ng-if="currentOrder" class="CartDetail">
+        <form name="cart">
+            <div class="col-md-8 well cart-view-line-items">
+                <h4>
+                    {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
+                </h4>
+                <div ng-repeat="Item in currentOrder.LineItems" class="row">
+                    <h5 class="col-md-2 col-sm-2 col-xs-12">
+                        {{Item.ProductIDText}}
+                    </h5>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <p>
+                            {{Item.Product.Name}}
+                        </p>
+                        <ul class="cart-view-variable"><!--- TODO this is still using ng-grid --->
+                            <li ng-repeat="spec in row.entity[col.field] | onproperty: {Property: 'CanSetForLineItem' ,Value:true}">{{spec.Name}} : {{spec.Value}}</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-3">
+                        {{Item.UnitPrice | currency}}
+                    </div><!--- TODO error needs styling --->
+                    <div class="col-md-1 col-sm-1 col-xs-3">
+
+                        {{Item.Quantity}}
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-3">
+                        {{Item.LineTotal | currency}}
+                    </div>
+                    <div class="col-md-1 col-sm-1 col-xs-3">
+                        <!--- TODO needs to remove selected item --->
+                        <span class="icon" style="text-align: center;"><i class="icon-remove-sign" ng-model="item"></i></span>
+                    </div>
+                </div>
+                <div class="cart-view-line-items-btn-group">
+                    <span class="btn-group">
+                        <button class="btn btn-default  cart-view-btn-save" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
+                        <button class="btn btn-default  cart-view-btn-cancel" ng-click="cancelOrder()">Cancel Order</button>
+                    </span>
+                    <button class="btn btn-default cart-view-btn-continue" ng-click="continueShopping()" style="float: right;">Continue Shopping</button>
+                </div>
+            </div>
+            <div class="cart-view-summary col-md-3 col-md-offset-1 well">
+                <h4>Cart Summary</h4>
+                <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
+                    <h5>SubTotal <span style="float: right;">{{currentOrder.Subtotal | currency}}</span></h5>
+                    <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
+                </div>
+                <div style="padding: 25px; border-top: 1px solid #d6d6d6;">
+                    <button class="btn btn-primary" ng-click="checkOut()" ng-disabled="cart.$invalid">{{user.Company.SiteText.Checkout || 'Check Out' }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
