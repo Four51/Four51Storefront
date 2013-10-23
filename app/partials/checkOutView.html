@@ -71,13 +71,14 @@
             </div>
 
             <div class="check-out-send" ng-if="user.Permissions.contains('SendOrderNotificationToOthers')">
-                <h4>Send <span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
+                <h4>Send Email<span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
                 Email Order Details to: <input ng-disabled="cart.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
             </div>
 
-            <shortCartView />
+            <shortcartview></shortcartview>
 
             <div class="check-out-view-btn-group" ng-if="currentOrder">
+
                 <span class="btn-group">
                     <button class="btn btn-default cart-view-btn-save" ng-click="saveChanges()">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
                     <button class="btn btn-default cart-view-btn-cancel" ng-click="cancelOrder()">Cancel Order</button>
@@ -97,6 +98,7 @@
         <div class="col-md-3 col-md-offset-1 well check-out-view-summary" style="border:1px solid #d6d6d6;">
             <h4 style="background-color:#2C3E50; color:#fff; padding: 10px 25px; margin: 0;text-align: center;">Order Summary</h4>
             <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
+                <p>Items: {{currentOrder.LineItems.length}}</p>
                 <p>Subtotal: {{currentOrder.Subtotal | currency}}</p>
                 <p>Shipping Costs: {{currentOrder.ShippingCost | currency}}</p>
                 <p>Tax: {{currentOrder.Tax || 0 | currency}}</p>
