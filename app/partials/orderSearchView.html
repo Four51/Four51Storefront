@@ -18,27 +18,27 @@
             <input class="btn btn-small btn-info btn-block" value="Search" ng-click="OrderSearch($event, criteria); toggle = !toggle; showMega = ! showMega" /><br />
         </div>
     <div class="order-types"  ng-show="!toggle" ng-class="{ 'hidden': ! showMega }" >
-        <div class="col-md-3">
-            <ul class="well unstyled">
+        <div class="col-md-4 well">
+            <ul>
                 <h5>Standard Orders</h5>
                 <li ng-repeat="criteria in OrderSearchCriteria | onproperty:{ 'Model': 'OrderStats', 'Value': 'Standard'}">
-                    <span>{{criteria.Status}} <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">({{criteria.Count}})</a></span>
+                    {{criteria.Status}} <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})"><span class="badge"  ng-show="criteria.Count">{{criteria.Count}}</span></a>
                 </li>
             </ul>
         </div>
-        <div class="col-md-3">
-            <ul class="well unstyled">
+        <div class="col-md-4 well">
+            <ul>
                 <h5>Replenishment Orders</h5>
                 <li ng-repeat="criteria in OrderSearchCriteria | onproperty:{ 'Model': 'OrderStats', 'Value': 'Replenishment'}">
-                    <span>{{criteria.Status}} <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">({{criteria.Count}})</a></span>
+                  {{criteria.Status}} <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})"><span class="badge" ng-show="criteria.Count">{{criteria.Count}}</span></a>
                 </li>
             </ul>
         </div>
-        <div class="col-md-3">
-            <ul class="well unstyled">
+        <div class="col-md-4 well">
+            <ul>
                 <h5>Price Request</h5>
                 <li ng-repeat="criteria in OrderSearchCriteria | onproperty:{ 'Model': 'OrderStats', 'Value': 'PriceRequest'}">
-                    <span>{{criteria.Status}} <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">({{criteria.Count}})</a></span>
+                  {{criteria.Status}} <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})"><span clas="badge" ng-show="criteria.Count">{{criteria.Count}}</span></a>
                 </li>
             </ul>
         </div>
