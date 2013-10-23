@@ -33,6 +33,11 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 		}
 	};
 
+	$scope.removeItem = function(item) {
+		item.Selected = true;
+		$scope.saveChanges();
+	}
+
     $scope.checkOut = function() {
         Order.save($scope.currentOrder, function(data) {
             $scope.currentOrder = data;
@@ -59,21 +64,4 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
     $scope.onPrint = function()  {
              window.print();
     };
-
-
-
-    // ng grid implementation TODO remove this when no longer needed
-    $scope.gridOptions = {
-        data: 'currentOrder.LineItems',
-        columnDefs: [
-            { displayName: 'Remove', field: 'Selected', cellTemplate: 'partials\\controls\\ngGridCheckBox.html' },
-            { displayName: 'ID', cellTemplate: "<a href=\"#/cart/default/{{row.rowIndex}}\">{{row.getProperty('ProductIDText')}}</a>"},
-            { displayName: 'Product', field: 'Product.Name'},
-            { displayName: 'Specifications', field: 'Specs', cellTemplate: 'partials\\controls\\ngGridList.html'},
-            { displayName: 'Unit Price', field: 'UnitPrice', cellFilter: 'currency' },
-            { displayName: 'Quantity', cellTemplate: "<div class='ngCellText colt{{$index}}'><quantityfield error='qtyError' lineitem='row.entity' />{{qtyError}}</div>"},
-            { displayName: 'Total Quantity', cellTemplate: '<div class="ngCellText colt{{$index}}">{{row.getProperty("Product.QuantityMultiplier") * row.getProperty("Quantity")}}</div>' },
-            { displayName: 'Price', field: 'LineTotal', cellFilter: 'currency' }
-        ]
-    }
 });
