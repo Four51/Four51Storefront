@@ -13,39 +13,45 @@
                 <h4>
                     {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
                 </h4>
-                    <div ng-repeat="Item in currentOrder.LineItems" class="row">
-                        <h5 class="col-md-2 col-sm-2 col-xs-12">
-                            {{Item.ProductIDText}}
-                        </h5>
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <p>
-                                {{Item.Product.Name}}
-                            </p>
-                            <ul><!--- TODO this is still using ng-grid --->
-                                <li ng-repeat="spec in row.entity[col.field] | onproperty: {Property: 'CanSetForLineItem' ,Value:true}">{{spec.Name}} : {{spec.Value}}</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-3">
-                            {{Item.UnitPrice | currency}}
-                        </div><!--- TODO error needs styling --->
-                        <div class="col-md-1 col-sm-1 col-xs-3">
-                            <quantityfield error="qtyError" lineitem="Item" class="quantity"/>
-                            {{qtyError}}
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-3">
-                            {{Item.LineTotal | currency}}
-                        </div>
-                        <div class="col-md-1 col-sm-1 col-xs-3">
-                        <!--- TODO needs to remove selected item --->
-                            <span class="icon" style="text-align: center;"><i class="icon-remove-sign" ng-model="item"></i></span>
-                        </div>
+                <div ng-repeat="item in currentOrder.LineItems" class="row">
+                    <h5 class="col-md-2 col-sm-2 col-xs-12">
+                        {{item.ProductIDText}}
+                    </h5>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <p>
+                            {{item.Product.Name}}
+                        </p>
+                        <ul><!--- TODO this is still using ng-grid --->
+                            <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">{{spec.Name}} : {{spec.Value}}</li>
+                        </ul>
                     </div>
+                    <div class="col-md-2 col-sm-2 col-xs-3">
+                        {{item.UnitPrice | currency}}
+                    </div><!--- TODO error needs styling --->
+                    <div class="col-md-1 col-sm-1 col-xs-3">
+                        <quantityfield error="qtyError" lineitem="item" class="quantity"/>
+                        {{qtyError}}
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-3">
+                        {{item.LineTotal | currency}}
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-3" ng-if="user.Permissions.contains('CostCenterPerLine')">
+                        <costcenter user="user" lineitem="item" />
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-3" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
+                        <input type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
+                        <input type="button" class="btn btn-xs btn-info" value="copy to all" ng-click="copyAddressToAll(currentOrder)" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" />
+                    </div>
+                    <div class="col-md-1 col-sm-1 col-xs-3">
+                        <span class="icon" style="text-align: center;"><i class="icon-remove-sign" ng-click="removeItem(item)"></i></span>
+                    </div>
+                </div>
                 <div class="cart-view-line-items-btn-group">
                     <span class="btn-group">
-                        <button class="btn btn-small btn-default" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
-                        <button class="btn btn-small btn-default" ng-click="cancelOrder()">Cancel Order</button>
-                        <button class="btn btn-small btn-default" ng-click="continueShopping()" style="float: right;">Continue Shopping</button>
+                        <button class="btn btn-default  cart-view-btn-save" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
+                        <button class="btn btn-default  cart-view-btn-cancel" ng-click="cancelOrder()">Cancel Order</button>
                     </span>
+                    <button class="btn btn-default cart-view-btn-continue" ng-click="continueShopping()" style="float: right;">Continue Shopping</button>
                 </div>
             </div>
             <div class="cart-view-summary col-md-3 col-md-offset-1 well">

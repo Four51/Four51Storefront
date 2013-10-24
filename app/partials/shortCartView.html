@@ -1,0 +1,35 @@
+<div class="short-cart-view">
+    <div ng-if="currentOrder" class="CartDetail">
+        <form name="cart">
+            <div class="cart-view-line-items">
+                <h4>
+                    Review {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} to be submitted
+                </h4>
+                <div ng-repeat="Item in currentOrder.LineItems" class="row">
+                    <h5 class="col-md-2 col-sm-2 col-xs-12">
+                        {{Item.ProductIDText}}
+                    </h5>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <p>
+                            {{Item.Product.Name}}
+                        </p>
+                        <ul class="cart-view-variable"><!--- TODO this is still using ng-grid --->
+                            <li ng-repeat="spec in row.entity[col.field] | onproperty: {Property: 'CanSetForLineItem' ,Value:true}">{{spec.Name}} : {{spec.Value}}</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-3">
+                        {{Item.UnitPrice | currency}}
+                    </div><!--- TODO error needs styling --->
+                    <div class="col-md-1 col-sm-1 col-xs-3">
+
+                        {{Item.Quantity}}
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-3">
+                        {{Item.LineTotal | currency}}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

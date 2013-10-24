@@ -12,7 +12,7 @@ four51.app.factory('User', function($q, $rootScope, $resource, $451, Security) {
             u.Permissions.push('PayByCreditCard');
 
 	    angular.forEach(u.CustomFields, function(f) {
-			if (f.ControlType == 'File' && f.File.Url.indexOf('auth') == -1)
+			if (f.ControlType == 'File' && f.File && f.File.Url.indexOf('auth') == -1)
 				f.File.Url += "&auth=" + Security.auth();
 	    });
     }
