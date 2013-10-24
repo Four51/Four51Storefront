@@ -495,6 +495,7 @@ li.cart span.badge {position: absolute; top: 10px; left: 10px; z-index: 99999999
 .order-types div {min-height: 225px;}
 
 
+
 textarea { resize:vertical; width: 100%; }
 /* ----------------------------------------------------------------------------------------------- */
 /* bootstrap tweaks */
@@ -576,3 +577,10 @@ textarea { resize:vertical; width: 100%; }
     border: none;
     border-radius: 0;
 }
+
+
+
+/* --------- ROB STUFF ----------*/
+.order-history-header-view h4, .order-history-footer-view h4 {letter-spacing: 0.18em;text-transform: uppercase;font-size: 1em;background-color:#3D3D3D; color:#fff; padding: 10px; margin: 0;text-align: center;}
+
+.order-history-header-view, .order-history-footer-view {padding: 0;text-align: center;}

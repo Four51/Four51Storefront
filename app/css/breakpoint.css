@@ -35,6 +35,8 @@
         height: 100px;
     }
 */
+    .no-padding-sm-md-lg {padding:0;}
+    .order-history-view-save-favorite {float:right;}
 }
 
 
@@ -45,12 +47,22 @@
     .nav li span.hidden-sm {float:right;}
 
 
+/*---ROB STUFF---*/
+
+    .no-padding-sm-md-lg {padding:0;}
+    .order-history-view-save-favorite {float:right;}
+
 }
 
 
 /* x-sm */
 @media (min-width:768px) and (max-width: 1023px) {
 
+
+
+    /*--ROB STUFF--*/
+    .order-history-view-save-favorite {float:right;}
+    .no-padding-sm-md-lg {padding:0;}
 }
 
 
@@ -67,5 +79,10 @@
     .cart-view-btn-cancel  {float: right !important;}
     .cart-view-btn-save {float: left;}
 
+    /*--ROB STUFF--*/
+    .order-history-view-save-favorite-input {float: left;}
+    .order-history-view-save-favorite-btn {float: right !important;}
+    .order-history-view-save-favorite{text-align:center; width: 100%;margin-top: 10px; }
+    .order-history-view-save-favorite-input, .order-history-view-save-favorite-btn{width:49%;}
 }
 
