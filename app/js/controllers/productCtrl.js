@@ -77,7 +77,7 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 		Order.save($scope.currentOrder, function(o){
 			$scope.user.CurrentOrderID = o.ID;
 			User.save($scope.user, function(){
-				$location.path('/cart');
+			$location.path('/cart');
 			});
 		});
 	}
