@@ -1,9 +1,11 @@
-<section class="container">
+<section class="container check-out-view">
     <form name="cart">
+        <!--- Removing this as cart button does not appear unless there are existing items in cart to check out. No need for an empty message.
         <div ng-if="!currentOrder">
             <span>Your cart is currently empty. <a ng-href="#/catalog">Continue Shopping</a></span>
         </div>
-
+        --->
+<div class="col-md-8 well check-out-view-types">
         <div class="OrderHistory" ng-show="currentOrder && !currentOrder.isEditable">
             <div>Thank you. Your order has been submitted.</div>
             <!-- currently a duplicate of the orderHistoryView -->
@@ -24,8 +26,9 @@
             </div>
         </div>
 
-        <div class="Order" ng-show="currentOrder && currentOrder.isEditable">
-            <div ng-if="currentOrder" class="span9 well OrderDetailTable">
+        <div ng-show="currentOrder && currentOrder.isEditable">
+            <div class="check-out-Order"  ng-if="currentOrder" class="OrderDetailTable">
+                <h4>Order <span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
                 <p ng-if="user.Permissions.contains('EditPOID')">
                     <label>{{user.Company.SiteText.OrderID || 'Order ID'}}:</label><br />
                     <input ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" required ui-mask="{{user.Company.POIDMask}}" />
@@ -48,25 +51,16 @@
                     </li>
                 </ul>
             </div>
-            <div class="span3" style="border:1px solid #d6d6d6;">
-                <h4 style="background-color:#2C3E50; color:#fff; padding: 10px 25px; margin: 0;text-align: center;">Order Summary</h4>
-                <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
-                    <p>Subtotal: {{currentOrder.Subtotal | currency}}</p>
-                    <p>Shipping Costs: {{currentOrder.ShippingCost | currency}}</p>
-                    <p>Tax: {{currentOrder.Tax || 0 | currency}}</p>
-                    <hr/>
-                    <p>Total: {{currentOrder.Total | currency}}</p>
-                    <p ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
-                </div>
-            </div>
 
-            <div ng-if="currentOrder" class="span9 well Shipping">
+            <div class="check-out-shipping" ng-if="currentOrder">
+                <h4>Shipping <span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
                 <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
                         ng-model="currentOrder.ShipAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address"  tabindex="-1">Add New Address</a>
                 <shipperselector />
             </div>
 
-            <div ng-if="currentOrder" class="span9 well Billing">
+            <div class="check-out-billing" ng-if="currentOrder" >
+                <h4>Billing <span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
                 <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}"
                         ng-model="currentOrder.BillAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address" tabindex="-1">Add New Address</a>
                 <paymentselector />
@@ -76,15 +70,41 @@
                 <approvalrulelist order="currentOrder" />
             </div>
 
-            <div class="span9 well Send" ng-if="user.Permissions.contains('SendOrderNotificationToOthers')">
+            <div class="check-out-send" ng-if="user.Permissions.contains('SendOrderNotificationToOthers')">
+                <h4>Send Email<span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
                 Email Order Details to: <input ng-disabled="cart.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
             </div>
 
-            <div class="btn-group" ng-if="currentOrder">
-                <button class="btn btn-small btn-action" ng-click="submitOrder()" ng-disabled="cart.$invalid">Submit</button>
-                <button class="btn btn-small btn-action" ng-click="saveChanges()">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
-                <button class="btn btn-small btn-warning" ng-click="cancelOrder()">Cancel Order</button>
-                <button class="btn btn-small btn-info" ng-click="continueShopping()">Continue Shopping</button>
+            <shortcartview></shortcartview>
+
+            <div class="check-out-view-btn-group" ng-if="currentOrder">
+
+                <span class="btn-group">
+                    <button class="btn btn-default cart-view-btn-save" ng-click="saveChanges()">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
+                    <button class="btn btn-default cart-view-btn-cancel" ng-click="cancelOrder()">Cancel Order</button>
+                </span>
+                <button class="btn btn-default cart-view-btn-continue" ng-click="continueShopping()" style="float: right;">Continue Shopping</button>
+            </div>
+            <div class="check-out-view-btn-group">
+
+                <button class="btn btn-primary" ng-if="currentOrder" ng-click="submitOrder()" ng-disabled="cart.$invalid">Submit</button>
+            </div>
+
+
+        </div>
+
+</div>
+
+        <div class="col-md-3 col-md-offset-1 well check-out-view-summary" style="border:1px solid #d6d6d6;">
+            <h4 style="background-color:#2C3E50; color:#fff; padding: 10px 25px; margin: 0;text-align: center;">Order Summary</h4>
+            <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
+                <p>Items: {{currentOrder.LineItems.length}}</p>
+                <p>Subtotal: {{currentOrder.Subtotal | currency}}</p>
+                <p>Shipping Costs: {{currentOrder.ShippingCost | currency}}</p>
+                <p>Tax: {{currentOrder.Tax || 0 | currency}}</p>
+                <hr/>
+                <p>Total: {{currentOrder.Total | currency}}</p>
+                <p ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
             </div>
         </div>
     </form>

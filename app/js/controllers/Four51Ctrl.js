@@ -15,6 +15,16 @@ four51.app.controller('Four51Ctrl', function ($scope, $routeParams, $location, $
             return "";
         }
     };
+    $scope.next = function(){
+        $scope.movedToNext = true;
+        $scope.movedToPrevious = false;
+    }
+
+    $scope.previous = function(){
+        $scope.movedToPrevious = true;
+        $scope.movedToNext = false;
+    }
+
 
     function init() {
         if (Security.isAuthenticated()) {
