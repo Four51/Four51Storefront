@@ -33,7 +33,7 @@ img {
 }
 
 select, input, .uneditable-input {
-    width: auto;
+    max-width: 100%;
 }
 
 /* iOS placeholder needs help to disappear on focus */
@@ -482,7 +482,9 @@ li.search-products span {
 
 .cart-view-line-items h4, .cart-view-summary h4, .check-out-view h4 {letter-spacing: 0.18em;text-transform: uppercase;font-size: 1em;background-color:#3D3D3D; color:#fff; padding: 10px; margin: 0;text-align: center;}
 .cart-view-line-items, .check-out-view-types {padding: 0;}
+.cart-view-line-items-product {margin-bottom: 10px;}
 .cart-view-line-items-btn-group, .check-out-view-btn-group {background: none repeat scroll 0 0 #F5F5F5;padding: 30px 15px; clear: both; overflow: hidden;}
+.cart-view-line-items-repeater {border-bottom: 1px solid #d6d6d6;clear: both; overflow: hidden;padding: 25px 0;}
 .cart-view-summary, .check-out-view-summary {padding: 0;text-align: center;}
 .cart-view .icon-remove-sign {color:#bfbfbf; display: block; padding: 15px;}
 .cart-view-summary h5 {letter-spacing: 0.18em; text-transform: uppercase;font-size: 1em;  padding: 10px; text-align: left;margin: 0;}
@@ -568,12 +570,7 @@ textarea { resize:vertical; width: 100%; }
     box-shadow: none;
 }
 
-.row {
-    margin-left: 0;
-    margin-right: 0;
-    border-bottom: 1px solid #e6e6e6;
 
-}
 
 .well {
     border: none;
