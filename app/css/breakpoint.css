@@ -66,6 +66,7 @@
     .cart-view-line-items-btn-group .btn-group {vertical-align: inherit; width: 100%;}
     .cart-view-btn-cancel  {float: right !important;}
     .cart-view-btn-save {float: left;}
+    .ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {}
 
 }
 

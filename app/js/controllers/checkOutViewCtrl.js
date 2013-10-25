@@ -89,5 +89,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
         FavoriteOrder.save($scope.currentOrder);
     };
 
+    $scope.showOrder = true;
+
     //$scope.$on('api:orderGetComplete', init);
 });

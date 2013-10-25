@@ -13,7 +13,6 @@
             <lineitemhistorygrid order="currentOrder"></lineitemhistorygrid>
             <hr />
             <orderhistoryfooter order="currentOrder"></orderhistoryfooter>
-
             <div>
                 <input type="button" class="btn btn-small btn-info" value="Repeat Order" />
             </div>
@@ -27,8 +26,10 @@
         </div>
 
         <div ng-show="currentOrder && currentOrder.isEditable">
-            <div class="check-out-Order"  ng-if="currentOrder" class="OrderDetailTable">
-                <h4>Order <span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
+            <h4  ng-click="showOrder = ! showOrder">Order <span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
+            <div  ng-if="currentOrder" class="check-out-Order"  ng-class="{ 'hidden': ! showOrder }">
+
+
                 <p ng-if="user.Permissions.contains('EditPOID')">
                     <label>{{user.Company.SiteText.OrderID || 'Order ID'}}:</label><br />
                     <input ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" required ui-mask="{{user.Company.POIDMask}}" />
@@ -50,45 +51,49 @@
                         <customradiobuttonfield customfield="field" ng-if="field.Options && field.IsRadioButtons" />
                     </li>
                 </ul>
-            </div>
 
-            <div class="check-out-shipping" ng-if="currentOrder">
-                <h4>Shipping <span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
+            </div>
+            <h4 ng-click="showShipping = ! showShipping">Shipping <span class="icon" style="float: right;"><i class="icon-caret-up"></i></span></h4>
+            <div ng-if="currentOrder"  class="check-out-shipping"  ng-class="{ 'hidden': ! showShipping }">
+
+
                 <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
                         ng-model="currentOrder.ShipAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address"  tabindex="-1">Add New Address</a>
                 <shipperselector />
-            </div>
 
-            <div class="check-out-billing" ng-if="currentOrder" >
-                <h4>Billing <span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
+            </div>
+            <h4  ng-click="showBilling = ! showBilling">Billing <span class="icon" style="float: right;"><i class="icon-caret-up"></i></span></h4>
+            <div ng-if="currentOrder" class="check-out-billing"  ng-class="{ 'hidden': ! showBilling }" >
+
+
                 <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}"
                         ng-model="currentOrder.BillAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address" tabindex="-1">Add New Address</a>
                 <paymentselector />
-            </div>
 
-            <div ng-if="currentOrder.Approvals" class="span9 well Approvals">
+            </div>
+            <h4  ng-click="showApprovals = ! showApprovals">Approvals <span class="icon" style="float: right;"><i class="icon-caret-up"></i></span></h4>
+     <div ng-if="currentOrder.Approvals" class="check-out-approvals"  ng-class="{ 'hidden': ! showApprovals }">
+
+
                 <approvalrulelist order="currentOrder" />
-            </div>
 
-            <div class="check-out-send" ng-if="user.Permissions.contains('SendOrderNotificationToOthers')">
-                <h4>Send Email<span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
+            </div>
+            <h4   ng-click="showNotifications = ! showNotifications">Notifications<span class="icon" style="float: right;"><i class="icon-caret-up"></i></span></h4>
+            <div ng-if="user.Permissions.contains('SendOrderNotificationToOthers')"  class="check-out-send" ng-class="{ 'hidden': ! showNotifications }" >
                 Email Order Details to: <input ng-disabled="cart.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
             </div>
 
-            <shortcartview></shortcartview>
+
 
             <div class="check-out-view-btn-group" ng-if="currentOrder">
-
                 <span class="btn-group">
                     <button class="btn btn-default cart-view-btn-save" ng-click="saveChanges()">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
                     <button class="btn btn-default cart-view-btn-cancel" ng-click="cancelOrder()">Cancel Order</button>
                 </span>
                 <button class="btn btn-default cart-view-btn-continue" ng-click="continueShopping()" style="float: right;">Continue Shopping</button>
             </div>
-            <div class="check-out-view-btn-group">
 
-                <button class="btn btn-primary" ng-if="currentOrder" ng-click="submitOrder()" ng-disabled="cart.$invalid">Submit</button>
-            </div>
+
 
 
         </div>
@@ -105,6 +110,10 @@
                 <hr/>
                 <p>Total: {{currentOrder.Total | currency}}</p>
                 <p ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
+            </div>
+            <div style="padding: 25px; border-top: 1px solid #d6d6d6;">
+                <div class="alert alert-warning" ng-show="cart.$invalid">Order is missing required fields for submission.</div>
+                <button ng-hide="cart.$invalid" class="btn btn-primary" ng-if="currentOrder" ng-click="submitOrder()" ng-disabled="cart.$invalid">Submit Order</button>
             </div>
         </div>
     </form>
