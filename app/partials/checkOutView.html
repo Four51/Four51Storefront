@@ -25,9 +25,9 @@
             </div>
         </div>
 
-        <div ng-show="currentOrder && currentOrder.isEditable">
-            <h4  ng-click="showOrder = ! showOrder">Order <span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
-            <div  ng-if="currentOrder" class="check-out-Order"  ng-class="{ 'hidden': ! showOrder }">
+ <div ng-show="currentOrder && currentOrder.isEditable" ng-switch="getCurrentStep()">
+            <h4 ng-show="currentOrder" >Order</h4>
+            <div  ng-switch-when="one" ng-show="currentOrder" class="check-out-Order"  ng-class="{ 'hidden': ! showOrder }">
 
 
                 <p ng-if="user.Permissions.contains('EditPOID')">
@@ -51,37 +51,58 @@
                         <customradiobuttonfield customfield="field" ng-if="field.Options && field.IsRadioButtons" />
                     </li>
                 </ul>
-
+                <a class="btn" ng-click="handlePrevious()" ng-show="!isFirstStep()">Back</a>
+                <a class="btn btn-primary" ng-click="handleNext(dismiss)">{{getNextLabel()}}</a>
             </div>
-            <h4 ng-click="showShipping = ! showShipping">Shipping <span class="icon" style="float: right;"><i class="icon-caret-up"></i></span></h4>
-            <div ng-if="currentOrder"  class="check-out-shipping"  ng-class="{ 'hidden': ! showShipping }">
+
+            <h4>Shipping</h4>
+            <div ng-switch-when="two" ng-show="currentOrder"  class="check-out-shipping"  >
 
 
                 <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
                         ng-model="currentOrder.ShipAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address"  tabindex="-1">Add New Address</a>
                 <shipperselector />
-
+                <a class="btn" ng-click="handlePrevious()" ng-show="!isFirstStep()">Back</a>
+                <a class="btn btn-primary" ng-click="handleNext(dismiss)">{{getNextLabel()}}</a>
             </div>
-            <h4  ng-click="showBilling = ! showBilling">Billing <span class="icon" style="float: right;"><i class="icon-caret-up"></i></span></h4>
-            <div ng-if="currentOrder" class="check-out-billing"  ng-class="{ 'hidden': ! showBilling }" >
+
+            <h4>Billing</h4>
+            <div ng-switch-when="three" ng-show="currentOrder" class="check-out-billing"  >
 
 
                 <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}"
                         ng-model="currentOrder.BillAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address" tabindex="-1">Add New Address</a>
                 <paymentselector />
-
+                <a class="btn" ng-click="handlePrevious()" ng-show="!isFirstStep()">Back</a>
+                <a class="btn btn-primary" ng-click="handleNext(dismiss)">{{getNextLabel()}}</a>
             </div>
-            <h4  ng-click="showApprovals = ! showApprovals">Approvals <span class="icon" style="float: right;"><i class="icon-caret-up"></i></span></h4>
-     <div ng-if="currentOrder.Approvals" class="check-out-approvals"  ng-class="{ 'hidden': ! showApprovals }">
 
+            <h4>Approvals</h4>
+             <div ng-switch-when="four" ng-show="currentOrder.Approvals" class="check-out-approvals"  >
+                    <approvalrulelist order="currentOrder" />
+                 <a class="btn" ng-click="handlePrevious()" ng-show="!isFirstStep()">Back</a>
+                 <a class="btn btn-primary" ng-click="handleNext(dismiss)">{{getNextLabel()}}</a>
 
-                <approvalrulelist order="currentOrder" />
+             </div>
+     <div ng-switch-when="four"  ng-hide="!currentOrder.Approvals" class="check-out-approvals"  >
 
-            </div>
-            <h4   ng-click="showNotifications = ! showNotifications">Notifications<span class="icon" style="float: right;"><i class="icon-caret-up"></i></span></h4>
-            <div ng-if="user.Permissions.contains('SendOrderNotificationToOthers')"  class="check-out-send" ng-class="{ 'hidden': ! showNotifications }" >
+      <p>you have no approvals</p>
+         <a class="btn" ng-click="handlePrevious()" ng-show="!isFirstStep()">Back</a>
+         <a class="btn btn-primary" ng-click="handleNext(dismiss)">{{getNextLabel()}}</a>
+
+     </div>
+
+          <h4>Notifications</h4>
+            <div ng-switch-when="five" ng-show="user.Permissions.contains('SendOrderNotificationToOthers')"  class="check-out-send" >
                 Email Order Details to: <input ng-disabled="cart.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
+                <a class="btn" ng-click="handlePrevious()" ng-show="!isFirstStep()">Back</a>
+
             </div>
+     <div ng-switch-when="five" ng-show="!user.Permissions.contains('SendOrderNotificationToOthers')"  class="check-out-send" >
+         <p>you have no notifications</p>
+         <a class="btn" ng-click="handlePrevious()" ng-show="!isFirstStep()">Back</a>
+
+     </div>
 
 
 

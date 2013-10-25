@@ -89,7 +89,48 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
         FavoriteOrder.save($scope.currentOrder);
     };
 
+    //show first checkout section on page load
     $scope.showOrder = true;
+
+    //step through checkout sections
+    //http://onehungrymind.com/ng-animate-first-look-with-angularjs-wizard/
+    $scope.steps = ['one', 'two', 'three', 'four', 'five'];
+    $scope.step = 0;
+
+    $scope.isCurrentStep = function(step) {
+        return $scope.step === step;
+    };
+
+    $scope.setCurrentStep = function(step) {
+        $scope.step = step;
+    };
+
+    $scope.getCurrentStep = function() {
+        return $scope.steps[$scope.step];
+    };
+    $scope.isFirstStep = function() {
+        return $scope.step === 0;
+    };
+
+    $scope.isLastStep = function() {
+        return $scope.step === ($scope.steps.length - 1);
+    };
+
+    $scope.getNextLabel = function() {
+        return ($scope.isLastStep()) ? '' : 'Next';
+    };
+
+    $scope.handlePrevious = function() {
+        $scope.step -= ($scope.isFirstStep()) ? 0 : 1;
+    };
+
+    $scope.handleNext = function(dismiss) {
+        if($scope.isLastStep()) {
+            dismiss();
+        } else {
+            $scope.step += 1;
+        }
+    };
 
     //$scope.$on('api:orderGetComplete', init);
 });
