@@ -94,7 +94,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 
     //step through checkout sections
     //http://onehungrymind.com/ng-animate-first-look-with-angularjs-wizard/
-    $scope.steps = ['one', 'two', 'three', 'four', 'five'];
+    $scope.steps = ['one', 'two', 'three'];
     $scope.step = 0;
 
     $scope.isCurrentStep = function(step) {
@@ -131,6 +131,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
             $scope.step += 1;
         }
     };
+
 
     //$scope.$on('api:orderGetComplete', init);
 });

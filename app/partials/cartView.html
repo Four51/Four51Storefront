@@ -28,8 +28,9 @@
                         </ul>
                         <div class="row">
                             <div class="col-xs-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
-                                <input placeholder="Delivery Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
-                                <input type="button" class="btn btn-xs btn-info" value="copy to all" ng-click="copyAddressToAll(currentOrder)" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" />
+                                <input placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
+                                <hr />
+                                <button type="button" class="btn btn-info" value="copy to all" ng-click="copyAddressToAll(currentOrder)" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" >copy date to all items</button>
                             </div>
                             <div class="col-xs-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
                                 <costcenter user="user" lineitem="item" />
