@@ -7,7 +7,7 @@
         </button>
         <button class="btn btn-default" ng-show="user.Permissions.contains('SubmitForApproval')" ng-click="setPaymentMethod('Undetermined'); showCreditCard = hidden; showSpendingAccount = hidden">
             <span class="icon"><i ng-class="{'icon-ok': currentOrder.PaymentMethod == 'Undetermined' }"></i></span>
-            Submit order for approval
+            Approval Order
         </button>
         <button class="btn btn-default" ng-click="setPaymentMethod('BudgetAccount'); showCreditCard = hidden; showSpendingAccount = !showSpendingAccount">
             <span class="icon"><i ng-class="{'icon-ok': currentOrder.PaymentMethod == 'BudgetAccount' }"></i></span>
