@@ -21,7 +21,33 @@ four51.app.factory('OrderConfig', function() {
 
     }
 
+	var setDefaultAddress = function() {
+		if (order.CostCenter == null)
+		angular.forEach(user.CostCenters, function(c) {
+			if (c.DefaultAddressID) {
+				order.ShipAddressID = c.DefaultAddressID;
+				angular.forEach(order.LineItems, function(li) {
+					li.ShipAddressID = c.DefaultAddressID;
+				});
+			}
+		});
+	}
+
+	function _hasAddress() {
+		if (order.ShipAddressID != null) return true;
+		angular.forEach(order.LineItems, function(li) {
+			if (li.ShipAddressID != null) return true;
+		});
+		return false;
+	}
+
     return {
+	    address: function(o, u) {
+			order = o; user = u;
+		    if (!_hasAddress())
+			    setDefaultAddress();
+		    return this;
+	    },
         costcenter: function(o, u) {
             order = o; user = u;
             if (order.Status == 'Unsubmitted') {

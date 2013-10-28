@@ -45,9 +45,8 @@
                 </label>
                 <ul class="unstyled" ng-if="user.OrderFields">
                     <li ng-repeat="field in currentOrder.OrderFields">
-                        <customtextfield customfield="field" ng-if="field.Lines" />
-                        <customselectionfield customfield="field" ng-if="field.Options && !field.IsRadioButtons" />
-                        <customradiobuttonfield customfield="field" ng-if="field.Options && field.IsRadioButtons" />
+                        <customtextfield customfield="field" ng-if="field.ControlType == 'Text'" />
+                        <customselectionfield customfield="field" ng-if="field.ControlType == 'Selection'" />
                     </li>
                 </ul>
             </div>
