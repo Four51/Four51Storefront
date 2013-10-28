@@ -1,11 +1,25 @@
-<div>
-   <h5>Select billing type</h5>
-    <button class="btn btn-default" ng-if="user.Permissions.contains('PayByPO')" ng-class="{'ok': currentOrder.PaymentMethod == 'PurchaseOrder' }" ng-click="setPaymentMethod('PurchaseOrder')">Purchase Order</button>
-    <hr />
-    <button class="btn btn-default" ng-if="user.Permissions.contains('SubmitForApproval')" ng-class="{'ok': currentOrder.PaymentMethod == 'Undetermined' }" ng-click="setPaymentMethod('Undetermined')">Submit order for approval</button>
-    <hr />
-    <div ng-if="user.Permissions.contains('PayByBudgetAccount')" ng-class="{'ok': currentOrder.PaymentMethod == 'BudgetAccount' }" ng-click="setPaymentMethod('BudgetAccount')">
-        <button class="btn btn-default">Spending Account:</button><br />
+<div class="animated fadeInDown">
+    <h5>Payment Method</h5>
+    <span class="btn-group">
+        <button class="btn btn-default" ng-show="user.Permissions.contains('PayByPO')" ng-click="setPaymentMethod('PurchaseOrder'); showCreditCard = hidden; showSpendingAccount = hidden">
+            <span class="icon"><i ng-class="{'icon-ok': currentOrder.PaymentMethod == 'PurchaseOrder' }"></i></span>
+            Purchase Order
+        </button>
+        <button class="btn btn-default" ng-show="user.Permissions.contains('SubmitForApproval')" ng-click="setPaymentMethod('Undetermined'); showCreditCard = hidden; showSpendingAccount = hidden">
+            <span class="icon"><i ng-class="{'icon-ok': currentOrder.PaymentMethod == 'Undetermined' }"></i></span>
+            Submit order for approval
+        </button>
+        <button class="btn btn-default" ng-click="setPaymentMethod('BudgetAccount'); showCreditCard = hidden; showSpendingAccount = !showSpendingAccount">
+            <span class="icon"><i ng-class="{'icon-ok': currentOrder.PaymentMethod == 'BudgetAccount' }"></i></span>
+            Spending Account
+        </button>
+        <button class="btn btn-default" ng-click="setPaymentMethod('CreditCard'); showCreditCard = !showCreditCard; showSpendingAccount = hidden">
+            <span class="icon"><i ng-class="{'icon-ok': currentOrder.PaymentMethod == 'CreditCard' }"></i></span>
+            Credit Card
+        </button>
+    </span>
+    <div ng-if="user.Permissions.contains('PayByBudgetAccount')"  ng-class="{ 'hidden': ! showSpendingAccount }">
+      <h5>Spending Account</h5>
         <select ng-options="account.ID as (account.Label + ' - Balance: ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{AccountType.PurchaseCredit:true}"
                 ng-model="currentOrder.BudgetAccountID"
                 ng-change="setPaymentMethod('BudgetAccount')"
@@ -15,8 +29,8 @@
         <span class="alert-error" ng-show="cart.$error.paymentMethod">The order total is not covered by the selected account.</span>
     </div>
     <hr />
-    <div ng-if="user.Permissions.contains('PayByCreditCard')" ng-class="{'ok': currentOrder.PaymentMethod == 'CreditCard' }" ng-click="setPaymentMethod('CreditCard')">
-        <button class="btn btn-default">Credit Card:</button><br />
+    <div ng-if="user.Permissions.contains('PayByCreditCard')" ng-class="{ 'hidden': ! showCreditCard }">
+     <h5>Credit Card</h5>
         <select ng-disabled="currentOrder.PaymentMethod != 'CreditCard'" ng-model="currentOrder.CreditCard.Type" ng-options="key as value for (key,value) in user.AvailableCreditCards" /><br />
         <input ng-disabled="currentOrder.PaymentMethod != 'CreditCard'" ng-model="currentOrder.CreditCard.CardholderName" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" placeholder="Cardholder Name" /><br />
         <input ng-disabled="currentOrder.PaymentMethod != 'CreditCard'" ng-model="currentOrder.CreditCard.AccountNumber" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" autocomplete="false" placeholder="Account Number" /><br />

@@ -495,7 +495,8 @@ li.cart span.badge {position: absolute; top: 10px; left: 10px; z-index: 99999999
 .order-types div {min-height: 225px;}
 .check-out-view h4 {border-bottom: 1px solid #4d4d4d;}
 .check-out-view-order, .check-out-view-shipping, .check-out-view-billing {padding: 25px 15px;}
-.btn.ok {background-color:green;}
+.check-out-view-order ul {list-style-type: none; margin: 0; padding: 0;}
+.check-out-view .ng-leave {display: none;}
 input.ng-invalid, input.ng-invalid:invalid {
     background: red;
     /* style the required !required angular form inputs */
@@ -524,6 +525,8 @@ input:focus, textarea:focus {
 .form label {
     margin-left: 10px;
 }
+
+
 
 textarea { resize:vertical; width: 100%;    line-height: 150%; }
 /* ----------------------------------------------------------------------------------------------- */

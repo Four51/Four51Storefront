@@ -26,25 +26,32 @@
             </div>
 
             <div ng-show="currentOrder && currentOrder.isEditable" ng-switch="getCurrentStep()">
-
-                <h4 ng-show="currentOrder">Order</h4>
-                <div  ng-switch-when="one" ng-show="currentOrder" class="check-out-view-order">
-
-                    <p ng-if="user.Permissions.contains('EditPOID')" ng-invalid>
-                        <label>{{user.Company.SiteText.OrderID || 'Order ID'}}:</label><br />
-                        <input ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" placeholder="required" required ui-mask="{{user.Company.POIDMask}}" />
-                        <span ng-if="user.Permissions.contains('AllowAutoGenPOID')">
-                            <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? 'auto' : ''" ng-model='currentOrder.autoID' /> Use system-generated ID
-                        </span>
-                    </p>
-                    <label>Comments:</label><textarea rows="5" cols="100" ng-model="currentOrder.Comments" /></label><br/>
+                <h4><span class="icon"><i ng-class="{'icon-ok': !cart.$invalid }"></i></span> Order</h4>
+                <div ng-switch-when="one" ng-show="currentOrder" class="check-out-view-order animated fadeInDown">
+                    <div ng-if="user.Permissions.contains('EditPOID')" ng-invalid>
+                        <label>{{user.Company.SiteText.OrderID || 'Order ID'}}:</label>
+                        <br />
+                        <div class="input-group">
+                             <span ng-if="user.Permissions.contains('AllowAutoGenPOID')" class="input-group-addon">
+                                <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? 'auto' : ''; showOrderID = ! showOrderID" ng-model='currentOrder.autoID' />
+                                 Use system-generated ID
+                             </span>
+                             <input ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" placeholder="Order ID" required ui-mask="{{user.Company.POIDMask}}" />
+                        </div>
+                    </div>
+                    <hr />
+                    <label>Comments:</label>
+                    <br />
+                    <textarea rows="5" cols="100" ng-model="currentOrder.Comments" />
                     <label ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')">
+                        <hr />
                         <costcenter
                                 user="user"
                                 order="currentOrder"
                                 ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')" />
                     </label>
-                    <ul class="unstyled" ng-if="user.OrderFields">
+                    <ul ng-if="user.OrderFields">
+                        <hr />
                         <li ng-repeat="field in currentOrder.OrderFields">
                             <customtextfield customfield="field" ng-if="field.Lines" />
                             <customselectionfield customfield="field" ng-if="field.Options && !field.IsRadioButtons" />
@@ -52,41 +59,43 @@
                         </li>
                     </ul>
                     <div class="modal-footer">
-                    <a class="btn btn-primary" ng-click="handleNext(dismiss)">{{getNextLabel()}}</a>
-                        </div>
+                        <a class="btn btn-primary" ng-click="handleNext(dismiss)">{{getNextLabel()}}</a>
+                    </div>
                 </div>
 
-                <h4>Shipping</h4>
-                <div ng-switch-when="two" ng-show="currentOrder"  class="check-out-view-shipping"  >
-                    <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
-                            ng-model="currentOrder.ShipAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address"  tabindex="-1">Add New Address</a>
+                <h4><span class="icon"><i ng-class="{'icon-ok': !cart.$invalid }"></i></span> Shipping</h4>
+                <div ng-switch-when="two" ng-show="currentOrder"  class="check-out-view-shipping animated fadeInDown"  >
+                   <h5>Shipping Address</h5>
+                    <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}" ng-model="currentOrder.ShipAddressID" required />
+                    <a class="btn btn-mini btn-action" ng-href="#/address"  tabindex="-1">Add New Address</a>
                     <shipperselector />
                     <div class="modal-footer">
-                    <a class="btn" ng-click="handlePrevious()" ng-show="!isFirstStep()">Back</a>
-                    <a class="btn btn-primary" ng-click="handleNext(dismiss)">{{getNextLabel()}}</a>
-                        </div>
+                        <a class="btn" ng-click="handlePrevious()" ng-show="!isFirstStep()">Back</a>
+                        <a class="btn btn-primary" ng-click="handleNext(dismiss)">{{getNextLabel()}}</a>
+                    </div>
                 </div>
 
-                <h4>Billing</h4>
-                <div ng-switch-when="three" ng-show="currentOrder" class="check-out-view-billing"  >
-                    <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}"
-                            ng-model="currentOrder.BillAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address" tabindex="-1">Add New Address</a>
+                <h4><span class="icon"><i ng-class="{'icon-ok': !cart.$invalid }"></i></span> Billing</h4>
+                <div ng-switch-when="three" ng-show="currentOrder" class="check-out-view-billing animated fadeInDown">
+                    <h5>Billing Address</h5>
+                    <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required />
+                    <a class="btn btn-mini btn-action" ng-href="#/address" tabindex="-1">Add New Address</a>
                     <paymentselector />
-
-
-                    <div ng-show="currentOrder.Approvals" class="check-out-approvals"  >
+                     <div ng-show="currentOrder.Approvals" class="check-out-approvals"  >
                         <approvalrulelist order="currentOrder" />
                     </div>
-
-
-                    <div ng-show="user.Permissions.contains('SendOrderNotificationToOthers')"  class="check-out-send" >
-                        Email Order Details to: <input ng-disabled="cart.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
+                    <div ng-show="user.Permissions.contains('SendOrderNotificationToOthers')">
+                       <div ng-show="!cart.$invalid">
+                            <h5>Email Notification</h5>
+                            <input ng-disabled="cart.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
+                       </div>
                     </div>
                     <div class="modal-footer">
-                    <a class="btn btn-primary" ng-click="handlePrevious()" ng-show="!isFirstStep()">Back</a>
-                        </div>
+                        <a class="btn btn-primary" ng-click="handlePrevious()" ng-show="!isFirstStep()">Back</a>
+                    </div>
                 </div>
-                 <div class="check-out-view-btn-group" ng-if="currentOrder">
+
+                <div class="check-out-view-btn-group" ng-if="currentOrder">
                     <span class="btn-group">
                         <button class="btn btn-default cart-view-btn-save" ng-click="saveChanges()">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
                         <button class="btn btn-default cart-view-btn-cancel" ng-click="cancelOrder()">Cancel Order</button>
@@ -97,7 +106,7 @@
         </div>
 
         <div class="col-md-3 col-md-offset-1 well check-out-view-summary" style="border:1px solid #d6d6d6;">
-            <h4>Order Summary</h4>
+            <h4>checkout Summary</h4>
             <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
                 <p>Items: {{currentOrder.LineItems.length}}</p>
                 <p>Subtotal: {{currentOrder.Subtotal | currency}}</p>
@@ -109,7 +118,7 @@
             </div>
             <div style="padding: 25px; border-top: 1px solid #d6d6d6;">
                 <div class="alert alert-warning" ng-show="cart.$invalid">Order is missing required fields for submission.</div>
-                <button ng-hide="cart.$invalid" class="btn btn-primary" ng-if="currentOrder" ng-click="submitOrder()" ng-disabled="cart.$invalid">Submit Order</button>
+                <button class="btn btn-primary" ng-if="currentOrder" ng-click="submitOrder()" ng-disabled="cart.$invalid">Submit Order</button>
             </div>
         </div>
     </form>
