@@ -38,6 +38,9 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 						$scope.shippers.push(s);
 				})
 			}
+			var currentShipper = $451.filter($scope.shippers, {'Property': 'Name', 'Value': $scope.currentOrder.LineItems[0].ShipperName || 'none' });
+			if (currentShipper.length == 0)
+				$scope.currentOrder.LineItems[0].ShipperName = null;
 		});
 	}
 
@@ -52,10 +55,15 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		$scope.currentOrder.ShipAddressID = null;
 		getShippers();
 	}
+
+	$scope.shipperChange = function(shipper) {
+		$scope.currentOrder.LineItems[0].ShipperName = shipper.Name;
+	}
+
 	getShippers();
 
     $scope.$on('event:paymentMethodChange', function(event, method) {
-        $scope.cart.$setValidity('paymentMethod', validatePaymentMethod(method));
+        $scope.cart_billing.$setValidity('paymentMethod', validatePaymentMethod(method));
     });
 
     function validatePaymentMethod(method) {
