@@ -52,10 +52,34 @@
             </div>
 
             <div class="check-out-shipping" ng-if="currentOrder">
-                <h4>Shipping <span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
-                <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
-                        ng-model="currentOrder.ShipAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address"  tabindex="-1">Add New Address</a>
-                <shipperselector />
+                <h4>Shipping {{currentOrder.hasMultipleAddresses()}}<span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
+                <a class="btn btn-mini btn-action" ng-href="#/address" tabindex="-1">Add New Address</a>
+                <input ng-click="shipToMultipleAddresses = !shipToMultipleAddresses" type="button" class="btn btn-xs btn-warning" value="Multiple Addresses"
+                       ng-show="user.Permissions.contains('ShipToMultipleAddresses')">
+                <div ng-show="!shipToMultipleAddresses">
+                    <select ng-change="setShipAddressAtOrderLevel()"
+                            ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
+                            ng-model="currentOrder.ShipAddressID" ng-required="!shipToMultipleAddresses" />
+                </div>
+                <div ng-show="shipToMultipleAddresses">
+                    <ul>
+                        <li ng-repeat="item in currentOrder.LineItems">
+                            {{item.ProductIDText}} |
+                            {{item.Quantity}} |
+                            {{item.DateNeeded | date:'MM/dd/yyyy' }} | {{item.ShipAddressID}}
+                            <select ng-change="setShipAddressAtLineItemLevel()"
+                                    ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
+                                    ng-model="item.ShipAddressID" ng-required="shipToMultipleAddresses" />
+                        </li>
+                    </ul>
+                </div>
+                <ul ng-if="user.ShipMethod.ShipperSelectionType == 'UserDropDown'">
+                    <li ng-repeat="shipper in shippers">
+                        <span ng-class="{'icon-ok': currentOrder.LineItems[0].ShipperName == shipper.Name }" ng-click="currentOrder.LineItems[0].ShipperName = shipper.Name">{{shipper.Name}}</span>
+                    </li>
+                </ul>
+                <input type='text' ng-required="shippers.length > 0" ng-model='currentOrder.LineItems[0].ShipperName' ng-hide="true" />
+                <input ng-if="user.ShipMethod.AskForAccountNumber" placeholder="Shipping Account Number" type="text" ng-model="currentOrder.LineItems[0].ShipAccount" />
             </div>
 
             <div class="check-out-billing" ng-if="currentOrder" >

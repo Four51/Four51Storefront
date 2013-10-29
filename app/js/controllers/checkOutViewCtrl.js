@@ -1,25 +1,58 @@
-four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList) {
-    AddressList.query(function(list) {
+four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList, Shipper) {
+	AddressList.query(function(list) {
         $scope.addresses = list;
     });
 
     $scope.$on('event:shipperChange', function(event,shipper) {
-        $scope.currentOrder.Shipper = shipper;
-        angular.forEach($scope.currentOrder.LineItems, function(li) {
-            li.Shipper = shipper;
-            li.ShipperName = shipper.Name;
-        });
+	    if (!hasMultipleAddresses()) {
+		    $scope.currentOrder.Shipper = shipper;
+		    angular.forEach($scope.currentOrder.LineItems, function(li) {
+			    li.Shipper = shipper;
+			    li.ShipperName = shipper.Name;
+		    });
+	    }
+
         Order.save($scope.currentOrder, function(order) {
             $scope.currentOrder = order;
         });
     });
 
-    $scope.$watch('currentOrder.ShipAddressID', function() {
-	    if (!$scope.currentOrder) return;
-        angular.forEach($scope.currentOrder.LineItems, function(li) {
-            li.ShipAddressID = $scope.currentOrder.ShipAddressID;
-        });
-    });
+	function hasMultipleAddresses() {
+		var current = $scope.currentOrder.LineItems[0].ShipAddressID;
+		var mismatch = false;
+		angular.forEach($scope.currentOrder.LineItems, function(li) {
+			mismatch = !mismatch || (li.ShipAddressID != current);
+			current = li.ShipAddressID;
+		});
+		return mismatch;
+	}
+
+	function getShippers() {
+		Shipper.query($scope.currentOrder, function(shippers) {
+			if (!hasMultipleAddresses())
+				$scope.shippers =  shippers;
+			else {
+				$scope.shippers = [];
+				angular.forEach(shippers, function(s) {
+					if (s.ShipperRateType == 'Custom' || s.ShipperRateType == 'None')
+						$scope.shippers.push(s);
+				})
+			}
+		});
+	}
+
+	$scope.setShipAddressAtOrderLevel = function() {
+		angular.forEach($scope.currentOrder.LineItems, function(li) {
+			li.ShipAddressID = $scope.currentOrder.ShipAddressID;
+		});
+		getShippers();
+	}
+
+	$scope.setShipAddressAtLineItemLevel = function() {
+		$scope.currentOrder.ShipAddressID = null;
+		getShippers();
+	}
+	getShippers();
 
     $scope.$on('event:paymentMethodChange', function(event, method) {
         $scope.cart.$setValidity('paymentMethod', validatePaymentMethod(method));
@@ -66,6 +99,14 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
         });
     }
 
+	function orderShipsToMultiple() {
+		if (!$scope.user.Permissions.contains('ShipToMultipleAddresses')) return false;
+		if ($scope.currentOrder.LineItems.length < 2) return false;
+		angular.forEach($scope.currentOrder.LineItems, function(li) {
+
+		});
+	}
+
     $scope.continueShopping = function() {
         $location.path('catalog');
     };
@@ -89,5 +130,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
         FavoriteOrder.save($scope.currentOrder);
     };
 
-    //$scope.$on('api:orderGetComplete', init);
+	$scope.multiple = $scope.currentOrder.hasMultipleAddresses;
+
+	//$scope.$on('api:orderGetComplete', init);
 });
