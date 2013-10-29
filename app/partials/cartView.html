@@ -18,6 +18,7 @@
                         <a ng-href="#.#">{{item.ProductIDText}}</a>
                         <!---TODO needs url --->
                     </h5>
+
                     <div class="col-md-4 col-sm-4 col-xs-12 cart-view-line-items-product">
                         <p>
                             {{item.Product.Name}}
@@ -27,8 +28,9 @@
                         </ul>
                         <div class="row">
                             <div class="col-xs-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
-                                <input placeholder="Delivery Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
-                                <input type="button" class="btn btn-xs btn-info" value="copy to all" ng-click="copyAddressToAll(currentOrder)" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" />
+                                <input placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
+                                <hr />
+                                <button type="button" class="btn btn-info" value="copy to all" ng-click="copyAddressToAll(currentOrder)" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" >copy date to all items</button>
                             </div>
                             <div class="col-xs-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
                                 <costcenter user="user" lineitem="item" />
@@ -51,7 +53,7 @@
                 </div>
                 <div class="cart-view-line-items-btn-group">
                     <span class="btn-group">
-                        <button class="btn btn-default  cart-view-btn-save" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
+                        <button ng-hide="cart.$invalid" class="btn btn-default  cart-view-btn-save" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
                         <button class="btn btn-default  cart-view-btn-cancel" ng-click="cancelOrder()">Cancel Order</button>
                     </span>
                     <button class="btn btn-default cart-view-btn-continue" ng-click="continueShopping()" style="float: right;">Continue Shopping</button>
@@ -64,6 +66,7 @@
                     <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
                 </div>
                 <div style="padding: 25px; border-top: 1px solid #d6d6d6;">
+                    <div class="alert alert-warning" ng-show="cart.$invalid">Cart is missing required fields for checkout.</div>
                     <button class="btn btn-primary" ng-click="checkOut()" ng-disabled="cart.$invalid">{{user.Company.SiteText.Checkout || 'Check Out' }}</button>
                 </div>
             </div>
