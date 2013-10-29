@@ -1,101 +1,113 @@
 <section class="container check-out-view">
     <form name="cart">
-        <!--- Removing this as cart button does not appear unless there are existing items in cart to check out. No need for an empty message.
+        <!--- No need for an empty message anymore. Removing this as cart button does not appear unless there are existing items in cart to check out.
         <div ng-if="!currentOrder">
             <span>Your cart is currently empty. <a ng-href="#/catalog">Continue Shopping</a></span>
         </div>
         --->
-<div class="col-md-8 well check-out-view-types">
-        <div class="OrderHistory" ng-show="currentOrder && !currentOrder.isEditable">
-            <div>Thank you. Your order has been submitted.</div>
-            <!-- currently a duplicate of the orderHistoryView -->
-            <orderhistoryheader order="currentOrder"></orderhistoryheader>
-            <lineitemhistorygrid order="currentOrder"></lineitemhistorygrid>
-            <hr />
-            <orderhistoryfooter order="currentOrder"></orderhistoryfooter>
-
-            <div>
-                <input type="button" class="btn btn-small btn-info" value="Repeat Order" />
-            </div>
-            <br />
-            <div>
+        <div class="col-md-8 well check-out-view-types">
+            <div class="OrderHistory" ng-show="currentOrder && !currentOrder.isEditable">
+                <div>Thank you. Your order has been submitted.</div>
+                <!-- currently a duplicate of the orderHistoryView -->
+                <orderhistoryheader order="currentOrder"></orderhistoryheader>
+                <lineitemhistorygrid order="currentOrder"></lineitemhistorygrid>
+                <hr />
+                <orderhistoryfooter order="currentOrder"></orderhistoryfooter>
                 <div>
-                    <input type="text" ng-model="currentOrder.FavoriteName" placeholder="Favorite Name" />
-                    <input ng-click="saveFavorite()" type="button" class="btn btn-small btn-primary" value="Save as Favorite" />
+                    <input type="button" class="btn btn-small btn-info" value="Repeat Order" />
+                </div>
+                <br />
+                <div>
+                    <div>
+                        <input type="text" ng-model="currentOrder.FavoriteName" placeholder="Favorite Name" />
+                        <input ng-click="saveFavorite()" type="button" class="btn btn-small btn-primary" value="Save as Favorite" />
+                    </div>
+                </div>
+            </div>
+            <!--- TODO H4 icon-ok should only display when fields in the aligned section are valid --->
+            <div ng-show="currentOrder && currentOrder.isEditable" ng-switch="getCurrentStep()">
+                <h4><span class="icon"><i ng-class="{'icon-ok': !cart.$invalid }"></i></span> Order</h4>
+                <div ng-switch-when="one" ng-show="currentOrder" class="check-out-view-order animated fadeInDown">
+                    <div ng-if="user.Permissions.contains('EditPOID')" ng-invalid>
+                        <label>{{user.Company.SiteText.OrderID || 'Order ID'}}:</label>
+                        <br />
+                        <div class="input-group">
+                             <span ng-if="user.Permissions.contains('AllowAutoGenPOID')" class="input-group-addon">
+                                <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? 'auto' : ''; showOrderID = ! showOrderID" ng-model='currentOrder.autoID' />
+                                 Use system-generated ID
+                             </span>
+                             <input ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" placeholder="Order ID" required ui-mask="{{user.Company.POIDMask}}" />
+                        </div>
+                    </div>
+                    <hr />
+                    <label>Comments:</label>
+                    <br />
+                    <textarea rows="5" cols="100" ng-model="currentOrder.Comments" />
+                    <label ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')">
+                        <hr />
+                        <costcenter
+                                user="user"
+                                order="currentOrder"
+                                ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')" />
+                    </label>
+                    <ul ng-if="user.OrderFields">
+                        <hr />
+                        <li ng-repeat="field in currentOrder.OrderFields">
+                            <customtextfield customfield="field" ng-if="field.Lines" />
+                            <customselectionfield customfield="field" ng-if="field.Options && !field.IsRadioButtons" />
+                            <customradiobuttonfield customfield="field" ng-if="field.Options && field.IsRadioButtons" />
+                        </li>
+                    </ul>
+                    <div class="modal-footer">
+                        <!--- TODO back/next buttons should only be clickable when fields in the aligned section are valid --->
+                        <a class="btn btn-primary" ng-disabled="cart.$invalid" ng-click="handleNext(dismiss)">{{getNextLabel()}}</a>
+                    </div>
+                </div>
+
+                <h4><span class="icon"><i ng-class="{'icon-ok': !cart.$invalid }"></i></span> Shipping</h4>
+                <div ng-switch-when="two" ng-show="currentOrder"  class="check-out-view-shipping animated fadeInDown"  >
+                   <h5>Shipping Address</h5>
+                    <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}" ng-model="currentOrder.ShipAddressID" required />
+                    <a class="btn btn-mini btn-action" ng-href="#/address"  tabindex="-1">Add New Address</a>
+                    <shipperselector />
+                    <div class="modal-footer">
+                        <a class="btn" ng-click="handlePrevious()" ng-show="!isFirstStep()">Back</a>
+                        <a class="btn btn-primary" ng-disabled="cart.$invalid" ng-click="handleNext(dismiss)">{{getNextLabel()}}</a>
+                    </div>
+                </div>
+
+                <h4><span class="icon"><i ng-class="{'icon-ok': !cart.$invalid }"></i></span> Billing</h4>
+                <div ng-switch-when="three" ng-show="currentOrder" class="check-out-view-billing animated fadeInDown">
+                    <h5>Billing Address</h5>
+                    <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required />
+                    <a class="btn btn-mini btn-action" ng-href="#/address" tabindex="-1">Add New Address</a>
+                    <paymentselector />
+                     <div ng-show="currentOrder.Approvals" class="check-out-approvals"  >
+                        <approvalrulelist order="currentOrder" />
+                    </div>
+                    <div ng-show="user.Permissions.contains('SendOrderNotificationToOthers')">
+                       <div ng-show="!cart.$invalid">
+                            <h5>Email Notification</h5>
+                            <input ng-disabled="cart.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
+                       </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-primary" ng-click="handlePrevious()" ng-show="!isFirstStep()">Back</a>
+                    </div>
+                </div>
+
+                <div class="check-out-view-btn-group" ng-if="currentOrder">
+                    <span class="btn-group">
+                        <button class="btn btn-default cart-view-btn-save" ng-click="saveChanges()">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
+                        <button class="btn btn-default cart-view-btn-cancel" ng-click="cancelOrder()">Cancel Order</button>
+                    </span>
+                    <button class="btn btn-default cart-view-btn-continue" ng-click="continueShopping()" style="float: right;">Continue Shopping</button>
                 </div>
             </div>
         </div>
 
-        <div ng-show="currentOrder && currentOrder.isEditable">
-            <div class="check-out-Order"  ng-if="currentOrder" class="OrderDetailTable">
-                <h4>Order <span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
-                <p ng-if="user.Permissions.contains('EditPOID')">
-                    <label>{{user.Company.SiteText.OrderID || 'Order ID'}}:</label><br />
-                    <input ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" required ui-mask="{{user.Company.POIDMask}}" />
-                    <span ng-if="user.Permissions.contains('AllowAutoGenPOID')">
-                        <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? 'auto' : ''" ng-model='currentOrder.autoID' /> Use system-generated ID
-                    </span>
-                </p>
-                <label>Comments:</label><textarea rows="5" cols="100" ng-model="currentOrder.Comments" /></label><br/>
-                <label ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')">
-                    <costcenter
-                            user="user"
-                            order="currentOrder"
-                            ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')" />
-                </label>
-                <ul class="unstyled" ng-if="user.OrderFields">
-                    <li ng-repeat="field in currentOrder.OrderFields">
-                        <customtextfield customfield="field" ng-if="field.ControlType == 'Text'" />
-                        <customselectionfield customfield="field" ng-if="field.ControlType == 'Selection'" />
-                    </li>
-                </ul>
-            </div>
-
-            <div class="check-out-shipping" ng-if="currentOrder">
-                <h4>Shipping <span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
-                <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
-                        ng-model="currentOrder.ShipAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address"  tabindex="-1">Add New Address</a>
-                <shipperselector />
-            </div>
-
-            <div class="check-out-billing" ng-if="currentOrder" >
-                <h4>Billing <span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
-                <select ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}"
-                        ng-model="currentOrder.BillAddressID" required /><a class="btn btn-mini btn-action" ng-href="#/address" tabindex="-1">Add New Address</a>
-                <paymentselector />
-            </div>
-
-            <div ng-if="currentOrder.Approvals" class="span9 well Approvals">
-                <approvalrulelist order="currentOrder" />
-            </div>
-
-            <div class="check-out-send" ng-if="user.Permissions.contains('SendOrderNotificationToOthers')">
-                <h4>Send Email<span class="icon" style="float: right;"><i class="icon-caret-down"></i></span></h4>
-                Email Order Details to: <input ng-disabled="cart.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
-            </div>
-
-            <shortcartview></shortcartview>
-
-            <div class="check-out-view-btn-group" ng-if="currentOrder">
-
-                <span class="btn-group">
-                    <button class="btn btn-default cart-view-btn-save" ng-click="saveChanges()">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
-                    <button class="btn btn-default cart-view-btn-cancel" ng-click="cancelOrder()">Cancel Order</button>
-                </span>
-                <button class="btn btn-default cart-view-btn-continue" ng-click="continueShopping()" style="float: right;">Continue Shopping</button>
-            </div>
-            <div class="check-out-view-btn-group">
-
-                <button class="btn btn-primary" ng-if="currentOrder" ng-click="submitOrder()" ng-disabled="cart.$invalid">Submit</button>
-            </div>
-
-
-        </div>
-
-</div>
-
         <div class="col-md-3 col-md-offset-1 well check-out-view-summary" style="border:1px solid #d6d6d6;">
-            <h4 style="background-color:#2C3E50; color:#fff; padding: 10px 25px; margin: 0;text-align: center;">Order Summary</h4>
+            <h4>checkout Summary</h4>
             <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
                 <p>Items: {{currentOrder.LineItems.length}}</p>
                 <p>Subtotal: {{currentOrder.Subtotal | currency}}</p>
@@ -104,6 +116,11 @@
                 <hr/>
                 <p>Total: {{currentOrder.Total | currency}}</p>
                 <p ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
+            </div>
+            <div style="padding: 25px; border-top: 1px solid #d6d6d6;">
+                <div class="alert alert-warning" ng-show="cart.$invalid">Order is missing required fields for submission.</div>
+                <!--- TODO submit button should only become valid when entire form is ready --->
+                <button class="btn btn-primary" ng-if="currentOrder" ng-click="submitOrder()" ng-disabled="cart.$invalid">Submit Order</button>
             </div>
         </div>
     </form>

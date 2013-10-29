@@ -493,9 +493,42 @@ li.cart span.badge {position: absolute; top: 10px; left: 10px; z-index: 99999999
 .cart-view-variable {padding: 0;}
 .order-types ul {list-style-type: none;}
 .order-types div {min-height: 225px;}
+.check-out-view h4 {border-bottom: 1px solid #4d4d4d;}
+.check-out-view-order, .check-out-view-shipping, .check-out-view-billing {padding: 25px 15px;}
+.check-out-view-order ul {list-style-type: none; margin: 0; padding: 0;}
+.check-out-view .ng-leave {display: none;}
+input.ng-invalid, input.ng-invalid:invalid {
+    background: red;
+    /* style the required !required angular form inputs */
+}
 
 
-textarea { resize:vertical; width: 100%; }
+input:not([type=submit]), textarea, select {
+    padding: 9px;
+    border: solid 1px #E5E5E5;
+    outline: 0;
+    background: #FFFFFF url('bg_form.png') left top repeat-x;
+    background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+    background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+    box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+    -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+    -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+}
+
+
+input:hover, textarea:hover,
+input:focus, textarea:focus {
+    border-color: #C9C9C9;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+}
+
+.form label {
+    margin-left: 10px;
+}
+
+
+
+textarea { resize:vertical; width: 100%;    line-height: 150%; }
 /* ----------------------------------------------------------------------------------------------- */
 /* bootstrap tweaks */
 /* ----------------------------------------------------------------------------------------------- */
