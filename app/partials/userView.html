@@ -19,8 +19,7 @@
             <ul class="unstyled" ng-if="user.CustomFields">
                 <li ng-repeat="field in user.CustomFields">
                     <customtextfield customfield="field" ng-if="field.ControlType == 'Text' && field.DisplayToUser" />
-                    <customselectionfield customfield="field" ng-if="field.ControlType == 'Selection' && !field.IsRadioButtons && field.DisplayToUser" />
-                    <customradiobuttonfield customfield="field" ng-if="field.ControlType == 'Selection' && field.IsRadioButtons && field.DisplayToUser" />
+                    <customselectionfield customfield="field" ng-if="field.ControlType == 'Selection' && field.DisplayToUser" />
                     <customfilefield customfield="field" ng-if="field.ControlType == 'File' && field.DisplayToUser"></customfilefield>
                 </li>
             </ul>
