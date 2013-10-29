@@ -69,7 +69,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
                 break;
             case 'BudgetAccount':
                 valid = $scope.user.Permissions.contains('PayByBudgetAccount');
-                var account;
+                var account = null;
                 angular.forEach($scope.SpendingAccounts, function(a) {
                     if (a.ID == $scope.currentOrder.BudgetAccountID)
                         account = a;
@@ -99,14 +99,6 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
         });
     }
 
-	function orderShipsToMultiple() {
-		if (!$scope.user.Permissions.contains('ShipToMultipleAddresses')) return false;
-		if ($scope.currentOrder.LineItems.length < 2) return false;
-		angular.forEach($scope.currentOrder.LineItems, function(li) {
-
-		});
-	}
-
     $scope.continueShopping = function() {
         $location.path('catalog');
     };
@@ -130,47 +122,5 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
         FavoriteOrder.save($scope.currentOrder);
     };
 
-    //step through checkout sections
-    //http://onehungrymind.com/ng-animate-first-look-with-angularjs-wizard/
-    $scope.steps = ['one', 'two', 'three'];
-    $scope.step = 0;
-
-    $scope.isCurrentStep = function(step) {
-        return $scope.step === step;
-    };
-
-    $scope.setCurrentStep = function(step) {
-        $scope.step = step;
-    };
-
-    $scope.getCurrentStep = function() {
-        return $scope.steps[$scope.step];
-    };
-    $scope.isFirstStep = function() {
-        return $scope.step === 0;
-    };
-
-    $scope.isLastStep = function() {
-        return $scope.step === ($scope.steps.length - 1);
-    };
-
-    $scope.getNextLabel = function() {
-        return ($scope.isLastStep()) ? '' : 'Next';
-    };
-
-    $scope.handlePrevious = function() {
-        $scope.step -= ($scope.isFirstStep()) ? 0 : 1;
-    };
-
-    $scope.handleNext = function(dismiss) {
-        if($scope.isLastStep()) {
-            dismiss();
-        } else {
-            $scope.step += 1;
-
-        }
-    };
-
-
-    //$scope.$on('api:orderGetComplete', init);
+    $scope.checkOutSection = 'order';
 });
