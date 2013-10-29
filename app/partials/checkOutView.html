@@ -24,7 +24,7 @@
                     </div>
                 </div>
             </div>
-
+            <!--- TODO H4 icon-ok should only display when fields in the aligned section are valid --->
             <div ng-show="currentOrder && currentOrder.isEditable" ng-switch="getCurrentStep()">
                 <h4><span class="icon"><i ng-class="{'icon-ok': !cart.$invalid }"></i></span> Order</h4>
                 <div ng-switch-when="one" ng-show="currentOrder" class="check-out-view-order animated fadeInDown">
@@ -59,7 +59,8 @@
                         </li>
                     </ul>
                     <div class="modal-footer">
-                        <a class="btn btn-primary" ng-click="handleNext(dismiss)">{{getNextLabel()}}</a>
+                        <!--- TODO back/next buttons should only be clickable when fields in the aligned section are valid --->
+                        <a class="btn btn-primary" ng-disabled="cart.$invalid" ng-click="handleNext(dismiss)">{{getNextLabel()}}</a>
                     </div>
                 </div>
 
@@ -71,7 +72,7 @@
                     <shipperselector />
                     <div class="modal-footer">
                         <a class="btn" ng-click="handlePrevious()" ng-show="!isFirstStep()">Back</a>
-                        <a class="btn btn-primary" ng-click="handleNext(dismiss)">{{getNextLabel()}}</a>
+                        <a class="btn btn-primary" ng-disabled="cart.$invalid" ng-click="handleNext(dismiss)">{{getNextLabel()}}</a>
                     </div>
                 </div>
 
@@ -118,6 +119,7 @@
             </div>
             <div style="padding: 25px; border-top: 1px solid #d6d6d6;">
                 <div class="alert alert-warning" ng-show="cart.$invalid">Order is missing required fields for submission.</div>
+                <!--- TODO submit button should only become valid when entire form is ready --->
                 <button class="btn btn-primary" ng-if="currentOrder" ng-click="submitOrder()" ng-disabled="cart.$invalid">Submit Order</button>
             </div>
         </div>
