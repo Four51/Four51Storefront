@@ -11,15 +11,13 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
     };
 
 	$scope.cancelOrder = function() {
-        Order.delete($scope.currentOrder, function() {
-			Order.delete($scope.currentOrder, function(){
-				$scope.currentOrder = null;
-				$scope.user.CurrentOrderID = null;
-				User.save($scope.user, function(){
-					$location.path('catalog');
-				});
+		Order.delete($scope.currentOrder, function(){
+			$scope.currentOrder = null;
+			$scope.user.CurrentOrderID = null;
+			User.save($scope.user, function(){
+				$location.path('catalog');
 			});
-        });
+		});
 	};
 
 	$scope.saveChanges = function() {
@@ -28,7 +26,7 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 		}else{
 			Order.save($scope.currentOrder, function(data) {
 				$scope.currentOrder = data;
-				OrderConfig.costcenter(data, $scope.user);
+				OrderConfig.costcenter(data, $scope.user).address(data, $scope.user);
 			});
 		}
 	};

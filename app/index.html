@@ -2,7 +2,7 @@
 <html lang="en" ng-app="451order">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>451order</title>
     <link rel="stylesheet" href="css/bootstrap/bootstrap-451.css">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
@@ -30,7 +30,6 @@
         <section class="container-content">
             <div ng-view />
         </section>
-
         <section ng-controller="ErrorCtrl">
             <ng-include src="template.url" />
         </section>
