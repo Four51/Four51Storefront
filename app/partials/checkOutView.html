@@ -24,7 +24,7 @@
     <div class="col-md-8 well check-out-view-types" ng-show="currentOrder && currentOrder.isEditable">
         <form name="cart_order">
             <h4 ng-click="checkOutSection = 'order'"><span class="icon"><i ng-class="{'icon-remove-sign': cart_order.$invalid, 'icon-ok': !cart_order.$invalid }"></i></span> Order</h4>
-            <div ng-show="checkOutSection == 'order'" ng-show="currentOrder" class="check-out-view-order animated fadeInDown">
+            <div ng-show="checkOutSection == 'order'" ng-show="currentOrder" class="check-out-view-order">
                 <div class="error_list">
                     <span class="alert-error" ng-show="cart_order.orderid.$invalid">Please enter a valid Order ID</span><br />
                 </div>
@@ -37,20 +37,8 @@
                             Use system-generated ID
                         </span>
                         <input name="orderid" ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" placeholder="Order ID" required ui-mask="{{user.Company.POIDMask}}" />
-            <!--- TODO H4 icon-ok should only display when fields in the aligned section are valid --->
-            <div ng-show="currentOrder && currentOrder.isEditable" ng-switch="getCurrentStep()">
-                <h4><span class="icon"><i ng-class="{'icon-ok': !cart.$invalid }"></i></span> Order</h4>
-                <div ng-switch-when="one" ng-show="currentOrder" class="check-out-view-order animated fadeInDown">
-                    <div ng-if="user.Permissions.contains('EditPOID')">
-                        <label>{{user.Company.SiteText.OrderID || 'Order ID'}}:</label>
-                        <br />
-                        <div class="input-group">
-                             <span ng-if="user.Permissions.contains('AllowAutoGenPOID')" class="input-group-addon">
-                                <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? 'auto' : ''; showOrderID = ! showOrderID" ng-model='currentOrder.autoID' />
-                                 Use system-generated ID
-                             </span>
-                             <input ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" placeholder="Order ID" required ui-mask="{{user.Company.POIDMask}}" />
-                        </div>
+
+
                     </div>
                 </div>
                 <hr />
@@ -76,7 +64,7 @@
 
         <form name="cart_shipping">
             <h4 ng-click="checkOutSection = 'shipping'"><span class="icon"><i ng-class="{'icon-remove-sign': cart_shipping.$invalid, 'icon-ok': !cart_shipping.$invalid }"></i></span> Shipping</h4>
-            <div ng-show="checkOutSection == 'shipping'" ng-show="currentOrder"  class="check-out-view-shipping animated fadeInDown"  >
+            <div ng-show="checkOutSection == 'shipping'" ng-show="currentOrder"  class="check-out-view-shipping"  >
                 <div class="error_list">
                     <p class="alert-error" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</p>
                     <p class="alert-error" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</p>
@@ -117,7 +105,7 @@
 
         <form name="cart_billing">
         <h4 ng-click="checkOutSection = 'billing'"><span class="icon"><i ng-class="{'icon-remove-sign': cart_billing.$invalid, 'icon-ok': !cart_billing.$invalid }"></i></span> Billing</h4>
-            <div ng-show="checkOutSection == 'billing'" ng-show="currentOrder" class="check-out-view-billing animated fadeInDown">
+            <div ng-show="checkOutSection == 'billing'" ng-show="currentOrder" class="check-out-view-billing">
                 <div class="error_list">
                     <p class="alert-error" ng-show="cart_billing.billingAddress.$invalid">Please select a billing address</p>
                     <p class="alert-error" ng-show="cart_billing.paymentMethod.$invalid">Please select a payment method</p>
