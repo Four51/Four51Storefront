@@ -28,7 +28,7 @@
             <div ng-show="currentOrder && currentOrder.isEditable" ng-switch="getCurrentStep()">
                 <h4><span class="icon"><i ng-class="{'icon-ok': !cart.$invalid }"></i></span> Order</h4>
                 <div ng-switch-when="one" ng-show="currentOrder" class="check-out-view-order animated fadeInDown">
-                    <div ng-if="user.Permissions.contains('EditPOID')" ng-invalid>
+                    <div ng-if="user.Permissions.contains('EditPOID')">
                         <label>{{user.Company.SiteText.OrderID || 'Order ID'}}:</label>
                         <br />
                         <div class="input-group">
@@ -53,9 +53,8 @@
                     <ul ng-if="user.OrderFields">
                         <hr />
                         <li ng-repeat="field in currentOrder.OrderFields">
-                            <customtextfield customfield="field" ng-if="field.Lines" />
-                            <customselectionfield customfield="field" ng-if="field.Options && !field.IsRadioButtons" />
-                            <customradiobuttonfield customfield="field" ng-if="field.Options && field.IsRadioButtons" />
+                            <customtextfield customfield="field" ng-if="field.ControlType == 'Text'" />
+                            <customselectionfield customfield="field" ng-if="field.ControlType == 'Selection'" />
                         </li>
                     </ul>
                     <div class="modal-footer">
