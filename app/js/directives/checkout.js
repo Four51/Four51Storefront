@@ -20,21 +20,3 @@ four51.app.directive('paymentselector', function() {
    }
    return obj;
 });
-
-four51.app.directive('shipperselector', function(Shipper) {
-    var obj = {
-        restrict: 'E',
-        templateUrl: 'partials/controls/shipperSelection.html',
-        controller: function($scope, $rootScope) {
-            $scope.setShipper = function(shipper) {
-                $rootScope.$broadcast('event:shipperChange', shipper);
-            }
-	        $scope.$watch('currentOrder.ShipAddressID', function() {
-		        Shipper.query($scope.currentOrder, function(shippers) {
-			        $scope.Shippers = shippers;
-		        });
-	        });
-        }
-    };
-    return obj;
-});
