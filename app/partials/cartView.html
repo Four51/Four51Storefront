@@ -14,12 +14,11 @@
                     {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
                 </h4>
                 <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
-                    <h5 class="col-md-2 col-sm-2 col-xs-12">
-                        <a ng-href="#.#">{{item.ProductIDText}}</a>
-                        <!---TODO needs url --->
-                    </h5>
-
-                    <div class="col-md-4 col-sm-4 col-xs-12 cart-view-line-items-product">
+                    <div class="col-md-6 col-sm-6 col-xs-12 cart-view-line-items-product">
+                        <h5>
+                            <a ng-href="#.#">{{item.ProductIDText}}</a>
+                            <!---TODO needs url --->
+                        </h5>
                         <p>
                             {{item.Product.Name}}
                         </p>
@@ -29,8 +28,7 @@
                         <div class="row">
                             <div class="col-xs-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
                                 <input placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
-                                <hr />
-                                <button type="button" class="btn btn-info" value="copy to all" ng-click="copyAddressToAll(currentOrder)" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" >copy date to all items</button>
+                                <button type="button" class="btn btn-info cart-view-btn-copy" value="copy to all" ng-click="copyAddressToAll(currentOrder)" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" ><span class="icon"><i class="icon-copy"></i></span></button>
                             </div>
                             <div class="col-xs-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
                                 <costcenter user="user" lineitem="item" />
@@ -48,7 +46,7 @@
                         {{item.LineTotal | currency}}
                     </div>
                     <div class="col-md-1 col-sm-1 col-xs-3">
-                        <span class="icon" style="text-align: center;cursor: pointer;"><i class="icon-remove-sign" ng-click="removeItem(item)"></i></span>
+                        <span class="icon" style="cursor: pointer;display: block;"><i class="icon-remove-sign" ng-click="removeItem(item)"></i></span>
                     </div>
                 </div>
                 <div class="cart-view-line-items-btn-group">
