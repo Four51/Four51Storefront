@@ -11,7 +11,7 @@ four51.app.controller('OrderSearchCtrl', function OrderSearchCtrl($scope, OrderS
     function _hasType(data, type) {
         var hasType = false;
         angular.forEach(data, function(o) {
-            if (hasType || o.Type == type)
+            if (hasType || o.Type == type && o.Count > 0)
                 hasType = true;
         });
         return hasType;
