@@ -35,6 +35,12 @@
         height: 100px;
     }
 */
+
+    /*-----ROB-------*/
+    .no-padding-sm-md-lg {padding:0;}
+    .order-history-view-save-favorite {float:left;}
+    .order-history-view-repeat {float:right;}
+    .order-history-view-repeat-btn {padding:6px 12px;}
 }
 
 
@@ -45,6 +51,14 @@
     .nav li span.hidden-sm {float:right;}
 
 
+
+    /*-----ROB--------*/
+    .order-history-view-save-favorite {float:left;}
+    .order-history-view-repeat {float:right;}
+    .no-padding-sm-md-lg {padding:0;}
+    .order-history-view-repeat-btn {padding:6px 12px;}
+
+
 }
 
 
@@ -52,7 +66,12 @@
 @media (min-width:768px) and (max-width: 1023px) {
 
 
+    /*-----ROB--------*/
+    .order-history-view-save-favorite {float:left;}
+    .order-history-view-repeat {float:right;}
+    .order-history-view-repeat-btn {padding:6px 12px;}
 
+    .no-padding-sm-md-lg {padding:0;}
 }
 
 
@@ -74,6 +93,9 @@
     .branding-view {text-align: center;}
     .branding-view-logo {float: none; margin: 0 auto; max-height: 75px; }
 
+    .order-history-view-repeat-btn{margin-top:20px;}
+    .order-history-view-save-favorite-input{width:49%;}
+    .order-history-view-save-favorite-btn{width:49%;}
 
 }
 
