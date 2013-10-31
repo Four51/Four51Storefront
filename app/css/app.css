@@ -538,7 +538,7 @@ li.cart span.badge {position: absolute; top: 10px; left: 10px; z-index: 99999999
 .branding-view-logo {max-height:130px; float: left;display: block;margin-right: 25px;}
 
 /* ----------------------------------------------------------------------------------------------- */
-/* bootstrap tweaks */
+/* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
 
 .navbar {
@@ -615,4 +615,21 @@ li.cart span.badge {position: absolute; top: 10px; left: 10px; z-index: 99999999
 .well {
     border: none;
     border-radius: 0;
+}
+
+.panel-primary {
+    border: none;
+}
+
+.panel-heading {
+    border-radius: 0;
+}
+
+.panel-primary .panel-title {
+    font-size: 1em;
+    letter-spacing: 0.18em;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    text-transform: uppercase;
 }
