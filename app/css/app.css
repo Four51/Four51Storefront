@@ -47,6 +47,41 @@ button::-moz-focus-inner {
     border: 0;
 }
 
+input.ng-invalid, input.ng-invalid:invalid {
+    background: red;
+    /* style the required !required angular form inputs */
+}
+
+
+input:not([type=submit]), textarea, select {
+    padding: 9px;
+    border: solid 1px #E5E5E5;
+    outline: 0;
+    background: #FFFFFF url('bg_form.png') left top repeat-x;
+    background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+    background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+    box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+    -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+    -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+}
+
+
+input:hover, textarea:hover,
+input:focus, textarea:focus {
+    border-color: #C9C9C9;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+}
+
+label {
+    margin-left: 10px;
+}
+
+textarea {
+    resize:vertical;
+    width: 100%;
+    line-height: 150%;
+}
+
 .container-view {
     clear: both;
     overflow: hidden;
@@ -486,8 +521,11 @@ li.search-products span {
 .cart-view-line-items-btn-group, .check-out-view-btn-group {background: none repeat scroll 0 0 #F5F5F5;padding: 30px 15px; clear: both; overflow: hidden;}
 .cart-view-line-items-repeater {border-bottom: 1px solid #d6d6d6;clear: both; overflow: hidden;padding: 25px 0;}
 .cart-view-summary, .check-out-view-summary {padding: 0;text-align: center;}
-.cart-view .icon-remove-sign {color:#bfbfbf; display: block; padding: 15px;}
+.cart-view .icon-remove-sign {color:#bfbfbf; display: block; padding: 0 15px 25px;}
+.cart-view h5 {margin: 0; font-weight: bold;}
+.cart-view .row input[type="text"] {display: inline; float: left; width: 60%; font-size: 11px;}
 .cart-view-summary h5 {letter-spacing: 0.18em; text-transform: uppercase;font-size: 1em;  padding: 10px; text-align: left;margin: 0;}
+.cart-view-btn-copy {float: right;}
 li.cart span.badge {position: absolute; top: 10px; left: 10px; z-index: 999999999;background-color:#3D3D3D;padding: 4px 7px;}
 .badge {background-color:#3D3D3D;padding: 4px 7px;}
 .cart-view-variable {padding: 0;}
@@ -497,38 +535,8 @@ li.cart span.badge {position: absolute; top: 10px; left: 10px; z-index: 99999999
 .check-out-view-order, .check-out-view-shipping, .check-out-view-billing {padding: 25px 15px;}
 .check-out-view-order ul {list-style-type: none; margin: 0; padding: 0;}
 .check-out-view .ng-leave {display: none;}
-input.ng-invalid, input.ng-invalid:invalid {
-    background: red;
-    /* style the required !required angular form inputs */
-}
+.branding-view-logo {max-height:130px; float: left;display: block;margin-right: 25px;}
 
-
-input:not([type=submit]), textarea, select {
-    padding: 9px;
-    border: solid 1px #E5E5E5;
-    outline: 0;
-    background: #FFFFFF url('bg_form.png') left top repeat-x;
-    background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
-    background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
-    box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
-    -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
-    -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
-}
-
-
-input:hover, textarea:hover,
-input:focus, textarea:focus {
-    border-color: #C9C9C9;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
-}
-
-.form label {
-    margin-left: 10px;
-}
-
-
-
-textarea { resize:vertical; width: 100%;    line-height: 150%; }
 /* ----------------------------------------------------------------------------------------------- */
 /* bootstrap tweaks */
 /* ----------------------------------------------------------------------------------------------- */
@@ -602,7 +610,6 @@ textarea { resize:vertical; width: 100%;    line-height: 150%; }
 .form-control:focus {
     box-shadow: none;
 }
-
 
 
 .well {
