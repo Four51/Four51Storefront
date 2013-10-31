@@ -9,47 +9,49 @@
             <hr />
         </nav>
         <form name="cart">
-            <div class="col-md-8 well cart-view-line-items">
-                <h4>
-                    {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
-                </h4>
-                <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
-                    <div class="col-md-6 col-sm-6 col-xs-12 cart-view-line-items-product">
-                        <h5>
-                            <a ng-href="#.#">{{item.ProductIDText}}</a>
-                            <!---TODO needs url --->
-                        </h5>
-                        <p>
-                            {{item.Product.Name}}
-                        </p>
-                        <ul>
-                            <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">{{spec.Name}} : {{spec.Value}}</li>
-                        </ul>
-                        <div class="row">
-                            <div class="col-xs-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
-                                <input placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
-                                <button type="button" class="btn btn-info cart-view-btn-copy" value="copy to all" ng-click="copyAddressToAll(currentOrder)" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" ><span class="icon"><i class="icon-copy"></i></span></button>
-                            </div>
-                            <div class="col-xs-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
-                                <costcenter user="user" lineitem="item" />
+            <div class="panel panel-primary col-md-8 cart-view-line-items">
+                <div class="panel-heading">
+                    <h3 class="panel-title panel-primary">  {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart</h3>
+                </div>
+                <div class="panel-body">
+                    <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
+                        <div class="col-md-6 col-sm-6 col-xs-12 cart-view-line-items-product">
+                            <h5>
+                                <a ng-href="#.#">{{item.ProductIDText}}</a>
+                                <!---TODO needs url --->
+                            </h5>
+                            <p>
+                                {{item.Product.Name}}
+                            </p>
+                            <ul>
+                                <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">{{spec.Name}} : {{spec.Value}}</li>
+                            </ul>
+                            <div class="row">
+                                <div class="col-xs-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
+                                    <input placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
+                                    <button type="button" class="btn btn-info cart-view-btn-copy" value="copy to all" ng-click="copyAddressToAll(currentOrder)" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" ><span class="icon"><i class="icon-copy"></i></span></button>
+                                </div>
+                                <div class="col-xs-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
+                                    <costcenter user="user" lineitem="item" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-3">
-                        {{item.UnitPrice | currency}}
-                    </div><!--- TODO error needs styling --->
-                    <div class="col-md-1 col-sm-1 col-xs-3">
-                        <quantityfield error="qtyError" lineitem="item" class="quantity"/>
-                        {{qtyError}}
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-3">
-                        {{item.LineTotal | currency}}
-                    </div>
-                    <div class="col-md-1 col-sm-1 col-xs-3">
-                        <span class="icon" style="cursor: pointer;display: block;"><i class="icon-remove-sign" ng-click="removeItem(item)"></i></span>
+                        <div class="col-md-2 col-sm-2 col-xs-3">
+                            {{item.UnitPrice | currency}}
+                        </div><!--- TODO error needs styling --->
+                        <div class="col-md-1 col-sm-1 col-xs-3">
+                            <quantityfield error="qtyError" lineitem="item" class="quantity"/>
+                            {{qtyError}}
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-3">
+                            {{item.LineTotal | currency}}
+                        </div>
+                        <div class="col-md-1 col-sm-1 col-xs-3">
+                            <span class="icon" style="cursor: pointer;display: block;"><i class="icon-remove-sign" ng-click="removeItem(item)"></i></span>
+                        </div>
                     </div>
                 </div>
-                <div class="cart-view-line-items-btn-group">
+                <div class="panel-footer">
                     <span class="btn-group">
                         <button ng-hide="cart.$invalid" class="btn btn-default  cart-view-btn-save" ng-click="saveChanges()" ng-disabled="cart.$invalid">{{user.Company.SiteText.SaveChanges || 'Save Changes'}}</button>
                         <button class="btn btn-default  cart-view-btn-cancel" ng-click="cancelOrder()">Cancel Order</button>
@@ -57,14 +59,20 @@
                     <button class="btn btn-default cart-view-btn-continue" ng-click="continueShopping()" style="float: right;">Continue Shopping</button>
                 </div>
             </div>
-            <div class="cart-view-summary col-md-3 col-md-offset-1 well">
-                <h4>Cart Summary</h4>
-                <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
-                    <h5>SubTotal <span style="float: right;">{{currentOrder.Subtotal | currency}}</span></h5>
-                    <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
+            <div class="panel panel-primary cart-view-summary col-md-3 col-md-offset-1">
+                <div class="panel-heading">
+                    <h3 class="panel-title panel-primary">
+                        Cart Summary
+                    </h3>
                 </div>
-                <div style="padding: 25px; border-top: 1px solid #d6d6d6;">
-                    <div class="alert alert-warning" ng-show="cart.$invalid">Cart is missing required fields for checkout.</div>
+                <div class="panel-body">
+                    <div ng-if="!user.Permissions.contains('HidePricing')">
+                        <h5>SubTotal <span style="float: right;">{{currentOrder.Subtotal | currency}}</span></h5>
+                        <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">{{ user.Company.SiteText.ShippingDisclaimer }}</p>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <p class="alert alert-warning" ng-show="cart.$invalid">Cart is missing required fields for checkout.</p>
                     <button class="btn btn-primary" ng-click="checkOut()" ng-disabled="cart.$invalid">{{user.Company.SiteText.Checkout || 'Check Out' }}</button>
                 </div>
             </div>

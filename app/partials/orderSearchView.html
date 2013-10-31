@@ -10,6 +10,7 @@
         </ul>
         <hr />
     </nav>
+
     <div class=" order-search-toggle" ng-show="toggle" >
         <input type="text" ng-model="criteria.OrderID" placeholder="Order ID" /><br />
         <input type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" /><br />
@@ -19,32 +20,32 @@
     </div>
     <div class="order-types"  ng-show="!toggle" ng-class="{ 'hidden': ! showMega }" >
         <!--- TODO panel divs should not display if no criteria.count --->
-        <div class="panel panel-default">
+        <div class="panel panel-default" ng-show="hasStandardTypes">
             <div class="panel-heading panel-title">Standard Orders</div>
             <div class="panel-body">
                 <ul>
-                    <li ng-repeat="criteria in OrderSearchCriteria | onproperty:{ 'Model': 'OrderStats', 'Value': 'Standard'}" ng-show="criteria.Count">
-                        {{criteria.Status}} <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})"><span class="badge">{{criteria.Count}}</span></a>
+                    <li ng-repeat="criteria in OrderSearchCriteria | filter:{Type:'Standard'}" ng-show="criteria.Count">
+                        <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">{{criteria.Status}} <span class="badge">{{criteria.Count}}</span></a>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="panel panel-default">
+        <div class="panel panel-default" ng-show="hasReplenishmentTypes">
             <div class="panel-heading panel-title">Replenishment Orders</div>
             <div class="panel-body">
                 <ul>
-                    <li ng-repeat="criteria in OrderSearchCriteria | onproperty:{ 'Model': 'OrderStats', 'Value': 'Replenishment'}" ng-show="criteria.Count">
-                        {{criteria.Status}} <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})"><span class="badge" >{{criteria.Count}}</span></a>
+                    <li ng-repeat="criteria in OrderSearchCriteria | filter:{Type:'Replenishment'}" ng-show="criteria.Count">
+                        <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">{{criteria.Status}} <span class="badge" >{{criteria.Count}}</span></a>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="panel panel-default">
+        <div class="panel panel-default" ng-show="hasPriceRequestTypes">
             <div class="panel-heading panel-title">Price Request</div>
             <div class="panel-body">
                 <ul>
-                    <li ng-repeat="criteria in OrderSearchCriteria | onproperty:{ 'Model': 'OrderStats', 'Value': 'PriceRequest'}" ng-show="criteria.Count">
-                        {{criteria.Status}} <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})"><span clas="badge">{{criteria.Count}}</span></a>
+                    <li ng-repeat="criteria in OrderSearchCriteria | filter:{Type:'PriceRequest'}" ng-show="criteria.Count">
+                        <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">{{criteria.Status}} <span clas="badge">{{criteria.Count}}</span></a>
                     </li>
                 </ul>
             </div>
