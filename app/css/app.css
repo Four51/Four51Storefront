@@ -636,4 +636,10 @@ li.cart span.badge {position: absolute; top: 10px; left: 10px; z-index: 99999999
     text-transform: uppercase;
 }
 
-.panel-footer {padding: 30px 15px; clear: both; overflow: hidden;}
+.panel-footer {padding: 30px 15px; clear: both; overflow: hidden;}}
+
+/*-------------ROB STUFF--------------*/
+
+.order-history-footer-view h4, .order-history-header-view h4{letter-spacing: 0.18em;text-transform: uppercase;font-size: 1em;background-color:#3D3D3D; color:#fff; padding: 10px; margin: 0;text-align: center;}
+.order-history-footer-view, .order-history-header-view {padding: 0;}
+.order-history-footer-view h5 {letter-spacing: 0.18em; text-transform: uppercase;font-size: 1em; text-align: left; padding:10px; margin: 0;}
