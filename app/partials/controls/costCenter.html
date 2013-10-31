@@ -2,6 +2,7 @@
     <select required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="lineitem.CostCenter"></select>
     <input ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="lineitem.CostCenter" type='text' required placeholder="Cost Center" />
     <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{lineitem.CostCenter}}</span>
+    <button type="button" class="btn btn-info cart-view-btn-copy" value="copy to all"><span class="icon"><i class="icon-copy"></i></span></button>
 </div>
 <div ng-if="order">
     <select required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="order.CostCenter"></select>
