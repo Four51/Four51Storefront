@@ -91,13 +91,11 @@
                         </li>
                     </ul>
                 </div>
-                <h5>Shipping Method</h5>{{shippers}}
-                <ul ng-if="user.ShipMethod.ShipperSelectionType == 'UserDropDown'">
-                    <li ng-repeat="shipper in shippers">
-                        <span ng-class="{'icon-ok': currentOrder.LineItems[0].ShipperName == shipper.Name }" ng-click="shipperChange(shipper)">{{shipper.Name}}</span>
-                    </li>
-                </ul>
-                <input name="shippingMethod" type='text' ng-required="shippers.length > 0" ng-model='currentOrder.LineItems[0].ShipperName' ng-hide="true" />
+                <h5>Shipping Method</h5>
+                <select ng-change="updateShipper()"
+                        ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
+                        ng-options="shipper.ID as shipper.Name for shipper in shippers"
+                        ng-model="currentOrder.Shipper.ID" />
                 <input ng-if="user.ShipMethod.AskForAccountNumber" placeholder="Shipping Account Number" type="text" ng-model="currentOrder.LineItems[0].ShipAccount" />
             </div>
         </form>
