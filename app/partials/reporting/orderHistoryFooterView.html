@@ -4,8 +4,9 @@
         <p>Subtotal:<span style="float: right;">{{order.Subtotal | currency:"$"}}</span></p>
         <p>Shipping & Handling: <span style="float: right;">{{order.ShippingCost | currency:"$"}}</span></p>
         <p>Tax: <span style="float: right;">{{order.TaxCost | currency:"$"}}</span></p>
-        <hr/>
-        <p><strong>Total: <span style="float: right;">{{order.Total | currency:"$"}}</span></strong></p>
+    </div>
+    <div style="padding:10px; border-top:1px solid #d6d6d6;">
+        <h5>Total: <span style="float: right;">{{order.Total | currency:"$"}}</span></h5>
     </div>
 </div>
 <div>
