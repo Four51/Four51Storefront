@@ -71,12 +71,18 @@
                 <h5>Shipping Address</h5>
                 <a class="btn btn-mini btn-action" ng-href="#/address"  tabindex="-1">Add New Address</a>
                 <button type="button" ng-click="shipToMultipleAddresses = !shipToMultipleAddresses" class="btn btn-xs btn-warning"
-                    ng-show="user.Permissions.contains('ShipToMultipleAddresses')">Ship to multiple addresses</button>
+                    ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1">Ship to multiple addresses</button>
                 <div ng-show="!shipToMultipleAddresses">
                     <select name="shippingAddress"
                         ng-change="setShipAddressAtOrderLevel()"
                         ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
                         ng-model="currentOrder.ShipAddressID" ng-required="!shipToMultipleAddresses" />
+                    <h5>Shipping Method</h5>
+                    <select ng-change="updateShipper()"
+                            ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
+                            ng-options="shipper.ID as shipper.Name for shipper in shippers | filter:{shipper.ShipperRateType:'"
+                            ng-model="currentOrder.Shipper.ID"
+                            ng-required="!shipToMultipleAddresses" />
                 </div>
                 <div ng-show="shipToMultipleAddresses">
                     <ul>
@@ -85,17 +91,16 @@
                             {{item.Quantity}} |
                             {{item.DateNeeded | date:'MM/dd/yyyy' }}
                             <select
-                                ng-change="setShipAddressAtLineItemLevel()"
                                 ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
-                                ng-model="item.ShipAddressID" ng-required="shipToMultipleAddresses" />
+                                ng-model="item.ShipAddressID" ng-required="shipToMultipleAddresses" /> ~
+                            <select ng-change="updateShipper()"
+                                    ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
+                                    ng-options="shipper.ID as shipper.Name for shipper in shippers"
+                                    ng-model="item.Shipper.ID" ng-required="shipToMultipleAddresses" />
                         </li>
                     </ul>
                 </div>
-                <h5>Shipping Method</h5>
-                <select ng-change="updateShipper()"
-                        ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
-                        ng-options="shipper.ID as shipper.Name for shipper in shippers"
-                        ng-model="currentOrder.Shipper.ID" />
+
                 <input ng-if="user.ShipMethod.AskForAccountNumber" placeholder="Shipping Account Number" type="text" ng-model="currentOrder.LineItems[0].ShipAccount" />
             </div>
         </form>

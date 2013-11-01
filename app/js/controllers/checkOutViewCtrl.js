@@ -8,12 +8,22 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	});
 
 	$scope.updateShipper = function() {
-		var shipper = $451.filter($scope.shippers, { Property: 'ID', Value: $scope.currentOrder.Shipper.ID })[0];
-		$scope.currentOrder.Shipper = shipper;
-		angular.forEach($scope.currentOrder.LineItems, function(li) {
-			li.Shipper = shipper;
-			li.ShipperName = shipper.Name;
-		});
+		if ($scope.shipToMultipleAddresses) {
+			angular.forEach($scope.currentOrder.LineItems, function(li) {
+				if (li.Shipper == null) return;
+				var shipper = $451.filter($scope.shippers, { Property: 'ID', Value: li.Shipper.ID })[0];
+				li.Shipper = shipper;
+				li.ShipperName = shipper.Name;
+			});
+		}
+		else {
+			var shipper = $451.filter($scope.shippers, { Property: 'ID', Value: $scope.currentOrder.Shipper.ID })[0];
+			$scope.currentOrder.Shipper = shipper;
+			angular.forEach($scope.currentOrder.LineItems, function(li) {
+				li.Shipper = shipper;
+				li.ShipperName = shipper.Name;
+			});
+		}
 
 		Order.save($scope.currentOrder, function(order) {
 			$scope.currentOrder = order;
