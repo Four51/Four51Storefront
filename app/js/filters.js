@@ -21,3 +21,14 @@ four51.app.filter('kb', function() {
 		return isNaN(value) ? value : parseFloat(value) / 1024;
 	}
 });
+
+four51.app.filter('noliverates', function() {
+	return function(value) {
+		var output = [];
+		angular.forEach(value, function(v) {
+			if (v.ShipperRateType != 'ActualRates')
+				output.push(v);
+		});
+		return output;
+	}
+});

@@ -80,7 +80,7 @@
                     <h5>Shipping Method</h5>
                     <select ng-change="updateShipper()"
                             ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
-                            ng-options="shipper.ID as shipper.Name for shipper in shippers | filter:{shipper.ShipperRateType:'"
+                            ng-options="shipper.ID as shipper.Name for shipper in shippers"
                             ng-model="currentOrder.Shipper.ID"
                             ng-required="!shipToMultipleAddresses" />
                 </div>
@@ -95,7 +95,7 @@
                                 ng-model="item.ShipAddressID" ng-required="shipToMultipleAddresses" /> ~
                             <select ng-change="updateShipper()"
                                     ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
-                                    ng-options="shipper.ID as shipper.Name for shipper in shippers"
+                                    ng-options="shipper.ID as shipper.Name for shipper in shippers | noliverates"
                                     ng-model="item.Shipper.ID" ng-required="shipToMultipleAddresses" />
                         </li>
                     </ul>
