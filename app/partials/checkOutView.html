@@ -47,10 +47,9 @@
                 <textarea rows="5" cols="100" ng-model="currentOrder.Comments" />
                 <label ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')">
                     <hr />
-                    <costcenter
-                        user="user"
-                        order="currentOrder"
-                        ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')" />
+                    <select required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="currentOrder.CostCenter"></select>
+                    <input ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="currentOrder.CostCenter" type='text' required placeholder="Cost Center" />
+                    <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{user.Company.SiteText.CostCenter || 'Cost Center'}}: {{currentOrder.CostCenter}}</span>
                 </label>
                 <ul ng-if="user.OrderFields">
                     <hr />
@@ -93,12 +92,10 @@
                     </ul>
                 </div>
                 <h5>Shipping Method</h5>
-                <ul ng-if="user.ShipMethod.ShipperSelectionType == 'UserDropDown'">
-                    <li ng-repeat="shipper in shippers">
-                        <span ng-class="{'icon-ok': currentOrder.LineItems[0].ShipperName == shipper.Name }" ng-click="shipperChange(shipper)">{{shipper.Name}}</span>
-                    </li>
-                </ul>
-                <input name="shippingMethod" type='text' ng-required="shippers.length > 0" ng-model='currentOrder.LineItems[0].ShipperName' ng-hide="true" />
+                <select ng-change="updateShipper()"
+                        ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
+                        ng-options="shipper.ID as shipper.Name for shipper in shippers"
+                        ng-model="currentOrder.Shipper.ID" />
                 <input ng-if="user.ShipMethod.AskForAccountNumber" placeholder="Shipping Account Number" type="text" ng-model="currentOrder.LineItems[0].ShipAccount" />
             </div>
         </form>

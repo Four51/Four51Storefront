@@ -1,10 +1,37 @@
 <section class="container">
     <h3>Addresses</h3>
-
     <div>
-        <div class="gridStyle" ng-grid="gridOptions"></div>
-        <input class="btn btn-small btn-info" value="Toggle Selection "type="button" ng-click="checkAll($event)" />
-        <input class="btn btn-small btn-danger" value="Delete Selected" ng-click="deleteSelected($event)" />
-        <input class="btn btn-small btn-info" style="float: right;"value="New" type="button" ng-click="newAddress($event)" />
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+            <tr>
+                <td colspan="6"><input type="text" placeholder="Search" ng-model="searchTerm" /></td>
+            </tr>
+            <tr>
+                <td><input type='checkbox' ng-click="checkAll($event)" /></td>
+                <td>Name</td>
+                <td>City</td>
+                <td>State</td>
+                <td>Shipping</td>
+                <td>Billing</td>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td colspan="6">
+                    <input class="btn btn-small btn-danger" value="Delete Selected" ng-click="deleteSelected($event)" />
+                </td>
+            </tr>
+            </tfoot>
+            <tbody>
+            <tr ng-repeat="address in addresses | filter:searchTerm">
+                <td><input type='checkbox' ng-model="address.Selected" /></td>
+                <td><a ng-href="#/address/{{address.ID}}">{{address.AddressName}}</a></td>
+                <td>{{address.City}}</a></td>
+                <td>{{address.State}}</td>
+                <td><span class="icon"><i ng-class="{'icon-ok': address.IsShipping }"></i></span> </td>
+                <td><span class="icon"><i ng-class="{'icon-ok': address.IsBilling }"></i></span> </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </section>

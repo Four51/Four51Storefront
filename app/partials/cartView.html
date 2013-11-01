@@ -9,31 +9,29 @@
             <hr />
         </nav>
         <form name="cart">
-            <div class="panel panel-primary col-md-8 cart-view-line-items">
-                <div class="panel-heading">
-                    <h3 class="panel-title panel-primary">  {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart</h3>
-                </div>
-                <div class="panel-body">
-                    <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
-                        <div class="col-md-6 col-sm-6 col-xs-12 cart-view-line-items-product">
-                            <h5>
-                                <a ng-href="#.#">{{item.ProductIDText}}</a>
-                                <!---TODO needs url --->
-                            </h5>
-                            <p>
-                                {{item.Product.Name}}
-                            </p>
-                            <ul>
-                                <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">{{spec.Name}} : {{spec.Value}}</li>
-                            </ul>
-                            <div class="row">
-                                <div class="col-xs-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
-                                    <input placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
-                                    <button type="button" class="btn btn-info cart-view-btn-copy" value="copy to all" ng-click="copyAddressToAll(currentOrder)" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" ><span class="icon"><i class="icon-copy"></i></span></button>
-                                </div>
-                                <div class="col-xs-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
-                                    <costcenter user="user" lineitem="item" />
-                                </div>
+            <div class="col-md-8 well cart-view-line-items">
+                <h4>
+                    {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
+                </h4>
+                <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
+                    <div class="col-md-6 col-sm-6 col-xs-12 cart-view-line-items-product">
+                        <h5>
+                            <a ng-href="#.#">{{item.ProductIDText}}</a>
+                            <!---TODO needs url --->
+                        </h5>
+                        <p>
+                            {{item.Product.Name}}
+                        </p>
+                        <ul>
+                            <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">{{spec.Name}} : {{spec.Value}}</li>
+                        </ul>
+                        <div class="row">
+                            <div class="col-xs-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
+                                <input placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
+                                <button type="button" class="btn btn-info cart-view-btn-copy" value="copy to all" ng-click="copyAddressToAll(currentOrder)" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" ><span class="icon"><i class="icon-copy"></i></span></button>
+                            </div>
+                            <div class="col-xs-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
+                                <costcenter user="user" lineitem="item" />
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-3">
