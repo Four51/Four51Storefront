@@ -28,12 +28,20 @@
                         <div class="row">
                             <div class="col-xs-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
                                 <input placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
-                                <button type="button" class="btn btn-info cart-view-btn-copy" value="copy to all" ng-click="copyAddressToAll(currentOrder)" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" ><span class="icon"><i class="icon-copy"></i></span></button>
+                                <button type="button" class="btn btn-info cart-view-btn-copy" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" >
+                                    <span class="icon"><i class="icon-copy"></i></span>
+                                </button>
                             </div>
                             <div class="col-xs-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
-                                <costcenter user="user" lineitem="item" />
+                                <select required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
+                                <input ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />
+                                <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
+                                <button type="button" class="btn btn-info cart-view-btn-copy" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
+                                    <span class="icon"><i class="icon-copy"></i></span>
+                                </button>
                             </div>
                         </div>
+                    </div>
                         <div class="col-md-2 col-sm-2 col-xs-3">
                             {{item.UnitPrice | currency}}
                         </div><!--- TODO error needs styling --->
@@ -47,7 +55,6 @@
                         <div class="col-md-1 col-sm-1 col-xs-3">
                             <span class="icon" style="cursor: pointer;display: block;"><i class="icon-remove-sign" ng-click="removeItem(item)"></i></span>
                         </div>
-                    </div>
                 </div>
                 <div class="panel-footer">
                     <span class="btn-group">
