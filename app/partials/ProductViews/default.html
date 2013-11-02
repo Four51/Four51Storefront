@@ -1,4 +1,4 @@
-<section id="451_area_prod_desc" class="container product-view">
+<section id="451_area_prod_desc" class="container product-view-default">
     <figure>
         <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url">
     </figure>
@@ -59,12 +59,10 @@
         </form>
     </div>
     <div class="panel panel-primary col-md-8 col-md-pull-4">
-        <div class="panel-heading product-view-toggle">
-            <h3 ng-click="selected=1" class="panel-title"><span class="icon"><i ng-class="{'icon-circle':selected == 1}"></i></span> Info</h3>
-            <h3 ng-click="selected=2" class="panel-title"><span class="icon"><i ng-class="{'icon-circle':selected == 2}"></i></span> Spec</h3>
+        <div class="panel-heading">
+            <h3  class="panel-title">Information</h3>
         </div>
         <div class="panel-body">
-            <div ng-hide="selected == 2">
                 <div ng-show="LineItem.Product.Description">
                     <p class="text-info">
                         Description:
@@ -89,51 +87,47 @@
                     </p>
                     {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
                 </div>
-            </div>
-            <div ng-show="selected == 2">
-                <staticspecstable specgroups="StaticSpecGroups"/>
-            </div>
-            <hr />
-            <div ng-show="LineItem.Product.Variants.length > 1 && !LineItem.Variant">
-                <h4>
-                    Please select from the following:
-                </h4>
-                <div>
-                    <table border=1 class="451_list_vars">
-                        <tr>
-                            <td>
-                                Variant ID
-                            </td>
-                            <td>
-                                Description
-                            </td>
-                            <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
-                                Available Quantity
-                            </td>
-                            <td>
-                                Order Quantity
-                            </td>
-                        </tr>
-                        <tr ng-repeat="v in LineItem.Product.Variants">
-                            <td>
-                                <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>{{v.ExternalID}}</a>
-                            </td>
-                            <td>
-                                {{v.Description}}
-                            </td>
-                            <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
-                                {{v.QuantityAvailable}}
-                            </td>
-                            <td>
-                                Order Quantity
-                            </td>
-                        </tr>
-                    </table>
+                <div ng-show="LineItem.Product.Variants.length > 1 && !LineItem.Variant">
+                    <h4>
+                        Please select from the following:
+                    </h4>
+                    <div>
+                        <table border=1 class="451_list_vars">
+                            <tr>
+                                <td>
+                                    Variant ID
+                                </td>
+                                <td>
+                                    Description
+                                </td>
+                                <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
+                                    Available Quantity
+                                </td>
+                                <td>
+                                    Order Quantity
+                                </td>
+                            </tr>
+                            <tr ng-repeat="v in LineItem.Product.Variants">
+                                <td>
+                                    <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>{{v.ExternalID}}</a>
+                                </td>
+                                <td>
+                                    {{v.Description}}
+                                </td>
+                                <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
+                                    {{v.QuantityAvailable}}
+                                </td>
+                                <td>
+                                    Order Quantity
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-            </div>
+                <staticspecstable specgroups="StaticSpecGroups"/>
         </div>
     </div>
-    <div class="panel panel-default col-md-8 col-md-pull-4">
+    <div class="product-view-default-related panel panel-default col-md-8 col-md-pull-4">
         <div class="panel-heading">
             <h3 class="panel-title">Related Products</h3>
         </div>
