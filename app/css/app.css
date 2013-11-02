@@ -542,8 +542,11 @@ li.cart span.badge {position: absolute; top: 10px; left: 10px; z-index: 99999999
 .branding-view-logo {max-height:130px; float: left;display: block;margin-right: 25px;}
 
 .product-view-default img {margin: 15px auto;}
-.product-view-default-related .panel-body  {border-bottom: 1px solid #d6d6d6;}
-
+.product-view-default-related .panel-body {border-bottom: 1px solid #d6d6d6;}
+.product-view-default-toggle-panel .panel-title.panel-selected {opacity: 1;}
+.product-view-default-toggle-panel .panel-heading {border-bottom: none; width: 100%;clear: both; overflow: hidden; padding: 0;}
+.product-view-default-toggle-panel .panel-title {cursor: pointer; opacity: .65;display: inline-block; width: 50%; text-align: center; float: left; padding: 20px 25px;position: relative;}
+.product-view-default-toggle-panel .icon {position: absolute; bottom: -10px; left: 50%;}
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
@@ -635,7 +638,6 @@ li.cart span.badge {position: absolute; top: 10px; left: 10px; z-index: 99999999
 
 .panel-heading {
     border-radius: 0;
-
 }
 
 .panel-title {
