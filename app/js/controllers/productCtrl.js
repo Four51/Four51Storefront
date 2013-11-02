@@ -37,7 +37,7 @@ four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, Pr
 
 four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, ProductDisplayService, Order, Variant, $451, $location, User) {
 	$scope.LineItem = {};
-	$scope.addToOrderText = "add to cart";
+	$scope.addToOrderText = "Add To Cart";
 	function ProductVariantGetsDone (){
 		ProductDisplayService.setNewLineItemScope($scope);
 		ProductDisplayService.setProductViewScope($scope);
@@ -132,3 +132,8 @@ four51.app.controller('CustomProductCtrlMatrix', function($scope, $451, Variant,
 		});
 	});
 });
+$scope.isActive = false;
+
+$scope.toggleActive = function () {
+    $scope.isActive = !$scope.isActive;
+};
