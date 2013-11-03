@@ -2,7 +2,6 @@
     <nav class="nav nav-cat-search">
         <hr />
         <ul>
-
             <li >Orders</li>
             <li class="search" ng-click="toggle = !toggle">
                 <span class="icon"><i class="icon-search"></i></span> <span class="hidden-sm hidden-xs">Search</span> <span class="icon"><i class="icon-caret-down"></i></span>
@@ -10,7 +9,7 @@
         </ul>
         <hr />
     </nav>
-    <div class="col-md-8" style="padding: 0;" ng-show='displayOrders' ng-hide="toggle">
+    <div style="padding: 0;" ng-show='displayOrders'>
         <table class="table table-striped table-hover table-bordered" ng-show="orders">
             <caption ng-show="orderSearchStat">{{orderSearchStat.Type}} - {{orderSearchStat.Status}}</caption>
             <thead>
@@ -42,12 +41,12 @@
                 <input type="text" ng-model="criteria.LastN" placeholder="Last n Orders:" />
             </div>
             <div class="panel-footer">
-                <input type="submit" class="btn btn-small btn-info btn-block" value="Search" ng-click="OrderSearch($event, criteria); toggle = !toggle; showMega = !showMega" />
+                <input type="submit" class="btn btn-small btn-info btn-block" value="Search" ng-click="OrderSearch($event, criteria); toggle = !toggle;" />
             </div>
         </div>
     </div>
     <div class="order-types" ng-show="!toggle">
-        <div class="panel panel-default col-md-offset-1" ng-show="hasStandardTypes" ng-class="{ 'col-md-3': ! showMega }" >
+        <div class="panel panel-default" ng-show="hasStandardTypes">
             <div class="panel-heading panel-title">
                 Standard Orders
             </div>
