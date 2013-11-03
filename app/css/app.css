@@ -200,6 +200,7 @@ textarea {
 .form-signin input[type="text"], .form-signin input[type="password"] {
     font-size: 1.143em;
     height: auto;
+    width: 100%;
     margin-bottom: 1.071em;
     padding: 0.500em 0.643em;
 }
