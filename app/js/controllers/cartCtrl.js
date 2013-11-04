@@ -58,6 +58,12 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
         });
     };
 
+	$scope.copyCostCenterToAll = function() {
+		angular.forEach($scope.currentOrder.LineItems, function(n) {
+			n.CostCenter = $scope.currentOrder.LineItems[0].CostCenter;
+		});
+	};
+
 
     $scope.onPrint = function()  {
              window.print();

@@ -1,150 +1,168 @@
-<section id="451_area_prod_desc" class="container product-view">
-
-        <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url"><!--- phone name display ---><h4 class="emphasis-title visible-phone">{{LineItem.Product.Name}}</h4>
-        <div class="col-lg-3 col-lg-offset-1 col-lg-push-8" style="border: 1px solid #000;">
-
-            <h5 class="hidden-phone">ID {{LineItem.Product.ExternalID}}</h5>
-            <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product'/>
-            <div style="margin: 20px 0">
-                <form name="addToOrderForm" ng-show="allowAddToOrder" style=";clear: both; overflow: hidden; padding: 20px 0; border-top: 1px solid #d6d6d6; border-bottom: 1px solid #d6d6d6;">
-                    <table id="451_list_vspec" border=1 ng-show="true">
-                        <tr ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
-                            <td>
-                                {{s.Name}}<span ng-show="s.Required" style="color:red"> *</span>
-                            </td>
-                            <td>
-                                {{s.Prefix}}
-                                <vspecfield changed="specChanged" s="s">
-                                </vspecfield>{{s.Suffix}}
-                            </td>
-                        </tr>
-                    </table>
-                    <div style="float: left;">
-                        <span class="text-info">Quantity</span>
-                        <quantityfield lineitem="LineItem" error="quantityError" class="test"/>{{LineItem.LineTotal | currency}}<span ng-show="quantityError">{{quantityError}}</span>
-                    </div>
-                    <div style=" display: inline;float: right;">
-                        <button id="451_btn_orderadd" ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(LineItem)" class="btn emphasis-btn">
-                            {{addToOrderText}}
-                        </button>
-                    </div>
-                    <p ng-show="LineItem.PriceSchedule.MinQuantity > 1">
-                        min: {{LineItem.PriceSchedule.MinQuantity}}
-                    </p>
-                    <p ng-show="LineItem.PriceSchedule.MaxQuantity">
-                        max: {{LineItem.PriceSchedule.MaxQuantity}}
-                    </p>
-                </form>
-            </div>
-            <h4 class="hidden-tablet hidden-phone" style="background-color:#f5f5f5;color:#444;text-align: center; font-weight: normal;border: 1px solid #d6d6d6; border-bottom: none;padding: 10px 25px; margin: 0;">Related Products</h4>
-            <div class="hidden-tablet hidden-phone"  style="border: 1px solid #d6d6d6; height: 200px; ">
-            </div>
-            <div class="hidden-tablet hidden-phone"  style="border: 1px solid #d6d6d6; height: 200px;">
-            </div>
+<section id="451_area_prod_desc" class="container product-view-default">
+    <figure>
+        <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url">
+    </figure>
+    <div class="panel panel-default col-md-3 col-md-offset-1 col-md-push-8">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                {{LineItem.Product.Name}}
+            </h3>
         </div>
-
-
-        <div class="col-lg-8 col-lg-pull-4" style="border: 1px solid #000;">
-            <!--- desktop and tablet info display --->
-            <div style="border: 1px solid #d6d6d6; clear: both; overflow: hidden;margin-bottom: 20px;" class="hidden-phone">
-                <div style="background-color:#2C3E50; clear: both; overflow: hidden;">
-                    <h4 ng-click="selected=1" class="span6" style="background-color:#1A242F; cursor: pointer; color:#fff; padding: 10px 25px; margin: 0; text-align: center;">Information</h4>
-                    <h4 ng-click="selected=2" class="span6" ng-show="StaticSpecGroups" style="background-color:#2C3E50; color:#fff;cursor: pointer;padding: 10px 25px;margin: 0;text-align: center;">Tech Specs</h4>
-                    <hr/>
+        <form name="addToOrderForm" ng-show="allowAddToOrder">
+            <div class="panel-body">
+                <h5>
+                    <span class="text-info">
+                        ID
+                     </span>
+                    {{LineItem.Product.ExternalID}}
+                </h5>
+                <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product'/>
+                <table id="451_list_vspec" border=1 ng-show="true">
+                    <tr ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
+                        <td>
+                            {{s.Name}}<span ng-show="s.Required" style="color:red"> *</span>
+                        </td>
+                        <td>
+                            {{s.Prefix}}
+                            <vspecfield changed="specChanged" s="s">
+                            </vspecfield>{{s.Suffix}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <p class="alert alert-danger" ng-show="quantityError">
+                    {{quantityError}}
+                </p>
+                <p class="alert alert-warning" ng-show="addToOrderForm.$invalid" ng-hide="quantityError">
+                    Please correct all errors to submit to cart.
+                </p>
+                <div style="float: left;">
+                    <span class="text-info">
+                        QTY
+                    </span>
+                    <quantityfield lineitem="LineItem" error="quantityError" class="quantity" />
+                   <span class="text-success">
+                       {{LineItem.LineTotal | currency}}
+                   </span>
                 </div>
-                <div ng-hide="selected == 2">
-                    <div ng-show="LineItem.Product.Description">
-                        <p class="text-info">
-                            Description:
-                        </p>
-                        <p ng-bind-html="LineItem.Product.Description" />
-                    </div>
-                    <p ng-show="LineItem.Variant.Description">
-                        <span class="text-info">Variant Description:</span>
-                        <span ng-bind-html="LineItem.Variant.Description"/>
-                    </p>
-                    <p ng-show="LineItem.Variant.ExternalID">
-                        <span class="text-info">Variant ID:</span>
-                        {{LineItem.Variant.ExternalID}}
-                    </p>
-                    <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
-                        <span class="text-info">Available Inventory:</span>
-                        {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
-                    </p>
+                <div style=" display: inline;float: right;">
+                    <button type="button" id="451_btn_orderadd" ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(LineItem)" class="btn btn-primary">
+                        {{addToOrderText}}
+                    </button>
                 </div>
-                <div ng-show="selected == 2">
-                    <staticspecstable specgroups="StaticSpecGroups"/>
-                </div>
-            </div><!--- phone info display --->
-            <div class="visible-phone" style="border: 1px solid #d6d6d6; margin-bottom: 10px;">
-                <h4 class="span6" style="background-color:#1A242F;  color:#fff; padding: 10px 25px; margin: 0; text-align: center;">Information</h4>
+                <p class="alert alert-danger" ng-show="LineItem.PriceSchedule.MinQuantity > 1">
+                    min: {{LineItem.PriceSchedule.MinQuantity}}
+                </p>
+                <p class="alert alert-danger" ng-show="LineItem.PriceSchedule.MaxQuantity">
+                    max: {{LineItem.PriceSchedule.MaxQuantity}}
+                </p>
+            </div>
+        </form>
+    </div>
+    <div class="panel product-view-default-toggle-panel panel-primary col-md-8 col-md-pull-4">
+        <div class="panel-heading">
+            <!--- TODO specgroups panel-title should only show if spec groups data exist --->
+            <h3 ng-click="selected=1" ng-class="{'panel-selected':selected == 1}" class="panel-title">
+                <span class="icon">
+                    <i ng-class="{'icon-caret-up':selected == 1}"></i>
+                </span>
+                Info
+            </h3>
+            <h3 ng-click="selected=2" ng-class="{'panel-selected':selected == 2}" class="panel-title">
+                <span class="icon">
+                    <i ng-class="{'icon-caret-up':selected == 2}"></i>
+                </span>
+                Spec
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div ng-hide="selected == 2">
                 <div ng-show="LineItem.Product.Description">
                     <p class="text-info">
                         Description:
                     </p>
                     <p ng-bind-html="LineItem.Product.Description" />
                 </div>
-                <p ng-show="LineItem.Variant.Description">
-                    <span class="text-info">Variant Description:</span>
-                    <span ng-bind-html="LineItem.Variant.Description"/>
-                </p>
-                <p ng-show="LineItem.Variant.ExternalID">
-                    <span class="text-info">Variant ID:</span>
+                <div ng-show="LineItem.Variant.Description">
+                    <p class="text-info">
+                        Variant Description:
+                    </p>
+                    <p ng-bind-html="LineItem.Variant.Description"/>
+                </div>
+                <div ng-show="LineItem.Variant.ExternalID">
+                    <p class="text-info">
+                        Variant ID:
+                    </p>
                     {{LineItem.Variant.ExternalID}}
-                </p>
-                <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
-                    <span class="text-info">Available Inventory:</span>
+                </div>
+                <div ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
+                    <p class="text-info">
+                        Available Inventory:
+                    </p>
                     {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
-                </p>
-            </div>
-            <div class="visible-phone" ng-show="StaticSpecGroups" style="border: 1px solid #d6d6d6; margin-bottom: 10px;">
-                <h4 class="span6" style="background-color:#2C3E50; color:#fff;padding: 10px 25px; margin: 0;text-align: center;">Tech Specs</h4>
-                <p>
-                    <staticspecstable specgroups="StaticSpecGroups"/>
-                </p>
-            </div>
-            <hr />
-
-            <div ng-show="LineItem.Product.Variants.length > 1 && !LineItem.Variant">
-                <h4 class="hidden-phone" style="background-color:#f5f5f5;color:#444;text-align: center; font-weight: normal;border: 1px solid #d6d6d6; border-bottom: none;padding: 10px 25px; margin: 0;">
-                    Please select from the following:
-              </h4>
-                <div style="border: 1px solid #d6d6d6; padding: 10px;">
-                <table border=1 class="451_list_vars">
-                    <tr>
-                        <td>
-                            Variant ID
-                        </td>
-                        <td>
-                            Description
-                        </td>
-                        <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
-                            Available Quantity
-                        </td>
-                        <td>
-                            Order Quantity
-                        </td>
-                    </tr>
-                    <tr ng-repeat="v in LineItem.Product.Variants">
-                        <td>
-                            <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>{{v.ExternalID}}</a>
-                        </td>
-                        <td>
-                            {{v.Description}}
-                        </td>
-                        <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
-                            {{v.QuantityAvailable}}
-                        </td>
-                        <td>
-                            Order Quantity
-                        </td>
-                    </tr>
-                </table>
+                </div>
+                <div ng-show="LineItem.Product.Variants.length > 1 && !LineItem.Variant">
+                    <h4>
+                        Please select from the following:
+                    </h4>
+                    <div>
+                        <table border=1 class="451_list_vars">
+                            <tr>
+                                <td>
+                                    Variant ID
+                                </td>
+                                <td>
+                                    Description
+                                </td>
+                                <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
+                                    Available Quantity
+                                </td>
+                                <td>
+                                    Order Quantity
+                                </td>
+                            </tr>
+                            <tr ng-repeat="v in LineItem.Product.Variants">
+                                <td>
+                                    <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>{{v.ExternalID}}</a>
+                                </td>
+                                <td>
+                                    {{v.Description}}
+                                </td>
+                                <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
+                                    {{v.QuantityAvailable}}
+                                </td>
+                                <td>
+                                    Order Quantity
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
+            <div ng-show="selected == 2">
+                <staticspecstable specgroups="StaticSpecGroups"/>
+            </div>
         </div>
-
-
-
-
+    </div>
+    <div class="panel panel-default product-view-default-related col-md-8 col-md-pull-4">
+        <div class="panel-heading">
+            <h3 class="panel-title">Related Products</h3>
+        </div>
+        <div class="panel-body">
+            <p>
+                R.1
+            </p>
+        </div>
+        <div class="panel-body">
+            <p>
+                R.2
+            </p>
+        </div>
+        <div class="panel-body">
+            <p>
+                R.3
+            </p>
+        </div>
+    </div>
 </section>

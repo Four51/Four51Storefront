@@ -15,6 +15,7 @@
 
     .nav li span.nav-name {float:right;}
     .header-nav-c1 {width: 1140px; margin: 0 auto; }
+    .product-view-default img {margin: 15px 0;}
 
 /* start working swipe as a hover for desktop
     .category-description {
@@ -49,7 +50,7 @@
 
     .nav li span.nav-name {float:right;}
     .nav li span.hidden-sm {float:right;}
-
+    .product-view-default img {margin: 15px 0;}
 
 
     /*-----ROB--------*/
@@ -65,6 +66,8 @@
 /* x-sm */
 @media (min-width:768px) and (max-width: 1023px) {
 
+    .branding-view {text-align: center;}
+    .branding-view-logo {float: none; margin: 0 auto; max-height: 75px; }
 
     /*-----ROB--------*/
     .order-history-view-save-favorite {float:left;}
@@ -83,7 +86,7 @@
     .navbar-left li.products a {padding: 15px 20px 15px 10px;}
     .navbar-right li.cart a {padding: 15px 10px 15px 15px;}
     .cart-view-btn-continue {width: 100%;margin-top: 10px;}
-    .cart-view-line-items-btn-group {}
+    .panel-footer .btn-group {width: 100%;}
     .cart-view-line-items-btn-group .btn-group, .check-out-view-btn-group .btn-group {vertical-align: inherit; width: 100%;}
     .cart-view-btn-cancel  {float: right !important;}
     .cart-view-line-items-product {margin-bottom: 25px;}
@@ -95,6 +98,7 @@
 
 
     /*----ROB STUFF-----*/
+    /*-----ROB--------*/
     .order-history-view-repeat-btn{margin-top:20px;}
     .order-history-view-save-favorite-input{width:49%;}
     .order-history-view-save-favorite-btn{width:49%;}

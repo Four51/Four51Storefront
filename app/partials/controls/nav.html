@@ -1,4 +1,4 @@
-<header class="header navbar navbar-inner animated" scroll-position="scroll" ng-class="{fadeOutUpBig: scroll > 310, fadeIn: scroll <= 310}">
+<header class="header navbar navbar-inner animated">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <section class="header-nav-c1">
             <div class="collapse navbar-collapse navbar-ex1-collapse visible-xs">
@@ -7,7 +7,7 @@
                     <li class="products" ng-class="getClass('/catalog')"> <a href="#/catalog"><span class="icon"><i class="icon-folder-open"></i></span><span class="nav-name">Products</span></a></li>
                     <li class="order hidden-xs" ng-class="getClass('/order')"> <a href="#/order"><span class="icon"><i class="icon-bar-chart"></i></span><span class="nav-name hidden-sm hidden-xs">Orders</span></a></li>
                     <li class="favorites" ng-class="getClass('/favoriteorders')"> <a href="#/favoriteorders"><span class="icon"><i class="icon-star"></i></span><span class="nav-name hidden-sm hidden-xs">Favorites</span></a></li>
-                    <li><a href="#/admin" class="hidden-md hidden-lg"><span class="icon"><i class="icon-user"></i></span></a></li>
+                    <li ng-class="getClass('/admin')"><a href="#/admin" class="hidden-md hidden-lg"><span class="icon"><i class="icon-user"></i></span></a></li>
                     <li class="dropdown admin-user visible-md visible-lg">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="icon"><i class="icon-user"></i></span> My Account <b class="caret"></b></a>
                         <ul class="dropdown-menu">
