@@ -52,7 +52,6 @@ input.ng-invalid, input.ng-invalid:invalid {
     /* style the required !required angular form inputs */
 }
 
-
 input:not([type=submit]), textarea, select {
     padding: 9px;
     border: solid 1px #E5E5E5;
@@ -82,13 +81,10 @@ textarea {
     line-height: 150%;
 }
 
-.container-view {
-    clear: both;
-    overflow: hidden;
-    margin-bottom: 100px;
+.showSideNav {
+    display: none;
 }
 
-.showSideNav {display: none;}
 .search-view-search {
     border-radius: 7px 0 0 7px;
     border-right: 0 none;
@@ -100,13 +96,12 @@ textarea {
     height: 57px;
 }
 
-
 .search-view-cancel {
     width: 34%;
     float: right;
     text-align: right;
     padding: 5px 10px 0 0;
-    border: 1px solid #ccc;
+    border: solid 1px #d6d6d6;
     border-left: 0 none;
     border-radius: 0 7px 7px 0;
     color: #BFBFBF;
@@ -114,6 +109,7 @@ textarea {
     font-size: 14px;
     height: 57px;
 }
+
 .search-view .icon-remove-sign {
     color:#bfbfbf;
     display: inline-block;
@@ -186,16 +182,6 @@ textarea {
     background-size: cover;
 }
 
-
-.quantity input {
-    background-color:#F5F5F5;
-    border: 1px solid #BFBFBF;
-    width: 30px;
-    padding: 5px 0 2px 1px;
-    text-align: center;
-}
-
-
 .form-signin {
     max-width: 26em;
     padding: 1.357em 2.071em 2.071em;
@@ -214,6 +200,7 @@ textarea {
 .form-signin input[type="text"], .form-signin input[type="password"] {
     font-size: 1.143em;
     height: auto;
+    width: 100%;
     margin-bottom: 1.071em;
     padding: 0.500em 0.643em;
 }
@@ -516,28 +503,154 @@ li.search span {
     opacity:0;
 }
 
-.cart-view-line-items h4, .cart-view-summary h4, .check-out-view h4 {letter-spacing: 0.18em;text-transform: uppercase;font-size: 1em;background-color:#3D3D3D; color:#fff; padding: 10px; margin: 0;text-align: center;}
-.cart-view-line-items, .check-out-view-types {padding: 0;}
-.cart-view-line-items-product {margin-bottom: 10px;}
-.cart-view-line-items .panel-body {padding: 0;}
-.cart-view-line-items-repeater {border-top: 1px solid #d6d6d6;clear: both; overflow: hidden;padding: 25px 0;}
-.cart-view-summary .panel-footer {background-color:#fff;}
-.cart-view-summary, .check-out-view-summary {padding: 0;text-align: center;}
-.cart-view .icon-remove-sign {color:#bfbfbf; display: block; padding: 0 15px 25px;}
-.cart-view h5 {margin: 0; font-weight: bold;}
-.cart-view .row input[type="text"] {display: inline; float: left; width: 60%; font-size: 11px;}
-.cart-view-summary h5 {letter-spacing: 0.18em; text-transform: uppercase;font-size: 1em;  padding: 10px; text-align: left;margin: 0;}
-.cart-view-btn-copy {float: right;}
-li.cart span.badge {position: absolute; top: 10px; left: 10px; z-index: 999999999;background-color:#3D3D3D;padding: 4px 7px;}
-.badge {background-color:#3D3D3D;padding: 4px 7px;}
-.cart-view-variable {padding: 0;}
-.order-types ul {list-style-type: none;}
+/* ----------------------------------------------------------------------------------------------- */
+/* Cart | Checkout */
+/* ----------------------------------------------------------------------------------------------- */
 
-.check-out-view h4 {border-bottom: 1px solid #4d4d4d;}
-.check-out-view-order, .check-out-view-shipping, .check-out-view-billing {padding: 25px 15px;}
-.check-out-view-order ul {list-style-type: none; margin: 0; padding: 0;}
-.check-out-view .ng-leave {display: none;}
-.branding-view-logo {max-height:130px; float: left;display: block;margin-right: 25px;}
+.quantity input {
+    background-color:#F5F5F5;
+    border: 1px solid #BFBFBF;
+    width: 30px;
+    padding: 5px 0 2px 1px;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.cart-view-line-items, .check-out-view-types {
+    padding: 0;
+}
+
+.cart-view-line-items-product {
+    margin-bottom: 10px;
+}
+
+.cart-view-line-items .panel-body, .product-view-default .panel{
+    padding: 0;
+}
+
+.cart-view-line-items-repeater {
+    border-top: 1px solid #d6d6d6;
+    clear: both;
+    overflow: hidden;
+    padding: 25px 0;
+}
+
+.cart-view-summary .panel-footer, .product-view-default .panel-footer {
+    background-color:transparent;
+}
+
+.cart-view-summary {
+    padding: 0;
+    text-align: center;
+}
+
+.cart-view .icon-remove-sign {
+    color:#bfbfbf;
+    display: block;
+    padding: 0 15px 25px;
+}
+
+.cart-view .row input[type="text"] {
+    display: inline;
+    float: left;
+    width: 60%;
+    font-size: 11px;
+}
+
+.cart-view-btn-copy {
+    float: right;
+}
+
+li.cart span.badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 999999999;
+    background-color:#3D3D3D;
+    padding: 4px 7px;
+}
+
+.badge {
+    background-color:#3D3D3D;
+    padding: 4px 7px;
+}
+
+.cart-view-variable {
+    padding: 0;
+}
+
+.order-types ul {
+    list-style-type: none;
+}
+
+.check-out-view-types.panel {
+    margin-bottom: 0;
+}
+
+.check-out-view-types .panel-heading {
+    border-bottom: 1px solid #4d4d4d;
+}
+
+.check-out-view-types .panel-title {
+    cursor: pointer;
+}
+
+.check-out-view-order ul {
+    list-style-type: none;
+    margin: 0; padding: 0;
+}
+
+.check-out-view .ng-leave {
+    display: none;
+}
+
+.branding-view-logo {
+    max-height:130px;
+    float: left;
+    display: block;
+    margin-right: 25px;
+}
+
+.product-view-default img {
+    margin: 15px auto;
+}
+
+.product-view-default-related .panel-body {
+    border-bottom: 1px solid #d6d6d6;
+}
+
+.product-view-default-toggle-panel .panel-title.panel-selected {
+    background: rgba(255, 255, 255, 0);
+}
+
+.product-view-default-toggle-panel .panel-heading {
+    border-bottom: none;
+    width: 100%;
+    clear: both;
+    overflow: hidden;
+    padding: 0;
+}
+
+
+.product-view-default-toggle-panel .panel-title {
+    cursor: pointer;
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    float: left;
+    padding: 20px 25px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.product-view-default-toggle-panel .icon {
+    position: absolute;
+    bottom: -13px; left: 48%;
+}
+.product-view-default-toggle-panel .icon i {
+    font-size: 22px;
+}
+
 
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
@@ -619,6 +732,11 @@ li.cart span.badge {position: absolute; top: 10px; left: 10px; z-index: 99999999
     border-radius: 0;
 }
 
+.panel {
+    box-shadow: none;
+    border-radius: 0;
+}
+
 .panel-primary {
     border: none;
 }
@@ -636,7 +754,12 @@ li.cart span.badge {position: absolute; top: 10px; left: 10px; z-index: 99999999
     text-transform: uppercase;
 }
 
-.panel-footer {padding: 30px 15px; clear: both; overflow: hidden;}}
+.panel-footer {
+    padding: 30px 15px;
+    clear: both;
+    overflow: hidden;
+    border-radius: 0;
+}
 
 /*-------------ROB STUFF--------------*/
 
