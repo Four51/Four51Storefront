@@ -7,26 +7,64 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		$scope.shippers = list;
 	});
 
-	$scope.updateShipper = function() {
-		if ($scope.shipToMultipleAddresses) {
+	/*angular.forEach($scope.currentOrder.LineItems, function(li) {
+		$scope.$watch(li.Shipper.ID, function(newValue, oldValue) {
+			if (newValue == oldValue) return;
+			var shipper = $451.filter($scope.shippers, { Property: 'ID', Value: newValue })[0];
+			li.Shipper = shipper;
+			li.ShipperName = shipper.Name;
+		});
+	});
+*/
+	function hasMultipleAddresses() {
+		var multi = false;
+		angular.forEach($scope.currentOrder.LineItems, function(li, i) {
+			multi = multi || i > 0 ? li.ShipAddressID != $scope.currentOrder.LineItems[i-1].ShipAddressID : false;
+		});
+		return multi;
+	};
+	$scope.shipToMultipleAddresses = hasMultipleAddresses();
+
+	$scope.updateShipper = function(li) {
+		var id = li ? li.ShipperID : $scope.currentOrder.ShipperID;
+		var shipper = $451.filter($scope.shippers, { Property: 'ID', Value: id })[0];
+		if (!$scope.shipToMultipleAddresses) {
+			$scope.currentOrder.Shipper = shipper;
 			angular.forEach($scope.currentOrder.LineItems, function(li) {
-				if (li.Shipper == null) return;
-				var shipper = $451.filter($scope.shippers, { Property: 'ID', Value: li.Shipper.ID })[0];
+				li.ShipperID = id;
 				li.Shipper = shipper;
 				li.ShipperName = shipper.Name;
+			});
+			Order.save($scope.currentOrder, function(order) {
+				$scope.currentOrder = order;
 			});
 		}
 		else {
-			var shipper = $451.filter($scope.shippers, { Property: 'ID', Value: $scope.currentOrder.Shipper.ID })[0];
-			$scope.currentOrder.Shipper = shipper;
-			angular.forEach($scope.currentOrder.LineItems, function(li) {
-				li.Shipper = shipper;
-				li.ShipperName = shipper.Name;
-			});
+			li.Shipper = shipper;
+			li.ShipperName = shipper.Name;
 		}
+	};
 
+	$scope.setShipAddressAtOrderLevel = function() {
+		angular.forEach($scope.currentOrder.LineItems, function(li) {
+			li.ShipAddressID = $scope.currentOrder.ShipAddressID;
+		});
 		Order.save($scope.currentOrder, function(order) {
 			$scope.currentOrder = order;
+			Shipper.query(order, function(list) {
+				$scope.shippers = list;
+			});
+		});
+	};
+
+	$scope.setShipAddressAtLineItem = function() {
+		$scope.currentOrder.ShipAddressID = $scope.currentOrder.LineItems[0].ShipAddressID;
+		$scope.currentOrder.Shipper = $scope.currentOrder.LineItems[0].Shipper;
+		Order.save($scope.currentOrder, function(order) {
+			$scope.currentOrder = order;
+			Shipper.query(order, function(list) {
+				$scope.shippers = list;
+			});
 		});
 	};
 
