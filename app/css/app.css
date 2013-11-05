@@ -111,7 +111,7 @@ textarea {
     height: 57px;
 }
 
-.search-view .icon-remove-sign {
+.search-view .fa-times-circle {
     color:#bfbfbf;
     display: inline-block;
     padding: 15px;
@@ -146,16 +146,12 @@ textarea {
     max-height: 200px;
 }
 
-.empty {
+.fa.empty {
     width: 100%;
     height: 200px;
 }
 
-.empty .icon {
-    display: block;
-}
-
-.empty.icon i {
+.fa.empty i {
     font-size: 25px;
     display: block;
     opacity: .25;
@@ -249,15 +245,11 @@ textarea {
     outline: none;
 }
 
-.icon-off {
-    margin-right: 5px;
-}
-
 .fa-shopping-cart {
     border: 1px solid #fff;
     font-size: 15px;
     border-radius: 25px;
-
+    padding: 13px;
 }
 
 div.catDropdown ul li ul {
@@ -508,6 +500,10 @@ li.search span {
 /* Cart | Checkout */
 /* ----------------------------------------------------------------------------------------------- */
 
+li.print {
+    cursor: pointer;
+}
+
 .quantity input {
     background-color:#F5F5F5;
     border: 1px solid #BFBFBF;
@@ -545,10 +541,11 @@ li.search span {
     text-align: center;
 }
 
-.cart-view .icon-remove-sign {
+.cart-view .fa-times-circle {
     color:#bfbfbf;
     display: block;
     padding: 0 15px 25px;
+    cursor: pointer;
 }
 
 .cart-view .row input[type="text"] {
@@ -562,6 +559,9 @@ li.search span {
     float: right;
 }
 
+li.cart a.cart {
+    padding: 3px 20px;
+}
 
 li.cart span.badge {
     position: absolute;
