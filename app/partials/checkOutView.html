@@ -49,9 +49,7 @@
     <div class="panel panel-primary col-md-8 col-md-pull-4 check-out-view-types" ng-show="currentOrder && currentOrder.isEditable">
         <div class="panel-heading">
             <h3 ng-click="checkOutSection = 'order'" class="panel-title panel-primary">
-                <span class="icon">
-                    <i ng-class="{'icon-remove-sign': cart_order.$invalid, 'icon-ok': !cart_order.$invalid }"></i>
-                </span>
+                    <i ng-class="{'fa fa-times-circle': cart_order.$invalid, 'fa fa-check': !cart_order.$invalid }"></i>
                 Order
             </h3>
         </div>
@@ -95,9 +93,7 @@
 
         <div class="panel-heading">
             <h3 ng-click="checkOutSection = 'shipping'" class="panel-title panel-primary">
-                <span class="icon">
-                    <i ng-class="{'icon-remove-sign': cart_shipping.$invalid, 'icon-ok': !cart_shipping.$invalid }"></i>
-                </span>
+                    <i ng-class="{'fa fa-times-circle': cart_shipping.$invalid, 'fa fa-check': !cart_shipping.$invalid }"></i>
                 Shipping
             </h3>
         </div>
@@ -152,9 +148,7 @@
 
         <div class="panel-heading">
             <h3 ng-click="checkOutSection = 'billing'" class="panel-title panel-primary">
-                <span class="icon">
-                    <i ng-class="{'icon-remove-sign': cart_billing.$invalid, 'icon-ok': !cart_billing.$invalid }"></i>
-                </span>
+                    <i ng-class="{'fa fa-times-circle': cart_billing.$invalid, 'fa fa-check': !cart_billing.$invalid }"></i>
                 Billing
             </h3>
         </div>
