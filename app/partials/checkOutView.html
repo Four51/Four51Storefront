@@ -107,18 +107,18 @@
                     <p class="alert-error" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</p>
                     <p class="alert-error" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</p>
                 </div>
-                <h5>
-                    Shipping Address
-                </h5>
-                <a class="btn btn-mini btn-action" ng-href="#/address"  tabindex="-1">Add New Address</a>
+                <button type="button" class="btn btn-xs btn-danger" ng-href="#/address"  tabindex="-1">Add New Address</button>
                 <button type="button" ng-click="shipToMultipleAddresses = !shipToMultipleAddresses" class="btn btn-xs btn-warning"
                         ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1 && user.ShipMethod != null">Ship to multiple addresses</button>
                 <div ng-show="!shipToMultipleAddresses">
-                    <select name="shippingAddress"
-                            ng-change="setShipAddressAtOrderLevel()"
-                            ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
-                            ng-model="currentOrder.ShipAddressID"
-                            ng-required="!shipToMultipleAddresses" />
+                    <h5>
+                        Shipping Address
+                        <select name="shippingAddress"
+                                ng-change="setShipAddressAtOrderLevel()"
+                                ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
+                                ng-model="currentOrder.ShipAddressID"
+                                ng-required="!shipToMultipleAddresses" />
+                    </h5>
                     <h5 ng-show="user.ShipMethod != null">
                         Shipping Method
                         <select ng-change="updateShipper()"
@@ -142,7 +142,7 @@
                                     ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
                                     ng-options="shipper.ID as shipper.Name for shipper in shippers | noliverates"
                                     ng-model="item.ShipperID"
-                                    ng-required="shipToMultipleAddresses && user.ShipMethod != null" /><br />{{item.Quantity}}<br />{{item.ShipAddressID}}<br />{{item.ShipperID}}
+                                    ng-required="shipToMultipleAddresses && user.ShipMethod != null" />
                         </li>
                     </ul>
                 </div>

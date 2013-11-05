@@ -58,6 +58,8 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	};
 
 	$scope.setShipAddressAtLineItem = function() {
+		$scope.currentOrder.ShipAddressID = $scope.currentOrder.LineItems[0].ShipAddressID;
+		$scope.currentOrder.Shipper = $scope.currentOrder.LineItems[0].Shipper;
 		Order.save($scope.currentOrder, function(order) {
 			$scope.currentOrder = order;
 			Shipper.query(order, function(list) {
