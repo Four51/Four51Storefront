@@ -253,11 +253,11 @@ textarea {
     margin-right: 5px;
 }
 
-.icon-shopping-cart {
+.fa-shopping-cart {
     border: 1px solid #fff;
     font-size: 15px;
     border-radius: 25px;
-    padding: 15px;
+
 }
 
 div.catDropdown ul li ul {
@@ -561,6 +561,7 @@ li.search span {
 .cart-view-btn-copy {
     float: right;
 }
+
 
 li.cart span.badge {
     position: absolute;
