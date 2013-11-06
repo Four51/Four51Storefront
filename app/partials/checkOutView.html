@@ -49,9 +49,7 @@
     <div class="panel panel-primary col-md-8 col-md-pull-4 check-out-view-types" ng-show="currentOrder && currentOrder.isEditable">
         <div class="panel-heading">
             <h3 ng-click="checkOutSection = 'order'" class="panel-title panel-primary">
-                <span class="icon">
-                    <i ng-class="{'icon-remove-sign': cart_order.$invalid, 'icon-ok': !cart_order.$invalid }"></i>
-                </span>
+                    <i ng-class="{'fa fa-times-circle': cart_order.$invalid, 'fa fa-check': !cart_order.$invalid }"></i>
                 Order
             </h3>
         </div>
@@ -95,9 +93,7 @@
 
         <div class="panel-heading">
             <h3 ng-click="checkOutSection = 'shipping'" class="panel-title panel-primary">
-                <span class="icon">
-                    <i ng-class="{'icon-remove-sign': cart_shipping.$invalid, 'icon-ok': !cart_shipping.$invalid }"></i>
-                </span>
+                    <i ng-class="{'fa fa-times-circle': cart_shipping.$invalid, 'fa fa-check': !cart_shipping.$invalid }"></i>
                 Shipping
             </h3>
         </div>
@@ -107,25 +103,26 @@
                     <p class="alert-error" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</p>
                     <p class="alert-error" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</p>
                 </div>
-                <h5>
-                    Shipping Address
-                </h5>
-                <a class="btn btn-mini btn-action" ng-href="#/address"  tabindex="-1">Add New Address</a>
+                <button type="button" class="btn btn-xs btn-danger" ng-href="#/address"  tabindex="-1">Add New Address</button>
                 <button type="button" ng-click="shipToMultipleAddresses = !shipToMultipleAddresses" class="btn btn-xs btn-warning"
-                        ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1">Ship to multiple addresses</button>
+                        ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1 && user.ShipMethod != null">Ship to multiple addresses</button>
                 <div ng-show="!shipToMultipleAddresses">
-                    <select name="shippingAddress"
-                            ng-change="setShipAddressAtOrderLevel()"
-                            ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
-                            ng-model="currentOrder.ShipAddressID" ng-required="!shipToMultipleAddresses" />
                     <h5>
-                        Shipping Method
+                        Shipping Address
+                        <select name="shippingAddress"
+                                ng-change="setShipAddressAtOrderLevel()"
+                                ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
+                                ng-model="currentOrder.ShipAddressID"
+                                ng-required="!shipToMultipleAddresses" />
                     </h5>
-                    <select ng-change="updateShipper()"
-                            ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
-                            ng-options="shipper.ID as shipper.Name for shipper in shippers"
-                            ng-model="currentOrder.Shipper.ID"
-                            ng-required="!shipToMultipleAddresses" />
+                    <h5 ng-show="user.ShipMethod != null">
+                        Shipping Method
+                        <select ng-change="updateShipper()"
+                                ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
+                                ng-options="shipper.ID as shipper.Name for shipper in shippers"
+                                ng-model="currentOrder.ShipperID"
+                                ng-required="!shipToMultipleAddresses && user.ShipMethod != null" />
+                    </h5>
                 </div>
                 <div ng-show="shipToMultipleAddresses">
                     <ul>
@@ -133,13 +130,15 @@
                             {{item.ProductIDText}} |
                             {{item.Quantity}} |
                             {{item.DateNeeded | date:'MM/dd/yyyy' }}
-                            <select
+                            <select name="shippingAddress"
                                     ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
-                                    ng-model="item.ShipAddressID" ng-required="shipToMultipleAddresses" /> ~
-                            <select ng-change="updateShipper()"
+                                    ng-model="item.ShipAddressID"
+                                    ng-required="shipToMultipleAddresses" /> ~
+                            <select ng-change="updateShipper(item)"
                                     ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
                                     ng-options="shipper.ID as shipper.Name for shipper in shippers | noliverates"
-                                    ng-model="item.Shipper.ID" ng-required="shipToMultipleAddresses" />
+                                    ng-model="item.ShipperID"
+                                    ng-required="shipToMultipleAddresses && user.ShipMethod != null" />
                         </li>
                     </ul>
                 </div>
@@ -149,9 +148,7 @@
 
         <div class="panel-heading">
             <h3 ng-click="checkOutSection = 'billing'" class="panel-title panel-primary">
-                <span class="icon">
-                    <i ng-class="{'icon-remove-sign': cart_billing.$invalid, 'icon-ok': !cart_billing.$invalid }"></i>
-                </span>
+                    <i ng-class="{'fa fa-times-circle': cart_billing.$invalid, 'fa fa-check': !cart_billing.$invalid }"></i>
                 Billing
             </h3>
         </div>

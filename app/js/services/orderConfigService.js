@@ -25,9 +25,9 @@ four51.app.factory('OrderConfig', function() {
 		if (order.CostCenter == null)
 		angular.forEach(user.CostCenters, function(c) {
 			if (c.DefaultAddressID) {
-				order.ShipAddressID = c.DefaultAddressID;
+				order.ShipAddressID = order.ShipAddressID || c.DefaultAddressID;
 				angular.forEach(order.LineItems, function(li) {
-					li.ShipAddressID = c.DefaultAddressID;
+					li.ShipAddressID = li.ShipAddressID || c.DefaultAddressID;
 				});
 			}
 		});

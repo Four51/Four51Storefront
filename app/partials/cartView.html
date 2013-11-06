@@ -4,7 +4,7 @@
             <hr />
             <ul>
                 <li class="nav-header">Your Cart</li>
-                <li class="nav-header print" style="float: right;" ng-click="onPrint()"><span class="icon"><i class="icon-print" style="font-size: 20px;"></i></span>Print</li>
+                <li class="nav-header print" style="float: right;" ng-click="onPrint()"><i class="fa fa-print" style="font-size: 20px;"></i>Print</li>
             </ul>
             <hr />
         </nav>
@@ -17,10 +17,10 @@
                 </div>
                 <div class="panel-body">
                     <div ng-if="!user.Permissions.contains('HidePricing')">
-                        <h5>
+                        <p>
                             SubTotal
                             <span style="float: right;">{{currentOrder.Subtotal | currency}}</span>
-                        </h5>
+                        </p>
                         <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
                             {{ user.Company.SiteText.ShippingDisclaimer }}
                         </p>
@@ -42,10 +42,10 @@
                 <div class=panel-body">
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
                         <div class="col-md-6 col-sm-6 col-xs-12 cart-view-line-items-product">
-                            <h5>
+                            <p>
                                 <a ng-href="#.#">{{item.ProductIDText}}</a>
                                 <!---TODO needs url --->
-                            </h5>
+                            </p>
                             <p>{{item.Product.Name}}</p>
                             <ul>
                                 <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">{{spec.Name}} : {{spec.Value}}</li>
@@ -54,7 +54,7 @@
                                 <div class="col-xs-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
                                     <input placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
                                     <button type="button" class="btn btn-info cart-view-btn-copy" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" >
-                                        <span class="icon"><i class="icon-copy"></i></span>
+                                        <i class="fa fa-copy"></i>
                                     </button>
                                 </div>
                                 <div class="col-xs-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
@@ -62,7 +62,7 @@
                                     <input ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />
                                     <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
                                     <button type="button" class="btn btn-info cart-view-btn-copy" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
-                                        <span class="icon"><i class="icon-copy"></i></span>
+                                        <i class="fa fa-copy"></i>
                                     </button>
                                 </div>
                             </div>
@@ -78,7 +78,7 @@
                                 {{item.LineTotal | currency}}
                             </div>
                             <div class="col-md-1 col-sm-1 col-xs-3">
-                                <span class="icon" style="cursor: pointer;display: block;"> <i class="icon-remove-sign" ng-click="removeItem(item)"></i></span>
+                                 <i class="fa fa-times-circle" ng-click="removeItem(item)"></i>
                             </div>
                     </div>
                 </div>
