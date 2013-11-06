@@ -1,6 +1,10 @@
-<div class="order-history-header-view well">
-    <h4>Order Details</h4>
-    <div style="padding:10px; text-align:left;">
+<div class="panel panel-default order-history-header-view">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Order Details
+        </h3>
+    </div>
+    <div class="panel-body">
         <p>{{order.Type}} Order ID: <span style="float:right;">{{order.ExternalID}}</span></p>
         <p>Date Submitted: <span style="float:right;">{{order.DateSubmitted | date:'medium'}}</span></p>
         <p>Status: <span style="float:right;">{{order.Status}}</span></p>
