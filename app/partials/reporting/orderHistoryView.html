@@ -1,18 +1,23 @@
 <section class="container order-history-view">
-<div class="col-sm-12 col-md-4 col-md-push-8 no-padding-sm-md-lg">
-    <orderhistoryheader class="col-md-12 col-sm-6 col-xs-12" order="order"></orderhistoryheader>
-    <orderhistoryfooter class="col-md-12 col-sm-6 col-xs-12" order="order"></orderhistoryfooter>
-</div>
-<div class="col-sm-12 col-md-8 col-md-pull-4">
-    <div ng-if="order.FromUserID == user.ID" class="order-history-view-save-favorite">
-        <input type="text" ng-model="order.FavoriteName" placeholder="Favorite Name" class="order-history-view-save-favorite-input" />
-        <input ng-click="saveFavorite()" type="button" class="btn btn-small btn-primary order-history-view-save-favorite-btn" value="Save as Favorite" />
+    <nav class="nav nav-cat-search">
+        <hr />
+        <ul>
+            <li class="nav-header">{{order.Type}} Order<span ng-show="order.ExternalID"> ID: </span>{{order.ExternalID}}</li>
+            <li class="nav-header print" style="float: right;" ng-click="onPrint()"><i class="fa fa-print" style="font-size: 20px;"></i> Print</li>
+        </ul>
+        <div ng-if="order.FromUserID == user.ID" class="order-history-view-save-favorite">
+            <input type="text" ng-model="order.FavoriteName" placeholder="Favorite Name" class="order-history-view-save-favorite-input" />
+            <button ng-click="saveFavorite()" class="btn btn-info order-history-view-save-favorite-btn">Save as Favorite</button>
+        </div>
+        <div style="clear:both;"></div>
+        <hr />
+    </nav>
+    <div class="col-sm-12 col-md-4 col-md-push-8 no-padding-sm-md-lg">
+        <orderhistoryheader class="col-md-12 col-sm-6 col-xs-12"></orderhistoryheader>
+        <orderhistoryfooter class="col-md-12 col-sm-6 col-xs-12"></orderhistoryfooter>
     </div>
-    <div ng-if="order.FromUserID == user.ID" class="order-history-view-repeat">
-        <input type="button" class="btn btn-small btn-info btn-block order-history-view-repeat-btn" value="Repeat Order" ng-click="repeatOrder()" />
+    <div class="col-sm-12 col-md-8 col-md-pull-4">
+        <div style="clear:both;"></div>
+        <lineitemhistorygrid></lineitemhistorygrid>
     </div>
-    <div style="clear:both;"></div>
-    <hr/>
-    <lineitemhistorygrid order="order"></lineitemhistorygrid>
-</div>
 </section>

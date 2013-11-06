@@ -8,9 +8,12 @@
         <p>Subtotal:<span style="float: right;">{{order.Subtotal | currency:"$"}}</span></p>
         <p>Shipping & Handling: <span style="float: right;">{{order.ShippingCost | currency:"$"}}</span></p>
         <p>Tax: <span style="float: right;">{{order.TaxCost | currency:"$"}}</span></p>
+        <p>Total: <span style="float: right;">{{order.Total | currency:"$"}}</span></p>
     </div>
     <div class="panel-footer">
-        <h5>Total: <span style="float: right;">{{order.Total | currency:"$"}}</span></h5>
+        <div ng-if="order.FromUserID == user.ID" class="order-history-view-repeat">
+            <button class="btn btn-primary" ng-click="repeatOrder()">Repeat Order</button>
+        </div>
     </div>
 </div>
 <div>

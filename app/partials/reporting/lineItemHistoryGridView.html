@@ -5,34 +5,34 @@
                 {{order.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in this order
             </h3>
         </div>
-        <div class="panel-body">
-            <div class="order-history-view-line-items-header text-center" style="color:#3d3d3d;">
-                <h5 class="col-md-4 text-left">PRODUCT</h5>
-                <h5 class="col-md-3">QUANTITY</h5>
-                <h5 class="col-md-2" ng-show="hasShipperOnAnyLineItem() || hasShipAccountOnAnyLineItem()">SHIPPING</h5>
-                <h5 class="col-md-2" ng-show="order.Status == 'Open'" style="line-height:1em">QTY SHIPPED</h5>
-                <h5 class="col-md-2">TOTAL</h5>
-            </div>
-            <h5 class="order-history-view-line-items-repeater" ng-repeat="item in order.LineItems">
-                <div class="col-md-4 order-history-view-line-items-product">
-                    <p><a ng-href="#/order/{{order.ID}}/{{$index}}">{{item.ProductIDText}}</a></p>
-                    <p>{{item.Product.Name}}</p>
-                    <ul ng-show="hasSpecOnAnyLineItem">
-                        <li ng-repeat="spec in item.Specs | filter:Selected">{{spec.Name + " : " + spec.Value}}</li>
-                    </ul>
+        <div>
+            <div class="order-history-view-line-items-repeater" ng-repeat="item in order.LineItems">
+                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-4 order-history-view-line-items-product">
+                     <p><a ng-href="#/order/{{order.ID}}/{{$index}}">{{item.ProductIDText}}</a></p>
+                     <p>{{item.Product.Name}}</p>
+                     <ul ng-show="hasSpecOnAnyLineItem">
+                         <li ng-repeat="spec in item.Specs | filter:Selected">{{spec.Name + " : " + spec.Value}}</li>
+                     </ul>
+                     <div class="row">
+                         <div class="col-xs-6">
+                             <p ng-show="hasShipperOnAnyLineItem()">{{item.Shipper.Name}}</p>
+                         </div>
+                         <div class="col-xs-6">
+                             <p ng-show="hasShipAccountOnAnyLineItem()">{{item.ShipAccount}}</p>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-xs-3 col-sm-2">
+                     <p>{{item.UnitPrice | currency:"$"}}</p>
+                 </div>
+                <div class="col-xs-3 col-sm-2">
+                    <p ng-show="item.Product.QuantityMultiplier == 1">x {{item.Quantity}}</span>
+                    <p ng-show="item.Product.QuantityMultiplier > 1" >x {{item.Product.QuantityMultiplier * item.Quantity}}</span>
                 </div>
-                <div class="col-md-3">
-                    <p>{{item.UnitPrice | currency:"$"}}
-                        <span style="float:right;" ng-show="item.Product.QuantityMultiplier == 1">x {{item.Quantity}}</span>
-                        <span style="float:right;" ng-show="item.Product.QuantityMultiplier > 1" >x {{item.Product.QuantityMultiplier * item.Quantity}}</span>
-                    </p>
+                <div class="col-xs-3 col-sm-2">
+                    {{item.LineTotal | currency:"$"}}
                 </div>
-                <div class="col-md-2" ng-show="hasShipperOnAnyLineItem() || hasShipAccountOnAnyLineItem()">
-                    <p ng-show="hasShipperOnAnyLineItem()">{{item.Shipper.Name}}</p>
-                    <p ng-show="hasShipAccountOnAnyLineItem()">{{item.ShipAccount}}</p>
-                </div>
-                <div class="col-md-2 text-center" ng-show="order.Status == 'Open'">{{item.TotalShipped}}</div>
-                <div class="col-md-2 text-center">{{item.LineTotal | currency:"$"}}</div>
+                <div class="col-xs-3 col-sm-2" ng-show="order.Status == 'Open'">{{item.TotalShipped}}</div>
             </div>
         </div>
         <div class="panel-footer">

@@ -39,9 +39,9 @@
 
     /*-----ROB-------*/
     .no-padding-sm-md-lg {padding:0;}
-    .order-history-view-save-favorite {float:left;}
+/*    .order-history-view-save-favorite {float:left;}
     .order-history-view-repeat {float:right;}
-    .order-history-view-repeat-btn {padding:6px 12px;}
+    .order-history-view-repeat-btn {padding:6px 12px;}    */
 }
 
 
@@ -54,10 +54,10 @@
 
 
     /*-----ROB--------*/
-    .order-history-view-save-favorite {float:left;}
+   /* .order-history-view-save-favorite {float:left;}
     .order-history-view-repeat {float:right;}
+    .order-history-view-repeat-btn {padding:6px 12px;}   */
     .no-padding-sm-md-lg {padding:0;}
-    .order-history-view-repeat-btn {padding:6px 12px;}
 
 
 }
@@ -70,9 +70,9 @@
     .branding-view-logo {float: none; margin: 0 auto; max-height: 75px; }
 
     /*-----ROB--------*/
-    .order-history-view-save-favorite {float:left;}
+/*    .order-history-view-save-favorite {float:left;}
     .order-history-view-repeat {float:right;}
-    .order-history-view-repeat-btn {padding:6px 12px;}
+    .order-history-view-repeat-btn {padding:6px 12px;}                        */
 
     .no-padding-sm-md-lg {padding:0;}
 }
@@ -98,9 +98,9 @@
 
 
     /*-----ROB--------*/
-    .order-history-view-repeat-btn{margin-top:20px;}
+/*    .order-history-view-repeat-btn{margin-top:20px;}
     .order-history-view-save-favorite-input{width:49%;}
-    .order-history-view-save-favorite-btn{width:49%;}
+    .order-history-view-save-favorite-btn{width:49%;}                 */
     .order-history-view-line-items-product {margin-bottom: 25px;}
 
 }
