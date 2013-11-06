@@ -496,6 +496,23 @@ li.search span {
     opacity:0;
 }
 
+li.grr { background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+    border-top: 1px solid rgba(0, 0, 0, 0);
+
+    height: 310px;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;}
+
+.shortproduct-view.howdy {width: 100%; border: 1px solid red;}
+.shortproduct-info {  margin-top: 214px; display: block; background: none repeat scroll 0 0 #F6F6F6;
+    border-bottom: 1px solid #E6E6E6;
+    border-top: 1px solid #E6E6E6;
+    height: 310px;
+    position: absolute;
+    width: 100%;
+    z-index: 5;}
 /* ----------------------------------------------------------------------------------------------- */
 /* Cart | Checkout */
 /* ----------------------------------------------------------------------------------------------- */

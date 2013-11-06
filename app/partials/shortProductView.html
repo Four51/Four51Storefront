@@ -1,4 +1,4 @@
-<div class="shortproduct-view">
+<div class="shortproduct-view" ng-class="{ 'howdy': toggle }">
     <a class="cat-link" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
         <figure ng-show="LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url" class="cat-image">
             <img ng-src="{{LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url}}"/>
@@ -9,7 +9,7 @@
     </a>
     <div>
         <figcaption class="shortproduct-name">{{LineItem.Product.Name}}</figcaption>
-        <figcaption class="shortproduct-toggle" ng-click="toggle = !toggle">Quick View</figcaption>
+        <figcaption class="shortproduct-toggle" ng-click="$parent.toggle = !$parent.toggle; toggle = !toggle">Quick View</figcaption>
     </div>
 </div>
 
