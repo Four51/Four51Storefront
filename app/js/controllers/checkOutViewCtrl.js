@@ -104,6 +104,9 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
         Order.submit($scope.currentOrder, function(data) {
             $scope.currentOrder = data;
             $scope.user.CurrentOrderID = null;
+	        User.save($scope.user, function(data) {
+		        $scope.user = data;
+	        });
         });
     };
 
@@ -121,6 +124,9 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
         Order.delete($scope.currentOrder, function() {
             $scope.user.CurrentOrderID = null;
             $scope.currentOrder = null;
+	        User.save($scope.user, function(data) {
+		        $scope.user = data;
+	        });
         });
     };
 
