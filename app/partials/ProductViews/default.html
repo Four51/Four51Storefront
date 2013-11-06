@@ -29,6 +29,9 @@
                         </td>
                     </tr>
                 </table>
+                <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
+                    QTY Available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
+                </p>
             </div>
             <div class="panel-footer">
                 <p class="alert alert-danger" ng-show="quantityError">
