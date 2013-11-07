@@ -1,4 +1,4 @@
-<div class="shortproduct-view">
+<div class="shortproduct-view" ng-class="{ 'howdy': toggle }">
     <a class="cat-link" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
         <figure ng-show="LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url" class="cat-image">
             <img ng-src="{{LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url}}"/>
@@ -7,29 +7,34 @@
             <span class="fa empty"><i class="fa fa-camera"></i></span>
         </div>
     </a>
-    <div>
+    <div class="caption">
         <figcaption class="shortproduct-name">{{LineItem.Product.Name}}</figcaption>
-        <figcaption class="shortproduct-toggle" ng-click="toggle = !toggle">Quick View</figcaption>
+        <figcaption class="shortproduct-toggle" ng-click="toggle = !toggle"><i class="fa fa-plus-circle"></i> Quick View</figcaption>
     </div>
 </div>
 
-<section class="shortproduct-info" ng-show="toggle">
-    <span ng-bind-html="LineItem.Product.Description" ng-show="LineItem.Product.Description"></span>
-    <span ng-show="LineItem.PriceSchedule.PriceBreaks[0]">
-        <br>
+<section class="shortproduct-info text-left" ng-show="toggle">
+    <i class="shortproduct-arrow fa fa-caret-up"></i>
+    <i class="shortproduct-close fa fa-times-circle" ng-click="toggle = !toggle"></i>
+    <p>
+        <span class="text-info">Description:</span>
+        <br />
+        <span ng-bind-html="LineItem.Product.Description" ng-show="LineItem.Product.Description" />
+    </p>
+    <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]">
         {{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
         <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>
         for {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
-    </span>
-    <span ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
-        <br>
-        quantity available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
-    </span>
-    <span ng-show="allowAddToOrderInProductList">
-        <br>
-        <quantityfield lineitem="LineItem" error="quantityError" />
-        <span ng-show="quantityError"><br>{{quantityError}} </span>
-        <span ng-show="!quantityError">{{LineItem.LineTotal | currency}}</span>
-    </span>
-    <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">More Info</a>
- </section>
+    </p>
+    <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
+        QTY Available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
+    </p>
+    <!--- intentionally removing quantity from short product view, would be more inclined to see user edit quantity if actually in the product-detail/add-to-cart environment. --->
+    <p>
+        <a class="btn btn-default" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
+            More Info
+        </a>
+    </p>
+</section>
+
+
