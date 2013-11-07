@@ -10,14 +10,14 @@
         <p>Tax: <span style="float: right;">{{order.TaxCost | currency:"$"}}</span></p>
         <p>Total: <span style="float: right;">{{order.Total | currency:"$"}}</span></p>
     </div>
-    <div class="panel-footer">
-        <div ng-if="order.FromUserID == user.ID" class="order-history-view-repeat">
+    <div class="panel-footer" ng-if="order.FromUserID == user.ID">
+        <div class="order-history-view-repeat">
             <button class="btn btn-primary" ng-click="repeatOrder()">Repeat Order</button>
         </div>
     </div>
 </div>
 <div>
-    <approvalrulelist order="order" />
+
 </div>
 <div>
     <approval order="order" ng-show="order.Status == 'AwaitingApproval' && (order.UserCanApprove || user.Permissions.contains('ApproveAllOrders'))" />
