@@ -35,12 +35,6 @@
                 <div class="col-xs-3 col-sm-2" ng-show="order.Status == 'Open'">{{item.TotalShipped}}</div>
             </div>
         </div>
+            <approvalrulelist ng-show="order.Approvals"order="order" />
     </div>
-    <div ng-show="order.Approvals" class="panel panel-primary approval-rule-summary">
-        <div class="panel-heading">
-            <h3 class="panel-title panel-primary">Approvals</h3>
-        </div>
-        <approvalrulelist order="order" />
-    </div>
-
 </div>
