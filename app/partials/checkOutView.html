@@ -33,6 +33,7 @@
                 <p>Subtotal: {{currentOrder.Subtotal | currency}}</p>
                 <p>Shipping Costs: {{currentOrder.ShippingCost | currency}}</p>
                 <p>Tax: {{currentOrder.Tax || 0 | currency}}</p>
+                <p ng-show="currentOrder.Coupon">{{currentOrder.Coupon.Label}}: {{currentOrder.Coupon.OrderDiscount * -1 | currency}}</p>
                 <hr/>
                 <p>Total: {{currentOrder.Total | currency}}</p>
                 <p ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
@@ -103,7 +104,7 @@
                     <p class="alert-error" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</p>
                     <p class="alert-error" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</p>
                 </div>
-                <button type="button" class="btn btn-xs btn-danger" ng-href="#/address"  tabindex="-1">Add New Address</button>
+                <button type="button" class="btn btn-xs btn-danger" redirect="/address" tabindex="-1">Add New Address</button>
                 <button type="button" ng-click="shipToMultipleAddresses = !shipToMultipleAddresses" class="btn btn-xs btn-warning"
                         ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1 && user.ShipMethod != null">Ship to multiple addresses</button>
                 <div ng-show="!shipToMultipleAddresses">
@@ -160,10 +161,25 @@
                 </div>
                 <h5>
                     Billing Address
+                    <select name="billingAddress" ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required />
+                    <button type="button" class="btn btn-xs btn-danger" redirect="/address"  tabindex="-1">Add New Address</button>
                 </h5>
-                <select name="billingAddress" ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required />
-                <a class="btn btn-mini btn-action" ng-href="#/address" tabindex="-1">Add New Address</a>
                 <paymentselector />
+                <div ng-show="user.Permissions.contains('ViewPromotions')">
+                    <div ng-show="!currentOrder.Coupon">
+                        <span>{{user.Company.SiteText.PromotionCode || 'Promotion Code'}}: </span>
+                        <input type="text" ng-model="coupon" />
+                        <button type="button" class="btn btn-xs btn-danger" ng-click="applyCoupon()">{{user.Company.SiteText.Apply || 'Apply'}}</button><br />
+                        <span ng-show="couponError" class="ui-state-error">{{couponError}}</span>
+                    </div>
+                    <h5 ng-show="currentOrder.Coupon">
+                        <span>Coupon: {{currentOrder.Coupon.CouponCode}}<span class="icon-remove-sign"></span></span><br />
+                        <div class="text-danger">
+                            {{currentOrder.Coupon.Description}}<br />
+                            <span ng-show="currentOrder.Coupon.ExpirationDate">Expires: {{currentOrder.Coupon.ExpirationDate | date:'MM/dd/yyyy'}}</span>
+                        </div>
+                    </h5>
+                </div>
                 <div ng-show="currentOrder.Approvals" class="check-out-approvals">
                     <approvalrulelist order="currentOrder" />
                 </div>
@@ -171,8 +187,8 @@
                     <div>
                         <h5>
                             Email Notification
+                            <input ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
                         </h5>
-                        <input ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
                     </div>
                 </div>
             </div>
