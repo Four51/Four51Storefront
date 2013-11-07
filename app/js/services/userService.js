@@ -9,12 +9,14 @@ four51.app.factory('User', function($q, $rootScope, $resource, $451, Security) {
             return $451.contains(u.Permissions, value);
         };
         if ($451.contains(u.Permissions, ['PayByVisa', 'PayByMasterCard', 'PayByAmex', 'PayByDiscover', 'PayByDinersClub', 'PayByJCB', 'PayByDelta', 'PayBySwitch', 'PayBySolo', 'PayByElectron', 'PayByLaser']))
-            u.Permissions.push('PayByCreditCard');
+            !$451.contains('PayByCreditCard') u.Permissions.push('PayByCreditCard');
 
 	    angular.forEach(u.CustomFields, function(f) {
 			if (f.ControlType == 'File' && f.File && f.File.Url.indexOf('auth') == -1)
 				f.File.Url += "&auth=" + Security.auth();
 	    });
+
+	    u.AvailableCreditCards.Count = Object.keys(u.AvailableCreditCards).length;
     }
 
 	var _refresh = function() {
