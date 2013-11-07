@@ -14,8 +14,9 @@
 </div>
 
 <section class="shortproduct-info text-left" ng-show="toggle">
-    <i class="fa fa-caret-up" style="position: absolute;top: -25px; left: 45%; color:#f5f5f5;font-size: 36px;z-index: 1;"></i>
-    <p class="short-product-view-description">
+    <i class="shortproduct-arrow fa fa-caret-up"></i>
+    <i class="shortproduct-close fa fa-times-circle" ng-click="toggle = !toggle"></i>
+    <p>
         <span class="text-info">Description:</span>
         <br />
         <span ng-bind-html="LineItem.Product.Description" ng-show="LineItem.Product.Description" />
@@ -28,14 +29,7 @@
     <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
         QTY Available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
     </p>
-    <!---   intentionally removing from short product view, this should simply be a short product view && show abridged information;
-            would be more inclined to see user edit quantity if actually in the cart environment.
-    <div ng-show="allowAddToOrderInProductList">
-        <quantityfield lineitem="LineItem" error="quantityError" />
-        <p ng-show="quantityError">{{quantityError}} quantity error </p>
-        <p ng-show="!quantityError">{{LineItem.LineTotal | currency}} line total currency</p>
-    </div>
-    --->
+    <!--- intentionally removing quantity from short product view, would be more inclined to see user edit quantity if actually in the product-detail/add-to-cart environment. --->
     <p>
         <a class="btn btn-default" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
             More Info

@@ -2,6 +2,9 @@
     <figure>
         <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url">
     </figure>
+    <div class="empty" ng-show="!LineItem.Variant.LargeImageFile.Url || !LineItem.Product.LargeImageFile.Url">
+        <span class="fa empty"><i class="fa fa-camera"></i></span>
+    </div>
     <div class="panel panel-default col-md-3 col-md-offset-1 col-md-push-8">
         <div class="panel-heading">
             <h3 class="panel-title">
@@ -66,13 +69,13 @@
     <div class="panel product-view-default-toggle-panel panel-primary col-md-8 col-md-pull-4">
         <div class="panel-heading">
             <!--- TODO specgroups panel-title should only show if spec groups data exist --->
-            <h3 ng-click="selected=1" ng-class="{'panel-selected':selected == 1}" class="panel-title">
+            <h3 ng-click="selected=1" ng-class="{'panel-selected':selected == 1}" class="panel-title panel-switch">
                 <span class="icon">
                     <i ng-class="{'fa fa-caret-up':selected == 1}"></i>
                 </span>
                 Info
             </h3>
-            <h3 ng-click="selected=2" ng-class="{'panel-selected':selected == 2}" class="panel-title">
+            <h3 ng-click="selected=2" ng-class="{'panel-selected':selected == 2}" class="panel-title panel-switch">
                 <span class="icon">
                     <i ng-class="{'fa fa-caret-up':selected == 2}"></i>
                 </span>
@@ -147,25 +150,17 @@
                 <staticspecstable specgroups="StaticSpecGroups"/>
             </div>
         </div>
-    </div>
-    <div class="panel panel-default product-view-default-related col-md-8 col-md-pull-4">
-        <div class="panel-heading">
-            <h3 class="panel-title">Related Products</h3>
-        </div>
-        <div class="panel-body">
-            <p>
-                R.1
-            </p>
-        </div>
-        <div class="panel-body">
-            <p>
-                R.2
-            </p>
-        </div>
-        <div class="panel-body">
-            <p>
-                R.3
-            </p>
+        <div class="panel-default product-view-default-related-products">
+            <div class="panel-heading">
+                <h3 class="panel-title">Related Products</h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li>R.1</li>
+                    <li>R.2</li>
+                    <li>R.3</li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
