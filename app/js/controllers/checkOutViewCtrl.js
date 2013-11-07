@@ -1,4 +1,4 @@
-four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList, Shipper) {
+four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList, Shipper, Coupon) {
 	AddressList.query(function(list) {
         $scope.addresses = list;
     });
@@ -104,6 +104,9 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
         Order.submit($scope.currentOrder, function(data) {
             $scope.currentOrder = data;
             $scope.user.CurrentOrderID = null;
+	        User.save($scope.user, function(data) {
+		        $scope.user = data;
+	        });
         });
     };
 
@@ -121,6 +124,9 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
         Order.delete($scope.currentOrder, function() {
             $scope.user.CurrentOrderID = null;
             $scope.currentOrder = null;
+	        User.save($scope.user, function(data) {
+		        $scope.user = data;
+	        });
         });
     };
 
@@ -135,6 +141,16 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     $scope.saveFavorite = function() {
         FavoriteOrder.save($scope.currentOrder);
     };
+
+	$scope.applyCoupon = function() {
+		$scope.couponError = null;
+		Coupon.apply($scope.coupon, function(coupon) {
+			$scope.currentOrder.Coupon = coupon;
+			Order.save($scope.currentOrder, function(data) {
+				$scope.currentOrder = data;
+			});
+		});
+	}
 
     $scope.checkOutSection = 'order';
 });

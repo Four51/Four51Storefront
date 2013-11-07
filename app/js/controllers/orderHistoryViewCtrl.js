@@ -1,4 +1,4 @@
-four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $location, $routeParams, Order, FavoriteOrder) {
+four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $location, $routeParams, Order, FavoriteOrder, User) {
 	Order.get($routeParams.id, function(data){
         $scope.order = data;
         $scope.hasSpecsOnAnyLineItem = false;
@@ -21,6 +21,18 @@ four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $location,
             return false;
         };
 	});
+
+	$scope.repeatOrder = function() {
+		$scope.order.Repeat = true;
+        Order.save($scope.order, function(data) {
+	        $scope.currentOrder = data;
+	        $scope.user.CurrentOrderID = data.ID;
+	        User.save($scope.user, function(data) {
+		        $scope.user = data;
+		        $location.path('/cart');
+	        });
+        });
+	};
 
 	$scope.saveFavorite = function() {
         FavoriteOrder.save($scope.order);
