@@ -16,6 +16,7 @@
     .nav li span.nav-name {float:right;}
     .header-nav-c1 {width: 1140px; margin: 0 auto; }
     .product-view-default img {margin: 15px 0;}
+    .product-view-default .fa.empty {text-align: left;}
 
 /* start working swipe as a hover for desktop
     .category-description {
@@ -51,7 +52,7 @@
     .nav li span.nav-name {float:right;}
     .nav li span.hidden-sm {float:right;}
     .product-view-default img {margin: 15px 0;}
-
+    .product-view-default .fa.empty {text-align: left;}
 
     /*-----ROB--------*/
    /* .order-history-view-save-favorite {float:left;}
