@@ -4,7 +4,7 @@
             <div>
                 <input type="text" ng-model="searchTerm"  class="form-control search-view-search" placeholder="Search Products" />
                 <div class="search-view-cancel">
-                    <a href="#/catalog"><i class="fa fa-remove-sign"></i></a>
+                    <a href="#/catalog"><i class="fa fa-times-circle"></i></a>
                     <div class="hidden-xs search-view-cancel-name">Press enter to search</div>
                 </div>
                 <button type="submit" ng-click="search()" class="btn btn-default" style="visibility:hidden;">Submit</button>
@@ -13,7 +13,7 @@
     </div>
     <div ng-show="products" class="product-navigation">
         <div>Search results
-            <a href="#/catalog"><i class="fa fa-times-circle"></i></a>
+            <a href="#/catalog"><i class="close-toggle fa fa-times-circle"></i></a>
         </div>
          <div>
             <nav class="nav">
