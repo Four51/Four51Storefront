@@ -1,21 +1,5 @@
-<div class="panel panel-default order-history-footer-view">
-    <div class="panel-heading">
-        <h3 class="panel-title">
-            Order Summary
-        </h3>
-    </div>
-    <div class="panel-body">
-        <p>Subtotal:<span style="float: right;">{{order.Subtotal | currency:"$"}}</span></p>
-        <p>Shipping & Handling: <span style="float: right;">{{order.ShippingCost | currency:"$"}}</span></p>
-        <p>Tax: <span style="float: right;">{{order.TaxCost | currency:"$"}}</span></p>
-        <p>Total: <span style="float: right;">{{order.Total | currency:"$"}}</span></p>
-    </div>
-    <div class="panel-footer" ng-if="order.FromUserID == user.ID">
-        <div class="order-history-view-repeat">
-            <button class="btn btn-primary" ng-click="repeatOrder()">Repeat Order</button>
-        </div>
-    </div>
-</div>
-<div>
-    <approval order="order" ng-show="order.Status == 'AwaitingApproval' && (order.UserCanApprove || user.Permissions.contains('ApproveAllOrders'))" />
-</div>
+<p>Subtotal:<span style="float: right;">{{order.Subtotal | currency:"$"}}</span></p>
+<p>Shipping & Handling: <span style="float: right;">{{order.ShippingCost | currency:"$"}}</span></p>
+<p>Tax: <span style="float: right;">{{order.TaxCost | currency:"$"}}</span></p>
+<p>Total: <span style="float: right;">{{order.Total | currency:"$"}}</span></p>
+

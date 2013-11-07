@@ -1,40 +1,57 @@
-<div>
-    <div class="panel panel-primary order-history-view-line-items">
-        <div class="panel-heading">
-            <h3 class="panel-title panel-primary">
-                {{order.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in this order
-            </h3>
-        </div>
-        <div>
-            <div class="order-history-view-line-items-repeater" ng-repeat="item in order.LineItems">
-                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-4 order-history-view-line-items-product">
-                     <p><a ng-href="#/order/{{order.ID}}/{{$index}}">{{item.ProductIDText}}</a></p>
-                     <p>{{item.Product.Name}}</p>
-                     <ul ng-show="hasSpecOnAnyLineItem">
-                         <li ng-repeat="spec in item.Specs | filter:Selected">{{spec.Name + " : " + spec.Value}}</li>
-                     </ul>
-                     <div class="row">
-                         <div class="col-xs-6">
-                             <p ng-show="hasShipperOnAnyLineItem()">{{item.Shipper.Name}}</p>
-                         </div>
-                         <div class="col-xs-6">
-                             <p ng-show="hasShipAccountOnAnyLineItem()">{{item.ShipAccount}}</p>
-                         </div>
+<div class="panel panel-primary order-history-view-line-items">
+    <div class="panel-heading">
+        <h3 class="panel-title panel-primary">
+            {{order.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in this order
+        </h3>
+    </div>
+
+
+    <div class="panel-body">
+        <div class="order-history-view-line-items-repeater" ng-repeat="item in order.LineItems">
+             <div class="col-md-6 col-sm-6 col-xs-12 col-md-4 order-history-view-line-items-product">
+                 <p><a ng-href="#/order/{{order.ID}}/{{$index}}">{{item.ProductIDText}}</a></p>
+                 <p>{{item.Product.Name}}</p>
+                 <ul ng-show="hasSpecOnAnyLineItem">
+                     <li ng-repeat="spec in item.Specs | filter:Selected">{{spec.Name + " : " + spec.Value}}</li>
+                 </ul>
+                 <div class="row">
+                     <div class="col-xs-6">
+                         <p ng-show="hasShipperOnAnyLineItem()">{{item.Shipper.Name}}</p>
+                     </div>
+                     <div class="col-xs-6">
+                         <p ng-show="hasShipAccountOnAnyLineItem()">{{item.ShipAccount}}</p>
                      </div>
                  </div>
-                 <div class="col-xs-3 col-sm-2">
-                     <p>{{item.UnitPrice | currency:"$"}}</p>
-                 </div>
-                <div class="col-xs-3 col-sm-2">
-                    <p ng-show="item.Product.QuantityMultiplier == 1">x {{item.Quantity}}</span>
-                    <p ng-show="item.Product.QuantityMultiplier > 1" >x {{item.Product.QuantityMultiplier * item.Quantity}}</span>
-                </div>
-                <div class="col-xs-3 col-sm-2">
-                    {{item.LineTotal | currency:"$"}}
-                </div>
-                <div class="col-xs-3 col-sm-2" ng-show="order.Status == 'Open'">{{item.TotalShipped}}</div>
+             </div>
+             <div class="col-xs-3 col-sm-2">
+                 <p>{{item.UnitPrice | currency:"$"}}</p>
+             </div>
+            <div class="col-xs-3 col-sm-2">
+                <p ng-show="item.Product.QuantityMultiplier == 1">x {{item.Quantity}}</span>
+                <p ng-show="item.Product.QuantityMultiplier > 1" >x {{item.Product.QuantityMultiplier * item.Quantity}}</span>
             </div>
+            <div class="col-xs-3 col-sm-2">
+                {{item.LineTotal | currency:"$"}}
+            </div>
+            <div class="col-xs-3 col-sm-2" ng-show="order.Status == 'Open'">{{item.TotalShipped}}</div>
         </div>
-            <approvalrulelist ng-show="order.Approvals"order="order" />
+    </div>
+    <div class="panel-footer">
+        <div ng-if="order.FromUserID == user.ID" class="input-group">
+            <input type="text" ng-model="order.FavoriteName" placeholder="Favorite Name" class="form-control"/>
+            <span class="input-group-btn">
+                <button type="button" ng-click="saveFavorite()" class="btn btn-default">Save as Favorite</button>
+            </span>
+        </div>
     </div>
 </div>
+
+<div ng-show="order.Approvals" class="panel panel-primary approval-rule-summary">
+    <div class="panel-heading">
+        <h3 class="panel-title panel-primary">Approvals</h3>
+    </div>
+    <div class="panel-body">
+        <approvalrulelist order="order" />
+    </div>
+</div>
+

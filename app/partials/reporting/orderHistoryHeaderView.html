@@ -1,28 +1,19 @@
-<div class="panel panel-default order-history-header-view">
-    <div class="panel-heading">
-        <h3 class="panel-title">
-            Order Details
-        </h3>
-    </div>
-    <div class="panel-body">
-        <p ng-show="order.DateSubmitted">Date Submitted: <span style="float:right;">{{order.DateSubmitted | date:'medium'}}</span></p>
-        <p>Status: <span style="float:right;">{{order.Status}}</span></p>
-        <p ng-show="order.DateCompleted">Date Completed: <span style="float:right;">{{order.DateCompleted | date:'medium'}}</span></p>
-        <p>Created By: <span style="float:right;">{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</span></p>
-        <p ng-show="order.Comments">Comments: <span style="float:right;">{{order.Comments}}</span></p>
-        <p ng-show="orderCostCenter">Cost Center: <span style="float:right;">{{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</span></p>
-        <p>Payment Method: <span style="float:right;">{{order.PaymentMethod}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong></span></p>
-        <address ng-show="order.BillAddress">
-            <strong> Bill to:</strong><br>
-            {{order.BillAddress.Street1}}<br>
-            {{order.BillAddress.Street2}}<br ng-show="order.BillAddress.Street2">
-            {{order.BillAddress.City}},{{order.BillAddress.State}} {{order.BillAddress.Zip}}
-        </address>
-        <address ng-show="order.ShipAddress">
-            <strong> Ship to:</strong><br>
-            {{order.ShipAddress.Street1}}<br>
-            {{order.ShipAddress.Street2}}<br ng-show="order.ShipAddress.Street2">
-            {{order.ShipAddress.City}}, {{order.ShipAddress.State}} {{order.ShipAddress.Zip}}
-        </address>
-    </div>
-</div>
+<p ng-show="order.DateSubmitted">Date Submitted: <span style="float:right;">{{order.DateSubmitted | date:'medium'}}</span></p>
+<p>Status: <span style="float:right;">{{order.Status}}</span></p>
+<p ng-show="order.DateCompleted">Date Completed: <span style="float:right;">{{order.DateCompleted | date:'medium'}}</span></p>
+<p>Created By: <span style="float:right;">{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</span></p>
+<p ng-show="order.Comments">Comments: <span style="float:right;">{{order.Comments}}</span></p>
+<p ng-show="orderCostCenter">Cost Center: <span style="float:right;">{{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</span></p>
+<p>Payment Method: <span style="float:right;">{{order.PaymentMethod}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong></span></p>
+<address ng-show="order.BillAddress">
+    <strong> Bill to:</strong><br>
+    {{order.BillAddress.Street1}}<br>
+    {{order.BillAddress.Street2}}<br ng-show="order.BillAddress.Street2">
+    {{order.BillAddress.City}},{{order.BillAddress.State}} {{order.BillAddress.Zip}}
+</address>
+<address ng-show="order.ShipAddress">
+    <strong> Ship to:</strong><br>
+    {{order.ShipAddress.Street1}}<br>
+    {{order.ShipAddress.Street2}}<br ng-show="order.ShipAddress.Street2">
+    {{order.ShipAddress.City}}, {{order.ShipAddress.State}} {{order.ShipAddress.Zip}}
+</address>
