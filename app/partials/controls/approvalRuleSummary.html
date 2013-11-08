@@ -13,7 +13,7 @@
             <span ng-hide="order.Status == 'AwaitingApproval' && (order.UserCanApprove || user.Permissions.contains('ApproveAllOrders'))">{{rule.ApprovingPartyName}}</span>
             <span ng-show="order.Status == 'AwaitingApproval' && (order.UserCanApprove || user.Permissions.contains('ApproveAllOrders'))">You</span></td>
         <td>
-            <strong>{{rule.Status}}</strong><span ng-show="rule.ApprovedByUserName"> by </span>{{rule.ApprovedByUserName}}<span ng-show="rule.TimeStamp"> on {{rule.TimeStamp | date}}</span>
+            <strong>{{rule.Status}}</strong><span ng-show="rule.ApprovedByUserName"> by </span>{{rule.ApprovedByUserName}}<span ng-show="rule.ApprovedByUserName"> on {{rule.TimeStamp | date}}</span>
         </td>
     </tr>
     <tr>
