@@ -198,7 +198,6 @@ li.search .hidden-xs {float: left;}
 }
 
 .shortproduct-info {
-    display: block;
     background-color:#f5f5f5;
     border: 1px solid #E6E6E6;
     border-top: none;
@@ -212,7 +211,7 @@ li.search .hidden-xs {float: left;}
     -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
 }
 
-.shortproduct-view .caption { cursor: pointer;}
+.shortproduct-view .caption { cursor: pointer; padding: 0 20px;}
 
 .shortproduct-info a.btn {
     position: absolute;
@@ -354,15 +353,7 @@ div.catDropdown.open ul li ul {
     width: 100%;
 }
 
-li.details-show {
-    display: block;
-    float: none;
-    font-size: 1.571em;
-    text-align: center;
-    cursor: pointer;
-    margin-right: 5px;
-    width: 45px;
-}
+
 .product-navigation .details-show {
     margin-bottom: 1px;
     height: 45px;
@@ -433,22 +424,21 @@ li.details-show {
 .nav-cat-search ul li {
     display: inline;
     float: left;
+    padding: 0;
+}
 
+.nav-cat-search ul li.text-nav {
+    padding: 15px 5px;
 }
 
 .nav-cat-search ul li.search {
     float: right;
-    cursor: pointer;
-    padding: 0;
 }
 
 .nav-cat-search i {
     font-size: 18px;
-    padding: 10px 15px;
-}
-
-li.current-cat-name {
-    padding: 10px 0;
+    padding: 15px 20px;
+    cursor: pointer;
 }
 
 li.search span {
@@ -725,6 +715,10 @@ li.cart span.badge {
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
+
+hr {
+    clear: both;
+}
 
 .navbar {
     margin-bottom: 0;

@@ -7,8 +7,15 @@
             <span class="fa empty"><i class="fa fa-camera"></i></span>
         </div>
     </a>
+    <div class="visible-xs">
+        <i class="fa fa-circle"></i>
+        <i class="fa fa-circle" style="color:#999;"></i>
+    </div>
     <div class="caption">
-        <figcaption class="shortproduct-name">{{LineItem.Product.Name}}</figcaption>
+        <figcaption class="shortproduct-name">{{LineItem.Product.Name}}
+            <span ng-class="{ 'hidden': toggle }" class="shortproduct-toggle visible-md visible-sm" style="position: absolute;cursor: pointer; right: 0; bottom: 0; color:#bfbfbf;padding: 15px 20px;" ng-click="toggle = !toggle"><i class="fa fa-plus-circle"></i></span>
+        </figcaption>
+
         <figcaption class="shortproduct-toggle" ng-click="toggle = !toggle"><i class="fa fa-plus-circle"></i> Quick View</figcaption>
     </div>
 </div>
@@ -29,9 +36,8 @@
     <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
         QTY Available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
     </p>
-    <!--- intentionally removing quantity from short product view, would be more inclined to see user edit quantity if actually in the product-detail/add-to-cart environment. --->
     <p>
-        <a class="btn btn-default" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
+        <a class="btn btn-default" style="width: 150px; margin: 0 auto;" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
             More Info
         </a>
     </p>
