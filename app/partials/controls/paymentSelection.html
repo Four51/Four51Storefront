@@ -1,5 +1,5 @@
 <div class="animated fadeInDown">
-    <h5>Payment Method {{currentOrder.PaymentMethod}}</h5>
+    <h5>Payment Method</h5>
     <span class="btn-group">
         <button class="btn btn-default" ng-show="user.Permissions.contains('PayByPO')" ng-click="currentOrder.PaymentMethod = 'PurchaseOrder'">
             <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'PurchaseOrder' }"></i>
@@ -11,7 +11,7 @@
         </button>
         <button ng-if="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 0" class="btn btn-default" ng-click="currentOrder.PaymentMethod = 'BudgetAccount'">
             <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'BudgetAccount' }"></i>
-            Spending Account
+            Spending Account {{showSpendingAccount}}
         </button>
         <button ng-if="user.Company.MerchantAccount && user.AvailableCreditCards.Count > 0 && user.Permissions.contains('PayByCreditCard')" class="btn btn-default" ng-click="currentOrder.PaymentMethod = 'CreditCard'">
             <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'CreditCard' }"></i>
@@ -24,13 +24,10 @@
         <select ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 0"
                 ng-options="account.ID as (account.Label + ' - Balance: ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{AccountType.PurchaseCredit:true}"
                 ng-model="currentOrder.BudgetAccountID"
-                ng-change="setPaymentMethod('BudgetAccount')"
-                ng-disabled="currentOrder.PaymentMethod != 'BudgetAccount'"
-                ng-required="currentOrder.PaymentMethod == 'BudgetAccount'"
-                />
+                ng-required="currentOrder.PaymentMethod == 'BudgetAccount'"></select>
         <span class="alert-error" ng-show="cart.$error.paymentMethod">The order total is not covered by the selected account.</span>
     </div>
-
+    <hr />
     <div ng-if="user.Permissions.contains('PayByCreditCard')" ng-show="currentOrder.PaymentMethod == 'CreditCard'">
         <h5>Credit Card</h5>
         <select ng-model="currentOrder.CreditCard.Type" ng-options="key as value for (key,value) in user.AvailableCreditCards" /><br />

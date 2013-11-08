@@ -180,7 +180,7 @@
                         <span>Coupon: {{currentOrder.Coupon.CouponCode}}<span class="icon-remove-sign"></span></span><br />
                     </h5>
                     <div ng-show="currentOrder.Coupon" class="text-danger">
-                        {{currentOrder.Coupon.Description}}<br />
+                        <p ng-bind="currentOrder.Coupon.Description"></p>
                         <span ng-show="currentOrder.Coupon.ExpirationDate">Expires: {{currentOrder.Coupon.ExpirationDate | date:'MM/dd/yyyy'}}</span>
                     </div>
                 </div>
