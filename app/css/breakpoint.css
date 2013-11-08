@@ -53,6 +53,8 @@
     .nav li span.hidden-sm {float:right;}
     .product-view-default img {margin: 15px 0;}
     .product-view-default .fa.empty {text-align: left;}
+    .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
+    .shortproduct-view:hover .shortproduct-toggle {display: none;}
 
     /*-----ROB--------*/
     .order-history-view-save-favorite {float:left;}
@@ -69,6 +71,8 @@
 
     .branding-view {text-align: center;}
     .branding-view-logo {float: none; margin: 0 auto; max-height: 75px; }
+    .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
+    .shortproduct-view:hover .shortproduct-toggle {display: none;}
 
     /*-----ROB--------*/
     .order-history-view-save-favorite {float:left;}
@@ -96,6 +100,9 @@
     .ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {}
     .branding-view {text-align: center;}
     .branding-view-logo {float: none; margin: 0 auto; max-height: 75px; }
+    .shortproduct-view:hover .shortproduct-name {display: block;}
+    .shortproduct-view:hover .shortproduct-toggle {display: none;}
+    .caption {margin: 5px;}
 
     /*-----ROB--------*/
     .order-history-view-repeat-btn{margin-top:20px;}
