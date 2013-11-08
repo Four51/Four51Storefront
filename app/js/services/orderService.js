@@ -6,15 +6,6 @@ four51.app.factory('Order', function($resource, $rootScope, $451) {
 
 	function _extend(order) {
 		order.isEditable = order.Status == 'Unsubmitted' || order.Status == 'Open';
-        //TODO: this will get changed in the api so it's only temporary
-        angular.forEach(order.Approvals, function(a) {
-            if (a.ApprovalStatus.indexOf('Approved') > -1)
-                a.Status = "Approved";
-            if (a.ApprovalStatus.indexOf('Pending') > -1)
-                a.Status = "Pending";
-            if (a.ApprovalStatus.indexOf('Declined') > -1)
-                a.Status = "Declined";
-        });
 	}
 
 	var _get = function(id, success) {

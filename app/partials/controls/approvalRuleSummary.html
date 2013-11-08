@@ -11,7 +11,7 @@
         <td><div ng-repeat="summary in rule.Summary">{{summary}}</div></td>
         <td>{{rule.ApprovingPartyName}}</td>
         <td>
-            <strong>{{rule.Status}}</strong><span ng-show="rule.ApprovedByUserName"> by </span>{{rule.ApprovedByUserName}}
+            <strong>{{rule.Status}}</strong><span ng-show="rule.ApprovedByUserName"> by </span>{{rule.ApprovedByUserName}}<span ng-show="rule.TimeStamp"> on {{rule.TimeStamp}}</span>
         </td>
     </tr>
     <tr>
