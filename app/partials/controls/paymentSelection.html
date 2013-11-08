@@ -20,8 +20,8 @@
     </span>
     <div ng-if="user.Permissions.contains('PayByBudgetAccount')" ng-show="currentOrder.PaymentMethod == 'BudgetAccount'">
       <h5>Spending Account</h5>
-        <span ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length == 0">{{SpendingAccounts[0].Label}}</span>
-        <select ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 0"
+        <span ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length == 1">{{SpendingAccounts[0].Label + ' - Balance: ' + (SpendingAccounts[0].Balance | currency)}}</span>
+        <select ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 1"
                 ng-options="account.ID as (account.Label + ' - Balance: ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{AccountType.PurchaseCredit:true}"
                 ng-model="currentOrder.BudgetAccountID"
                 ng-required="currentOrder.PaymentMethod == 'BudgetAccount'"></select>

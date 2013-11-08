@@ -150,7 +150,16 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 				$scope.currentOrder = data;
 			});
 		});
-	}
+	};
+
+	$scope.removeCoupon = function() {
+		$scope.couponError = null;
+		Coupon.remove(function() {
+			Order.save($scope.currentOrder, function(data) {
+				$scope.currentOrder = data;
+			});
+		});
+	};
 
     $scope.checkOutSection = 'order';
 });

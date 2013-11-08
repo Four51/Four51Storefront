@@ -177,7 +177,7 @@
                         <span ng-show="couponError" class="ui-state-error">{{couponError}}</span>
                     </div>
                     <h5 ng-show="currentOrder.Coupon">
-                        <span>Coupon: {{currentOrder.Coupon.CouponCode}}<span class="icon-remove-sign"></span></span><br />
+                        <p>Coupon: {{currentOrder.Coupon.CouponCode}}<span><i ng-click="removeCoupon()" ng-class="{'fa fa-eraser': currentOrder.Coupon }"></i></span></p>
                     </h5>
                     <div ng-show="currentOrder.Coupon" class="text-danger">
                         <p ng-bind="currentOrder.Coupon.Description"></p>
