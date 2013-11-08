@@ -46,11 +46,12 @@
     </div>
 </div>
 
-<div ng-show="order.Approvals" class="panel panel-primary approval-rule-summary">
+<div ng-show="order.Approvals" class="panel panel-default approval-rule-status-summary">
     <div class="panel-heading">
         <h3 class="panel-title panel-primary">Approvals</h3>
     </div>
     <div class="panel-body">
+        <approval ng-show="order.Status == 'AwaitingApproval' && (order.UserCanApprove || user.Permissions.contains('ApproveAllOrders'))" order="order"/>
         <approvalrulelist order="order" />
     </div>
 </div>

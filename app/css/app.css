@@ -842,7 +842,7 @@ hr {
 .order-history-view-line-items-product {
     margin-bottom: 10px;
 }
-.order-history-view .panel-body, .order-history-view .panel{
+.order-history-view .panel-body, .order-history-view .panel, .order-history-view-grid{
     padding:0;
 }
 .order-history-view-footer .panel-body, .order-history-view-header .panel-body{

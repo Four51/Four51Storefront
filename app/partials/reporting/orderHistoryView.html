@@ -3,7 +3,7 @@
         <hr />
         <ul>
             <li class="nav-header">{{order.Type}} Order<span ng-show="order.ExternalID"> ID: </span>{{order.ExternalID}}</li>
-            <li class="nav-header print" style="float: right;" ng-click="onPrint()"><i class="fa fa-print" style="font-size: 20px;"></i> Print</li>
+            <li class="nav-header print" style="float: right;" ng-click="onPrint()"><i class="fa fa-print" style="font-size: 20px;"></i>Print</li>
         </ul>
 
         <hr />
@@ -37,9 +37,9 @@
                 </div>
             </div>
         </div>
-        <div>
+       <!-- <div>
             <approval order="order" ng-show="order.Status == 'AwaitingApproval' && (order.UserCanApprove || user.Permissions.contains('ApproveAllOrders'))" />
-        </div>
+        </div>               !-->
     </div>
     <div class="col-md-8 col-md-pull-4 order-history-view-grid">
         <lineitemhistorygrid></lineitemhistorygrid>

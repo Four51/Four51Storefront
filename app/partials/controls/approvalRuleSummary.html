@@ -7,11 +7,13 @@
     </tr>
     </thead>
     <tbody class="approval-rule-summary-rule" ng-repeat="rule in order.Approvals">
-    <tr ng-class="{success: rule.Status == 'Approved', warning: rule.Status == 'Declined'}">
+    <tr ng-class="{success: rule.Status == 'Approved', danger: rule.Status == 'Declined'}">
         <td><div ng-repeat="summary in rule.Summary">{{summary}}</div></td>
-        <td>{{rule.ApprovingPartyName}}</td>
         <td>
-            <strong>{{rule.Status}}</strong><span ng-show="rule.ApprovedByUserName"> by </span>{{rule.ApprovedByUserName}}<span ng-show="rule.TimeStamp"> on {{rule.TimeStamp}}</span>
+            <span ng-hide="order.Status == 'AwaitingApproval' && (order.UserCanApprove || user.Permissions.contains('ApproveAllOrders'))">{{rule.ApprovingPartyName}}</span>
+            <span ng-show="order.Status == 'AwaitingApproval' && (order.UserCanApprove || user.Permissions.contains('ApproveAllOrders'))">You</span></td>
+        <td>
+            <strong>{{rule.Status}}</strong><span ng-show="rule.ApprovedByUserName"> by </span>{{rule.ApprovedByUserName}}<span ng-show="rule.TimeStamp"> on {{rule.TimeStamp | date}}</span>
         </td>
     </tr>
     <tr>
