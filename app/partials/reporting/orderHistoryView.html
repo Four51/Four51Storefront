@@ -1,18 +1,47 @@
 <section class="container order-history-view">
-<div class="col-sm-12 col-md-4 col-md-push-8 no-padding-sm-md-lg">
-    <orderhistoryheader class="col-md-12 col-sm-6 col-xs-12" order="order"></orderhistoryheader>
-    <orderhistoryfooter class="col-md-12 col-sm-6 col-xs-12" order="order"></orderhistoryfooter>
-</div>
-<div class="col-sm-12 col-md-8 col-md-pull-4">
-    <div ng-if="order.FromUserID == user.ID" class="order-history-view-save-favorite">
-        <input type="text" ng-model="order.FavoriteName" placeholder="Favorite Name" class="order-history-view-save-favorite-input" />
-        <input ng-click="saveFavorite()" type="button" class="btn btn-small btn-primary order-history-view-save-favorite-btn" value="Save as Favorite" />
+    <nav class="nav nav-cat-search">
+        <hr />
+        <ul>
+            <li class="nav-header">{{order.Type}} Order<span ng-show="order.ExternalID"> ID: </span>{{order.ExternalID}}</li>
+            <li class="nav-header print" style="float: right;" ng-click="onPrint()"><i class="fa fa-print" style="font-size: 20px;"></i>Print</li>
+        </ul>
+
+        <hr />
+    </nav>
+    <div class="col-md-3 col-md-offset-1 col-md-push-8">
+        <div class="row">
+            <div class="panel panel-default order-history-view-header col-sm-5 col-md-12">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Order Details
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <orderhistoryheader></orderhistoryheader>
+                </div>
+            </div>
+
+            <div class="panel panel-default order-history-view-footer col-sm-5 col-sm-offset-2 col-md-12 col-md-offset-0">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Order Summary
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <orderhistoryfooter></orderhistoryfooter>
+                </div>
+                <div class="panel-footer" ng-if="order.FromUserID == user.ID">
+                    <div class="order-history-view-repeat">
+                        <button class="btn btn-primary" ng-click="repeatOrder()">Repeat Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <!-- <div>
+            <approval order="order" ng-show="order.Status == 'AwaitingApproval' && (order.UserCanApprove || user.Permissions.contains('ApproveAllOrders'))" />
+        </div>               !-->
     </div>
-    <div ng-if="order.FromUserID == user.ID" class="order-history-view-repeat">
-        <input type="button" class="btn btn-small btn-info btn-block order-history-view-repeat-btn" value="Repeat Order" ng-click="repeatOrder()" />
+    <div class="col-md-8 col-md-pull-4 order-history-view-grid">
+        <lineitemhistorygrid></lineitemhistorygrid>
     </div>
-    <div style="clear:both;"></div>
-    <hr/>
-    <lineitemhistorygrid order="order"></lineitemhistorygrid>
-</div>
 </section>

@@ -848,8 +848,27 @@ li.cart span.badge {
     border-radius: 0;
 }
 
-/*-------------ROB STUFF--------------*/
+/*-------------ROB WATT STUFF--------------*/
 
-.order-history-footer-view h4, .order-history-header-view h4{letter-spacing: 0.18em;text-transform: uppercase;font-size: 1em;background-color:#3D3D3D; color:#fff; padding: 10px; margin: 0;text-align: center;}
-.order-history-footer-view, .order-history-header-view {padding: 0;}
-.order-history-footer-view h5 {letter-spacing: 0.18em; text-transform: uppercase;font-size: 1em; text-align: left; padding:10px; margin: 0;}
+
+.order-history-view-footer h4, .order-history-view-header h4{letter-spacing: 0.18em;text-transform: uppercase;font-size: 1em;background-color:#3D3D3D; color:#fff; padding: 10px; margin: 0;text-align: center;}
+
+.order-history-view-footer .panel-footer{text-align: center;}
+.order-history-view-footer h5 {letter-spacing: 0.18em; text-transform: uppercase;font-size: 1em; text-align: left; padding:10px; margin: 0;}
+
+.order-history-view-line-items-repeater {
+    border-top: 1px solid #d6d6d6;
+    clear: both;
+    overflow: hidden;
+    padding: 25px 0;
+}
+.order-history-view-line-items-product {
+    margin-bottom: 10px;
+}
+.order-history-view .panel-body, .order-history-view .panel, .order-history-view-grid{
+    padding:0;
+}
+.order-history-view-footer .panel-body, .order-history-view-header .panel-body{
+    padding:10px;
+}
+

@@ -1,25 +1,6 @@
 <section class="container check-out-view">
-    <!--- TODO lineitemhistory section is tasked to Rob as part of the of the reporting updates --->
-    <div class="col-md-8 well check-out-view-types" ng-show="currentOrder && !currentOrder.isEditable">
-        <div class="OrderHistory">
-            <div>Thank you. Your order has been submitted.</div>
-            <!-- currently a duplicate of the orderHistoryView -->
-            <orderhistoryheader order="currentOrder"></orderhistoryheader>
-            <lineitemhistorygrid order="currentOrder"></lineitemhistorygrid>
-            <hr />
-            <orderhistoryfooter order="currentOrder"></orderhistoryfooter>
-            <div>
-                <input type="button" class="btn btn-small btn-info" value="Repeat Order" />
-            </div>
-            <br />
-            <div>
-                <div>
-                    <input type="text" ng-model="currentOrder.FavoriteName" placeholder="Favorite Name" />
-                    <input ng-click="saveFavorite()" type="button" class="btn btn-small btn-primary" value="Save as Favorite" />
-                </div>
-            </div>
-        </div>
-    </div>
+
+
 
     <div class="panel panel-default cart-view-summary col-md-3 col-md-offset-1 col-md-push-8">
         <div class="panel-heading">
@@ -185,6 +166,7 @@
                     </div>
                 </div>
                 <div ng-show="currentOrder.Approvals" class="check-out-approvals">
+                    <h5>APPROVALS</h5>
                     <approvalrulelist order="currentOrder" />
                 </div>
                 <div ng-show="user.Permissions.contains('SendOrderNotificationToOthers')">
