@@ -27,6 +27,11 @@ h1, h2, h3, h4, h5 {
     line-height: 2em;
 }
 
+hr {
+    clear: both;
+}
+
+
 img {
     display: block;
 }
@@ -464,6 +469,7 @@ li.search span {
     transition: all 0.5s ease;
 }
 
+
 /* ----------------------------------------------------------------------------------------------- */
 /* ng-view animation */
 /* ----------------------------------------------------------------------------------------------- */
@@ -533,7 +539,7 @@ li.search span {
 
 
 .ng-enter-active {
-    opacity:1;
+    opacity: 1;
 }
 
 
@@ -542,7 +548,28 @@ li.search span {
 }
 
 .ng-leave-active{
-    opacity:0;
+    opacity: 0;
+}
+
+.badge.badge-cart.ng-enter {
+    -webkit-animation-duration: none;
+    -moz-animation-duration: none;
+    -o-animation-duration: none;
+}
+
+.badge.badge-cart.ng-enter-active {
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: flash;
+    -moz-animation-name: flash;
+    -o-animation-name: flash;
+    animation-name: flash;
 }
 
 /* ----------------------------------------------------------------------------------------------- */
@@ -664,6 +691,7 @@ li.cart span.badge {
 
 .product-view-default img {
     margin: 15px auto;
+    max-height: 300px;
 }
 
 .product-view-default-toggle-panel .panel-title.panel-selected {
@@ -690,19 +718,6 @@ li.cart span.badge {
     background: rgba(255, 255, 255, 0.5);
 }
 
-.product-view-default-related-products .panel-heading {
-    padding: 10px 15px;
-}
-
-.product-view-default-related-products ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-.product-view-default-related-products li {
-    padding: 15px;
-}
-
 .product-view-default-toggle-panel .icon {
     position: absolute;
     bottom: -13px; left: 48%;
@@ -711,13 +726,21 @@ li.cart span.badge {
     font-size: 22px;
 }
 
+.col-collapse {
+    padding: 0;
+}
 
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
 
-hr {
-    clear: both;
+/* modal was changed in new bootstrap, this is temporary fix for internal error messaging */
+.modal.fade.in  {
+    display: block;
+    overflow: hidden;
+    max-width: 60%;
+    max-height: 300px;
+    margin: 0 auto;
 }
 
 .navbar {
