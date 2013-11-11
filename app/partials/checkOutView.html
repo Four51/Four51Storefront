@@ -89,22 +89,26 @@
                 <button type="button" ng-click="shipToMultipleAddresses = !shipToMultipleAddresses" class="btn btn-xs btn-warning"
                         ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1 && user.ShipMethod != null">Ship to multiple addresses</button>
                 <div ng-show="!shipToMultipleAddresses">
-                    <h5>
-                        Shipping Address
+                    <div>
+                        <h5>
+                            Shipping Address
+                        </h5>
                         <select name="shippingAddress"
                                 ng-change="setShipAddressAtOrderLevel()"
                                 ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
                                 ng-model="currentOrder.ShipAddressID"
                                 ng-required="!shipToMultipleAddresses" />
-                    </h5>
-                    <h5 ng-show="user.ShipMethod != null">
-                        Shipping Method
+                    </div>
+                    <div ng-show="user.ShipMethod != null">
+                        <h5>
+                            Shipping Method
+                        </h5>
                         <select ng-change="updateShipper()"
                                 ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
                                 ng-options="shipper.ID as shipper.Name for shipper in shippers"
                                 ng-model="currentOrder.ShipperID"
                                 ng-required="!shipToMultipleAddresses && user.ShipMethod != null" />
-                    </h5>
+                    </div>
                 </div>
                 <div ng-show="shipToMultipleAddresses">
                     <ul>
@@ -130,7 +134,7 @@
 
         <div class="panel-heading">
             <h3 ng-click="checkOutSection = 'billing'" class="panel-title panel-primary">
-                    <i ng-class="{'fa fa-times-circle': cart_billing.$invalid, 'fa fa-check': !cart_billing.$invalid }"></i>
+                <i ng-class="{'fa fa-times-circle': cart_billing.$invalid, 'fa fa-check': !cart_billing.$invalid }"></i>
                 Billing
             </h3>
         </div>
@@ -142,9 +146,9 @@
                 </div>
                 <h5>
                     Billing Address
-                    <select name="billingAddress" ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required />
-                    <button type="button" class="btn btn-xs btn-danger" redirect="/address"  tabindex="-1">Add New Address</button>
                 </h5>
+                <select name="billingAddress" ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required />
+                <button type="button" class="btn btn-xs btn-danger" redirect="/address"  tabindex="-1">Add New Address</button>
                 <paymentselector />
                 <div ng-show="user.Permissions.contains('ViewPromotions')">
                     <div ng-show="!currentOrder.Coupon">
@@ -154,12 +158,12 @@
                         <span ng-show="couponError" class="ui-state-error">{{couponError}}</span>
                     </div>
                     <h5 ng-show="currentOrder.Coupon">
-                        <span>Coupon: {{currentOrder.Coupon.CouponCode}}<span class="icon-remove-sign"></span></span><br />
-                        <div class="text-danger">
-                            {{currentOrder.Coupon.Description}}<br />
-                            <span ng-show="currentOrder.Coupon.ExpirationDate">Expires: {{currentOrder.Coupon.ExpirationDate | date:'MM/dd/yyyy'}}</span>
-                        </div>
+                        <p>Coupon: {{currentOrder.Coupon.CouponCode}}<span><i ng-click="removeCoupon()" ng-class="{'fa fa-eraser': currentOrder.Coupon }"></i></span></p>
                     </h5>
+                    <div ng-show="currentOrder.Coupon" class="text-danger">
+                        <p ng-bind="currentOrder.Coupon.Description"></p>
+                        <span ng-show="currentOrder.Coupon.ExpirationDate">Expires: {{currentOrder.Coupon.ExpirationDate | date:'MM/dd/yyyy'}}</span>
+                    </div>
                 </div>
                 <div ng-show="currentOrder.Approvals" class="check-out-approvals">
                     <h5>APPROVALS</h5>
@@ -169,8 +173,8 @@
                     <div>
                         <h5>
                             Email Notification
-                            <input ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
                         </h5>
+                        <input ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
                     </div>
                 </div>
             </div>

@@ -10,7 +10,14 @@ four51.app.factory('Coupon', function($resource, $451){
 		});
 	}
 
+	var _delete = function(success) {
+		return $resource($451.api('coupon')).delete().$promise.then(function() {
+			_then(success);
+		});
+	}
+
 	return {
-		apply: _save
+		apply: _save,
+		remove: _delete
 	};
 });
