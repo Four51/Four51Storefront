@@ -60,7 +60,6 @@ input:not([type=submit]), textarea, select {
     padding: 9px;
     border: solid 1px #E5E5E5;
     outline: 0;
-    max-width: 40%;
     background: #FFFFFF url('bg_form.png') left top repeat-x;
     background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
     background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
@@ -470,6 +469,7 @@ li.search span {
     transition: all 0.5s ease;
 }
 
+
 /* ----------------------------------------------------------------------------------------------- */
 /* ng-view animation */
 /* ----------------------------------------------------------------------------------------------- */
@@ -539,7 +539,7 @@ li.search span {
 }
 
 .ng-enter-active {
-    opacity:1;
+    opacity: 1;
 }
 
 
@@ -548,7 +548,28 @@ li.search span {
 }
 
 .ng-leave-active{
-    opacity:0;
+    opacity: 0;
+}
+
+.badge.badge-cart.ng-enter {
+    -webkit-animation-duration: none;
+    -moz-animation-duration: none;
+    -o-animation-duration: none;
+}
+
+.badge.badge-cart.ng-enter-active {
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: flash;
+    -moz-animation-name: flash;
+    -o-animation-name: flash;
+    animation-name: flash;
 }
 
 /* ----------------------------------------------------------------------------------------------- */
@@ -705,10 +726,22 @@ li.cart span.badge {
     font-size: 22px;
 }
 
-.col-collapse {padding: 0;}
+.col-collapse {
+    padding: 0;
+}
+
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
+
+/* modal was changed in new bootstrap, this is temporary fix for internal error messaging */
+.modal.fade.in  {
+    display: block;
+    overflow: hidden;
+    max-width: 60%;
+    max-height: 300px;
+    margin: 0 auto;
+}
 
 .navbar {
     margin-bottom: 0;
