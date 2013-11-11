@@ -26,5 +26,9 @@ four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $location,
         FavoriteOrder.save($scope.order);
 	};
 
+    $scope.onPrint = function()  {
+        window.print();
+    };
+
 });
 

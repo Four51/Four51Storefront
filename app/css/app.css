@@ -517,10 +517,10 @@ li.search span {
 }
 
 .ng-enter {
-    -webkit-animation-duration: 1s;
-    -moz-animation-duration: 1s;
-    -o-animation-duration: 1s;
-    animation-duration: 1s;
+    -webkit-animation-duration: none;
+    -moz-animation-duration: none;
+    -o-animation-duration: none;
+    animation-duration: none;
     -webkit-animation-fill-mode: both;
     -moz-animation-fill-mode: both;
     -o-animation-fill-mode: both;
@@ -529,8 +529,8 @@ li.search span {
     -moz-animation-name: view-enter;
     -o-animation-name: view-enter;
     animation-name: view-enter;
-
 }
+
 
 .ng-enter-active {
     opacity:1;
@@ -825,7 +825,7 @@ hr {
     border-radius: 0;
 }
 
-/*-------------ROB WATT STUFF--------------*/
+/*-------------ROB STUFF--------------*/
 
 
 .order-history-view-footer h4, .order-history-view-header h4{letter-spacing: 0.18em;text-transform: uppercase;font-size: 1em;background-color:#3D3D3D; color:#fff; padding: 10px; margin: 0;text-align: center;}
