@@ -535,7 +535,6 @@ li.search span {
     -moz-animation-name: view-enter;
     -o-animation-name: view-enter;
     animation-name: view-enter;
-
 }
 
 .ng-enter-active {
@@ -739,8 +738,9 @@ li.cart span.badge {
     display: block;
     overflow: hidden;
     max-width: 60%;
-    max-height: 300px;
-    margin: 0 auto;
+    max-height: 40%;
+    margin: 15px auto;
+    background-color:#fff;
 }
 
 .navbar {
