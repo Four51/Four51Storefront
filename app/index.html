@@ -17,7 +17,8 @@
 </head>
 <body ng-cloak class="static ng-cloak" scroll ng-class="{scroll:boolChangeClass}">
 <section ng-controller="Four51Ctrl">
-    <section ng-hide="Four51User.isAuthenticated()" class="container">
+	
+    <section ng-hide="Four51User.isAuthenticated() || isAnon" class="container">
         <login />
     </section>
     <section ng-show="Four51User.isAuthenticated()" id="content">
@@ -63,7 +64,7 @@
     <script src="js/filters.js"></script>
     <script src="js/config.js"></script>
     <script src="js/routing.js"></script>
-
+	<script src="js/four51consts.js"></script>
     <script src="js/controllers/Four51Ctrl.js"></script>
     <script src="js/controllers/categoryCtrl.js"></script>
     <script src="js/controllers/errorCtrl.js"></script>

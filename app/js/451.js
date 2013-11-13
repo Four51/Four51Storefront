@@ -1,6 +1,6 @@
 /* Four51 Global Namespace */
 
-four51.app.factory('$451', function() {
+four51.app.factory('$451', function(AppConst) {
 	function json_filter(input, options, op) {
 		if (input == null || options == null) return;
 		var result = [];
@@ -47,7 +47,8 @@ four51.app.factory('$451', function() {
 
 
 	return {
-		debug: true,
+		debug: AppConst.debug,
+		isAnon: AppConst.isAnon,
 		appname: four51.app.name,
 		api: function(path) {
             //todo: get appname with out using window?
