@@ -7,15 +7,6 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		$scope.shippers = list;
 	});
 
-	/*angular.forEach($scope.currentOrder.LineItems, function(li) {
-		$scope.$watch(li.Shipper.ID, function(newValue, oldValue) {
-			if (newValue == oldValue) return;
-			var shipper = $451.filter($scope.shippers, { Property: 'ID', Value: newValue })[0];
-			li.Shipper = shipper;
-			li.ShipperName = shipper.Name;
-		});
-	});
-*/
 	function hasMultipleAddresses() {
 		var multi = false;
 		angular.forEach($scope.currentOrder.LineItems, function(li, i) {
@@ -68,8 +59,11 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		});
 	};
 
-    $scope.$on('event:paymentMethodChange', function(event, method) {
-        $scope.cart_billing.$setValidity('paymentMethod', validatePaymentMethod(method));
+    $scope.$watch('currentOrder.PaymentMethod', function(event, method) {
+	    if (event == 'BudgetAccount' && $scope.SpendingAccounts.length == 1) {
+		    $scope.currentOrder.BudgetAccountID = $scope.SpendingAccounts[0].ID;
+	    }
+        $scope.cart_billing.$setValidity('paymentMethod', validatePaymentMethod(event));
     });
 
     function validatePaymentMethod(method) {
