@@ -1,5 +1,5 @@
 <section class="container cart-view">
-    <div ng-if="currentOrder" class="CartDetail">
+    <div ng-if="currentOrder" class="cart-view-detail hidden-print">
         <nav class="nav nav-cat-search">
             <hr />
             <ul>
@@ -98,5 +98,6 @@
             </div>
         </form>
     </div>
+    <cartprint class="visible-print" />
 </section>
 

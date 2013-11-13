@@ -1,15 +1,15 @@
-four51.app.directive('orderhistoryheader', function() {
+four51.app.directive('orderhistorydetails', function() {
 	var obj = {
 		restrict: 'E',
-		templateUrl: 'partials/reporting/orderHistoryHeaderView.html'
+		templateUrl: 'partials/reporting/orderHistoryDetailsView.html'
 	}
 	return obj;
 });
 
-four51.app.directive('orderhistoryfooter', function($location, Order, User) {
+four51.app.directive('orderhistorysummary', function($location, Order, User) {
 	var obj = {
 		restrict: 'E',
-		templateUrl: 'partials/reporting/orderHistoryFooterView.html',
+		templateUrl: 'partials/reporting/orderHistorySummaryView.html',
         controller: function($scope){
             $scope.repeatOrder = function() {
                 $scope.order.Repeat = true;
