@@ -66,6 +66,6 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 
 
     $scope.onPrint = function()  {
-             window.print();
+            window.print();
     };
 });

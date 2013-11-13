@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>451order</title>
     <link rel="stylesheet" href="css/bootstrap/bootstrap-451.css">
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/jquery-ui.min.css">
-    <link rel="stylesheet" href="css/ng-grid.css">
-    <link rel="stylesheet" href="css/animate.css">
+    <link href="css/font-awesome.css" rel="stylesheet"/>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="css/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="css/ng-grid.css"/>
+    <link rel="stylesheet" href="css/animate.css"/>
     <link rel="stylesheet" href="css/app.css"/>
-    <link rel="stylesheet" href="css/breakpoint.css"/>
+    <link rel="stylesheet" href="css/breakpoint.css" media="screen"/>
+    <link rel="stylesheet" href="css/print.css" media="print"/>
     <script src="lib/angular/angular-loader.js"></script>
 </head>
 <body ng-cloak class="static ng-cloak" scroll ng-class="{scroll:boolChangeClass}">
@@ -22,10 +23,10 @@
         <login />
     </section>
     <section ng-show="Four51User.isAuthenticated()" id="content">
-        <section>
+        <section class="hidden-print">
             <navigation />
         </section>
-        <section>
+        <section class="hidden-print">
             <branding />
         </section>
         <section class="container-content">
@@ -122,6 +123,7 @@
     <script src="js/directives/scrollposition.js"></script>
     <script src="js/directives/fileinput.js"></script>
     <script src="js/directives/shortCartView.js"></script>
+    <script src="js/directives/printing.js"></script>
 
     <script src="js/bootstrap/affix.js"></script>
     <script src="js/bootstrap/alert.js"></script>

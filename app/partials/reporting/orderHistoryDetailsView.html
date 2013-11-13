@@ -1,6 +1,6 @@
-<p ng-show="order.DateSubmitted">Date Submitted: <span style="float:right;">{{order.DateSubmitted | date:'medium'}}</span></p>
+<p ng-show="order.DateSubmitted">Date Submitted: <span style="float:right;">{{order.DateSubmitted | date}}</span></p>
 <p>Status: <span style="float:right;">{{order.Status}}</span></p>
-<p ng-show="order.DateCompleted">Date Completed: <span style="float:right;">{{order.DateCompleted | date:'medium'}}</span></p>
+<p ng-show="order.DateCompleted">Date Completed: <span style="float:right;">{{order.DateCompleted | date}}</span></p>
 <p>Created By: <span style="float:right;">{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</span></p>
 <p ng-show="order.Comments">Comments: <span style="float:right;">{{order.Comments}}</span></p>
 <p ng-show="orderCostCenter">Cost Center: <span style="float:right;">{{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</span></p>
