@@ -20,6 +20,7 @@ body {
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
     -webkit-text-stroke: 1px transparent;
+    margin-bottom: 40px;
 }
 
 h1, h2, h3, h4, h5 {
@@ -311,25 +312,17 @@ li.search .hidden-xs {float: left;}
     padding: 13px;
 }
 
-div.catDropdown ul li ul {
-    display: block;
-}
 
-div.catDropdown.open ul li ul {
+div.category-view-subcat ul li ul {
     display: none;
 }
 
-.cat-body.col-sm-9 {
-    opacity: .5;
-    overflow: hidden;
-}
+
+
 
 .product-navigation li.nav-header a {
     padding: .75em;
 
-}
-.product-navigation {
-    margin-bottom: 40px;
 }
 
 .product-navigation ul li {
@@ -346,11 +339,6 @@ div.catDropdown.open ul li ul {
     text-transform: capitalize;
     text-shadow: none;
     font-weight: normal;
-    -webkit-transition: color .5s, background .5s, height .5s;
-    -moz-transition: color .5s, background .5s, height .5s;
-    -o-transition: color .5s, background .5s, height .5s;
-    -ms-transition: color .5s, background .5s, height .5s;
-    transition: color .5s, background .5s, height .5s;
 }
 
 
@@ -522,6 +510,9 @@ li.search span {
     }
 }
 
+
+
+
 .ng-enter {
     -webkit-animation-duration: 1s;
     -moz-animation-duration: 1s;
@@ -546,7 +537,7 @@ li.search span {
     opacity: 0;
 }
 
-.ng-leave-active{
+.ng-leave-active {
     opacity: 0;
 }
 
@@ -570,6 +561,91 @@ li.search span {
     -o-animation-name: flash;
     animation-name: flash;
 }
+
+
+.howdy-add {
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    animation-delay: 1s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeInLeft;
+    -moz-animation-name: fadeInLeft;
+    -o-animation-name: fadeInLeft;
+    animation-name: fadeInLeft;
+}
+
+.howdy-add-active {
+    opacity: 1;
+}
+
+
+.howdy-remove {
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeOutLeft;
+    -moz-animation-name: fadeOutLeft;
+    -o-animation-name: fadeOutLeft;
+    animation-name: fadeOutLeft;
+
+}
+
+.howdy-remove-active{
+    opacity: 0;
+}
+
+
+.move-add {
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeInLeft;
+    -moz-animation-name: fadeInLeft;
+    -o-animation-name: fadeInLeft;
+    animation-name: fadeInLeft;
+}
+
+.move-add-active {
+    opacity: 1;
+}
+
+
+.move-remove {
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeInRight;
+    -moz-animation-name: fadeInRight;
+    -o-animation-name: fadeInRight;
+    animation-name: fadeInRight;
+
+}
+
+.move-remove-active{
+    opacity: 1;
+}
+
 
 /* ----------------------------------------------------------------------------------------------- */
 /* Cart | Checkout */
