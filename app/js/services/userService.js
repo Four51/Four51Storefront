@@ -16,7 +16,7 @@ four51.app.factory('User', function($q, $rootScope, $resource, $451, Security) {
 				f.File.Url += "&auth=" + Security.auth();
 	    });
 
-	    u.AvailableCreditCards.Count = Object.keys(u.AvailableCreditCards).length;
+	   // u.AvailableCreditCards.Count = Object.keys(u.AvailableCreditCards).length;
     }
 
 	var _refresh = function() {

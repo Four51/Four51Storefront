@@ -13,7 +13,7 @@
             <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'BudgetAccount' }"></i>
             Spending Account {{showSpendingAccount}}
         </button>
-        <button ng-if="user.Company.MerchantAccount && user.AvailableCreditCards.Count > 0 && user.Permissions.contains('PayByCreditCard')" class="btn btn-default" ng-click="currentOrder.PaymentMethod = 'CreditCard'">
+        <button ng-if="user.Company.MerchantAccount && user.AvailableCreditCards.length > 0 && user.Permissions.contains('PayByCreditCard')" class="btn btn-default" ng-click="currentOrder.PaymentMethod = 'CreditCard'">
             <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'CreditCard' }"></i>
             Credit Card
         </button>
@@ -30,7 +30,7 @@
     <hr />
     <div ng-if="user.Permissions.contains('PayByCreditCard')" ng-show="currentOrder.PaymentMethod == 'CreditCard'">
         <h5>Credit Card</h5>
-        <select ng-model="currentOrder.CreditCard.Type" ng-options="key as value for (key,value) in user.AvailableCreditCards" /><br />
+        <select ng-model="currentOrder.CreditCard.Type" ng-options="creditCard.DisplayName as creditCard.Type for creditCard in user.AvailableCreditCards" /><br />
         <input ng-model="currentOrder.CreditCard.CardholderName" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" placeholder="Cardholder Name" /><br />
         <input ng-model="currentOrder.CreditCard.AccountNumber" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" autocomplete="false" placeholder="Account Number" /><br />
         <input ng-model="currentOrder.CreditCard.ExpirationDate" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" ui-mask="**/**" placeholder="Expiration Date" /><br />
