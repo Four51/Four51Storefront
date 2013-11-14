@@ -1,7 +1,12 @@
 four51.app.controller('Four51Ctrl', function ($scope, $routeParams, $location, $451, User, Order, Security, OrderConfig, Category, SpendingAccount, fileReader) {
     $scope.scroll = 0;
     $scope.appname = $451.appname;
+	$scope.isAnon = $451.isAnon;
 	$scope.Four51User = Security;
+
+	if($451.isAnon){
+		User.login();
+	}
 
     // http://stackoverflow.com/questions/12592472/how-to-highlight-a-current-menu-item-in-angularjs
     $scope.getClass = function(path) {

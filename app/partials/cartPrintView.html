@@ -1,0 +1,67 @@
+<section class="container cart-print-view">
+    <div class="cart-print-view-header">
+        <div>
+            <figure>
+                <img class="branding-print-view-logo" ng-src="{{user.Company.Logo.Url}}" />
+            </figure>
+            <h3>{{user.Company.Name}}</h3>
+        </div>
+        <div>
+            <h5>
+                {{currentOrder.IncomingStatus + ' Order'}}<br/>
+                Created on {{currentOrder.DateCreated | date}}
+            </h5>
+        </div>
+    </div>
+        <div>
+            <h3>
+                Cart Summary
+            </h3>
+            <div ng-if="!user.Permissions.contains('HidePricing')">
+                <p>
+                    SubTotal
+                    <span>{{currentOrder.Subtotal | currency}}</span>
+                </p>
+                <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
+                    {{ user.Company.SiteText.ShippingDisclaimer }}
+                </p>
+            </div>
+        </div>
+        <div>
+            <h3>
+                {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
+            </h3>
+            <div ng-repeat="item in currentOrder.LineItems" class="cart-print-view-line-items-repeater">
+                <div class="cart-print-view-line-items-product">
+                    <p>
+                        {{item.ProductIDText}}
+                    </p>
+                    <p>{{item.Product.Name}}</p>
+                    <ul>
+                        <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">{{spec.Name}} : {{spec.Value}}</li>
+                    </ul>
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            {{item.UnitPrice | currency}}
+                        </div>
+                        <div>
+                            {{item.Quantity}}
+                        </div>
+                        <div>
+                            {{item.LineTotal | currency}}
+                        </div>
+                    </div>
+                    <div>
+                        <div ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
+                            <p ng-show="item.DateNeeded">Date Needed<br/>{{item.DateNeeded | date: 'MM/dd/yy'}}</p>
+                        </div>
+                        <div ng-if="user.Permissions.contains('CostCenterPerLine')">
+                            <p ng-show="item.CostCenter">Cost Center<br/>{{item.CostCenter}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>

@@ -38,11 +38,6 @@
     }
 */
 
-    /*-----ROB-------*/
-    .no-padding-sm-md-lg {padding:0;}
-/*    .order-history-view-save-favorite {float:left;}
-    .order-history-view-repeat {float:right;}
-    .order-history-view-repeat-btn {padding:6px 12px;}    */
 }
 
 
@@ -56,13 +51,6 @@
     .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
 
-    /*-----ROB--------*/
-   /* .order-history-view-save-favorite {float:left;}
-    .order-history-view-repeat {float:right;}
-    .order-history-view-repeat-btn {padding:6px 12px;}   */
-    .no-padding-sm-md-lg {padding:0;}
-
-
 }
 
 
@@ -74,12 +62,6 @@
     .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
 
-    /*-----ROB--------*/
-/*    .order-history-view-save-favorite {float:left;}
-    .order-history-view-repeat {float:right;}
-    .order-history-view-repeat-btn {padding:6px 12px;}                        */
-
-    .no-padding-sm-md-lg {padding:0;}
 }
 
 
@@ -103,13 +85,6 @@
     .shortproduct-view:hover .shortproduct-name {display: block;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
     .caption {margin: 5px;}
-
-
-    /*-----ROB--------*/
-/*    .order-history-view-repeat-btn{margin-top:20px;}
-    .order-history-view-save-favorite-input{width:49%;}
-    .order-history-view-save-favorite-btn{width:49%;}                 */
-    .order-history-view-line-items-product {margin-bottom: 25px;}
 
 }
 
