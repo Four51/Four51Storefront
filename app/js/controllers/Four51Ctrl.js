@@ -4,7 +4,7 @@ four51.app.controller('Four51Ctrl', function ($scope, $routeParams, $location, $
 	$scope.isAnon = $451.isAnon;
 	$scope.Four51User = Security;
 
-	if($451.isAnon){
+	if($451.isAnon && !Security.isAuthenticated()){
 		User.login();
 	}
 
