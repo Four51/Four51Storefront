@@ -14,7 +14,7 @@ four51.app.factory('Category', function($resource, $451){
             });
     }
 
-	var _treeCacheName = '451Cache.Tree' + $451.apiName;
+	var _treeCacheName = '451Cache.Tree.' + $451.apiName;
     var _query = function(success){
 		var tree = store.get(_treeCacheName);
         tree ? _then(success,tree) :

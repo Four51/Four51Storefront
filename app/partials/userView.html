@@ -29,7 +29,7 @@
                 <span class="alert-error" ng-show="user_form.confirm_password.$error.validator">Passwords do not match!</span><br />
             </div>
             <div class="panel-footer">
-                <input class="btn btn-medium btn-primary" type="submit" ng-disabled="user_form.$invalid" id="451_btn_user" value="Save" />
+                <input class="btn btn-medium btn-primary" type="submit" ng-disabled="user_form.$invalid" id="451_btn_user" value="{{user.Type == 'TempCustomer' ? 'Create Acccount' : 'Save'}}" />
             </div>
         </div>
     </form>
