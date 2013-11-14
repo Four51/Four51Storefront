@@ -44,17 +44,17 @@ four51.app.factory('$451', function(AppConst) {
         else
             return array.indexOf(value) > -1;
     }
-
+	var _apiName = function(){
+		return four51.app.ApiAppName ? four51.app.ApiAppName : window.location.pathname.split('/')[1];
+	}
 
 	return {
 		debug: AppConst.debug,
 		isAnon: AppConst.isAnon,
 		appname: four51.app.name,
+		apiName : _apiName(),
 		api: function(path) {
-            //todo: get appname with out using window?
-			var apiName = four51.app.ApiAppName ? four51.app.ApiAppName : window.location.pathname.split('/')[1];
-            return '/api/' + apiName + "/" + path;
-			//return '/api/451Order/' + path;
+            return '/api/' + _apiName() + "/" + path;
 		},
 		filter: function(input, options, op) {
 			return json_filter(input, options, op);
