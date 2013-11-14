@@ -604,6 +604,41 @@ li.search span {
     opacity: 0;
 }
 
+@-moz-keyframes cat-body-move {
+    0% {
+        opacity: 0;
+        -moz-transform: translateX(-300px);
+    }
+
+    100% {
+        opacity: 1;
+        -moz-transform: translateX(0);
+    }
+}
+
+@-o-keyframes cat-body-move {
+    0% {
+        opacity: 0;
+        -o-transform: translateX(-300px);
+    }
+
+    100% {
+        opacity: 1;
+        -o-transform: translateX(0);
+    }
+}
+
+@keyframes cat-body-move {
+    0% {
+        opacity: 0;
+        transform: translateX(-300px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
 
 .move-add {
     -webkit-animation-duration: 1s;
@@ -615,10 +650,10 @@ li.search span {
     -moz-animation-fill-mode: both;
     -o-animation-fill-mode: both;
     animation-fill-mode: both;
-    -webkit-animation-name: fadeInLeft;
-    -moz-animation-name: fadeInLeft;
-    -o-animation-name: fadeInLeft;
-    animation-name: fadeInLeft;
+    -webkit-animation-name: cat-body-move;
+    -moz-animation-name: cat-body-move;
+    -o-animation-name: cat-body-move;
+    animation-name: cat-body-move;
 }
 
 .move-add-active {
