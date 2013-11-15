@@ -5,10 +5,25 @@
         <li class="messages"><a href="#/message">Messages</a></li>
         <li ng-if="user.Type=='Customer'" class="logout"><a href="#" class="451_btn_logout" ng-click="Logout()">Log Out</a></li>
     </ul>
-    <form name="user_form" ng-submit="save()">
+	<form name="login_existing" ng-submit="loginExisting()" ng-if="user.Type == 'TempCustomer'">
+		<div class="panel panel-primary" id="user_form">
+			<div class="panel-heading">
+				<h3 class="panel-title panel-primary">Logon as existing user</h3>
+			</div>
+			<div class="panel-body">
+				<input name="username" class="input-large" type="text" ng-model="loginasuser.Username" required placeholder="User Name" /><br />
+				<input name="password" class="input-large" type="password" ng-model="loginasuser.Password" required placeholder="Password" /><br />
+			</div>
+			<div class="panel-footer">
+				<input class="btn btn-medium btn-primary" type="submit" ng-disabled="login_existing.$invalid" id="451_btn_login_existing" value="Logon" />
+			</div>
+		</div>
+	</form>
+
+	<form name="user_form" ng-submit="save()">
         <div class="panel panel-primary" id="user_form">
             <div class="panel-heading">
-                <h3 class="panel-title panel-primary">My Account</h3>
+                <h3 class="panel-title panel-primary">{{user.Type == 'TempCustomer' ? 'Create' : 'My'}} Account</h3>
             </div>
             <div class="panel-body">
                 <input name="firstname" class="input-large" type="text" ng-model="user.FirstName" placeholder="First Name" /><br />
@@ -33,4 +48,5 @@
             </div>
         </div>
     </form>
+
 </section>

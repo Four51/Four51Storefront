@@ -1,5 +1,5 @@
 four51.app.factory('Security', function($451, $cookieStore) {
-
+	var _cookieName = 'user.' + $451.apiName;
     return {
         init: function(user, auth) {
             this.currentUser = {
@@ -11,21 +11,21 @@ four51.app.factory('Security', function($451, $cookieStore) {
                 Email: user.Email,
                 Auth: auth
             };
-            $cookieStore.put('User', this.currentUser);
+            $cookieStore.put(_cookieName, this.currentUser);
         },
         clear: function() {
-            $cookieStore.remove('User');
+            $cookieStore.remove(_cookieName);
         },
         auth: function() {
-            var user = $cookieStore.get('User');
+            var user = $cookieStore.get(_cookieName);
             return user ? user.Auth : null;
         },
         isAuthenticated: function() {
-            this.currentUser =  $cookieStore.get('User');
+            this.currentUser =  $cookieStore.get(_cookieName);
             return !!this.currentUser;
         },
         logout: function() {
-            $cookieStore.remove('User');
+            $cookieStore.remove(_cookieName);
             delete this.currentUser;
         }
     }
