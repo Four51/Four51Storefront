@@ -18,7 +18,7 @@
             <tfoot>
                 <tr>
                     <td colspan="6">
-                        <input class="btn btn-small btn-danger" value="Delete Selected" ng-click="deleteSelected($event)" />
+                        <button type="button" class="btn btn-small btn-danger" ng-click="deleteSelected($event)">Delete Selected</button>
                     </td>
                 </tr>
             </tfoot>
@@ -29,7 +29,7 @@
                     <td><a ng-href="#/order/{{order.ID}}">{{order.ExternalID}}</a></td>
                     <td>{{order.DateCompleted | date:'medium'}}</td>
                     <td>{{order.Type}}</td>
-                    <td><input type="button" class="btn btn-mini btn-info" value="Repeat Order" ng-click="repeat(order)" /></td>
+                    <td><button type="button" class="btn btn-mini btn-info" ng-click="repeat(order)">Repeat Order</button></td>
                 </tr>
             </tbody>
         </table>
