@@ -6,9 +6,7 @@ four51.app.factory('User', function($q, $rootScope, $resource, $451, Security) {
     }
 
     function _extend(u) {
-		if(u.Type == "TempCustomer")
-			u.Username = "";
-        u.Permissions.contains = function(value) {
+		u.Permissions.contains = function(value) {
             return $451.contains(u.Permissions, value);
         };
         if ($451.contains(u.Permissions, ['PayByVisa', 'PayByMasterCard', 'PayByAmex', 'PayByDiscover', 'PayByDinersClub', 'PayByJCB', 'PayByDelta', 'PayBySwitch', 'PayBySolo', 'PayByElectron', 'PayByLaser']))
