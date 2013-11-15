@@ -46,9 +46,6 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
             Category.tree(function(data) {
                 $scope.tree = data;
             });
-            SpendingAccount.query(function(data) {
-                $scope.SpendingAccounts = data;
-            });
         }
     }
 
@@ -58,7 +55,7 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
 
     $scope.$on('event:auth-loginConfirmed', function(){
 		$route.reload();
-		});
+	});
 	$scope.$on("$routeChangeSuccess", init);
     $scope.$on('event:auth-loginRequired', cleanup);
 

@@ -23,6 +23,7 @@ four51.app.factory('Address', function($resource, $451){
 
     var _save = function(address, success) {
         return $resource($451.api('address')).save(address).$promise.then(function(add) {
+	        store.remove('451Cache.Addresses');
             store.set('451Cache.Address.' + add.ID, add);
 	        _extend(add);
             _then(success, add);
@@ -31,6 +32,7 @@ four51.app.factory('Address', function($resource, $451){
 
     var _delete = function(address, success) {
         return $resource($451.api('address')).delete(address).$promise.then(function() {
+	        store.remove('451Cache.Addresses');
             store.remove('451Cache.Address.' + address.ID);
             _then(success);
         });
