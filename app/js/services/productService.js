@@ -1,15 +1,16 @@
 'use strict';
 four51.app.factory('Product', function($resource, $451){
+	var _cacheName = '451Cache.Product.' + $451.apiName;
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
 	}
 
      var _get = function(param, success) {
-	     var product = store.get('451Cache.Product.' + param);
+	     var product = store.get(_cacheName + param);
 	     product ? _then(success, product) :
 		     $resource($451.api('Products/:interopID'), { interopID: '@ID' }).get({ interopID: param }).$promise.then(function(product) {
-		        store.set('451Cache.Product.' + product.InteropID, product);
+		        store.set(_cacheName + product.InteropID, product);
 	            _then(success, product);
 	         });
     }

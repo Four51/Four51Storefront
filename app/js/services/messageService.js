@@ -15,6 +15,7 @@ four51.app.factory('Message', function($resource, $451) {
 
     var _delete = function(msg, success) {
         $resource($451.api('message')).delete(msg, function() {
+	        store.remove('451Cache.Messages');
 	        store.remove('451Cache.Message.' + msg.ID);
             _then(success);
         });
@@ -22,6 +23,7 @@ four51.app.factory('Message', function($resource, $451) {
 
     var _save = function(msg, success) {
         $resource($451.api('message')).save(msg).$promise.then(function(m) {
+	        store.remove('451Cache.Messages');
 	        store.set('451Cache.Message.' + m.ID, m);
             _then(success, m);
         });

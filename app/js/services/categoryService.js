@@ -14,11 +14,12 @@ four51.app.factory('Category', function($resource, $451){
             });
     }
 
+	var _treeCacheName = '451Cache.Tree.' + $451.apiName;
     var _query = function(success){
-		var tree = store.get('451Cache.Tree');
+		var tree = store.get(_treeCacheName);
         tree ? _then(success,tree) :
             $resource($451.api('categories'), {}, { query: { method: 'GET', isArray: true }}).query().$promise.then(function(tree){
-                store.set('451Cache.Tree', tree);
+                store.set(_treeCacheName, tree);
                _then(success, tree);
             });
     }
