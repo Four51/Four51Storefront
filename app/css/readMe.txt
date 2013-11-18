@@ -1,4 +1,12 @@
 0.  App Front End Strategy
+
+    Customizing the Four51 SPA  -       Do not modify the app.css file
+                                        - apply custom styles in the custom.css file as a child theme IE:
+                                            /*
+                                            Theme name: My SPA Theme
+                                            Version: 1.0
+                                            Template: Welcome
+                                            */
     Bootstrap                   -       Twitter Bootstrap 3
                                             http://getbootstrap.com/
     Themes                      -       Bootstrap driven color themes via colourlovers API and paintstrap
@@ -77,7 +85,24 @@
                     ~md                3 categories or products in a view
                     ~lg                4 categories or products in a view
 
-2.  Priorities
+2.      Animations
+        http://www.yearofmoo.com/2013/08/remastered-animation-in-angularjs-1-2.html
+        More specifically:
+            Event 	CSS Class 	Ending CSS class 	Directives that fire it
+            enter 	.ng-enter 	.ng-enter-active 	ngRepeat, ngInclude, ngIf, ngView
+            leave 	.ng-leave 	.ng-leave-active 	ngRepeat, ngInclude, ngIf, ngView
+            move 	.ng-move 	.ng-move-active 	ngRepeat
+
+            Action 	                            CSS Class 	        Ending CSS class 	    Directives that fire it
+            hide an element 	                .ng-hide-add 	    .ng-hide-add-active 	ngShow, ngHide
+            show an element 	                .ng-hide-remove 	.ng-hide-remove-active 	ngShow, ngHide
+            adding a class to an element 	    .CLASS-add 	        .CLASS-add-active 	    ngClass and class=""
+            removing a class from an element 	.CLASS-remove 	    .CLASS-remove-active 	ngClass and class=""
+
+        issues:
+        https://github.com/angular-ui/ui-router/issues/458
+
+3.  Priorities
     Navigation
         AdminNav
         CategoryNav

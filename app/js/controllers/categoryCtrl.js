@@ -9,5 +9,4 @@ four51.app.controller('CategoryCtrl', function ($routeParams, $scope, $451, Cate
             $scope.currentCategory = cat;
         });
     }
-    $scope.blah = false;
 });
