@@ -38,9 +38,6 @@
                     <p class="alert alert-danger" ng-show="quantityError">
                         {{quantityError}}
                     </p>
-                    <p class="alert alert-warning" ng-show="addToOrderForm.$invalid" ng-hide="quantityError">
-                        Please correct all errors to submit to cart.
-                    </p>
                     <div style="float: left;">
                         <span class="text-info">
                             QTY
@@ -63,6 +60,10 @@
                     </p>
                 </div>
             </form>
+				<p class="alert alert-warning" ng-show="addToOrderForm.$invalid" ng-hide="quantityError">
+					Please correct all errors to submit to cart.
+				</p>
+
         </div>
     </div>
     <div class="col-collapse col-md-8 col-md-pull-4">
