@@ -28,4 +28,9 @@ four51.app.controller('FavoriteOrderCtrl', function FavoriteOrderCtrl($scope, $l
             });
         });
 	};
+
+    $scope.saveFavoriteNow = function() {
+        $location.path('order');
+    };
+
 });
