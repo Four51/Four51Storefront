@@ -13,11 +13,9 @@
                 <li class="pull-right">
                     <a href="#/search"><i class="fa fa-search" rel="tooltip" title="Search Products"></i></a>
                 </li>
-                <li ng-click="productList = !productList" class="pull-right" ng-class="{ 'selected': ! productList }">
-                    <i class="fa fa-th hidden-xs" rel="tooltip" title="Display as Grid"></i></span>
-                </li>
-                <li ng-click="productList = !productList" class="pull-right" ng-class="{ 'selected': productList }">
-                    <i class="fa fa-align-justify hidden-xs" rel="tooltip" title="Display as Row"></i></span>
+                <li ng-click="productList = !productList" class="pull-right">
+                    <span ng-show="productList" ><i class="fa fa-th hidden-xs" rel="tooltip" title="Display as Grid"></i></span>
+                    <span ng-show="!productList"><i class="fa fa-align-justify hidden-xs" rel="tooltip" title="Display as Row"></i></span>
                 </li>
             </ul>
         <hr />
@@ -45,7 +43,7 @@
                                 <span class="fa empty"><i class="fa fa-camera"></i></span>
                             </div>
                             <h5 ng-bind-html="c.Name"></h5>
-                            <figcaption ng-if="showMega" class="category-description">{{c.Description}}</figcaption>
+                            <figcaption ng-if="productList" class="category-description">{{c.Description}}</figcaption>
                         </a>
                     </li>
                 </ul>
@@ -65,7 +63,7 @@
                                 <span class="fa empty"><i class="fa fa-camera"></i></span>
                             </div>
                             <h5>{{c.Name}}</h5>
-                            <figcaption ng-if="showMega" class="category-description">{{c.Description}}</figcaption>
+                            <figcaption ng-if="productList" class="category-description">{{c.Description}}</figcaption>
                         </a>
                     </li>
                 </ul>
