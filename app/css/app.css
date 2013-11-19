@@ -454,9 +454,12 @@ li.productList {
     width: 100%;
 }
 
-li.selected {border: 1px solid #fff;}
+li.selected {
+    border: 1px solid #fff;
+}
+
 /* ----------------------------------------------------------------------------------------------- */
-/* ng-view animation */
+/* Animations */
 /* ----------------------------------------------------------------------------------------------- */
 
 @-webkit-keyframes view-enter {

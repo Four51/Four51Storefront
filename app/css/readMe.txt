@@ -1,6 +1,7 @@
 0.  App Front End Strategy
 
     Customizing the Four51 SPA  -       Do not modify the app.css file
+                                        - no !important rules in the app.css file, everything should cascade according to specificity
                                         - apply custom styles in the custom.css file as a child theme IE:
                                             /*
                                             Theme name: My SPA Theme
@@ -57,7 +58,9 @@
         Bootstrap CSS
         http://getbootstrap.com/
 
-        Using CDN for Bootstrap.css, Bootstrap-responsive.css and font-awesome.css
+        *Local Bootstrap and font-awesome files
+
+        When using CDN for Bootstrap.css, Bootstrap-responsive.css and font-awesome.css
         CDN: http://www.bootstrapcdn.com/
 
         Bootstrap Font Icons CSS (Font Awesome) 4.0.1
@@ -102,29 +105,8 @@
             adding a class to an element 	    .CLASS-add 	        .CLASS-add-active 	    ngClass and class=""
             removing a class from an element 	.CLASS-remove 	    .CLASS-remove-active 	ngClass and class=""
 
-        issues:
+        noted issues:
         https://github.com/angular-ui/ui-router/issues/458
-
-3.  Priorities
-    Navigation
-        AdminNav
-        CategoryNav
-        ProductNav
-
-    Buttons
-
-    Messaging
-
-    Orders
-        Search
-
-    Forms
-
-    Spending Accounts
-
-    Product View
-
-    Product Search
 
 
 
