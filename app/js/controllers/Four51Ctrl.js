@@ -60,4 +60,3 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
     $scope.$on('event:auth-loginRequired', cleanup);
 
 });
-
