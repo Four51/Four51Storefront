@@ -1,11 +1,9 @@
 /*
-
-Theme: Four51 Single Page App Default
-Author: Ken Buras (http://www.kenburas.com/)
+Theme name: Default
 Version: 1.0
+Template: Four51 Single Page App - Ken Buras (http://www.kenburas.com/)
 
 ** If there is question on something the answer is most likely found in readMe.txt
-
 /* ----------------------------------------------------------------------------------------------- */
 
 html {
@@ -416,6 +414,17 @@ div.category-view-subcat ul li ul {
 
 .nav-cat-search ul li.text-nav {
     padding: 15px 5px;
+}
+
+.header .text-nav {
+    padding: 0 5px;
+    display: inline-block;
+    float: right;
+}
+
+.header .dropdown .text-nav {
+    padding: 0 5px;
+    float: none;
 }
 
 .nav-cat-search i {
