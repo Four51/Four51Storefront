@@ -147,6 +147,7 @@ textarea {
     min-height: 200px;
 }
 
+
 .cat-image img {
     margin: 0 auto;
     max-width: 100%;
@@ -166,13 +167,16 @@ textarea {
     padding-top: 75px;
 }
 
-li.search .hidden-xs {float: left;}
-.search i {border: 1px solid transparent;}
-.search i.selected {border: 1px solid #fff;}
+.move-cat-body .cat-image {
+    min-height: 150px;
+}
+.move-cat-body .fa.empty {
+    height: 150px;
+}
+
 .shortproduct-view:hover .shortproduct-name, .shortproduct-view .shortproduct-toggle, .shortproduct-view.howdy:hover .shortproduct-toggle {
     display: none;
 }
-
 
 .shortproduct-view:hover .shortproduct-toggle, .shortproduct-view.howdy:hover .shortproduct-name {
     display: block;
@@ -420,20 +424,12 @@ div.category-view-subcat ul li ul {
     padding: 15px 5px;
 }
 
-.nav-cat-search ul li.search {
-    float: right;
-}
-
 .nav-cat-search i {
     font-size: 18px;
     padding: 15px 20px;
     cursor: pointer;
 }
 
-li.search span {
-    display: inline-block;
-    float: left;
-}
 
 .admin-navigation .nav li > ul li {
     font-size: 14px;
@@ -455,10 +451,7 @@ li.productList {
     width: 100%;
 }
 
-li.productList.category-view-aside, li.productList-add, li.productList-add-active {
-    width: 75%;
-}
-
+li.selected {border: 1px solid #fff;}
 /* ----------------------------------------------------------------------------------------------- */
 /* ng-view animation */
 /* ----------------------------------------------------------------------------------------------- */
@@ -602,7 +595,7 @@ li.productList.category-view-aside, li.productList-add, li.productList-add-activ
 
 @-moz-keyframes cat-body-move-right {
     0% {
-        opacity: 1;
+        opacity: 0;
         -moz-transform: translateX(-25%);
     }
 
@@ -614,7 +607,7 @@ li.productList.category-view-aside, li.productList-add, li.productList-add-activ
 
 @-o-keyframes cat-body-move-right {
     0% {
-        opacity: 1;
+        opacity: 0;
         -o-transform: translateX(-25%);
     }
 
@@ -626,7 +619,7 @@ li.productList.category-view-aside, li.productList-add, li.productList-add-activ
 
 @keyframes cat-body-move-right {
     0% {
-        opacity: 1;
+        opacity: 0;
         transform: translateX(-25%);
     }
 
@@ -657,7 +650,6 @@ li.productList.category-view-aside, li.productList-add, li.productList-add-activ
 .move-cat-body-add-active {
     opacity: 1;
 }
-
 
 @-webkit-keyframes cat-body-move-left {
     0% {

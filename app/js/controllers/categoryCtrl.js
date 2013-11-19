@@ -9,4 +9,11 @@ four51.app.controller('CategoryCtrl', function ($routeParams, $scope, $451, Cate
             $scope.currentCategory = cat;
         });
     }
+
+
+    // No tooltips on mobile
+    if (!window.matchMedia || (window.matchMedia("(min-width: 767px)").matches)) {
+        $('.fa').tooltip();
+    }
+
 });
