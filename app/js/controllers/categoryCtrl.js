@@ -11,8 +11,8 @@ four51.app.controller('CategoryCtrl', function ($routeParams, $scope, $451, Cate
     }
 
 
-    // No tooltips on mobile
-    if (!window.matchMedia || (window.matchMedia("(min-width: 767px)").matches)) {
+    // No tooltips on phone, tablet portrait
+    if (!window.matchMedia || (window.matchMedia("(min-width: 1023px)").matches)) {
         $('.fa').tooltip();
     }
 

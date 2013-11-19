@@ -71,7 +71,7 @@
             Large devices (large desktops, 1200px ~) x-lg
 
         Toolips
-            No tooltips on mobile because it forces user to touch the attribute twice
+            No tooltips on phone, tablet portrait
 
 1.1     Content scales up IE:mobile first
             Admin navigation
