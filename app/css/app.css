@@ -167,12 +167,6 @@ textarea {
     padding-top: 75px;
 }
 
-.move-cat-body .cat-image {
-    min-height: 150px;
-}
-.move-cat-body .fa.empty {
-    height: 150px;
-}
 
 .shortproduct-view:hover .shortproduct-name, .shortproduct-view .shortproduct-toggle, .shortproduct-view.howdy:hover .shortproduct-toggle {
     display: none;
