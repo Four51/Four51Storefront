@@ -1,0 +1,9 @@
+/* x-lg */
+@media (min-width: 1200px) {
+
+    .nav li span.nav-name {float:right;}
+    .header-nav-c1 {width: 1140px; margin: 0 auto; }
+    .product-view-default img {margin: 15px 0;}
+    .product-view-default .fa.empty {text-align: left;}
+
+}

@@ -38,7 +38,7 @@
     Swipe                       -       A swipe is currently working on category and product list views to show description
                                             ngTouch
     Responsive breakpoints      -       app media queries that work alongside Twitter Bootstrap to provide more bulletproof design styles
-                                        - breakpoint.css
+                                        - /breakpoint
 
 1.  Responsive
 
@@ -64,11 +64,11 @@
         http://fontawesome.io/icons/
 
         Default Breakpoints:
-        See breakpoint.css for responsive styles that work alongside Bootstrap responsive classes
-            Extra small devices (phone, ~ 618px) x-xs
-            Small devices (tablet portrait, ~ 768px) x-sm
-            Medium devices (desktops, tablet landscape ~ 1024px)  x-md
-            Large devices (large desktops, 1200px ~) x-lg
+        See ~/breakpoint for responsive styles that work alongside Bootstrap responsive classes
+            xs.css Extra small devices (phone, ~ 618px) x-xs
+            sm.css Small devices (tablet portrait, ~ 768px) x-sm
+            md.css Medium devices (desktops, tablet landscape ~ 1024px)  x-md
+            lg.css Large devices (large desktops, 1200px ~) x-lg
 
         Toolips
             No tooltips on phone, tablet portrait
