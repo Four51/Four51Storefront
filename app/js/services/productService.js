@@ -53,14 +53,9 @@ four51.app.factory('Variant', function($resource, $451){
 	        });
     }
 	var _save = function(variant, success) {
-		console.log('save variant');
-		console.dir(variant);
 		return $resource($451.api('variant')).save(variant).$promise.then(function(v) {
-			console.log('save var return');
-			console.dir(v);
 			store.remove(getCacheName(v.ProductInteropID, v.InteropID));
 			store.set(getCacheName(v.ProductInteropID, v.InteropID), v);
-
 			_then(success, v);
 		});
 	}
