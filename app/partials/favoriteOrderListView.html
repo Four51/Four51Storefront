@@ -1,6 +1,5 @@
 <section class="container favorite-order-list-view">
-    <!--- TODO below PANEL needs to only display if NO favorites --->
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-if="favoriteorders.length == 0">
         <div class="panel-heading">
             <h3 class="panel-title panel-primary">Favorite Orders</h3>
         </div>
@@ -11,8 +10,7 @@
             <button type="button" class="btn btn-primary" ng-click="saveFavoriteNow()">View orders</button>
         </div>
     </div>
-    <!--- TODO below PANEL needs to only display if YES favorites --->
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-if="favoriteorders.length > 0">
         <div class="panel-heading">
             <h3 class="panel-title panel-primary">Favorite Orders</h3>
         </div>

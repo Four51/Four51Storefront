@@ -1,6 +1,5 @@
 <section class="container address-list-view">
-    <!--- TODO below PANEL needs to only display if NO addresses --->
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-if="addresses.length == 0">
         <div class="panel-heading">
             <h3 class="panel-title">Addresses</h3>
         </div>
@@ -11,8 +10,7 @@
             <button type="button" class="btn btn-primary" ng-click="newAddress($event)">Add an address now</button>
         </div>
     </div>
-    <!--- TODO below PANEL needs to only display if YES addresses --->
-    <div class="panel panel-default">
+    <div class="panel panel-default"  ng-if="addresses.length > 0">
         <div class="panel-heading">
             <h3 class="panel-title">Addresses</h3>
         </div>

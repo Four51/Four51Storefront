@@ -1,6 +1,5 @@
 <section class="container order-search-view">
-    <!--- TODO below panel needs to only display if NO orders --->
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-if="!hasStandardTypes && !hasReplenishmentTypes && !hasPriceRequestTypes">
         <div class="panel-heading">
             <h3 class="panel-title">Orders</h3>
         </div>
@@ -11,8 +10,7 @@
             <button type="button" class="btn btn-primary" ng-click="continueShopping()">Continue Shopping</button>
         </div>
     </div>
-    <!--- TODO below nav needs to only display if YES orders --->
-    <nav class="nav nav-cat-search">
+    <nav class="nav nav-cat-search" ng-if="hasStandardTypes || hasReplenishmentTypes || hasPriceRequestTypes">
         <hr />
         <ul>
             <li class="text-nav">Orders</li>
