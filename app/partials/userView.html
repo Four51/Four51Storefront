@@ -2,7 +2,7 @@
 	<form name="login_existing" ng-submit="loginExisting()" ng-if="user.Type == 'TempCustomer'">
 		<div class="panel panel-default" id="user_form">
 			<div class="panel-heading">
-				<h3 class="panel-title panel-primary">Logon as existing user</h3>
+				<h3 class="panel-title">Logon as existing user</h3>
 			</div>
 			<div class="panel-body">
 				<input name="username" class="input-large" type="text" ng-model="loginasuser.Username" required placeholder="User Name" /><br />
@@ -28,7 +28,7 @@
 	<form name="user_form" ng-submit="save()">
         <div class="panel panel-default" id="user_form">
             <div class="panel-heading">
-                <h3 class="panel-title panel-primary">{{user.Type == 'TempCustomer' ? 'Create' : 'My'}} Account</h3>
+                <h3 class="panel-title">{{user.Type == 'TempCustomer' ? 'Create' : 'My'}} Account</h3>
             </div>
             <div class="panel-body">
                 <input name="firstname" class="input-large" type="text" ng-model="user.FirstName" placeholder="First Name" /><br />

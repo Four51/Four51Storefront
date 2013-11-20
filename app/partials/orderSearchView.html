@@ -1,7 +1,7 @@
 <section class="container order-search-view">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title panel-primary">Orders</h3>
+            <h3 class="panel-title">Orders</h3>
         </div>
         <div class="panel-body">
             <p class="alert alert-warning">You have no orders yet!</p>
@@ -43,7 +43,7 @@
     <div class="order-search-toggle" ng-show="toggle" >
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title panel-primary">Search Orders</h3>
+                <h3 class="panel-title">Search Orders</h3>
             </div>
             <div class="panel-body">
                 <input type="text" ng-model="criteria.OrderID" placeholder="Order ID" /><br />
@@ -58,8 +58,8 @@
     </div>
     <div class="order-types" ng-show="!toggle">
         <div class="panel panel-default" ng-show="hasStandardTypes">
-            <div class="panel-heading panel-title">
-                Standard Orders
+            <div class="panel-heading">
+                <h3 class="panel-title">Standard Orders</h3>
             </div>
             <div class="panel-body">
                 <ul>
@@ -70,8 +70,8 @@
             </div>
         </div>
         <div class="panel panel-default" ng-show="hasReplenishmentTypes">
-            <div class="panel-heading panel-title">
-                Replenishment Orders
+            <div class="panel-heading">
+                <h3 class="panel-title">Replenishment Orders<h3>
             </div>
             <div class="panel-body">
                 <ul>
@@ -82,8 +82,8 @@
             </div>
         </div>
         <div class="panel panel-default" ng-show="hasPriceRequestTypes">
-            <div class="panel-heading panel-title">
-                Price Request
+            <div class="panel-heading">
+                <h3 class="panel-title">Price Request</h3>
             </div>
             <div class="panel-body">
                 <ul>
