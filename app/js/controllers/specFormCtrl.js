@@ -6,6 +6,8 @@ four51.app.controller('SpecFormCtrl', function ($routeParams, $scope, ProductDis
 		$scope.Variant = data.variant;
 	})
 	$scope.save = function(){
-		Variant.save($scope.Variant);
+		Variant.save($scope.Variant, function(data){
+			$scope.Variant = data;
+		});
 	}
 });
