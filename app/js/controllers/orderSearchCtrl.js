@@ -1,6 +1,6 @@
 'use strict';
 
-four51.app.controller('OrderSearchCtrl', function OrderSearchCtrl($scope, OrderSearchCriteria, OrderSearch) {
+four51.app.controller('OrderSearchCtrl', function OrderSearchCtrl($scope,  $location, OrderSearchCriteria, OrderSearch) {
     OrderSearchCriteria.query(function(data) {
         $scope.OrderSearchCriteria = data;
         $scope.hasStandardTypes = _hasType(data, 'Standard');
@@ -24,5 +24,9 @@ four51.app.controller('OrderSearchCtrl', function OrderSearchCtrl($scope, OrderS
 		$scope.displayOrders = true;
 		$scope.orderSearchStat = criteria;
 	};
+
+    $scope.continueShopping = function() {
+        $location.path('catalog');
+    };
 });
 

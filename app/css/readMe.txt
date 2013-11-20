@@ -1,6 +1,7 @@
 0.  App Front End Strategy
 
     Customizing the Four51 SPA  -       Do not modify the app.css file
+                                        - no !important rules in the app.css file, everything should cascade according to specificity
                                         - apply custom styles in the custom.css file as a child theme IE:
                                             /*
                                             Theme name: My SPA Theme
@@ -38,7 +39,7 @@
     Swipe                       -       A swipe is currently working on category and product list views to show description
                                             ngTouch
     Responsive breakpoints      -       app media queries that work alongside Twitter Bootstrap to provide more bulletproof design styles
-                                        - breakpoint.css
+                                        - /breakpoint
 
 1.  Responsive
 
@@ -57,18 +58,20 @@
         Bootstrap CSS
         http://getbootstrap.com/
 
-        Using CDN for Bootstrap.css, Bootstrap-responsive.css and font-awesome.css
+        *Local Bootstrap and font-awesome files
+
+        When using CDN for Bootstrap.css, Bootstrap-responsive.css and font-awesome.css
         CDN: http://www.bootstrapcdn.com/
 
         Bootstrap Font Icons CSS (Font Awesome) 4.0.1
         http://fontawesome.io/icons/
 
         Default Breakpoints:
-        See breakpoint.css for responsive styles that work alongside Bootstrap responsive classes
-            Extra small devices (phone, ~ 618px) x-xs
-            Small devices (tablet portrait, ~ 768px) x-sm
-            Medium devices (desktops, tablet landscape ~ 1024px)  x-md
-            Large devices (large desktops, 1200px ~) x-lg
+        See ~/breakpoint for responsive styles that work alongside Bootstrap responsive classes
+            xs.css Extra small devices (phone, ~ 618px) x-xs
+            sm.css Small devices (tablet portrait, ~ 768px) x-sm
+            md.css Medium devices (desktops, tablet landscape ~ 1024px)  x-md
+            lg.css Large devices (large desktops, 1200px ~) x-lg
 
         Toolips
             No tooltips on phone, tablet portrait
@@ -102,29 +105,8 @@
             adding a class to an element 	    .CLASS-add 	        .CLASS-add-active 	    ngClass and class=""
             removing a class from an element 	.CLASS-remove 	    .CLASS-remove-active 	ngClass and class=""
 
-        issues:
+        noted issues:
         https://github.com/angular-ui/ui-router/issues/458
-
-3.  Priorities
-    Navigation
-        AdminNav
-        CategoryNav
-        ProductNav
-
-    Buttons
-
-    Messaging
-
-    Orders
-        Search
-
-    Forms
-
-    Spending Accounts
-
-    Product View
-
-    Product Search
 
 
 

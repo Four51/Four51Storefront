@@ -101,8 +101,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	        User.save($scope.user, function(data) {
 		        $scope.user = data;
 	        });
-            //$location.path('/order/{{order.ID}}');
-            // TODO upon submit, send the user to this order's order history view
+            $location.path('/order/' + data.ID);
         });
     };
 
