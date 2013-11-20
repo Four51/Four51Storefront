@@ -43,7 +43,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 cart-view-line-items-product">
                             <p>
                                 <a ng-href="#.#">{{item.ProductIDText}}</a>
-                                <!---TODO needs url --->
+<!---TODO needs url --->
                             </p>
                             <p>{{item.Product.Name}}</p>
                             <ul>
@@ -68,7 +68,8 @@
                         </div>
                             <div class="col-md-2 col-sm-2 col-xs-3">
                                 {{item.UnitPrice | currency}}
-                            </div><!--- TODO error needs styling --->
+                            </div>
+                            <!--- TODO error needs styling --->
                             <div class="col-md-1 col-sm-1 col-xs-3">
                                 <quantityfield error="qtyError" lineitem="item" class="quantity"/>
                                 {{qtyError}}

@@ -1,6 +1,7 @@
 <section class="container">
     <div ng-show="ps && p">
     <span class="text-info">Price</span>
+        <!--- TODO table needs to redone as Bootstrap responsive layout, see cartView.html for example --->
     <table border=1 id="451_list_pric_schd"><!--ken, when you change this away from bieng a table structure please make sure this ID is in something that surrounds the repeater-->
         <tr><td>Quantity <span ng-show="p.QuantityMultiplier > 1 && !ps.RestrictedQuantity"> (x {{p.QuantityMultiplier}})</span></td>
             <td>Price <span ng-show="p.QuantityMultiplier > 1 && !ps.RestrictedQuantity" > (per {{p.QuantityMultiplier}})</span></td>

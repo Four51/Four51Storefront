@@ -66,6 +66,7 @@
         </div>
     </div>
     <div class="col-collapse col-md-8 col-md-pull-4">
+        <!--- TODO below entire PANEL needs to only display if YES info --->
         <div class="panel product-view-default-toggle-panel panel-primary ">
             <div class="panel-heading">
                 <h3 ng-click="selected=1" ng-class="{'panel-selected':selected == 1}" class="panel-title panel-switch">
@@ -74,6 +75,7 @@
                     </span>
                     Info
                 </h3>
+                <!--- below heading tag hides/shows as intended --->
                 <h3 ng-show="StaticSpecGroups" ng-click="selected=2" ng-class="{'panel-selected':selected == 2}" class="panel-title panel-switch">
                     <span class="icon">
                         <i ng-class="{'fa fa-caret-up':selected == 2}"></i>
@@ -81,6 +83,7 @@
                    Spec
                 </h3>
             </div>
+            <!--- TODO below PANEL needs to only display if YES info --->
             <div class="panel-body">
                 <div ng-hide="selected == 2">
                     <div ng-show="LineItem.Product.Description">
@@ -112,6 +115,7 @@
                             Please select from the following:
                         </h4>
                         <div>
+                            <!--- TODO table needs to redone as Bootstrap responsive layout, see cartView.html for example --->
                             <table border=1 class="451_list_vars">
                                 <tr>
                                     <td>
@@ -145,6 +149,7 @@
                         </div>
                     </div>
                 </div>
+                <!--- below panel hides/shows as intended and is dependant upon the header toggle above --->
                 <div ng-show="selected == 2">
                     <staticspecstable specgroups="StaticSpecGroups"/>
                 </div>
