@@ -1,0 +1,19 @@
+default spec form: {{Product.Name}}
+table
+<table id="451_list_vspec" border=1 ng-show="true">
+	<tr ng-repeat="s in Variant.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: false}, {Property: 'DefinesVariant', Value: false}]">
+		<td>
+			{{s.Name}}<span ng-show="s.Required" style="color:red"> *</span>
+		</td>
+		<td>
+			{{s.Prefix}}
+			<vspecfield changed="specChanged" s="s">
+			</vspecfield>{{s.Suffix}}
+		</td>
+	</tr>
+</table>
+		<hr>
+
+<button>save</button>
+<button>save as new</button>
+<button>cancel</button>

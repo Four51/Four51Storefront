@@ -9,9 +9,12 @@ four51.app.controller('MessageListCtrl', function($scope, MessageList) {
 		});
 	};
 
-	$scope.deleteSelected = function(event) {
-		event.preventDefault();
-		MessageList.delete($scope.messages);
+	$scope.deleteSelected = function() {
+		MessageList.delete($scope.messages, function() {
+			MessageList.query(function(list) {
+				$scope.messages = list;
+			});
+		});
 	};
 });
 

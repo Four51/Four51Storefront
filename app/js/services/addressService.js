@@ -4,12 +4,7 @@ four51.app.factory('Address', function($resource, $451){
             fn(data);
     }
 
-	function _extend(address) {
-		//set default value to US if it's a new address and other values
-		address.Country = address.Country || 'US';
-		address.IsBilling = address.IsBilling || true;
-		address.IsShipping = address.IsShipping || true;
-	}
+	function _extend(address) {	}
 
     var _get = function(id, success) {
 		var address = store.get('451Cache.Address.' + id);
@@ -45,7 +40,7 @@ four51.app.factory('Address', function($resource, $451){
     };
 });
 
-four51.app.factory('AddressList', function($resource, $451) {
+four51.app.factory('AddressList', function($q, $resource, $451) {
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
@@ -60,15 +55,26 @@ four51.app.factory('AddressList', function($resource, $451) {
 	        });
     }
 
-    var _delete = function(addresses, success) {
-        angular.forEach(addresses, function(add) {
-            if (add.Selected) {
-	            $resource($451.api('address')).delete(add);
-            }
-        });
-	    store.set('451Cache.Addresses');
-        _then(success);
-    }
+	var _delete = function(messages, success) {
+		store.remove('451Cache.Addresses');
+
+		var queue = [];
+		angular.forEach(addresses, function(add) {
+			if (add.Selected) {
+				queue.push((function() {
+					var d = $q.defer();
+					$resource($451.api('address')).delete(add).$promise.then(function() {
+						d.resolve();
+					});
+					return d.promise;
+				})());
+			}
+		});
+
+		$q.all(queue).then(function() {
+			_then(success);
+		});
+	}
 
     return {
         query: _query,

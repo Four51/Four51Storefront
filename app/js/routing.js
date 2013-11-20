@@ -3,7 +3,10 @@
 /* routing */
 four51.app.config(['$routeProvider', function($routeProvider) {
 		var concatProductView = function(routeParams){
-			return 'partials/productviews/'+ routeParams.view +'.html'
+			return 'partials/productviews/'+ routeParams.view +'.html';
+		}
+		var concatSpecFormView = function(routeParams){
+			return 'partials/SpecForms/' + routeParams.productInteropID + '.html';
 		}
 
 		$routeProvider.
@@ -13,7 +16,8 @@ four51.app.config(['$routeProvider', function($routeProvider) {
             when('/catalog/:categoryInteropID', { templateUrl: 'partials/categoryView.html', controller: 'CategoryCtrl' }).
             when('/product/:view/:productInteropID', {templateUrl: concatProductView, controller: 'ProductCtrl'}).
             when('/product/:view/:productInteropID/:variantInteropID', {templateUrl: concatProductView, controller: 'ProductCtrl'}).
-            when('/order', { templateUrl: 'partials/orderSearchView.html', controller: 'OrderSearchCtrl' }).
+			when('/product/:view/:productInteropID/:variantInteropID/edit', {templateUrl: concatSpecFormView, controller: 'SpecFormCtrl'}).
+			when('/order', { templateUrl: 'partials/orderSearchView.html', controller: 'OrderSearchCtrl' }).
 			when('/order/:id', { templateUrl: 'partials/reporting/orderHistoryView.html', controller: 'OrderViewCtrl' }).
 			when('/favoriteorders', { templateUrl: 'partials/favoriteOrderListView.html', controller: 'FavoriteOrderCtrl' }).
 			when('/order/:orderid/:lineitemindex/', { templateUrl: 'partials/reporting/lineItemHistoryView.html', controller: 'LineItemViewCtrl' }).

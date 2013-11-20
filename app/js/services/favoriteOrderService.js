@@ -1,4 +1,4 @@
-four51.app.factory('FavoriteOrder', function($resource, $451) {
+four51.app.factory('FavoriteOrder', function($q, $resource, $451) {
 	var _cacheName = '451Cache.FavoriteOrders.' + $451.apiName;
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
@@ -21,16 +21,26 @@ four51.app.factory('FavoriteOrder', function($resource, $451) {
         });
     }
 
-    var _delete = function(orders, success) {
-        angular.forEach(orders, function(order, key) {
-            if (order.Selected) {
-	            orders.splice(key, 1);
-                $resource($451.api('favoriteorder')).delete(order);
-            }
-        });
-	    store.set(_cacheName, orders);
-       _then(success, orders);
-    }
+	var _delete = function(orders, success) {
+		store.remove(_cacheName);
+
+		var queue = [];
+		angular.forEach(orders, function(o) {
+			if (o.Selected) {
+				queue.push((function() {
+					var d = $q.defer();
+					$resource($451.api('favoriteorder')).delete(o).$promise.then(function() {
+						d.resolve();
+					});
+					return d.promise;
+				})());
+			}
+		});
+
+		$q.all(queue).then(function() {
+			_then(success);
+		});
+	}
 
 	return {
 		query: _query,

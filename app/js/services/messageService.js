@@ -36,7 +36,7 @@ four51.app.factory('Message', function($resource, $451) {
 	}
 });
 
-four51.app.factory('MessageList', function($resource, $451) {
+four51.app.factory('MessageList', function($q, $resource, $451) {
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
@@ -51,14 +51,26 @@ four51.app.factory('MessageList', function($resource, $451) {
 	        });
     }
 
-    var _delete = function(messages, success) {
-        angular.forEach(messages, function(msg) {
-            if (msg.Selected)
-                $resource($451.api('message')).delete(msg);
-        });
-	    store.set('451Cache.Messages', messages);
-       _then(success,messages);
-    }
+	var _delete = function(messages, success) {
+		store.remove('451Cache.Messages');
+
+		var queue = [];
+		angular.forEach(messages, function(msg) {
+			if (msg.Selected) {
+				queue.push((function() {
+					var d = $q.defer();
+					$resource($451.api('message')).delete(msg).$promise.then(function() {
+						d.resolve();
+					});
+					return d.promise;
+				})());
+			}
+		});
+
+		$q.all(queue).then(function() {
+			_then(success);
+		});
+	}
 
     return {
         query: _query,

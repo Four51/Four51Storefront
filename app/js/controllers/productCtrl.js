@@ -39,31 +39,19 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
     $scope.selected = 1;
     $scope.LineItem = {};
 	$scope.addToOrderText = "Add To Cart";
-	function ProductVariantGetsDone (){
-		ProductDisplayService.setNewLineItemScope($scope);
-		ProductDisplayService.setProductViewScope($scope);
-		$scope.$broadcast('ProductGetComplete');
-	}
+
 
 	$scope.getSpec = function() {
 		if (!localStorage["angular-cache.caches.451Cache.data.productARIHome"]) return "null";
 		return JSON.parse(localStorage["angular-cache.caches.451Cache.data.productARIHome"]).value.Specs.Size.Value;
 	}
 
-	Product.get($routeParams.productInteropID, function(data){
-        $scope.LineItem.Product = data;
-        if($routeParams.variantInteropID){
-			if(data.Type == 'VariableText'){
-				Variant.get({VariantInteropID: $routeParams.variantInteropID, ProductInteropID: data.InteropID }, function(variant) {
-					$scope.LineItem.Variant = variant;
-					ProductVariantGetsDone();})
-			} else {
-				$scope.LineItem.Variant = $451.filter(data.Variants, {Property: 'InteropID', Value: $routeParams.variantInteropID})[0];
-				ProductVariantGetsDone();
-			}
-		}
-		else
-			ProductVariantGetsDone();
+	ProductDisplayService.getProductAndVariant($routeParams.productInteropID,$routeParams.variantInteropID, function(data){
+		$scope.LineItem.Product = data.product;
+		$scope.LineItem.Variant = data.variant;
+		ProductDisplayService.setNewLineItemScope($scope);
+		ProductDisplayService.setProductViewScope($scope);
+		$scope.$broadcast('ProductGetComplete');
 	});
 
 	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){

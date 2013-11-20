@@ -20,8 +20,7 @@ four51.app.controller('FavoriteOrderCtrl', function FavoriteOrderCtrl($scope, $l
 			order.Selected = event.currentTarget.checked;
 		});
 	};
-	$scope.deleteSelected = function(event) {
-		event.preventDefault();
+	$scope.deleteSelected = function() {
         FavoriteOrder.delete($scope.favoriteorders, function() {
             FavoriteOrder.query(function(favs) {
                 $scope.favoriteorders = favs;

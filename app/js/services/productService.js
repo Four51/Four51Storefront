@@ -56,7 +56,7 @@ four51.app.factory('Variant', function($resource, $451){
 	}
 });
 
-four51.app.factory('ProductDisplayService', function($451, Variant){
+four51.app.factory('ProductDisplayService', function($451, Variant, Product){
 	function calcTotal(lineItem){
 
 		var ps = lineItem.PriceSchedule;
@@ -203,8 +203,25 @@ four51.app.factory('ProductDisplayService', function($451, Variant){
 			return null;
 		return product.StaticSpecGroups.SPAProductConfig.Specs[specName].Value || escapeNull;
 	}
-
+	function _getProductAndVariant(productInteropID, variantInteropID, callback){
+		Product.get(productInteropID, function(data){
+			var p = data;
+			if(variantInteropID){
+				if(p.Type == 'VariableText'){
+					Variant.get({VariantInteropID: variantInteropID, ProductInteropID: p.InteropID }, function(v) {
+						callback({product: p, variant: v});
+					});
+				}else{
+					var variant = $451.filter(data.Variants, {Property: 'InteropID', Value: variantInteropID})[0];
+					callback({product: p, variant: variant});
+				}
+			}
+			else
+				callback({product:p});
+		});
+	};
 	return{
+		getProductAndVariant: _getProductAndVariant,
 		setNewLineItemScope: function(scope){
 			newLineItemScope(scope);
 		},

@@ -2,6 +2,7 @@
     <figure>
         <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url">
     </figure>
+	<span ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant"><a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit>edit variant</a> </span>
     <div class="col-collapse col-md-3 col-md-offset-1 col-md-push-8">
         <div class="panel panel-default">
             <div class="panel-heading">
