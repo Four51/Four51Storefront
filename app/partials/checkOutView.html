@@ -1,14 +1,11 @@
 <section class="container check-out-view">
-
-
-
     <div class="panel panel-default cart-view-summary col-md-3 col-md-offset-1 col-md-push-8">
         <div class="panel-heading">
             <h3 class="panel-title panel-primary">
                 Checkout Summary
             </h3>
         </div>
-        <div class="panel-body">
+        <div class="panel-body text-left">
             <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
                 <p>Items: {{currentOrder.LineItems.length}}</p>
                 <p>Subtotal: {{currentOrder.Subtotal | currency}}</p>
@@ -22,7 +19,8 @@
         </div>
         <div class="panel-footer">
             <p class="alert alert-warning" ng-show="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">Please correct all errors to submit order.</p>
-            <button class="btn btn-primary" ng-if="currentOrder" ng-click="submitOrder()" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">
+            <!--- TODO below submit order button needs to redirect to ORDERS page and display the submitted order upon submission --->
+            <button class="btn btn-primary" ng-show="currentOrder" ng-click="submitOrder()" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">
                 Submit Order
             </button>
         </div>
@@ -181,7 +179,7 @@
         </form>
 
         <div class="panel-footer check-out-view-types">
-            <div class="check-out-view-btn-group" ng-if="currentOrder">
+            <div class="check-out-view-btn-group" ng-show="currentOrder">
                 <span class="btn-group">
                     <button class="btn btn-default cart-view-btn-save" ng-click="saveChanges()">
                         {{user.Company.SiteText.SaveChanges || 'Save Changes'}}
