@@ -1,12 +1,6 @@
 <section class="container user-view">
-    <ul class="visible-sm visible-xs">
-        <li class="addresses"> <a href="#/order">Orders</a></li>
-        <li class="addresses"><a href="#/addresses">Addresses</a></li>
-        <li class="messages"><a href="#/message">Messages</a></li>
-        <li ng-if="user.Type=='Customer'" class="logout"><a href="#" class="451_btn_logout" ng-click="Logout()">Log Out</a></li>
-    </ul>
 	<form name="login_existing" ng-submit="loginExisting()" ng-if="user.Type == 'TempCustomer'">
-		<div class="panel panel-primary" id="user_form">
+		<div class="panel panel-default" id="user_form">
 			<div class="panel-heading">
 				<h3 class="panel-title panel-primary">Logon as existing user</h3>
 			</div>
@@ -19,6 +13,17 @@
 			</div>
 		</div>
 	</form>
+
+    <nav class="nav nav-cat-search visible-sm visible-xs user-view-sm-xs-nav">
+        <hr />
+        <ul>
+            <li class="addresses text-nav"><a href="#/order">Orders</a></li>
+            <li class="addresses text-nav"><a href="#/addresses">Addresses</a></li>
+            <li class="messages text-nav"><a href="#/message">Messages</a></li>
+            <li ng-if="user.Type=='Customer'" class="logout text-nav"><a href="#" class="451_btn_logout" ng-click="Logout()">Log Out</a></li>
+        </ul>
+        <hr />
+    </nav>
 
 	<form name="user_form" ng-submit="save()">
         <div class="panel panel-default" id="user_form">
@@ -48,5 +53,4 @@
             </div>
         </div>
     </form>
-
 </section>

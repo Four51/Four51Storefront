@@ -3,11 +3,8 @@
         <section class="header-nav-c1">
             <div class="collapse navbar-collapse navbar-ex1-collapse visible-xs">
                 <ul class="nav navbar-nav pull-left">
-                    <li class="hidden-sm hidden-xs">
-                        <a class="navbar-brand" ng-click="refreshUser()" ng-show="Four51User.isAuthenticated()" href="#/catalog"><i class="fa fa-home"></i></a>
-                    </li>
                     <li class="products" ng-class="getClass('/catalog')">
-                        <a href="#/catalog"><i class="fa fa-folder-open"></i><span class="text-nav">Products</span></a>
+                        <a ng-click="refreshUser()" ng-show="Four51User.isAuthenticated()" href="#/catalog"><i class="fa fa-home"></i><span class="text-nav">Products</span></a>
                     </li>
                     <li class="order hidden-xs" ng-class="getClass('/order')">
                         <a href="#/order"><i class="fa fa-bar-chart-o"></i><span class="text-nav hidden-sm hidden-xs">Orders</span></a>
