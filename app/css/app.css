@@ -1,11 +1,9 @@
 /*
-
-Theme: Four51 Single Page App Default
-Author: Ken Buras (http://www.kenburas.com/)
+Theme name: Default
 Version: 1.0
+Template: Four51 Single Page App - Ken Buras (http://www.kenburas.com/)
 
 ** If there is question on something the answer is most likely found in readMe.txt
-
 /* ----------------------------------------------------------------------------------------------- */
 
 html {
@@ -58,6 +56,7 @@ input.ng-invalid, input.ng-invalid:invalid {
 
 input:not([type=submit]), textarea, select {
     padding: 9px;
+    margin: 5px 0;
     border: solid 1px #E5E5E5;
     outline: 0;
     background: #FFFFFF url('bg_form.png') left top repeat-x;
@@ -418,6 +417,17 @@ div.category-view-subcat ul li ul {
     padding: 15px 5px;
 }
 
+.header .text-nav {
+    padding: 0 5px;
+    display: inline-block;
+    float: right;
+}
+
+.header .dropdown .text-nav {
+    padding: 0 5px;
+    float: none;
+}
+
 .nav-cat-search i {
     font-size: 18px;
     padding: 15px 20px;
@@ -445,9 +455,25 @@ li.productList {
     width: 100%;
 }
 
-li.selected {border: 1px solid #fff;}
+li.selected {
+    border: 1px solid #fff;
+}
+
+nav.user-view-sm-xs-nav {
+    text-align: center;
+}
+
+nav.user-view-sm-xs-nav ul li {
+    float: none;
+}
+
+.user-view .list-group label {
+    display: block;
+    margin: 0;
+}
+
 /* ----------------------------------------------------------------------------------------------- */
-/* ng-view animation */
+/* Animations */
 /* ----------------------------------------------------------------------------------------------- */
 
 @-webkit-keyframes view-enter {

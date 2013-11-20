@@ -1,7 +1,7 @@
 <section class="jumbotron branding-view">
     <div class="container">
         <figure>
-            <a ng-click="refreshUser()" href="#/catalog">
+            <a ng-show="Four51User.isAuthenticated()" ng-click="refreshUser()" href="#/catalog">
                 <img class="branding-view-logo" ng-src="{{user.Company.Logo.Url}}" />
             </a>
         </figure>

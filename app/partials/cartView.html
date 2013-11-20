@@ -1,10 +1,10 @@
 <section class="container cart-view">
-    <div ng-if="currentOrder" class="cart-view-detail hidden-print">
+    <div ng-show="currentOrder" class="cart-view-detail hidden-print">
         <nav class="nav nav-cat-search">
             <hr />
             <ul>
-                <li class="nav-header">Your Cart</li>
-                <li class="nav-header print" style="float: right;" ng-click="onPrint()"><i class="fa fa-print" style="font-size: 20px;"></i>Print</li>
+                <li class="nav-header text-nav">Your Cart</li>
+                <li class="nav-header print pull-right" ng-click="onPrint()"><i class="fa fa-print" rel="tooltip" title="Print" ></i></li>
             </ul>
             <hr />
         </nav>
@@ -15,11 +15,10 @@
                         Cart Summary
                     </h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body text-left">
                     <div ng-if="!user.Permissions.contains('HidePricing')">
                         <p>
-                            SubTotal
-                            <span style="float: right;">{{currentOrder.Subtotal | currency}}</span>
+                            SubTotal: {{currentOrder.Subtotal | currency}}
                         </p>
                         <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
                             {{ user.Company.SiteText.ShippingDisclaimer }}
@@ -69,7 +68,8 @@
                         </div>
                             <div class="col-md-2 col-sm-2 col-xs-3">
                                 {{item.UnitPrice | currency}}
-                            </div><!--- TODO error needs styling --->
+                            </div>
+                            <!--- TODO error needs styling --->
                             <div class="col-md-1 col-sm-1 col-xs-3">
                                 <quantityfield error="qtyError" lineitem="item" class="quantity"/>
                                 {{qtyError}}

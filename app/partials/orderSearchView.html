@@ -1,5 +1,16 @@
 <section class="container order-search-view">
-    <nav class="nav nav-cat-search">
+    <div class="panel panel-default" ng-if="!hasStandardTypes && !hasReplenishmentTypes && !hasPriceRequestTypes">
+        <div class="panel-heading">
+            <h3 class="panel-title">Orders</h3>
+        </div>
+        <div class="panel-body">
+            <p class="alert alert-warning">You have no orders yet!</p>
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-primary" ng-click="continueShopping()">Continue Shopping</button>
+        </div>
+    </div>
+    <nav class="nav nav-cat-search" ng-if="hasStandardTypes || hasReplenishmentTypes || hasPriceRequestTypes">
         <hr />
         <ul>
             <li class="text-nav">Orders</li>
@@ -9,7 +20,8 @@
         </ul>
         <hr />
     </nav>
-    <div  style="padding: 0;" ng-show='displayOrders' ng-hide="toggle">
+    <div ng-show="displayOrders" ng-hide="toggle">
+        <!--- TODO table needs to redone as Bootstrap responsive layout, see cartView.html for example --->
         <table class="table table-striped table-hover table-bordered" ng-show="orders">
             <caption ng-show="orderSearchStat">{{orderSearchStat.Type}} - {{orderSearchStat.Status}}</caption>
             <thead>
@@ -29,11 +41,11 @@
             </tbody>
         </table>
     </div>
-
+    <!--- below panels are fine and hide/show as intended --->
     <div class="order-search-toggle" ng-show="toggle" >
-        <div class="panel panel-primary">
+        <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title panel-primary">Search Orders</h3>
+                <h3 class="panel-title">Search Orders</h3>
             </div>
             <div class="panel-body">
                 <input type="text" ng-model="criteria.OrderID" placeholder="Order ID" /><br />
@@ -42,14 +54,14 @@
                 <input type="text" ng-model="criteria.LastN" placeholder="Last n Orders:" />
             </div>
             <div class="panel-footer">
-                <input type="submit" class="btn btn-small btn-info btn-block" value="Search" ng-click="OrderSearch($event, criteria); toggle = !toggle;" />
+                <input type="submit" class="btn btn-primary" value="Search" ng-click="OrderSearch($event, criteria); toggle = !toggle;" />
             </div>
         </div>
     </div>
     <div class="order-types" ng-show="!toggle">
         <div class="panel panel-default" ng-show="hasStandardTypes">
-            <div class="panel-heading panel-title">
-                Standard Orders
+            <div class="panel-heading">
+                <h3 class="panel-title">Standard Orders</h3>
             </div>
             <div class="panel-body">
                 <ul>
@@ -60,8 +72,8 @@
             </div>
         </div>
         <div class="panel panel-default" ng-show="hasReplenishmentTypes">
-            <div class="panel-heading panel-title">
-                Replenishment Orders
+            <div class="panel-heading">
+                <h3 class="panel-title">Replenishment Orders<h3>
             </div>
             <div class="panel-body">
                 <ul>
@@ -72,8 +84,8 @@
             </div>
         </div>
         <div class="panel panel-default" ng-show="hasPriceRequestTypes">
-            <div class="panel-heading panel-title">
-                Price Request
+            <div class="panel-heading">
+                <h3 class="panel-title">Price Request</h3>
             </div>
             <div class="panel-body">
                 <ul>

@@ -3,8 +3,8 @@
         <nav class="nav nav-cat-search">
             <hr />
             <ul>
-                <li class="nav-header">{{order.Type}} Order<span ng-show="order.ExternalID"> ID: </span>{{order.ExternalID}}</li>
-                <li class="nav-header print" style="float: right;" ng-click="onPrint()"><i class="fa fa-print" style="font-size: 20px;"></i>Print</li>
+                <li class="nav-header text-nav">{{order.Type}} Order<span ng-show="order.ExternalID"> ID: </span>{{order.ExternalID}}</li>
+                <li class="nav-header print pull-right" ng-click="onPrint()"><i class="fa fa-print" rel="tooltip" title="Print"></i></li>
             </ul>
 
             <hr />
@@ -53,6 +53,7 @@
                     <div class="input-group">
                         <input type="text" ng-model="order.FavoriteName" placeholder="Favorite Name" class="form-control"/>
             <span class="input-group-btn">
+                    <!--- TODO the name does not appear to be saving ? --->
                 <button type="button" ng-click="saveFavorite()" class="btn btn-default">Save as Favorite</button>
             </span>
                     </div>

@@ -9,16 +9,18 @@
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'/>
     <link rel="stylesheet" href="css/jquery-ui.min.css"/>
-    <link rel="stylesheet" href="css/ng-grid.css"/>
     <link rel="stylesheet" href="css/animate.css"/>
     <link rel="stylesheet" href="css/app.css"/>
     <link rel="stylesheet" href="css/custom.css"/>
-    <link rel="stylesheet" href="css/breakpoint.css" media="screen"/>
+    <link rel="stylesheet" href="css/breakpoint/lg.css" media="screen"/>
+    <link rel="stylesheet" href="css/breakpoint/md.css" media="screen"/>
+    <link rel="stylesheet" href="css/breakpoint/sm.css" media="screen"/>
+    <link rel="stylesheet" href="css/breakpoint/xs.css" media="screen"/>
     <link rel="stylesheet" href="css/print.css" media="print"/>
 </head>
 <body ng-cloak class="static ng-cloak" scroll ng-class="{scroll:boolChangeClass}">
 <section ng-controller="Four51Ctrl">
-	
+    <!--- TODO login on phone displays a temporary error upon logging ? --->
     <section ng-hide="Four51User.isAuthenticated() || isAnon" class="container">
         <login />
     </section>
@@ -58,9 +60,7 @@
     <script src="lib/angular/ui-date.js"></script>
     <script src="lib/angular/ui-validate.js"></script>
     <script src="lib/angular/ui-mask.js"></script>
-    <!--- <script src="lib/angular/ng-grid.js"></script>
-    removing ng-grid; more trouble than I need right now until they develop it more
-    --->
+
     <script src="js/app.js"></script>
     <script src="js/451.js"></script>
     <script src="js/filters.js"></script>

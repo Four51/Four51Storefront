@@ -1,6 +1,6 @@
 <div ng-show="specgroups">
     <p class="text-info">Specifications</p>
-
+    <!--- TODO table needs to redone as Bootstrap responsive layout, see cartView.html for example --->
     <table border=1 id="451_list_specgroup" style="margin: 10px;">
         <tbody ng-repeat="sg in specgroups">
         <tr ng-show="hasvisiblechild(sg.Specs)" class="alert-info 451_hdr_spec_grp">

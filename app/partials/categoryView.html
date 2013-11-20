@@ -2,6 +2,7 @@
     <nav class="nav nav-cat-search">
         <hr />
             <ul>
+                <!--- TODO would like to see the toggle in scope and stay open if opened while navigation through categories and products until user decides to close aside nav --->
                 <li class="nav-header hidden-sm hidden-xs" ng-click="showMega = ! showMega" href="#">
                     <span ng-show="!showMega"><i class="fa fa-plus" rel="tooltip" title="Open all Categories"></i></span>
                     <span ng-show="showMega"><i class="fa fa-minus-circle" rel="tooltip" title="Close all Categories"></i></span>
@@ -13,11 +14,9 @@
                 <li class="pull-right">
                     <a href="#/search"><i class="fa fa-search" rel="tooltip" title="Search Products"></i></a>
                 </li>
-                <li ng-click="productList = !productList" class="pull-right" ng-class="{ 'selected': ! productList }">
-                    <i class="fa fa-th hidden-xs" rel="tooltip" title="Display as Grid"></i></span>
-                </li>
-                <li ng-click="productList = !productList" class="pull-right" ng-class="{ 'selected': productList }">
-                    <i class="fa fa-align-justify hidden-xs" rel="tooltip" title="Display as Row"></i></span>
+                <li ng-click="productList = !productList" class="pull-right">
+                    <span ng-show="productList" ><i class="fa fa-th hidden-xs" rel="tooltip" title="Display as Grid"></i></span>
+                    <span ng-show="!productList"><i class="fa fa-align-justify hidden-xs" rel="tooltip" title="Display as Row"></i></span>
                 </li>
             </ul>
         <hr />
@@ -31,23 +30,21 @@
                 </ul>
         </nav>
     </aside>
-    <div class="cat-body" ng-class="{ 'move-cat-body col-sm-9': showMega }">
+    <div class="cat-body" ng-class="{ 'move-cat-body col-sm-9 col-collapse': showMega }">
         <div class="category-product product-navigation" ng-show=!currentCategory>
             <div class="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image"></div>
             <nav class="nav 451_lbl_subcatlist">
                 <ul>
                     <li class="nav-header well col-lg-3 col-md-4  col-sm-6 col-xs-12" ng-class="{ 'productList': productList, 'productGrid': !productList, 'category-view-aside': showMega }" ng-repeat="c in tree">
                         <a class="cat-link" ng-href="#/catalog/{{c.InteropID}}">
-                            <figure ng-show="c.Image.URL" class="cat-image" ng-swipe-left="showSwipe = true" ng-swipe-right="showSwipe = false">
+                            <figure ng-show="c.Image.URL" class="cat-image">
                                 <img ng-src="{{c.Image.URL}}"/>
                             </figure>
-                            <div class="empty" ng-show="!c.Image.URL" ng-swipe-left="showSwipe = true" ng-swipe-right="showSwipe = false">
+                            <div class="empty" ng-show="!c.Image.URL">
                                 <span class="fa empty"><i class="fa fa-camera"></i></span>
                             </div>
-                            <div ng-show="showSwipe">
-                                <figcaption class="category-description">{{c.Description}}</figcaption>
-                            </div>
-                            <div ng-bind-html="c.Name"></div>
+                            <h5 ng-bind-html="c.Name"></h5>
+                            <figcaption ng-if="productList" class="category-description">{{c.Description}}</figcaption>
                         </a>
                     </li>
                 </ul>
@@ -60,16 +57,14 @@
                 <ul>
                     <li class="nav-header well col-lg-3 col-md-4  col-sm-6 col-xs-12" ng-class="{ 'productList': productList, 'productGrid': !productList, 'category-view-aside': showMega }" ng-repeat="c in currentCategory.SubCategories">
                         <a class="cat-link" ng-href="#/catalog/{{c.InteropID}}">
-                            <figure ng-show="c.Image.URL" class="cat-image" ng-swipe-left="showSwipe = true" ng-swipe-right="showSwipe = false">
+                            <figure ng-show="c.Image.URL" class="cat-image">
                                 <img ng-src="{{c.Image.URL}}"/>
                             </figure>
-                            <div class="empty" ng-show="!c.Image.URL" ng-swipe-left="showSwipe = true" ng-swipe-right="showSwipe = false">
+                            <div class="empty" ng-show="!c.Image.URL">
                                 <span class="fa empty"><i class="fa fa-camera"></i></span>
                             </div>
-                            <div ng-show="showSwipe">
-                                <figcaption class="category-description">{{c.Description}}</figcaption>
-                            </div>
-                            <div>{{c.Name}}</div>
+                            <h5>{{c.Name}}</h5>
+                            <figcaption ng-if="productList" class="category-description">{{c.Description}}</figcaption>
                         </a>
                     </li>
                 </ul>
@@ -79,7 +74,9 @@
             <h3 ng-show="products">Products</h3>
             <nav class="nav">
                 <ul>
-                    <li class="nav-header well col-lg-3 col-md-4  col-sm-6 col-xs-12" ng-class="{ 'productList': productList, 'productGrid': !productList, 'category-view-aside': showMega }" ng-repeat="product in products"> <shortproductview p="product" /></li>
+                    <li class="nav-header well col-lg-3 col-md-4  col-sm-6 col-xs-12" ng-class="{ 'productList': productList, 'productGrid': !productList, 'category-view-aside': showMega }" ng-repeat="product in products">
+                        <shortproductview p="product" />
+                    </li>
                 </ul>
             </nav>
         </div>
