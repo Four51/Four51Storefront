@@ -41,18 +41,27 @@ four51.app.factory('Variant', function($resource, $451){
 		if (angular.isFunction(fn))
 			fn(data);
 	}
-
+	function getCacheName(p, v){
+		return '451Cache.' + $451.apiName + '.Variants.' + p+ v;
+	}
     var _get = function(params, success) {
-		var variant = store.get('451Cache.Variants.' + params.ProductInteropID + params.VariantInteropID );
+		var variant = store.get(getCacheName(params.ProductInteropID, params.VariantInteropID) );
 	    variant ? _then(success, variant) :
 	        $resource($451.api('variant')).get(params).$promise.then(function(variant) {
-		        store.set('451Cache.Variants.' + params.ProductInteropID + params.VariantInteropID, variant);
+		        store.set(getCacheName(params.ProductInteropID, params.VariantInteropID), variant);
 	            _then(success, variant);
 	        });
     }
-
+	var _save = function(variant, success) {
+		return $resource($451.api('variant')).save(variant).$promise.then(function(v) {
+			store.remove(getCacheName(v.ProductInteropID, v.InteropID));
+			store.set(getCacheName(v.ProductInteropID, v.InteropID), v);
+			_then(success, v);
+		});
+	}
 	return {
-		get: _get
+		get: _get,
+		save: _save
 	}
 });
 
