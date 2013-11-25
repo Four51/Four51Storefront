@@ -152,7 +152,9 @@ textarea {
     margin: 0 auto;
     max-width: 100%;
     max-height: 200px;
+
 }
+
 
 .fa.empty {
     width: 100%;
@@ -1076,9 +1078,4 @@ li.cart span.badge {
     overflow: hidden;
     border-radius: 0;
 }
-
-/*-------------ROB STUFF--------------*/
-
-
-
 

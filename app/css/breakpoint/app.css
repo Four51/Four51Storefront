@@ -5,7 +5,9 @@
     .header-nav-c1 {width: 1140px; margin: 0 auto; }
     .product-view-default img {margin: 15px 0;}
     .product-view-default .fa.empty {text-align: left;}
-
+    .cat-image {overflow: hidden;}
+    .cat-image img { transition-duration: 0.375s;}
+    .cat-image img:hover {transform:scale(1.2);}
 }
 
 

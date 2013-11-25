@@ -29,13 +29,12 @@
                     <p class="alert alert-warning" ng-show="cart.$invalid">Cart is missing required fields for checkout.</p>
                     <button class="btn btn-primary" ng-click="checkOut()" ng-disabled="cart.$invalid">
                         {{user.Company.SiteText.Checkout || 'Check Out' }}
-                        <div class="container col-xs-12 app-loading-indicator-cell"><span class="app-loading-indicator"></span></div>
+                        <loadingindicator ng-show="displayLoadingIndicator" />
                     </button>
                 </div>
             </div>
             <div class="panel panel-primary cart-view-line-items col-md-8 col-md-pull-4">
-                <div class="container col-xs-12 app-loading-indicator-cell"><span class="app-loading-indicator"></span></div>
-
+                <loadingindicator ng-show="displayLoadingIndicator" />
                 <div class="panel-heading">
                     <h3 class="panel-title panel-primary">
                         {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
