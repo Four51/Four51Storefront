@@ -26,7 +26,7 @@
                             <td colspan="2">
                                 <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
                                 <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
-                                <customselectionfield customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
+                                <customselectionfield change="specChanged" customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
                             </td>
                         </tr>
                     </table>
