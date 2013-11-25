@@ -25,8 +25,8 @@
                         <tr ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
                             <td colspan="2">
                                 <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
-                                <customtextfield customfield="s" ng-if="s.ControlType == 'Text'" />
-                                <customselectionfield customfield="s" ng-if="s.ControlType == 'Selection'" />
+                                <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
+                                <customselectionfield customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
                             </td>
                         </tr>
                     </table>
