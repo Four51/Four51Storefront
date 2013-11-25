@@ -110,7 +110,7 @@
                         </p>
                         {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
                     </div>
-                    <div ng-show="LineItem.Product.Variants.length > 1 && !LineItem.Variant">
+                    <div ng-show="LineItem.Product.Variants.length > 0 && !LineItem.Variant">
                         <h4>
                             Please select from the following:
                         </h4>
