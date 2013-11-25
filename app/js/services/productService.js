@@ -84,7 +84,7 @@ four51.app.factory('ProductDisplayService', function($451, Variant, Product){
 
 		var addToMarkups = function(spec){
 			var otherMarkup;
-			if(spec.AllowOtherValue && spec.OtherTextValue && spec.OtherValueMarkup > 0)
+			if(spec.isOtherSelected && spec.OtherValueMarkup > 0)
 				otherMarkup = spec.OtherValueMarkup;
 
 			if((spec.Options && spec.SelectedOptionID) || otherMarkup){
@@ -93,11 +93,11 @@ four51.app.factory('ProductDisplayService', function($451, Variant, Product){
 				if(!option && !otherMarkup)
 					return;
 				if(spec.MarkupType ==="AmountPerQuantity" )
-					amountPerQty += otherMarkup || option.PriceMarkup;
+					amountPerQty += otherMarkup || option.Markup;
 				if(spec.MarkupType ==="Percentage" )
-					percentagePerLine += otherMarkup || option.PriceMarkup;
+					percentagePerLine += otherMarkup || option.Markup;
 				if(spec.MarkupType ==="AmountTotal")
-					fixedAddPerLine += otherMarkup || option.PriceMarkup;
+					fixedAddPerLine += otherMarkup || option.Markup;
 			}
 		};
 
@@ -126,6 +126,7 @@ four51.app.factory('ProductDisplayService', function($451, Variant, Product){
 	}
 	function productViewScope(scope){
 		scope.specChanged = function(spec){
+			console.log('spec changed');
 			if(!spec){
 				return;
 			}

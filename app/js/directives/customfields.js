@@ -1,3 +1,10 @@
+four51.app.directive('customcontrols', function($451) {
+	var obj = {
+
+	}
+	return obj;
+});
+
 four51.app.directive('customtextfield', function($451) {
     var obj = {
         scope: {
@@ -10,29 +17,43 @@ four51.app.directive('customtextfield', function($451) {
     return obj;
 });
 
+//TODO: required on selection spec
 four51.app.directive('customselectionfield', function($451) {
     var obj = {
         scope: {
-            customfield : '='
+            customfield : '=',
+	        change: '='
         },
         restrict: 'E',
         transclude: true,
         template: '<label>{{customfield.Label}}</label>' +
             '<select ng-init="init()" ng-change="changed()" ng-model="item" ng-options="option.Value for option in customfield.Options" ng-if="customfield.Options && !customfield.IsRadioButtons">' +
             '<option ng-if="!customfield.IsRequired" value="" /></select>' +
-            '<input type="text" ng-change="otherChanged()" ng-model="other" ng-show="isOtherSelected" />',
+            '<input type="text" ng-change="otherChanged()" ng-model="other" ng-show="customfield.isOtherSelected" />',
         link: function(scope, element, attr) {
             scope.changed = function() {
-                scope.customfield.Value = this.item == null ? null : this.item.Value;
-                scope.isOtherSelected = false;
+	            //reset values
+	            scope.customfield.isOtherSelected = false;
+	            angular.forEach(scope.customfield.Options, function(opt) {
+		            opt.Selected = false;
+	            });
+	            // end reset
+	            scope.customfield.Value = this.item == null ? null : this.item.Value;
+	            scope.customfield.SelectedOptionID = this.item.ID;
+	            this.item.Selected = true;
+
                 if (this.item != null && this.item.Value.indexOf('Other') > -1) {
-                    scope.isOtherSelected = true;
+                    scope.customfield.isOtherSelected = true;
+	                this.item.Selected = true;
+	                scope.customfield.SelectedOptionID = this.item.ID;
                     scope.customfield.Value = scope.other;
                 }
+	            scope.change(scope.customfield);
             };
             scope.otherChanged = function() {
-                scope.isOtherSelected = true;
+                scope.customfield.isOtherSelected = true;
                 scope.customfield.Value = scope.other;
+	            scope.change(scope.customfield);
             };
             scope.item = {}, scope.other = ''; // initialize the item variable to avoid checking for null
 
@@ -68,13 +89,13 @@ four51.app.directive('customradiobuttonfield', function($451) {
             '<span ng-repeat="option in customfield.Options">' +
             '<input type="radio" ng-change="changed()" name="{{customfield.Name}}" ng-model="$parent.item" ng-value="{{option}}" />{{option.Value}}<br />' +
             '</span>' +
-            '<input type="text" ng-change="otherChanged()" ng-model="other" ng-show="isOtherSelected" /><br />',
+            '<input type="text" ng-change="otherChanged()" ng-model="other" ng-show="customfield.isOtherSelected" /><br />',
         link: function(scope, element, attr) {
             scope.changed = function() {
                 scope.customfield.Value = this.item.Value;
-                scope.isOtherSelected = false;
+                scope.customfield.isOtherSelected = false;
                 if (this.item.ID.indexOf('other') > -1) {
-                    scope.isOtherSelected = true;
+                    scope.customfield.isOtherSelected = true;
                     scope.customfield.Value = scope.other;
                 }
             };

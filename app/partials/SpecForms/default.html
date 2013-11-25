@@ -1,6 +1,6 @@
-default spec form: {{Product.Name}}
-<br>
-<input type="text" ng-model="Variant.ExternalID">
+<img ng-src="{{Variant.PreviewUrl}}" />
+
+variant ID:<input type="text" ng-model="Variant.ExternalID">
 <table id="451_list_vspec" border=1 ng-show="true">
 	<tr ng-repeat="s in Variant.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: false}, {Property: 'DefinesVariant', Value: false}]">
 		<td>
@@ -8,13 +8,13 @@ default spec form: {{Product.Name}}
 		</td>
 		<td>
 			{{s.Prefix}}
-			<vspecfield changed="specChanged" s="s">
-			</vspecfield>{{s.Suffix}}
+            <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
+            <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
+            <customselectionfield customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
+			{{s.Suffix}}
 		</td>
 	</tr>
 </table>
 		<hr>
 
 <button ng-click="save()">save</button>
-<button>save as new</button>
-<button>cancel</button>

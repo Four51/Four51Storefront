@@ -10,13 +10,13 @@ four51.app.directive('customfilefield', function($parse, $resource, $451, fileRe
 		link: function(scope, element, attrs) {
 			var cache = angular.copy(scope.customfield);
 			var file_input = $parse("file");
-			var replace_box = element[0].children[3];
-			var delete_box = element[0].children[4];
-			var file_control = element[0].children[6];
-			var error_element = element[0].children[8].children[0];
+			var replace_box = $('.replace', element)[0];
+			var delete_box = $('.delete', element)[0];
+			var file_control = $('.upload', element)[0];
+			var error_element = $('.error', element)[0];
 
 			var afterSelection = function(file) {
-				$resource($451.api('uploadfile')).save({ Data: file.result, Name: file_control.files[0].name, ID: scope.customfield.ID }).$promise.then(function(u) {
+				$resource($451.api('uploadfile')).save({ Data: file.result, Name: file_control.files[0].name, ID: scope.customfield.ID, SourceType: scope.customfield.SourceType, SourceID: scope.customfield.SourceID }).$promise.then(function(u) {
 					u.Url += "&auth=" + Security.auth();
 					scope.customfield.File = u;
 					scope.customfield.Value = u.ID;
@@ -35,7 +35,7 @@ four51.app.directive('customfilefield', function($parse, $resource, $451, fileRe
 
 			var updateModel = function (event) {
 				error_element.innerHTML = "";
-				switch (event.target.id) {
+				switch (event.target.name) {
 					case "delete":
 						scope.replace = false;
 						if (event.target.checked) {

@@ -1,8 +1,10 @@
 <section id="451_area_prod_desc" class="container product-view-default">
     <figure>
-        <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url">
+        <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url || LineItem.Variant.PreviewUrl">
     </figure>
-	<span ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant"><a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit>edit variant</a> </span>
+	<span ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant">
+		<a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit>edit variant</a>
+	</span>
     <div class="col-collapse col-md-3 col-md-offset-1 col-md-push-8">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -21,13 +23,10 @@
                     <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product'/>
                     <table id="451_list_vspec" border=1 ng-show="true">
                         <tr ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
-                            <td>
-                                {{s.Name}}<span ng-show="s.Required" style="color:red"> *</span>
-                            </td>
-                            <td>
-                                {{s.Prefix}}
-                                <vspecfield changed="specChanged" s="s">
-                                </vspecfield>{{s.Suffix}}
+                            <td colspan="2">
+                                <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
+                                <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
+                                <customselectionfield change="specChanged" customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
                             </td>
                         </tr>
                     </table>
@@ -115,6 +114,7 @@
                         <h4>
                             Please select from the following:
                         </h4>
+						<span ng-show="LineItem.Product.Type == 'VariableText'"><a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/new/edit>Create New</a></span>
                         <div>
                             <!--- TODO table needs to redone as Bootstrap responsive layout, see cartView.html for example --->
                             <table border=1 class="451_list_vars">

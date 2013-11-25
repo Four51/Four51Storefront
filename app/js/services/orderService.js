@@ -1,4 +1,4 @@
-four51.app.factory('Order', function($resource, $rootScope, $451) {
+four51.app.factory('Order', function($resource, $rootScope, $451, Security) {
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
@@ -6,6 +6,12 @@ four51.app.factory('Order', function($resource, $rootScope, $451) {
 
 	function _extend(order) {
 		order.isEditable = order.Status == 'Unsubmitted' || order.Status == 'Open';
+		angular.forEach(order.LineItems, function(item) {
+			angular.forEach(item.Specs, function(spec) {
+				if (spec.ControlType == 'File' && spec.File && spec.File.Url.indexOf('auth') == -1)
+					spec.File.Url += "&auth=" + Security.auth();
+			});
+		});
 	}
 
 	var _get = function(id, success) {
