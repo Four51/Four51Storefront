@@ -42,12 +42,14 @@
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
                         <div class="col-md-6 col-sm-6 col-xs-12 cart-view-line-items-product">
                             <p>
-                                <a ng-href="#.#">{{item.ProductIDText}}</a>
+                                <a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">{{item.ProductIDText}}</a>
                                 <!---TODO needs url --->
                             </p>
                             <p>{{item.Product.Name}}</p>
                             <ul>
-                                <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">{{spec.Name}} : {{spec.Value}}</li>
+                                <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
+                                    {{spec.Name}} : <img ng-if="spec.ControlType == 'File' && spec.FileType == 'Image'" ng-src="{{spec.File.Url}}" /><span ng-if="!spec.ControlType == 'File'">{{spec.Value}}</span>
+                                </li>
                             </ul>
                             <div class="row">
                                 <div class="col-xs-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">

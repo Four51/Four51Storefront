@@ -1,3 +1,10 @@
+four51.app.directive('customcontrols', function($451) {
+	var obj = {
+
+	}
+	return obj;
+});
+
 four51.app.directive('customtextfield', function($451) {
     var obj = {
         scope: {
@@ -10,6 +17,7 @@ four51.app.directive('customtextfield', function($451) {
     return obj;
 });
 
+//TODO: required on selection spec
 four51.app.directive('customselectionfield', function($451) {
     var obj = {
         scope: {
