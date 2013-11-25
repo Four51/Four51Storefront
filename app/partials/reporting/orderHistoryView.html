@@ -9,26 +9,26 @@
 
             <hr />
         </nav>
-        <div class="col-md-3 col-md-offset-1 col-md-push-8">
+        <div class="col-collapse col-md-3 col-md-offset-1 col-md-push-8">
             <div class="row">
-                <div class="panel panel-default order-history-view-header col-sm-5 col-md-12">
+                <div class="panel panel-default order-history-view-header col-collapse col-sm-5 col-md-12">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             Order Details
                         </h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body text-left">
                         <orderhistorydetails></orderhistorydetails>
                     </div>
                 </div>
 
-                <div class="panel panel-default order-history-view-footer col-sm-5 col-sm-offset-2 col-md-12 col-md-offset-0">
+                <div class="panel panel-default order-history-view-footer col-collapse col-sm-5 col-sm-offset-2 col-md-12 col-md-offset-0">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             Order Summary
                         </h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body text-left">
                         <orderhistorysummary></orderhistorysummary>
                     </div>
                     <div class="panel-footer" ng-if="order.FromUserID == user.ID">
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8 col-md-pull-4 order-history-view-grid">
+        <div class="col-collapse col-md-8 col-md-pull-4 order-history-view-grid">
             <div class="panel panel-primary order-history-view-line-items">
                 <div class="panel-heading">
                     <h3 class="panel-title panel-primary">
