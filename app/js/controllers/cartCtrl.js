@@ -40,7 +40,9 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
         Order.save($scope.currentOrder, function(data) {
             $scope.currentOrder = data;
             $location.path('checkout');
+            $scope.displayLoadingIndicator = true;
         });
+
     };
 
 	$scope.$watch('currentOrder.LineItems', function(newval) {
@@ -63,6 +65,8 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 			n.CostCenter = $scope.currentOrder.LineItems[0].CostCenter;
 		});
 	};
+
+
 
 
     $scope.onPrint = function()  {

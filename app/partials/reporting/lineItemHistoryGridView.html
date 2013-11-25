@@ -1,5 +1,5 @@
 <div class="order-history-view-line-items-repeater" ng-repeat="item in order.LineItems">
-     <div class="col-md-6 col-sm-6 col-xs-12 col-md-4 order-history-view-line-items-product">
+     <div class="col-collapse col-md-6 col-sm-6 col-xs-12 col-md-4 order-history-view-line-items-product">
          <p><a ng-href="#/order/{{order.ID}}/{{$index}}">{{item.ProductIDText}}</a></p>
          <p>{{item.Product.Name}}</p>
          <ul ng-show="hasSpecOnAnyLineItem">

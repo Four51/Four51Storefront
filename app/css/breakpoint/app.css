@@ -1,0 +1,153 @@
+/* x-lg */
+@media (min-width: 1200px) {
+
+    .nav li span.nav-name {float:right;}
+    .header-nav-c1 {width: 1140px; margin: 0 auto; }
+    .product-view-default img {margin: 15px 0;}
+    .product-view-default .fa.empty {text-align: left;}
+    .cat-image {overflow: hidden;}
+    .cat-image img { transition-duration: 0.375s;}
+    .cat-image img:hover {transform:scale(1.2);}
+}
+
+
+/* x-md */
+@media (min-width: 980px) and (max-width: 1199px) {
+
+    .nav li span.nav-name {float:right;}
+    .nav li span.hidden-sm {float:right;}
+    .product-view-default img {margin: 15px 0;}
+    .product-view-default .fa.empty {text-align: left;}
+    .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
+    .shortproduct-view:hover .shortproduct-toggle {display: none;}
+
+}
+
+/* x-sm */
+@media (min-width:768px) and (max-width: 1023px) {
+    @-webkit-keyframes view-enter {
+        0% {
+            opacity: 0;
+            -webkit-transform: translateY(2000px);
+        }
+
+        100% {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+        }
+    }
+
+    @-moz-keyframes view-enter {
+        0% {
+            opacity: 0;
+            -moz-transform: translateY(2000px);
+        }
+
+        100% {
+            opacity: 1;
+            -moz-transform: translateY(0);
+        }
+    }
+
+    @-o-keyframes view-enter {
+        0% {
+            opacity: 0;
+            -o-transform: translateY(2000px);
+        }
+
+        100% {
+            opacity: 1;
+            -o-transform: translateY(0);
+        }
+    }
+
+    @keyframes view-enter {
+        0% {
+            opacity: 0;
+            transform: translateY(2000px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .branding-view {text-align: center;}
+    .branding-view-logo {float: none; margin: 0 auto; max-height: 75px; }
+    .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
+    .shortproduct-view:hover .shortproduct-toggle {display: none;}
+
+}
+
+
+/* x-xs */
+@media (max-width: 767px) {
+    @-webkit-keyframes view-enter {
+        0% {
+            opacity: 0;
+            -webkit-transform: translateY(2000px);
+        }
+
+        100% {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+        }
+    }
+
+    @-moz-keyframes view-enter {
+        0% {
+            opacity: 0;
+            -moz-transform: translateY(2000px);
+        }
+
+        100% {
+            opacity: 1;
+            -moz-transform: translateY(0);
+        }
+    }
+
+    @-o-keyframes view-enter {
+        0% {
+            opacity: 0;
+            -o-transform: translateY(2000px);
+        }
+
+        100% {
+            opacity: 1;
+            -o-transform: translateY(0);
+        }
+    }
+
+    @keyframes view-enter {
+        0% {
+            opacity: 0;
+            transform: translateY(2000px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    .current-cat-name {width: 215px;}
+    .navbar-collapse {padding: 0;}
+    .navbar-left li.products a {padding: 15px 20px 15px 10px;}
+    .navbar-right li.cart a {padding: 15px 10px 15px 15px;}
+    .cart-view-btn-continue {width: 100%;margin-top: 10px;}
+    .panel-footer .btn-group {width: 100%;}
+    .cart-view-line-items-btn-group .btn-group, .check-out-view-btn-group .btn-group {vertical-align: inherit; width: 100%;}
+    .cart-view-btn-cancel  {float: right !important;}
+    .cart-view-line-items-product {margin-bottom: 25px;}
+    .cart-view-line-items-repeater div.col-xs-3 { text-align:center; }
+    .cart-view-btn-save {float: left;}
+    .ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {}
+    .branding-view {text-align: center;}
+    .branding-view-logo {float: none; margin: 0 auto; max-height: 75px; }
+    .shortproduct-view:hover .shortproduct-name {display: block;}
+    .shortproduct-view:hover .shortproduct-toggle {display: none;}
+    .caption {margin: 5px;}
+
+}
