@@ -1,6 +1,6 @@
 0.  App Front End Strategy
 
-    Customizing the Four51 SPA  -       Do not modify the app.css file
+    Customizing the Four51 SPA  -       Do not modify the app.css files
                                         - no !important rules in the app.css file, everything should cascade according to specificity
                                         - apply custom styles in the custom.css file as a child theme IE:
                                             /*
@@ -8,6 +8,7 @@
                                             Version: 1.0
                                             Template: Welcome
                                             */
+                                        - apply custom breakpoint styles in the ~/breakpoint/custom.css file
     Bootstrap                   -       Twitter Bootstrap 3
                                             http://getbootstrap.com/
     Themes                      -       Bootstrap driven color themes via colourlovers API and paintstrap
