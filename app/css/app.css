@@ -908,7 +908,7 @@ li.cart span.badge {
 }
 
 .branding-view-logo {
-    max-height:130px;
+    max-height:50px;
     float: left;
     display: block;
     margin-right: 25px;
@@ -930,7 +930,6 @@ li.cart span.badge {
     overflow: hidden;
     padding: 0;
 }
-
 
 .product-view-default-toggle-panel .panel-switch {
     cursor: pointer;
@@ -970,6 +969,10 @@ li.cart span.badge {
     background-color:#fff;
 }
 
+.panel {
+    word-wrap: break-word;
+}
+
 .btn.btn-primary {
     border: none;
 }
@@ -1005,8 +1008,9 @@ li.cart span.badge {
 }
 
 .jumbotron {
-    padding-bottom: 24px;
-    padding-top: 24px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 0;
 }
 
 .navbar-nav > li > a {
