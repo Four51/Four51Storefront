@@ -26,11 +26,12 @@
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <p class="alert alert-warning" ng-show="cart.$invalid">Cart is missing required fields for checkout.</p>
                     <button class="btn btn-primary" ng-click="checkOut()" ng-disabled="cart.$invalid">
                         {{user.Company.SiteText.Checkout || 'Check Out' }}
                         <loadingindicator ng-show="displayLoadingIndicator" />
                     </button>
+                    <hr />
+                    <p class="alert alert-warning" ng-show="cart.$invalid">Cart is missing required fields for checkout.</p>
                 </div>
             </div>
             <div class="panel panel-primary cart-view-line-items col-md-8 col-md-pull-4">

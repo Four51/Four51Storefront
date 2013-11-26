@@ -18,11 +18,11 @@
             </div>
         </div>
         <div class="panel-footer">
-            <p class="alert alert-warning" ng-show="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">Please correct all errors to submit order.</p>
-            <!--- TODO below submit order button needs to redirect to ORDERS page and display the submitted order upon submission --->
             <button class="btn btn-primary" ng-show="currentOrder" ng-click="submitOrder()" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">
                 Submit Order
             </button>
+            <hr />
+            <p class="alert alert-warning" ng-show="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">Please correct all errors to submit order.</p>
         </div>
     </div>
 
