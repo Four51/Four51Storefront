@@ -29,14 +29,14 @@
                 <h3 class="panel-title">{{user.Type == 'TempCustomer' ? 'Create' : 'My'}} Account</h3>
             </div>
             <div class="panel-body">
-                <input name="firstname" class="input-large" type="text" ng-model="user.FirstName" placeholder="First Name" /><br />
-                <input name="lastname" class="input-large" type="text" ng-model="user.LastName" placeholder="Last Name" /><br />
-                <input name="phone" class="input-large" type="text" ng-model="user.Phone" ui-mask="(999) 999-9999" placeholder="Phone Number" /><br />
-                <input name="email" class="input-large" type="email" ng-model="user.Email" required placeholder="Email Address" />
+                <label>First Name</label> <input name="firstname" class="input-large" type="text" ng-model="user.FirstName" placeholder="First Name" /><br />
+                <label>Last Name</label> <input name="lastname" class="input-large" type="text" ng-model="user.LastName" placeholder="Last Name" /><br />
+                <label>Phone</label> <input name="phone" class="input-large" type="text" ng-model="user.Phone" ui-mask="(999) 999-9999" placeholder="Phone Number" /><br />
+                <label>Email</label> <input name="email" class="input-large" type="email" ng-model="user.Email" required placeholder="Email Address" />
                 <span class="alert-error" ng-show="user_form.email.$invalid">Please enter a valid email address</span><br />
-                <input name="username" class="input-large" type="text" ng-model="user.Username" required placeholder="User Name" /><br />
-                <input name="password" class="input-large" type="password" ng-model="user.Password" placeholder="Password" /><br />
-                <input name="confirm_password" match="'password'" class="input-large" type="password" ng-model="user.ConfirmPassword" ui-validate="'$value==user.Password'" ui-validate-watch="'user.Password'" placeholder="Confirm Password" />
+                <label>Username</label> <input name="username" class="input-large" type="text" ng-model="user.Username" required placeholder="User Name" /><br />
+                <label>Password</label> <input name="password" class="input-large" type="password" ng-model="user.Password" placeholder="Password" /><br />
+                <label>Confirm Password</label> <input name="confirm_password" match="'password'" class="input-large" type="password" ng-model="user.ConfirmPassword" ui-validate="'$value==user.Password'" ui-validate-watch="'user.Password'" placeholder="Confirm Password" />
                 <span class="alert-error" ng-show="user_form.confirm_password.$error.validator">Passwords do not match!</span><br />
             </div>
             <div class="panel-body" ng-if="user.CustomFields">

@@ -23,7 +23,10 @@
                     <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product'/>
                     <table id="451_list_vspec" border=1 ng-show="true">
                         <tr ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
-                            <td colspan="2">{{s.Prefix}}
+                            <td>
+                                <label>{{s.Name}}</label>
+                            </td>
+                            <td>{{s.Prefix}}
                                 <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
                                 <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
                                 <customselectionfield change="specChanged" customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>

@@ -3,6 +3,7 @@
 variant ID:<input type="text" ng-model="Variant.ExternalID">
 <table id="451_list_vspec" border=1 ng-show="true">
 	<tr ng-repeat="s in Variant.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: false}, {Property: 'DefinesVariant', Value: false}]">
+        <td><label>{{s.Name}}</label></td>
 		<td>
 			{{s.Prefix}}
             <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
