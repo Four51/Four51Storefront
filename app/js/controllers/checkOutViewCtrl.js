@@ -1,10 +1,14 @@
-four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList, Shipper, Coupon) {
+four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList, Shipper, Coupon, SpendingAccount) {
 	AddressList.query(function(list) {
         $scope.addresses = list;
     });
 
 	Shipper.query($scope.currentOrder, function(list) {
 		$scope.shippers = list;
+	});
+
+	SpendingAccount.query(function(data) {
+		$scope.SpendingAccounts = data;
 	});
 
 	function hasMultipleAddresses() {
