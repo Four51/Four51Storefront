@@ -24,9 +24,12 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 		if($scope.currentOrder.LineItems.length == $451.filter($scope.currentOrder.LineItems, {Property:'Selected', Value: true}).length){
 			$scope.cancelOrder();
 		}else{
+			$scope.displayLoadingIndicator = true;
 			Order.save($scope.currentOrder, function(data) {
+				debugger;
 				$scope.currentOrder = data;
 				OrderConfig.costcenter(data, $scope.user).address(data, $scope.user);
+				$scope.displayLoadingIndicator = false;
 			});
 		}
 	};
