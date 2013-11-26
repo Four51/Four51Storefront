@@ -12,7 +12,8 @@ four51.app.directive('customtextfield', function($451) {
         },
         restrict: 'E',
         transclude: true,
-        template: '<input placeholder="{{customfield.Label}}" ui-mask="{{customfield.MaskedInput}}" type="text" ng-required="{{customfield.IsRequired}}" ng-model="customfield.Value" />'
+        template: '<input ng-if="customfield.Lines == 1" placeholder="{{customfield.Label}}" size="{{customfield.Width * .13}}" max="{{customfield.MaxLength}}" ui-mask="{{customfield.MaskedInput}}" type="text" ng-required="{{customfield.IsRequired}}" ng-model="customfield.Value"></input>' +
+	        '<textarea ng-if="customfield.Lines > 1" cols="{{customfield.Width}} rows={{customfield.Lines}}" ng-maxlength="{{customfield.MaxLength}}" ng-required="{{customfield.IsRequired}}" ng-model="customfield.Value"></textarea>'
     }
     return obj;
 });
@@ -48,12 +49,14 @@ four51.app.directive('customselectionfield', function($451) {
 	                scope.customfield.SelectedOptionID = this.item.ID;
                     scope.customfield.Value = scope.other;
                 }
-	            scope.change(scope.customfield);
+	            if (scope.change)
+		            scope.change(scope.customfield);
             };
             scope.otherChanged = function() {
                 scope.customfield.isOtherSelected = true;
                 scope.customfield.Value = scope.other;
-	            scope.change(scope.customfield);
+	            if (scope.change)
+		            scope.change(scope.customfield);
             };
             scope.item = {}, scope.other = ''; // initialize the item variable to avoid checking for null
 
@@ -73,50 +76,6 @@ four51.app.directive('customselectionfield', function($451) {
                     this.otherChanged();
                 }
             };
-        }
-    }
-    return obj;
-});
-
-four51.app.directive('customradiobuttonfield', function($451) {
-    var obj = {
-        scope: {
-            customfield : '='
-        },
-        restrict: 'E',
-        transclude: true,
-        template: '<label>{{customfield.Label}}</label>' +
-            '<span ng-repeat="option in customfield.Options">' +
-            '<input type="radio" ng-change="changed()" name="{{customfield.Name}}" ng-model="$parent.item" ng-value="{{option}}" />{{option.Value}}<br />' +
-            '</span>' +
-            '<input type="text" ng-change="otherChanged()" ng-model="other" ng-show="customfield.isOtherSelected" /><br />',
-        link: function(scope, element, attr) {
-            scope.changed = function() {
-                scope.customfield.Value = this.item.Value;
-                scope.customfield.isOtherSelected = false;
-                if (this.item.ID.indexOf('other') > -1) {
-                    scope.customfield.isOtherSelected = true;
-                    scope.customfield.Value = scope.other;
-                }
-            };
-            scope.otherChanged = function() {
-                scope.customfield.Value = scope.other;
-            };
-            var id = scope.customfield.Value != null ? scope.customfield.Options[scope.customfield.Options.length-1].ID : scope.customfield.DefaultOptionID;
-            var matched = false;
-            angular.forEach(scope.customfield.Options, function(n,i) {
-                if (matched) return;
-                if (scope.customfield.Value == n.Value) {
-                    id = n.ID;
-                    matched = true;
-                }
-            });
-            scope.item = $451.filter(scope.customfield.Options, { 'Property': 'ID', 'Value': id })[0];
-            scope.changed();
-
-            scope.getVal = function() {
-                return scope.item.Value;
-            }
         }
     }
     return obj;

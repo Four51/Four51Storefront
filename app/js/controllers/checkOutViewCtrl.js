@@ -1,10 +1,14 @@
-four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList, Shipper, Coupon) {
+four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList, Shipper, Coupon, SpendingAccount) {
 	AddressList.query(function(list) {
         $scope.addresses = list;
     });
 
 	Shipper.query($scope.currentOrder, function(list) {
 		$scope.shippers = list;
+	});
+
+	SpendingAccount.query(function(data) {
+		$scope.SpendingAccounts = data;
 	});
 
 	function hasMultipleAddresses() {
@@ -96,13 +100,12 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 
     function submitOrder() {
         Order.submit($scope.currentOrder, function(data) {
-            $scope.currentOrder = data;
-            $scope.user.CurrentOrderID = null;
 	        User.save($scope.user, function(data) {
 		        $scope.user = data;
                 $scope.displayLoadingIndicator = true;
 	        });
-            $location.path('/order/' + data.ID);
+	        $scope.currentOrder = null;
+	        $location.path('/order/' + data.ID);
         });
     };
 

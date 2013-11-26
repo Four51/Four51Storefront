@@ -23,10 +23,11 @@
                     <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product'/>
                     <table id="451_list_vspec" border=1 ng-show="true">
                         <tr ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
-                            <td colspan="2">
+                            <td colspan="2">{{s.Prefix}}
                                 <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
                                 <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
                                 <customselectionfield change="specChanged" customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
+                                {{s.Suffix}}
                             </td>
                         </tr>
                     </table>
@@ -111,11 +112,13 @@
                         </p>
                         {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
                     </div>
+                    <div ng-show="LineItem.Product.Type == 'VariableText'">
+                        <button type="button" class="btn btn-xs btn-danger" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/new/edit" tabindex="-1">Create New</button>
+                    </div>
                     <div ng-show="LineItem.Product.Variants.length > 0 && !LineItem.Variant">
                         <h4>
                             Please select from the following:
                         </h4>
-						<span ng-show="LineItem.Product.Type == 'VariableText'"><a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/new/edit>Create New</a></span>
                         <div>
                             <!--- TODO table needs to redone as Bootstrap responsive layout, see cartView.html for example --->
                             <table border=1 class="451_list_vars">

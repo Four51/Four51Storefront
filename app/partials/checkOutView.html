@@ -29,12 +29,12 @@
     <div class="panel panel-primary col-md-8 col-md-pull-4 check-out-view-types" ng-show="currentOrder && currentOrder.isEditable">
         <div class="panel-heading">
             <h3 ng-click="checkOutSection = 'order'" class="panel-title panel-primary">
-                    <i ng-class="{'fa fa-times-circle': cart_order.$invalid, 'fa fa-check': !cart_order.$invalid }"></i>
+                <i ng-class="{'fa fa-times-circle': cart_order.$invalid, 'fa fa-check': !cart_order.$invalid }"></i>
                 Order
             </h3>
         </div>
         <form name="cart_order">
-            <div ng-show="checkOutSection == 'order'" ng-show="currentOrder" class="panel-body check-out-view-order">
+            <div ng-show="checkOutSection == 'order'" class="panel-body check-out-view-order">
                 <div class="error_list">
                     <span class="alert-error" ng-show="cart_order.orderid.$invalid">Please enter a valid Order ID</span><br />
                 </div>
@@ -43,7 +43,7 @@
                     <br />
                     <div class="input-group">
                         <span ng-if="user.Permissions.contains('AllowAutoGenPOID')" class="input-group-addon">
-                            <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? 'auto' : ''; showOrderID = ! showOrderID" ng-model='currentOrder.autoID' />
+                            <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? null : 'auto'" ng-model='currentOrder.autoID' />
                             Use system-generated ID
                         </span>
                         <input name="orderid" ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" placeholder="Order ID" required ui-mask="{{user.Company.POIDMask}}" />
