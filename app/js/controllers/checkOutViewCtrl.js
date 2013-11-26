@@ -100,13 +100,12 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 
     function submitOrder() {
         Order.submit($scope.currentOrder, function(data) {
-            $scope.currentOrder = data;
-            $scope.user.CurrentOrderID = null;
 	        User.save($scope.user, function(data) {
 		        $scope.user = data;
                 $scope.displayLoadingIndicator = true;
 	        });
-            $location.path('/order/' + data.ID);
+	        $scope.currentOrder = null;
+	        $location.path('/order/' + data.ID);
         });
     };
 
