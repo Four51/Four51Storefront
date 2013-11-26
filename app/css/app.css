@@ -908,7 +908,7 @@ li.cart span.badge {
 }
 
 .branding-view-logo {
-    max-height:130px;
+    max-height:50px;
     float: left;
     display: block;
     margin-right: 25px;
@@ -930,7 +930,6 @@ li.cart span.badge {
     overflow: hidden;
     padding: 0;
 }
-
 
 .product-view-default-toggle-panel .panel-switch {
     cursor: pointer;
@@ -955,6 +954,15 @@ li.cart span.badge {
     padding: 0;
 }
 
+.panel-heading.yes i {
+    color:#19B698;
+    font-size: 22px;
+}
+
+.panel-heading.no i {
+    color:#D14233;
+    font-size: 22px;
+}
 
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
@@ -968,6 +976,10 @@ li.cart span.badge {
     max-height: 40%;
     margin: 15px auto;
     background-color:#fff;
+}
+
+.panel {
+    word-wrap: break-word;
 }
 
 .btn.btn-primary {
@@ -1005,8 +1017,8 @@ li.cart span.badge {
 }
 
 .jumbotron {
-    padding-bottom: 24px;
-    padding-top: 24px;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 .navbar-nav > li > a {

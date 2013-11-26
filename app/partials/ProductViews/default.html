@@ -39,18 +39,6 @@
                     </p>
                 </div>
                 <div class="panel-footer">
-                    <p class="alert alert-danger" ng-show="quantityError">
-                        {{quantityError}}
-                    </p>
-                    <p class="alert alert-danger" ng-show="LineItem.PriceSchedule.MinQuantity > 1">
-                        min: {{LineItem.PriceSchedule.MinQuantity}}
-                    </p>
-                    <p class="alert alert-danger" ng-show="LineItem.PriceSchedule.MaxQuantity">
-                        max: {{LineItem.PriceSchedule.MaxQuantity}}
-                    </p>
-                    <p class="alert alert-warning" ng-show="addToOrderForm.$invalid" ng-hide="quantityError">
-                        Please correct all errors to submit to cart.
-                    </p>
                     <div style="float: left;">
                         <span class="text-info">
                             QTY
@@ -65,6 +53,19 @@
                             {{addToOrderText}}
                         </button>
                     </div>
+                    <hr />
+                    <p class="alert alert-danger" ng-show="quantityError">
+                        {{quantityError}}
+                    </p>
+                    <p class="alert alert-danger" ng-show="LineItem.PriceSchedule.MinQuantity > 1">
+                        min: {{LineItem.PriceSchedule.MinQuantity}}
+                    </p>
+                    <p class="alert alert-danger" ng-show="LineItem.PriceSchedule.MaxQuantity">
+                        max: {{LineItem.PriceSchedule.MaxQuantity}}
+                    </p>
+                    <p class="alert alert-warning" ng-show="addToOrderForm.$invalid" ng-hide="quantityError">
+                        Please correct all errors to submit to cart.
+                    </p>
                 </div>
             </form>
         </div>
@@ -162,7 +163,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-default">
+        <div class="panel panel-default hidden">
             <div class="panel-heading">
                 <h3 class="panel-title">Related Products</h3>
             </div>

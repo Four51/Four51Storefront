@@ -1,16 +1,12 @@
 <section class="jumbotron branding-view">
     <div class="container">
-        <figure>
-            <a ng-show="Four51User.isAuthenticated()" ng-click="refreshUser()" href="#/catalog">
-                <img class="branding-view-logo" ng-src="{{user.Company.Logo.Url}}" />
-            </a>
-        </figure>
         <h3 ng-show="Four51User.isAuthenticated()">
+            <figure>
+                <a ng-show="Four51User.isAuthenticated()" ng-click="refreshUser()" href="#/catalog">
+                    <img class="branding-view-logo" ng-src="{{user.Company.Logo.Url}}" />
+                </a>
+            </figure>
             Hello {{user.FirstName + " " + user.LastName}}</span>
         </h3>
-        <h4 class="visible-xs text-warning">Phone</h4>
-        <h4 class="visible-sm text-warning">Tablet Portrait</h4>
-        <h4 class="visible-md text-warning">Tablet Landscape / Desktop Small</h4>
-        <h4 class="visible-lg text-warning">Desktop Large</h4>
     </div>
 </section>
