@@ -4,9 +4,11 @@ four51.app.controller('AddressListCtrl', function ($scope, $location, $451, Addr
         $scope.addresses = list;
     });
     $scope.deleteSelected = function() {
+	    $scope.displayLoadingIndicator = true;
         AddressList.delete($scope.addresses, function() {
 	        AddressList.query(function(list) {
 		        $scope.addresses = list;
+		        $scope.displayLoadingIndicator = false;
 	        });
         });
     };

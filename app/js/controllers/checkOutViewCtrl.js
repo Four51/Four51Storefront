@@ -21,6 +21,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	$scope.shipToMultipleAddresses = hasMultipleAddresses();
 
 	$scope.updateShipper = function(li) {
+		$scope.displayLoadingIndicator = true;
 		var id = li ? li.ShipperID : $scope.currentOrder.ShipperID;
 		var shipper = $451.filter($scope.shippers, { Property: 'ID', Value: id })[0];
 		if (!$scope.shipToMultipleAddresses) {
@@ -32,6 +33,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 			});
 			Order.save($scope.currentOrder, function(order) {
 				$scope.currentOrder = order;
+				$scope.displayLoadingIndicator = false;
 			});
 		}
 		else {
@@ -99,10 +101,11 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     }
 
     function submitOrder() {
+	    $scope.displayLoadingIndicator = true;
         Order.submit($scope.currentOrder, function(data) {
 	        User.save($scope.user, function(data) {
 		        $scope.user = data;
-                $scope.displayLoadingIndicator = true;
+                $scope.displayLoadingIndicator = false;
 	        });
 	        $scope.currentOrder = null;
 	        $location.path('/order/' + data.ID);
@@ -110,8 +113,10 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     };
 
     function saveChanges() {
+	    $scope.displayLoadingIndicator = true;
         Order.save($scope.currentOrder, function(data) {
             $scope.currentOrder = data;
+	        $scope.displayLoadingIndicator = false;
         });
     };
 
@@ -120,11 +125,13 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     };
 
     $scope.cancelOrder = function() {
+	    $scope.displayLoadingIndicator = true;
         Order.delete($scope.currentOrder, function() {
             $scope.user.CurrentOrderID = null;
             $scope.currentOrder = null;
 	        User.save($scope.user, function(data) {
 		        $scope.user = data;
+		        $scope.displayLoadingIndicator = false;
 	        });
         });
     };
@@ -142,20 +149,24 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     };
 
 	$scope.applyCoupon = function() {
+		$scope.displayLoadingIndicator = true;
 		$scope.couponError = null;
 		Coupon.apply($scope.coupon, function(coupon) {
 			$scope.currentOrder.Coupon = coupon;
 			Order.save($scope.currentOrder, function(data) {
 				$scope.currentOrder = data;
+				$scope.displayLoadingIndicator = false;
 			});
 		});
 	};
 
 	$scope.removeCoupon = function() {
 		$scope.couponError = null;
+		$scope.displayLoadingIndicator = true;
 		Coupon.remove(function() {
 			Order.save($scope.currentOrder, function(data) {
 				$scope.currentOrder = data;
+				$scope.displayLoadingIndicator = false;
 			});
 		});
 	};
