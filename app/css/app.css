@@ -891,7 +891,7 @@ li.cart span.badge {
 }
 
 .check-out-view-types .panel-heading {
-    border-bottom: 1px solid #EEE;
+    border-bottom: 1px solid #4d4d4d;
 }
 
 .check-out-view-types .panel-title {
@@ -954,12 +954,14 @@ li.cart span.badge {
     padding: 0;
 }
 
-.panel-heading.yes {
-    background-color:#19B698;
+.panel-heading.yes i {
+    color:#19B698;
+    font-size: 22px;
 }
 
-.panel-heading.no {
-    background-color:#D14233;
+.panel-heading.no i {
+    color:#D14233;
+    font-size: 22px;
 }
 
 /* ----------------------------------------------------------------------------------------------- */

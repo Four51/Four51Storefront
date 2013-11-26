@@ -22,14 +22,14 @@
                 Submit Order
             </button>
             <hr />
-            <p class="alert alert-warning" ng-show="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">Please correct all errors to submit order.</p>
+            <p class="alert alert-warning" ng-show="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">Cart is missing required fields for submition.</p>
         </div>
     </div>
 
     <div class="panel panel-primary col-md-8 col-md-pull-4 check-out-view-types" ng-show="currentOrder && currentOrder.isEditable">
         <div class="panel-heading" ng-class="{'no': cart_order.$invalid, 'yes': !cart_order.$invalid }">
             <h3 ng-click="checkOutSection = 'order'" class="panel-title panel-primary">
-                <i ng-class="{'fa fa-exclamation-circle': cart_order.$invalid, 'fa fa-check': !cart_order.$invalid }"></i>
+                <i ng-class="{'fa fa-exclamation-circle': cart_order.$invalid, 'fa fa-check-circle': !cart_order.$invalid }"></i>
                 Order
             </h3>
         </div>
@@ -73,7 +73,7 @@
 
         <div class="panel-heading"  ng-class="{'no': cart_shipping.$invalid, 'yes': !cart_shipping.$invalid }">
             <h3 ng-click="checkOutSection = 'shipping'" class="panel-title panel-primary">
-                    <i ng-class="{'fa fa-exclamation-circle': cart_shipping.$invalid, 'fa fa-check': !cart_shipping.$invalid }"></i>
+                    <i ng-class="{'fa fa-exclamation-circle': cart_shipping.$invalid, 'fa fa-check-circle': !cart_shipping.$invalid }"></i>
                 Shipping
             </h3>
         </div>
@@ -132,7 +132,7 @@
 
         <div class="panel-heading"  ng-class="{'no': cart_billing.$invalid, 'yes': !cart_billing.$invalid }">
             <h3 ng-click="checkOutSection = 'billing'" class="panel-title panel-primary">
-                <i ng-class="{'fa fa-exclamation-circle': cart_billing.$invalid, 'fa fa-check': !cart_billing.$invalid }"></i>
+                <i ng-class="{'fa fa-exclamation-circle': cart_billing.$invalid, 'fa fa-check-circle': !cart_billing.$invalid }"></i>
                 Billing
             </h3>
         </div>
