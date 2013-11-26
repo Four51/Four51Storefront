@@ -11,12 +11,14 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
     };
 
 	$scope.cancelOrder = function() {
+		$scope.displayLoadingIndicator = true;
 		Order.delete($scope.currentOrder, function(){
 			$scope.currentOrder = null;
 			$scope.user.CurrentOrderID = null;
 			User.save($scope.user, function(){
 				$location.path('catalog');
 			});
+			$scope.displayLoadingIndicator = false;
 		});
 	};
 
@@ -24,9 +26,11 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 		if($scope.currentOrder.LineItems.length == $451.filter($scope.currentOrder.LineItems, {Property:'Selected', Value: true}).length){
 			$scope.cancelOrder();
 		}else{
+			$scope.displayLoadingIndicator = true;
 			Order.save($scope.currentOrder, function(data) {
 				$scope.currentOrder = data;
 				OrderConfig.costcenter(data, $scope.user).address(data, $scope.user);
+				$scope.displayLoadingIndicator = false;
 			});
 		}
 	};
@@ -37,12 +41,12 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 	}
 
     $scope.checkOut = function() {
+	    $scope.displayLoadingIndicator = true;
         Order.save($scope.currentOrder, function(data) {
             $scope.currentOrder = data;
             $location.path('checkout');
-            $scope.displayLoadingIndicator = true;
+            $scope.displayLoadingIndicator = false;
         });
-
     };
 
 	$scope.$watch('currentOrder.LineItems', function(newval) {
@@ -66,10 +70,7 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 		});
 	};
 
-
-
-
     $scope.onPrint = function()  {
-            window.print();
+	    window.print();
     };
 });

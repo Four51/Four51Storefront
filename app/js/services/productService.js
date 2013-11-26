@@ -57,15 +57,17 @@ four51.app.factory('Variant', function($resource, $451, Security){
 		});
 	}
 
-	function getCacheName(p, v){
-		return '451Cache.' + $451.apiName + '.Variants.' + p+ v;
+	function getCacheName(params){
+		var query = params.VariantInteropID ? params.VariantInteropID : params.SpecOptionIDs.join();
+		return '451Cache.' + $451.apiName + '.Variants.' + params.ProductInteropID + query;
 	}
     var _get = function(params, success) {
-		var variant = store.get(getCacheName(params.ProductInteropID, params.VariantInteropID) );
-	    variant ? (function() { _extend(variant);	_then(success, variant); })() :
+
+		var variant = store.get(getCacheName(params));
+		variant ? (function() { _extend(variant);	_then(success, variant); })() :
 	        $resource($451.api('variant')).get(params).$promise.then(function(variant) {
 		        _extend(variant);
-		        store.set(getCacheName(params.ProductInteropID, params.VariantInteropID), variant);
+		        store.set(getCacheName(params), variant);
 	            _then(success, variant);
 	        });
     }

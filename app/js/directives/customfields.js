@@ -13,7 +13,7 @@ four51.app.directive('customtextfield', function($451) {
         restrict: 'E',
         transclude: true,
         template: '<label>{{customfield.Label}}</label><input ng-if="customfield.Lines == 1" placeholder="{{customfield.Label}}" size="{{customfield.Width * .13}}" max="{{customfield.MaxLength}}" ui-mask="{{customfield.MaskedInput}}" type="text" ng-required="{{customfield.IsRequired}}" ng-model="customfield.Value"></input>' +
-	        '<textarea ng-if="customfield.Lines > 1" cols="{{customfield.Width}} rows={{customfield.Lines}}" ng-maxlength="{{customfield.MaxLength}}" ng-required="{{customfield.IsRequired}}" ng-model="customfield.Value"></textarea>'
+	        '<textarea ng-if="customfield.Lines > 1" cols="{{customfield.Width * .13}} rows={{customfield.Lines}}" ng-maxlength="{{customfield.MaxLength}}" ng-required="{{customfield.IsRequired}}" ng-model="customfield.Value"></textarea>'
     }
     return obj;
 });
@@ -28,7 +28,7 @@ four51.app.directive('customselectionfield', function($451) {
         restrict: 'E',
         transclude: true,
         template: '<label>{{customfield.Label}}</label>' +
-            '<select ng-init="init()" ng-change="changed()" ng-model="item" ng-options="option.Value for option in customfield.Options" ng-if="customfield.Options && !customfield.IsRadioButtons">' +
+            '<select ng-init="init()" ng-change="changed()" ng-model="item" ng-options="option.Value for option in customfield.Options" ng-if="customfield.Options">' +
             '<option ng-if="!customfield.IsRequired" value="" /></select>' +
             '<input type="text" ng-change="otherChanged()" ng-model="other" ng-show="customfield.isOtherSelected" />',
         link: function(scope, element, attr) {
