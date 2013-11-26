@@ -891,7 +891,7 @@ li.cart span.badge {
 }
 
 .check-out-view-types .panel-heading {
-    border-bottom: 1px solid #4d4d4d;
+    border-bottom: 1px solid #EEE;
 }
 
 .check-out-view-types .panel-title {
@@ -954,6 +954,13 @@ li.cart span.badge {
     padding: 0;
 }
 
+.panel-heading.yes {
+    background-color:#19B698;
+}
+
+.panel-heading.no {
+    background-color:#D14233;
+}
 
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
@@ -1010,7 +1017,6 @@ li.cart span.badge {
 .jumbotron {
     padding-bottom: 10px;
     padding-top: 10px;
-    margin-bottom: 0;
 }
 
 .navbar-nav > li > a {
