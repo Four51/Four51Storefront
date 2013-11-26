@@ -1,9 +1,9 @@
 <section class="container">
     <div id="451_msg_read" ng-hide="replying">
-        <span>Date: {{message.DateSent | date:'medium'}}</span><br />
-        <span>To: {{message.ToName}}</span><br />
-        <span>From: {{message.FromName}}</span><br />
-        <span>Subject: {{message.Subject}}</span><br />
+        <label>Date: {{message.DateSent | date:'medium'}}</label><br />
+        <label>To: {{message.ToName}}</label><br />
+        <label>From: {{message.FromName}}</label><br />
+        <label>Subject: {{message.Subject}}</label><br />
         <span><pre>{{message.Body}}</pre></span><br />
         <span>
             <button id="451_btn_del" ng-click="delete($event)" type="button" class="btn btn-small btn-danger">Delete</button>
@@ -13,8 +13,8 @@
     </div>
 
     <div id="451_msg_reply" ng-show="replying">
-        <span>To: {{message.FromName}}</span><br />
-        <span>Subject: <input id="451_inp_subj" type="text" ng-model="message.Subject" value="{{'RE: ' + message.Subject}}" /></span><br />
+        <label>To: {{message.FromName}}</label><br />
+        <label>Subject: <input id="451_inp_subj" type="text" ng-model="message.Subject" value="{{'RE: ' + message.Subject}}" /></label><br />
         <span><textarea id="451_inp_body" style="width: 500px; height: 300px;" ng-model="message.Body" /></span><br />
         <span>
             <button type="button" id="451_btn_cancel" class="btn btn-small btn-warning" ng-click="replying = !replying">Cancel</button>

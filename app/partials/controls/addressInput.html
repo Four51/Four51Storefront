@@ -1,22 +1,20 @@
 <div id="address_edit">
     <form name="addressEdit" ng-submit="save()">
-        <input name="addressname" class="input-large" type="text" ng-model="address.AddressName" placeholder="Address Name" required /><br />
-        <input name="firstname" class="input-large" type="text" ng-model="address.FirstName" placeholder="First Name" ng-required="address.IsBilling" /><br />
-        <input name="lastname" class="input-large" type="text" ng-model="address.LastName" placeholder="Last Name" ng-required="address.IsBilling" /><br />
-        <input name="companyname" class="input-large" type="text" ng-model="address.CompanyName" placeholder="Company Name" /><br />
-        <input name="street1" class="input-large" type="text" ng-model="address.Street1" placeholder="Address Line 1" required /><br />
-        <input name="street2" class="input-large" type="text" ng-model="address.Street2" placeholder="Address Line 2" /><br />
-        <input name="city" class="input-large" type="text" ng-model="address.City" placeholder="City" required /><br />
-        <input ng-show="!hasStates()" class="input-large" type="text" ng-model="address.State" placeholder="State" ng-required="!hasStates()" />
+        <label>Address Name</label></label><input name="addressname" class="input-large" type="text" ng-model="address.AddressName" placeholder="Address Name" required /><br />
+        <label>First Name</label><input name="firstname" class="input-large" type="text" ng-model="address.FirstName" placeholder="First Name" ng-required="address.IsBilling" /><br />
+        <label>Last Name</label><input name="lastname" class="input-large" type="text" ng-model="address.LastName" placeholder="Last Name" ng-required="address.IsBilling" /><br />
+        <label>Company Name</label><input name="companyname" class="input-large" type="text" ng-model="address.CompanyName" placeholder="Company Name" /><br />
+        <label>Street Line One</label><input name="street1" class="input-large" type="text" ng-model="address.Street1" placeholder="Address Line 1" required /><br />
+        <label>Street Line Two</label><input name="street2" class="input-large" type="text" ng-model="address.Street2" placeholder="Address Line 2" /><br />
+        <label>City</label><input name="city" class="input-large" type="text" ng-model="address.City" placeholder="City" required /><br />
+        <label>State</label><input ng-show="!hasStates()" class="input-large" type="text" ng-model="address.State" placeholder="State" ng-required="!hasStates()" />
         <select ng-show="hasStates()" ng-options="state.value as state.label for state in states | filter:country" ng-model="address.State" placeholder="State" ng-required="hasStates()" /><br />
-        <input name="zip" class="input-large" type="text" ng-model="address.Zip" placeholder="Zip" ng-required="hasStates()" /><br />
-        <select name="country" ng-options="country.value as country.label for country in countries" ng-model="address.Country" placeholder="Country" required /><br />
-        <input name="phone" class="input-large" type="text" ng-model="address.Phone" placeholder="Phone" ng-required="isPhoneRequired()" /><br />
+        <label>Zip</label><input name="zip" class="input-large" type="text" ng-model="address.Zip" placeholder="Zip" ng-required="hasStates()" /><br />
+        <label>Country</label><select name="country" ng-options="country.value as country.label for country in countries" ng-model="address.Country" placeholder="Country" required /><br />
+        <label>Phone</label><input name="phone" class="input-large" type="text" ng-model="address.Phone" placeholder="Phone" ng-required="isPhoneRequired()" /><br />
         <label><input type="checkbox" ng-model="address.IsShipping" /> Save to Shipping Address Book</label><br />
         <label><input type="checkbox" ng-model="address.IsBilling" /> Save to Billing Address Book  </label><br />
         <button class="btn btn-small btn-danger" ng-if="address.InteropID" ng-click="delete()" type="button">Delete</button>
         <button class="btn btn-primary pull-right" type="submit" ng-disabled="addressEdit.$invalid" id="451_btn_user">Save</button>
-
     </form>
 </div>
-        <!-- need to add requirements around user permissions. see api validation in controller -->
