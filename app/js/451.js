@@ -9,7 +9,7 @@ four51.app.factory('$451', function(AppConst) {
             if (row[options.Property] === undefined && !options instanceof Array) return;
 
 			var checkRow = function(opt){
-				if ((row[opt.Property].toString()).toLowerCase() === (opt.Value.toString()).toLowerCase()){
+				if (row[opt.Property] === opt.Value) {
 					return row;
 				}
 			}
