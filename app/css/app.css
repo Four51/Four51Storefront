@@ -23,7 +23,7 @@ body {
 
 h1, h2, h3, h4, h5 {
     font-family: 'Lato', sans-serif;
-    line-height: 2em;
+    line-height: 1.5em;
 }
 
 hr {
@@ -140,7 +140,8 @@ textarea {
 }
 
 .shortproduct-view {
-    min-height: 250px;
+    min-height: 275px;
+    position: relative;
 }
 
 .cat-image {
@@ -182,12 +183,13 @@ textarea {
     color:red;
 }
 
+
 .shortproduct-arrow {
     position: absolute;
-    top: -25px;
-    left: 45%;
-    color:#f5f5f5;
-    font-size: 36px;
+    bottom: -15px;
+    left: 48%;
+    color:#F5F5F5;
+    font-size: 46px;
     z-index: 1;
 }
 
@@ -201,18 +203,27 @@ textarea {
     padding: 15px;
 }
 
+.product-navigation li.nav-header {
+    position: static;
+}
+
+.product-navigation li.nav-header h5 {
+    font-size: 13px;
+}
+
 .shortproduct-info {
     background-color:#f5f5f5;
     border: 1px solid #E6E6E6;
     border-top: none;
-    min-height: 250px;
+    min-height: 275px;
     position: absolute;
-    width: 100%;
+    right: 15px;
+    left: 15px;
     z-index: 1;
     padding: 10px;
-    box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
-    -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
-    -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+    box-shadow: rgba(0,0,0, 0.1) 0px 5px 8px;
+    -moz-box-shadow: rgba(0,0,0, 0.1) 0px 5px 8px;
+    -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 5px 8px;
 }
 
 .shortproduct-view .caption { cursor: pointer; padding: 0 20px;}
@@ -315,12 +326,8 @@ div.category-view-subcat ul li ul {
     display: none;
 }
 
-
-
-
 .product-navigation li.nav-header a {
     padding: .75em;
-
 }
 
 .product-navigation ul li {
@@ -337,11 +344,9 @@ div.category-view-subcat ul li ul {
     text-transform: capitalize;
     text-shadow: none;
     font-weight: normal;
+    min-height: 275px;
 }
 
-.category-view-aside ul:first-child {
-    padding: 0;
-}
 
 .product-navigation .details-show {
     margin-bottom: 1px;
@@ -357,6 +362,7 @@ div.category-view-subcat ul li ul {
     text-transform: capitalize;
     padding: 0.214em 0;
     line-height: normal;
+
 }
 
 .product-navigation .nav li + .nav-header {
@@ -382,7 +388,6 @@ div.category-view-subcat ul li ul {
 
 .product-navigation .nav li.nav-header a {
     display: block;
-    color:#777;
     text-align: center;
     text-decoration: none;
 }
@@ -963,6 +968,21 @@ li.cart span.badge {
     color:#D14233;
     font-size: 22px;
 }
+
+.category-view-aside ul {
+    padding-left: 15px;
+    list-style-type: none;
+}
+
+.category-view-aside ul:first-child {
+    list-style-type: disc;
+    padding: 0;
+}
+
+.category-view-aside ul li a {
+    display: block;
+}
+
 
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */

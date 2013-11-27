@@ -23,11 +23,11 @@
     </nav>
     <aside class="col-sm-3" ng-if="showMega" ng-class="{ 'category-view-aside': showMega }">
         <nav class="nav 451_cat_nav">
-                <ul class="nav-header 451_cat_item">
-                    <li><a href="#/catalog">All Products</a>
-                    <categorytree tree='tree' current='currentCategory' />
-                    </li>
-                </ul>
+            <a href="#/catalog">All Products</a>
+            <ul class="nav-header 451_cat_item">
+                <categorytree tree='tree' current='currentCategory' />
+                </li>
+            </ul>
         </nav>
     </aside>
     <div class="cat-body" ng-class="{ 'move-cat-body col-sm-9 col-collapse': showMega }">
