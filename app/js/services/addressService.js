@@ -55,7 +55,7 @@ four51.app.factory('AddressList', function($q, $resource, $451) {
 	        });
     }
 
-	var _delete = function(messages, success) {
+	var _delete = function(addresses, success) {
 		store.remove('451Cache.Addresses');
 
 		var queue = [];
