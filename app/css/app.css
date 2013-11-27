@@ -50,7 +50,7 @@ button::-moz-focus-inner {
     border: 0;
 }
 
-input.ng-invalid, input.ng-invalid:invalid {
+input.ng-invalid, input.ng-invalid:invalid, textarea.ng-invalid, select.ng-invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid  {
     background: red;
     /* style the required !required angular form inputs */
 }
