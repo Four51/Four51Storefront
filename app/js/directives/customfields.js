@@ -1,10 +1,3 @@
-four51.app.directive('customcontrols', function($451) {
-	var obj = {
-
-	}
-	return obj;
-});
-
 four51.app.directive('customtextfield', function($451) {
     var obj = {
         scope: {

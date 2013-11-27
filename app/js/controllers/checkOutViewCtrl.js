@@ -21,24 +21,29 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	$scope.shipToMultipleAddresses = hasMultipleAddresses();
 
 	$scope.updateShipper = function(li) {
-		$scope.displayLoadingIndicator = true;
-		var id = li ? li.ShipperID : $scope.currentOrder.ShipperID;
-		var shipper = $451.filter($scope.shippers, { Property: 'ID', Value: id })[0];
+		$scope.shippingLoadingIndicator = true;
 		if (!$scope.shipToMultipleAddresses) {
-			$scope.currentOrder.Shipper = shipper;
-			angular.forEach($scope.currentOrder.LineItems, function(li) {
-				li.ShipperID = id;
-				li.Shipper = shipper;
-				li.ShipperName = shipper.Name;
+			angular.forEach($scope.shippers, function(s) {
+				if (s.Name == $scope.currentOrder.LineItems[0].ShipperName)
+					$scope.currentOrder.Shipper = s;
+			});
+			angular.forEach($scope.currentOrder.LineItems, function(item) {
+				item.ShipperName = $scope.currentOrder.Shipper.Name;
+				item.ShipperID = $scope.currentOrder.Shipper.ID;
 			});
 			Order.save($scope.currentOrder, function(order) {
 				$scope.currentOrder = order;
-				$scope.displayLoadingIndicator = false;
+				$scope.shippingLoadingIndicator = false;
 			});
 		}
 		else {
-			li.Shipper = shipper;
-			li.ShipperName = shipper.Name;
+			angular.forEach($scope.shippers, function(s) {
+				if (s.ID == li.ShipperName)
+					li.Shipper = s;
+			});
+			li.ShipperName = li.Shipper.Name;
+			li.ShipperID = li.Shipper.ID;
+			$scope.shippingLoadingIndicator = false;
 		}
 	};
 
@@ -150,24 +155,24 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     };
 
 	$scope.applyCoupon = function() {
-		$scope.displayLoadingIndicator = true;
+		$scope.couponLoadingIndicator = true;
 		$scope.couponError = null;
 		Coupon.apply($scope.coupon, function(coupon) {
 			$scope.currentOrder.Coupon = coupon;
 			Order.save($scope.currentOrder, function(data) {
 				$scope.currentOrder = data;
-				$scope.displayLoadingIndicator = false;
+				$scope.couponLoadingIndicator = false;
 			});
 		});
 	};
 
 	$scope.removeCoupon = function() {
 		$scope.couponError = null;
-		$scope.displayLoadingIndicator = true;
+		$scope.couponLoadingIndicator = true;
 		Coupon.remove(function() {
 			Order.save($scope.currentOrder, function(data) {
 				$scope.currentOrder = data;
-				$scope.displayLoadingIndicator = false;
+				$scope.couponLoadingIndicator = false;
 			});
 		});
 	};
