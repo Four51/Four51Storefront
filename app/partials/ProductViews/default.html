@@ -1,5 +1,7 @@
 <section id="451_area_prod_desc" class="container product-view-default">
-    <figure>
+	<productnav product="LineItem.Product" variant="LineItem.Variant" />
+
+	<figure>
         <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url || LineItem.Variant.PreviewUrl">
     </figure>
 	<span ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant">
@@ -135,9 +137,9 @@
                                     <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
                                         Available Quantity
                                     </td>
-                                    <td>
+                                    <!--<td>
                                         Order Quantity
-                                    </td>
+                                    </td>-->
                                 </tr>
                                 <tr ng-repeat="v in LineItem.Product.Variants">
                                     <td>
@@ -149,9 +151,9 @@
                                     <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
                                         {{v.QuantityAvailable}}
                                     </td>
-                                    <td>
-                                        Order Quantity
-                                    </td>
+									<!--<td>
+										Order Quantity
+									</td>-->
                                 </tr>
                             </table>
                         </div>

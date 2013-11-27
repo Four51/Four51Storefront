@@ -73,9 +73,10 @@ four51.app.factory('Variant', function($resource, $451, Security){
     }
 	var _save = function(variant, success) {
 		return $resource($451.api('variant')).save(variant).$promise.then(function(v) {
-			store.remove(getCacheName(v.ProductInteropID, v.InteropID));
+			var queryParams = {ProductInteropID: v.ProductInteropID, VariantInteropID: v.InteropID};
+			store.remove(getCacheName(queryParams));
 			_extend(v);
-			store.set(getCacheName(v.ProductInteropID, v.InteropID), v);
+			store.set(getCacheName(queryParams), v);
 			_then(success, v);
 		});
 	}

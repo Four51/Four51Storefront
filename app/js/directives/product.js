@@ -90,7 +90,21 @@ four51.app.directive('staticspecstable', function(){
     }
     return obj;
 })
-
+four51.app.directive('productnav', function($451, ProductDisplayService){
+	var obj = {
+		scope: {
+			product: '=',
+			variant: '='
+		},
+		restrict: 'E',
+		templateUrl: 'partials/controls/productNav.html',
+		controller: function($451, $scope){
+			if($scope.product)
+				ProductDisplayService.setProductViewName($scope.product);
+		}
+	};
+	return obj;
+})
 four51.app.directive('quantityfield', function($451, ProductDisplayService){
 
 	var obj = {
