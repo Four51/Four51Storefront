@@ -135,9 +135,9 @@
                                     <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
                                         Available Quantity
                                     </td>
-                                    <td>
+                                    <!--<td>
                                         Order Quantity
-                                    </td>
+                                    </td>-->
                                 </tr>
                                 <tr ng-repeat="v in LineItem.Product.Variants">
                                     <td>
@@ -149,9 +149,9 @@
                                     <td ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
                                         {{v.QuantityAvailable}}
                                     </td>
-                                    <td>
-                                        Order Quantity
-                                    </td>
+									<!--<td>
+										Order Quantity
+									</td>-->
                                 </tr>
                             </table>
                         </div>
