@@ -23,7 +23,10 @@ four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $location,
 	});
 
 	$scope.saveFavorite = function() {
-        FavoriteOrder.save($scope.order);
+		$scope.displayLoadingIndicator = true;
+        FavoriteOrder.save($scope.order, function() {
+	        $scope.displayLoadingIndicator = false;
+        });
 	};
 
     $scope.onPrint = function()  {

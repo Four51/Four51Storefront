@@ -49,13 +49,14 @@
                 <div class="panel-body">
                     <lineitemhistorygrid></lineitemhistorygrid>
                 </div>
-                <div class="panel-footer" ng-if="order.FromUserID == user.ID">
+                <div class="panel-footer" ng-if="order.FromUserID == user.ID" style="position: relative;">
+                    <loadingindicator ng-show="displayLoadingIndicator" />
                     <div class="input-group">
                         <input type="text" ng-model="order.FavoriteName" placeholder="Favorite Name" class="form-control"/>
-            <span class="input-group-btn">
+                        <span class="input-group-btn">
                     <!--- TODO the name does not appear to be saving ? --->
-                <button type="button" ng-click="saveFavorite()" class="btn btn-default">Save as Favorite</button>
-            </span>
+                            <button type="button" ng-click="saveFavorite()" class="btn btn-default">Save as Favorite</button>
+                        </span>
                     </div>
                 </div>
             </div>

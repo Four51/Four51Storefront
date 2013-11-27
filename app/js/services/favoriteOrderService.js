@@ -15,6 +15,7 @@ four51.app.factory('FavoriteOrder', function($q, $resource, $451) {
     }
 
     var _save = function(order, success) {
+	    store.remove(_cacheName);
         $resource($451.api('favoriteorder'), {},  { 'save': { method: 'POST', isArray: true }}).save(order).$promise.then(function(fav) {
 	        store.set(_cacheName, fav);
             _then(success, fav);
