@@ -1,4 +1,5 @@
 <div class="shortproduct-view" ng-class="{ 'howdy': toggle }">
+    <i class="shortproduct-arrow fa fa-caret-up" ng-show="toggle"></i>
     <a class="cat-link" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
         <figure ng-show="LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url" class="cat-image">
             <img ng-src="{{LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url}}"/>
@@ -21,7 +22,7 @@
 </div>
 
 <section class="shortproduct-info text-left" ng-show="toggle">
-    <i class="shortproduct-arrow fa fa-caret-up"></i>
+
     <i class="shortproduct-close fa fa-times-circle" ng-click="toggle = !toggle"></i>
     <p>
         <span class="text-info">Description:</span>

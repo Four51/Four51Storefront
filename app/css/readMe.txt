@@ -44,22 +44,10 @@
 
 1.  Responsive
 
-1.0     Bootstrap
-        Reset via Normalize
-
-        The reset block has been dropped in favor of Normalize.css, a project by Nicolas Gallagher and Jonathan Neal that also powers the HTML5 Boilerplate.
-        While we use much of Normalize within our reset.less, we have removed some elements specifically for Bootstrap.reset.less
-
-        scaffolding.less    Basic and global styles for generating a grid system, structural layout, and page templates
-        type.less           Headings, body text, lists, code, and more for a versatile and durable typography system
-        patterns.less       Repeatable interface elements like navigation, modals, popovers, and tooltips to take you beyond the default scaffolding styles
-        forms.less          Durable styles for various input types, form layouts, and control states.
-        tables.less         Styles for tabular data in a number of varied displays
-
-        Bootstrap CSS
+1.0     Bootstrap 3
         http://getbootstrap.com/
 
-        *Local Bootstrap and font-awesome files
+        *Local Bootstrap and font-awesome files, no external URL
 
         When using CDN for Bootstrap.css, Bootstrap-responsive.css and font-awesome.css
         CDN: http://www.bootstrapcdn.com/
@@ -80,11 +68,12 @@
 1.1     Content scales up IE:mobile first
             Admin navigation
                 Fixed top
+                Branding        uses Bootstrap .jumbotron and default is set to appear if a buyer logo is available
                 Product icon + text is always visible and available
-                    ~xs                limited icons
-                    ~sm                icons
-                    ~md                home | icons + text
-                    ~lg                home | icons + text
+                    ~xs         limited icons
+                    ~sm         icons
+                    ~md         home | icons + text
+                    ~lg         home | icons + text
             Content
                 Category and Products
                     ~xs                1 category or product in a view
