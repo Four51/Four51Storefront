@@ -51,13 +51,13 @@ button::-moz-focus-inner {
 }
 
 input.ng-invalid, input.ng-invalid:invalid, textarea.ng-invalid, select.ng-invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid  {
-    background: red;
+    background: #E74C3C;
     /* style the required !required angular form inputs */
 }
 
 input:not([type=submit]), textarea, select {
     padding: 9px;
-    margin: 5px 0;
+    margin: 5px 0 15px;
     border: solid 1px #E5E5E5;
     outline: 0;
     background: #FFFFFF url('bg_form.png') left top repeat-x;
@@ -76,7 +76,14 @@ input:focus, textarea:focus {
 }
 
 label {
-    margin-left: 10px;
+
+
+
+    margin: 0;
+    display: block;
+    -webkit-transition: .333s ease top, .333s ease opacity;
+    transition: .333s ease top, .333s ease opacity;
+
 }
 
 textarea {
@@ -949,7 +956,8 @@ li.cart span.badge {
 
 .product-view-default-toggle-panel .icon {
     position: absolute;
-    bottom: -13px; left: 48%;
+    bottom: -10px;
+    left: 48%;
 }
 .product-view-default-toggle-panel .icon i {
     font-size: 22px;
