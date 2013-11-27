@@ -84,7 +84,6 @@
                     <p class="alert-error" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</p>
                     <p class="alert-error" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</p>
                 </div>
-                <button type="button" class="btn btn-xs btn-danger" redirect="/address" tabindex="-1">Add New Address</button>
                 <button type="button" ng-click="shipToMultipleAddresses = !shipToMultipleAddresses" class="btn btn-xs btn-warning"
                         ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1 && user.ShipMethod != null">Ship to multiple addresses</button>
                 <div ng-show="!shipToMultipleAddresses">
@@ -97,15 +96,17 @@
                                 ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
                                 ng-model="currentOrder.ShipAddressID"
                                 ng-required="!shipToMultipleAddresses" />
+                        <button type="button" class="btn btn-xs btn-danger" redirect="/address" tabindex="-1">Add New Address</button>
                     </div>
                     <div ng-show="user.ShipMethod != null">
+                        <loadingindicator ng-show="shippingLoadingIndicator" />
                         <h5>
                             Shipping Method
                         </h5>
                         <select ng-change="updateShipper()"
+                                ng-model="currentOrder.LineItems[0].ShipperName"
                                 ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
-                                ng-options="shipper.ID as shipper.Name for shipper in shippers"
-                                ng-model="currentOrder.ShipperID"
+                                ng-options="shipper.Name as shipper.Name for shipper in shippers"
                                 ng-required="!shipToMultipleAddresses && user.ShipMethod != null" />
                     </div>
                 </div>
@@ -121,8 +122,8 @@
                                     ng-required="shipToMultipleAddresses" /> ~
                             <select ng-change="updateShipper(item)"
                                     ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
-                                    ng-options="shipper.ID as shipper.Name for shipper in shippers | noliverates"
-                                    ng-model="item.ShipperID"
+                                    ng-options="shipper.Name as shipper.Name for shipper in shippers | noliverates"
+                                    ng-model="item.ShipperName"
                                     ng-required="shipToMultipleAddresses && user.ShipMethod != null" />
                         </li>
                     </ul>
@@ -138,6 +139,7 @@
             </h3>
         </div>
         <form name="cart_billing">
+            <loadingindicator ng-show="couponLoadingIndicator" />
             <div ng-show="checkOutSection == 'billing'" ng-show="currentOrder" class="panel-body check-out-view-billing">
                 <div class="error_list">
                     <p class="alert-error" ng-show="cart_billing.billingAddress.$invalid">Please select a billing address</p>
