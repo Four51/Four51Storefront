@@ -103,7 +103,8 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     function submitOrder() {
 	    $scope.displayLoadingIndicator = true;
         Order.submit($scope.currentOrder, function(data) {
-	        User.save($scope.user, function(data) {
+			$scope.user.CurrentOrderID = null;
+			User.save($scope.user, function(data) {
 		        $scope.user = data;
                 $scope.displayLoadingIndicator = false;
 	        });
