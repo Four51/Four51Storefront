@@ -908,7 +908,7 @@ li.cart span.badge {
 }
 
 .branding-view-logo {
-    max-height:50px;
+    max-height:130px;
     float: left;
     display: block;
     margin-right: 25px;
@@ -1017,8 +1017,8 @@ li.cart span.badge {
 }
 
 .jumbotron {
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding-bottom: 24px;
+    padding-top: 24px;
 }
 
 .navbar-nav > li > a {
