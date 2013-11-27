@@ -1,5 +1,5 @@
+<productnav product="Product" variant="Variant" />
 <img ng-src="{{Variant.PreviewUrl}}" />
-
 
 <table id="451_list_vspec" border=1 ng-show="true">
 	<tr ng-repeat="s in Variant.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: false}, {Property: 'DefinesVariant', Value: false}]">
