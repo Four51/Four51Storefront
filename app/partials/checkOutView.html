@@ -43,11 +43,11 @@
                     <label>{{user.Company.SiteText.OrderID || 'Order ID'}}:</label>
                     <br />
                     <div class="input-group">
+                        <input name="orderid" ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" placeholder="Order ID" required ui-mask="{{user.Company.POIDMask}}" />
                         <span ng-if="user.Permissions.contains('AllowAutoGenPOID')" class="input-group-addon">
                             <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? null : 'auto'" ng-model='currentOrder.autoID' />
                             Use system-generated ID
                         </span>
-                        <input name="orderid" ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" placeholder="Order ID" required ui-mask="{{user.Company.POIDMask}}" />
                     </div>
                 </div>
                 <hr />
@@ -89,7 +89,7 @@
                 <div ng-show="!shipToMultipleAddresses">
                     <div>
                         <h5>
-                            Shipping Address
+                            <label>Shipping Address</label>
                         </h5>
                         <select name="shippingAddress"
                                 ng-change="setShipAddressAtOrderLevel()"
@@ -101,7 +101,7 @@
                     <div ng-show="user.ShipMethod != null" style="position: relative">
                         <loadingindicator ng-show="shippingLoadingIndicator" title="Please wait while we fetch new shipping options" />
                         <h5>
-                            Shipping Method
+                            <label>Shipping Method</label>
                         </h5>
                         <select ng-change="updateShipper()"
                                 ng-model="currentOrder.LineItems[0].ShipperName"
@@ -146,20 +146,20 @@
                     <p class="alert-error" ng-show="cart_billing.paymentMethod.$invalid">Please select a payment method</p>
                 </div>
                 <h5>
-                    Billing Address
+                    <label>Billing Address</label>
                 </h5>
                 <select name="billingAddress" ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required />
                 <button type="button" class="btn btn-xs btn-danger" redirect="/address"  tabindex="-1">Add New Address</button>
                 <paymentselector />
                 <div ng-show="user.Permissions.contains('ViewPromotions')">
                     <div ng-show="!currentOrder.Coupon">
-                        <span>{{user.Company.SiteText.PromotionCode || 'Promotion Code'}}: </span>
+                        <label>{{user.Company.SiteText.PromotionCode || 'Promotion Code'}}: </label>
                         <input type="text" ng-model="coupon" />
                         <button type="button" class="btn btn-xs btn-danger" ng-click="applyCoupon()">{{user.Company.SiteText.Apply || 'Apply'}}</button><br />
                         <span ng-show="couponError" class="ui-state-error">{{couponError}}</span>
                     </div>
                     <h5 ng-show="currentOrder.Coupon">
-                        <p>Coupon: {{currentOrder.Coupon.CouponCode}}<span><i ng-click="removeCoupon()" ng-class="{'fa fa-eraser': currentOrder.Coupon }"></i></span></p>
+                        <p><span class="text-info">Coupon</span>{{currentOrder.Coupon.CouponCode}}<span><i ng-click="removeCoupon()" ng-class="{'fa fa-eraser': currentOrder.Coupon }"></i></span></p>
                     </h5>
                     <div ng-show="currentOrder.Coupon" class="text-danger">
                         <p ng-bind="currentOrder.Coupon.Description"></p>
@@ -173,7 +173,7 @@
                 <div ng-show="user.Permissions.contains('SendOrderNotificationToOthers')">
                     <div>
                         <h5>
-                            Email Notification
+                            <label>Email Notification</label>
                         </h5>
                         <input ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
                     </div>

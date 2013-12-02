@@ -48,10 +48,11 @@
                 <h3 class="panel-title">Search Orders</h3>
             </div>
             <div class="panel-body">
-                <input type="text" ng-model="criteria.OrderID" placeholder="Order ID" /><br />
-                <input type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" /><br />
-                <input type="text" ui-date ng-model="criteria.DateRangeFrom" placeholder="From:" /><input type="text" ui-date ng-model="criteria.DateRangeTo" placeholder="To:" /><br />
-                <input type="text" ng-model="criteria.LastN" placeholder="Last n Orders:" />
+                <label>Order ID</label><input type="text" ng-model="criteria.OrderID" placeholder="Order ID" />
+                <label>Shipping Address</label><input type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" />
+                <label>From</label><input type="text" ui-date ng-model="criteria.DateRangeFrom" placeholder="From:" />
+                <label>To</label><input type="text" ui-date ng-model="criteria.DateRangeTo" placeholder="To:" />
+                <label>Last n Orders</label><input type="text" ng-model="criteria.LastN" placeholder="Last n Orders:" />
             </div>
             <div class="panel-footer">
                 <input type="submit" class="btn btn-primary" value="Search" ng-click="OrderSearch($event, criteria); toggle = !toggle;" />

@@ -44,23 +44,28 @@
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
                         <div class="col-sm-6 col-xs-12 cart-view-line-items-product">
                             <p>
-                                <a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">{{item.ProductIDText}}</a>
+                                <span class="text-info">{{user.Company.SiteText.ProductIDGridHeader || 'ID'}}: </span><a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">{{item.ProductIDText}}</a>
                                 <!---TODO needs url --->
                             </p>
-                            <p>{{item.Product.Name}}</p>
+                            <p><span class="text-info">{{user.Company.SiteText.ProductNameGridHeader || 'Product'}}: </span>{{item.Product.Name}}</p>
+                            <span class="text-info">Specifications: </span>
                             <ul>
                                 <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
-                                    {{spec.Name}} : <img ng-if="spec.ControlType == 'File' && spec.FileType == 'Image'" ng-src="{{spec.File.Url}}" /><span ng-if="!spec.ControlType == 'File'">{{spec.Value}}</span>
+                                    {{spec.Name}} :
+                                    <img ng-if="spec.ControlType == 'File' && spec.FileType == 'Image'" ng-src="{{spec.File.Url}}" />
+                                    <span ng-if="spec.ControlType != 'File'">{{spec.Value}}</span>
                                 </li>
                             </ul>
                             <div class="row">
                                 <div class="col-xs-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
+                                    <label>Date Needed</label>
                                     <input placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
                                     <button type="button" class="btn btn-info cart-view-btn-copy" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" >
                                         <i class="fa fa-copy"></i>
                                     </button>
                                 </div>
                                 <div class="col-xs-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
+                                    <label>Cost Center</label>
                                     <select required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
                                     <input ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />
                                     <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
@@ -71,15 +76,18 @@
                             </div>
                         </div>
                             <div class="col-md-2 col-sm-2 col-xs-3">
-                                {{item.UnitPrice | currency}}
+                               <span class="text-info">Unit Price: </span>{{item.UnitPrice | currency}}
                             </div>
                             <!--- TODO error needs styling --->
                             <div class="col-md-1 col-sm-1 col-xs-3">
-                                <quantityfield error="qtyError" lineitem="item" class="quantity"/>
+                                <label>Quantity</label><quantityfield error="qtyError" lineitem="item" class="quantity"/>
                                 {{qtyError}}
                             </div>
+                            <div class="col-md-1 col-sm-1 col-xs-3">
+                                <span class="text-info">Total Quantity</span>{{item.Quantity * item.Product.QuantityMultiplier}}
+                            </div>
                             <div class="col-md-2 col-sm-2 col-xs-3">
-                                {{item.LineTotal | currency}}
+                                <span class="text-info">Price: </span>{{item.LineTotal | currency}}
                             </div>
                             <div class="col-md-1 col-sm-1 col-xs-3">
                                  <i class="fa fa-times-circle" ng-click="removeItem(item)"></i>

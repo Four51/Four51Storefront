@@ -5,7 +5,7 @@
         <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url || LineItem.Variant.PreviewUrl">
     </figure>
 	<span ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant">
-		<a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit>edit variant</a>
+		<a ng-href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit>Edit</a>
 	</span>
     <div class="col-collapse col-md-3 col-md-offset-1 col-md-push-8">
         <div class="panel panel-default">
@@ -17,24 +17,21 @@
             <form name="addToOrderForm" ng-show="allowAddToOrder">
                 <div class="panel-body text-left">
                     <h5>
-                        <span class="text-info">
-                            ID
-                         </span>
+                        <span class="text-info">{{user.Company.SiteText.ProductIDGridHeader || 'ID'}}</span>
                         {{LineItem.Product.ExternalID}}
                     </h5>
                     <!--- priceschedule and vspec table is in INFO because these fields can become very long. Would like to see if only a single price to display priceschedule here--->
-                    <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
+                    <p ng-show="LineItem.Product.DisplayInventory && inventoryDisplay(LineItem.Product, LineItem.Variant)">
+                        <!-- nothing is accomodating the 0 level inventory and the custom message to be displayed -->
                         <span class="text-info">
-                            QTY Available:
+                            Quantity Available:
                         </span>
                         {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
                     </p>
                 </div>
                 <div class="panel-footer">
                     <div style="float: left;">
-                        <span class="text-info">
-                            QTY
-                        </span>
+                       <span class="text-info">Order Quantity: </span>
                         <quantityfield lineitem="LineItem" error="quantityError" class="quantity" />
                        <span class="text-success">
                            {{LineItem.LineTotal | currency}}
@@ -50,10 +47,10 @@
                         {{quantityError}}
                     </p>
                     <p class="alert alert-danger" ng-show="LineItem.PriceSchedule.MinQuantity > 1">
-                        min: {{LineItem.PriceSchedule.MinQuantity}}
+                        Minimum Quantity: {{LineItem.PriceSchedule.MinQuantity}}
                     </p>
                     <p class="alert alert-danger" ng-show="LineItem.PriceSchedule.MaxQuantity">
-                        max: {{LineItem.PriceSchedule.MaxQuantity}}
+                        Maximum Quantity: {{LineItem.PriceSchedule.MaxQuantity}}
                     </p>
                     <p class="alert alert-warning" ng-show="addToOrderForm.$invalid" ng-hide="quantityError">
                         Product is missing required fields for Add to Cart.
