@@ -929,6 +929,7 @@ li.cart span.badge {
 .product-view-default img {
     margin: 15px auto;
     max-height: 300px;
+    max-width: 100%;
 }
 
 .product-view-default-toggle-panel .panel-title.panel-selected {
