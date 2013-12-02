@@ -118,10 +118,10 @@
                         </div>
                     </div>
                     <div ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
-                        <p class="text-info">
-                            Available Inventory:
+                        <hr />
+                        <p>
+                            <span class="text-info">Available Inventory:</span> {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
                         </p>
-                        {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
                     </div>
                     <div ng-show="LineItem.Product.Type == 'VariableText'">
                         <button type="button" class="btn btn-xs btn-danger" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/new/edit" tabindex="-1">Create New</button>
