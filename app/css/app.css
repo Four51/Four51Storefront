@@ -991,7 +991,10 @@ li.cart span.badge {
     display: block;
 }
 
-.product-view-default .row {padding: 0 15px;}
+.product-view-default .row {
+    padding: 0 15px;
+}
+
 .price-schedule-view .row [class*="col-"] {
     border: 1px solid rgba(86, 61, 124, 0.2);
 }
