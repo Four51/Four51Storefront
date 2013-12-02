@@ -1,22 +1,21 @@
-<section class="container">
-    <div ng-show="ps && p">
+<div class="price-schedule-view" ng-show="ps && p">
     <span class="text-info">Price</span>
-        <!--- TODO table needs to redone as Bootstrap responsive layout, see cartView.html for example --->
-    <table border=1 id="451_list_pric_schd"><!--ken, when you change this away from bieng a table structure please make sure this ID is in something that surrounds the repeater-->
-        <tr><td>Quantity <span ng-show="p.QuantityMultiplier > 1 && !ps.RestrictedQuantity"> (x {{p.QuantityMultiplier}})</span></td>
-            <td>Price <span ng-show="p.QuantityMultiplier > 1 && !ps.RestrictedQuantity" > (per {{p.QuantityMultiplier}})</span></td>
-        </tr>
-        <tr ng-repeat="pb in ps.PriceBreaks">
-            <td>{{pb.Quantity * (ps.RestrictedQuantity ? p.QuantityMultiplier : 1)}}
+    <!--- example of 2 column responsive tabular structure --->
+    <div id="451_list_pric_schd">
+        <div class="row">
+            <div class="col-xs-6">Quantity <span ng-show="p.QuantityMultiplier > 1 && !ps.RestrictedQuantity"> (x {{p.QuantityMultiplier}})</span></div>
+            <div class="col-xs-6">Price <span ng-show="p.QuantityMultiplier > 1 && !ps.RestrictedQuantity" > (per {{p.QuantityMultiplier}})</span></div>
+        </div>
+        <div class="row" ng-repeat="pb in ps.PriceBreaks">
+            <div class="col-xs-6">{{pb.Quantity * (ps.RestrictedQuantity ? p.QuantityMultiplier : 1)}}
                     <span ng-show="!ps.RestrictedQuantity">
                         <span ng-show="ps.PriceBreaks[$index + 1].Quantity"> - {{ ps.PriceBreaks[$index + 1].Quantity - 1  }}</span>
                         <span ng-show="$last && ps.MaxQuantity"> - {{ps.MaxQuantity}}</span>
                         <span ng-show="$last && !ps.MaxQuantity"> +</span>
                     </span>
-            </td>
-            <td>{{pb.Price * (ps.RestrictedQuantity ? pb.Quantity : 1)| currency}}</td>
-        </tr>
-    </table>
+            </div>
+            <div class="col-xs-6">{{pb.Price * (ps.RestrictedQuantity ? pb.Quantity : 1)| currency}}</div>
+        </div>
     </div>
-</section>
+</div>
 
