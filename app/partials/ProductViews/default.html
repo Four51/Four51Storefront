@@ -130,17 +130,14 @@
                             Please select from the following:
                         </h4>
                         <div class="451_list_vars view-tr">
+                            <h5 class="text-info">Variant ID</h5>
                             <div class="row" ng-repeat="v in LineItem.Product.Variants">
-                                <hr />
-                                <div class="row">
-                                    <div class="col-xs-12" ng-class="{'col-sm-12': !LineItem.Product.DisplayInventory && !LineItem.Product.IsVariantLevelInventory, 'col-sm-6': LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory }">
-                                        <h5 class="text-info">Variant ID</h5>
-                                        <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}} style="text-decoration: underline;">{{v.ExternalID}}</a>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6" ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
-                                        <div ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
-                                            <h5 class="text-info">Available Quantity:</h5> {{v.QuantityAvailable}}
-                                        </div>
+                                <div class="col-xs-12">
+                                    <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}} style="text-decoration: underline;">{{v.ExternalID}}</a>
+                                </div>
+                                <div class="col-xs-12" ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
+                                    <div ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
+                                        <h5 class="text-info">Available Quantity:</h5> {{v.QuantityAvailable}}
                                     </div>
                                 </div>
                                 <div class="col-xs-12" ng-show="v.Description">
