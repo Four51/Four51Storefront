@@ -929,6 +929,7 @@ li.cart span.badge {
 .product-view-default img {
     margin: 15px auto;
     max-height: 300px;
+    max-width: 100%;
 }
 
 .product-view-default-toggle-panel .panel-title.panel-selected {
@@ -995,7 +996,7 @@ li.cart span.badge {
     padding: 0 15px;
 }
 
-.price-schedule-view .row [class*="col-"] {
+.view-tr  .row [class*="col-"] {
     border: 1px solid rgba(86, 61, 124, 0.2);
 }
 
