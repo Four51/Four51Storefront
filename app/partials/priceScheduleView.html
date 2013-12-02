@@ -1,7 +1,7 @@
 <div class="price-schedule-view" ng-show="ps && p">
     <span class="text-info">Price</span>
     <!--- example of 2 column responsive tabular structure --->
-    <div id="451_list_pric_schd">
+    <div id="451_list_pric_schd" class="view-tr">
         <div class="row">
             <div class="col-xs-6">Quantity <span ng-show="p.QuantityMultiplier > 1 && !ps.RestrictedQuantity"> (x {{p.QuantityMultiplier}})</span></div>
             <div class="col-xs-6">Price <span ng-show="p.QuantityMultiplier > 1 && !ps.RestrictedQuantity" > (per {{p.QuantityMultiplier}})</span></div>

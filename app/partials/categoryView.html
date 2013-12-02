@@ -31,6 +31,7 @@
         </nav>
     </aside>
     <div class="cat-body" ng-class="{ 'move-cat-body col-sm-9 col-collapse': showMega }">
+
         <div class="category-product product-navigation" ng-show=!currentCategory>
             <div class="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image"></div>
             <nav class="nav 451_lbl_subcatlist">
@@ -50,6 +51,7 @@
                 </ul>
             </nav>
         </div>
+
         <div class="category-product product-navigation" ng-show="currentCategory">
             <div class="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image"></div>
             <h3 ng-show="currentCategory.SubCategories">Categories</h3>
@@ -70,6 +72,7 @@
                 </ul>
             </nav>
         </div>
+
         <div id="451_lst_prod" class="product-navigation" ng-if="currentCategory">
             <h3 ng-show="products">Products</h3>
             <nav class="nav">
