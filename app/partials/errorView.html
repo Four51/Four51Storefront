@@ -7,8 +7,8 @@
                     <h6 ng-show="error.Code">{{'(' + error.Code + ')'}}</h6>
                 </div>
                 <div ng-show="error.StackTrace">
-                    <label><small class="text-warning" ng-click="isCollapsed = !isCollapsed">Stack Trace</small></label>
-                    <p class="help-block" collapse="!isCollapsed"><small class="text-error">{{error.StackTrace}}</small></p>
+                    <label><small class="text-warning">Stack Trace</small></label>
+                    <p class="help-block"><small class="text-error">{{error.StackTrace}}</small></p>
                 </div>
             </div>
     </div>
