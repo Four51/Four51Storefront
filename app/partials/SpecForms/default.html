@@ -1,17 +1,28 @@
-<productnav product="Product" variant="Variant" />
-<img ng-src="{{Variant.PreviewUrl}}" />
+<section class="container specform-default">
+    <productnav product="Product" variant="Variant" />
+    <img ng-src="{{Variant.PreviewUrl}}" />
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Create New</h3>
+        </div>
+        <div class="panel-body">
+            <div id="451_list_vspec" ng-show="true" class="view-tr">
+                <div ng-repeat="s in Variant.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: false}, {Property: 'DefinesVariant', Value: false}]">
+                    <label>{{s.Name}}</label>
+                        {{s.Prefix}}
+                        <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
+                        <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
+                        <customselectionfield customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
+                        {{s.Suffix}}
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-primary" type="submit" ng-click="save()">Save</button>
+        </div>
+    </div>
+</section>
 
-<table id="451_list_vspec" border=1 ng-show="true">
-	<tr ng-repeat="s in Variant.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: false}, {Property: 'DefinesVariant', Value: false}]">
-        <td><label>{{s.Name}}</label></td>
-		<td>
-			{{s.Prefix}}
-            <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
-            <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
-            <customselectionfield customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
-			{{s.Suffix}}
-		</td>
-	</tr>
-</table>
-<hr>
-<button class="btn btn-primary" type="submit" ng-click="save()">Save</button>
+
+
+

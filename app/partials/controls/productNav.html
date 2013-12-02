@@ -1,6 +1,11 @@
-<span ng-show="product.Variants || product.Type == 'VariableText'">
-	<a href="#/product/{{product.ViewName}}/{{product.InteropID}}">{{product.Name}}</a>
-	> <a href="#/product/{{product.ViewName}}/{{product.InteropID}}/{{variant.InteropID}}">{{variant.ExternalID}}</a>
-</span>
+<nav class="nav nav-cat-search"  ng-show="product.Variants || product.Type == 'VariableText'">
+    <hr />
+    <ul>
+        <li class="nav-header text-nav"><a href="#/product/{{product.ViewName}}/{{product.InteropID}}" style="text-decoration: underline;">{{product.Name}}</a></li>
+        <li class="nav-header text-nav"><a href="#/product/{{product.ViewName}}/{{product.InteropID}}/{{variant.InteropID}}"> - {{variant.ExternalID}}</a></li>
+    </ul>
+    <hr />
+</nav>
+
 
 
