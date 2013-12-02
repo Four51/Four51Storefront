@@ -13,7 +13,7 @@
             <form name="addToOrderForm" ng-show="allowAddToOrder">
                 <div class="panel-body text-left">
                     <h5>
-                        <span class="text-info">{{user.Company.SiteText.ProductIDGridHeader || 'ID'}}</span>
+                        <span class="text-info">{{user.Company.SiteText.ProductIDGridHeader || 'ID: '}}</span>
                         {{LineItem.Product.ExternalID}}
                     </h5>
                     <!--- priceschedule and vspec table is in INFO because these fields can become very long. Would like to see if only a single price to display priceschedule here--->
@@ -97,7 +97,7 @@
                     </div>
                     <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product'/>
                     <span ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant">
-                        <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit>edit variant</a>
+                        <button class="btn btn-xs btn-warning" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit">Edit</button>
                     </span>
                     <div id="451_list_vspec" ng-show="true">
                         <div class="row" ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
@@ -120,7 +120,7 @@
                         </p>
                     </div>
                     <div ng-show="LineItem.Product.Type == 'VariableText'">
-                        <button type="button" class="btn btn-xs btn-danger" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/new/edit" tabindex="-1">Create New</button>
+                        <button type="button" class="btn btn-xs btn-danger" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/new/edit" tabindex="-1">{{user.Company.SiteText.CreateNew || 'Create New'}}</button>
                     </div>
                     <div ng-show="LineItem.Product.Variants.length > 0 && !LineItem.Variant">
                         <h4>

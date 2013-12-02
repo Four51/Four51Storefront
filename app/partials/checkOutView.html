@@ -8,14 +8,14 @@
         </div>
         <div class="panel-body text-left">
             <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
-                <p>Items: {{currentOrder.LineItems.length}}</p>
-                <p>Subtotal: {{currentOrder.Subtotal | currency}}</p>
-                <p>Shipping Costs: {{currentOrder.ShippingCost | currency}}</p>
-                <p>Tax: {{currentOrder.Tax || 0 | currency}}</p>
-                <p ng-show="currentOrder.Coupon">{{currentOrder.Coupon.Label}}: {{currentOrder.Coupon.OrderDiscount * -1 | currency}}</p>
+                <p><span class="text-info">Items:</span> {{currentOrder.LineItems.length}}</p>
+                <p><span class="text-info">Subtotal:</span> {{currentOrder.Subtotal | currency}}</p>
+                <p><span class="text-info">Shipping Costs:</span> {{currentOrder.ShippingCost | currency}}</p>
+                <p><span class="text-info">Tax:</span> {{currentOrder.Tax || 0 | currency}}</p>
+                <p ng-show="currentOrder.Coupon"><span class="text-info">{{currentOrder.Coupon.Label}}:</span> {{currentOrder.Coupon.OrderDiscount * -1 | currency}}</p>
                 <hr/>
-                <p>Total: {{currentOrder.Total | currency}}</p>
-                <p ng-if="user.Company.TaxMethod != 'NoTax'"><label>{{ user.Company.SiteText.ShippingDisclaimer }}</label></p>
+                <p><span class="text-info">Total:</span> {{currentOrder.Total | currency}}</p>
+                <p ng-if="user.Company.TaxMethod != 'NoTax'"><span class="text-info">{{ user.Company.SiteText.ShippingDisclaimer }}</span></p>
             </div>
         </div>
         <div class="panel-footer">
@@ -89,7 +89,7 @@
                 <div ng-show="!shipToMultipleAddresses">
                     <div>
                         <h5>
-                            <label>Shipping Address</label>
+                            <label>{{user.Company.SiteText.SelectShippingAddress || 'Select a shipping address'}}</label>
                         </h5>
                         <select name="shippingAddress"
                                 ng-change="setShipAddressAtOrderLevel()"
@@ -146,7 +146,7 @@
                     <p class="alert-error" ng-show="cart_billing.paymentMethod.$invalid">Please select a payment method</p>
                 </div>
                 <h5>
-                    <label>Billing Address</label>
+                    <label>{{user.Company.SiteText.SelectBillingAddress || 'Select a billing address'}}</label>
                 </h5>
                 <select name="billingAddress" ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required />
                 <button type="button" class="btn btn-xs btn-danger" redirect="/address"  tabindex="-1">Add New Address</button>

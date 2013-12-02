@@ -19,10 +19,10 @@
                 <div class="panel-body text-left">
                     <div ng-if="!user.Permissions.contains('HidePricing')">
                         <p>
-                            SubTotal: {{currentOrder.Subtotal | currency}}
+                            <span class="text-info">SubTotal:</span> {{currentOrder.Subtotal | currency}}
                         </p>
                         <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
-                            {{ user.Company.SiteText.ShippingDisclaimer }}
+                            <span class="text-info">{{ user.Company.SiteText.ShippingDisclaimer }}</span>
                         </p>
                     </div>
                 </div>
