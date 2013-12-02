@@ -22,22 +22,12 @@
                          </span>
                         {{LineItem.Product.ExternalID}}
                     </h5>
-                    <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product'/>
-                    <table id="451_list_vspec" border=1 ng-show="true">
-                        <tr ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
-                            <td>
-                                <label>{{s.Name}}</label>
-                            </td>
-                            <td>{{s.Prefix}}
-                                <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
-                                <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
-                                <customselectionfield change="specChanged" customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
-                                {{s.Suffix}}
-                            </td>
-                        </tr>
-                    </table>
+                    <!--- priceschedule and vspec table is in INFO because these fields can become very long. Would like to see if only a single price to display priceschedule here--->
                     <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
-                        QTY Available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
+                        <span class="text-info">
+                            QTY Available:
+                        </span>
+                        {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
                     </p>
                 </div>
                 <div class="panel-footer">
@@ -70,6 +60,7 @@
                     </p>
                 </div>
             </form>
+
         </div>
     </div>
     <div class="col-collapse col-md-8 col-md-pull-4">
@@ -111,6 +102,22 @@
                         </p>
                         {{LineItem.Variant.ExternalID}}
                     </div>
+                    <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product'/>
+                    <hr />
+                    <table id="451_list_vspec" border=1 ng-show="true">
+                        <tr ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
+                            <td>
+                                <label>{{s.Name}}</label>
+                            </td>
+                            <td>{{s.Prefix}}
+                                <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
+                                <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
+                                <customselectionfield change="specChanged" customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
+                                {{s.Suffix}}
+                            </td>
+                        </tr>
+                    </table>
+
                     <div ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
                         <p class="text-info">
                             Available Inventory:

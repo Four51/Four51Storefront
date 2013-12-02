@@ -42,7 +42,7 @@
                 </div>
                 <div class="panel-body">
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
-                        <div class="col-md-6 col-sm-6 col-xs-12 cart-view-line-items-product">
+                        <div class="col-sm-6 col-xs-12 cart-view-line-items-product">
                             <p>
                                 <a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">{{item.ProductIDText}}</a>
                                 <!---TODO needs url --->
