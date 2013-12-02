@@ -44,7 +44,7 @@
                                 <span class="fa empty"><i class="fa fa-camera"></i></span>
                             </div>
                             <h5 ng-bind-html="c.Name"></h5>
-                            <figcaption ng-bind-unsafe="{{c.Description}}" ng-if="productList" class="category-description"></figcaption>
+                            <figcaption ng-if="productList" class="category-description" ng-bind-html="c.Description"></figcaption>
                         </a>
                     </li>
                 </ul>
@@ -64,7 +64,7 @@
                                 <span class="fa empty"><i class="fa fa-camera"></i></span>
                             </div>
                             <h5>{{c.Name}}</h5>
-                            <figcaption ng-bind-unsafe="{{c.Description}}" ng-if="productList" class="category-description"></figcaption>
+                            <figcaption ng-if="productList" class="category-description" ng-bind-html="c.Description"></figcaption>
                         </a>
                     </li>
                 </ul>
