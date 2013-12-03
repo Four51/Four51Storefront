@@ -1017,19 +1017,25 @@ li.cart span.badge {
     float: left;
 }
 
+.container .form-control {
+    margin-top: 0;
+}
+
+.check-out-view-input-group-id input[type="checkbox"] {margin: 0;padding: 0;}
 
 .no-whammy {
     text-align: center;
     z-index: 999999999;
     color:#fff;
     background-color:#A3D1EF;
-    opacity: .25;
-    padding: 0 25px;
+    opacity: .35;
+    padding: 0 5px;
 }
 
 .no-whammy h4 {
     font-size: 12px;
     color:#000;
+    text-transform: uppercase;
 }
 
 /* ----------------------------------------------------------------------------------------------- */
