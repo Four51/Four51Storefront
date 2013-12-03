@@ -5,7 +5,7 @@
             <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'PurchaseOrder' }"></i>
             Purchase Order
         </button>
-        <button class="btn btn-default" ng-show="user.Permissions.contains('SubmitForApproval')" ng-click="currentOrder.PaymentMethod = 'Undetermined'">
+        <button class="btn btn-default" ng-show="user.Permissions.contains('SubmitForApproval') && currentOrder.Approvals" ng-click="currentOrder.PaymentMethod = 'Undetermined'">
             <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'Undetermined' }"></i>
             Approval Order
         </button>
