@@ -4,9 +4,9 @@
 	<figure>
         <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url || LineItem.Variant.PreviewUrl">
     </figure>
-    <div class="col-collapse col-md-3 col-md-offset-1 col-md-push-8" style="position: relative;">
+    <div class="col-collapse col-md-4 col-md-offset-1 col-md-push-7" style="position: relative;">
         <loadingindicator ng-show="addToOrderIndicator" title="Please wait while we add this product to your order" />
-        <div class="panel panel-default" ng-show="allowAddToOrder">
+        <div class="panel panel-primary" ng-show="allowAddToOrder">
             <div class="panel-heading">
                 <h3 class="panel-title panel-primary">
                     {{LineItem.Product.Name}}
@@ -31,7 +31,6 @@
                     <!--- bringing vspec back into this panel to coincide with order quantity --->
                     <div id="451_list_vspec" ng-show="allowAddToOrder">
                         <div class="row" ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
-                            <hr />
                             <div class="col-xs-12">
                                 <label>{{s.Name}}</label>
                             </div>
