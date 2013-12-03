@@ -31,7 +31,6 @@
         </nav>
     </aside>
     <div class="cat-body" ng-class="{ 'move-cat-body col-sm-9 col-collapse': showMega }">
-
         <div class="category-product product-navigation" ng-show=!currentCategory>
             <div class="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image"></div>
             <nav class="nav 451_lbl_subcatlist">
@@ -52,7 +51,8 @@
             </nav>
         </div>
 
-        <div class="category-product product-navigation" ng-show="currentCategory">
+        <div class="category-product product-navigation" ng-show="currentCategory" style="position: relative;">
+            <loadingindicator ng-show="categoryLoadingIndicator" title="Please wait while we fetch all categories" />
             <div class="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image"></div>
             <h3 ng-show="currentCategory.SubCategories">Categories</h3>
             <nav class="nav 451_lbl_subcatlist">
@@ -73,7 +73,8 @@
             </nav>
         </div>
 
-        <div id="451_lst_prod" class="product-navigation" ng-if="currentCategory">
+        <div id="451_lst_prod" class="product-navigation" ng-if="currentCategory" style="position: relative;">
+            <loadingindicator ng-show="productLoadingIndicator" title="Please wait while we fetch all products" />
             <h3 ng-show="products">Products</h3>
             <nav class="nav">
                 <ul>
