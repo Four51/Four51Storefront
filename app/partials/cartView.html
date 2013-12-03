@@ -44,11 +44,11 @@
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
                         <div class="col-sm-6 col-xs-12 cart-view-line-items-product">
                             <p>
-                                <span class="text-info">{{user.Company.SiteText.ProductIDGridHeader || 'ID'}}: </span><a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">{{item.ProductIDText}}</a>
+                                <span class="text-info">{{user.Company.SiteText.ProductIDGridHeader || 'ID: '}} </span><a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">{{item.ProductIDText}}</a>
                             </p>
-                            <p><span class="text-info">{{user.Company.SiteText.ProductNameGridHeader || 'Product'}}: </span>{{item.Product.Name}}</p>
+                            <p><span class="text-info">{{user.Company.SiteText.ProductNameGridHeader || 'Product: '}} </span>{{item.Product.Name}}</p>
                             <p><span class="text-info">Unit Price: </span>{{item.UnitPrice | currency}}</p>
-                            <span class="text-info" ng-show="item.Specs.length > 0">Specifications: </span>
+                            <span class="text-info" ng-show="item.Specs != {}">Specifications: </span>
                             <ul>
                                 <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
                                     {{spec.Name}} :

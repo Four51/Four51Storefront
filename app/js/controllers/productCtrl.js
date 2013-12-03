@@ -39,7 +39,7 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
     $scope.selected = 1;
     $scope.LineItem = {};
 	$scope.addToOrderText = "Add To Cart";
-
+	$scope.loadingIndicator = true;
 
 	$scope.getSpec = function() {
 		if (!localStorage["angular-cache.caches.451Cache.data.productARIHome"]) return "null";
@@ -52,10 +52,11 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 		ProductDisplayService.setNewLineItemScope($scope);
 		ProductDisplayService.setProductViewScope($scope);
 		$scope.$broadcast('ProductGetComplete');
+		$scope.loadingIndicator = false;
 	});
 
 	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
-
+		$scope.addToOrderIndicator = true;
 		if(!$scope.currentOrder){
 			$scope.currentOrder = {};
 			$scope.currentOrder.LineItems = [];
@@ -66,7 +67,8 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 		Order.save($scope.currentOrder, function(o){
 			$scope.user.CurrentOrderID = o.ID;
 			User.save($scope.user, function(){
-			$location.path('/cart');
+				$scope.addToOrderIndicator = true;
+				$location.path('/cart');
 			});
 		});
 	}

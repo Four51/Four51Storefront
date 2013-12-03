@@ -1,9 +1,11 @@
 <section id="451_area_prod_desc" class="container product-view-default">
+    <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch product information" />
     <productnav product="LineItem.Product" variant="LineItem.Variant" />
 	<figure>
         <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url || LineItem.Variant.PreviewUrl">
     </figure>
-    <div class="col-collapse col-md-3 col-md-offset-1 col-md-push-8">
+    <div class="col-collapse col-md-3 col-md-offset-1 col-md-push-8" style="position: relative;">
+        <loadingindicator ng-show="addToOrderIndicator" title="Please wait while we add this product to your order" />
         <div class="panel panel-default" ng-show="allowAddToOrder">
             <div class="panel-heading">
                 <h3 class="panel-title panel-primary">
