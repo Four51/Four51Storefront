@@ -6,7 +6,7 @@
     <div class="col-collapse col-md-3 col-md-offset-1 col-md-push-8">
         <div class="panel panel-default" ng-show="allowAddToOrder">
             <div class="panel-heading">
-                <h3 class="panel-title">
+                <h3 class="panel-title panel-primary">
                     {{LineItem.Product.Name}}
                 </h3>
             </div>
@@ -53,12 +53,11 @@
                     </p>
                 </div>
             </form>
-
         </div>
     </div>
-    <div class="col-collapse col-md-8 col-md-pull-4">
+    <div class="col-collapse col-md-7 col-md-pull-5">
         <!--- TODO below entire PANEL needs to only display if YES info --->
-        <div class="panel product-view-default-toggle-panel panel-primary ">
+        <div class="panel product-view-default-toggle-panel panel-default ">
             <div class="panel-heading">
                 <h3 ng-click="selected=1" ng-class="{'panel-selected':selected == 1}" class="panel-title panel-switch">
                     <span class="icon">
