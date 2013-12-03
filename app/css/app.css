@@ -808,6 +808,9 @@ nav.user-view-sm-xs-nav ul li {
     border-radius:100%;
 
 }
+.container-content {
+    margin-top: 25px;
+}
 
 /* ----------------------------------------------------------------------------------------------- */
 /* Cart | Checkout */
@@ -998,6 +1001,24 @@ li.cart span.badge {
 
 .view-tr  .row [class*="col-"] {
     border: 1px solid rgba(86, 61, 124, 0.2);
+}
+
+.check-out-view-multiple-shipping .row [class*="col-"] {
+    border-right: none;
+    border-left: none;
+    min-height: 60px;
+}
+
+.row label {
+    font-size: 11px;
+}
+
+.cart-view-summary p {
+    text-align: right;
+}
+
+.cart-view-summary p span {
+    float: left;
 }
 
 /* ----------------------------------------------------------------------------------------------- */

@@ -75,6 +75,13 @@
     .branding-view-logo {float: none; margin: 0 auto; max-height: 75px; }
     .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
+    .check-out-view-multiple-shipping .row [class*="col-"] {
+        border: none;
+        min-height: inherit;
+    }
+    .check-out-view-multiple-shipping .row [class*="col-"] {
+        border-bottom: 1px solid #d6d6d6;
+    }
 
 }
 
@@ -147,5 +154,12 @@
     .shortproduct-view:hover .shortproduct-name {display: block;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
     .caption {margin: 5px;}
+    .check-out-view-multiple-shipping .row [class*="col-"] {
+        border: none;
+        min-height: inherit;
+    }
+    .check-out-view-multiple-shipping .row {
+        border-bottom: 1px solid #d6d6d6;
+    }
 
 }
