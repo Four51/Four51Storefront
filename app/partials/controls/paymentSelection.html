@@ -9,7 +9,7 @@
             <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'Undetermined' }"></i>
             Approval Order
         </button>
-        <button ng-if="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 0" class="btn btn-default" ng-click="currentOrder.PaymentMethod = 'BudgetAccount'">
+        <button ng-if="user.Permissions.contains('PayByBudgetAccount') && (SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 0" class="btn btn-default" ng-click="currentOrder.PaymentMethod = 'BudgetAccount'">
             <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'BudgetAccount' }"></i>
             Spending Account {{showSpendingAccount}}
         </button>
