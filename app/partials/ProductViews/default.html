@@ -3,8 +3,8 @@
 	<figure>
         <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url || LineItem.Variant.PreviewUrl">
     </figure>
-    <div class="col-collapse col-md-3 col-md-offset-1 col-md-push-8">
-        <div class="panel panel-default" ng-show="allowAddToOrder">
+    <div class="col-collapse col-md-4 col-md-offset-1 col-md-push-7">
+        <div class="panel panel-primary" ng-show="allowAddToOrder">
             <div class="panel-heading">
                 <h3 class="panel-title panel-primary">
                     {{LineItem.Product.Name}}
@@ -26,6 +26,22 @@
                     </p>
                 </div>
                 <div class="panel-footer">
+                    <!--- bringing vspec back into this panel to coincide with order quantity --->
+                    <div id="451_list_vspec" ng-show="allowAddToOrder">
+                        <div class="row" ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
+                            <hr />
+                            <div class="col-xs-12">
+                                <label>{{s.Name}}</label>
+                            </div>
+                            <div class="col-xs-12">{{s.Prefix}}
+                                <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
+                                <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
+                                <customselectionfield change="specChanged" customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
+                                {{s.Suffix}}
+                            </div>
+                        </div>
+                    </div>
+
                     <div style="float: left;">
                        <span class="text-info">Order Quantity: </span>
                         <quantityfield lineitem="LineItem" error="quantityError" class="quantity" />
@@ -99,20 +115,7 @@
                         <button class="btn btn-xs btn-warning" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit">Edit</button>
                         <button class="btn btn-xs btn-warning" redirect="{{LineItem.Variant.ProofUrl}}">View PDF</button>
                     </span>
-                    <div id="451_list_vspec" ng-show="allowAddToOrder">
-                        <div class="row" ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
-                            <hr />
-                            <div class="col-xs-12">
-                                <label>{{s.Name}}</label>
-                            </div>
-                            <div class="col-xs-12">{{s.Prefix}}
-                                <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
-                                <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
-                                <customselectionfield change="specChanged" customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
-                                {{s.Suffix}}
-                            </div>
-                        </div>
-                    </div>
+
                     <div ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
                         <hr />
                         <p>
