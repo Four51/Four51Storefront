@@ -926,7 +926,7 @@ li.cart span.badge {
     margin-right: 25px;
 }
 
-.product-view-default img {
+.product-view-default img, .specform-default img {
     margin: 15px auto;
     max-height: 300px;
     max-width: 100%;
