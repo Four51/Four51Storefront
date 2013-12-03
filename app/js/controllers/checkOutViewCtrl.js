@@ -38,7 +38,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		}
 		else {
 			angular.forEach($scope.shippers, function(s) {
-				if (s.ID == li.ShipperName)
+				if (s.Name == li.ShipperName)
 					li.Shipper = s;
 			});
 			li.ShipperName = li.Shipper.Name;
