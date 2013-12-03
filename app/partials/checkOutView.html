@@ -166,7 +166,7 @@
                 </h5>
                 <select name="billingAddress" ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required />
                 <button type="button" class="btn btn-xs btn-danger" redirect="/address"  tabindex="-1">Add New Address</button>
-                <paymentselector />
+                <paymentselector></paymentselector>
                 <div ng-show="user.Permissions.contains('ViewPromotions')">
                     <div ng-show="!currentOrder.Coupon">
                         <label>{{user.Company.SiteText.PromotionCode || 'Promotion Code'}}: </label>
