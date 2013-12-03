@@ -4,13 +4,13 @@
         <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url || LineItem.Variant.PreviewUrl">
     </figure>
     <div class="col-collapse col-md-3 col-md-offset-1 col-md-push-8">
-        <div class="panel panel-default">
+        <div class="panel panel-default" ng-show="allowAddToOrder">
             <div class="panel-heading">
                 <h3 class="panel-title">
                     {{LineItem.Product.Name}}
                 </h3>
             </div>
-            <form name="addToOrderForm" ng-show="allowAddToOrder">
+            <form name="addToOrderForm">
                 <div class="panel-body text-left">
                     <h5>
                         <span class="text-info">{{user.Company.SiteText.ProductIDGridHeader || 'ID: '}}</span>
@@ -100,7 +100,7 @@
                         <button class="btn btn-xs btn-warning" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit">Edit</button>
                         <button class="btn btn-xs btn-warning" redirect="{{LineItem.Variant.ProofUrl}}">View PDF</button>
                     </span>
-                    <div id="451_list_vspec" ng-show="true">
+                    <div id="451_list_vspec" ng-show="allowAddToOrder">
                         <div class="row" ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
                             <hr />
                             <div class="col-xs-12">
