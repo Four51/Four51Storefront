@@ -84,8 +84,18 @@
                     <p class="alert-error" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</p>
                     <p class="alert-error" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</p>
                 </div>
-                <button type="button" ng-click="shipToMultipleAddresses = !shipToMultipleAddresses" class="btn btn-xs btn-warning"
+
+                <span class=""btn-group">
+
+                <button ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1 && user.ShipMethod != null"
+                    ng-click="shipToMultipleAddresses = false">Ship to single address</button>
+
+                <button type="button" ng-click="shipToMultipleAddresses = true" class="btn btn-xs btn-warning"
                         ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1 && user.ShipMethod != null">Ship to multiple addresses</button>
+                <button type="button" class="btn btn-xs btn-danger" redirect="/address" tabindex="-1">Add New Address</button>
+                </span>
+
+
                 <div ng-show="!shipToMultipleAddresses">
                     <div>
                         <h5>
@@ -96,9 +106,9 @@
                                 ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
                                 ng-model="currentOrder.ShipAddressID"
                                 ng-required="!shipToMultipleAddresses" />
-                        <button type="button" class="btn btn-xs btn-danger" redirect="/address" tabindex="-1">Add New Address</button>
+
                     </div>
-                    <div ng-show="user.ShipMethod != null" style="position: relative">
+                    <div ng-show="user.ShipMethod != null && shippers.length > 0" style="position: relative">
                         <loadingindicator ng-show="shippingLoadingIndicator" title="Please wait while we fetch new shipping options" />
                         <h5>
                             <label>Shipping Method</label>
@@ -141,10 +151,6 @@
         <form name="cart_billing">
             <loadingindicator ng-show="couponLoadingIndicator" />
             <div ng-show="checkOutSection == 'billing'" ng-show="currentOrder" class="panel-body check-out-view-billing">
-                <div class="error_list">
-                    <p class="alert-error" ng-show="cart_billing.billingAddress.$invalid">Please select a billing address</p>
-                    <p class="alert-error" ng-show="cart_billing.paymentMethod.$invalid">Please select a payment method</p>
-                </div>
                 <h5>
                     <label>{{user.Company.SiteText.SelectBillingAddress || 'Select a billing address'}}</label>
                 </h5>
