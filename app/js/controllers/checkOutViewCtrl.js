@@ -79,6 +79,10 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
         $scope.cart_billing.$setValidity('paymentMethod', validatePaymentMethod(event));
     });
 
+	$scope.$watch('currentOrder.BudgetAccountID', function() {
+		$scope.cart_billing.$setValidity('paymentMethod', validatePaymentMethod('BudgetAccount'));
+	});
+
     function validatePaymentMethod(method) {
         var valid = false;
         switch (method) {

@@ -24,7 +24,7 @@
                 ng-options="account.ID as (account.Label + ' - Balance: ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{AccountType.PurchaseCredit:true}"
                 ng-model="currentOrder.BudgetAccountID"
                 ng-required="currentOrder.PaymentMethod == 'BudgetAccount'"></select>
-        <span class="alert-error" ng-show="cart.$error.paymentMethod">The order total is not covered by the selected account.</span>
+        <span class="alert-error" ng-show="cart_billing.$error.paymentMethod">The order total is not covered by the selected account.</span>
     </div>
     <hr />
     <div ng-if="user.Permissions.contains('PayByCreditCard')" ng-show="currentOrder.PaymentMethod == 'CreditCard'">
