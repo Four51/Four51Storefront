@@ -1,5 +1,5 @@
 <section class="container check-out-view">
-    <loadingindicator ng-show="displayLoadingIndicator" />
+    <loadingindicator ng-show="displayLoadingIndicator" title="Please wait while we update your order" />
     <div class="panel panel-default cart-view-summary col-md-3 col-md-offset-1 col-md-push-8">
         <div class="panel-heading">
             <h3 class="panel-title panel-primary">
@@ -110,6 +110,9 @@
                     </div>
                     <div ng-show="user.ShipMethod != null && shippers.length > 0" style="position: relative">
                         <loadingindicator ng-show="shippingLoadingIndicator" title="Please wait while we fetch new shipping options" />
+                    <div ng-show="user.ShipMethod != null" style="position: relative">
+                        <loadingindicator ng-show="shippingUpdatingIndicator" title="Please wait while shipping costs are updated" />
+                        <loadingindicator ng-show="shippingFetchIndicator" title="Please wait while available shippers are updated" />
                         <h5>
                             <label>Shipping Method</label>
                         </h5>
