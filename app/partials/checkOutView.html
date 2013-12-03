@@ -108,8 +108,6 @@
                                 ng-required="!shipToMultipleAddresses" />
 
                     </div>
-                    <div ng-show="user.ShipMethod != null && shippers.length > 0" style="position: relative">
-                        <loadingindicator ng-show="shippingLoadingIndicator" title="Please wait while we fetch new shipping options" />
                     <div ng-show="user.ShipMethod != null" style="position: relative">
                         <loadingindicator ng-show="shippingUpdatingIndicator" title="Please wait while shipping costs are updated" />
                         <loadingindicator ng-show="shippingFetchIndicator" title="Please wait while available shippers are updated" />
@@ -120,9 +118,11 @@
                                 ng-model="currentOrder.LineItems[0].ShipperName"
                                 ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
                                 ng-options="shipper.Name as shipper.Name for shipper in shippers"
-                                ng-required="!shipToMultipleAddresses && user.ShipMethod != null" />
+                                ng-required="!shipToMultipleAddresses && user.ShipMethod != null" ></select>
                     </div>
                 </div>
+
+
                 <div ng-show="shipToMultipleAddresses">
 
                     <div class="view-tr check-out-view-multiple-shipping">
@@ -131,26 +131,27 @@
                             <div class="col-xs-12 col-sm-1">{{item.Quantity}}</div>
                             <div class="col-xs-12 col-sm-2">{{item.DateNeeded | date:'MM/dd/yyyy' }}</div>
                             <div class="col-xs-12 col-sm-3">
-                            <select name="shippingAddress"
-                                    ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
-                                    ng-model="item.ShipAddressID"
-                                    ng-required="shipToMultipleAddresses" />
+                                <select name="shippingAddress"
+                                        ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
+                                        ng-model="item.ShipAddressID"
+                                        ng-required="shipToMultipleAddresses" ></select>
                             </div>
                             <div class="col-xs-12 col-sm-4">
-                            <select ng-change="updateShipper(item)"
-                                    ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
-                                    ng-options="shipper.Name as shipper.Name for shipper in shippers | noliverates"
-                                    ng-model="item.ShipperName"
-                                    ng-required="shipToMultipleAddresses && user.ShipMethod != null" />
-                                </div>
+                                <select ng-change="updateShipper(item)"
+                                        ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
+                                        ng-options="shipper.Name as shipper.Name for shipper in shippers | noliverates"
+                                        ng-model="item.ShipperName"
+                                        ng-required="shipToMultipleAddresses && user.ShipMethod != null" ></select>
+                            </div>
                         </div>
                     </div>
 
                 </div>
+
+
                 <input ng-if="user.ShipMethod.AskForAccountNumber" placeholder="Shipping Account Number" type="text" ng-model="currentOrder.LineItems[0].ShipAccount" />
             </div>
         </form>
-
         <div class="panel-heading"  ng-class="{'no': cart_billing.$invalid, 'yes': !cart_billing.$invalid }">
             <h3 ng-click="checkOutSection = 'billing'" class="panel-title">
                 <i ng-class="{'fa fa-exclamation-circle': cart_billing.$invalid, 'fa fa-check-circle': !cart_billing.$invalid }"></i>
