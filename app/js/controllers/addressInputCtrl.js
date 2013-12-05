@@ -1,8 +1,15 @@
 four51.app.controller('AddressInputCtrl', function ($scope, $location, User, Address, Resources) {
     $scope.save = function() {
-        Address.save(this.address, function() {
-           $location.path($scope.return);
-        });
+	    $scope.objectExists = false;
+        Address.save(this.address,
+	        function() {
+                $location.path($scope.return);
+            },
+	        function(ex) {
+	            if (ex.Code.is('ObjectExistsException'))
+	                $scope.objectExists = true;
+            }
+        );
     };
     $scope.delete = function() {
         Address.delete(this.address, function() {

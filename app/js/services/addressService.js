@@ -1,4 +1,4 @@
-four51.app.factory('Address', function($resource, $451){
+four51.app.factory('Address', function($resource, $451, Error){
     function _then(fn, data) {
         if (angular.isFunction(fn))
             fn(data);
@@ -16,13 +16,18 @@ four51.app.factory('Address', function($resource, $451){
             });
     }
 
-    var _save = function(address, success) {
-        return $resource($451.api('address')).save(address).$promise.then(function(add) {
-	        store.remove('451Cache.Addresses');
-            store.set('451Cache.Address.' + add.ID, add);
-	        _extend(add);
-            _then(success, add);
-        });
+    var _save = function(address, success, error) {
+        return $resource($451.api('address')).save(address).$promise.then(
+		    function(add) {
+		        store.remove('451Cache.Addresses');
+	            store.set('451Cache.Address.' + add.ID, add);
+		        _extend(add);
+	            _then(success, add);
+	        },
+	        function(ex) {
+		        error(Error.format(ex));
+	        }
+        );
     }
 
     var _delete = function(address, success) {
