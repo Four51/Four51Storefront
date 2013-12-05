@@ -11,6 +11,13 @@ four51.app.factory('Product', function($resource, $451, Security){
 			if (spec.ControlType == 'File' && spec.File && spec.File.Url.indexOf('auth') == -1)
 				spec.File.Url += "&auth=" + Security.auth();
 		});
+
+		angular.forEach(product.StaticSpecGroups, function(group) {
+			angular.forEach(group.Specs, function(spec) {
+				if (spec.FileURL && spec.FileURL.indexOf('auth') == -1)
+					spec.FileURL += "&auth=" + Security.auth();
+			});
+		});
 	}
 
      var _get = function(param, success) {
