@@ -15,7 +15,7 @@
                 <p ng-show="currentOrder.Coupon"><span class="text-info">{{currentOrder.Coupon.Label}}:</span> {{currentOrder.Coupon.OrderDiscount * -1 | currency}}</p>
                 <hr/>
                 <p><span class="text-info">Total:</span> {{currentOrder.Total | currency}}</p>
-                <p ng-if="user.Company.TaxMethod != 'NoTax'"><span class="text-info">{{ user.Company.SiteText.ShippingDisclaimer }}</span></p>
+                <p ng-if="user.Company.TaxMethod != 'NoTax'"><span class="text-info">Shipping, handling and tax may be added to this subtotal.</span></p>
             </div>
         </div>
         <div class="panel-footer">
@@ -40,7 +40,7 @@
                     <span class="alert-error" ng-show="cart_order.orderid.$invalid">Please enter a valid Order ID</span><br />
                 </div>
                 <div ng-if="user.Permissions.contains('EditPOID')" ng-invalid>
-                    <label>{{user.Company.SiteText.OrderID || 'Order ID'}}:</label>
+                    <label>Order ID: </label>
                     <div class="input-group check-out-view-input-group-id">
                         <input class="form-control" name="orderid" ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" placeholder="Order ID" required ui-mask="{{user.Company.POIDMask}}" />
                         <span ng-if="user.Permissions.contains('AllowAutoGenPOID')" class="input-group-addon">
@@ -56,7 +56,7 @@
                     <select required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="currentOrder.CostCenter"></select>
                     <input ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="currentOrder.CostCenter" type='text' required placeholder="Cost Center" />
                     <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">
-                        {{user.Company.SiteText.CostCenter || 'Cost Center'}}: {{currentOrder.CostCenter}}
+                        Cost Center: {{currentOrder.CostCenter}}
                     </span>
                 </label>
                 <ul ng-if="user.OrderFields">
@@ -99,7 +99,7 @@
 
                     <div>
                         <h5>
-                            <label>{{user.Company.SiteText.SelectShippingAddress || 'Select a shipping address'}}</label>
+                            <label>Select a shipping address</label>
                         </h5>
                         <select name="shippingAddress"
                                 ng-change="setShipAddressAtOrderLevel()"
@@ -162,16 +162,16 @@
             <loadingindicator ng-show="couponLoadingIndicator" />
             <div ng-show="checkOutSection == 'billing'" ng-show="currentOrder" class="panel-body check-out-view-billing">
                 <h5>
-                    <label>{{user.Company.SiteText.SelectBillingAddress || 'Select a billing address'}}</label>
+                    <label>Select a billing address</label>
                 </h5>
                 <select name="billingAddress" ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required />
                 <button type="button" class="btn btn-xs btn-danger" redirect="/address"  tabindex="-1">Add New Address</button>
                 <paymentselector></paymentselector>
                 <div ng-show="user.Permissions.contains('ViewPromotions')">
                     <div ng-show="!currentOrder.Coupon">
-                        <label>{{user.Company.SiteText.PromotionCode || 'Promotion Code'}}: </label>
+                        <label>Promotion Code: </label>
                         <input type="text" ng-model="coupon" />
-                        <button type="button" class="btn btn-xs btn-danger" ng-click="applyCoupon()">{{user.Company.SiteText.Apply || 'Apply'}}</button><br />
+                        <button type="button" class="btn btn-xs btn-danger" ng-click="applyCoupon()">Apply</button><br />
                         <span ng-show="couponError" class="ui-state-error">{{couponError}}</span>
                     </div>
                     <h5 ng-show="currentOrder.Coupon">
@@ -201,7 +201,7 @@
             <div class="check-out-view-btn-group" ng-show="currentOrder">
                 <span class="btn-group">
                     <button class="btn btn-default cart-view-btn-save" ng-click="saveChanges()">
-                        {{user.Company.SiteText.SaveChanges || 'Save Changes'}}
+                        Save Changes
                     </button>
                     <button class="btn btn-default cart-view-btn-cancel" ng-click="cancelOrder()">
                         Cancel Order
