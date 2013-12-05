@@ -5,7 +5,7 @@ four51.app.directive('customtextfield', function($451) {
         },
         restrict: 'E',
         transclude: true,
-        template: '<label>{{customfield.Label}}</label><input ng-if="customfield.Lines == 1" placeholder="{{customfield.Label}}" size="{{customfield.Width * .13}}" max="{{customfield.MaxLength}}" ui-mask="{{customfield.MaskedInput}}" type="text" ng-required="{{customfield.IsRequired}}" ng-model="customfield.Value"></input>' +
+        template: '<label>{{customfield.Label}}</label><input ng-if="customfield.Lines <= 1" placeholder="{{customfield.Label}}" size="{{customfield.Width * .13}}" max="{{customfield.MaxLength}}" ui-mask="{{customfield.MaskedInput}}" type="text" ng-required="{{customfield.IsRequired}}" ng-model="customfield.Value"></input>' +
 	        '<textarea ng-if="customfield.Lines > 1" cols="{{customfield.Width * .13}} rows={{customfield.Lines}}" ng-maxlength="{{customfield.MaxLength}}" ng-required="{{customfield.IsRequired}}" ng-model="customfield.Value"></textarea>'
     }
     return obj;
