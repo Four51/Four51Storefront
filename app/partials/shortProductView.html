@@ -34,6 +34,9 @@
         <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>
         for {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
     </p>
+    <p ng-show="LineItem.Product.UnitOfMeasure">
+        Unit of Measure: {{LineItem.Product.UnitOfMeasure}}
+    </p>
     <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
         QTY Available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
     </p>
