@@ -112,6 +112,12 @@
                         {{LineItem.Variant.ExternalID}}
                     </div>
                     <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product'/>
+                    <div ng-show="LineItem.Product.UnitOfMeasure">
+                        <hr />
+                        <p>
+                            <span class="text-info">Unit of Measure:</span> {{LineItem.Product.UnitOfMeasure}}
+                        </p>
+                    </div>
                     <span ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant">
                         <button class="btn btn-xs btn-warning" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit">Edit</button>
                         <button class="btn btn-xs btn-warning" redirect="{{LineItem.Variant.ProofUrl}}">View PDF</button>

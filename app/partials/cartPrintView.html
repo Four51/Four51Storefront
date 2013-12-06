@@ -52,6 +52,9 @@
                         <div>
                             {{item.LineTotal | currency}}
                         </div>
+                        <div ng-show="item.Product.UnitOfMeasure">
+                            Unit of Measure: {{item.Product.UnitOfMeasure}}
+                        </div>
                     </div>
                     <div>
                         <div ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">

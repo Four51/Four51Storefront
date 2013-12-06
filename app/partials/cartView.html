@@ -48,6 +48,7 @@
                             </p>
                             <p><span class="text-info">Product: </span>{{item.Product.Name}}</p>
                             <p><span class="text-info">Unit Price: </span>{{item.UnitPrice | currency}}</p>
+                            <p ng-show="item.Product.UnitOfMeasure"><span class="text-info">Unit of Measure: </span>{{item.Product.UnitOfMeasure}}</p>
                             <span class="text-info" ng-show="item.Specs != {}">Specifications: </span>
                             <ul>
                                 <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">

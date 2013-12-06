@@ -5,6 +5,7 @@
 		<tr><td>name:</td><td>{{LineItem.Product.Name}}</td></tr>
 		<tr><td>Description:</td><td><span ng-bind-html="LineItem.Product.Description"/></td></tr>
 		<tr><td>ExternalID</td><td>{{LineItem.Product.ExternalID}}</td></tr>
+        <tr ng-show="LineItem.Product.UnitOfMeasure"><td>Unit of Measure:</td><td>{{LineItem.Product.UnitOfMeasure}}</td></tr>
 		<tr ng-show="LineItem.Variant.Description"><td>variant description:</td><td><span ng-bind-html="LineItem.Variant.Description"/></td></tr>
 		<tr ng-show="LineItem.Variant.ExternalID"><td>variant id:</td><td>{{LineItem.Variant.ExternalID}}</td></tr>
 		<tr ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)"><td>available inventory</td><td>{{inventoryDisplay(LineItem.Product, LineItem.Variant) }}</td></tr>
