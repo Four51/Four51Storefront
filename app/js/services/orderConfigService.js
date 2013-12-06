@@ -67,7 +67,7 @@ four51.app.factory('OrderConfig', function() {
             }
             return this;
         },
-        paymentMethod: function(o,u,a) {
+        paymentMethod: function(o,u,a) { // not used. set in the api now but leaving here for potential
             order = o; user = u;
             if (order.PaymentMethod == 'Undetermined') { // might be legitimately this type, but can't be another unless already altered
                 setPaymentMethod(a);

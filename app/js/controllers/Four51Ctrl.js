@@ -14,10 +14,7 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
                 if (user.CurrentOrderID) {
                     Order.get(user.CurrentOrderID, function(ordr) {
                         $scope.currentOrder = ordr;
-	                    SpendingAccount.query(function(data) {
-		                    $scope.SpendingAccounts = data;
-			                OrderConfig.costcenter(ordr, user).address(ordr, user).paymentMethod(ordr, user, data);
-	                    });
+			            OrderConfig.costcenter(ordr, user).address(ordr, user);
                     });
                 }
                 else
