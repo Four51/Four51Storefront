@@ -9,15 +9,17 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 
 
 	$scope.cancelOrder = function() {
-		$scope.displayLoadingIndicator = true;
-		Order.delete($scope.currentOrder, function(){
-			$scope.currentOrder = null;
-			$scope.user.CurrentOrderID = null;
-			User.save($scope.user, function(){
-				$location.path('catalog');
+		if (confirm('Are you sure you wish to cancel your order?') == true) {
+			$scope.displayLoadingIndicator = true;
+			Order.delete($scope.currentOrder, function(){
+				$scope.currentOrder = null;
+				$scope.user.CurrentOrderID = null;
+				User.save($scope.user, function(){
+					$location.path('catalog');
+				});
+				$scope.displayLoadingIndicator = false;
 			});
-			$scope.displayLoadingIndicator = false;
-		});
+		}
 	};
 
 	$scope.saveChanges = function(callback) {

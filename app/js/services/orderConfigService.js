@@ -18,7 +18,8 @@ four51.app.factory('OrderConfig', function() {
         // this order is purely a business requirement. not an api requirement.
         if (user.Permissions.contains('SubmitForApproval')) order.PaymentMethod = 'Undetermined';
         if (user.Permissions.contains('PayByPO')) order.PaymentMethod = 'PurchaseOrder';
-
+		if (user.Permissions.contains('PayByCreditCard')) order.PaymentMethod = 'CreditCard';
+	    if (user.Permissions.contains('PayByBudgetAccount')) order.PaymentMethod = 'BudgetAccount';
     }
 
 	var setDefaultAddress = function() {
