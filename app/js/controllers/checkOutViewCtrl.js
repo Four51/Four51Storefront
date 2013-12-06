@@ -124,16 +124,20 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
         });
     };
 
-    function saveChanges() {
+    function saveChanges(callback) {
 	    $scope.displayLoadingIndicator = true;
         Order.save($scope.currentOrder, function(data) {
             $scope.currentOrder = data;
 	        $scope.displayLoadingIndicator = false;
+	        if (callback) callback();
         });
     };
 
     $scope.continueShopping = function() {
-        $location.path('catalog');
+	    if (confirm('Do you want to save changes to your order before continuing?') == true)
+	        saveChanges(function() { $location.path('catalog') });
+        else
+		    $location.path('catalog');
     };
 
     $scope.cancelOrder = function() {
