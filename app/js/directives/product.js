@@ -110,7 +110,8 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 	var obj = {
         scope: {
             lineitem : '=',
-			error: '='
+			error: '=',
+			calculated: '='
         },
         restrict: 'E',
         template: '<select ng-change="qtyChanged(lineitem)" ng-if="lineitem.PriceSchedule.RestrictedQuantity" ng-model="lineitem.Quantity" ng-options="pb.Quantity as getRestrictedQtyText(pb, lineitem.Product.QuantityMultiplier) for pb in lineitem.PriceSchedule.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"></select>'+
@@ -124,6 +125,8 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 			};
 			scope.qtyChanged = function(lineitem){
 				ProductDisplayService.calculateLineTotal(lineitem);
+				if(scope.calculated)
+					scope.calculated(lineitem);
 			};
             scope.validQuantityAddToOrder = function(value, lineItem){
 
@@ -179,13 +182,17 @@ four51.app.directive("variantlist", function(){
 	var obj = {
 		restrict: 'E',
 		templateUrl:'partials/controls/variantList.html',
-		link: function(scope){
-			scope.calcListTotal = function(){
-				scope.variantLineitems.OrderTotal = 0;
-				angular.forEach(scope.variantLineItems, function(item){
-					scope.variantLineitems.OrderTotal += 10;
+		controller: function($scope){
+
+			$scope.calcListTotal = function(i){
+				$scope.variantLineItems.OrderTotal = 0;
+				angular.forEach($scope.variantLineItems, function(item){
+					$scope.variantLineItems.OrderTotal += item.LineTotal || 0;
 				})
 			};
+		},
+		link: function(scope){
+
 		}
 	};
 	return obj;
