@@ -6,7 +6,7 @@
 	<div class="row" ng-repeat="v in LineItem.Product.Variants">
 		<div class="col-xs-12">
 			<a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}} style="text-decoration: underline;">{{v.ExternalID}}</a>
-			<div ng-show="variantLineItems">
+			<div ng-if="allowAddFromVariantList">
 				<quantityfield calculated="calcVariantLineItems" lineitem="variantLineItems[v.InteropID]" error="quantityError" class="quantity" /> {{quantityError}} {{variantLineItems[v.InteropID].LineTotal | currency}}
 			</div>
 
