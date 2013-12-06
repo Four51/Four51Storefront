@@ -1,13 +1,10 @@
 
 four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, OrderConfig, User, ProductDisplayService) {
-	//$scope.order = OrderService.get($scope.user.CurrentOrderID, function(data){
-		//angular.forEach($scope.currentOrder.LineItems, function(item){
-		//	ProductDisplayService.setProductViewName(item.Product);
-		//});
-	//});
-
     $scope.continueShopping = function() {
-        $location.path('catalog');
+	    if (confirm('Do you want to save changes to your order before continuing?') == true)
+		    $scope.saveChanges(function() { $location.path('catalog') });
+	    else
+		    $location.path('catalog');
     };
 
 	$scope.cancelOrder = function() {
@@ -22,7 +19,7 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 		});
 	};
 
-	$scope.saveChanges = function() {
+	$scope.saveChanges = function(callback) {
 		if($scope.currentOrder.LineItems.length == $451.filter($scope.currentOrder.LineItems, {Property:'Selected', Value: true}).length){
 			$scope.cancelOrder();
 		}else{
@@ -31,6 +28,7 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 				$scope.currentOrder = data;
 				OrderConfig.costcenter(data, $scope.user).address(data, $scope.user);
 				$scope.displayLoadingIndicator = false;
+				if (callback) callback();
 			});
 		}
 	};
