@@ -45,7 +45,7 @@
 
                     <div style="float: left;">
                        <span class="text-info">Order Quantity: </span>
-                        <quantityfield lineitem="LineItem" error="quantityError" class="quantity" />
+					<quantityfield ng-show="!allowAddFromVariantList" lineitem="LineItem" error="quantityError" class="quantity" />
                        <span class="text-success">
                            {{LineItem.LineTotal | currency}}
                        </span>
