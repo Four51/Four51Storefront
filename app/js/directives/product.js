@@ -178,7 +178,15 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 four51.app.directive("variantlist", function(){
 	var obj = {
 		restrict: 'E',
-		templateUrl:'partials/controls/variantList.html'
+		templateUrl:'partials/controls/variantList.html',
+		link: function(scope){
+			scope.calcListTotal = function(){
+				scope.variantLineitems.OrderTotal = 0;
+				angular.forEach(scope.variantLineItems, function(item){
+					scope.variantLineitems.OrderTotal += 10;
+				})
+			};
+		}
 	};
 	return obj;
 });
