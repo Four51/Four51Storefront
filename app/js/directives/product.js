@@ -173,4 +173,12 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
         }
     }
     return obj;
-})
+});
+
+four51.app.directive("variantlist", function(){
+	var obj = {
+		restrict: 'E',
+		templateUrl:'partials/controls/variantList.html'
+	};
+	return obj;
+});

@@ -22,13 +22,13 @@
                             <span class="text-info">SubTotal:</span> {{currentOrder.Subtotal | currency}}
                         </p>
                         <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
-                            <span class="text-info">{{ user.Company.SiteText.ShippingDisclaimer }}</span>
+                            <span class="text-info">Shipping, handling and tax may be added to this subtotal.</span>
                         </p>
                     </div>
                 </div>
                 <div class="panel-footer">
                     <button class="btn btn-primary" ng-click="checkOut()" ng-disabled="cart.$invalid">
-                        {{user.Company.SiteText.Checkout || 'Check Out' }}
+                       Check Out
                     </button>
                     <hr />
                     <p class="alert alert-warning" ng-show="cart.$invalid">Cart is missing required fields for checkout.</p>
@@ -44,9 +44,9 @@
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
                         <div class="col-sm-6 col-xs-12 cart-view-line-items-product">
                             <p>
-                                <span class="text-info">{{user.Company.SiteText.ProductIDGridHeader || 'ID: '}} </span><a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">{{item.ProductIDText}}</a>
+                                <span class="text-info">ID: </span><a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">{{item.ProductIDText}}</a>
                             </p>
-                            <p><span class="text-info">{{user.Company.SiteText.ProductNameGridHeader || 'Product: '}} </span>{{item.Product.Name}}</p>
+                            <p><span class="text-info">Product: </span>{{item.Product.Name}}</p>
                             <p><span class="text-info">Unit Price: </span>{{item.UnitPrice | currency}}</p>
                             <span class="text-info" ng-show="item.Specs != {}">Specifications: </span>
                             <ul>
@@ -96,7 +96,7 @@
                 <div class="panel-footer">
                     <span class="btn-group">
                         <button ng-hide="cart.$invalid" class="btn btn-default  cart-view-btn-save" ng-click="saveChanges()" ng-disabled="cart.$invalid">
-                            {{user.Company.SiteText.SaveChanges || 'Save Changes'}}
+                            Save Changes
                         </button>
                         <button class="btn btn-default  cart-view-btn-cancel" ng-click="cancelOrder()">
                             Cancel Order

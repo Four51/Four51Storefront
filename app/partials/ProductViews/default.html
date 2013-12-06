@@ -15,7 +15,7 @@
             <form name="addToOrderForm">
                 <div class="panel-body text-left">
                     <h5>
-                        <span class="text-info">{{user.Company.SiteText.ProductIDGridHeader || 'ID: '}}</span>
+                        <span class="text-info">ID: </span>
                         {{LineItem.Product.ExternalID}}
                     </h5>
                     <!--- priceschedule and vspec table is in INFO because these fields can become very long. Would like to see if only a single price to display priceschedule here--->
@@ -124,31 +124,9 @@
                         </p>
                     </div>
                     <div ng-show="LineItem.Product.Type == 'VariableText'">
-                        <button type="button" ng-show="!LineItem.Variant" class="btn btn-xs btn-danger" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/new/edit" tabindex="-1">{{user.Company.SiteText.CreateNew || 'Create New'}}</button>
+                        <button type="button" ng-show="!LineItem.Variant" class="btn btn-xs btn-danger" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/new/edit" tabindex="-1">Create New</button>
                     </div>
-                    <div ng-show="LineItem.Product.Variants.length > 0 && !LineItem.Variant">
-                        <h4>
-                            Please select from the following:
-                        </h4>
-                        <div class="451_list_vars view-tr">
-                            <h5 class="text-info">Variant ID</h5>
-                            <div class="row" ng-repeat="v in LineItem.Product.Variants">
-                                <div class="col-xs-12">
-                                    <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}} style="text-decoration: underline;">{{v.ExternalID}}</a>
-                                </div>
-                                <div class="col-xs-12" ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
-                                    <div ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
-                                        <h5 class="text-info">Available Quantity:</h5> {{v.QuantityAvailable}}
-                                    </div>
-                                </div>
-                                <div class="col-xs-12" ng-show="v.Description">
-                                    <div>
-                                        {{v.Description}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <variantlist ng-show="LineItem.Product.Variants.length > 0 && !LineItem.Variant" />
                 </div>
                 <!--- below panel hides/shows as intended and is dependant upon the header toggle above --->
                 <div ng-show="selected == 2">
