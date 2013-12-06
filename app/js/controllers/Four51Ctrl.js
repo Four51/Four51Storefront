@@ -1,4 +1,4 @@
-four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $location, $451, User, Order, Security, OrderConfig, Category, SpendingAccount, fileReader) {
+four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $location, $451, User, Order, Security, OrderConfig, Category, SpendingAccount) {
     $scope.scroll = 0;
     $scope.appname = $451.appname;
 	$scope.isAnon = $451.isAnon; //need to know this before we have access to the user object
@@ -14,7 +14,10 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
                 if (user.CurrentOrderID) {
                     Order.get(user.CurrentOrderID, function(ordr) {
                         $scope.currentOrder = ordr;
-                        OrderConfig.costcenter(ordr, user).address(ordr, user).paymentMethod(ordr, user);
+	                    SpendingAccount.query(function(data) {
+		                    $scope.SpendingAccounts = data;
+			                OrderConfig.costcenter(ordr, user).address(ordr, user).paymentMethod(ordr, user, data);
+	                    });
                     });
                 }
                 else

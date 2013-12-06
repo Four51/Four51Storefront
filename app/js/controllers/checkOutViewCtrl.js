@@ -96,7 +96,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
                 valid = $scope.user.Permissions.contains('PayByBudgetAccount');
                 var account = null;
                 angular.forEach($scope.SpendingAccounts, function(a) {
-                    if (a.ID == $scope.currentOrder.BudgetAccountID)
+                    if ($scope.currentOrder && a.ID == $scope.currentOrder.BudgetAccountID)
                         account = a;
                 });
                 if (account)
@@ -141,15 +141,18 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     };
 
     $scope.cancelOrder = function() {
-	    $scope.displayLoadingIndicator = true;
-        Order.delete($scope.currentOrder, function() {
-            $scope.user.CurrentOrderID = null;
-            $scope.currentOrder = null;
-	        User.save($scope.user, function(data) {
-		        $scope.user = data;
-		        $scope.displayLoadingIndicator = false;
+	    if (confirm('Are you sure you wish to cancel your order?') == true) {
+		    $scope.displayLoadingIndicator = true;
+	        Order.delete($scope.currentOrder, function() {
+	            $scope.user.CurrentOrderID = null;
+	            $scope.currentOrder = null;
+		        User.save($scope.user, function(data) {
+			        $scope.user = data;
+			        $scope.displayLoadingIndicator = false;
+			        $location.path('catalog');
+		        });
 	        });
-        });
+	    }
     };
 
     $scope.saveChanges = function() {

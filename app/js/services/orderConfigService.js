@@ -13,13 +13,24 @@ four51.app.factory('OrderConfig', function() {
         }
     };
 
-    var setPaymentMethod = function() {
+    var setPaymentMethod = function(accounts) {
         // logic is that we want to default the payment method to the most likely choice of the user.
         // this order is purely a business requirement. not an api requirement.
-        if (user.Permissions.contains('SubmitForApproval')) order.PaymentMethod = 'Undetermined';
-        if (user.Permissions.contains('PayByPO')) order.PaymentMethod = 'PurchaseOrder';
-		if (user.Permissions.contains('PayByCreditCard')) order.PaymentMethod = 'CreditCard';
-	    if (user.Permissions.contains('PayByBudgetAccount')) order.PaymentMethod = 'BudgetAccount';
+	    if (user.Permissions.contains('SubmitForApproval') && order.Approvals.length > 0) {
+		    order.PaymentMethod = 'Undetermined'; return;
+	    }
+	    if (user.Permissions.contains('PayByBudgetAccount') && accounts.length > 0) {
+		    order.PaymentMethod = 'BudgetAccount'; return;
+	    }
+	    if (user.Permissions.contains('PayByCreditCard') && user.AvailableCreditCards.length > 0) {
+		    order.PaymentMethod = 'CreditCard'; return;
+	    }
+        if (user.Permissions.contains('PayByPO')) {
+	        order.PaymentMethod = 'PurchaseOrder'; return;
+        }
+	    if (order.PaymentMethod == 'Undetermined' && order.Approvals.length == 0)
+	        order.PaymentMethod = null;
+	    return null;
     }
 
 	var setDefaultAddress = function() {
@@ -56,10 +67,10 @@ four51.app.factory('OrderConfig', function() {
             }
             return this;
         },
-        paymentMethod: function(o,u) {
+        paymentMethod: function(o,u,a) {
             order = o; user = u;
             if (order.PaymentMethod == 'Undetermined') { // might be legitimately this type, but can't be another unless already altered
-                setPaymentMethod();
+                setPaymentMethod(a);
             }
             return this;
         }
