@@ -158,7 +158,13 @@ four51.app.factory('ProductDisplayService', function($451, Variant, Product){
 			if(!spec){
 				return;
 			}
-
+			if(scope.variantLineItems){
+				angular.forEach(scope.variantLineItems, function(item){
+					calcTotal(item);
+				});
+				scope.calcVariantLineItems();
+				return;
+			}
 			if(spec.DefinesVariant)
 			{
 				var specOptionIDs = [];

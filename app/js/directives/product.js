@@ -184,12 +184,7 @@ four51.app.directive("variantlist", function(){
 		templateUrl:'partials/controls/variantList.html',
 		controller: function($scope){
 
-			$scope.calcListTotal = function(i){
-				$scope.variantLineItems.OrderTotal = 0;
-				angular.forEach($scope.variantLineItems, function(item){
-					$scope.variantLineItems.OrderTotal += item.LineTotal || 0;
-				})
-			};
+
 		},
 		link: function(scope){
 
