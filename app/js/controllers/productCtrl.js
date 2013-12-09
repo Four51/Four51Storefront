@@ -66,8 +66,14 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 			$scope.currentOrder = {};
 			$scope.currentOrder.LineItems = [];
 		}
-
-		$scope.currentOrder.LineItems.push($scope.LineItem);
+		if($scope.allowAddFromVariantList){
+			angular.forEach($scope.variantLineItems, function(item){
+				if(item.Quantity > 0)
+					$scope.currentOrder.LineItems.push(item);
+			});
+		}else{
+			$scope.currentOrder.LineItems.push($scope.LineItem);
+		}
 
 		Order.save($scope.currentOrder, function(o){
 			$scope.user.CurrentOrderID = o.ID;
