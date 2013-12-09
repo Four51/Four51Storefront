@@ -80,8 +80,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     });
 
 	$scope.$watch('currentOrder.BudgetAccountID', function() {
-		if ($scope.currentOrder.PaymentMethod == 'BudgetAccount' && ($scope.SpendingAccounts && $scope.SpendingAccounts.length == 1))
-			$scope.cart_billing.$setValidity('paymentMethod', validatePaymentMethod('BudgetAccount'));
+		$scope.cart_billing.$setValidity('paymentMethod', validatePaymentMethod('BudgetAccount'));
 	});
 
     function validatePaymentMethod(method) {
@@ -196,6 +195,32 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 			});
 		});
 	};
+
+    $scope.newShippingAddress = function() {
+        if ($scope.address) {
+            $scope.address = {};
+        }
+        $scope.addressform = true;
+    }
+    $scope.cancelShippingAddress = function() {
+        $scope.addressform = false;
+    }
+    $scope.newBillingAddress = function() {
+        if ($scope.address) {
+            $scope.address = {};
+        }
+        $scope.addressform = true;
+    }
+    $scope.cancelBillingAddress = function() {
+        $scope.addressform = false;
+    }
+
+    $scope.$on('event:AddressSaved', function() {
+        AddressList.query(function(list) {
+            $scope.addresses = list;
+        });
+        $scope.addressform = false;
+    });
 
     $scope.checkOutSection = 'order';
 });

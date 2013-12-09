@@ -32,7 +32,7 @@ four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, Pr
 	$scope.LineItem.Product = $scope.p;
 	ProductDisplayService.setNewLineItemScope($scope);
 	ProductDisplayService.setProductViewScope($scope);
-	$scope.allowAddToOrderInProductList = $scope.allowAddToOrder &&  Object.keys($scope.LineItem.Specs).length == 0 && $scope.LineItem.Product.Type != 'VariableText';
+	$scope.allowAddToOrderInProductList = $scope.allowAddToOrder && $scope.LineItem.Specs.length == 0 && $scope.LineItem.Product.Type != 'VariableText';
 });
 
 four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, ProductDisplayService, Order, Variant, $451, $location, User) {

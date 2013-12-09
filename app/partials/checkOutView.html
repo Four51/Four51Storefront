@@ -75,8 +75,11 @@
                 Shipping
             </h3>
         </div>
-        <form name="cart_shipping">
             <div ng-show="checkOutSection == 'shipping'" ng-show="currentOrder"  class="panel-body check-out-view-shipping"  >
+                <div ng-show="addressform">
+                    <addressinput address='address' user='user' return='return'></addressinput>
+                </div>
+                <form name="cart_shipping">
                 <div class="error_list">
                     <p class="alert-error" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</p>
                     <p class="alert-error" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</p>
@@ -93,7 +96,8 @@
                         Ship to multiple addresses
                     </button>
                 </span>
-                <button class="btn btn-default btn-info pull-right" type="button" class="btn btn-xs btn-danger" redirect="/address" tabindex="-1">Add New Address</button>
+                <button class="btn btn-default btn-info pull-right" type="button" class="btn btn-xs btn-danger" ng-hide="addressform" ng-click="newShippingAddress()" tabindex="-1">Add New Address</button>
+                <button class="btn btn-default btn-default pull-right" type="button" class="btn btn-xs btn-danger" ng-show="addressform" ng-click="cancelShippingAddress()" style="margin-right: 10px;" tabindex="-1">Cancel</button>
                 <hr />
                 <div ng-show="!shipToMultipleAddresses">
 
@@ -150,52 +154,57 @@
 
 
                 <input ng-if="user.ShipMethod.AskForAccountNumber" placeholder="Shipping Account Number" type="text" ng-model="currentOrder.LineItems[0].ShipAccount" />
+                </form>
             </div>
-        </form>
         <div class="panel-heading"  ng-class="{'no': cart_billing.$invalid, 'yes': !cart_billing.$invalid }">
             <h3 ng-click="checkOutSection = 'billing'" class="panel-title">
                 <i ng-class="{'fa fa-exclamation-circle': cart_billing.$invalid, 'fa fa-check-circle': !cart_billing.$invalid }"></i>
                 Billing
             </h3>
         </div>
-        <form name="cart_billing">
             <loadingindicator ng-show="couponLoadingIndicator" />
             <div ng-show="checkOutSection == 'billing'" ng-show="currentOrder" class="panel-body check-out-view-billing">
-                <h5>
-                    <label>Select a billing address</label>
-                </h5>
-                <select required name="billingAddress" ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID"></select>
-                <button type="button" class="btn btn-xs btn-danger" redirect="/address"  tabindex="-1">Add New Address</button>
-                <paymentselector></paymentselector>
-                <div ng-show="user.Permissions.contains('ViewPromotions')">
-                    <div ng-show="!currentOrder.Coupon">
-                        <label>Promotion Code: </label>
-                        <input type="text" ng-model="coupon" />
-                        <button type="button" class="btn btn-xs btn-danger" ng-click="applyCoupon()">Apply</button><br />
-                        <span ng-show="couponError" class="ui-state-error">{{couponError}}</span>
-                    </div>
-                    <h5 ng-show="currentOrder.Coupon">
-                        <p><span class="text-info">Coupon</span>{{currentOrder.Coupon.CouponCode}}<span><i ng-click="removeCoupon()" ng-class="{'fa fa-eraser': currentOrder.Coupon }"></i></span></p>
+                <div ng-show="addressform">
+                    <addressinput address='address' user='user' return='return'></addressinput>
+                </div>
+                <button class="btn btn-default btn-info pull-right" type="button" class="btn btn-xs btn-danger" ng-hide="addressform" ng-click="newBillingAddress()" tabindex="-1">Add New Address</button>
+                <button class="btn btn-default btn-default pull-right" type="button" class="btn btn-xs btn-danger" ng-show="addressform" ng-click="cancelBillingAddress()" style="margin-right: 10px;" tabindex="-1">Cancel</button>
+                <hr />
+                <form name="cart_billing">
+                    <h5>
+                        <label>Select a billing address</label>
                     </h5>
-                    <div ng-show="currentOrder.Coupon" class="text-danger">
-                        <p ng-bind="currentOrder.Coupon.Description"></p>
-                        <span ng-show="currentOrder.Coupon.ExpirationDate">Expires: {{currentOrder.Coupon.ExpirationDate | date:'MM/dd/yyyy'}}</span>
-                    </div>
-                </div>
-                <div ng-show="currentOrder.Approvals" class="check-out-approvals">
-                    <h5>APPROVALS</h5>
-                    <approvalrulelist order="currentOrder" />
-                </div>
-                <div ng-show="user.Permissions.contains('SendOrderNotificationToOthers')">
-                    <div>
-                        <h5>
-                            <label>Email Notification</label>
+                    <select name="billingAddress" ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required />
+                    <paymentselector></paymentselector>
+                    <div ng-show="user.Permissions.contains('ViewPromotions')">
+                        <div ng-show="!currentOrder.Coupon">
+                            <label>Promotion Code: </label>
+                            <input type="text" ng-model="coupon" />
+                            <button type="button" class="btn btn-xs btn-danger" ng-click="applyCoupon()">Apply</button><br />
+                            <span ng-show="couponError" class="ui-state-error">{{couponError}}</span>
+                        </div>
+                        <h5 ng-show="currentOrder.Coupon">
+                            <p><span class="text-info">Coupon</span>{{currentOrder.Coupon.CouponCode}}<span><i ng-click="removeCoupon()" ng-class="{'fa fa-eraser': currentOrder.Coupon }"></i></span></p>
                         </h5>
-                        <input ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
+                        <div ng-show="currentOrder.Coupon" class="text-danger">
+                            <p ng-bind="currentOrder.Coupon.Description"></p>
+                            <span ng-show="currentOrder.Coupon.ExpirationDate">Expires: {{currentOrder.Coupon.ExpirationDate | date:'MM/dd/yyyy'}}</span>
+                        </div>
                     </div>
-                </div>
+                    <div ng-show="currentOrder.Approvals" class="check-out-approvals">
+                        <h5>APPROVALS</h5>
+                        <approvalrulelist order="currentOrder" />
+                    </div>
+                    <div ng-show="user.Permissions.contains('SendOrderNotificationToOthers')">
+                        <div>
+                            <h5>
+                                <label>Email Notification</label>
+                            </h5>
+                            <input ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
 
         <div class="panel-footer check-out-view-types">
             <div class="check-out-view-btn-group" ng-show="currentOrder">
