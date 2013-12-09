@@ -224,7 +224,7 @@ four51.app.factory('ProductDisplayService', function($451, Variant, Product){
 			});
 		}
 
-		var hasAddToOrderSpecs = scope.LineItem.Specs != null;
+		var hasAddToOrderSpecs = Object.keys(scope.LineItem.Specs).length > 0;
 		scope.allowAddFromVariantList = (scope.LineItem.Product.ShowSpecsWithVariantList || !hasAddToOrderSpecs)&& !scope.LineItem.Variant && scope.LineItem.Product.Variants && scope.LineItem.Product.Variants.length > 0;
 		if(scope.LineItem.Variant){
 			scope.LineItem.PriceSchedule = scope.LineItem.Variant.StandardPriceSchedule ? scope.LineItem.Variant.StandardPriceSchedule : scope.LineItem.Product.StandardPriceSchedule; //include user permissions to decide to show
