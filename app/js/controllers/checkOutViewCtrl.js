@@ -73,7 +73,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	};
 
     $scope.$watch('currentOrder.PaymentMethod', function(event, method) {
-	    if (event == 'BudgetAccount' && $scope.SpendingAccounts.length == 1) {
+	    if (event == 'BudgetAccount' && ($scope.SpendingAccounts && $scope.SpendingAccounts.length == 1)) {
 		    $scope.currentOrder.BudgetAccountID = $scope.SpendingAccounts[0].ID;
 	    }
         $scope.cart_billing.$setValidity('paymentMethod', validatePaymentMethod(event));
