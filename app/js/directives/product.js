@@ -15,6 +15,7 @@ four51.app.directive('shortproductview', function(){
 
 	return obj;
 });
+/*
 four51.app.directive('vspecfield', function($451){
 	var template = '<select " ' +
 		'ng-model="s.SelectedOptionID" '+
@@ -56,7 +57,7 @@ four51.app.directive('vspecfield', function($451){
 	return obj;
 
 });
-
+*/
 four51.app.directive('pricescheduletable', function(){
     var obj = {
         scope: {
