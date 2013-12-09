@@ -210,7 +210,9 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     }
 
     $scope.$on('event:AddressSaved', function() {
-        $scope.addresses.push($scope.address);
+        AddressList.query(function(list) {
+            $scope.addresses = list;
+        });
         $scope.addressform = false;
     });
 
