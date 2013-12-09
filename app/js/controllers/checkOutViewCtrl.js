@@ -197,12 +197,18 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	};
 
     $scope.newShippingAddress = function() {
+        if ($scope.address) {
+            $scope.address = {};
+        }
         $scope.addressform = true;
     }
     $scope.cancelShippingAddress = function() {
         $scope.addressform = false;
     }
     $scope.newBillingAddress = function() {
+        if ($scope.address) {
+            $scope.address = {};
+        }
         $scope.addressform = true;
     }
     $scope.cancelBillingAddress = function() {
