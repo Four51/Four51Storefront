@@ -190,5 +190,23 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		});
 	};
 
+    $scope.newShippingAddress = function() {
+        $scope.addressform = true;
+    }
+    $scope.cancelShippingAddress = function() {
+        $scope.addressform = false;
+    }
+    $scope.newBillingAddress = function() {
+        $scope.addressform = true;
+    }
+    $scope.cancelBillingAddress = function() {
+        $scope.addressform = false;
+    }
+
+    $scope.$on('event:AddressSaved', function() {
+        $scope.addresses.push($scope.address);
+        $scope.addressform = false;
+    });
+
     $scope.checkOutSection = 'order';
 });
