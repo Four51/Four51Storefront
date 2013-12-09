@@ -158,7 +158,13 @@ four51.app.factory('ProductDisplayService', function($451, Variant, Product){
 			if(!spec){
 				return;
 			}
-
+			if(scope.variantLineItems){
+				angular.forEach(scope.variantLineItems, function(item){
+					calcTotal(item);
+				});
+				scope.calcVariantLineItems();
+				return;
+			}
 			if(spec.DefinesVariant)
 			{
 				var specOptionIDs = [];
@@ -207,12 +213,6 @@ four51.app.factory('ProductDisplayService', function($451, Variant, Product){
 			return false;
 		}
 
-		if(scope.LineItem.Variant){
-			scope.LineItem.PriceSchedule = scope.LineItem.Variant.StandardPriceSchedule ? scope.LineItem.Variant.StandardPriceSchedule : scope.LineItem.Product.StandardPriceSchedule; //include user permissions to decide to show
-			//moved to productViewScope scope.StaticSpecGroups = scope.LineItem.Variant.StaticSpecGroups || scope.LineItem.Product.StaticSpecGroups;
-		}else{
-			scope.LineItem.PriceSchedule = variantHasPriceSchedule(scope.LineItem.Product, 'StandardPriceSchedule') ? null : scope.LineItem.Product.StandardPriceSchedule; //don't show price schedule if variant overrides parent PS
-		}
 		if(!scope.LineItem.Specs){//it's possible we're reloading this due to changing a variant and we don't want to leave the spec values behind
 			scope.LineItem.Specs = {};
 			angular.forEach(scope.LineItem.Product.Specs, function(item){
@@ -224,7 +224,25 @@ four51.app.factory('ProductDisplayService', function($451, Variant, Product){
 			});
 		}
 
-		scope.allowAddToOrder = scope.LineItem.Variant || scope.LineItem.Product.Variants.length == 0;//this will include some order type and current order logic.
+		var hasAddToOrderSpecs = false; //TODO:determine based on lineitem or product setup
+		scope.allowAddFromVariantList = (scope.LineItem.Product.ShowSpecsWithVariantList || !hasAddToOrderSpecs)&& !scope.LineItem.Variant && scope.LineItem.Product.Variants && scope.LineItem.Product.Variants.length > 0;
+
+		if(scope.LineItem.Variant){
+			scope.LineItem.PriceSchedule = scope.LineItem.Variant.StandardPriceSchedule ? scope.LineItem.Variant.StandardPriceSchedule : scope.LineItem.Product.StandardPriceSchedule; //include user permissions to decide to show
+			//moved to productViewScope scope.StaticSpecGroups = scope.LineItem.Variant.StaticSpecGroups || scope.LineItem.Product.StaticSpecGroups;
+		}else{
+			scope.LineItem.PriceSchedule = variantHasPriceSchedule(scope.LineItem.Product, 'StandardPriceSchedule') ? null : scope.LineItem.Product.StandardPriceSchedule; //don't show price schedule if variant overrides parent PS
+			if(scope.allowAddFromVariantList){
+				var p = scope.LineItem.Product;
+				scope.variantLineItems = {};
+				angular.forEach(p.Variants, function(v){
+					scope.variantLineItems[v.InteropID] = {PriceSchedule: v.StandardPriceSchedule || p.StandardPriceSchedule, Product: p, Variant: v, Specs: scope.LineItem.Specs};
+				});
+			}
+		}
+
+		scope.allowAddToOrder =  scope.allowAddFromVariantList || (scope.LineItem.Variant || scope.LineItem.Product.Variants.length == 0);//this will include some order type and current order logic.
+
 		//short view//scope.allowAddToOrder = scope.LineItem.Product.Variants.length == 0 && scope.lineItemSpecs.length == 0 && scope.LineItem.Product.Type != 'VariableText';
 		//one view//ng-show="LineItem.Variant || LineItem.Product.Variants.length == 0"
 	}

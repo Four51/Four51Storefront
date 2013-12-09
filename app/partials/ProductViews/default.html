@@ -45,9 +45,9 @@
 
                     <div style="float: left;">
                        <span class="text-info">Order Quantity: </span>
-                        <quantityfield lineitem="LineItem" error="quantityError" class="quantity" />
+					<quantityfield ng-show="!allowAddFromVariantList" lineitem="LineItem" error="quantityError" class="quantity" />
                        <span class="text-success">
-                           {{LineItem.LineTotal | currency}}
+                           {{LineItem.LineTotal | currency}}{{variantLineItemsOrderTotal | currency}}
                        </span>
                     </div>
                     <div style=" display: inline;float: right;">
@@ -132,7 +132,7 @@
                     <div ng-show="LineItem.Product.Type == 'VariableText'">
                         <button type="button" ng-show="!LineItem.Variant" class="btn btn-xs btn-danger" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/new/edit" tabindex="-1">Create New</button>
                     </div>
-                    <variantlist ng-show="LineItem.Product.Variants.length > 0 && !LineItem.Variant" />
+                    <variantlist ng-if="LineItem.Product.Variants.length > 0 && !LineItem.Variant" />
                 </div>
                 <!--- below panel hides/shows as intended and is dependant upon the header toggle above --->
                 <div ng-show="selected == 2">

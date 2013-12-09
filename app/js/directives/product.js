@@ -110,7 +110,8 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 	var obj = {
         scope: {
             lineitem : '=',
-			error: '='
+			error: '=',
+			calculated: '='
         },
         restrict: 'E',
         template: '<select ng-change="qtyChanged(lineitem)" ng-if="lineitem.PriceSchedule.RestrictedQuantity" ng-model="lineitem.Quantity" ng-options="pb.Quantity as getRestrictedQtyText(pb, lineitem.Product.QuantityMultiplier) for pb in lineitem.PriceSchedule.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"></select>'+
@@ -124,6 +125,8 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 			};
 			scope.qtyChanged = function(lineitem){
 				ProductDisplayService.calculateLineTotal(lineitem);
+				if(scope.calculated)
+					scope.calculated(lineitem);
 			};
             scope.validQuantityAddToOrder = function(value, lineItem){
 
@@ -178,7 +181,14 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 four51.app.directive("variantlist", function(){
 	var obj = {
 		restrict: 'E',
-		templateUrl:'partials/controls/variantList.html'
+		templateUrl:'partials/controls/variantList.html',
+		controller: function($scope){
+
+
+		},
+		link: function(scope){
+
+		}
 	};
 	return obj;
 });
