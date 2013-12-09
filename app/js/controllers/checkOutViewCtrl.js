@@ -113,15 +113,21 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 
     function submitOrder() {
 	    $scope.displayLoadingIndicator = true;
-        Order.submit($scope.currentOrder, function(data) {
-			$scope.user.CurrentOrderID = null;
-			User.save($scope.user, function(data) {
-		        $scope.user = data;
-                $scope.displayLoadingIndicator = false;
-	        });
-	        $scope.currentOrder = null;
-	        $location.path('/order/' + data.ID);
-        });
+        Order.submit($scope.currentOrder,
+	        function(data) {
+				$scope.user.CurrentOrderID = null;
+				User.save($scope.user, function(data) {
+			        $scope.user = data;
+	                $scope.displayLoadingIndicator = false;
+		        });
+		        $scope.currentOrder = null;
+		        $location.path('/order/' + data.ID);
+	        },
+	        function(ex) {
+		        $scope.cart_billing.$setValidity('paymentMethod', false);
+		        $scope.displayLoadingIndicator = false;
+	        }
+        );
     };
 
     function saveChanges(callback) {

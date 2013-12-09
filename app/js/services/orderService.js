@@ -1,4 +1,4 @@
-four51.app.factory('Order', function($resource, $rootScope, $451, Security) {
+four51.app.factory('Order', function($resource, $rootScope, $451, Security, Error) {
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
@@ -39,12 +39,17 @@ four51.app.factory('Order', function($resource, $rootScope, $451, Security) {
         });
     }
 
-    var _submit = function(order, success) {
-        $resource($451.api('order'), { }, { submit: { method: 'PUT' }}).submit(order).$promise.then(function(o) {
-	        store.set('451Cache.Order.' + o.ID);
-	        _extend(o);
-            _then(success,o);
-        });
+    var _submit = function(order, success, error) {
+        $resource($451.api('order'), { }, { submit: { method: 'PUT' }}).submit(order).$promise.then(
+	        function(o) {
+		        store.set('451Cache.Order.' + o.ID);
+		        _extend(o);
+	            _then(success,o);
+	        },
+	        function(ex) {
+		        error(Error.format(ex));
+	        }
+        );
     }
 
     return {
