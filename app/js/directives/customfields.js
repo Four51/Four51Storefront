@@ -23,7 +23,7 @@ four51.app.directive('customselectionfield', function($451) {
         template: '<label>{{customfield.Label}}</label>' +
             '<select ng-init="init()" ng-required="customfield.Required" ng-change="changed()" ng-model="item" ng-options="option.Value for option in customfield.Options" ng-if="customfield.Options">' +
             '<option ng-if="!customfield.IsRequired" value="" /></select>' +
-            '<input type="text" ng-change="otherChanged()" ng-model="other" ng-show="customfield.isOtherSelected" />',
+            '<input type="text" ng-change="otherChanged()" ng-model="other" ng-show="customfield.isOtherSelected" ng-required="customfield.Required && customfield.isOtherSelected" />',
         link: function(scope, element, attr) {
             scope.changed = function() {
 	            //reset values
