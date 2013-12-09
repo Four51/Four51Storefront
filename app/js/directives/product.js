@@ -15,6 +15,7 @@ four51.app.directive('shortproductview', function(){
 
 	return obj;
 });
+/*
 four51.app.directive('vspecfield', function($451){
 	var template = '<select " ' +
 		'ng-model="s.SelectedOptionID" '+
@@ -56,7 +57,7 @@ four51.app.directive('vspecfield', function($451){
 	return obj;
 
 });
-
+*/
 four51.app.directive('pricescheduletable', function(){
     var obj = {
         scope: {
@@ -111,11 +112,12 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
         scope: {
             lineitem : '=',
 			error: '=',
-			calculated: '='
+			calculated: '=',
+			required: '='
         },
         restrict: 'E',
-        template: '<select ng-change="qtyChanged(lineitem)" ng-if="lineitem.PriceSchedule.RestrictedQuantity" ng-model="lineitem.Quantity" ng-options="pb.Quantity as getRestrictedQtyText(pb, lineitem.Product.QuantityMultiplier) for pb in lineitem.PriceSchedule.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"></select>'+
-            '<input  ng-change="qtyChanged(lineitem)" ng-if="!lineitem.PriceSchedule.RestrictedQuantity" type="text" required name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"/>',
+        template: '<select ng-change="qtyChanged(lineitem)" ng-if="lineitem.PriceSchedule.RestrictedQuantity" ng-required="required" ng-model="lineitem.Quantity" ng-options="pb.Quantity as getRestrictedQtyText(pb, lineitem.Product.QuantityMultiplier) for pb in lineitem.PriceSchedule.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"></select>'+
+            '<input  ng-change="qtyChanged(lineitem)" ng-if="!lineitem.PriceSchedule.RestrictedQuantity" type="text" ng-required="required" name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"/>',
         link: function(scope){
 			scope.getRestrictedQtyText = function(priceBreak, qtyMultiplier){
 				var qtyText = priceBreak.Quantity * qtyMultiplier;

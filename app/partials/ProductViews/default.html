@@ -44,8 +44,8 @@
                     </div>
 
                     <div style="float: left;">
-                       <span class="text-info">Order Quantity: </span>
-					<quantityfield ng-show="!allowAddFromVariantList" lineitem="LineItem" error="quantityError" class="quantity" />
+                       <span class="text-info">{{allowAddFromVariantList ? 'Total' : 'Order Quantity'}}: </span>
+					<quantityfield ng-if="!allowAddFromVariantList" required="true" lineitem="LineItem" error="quantityError" class="quantity" />
                        <span class="text-success">
                            {{LineItem.LineTotal | currency}}{{variantLineItemsOrderTotal | currency}}
                        </span>
@@ -65,7 +65,7 @@
                     <p class="alert alert-danger" ng-show="LineItem.PriceSchedule.MaxQuantity">
                         Maximum Quantity: {{LineItem.PriceSchedule.MaxQuantity}}
                     </p>
-                    <p class="alert alert-warning" ng-show="addToOrderForm.$invalid" ng-hide="quantityError">
+					<p class="alert alert-warning" ng-show="addToOrderForm.$invalid" >
                         Product is missing required fields for Add to Cart.
                     </p>
                 </div>
