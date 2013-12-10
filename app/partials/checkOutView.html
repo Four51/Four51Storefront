@@ -181,7 +181,7 @@
                             <label>Promotion Code: </label>
                             <input type="text" ng-model="coupon" />
                             <button type="button" class="btn btn-xs btn-danger" ng-click="applyCoupon()">Apply</button><br />
-                            <span ng-show="couponError" class="ui-state-error">{{couponError}}</span>
+                            <span ng-show="couponError" class="ui-state-error-text">{{couponError}}</span>
                         </div>
                         <h5 ng-show="currentOrder.Coupon">
                             <p><span class="text-info">Coupon</span>{{currentOrder.Coupon.CouponCode}}<span><i ng-click="removeCoupon()" ng-class="{'fa fa-eraser': currentOrder.Coupon }"></i></span></p>

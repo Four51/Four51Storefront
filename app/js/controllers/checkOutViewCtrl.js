@@ -176,13 +176,19 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	$scope.applyCoupon = function() {
 		$scope.couponLoadingIndicator = true;
 		$scope.couponError = null;
-		Coupon.apply($scope.coupon, function(coupon) {
-			$scope.currentOrder.Coupon = coupon;
-			Order.save($scope.currentOrder, function(data) {
-				$scope.currentOrder = data;
+		Coupon.apply($scope.coupon,
+			function(coupon) {
+				$scope.currentOrder.Coupon = coupon;
+				Order.save($scope.currentOrder, function(data) {
+					$scope.currentOrder = data;
+					$scope.couponLoadingIndicator = false;
+				});
+			},
+			function(ex) {
+				$scope.couponError = ex.Detail;
 				$scope.couponLoadingIndicator = false;
-			});
-		});
+			}
+		);
 	};
 
 	$scope.removeCoupon = function() {
