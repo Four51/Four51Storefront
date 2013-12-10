@@ -41,11 +41,10 @@
             </div>
             <div class="panel-body" ng-if="user.CustomFields">
                 <div class="list-group">
-                    <!--- TODO image does not display for me on file upload replace/delete --->
                     <div ng-repeat="field in user.CustomFields" class="list-group-item">
                         <customfilefield customfield="field" ng-if="field.ControlType == 'File' && field.DisplayToUser"></customfilefield>
-                        <customtextfield customfield="field" ng-if="field.ControlType == 'Text' && field.DisplayToUser" />
-                        <customselectionfield customfield="field" ng-if="field.ControlType == 'Selection' && field.DisplayToUser" />
+                        <customtextfield customfield="field" ng-if="field.ControlType == 'Text' && field.DisplayToUser"></customtextfield>
+                        <customselectionfield customfield="field" ng-if="field.ControlType == 'Selection' && field.DisplayToUser"></customselectionfield>
                     </div>
                 </div>
             </div>
