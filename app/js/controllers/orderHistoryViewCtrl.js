@@ -1,5 +1,7 @@
 four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $location, $routeParams, Order, FavoriteOrder) {
+	$scope.loadingIndicator = true;
 	Order.get($routeParams.id, function(data){
+		$scope.loadingIndicator = false;
         $scope.order = data;
         $scope.hasSpecsOnAnyLineItem = false;
 		for(var i = 0; i < data.LineItems.length ; i++) {

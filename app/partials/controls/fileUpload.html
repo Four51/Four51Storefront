@@ -1,11 +1,12 @@
 <div class="fileInput">
     <h3 class="list-group-item-heading">{{customfield.Label}}</h3>
-    <img ng-show="customfield.File.IsImage" ng-src="{{customfield.File.Url}}" /><a ng-show="!customfield.File.IsImage" ng-href="{{customfield.File.Url}}">{{customfield.File.OriginalName}}</a><br />
+    <img ng-show="customfield.File.IsImage" ng-src="{{customfield.File.Url}}"></img><a ng-show="!customfield.File.IsImage" ng-href="{{customfield.File.Url}}">{{customfield.File.OriginalName}}</a><br />
     <div ng-show="customfield.File">
-        <input name="replace" class="replace" type="checkbox" ng-model="replace" /> Replace
-        <input name="delete" class="delete" type="checkbox" /> Delete
+        <input name="replace" class="replace" type="checkbox" ng-model="replace"></input> Replace
+        <input name="delete" class="delete" type="checkbox"></input> Delete
     </div>
-    <input name="upload" class="upload" ng-show="replace || !customfield.File" type="file" /><br />
+    <input name="upload" class="upload" ng-show="replace || !customfield.File" type="file"></input><br />
+    <input type="hidden" ng-required="customfield.Required" ng-model="customfield.File.ID"></input>
     <div class="alert alert-info" ng-show="replace">
         <div class="error ui-state-error-text"></div>
         {{customfield.UploadInstructions}}

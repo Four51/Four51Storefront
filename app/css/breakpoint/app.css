@@ -3,7 +3,6 @@
 
     .nav li span.nav-name {float:right;}
     .header-nav-c1 {width: 1140px; margin: 0 auto; }
-    .product-view-default img, .specform-default img {margin: 15px 0;}
     .product-view-default .fa.empty {text-align: left;}
     .cat-image {overflow: hidden;}
 }
@@ -14,7 +13,6 @@
 
     .nav li span.nav-name {float:right;}
     .nav li span.hidden-sm {float:right;}
-    .product-view-default img, .specform-default img {margin: 15px 0;}
     .product-view-default .fa.empty {text-align: left;}
     .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
