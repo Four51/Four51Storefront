@@ -33,8 +33,8 @@ four51.app.directive('customselectionfield', function($451) {
 	            });
 	            // end reset
 	            scope.customfield.Value = this.item == null ? null : this.item.Value;
-	            scope.customfield.SelectedOptionID = this.item.ID;
-	            this.item.Selected = true;
+	            scope.customfield.SelectedOptionID = this.item == null ? null : this.item.ID;
+	            this.item == null ? null : this.item.Selected = true;
 
                 if (this.item != null && this.item.Value.indexOf('Other') > -1) {
                     scope.customfield.isOtherSelected = true;
