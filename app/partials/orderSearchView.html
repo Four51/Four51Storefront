@@ -48,11 +48,27 @@
                 <h3 class="panel-title">Search Orders</h3>
             </div>
             <div class="panel-body">
-                <label>Order ID</label><input type="text" ng-model="criteria.OrderID" placeholder="Order ID" />
-                <label>Shipping Address</label><input type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" />
-                <label>From</label><input type="text" ui-date ng-model="criteria.DateRangeFrom" placeholder="From:" />
-                <label>To</label><input type="text" ui-date ng-model="criteria.DateRangeTo" placeholder="To:" />
-                <label>Last n Orders</label><input type="text" ng-model="criteria.LastN" placeholder="Last n Orders:" />
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label>Order ID</label><input class="form-control" type="text" ng-model="criteria.OrderID" placeholder="Order ID" />
+                    </div>
+                    <div class="form-group">
+                        <label>Shipping Address</label><input class="form-control" type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" />
+
+                    </div>
+                    <div class="form-group">
+                        <label>From</label><input type="text" class="form-control" ui-date ng-model="criteria.DateRangeFrom" placeholder="From:" />
+
+                    </div>
+                    <div class="form-group">
+                        <label>To</label><input type="text" class="form-control" ui-date ng-model="criteria.DateRangeTo" placeholder="To:" />
+
+                    </div>
+                    <div class="form-group">
+                        <label>Last n Orders</label><input class="form-control" type="text" ng-model="criteria.LastN" placeholder="Last n Orders:" />
+
+                    </div>
+                </div>
             </div>
             <div class="panel-footer">
                 <input type="submit" class="btn btn-primary" value="Search" ng-click="OrderSearch($event, criteria); toggle = !toggle;" />
