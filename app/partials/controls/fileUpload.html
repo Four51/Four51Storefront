@@ -6,7 +6,7 @@
         <input name="delete" class="delete" type="checkbox"></input> Delete
     </div>
     <input name="upload" class="upload" ng-show="replace || !customfield.File" type="file"></input><br />
-    <input type="hidden" ng-required="customfield.IsRequired" ng-model="customfield.File.ID"></input>
+    <input type="hidden" ng-required="customfield.Required" ng-model="customfield.File.ID"></input>
     <div class="alert alert-info" ng-show="replace">
         <div class="error ui-state-error-text"></div>
         {{customfield.UploadInstructions}}
