@@ -33,5 +33,6 @@ four51.app.config(['$routeProvider', function($routeProvider) {
 			when('/login', { templateUrl: 'partials/controls/login.html', controller: 'LoginCtrl' }).
 			when('/search', { templateUrl: 'partials/searchView.html', controller: 'ProductSearchCtrl' }).
             when('/search/:searchTerm', { templateUrl: 'partials/searchView.html', controller: 'ProductSearchCtrl' }).
+            when('/security', { templateUrl: 'partials/security.html', controller: 'SecurityCtrl' }).
 			otherwise({redirectTo: '/catalog'});
 	}]);
