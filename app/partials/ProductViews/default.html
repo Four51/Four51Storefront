@@ -65,18 +65,14 @@
                         <!-- nothing is accomodating the 0 level inventory and the custom message to be displayed -->
                         {{inventoryDisplay(LineItem.Product, LineItem.Variant) + ' in stock'}}
                     </p>
-
+                    <br/>
                     <div id="451_list_vspec" ng-show="allowAddToOrder">
                         <div class="row" ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
-                            <div class="col-xs-12">
-                                <label>{{s.Name}}</label>
-                            </div>
-                            <div class="col-xs-12">{{s.Prefix}}
+                                <label>{{s.Name}}</label>{{s.Prefix}}
                                 <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
                                 <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
                                 <customselectionfield change="specChanged" customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
                                 {{s.Suffix}}
-                            </div>
                         </div>
                     </div>
 
@@ -85,7 +81,6 @@
                         <quantityfield ng-if="!allowAddFromVariantList" required="true" lineitem="LineItem" error="quantityError" class="quantity" />
                     </div>
 
-                    <hr />
                     <p class="alert alert-danger" ng-show="quantityError">
                         {{quantityError}}
                     </p>
