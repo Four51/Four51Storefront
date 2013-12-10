@@ -5,8 +5,6 @@ four51.app.directive('customtextfield', function($451) {
         },
         restrict: 'E',
         transclude: true,
-        template: '<label>{{customfield.Label}}</label><input ng-if="customfield.Lines <= 1" placeholder="{{customfield.Label}}" size="{{customfield.Width * .13}}" max="{{customfield.MaxLength}}" ui-mask="{{customfield.MaskedInput}}" type="text" ng-required="{{customfield.IsRequired}}" ng-model="customfield.Value"></input>' +
-	        '<textarea ng-if="customfield.Lines > 1" cols="{{customfield.Width * .13}} rows={{customfield.Lines}}" ng-maxlength="{{customfield.MaxLength}}" ng-required="{{customfield.IsRequired}}" ng-model="customfield.Value"></textarea>'
         template: '<label>{{customfield.Label}}</label><input class="form-control" ng-if="customfield.Lines <= 1" placeholder="{{customfield.Label}}" size="{{customfield.Width * .13}}" max="{{customfield.MaxLength}}" ui-mask="{{customfield.MaskedInput}}" type="text" ng-required="{{customfield.Required}}" ng-model="customfield.Value"></input>' +
 	        '<textarea class="form-control" ng-if="customfield.Lines > 1" cols="{{customfield.Width * .13}} rows={{customfield.Lines}}" ng-maxlength="{{customfield.MaxLength}}" ng-required="{{customfield.Required}}" ng-model="customfield.Value"></textarea>'
     }
@@ -62,6 +60,11 @@ four51.app.directive('customselectionfield', function($451) {
                     if (matched) return;
                     if (scope.customfield.Value == n.Value) {
                         id = n.ID;
+                        matched = true;
+                    }
+                    if  (scope.customfield.Value == null) {
+                        id = scope.customfield.DefaultOptionID;
+                        if (id != null) scope.customfield.Value = $451.filter(scope.customfield.Options, { 'Property': 'ID', 'Value': id })[0].Value;
                         matched = true;
                     }
                 });
