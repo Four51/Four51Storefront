@@ -83,7 +83,7 @@
                     Info
                 </h3>
                 <!--- below heading tag hides/shows as intended --->
-                <h3 ng-show="StaticSpecGroups" ng-click="selected=2" ng-class="{'panel-selected':selected == 2}" class="panel-title panel-switch">
+                <h3 ng-show="StaticSpecGroups && user.Permissions.contains('ViewNonCustomizableSpecs')" ng-click="selected=2" ng-class="{'panel-selected':selected == 2}" class="panel-title panel-switch">
                     <span class="icon">
                         <i ng-class="{'fa fa-caret-up':selected == 2}"></i>
                     </span>
