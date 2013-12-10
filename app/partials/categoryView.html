@@ -14,14 +14,14 @@
                 <li class="pull-right">
                     <a href="#/search"><i class="fa fa-search" rel="tooltip" title="Search Products"></i></a>
                 </li>
-                <li ng-click="productList = !productList" class="pull-right">
+                <!--<li ng-click="productList = !productList" class="pull-right">
                     <span ng-show="productList" ><i class="fa fa-th hidden-xs" rel="tooltip" title="Display as Grid"></i></span>
                     <span ng-show="!productList"><i class="fa fa-align-justify hidden-xs" rel="tooltip" title="Display as Row"></i></span>
-                </li>
+                </li>!-->
             </ul>
         <hr />
     </nav>
-    <aside class="col-sm-3" ng-if="showMega" ng-class="{ 'category-view-aside': showMega }">
+    <aside class="col-sm-3 hidden-sm hidden-xs" ng-if="showMega" ng-class="{ 'category-view-aside': showMega }">
         <nav class="nav 451_cat_nav">
             <a href="#/catalog">All Products</a>
             <ul class="nav-header 451_cat_item">
@@ -55,11 +55,11 @@
         </div>
 
         <div id="451_lst_prod" class="product-navigation" ng-if="currentCategory.InteropID" style="position: relative;">
-            <loadingindicator ng-show="productLoadingIndicator" title="Please wait while we fetch all products" />
+            <loadingindicator ng-show="productLoadingIndicator" title="Please wait while we fetch all products"/>
             <h3 ng-show="products">Products</h3>
             <nav class="nav">
                 <ul>
-                    <li class="nav-header well col-lg-3 col-md-4  col-sm-6 col-xs-12" ng-class="{ 'productList': productList, 'productGrid': !productList, 'category-view-aside': showMega }" ng-repeat="product in products">
+                    <li style="min-height:0;" class="nav-header well" ng-class="{ 'productList': !productList, 'category-view-aside': showMega }" ng-repeat="product in products">
                         <shortproductview p="product" />
                     </li>
                 </ul>
