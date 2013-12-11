@@ -1,6 +1,7 @@
 <div class="fileInput">
     <p class="text-info">{{customfield.Name}}:</p>
-    <img ng-show="customfield.File.IsImage || customfield.FileType == 'Image'" ng-src="{{customfield.File.Url}}"></img><a ng-show="!customfield.File.IsImage || customfield.FileType != 'Image'" ng-href="{{customfield.File.Url}}">{{customfield.File.OriginalName}}</a>
+    <img ng-show="customfield.File.IsImage && customfield.FileType == 'Image'" ng-src="{{customfield.File.Url}}"></img>
+    <a ng-show="customfield.FileType != 'Image'" ng-href="{{customfield.File.Url}}">{{customfield.File.OriginalName}}</a>
     <div ng-show="customfield.File">
         <input name="replace" class="replace" type="checkbox" ng-model="replace"></input> Replace
         <input name="delete" class="delete" type="checkbox"></input> Delete
