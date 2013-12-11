@@ -68,7 +68,7 @@
                     <br/>
                     <div id="451_list_vspec" ng-show="allowAddToOrder">
                         <div class="row" ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
-                                <label>{{s.Name}}</label>{{s.Prefix}}
+                                {{s.Prefix}}
                                 <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
                                 <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
                                 <customselectionfield change="specChanged" customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
@@ -76,7 +76,7 @@
                         </div>
                     </div>
 
-                    <div style="float: left;">
+                    <div>
                         <span class="text-info" ng-hide="allowAddFromVariantList">Order Quantity:</span>
                         <quantityfield ng-if="!allowAddFromVariantList" required="true" lineitem="LineItem" error="quantityError" class="quantity" />
                     </div>
