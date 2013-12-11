@@ -1,7 +1,10 @@
 <section id="451_area_prod_desc" class="container product-view-default">
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch product information" />
     <productnav product="LineItem.Product" variant="LineItem.Variant" />
-    <div class="row">
+	<div ng-show="LineItem.PriceSchedule.PriceBreaks.length == 1">
+		Simple Price: {{LineItem.PriceSchedule.PriceBreaks[0]}}
+	</div>
+	<div class="row">
         <div class="col-sm-5 col-collapse" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url || LineItem.Variant.PreviewUrl">
             <figure style="background-color:#fff;">
                 <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}">
