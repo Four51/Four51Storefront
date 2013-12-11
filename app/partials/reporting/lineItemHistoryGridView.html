@@ -14,14 +14,14 @@
              </div>
          </div>
      </div>
-     <div class="col-xs-3 col-sm-2">
+     <div ng-if="!(user.Permissions.contains('HidePricing'))" class="col-xs-3 col-sm-2">
          <p>{{item.UnitPrice | currency:"$"}}</p>
      </div>
     <div class="col-xs-3 col-sm-2">
         <p ng-show="item.Product.QuantityMultiplier == 1">x {{item.Quantity}}</span>
         <p ng-show="item.Product.QuantityMultiplier > 1" >x {{item.Product.QuantityMultiplier * item.Quantity}}</span>
     </div>
-    <div class="col-xs-3 col-sm-2">
+    <div ng-if="!(user.Permissions.contains('HidePricing'))" class="col-xs-3 col-sm-2">
         {{item.LineTotal | currency:"$"}}
     </div>
     <div class="col-xs-3 col-sm-2" ng-show="order.Status == 'Open'">{{item.TotalShipped}}</div>

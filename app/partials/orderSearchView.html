@@ -26,7 +26,7 @@
             <caption ng-show="orderSearchStat">{{orderSearchStat.Type}} - {{orderSearchStat.DisplayName}}</caption>
             <thead>
             <tr>
-                <td>ID</td><td>Type</td><td>Status</td><td>Submitted By</td><td>DateCreated/Submitted</td><td>Total</td>
+                <td>ID</td><td>Type</td><td>Status</td><td>Submitted By</td><td>DateCreated/Submitted</td><td ng-if="!(user.Permissions.contains('HidePricing'))">Total</td>
             </tr>
             </thead>
             <tbody>
@@ -36,7 +36,7 @@
                 <td>{{order.StatusText}}</td>
                 <td>{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</td>
                 <td>{{order.DateSubmitted || order.DateCreated | date:'short'}}</td>
-                <td>{{order.Total | currency:"$"}}</td>
+                <td ng-if="!(user.Permissions.contains('HidePricing'))">{{order.Total | currency:"$"}}</td>
             </tr>
             </tbody>
         </table>

@@ -29,7 +29,7 @@
                             Order Summary
                         </h3>
                     </div>
-                    <div class="panel-body text-left">
+                    <div ng-if="!(user.Permissions.contains('HidePricing'))" class="panel-body text-left">
                         <orderhistorysummary></orderhistorysummary>
                     </div>
                     <div class="panel-footer" ng-if="order.FromUserID == user.ID">

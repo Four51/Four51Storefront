@@ -17,7 +17,7 @@
                     </h3>
                 </div>
                 <div class="panel-body text-right">
-                    <div ng-if="!user.Permissions.contains('HidePricing')">
+                    <div ng-if="!(user.Permissions.contains('HidePricing'))">
                         <p>
                             <span class="text-info">SubTotal:</span> {{currentOrder.Subtotal | currency}}
                         </p>
@@ -47,7 +47,7 @@
                                 <span class="text-info">ID: </span><a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">{{item.ProductIDText}}</a>
                             </p>
                             <p><span class="text-info">Product: </span>{{item.Product.Name}}</p>
-                            <p><span class="text-info">Unit Price: </span>{{item.UnitPrice | currency}}</p>
+                            <p ng-if="!(user.Permissions.contains('HidePricing'))"><span class="text-info">Unit Price: </span>{{item.UnitPrice | currency}}</p>
                             <p ng-show="item.Product.UnitOfMeasure"><span class="text-info">Unit of Measure: </span>{{item.Product.UnitOfMeasure}}</p>
                             <span class="text-info" ng-show="item.Specs != {}">Specifications: </span>
                             <ul>
@@ -86,8 +86,10 @@
                             </div>
                         </div>
                         <div class="col-sm-2 col-xs-4">
-                            <p class="text-info">Price: </p>
-                            {{item.LineTotal | currency}}
+                            <span ng-if="!(user.Permissions.contains('HidePricing'))">
+                                <p class="text-info">Price: </p>
+                                {{item.LineTotal | currency}}
+                            </span>
                         </div>
                         <div class="col-sm-1 col-xs-4">
                              <i class="fa fa-times-circle" ng-click="removeItem(item)"></i>
