@@ -79,7 +79,7 @@ four51.app.directive('staticspecstable', function(){
         restrict: 'E',
         templateUrl: 'partials/controls/staticSpecs.html',
 		link: function(scope){
-            scope.length = Object.keys(scope.specgroups).length;
+            scope.length = scope.specgroups ? Object.keys(scope.specgroups).length : 0;
 			scope.hasvisiblechild = function(specs){
 				var hasChild = false;
 				angular.forEach(specs, function(item){

@@ -1227,3 +1227,7 @@ input[type="file"]{
     content:" Required";
 
 }
+.product-view-default-variant-box{
+    max-height:220px;
+    overflow-y:scroll;
+}
