@@ -1,7 +1,10 @@
 <section id="451_area_prod_desc" class="container product-view-default">
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch product information" />
     <productnav product="LineItem.Product" variant="LineItem.Variant" />
-    <div class="row">
+	<div ng-show="LineItem.PriceSchedule.PriceBreaks.length == 1">
+		Simple Price: {{LineItem.PriceSchedule.PriceBreaks[0]}}
+	</div>
+	<div class="row">
         <div class="col-sm-5 col-collapse" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url || LineItem.Variant.PreviewUrl">
             <figure style="background-color:#fff;">
                 <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}">
@@ -43,22 +46,23 @@
                 <div class="panel-body">
                     <div ng-if="LineItem.Product.Variants.length > 0 && !LineItem.Variant">
                         <h4 class="text-center">Choose a variant:</h4>
-                        <div class="row" ng-repeat="v in LineItem.Product.Variants">
-                            <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}} class="text-info">{{v.ExternalID}}</a>
-                            <div class="pull-right" ng-if="allowAddFromVariantList">
-                                <quantityfield calculated="calcVariantLineItems" lineitem="variantLineItems[v.InteropID]" error="quantityError" class="quantity" /> {{quantityError}} {{variantLineItems[v.InteropID].LineTotal | currency}}
-                            </div>
-                            <div ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
+                        <div style="max-height:200px; overflow-y:scroll;">
+                        <div class="list-group" ng-repeat="v in LineItem.Product.Variants">
+                            <a class="list-group-item" href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>
+                                <h5 class="list-group-item-heading">{{v.ExternalID}}</h5>
+                                <p class="list-group-item-text small" ng-show="v.Description"><small>{{v.Description}}</p>
                                 <div ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
                                     {{v.QuantityAvailable + ' in stock'}}
                                 </div>
-                            </div>
-                            <div ng-show="v.Description">
-                                <div>
-                                    {{v.Description}}
-                                </div>
+                            </a>
+                            <div class="list-group-item">
+                                <h4 class="pull-left text-success" style="margin:0;">{{variantLineItems[v.InteropID].LineTotal | currency}}</h4>
+                                <quantityfield calculated="calcVariantLineItems" lineitem="variantLineItems[v.InteropID]" error="quantityError" class="quantity pull-right" />
+                                <div style="padding:5px 15px; margin:2px 15px;" class="alert alert-danger pull-right" ng-show="quantityError">{{quantityError}}</div>
+                                <div style="clear:both;"></div>
                             </div>
                         </div>
+                            </div>
                     </div>
 
                     <p ng-show="LineItem.Product.DisplayInventory && inventoryDisplay(LineItem.Product, LineItem.Variant)">
@@ -130,6 +134,10 @@
             <div ng-show="LineItem.Product.Type == 'VariableText'">
                 <button type="button" ng-show="!LineItem.Variant" class="btn btn-xs btn-danger" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/new/edit" tabindex="-1">Create New</button>
             </div>!-->
+
+            <!--PRICE SCHEDULE
+            <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product'/>
+            !-->
 
         </div>
     </div>
