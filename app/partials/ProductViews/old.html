@@ -1,0 +1,156 @@
+<section id="451_area_prod_desc" class="container product-view-default">
+    <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch product information" />
+    <productnav product="LineItem.Product" variant="LineItem.Variant" />
+	<figure>
+        <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url || LineItem.Variant.PreviewUrl">
+    </figure>
+    <div class="col-collapse col-md-4 col-md-offset-1 col-md-push-7" style="position: relative;">
+        <loadingindicator ng-show="addToOrderIndicator" title="Please wait while we add this product to your order" />
+        <div class="panel panel-primary" ng-show="allowAddToOrder">
+            <div class="panel-heading">
+                <h3 class="panel-title panel-primary">
+                    {{LineItem.Product.Name}}
+                </h3>
+            </div>
+            <form name="addToOrderForm">
+                <div class="panel-body text-left">
+                    <h5>
+                        <span class="text-info">ID: </span>
+                        {{LineItem.Product.ExternalID}}
+                    </h5>
+                    <!--- priceschedule and vspec table is in INFO because these fields can become very long. Would like to see if only a single price to display priceschedule here--->
+                    <p ng-show="LineItem.Product.DisplayInventory && inventoryDisplay(LineItem.Product, LineItem.Variant)">
+                        <!-- nothing is accomodating the 0 level inventory and the custom message to be displayed -->
+                        <span class="text-info">
+                            Quantity Available:
+                        </span>
+                        {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
+                    </p>
+                </div>
+                <div class="panel-footer">
+                    <!--- bringing vspec back into this panel to coincide with order quantity --->
+                    <div id="451_list_vspec" ng-show="allowAddToOrder">
+                        <div class="row" ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
+                            <div class="col-xs-12">
+                                <label>{{s.Name}}</label>
+                            </div>
+                            <div class="col-xs-12">{{s.Prefix}}
+                                <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
+                                <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
+                                <customselectionfield change="specChanged" customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
+                                {{s.Suffix}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="float: left;">
+                       <span class="text-info">{{allowAddFromVariantList ? 'Total' : 'Order Quantity'}}: </span>
+					<quantityfield ng-if="!allowAddFromVariantList" required="true" lineitem="LineItem" error="quantityError" class="quantity" />
+                       <span class="text-success">
+                           {{LineItem.LineTotal | currency}}{{variantLineItemsOrderTotal | currency}}
+                       </span>
+                    </div>
+                    <div style=" display: inline;float: right;">
+                        <button type="button" id="451_btn_orderadd" ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(LineItem)" class="btn btn-primary">
+                            {{addToOrderText}}
+                        </button>
+                    </div>
+                    <hr />
+                    <p class="alert alert-danger" ng-show="quantityError">
+                        {{quantityError}}
+                    </p>
+                    <p class="alert alert-danger" ng-show="LineItem.PriceSchedule.MinQuantity > 1">
+                        Minimum Quantity: {{LineItem.PriceSchedule.MinQuantity}}
+                    </p>
+                    <p class="alert alert-danger" ng-show="LineItem.PriceSchedule.MaxQuantity">
+                        Maximum Quantity: {{LineItem.PriceSchedule.MaxQuantity}}
+                    </p>
+					<p class="alert alert-warning" ng-show="addToOrderForm.$invalid" >
+                        Product is missing required fields for Add to Cart.
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-collapse col-md-7 col-md-pull-5">
+        <!--- TODO below entire PANEL needs to only display if YES info --->
+        <div class="panel product-view-default-toggle-panel panel-default ">
+            <div class="panel-heading">
+                <h3 ng-click="selected=1" ng-class="{'panel-selected':selected == 1}" class="panel-title panel-switch">
+                    <span class="icon">
+                        <i ng-class="{'fa fa-caret-up':selected == 1}"></i>
+                    </span>
+                    Info
+                </h3>
+                <!--- below heading tag hides/shows as intended --->
+                <h3 ng-show="StaticSpecGroups" ng-click="selected=2" ng-class="{'panel-selected':selected == 2}" class="panel-title panel-switch">
+                    <span class="icon">
+                        <i ng-class="{'fa fa-caret-up':selected == 2}"></i>
+                    </span>
+                   Spec
+                </h3>
+            </div>
+            <!--- TODO below PANEL needs to only display if YES info --->
+            <div class="panel-body">
+                <div ng-hide="selected == 2">
+                    <div ng-show="LineItem.Product.Description">
+                        <p class="text-info">
+                            Description:
+                        </p>
+                        <p ng-bind-html="LineItem.Product.Description" />
+                    </div>
+                    <div ng-show="LineItem.Variant.Description">
+                        <p class="text-info">
+                            Variant Description:
+                        </p>
+                        <p ng-bind-html="LineItem.Variant.Description"/>
+                    </div>
+                    <div ng-show="LineItem.Variant.ExternalID">
+                        <p class="text-info">
+                            Variant ID:
+                        </p>
+                        {{LineItem.Variant.ExternalID}}
+                    </div>
+                    <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product'/>
+                    <div ng-show="LineItem.Product.UnitOfMeasure">
+                        <hr />
+                        <p>
+                            <span class="text-info">Unit of Measure:</span> {{LineItem.Product.UnitOfMeasure}}
+                        </p>
+                    </div>
+                    <span ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant">
+                        <button class="btn btn-xs btn-warning" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit">Edit</button>
+                        <button class="btn btn-xs btn-warning" redirect="{{LineItem.Variant.ProofUrl}}">View PDF</button>
+                    </span>
+
+                    <div ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
+                        <hr />
+                        <p>
+                            <span class="text-info">Available Inventory:</span> {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
+                        </p>
+                    </div>
+                    <div ng-show="LineItem.Product.Type == 'VariableText'">
+                        <button type="button" ng-show="!LineItem.Variant" class="btn btn-xs btn-danger" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/new/edit" tabindex="-1">Create New</button>
+                    </div>
+                    <variantlist ng-if="LineItem.Product.Variants.length > 0 && !LineItem.Variant" />
+                </div>
+                <!--- below panel hides/shows as intended and is dependant upon the header toggle above --->
+                <div ng-show="selected == 2">
+                    <staticspecstable specgroups="StaticSpecGroups"/>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default hidden">
+            <div class="panel-heading">
+                <h3 class="panel-title">Related Products</h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li>R.1</li>
+                    <li>R.2</li>
+                    <li>R.3</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
