@@ -41,6 +41,7 @@ four51.app.directive('customfilefield', function($parse, $resource, $451, fileRe
 						if (event.target.checked) {
 							scope.$apply(function() {
 								scope.customfield.File = null;
+                                scope.customfield.Value = null;
 								replace_box.checked = false;
 							});
 							break;
@@ -53,8 +54,8 @@ four51.app.directive('customfilefield', function($parse, $resource, $451, fileRe
 							reset();
 							delete_box.checked = false;
 						}
-						if (!event.target.checked) {
-							reset();
+						if (!event.target.checked && cache.Value) {
+                            reset();
 						}
 						break;
 					case "upload":

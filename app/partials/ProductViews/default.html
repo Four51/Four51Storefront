@@ -43,7 +43,8 @@
                         Order
                     </h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" style="position: relative;">
+                    <loadingindicator ng-show="addToOrderIndicator" title="Adding product to cart"/>
                     <div ng-if="LineItem.Product.Variants.length > 0 && !LineItem.Variant">
                         <h4 class="text-center">Choose a variant:</h4>
                         <div style="max-height:200px; overflow-y:scroll;">
