@@ -29,6 +29,11 @@
                         <h4 ng-show="LineItem.Product.ExternalID" class="text-info" style="margin:0;">ID: {{LineItem.Product.ExternalID}}</h4><br/>
                         <p ng-bind-html="LineItem.Product.Description" />
                         <p ng-bind-html="LineItem.Variant.Description" />
+                        <div class="btn btn-default btn-block" ng-show="LineItem.PriceSchedule.PriceBreaks.length > 1 && LineItem.PriceSchedule.PriceBreaks.length > 5" ng-init="togglePS = true" ng-click="togglePS = !togglePS">
+                            <span ng-show="!togglePS"><i class="fa fa-arrow-circle-up"></i> Hide</span>
+                            <span ng-show="togglePS"><i class="fa fa-arrow-circle-down"></i> View</span>
+                            Price Schedule</div>
+                        <priceScheduleTable ng-hide="(LineItem.PriceSchedule.PriceBreaks.length == 1 || LineItem.PriceSchedule.PriceBreaks.length > 5) && togglePS" ps='LineItem.PriceSchedule' p='LineItem.Product'/>
                     </div>
                 </div>
             </div>
@@ -47,7 +52,7 @@
                 <div class="panel-body">
                     <div ng-if="LineItem.Product.Variants.length > 0 && !LineItem.Variant">
                         <h4 class="text-center">Choose a variant:</h4>
-                        <div style="max-height:200px; overflow-y:scroll;">
+                        <div class="product-view-default-variant-box">
                         <div class="list-group" ng-repeat="v in LineItem.Product.Variants">
                             <a class="list-group-item" href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>
                                 <h5 class="list-group-item-heading">{{v.ExternalID}}</h5>
@@ -56,7 +61,7 @@
                                     {{v.QuantityAvailable + ' in stock'}}
                                 </div>
                             </a>
-                            <div class="list-group-item">
+                            <div class="list-group-item" style="border-top-left-radius:0; border-top-right-radius:0;">
                                 <h4 class="pull-left text-success" style="margin:0;">{{variantLineItems[v.InteropID].LineTotal | currency}}</h4>
                                 <quantityfield calculated="calcVariantLineItems" lineitem="variantLineItems[v.InteropID]" error="quantityError" class="quantity pull-right" />
                                 <div style="padding:5px 15px; margin:2px 15px;" class="alert alert-danger pull-right" ng-show="quantityError">{{quantityError}}</div>
@@ -137,7 +142,7 @@
             </div>!-->
 
             <!--PRICE SCHEDULE
-            <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product'/>
+
             !-->
 
         </div>
