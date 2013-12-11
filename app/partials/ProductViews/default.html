@@ -65,27 +65,20 @@
                         <!-- nothing is accomodating the 0 level inventory and the custom message to be displayed -->
                         {{inventoryDisplay(LineItem.Product, LineItem.Variant) + ' in stock'}}
                     </p>
-
+                    <br/>
                     <div id="451_list_vspec" ng-show="allowAddToOrder">
-                        <div class="row" ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
-                            <div class="col-xs-12">
-                                <label>{{s.Name}}</label>
-                            </div>
-                            <div class="col-xs-12">{{s.Prefix}}
+                        <div class="form-group" ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
                                 <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
                                 <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
                                 <customselectionfield change="specChanged" customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
-                                {{s.Suffix}}
-                            </div>
                         </div>
                     </div>
 
-                    <div style="float: left;">
+                    <div class="form-group">
                         <span class="text-info" ng-hide="allowAddFromVariantList">Order Quantity:</span>
                         <quantityfield ng-if="!allowAddFromVariantList" required="true" lineitem="LineItem" error="quantityError" class="quantity" />
                     </div>
 
-                    <hr />
                     <p class="alert alert-danger" ng-show="quantityError">
                         {{quantityError}}
                     </p>
@@ -103,13 +96,13 @@
                 <div class="panel-footer">
                     <div ng-hide="LineItem.LineTotal || variantLineItemsOrderTotal" class="col-md-3"></div>
                     <div ng-show="LineItem.LineTotal || variantLineItemsOrderTotal" class="col-md-6 text-center">
-                        <h3 style="margin:0; padding:0; display:inline-block;">Total:</h3 >
+                        <h3 style="margin-top:0; display:inline-block;">Total:</h3 >
                         <h3 class="text-success" style="margin:0; padding:0; display:inline-block;">
                             {{LineItem.LineTotal | currency}}{{variantLineItemsOrderTotal | currency}}
                         </h3>
                     </div>
                     <div class="col-md-6">
-                        <button type="button" id="451_btn_orderadd" ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(LineItem)" class="btn btn-primary btn-block">
+                        <button type="button" id="451_btn_orderadd" ng-disabled="addToOrderForm.$invalid" ng-click="addToOrder(LineItem)" class="btn btn-primary btn-block btn-lg">
                             {{addToOrderText}}
                         </button>
                     </div>
