@@ -1,9 +1,7 @@
 <section id="451_area_prod_desc" class="container product-view-default">
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch product information" />
     <productnav product="LineItem.Product" variant="LineItem.Variant" />
-	<div ng-show="LineItem.PriceSchedule.PriceBreaks.length == 1">
-		Simple Price: {{LineItem.PriceSchedule.PriceBreaks[0]}}
-	</div>
+
 	<div class="row">
         <div class="col-sm-5 col-collapse" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url || LineItem.Variant.PreviewUrl">
             <figure style="background-color:#fff;">
@@ -13,7 +11,9 @@
 
         <div class="col-sm-6 col-sm-offset-1 col-collapse" ng-show="allowAddToOrder">
             <!--BASIC PRODUCT INFO!-->
-            <h4 ng-show="LineItem.Product.ExternalID" class="pull-right text-info">ID: {{LineItem.Product.ExternalID}}</h4>
+            <h2 class="text-success pull-right" ng-show="LineItem.PriceSchedule.PriceBreaks.length == 1">
+                {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
+            </h2>
             <h2 ng-hide="LineItem.Variant.ExternalID">{{LineItem.Product.Name}}</h2>
             <h2 ng-show="LineItem.Variant.ExternalID">{{LineItem.Variant.ExternalID}}</h2>
             <div ng-show="LineItem.Product.Description">
@@ -26,6 +26,7 @@
                         </h3>
                     </div>
                     <div class="panel-body">
+                        <h4 ng-show="LineItem.Product.ExternalID" class="text-info" style="margin:0;">ID: {{LineItem.Product.ExternalID}}</h4><br/>
                         <p ng-bind-html="LineItem.Product.Description" />
                         <p ng-bind-html="LineItem.Variant.Description" />
                     </div>
