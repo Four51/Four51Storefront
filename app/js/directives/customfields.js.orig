@@ -34,7 +34,11 @@ four51.app.directive('customselectionfield', function($451) {
 	            // end reset
 	            scope.customfield.Value = this.item == null ? null : this.item.Value;
 	            scope.customfield.SelectedOptionID = this.item == null ? null : this.item.ID;
+<<<<<<< HEAD
+	            this.item == null ? null : this.item.Selected = true;
+=======
 	            if (this.item != null) this.item.Selected = true;
+>>>>>>> 9b763f48630d316bb0fcec0cded412435c330780
 
                 if (this.item != null && this.item.Value.indexOf('Other') > -1) {
                     scope.customfield.isOtherSelected = true;
@@ -60,11 +64,6 @@ four51.app.directive('customselectionfield', function($451) {
                     if (matched) return;
                     if (scope.customfield.Value == n.Value) {
                         id = n.ID;
-                        matched = true;
-                    }
-                    if  (scope.customfield.Value == null) {
-                        id = scope.customfield.DefaultOptionID;
-                        if (id != null) scope.customfield.Value = $451.filter(scope.customfield.Options, { 'Property': 'ID', 'Value': id })[0].Value;
                         matched = true;
                     }
                 });
