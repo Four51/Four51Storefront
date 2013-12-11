@@ -4,6 +4,8 @@
     </figure>
     <p>Product ID: {{LineItem.ProductIDText}}</p>
     <p ng-bind-html='LineItem.Product.Description'></p>
-    <priceScheduleTable ng-if="!(user.Permissions.contains('HidePricing'))" ps='LineItem.PriceSchedule' p='LineItem.Product' />
+    <span ng-if="!(user.Permissions.contains('HidePricing'))">
+       <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product' />
+    </span>
     <staticspecstable specGroups="StaticSpecGroups"></staticspecstable>
 </div>
