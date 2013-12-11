@@ -6,14 +6,9 @@
 <p ng-show="orderCostCenter">Cost Center: <span style="float:right;">{{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</span></p>
 <p>Payment Method: <span style="float:right;">{{order.PaymentMethodText}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong></span></p>
 <address ng-show="order.BillAddress">
-    <strong> Bill to:</strong><br>
-    {{order.BillAddress.Street1}}<br>
+    <strong> Bill to:</strong>
+    <span style="float:right;">{{order.BillAddress.Street1}}<br>
     {{order.BillAddress.Street2}}<br ng-show="order.BillAddress.Street2">
-    {{order.BillAddress.City}},{{order.BillAddress.State}} {{order.BillAddress.Zip}}
-</address>
-<address ng-show="order.ShipAddress">
-    <strong> Ship to:</strong><br>
-    {{order.ShipAddress.Street1}}<br>
-    {{order.ShipAddress.Street2}}<br ng-show="order.ShipAddress.Street2">
-    {{order.ShipAddress.City}}, {{order.ShipAddress.State}} {{order.ShipAddress.Zip}}
+    {{order.BillAddress.City}}<br>
+    {{order.BillAddress.State}} {{order.BillAddress.Zip}}</span>
 </address>
