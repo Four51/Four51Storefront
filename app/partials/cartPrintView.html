@@ -43,13 +43,13 @@
                 </div>
                 <div>
                     <div>
-                        <div>
+                        <div ng-if="!(user.Permissions.contains('HidePricing'))">
                             {{item.UnitPrice | currency}}
                         </div>
                         <div>
                             {{item.Quantity}}
                         </div>
-                        <div>
+                        <div ng-if="!(user.Permissions.contains('HidePricing'))">
                             {{item.LineTotal | currency}}
                         </div>
                         <div ng-show="item.Product.UnitOfMeasure">

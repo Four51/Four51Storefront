@@ -19,7 +19,7 @@
     <div style="position:absolute; top:0; bottom:0; width:50%; right:0;">
         <section class="shortproduct-info text-center" ng-class="{ 'product-details': toggle }" ng-show="toggle">
 
-            <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]">
+            <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]" ng-if="!(user.Permissions.contains('HidePricing'))">
                 {{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
                 <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>
                 for {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}

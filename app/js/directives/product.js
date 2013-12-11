@@ -7,7 +7,8 @@ four51.app.directive('shortproductview', function(){
 
 		},
 		scope: {
-			p: '='
+			p: '=',
+            user: '='
 		},
 		templateUrl:'partials/shortProductView.html',
 		controller: 'shortProductViewCtrl'

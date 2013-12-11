@@ -7,7 +7,7 @@
             </h3>
         </div>
         <div class="panel-body text-right">
-            <div ng-if="!user.Permissions.contains('HidePricing')" style="padding: 10px;">
+            <div ng-if="!(user.Permissions.contains('HidePricing'))" style="padding: 10px;">
                 <p><span class="text-info">Items:</span> {{currentOrder.LineItems.length}}</p>
                 <p><span class="text-info">Subtotal:</span> {{currentOrder.Subtotal | currency}}</p>
                 <p><span class="text-info">Shipping Costs:</span> {{currentOrder.ShippingCost | currency}}</p>
