@@ -1,4 +1,4 @@
-four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $location, $routeParams, Order, FavoriteOrder) {
+four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $location, $routeParams, Order, FavoriteOrder, Address) {
 	$scope.loadingIndicator = true;
 	Order.get($routeParams.id, function(data){
 		$scope.loadingIndicator = false;
@@ -22,6 +22,18 @@ four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $location,
             });
             return false;
         };
+
+        angular.forEach(data.LineItems, function(item) {
+            if (item.ShipAddressID) {
+                Address.get(item.ShipAddressID, function(add) {
+                    item.ShipAddress = add;
+                });
+            }
+        });
+
+        Address.get(data.BillAddressID, function(add){
+            data.BillAddress = add;
+        });
 	});
 
 	$scope.saveFavorite = function() {
