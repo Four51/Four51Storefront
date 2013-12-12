@@ -64,8 +64,8 @@
                             </a>
                             <div ng-if="allowAddFromVariantList" class="list-group-item" style="border-top-left-radius:0; border-top-right-radius:0;">
                                 <h4 class="pull-left text-success" style="margin:0;">{{variantLineItems[v.InteropID].LineTotal | currency}}</h4>
-                                <quantityfield calculated="calcVariantLineItems" lineitem="variantLineItems[v.InteropID]" error="quantityError" class="quantity pull-right" />
-                                <div style="padding:5px 15px; margin:2px 15px;" class="alert alert-danger pull-right" ng-show="quantityError">{{quantityError}}</div>
+                                <quantityfield calculated="calcVariantLineItems" lineitem="variantLineItems[v.InteropID]" class="quantity pull-right" />
+                                <div style="padding:5px 15px; margin:2px 15px;" class="alert alert-danger pull-right" ng-show="variantLineItems[v.InteropID].qtyError">{{variantLineItems[v.InteropID].qtyError}}</div>
                                 <div style="clear:both;"></div>
                             </div>
                         </div>
@@ -87,12 +87,12 @@
 
                     <div class="form-group" ng-if="allowAddToOrder">
                         <span class="text-info" ng-hide="allowAddFromVariantList">Order Quantity:</span>
-                        <quantityfield ng-if="!allowAddFromVariantList" required="true" lineitem="LineItem" error="quantityError" class="quantity" />
+                        <quantityfield ng-if="!allowAddFromVariantList" required="true" lineitem="LineItem" class="quantity" />
                     </div>
 
 					<div ng-if="allowAddToOrder">
-						<p class="alert alert-danger" ng-show="quantityError">
-							{{quantityError}}
+						<p class="alert alert-danger" ng-show="LineItem.qtyError">
+							{{LineItem.qtyError}}
 						</p>
 						<p class="alert alert-danger" ng-show="LineItem.PriceSchedule.MinQuantity > 1">
 							Minimum Quantity: {{LineItem.PriceSchedule.MinQuantity}}

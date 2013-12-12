@@ -78,8 +78,8 @@
                         </div>
                         <div class="col-sm-3 col-xs-4">
                             <div>
-                                <label>Quantity</label><quantityfield error="qtyError" lineitem="item" class="quantity"/>
-                                {{qtyError}}
+                                <label>Quantity</label><quantityfield lineitem="item" class="quantity"/>
+                                {{item.qtyError}}
                             </div>
                             <div ng-show="item.Product.QuantityMultiplier != 1">
                                 <span class="text-info">Total Quantity</span>{{item.Quantity * item.Product.QuantityMultiplier}}
