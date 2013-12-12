@@ -18,8 +18,9 @@
                 <label>Country</label><select name="country" class="form-control" ng-options="country.value as country.label for country in countries" ng-model="address.Country" placeholder="Country" required /><br />
             </div>
         </div>
-        <label class="checkbox-label"><input type="checkbox" ng-model="address.IsShipping" /> Save to Shipping Address Book</label><br />
-        <label class="checkbox-label"><input type="checkbox" ng-model="address.IsBilling" /> Save to Billing Address Book  </label><br />
+        <label class="checkbox-label"><input name="isShipping" type="checkbox" ng-model="address.IsShipping" ng-required="!address.IsBilling" /> Save to Shipping Address Book</label><br />
+        <label class="checkbox-label"><input name="isBilling" type="checkbox" ng-model="address.IsBilling" ng-required="!address.IsShipping" /> Save to Billing Address Book  </label><br />
+        <span class="ui-state-error-text" ng-show="addressEdit.isShipping.$invalid || addressEdit.isBilling.$invalid">An address must saved to the shipping, billing or both address books.</span>
         <hr/>
         <span class="ui-state-error-text" ng-show="objectExists">An address with that name already exists. Please specify another name</span>
         <button class="btn btn-small btn-danger" ng-if="address.InteropID" ng-click="delete()" type="button">Delete</button>
