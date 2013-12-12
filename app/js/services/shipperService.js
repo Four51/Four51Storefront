@@ -13,6 +13,7 @@ four51.app.factory('Shipper', function($resource, $451) {
 	}
 
     var _query = function(order, success) {
+	    if (!order) return null;
 	    var id = buildCacheID(order),
 		    shippers = store.get(id);
 		shippers ? _then(success, shippers) :
