@@ -11,7 +11,11 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
         if (Security.isAuthenticated()) {
             User.get(function(user) {
                 $scope.user = user;
-                if (user.CurrentOrderID) {
+
+	            if (!$scope.user.TermsAccepted)
+		            $location.path('conditions');
+
+	            if (user.CurrentOrderID) {
                     Order.get(user.CurrentOrderID, function(ordr) {
                         $scope.currentOrder = ordr;
 			            OrderConfig.costcenter(ordr, user).address(ordr, user);
@@ -31,7 +35,7 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
     }
 
     $scope.$on('event:auth-loginConfirmed', function(){
-		$route.reload();
+        $route.reload();
 	});
 	$scope.$on("$routeChangeSuccess", init);
     $scope.$on('event:auth-loginRequired', cleanup);
