@@ -1,4 +1,4 @@
-four51.app.factory('Order', function($resource, $rootScope, $451, Security) {
+four51.app.factory('Order', function($resource, $rootScope, $451, Security, Error) {
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
@@ -7,6 +7,7 @@ four51.app.factory('Order', function($resource, $rootScope, $451, Security) {
 	function _extend(order) {
 		order.isEditable = order.Status == 'Unsubmitted' || order.Status == 'Open';
 		angular.forEach(order.LineItems, function(item) {
+			item.OriginalQuantity = item.Quantity; //needed to validate qty changes compared to available quantity
 			angular.forEach(item.Specs, function(spec) {
 				if (spec.ControlType == 'File' && spec.File && spec.File.Url.indexOf('auth') == -1)
 					spec.File.Url += "&auth=" + Security.auth();
@@ -39,12 +40,17 @@ four51.app.factory('Order', function($resource, $rootScope, $451, Security) {
         });
     }
 
-    var _submit = function(order, success) {
-        $resource($451.api('order'), { }, { submit: { method: 'PUT' }}).submit(order).$promise.then(function(o) {
-	        store.set('451Cache.Order.' + o.ID);
-	        _extend(o);
-            _then(success,o);
-        });
+    var _submit = function(order, success, error) {
+        $resource($451.api('order'), { }, { submit: { method: 'PUT' }}).submit(order).$promise.then(
+	        function(o) {
+		        store.set('451Cache.Order.' + o.ID);
+		        _extend(o);
+	            _then(success,o);
+	        },
+	        function(ex) {
+		        error(Error.format(ex));
+	        }
+        );
     }
 
     return {

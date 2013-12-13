@@ -45,7 +45,12 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 		if (!localStorage["angular-cache.caches.451Cache.data.productARIHome"]) return "null";
 		return JSON.parse(localStorage["angular-cache.caches.451Cache.data.productARIHome"]).value.Specs.Size.Value;
 	}
-
+	$scope.calcVariantLineItems = function(i){
+		$scope.variantLineItemsOrderTotal = 0;
+		angular.forEach($scope.variantLineItems, function(item){
+			$scope.variantLineItemsOrderTotal += item.LineTotal || 0;
+		})
+	};
 	ProductDisplayService.getProductAndVariant($routeParams.productInteropID,$routeParams.variantInteropID, function(data){
 		$scope.LineItem.Product = data.product;
 		$scope.LineItem.Variant = data.variant;
@@ -61,8 +66,14 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 			$scope.currentOrder = {};
 			$scope.currentOrder.LineItems = [];
 		}
-
-		$scope.currentOrder.LineItems.push($scope.LineItem);
+		if($scope.allowAddFromVariantList){
+			angular.forEach($scope.variantLineItems, function(item){
+				if(item.Quantity > 0)
+					$scope.currentOrder.LineItems.push(item);
+			});
+		}else{
+			$scope.currentOrder.LineItems.push($scope.LineItem);
+		}
 
 		Order.save($scope.currentOrder, function(o){
 			$scope.user.CurrentOrderID = o.ID;

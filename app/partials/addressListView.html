@@ -1,6 +1,6 @@
 <section class="container address-list-view">
     <loadingindicator ng-show="displayLoadingIndicator" />
-    <div class="panel panel-default" ng-if="addresses.length == 0">
+    <div class="panel panel-default" ng-if="(addresses | filter:{IsCustEditable:true}).length == 0">
         <div class="panel-heading">
             <h3 class="panel-title">Addresses</h3>
         </div>
@@ -11,18 +11,19 @@
             <button type="button" class="btn btn-primary" ng-click="newAddress($event)">Add an address now</button>
         </div>
     </div>
-    <div class="panel panel-default"  ng-if="addresses.length > 0">
+    <div class="panel panel-default"  ng-if="(addresses | filter:{IsCustEditable:true}).length > 0">
         <div class="panel-heading">
             <h3 class="panel-title">Addresses</h3>
         </div>
+
         <div class="panel-body">
             <!--- TODO table needs to redone as Bootstrap responsive layout, see cartView.html for example --->
             <table class="table table-striped table-hover table-bordered">
                 <thead>
                 <tr>
-                    <td colspan="6"><input type="text" placeholder="Search" ng-model="searchTerm" /></td>
+                    <td colspan="6"><input class='form-control' type="text" placeholder="Search" ng-model="searchTerm" /></td>
                 </tr>
-                <tr>
+                <tr ng-show="(addresses | filter:searchTerm | filter:{IsCustEditable:true}).length > 0">
                     <td><input type='checkbox' ng-click="checkAll($event)" /></td>
                     <td>Name</td>
                     <td>City</td>
@@ -30,9 +31,12 @@
                     <td>Shipping</td>
                     <td>Billing</td>
                 </tr>
+                <tr ng-show="(addresses | filter:searchTerm | filter:{IsCustEditable:true}).length == 0">
+                    <td colspan="6">Your search resulted in no records. Please refine your search.</td>
+                </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="address in addresses | filter:searchTerm">
+                <tr ng-repeat="address in addresses | filter:searchTerm | filter:{IsCustEditable:true}">
                     <td><input type='checkbox' ng-model="address.Selected" /></td>
                     <td><a ng-href="#/address/{{address.ID}}">{{address.AddressName}}</a></td>
                     <td>{{address.City}}</a></td>
@@ -44,8 +48,8 @@
             </table>
         </div>
         <div class="panel-footer">
-            <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)">Delete Selected</button>
-            <button type="button" class="btn btn-primary pull-right" ng-click="newAddress($event)">New Address</button>
+            <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-show="(addresses | filter:searchTerm | filter:{Selected:true}).length > 0">Delete Selected</button>
+            <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" type="button" class="btn btn-primary pull-right" ng-click="newAddress($event)">New Address</button>
         </div>
     </div>
 </section>

@@ -22,6 +22,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 
 	$scope.updateShipper = function(li) {
 		$scope.shippingUpdatingIndicator = true;
+		$scope.shippingFetchIndicator = true;
 		if (!$scope.shipToMultipleAddresses) {
 			angular.forEach($scope.shippers, function(s) {
 				if (s.Name == $scope.currentOrder.LineItems[0].ShipperName)
@@ -34,6 +35,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 			Order.save($scope.currentOrder, function(order) {
 				$scope.currentOrder = order;
 				$scope.shippingUpdatingIndicator = false;
+				$scope.shippingFetchIndicator = false;
 			});
 		}
 		else {
@@ -44,6 +46,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 			li.ShipperName = li.Shipper.Name;
 			li.ShipperID = li.Shipper.ID;
 			$scope.shippingUpdatingIndicator = false;
+			$scope.shippingFetchIndicator = false;
 		}
 	};
 
@@ -73,7 +76,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	};
 
     $scope.$watch('currentOrder.PaymentMethod', function(event, method) {
-	    if (event == 'BudgetAccount' && $scope.SpendingAccounts.length == 1) {
+	    if (event == 'BudgetAccount' && ($scope.SpendingAccounts && $scope.SpendingAccounts.length == 1)) {
 		    $scope.currentOrder.BudgetAccountID = $scope.SpendingAccounts[0].ID;
 	    }
         $scope.cart_billing.$setValidity('paymentMethod', validatePaymentMethod(event));
@@ -96,7 +99,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
                 valid = $scope.user.Permissions.contains('PayByBudgetAccount');
                 var account = null;
                 angular.forEach($scope.SpendingAccounts, function(a) {
-                    if (a.ID == $scope.currentOrder.BudgetAccountID)
+                    if ($scope.currentOrder && a.ID == $scope.currentOrder.BudgetAccountID)
                         account = a;
                 });
                 if (account)
@@ -113,39 +116,52 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 
     function submitOrder() {
 	    $scope.displayLoadingIndicator = true;
-        Order.submit($scope.currentOrder, function(data) {
-			$scope.user.CurrentOrderID = null;
-			User.save($scope.user, function(data) {
-		        $scope.user = data;
-                $scope.displayLoadingIndicator = false;
-	        });
-	        $scope.currentOrder = null;
-	        $location.path('/order/' + data.ID);
-        });
+        Order.submit($scope.currentOrder,
+	        function(data) {
+				$scope.user.CurrentOrderID = null;
+				User.save($scope.user, function(data) {
+			        $scope.user = data;
+	                $scope.displayLoadingIndicator = false;
+		        });
+		        $scope.currentOrder = null;
+		        $location.path('/order/' + data.ID);
+	        },
+	        function(ex) {
+		        $scope.cart_billing.$setValidity('paymentMethod', false);
+		        $scope.displayLoadingIndicator = false;
+	        }
+        );
     };
 
-    function saveChanges() {
+    function saveChanges(callback) {
 	    $scope.displayLoadingIndicator = true;
         Order.save($scope.currentOrder, function(data) {
             $scope.currentOrder = data;
 	        $scope.displayLoadingIndicator = false;
+	        if (callback) callback();
         });
     };
 
     $scope.continueShopping = function() {
-        $location.path('catalog');
+	    if (confirm('Do you want to save changes to your order before continuing?') == true)
+	        saveChanges(function() { $location.path('catalog') });
+        else
+		    $location.path('catalog');
     };
 
     $scope.cancelOrder = function() {
-	    $scope.displayLoadingIndicator = true;
-        Order.delete($scope.currentOrder, function() {
-            $scope.user.CurrentOrderID = null;
-            $scope.currentOrder = null;
-	        User.save($scope.user, function(data) {
-		        $scope.user = data;
-		        $scope.displayLoadingIndicator = false;
+	    if (confirm('Are you sure you wish to cancel your order?') == true) {
+		    $scope.displayLoadingIndicator = true;
+	        Order.delete($scope.currentOrder, function() {
+	            $scope.user.CurrentOrderID = null;
+	            $scope.currentOrder = null;
+		        User.save($scope.user, function(data) {
+			        $scope.user = data;
+			        $scope.displayLoadingIndicator = false;
+			        $location.path('catalog');
+		        });
 	        });
-        });
+	    }
     };
 
     $scope.saveChanges = function() {
@@ -163,13 +179,19 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	$scope.applyCoupon = function() {
 		$scope.couponLoadingIndicator = true;
 		$scope.couponError = null;
-		Coupon.apply($scope.coupon, function(coupon) {
-			$scope.currentOrder.Coupon = coupon;
-			Order.save($scope.currentOrder, function(data) {
-				$scope.currentOrder = data;
+		Coupon.apply($scope.coupon,
+			function(coupon) {
+				$scope.currentOrder.Coupon = coupon;
+				Order.save($scope.currentOrder, function(data) {
+					$scope.currentOrder = data;
+					$scope.couponLoadingIndicator = false;
+				});
+			},
+			function(ex) {
+				$scope.couponError = ex.Detail;
 				$scope.couponLoadingIndicator = false;
-			});
-		});
+			}
+		);
 	};
 
 	$scope.removeCoupon = function() {
@@ -182,6 +204,24 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 			});
 		});
 	};
+
+	$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
+	$scope.billaddress = { Country: 'US', IsShipping: false, IsBilling: true };
+
+	$scope.$on('event:AddressCancel', function(event) {
+		$scope.addressform = false;
+	});
+    $scope.$on('event:AddressSaved', function(event, address) {
+	    $scope.currentOrder.ShipAddressID = address.ID;
+	    if (!$scope.shipToMultipleAddresses)
+		    $scope.setShipAddressAtOrderLevel();
+        AddressList.query(function(list) {
+            $scope.addresses = list;
+        });
+        $scope.addressform = false;
+	    $scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
+	    $scope.billaddress = { Country: 'US', IsShipping: false, IsBilling: true };
+    });
 
     $scope.checkOutSection = 'order';
 });

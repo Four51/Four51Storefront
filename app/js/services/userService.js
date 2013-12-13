@@ -16,8 +16,6 @@ four51.app.factory('User', function($q, $rootScope, $resource, $451, Security) {
 			if (f.ControlType == 'File' && f.File && f.File.Url.indexOf('auth') == -1)
 				f.File.Url += "&auth=" + Security.auth();
 	    });
-
-	   // u.AvailableCreditCards.Count = Object.keys(u.AvailableCreditCards).length;
     }
 
 	var _refresh = function() {

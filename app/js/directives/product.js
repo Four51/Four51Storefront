@@ -7,7 +7,8 @@ four51.app.directive('shortproductview', function(){
 
 		},
 		scope: {
-			p: '='
+			p: '=',
+            user: '='
 		},
 		templateUrl:'partials/shortProductView.html',
 		controller: 'shortProductViewCtrl'
@@ -15,6 +16,7 @@ four51.app.directive('shortproductview', function(){
 
 	return obj;
 });
+/*
 four51.app.directive('vspecfield', function($451){
 	var template = '<select " ' +
 		'ng-model="s.SelectedOptionID" '+
@@ -56,7 +58,7 @@ four51.app.directive('vspecfield', function($451){
 	return obj;
 
 });
-
+*/
 four51.app.directive('pricescheduletable', function(){
     var obj = {
         scope: {
@@ -77,6 +79,7 @@ four51.app.directive('staticspecstable', function(){
         restrict: 'E',
         templateUrl: 'partials/controls/staticSpecs.html',
 		link: function(scope){
+            scope.length = scope.specgroups ? Object.keys(scope.specgroups).length : 0;
 			scope.hasvisiblechild = function(specs){
 				var hasChild = false;
 				angular.forEach(specs, function(item){
@@ -110,11 +113,12 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 	var obj = {
         scope: {
             lineitem : '=',
-			error: '='
+			calculated: '=',
+			required: '='
         },
         restrict: 'E',
-        template: '<select ng-change="qtyChanged(lineitem)" ng-if="lineitem.PriceSchedule.RestrictedQuantity" ng-model="lineitem.Quantity" ng-options="pb.Quantity as getRestrictedQtyText(pb, lineitem.Product.QuantityMultiplier) for pb in lineitem.PriceSchedule.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"></select>'+
-            '<input  ng-change="qtyChanged(lineitem)" ng-if="!lineitem.PriceSchedule.RestrictedQuantity" type="text" required name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"/>',
+        template: '<select class="form-control" ng-change="qtyChanged(lineitem)" ng-if="lineitem.PriceSchedule.RestrictedQuantity" ng-required="required" ng-model="lineitem.Quantity" ng-options="pb.Quantity as getRestrictedQtyText(pb, lineitem.Product.QuantityMultiplier) for pb in lineitem.PriceSchedule.PriceBreaks" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"></select>'+
+            '<input class="form-control" ng-change="qtyChanged(lineitem)" ng-if="!lineitem.PriceSchedule.RestrictedQuantity" type="text" ng-required="required" name="qtyInput" ng-model="lineitem.Quantity" ui-validate="\'validQuantityAddToOrder($value, lineitem)\'"/>',
         link: function(scope){
 			scope.getRestrictedQtyText = function(priceBreak, qtyMultiplier){
 				var qtyText = priceBreak.Quantity * qtyMultiplier;
@@ -124,6 +128,8 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 			};
 			scope.qtyChanged = function(lineitem){
 				ProductDisplayService.calculateLineTotal(lineitem);
+				if(scope.calculated)
+					scope.calculated(lineitem);
 			};
             scope.validQuantityAddToOrder = function(value, lineItem){
 
@@ -132,7 +138,7 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 				var priceSchedule = lineItem.PriceSchedule;
 
 				if(value == null){
-					scope.error = null;
+					scope.lineitem.qtyError = null;
 					return scope.valid | true;
 				}
 
@@ -146,11 +152,11 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 
                 if(priceSchedule.MinQuantity > value){
 					scope.valid = false;
-                    scope.error = "must be greater than " + priceSchedule.MinQuantity;
+                    scope.lineitem.qtyError = "must be greater than " + priceSchedule.MinQuantity;
                 }
 
                 if(priceSchedule.MaxQuantity && priceSchedule.MaxQuantity < value){
-					scope.error = "must be less than " + priceSchedule.MaxQuantity;
+					scope.lineitem.qtyError = "must be less than " + priceSchedule.MaxQuantity;
                     scope.valid = false;
                 }
 
@@ -158,14 +164,14 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 					//console.log('variant not selected can\'t check qty available'); //in vboss the user may select the qty before the variant. we may have to change when this gets called so inventory available can be re validated if the variant is chnaged based on a selection spec. It's probably not a big deal since the api will check inventory available on adding to order.
 				}
 				else{
-					var qtyAvail = product.IsVariantLevelInventory ? variant.QuantityAvailable : product.QuantityAvailable;
+					var qtyAvail = product.IsVariantLevelInventory ? variant.QuantityAvailable : product.QuantityAvailable + lineItem.OriginalQuantity;
 					if(qtyAvail < value && product.AllowExceedInventory == false){
-						scope.error = "not enough available inventory " +  qtyAvail;
+						scope.lineitem.qtyError = "not enough available inventory " +  qtyAvail;
 						scope.valid = false;
 					}
 				}
                 if(scope.valid)
-					scope.error = null;
+					scope.lineitem.qtyError = null;
 
                 return scope.valid;
             }
@@ -173,4 +179,19 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
         }
     }
     return obj;
-})
+});
+
+four51.app.directive("variantlist", function(){
+	var obj = {
+		restrict: 'E',
+		templateUrl:'partials/controls/variantList.html',
+		controller: function($scope){
+
+
+		},
+		link: function(scope){
+
+		}
+	};
+	return obj;
+});

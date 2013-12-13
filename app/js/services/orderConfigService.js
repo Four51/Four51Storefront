@@ -13,21 +13,34 @@ four51.app.factory('OrderConfig', function() {
         }
     };
 
-    var setPaymentMethod = function() {
+    var setPaymentMethod = function(accounts) {
         // logic is that we want to default the payment method to the most likely choice of the user.
         // this order is purely a business requirement. not an api requirement.
-        if (user.Permissions.contains('SubmitForApproval')) order.PaymentMethod = 'Undetermined';
-        if (user.Permissions.contains('PayByPO')) order.PaymentMethod = 'PurchaseOrder';
-
+	    if (user.Permissions.contains('SubmitForApproval') && order.Approvals.length > 0) {
+		    order.PaymentMethod = 'Undetermined'; return;
+	    }
+	    if (user.Permissions.contains('PayByBudgetAccount') && accounts.length > 0) {
+		    order.PaymentMethod = 'BudgetAccount'; return;
+	    }
+	    if (user.Permissions.contains('PayByCreditCard') && user.AvailableCreditCards.length > 0) {
+		    order.PaymentMethod = 'CreditCard'; return;
+	    }
+        if (user.Permissions.contains('PayByPO')) {
+	        order.PaymentMethod = 'PurchaseOrder'; return;
+        }
+	    if (order.PaymentMethod == 'Undetermined' && order.Approvals.length == 0)
+	        order.PaymentMethod = null;
+	    return null;
     }
 
 	var setDefaultAddress = function() {
-		if (order.CostCenter == null)
 		angular.forEach(user.CostCenters, function(c) {
 			if (c.DefaultAddressID) {
-				order.ShipAddressID = order.ShipAddressID || c.DefaultAddressID;
+				if (order.CostCenter)
+					order.ShipAddressID = order.ShipAddressID ||  order.CostCenter == c.Name ? c.DefaultAddressID : null;
 				angular.forEach(order.LineItems, function(li) {
-					li.ShipAddressID = li.ShipAddressID || c.DefaultAddressID;
+					if (li.CostCenter)
+						li.ShipAddressID = li.ShipAddressID || li.CostCenter == c.Name ? c.DefaultAddressID : null;
 				});
 			}
 		});
@@ -44,8 +57,9 @@ four51.app.factory('OrderConfig', function() {
     return {
 	    address: function(o, u) {
 			order = o; user = u;
-		    if (!_hasAddress())
-			    setDefaultAddress();
+		    // not supporting cost center default addreses due to issues with assignments to the user
+		    //if (!_hasAddress())
+			//    setDefaultAddress();
 		    return this;
 	    },
         costcenter: function(o, u) {
@@ -55,10 +69,10 @@ four51.app.factory('OrderConfig', function() {
             }
             return this;
         },
-        paymentMethod: function(o,u) {
+        paymentMethod: function(o,u,a) { // not used. set in the api now but leaving here for potential
             order = o; user = u;
             if (order.PaymentMethod == 'Undetermined') { // might be legitimately this type, but can't be another unless already altered
-                setPaymentMethod();
+                setPaymentMethod(a);
             }
             return this;
         }

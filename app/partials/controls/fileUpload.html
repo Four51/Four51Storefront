@@ -1,12 +1,21 @@
 <div class="fileInput">
-    <h3 class="list-group-item-heading">{{customfield.Label}}</h3>
-    <img ng-show="customfield.File.IsImage" ng-src="{{customfield.File.Url}}" /><a ng-show="!customfield.File.IsImage" ng-href="{{customfield.File.Url}}">{{customfield.File.OriginalName}}</a><br />
-    <input name="replace" class="replace" type="checkbox" ng-model="replace" /> Replace  <input name="delete" class="delete" type="checkbox" /> Delete<br />
-    <input name="upload" class="upload" ng-show="replace" type="file" /><br />
-    <div class="alert alert-info" ng-show="replace">
+    <p class="text-info">{{customfield.Name}}:</p>
+    <img ng-show="customfield.File.IsImage && customfield.FileType == 'Image'" ng-src="{{customfield.File.Url}}"></img>
+    <a ng-show="customfield.FileType != 'Image'" ng-href="{{customfield.File.Url}}">{{customfield.File.OriginalName}}</a>
+    <div ng-show="customfield.File">
+        <input name="replace" class="replace" type="checkbox" ng-model="replace"></input> Replace
+        <input name="delete" class="delete" type="checkbox"></input> Delete
+    </div>
+    <div ng-show="replace || !customfield.File" ng-class="{'file-upload-required btn-danger': customfield.Required }" class="btn btn-default" style="overflow:hidden; position:relative; margin-bottom:15px;">
+        <i class="fa fa-upload"></i> Upload File
+        <input name="upload" class="upload" type="file"></input>
+    </div>
+    <br />
+    <input type="hidden" ng-required="customfield.Required" ng-model="customfield.File.ID"></input>
+    <div class="alert alert-info" ng-show="replace || !customfield.File">
         <div class="error ui-state-error-text"></div>
         {{customfield.UploadInstructions}}
-        <ul ng-show="replace">
+        <ul ng-show="replace || !customfield.File">
             <li>Allowed File Types: {{customfield.AllowedExt}}</li>
             <li ng-if="customfield.MinSize > 0">Minimum File Size: {{(customfield.MinSize | kb) + ' KB'}}</li>
             <li ng-if="customfield.MaxSize > 0">Maximum File Size: {{(customfield.MaxSize | kb) + ' KB'}}</li>

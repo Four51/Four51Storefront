@@ -18,13 +18,13 @@
                         </ul>
 
                     </div>
-                    <div class="col-md-2 col-xs-4">
+                    <div class="col-md-2 col-xs-4" ng-if="!(user.Permissions.contains('HidePricing'))">
                         {{Item.UnitPrice | currency}}
                     </div>
                     <div class="col-md-2 col-xs-4">
                         {{Item.Quantity}}
                     </div>
-                    <div class="col-md-2 col-xs-4">
+                    <div class="col-md-2 col-xs-4" ng-if="!(user.Permissions.contains('HidePricing'))">
                         {{Item.LineTotal | currency}}
                     </div>
                 </div>

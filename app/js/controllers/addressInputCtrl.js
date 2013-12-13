@@ -1,14 +1,26 @@
-four51.app.controller('AddressInputCtrl', function ($scope, $location, User, Address, Resources) {
+four51.app.controller('AddressInputCtrl', function ($scope, $rootScope, $location, User, Address, Resources) {
     $scope.save = function() {
-        Address.save(this.address, function() {
-           $location.path($scope.return);
-        });
+	    $scope.objectExists = false;
+        Address.save(this.address,
+	        function(address) {
+                $rootScope.$broadcast('event:AddressSaved', address);
+                $location.path($scope.return);
+            },
+	        function(ex) {
+	            if (ex.Code.is('ObjectExistsException'))
+	                $scope.objectExists = true;
+            }
+        );
     };
     $scope.delete = function() {
         Address.delete(this.address, function() {
             $location.path($scope.return);
         });
     };
+
+	$scope.cancel = function() {
+		$scope.return ? $location.path($scope.return) : $rootScope.$broadcast('event:AddressCancel');
+	};
 
     $scope.countries = Resources.countries;
     $scope.states = Resources.states;

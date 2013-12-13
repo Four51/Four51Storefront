@@ -17,18 +17,18 @@
                     </h3>
                 </div>
                 <div class="panel-body text-right">
-                    <div ng-if="!user.Permissions.contains('HidePricing')">
+                    <div ng-if="!(user.Permissions.contains('HidePricing'))">
                         <p>
                             <span class="text-info">SubTotal:</span> {{currentOrder.Subtotal | currency}}
                         </p>
                         <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
-                            <span class="text-info">{{ user.Company.SiteText.ShippingDisclaimer }}</span>
+                            <span class="text-info">Shipping, handling and tax may be added to this subtotal.</span>
                         </p>
                     </div>
                 </div>
                 <div class="panel-footer">
                     <button class="btn btn-primary" ng-click="checkOut()" ng-disabled="cart.$invalid">
-                        {{user.Company.SiteText.Checkout || 'Check Out' }}
+                       Check Out
                     </button>
                     <hr />
                     <p class="alert alert-warning" ng-show="cart.$invalid">Cart is missing required fields for checkout.</p>
@@ -44,30 +44,31 @@
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
                         <div class="col-sm-6 col-xs-12 cart-view-line-items-product">
                             <p>
-                                <span class="text-info">{{user.Company.SiteText.ProductIDGridHeader || 'ID: '}} </span><a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">{{item.ProductIDText}}</a>
+                                <span class="text-info">ID: </span><a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">{{item.ProductIDText}}</a>
                             </p>
-                            <p><span class="text-info">{{user.Company.SiteText.ProductNameGridHeader || 'Product: '}} </span>{{item.Product.Name}}</p>
-                            <p><span class="text-info">Unit Price: </span>{{item.UnitPrice | currency}}</p>
+                            <p><span class="text-info">Product: </span>{{item.Product.Name}}</p>
+                            <p ng-if="!(user.Permissions.contains('HidePricing'))"><span class="text-info">Unit Price: </span>{{item.UnitPrice | currency}}</p>
+                            <p ng-show="item.Product.UnitOfMeasure"><span class="text-info">Unit of Measure: </span>{{item.Product.UnitOfMeasure}}</p>
                             <span class="text-info" ng-show="item.Specs != {}">Specifications: </span>
                             <ul>
                                 <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
                                     {{spec.Name}} :
                                     <img ng-if="spec.ControlType == 'File' && spec.FileType == 'Image'" ng-src="{{spec.File.Url}}" />
-                                    <span ng-if="spec.ControlType != 'File'">{{spec.Value}}</span>
+                                    <span ng-if="spec.ControlType != 'File'">{{spec.Value || "(unspecified)"}}</span>
                                 </li>
                             </ul>
                             <div class="row">
                                 <div class="col-xs-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
                                     <label>Date Needed</label>
-                                    <input placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
+                                    <input class="form-control" placeholder="Date Needed" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
                                     <button type="button" class="btn btn-info cart-view-btn-copy" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" >
                                         <i class="fa fa-copy"></i>
                                     </button>
                                 </div>
                                 <div class="col-xs-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
                                     <label>Cost Center</label>
-                                    <select required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
-                                    <input ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />
+                                    <select class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
+                                    <input class="form-control" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />
                                     <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
                                     <button type="button" class="btn btn-info cart-view-btn-copy" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
                                         <i class="fa fa-copy"></i>
@@ -77,16 +78,18 @@
                         </div>
                         <div class="col-sm-3 col-xs-4">
                             <div>
-                                <label>Quantity</label><quantityfield error="qtyError" lineitem="item" class="quantity"/>
-                                {{qtyError}}
+                                <label>Quantity</label><quantityfield lineitem="item" class="quantity"/>
+                                {{item.qtyError}}
                             </div>
                             <div ng-show="item.Product.QuantityMultiplier != 1">
                                 <span class="text-info">Total Quantity</span>{{item.Quantity * item.Product.QuantityMultiplier}}
                             </div>
                         </div>
                         <div class="col-sm-2 col-xs-4">
-                            <p class="text-info">Price: </p>
-                            {{item.LineTotal | currency}}
+                            <span ng-if="!(user.Permissions.contains('HidePricing'))">
+                                <p class="text-info">Price: </p>
+                                {{item.LineTotal | currency}}
+                            </span>
                         </div>
                         <div class="col-sm-1 col-xs-4">
                              <i class="fa fa-times-circle" ng-click="removeItem(item)"></i>
@@ -95,8 +98,8 @@
                 </div>
                 <div class="panel-footer">
                     <span class="btn-group">
-                        <button ng-hide="cart.$invalid" class="btn btn-default  cart-view-btn-save" ng-click="saveChanges()" ng-disabled="cart.$invalid">
-                            {{user.Company.SiteText.SaveChanges || 'Save Changes'}}
+                        <button class="btn btn-default  cart-view-btn-save" ng-click="saveChanges()">
+                            Save Changes
                         </button>
                         <button class="btn btn-default  cart-view-btn-cancel" ng-click="cancelOrder()">
                             Cancel Order

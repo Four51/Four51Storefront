@@ -23,7 +23,7 @@
                     <span>{{currentOrder.Subtotal | currency}}</span>
                 </p>
                 <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
-                    {{ user.Company.SiteText.ShippingDisclaimer }}
+                    Shipping, handling and tax may be added to this subtotal.
                 </p>
             </div>
         </div>
@@ -43,14 +43,17 @@
                 </div>
                 <div>
                     <div>
-                        <div>
+                        <div ng-if="!(user.Permissions.contains('HidePricing'))">
                             {{item.UnitPrice | currency}}
                         </div>
                         <div>
                             {{item.Quantity}}
                         </div>
-                        <div>
+                        <div ng-if="!(user.Permissions.contains('HidePricing'))">
                             {{item.LineTotal | currency}}
+                        </div>
+                        <div ng-show="item.Product.UnitOfMeasure">
+                            Unit of Measure: {{item.Product.UnitOfMeasure}}
                         </div>
                     </div>
                     <div>
