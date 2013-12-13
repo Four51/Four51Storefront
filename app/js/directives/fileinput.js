@@ -16,14 +16,17 @@ four51.app.directive('customfilefield', function($parse, $resource, $451, fileRe
 			var error_element = $('.error', element)[0];
 
 			var afterSelection = function(file) {
-				$resource($451.api('uploadfile')).save({ Data: file.result, Name: file_control.files[0].name, ID: scope.customfield.ID, SourceType: scope.customfield.SourceType, SourceID: scope.customfield.SourceID }).$promise.then(function(u) {
-					u.Url += "&auth=" + Security.auth();
+                scope.uploadFileIndicator = true;
+                $resource($451.api('uploadfile')).save({ Data: file.result, Name: file_control.files[0].name, ID: scope.customfield.ID, SourceType: scope.customfield.SourceType, SourceID: scope.customfield.SourceID }).$promise.then(function(u) {
+                    u.Url += "&auth=" + Security.auth();
 					scope.customfield.File = u;
 					scope.customfield.Value = u.ID;
+                    scope.uploadFileIndicator = false;
 				}).catch(function(ex) {
 					error_element.innerHTML = (ex.status == 500) ?
 						"An error occurred. Please select a new file and try again." :
 						ex.data.Message;
+                        scope.uploadFileIndicator = false;
 				});
 			}
 
