@@ -12,6 +12,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	});
 
 	function hasMultipleAddresses() {
+		if (!$scope.currentOrder) return false;
 		var multi = false;
 		angular.forEach($scope.currentOrder.LineItems, function(li, i) {
 			multi = multi || i > 0 ? li.ShipAddressID != $scope.currentOrder.LineItems[i-1].ShipAddressID : false;
@@ -212,9 +213,14 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		$scope.addressform = false;
 	});
     $scope.$on('event:AddressSaved', function(event, address) {
-	    $scope.currentOrder.ShipAddressID = address.ID;
-	    if (!$scope.shipToMultipleAddresses)
-		    $scope.setShipAddressAtOrderLevel();
+	    if (address.IsShipping) {
+            $scope.currentOrder.ShipAddressID = address.ID;
+            if (!$scope.shipToMultipleAddresses)
+                $scope.setShipAddressAtOrderLevel();
+        }
+        if (address.IsBilling) {
+            $scope.currentOrder.BillAddressID = address.ID;
+        }
         AddressList.query(function(list) {
             $scope.addresses = list;
         });
