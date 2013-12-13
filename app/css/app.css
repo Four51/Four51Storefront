@@ -891,6 +891,28 @@ li.print {
     clear: both;
     overflow: hidden;
     padding: 25px 0;
+    position:relative;
+}
+
+.cart-view-line-items-repeater-product-link a{
+    display:block;
+    padding:8px;
+    border-radius:4px;
+}
+
+.cart-view-line-items-repeater-product-link a, .cart-view-line-items-repeater-product-link a .text-info{
+    -webkit-transition: background-color 250ms linear;
+    -moz-transition: background-color 250ms linear;
+    -o-transition: background-color 250ms linear;
+    -ms-transition: background-color 250ms linear;
+    transition: background-color 250ms linear;
+}
+.cart-view-line-items-repeater-product-link a:hover{
+    background-color:#dddddd;
+    text-decoration:none;
+}
+.cart-view-line-items-repeater-product-link a:hover .text-info{
+    color:#171717;
 }
 
 .cart-view-summary .panel-footer, .product-view-default .panel-footer {
@@ -1229,5 +1251,14 @@ input[type="file"]{
 }
 .product-view-default-variant-box{
     max-height:220px;
+    min-height:220px;
     overflow-y:scroll;
+}
+
+.static-spec-panel-body {
+    padding-left:0;
+    padding-right:0;
+}
+.margin-bottom-15{
+    margin-bottom:15px;
 }
