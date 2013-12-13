@@ -1,7 +1,8 @@
-<div class="fileInput">
+<div class="fileInput" style="position: relative;">
+    <loadingindicator ng-show="uploadFileIndicator" title="Uploading"/>
     <p class="text-info">{{customfield.Name}}:</p>
     <img ng-show="customfield.File.IsImage && customfield.FileType == 'Image'" ng-src="{{customfield.File.Url}}"></img>
-    <a ng-show="customfield.FileType != 'Image'" ng-href="{{customfield.File.Url}}">{{customfield.File.OriginalName}}</a>
+    <a ng-href="{{customfield.File.Url}}">{{customfield.File.OriginalName}}</a>
     <div ng-show="customfield.File">
         <input name="replace" class="replace" type="checkbox" ng-model="replace"></input> Replace
         <input name="delete" class="delete" type="checkbox"></input> Delete
@@ -12,8 +13,8 @@
     </div>
     <br />
     <input type="hidden" ng-required="customfield.Required" ng-model="customfield.File.ID"></input>
+    <div class="error ui-state-error-text"></div>
     <div class="alert alert-info" ng-show="replace || !customfield.File">
-        <div class="error ui-state-error-text"></div>
         {{customfield.UploadInstructions}}
         <ul ng-show="replace || !customfield.File">
             <li>Allowed File Types: {{customfield.AllowedExt}}</li>

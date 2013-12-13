@@ -6,7 +6,7 @@
             </h3>
         </div>
 
-        <div class="panel-body" style="padding-left:0; padding-right:0;">
+        <div class="panel-body" ng-class="{'static-spec-panel-body': length > 1}">
             <div id="451_list_specgroup" class="row">
                 <div  ng-class="{'col-md-6': length > 1}" >
                     <ul  ng-if="$even" class="list-group" ng-repeat="sg in specgroups">

@@ -12,7 +12,6 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	});
 
 	function hasMultipleAddresses() {
-		if (!$scope.currentOrder) return false;
 		var multi = false;
 		angular.forEach($scope.currentOrder.LineItems, function(li, i) {
 			multi = multi || i > 0 ? li.ShipAddressID != $scope.currentOrder.LineItems[i-1].ShipAddressID : false;
@@ -206,21 +205,35 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		});
 	};
 
+<<<<<<< HEAD
+    $scope.newShippingAddress = function() {
+        if ($scope.address) {
+            $scope.address = {};
+        }
+        $scope.address = { Country: 'US' , IsShipping: true };
+        $scope.addressform = true;
+    }
+    $scope.cancelShippingAddress = function() {
+        $scope.addressform = false;
+    }
+    $scope.newBillingAddress = function() {
+        if ($scope.address) {
+            $scope.address = {};
+        }
+        $scope.address = { Country: 'US' , IsBilling: true };
+        $scope.addressform = true;
+    }
+    $scope.cancelBillingAddress = function() {
+        $scope.addressform = false;
+    }
+=======
 	$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
 	$scope.billaddress = { Country: 'US', IsShipping: false, IsBilling: true };
+>>>>>>> 2896601ebd495fcc794b5b6be2b0020453bfde77
 
-	$scope.$on('event:AddressCancel', function(event) {
-		$scope.addressform = false;
-	});
     $scope.$on('event:AddressSaved', function(event, address) {
-	    if (address.IsShipping) {
-            $scope.currentOrder.ShipAddressID = address.ID;
-            if (!$scope.shipToMultipleAddresses)
-                $scope.setShipAddressAtOrderLevel();
-        }
-        if (address.IsBilling) {
-            $scope.currentOrder.BillAddressID = address.ID;
-        }
+	    $scope.currentOrder.ShipAddressID = address.ID;
+	    $scope.setShipAddressAtOrderLevel();
         AddressList.query(function(list) {
             $scope.addresses = list;
         });
