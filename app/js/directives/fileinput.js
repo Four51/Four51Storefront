@@ -65,8 +65,8 @@ four51.app.directive('customfilefield', function($parse, $resource, $451, fileRe
 								.then(afterSelection);
 							file_input.assign(scope,  event.target.files[0]);
 						});
-                        replace_box.checked = false;
-                        delete_box.checked = false;
+						scope.replace = replace_box.checked = false;
+                        scope.delete = delete_box.checked = false;
 						break;
 				}
 			}

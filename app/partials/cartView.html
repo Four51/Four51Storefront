@@ -54,7 +54,7 @@
                                 <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
                                     {{spec.Name}} :
                                     <img ng-if="spec.ControlType == 'File' && spec.FileType == 'Image'" ng-src="{{spec.File.Url}}" />
-                                    <span ng-if="spec.ControlType != 'File'">{{spec.Value}}</span>
+                                    <span ng-if="spec.ControlType != 'File'">{{spec.Value || "(unspecified)"}}</span>
                                 </li>
                             </ul>
                             <div class="row">
@@ -78,8 +78,8 @@
                         </div>
                         <div class="col-sm-3 col-xs-4">
                             <div>
-                                <label>Quantity</label><quantityfield error="qtyError" lineitem="item" class="quantity"/>
-                                {{qtyError}}
+                                <label>Quantity</label><quantityfield lineitem="item" class="quantity"/>
+                                {{item.qtyError}}
                             </div>
                             <div ng-show="item.Product.QuantityMultiplier != 1">
                                 <span class="text-info">Total Quantity</span>{{item.Quantity * item.Product.QuantityMultiplier}}
@@ -98,7 +98,7 @@
                 </div>
                 <div class="panel-footer">
                     <span class="btn-group">
-                        <button ng-hide="cart.$invalid" class="btn btn-default  cart-view-btn-save" ng-click="saveChanges()" ng-disabled="cart.$invalid">
+                        <button class="btn btn-default  cart-view-btn-save" ng-click="saveChanges()">
                             Save Changes
                         </button>
                         <button class="btn btn-default  cart-view-btn-cancel" ng-click="cancelOrder()">

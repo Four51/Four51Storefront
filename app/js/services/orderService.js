@@ -7,6 +7,7 @@ four51.app.factory('Order', function($resource, $rootScope, $451, Security, Erro
 	function _extend(order) {
 		order.isEditable = order.Status == 'Unsubmitted' || order.Status == 'Open';
 		angular.forEach(order.LineItems, function(item) {
+			item.OriginalQuantity = item.Quantity; //needed to validate qty changes compared to available quantity
 			angular.forEach(item.Specs, function(spec) {
 				if (spec.ControlType == 'File' && spec.File && spec.File.Url.indexOf('auth') == -1)
 					spec.File.Url += "&auth=" + Security.auth();

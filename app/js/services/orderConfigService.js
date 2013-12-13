@@ -34,12 +34,13 @@ four51.app.factory('OrderConfig', function() {
     }
 
 	var setDefaultAddress = function() {
-		if (order.CostCenter == null)
 		angular.forEach(user.CostCenters, function(c) {
 			if (c.DefaultAddressID) {
-				order.ShipAddressID = order.ShipAddressID || c.DefaultAddressID;
+				if (order.CostCenter)
+					order.ShipAddressID = order.ShipAddressID ||  order.CostCenter == c.Name ? c.DefaultAddressID : null;
 				angular.forEach(order.LineItems, function(li) {
-					li.ShipAddressID = li.ShipAddressID || c.DefaultAddressID;
+					if (li.CostCenter)
+						li.ShipAddressID = li.ShipAddressID || li.CostCenter == c.Name ? c.DefaultAddressID : null;
 				});
 			}
 		});
@@ -56,8 +57,9 @@ four51.app.factory('OrderConfig', function() {
     return {
 	    address: function(o, u) {
 			order = o; user = u;
-		    if (!_hasAddress())
-			    setDefaultAddress();
+		    // not supporting cost center default addreses due to issues with assignments to the user
+		    //if (!_hasAddress())
+			//    setDefaultAddress();
 		    return this;
 	    },
         costcenter: function(o, u) {

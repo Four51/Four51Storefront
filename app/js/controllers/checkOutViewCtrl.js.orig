@@ -205,8 +205,31 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		});
 	};
 
+<<<<<<< HEAD
+    $scope.newShippingAddress = function() {
+        if ($scope.address) {
+            $scope.address = {};
+        }
+        $scope.address = { Country: 'US' , IsShipping: true };
+        $scope.addressform = true;
+    }
+    $scope.cancelShippingAddress = function() {
+        $scope.addressform = false;
+    }
+    $scope.newBillingAddress = function() {
+        if ($scope.address) {
+            $scope.address = {};
+        }
+        $scope.address = { Country: 'US' , IsBilling: true };
+        $scope.addressform = true;
+    }
+    $scope.cancelBillingAddress = function() {
+        $scope.addressform = false;
+    }
+=======
 	$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
 	$scope.billaddress = { Country: 'US', IsShipping: false, IsBilling: true };
+>>>>>>> 2896601ebd495fcc794b5b6be2b0020453bfde77
 
     $scope.$on('event:AddressSaved', function(event, address) {
 	    $scope.currentOrder.ShipAddressID = address.ID;
