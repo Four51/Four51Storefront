@@ -176,7 +176,7 @@
                             <label>Select a billing address</label>
                         </h5>
                         <select name="billingAddress" ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required />
-                        <span class="ui-state-error" ng-show="cart_billing.billingAddress.$invalid">Select an address shithead</span>
+                        <span class="ui-state-error" ng-show="cart_billing.billingAddress.$invalid">Please select an address</span>
                         <paymentselector></paymentselector>
                         <div ng-show="user.Permissions.contains('ViewPromotions')">
                             <div ng-show="!currentOrder.Coupon">
