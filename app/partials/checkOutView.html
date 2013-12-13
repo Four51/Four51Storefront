@@ -97,9 +97,8 @@
                             Ship to multiple addresses
                         </button>
                     </span>
-                    <button ng-if="user.Permissions.contains('CreateShipToAddress')"
-                            class="btn btn-default btn-info pull-right" type="button" class="btn btn-xs btn-danger"
-                            ng-hide="addressform || (!addressform && (addresses | filter:{IsShipping:true}).length == 0)" ng-click="addressform = true" tabindex="-1">
+                    <button class="btn btn-default btn-info pull-right" type="button" class="btn btn-xs btn-danger"
+                            ng-hide="addressform || (!addressform && (addresses | filter:{IsShipping:true}).length == 0) || !user.Permissions.contains('CreateShipToAddress')" ng-click="addressform = true" tabindex="-1">
                         Add New Address</button>
 
                     <hr />
@@ -167,7 +166,7 @@
             </h3>
         </div>
             <loadingindicator ng-show="couponLoadingIndicator" />
-            <div ng-show="checkOutSection == 'billing'" ng-show="currentOrder" class="panel-body check-out-view-billing">
+            <div ng-show="checkOutSection == 'billing'" class="panel-body check-out-view-billing">
                 <div ng-show="addressform && user.Permissions.contains('CreateBillToAddress')">
                     <addressinput address='billaddress' user='user'></addressinput>
                 </div>
@@ -176,14 +175,14 @@
                 </div>
                 <div ng-show="!addressform">
                     <button class="btn btn-default btn-info pull-right" type="button" class="btn btn-xs btn-danger"
-                            ng-if="user.Permissions.contains('CreateBillToAddress')"
-                            ng-hide="addressform" ng-click="addressform = true" tabindex="-1">Add New Address</button>
+                            ng-hide="addressform || !user.Permissions.contains('CreateBillToAddress')" ng-click="addressform = true" tabindex="-1">Add New Address</button>
                     <hr />
                     <form name="cart_billing">
                         <h5>
                             <label>Select a billing address</label>
                         </h5>
-                        <select ng-show="(addresses | filter:{IsBilling:true}).length > 0" name="billingAddress" ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required />
+                        <select ng-show="(addresses | filter:{IsBilling:true}).length > 0" name="billingAddress"
+                                ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required></select>
                         <paymentselector></paymentselector>
                         <div ng-show="user.Permissions.contains('ViewPromotions')">
                             <div ng-show="!currentOrder.Coupon">
