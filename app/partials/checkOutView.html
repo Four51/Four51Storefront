@@ -78,6 +78,9 @@
                 <div ng-show="addressform || (addresses | filter:{IsShipping:true}).length == 0 && user.Permissions.contains('CreateShipToAddress')">
                     <addressinput address='shipaddress' user='user'></addressinput>
                 </div>
+                <div class="alert-error" ng-if="!user.Permissions.contains('CreateShipToAddress') && (addresses | filter:{IsShipping:true}).length == 0">
+                    You're site is mis-configured. You do not have permission to create a shipping address nor do you have any addresses assigned to you. Please contact your support representative.
+                </div>
                 <div ng-show="!addressform">
                     <form name="cart_shipping">
                     <div class="error_list">
@@ -168,6 +171,9 @@
                 <div ng-show="addressform && user.Permissions.contains('CreateBillToAddress')">
                     <addressinput address='billaddress' user='user'></addressinput>
                 </div>
+                <div class="alert-error" ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
+                    You're site is mis-configured. You do not have permission to create a billing address nor do you have any addresses assigned to you. Please contact your support representative.
+                </div>
                 <div ng-show="!addressform">
                     <button class="btn btn-default btn-info pull-right" type="button" class="btn btn-xs btn-danger"
                             ng-if="user.Permissions.contains('CreateBillToAddress')"
@@ -177,7 +183,7 @@
                         <h5>
                             <label>Select a billing address</label>
                         </h5>
-                        <select name="billingAddress" ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required />
+                        <select ng-show="(addresses | filter:{IsBilling:true}).length > 0" name="billingAddress" ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required />
                         <paymentselector></paymentselector>
                         <div ng-show="user.Permissions.contains('ViewPromotions')">
                             <div ng-show="!currentOrder.Coupon">
