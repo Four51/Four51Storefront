@@ -206,6 +206,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
         if ($scope.address) {
             $scope.address = {};
         }
+        $scope.address = { Country: 'US' , IsShipping: true };
         $scope.addressform = true;
     }
     $scope.cancelShippingAddress = function() {
@@ -215,6 +216,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
         if ($scope.address) {
             $scope.address = {};
         }
+        $scope.address = { Country: 'US' , IsBilling: true };
         $scope.addressform = true;
     }
     $scope.cancelBillingAddress = function() {
