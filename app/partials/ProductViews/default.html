@@ -84,13 +84,12 @@
                                 <customselectionfield change="specChanged" customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
                         </div>
                     </div>
-
-                    <div class="form-group" ng-if="allowAddToOrder">
-                        <span class="text-info" ng-hide="allowAddFromVariantList">Order Quantity:</span>
-                        <quantityfield ng-if="!allowAddFromVariantList" required="true" lineitem="LineItem" class="quantity" />
+                    <div class="form-group" ng-show="allowAddToOrder">
+						<span class="text-info" ng-hide="allowAddFromVariantList">Order Quantity:</span>
+                        <quantityfield ng-show="!allowAddFromVariantList" required="true" lineitem="LineItem" class="quantity" />
                     </div>
 
-					<div ng-if="allowAddToOrder">
+					<div ng-show="allowAddToOrder">
 						<p class="alert alert-danger" ng-show="LineItem.qtyError">
 							{{LineItem.qtyError}}
 						</p>
