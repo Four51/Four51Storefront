@@ -52,9 +52,13 @@
                 <div class="panel-body" style="position: relative;">
                     <loadingindicator ng-show="addToOrderIndicator" title="Adding product to cart"/>
                     <div ng-if="LineItem.Product.Variants.length > 0 && !LineItem.Variant">
-                        <h4 class="text-center">Choose a variant:</h4>
+                        <div class="row">
+                            <div class="col-sm-6"><h4>Choose a variant:</h4></div>
+                            <div class="col-sm-6"><input ng-model="queryVariants" type="text" class="form-control" placeholder="Filter variants"/></div>
+                        </div>
+
                         <div class="product-view-default-variant-box">
-                        <div class="list-group" ng-repeat="v in LineItem.Product.Variants">
+                        <div class="list-group" ng-repeat="v in LineItem.Product.Variants | filter:queryVariants">
                             <a class="list-group-item" href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>
                                 <h5 class="list-group-item-heading">{{v.ExternalID}}</h5>
                                 <p class="list-group-item-text small" ng-show="v.Description"><small>{{v.Description}}</small></p>
@@ -84,13 +88,12 @@
                                 <customselectionfield change="specChanged" customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
                         </div>
                     </div>
-
-                    <div class="form-group" ng-if="allowAddToOrder">
-                        <span class="text-info" ng-hide="allowAddFromVariantList">Order Quantity:</span>
-                        <quantityfield ng-if="!allowAddFromVariantList" required="true" lineitem="LineItem" class="quantity" />
+                    <div class="form-group" ng-show="allowAddToOrder">
+						<span class="text-info" ng-hide="allowAddFromVariantList">Order Quantity:</span>
+                        <quantityfield ng-show="!allowAddFromVariantList" required="true" lineitem="LineItem" class="quantity" />
                     </div>
 
-					<div ng-if="allowAddToOrder">
+					<div ng-show="allowAddToOrder">
 						<p class="alert alert-danger" ng-show="LineItem.qtyError">
 							{{LineItem.qtyError}}
 						</p>

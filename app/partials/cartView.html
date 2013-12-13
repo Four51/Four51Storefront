@@ -13,7 +13,7 @@
             <div class="panel panel-primary cart-view-summary col-md-4 col-md-offset-1 col-md-push-7">
                 <div class="panel-heading">
                     <h3 class="panel-title panel-primary">
-                        Cart Summary
+                        Cart
                     </h3>
                 </div>
                 <div class="panel-body text-right">
@@ -30,7 +30,7 @@
                     <button class="btn btn-primary" ng-click="checkOut()" ng-disabled="cart.$invalid">
                        Check Out
                     </button>
-                    <hr />
+                    <hr ng-show="cart.$invalid" />
                     <p class="alert alert-warning" ng-show="cart.$invalid">Cart is missing required fields for checkout.</p>
                 </div>
             </div>
@@ -42,22 +42,50 @@
                 </div>
                 <div class="panel-body">
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
-                        <div class="col-sm-6 col-xs-12 cart-view-line-items-product">
-                            <p>
-                                <span class="text-info">ID: </span><a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">{{item.ProductIDText}}</a>
+                        <span title="Remove Item" style="cursor:pointer; position:absolute; top:-5px; right:-5px; font-size:1.2em;" class="fa-stack text-danger" ng-click="removeItem(item)">
+                          <i class="fa fa-square fa-stack-2x"></i>
+                          <i class="fa fa-times fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <div class="col-sm-5 col-xs-12 cart-view-line-items-product">
+                            <div class="cart-view-line-items-repeater-product-link">
+                                <a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">
+                                    <div class="pull-right" style="background-color:#fff; padding:0 4px; border-radius:2px;">
+                                        <p style="margin:0;" ng-if="!(user.Permissions.contains('HidePricing'))"><small>Unit Price</small><br/><span class="text-success">{{item.UnitPrice | currency}}</span></p>
+                                    </div>
+                                    <strong>{{item.Product.Name}} </strong><br/>
+                                    <span class="text-info"><small>{{item.ProductIDText}}</small></span>
+                                </a>
+                            </div>
+                            <p style="cursor:pointer; padding:15px; margin-bottom:0;" class="text-info text-center" ng-show="item.Specs != {}" ng-init="toggleSpecs = false" ng-click="toggleSpecs = !toggleSpecs">
+                                <span ng-show="toggleSpecs == false"><i class="fa fa-plus-circle"></i> Show </span>
+                                <span ng-show="toggleSpecs == true"><i class="fa fa-minus-circle"></i> Hide </span>
+                                Specifications
                             </p>
-                            <p><span class="text-info">Product: </span>{{item.Product.Name}}</p>
-                            <p ng-if="!(user.Permissions.contains('HidePricing'))"><span class="text-info">Unit Price: </span>{{item.UnitPrice | currency}}</p>
-                            <p ng-show="item.Product.UnitOfMeasure"><span class="text-info">Unit of Measure: </span>{{item.Product.UnitOfMeasure}}</p>
-                            <span class="text-info" ng-show="item.Specs != {}">Specifications: </span>
-                            <ul>
-                                <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
-                                    {{spec.Name}} :
-                                    <img ng-if="spec.ControlType == 'File' && spec.FileType == 'Image'" ng-src="{{spec.File.Url}}" />
-                                    <span ng-if="spec.ControlType != 'File'">{{spec.Value || "(unspecified)"}}</span>
+                            <ul style="list-style: none; padding:0;" ng-show="toggleSpecs == true">
+                                <li class="text-center" ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
+                                    <span class="text-info">{{spec.Name}}: </span>
+                                    <span ng-if="spec.ControlType == 'File' && spec.FileType == 'Image'">{{spec.File.OriginalName + Extension}}</span>
+                                    <span ng-if="spec.ControlType != 'File'">{{spec.Value}}</span>
                                 </li>
                             </ul>
-                            <div class="row">
+                        </div>
+                        <div class="col-sm-7 col-xs-12">
+                            <div class="row" style="margin-bottom:15px; padding-top:5px;">
+                                <div class="col-xs-6" style="padding-top:5px;">
+                                    <div>
+                                        <label>Quantity</label>
+                                        <quantityfield lineitem="item" class="quantity"/>
+                                    </div>
+                                    <div style="text-align:right;" ng-show="item.Product.QuantityMultiplier != 1">
+                                        <small><span class="text-info" >Total Quantity: </span>{{item.Quantity * item.Product.QuantityMultiplier}}</small>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6" style="position:relative;">
+                                    <div ng-show="item.qtyError" style="padding:2px 5px; margin:0; position:absolute; height:100%;" class="alert alert-danger text-center"><small>{{item.qtyError}}</small></div>
+                                    <p style="margin:0; text-align:center;" ng-if="!(user.Permissions.contains('HidePricing'))"><small>Line Item Price</small><br/><span class="text-success">{{item.LineTotal | currency}}</span></p>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="(user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')) || user.Permissions.contains('CostCenterPerLine')">
                                 <div class="col-xs-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
                                     <label>Date Needed</label>
                                     <input class="form-control" placeholder="Date Needed" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
@@ -75,24 +103,6 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-3 col-xs-4">
-                            <div>
-                                <label>Quantity</label><quantityfield lineitem="item" class="quantity"/>
-                                {{item.qtyError}}
-                            </div>
-                            <div ng-show="item.Product.QuantityMultiplier != 1">
-                                <span class="text-info">Total Quantity</span>{{item.Quantity * item.Product.QuantityMultiplier}}
-                            </div>
-                        </div>
-                        <div class="col-sm-2 col-xs-4">
-                            <span ng-if="!(user.Permissions.contains('HidePricing'))">
-                                <p class="text-info">Price: </p>
-                                {{item.LineTotal | currency}}
-                            </span>
-                        </div>
-                        <div class="col-sm-1 col-xs-4">
-                             <i class="fa fa-times-circle" ng-click="removeItem(item)"></i>
                         </div>
                     </div>
                 </div>
