@@ -213,18 +213,19 @@ four51.app.factory('ProductDisplayService', function($451, Variant, Product){
 			return false;
 		}
 
+		var hasAddToOrderSpecs = false; //TODO:determine based on lineitem or product setup
+
 		if(!scope.LineItem.Specs){//it's possible we're reloading this due to changing a variant and we don't want to leave the spec values behind
 			scope.LineItem.Specs = {};
 			angular.forEach(scope.LineItem.Product.Specs, function(item){
 				if(item.CanSetForLineItem || item.DefinesVariant)
 				{
-					//TODO:doesn't mesh with caching
+					hasAddToOrderSpecs = true;
 					scope.LineItem.Specs[item.Name] = item;// Object.create(item);
 				}
 			});
 		}
 
-		var hasAddToOrderSpecs = false; //TODO:determine based on lineitem or product setup
 		scope.allowAddFromVariantList = (scope.LineItem.Product.ShowSpecsWithVariantList || !hasAddToOrderSpecs)&& !scope.LineItem.Variant && scope.LineItem.Product.Variants && scope.LineItem.Product.Variants.length > 0;
 
 		if(scope.LineItem.Variant){

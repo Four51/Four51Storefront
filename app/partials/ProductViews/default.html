@@ -9,7 +9,7 @@
             </figure>
         </div>
 
-        <div class="col-sm-6 col-sm-offset-1 col-collapse" ng-show="allowAddToOrder">
+        <div class="col-sm-6 col-sm-offset-1 col-collapse">
             <!--BASIC PRODUCT INFO!-->
             <h2 class="text-success pull-right" ng-show="LineItem.PriceSchedule.PriceBreaks.length == 1">
                 {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
@@ -57,24 +57,24 @@
                         <div class="list-group" ng-repeat="v in LineItem.Product.Variants">
                             <a class="list-group-item" href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>
                                 <h5 class="list-group-item-heading">{{v.ExternalID}}</h5>
-                                <p class="list-group-item-text small" ng-show="v.Description"><small>{{v.Description}}</p>
+                                <p class="list-group-item-text small" ng-show="v.Description"><small>{{v.Description}}</small></p>
                                 <div ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
-                                    {{v.QuantityAvailable + ' in stock'}}
+                                    {{v.QuantityAvailable}} in stock
                                 </div>
                             </a>
-                            <div class="list-group-item" style="border-top-left-radius:0; border-top-right-radius:0;">
+                            <div ng-if="allowAddFromVariantList" class="list-group-item" style="border-top-left-radius:0; border-top-right-radius:0;">
                                 <h4 class="pull-left text-success" style="margin:0;">{{variantLineItems[v.InteropID].LineTotal | currency}}</h4>
-                                <quantityfield calculated="calcVariantLineItems" lineitem="variantLineItems[v.InteropID]" error="quantityError" class="quantity pull-right" />
-                                <div style="padding:5px 15px; margin:2px 15px;" class="alert alert-danger pull-right" ng-show="quantityError">{{quantityError}}</div>
+                                <quantityfield calculated="calcVariantLineItems" lineitem="variantLineItems[v.InteropID]" class="quantity pull-right" />
+                                <div style="padding:5px 15px; margin:2px 15px;" class="alert alert-danger pull-right" ng-show="variantLineItems[v.InteropID].qtyError">{{variantLineItems[v.InteropID].qtyError}}</div>
                                 <div style="clear:both;"></div>
                             </div>
                         </div>
                             </div>
                     </div>
 
-                    <p ng-show="LineItem.Product.DisplayInventory && inventoryDisplay(LineItem.Product, LineItem.Variant)">
+                    <p ng-show="LineItem.Product.DisplayInventory">
                         <!-- nothing is accomodating the 0 level inventory and the custom message to be displayed -->
-                        {{inventoryDisplay(LineItem.Product, LineItem.Variant) + ' in stock'}}
+                        {{inventoryDisplay(LineItem.Product, LineItem.Variant) < 0 ? 0 : inventoryDisplay(LineItem.Product, LineItem.Variant)}} in stock
                     </p>
                     <br/>
                     <div id="451_list_vspec" ng-show="allowAddToOrder">
@@ -85,23 +85,25 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" ng-if="allowAddToOrder">
                         <span class="text-info" ng-hide="allowAddFromVariantList">Order Quantity:</span>
-                        <quantityfield ng-if="!allowAddFromVariantList" required="true" lineitem="LineItem" error="quantityError" class="quantity" />
+                        <quantityfield ng-if="!allowAddFromVariantList" required="true" lineitem="LineItem" class="quantity" />
                     </div>
 
-                    <p class="alert alert-danger" ng-show="quantityError">
-                        {{quantityError}}
-                    </p>
-                    <p class="alert alert-danger" ng-show="LineItem.PriceSchedule.MinQuantity > 1">
-                        Minimum Quantity: {{LineItem.PriceSchedule.MinQuantity}}
-                    </p>
-                    <p class="alert alert-danger" ng-show="LineItem.PriceSchedule.MaxQuantity">
-                        Maximum Quantity: {{LineItem.PriceSchedule.MaxQuantity}}
-                    </p>
-                    <p class="alert alert-warning" ng-show="addToOrderForm.$invalid" >
-                        Product is missing required fields for Add to Cart.
-                    </p>
+					<div ng-if="allowAddToOrder">
+						<p class="alert alert-danger" ng-show="LineItem.qtyError">
+							{{LineItem.qtyError}}
+						</p>
+						<p class="alert alert-danger" ng-show="LineItem.PriceSchedule.MinQuantity > 1">
+							Minimum Quantity: {{LineItem.PriceSchedule.MinQuantity}}
+						</p>
+						<p class="alert alert-danger" ng-show="LineItem.PriceSchedule.MaxQuantity">
+							Maximum Quantity: {{LineItem.PriceSchedule.MaxQuantity}}
+						</p>
+						<p class="alert alert-warning" ng-show="addToOrderForm.$invalid" >
+							Product is missing required fields for Add to Cart.
+						</p>
+					</div>
 
                 </div>
                 <div class="panel-footer">
