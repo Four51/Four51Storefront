@@ -18,6 +18,10 @@ four51.app.controller('AddressInputCtrl', function ($scope, $rootScope, $locatio
         });
     };
 
+	$scope.cancel = function() {
+		$scope.return ? $location.path($scope.return) : $rootScope.$broadcast('event:AddressCancel');
+	};
+
     $scope.countries = Resources.countries;
     $scope.states = Resources.states;
 

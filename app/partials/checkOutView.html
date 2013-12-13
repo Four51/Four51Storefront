@@ -76,7 +76,7 @@
         </div>
             <div ng-show="checkOutSection == 'shipping'" ng-show="currentOrder"  class="panel-body check-out-view-shipping"  >
                 <div ng-show="addressform || (addresses | filter:{IsShipping:true}).length == 0">
-                    <addressinput address='shipaddress' user='user' return='return'></addressinput>
+                    <addressinput address='shipaddress' user='user'></addressinput>
                 </div>
                 <div ng-show="!addressform">
                     <form name="cart_shipping">
@@ -96,8 +96,7 @@
                     </span>
                     <button class="btn btn-default btn-info pull-right" type="button" class="btn btn-xs btn-danger"
                             ng-hide="addressform || (!addressform && (addresses | filter:{IsShipping:true}).length == 0)" ng-click="addressform = true" tabindex="-1">Add New Address</button>
-                    <button class="btn btn-default btn-default pull-right" type="button" class="btn btn-xs btn-danger"
-                            ng-show="addressform || (addressform && (addresses | filter:{IsShipping:true}).length == 0)" ng-click="addressform = false" style="margin-right: 10px;" tabindex="-1">Cancel</button>
+
                     <hr />
 
                     <div ng-show="!shipToMultipleAddresses">
@@ -165,18 +164,16 @@
             <loadingindicator ng-show="couponLoadingIndicator" />
             <div ng-show="checkOutSection == 'billing'" ng-show="currentOrder" class="panel-body check-out-view-billing">
                 <div ng-show="addressform">
-                    <addressinput address='billaddress' user='user' return='return'></addressinput>
+                    <addressinput address='billaddress' user='user'></addressinput>
                 </div>
                 <div ng-show="!addressform">
                     <button class="btn btn-default btn-info pull-right" type="button" class="btn btn-xs btn-danger" ng-hide="addressform" ng-click="addressform = true" tabindex="-1">Add New Address</button>
-                    <button class="btn btn-default btn-default pull-right" type="button" class="btn btn-xs btn-danger" ng-show="addressform" ng-click="addressform = false" style="margin-right: 10px;" tabindex="-1">Cancel</button>
                     <hr />
                     <form name="cart_billing">
                         <h5>
                             <label>Select a billing address</label>
                         </h5>
                         <select name="billingAddress" ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required />
-                        <span class="ui-state-error" ng-show="cart_billing.billingAddress.$invalid">Select an address shithead</span>
                         <paymentselector></paymentselector>
                         <div ng-show="user.Permissions.contains('ViewPromotions')">
                             <div ng-show="!currentOrder.Coupon">

@@ -208,9 +208,13 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
 	$scope.billaddress = { Country: 'US', IsShipping: false, IsBilling: true };
 
+	$scope.$on('event:AddressCancel', function(event) {
+		$scope.addressform = false;
+	});
     $scope.$on('event:AddressSaved', function(event, address) {
 	    $scope.currentOrder.ShipAddressID = address.ID;
-	    $scope.setShipAddressAtOrderLevel();
+	    if (!$scope.shipToMultipleAddresses)
+		    $scope.setShipAddressAtOrderLevel();
         AddressList.query(function(list) {
             $scope.addresses = list;
         });
