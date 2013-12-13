@@ -15,7 +15,7 @@
                 <p ng-show="currentOrder.Coupon"><span class="text-info">{{currentOrder.Coupon.Label}}:</span> {{currentOrder.Coupon.OrderDiscount * -1 | currency}}</p>
                 <hr/>
                 <p><span class="text-info">Total:</span> {{currentOrder.Total | currency}}</p>
-                <p ng-if="user.Company.TaxMethod != 'NoTax'"><span class="text-info">Shipping, handling and tax may be added to this subtotal.</span></p>
+                <p class="text-center text-info" ng-if="user.Company.TaxMethod != 'NoTax'">Shipping, handling and tax may be added to this subtotal.</p>
             </div>
         </div>
         <div class="panel-footer">
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <label>Comments:</label>
-                <textarea rows="5" cols="100" ng-model="currentOrder.Comments" />
+                <textarea class="form-control" rows="5" cols="100" ng-model="currentOrder.Comments" placeholder="Comments..." />
                 <div ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')">
                     <label>Cost Center</label>
                     <select class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="currentOrder.CostCenter"></select>
@@ -61,8 +61,8 @@
                 <ul ng-if="user.OrderFields">
                     <hr />
                     <li ng-repeat="field in currentOrder.OrderFields">
-                        <customtextfield customfield="field" ng-if="field.ControlType == 'Text'" ng-required="field.IsRequired" />
-                        <customselectionfield customfield="field" ng-if="field.ControlType == 'Selection'" ng-required="field.IsRequired" />
+                        <customtextfield class="form-control" customfield="field" ng-if="field.ControlType == 'Text'" ng-required="field.IsRequired" />
+                        <customselectionfield class="form-control" customfield="field" ng-if="field.ControlType == 'Selection'" ng-required="field.IsRequired" />
                     </li>
                 </ul>
             </div>
@@ -98,21 +98,30 @@
                         </button>
                     </span>
                     <button class="btn btn-default btn-info pull-right" type="button" class="btn btn-xs btn-danger"
-                            ng-hide="addressform || (!addressform && (addresses | filter:{IsShipping:true}).length == 0) || !user.Permissions.contains('CreateShipToAddress')" ng-click="addressform = true" tabindex="-1">
+                            ng-hide="(addressform || (!addressform && (addresses | filter:{IsShipping:true}).length == 0) || !user.Permissions.contains('CreateShipToAddress')) || !shipToMultipleAddresses" ng-click="addressform = true" tabindex="-1">
                         Add New Address</button>
 
                     <hr />
 
                     <div ng-show="!shipToMultipleAddresses">
                         <div ng-show="(addresses | filter:{IsShipping:true}).length > 0">
-                            <h5>
+                            <div class="form-group">
                                 <label>Select a shipping address</label>
-                            </h5>
-                            <select name="shippingAddress"
-                                    ng-change="setShipAddressAtOrderLevel()"
-                                    ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
-                                    ng-model="currentOrder.ShipAddressID"
-                                    ng-required="!shipToMultipleAddresses" />
+                                <div class="input-group">
+                                    <select class="form-control" name="shippingAddress"
+                                            ng-change="setShipAddressAtOrderLevel()"
+                                            ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
+                                            ng-model="currentOrder.ShipAddressID"
+                                            ng-required="!shipToMultipleAddresses">
+                                    </select>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default btn-info pull-right" type="button" class="btn btn-xs btn-danger"
+                                                ng-hide="addressform || (!addressform && (addresses | filter:{IsShipping:true}).length == 0) || !user.Permissions.contains('CreateShipToAddress')" ng-click="addressform = true" tabindex="-1">
+                                            Add New Address</button>
+                                    </span>
+                                </div>
+                            </div>
+
 
                         </div>
                         <div ng-show="user.ShipMethod != null && shippers" style="position: relative">
@@ -121,33 +130,35 @@
                             <h5>
                                 <label>Shipping Method</label>
                             </h5>
-                            <select ng-change="updateShipper()"
+                            <select class="form-control" ng-change="updateShipper()"
                                     ng-model="currentOrder.LineItems[0].ShipperName"
                                     ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
                                     ng-options="shipper.Name as shipper.Name for shipper in shippers"
-                                    ng-required="!shipToMultipleAddresses && user.ShipMethod != null" ></select>
+                                    ng-required="!shipToMultipleAddresses && user.ShipMethod != null" >
+                            </select>
                         </div>
                     </div>
 
                     <div ng-show="shipToMultipleAddresses">
 
-                        <div class="view-tr check-out-view-multiple-shipping">
-                            <div class="row" ng-repeat="item in currentOrder.LineItems">
-                                <div class="col-xs-12 col-sm-2">{{item.ProductIDText}}</div>
-                                <div class="col-xs-12 col-sm-1">{{item.Quantity}}</div>
-                                <div class="col-xs-12 col-sm-2">{{item.DateNeeded | date:'MM/dd/yyyy' }}</div>
-                                <div class="col-xs-12 col-sm-3">
-                                    <select name="shippingAddress"
+                        <div class="check-out-view-multiple-shipping">
+                            <div class="row" ng-class="{'ng-repeater-even-row': $even}" ng-repeat="item in currentOrder.LineItems">
+                                <div class="col-xs-12 col-sm-4"><strong>{{item.Product.Name}}</strong><small>{{' x ' + item.Quantity}}</small><br/>
+                                    <span class="text-info">{{item.DateNeeded | date:'MM/dd/yyyy' }}</span></div>
+                                <div class="col-xs-12 col-sm-4">
+                                    <select class="form-control" name="shippingAddress"
                                             ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
                                             ng-model="item.ShipAddressID"
-                                            ng-required="shipToMultipleAddresses" ></select>
+                                            ng-required="shipToMultipleAddresses" >
+                                    </select>
                                 </div>
                                 <div class="col-xs-12 col-sm-4">
-                                    <select ng-change="updateShipper(item)"
+                                    <select class="form-control" ng-change="updateShipper(item)"
                                             ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
                                             ng-options="shipper.Name as shipper.Name for shipper in shippers | noliverates"
                                             ng-model="item.ShipperName"
-                                            ng-required="shipToMultipleAddresses && user.ShipMethod != null" ></select>
+                                            ng-required="shipToMultipleAddresses && user.ShipMethod != null" >
+                                     </select>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +166,7 @@
                     </div>
 
 
-                    <input ng-if="user.ShipMethod.AskForAccountNumber" placeholder="Shipping Account Number" type="text" ng-model="currentOrder.LineItems[0].ShipAccount" />
+                    <input class="form-control" ng-if="user.ShipMethod.AskForAccountNumber" placeholder="Shipping Account Number" type="text" ng-model="currentOrder.LineItems[0].ShipAccount" />
                     </form>
                 </div>
             </div>
@@ -174,22 +185,34 @@
                     You're site is mis-configured. You do not have permission to create a billing address nor do you have any addresses assigned to you. Please contact your support representative.
                 </div>
                 <div ng-show="!addressform">
-                    <button class="btn btn-default btn-info pull-right" type="button" class="btn btn-xs btn-danger"
-                            ng-hide="addressform || !user.Permissions.contains('CreateBillToAddress')" ng-click="addressform = true" tabindex="-1">Add New Address</button>
-                    <hr />
                     <form name="cart_billing">
-                        <h5>
+                        <div class="form-group">
                             <label>Select a billing address</label>
-                        </h5>
-                        <select ng-show="(addresses | filter:{IsBilling:true}).length > 0" name="billingAddress"
-                                ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required></select>
+                            <div class="input-group">
+                                <select class="form-control" ng-show="(addresses | filter:{IsBilling:true}).length > 0" name="billingAddress"
+                                        ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required></select>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default btn-info pull-right" type="button" class="btn btn-xs btn-danger"
+                                            ng-hide="addressform || !user.Permissions.contains('CreateBillToAddress')" ng-click="addressform = true" tabindex="-1">Add New Address</button>
+                                </span>
+                            </div>
+
+                        </div>
+
                         <paymentselector></paymentselector>
+                        <hr/>
                         <div ng-show="user.Permissions.contains('ViewPromotions')">
                             <div ng-show="!currentOrder.Coupon">
-                                <label>Promotion Code: </label>
-                                <input type="text" ng-model="coupon" />
-                                <button type="button" class="btn btn-xs btn-danger" ng-click="applyCoupon()">Apply</button><br />
-                                <span ng-show="couponError" class="ui-state-error-text">{{couponError}}</span>
+                                <div class="form-group col-sm-6 col-sm-offset-3">
+                                    <label>Promotion Code: </label>
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" ng-model="coupon" placeholder="PROMO CODE" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-danger" ng-click="applyCoupon()">Apply</button>
+                                    </span>
+                                    </div>
+                                    <div ng-show="couponError" class="alert alert-danger">{{couponError}}</div>
+                                </div>
                             </div>
                             <h5 ng-show="currentOrder.Coupon">
                                 <p><span class="text-info">Coupon: </span>{{currentOrder.Coupon.CouponCode}}<span><i ng-click="removeCoupon()" ng-class="{'fa fa-eraser': currentOrder.Coupon }"></i></span></p>
@@ -199,16 +222,17 @@
                                 <span ng-show="currentOrder.Coupon.ExpirationDate">Expires: {{currentOrder.Coupon.ExpirationDate | date:'MM/dd/yyyy'}}</span>
                             </div>
                         </div>
+                        <hr/>
                         <div ng-show="currentOrder.Approvals" class="check-out-approvals">
-                            <h5>APPROVALS</h5>
+                            <p class="text-info" style="padding-left:15px; padding-right:15px;">Approvals:</p>
                             <approvalrulelist order="currentOrder" />
                         </div>
+                        <hr/>
                         <div ng-show="user.Permissions.contains('SendOrderNotificationToOthers')">
-                            <div>
-                                <h5>
-                                    <label>Email Notification</label>
-                                </h5>
-                                <input ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" />
+                            <div class="form-group col-sm-6 col-sm-offset-3">
+                                <label>Email Notification</label>
+                                <input class="form-control" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" placeholder="Email Address" />
+                                <span class="help-block"><small>Provide an email address if you would like to receive notifications concerning this order.</small></span>
                             </div>
                         </div>
                     </form>
