@@ -74,14 +74,14 @@
                                 <div class="col-xs-6" style="padding-top:5px;">
                                     <div>
                                         <label>Quantity</label>
-                                        <quantityfield error="qtyError" lineitem="item" class="quantity"/>
+                                        <quantityfield lineitem="item" class="quantity"/>
                                     </div>
                                     <div style="text-align:right;" ng-show="item.Product.QuantityMultiplier != 1">
                                         <small><span class="text-info" >Total Quantity: </span>{{item.Quantity * item.Product.QuantityMultiplier}}</small>
                                     </div>
                                 </div>
                                 <div class="col-xs-6" style="position:relative;">
-                                    <div ng-show="qtyError" style="padding:2px 5px; margin:0; position:absolute; height:100%;" class="alert alert-danger text-center"><small>{{qtyError}}</small></div>
+                                    <div ng-show="item.qtyError" style="padding:2px 5px; margin:0; position:absolute; height:100%;" class="alert alert-danger text-center"><small>{{item.qtyError}}</small></div>
                                     <p style="margin:0; text-align:center;" ng-if="!(user.Permissions.contains('HidePricing'))"><small>Line Item Price</small><br/><span class="text-success">{{item.LineTotal | currency}}</span></p>
                                 </div>
                             </div>

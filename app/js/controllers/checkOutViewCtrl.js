@@ -22,6 +22,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 
 	$scope.updateShipper = function(li) {
 		$scope.shippingUpdatingIndicator = true;
+		$scope.shippingFetchIndicator = true;
 		if (!$scope.shipToMultipleAddresses) {
 			angular.forEach($scope.shippers, function(s) {
 				if (s.Name == $scope.currentOrder.LineItems[0].ShipperName)
@@ -34,6 +35,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 			Order.save($scope.currentOrder, function(order) {
 				$scope.currentOrder = order;
 				$scope.shippingUpdatingIndicator = false;
+				$scope.shippingFetchIndicator = false;
 			});
 		}
 		else {
@@ -44,6 +46,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 			li.ShipperName = li.Shipper.Name;
 			li.ShipperID = li.Shipper.ID;
 			$scope.shippingUpdatingIndicator = false;
+			$scope.shippingFetchIndicator = false;
 		}
 	};
 
@@ -202,30 +205,22 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		});
 	};
 
-    $scope.newShippingAddress = function() {
-        if ($scope.address) {
-            $scope.address = {};
-        }
-        $scope.addressform = true;
-    }
-    $scope.cancelShippingAddress = function() {
-        $scope.addressform = false;
-    }
-    $scope.newBillingAddress = function() {
-        if ($scope.address) {
-            $scope.address = {};
-        }
-        $scope.addressform = true;
-    }
-    $scope.cancelBillingAddress = function() {
-        $scope.addressform = false;
-    }
+	$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
+	$scope.billaddress = { Country: 'US', IsShipping: false, IsBilling: true };
 
-    $scope.$on('event:AddressSaved', function() {
+	$scope.$on('event:AddressCancel', function(event) {
+		$scope.addressform = false;
+	});
+    $scope.$on('event:AddressSaved', function(event, address) {
+	    $scope.currentOrder.ShipAddressID = address.ID;
+	    if (!$scope.shipToMultipleAddresses)
+		    $scope.setShipAddressAtOrderLevel();
         AddressList.query(function(list) {
             $scope.addresses = list;
         });
         $scope.addressform = false;
+	    $scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
+	    $scope.billaddress = { Country: 'US', IsShipping: false, IsBilling: true };
     });
 
     $scope.checkOutSection = 'order';

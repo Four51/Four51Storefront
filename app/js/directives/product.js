@@ -113,7 +113,6 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 	var obj = {
         scope: {
             lineitem : '=',
-			error: '=',
 			calculated: '=',
 			required: '='
         },
@@ -139,7 +138,7 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 				var priceSchedule = lineItem.PriceSchedule;
 
 				if(value == null){
-					scope.error = null;
+					scope.lineitem.qtyError = null;
 					return scope.valid | true;
 				}
 
@@ -153,11 +152,11 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 
                 if(priceSchedule.MinQuantity > value){
 					scope.valid = false;
-                    scope.error = "must be greater than " + priceSchedule.MinQuantity;
+                    scope.lineitem.qtyError = "must be greater than " + priceSchedule.MinQuantity;
                 }
 
                 if(priceSchedule.MaxQuantity && priceSchedule.MaxQuantity < value){
-					scope.error = "must be less than " + priceSchedule.MaxQuantity;
+					scope.lineitem.qtyError = "must be less than " + priceSchedule.MaxQuantity;
                     scope.valid = false;
                 }
 
@@ -165,14 +164,14 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 					//console.log('variant not selected can\'t check qty available'); //in vboss the user may select the qty before the variant. we may have to change when this gets called so inventory available can be re validated if the variant is chnaged based on a selection spec. It's probably not a big deal since the api will check inventory available on adding to order.
 				}
 				else{
-					var qtyAvail = product.IsVariantLevelInventory ? variant.QuantityAvailable : product.QuantityAvailable;
+					var qtyAvail = product.IsVariantLevelInventory ? variant.QuantityAvailable : product.QuantityAvailable + lineItem.OriginalQuantity;
 					if(qtyAvail < value && product.AllowExceedInventory == false){
-						scope.error = "not enough available inventory " +  qtyAvail;
+						scope.lineitem.qtyError = "not enough available inventory " +  qtyAvail;
 						scope.valid = false;
 					}
 				}
                 if(scope.valid)
-					scope.error = null;
+					scope.lineitem.qtyError = null;
 
                 return scope.valid;
             }

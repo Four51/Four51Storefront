@@ -2,8 +2,8 @@ four51.app.controller('AddressInputCtrl', function ($scope, $rootScope, $locatio
     $scope.save = function() {
 	    $scope.objectExists = false;
         Address.save(this.address,
-	        function() {
-                $rootScope.$broadcast('event:AddressSaved');
+	        function(address) {
+                $rootScope.$broadcast('event:AddressSaved', address);
                 $location.path($scope.return);
             },
 	        function(ex) {
@@ -17,6 +17,10 @@ four51.app.controller('AddressInputCtrl', function ($scope, $rootScope, $locatio
             $location.path($scope.return);
         });
     };
+
+	$scope.cancel = function() {
+		$scope.return ? $location.path($scope.return) : $rootScope.$broadcast('event:AddressCancel');
+	};
 
     $scope.countries = Resources.countries;
     $scope.states = Resources.states;

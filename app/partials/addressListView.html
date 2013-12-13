@@ -11,7 +11,7 @@
             <button type="button" class="btn btn-primary" ng-click="newAddress($event)">Add an address now</button>
         </div>
     </div>
-    <div class="panel panel-default"  ng-if="addresses.length > 0">
+    <div class="panel panel-default"  ng-if="(addresses | filter:{IsCustEditable:true}).length > 0">
         <div class="panel-heading">
             <h3 class="panel-title">Addresses</h3>
         </div>
@@ -49,7 +49,7 @@
         </div>
         <div class="panel-footer">
             <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-show="(addresses | filter:searchTerm | filter:{Selected:true}).length > 0">Delete Selected</button>
-            <button type="button" class="btn btn-primary pull-right" ng-click="newAddress($event)">New Address</button>
+            <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" type="button" class="btn btn-primary pull-right" ng-click="newAddress($event)">New Address</button>
         </div>
     </div>
 </section>
