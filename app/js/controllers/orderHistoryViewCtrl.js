@@ -1,4 +1,4 @@
-four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $location, $routeParams, Order, FavoriteOrder, Address) {
+four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $location, $routeParams, Order, FavoriteOrder, Address, User) {
 	$scope.loadingIndicator = true;
 	Order.get($routeParams.id, function(data){
 		$scope.loadingIndicator = false;
@@ -42,6 +42,18 @@ four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $location,
 	        $scope.displayLoadingIndicator = false;
         });
 	};
+
+    $scope.repeatOrder = function() {
+        $scope.order.Repeat = true;
+        Order.save($scope.order, function(data) {
+            $scope.currentOrder = data;
+            $scope.user.CurrentOrderID = data.ID;
+            User.save($scope.user, function(data){
+                $scope.user = data;
+                $location.path('/cart');
+            });
+        });
+    };
 
     $scope.onPrint = function()  {
         window.print();

@@ -68,7 +68,7 @@
                             </a>
                             <div ng-if="allowAddFromVariantList" class="list-group-item" style="border-top-left-radius:0; border-top-right-radius:0;">
                                 <h4 class="pull-left text-success" style="margin:0;">{{variantLineItems[v.InteropID].LineTotal | currency}}</h4>
-                                <quantityfield calculated="calcVariantLineItems" lineitem="variantLineItems[v.InteropID]" class="quantity pull-right" />
+                                <quantityfield required="false" calculated="calcVariantLineItems" lineitem="variantLineItems[v.InteropID]" class="quantity pull-right" />
                                 <div style="padding:5px 15px; margin:2px 15px;" class="alert alert-danger pull-right" ng-show="variantLineItems[v.InteropID].qtyError">{{variantLineItems[v.InteropID].qtyError}}</div>
                                 <div style="clear:both;"></div>
                             </div>
@@ -76,7 +76,7 @@
                             </div>
                     </div>
 
-                    <p ng-show="LineItem.Product.DisplayInventory">
+                    <p ng-show="LineItem.Product.DisplayInventory && (LineItem.Variant || LineItem.Product.Variants.length == 0)">
                         <!-- nothing is accomodating the 0 level inventory and the custom message to be displayed -->
                         {{inventoryDisplay(LineItem.Product, LineItem.Variant) < 0 ? 0 : inventoryDisplay(LineItem.Product, LineItem.Variant)}} in stock
                     </p>
