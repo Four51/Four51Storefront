@@ -1,26 +1,27 @@
 <div class="animated fadeInDown">
-    <h5><label>Payment Method</label></h5>
-    <span class="btn-group">
-        <button class="btn btn-default" ng-show="user.Permissions.contains('PayByPO')" ng-click="currentOrder.PaymentMethod = 'PurchaseOrder'">
-            <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'PurchaseOrder' }"></i>
-            Purchase Order
-        </button>
-        <button class="btn btn-default" ng-show="user.Permissions.contains('SubmitForApproval') && currentOrder.Approvals" ng-click="currentOrder.PaymentMethod = 'Undetermined'">
-            <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'Undetermined' }"></i>
-            Approval Order
-        </button>
-        <button ng-if="user.Permissions.contains('PayByBudgetAccount') && (SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 0" class="btn btn-default" ng-click="currentOrder.PaymentMethod = 'BudgetAccount'">
-            <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'BudgetAccount' }"></i>
-            Spending Account {{showSpendingAccount}}
-        </button>
-        <button ng-if="user.Company.MerchantAccount && user.AvailableCreditCards.length > 0 && user.Permissions.contains('PayByCreditCard')" class="btn btn-default" ng-click="currentOrder.PaymentMethod = 'CreditCard'">
-            <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'CreditCard' }"></i>
-            Credit Card
-        </button>
+    <label>Payment Method</label>
+    <span class="btn-group btn-group-sm">
+    <button class="btn btn-default" ng-show="user.Permissions.contains('PayByPO')" ng-click="currentOrder.PaymentMethod = 'PurchaseOrder'">
+        <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'PurchaseOrder' }"></i>
+        Purchase Order
+    </button>
+    <button class="btn btn-default" ng-show="user.Permissions.contains('SubmitForApproval') && currentOrder.Approvals" ng-click="currentOrder.PaymentMethod = 'Undetermined'">
+        <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'Undetermined' }"></i>
+        Approval Order
+    </button>
+    <button ng-if="user.Permissions.contains('PayByBudgetAccount') && (SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 0" class="btn btn-default" ng-click="currentOrder.PaymentMethod = 'BudgetAccount'">
+        <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'BudgetAccount' }"></i>
+        Spending Account {{showSpendingAccount}}
+    </button>
+    <button ng-if="user.Company.MerchantAccount && user.AvailableCreditCards.length > 0 && user.Permissions.contains('PayByCreditCard')" class="btn btn-default" ng-click="currentOrder.PaymentMethod = 'CreditCard'">
+        <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'CreditCard' }"></i>
+        Credit Card
+    </button>
     </span>
+
     <div ng-if="user.Permissions.contains('PayByBudgetAccount')" ng-show="currentOrder.PaymentMethod == 'BudgetAccount'">
         <div ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length == 1"class="alert alert-success">{{SpendingAccounts[0].Label + ' - Balance: ' + (SpendingAccounts[0].Balance | currency)}}</div>
-        <div class="row" style="margin-top:15px; margin-bottom:15px;">
+        <div class="row" style="margin-top:15px;">
             <div class="col-sm-6">
                 <select class="form-control" ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 1"
                         ng-options="account.ID as (account.Label + ' - Balance: ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{AccountType.PurchaseCredit:true}"
@@ -28,9 +29,10 @@
                         ng-required="currentOrder.PaymentMethod == 'BudgetAccount'"></select>
             </div>
             <div class="col-sm-6">
-                <div class="alert alert-danger" ng-show="cart_billing.$error.paymentMethod" style="padding:6px 0; text-align:center;">This account does not cover the order total.</div>
+                <div class="alert alert-danger" ng-show="cart_billing.$error.paymentMethod" style="padding:6px 0; text-align:center; margin:0;">This account does not cover the order total.</div>
             </div>
         </div>
+        <hr/>
     </div>
     <div ng-if="user.Permissions.contains('PayByCreditCard')" ng-show="currentOrder.PaymentMethod == 'CreditCard'">
         <div class="row" style="padding:15px 0 8px 0;">
@@ -57,8 +59,9 @@
                 <input id="cvn" class="form-control" ng-model="currentOrder.CreditCard.CVN" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" placeholder="CVN" maxlength="4" />
             </div>
         </div>
-        <div ng-if="user.Permissions.contains('AllowSaveCreditCard')" style="padding:8px 0 15px 0;">
+        <div ng-if="user.Permissions.contains('AllowSaveCreditCard')" style="padding:8px 0 0 0;">
             <label class="checkbox-label"><input ng-model="currentOrder.CreditCard.Save"  type="checkbox" /> Save my credit card information</label>
         </div>
+        <hr/>
     </div>
 </div>
