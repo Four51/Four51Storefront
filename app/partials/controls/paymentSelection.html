@@ -20,7 +20,7 @@
     </span>
     <div ng-if="user.Permissions.contains('PayByBudgetAccount')" ng-show="currentOrder.PaymentMethod == 'BudgetAccount'">
         <span ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length == 1">{{SpendingAccounts[0].Label + ' - Balance: ' + (SpendingAccounts[0].Balance | currency)}}</span>
-        <select ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 1"
+        <select class="form-control" ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 1"
                 ng-options="account.ID as (account.Label + ' - Balance: ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{AccountType.PurchaseCredit:true}"
                 ng-model="currentOrder.BudgetAccountID"
                 ng-required="currentOrder.PaymentMethod == 'BudgetAccount'"></select>
@@ -28,13 +28,35 @@
     </div>
     <hr />
     <div ng-if="user.Permissions.contains('PayByCreditCard')" ng-show="currentOrder.PaymentMethod == 'CreditCard'">
-        <label>Type</label><select ng-model="currentOrder.CreditCard.Type" ng-options="creditCard.Type as creditCard.DisplayName for creditCard in user.AvailableCreditCards"></select>
-        <label ng-if="user.Permissions.contains('CardholderName')">Cardholder Name</label><input ng-if="user.Permissions.contains('CardholderName')" ng-model="currentOrder.CreditCard.CardholderName" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" placeholder="Cardholder Name" />
-        <label>Account Number</label><input ng-model="currentOrder.CreditCard.AccountNumber" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" autocomplete="false" placeholder="Account Number" />
-        <label>Expiration Date (mm/yy)</label><input ng-model="currentOrder.CreditCard.ExpirationDate" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" ui-mask="99/99" placeholder="Expiration Date" />
-        <label ng-if="currentOrder.RequireCVN">CVN</label><input ng-model="currentOrder.CreditCard.CVN" ng-required="currentOrder.PaymentMethod == 'CreditCard'" ng-if="currentOrder.RequireCVN" type="text" placeholder="Card Identification Number" maxlength="4" />
-        <span ng-if="user.Permissions.contains('AllowSaveCreditCard')">
-            <input ng-model="currentOrder.CreditCard.Save"  type="checkbox" /><label class="checkbox-label">Save my credit card information</label>
-        </span>
+        <div class="form-inline">
+            <div class="form-group">
+                <label for="credit-card-type">Type</label>
+                <select id="credit-card-type" class="form-control" ng-model="currentOrder.CreditCard.Type" ng-options="creditCard.Type as creditCard.DisplayName for creditCard in user.AvailableCreditCards"></select>
+            </div>
+            <div ng-if="user.Permissions.contains('CardholderName')" class="form-group">
+                <label for="cardholder-name" >Cardholder Name</label>
+                <input id="cardholder-name" class="form-control" ng-model="currentOrder.CreditCard.CardholderName" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" placeholder="Cardholder Name" />
+            </div>
+
+        </div>
+        <hr/>
+        <div class="form-inline">
+            <div class="form-group">
+                <label for="account-number">Account Number</label>
+                <input id="account-number" class="form-control" ng-model="currentOrder.CreditCard.AccountNumber" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" autocomplete="false" placeholder="Account Number" />
+            </div>
+            <div class="form-group">
+                <label for="expiration-date">Expiration Date (mm/yy)</label>
+                <input id="expiration-date" class="form-control" ng-model="currentOrder.CreditCard.ExpirationDate" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" ui-mask="99/99" placeholder="Expiration Date" />
+            </div>
+            <div ng-if="currentOrder.RequireCVN" class="form-group">
+                <label for="cvn">CVN</label>
+                <input id="cvn" class="form-control" ng-model="currentOrder.CreditCard.CVN" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" placeholder="CVN" maxlength="4" />
+            </div>
+        </div>
+        <hr/>
+        <div ng-if="user.Permissions.contains('AllowSaveCreditCard')">
+            <label class="checkbox-label"><input ng-model="currentOrder.CreditCard.Save"  type="checkbox" /> Save my credit card information</label>
+        </div>
     </div>
 </div>
