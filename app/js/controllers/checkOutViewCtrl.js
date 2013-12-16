@@ -1,5 +1,9 @@
 four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList, Shipper, Coupon, SpendingAccount) {
-	AddressList.query(function(list) {
+	if (!$scope.currentOrder) {
+        $location.path('catalog');
+    }
+
+    AddressList.query(function(list) {
         $scope.addresses = list;
     });
 
