@@ -12,6 +12,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	});
 
 	function hasMultipleAddresses() {
+		if (!$scope.currentOrder) return false;
 		var multi = false;
 		angular.forEach($scope.currentOrder.LineItems, function(li, i) {
 			multi = multi || i > 0 ? li.ShipAddressID != $scope.currentOrder.LineItems[i-1].ShipAddressID : false;
