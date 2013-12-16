@@ -106,17 +106,31 @@
                 </div>
                 <div class="panel-footer">
                     <span class="btn-group">
-                        <button class="btn btn-default  cart-view-btn-save" ng-click="saveChanges()">
-                            Save Changes
-                        </button>
-                        <button class="btn btn-default  cart-view-btn-cancel" ng-click="cancelOrder()">
+                        <button class="btn btn-default cart-view-btn-cancel" ng-click="cancelOrder()">
                             Cancel Order
                         </button>
+                        <button class="btn btn-default cart-view-btn-save" ng-click="saveChanges()">
+                            Save Changes
+                        </button>
                     </span>
-                    <button class="btn btn-default cart-view-btn-continue" ng-click="continueShopping()" style="float: right;">
+                    <button class="btn btn-default hidden-sm hidden-xs pull-right" ng-click="continueShopping()">
                         Continue Shopping
                     </button>
                 </div>
+            </div>
+            <div class="visible-sm visible-xs view-cart-bottom-nav navbar-fixed-bottom">
+                <ul>
+                    <li>
+                        <button class="btn btn-default" style="background-color:#50ACDB;" ng-click="continueShopping()">
+                            Continue Shopping
+                        </button>
+                    </li>
+                    <li>
+                        <button class="btn btn-success" ng-click="checkOut()" ng-disabled="cart.$invalid">
+                            Check Out  <i class="fa fa-angle-right"></i>
+                        </button>
+                    </li>
+                </ul>
             </div>
         </form>
     </div>

@@ -1,5 +1,9 @@
 four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList, Shipper, Coupon, SpendingAccount, Address) {
-	AddressList.query(function(list) {
+	if (!$scope.currentOrder) {
+        $location.path('catalog');
+    }
+
+    AddressList.query(function(list) {
         $scope.addresses = list;
     });
 
@@ -196,7 +200,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	$scope.applyCoupon = function() {
 		$scope.couponLoadingIndicator = true;
 		$scope.couponError = null;
-		Coupon.apply(this.code,
+		Coupon.apply($scope.coupon,
 			function(coupon) {
 				$scope.currentOrder.Coupon = coupon;
 				Order.save($scope.currentOrder, function(data) {

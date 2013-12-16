@@ -137,7 +137,6 @@
                     </div>
 
 
-
                     <div style="position:relative;">
                         <loadingindicator ng-show="shippingUpdatingIndicator" title="Please wait while shipping costs are updated" />
                         <loadingindicator ng-show="shippingFetchIndicator" title="Please wait while available shippers are updated" />
@@ -224,7 +223,7 @@
             </h3>
         </div>
             <div ng-show="checkOutSection == 'billing'" class="panel-body check-out-view-billing">
-                <div ng-show="addressform && user.Permissions.contains('CreateBillToAddress')">
+                <div ng-show="addressform || (addresses | filter:{IsBilling:true}).length == 0 && user.Permissions.contains('CreateBillToAddress')">
                     <addressinput address='billaddress' user='user'></addressinput>
                 </div>
                 <div class="alert-error" ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
@@ -238,11 +237,12 @@
                             <div class="col-xs-7 col-collapse">
                                 <div class="input-group">
                                     <select class="form-control" ng-show="(addresses | filter:{IsBilling:true}).length > 0" name="billingAddress"
-                                            ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required></select>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default btn-info pull-right" type="button" class="btn btn-xs btn-danger"
-                                            ng-hide="addressform || !user.Permissions.contains('CreateBillToAddress')" ng-click="addressform = true" tabindex="-1">New Address</button>
-                                </span>
+                                                ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required></select>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default btn-info pull-right" type="button" class="btn btn-xs btn-danger"
+                                                ng-hide="(addressform || (!addressform && (addresses | filter:{IsBilling:true}).length == 0) || !user.Permissions.contains('CreateBillToAddress'))"
+                                                ng-click="addressform = true" tabindex="-1">Add New Address</button>
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-xs-5 col-collapse text-right check-out-view-selected-billing" style="padding-left:15px;">
@@ -255,13 +255,11 @@
                                 <p ng-show="BillAddress.Phone"><small>{{BillAddress.Phone}}</small></p>
                             </div>
                         </div>
-
-
                         <hr/>
                         <div ng-show="currentOrder.Approvals" class="check-out-approvals" ng-click="toggleApprovals = !toggleApprovals" ng-init="toggleApprovals = false">
                             <p class="text-info text-center" style="padding:15px; cursor:pointer;">
-                                <span ng-show="toggleApprovals"><i class="fa fa-plus-circle"></i> Hide </span>
-                                <span ng-show="!toggleApprovals"><i class="fa fa-minus-circle"></i> Show </span>
+                                <span ng-show="toggleApprovals"><i class="fa fa-minus-circle"></i> Hide </span>
+                                <span ng-show="!toggleApprovals"><i class="fa fa-plus-circle"></i> Show </span>
                                 Approval Rules
                             </p>
                             <approvalrulelist ng-show="toggleApprovals" order="currentOrder" />

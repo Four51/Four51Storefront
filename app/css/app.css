@@ -861,6 +861,43 @@ nav.user-view-sm-xs-nav ul li {
 /* Cart | Checkout */
 /* ----------------------------------------------------------------------------------------------- */
 
+
+.view-cart-bottom-nav{
+    text-align: center;
+    z-index: 999999999;
+    border-top: 1px solid #d6d6d6;
+    background-color:#fff;
+}
+
+.view-cart-bottom-nav .btn i {
+    margin: 0 0 0 10px;
+    font-size: 14px;
+}
+
+.view-cart-bottom-nav  ul {
+    list-style-type:none;
+    padding: 0;
+    margin: 0;
+    clear: both;
+    overflow: hidden;
+}
+
+.view-cart-bottom-nav  ul li {
+    width: 50%;
+    display: inline-block;
+    float: left;
+}
+
+.view-cart-bottom-nav  .btn {
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    padding: 15px 0;
+    color:#fff;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
 li.print {
     cursor: pointer;
 }
@@ -1036,12 +1073,12 @@ li.cart span.badge {
     padding: 0;
 }
 
-.panel-heading.yes i {
+.panel-heading.yes i:first-of-type {
     color:#19B698;
     font-size: 22px;
 }
 
-.panel-heading.no i {
+.panel-heading.no i:first-of-type {
     color:#D14233;
     font-size: 22px;
 }
@@ -1076,8 +1113,6 @@ li.cart span.badge {
     font-size: 11px;
 }
 
-
-
 .cart-view-summary p span {
     float: left;
 }
@@ -1104,20 +1139,6 @@ li.cart span.badge {
     margin:0 -15px;
 }
 
-.no-whammy {
-    text-align: center;
-    z-index: 999999999;
-    color:#fff;
-    background-color:#A3D1EF;
-    opacity: .35;
-    padding: 0 5px;
-}
-
-.no-whammy h4 {
-    font-size: 12px;
-    color:#000;
-    text-transform: uppercase;
-}
 
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
@@ -1139,6 +1160,8 @@ li.cart span.badge {
 
 .btn.btn-primary {
     border: none;
+    padding: 15px 20px;
+    text-transform: uppercase;
 }
 
 .navbar {

@@ -73,6 +73,8 @@
     .branding-view-logo {float: none; margin: 0 auto; max-height: 75px; }
     .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
+    .cart-view-btn-cancel  {float: left !important;}
+    .cart-view-btn-save {float: right !important;}
     .check-out-view-multiple-shipping .row [class*="col-"] {
         border: none;
         min-height: inherit;
@@ -142,10 +144,10 @@
     .cart-view-btn-continue {width: 100%;margin-top: 10px;}
     .panel-footer .btn-group {width: 100%;}
     .cart-view-line-items-btn-group .btn-group, .check-out-view-btn-group .btn-group {vertical-align: inherit; width: 100%;}
-    .cart-view-btn-cancel  {float: right !important;}
+    .cart-view-btn-cancel  {float: left !important;}
     .cart-view-line-items-product {margin-bottom: 25px;}
     .cart-view-line-items-repeater div.col-xs-3 { text-align:center; }
-    .cart-view-btn-save {float: left;}
+    .cart-view-btn-save {float: right !important;}
     .ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {}
     .branding-view {text-align: center;}
     .branding-view-logo {float: none; margin: 0 auto; max-height: 75px; }
