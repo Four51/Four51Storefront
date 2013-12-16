@@ -1,0 +1,12 @@
+<div>
+    <ul class="list-group complex-selection-list-group">
+        <li ng-repeat="address in list | filter:{IsShipping:true}" class="list-group-item complex-selection-list-group-item" style="position:relative;"> <!---REPEAT OVER THIS LIST GROUP ITEM!-->
+            <div ng-click="selectItem(address.ID)">
+                <i ng-show="address.ID == model" class="fa fa-check text-success fa-2x" style="position:absolute; top:50%; right:15px;"></i>
+                <div class="complex-selection-list-group-item-content" style="margin-right:30px;">
+                    {{address.ID}} = {{address.City}}, {{address.State}} {{address.Zip}}
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
