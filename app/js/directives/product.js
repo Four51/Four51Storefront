@@ -137,6 +137,12 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 				var product = lineItem.Product;
 				var priceSchedule = lineItem.PriceSchedule;
 
+
+				if(value == "" && !scope.required)
+				{
+					lineItem.qtyError = null;
+					return scope.valid | true;
+				}
 				if(value == null){
 					scope.lineitem.qtyError = null;
 					return scope.valid | true;
