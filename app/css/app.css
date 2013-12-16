@@ -1095,6 +1095,10 @@ li.cart span.badge {
     margin-bottom:15px;
 }
 
+.check-out-view-selected-shipper p {
+    margin:0;
+}
+
 .check-out-approvals {
     margin:0 -15px;
 }

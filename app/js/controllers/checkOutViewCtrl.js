@@ -1,4 +1,4 @@
-four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList, Shipper, Coupon, SpendingAccount) {
+four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList, Shipper, Coupon, SpendingAccount, Address) {
 	AddressList.query(function(list) {
         $scope.addresses = list;
     });
@@ -75,6 +75,22 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 			});
 		});
 	};
+
+    $scope.$watch('currentOrder.ShipAddressID', function(newValue) {
+        if (newValue) {
+            Address.get(newValue, function(add) {
+                $scope.ShipAddress = add;
+            });
+        }
+    });
+
+    $scope.$watch('currentOrder.BillAddressID', function(newValue) {
+        if (newValue) {
+            Address.get(newValue, function(add) {
+                $scope.BillAddress = add;
+            });
+        }
+    });
 
     $scope.$watch('currentOrder.PaymentMethod', function(event, method) {
 	    if (event == 'BudgetAccount' && ($scope.SpendingAccounts && $scope.SpendingAccounts.length == 1)) {
@@ -180,7 +196,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	$scope.applyCoupon = function() {
 		$scope.couponLoadingIndicator = true;
 		$scope.couponError = null;
-		Coupon.apply($scope.coupon,
+		Coupon.apply(this.code,
 			function(coupon) {
 				$scope.currentOrder.Coupon = coupon;
 				Order.save($scope.currentOrder, function(data) {
