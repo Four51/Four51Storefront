@@ -1,6 +1,6 @@
 <div class="container line-item-history-view">
     <figure>
-        <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}" >
+        <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}" >
     </figure>
     <p>Product ID: {{LineItem.ProductIDText}}</p>
     <p ng-bind-html='LineItem.Product.Description'></p>
