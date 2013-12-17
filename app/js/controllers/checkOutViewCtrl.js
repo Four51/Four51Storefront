@@ -160,6 +160,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
             $scope.currentOrder = data;
 	        $scope.displayLoadingIndicator = false;
 	        if (callback) callback();
+            $scope.showSuccessAlert = true;
         });
     };
 
