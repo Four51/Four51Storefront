@@ -1,0 +1,9 @@
+<nav class="nav nav-cat-search visible-sm visible-xs account-nav">
+    <hr />
+    <span class="btn-group">
+        <button class="btn btn-default" ng-class="{'active': isActive('addresses')}" redirect="/addresses">Addresses</button>
+        <button class="btn btn-default" ng-class="{'active': isActive('message')}" redirect="/message">Messages</button>
+    </span>
+    <span ng-if="user.Type=='Customer'" class="logout pull-right"><button class="btn btn-danger 451_btn_logout" ng-click="Logout()">Log Out</button></span>
+    <hr />
+</nav>

@@ -5,6 +5,7 @@
     .header-nav-c1 {width: 1140px; margin: 0 auto; }
     .product-view-default .fa.empty {text-align: left;}
     .cat-image {overflow: hidden;}
+    .branding-view h3 {line-height: 4em;}
 }
 
 
@@ -16,6 +17,7 @@
     .product-view-default .fa.empty {text-align: left;}
     .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
+    .branding-view h3 {line-height: 4em;}
 
 }
 
@@ -70,7 +72,7 @@
     }
 
     .branding-view {text-align: center;}
-    .branding-view-logo {float: none; margin: 0 auto; max-height: 75px; }
+    .branding-view-logo {float: none; margin: 0 auto 10px; max-height: 75px; }
     .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
     .cart-view-btn-cancel  {float: left !important;}
@@ -150,7 +152,7 @@
     .cart-view-btn-save {float: right !important;}
     .ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {}
     .branding-view {text-align: center;}
-    .branding-view-logo {float: none; margin: 0 auto; max-height: 75px; }
+    .branding-view-logo {float: none; margin: 0 auto 10px; max-height: 75px; }
     .shortproduct-view:hover .shortproduct-name {display: block;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
     .caption {margin: 5px;}

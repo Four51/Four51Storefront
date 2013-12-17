@@ -1,5 +1,6 @@
 <section class="container address-list-view">
     <loadingindicator ng-show="displayLoadingIndicator" />
+    <accountnavigation />
     <div class="panel panel-default" ng-if="(addresses | filter:{IsCustEditable:true}).length == 0">
         <div class="panel-heading">
             <h3 class="panel-title">Addresses</h3>

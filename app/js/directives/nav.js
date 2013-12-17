@@ -6,3 +6,12 @@ four51.app.directive('navigation', function() {
 	}
 	return obj;
 });
+
+four51.app.directive('accountnavigation', function() {
+    var obj = {
+        restrict: 'E',
+        templateUrl: 'partials/controls/accountnav.html',
+        controller: 'NavCtrl'
+    }
+    return obj;
+});
