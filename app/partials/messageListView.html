@@ -1,4 +1,5 @@
 <section class="container message-list-view">
+    <accountnavigation />
     <div class="panel panel-default" ng-if="messages.length == 0">
         <div class="panel-heading">
             <h3 class="panel-title">Messages</h3>
@@ -9,6 +10,7 @@
         <div class="panel-footer">
         </div>
     </div>
+
     <div class="panel panel-default"ng-if="messages.length > 0">
         <loadingindicator ng-show="displayLoadingIndicator" />
         <div class="panel-heading">

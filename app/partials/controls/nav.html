@@ -6,14 +6,14 @@
                     <li class="products" ng-class="{'active': isActive('catalog')}">
                         <a ng-show="Four51User.isAuthenticated()" href="#/catalog"><i class="fa fa-home"></i><span class="text-nav">Products</span></a>
                     </li>
-                    <li class="order hidden-xs"ng-class="{'active': isActive('order')}">
+                    <li class="order"ng-class="{'active': isActive('order')}">
                         <a href="#/order"><i class="fa fa-bar-chart-o"></i><span class="text-nav hidden-sm hidden-xs">Orders</span></a>
                     </li>
-                    <li class="favorites" ng-class="{'active': isActive('favoriteorders')}">
+                    <li class="favorites hidden-xs" ng-class="{'active': isActive('favoriteorders')}">
                         <a href="#/favoriteorders" ><i class="fa fa-star"></i><span class="text-nav hidden-sm hidden-xs">Favorites</span></a>
                     </li>
                     <li ng-class="{'active': isActive(['admin', 'addresses', 'address', 'messages', 'message'])}">
-                        <a href="#/admin" class="hidden-md hidden-lg"><i class="fa fa-user"></i></a>
+                        <a href="#/admin" class="hidden-md hidden-lg"><i class="fa fa-user"></i><span class="text-nav hidden-sm hidden-xs">My Account</span></a>
                     </li>
                     <li class="dropdown admin-user visible-md visible-lg" ng-class="{'active': isActive(['admin', 'addresses', 'address', 'messages', 'message'])}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><span class="text-nav">My Account</span><b class="caret"></b></a>

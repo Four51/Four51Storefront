@@ -271,17 +271,31 @@
         <div class="panel-footer check-out-view-types">
             <div class="check-out-view-btn-group" ng-show="currentOrder">
                 <span class="btn-group">
-                    <button class="btn btn-default cart-view-btn-save" ng-click="saveChanges()">
-                        Save Changes
-                    </button>
                     <button class="btn btn-default cart-view-btn-cancel" ng-click="cancelOrder()">
                         Cancel Order
                     </button>
+                    <button class="btn btn-default cart-view-btn-save" ng-click="saveChanges()">
+                        Save Changes
+                    </button>
                 </span>
-                <button class="btn btn-default cart-view-btn-continue" ng-click="continueShopping()" style="float: right;">
+                <button class="btn btn-default hidden-sm hidden-xs pull-right" ng-click="continueShopping()">
                     Continue Shopping
                 </button>
             </div>
+        </div>
+        <div class="visible-sm visible-xs view-cart-bottom-nav navbar-fixed-bottom">
+            <ul>
+                <li>
+                    <button class="btn btn-default" style="background-color:#50ACDB;" ng-click="continueShopping()">
+                        Continue Shopping
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-success" ng-show="currentOrder" ng-click="submitOrder()" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">
+                        Submit Order  <i class="fa fa-angle-right"></i>
+                    </button>
+                </li>
+            </ul>
         </div>
     </div>
 </section>

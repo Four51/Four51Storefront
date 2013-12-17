@@ -1,4 +1,5 @@
-<section class="jumbotron branding-view" ng-show="user.Company.Logo.Url">
+<section class="jumbotron branding-view" ng-class="{'active': isActive('catalog')}" ng-show="user.Company.Logo.Url">
+    <!--- product centric sliders, new products, features and buyer company branded info would be nice here --->
     <div class="container">
         <h3 ng-show="Four51User.isAuthenticated()">
             <figure>
@@ -6,7 +7,7 @@
                     <img class="branding-view-logo" ng-src="{{user.Company.Logo.Url}}" />
                 </a>
             </figure>
-            {{user.Company.Name}}</span>
+            <span>{{user.Company.Name}}</span>
         </h3>
     </div>
 </section>

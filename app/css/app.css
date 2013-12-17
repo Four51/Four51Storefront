@@ -487,14 +487,6 @@ li.selected {
     border: 1px solid #fff;
 }
 
-nav.user-view-sm-xs-nav {
-    text-align: center;
-}
-
-nav.user-view-sm-xs-nav ul li {
-    float: none;
-}
-
 .user-view .list-group label {
     display: block;
     margin: 0;
@@ -1023,6 +1015,14 @@ li.cart span.badge {
     display: none;
 }
 
+.branding-view {
+    display: none;
+}
+
+.branding-view.active {
+    display:block;
+}
+
 .branding-view-logo {
     max-height:130px;
     float: left;
@@ -1138,7 +1138,6 @@ li.cart span.badge {
 .check-out-approvals {
     margin:0 -15px;
 }
-
 
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
