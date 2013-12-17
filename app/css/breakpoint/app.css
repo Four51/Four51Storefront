@@ -138,7 +138,10 @@
         }
     }
 
-
+    .navbar-default .navbar-nav > .active-xs > a, .navbar-default .navbar-nav > .active-xs > a:hover, .navbar-default .navbar-nav > .active-xs > a:focus {
+        background-color: #359FD5;
+        color: #FFFFFF;
+    }
     .current-cat-name {width: 215px;}
     .navbar-collapse {padding: 0;}
     .navbar-left li.products a {padding: 15px 20px 15px 10px;}

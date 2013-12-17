@@ -1139,6 +1139,8 @@ li.cart span.badge {
     margin:0 -15px;
 }
 
+
+
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
@@ -1159,7 +1161,6 @@ li.cart span.badge {
 
 .btn.btn-primary {
     border: none;
-    padding: 15px 20px;
     text-transform: uppercase;
 }
 

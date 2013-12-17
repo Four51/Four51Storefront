@@ -1,4 +1,12 @@
 <section class="container favorite-order-list-view">
+    <nav class="nav nav-cat-search visible-xs">
+        <hr />
+        <span class="btn-group">
+            <button class="btn btn-default" ng-class="{'active': isActive('order')}" redirect="/order">Orders</button>
+            <button class="btn btn-default" ng-class="{'active': isActive('favoriteorders')}" redirect="/favoriteorders">Favorites</button>
+        </span>
+        <hr />
+    </nav>
     <div class="panel panel-default" ng-if="favoriteorders.length == 0">
         <div class="panel-heading">
             <h3 class="panel-title panel-primary">Favorite Orders</h3>

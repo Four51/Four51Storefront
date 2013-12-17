@@ -1,4 +1,12 @@
 <section class="container order-search-view">
+    <nav class="nav nav-cat-search visible-xs" ng-show="hasStandardTypes || hasReplenishmentTypes || hasPriceRequestTypes">
+        <hr />
+        <span class="btn-group">
+            <button class="btn btn-default" ng-class="{'active': isActive('order')}" redirect="/order">Orders</button>
+            <button class="btn btn-default" ng-class="{'active': isActive('favoriteorders')}" redirect="/favoriteorders">Favorites</button>
+        </span>
+        <hr />
+    </nav>
     <div class="panel panel-default" ng-if="!hasStandardTypes && !hasReplenishmentTypes && !hasPriceRequestTypes">
         <div class="panel-heading">
             <h3 class="panel-title">Orders</h3>
@@ -10,17 +18,7 @@
             <button type="button" class="btn btn-primary" ng-click="continueShopping()">Continue Shopping</button>
         </div>
     </div>
-    <nav class="nav nav-cat-search" ng-show="hasStandardTypes || hasReplenishmentTypes || hasPriceRequestTypes">
-        <hr />
-        <ul>
-            <li class="text-nav">Orders</li>
-            <li class="pull-right" ng-click="toggle = !toggle">
-                <i class="fa fa-search" rel="tooltip" title="Search Orders"></i>
-            </li>
-        </ul>
-        <hr />
-    </nav>
-    <div ng-show="displayOrders" ng-hide="toggle">
+    <div ng-show="displayOrders">
         <!--- TODO table needs to redone as Bootstrap responsive layout, see cartView.html for example --->
         <table class="table table-striped table-hover table-bordered" ng-show="orders">
             <caption ng-show="orderSearchStat">{{orderSearchStat.Type}} - {{orderSearchStat.DisplayName}}</caption>
@@ -41,41 +39,38 @@
             </tbody>
         </table>
     </div>
-    <!--- below panels are fine and hide/show as intended --->
-    <div class="order-search-toggle" ng-show="toggle" >
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Search Orders</h3>
-            </div>
-            <div class="panel-body">
-                <div class="form-inline">
-                    <div class="form-group">
-                        <label>Order ID</label><input class="form-control" type="text" ng-model="criteria.OrderID" placeholder="Order ID" />
-                    </div>
-                    <div class="form-group">
-                        <label>Shipping Address</label><input class="form-control" type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" />
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Search Orders</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label>Order ID</label><input class="form-control" type="text" ng-model="criteria.OrderID" placeholder="Order ID" />
+                </div>
+                <div class="form-group">
+                    <label>Shipping Address</label><input class="form-control" type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" />
 
-                    </div>
-                    <div class="form-group">
-                        <label>From</label><input type="text" class="form-control" ui-date ng-model="criteria.DateRangeFrom" placeholder="From:" />
+                </div>
+                <div class="form-group">
+                    <label>From</label><input type="text" class="form-control" ui-date ng-model="criteria.DateRangeFrom" placeholder="From:" />
 
-                    </div>
-                    <div class="form-group">
-                        <label>To</label><input type="text" class="form-control" ui-date ng-model="criteria.DateRangeTo" placeholder="To:" />
+                </div>
+                <div class="form-group">
+                    <label>To</label><input type="text" class="form-control" ui-date ng-model="criteria.DateRangeTo" placeholder="To:" />
 
-                    </div>
-                    <div class="form-group">
-                        <label>Last n Orders</label><input class="form-control" type="text" ng-model="criteria.LastN" placeholder="Last n Orders:" />
+                </div>
+                <div class="form-group">
+                    <label>Last n Orders</label><input class="form-control" type="text" ng-model="criteria.LastN" placeholder="Last n Orders:" />
 
-                    </div>
                 </div>
             </div>
-            <div class="panel-footer">
-                <input type="submit" class="btn btn-primary" value="Search" ng-click="OrderSearch($event, criteria); toggle = !toggle;" />
-            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" class="btn btn-primary" value="Search" ng-click="OrderSearch($event, criteria)" />
         </div>
     </div>
-    <div class="order-types" ng-show="!toggle">
+    <div class="order-types">
         <div class="panel panel-default" ng-show="hasStandardTypes">
             <div class="panel-heading">
                 <h3 class="panel-title">Standard Orders</h3>
