@@ -1,4 +1,4 @@
-four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList, Shipper, Coupon, SpendingAccount) {
+four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList, Shipper, Coupon, SpendingAccount, Address) {
 	if (!$scope.currentOrder) {
         $location.path('catalog');
     }
@@ -79,6 +79,22 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 			});
 		});
 	};
+
+    $scope.$watch('currentOrder.ShipAddressID', function(newValue) {
+        if (newValue) {
+            Address.get(newValue, function(add) {
+                $scope.ShipAddress = add;
+            });
+        }
+    });
+
+    $scope.$watch('currentOrder.BillAddressID', function(newValue) {
+        if (newValue) {
+            Address.get(newValue, function(add) {
+                $scope.BillAddress = add;
+            });
+        }
+    });
 
     $scope.$watch('currentOrder.PaymentMethod', function(event, method) {
 	    if (event == 'BudgetAccount' && ($scope.SpendingAccounts && $scope.SpendingAccounts.length == 1)) {
