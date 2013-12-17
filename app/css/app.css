@@ -1015,6 +1015,14 @@ li.cart span.badge {
     display: none;
 }
 
+.branding-view {
+    display: none;
+}
+
+.branding-view.active {
+    display:block;
+}
+
 .branding-view-logo {
     max-height:130px;
     float: left;

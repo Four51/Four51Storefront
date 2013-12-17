@@ -1,4 +1,4 @@
-<section class="jumbotron branding-view" ng-class="{'hidden': isActive(['order', 'favoriteorders', 'admin', 'addresses', 'address', 'messages', 'message'])}" ng-show="user.Company.Logo.Url">
+<section class="jumbotron branding-view" ng-class="{'active': isActive('catalog')}" ng-show="user.Company.Logo.Url">
     <!--- product centric sliders, new products, features and buyer company branded info would be nice here --->
     <div class="container">
         <h3 ng-show="Four51User.isAuthenticated()">
