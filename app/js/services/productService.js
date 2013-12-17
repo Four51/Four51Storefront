@@ -242,7 +242,7 @@ four51.app.factory('ProductDisplayService', function($451, Variant, Product){
 			}
 		}
 
-		scope.allowAddToOrder =  scope.allowAddFromVariantList || (scope.LineItem.Variant || scope.LineItem.Product.Variants.length == 0);//this will include some order type and current order logic.
+		scope.allowAddToOrder =  scope.allowAddFromVariantList || (scope.LineItem.Variant || scope.LineItem.Product.VariantCount == 0);//this will include some order type and current order logic.
 
 		//short view//scope.allowAddToOrder = scope.LineItem.Product.Variants.length == 0 && scope.lineItemSpecs.length == 0 && scope.LineItem.Product.Type != 'VariableText';
 		//one view//ng-show="LineItem.Variant || LineItem.Product.Variants.length == 0"

@@ -3,9 +3,9 @@
     <productnav product="LineItem.Product" variant="LineItem.Variant" />
 
 	<div class="row">
-        <div class="col-sm-5 col-collapse" ng-show="LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url || LineItem.Variant.PreviewUrl">
+        <div class="col-sm-5 col-collapse" ng-show="LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl || LineItem.Variant.PreviewUrl">
             <figure style="background-color:#fff;">
-                <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageFile.Url || LineItem.Product.LargeImageFile.Url}}">
+                <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}">
             </figure>
         </div>
 

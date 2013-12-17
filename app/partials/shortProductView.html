@@ -1,8 +1,8 @@
 <div class="shortproduct-view row" ng-mouseover="toggle = true" ng-mouseleave="toggle = false" ng-class="{ 'howdy': toggle }" style="position:relative;">
     <div class="col-md-6 col-sm-12">
         <a class="cat-link" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
-            <figure ng-show="LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url" class="prod-image">
-                <img ng-src="{{LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url}}"/>
+            <figure ng-show="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl" class="prod-image">
+                <img ng-src="{{LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl}}"/>
             </figure>
         </a>
     </div>
@@ -41,8 +41,8 @@
 
 <!--<div class="shortproduct-view" ng-mouseover="toggle = true" ng-mouseleave="toggle = false" ng-class="{ 'howdy': toggle }">
     <a class="cat-link text-left" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}" style="overflow: hidden;">
-        <figure ng-show="LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url" class="pull-left prod-image">
-            <img ng-src="{{LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url}}"/>
+        <figure ng-show="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl" class="pull-left prod-image">
+            <img ng-src="{{LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl}}"/>
         </figure>
         <div class="text-left" style="margin-left:50%;">
             <figcaption class="shortproduct-name">{{LineItem.Product.Name}}</figcaption>
@@ -54,7 +54,7 @@
 
 
         <div style="clear:both;"></div>
-        <div class="empty" ng-hide="LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url">
+        <div class="empty" ng-hide="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl">
             <span class="fa empty"><i class="fa fa-camera"></i></span>
         </div>
     </a>
