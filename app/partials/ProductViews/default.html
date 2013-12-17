@@ -110,10 +110,9 @@
 
                 </div>
                 <div class="panel-footer">
-                    <div ng-hide="LineItem.LineTotal || variantLineItemsOrderTotal" class="col-md-3" ng-if="!(user.Permissions.contains('HidePricing'))"></div>
-                    <div ng-show="LineItem.LineTotal || variantLineItemsOrderTotal" class="col-md-6 text-center" ng-if="!(user.Permissions.contains('HidePricing'))">
-                        <h3 style="margin-top:0; display:inline-block;">Total:</h3 >
-                        <h3 class="text-success" style="margin:0; padding:0; display:inline-block;">
+                    <div class="col-md-6 text-center">
+                        <h3 ng-show="LineItem.LineTotal || variantLineItemsOrderTotal" style="margin-top:0; display:inline-block;" ng-if="!(user.Permissions.contains('HidePricing'))">Total:</h3 >
+                        <h3 class="text-success" style="margin:0; padding:0; display:inline-block;" ng-if="!(user.Permissions.contains('HidePricing'))">
                             {{LineItem.LineTotal | currency}}{{variantLineItemsOrderTotal | currency}}
                         </h3>
                     </div>
