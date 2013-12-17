@@ -1139,7 +1139,14 @@ li.cart span.badge {
     margin:0 -15px;
 }
 
-
+/* disable dragging */
+.view-nonDraggableImage{
+    -webkit-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    -ms-user-drag: none;
+    user-drag: none;
+}
 
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */

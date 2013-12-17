@@ -6,6 +6,9 @@
     .product-view-default .fa.empty {text-align: left;}
     .cat-image {overflow: hidden;}
     .branding-view h3 {line-height: 4em;}
+    .shortproduct-view-swipe {
+        display: none;
+    }
 }
 
 
@@ -18,6 +21,9 @@
     .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
     .branding-view h3 {line-height: 4em;}
+    .shortproduct-view-swipe {
+        display: none;
+    }
 
 }
 
