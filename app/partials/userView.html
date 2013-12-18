@@ -1,6 +1,7 @@
 <section class="container user-view">
     <loadingindicator title="Please wait while we save your changes" ng-show="displayLoadingIndicator"/>
     <accountnavigation />
+
 	<form name="login_existing" ng-submit="loginExisting()" ng-if="user.Type == 'TempCustomer'">
 		<div class="panel panel-default" id="user_form">
 			<div class="panel-heading">
@@ -29,7 +30,7 @@
                     <label>Phone</label> <input name="phone" class="form-control" type="text" ng-model="user.Phone" ui-mask="(999) 999-9999" placeholder="Phone Number" /><br />
                     <label>Email</label> <input name="email" class="form-control" type="email" ng-model="user.Email" required placeholder="Email Address" />
                     <span class="alert-error" ng-show="user_form.email.$invalid">Please enter a valid email address</span><br />
-                    <label>Username</label> <input name="username" class="form-control" type="text" ng-model="user.Username" required placeholder="User Name" /><br />
+                    <label>Username</label> <input name="username" class="form-control" type="text" ng-model="user.TempUsername" required placeholder="User Name" /><br />
                     <!--TODO username input shouldn't default to temporary usernames, if the user is temp, make the placeholder show instead !-->
                     <label>Password</label> <input name="password" class="form-control" type="password" ng-model="user.Password" placeholder="Password" /><br />
                     <label>Confirm Password</label> <input name="confirm_password" match="'password'" class="form-control" type="password" ng-model="user.ConfirmPassword" ui-validate="'$value==user.Password'" ui-validate-watch="'user.Password'" placeholder="Confirm Password" />
