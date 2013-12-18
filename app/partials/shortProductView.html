@@ -1,12 +1,14 @@
 <div class="shortproduct-view row" ng-mouseover="toggle = true" ng-mouseleave="toggle = false" ng-class="{ 'howdy': toggle }" style="position:relative;">
     <div class="col-md-6 col-sm-12">
         <a class="cat-link" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
-            <figure ng-show="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl" class="prod-image">
-                <img ng-src="{{LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl}}"/>
+            <figure ng-show="LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url" class="prod-image view-nonDraggableImage" ng-swipe-left="showSwipe = true">
+                <img ng-src="{{LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url}}"/>
             </figure>
+            <div class="empty view-nonDraggableImage" ng-hide="LineItem.Variant.SmallImageFile.Url || LineItem.Product.SmallImageFile.Url" ng-swipe-left="showSwipe = true">
+                <span class="fa empty"><i class="fa fa-camera"></i></span>
+            </div>
         </a>
     </div>
-
     <div class="col-md-6 col-sm-12" style="position:relative;">
         <div class="text-left" style="padding:15px;">
             <figcaption class="shortproduct-name">{{LineItem.Product.Name}}</figcaption>
@@ -16,9 +18,8 @@
             </p>
         </div>
     </div>
-    <div style="position:absolute; top:0; bottom:0; width:50%; right:0;">
-        <section class="shortproduct-info text-center" ng-class="{ 'product-details': toggle }" ng-show="toggle">
-
+    <section style="position:absolute; top:0; bottom:0; width:50%; right:0;" class="hidden-xs hidden-sm">
+        <div class="shortproduct-info text-center" ng-class="{ 'product-details': toggle }" ng-show="toggle">
             <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]" ng-if="!(user.Permissions.contains('HidePricing'))">
                 {{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
                 <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>
@@ -35,49 +36,26 @@
                     View Product
                 </a>
             </p>
-        </section>
-    </div>
-</div>
-
-<!--<div class="shortproduct-view" ng-mouseover="toggle = true" ng-mouseleave="toggle = false" ng-class="{ 'howdy': toggle }">
-    <a class="cat-link text-left" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}" style="overflow: hidden;">
-        <figure ng-show="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl" class="pull-left prod-image">
-            <img ng-src="{{LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl}}"/>
-        </figure>
-        <div class="text-left" style="margin-left:50%;">
-            <figcaption class="shortproduct-name">{{LineItem.Product.Name}}</figcaption>
+        </div>
+    </section>
+    <section class="shortproduct-view-swipe" ng-show="showSwipe" ng-swipe-right="showSwipe = false">
+        <div class="shortproduct-info text-center" ng-class="{ 'product-details': toggle }">
+            <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]" ng-if="!(user.Permissions.contains('HidePricing'))">
+                {{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
+                <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>
+                for {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
+            </p>
+            <p ng-show="LineItem.Product.UnitOfMeasure">
+                Unit of Measure: {{LineItem.Product.UnitOfMeasure}}
+            </p>
+            <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
+                QTY Available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
+            </p>
             <p>
-                <span class="text-info">Description: </span><br/>
-                <span ng-bind-html="LineItem.Product.Description" ng-show="LineItem.Product.Description" />
+                <a class="btn btn-default" style="width: 150px; margin: 0 auto;" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
+                    View Product
+                </a>
             </p>
         </div>
-
-
-        <div style="clear:both;"></div>
-        <div class="empty" ng-hide="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl">
-            <span class="fa empty"><i class="fa fa-camera"></i></span>
-        </div>
-    </a>
-
-    <section class="shortproduct-info text-center" ng-class="{ 'product-details': toggle }" ng-show="toggle" style="top:0; height:100%; width:51%; right:0;">
-
-        <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]">
-            {{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
-            <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>
-            for {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
-        </p>
-        <p ng-show="LineItem.Product.UnitOfMeasure">
-            Unit of Measure: {{LineItem.Product.UnitOfMeasure}}
-        </p>
-        <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
-            QTY Available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
-        </p>
-        <p>
-            <a class="btn btn-info" style="width: 150px; margin: 0 auto;" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
-                View Product
-            </a>
-        </p>
     </section>
-</div>!-->
-
-
+</div>

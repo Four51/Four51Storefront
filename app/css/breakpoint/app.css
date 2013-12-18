@@ -6,6 +6,9 @@
     .product-view-default .fa.empty {text-align: left;}
     .cat-image {overflow: hidden;}
     .branding-view h3 {line-height: 4em;}
+    .shortproduct-view-swipe {
+        display: none;
+    }
 }
 
 
@@ -18,6 +21,9 @@
     .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
     .branding-view h3 {line-height: 4em;}
+    .shortproduct-view-swipe {
+        display: none;
+    }
 
 }
 
@@ -138,7 +144,10 @@
         }
     }
 
-
+    .navbar-default .navbar-nav > .active-xs > a, .navbar-default .navbar-nav > .active-xs > a:hover, .navbar-default .navbar-nav > .active-xs > a:focus {
+        background-color: #359FD5;
+        color: #FFFFFF;
+    }
     .current-cat-name {width: 215px;}
     .navbar-collapse {padding: 0;}
     .navbar-left li.products a {padding: 15px 20px 15px 10px;}
