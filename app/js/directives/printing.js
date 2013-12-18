@@ -4,13 +4,13 @@ four51.app.directive('cartprint', function() {
         templateUrl: 'partials/cartPrintView.html',
         controller: function($scope){
 	        $scope.hasShipperOnAnyLineItem = function() {
-		        angular.forEach(data.LineItems, function(item) {
+		        angular.forEach($scope.currentOrder.LineItems, function(item) {
 			        if (item.Shipper) return true;
 		        });
 		        return false;
 	        };
 	        $scope.hasShipAccountOnAnyLineItem = function() {
-		        angular.forEach(data.LineItems, function(item) {
+		        angular.forEach($scope.currentOrder.LineItems, function(item) {
 			        if (item.ShipAccount) return true;
 		        });
 		        return false;
@@ -26,13 +26,13 @@ four51.app.directive('orderprint', function() {
         templateUrl: 'partials/orderPrintView.html',
         controller: function($scope){
 	        $scope.hasShipperOnAnyLineItem = function() {
-		        angular.forEach(data.LineItems, function(item) {
+		        angular.forEach($scope.order.LineItems, function(item) {
 			        if (item.Shipper) return true;
 		        });
 		        return false;
 	        };
 	        $scope.hasShipAccountOnAnyLineItem = function() {
-		        angular.forEach(data.LineItems, function(item) {
+		        angular.forEach($scope.order.LineItems, function(item) {
 			        if (item.ShipAccount) return true;
 		        });
 		        return false;
