@@ -34,13 +34,22 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 				$scope.displayLoadingIndicator = false;
 				if (callback) callback();
                 $scope.showSuccessAlert = true;
+				$scope.$broadcast('event:orderUpdate', data);
 			});
 		}
 	};
 
 	$scope.removeItem = function(item) {
-		item.Selected = true;
-		$scope.saveChanges();
+		if ($scope.currentOrder.LineItems.length > 1) {
+			if (confirm('Are you sure you wish to remove this item from your cart?') == true) {
+				item.Selected = true;
+				$scope.saveChanges();
+			}
+		}
+		else {
+			item.Selected = true;
+			$scope.saveChanges();
+		}
 	}
 
     $scope.checkOut = function() {
