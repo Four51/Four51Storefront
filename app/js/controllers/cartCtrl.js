@@ -33,6 +33,7 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 				OrderConfig.costcenter(data, $scope.user).address(data, $scope.user);
 				$scope.displayLoadingIndicator = false;
 				if (callback) callback();
+                $scope.showSuccessAlert = true;
 			});
 		}
 	};
@@ -75,4 +76,5 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
     $scope.onPrint = function()  {
 	    window.print();
     };
+
 });
