@@ -12,7 +12,7 @@ four51.app.factory('Order', function($resource, $rootScope, $451, Security, Erro
 				if (spec.ControlType == 'File' && spec.File && spec.File.Url.indexOf('auth') == -1)
 					spec.File.Url += "&auth=" + Security.auth();
 			});
-			item.Specs.length = Object.keys(item.Specs).length;
+			item.SpecsLength = Object.keys(item.Specs).length;
 		});
 	}
 
