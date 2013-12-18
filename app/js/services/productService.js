@@ -1,6 +1,6 @@
 'use strict';
 four51.app.factory('Product', function($resource, $451, Security){
-	var _cacheName = '451Cache.Product.' + $451.apiName;
+	//var _cacheName = '451Cache.Product.' + $451.apiName;
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
@@ -21,11 +21,11 @@ four51.app.factory('Product', function($resource, $451, Security){
 	}
 
      var _get = function(param, success) {
-	     var product = store.get(_cacheName + param);
-	     product ? (function() { _extend(product);	_then(success, product); })() :
-		     $resource($451.api('Products/:interopID'), { interopID: '@ID' }).get({ interopID: param }).$promise.then(function(product) {
+	     //var product = store.get(_cacheName + param);
+	     //product ? (function() { _extend(product);	_then(success, product); })() :
+		 var product = $resource($451.api('Products/:interopID'), { interopID: '@ID' }).get({ interopID: param }).$promise.then(function(product) {
 				_extend(product);
-				store.set(_cacheName + product.InteropID, product);
+				//store.set(_cacheName + product.InteropID, product);
 				_then(success, product);
 	         });
     }
@@ -36,15 +36,15 @@ four51.app.factory('Product', function($resource, $451, Security){
             'CategoryInteropID': categoryInteropID,
             'SearchTerms': searchTerm ? searchTerm : ''
         };
-	    var cacheID = '451Cache.Products.' + criteria.CategoryInteropID + criteria.SearchTerms.replace(/ /g, "");
-		var products = store.get(cacheID);
-	    products ? _then(success, products) :
-	        $resource($451.api('Products')).query(criteria).$promise.then(function(products) {
-		        store.set(cacheID, products);
+	    //var cacheID = '451Cache.Products.' + criteria.CategoryInteropID + criteria.SearchTerms.replace(/ /g, "");
+		//var products = store.get(cacheID);
+	    //products ? _then(success, products) :
+	    var products = $resource($451.api('Products')).query(criteria).$promise.then(function(products) {
+		        //store.set(cacheID, products);
 	            _then(success, products);
 	        });
     }
-
+	
 	return {
         get: _get,
         search: _search
