@@ -1,4 +1,5 @@
 <section class="container user-view">
+    <loadingindicator title="Please wait while we save your changes" ng-show="displayLoadingIndicator"/>
     <accountnavigation />
 	<form name="login_existing" ng-submit="loginExisting()" ng-if="user.Type == 'TempCustomer'">
 		<div class="panel panel-default" id="user_form">
@@ -45,7 +46,8 @@
                 </div>
             </div>
             <div class="panel-footer text-center">
-                <input class="btn btn-medium btn-primary" type="submit" ng-disabled="user_form.$invalid" id="451_btn_user" value="{{user.Type == 'TempCustomer' ? 'Create Acccount' : 'Save'}}" />
+                <input class="btn btn-primary" type="submit" ng-disabled="user_form.$invalid" id="451_btn_user" value="{{user.Type == 'TempCustomer' ? 'Create Acccount' : 'Save'}}" />
+                <span class="alert alert-success" ng-show="saveSuccess">Your changes have been saved</span>
             </div>
         </div>
     </form>
