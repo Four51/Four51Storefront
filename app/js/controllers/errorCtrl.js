@@ -20,8 +20,8 @@ four51.app.controller('ErrorCtrl', function ErrorCtrl($scope, $451) {
 				StackTrace: ex.StackTrace || ''
 			};
 			console.dir($scope.error);
-			if ($451.debug)
-				$scope.open();
+			//if ($451.debug)
+			//	$scope.open();
 		}
 		catch(e) {
 			console.log('An error occurred while handling an error. Consult the object written to the log. Keep in mind you must use the Error() if you are throwing an error in your JavaScript');
