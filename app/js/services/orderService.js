@@ -2,6 +2,7 @@ four51.app.factory('Order', function($resource, $rootScope, $451, Security, Erro
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
+		$rootScope.$broadcast('event:orderUpdate', data);
 	}
 
 	function _extend(order) {

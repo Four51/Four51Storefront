@@ -35,7 +35,7 @@
                 <ul class="nav navbar-nav pull-right">
                     <li class="cart" ng-class="{'active': isActive('cart')}">
                         <a ng-show="currentOrder" class="cart" href="#/cart">
-                            <span ng-binding ng-if="currentOrder.LineItems.length" class="badge badge-cart">{{currentOrder.LineItems.length}}</span>
+                            <span ng-bind="cartCount" class="badge badge-cart"></span>
                             <i class="fa fa-shopping-cart"></i>
                         </a>
                     </li>
