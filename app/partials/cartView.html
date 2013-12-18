@@ -109,10 +109,13 @@
                         <button class="btn btn-default cart-view-btn-cancel" ng-click="cancelOrder()">
                             Cancel Order
                         </button>
-                        <button class="btn btn-default cart-view-btn-save" ng-click="saveChanges()">
+                            <button class="btn btn-default cart-view-btn-save" ng-click="saveChanges()">
                             Save Changes
-                        </button>
+                            </button>
                     </span>
+                    <div class="alert alert-success" ng-show="showSuccessAlert">
+                        Your Changes Have Been Saved!
+                    </div>
                     <button class="btn btn-default hidden-sm hidden-xs pull-right" ng-click="continueShopping()">
                         Continue Shopping
                     </button>
