@@ -8,6 +8,7 @@
         </div>
         <div class="panel-body text-right" style="position: relative;">
             <loadingindicator ng-show="couponLoadingIndicator" title="Please wait while we verify and apply your promotion code" />
+            <loadingindicator ng-show="couponRemoveIndicator" title="Please wait while we remove your promotion code" />
             <div ng-if="!(user.Permissions.contains('HidePricing'))">
                 <p><span class="text-info">Items:</span> {{currentOrder.LineItems.length}}</p>
                 <p><span class="text-info">Subtotal:</span> {{currentOrder.Subtotal | currency}}</p>
@@ -18,10 +19,10 @@
                         <div class="form-group">
                             <label>Promotion Code: </label>
                             <div class="input-group">
-                                <input class="form-control" type="text" ng-model="code" placeholder="PROMO CODE"></input>
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-info" ng-click="applyCoupon()">Apply</button>
-                                    </span>
+                                <input class="form-control" type="text" ng-model="currentOrder.CouponCode" placeholder="PROMO CODE"></input>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info" ng-click="applyCoupon()">Apply</button>
+                                </span>
                             </div>
                             <div ng-show="couponError" class="alert alert-danger">{{couponError}}</div>
                         </div>
@@ -31,7 +32,7 @@
                     </p>
                     <div ng-show="currentOrder.Coupon">
                         <div class="btn btn-xs btn-danger pull-right" ng-click="removeCoupon()">Remove Coupon</div>
-                        <p class="text-left"><small class="text-danger">Expires: {{currentOrder.Coupon.ExpirationDate | date:'MM/dd/yyyy'}}</small></p>
+                        <p class="text-left" ng-show="currentOrder.Coupon.ExpirationDate"><small class="text-danger">Expires: {{currentOrder.Coupon.ExpirationDate | date:'MM/dd/yyyy'}}</small></p>
                     </div>
                 </div>
                 <hr/>
