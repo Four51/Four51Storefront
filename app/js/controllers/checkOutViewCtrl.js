@@ -15,14 +15,15 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		$scope.SpendingAccounts = data;
 	});
 
-	$scope.shipToMultipleAddresses = function() {
-		if (!$scope.currentOrder) return false;
+	var shipToMultipleAddresses = function(order) {
+		if (!order) return false;
 		var multi = false;
-		angular.forEach($scope.currentOrder.LineItems, function(li, i) {
-			multi = multi || i > 0 ? li.ShipAddressID != $scope.currentOrder.LineItems[i-1].ShipAddressID : false;
+		angular.forEach(order.LineItems, function(li, i) {
+			multi = multi || i > 0 ? li.ShipAddressID != order.LineItems[i-1].ShipAddressID : false;
 		});
 		return multi;
 	};
+	$scope.shipToMultipleAddresses = shipToMultipleAddresses();
 
 	$scope.updateShipper = function(li) {
 		$scope.shippingUpdatingIndicator = true;
