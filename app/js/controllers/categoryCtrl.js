@@ -12,11 +12,15 @@ four51.app.controller('CategoryCtrl', function ($routeParams, $scope, $451, Cate
             $scope.currentCategory = cat;
 	        $scope.categoryLoadingIndicator = false;
         });
-    }else{
+    }else if($scope.tree){
 		$scope.currentCategory ={SubCategories:$scope.tree};
 	}
 
-
+	$scope.$on("treeComplete", function(data){
+		if (!$routeParams.categoryInteropID) {
+			$scope.currentCategory ={SubCategories:$scope.tree};
+		}
+	});
 
     // No tooltips on phone, tablet portrait
     if (!window.matchMedia || (window.matchMedia("(min-width: 1023px)").matches)) {
