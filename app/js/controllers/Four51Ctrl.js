@@ -27,7 +27,8 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
                     $scope.currentOrder = null;
             });
             Category.tree(function(data) {
-		        $scope.tree = data;
+				$scope.tree = data;
+				$scope.$broadcast("treeComplete", data);
 	        });
         }
     }
