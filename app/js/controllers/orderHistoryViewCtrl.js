@@ -12,7 +12,7 @@ four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $location,
 		}
         $scope.hasShipperOnAnyLineItem = function() {
             angular.forEach(data.LineItems, function(item) {
-                if (item.Shipper) return true;
+                if (item.ShipperID) return true;
             });
             return false;
         };

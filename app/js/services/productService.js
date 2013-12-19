@@ -18,6 +18,8 @@ four51.app.factory('Product', function($resource, $451, Security){
 					spec.FileURL += "&auth=" + Security.auth();
 			});
 		});
+
+		product.StaticSpecLength = Object.keys(product.StaticSpecGroups).length;
 	}
 
      var _get = function(param, success) {

@@ -74,13 +74,14 @@ four51.app.directive('pricescheduletable', function(){
 four51.app.directive('staticspecstable', function(){
     var obj = {
         scope: {
-			specgroups : '='
+			specgroups : '=',
+	        length: '='
         },
         restrict: 'E',
         templateUrl: 'partials/controls/staticSpecs.html',
-		link: function(scope){
-            scope.length = scope.specgroups ? Object.keys(scope.specgroups).length : 0;
-			scope.hasvisiblechild = function(specs){
+		controller: function($scope){
+            //$scope.length = $scope.specgroups ? Object.keys($scope.specgroups).length : 0;
+			$scope.hasvisiblechild = function(specs){
 				var hasChild = false;
 				angular.forEach(specs, function(item){
 					if(item.VisibleToCustomer)

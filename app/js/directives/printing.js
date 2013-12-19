@@ -5,13 +5,13 @@ four51.app.directive('cartprint', function() {
         controller: function($scope){
 	        $scope.hasShipperOnAnyLineItem = function() {
 		        angular.forEach($scope.currentOrder.LineItems, function(item) {
-			        if (item.Shipper) return true;
+			        if (item.ShipperID) return true;
 		        });
 		        return false;
 	        };
 	        $scope.hasShipAccountOnAnyLineItem = function() {
 		        angular.forEach($scope.currentOrder.LineItems, function(item) {
-			        if (item.ShipAccount) return true;
+			        if (item.ShipAccountID) return true;
 		        });
 		        return false;
 	        };
