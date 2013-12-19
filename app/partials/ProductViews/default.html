@@ -39,7 +39,7 @@
             </div>
 
             <!--STATIC SPECS PANEL!-->
-            <staticspecstable ng-show="StaticSpecGroups && user.Permissions.contains('ViewNonCustomizableSpecs')" specgroups="StaticSpecGroups"/>
+            <staticspecstable ng-show="StaticSpecGroups && user.Permissions.contains('ViewNonCustomizableSpecs')" specgroups="StaticSpecGroups" length="LineItem.Product.StaticSpecLength"/>
 
             <!--VARIANT LIST TABLE!-->
             <form name="addToOrderForm">

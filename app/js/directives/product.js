@@ -74,13 +74,14 @@ four51.app.directive('pricescheduletable', function(){
 four51.app.directive('staticspecstable', function(){
     var obj = {
         scope: {
-			specgroups : '='
+			specgroups : '=',
+	        length: '='
         },
         restrict: 'E',
         templateUrl: 'partials/controls/staticSpecs.html',
-		link: function(scope){
-            scope.length = scope.specgroups ? Object.keys(scope.specgroups).length : 0;
-			scope.hasvisiblechild = function(specs){
+		controller: function($scope){
+            //$scope.length = $scope.specgroups ? Object.keys($scope.specgroups).length : 0;
+			$scope.hasvisiblechild = function(specs){
 				var hasChild = false;
 				angular.forEach(specs, function(item){
 					if(item.VisibleToCustomer)
@@ -170,8 +171,8 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 					//console.log('variant not selected can\'t check qty available'); //in vboss the user may select the qty before the variant. we may have to change when this gets called so inventory available can be re validated if the variant is chnaged based on a selection spec. It's probably not a big deal since the api will check inventory available on adding to order.
 				}
 				else{
+					var qtyAvail = (product.IsVariantLevelInventory ? variant.QuantityAvailable : product.QuantityAvailable) + (lineItem.OriginalQuantity || 0);
 
-					var qtyAvail = product.IsVariantLevelInventory ? variant.QuantityAvailable : product.QuantityAvailable + (lineItem.OriginalQuantity || 0);
 					if(qtyAvail < value && product.AllowExceedInventory == false){
 						scope.lineitem.qtyError = "not enough available inventory " +  qtyAvail;
 						scope.valid = false;

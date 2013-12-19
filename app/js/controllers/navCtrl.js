@@ -35,4 +35,9 @@ four51.app.controller('NavCtrl', function ($location, $route, $scope, $451, User
 		localStorage.clear();
 		$route.reload();
 	}
+
+	$scope.$on('event:orderUpdate', function(event, order) {
+		if (order)
+			$scope.cartCount = order.LineItems.length;
+	});
 });

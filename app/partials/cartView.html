@@ -54,7 +54,7 @@
                                     <span class="text-info"><small>{{item.ProductIDText}}</small></span>
                                 </a>
                             </div>
-                            <p style="cursor:pointer; padding:15px; margin-bottom:0;" class="text-info text-center" ng-show="item.Specs.length > 0" ng-init="toggleSpecs = false" ng-click="toggleSpecs = !toggleSpecs">
+                            <p style="cursor:pointer; padding:15px; margin-bottom:0;" class="text-info text-center" ng-show="item.SpecsLength > 0" ng-init="toggleSpecs = false" ng-click="toggleSpecs = !toggleSpecs">
                                 <span ng-show="toggleSpecs == false"><i class="fa fa-plus-circle"></i> Show </span>
                                 <span ng-show="toggleSpecs == true"><i class="fa fa-minus-circle"></i> Hide </span>
                                 Specifications
@@ -62,8 +62,8 @@
                             <ul style="list-style: none; padding:0;" ng-show="toggleSpecs == true">
                                 <li class="text-center" ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
                                     <span class="text-info">{{spec.Name}}: </span>
-                                    <span ng-if="spec.ControlType == 'File' && spec.FileType == 'Image'">{{spec.File.OriginalName + Extension}}</span>
-                                    <span ng-if="spec.ControlType != 'File'">{{spec.Value}}</span>
+                                    <span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span></span>
+                                    <span ng-if="spec.ControlType != 'File'">{{spec.Value || '(unspecified)'}}</span>
                                 </li>
                             </ul>
                         </div>

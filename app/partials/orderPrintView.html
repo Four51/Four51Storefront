@@ -54,6 +54,7 @@
                     <p>Subtotal:<span style="float: right;">{{order.Subtotal | currency:"$"}}</span></p>
                     <p>Shipping & Handling: <span style="float: right;">{{order.ShippingCost | currency:"$"}}</span></p>
                     <p>Tax: <span style="float: right;">{{order.TaxCost | currency:"$"}}</span></p>
+                    <p>Coupon ({{order.Coupon.Label}}): <span style="float: right;">{{order.Coupon.OrderDiscount * -1 | currency}}</span></p>
                     <p>Total: <span style="float: right;">{{order.Total | currency:"$"}}</span></p>
                 </div>
             </div>
@@ -77,7 +78,7 @@
                             </ul>
                             <div>
                                 <div>
-                                    <p ng-show="hasShipperOnAnyLineItem()">{{item.Shipper.Name}}</p>
+                                    <p ng-show="hasShipperOnAnyLineItem()">{{item.ShipperName}}</p>
                                 </div>
                                 <div>
                                     <p ng-show="hasShipAccountOnAnyLineItem()">{{item.ShipAccount}}</p>
