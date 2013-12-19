@@ -1,36 +1,38 @@
 <div class="order-history-view-line-items-repeater" ng-repeat="item in order.LineItems">
-     <div class="col-collapse col-md-6 col-sm-6 col-xs-12 col-md-4 order-history-view-line-items-product">
-         <p><a ng-href="#/order/{{order.ID}}/{{$index}}">{{item.ProductIDText}}</a></p>
-         <p>{{item.Product.Name}}</p>
-         <ul ng-show="hasSpecOnAnyLineItem">
-             <li ng-repeat="spec in item.Specs | filter:Selected">{{spec.Name + " : " + spec.Value}}</li>
-         </ul>
-         <div class="row">
-             <div class="col-xs-6">
-                 <p>{{item.ShipperName}}</p>
-             </div>
-             <div class="col-xs-6">
-                 <p>{{item.ShipAccount}}</p>
-             </div>
-         </div>
-     </div>
-    <div ng-if="item.CostCenter">{{item.CostCenter}}</div>
-     <div ng-if="!(user.Permissions.contains('HidePricing'))" class="col-xs-3 col-sm-2">
-         <p>{{item.UnitPrice | currency:"$"}}</p>
-     </div>
-    <div class="col-xs-3 col-sm-2">
-        <p ng-show="item.Product.QuantityMultiplier == 1">x {{item.Quantity}}</span>
-        <p ng-show="item.Product.QuantityMultiplier > 1" >x {{item.Product.QuantityMultiplier * item.Quantity}}</span>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12 col-md-4 order-history-view-line-items-product">
+            <p><a ng-href="#/order/{{order.ID}}/{{$index}}">{{item.ProductIDText}}</a></p>
+            <p>{{item.Product.Name}}</p>
+            <ul ng-show="hasSpecOnAnyLineItem">
+                <li ng-repeat="spec in item.Specs | filter:Selected">{{spec.Name + " : " + spec.Value}}</li>
+            </ul>
+            <div class="row">
+                <div class="col-xs-6">
+                    <p>{{item.ShipperName}}</p>
+                </div>
+                <div class="col-xs-6">
+                    <p>{{item.ShipAccount}}</p>
+                </div>
+            </div>
+        </div>
+        <div ng-if="item.CostCenter">{{item.CostCenter}}</div>
+        <div ng-if="!(user.Permissions.contains('HidePricing'))" class="col-xs-3 col-sm-2">
+            <p>{{item.UnitPrice | currency:"$"}}</p>
+        </div>
+        <div class="col-xs-3 col-sm-2">
+            <p ng-show="item.Product.QuantityMultiplier == 1">x {{item.Quantity}}</span>
+            <p ng-show="item.Product.QuantityMultiplier > 1" >x {{item.Product.QuantityMultiplier * item.Quantity}}</span>
+        </div>
+        <div ng-if="!(user.Permissions.contains('HidePricing'))" class="col-xs-3 col-sm-2">
+            {{item.LineTotal | currency:"$"}}
+        </div>
+        <div class="col-xs-3 col-sm-2" ng-show="order.Status == 'Open'">{{item.TotalShipped}}</div>
+        <address class="col-xs-3 col-sm-2" ng-show="item.ShipAddress">
+            <strong> Ship to:</strong><br>
+            {{item.ShipAddress.Street1}}<br>
+            {{item.ShipAddress.Street2}}<br ng-show="item.ShipAddress.Street2">
+            {{item.ShipAddress.City}}, {{item.ShipAddress.State}} {{item.ShipAddress.Zip}}
+        </address>
     </div>
-    <div ng-if="!(user.Permissions.contains('HidePricing'))" class="col-xs-3 col-sm-2">
-        {{item.LineTotal | currency:"$"}}
-    </div>
-    <div class="col-xs-3 col-sm-2" ng-show="order.Status == 'Open'">{{item.TotalShipped}}</div>
-    <address class="col-xs-3 col-sm-2" ng-show="item.ShipAddress">
-        <strong> Ship to:</strong><br>
-        {{item.ShipAddress.Street1}}<br>
-        {{item.ShipAddress.Street2}}<br ng-show="item.ShipAddress.Street2">
-        {{item.ShipAddress.City}}, {{item.ShipAddress.State}} {{item.ShipAddress.Zip}}
-    </address>
 </div>
 

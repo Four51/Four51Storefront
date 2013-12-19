@@ -15,7 +15,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		$scope.SpendingAccounts = data;
 	});
 
-	function hasMultipleAddresses() {
+	$scope.shipToMultipleAddresses = function() {
 		if (!$scope.currentOrder) return false;
 		var multi = false;
 		angular.forEach($scope.currentOrder.LineItems, function(li, i) {
@@ -23,7 +23,6 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		});
 		return multi;
 	};
-	$scope.shipToMultipleAddresses = hasMultipleAddresses();
 
 	$scope.updateShipper = function(li) {
 		$scope.shippingUpdatingIndicator = true;

@@ -23,23 +23,23 @@
                 </div>
                 <div>
                     <p ng-show="order.DateSubmitted">Date Submitted: <span style="float:right;">{{order.DateSubmitted | date}}</span></p>
-                    <p>Status: <span style="float:right;">{{order.Status}}</span></p>
+                    <p>Status: <span style="float:right;">{{order.StatusText}}</span></p>
                     <p ng-show="order.DateCompleted">Date Completed: <span style="float:right;">{{order.DateCompleted | date}}</span></p>
                     <p>Created By: <span style="float:right;">{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</span></p>
                     <p ng-show="order.Comments">Comments: <span style="float:right;">{{order.Comments}}</span></p>
                     <p ng-show="orderCostCenter">Cost Center: <span style="float:right;">{{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</span></p>
-                    <p>Payment Method: <span style="float:right;">{{order.PaymentMethod}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong></span></p>
-                    <address ng-show="order.BillAddress">
-                        <strong> Bill to:</strong><br>
-                        {{order.BillAddress.Street1}}<br>
-                        {{order.BillAddress.Street2}}<br ng-show="order.BillAddress.Street2">
-                        {{order.BillAddress.City}},{{order.BillAddress.State}} {{order.BillAddress.Zip}}
-                    </address>
+                    <p>Payment Method: <span style="float:right;">{{order.PaymentMethodText}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong></span></p>
                     <address ng-show="order.ShipAddress">
-                        <strong> Ship to:</strong><br>
-                        {{order.ShipAddress.Street1}}<br>
+                        <strong> Ship to:</strong>
+                        <span style="float:right;">{{order.ShipAddress.Street1}}<br>
                         {{order.ShipAddress.Street2}}<br ng-show="order.ShipAddress.Street2">
-                        {{order.ShipAddress.City}}, {{order.ShipAddress.State}} {{order.ShipAddress.Zip}}
+                        {{order.ShipAddress.City}}, {{order.ShipAddress.State}} {{order.ShipAddress.Zip}}</span>
+                    </address><br />
+                    <address ng-show="order.BillAddress">
+                        <strong> Bill to:</strong>
+                        <span style="float:right;">{{order.BillAddress.Street1}}<br>
+                        {{order.BillAddress.Street2}}<br ng-show="order.BillAddress.Street2">
+                        {{order.BillAddress.City}}, {{order.BillAddress.State}} {{order.BillAddress.Zip}}</span>
                     </address>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                     <p>Subtotal:<span style="float: right;">{{order.Subtotal | currency:"$"}}</span></p>
                     <p>Shipping & Handling: <span style="float: right;">{{order.ShippingCost | currency:"$"}}</span></p>
                     <p>Tax: <span style="float: right;">{{order.TaxCost | currency:"$"}}</span></p>
-                    <p>Coupon ({{order.Coupon.Label}}): <span style="float: right;">{{order.Coupon.OrderDiscount * -1 | currency}}</span></p>
+                    <p ng-if="order.Coupon">Coupon ({{order.Coupon.Label}}): <span style="float: right;">{{order.Coupon.OrderDiscount * -1 | currency}}</span></p>
                     <p>Total: <span style="float: right;">{{order.Total | currency:"$"}}</span></p>
                 </div>
             </div>
@@ -83,6 +83,14 @@
                                 <div>
                                     <p ng-show="hasShipAccountOnAnyLineItem()">{{item.ShipAccount}}</p>
                                 </div>
+                            </div>
+                            <div ng-show="item.ShipAddress">
+                                <address>
+                                    <strong> Ship to:</strong><br>
+                                    {{item.ShipAddress.Street1}}<br>
+                                    {{item.ShipAddress.Street2}}<br ng-show="item.ShipAddress.Street2">
+                                    {{item.ShipAddress.City}}, {{item.ShipAddress.State}} {{item.ShipAddress.Zip}}
+                                </address>
                             </div>
                         </div>
                         <div ng-if="!(user.Permissions.contains('HidePricing'))">
