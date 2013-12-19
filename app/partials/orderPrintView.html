@@ -73,8 +73,12 @@
                         <div class="order-print-view-line-items-product">
                             <p><a ng-href="#/order/{{order.ID}}/{{$index}}">{{item.ProductIDText}}</a></p>
                             <p>{{item.Product.Name}}</p>
-                            <ul ng-show="hasSpecOnAnyLineItem">
-                                <li ng-repeat="spec in item.Specs | filter:Selected">{{spec.Name + " : " + spec.Value}}</li>
+                            <ul ng-show="item.Specs | filter:{'CanSetForLineItem':true}.length > 0">
+                                <li class="text-center" ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
+                                    <span class="text-info">{{spec.Name}}: </span>
+                                    <span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span></span>
+                                    <span ng-if="spec.ControlType != 'File'">{{spec.Value || '(unspecified)'}}</span>
+                                </li>
                             </ul>
                             <div>
                                 <div>
