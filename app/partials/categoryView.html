@@ -8,7 +8,7 @@
                     <span ng-show="showMega"><i class="fa fa-minus-circle" rel="tooltip" title="Close all Categories"></i></span>
                 </li>
                 <li class="text-nav">
-                    {{currentCategory.Name || "Categories"}}
+                    <span ng-bind-html="currentCategory.Name || 'Categories'"></span>
                     <span ng-show="!currentCategory">Categories</span>
                 </li>
                 <li class="pull-right">
@@ -41,7 +41,7 @@
                             <div class="empty" ng-show="!c.Image.URL">
                                 <span class="fa empty"><i class="fa fa-camera"></i></span>
                             </div>
-                            <h5>{{c.Name}}</h5>
+                            <h5><span ng-bind-html="c.Name"></span></h5>
                             <figcaption ng-if="productList" class="category-description" ng-bind-html="c.Description"></figcaption>
                         </a>
                     </li>
