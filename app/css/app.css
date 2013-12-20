@@ -922,9 +922,7 @@ li.print {
     padding: 0;
 }
 
-.cart-view-line-items-product {
-    margin-bottom: 10px;
-}
+
 
 .cart-view-line-items .panel-body, .product-view-default .panel{
     padding: 0;
@@ -936,6 +934,15 @@ li.print {
     overflow: hidden;
     padding: 25px 0;
     position:relative;
+}
+
+.view-form-icon {padding-left: 25px;}
+.view-form-icon-fa {
+    color: #CCCCCC;
+    left: 20px;
+    position: absolute;
+    top: 10px;
+    z-index: 10;
 }
 
 /* stuff
@@ -979,8 +986,6 @@ li.print {
 */
 .cart-view .row input[type="text"] {
     display: inline;
-    float: left;
-    width: 60%;
     font-size: 11px;
 }
 

@@ -176,7 +176,6 @@
     .panel-footer .btn-group {width: 100%;}
     .cart-view-line-items-btn-group .btn-group, .check-out-view-btn-group .btn-group {vertical-align: inherit; width: 100%;}
     .cart-view-btn-cancel  {float: left !important;}
-    .cart-view-line-items-product {margin-bottom: 25px;}
     .cart-view-line-items-repeater div.col-xs-3 { text-align:center; }
     .cart-view-btn-save {float: right !important;}
     .ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {}
