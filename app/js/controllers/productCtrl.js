@@ -147,9 +147,6 @@ four51.app.factory('ProductDisplayService', function($451, $sce, Variant, Produc
 		lineItem.LineTotal = total;
 	}
 	function productViewScope(scope){
-		scope.trustedProductDescription = $sce.trustAsHtml(scope.LineItem.Product.Description);
-		scope.trustedVariantDescription = scope.LineItem.Variant ? $sce.trustAsHtml(scope.LineItem.Variant.Description) : "";
-
 		scope.specChanged = function(spec){
 			console.log('spec changed');
 			if(!spec){
@@ -184,6 +181,9 @@ four51.app.factory('ProductDisplayService', function($451, $sce, Variant, Produc
 				}
 			}
 			calcTotal(scope.LineItem);
+		}
+		scope.trustedDescription = function(p){
+			if(p) return $sce.trustAsHtml(p.Description);
 		}
 		scope.inventoryDisplay = function(product, variant){
 			if(product.IsVariantLevelInventory){
