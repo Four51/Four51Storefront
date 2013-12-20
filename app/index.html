@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="css/print.css" media="print"/>
 </head>
 <body ng-cloak class="ng-cloak">
-<section >
+<section ng-controller="Four51Ctrl">
 	<!--- TODO login on phone displays a temporary error upon logging ? --->
     <section ng-hide="Four51User.isAuthenticated() || isAnon" class="container">
         <login />
@@ -34,7 +34,7 @@
             <branding />
         </section>
         <section class="container-content">
-			<div ng-view />
+            <div ng-view autoscroll />
         </section>
         <section ng-controller="ErrorCtrl">
             <ng-include src="template.url" />
@@ -48,7 +48,6 @@
                 <div ng-if="!(user.Permissions.contains('HideTerms'))"><a href="#/conditions">Conditions of Use</a></div>
             </div>
         </div>
-
     </section>
 </section>
 

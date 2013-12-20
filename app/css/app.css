@@ -777,6 +777,22 @@ li.selected {
     to {transform: rotate(359deg);}
 }
 
+.navbar-fixed-bottom {
+    -webkit-animation-duration: 1.5s;
+    -moz-animation-duration: 1.5s;
+    -o-animation-duration: 1.5s;
+    animation-duration: 1.5s;
+    animation-delay: 1s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeIn;
+    -moz-animation-name: fadeIn;
+    -o-animation-name: fadeIn;
+    animation-name: fadeIn;
+}
+
 .btn, .container {
     position: relative;
 }
@@ -885,7 +901,6 @@ li.selected {
     border: none;
     border-radius: 0;
     padding: 15px 0;
-    color:#fff;
     text-transform: uppercase;
     font-size: 12px;
 }
@@ -953,13 +968,14 @@ li.print {
     text-align: center;
 }
 
+/*
 .cart-view .fa-times-circle {
     color:#bfbfbf;
     display: block;
     padding: 0 15px 25px;
     cursor: pointer;
 }
-
+*/
 .cart-view .row input[type="text"] {
     display: inline;
     float: left;
@@ -1160,6 +1176,11 @@ li.cart span.badge {
     max-height: 40%;
     margin: 15px auto;
     background-color:#fff;
+}
+
+/* full screen: if we want to go back to default bootstrap widths, simply remove the below container rule */
+.container {
+    max-width: 100%;
 }
 
 .panel {

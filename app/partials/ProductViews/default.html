@@ -3,13 +3,13 @@
     <productnav product="LineItem.Product" variant="LineItem.Variant" />
 
 	<div class="row">
-        <div class="col-sm-5 col-collapse" ng-show="LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl || LineItem.Variant.PreviewUrl">
+        <div class="col-md-5 col-collapse" ng-show="LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl || LineItem.Variant.PreviewUrl">
             <figure style="background-color:#fff;">
                 <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}">
             </figure>
         </div>
 
-        <div class="col-sm-6 col-sm-offset-1 col-collapse">
+        <div class="col-md-6 col-md-offset-1 col-collapse">
             <!--BASIC PRODUCT INFO!-->
             <h2 class="text-success pull-right" ng-show="LineItem.PriceSchedule.PriceBreaks.length == 1" ng-if="!(user.Permissions.contains('HidePricing'))">
                 {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}

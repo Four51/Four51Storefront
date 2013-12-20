@@ -2,13 +2,9 @@
 @media (min-width: 1200px) {
 
     .nav li span.nav-name {float:right;}
-    .header-nav-c1 {width: 1140px; margin: 0 auto; }
     .product-view-default .fa.empty {text-align: left;}
     .cat-image {overflow: hidden;}
     .branding-view h3 {line-height: 4em;}
-    .shortproduct-view-swipe {
-        display: none;
-    }
 }
 
 
@@ -21,9 +17,6 @@
     .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
     .branding-view h3 {line-height: 4em;}
-    .shortproduct-view-swipe {
-        display: none;
-    }
 
 }
 
@@ -75,6 +68,21 @@
             opacity: 1;
             transform: translateY(0);
         }
+    }
+
+    .ng-enter-active {
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        -webkit-animation-fill-mode: both;
+        -moz-animation-fill-mode: both;
+        -o-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-name: view-enter;
+        -moz-animation-name: view-enter;
+        -o-animation-name: view-enter;
+        animation-name: view-enter;
     }
 
     .branding-view {text-align: center;}
@@ -144,10 +152,22 @@
         }
     }
 
-    .navbar-default .navbar-nav > .active-xs > a, .navbar-default .navbar-nav > .active-xs > a:hover, .navbar-default .navbar-nav > .active-xs > a:focus {
-        background-color: #359FD5;
-        color: #FFFFFF;
+    .ng-enter {
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        -webkit-animation-fill-mode: both;
+        -moz-animation-fill-mode: both;
+        -o-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-name: view-enter;
+        -moz-animation-name: view-enter;
+        -o-animation-name: view-enter;
+        animation-name: view-enter;
     }
+
+
     .current-cat-name {width: 215px;}
     .navbar-collapse {padding: 0;}
     .navbar-left li.products a {padding: 15px 20px 15px 10px;}
