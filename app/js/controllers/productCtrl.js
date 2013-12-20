@@ -27,19 +27,29 @@ four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Produc
 	}
 });
 
-four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, ProductDisplayService) {
+four51.app.controller('shortProductViewCtrl', function ($routeParams, $sce, $scope, ProductDisplayService) {
 	$scope.LineItem = {};
 	$scope.LineItem.Product = $scope.p;
 	ProductDisplayService.setNewLineItemScope($scope);
 	ProductDisplayService.setProductViewScope($scope);
 	$scope.allowAddToOrderInProductList = $scope.allowAddToOrder && $scope.LineItem.Specs.length == 0 && $scope.LineItem.Product.Type != 'VariableText';
+	$scope.trustedProductDescription = function() {
+		return $sce.trustAsHtml($scope.LineItem.Product.Description);
+	};
 });
 
-four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, ProductDisplayService, Order, Variant, $451, $location, User) {
+four51.app.controller('ProductCtrl', function ($routeParams, $sce, $scope, Product, ProductDisplayService, Order, Variant, $451, $location, User) {
     $scope.selected = 1;
     $scope.LineItem = {};
 	$scope.addToOrderText = "Add To Cart";
 	$scope.loadingIndicator = true;
+
+	$scope.trustedProductDescription = function() {
+		return $sce.trustAsHtml($scope.LineItem.Product.Description);
+	};
+	$scope.trustedVariantDescription = function() {
+		return $sce.trustAsHtml($scope.LineItem.Variant.Description);
+	};
 
 	$scope.getSpec = function() {
 		if (!localStorage["angular-cache.caches.451Cache.data.productARIHome"]) return "null";
