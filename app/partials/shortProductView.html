@@ -14,7 +14,7 @@
             <figcaption class="shortproduct-name">{{LineItem.Product.Name}}</figcaption>
             <p>
                 <span class="text-info">Description: </span><br/>
-                <span ng-bind-html="LineItem.Product.Description" ng-show="LineItem.Product.Description" />
+                <span ng-bind-html="trustedDescription()" ng-show="LineItem.Product.Description" />
             </p>
         </div>
     </div>

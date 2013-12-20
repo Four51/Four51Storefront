@@ -27,12 +27,15 @@ four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Produc
 	}
 });
 
-four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, ProductDisplayService) {
+four51.app.controller('shortProductViewCtrl', function ($routeParams, $sce, $scope, ProductDisplayService) {
 	$scope.LineItem = {};
 	$scope.LineItem.Product = $scope.p;
 	ProductDisplayService.setNewLineItemScope($scope);
 	ProductDisplayService.setProductViewScope($scope);
 	$scope.allowAddToOrderInProductList = $scope.allowAddToOrder && $scope.LineItem.Specs.length == 0 && $scope.LineItem.Product.Type != 'VariableText';
+	$scope.trustedDescription = function() {
+		return $sce.trustAsHtml($scope.LineItem.Product.Description);
+	};
 });
 
 four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, ProductDisplayService, Order, Variant, $451, $location, User) {
