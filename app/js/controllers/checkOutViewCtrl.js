@@ -149,6 +149,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	        },
 	        function(ex) {
 		        $scope.cart_billing.$setValidity('paymentMethod', false);
+		        $scope.actionMessage = ex.Message;
 		        $scope.displayLoadingIndicator = false;
 	        }
         );
@@ -156,12 +157,18 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 
     function saveChanges(callback) {
 	    $scope.displayLoadingIndicator = true;
-        Order.save($scope.currentOrder, function(data) {
-            $scope.currentOrder = data;
-	        $scope.displayLoadingIndicator = false;
-	        if (callback) callback();
-            $scope.showSuccessAlert = true;
-        });
+        Order.save($scope.currentOrder,
+	        function(data) {
+	            $scope.currentOrder = data;
+		        $scope.displayLoadingIndicator = false;
+		        if (callback) callback();
+	            $scope.actionMessage = 'Your changes have been saved.';
+	        },
+	        function(ex) {
+		        $scope.actionMessage = ex.Message;
+		        $scope.displayLoadingIndicator = false;
+	        }
+        );
     };
 
     $scope.continueShopping = function() {
@@ -174,15 +181,21 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     $scope.cancelOrder = function() {
 	    if (confirm('Are you sure you wish to cancel your order?') == true) {
 		    $scope.displayLoadingIndicator = true;
-	        Order.delete($scope.currentOrder, function() {
-	            $scope.user.CurrentOrderID = null;
-	            $scope.currentOrder = null;
-		        User.save($scope.user, function(data) {
-			        $scope.user = data;
+	        Order.delete($scope.currentOrder,
+		        function() {
+		            $scope.user.CurrentOrderID = null;
+		            $scope.currentOrder = null;
+			        User.save($scope.user, function(data) {
+				        $scope.user = data;
+				        $scope.displayLoadingIndicator = false;
+				        $location.path('catalog');
+			        });
+		        },
+		        function(ex) {
+			        $scope.actionMessage = ex.Message;
 			        $scope.displayLoadingIndicator = false;
-			        $location.path('catalog');
-		        });
-	        });
+		        }
+	        );
 	    }
     };
 

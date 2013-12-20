@@ -116,9 +116,7 @@
                     <button class="btn btn-default hidden-sm hidden-xs pull-right" ng-click="continueShopping()">
                         Continue Shopping
                     </button>
-                    <div class="alert alert-success" ng-show="showSuccessAlert">
-                        Your Changes Have Been Saved!
-                    </div>
+                    <div class="alert alert-success" ng-show="alertBox">{{actionMessage}}</div>
 
                 </div>
             </div>

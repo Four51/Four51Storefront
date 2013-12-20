@@ -27,19 +27,29 @@ four51.app.factory('Order', function($resource, $rootScope, $451, Security, Erro
 	        });
     }
 
-    var _save = function(order, success) {
-        $resource($451.api('order')).save(order).$promise.then(function(o) {
-	        store.set('451Cache.Order.' + o.ID, o);
-	        _extend(o);
-            _then(success, o);
-        });
+    var _save = function(order, success, error) {
+        $resource($451.api('order')).save(order).$promise.then(
+	        function(o) {
+		        store.set('451Cache.Order.' + o.ID, o);
+		        _extend(o);
+	            _then(success, o);
+	        },
+	        function(ex) {
+		        error(Error.format(ex));
+	        }
+        );
     }
 
-    var _delete = function(order, success) {
-        $resource($451.api('order')).delete().$promise.then(function() {
-	        store.remove('451Cache.Order.' + order.ID);
-           _then(success);
-        });
+    var _delete = function(order, success, error) {
+        $resource($451.api('order')).delete().$promise.then(
+	        function() {
+		        store.remove('451Cache.Order.' + order.ID);
+	           _then(success);
+	        },
+	        function(ex) {
+		        error(Error.format(ex));
+	        }
+        );
     }
 
     var _submit = function(order, success, error) {
