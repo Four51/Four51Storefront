@@ -115,9 +115,7 @@
                             <span class="text-info">Shipping, handling and tax may be added to this subtotal.</span>
                         </p>
                     </div>
-                    <div class="alert alert-success" ng-show="showSuccessAlert">
-                        Your Changes Have Been Saved!
-                    </div>
+                    <div class="alert alert-success" ng-show="alertBox">{{actionMessage}}</div>
                 </div>
             </div>
             <div class="view-cart-bottom-nav navbar-fixed-bottom">

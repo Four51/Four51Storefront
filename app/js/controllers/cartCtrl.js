@@ -11,31 +11,45 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 	$scope.cancelOrder = function() {
 		if (confirm('Are you sure you wish to cancel your order?') == true) {
 			$scope.displayLoadingIndicator = true;
-			Order.delete($scope.currentOrder, function(){
-				$scope.currentOrder = null;
-				$scope.user.CurrentOrderID = null;
-				User.save($scope.user, function(){
-					$location.path('catalog');
-				});
-				$scope.displayLoadingIndicator = false;
-			});
+			$scope.actionMessage = null;
+			Order.delete($scope.currentOrder,
+				function(){
+					$scope.currentOrder = null;
+					$scope.user.CurrentOrderID = null;
+					User.save($scope.user, function(){
+						$location.path('catalog');
+					});
+					$scope.displayLoadingIndicator = false;
+					$scope.actionMessage = 'Your Changes Have Been Saved!';
+				},
+				function(ex) {
+					$scope.actionMessage = 'An error occurred: ' + ex.Message;
+					$scope.displayLoadingIndicator = false;
+				}
+			);
 		}
 	};
 
 	$scope.saveChanges = function(callback) {
+		$scope.actionMessage = null;
 		if($scope.currentOrder.LineItems.length == $451.filter($scope.currentOrder.LineItems, {Property:'Selected', Value: true}).length) {
 			$scope.cancelOrder();
 		}
 		else {
 			$scope.displayLoadingIndicator = true;
-			Order.save($scope.currentOrder, function(data) {
-				$scope.currentOrder = data;
-				OrderConfig.costcenter(data, $scope.user).address(data, $scope.user);
-				$scope.displayLoadingIndicator = false;
-				if (callback) callback();
-                $scope.showSuccessAlert = true;
-				$scope.$broadcast('event:orderUpdate', data);
-			});
+			Order.save($scope.currentOrder,
+				function(data) {
+					$scope.currentOrder = data;
+					OrderConfig.costcenter(data, $scope.user).address(data, $scope.user);
+					$scope.displayLoadingIndicator = false;
+					if (callback) callback();
+	                $scope.actionMessage = 'Your Changes Have Been Saved!';
+				},
+				function(ex) {
+					$scope.actionMessage = 'An error occurred: ' + ex.Message;
+					$scope.displayLoadingIndicator = false;
+				}
+			);
 		}
 	};
 

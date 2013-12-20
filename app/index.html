@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="en" ng-app="451order">
+<html lang="en" ng-app="451order" ng-controller="Four51Ctrl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>451order</title>
-    <link rel="stylesheet" href="css/bootstrap/bootstrap-451.css">
+
+	<link rel="stylesheet" href="css/bootstrap/{{AppConst.bootstrapFileName || 'bootstrap-451.css'}}">
     <link href="css/font-awesome.css" rel="stylesheet"/>
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'/>
@@ -21,6 +22,7 @@
 </head>
 <body ng-cloak class="ng-cloak">
 <section ng-controller="Four51Ctrl">
+	<!--- TODO login on phone displays a temporary error upon logging ? --->
     <section ng-hide="Four51User.isAuthenticated() || isAnon" class="container">
         <login />
     </section>
@@ -31,7 +33,6 @@
         <section class="hidden-print">
             <branding />
         </section>
-        <!--- TODO the fixed bottom navbar has a 1s delay on animation in the CSS to account for a jump in display. What if ng-view does not load in the span of the the delay it will jump again? May need to check for content is loaded then animated the fixed bottom navbar --->
         <section class="container-content">
             <div ng-view autoscroll />
         </section>
