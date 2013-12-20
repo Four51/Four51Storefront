@@ -52,7 +52,6 @@
                 Submit Order
             </button>
             <hr />
-            <p class="alert alert-warning" ng-show="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">Cart is missing required fields for submission.</p>
             <a href="#/security">Concerned About Security?</a>
         </div>
     </div>
@@ -275,13 +274,11 @@
                     <button class="btn btn-default cart-view-btn-save" ng-click="saveChanges()">
                         Save Changes
                     </button>
+                    <button class="btn btn-default hidden-sm hidden-xs pull-right" ng-click="continueShopping()">
+                        Continue Shopping
+                    </button>
                 </span>
-                <div class="alert alert-success" ng-show="showSuccessAlert">
-                    Your Changes Have Been Saved!
-                </div>
-                <button class="btn btn-default hidden-sm hidden-xs pull-right" ng-click="continueShopping()">
-                    Continue Shopping
-                </button>
+                <div class="alert alert-success" ng-show="actionMessage">{{actionMessage}}</div>
             </div>
         </div>
         <div class="visible-sm visible-xs view-cart-bottom-nav navbar-fixed-bottom">
