@@ -10,6 +10,7 @@
         </nav>
         <form name="cart">
             <loadingindicator ng-show="displayLoadingIndicator" title="Please wait while we save your order"/>
+            <!--- removing this for bottom navigation and subtotal will go in panel footer of line items
             <div class="panel panel-primary cart-view-summary col-md-4 col-md-offset-1 col-md-push-7">
                 <div class="panel-heading">
                     <h3 class="panel-title panel-primary">
@@ -32,7 +33,8 @@
                     <p class="alert alert-warning" ng-show="cart.$invalid">Cart is missing required fields for checkout.</p>
                 </div>
             </div>
-            <div class="panel panel-default cart-view-line-items col-md-7 col-md-pull-5">
+            --->
+            <div class="panel panel-default cart-view-line-items">
                 <div class="panel-heading">
                     <h3 class="panel-title panel-primary">
                         {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
@@ -42,7 +44,7 @@
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
                         <span title="Remove Item" style="cursor:pointer; position:absolute; top:-5px; right:-5px; font-size:1.2em;" class="fa-stack text-danger" ng-click="removeItem(item)">
                           <i class="fa fa-square fa-stack-2x"></i>
-                          <i class="fa fa-times fa-stack-1x fa-inverse"></i>
+                          <i class="fa fa-times-circle fa-stack-1x fa-inverse"></i>
                         </span>
                         <div class="col-sm-5 col-xs-12 cart-view-line-items-product">
                             <div class="cart-view-line-items-repeater-product-link">
@@ -105,33 +107,39 @@
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <span class="btn-group">
-                        <button class="btn btn-default cart-view-btn-cancel" ng-click="cancelOrder()">
-                            Cancel Order
-                        </button>
-                            <button ng-disabled="cart.$invalid" class="btn btn-default cart-view-btn-save" ng-click="saveChanges()">
-                            Save Changes
-                            </button>
-                    </span>
-                    <button class="btn btn-default hidden-sm hidden-xs pull-right" ng-click="continueShopping()">
-                        Continue Shopping
-                    </button>
+                    <div class="text-right" ng-if="!(user.Permissions.contains('HidePricing'))">
+                        <p>
+                            <span class="text-info">SubTotal:</span> {{currentOrder.Subtotal | currency}}
+                        </p>
+                        <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
+                            <span class="text-info">Shipping, handling and tax may be added to this subtotal.</span>
+                        </p>
+                    </div>
                     <div class="alert alert-success" ng-show="showSuccessAlert">
                         Your Changes Have Been Saved!
                     </div>
-
                 </div>
             </div>
             <div class="view-cart-bottom-nav navbar-fixed-bottom">
                 <ul>
-                    <li>
-                        <button class="btn btn-default" style="background-color:#50ACDB;" ng-click="continueShopping(cart.$invalid)">
-                            Continue Shopping
+                    <li style="width: 25%;">
+                        <button class="btn btn-danger" ng-click="cancelOrder()">
+                            <i class="fa fa-times"></i>
                         </button>
                     </li>
+                    <li style="width: 25%;">
+                        <button ng-disabled="cart.$invalid" class="btn btn-primary" ng-click="saveChanges()">
+                            <i class="fa fa-check"></i>
+                        </button>
+                    </li>
+                    <!--- removing continue shoping and moving cancel/save into left li
+                    <button class="btn btn-default" style="background-color:#50ACDB;" ng-click="continueShopping(cart.$invalid)">
+                        Continue Shopping
+                    </button>
+                    --->
                     <li>
                         <button class="btn btn-success" ng-click="checkOut()" ng-disabled="cart.$invalid">
-                            Check Out  <i class="fa fa-angle-right"></i>
+                            Check Out
                         </button>
                     </li>
                 </ul>

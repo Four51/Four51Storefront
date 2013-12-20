@@ -21,7 +21,6 @@
 </head>
 <body ng-cloak class="ng-cloak">
 <section ng-controller="Four51Ctrl">
-    <!--- TODO login on phone displays a temporary error upon logging ? --->
     <section ng-hide="Four51User.isAuthenticated() || isAnon" class="container">
         <login />
     </section>
@@ -32,6 +31,7 @@
         <section class="hidden-print">
             <branding />
         </section>
+        <!--- TODO the fixed bottom navbar has a 1s delay on animation in the CSS to account for a jump in display. What if ng-view does not load in the span of the the delay it will jump again? May need to check for content is loaded then animated the fixed bottom navbar --->
         <section class="container-content">
             <div ng-view autoscroll />
         </section>
