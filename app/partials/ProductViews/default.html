@@ -27,8 +27,8 @@
                     </div>
                     <div class="panel-body">
                         <h4 ng-show="LineItem.Product.ExternalID" class="text-info" style="margin:0;">ID: {{LineItem.Product.ExternalID}}</h4><br/>
-                        <p ng-bind-html="trustedProductDescription()" />
-                        <p ng-bind-html="trustedVariantDescription()" />
+                        <p ng-bind-html="trustedDescription(LineItem.Product)" />
+                        <p ng-show="LineItem.Variant.Description" ng-bind-html="trustedDescription(LineItem.Variant)" />
                         <div class="btn btn-default btn-block" ng-show="LineItem.PriceSchedule.PriceBreaks.length > 1 && LineItem.PriceSchedule.PriceBreaks.length > 5" ng-init="togglePS = true" ng-click="togglePS = !togglePS">
                             <span ng-show="!togglePS"><i class="fa fa-arrow-circle-up"></i> Hide</span>
                             <span ng-show="togglePS"><i class="fa fa-arrow-circle-down"></i> View</span>
@@ -61,8 +61,8 @@
                         <div class="list-group" ng-repeat="v in LineItem.Product.Variants | filter:queryVariants">
                             <a class="list-group-item" href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>
                                 <h5 class="list-group-item-heading">{{v.ExternalID}}</h5>
-                                <p class="list-group-item-text small" ng-show="v.Description"><small>{{v.Description}}</small></p>
-                                <div ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
+								<p class="list-group-item-text small"><small><span ng-show="v.Description" ng-bind-html="trustedDescription(v)" /></small></p>
+								<div ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
                                     {{v.QuantityAvailable}} in stock
                                 </div>
                             </a>
