@@ -1,5 +1,6 @@
-four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $location, $451, User, Order, Security, OrderConfig, Category, SpendingAccount) {
-    $scope.scroll = 0;
+four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $location, $451, User, Order, Security, OrderConfig, Category, SpendingAccount, AppConst) {
+    $scope.AppConst = AppConst;
+	$scope.scroll = 0;
     $scope.appname = $451.appname;
 	$scope.isAnon = $451.isAnon; //need to know this before we have access to the user object
 	$scope.Four51User = Security;
