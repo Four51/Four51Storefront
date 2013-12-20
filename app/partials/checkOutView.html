@@ -52,7 +52,6 @@
                 Submit Order
             </button>
             <hr />
-
             <p class="alert alert-warning" ng-show="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">Cart is missing required fields for submission.</p>
             <a href="#/security">Concerned About Security?</a>
         </div>
@@ -104,7 +103,7 @@
                 Shipping
             </h3>
         </div>
-            <div ng-show="checkOutSection == 'shipping'" ng-show="currentOrder"  class="panel-body check-out-view-shipping"  >
+            <div ng-show="checkOutSection == 'shipping'" class="panel-body check-out-view-shipping"  >
                 <div ng-show="addressform || (addresses | filter:{IsShipping:true}).length == 0 && user.Permissions.contains('CreateShipToAddress')">
                     <addressinput address='shipaddress' user='user'></addressinput>
                 </div>
@@ -114,8 +113,8 @@
                 <div ng-show="!addressform">
                     <form name="cart_shipping">
                     <div class="error_list">
-                        <p class="alert-error" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</p>
-                        <p class="alert-error" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</p>
+                        <p class="alert alert-error" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</p>
+                        <p class="alert alert-error" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</p>
                     </div>
                     <div class="row">
                         <div class="col-sm-9 col-xs-12">
@@ -136,8 +135,6 @@
                                 New Address</button>
                         </div>
                     </div>
-
-
                     <div style="position:relative;">
                         <loadingindicator ng-show="shippingUpdatingIndicator" title="Please wait while shipping costs are updated" />
                         <loadingindicator ng-show="shippingFetchIndicator" title="Please wait while available shippers are updated" />

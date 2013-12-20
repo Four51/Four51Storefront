@@ -1,12 +1,12 @@
 four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, OrderConfig, User) {
     $scope.continueShopping = function() {
-	    if (confirm('Do you want to save changes to your order before continuing?') == true)
-		    $scope.saveChanges(function() { $location.path('catalog') });
+	    if (!$scope.cart.$invalid) {
+	        if (confirm('Do you want to save changes to your order before continuing?') == true)
+		        $scope.saveChanges(function() { $location.path('catalog') });
+        }
 	    else
 		    $location.path('catalog');
     };
-
-
 
 	$scope.cancelOrder = function() {
 		if (confirm('Are you sure you wish to cancel your order?') == true) {

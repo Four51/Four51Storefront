@@ -19,7 +19,7 @@ four51.app.factory('Product', function($resource, $451, Security){
 			});
 		});
 
-		product.StaticSpecLength = Object.keys(product.StaticSpecGroups).length;
+		product.StaticSpecLength = product.StaticSpecGroups ? Object.keys(product.StaticSpecGroups).length : 0;
 	}
 
      var _get = function(param, success) {
