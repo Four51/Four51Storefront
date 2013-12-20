@@ -1162,6 +1162,11 @@ li.cart span.badge {
     background-color:#fff;
 }
 
+/* full screen: if we want to go back to default bootstrap widths, simply remove the below container rule */
+.container {
+    max-width: 100%;
+}
+
 .panel {
     word-wrap: break-word;
 }
