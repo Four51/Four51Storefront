@@ -18,15 +18,12 @@ four51.app.controller('OrderSearchCtrl', function OrderSearchCtrl($scope,  $loca
     }
 	$scope.OrderSearch = function($event, criteria) {
 		$event.preventDefault();
+		$scope.showNoResults = false;
 		OrderSearch.search(criteria, function(list) {
             $scope.orders = list;
+			$scope.showNoResults = list.length == 0;
         });
-		$scope.displayOrders = true;
 		$scope.orderSearchStat = criteria;
 	};
-
-    $scope.continueShopping = function() {
-        $location.path('catalog');
-    };
 });
 

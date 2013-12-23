@@ -15,59 +15,7 @@
             <p class="alert alert-warning">You have no orders yet!</p>
         </div>
         <div class="panel-footer">
-            <button type="button" class="btn btn-primary" ng-click="continueShopping()">Continue Shopping</button>
-        </div>
-    </div>
-    <div ng-show="displayOrders">
-        <!--- TODO table needs to redone as Bootstrap responsive layout, see cartView.html for example --->
-        <table class="table table-striped table-hover table-bordered" ng-show="orders">
-            <caption ng-show="orderSearchStat">{{orderSearchStat.Type}} - {{orderSearchStat.DisplayName}}</caption>
-            <thead>
-            <tr>
-                <td>ID</td><td>Type</td><td>Status</td><td>Submitted By</td><td>DateCreated/Submitted</td><td ng-if="!(user.Permissions.contains('HidePricing'))">Total</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="order in orders">
-                <td><a ng-href="#/order/{{order.ID}}">{{order.ExternalID}}</a></td>
-                <td>{{order.Type}}</td>
-                <td>{{order.StatusText}}</td>
-                <td>{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</td>
-                <td>{{order.DateSubmitted || order.DateCreated | date:'short'}}</td>
-                <td ng-if="!(user.Permissions.contains('HidePricing'))">{{order.Total | currency:"$"}}</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="panel panel-default" ng-show="hasStandardTypes || hasReplenishmentTypes || hasPriceRequestTypes">
-        <div class="panel-heading">
-            <h3 class="panel-title">Search Orders</h3>
-        </div>
-        <div class="panel-body">
-            <div class="form-inline">
-                <div class="form-group">
-                    <label>Order ID</label><input class="form-control" type="text" ng-model="criteria.OrderID" placeholder="Order ID" />
-                </div>
-                <div class="form-group">
-                    <label>Shipping Address</label><input class="form-control" type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" />
-
-                </div>
-                <div class="form-group">
-                    <label>From</label><input type="text" class="form-control" ui-date ng-model="criteria.DateRangeFrom" placeholder="From:" />
-
-                </div>
-                <div class="form-group">
-                    <label>To</label><input type="text" class="form-control" ui-date ng-model="criteria.DateRangeTo" placeholder="To:" />
-
-                </div>
-                <div class="form-group">
-                    <label>Last n Orders</label><input class="form-control" type="text" ng-model="criteria.LastN" placeholder="Last n Orders:" />
-
-                </div>
-            </div>
-        </div>
-        <div class="panel-footer">
-            <input type="submit" class="btn btn-primary" value="Search" ng-click="OrderSearch($event, criteria)" />
+            <button type="button" class="btn btn-primary" redirect="catalog">Continue Shopping</button>
         </div>
     </div>
     <div class="order-types">
@@ -106,6 +54,63 @@
                     </li>
                 </ul>
             </div>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-show="hasStandardTypes || hasReplenishmentTypes || hasPriceRequestTypes">
+        <div class="panel-heading">
+            <h3 class="panel-title">Search Orders</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label>Order ID</label><input class="form-control" type="text" ng-model="criteria.OrderID" placeholder="Order ID" />
+                </div>
+            </div>
+            <div class="form-inline">
+                <div class="form-group">
+                    <label>Shipping Address</label><input class="form-control" type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" />
+
+                </div>
+                <div class="form-group">
+                    <label>From</label><input type="text" class="form-control" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="criteria.DateRangeFrom" placeholder="From:" />
+
+                </div>
+                <div class="form-group">
+                    <label>To</label><input type="text" class="form-control" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="criteria.DateRangeTo" placeholder="To:" />
+
+                </div>
+                <div class="form-group">
+                    <label>Last n Orders</label><input class="form-control" type="text" ng-model="criteria.LastN" placeholder="Last n Orders:" />
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="submit" class="btn btn-primary" ng-click="OrderSearch($event, criteria)">Search</button>
+        </div>
+    </div>
+
+    <div>
+        <!--- TODO table needs to redone as Bootstrap responsive layout, see cartView.html for example --->
+        <table class="table table-striped table-hover table-bordered" ng-show="orders">
+            <caption>{{orderSearchStat.Type + ' - ' + orderSearchStat.DisplayName}}</caption>
+            <thead>
+            <tr>
+                <td>ID</td><td>Type</td><td>Status</td><td>Submitted By</td><td>DateCreated/Submitted</td><td ng-if="!(user.Permissions.contains('HidePricing'))">Total</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="order in orders">
+                <td><a ng-href="#/order/{{order.ID}}">{{order.ExternalID}}</a></td>
+                <td>{{order.Type}}</td>
+                <td>{{order.StatusText}}</td>
+                <td>{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</td>
+                <td>{{order.DateSubmitted || order.DateCreated | date:'short'}}</td>
+                <td ng-if="!(user.Permissions.contains('HidePricing'))">{{order.Total | currency:"$"}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="panel-body" ng-show="showNoResults">
+            <p class="alert alert-warning">Your search returned no results</p>
         </div>
     </div>
 </section>
