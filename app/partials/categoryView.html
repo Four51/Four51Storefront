@@ -22,7 +22,6 @@
             <a href="#/catalog">All Products</a>
             <ul class="nav-header 451_cat_item">
                 <categorytree tree='tree' current='currentCategory' />
-                </li>
             </ul>
         </nav>
     </aside>
@@ -30,7 +29,7 @@
         <div class="category-product product-navigation" ng-show="currentCategory" style="position: relative;">
             <loadingindicator ng-show="categoryLoadingIndicator" title="Please wait while we fetch all categories" />
             <div class="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image"></div>
-            <h3 ng-show="currentCategory.SubCategories.length && currentCategory.InteropID">Categories</h3>
+            <h3 ng-show="currentCategory.SubCategories.length && currentCategory.InteropID">Categoriesss</h3>
             <nav class="nav 451_lbl_subcatlist">
                 <ul>
                     <li class="nav-header well col-lg-3 col-md-4  col-sm-6 col-xs-12" ng-class="{ 'productList': productList, 'productGrid': !productList, 'category-view-aside': showMega }" ng-repeat="c in currentCategory.SubCategories">
@@ -42,7 +41,7 @@
                                 <span class="fa empty"><i class="fa fa-camera"></i></span>
                             </div>
                             <h5><span ng-bind-html="c.Name"></span></h5>
-                            <figcaption ng-if="productList" class="category-description" ng-bind-html="c.Description"></figcaption>
+                            <figcaption class="category-description" ng-bind-html="trusted(c.Description)"></figcaption>
                         </a>
                     </li>
                 </ul>

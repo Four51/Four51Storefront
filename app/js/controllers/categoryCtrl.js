@@ -1,7 +1,10 @@
 'use strict';
 
-four51.app.controller('CategoryCtrl', function ($routeParams, $scope, $451, Category, Product) {
+four51.app.controller('CategoryCtrl', function ($routeParams, $sce, $scope, $451, Category, Product) {
 	$scope.productLoadingIndicator = true;
+	$scope.trusted = function(d){
+		if(d) return $sce.trustAsHtml(d);
+	}
 	Product.search($routeParams.categoryInteropID, null, function(products) {
         $scope.products = products;
 		$scope.productLoadingIndicator = false;
