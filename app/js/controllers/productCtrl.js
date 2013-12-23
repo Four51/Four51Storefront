@@ -42,10 +42,6 @@ four51.app.controller('ProductCtrl', function ($routeParams, $sce, $scope, Produ
 	$scope.addToOrderText = "Add To Cart";
 	$scope.loadingIndicator = true;
 
-	$scope.getSpec = function() {
-		if (!localStorage["angular-cache.caches.451Cache.data.productARIHome"]) return "null";
-		return JSON.parse(localStorage["angular-cache.caches.451Cache.data.productARIHome"]).value.Specs.Size.Value;
-	}
 	$scope.calcVariantLineItems = function(i){
 		$scope.variantLineItemsOrderTotal = 0;
 		angular.forEach($scope.variantLineItems, function(item){
