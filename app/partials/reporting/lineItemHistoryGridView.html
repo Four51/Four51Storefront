@@ -24,8 +24,7 @@
             <p>{{item.UnitPrice | currency:"$"}}</p>
         </div>
         <div class="col-xs-3 col-sm-2">
-            <p ng-show="item.Product.QuantityMultiplier == 1">x {{item.Quantity}}</span>
-            <p ng-show="item.Product.QuantityMultiplier > 1" >x {{item.Product.QuantityMultiplier * item.Quantity}}</span>
+            <span>x {{item.Quantity * (item.Product.QuantityMultiplier || 1)}}</span>
         </div>
         <div ng-if="!(user.Permissions.contains('HidePricing'))" class="col-xs-3 col-sm-2">
             {{item.LineTotal | currency:"$"}}
