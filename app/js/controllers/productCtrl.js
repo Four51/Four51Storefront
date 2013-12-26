@@ -72,13 +72,19 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 			$scope.currentOrder.LineItems.push($scope.LineItem);
 		}
 
-		Order.save($scope.currentOrder, function(o){
-			$scope.user.CurrentOrderID = o.ID;
-			User.save($scope.user, function(){
-				$scope.addToOrderIndicator = true;
-				$location.path('/cart');
-			});
-		});
+		Order.save($scope.currentOrder,
+			function(o){
+				$scope.user.CurrentOrderID = o.ID;
+				User.save($scope.user, function(){
+					$scope.addToOrderIndicator = true;
+					$location.path('/cart');
+				});
+			},
+			function(ex) {
+				$scope.addToOrderIndicator = false;
+				$scope.addToOrderError = ex.Message;
+			}
+		);
 	}
 });
 
