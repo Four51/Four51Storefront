@@ -107,12 +107,13 @@
                 <ul>
                     <li style="width: 25%;">
                         <button class="btn btn-danger" ng-click="cancelOrder()">
-                            <i class="fa fa-times"></i>
+                            Cancel Order
                         </button>
                     </li>
                     <li style="width: 25%;">
-                        <button ng-disabled="cart.$invalid" class="btn btn-primary" ng-click="continueShopping()">
-                            <i class="fa fa-check"></i>
+                        <button ng-disabled="cart.$invalid" class="btn" ng-class="{'btn-warning': cart.$invalid, 'btn-primary': !cart.$invalid }" ng-click="continueShopping()">
+                            <i ng-show="cart.$invalid" class="fa fa-warning"></i>
+                            <span ng-hide="cart.$invalid">Save Order</span>
                         </button>
                     </li>
                     <li>
