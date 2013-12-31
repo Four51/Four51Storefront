@@ -37,8 +37,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 				item.ShipperName = $scope.currentOrder.Shipper.Name;
 				item.ShipperID = $scope.currentOrder.Shipper.ID;
 			});
-			Order.save($scope.currentOrder, function(order) {
-				$scope.currentOrder = order;
+			saveChanges(function() {
 				$scope.shippingUpdatingIndicator = false;
 				$scope.shippingFetchIndicator = false;
 			});
@@ -60,8 +59,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		angular.forEach($scope.currentOrder.LineItems, function(li) {
 			li.ShipAddressID = $scope.currentOrder.ShipAddressID;
 		});
-		Order.save($scope.currentOrder, function(order) {
-			$scope.currentOrder = order;
+		saveChanges(function(order) {
 			Shipper.query(order, function(list) {
 				$scope.shippers = list;
 				$scope.shippingFetchIndicator = false;
@@ -72,8 +70,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	$scope.setShipAddressAtLineItem = function() {
 		$scope.currentOrder.ShipAddressID = $scope.currentOrder.LineItems[0].ShipAddressID;
 		$scope.currentOrder.Shipper = $scope.currentOrder.LineItems[0].Shipper;
-		Order.save($scope.currentOrder, function(order) {
-			$scope.currentOrder = order;
+		saveChanges(function(order) {
 			Shipper.query(order, function(list) {
 				$scope.shippers = list;
 			});
@@ -157,11 +154,16 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 
     function saveChanges(callback) {
 	    $scope.displayLoadingIndicator = true;
+	    var auto = $scope.currentOrder.autoID;
         Order.save($scope.currentOrder,
 	        function(data) {
 	            $scope.currentOrder = data;
+		        if (auto) {
+			        $scope.currentOrder.autoID = true;
+			        $scope.currentOrder.ExternalID = 'auto';
+		        }
 		        $scope.displayLoadingIndicator = false;
-		        if (callback) callback();
+		        if (callback) callback($scope.currentOrder);
 	            $scope.actionMessage = 'Your changes have been saved.';
 	        },
 	        function(ex) {
@@ -217,8 +219,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		Coupon.apply($scope.currentOrder.CouponCode,
 			function(coupon) {
 				$scope.currentOrder.Coupon = coupon;
-				Order.save($scope.currentOrder, function(data) {
-					$scope.currentOrder = data;
+				saveChanges(function() {
 					$scope.couponLoadingIndicator = false;
 				});
 			},
@@ -233,8 +234,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		$scope.couponError = null;
 		$scope.couponRemoveIndicator = true;
 		Coupon.remove(function() {
-			Order.save($scope.currentOrder, function(data) {
-				$scope.currentOrder = data;
+			saveChanges(function() {
 				$scope.couponRemoveIndicator = false;
 			});
 		});

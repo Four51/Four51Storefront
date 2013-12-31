@@ -106,6 +106,9 @@
 						<p class="alert alert-warning" ng-show="addToOrderForm.$invalid" >
 							Product is missing required fields for Add to Cart.
 						</p>
+                        <p class="alert alert-warning" ng-show="addToOrderError">
+                            {{addToOrderError}}
+                        </p>
 					</div>
 
                 </div>

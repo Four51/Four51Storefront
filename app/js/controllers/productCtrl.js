@@ -27,7 +27,7 @@ four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Produc
 	}
 });
 
-four51.app.controller('shortProductViewCtrl', function ($routeParams, $sce, $scope, ProductDisplayService) {
+four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, ProductDisplayService) {
 	$scope.LineItem = {};
 	$scope.LineItem.Product = $scope.p;
 	ProductDisplayService.setNewLineItemScope($scope);
@@ -36,16 +36,12 @@ four51.app.controller('shortProductViewCtrl', function ($routeParams, $sce, $sco
 
 });
 
-four51.app.controller('ProductCtrl', function ($routeParams, $sce, $scope, Product, ProductDisplayService, Order, Variant, $451, $location, User) {
+four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, ProductDisplayService, Order, Variant, $451, $location, User) {
     $scope.selected = 1;
     $scope.LineItem = {};
 	$scope.addToOrderText = "Add To Cart";
 	$scope.loadingIndicator = true;
 
-	$scope.getSpec = function() {
-		if (!localStorage["angular-cache.caches.451Cache.data.productARIHome"]) return "null";
-		return JSON.parse(localStorage["angular-cache.caches.451Cache.data.productARIHome"]).value.Specs.Size.Value;
-	}
 	$scope.calcVariantLineItems = function(i){
 		$scope.variantLineItemsOrderTotal = 0;
 		angular.forEach($scope.variantLineItems, function(item){
@@ -76,13 +72,19 @@ four51.app.controller('ProductCtrl', function ($routeParams, $sce, $scope, Produ
 			$scope.currentOrder.LineItems.push($scope.LineItem);
 		}
 
-		Order.save($scope.currentOrder, function(o){
-			$scope.user.CurrentOrderID = o.ID;
-			User.save($scope.user, function(){
-				$scope.addToOrderIndicator = true;
-				$location.path('/cart');
-			});
-		});
+		Order.save($scope.currentOrder,
+			function(o){
+				$scope.user.CurrentOrderID = o.ID;
+				User.save($scope.user, function(){
+					$scope.addToOrderIndicator = true;
+					$location.path('/cart');
+				});
+			},
+			function(ex) {
+				$scope.addToOrderIndicator = false;
+				$scope.addToOrderError = ex.Message;
+			}
+		);
 	}
 });
 

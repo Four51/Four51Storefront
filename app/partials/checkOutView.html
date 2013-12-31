@@ -179,11 +179,7 @@
                         </div>
 
                     </div>
-
-
-
                     <div style="margin-top:15px;" ng-show="shipToMultipleAddresses">
-
                         <div class="check-out-view-multiple-shipping">
                             <div class="row" ng-class="{'ng-repeater-even-row': $even}" ng-repeat="item in currentOrder.LineItems">
                                 <div class="col-xs-12 col-sm-4"><strong>{{item.Product.Name}}</strong><small>{{' x ' + item.Quantity}}</small><br/>
@@ -205,15 +201,12 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
-
                     <input class="form-control" ng-if="user.ShipMethod.AskForAccountNumber" placeholder="Shipping Account Number" type="text" ng-model="currentOrder.LineItems[0].ShipAccount" />
                     </form>
                 </div>
             </div>
-        <div class="panel-heading"  ng-class="{'no': cart_billing.$invalid, 'yes': !cart_billing.$invalid }">
+        <div class="panel-heading" ng-class="{'no': cart_billing.$invalid, 'yes': !cart_billing.$invalid }">
             <h3 ng-click="checkOutSection = 'billing'" class="panel-title">
                 <i ng-class="{'fa fa-exclamation-circle': cart_billing.$invalid, 'fa fa-check-circle': !cart_billing.$invalid }"></i>
                 Billing

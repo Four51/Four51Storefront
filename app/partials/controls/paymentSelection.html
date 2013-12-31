@@ -29,7 +29,7 @@
                         ng-required="currentOrder.PaymentMethod == 'BudgetAccount'"></select>
             </div>
             <div class="col-sm-6">
-                <div class="alert alert-danger" ng-show="cart_billing.$error.paymentMethod" style="padding:6px 0; text-align:center; margin:0;">This account does not cover the order total.</div>
+                <div class="alert alert-warning" ng-show="cart_billing.$error.paymentMethod" style="padding:6px 0; text-align:center; margin:0;">This account does not cover the order total.</div>
             </div>
         </div>
         <hr/>
