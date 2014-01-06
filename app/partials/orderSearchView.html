@@ -63,24 +63,24 @@
         <div class="panel-body">
             <div class="form-inline">
                 <div class="form-group">
-                    <label>Order ID</label><input class="form-control" type="text" ng-model="criteria.OrderID" placeholder="Order ID" />
+                    <label ng-show="criteria.OrderID">Order ID</label><input class="form-control" type="text" ng-model="criteria.OrderID" placeholder="Order ID" />
                 </div>
             </div>
             <div class="form-inline">
                 <div class="form-group">
-                    <label>Shipping Address</label><input class="form-control" type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" />
+                    <label ng-show="criteria.ShippingAddress">Shipping Address</label><input class="form-control" type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" />
 
                 </div>
                 <div class="form-group">
-                    <label>From</label><input type="text" class="form-control" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="criteria.DateRangeFrom" placeholder="From:" />
+                    <label ng-show="criteria.DateRangeFrom">From</label><input type="text" class="form-control" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="criteria.DateRangeFrom" placeholder="From:" />
 
                 </div>
                 <div class="form-group">
-                    <label>To</label><input type="text" class="form-control" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="criteria.DateRangeTo" placeholder="To:" />
+                    <label ng-show="criteria.DateRangeTo">To</label><input type="text" class="form-control" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="criteria.DateRangeTo" placeholder="To:" />
 
                 </div>
                 <div class="form-group">
-                    <label>Last n Orders</label><input class="form-control" type="text" ng-model="criteria.LastN" placeholder="Last n Orders:" />
+                    <label ng-show="criteria.LastN">Last n Orders</label><input class="form-control" type="text" ng-model="criteria.LastN" placeholder="Last n Orders:" />
                 </div>
             </div>
         </div>

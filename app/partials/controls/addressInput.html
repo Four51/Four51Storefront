@@ -2,20 +2,20 @@
     <form name="addressEdit" ng-submit="save()">
         <div class="row">
             <div class="col-sm-6">
-                <label>Address Name</label><input name="addressname" class="form-control" type="text" ng-model="address.AddressName" placeholder="Address Name" required /><br />
-                <label>First Name</label><input name="firstname" class="form-control" type="text" ng-model="address.FirstName" placeholder="First Name" ng-required="address.IsBilling" /><br />
-                <label>Last Name</label><input name="lastname" class="form-control" type="text" ng-model="address.LastName" placeholder="Last Name" ng-required="address.IsBilling" /><br />
-                <label>Company Name</label><input name="companyname" class="form-control" type="text" ng-model="address.CompanyName" placeholder="Company Name" /><br />
-                <label>Phone</label><input name="phone" class="form-control" type="text" ng-model="address.Phone" placeholder="Phone" ng-required="isPhoneRequired()" /><br />
+                <label ng-show="address.AddressName">Address Name</label><input name="addressname" class="form-control" type="text" ng-model="address.AddressName" placeholder="Address Name" required /><br />
+                <label ng-show="address.FirstName">First Name</label><input name="firstname" class="form-control" type="text" ng-model="address.FirstName" placeholder="First Name" ng-required="address.IsBilling" /><br />
+                <label ng-show="address.LastName">Last Name</label><input name="lastname" class="form-control" type="text" ng-model="address.LastName" placeholder="Last Name" ng-required="address.IsBilling" /><br />
+                <label ng-show="address.CompanyName">Company Name</label><input name="companyname" class="form-control" type="text" ng-model="address.CompanyName" placeholder="Company Name" /><br />
+                <label ng-show="address.Phone">Phone</label><input name="phone" class="form-control" type="text" ng-model="address.Phone" placeholder="Phone" ng-required="isPhoneRequired()" /><br />
             </div>
             <div class="col-sm-6">
-                <label>Address Line 1</label><input name="street1" class="form-control" type="text" ng-model="address.Street1" placeholder="Address Line 1" required /><br />
-                <label>Address Line 2</label><input name="street2" class="form-control" type="text" ng-model="address.Street2" placeholder="Address Line 2" /><br />
-                <label>City</label><input name="city" class="form-control" type="text" ng-model="address.City" placeholder="City" required /><br />
-                <label>State</label><input ng-show="!hasStates()" class="form-control" type="text" ng-model="address.State" placeholder="State" ng-required="!hasStates()" />
+                <label ng-show="address.Street1">Address Line 1</label><input name="street1" class="form-control" type="text" ng-model="address.Street1" placeholder="Address Line 1" required /><br />
+                <label ng-show="address.Street2">Address Line 2</label><input name="street2" class="form-control" type="text" ng-model="address.Street2" placeholder="Address Line 2" /><br />
+                <label ng-show="address.City">City</label><input name="city" class="form-control" type="text" ng-model="address.City" placeholder="City" required /><br />
+                <label ng-show="address.State">State</label><input ng-show="!hasStates()" class="form-control" type="text" ng-model="address.State" placeholder="State" ng-required="!hasStates()" />
                 <select ng-show="hasStates()" class="form-control" ng-options="state.value as state.label for state in states | filter:country" ng-model="address.State" placeholder="State" ng-required="hasStates()" /><br />
-                <label>Zip</label><input name="zip" class="form-control" type="text" ng-model="address.Zip" placeholder="Zip" ng-required="hasStates()" /><br />
-                <label>Country</label><select name="country" class="form-control" ng-options="country.value as country.label for country in countries" ng-model="address.Country" placeholder="Country" required /><br />
+                <label ng-show="address.Zip">Zip</label><input name="zip" class="form-control" type="text" ng-model="address.Zip" placeholder="Zip" ng-required="hasStates()" /><br />
+                <label ng-show="address.Country">Country</label><select name="country" class="form-control" ng-options="country.value as country.label for country in countries" ng-model="address.Country" placeholder="Country" required /><br />
             </div>
         </div>
         <label ng-show="user.Permissions.contains('CreateShipToAddress')" class="checkbox-label"><input name="isShipping" type="checkbox" ng-model="address.IsShipping" ng-required="!address.IsBilling" /> Save to Shipping Address Book</label><br />
