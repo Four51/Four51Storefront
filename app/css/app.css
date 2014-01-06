@@ -17,7 +17,7 @@ body {
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
     -webkit-text-stroke: 1px transparent;
-    margin-bottom: 40px;
+    margin-bottom: 100px;
 
 }
 
@@ -917,13 +917,26 @@ li.print {
 }
 
 .quantity input {
-    background-color:#F5F5F5;
+    height: 100%;
+    outline: 0 none;
+    padding: .5em;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    font-size: 24px !important;
+    color:#468847;
+    border-radius: 0;
+    box-shadow: none;
+
+   /* background-color:#F5F5F5;
     border: 1px solid #BFBFBF;
     padding: 5px 0 2px 1px;
     text-align: center;
     width: 100%;
-    height: 100%;
+    height: 100%;*/
 }
+
+
 
 .cart-view-line-items, .check-out-view-types {
     padding: 0;
@@ -939,7 +952,7 @@ li.print {
     border-top: 1px solid #d6d6d6;
     clear: both;
     overflow: hidden;
-    padding: 25px 0;
+    padding: 15px 0;
     position:relative;
 }
 

@@ -167,7 +167,7 @@
         animation-name: view-enter;
     }
 
-
+    .view-price-total {font-size: 24px !important;}
     .current-cat-name {width: 215px;}
     .navbar-collapse {padding: 0;}
     .navbar-left li.products a {padding: 15px 20px 15px 10px;}
