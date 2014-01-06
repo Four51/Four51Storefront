@@ -28,7 +28,8 @@
             <p ng-show="LineItem.Product.UnitOfMeasure">
                 Unit of Measure: {{LineItem.Product.UnitOfMeasure}}
             </p>
-            <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
+
+            <p ng-show="LineItem.Product.DisplayInventory && inventoryDisplay(LineItem.Product, LineItem.Variant) != undefined">
                 QTY Available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
             </p>
             <p>
