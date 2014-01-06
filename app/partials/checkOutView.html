@@ -17,9 +17,9 @@
                 <div ng-show="user.Permissions.contains('ViewPromotions')">
                     <div ng-show="!currentOrder.Coupon">
                         <div class="form-group">
-                            <label>Promotion Code: </label>
+                            <label ng-show="currentOrder.CouponCode">Promotion Code</label>
                             <div class="input-group">
-                                <input class="form-control" type="text" ng-model="currentOrder.CouponCode" placeholder="PROMO CODE"></input>
+                                <input class="form-control" type="text" ng-model="currentOrder.CouponCode" placeholder="Promotion Code"></input>
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-info" ng-click="applyCoupon()">Apply</button>
                                 </span>
@@ -43,7 +43,7 @@
         <div class="panel-footer">
             <div ng-show="user.Permissions.contains('SendOrderNotificationToOthers') && !(cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid)" >
                 <div class="form-group">
-                    <label>Email Notification</label>
+                    <label ng-show="currentOrder.ExternalOrderDetailRecipients">Email Notification</label>
                     <input class="form-control" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" placeholder="Email Address" />
                     <span class="help-block text-left"><small>Provide an email address if you would like to receive notifications concerning this order.</small></span>
                 </div>
@@ -66,10 +66,10 @@
         <form name="cart_order">
             <div ng-show="checkOutSection == 'order'" class="panel-body check-out-view-order">
                 <div class="error_list">
-                    <span class="alert-error" ng-show="cart_order.orderid.$invalid">Please enter a valid Order ID</span><br />
+                    <span class="alert-error" ng-show="cart_order.orderid.$invalid">Enter an order id</span><br />
                 </div>
                 <div ng-if="user.Permissions.contains('EditPOID')" ng-invalid>
-                    <label>Order ID: </label>
+                    <label ng-show="currentOrder.ExternalID">Order ID: </label>
                     <div class="input-group check-out-view-input-group-id">
                         <input class="form-control" name="orderid" ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" placeholder="Order ID" required ui-mask="{{user.Company.POIDMask}}" />
                         <span ng-if="user.Permissions.contains('AllowAutoGenPOID')" class="input-group-addon">
@@ -78,10 +78,10 @@
                         </span>
                     </div>
                 </div>
-                <label>Comments:</label>
+                <label ng-show="currentOrder.Comments">Comments:</label>
                 <textarea class="form-control" rows="5" cols="100" ng-model="currentOrder.Comments" placeholder="Comments..." />
                 <div ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')">
-                    <label>Cost Center</label>
+                    <label ng-show="currentOrder.CostCenter">Cost Center</label>
                     <select class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="currentOrder.CostCenter"></select>
                     <input class="form-control" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="currentOrder.CostCenter" type='text' required placeholder="Cost Center" />
                     <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{currentOrder.CostCenter}}</span>
@@ -138,10 +138,9 @@
                         <loadingindicator ng-show="shippingUpdatingIndicator" title="Please wait while shipping costs are updated" />
                         <loadingindicator ng-show="shippingFetchIndicator" title="Please wait while available shippers are updated" />
                         <div>
-                            <h4>Select<span ng-show="!shipToMultipleAddresses"> a</span> shipping address<span ng-show="shipToMultipleAddresses">es</span></h4>
                             <div ng-show="!shipToMultipleAddresses" class="col-xs-7 col-collapse">
                                 <div ng-show="(addresses | filter:{IsShipping:true}).length > 0">
-                                    <label>Select a shipping address</label>
+                                    <label ng-show="currentOrder.ShipAddressID">Shipping Address: </label>
                                     <div class="input-group">
                                         <select class="form-control" name="shippingAddress"
                                                 ng-change="setShipAddressAtOrderLevel()"
@@ -157,7 +156,7 @@
                                     </div>
                                 </div>
                                 <div style="margin-top:15px;" ng-show="user.ShipMethod != null && shippers">
-                                    <label>Shipping Method</label>
+                                    <label ng-show="currentOrder.LineItems[0].ShipperName">Shipping Method: </label>
                                     <select class="form-control" ng-change="updateShipper()"
                                             ng-model="currentOrder.LineItems[0].ShipperName"
                                             ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
@@ -202,6 +201,7 @@
                             </div>
                         </div>
                     </div>
+                    <label ng-show="currentOrder.LineItems[0].ShipAccount">Ship Account: </label>
                     <input class="form-control" ng-if="user.ShipMethod.AskForAccountNumber" placeholder="Shipping Account Number" type="text" ng-model="currentOrder.LineItems[0].ShipAccount" />
                     </form>
                 </div>

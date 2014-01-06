@@ -45,7 +45,7 @@
                     <td><a ng-href="#/order/{{order.ID}}">{{order.ExternalID}}</a></td>
                     <td>{{order.DateCompleted | date:'medium'}}</td>
                     <td>{{order.Type}}</td>
-                    <td><button type="button" class="btn btn-default" ng-click="repeat(order)">Repeat Order</button></td>
+                    <td><button ng-disabled="currentOrder" type="button" class="btn btn-default" ng-click="repeat(order)">Repeat Order</button></td>
                 </tr>
                 </tbody>
             </table>

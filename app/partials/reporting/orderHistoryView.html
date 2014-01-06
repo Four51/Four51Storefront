@@ -34,7 +34,7 @@
                     </div>
                     <div class="panel-footer" ng-if="order.FromUserID == user.ID">
                         <div class="order-history-view-repeat">
-                            <button class="btn btn-primary" ng-click="repeatOrder()">Repeat Order</button>
+                            <button ng-disabled="currentOrder" class="btn btn-primary" ng-click="repeatOrder()">Repeat Order</button>
                         </div>
                     </div>
                 </div>
