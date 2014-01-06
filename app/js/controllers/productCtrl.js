@@ -188,11 +188,9 @@ four51.app.factory('ProductDisplayService', function($451, $sce, Variant, Produc
 			if(p) return $sce.trustAsHtml(p.Description);
 		}
 		scope.inventoryDisplay = function(product, variant){
-			if(product.IsVariantLevelInventory){
-				return variant ? variant.QuantityAvailable : null;
-			}else{
-				return product.QuantityAvailable;
-			}
+			var qa = product.IsVariantLevelInventory ? variant : product;
+			if(qa)
+				return qa.QuantityAvailable > 0 ? qa.QuantityAvailable : 0;
 		}
 		if(scope.LineItem.Variant){
 			//scope.LineItem.Variant = variant;

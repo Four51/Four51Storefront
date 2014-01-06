@@ -78,7 +78,7 @@
 
                     <p ng-show="LineItem.Product.DisplayInventory && (LineItem.Variant || LineItem.Product.Variants.length == 0)">
                         <!-- nothing is accomodating the 0 level inventory and the custom message to be displayed -->
-                        {{inventoryDisplay(LineItem.Product, LineItem.Variant) < 0 ? 0 : inventoryDisplay(LineItem.Product, LineItem.Variant)}} in stock
+                        {{inventoryDisplay(LineItem.Product, LineItem.Variant)}} in stock
                     </p>
                     <br/>
                     <div id="451_list_vspec" ng-show="allowAddToOrder">
