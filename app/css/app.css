@@ -97,9 +97,6 @@ input:focus, textarea:focus {
     -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
 }
 */
-label:not([class=checkbox-label]) {
-    display:none;
-}
 
 textarea {
     resize:vertical;

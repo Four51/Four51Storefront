@@ -5,7 +5,7 @@ four51.app.directive('customtextfield', function($451) {
         },
         restrict: 'E',
         transclude: true,
-        template: '<label>{{customfield.Name}}</label>' +
+        template: '<label ng-show="customfield.Value">{{customfield.Name}}</label>' +
             '<div class="input-group" ng-if="customfield.Lines <= 1"><span class="input-group-addon" ng-if="customfield.Prefix">{{customfield.Prefix}}</span>' +
             '<input class="form-control" placeholder="{{customfield.Name}}" size="{{customfield.Width * .13}}" max="{{customfield.MaxLength}}" ui-mask="{{customfield.MaskedInput}}" type="text" ng-required="{{customfield.Required}}" ng-model="customfield.Value"></input>' +
             '<span class="input-group-addon" ng-if="customfield.Suffix">{{customfield.Suffix}}</span></div>' +
