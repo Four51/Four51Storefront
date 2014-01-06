@@ -35,6 +35,7 @@ img {
     display: block;
 }
 
+.view-form-field  {}
 /*select, input, .uneditable-input {
     max-width: 100%;
 }*/
@@ -49,15 +50,22 @@ a:focus {
 button::-moz-focus-inner {
     border: 0;
 }
-/*
-input.ng-invalid, input.ng-invalid:invalid, textarea.ng-invalid, select.ng-invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid  {
-  background: #E74C3C;
-  style the required !required angular form inputs */
 
 .ng-invalid .help-block,
 .ng-invalid .control-label {
     color: #b94a48;
 }
+
+label {
+    top: -20px;
+    font-size: 11px;
+    position: absolute;
+}
+
+label.required{
+    color: red;
+}
+
 input.ng-invalid, textarea.ng-invalid, select.ng-invalid,
 input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid {
     border-color: #b94a48;
@@ -70,33 +78,6 @@ input.ng-invalid:invalid:focus, textarea.ng-invalid:invalid:focus, select.ng-inv
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
 }
-
-/*
-.input-group-addon .ng-invalid  {
-    color: #b94a48;
-    border-color: #b94a48;
-    background-color: #f2dede;
-}
-input:not([type=submit]), textarea, select {
-    padding: 9px;
-    margin: 5px 0 15px;
-    border: solid 1px #E5E5E5;
-    outline: 0;
-    background: #FFFFFF url('bg_form.png') left top repeat-x;
-    background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
-    background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
-    box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
-    -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
-    -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
-}
-
-
-input:hover, textarea:hover,
-input:focus, textarea:focus {
-    border-color: #C9C9C9;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
-}
-*/
 
 textarea {
     resize:vertical;
@@ -280,13 +261,7 @@ textarea {
     margin-bottom: 0.714em;
 }
 
-.form-signin input[type="text"], .form-signin input[type="password"] {
-    font-size: 1.143em;
-    height: auto;
-    width: 100%;
-    margin-bottom: 1.071em;
-    padding: 0.500em 0.643em;
-}
+
 
 .form-signin .btn-primary  {
     letter-spacing: .04em;
@@ -337,7 +312,6 @@ textarea {
     border-radius: 25px;
     padding: 13px;
 }
-
 
 div.category-view-subcat ul li ul {
     display: none;
@@ -920,26 +894,15 @@ li.print {
     text-align: center;
     width: 100%;
     margin: 0;
+    border-radius: 0;
     font-size: 24px !important;
     color:#468847;
-    border-radius: 0;
     box-shadow: none;
-
-   /* background-color:#F5F5F5;
-    border: 1px solid #BFBFBF;
-    padding: 5px 0 2px 1px;
-    text-align: center;
-    width: 100%;
-    height: 100%;*/
 }
-
-
 
 .cart-view-line-items, .check-out-view-types {
     padding: 0;
 }
-
-
 
 .cart-view-line-items .panel-body, .product-view-default .panel{
     padding: 0;
@@ -953,54 +916,39 @@ li.print {
     position:relative;
 }
 
-.view-form-icon {padding-left: 25px;}
-.view-form-icon-fa {
+div {
+    position: relative;
+}
+
+.view-form-icon > div {
+    margin-top: 35px;
+    position: relative;
+}
+
+.view-form-icon input {
+    padding-left: 25px;
+}
+
+.view-form-icon  i {
     color: #CCCCCC;
-    left: 20px;
+    left: 5px;
     position: absolute;
     top: 10px;
     z-index: 10;
 }
 
-/* stuff
-.cart-view-line-items-repeater-product-link a{
-    display:block;
-    padding:8px;
-    border-radius:4px;
+.row.view-form-icon i {
+    left: 20px;
 }
 
-.cart-view-line-items-repeater-product-link a, .cart-view-line-items-repeater-product-link a .text-info{
-    -webkit-transition: background-color 250ms linear;
-    -moz-transition: background-color 250ms linear;
-    -o-transition: background-color 250ms linear;
-    -ms-transition: background-color 250ms linear;
-    transition: background-color 250ms linear;
-}
-.cart-view-line-items-repeater-product-link a:hover{
-    background-color:#dddddd;
-    text-decoration:none;
-}
-.cart-view-line-items-repeater-product-link a:hover .text-info{
-    color:#171717;
-}
-*/
 .cart-view-summary .panel-footer, .product-view-default .panel-footer {
     background-color:transparent;
 }
 
 .cart-view-summary, .order-history-view-footer {
     padding: 0;
-    text-align: center;
 }
 
-/*
-.cart-view .fa-times-circle {
-    color:#bfbfbf;
-    display: block;
-    padding: 0 15px 25px;
-    cursor: pointer;
-}
-*/
 .cart-view .row input[type="text"] {
     display: inline;
     font-size: 11px;
@@ -1114,7 +1062,7 @@ li.cart span.badge {
 }
 
 .panel-heading.no i:first-of-type {
-    color:#D14233;
+    color:#F0AD4E;
     font-size: 22px;
 }
 
@@ -1142,10 +1090,6 @@ li.cart span.badge {
 }
 
 */
-
-.row label {
-    font-size: 11px;
-}
 
 .cart-view-summary p span {
     float: left;
@@ -1342,9 +1286,3 @@ input[type="file"]{
 .margin-bottom-15{
     margin-bottom:15px;
 }
-
-/*
-.ng-repeater-even-row{
-    background-color:#f5f5f5;
-}
-*/

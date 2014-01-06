@@ -5,9 +5,19 @@
                 <form class="form-signin" ng-submit="login()" name="LoginForm">
                     <h2 class="form-signin-heading animated fadeIn" style="text-align: center; color:#ECF8FF; text-shadow: 1px 1px 3px rgba(150, 150, 150, 1);"><i class="fa fa-cloud"></i><br />Order Cloud</h2>
                     <p class="alert-error">{{errorMessage}}</p>
-                    <input autofocus class="input-block-level" type="text" ng-model="credentials.Username" placeholder="Username" />
-                    <input class="input-block-level" type="password" ng-model="credentials.Password" placeholder="Password" />
-                    <input class="btn btn-large btn-primary btn-block" id="451_btn_login" type="submit" value="Login" />
+                    <div class="view-form-icon">
+                        <div>
+                            <input autofocus class="form-control" type="text" ng-model="credentials.Username" placeholder="Username" />
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <div>
+                            <input class="form-control" type="password" ng-model="credentials.Password" placeholder="Password" />
+                            <i class="fa fa-lock"></i>
+                        </div>
+                        <div>
+                            <input class="btn btn-large btn-primary btn-block" id="451_btn_login" type="submit" value="Login" />
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
