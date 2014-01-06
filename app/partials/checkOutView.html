@@ -223,7 +223,7 @@
                     <form name="cart_billing">
                         <paymentselector></paymentselector>
                         <div  style="padding-top:15px;">
-                            <h4>Select a billing address</h4>
+                            <label ng-show="currentOrder.BillAddressID">Billing Address</label>
                             <div class="col-xs-7 col-collapse">
                                 <div class="input-group">
                                     <select class="form-control" ng-show="(addresses | filter:{IsBilling:true}).length > 0" name="billingAddress"
