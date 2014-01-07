@@ -4,13 +4,13 @@
 
     Customizing the Four51 SPA  -       Do not modify the app.css files
                                         - no !important rules in the app.css file, everything should cascade according to specificity
-                                        - apply custom styles in the custom.css file as a child theme IE:
+                                        - apply custom app styles in the ~/css custom.css file. IE:
                                             /*
                                             Theme name: My SPA Theme
                                             Version: 1.0
                                             Template: Welcome
                                             */
-                                        - apply custom breakpoint styles in the ~/breakpoint/custom.css file
+                                        - apply custom breakpoint styles in ~/breakpoint custom css files.
     Bootstrap                   -       Twitter Bootstrap 3
                                             http://getbootstrap.com/
     Themes                      -       Bootstrap driven color themes via colourlovers API and paintstrap
@@ -37,12 +37,18 @@
                                             http://code.angularjs.org/1.1.4/docs/api/ng.directive:ngAnimate
                                         Animate CSS for a library of pre-made animations is included
                                             https://github.com/daneden/animate.css
-    Scroll breakpoints          -       Currently a directive to watch for scrolling and add a static/scroll class to body
-                                        - scrollposition.js
     Swipe                       -       A swipe is currently working on category and product list views to show description
                                             ngTouch
     Responsive breakpoints      -       app media queries that work alongside Twitter Bootstrap to provide more bulletproof design styles
                                         - /breakpoint
+    Form icons                  -       Form input field icons use the font-awesome resource.
+                                        - Add the class "view-form-icon" to the input
+                                        - Add the font-awesome <i> tag anywhere in the form field parent container with the class" view-form-icon-fa"
+                                            <div>
+                                                <label>label</label>
+                                                <input class="form-control view-form-icon" placeholder="placeholder" type="text" />
+                                                <i class="fa fa-calendar view-form-icon-fa"></i>
+                                            </div>
 
 1.  Responsive
 
@@ -57,15 +63,18 @@
         Bootstrap Font Icons CSS (Font Awesome) 4.0.1
         http://fontawesome.io/icons/
 
-        Default Breakpoints:
-        See ~/breakpoint for responsive styles that work alongside Bootstrap responsive classes
-            xs.css Extra small devices (phone, ~ 618px) x-xs
-            sm.css Small devices (tablet portrait, ~ 768px) x-sm
-            md.css Medium devices (desktops, tablet landscape ~ 1024px)  x-md
-            lg.css Large devices (large desktops, 1200px ~) x-lg
+        App Responsive Styles:
+        Do not modify the app.css files
+        - apply custom app styles in the ~/css custom.css file. IE:
+            custom-extra-small.css  - Extra small devices (phone, ~ 618px) x-xs
+            custom-small.css        - Small devices (tablet portrait, ~ 768px) x-sm
+            custom-medium.css       - Medium devices (desktops, tablet landscape ~ 1024px)  x-md
+            custom-large.css        - Large devices (large desktops, 1200px ~) x-lg
 
         Toolips
             No tooltips on phone, tablet portrait
+        Dropdowns
+            No dropdowns on phone, tablet portrait
 
 1.1     Content scales up IE:mobile first
             Admin navigation

@@ -2,7 +2,7 @@
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch product information" />
     <productnav product="LineItem.Product" variant="LineItem.Variant" />
 
-	<div class="row">
+
         <div class="col-md-5 col-collapse" ng-show="LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl || LineItem.Variant.PreviewUrl">
             <figure style="background-color:#fff;">
                 <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}">
@@ -154,6 +154,6 @@
             !-->
 
         </div>
-    </div>
+
 
 </section>

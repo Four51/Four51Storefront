@@ -41,16 +41,14 @@
             </div>
         </div>
         <div class="panel-footer">
-            <div ng-show="user.Permissions.contains('SendOrderNotificationToOthers') && !(cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid)" >
+            <div class="view-form-icon" ng-show="user.Permissions.contains('SendOrderNotificationToOthers') && !(cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid)" >
                 <div class="form-group">
                     <label ng-show="currentOrder.ExternalOrderDetailRecipients">Email Notification</label>
                     <input class="form-control" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" placeholder="Email Address" />
+                    <i class="fa fa-envelope-o"></i>
                     <span class="help-block text-left"><small>Provide an email address if you would like to receive notifications concerning this order.</small></span>
                 </div>
             </div>
-            <button class="btn btn-primary" ng-show="currentOrder" ng-click="submitOrder()" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">
-                Submit Order
-            </button>
             <hr />
             <a href="#/security">Concerned About Security?</a>
         </div>
@@ -59,7 +57,7 @@
     <div class="panel panel-default col-md-7 col-md-pull-5 check-out-view-types" ng-show="currentOrder && currentOrder.isEditable" ng-click="showSuccessAlert = false">
         <div class="panel-heading" ng-class="{'no': cart_order.$invalid, 'yes': !cart_order.$invalid }">
             <h3 ng-click="checkOutSection = 'order'" class="panel-title panel-primary">
-                <i ng-class="{'fa fa-exclamation-circle': cart_order.$invalid, 'fa fa-check-circle': !cart_order.$invalid }"></i>
+                <i ng-class="{'fa fa-warning': cart_order.$invalid, 'fa fa-check-circle': !cart_order.$invalid }"></i>
                 Order
             </h3>
         </div>
@@ -98,7 +96,7 @@
 
         <div class="panel-heading"  ng-class="{'no': cart_shipping.$invalid, 'yes': !cart_shipping.$invalid }" ng-click="showSuccessAlert = false">
             <h3 ng-click="checkOutSection = 'shipping'" class="panel-title panel-primary">
-                <i ng-class="{'fa fa-exclamation-circle': cart_shipping.$invalid, 'fa fa-check-circle': !cart_shipping.$invalid }"></i>
+                <i ng-class="{'fa fa-warning': cart_shipping.$invalid, 'fa fa-check-circle': !cart_shipping.$invalid }"></i>
                 Shipping
             </h3>
         </div>
@@ -208,7 +206,7 @@
             </div>
         <div class="panel-heading" ng-class="{'no': cart_billing.$invalid, 'yes': !cart_billing.$invalid }">
             <h3 ng-click="checkOutSection = 'billing'" class="panel-title">
-                <i ng-class="{'fa fa-exclamation-circle': cart_billing.$invalid, 'fa fa-check-circle': !cart_billing.$invalid }"></i>
+                <i ng-class="{'fa fa-warning': cart_billing.$invalid, 'fa fa-check-circle': !cart_billing.$invalid }"></i>
                 Billing
             </h3>
         </div>
@@ -245,46 +243,44 @@
                                 <p ng-show="BillAddress.Phone"><small>{{BillAddress.Phone}}</small></p>
                             </div>
                         </div>
-                        <hr/>
-                        <div ng-show="currentOrder.Approvals" class="check-out-approvals" ng-click="toggleApprovals = !toggleApprovals" ng-init="toggleApprovals = false">
-                            <p class="text-info text-center" style="padding:15px; cursor:pointer;">
-                                <span ng-show="toggleApprovals"><i class="fa fa-minus-circle"></i> Hide </span>
-                                <span ng-show="!toggleApprovals"><i class="fa fa-plus-circle"></i> Show </span>
-                                Approval Rules
-                            </p>
-                            <approvalrulelist ng-show="toggleApprovals" order="currentOrder" />
-                        </div>
                     </form>
                 </div>
             </div>
-
+        <!--- copy billing section down one to include approval panel --->
+        <!--- TODO not exactly sure how you want to handle approvals form controls or if needs a form control --->
+        <div ng-show="currentOrder.Approvals"  class="panel-heading" ng-class="{'no': cart_approval.$invalid, 'yes': !cart_approval.$invalid }">
+            <h3 ng-click="checkOutSection = 'approval'" class="panel-title">
+                <i ng-class="{'fa fa-warning': cart_approval.$invalid, 'fa fa-check-circle': !cart_approval.$invalid }"></i>
+                Approval Rules
+            </h3>
+        </div>
+        <div ng-show="checkOutSection == 'approval'" class="panel-body check-out-view-approval">
+            <div ng-show="!addressform">
+                <form name="cart_approval">
+                        <approvalrulelist order="currentOrder" />
+                </form>
+            </div>
+        </div>
         <div class="panel-footer check-out-view-types">
-            <div class="check-out-view-btn-group" ng-show="currentOrder">
-                <span class="btn-group">
-                    <button class="btn btn-default cart-view-btn-cancel" ng-click="cancelOrder()">
-                        Cancel Order
-                    </button>
-                    <button class="btn btn-default cart-view-btn-save" ng-click="saveChanges()">
-                        Save Changes
-                    </button>
-                    <button class="btn btn-default hidden-sm hidden-xs pull-right" ng-click="continueShopping()">
-                        Continue Shopping
-                    </button>
-                </span>
+            <div ng-show="currentOrder">
                 <div class="alert alert-success" ng-show="actionMessage">{{actionMessage}}</div>
             </div>
         </div>
-        <div class="view-cart-bottom-nav navbar-fixed-bottom">
+        <div class="view-footer navbar-fixed-bottom">
             <ul>
-                <li>
-                    <button class="btn btn-default" style="background-color:#50ACDB;" ng-click="continueShopping()">
-                        Continue Shopping
+                <li style="width: 25%;">
+                    <button class="btn btn-danger" ng-click="cancelOrder()">
+                        Cancel Order
+                    </button>
+                </li>
+                <li style="width: 25%;">
+                    <button ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" class="btn"  ng-class="{'btn-warning': cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid, 'btn-primary': !cart_shipping.$invalid || !cart_order.$invalid || !cart_billing.$invalid }" ng-click="saveChanges()">
+                        <i ng-show="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" class="fa fa-warning"></i>
+                        <span ng-hide="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">Save Order</span>
                     </button>
                 </li>
                 <li>
-                    <button class="btn btn-success" ng-show="currentOrder" ng-click="submitOrder()" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">
-                        Submit Order  <i class="fa fa-angle-right"></i>
-                    </button>
+                    <button class="btn btn-success" ng-show="currentOrder" ng-click="submitOrder()" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">Submit Order</button>
                 </li>
             </ul>
         </div>

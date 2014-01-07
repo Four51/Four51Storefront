@@ -24,16 +24,44 @@
                 <h3 class="panel-title">{{user.Type == 'TempCustomer' ? 'Create' : 'My'}} Account</h3>
             </div>
             <div class="panel-body">
-                <div class="col-md-6 col-md-offset-3 col-collapse">
-                    <label ng-show="user.FirstName">First Name</label> <input name="firstname" class="form-control" type="text" ng-model="user.FirstName" placeholder="First Name" /><br />
-                    <label ng-show="user.LastName">Last Name</label> <input name="lastname" class="form-control" type="text" ng-model="user.LastName" placeholder="Last Name" /><br />
-                    <label ng-show="user.Phone">Phone</label> <input name="phone" class="form-control" type="text" ng-model="user.Phone" ui-mask="(999) 999-9999" placeholder="Phone Number" /><br />
-                    <label ng-show="user.Email">Email</label> <input name="email" class="form-control" type="email" ng-model="user.Email" required placeholder="Email Address" />
+                <div class="col-md-6 col-md-offset-3 col-collapse view-form-icon">
+                    <div>
+                        <label ng-show="user.FirstName">First Name</label>
+                        <input name="firstname" class="form-control" type="text" ng-model="user.FirstName" placeholder="First Name" />
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div>
+                        <label ng-show="user.LastName">Last Name</label>
+                        <input name="lastname" class="form-control" type="text" ng-model="user.LastName" placeholder="Last Name" />
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div>
+                        <label ng-show="user.Phone">Phone</label>
+                        <input name="phone" class="form-control" type="text" ng-model="user.Phone" ui-mask="(999) 999-9999" placeholder="Phone Number" />
+                        <i class="fa fa-phone"></i>
+                    </div>
+                    <div>
+                        <label class="required">Email</label>
+                        <input name="email" class="form-control" type="email" ng-model="user.Email" required placeholder="Email Address" />
+                        <i class="fa fa-envelope-o"></i>
+                    </div>
                     <span class="alert-error" ng-show="user_form.email.$invalid">Please enter a valid email address</span><br />
-                    <label ng-show="user.TempUsername">Username</label> <input name="username" class="form-control" type="text" ng-model="user.TempUsername" required placeholder="User Name" /><br />
+                    <div>
+                        <label class="required">Username</label>
+                        <input name="username" class="form-control" type="text" ng-model="user.TempUsername" required placeholder="User Name" />
+                        <i class="fa fa-user"></i>
+                    </div>
                     <!--TODO username input shouldn't default to temporary usernames, if the user is temp, make the placeholder show instead !-->
-                    <label ng-show="user.Password">Password</label> <input name="password" class="form-control" type="password" ng-model="user.Password" placeholder="Password" /><br />
-                    <label ng-show="user.ConfirmPassword">Confirm Password</label> <input name="confirm_password" match="'password'" class="form-control" type="password" ng-model="user.ConfirmPassword" ui-validate="'$value==user.Password'" ui-validate-watch="'user.Password'" placeholder="Confirm Password" />
+                    <div>
+                        <label ng-show="user.Password">Password</label>
+                        <input name="password" class="form-control" type="password" ng-model="user.Password" placeholder="Password" />
+                        <i class="fa fa-lock"></i>
+                    </div>
+                    <div>
+                        <label ng-show="user.ConfirmPassword">Confirm Password</label>
+                        <input name="confirm_password" match="'password'" class="form-control" type="password" ng-model="user.ConfirmPassword" ui-validate="'$value==user.Password'" ui-validate-watch="'user.Password'" placeholder="Confirm Password" />
+                        <i class="fa fa-lock"></i>
+                    </div>
                     <span class="alert-error" ng-show="user_form.confirm_password.$error.validator">Passwords do not match!</span><br />
                 </div>
             </div>

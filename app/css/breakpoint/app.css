@@ -71,10 +71,10 @@
     }
 
     .ng-enter-active {
-        -webkit-animation-duration: 2s;
-        -moz-animation-duration: 2s;
-        -o-animation-duration: 2s;
-        animation-duration: 2s;
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
         -webkit-animation-fill-mode: both;
         -moz-animation-fill-mode: both;
         -o-animation-fill-mode: both;
@@ -153,10 +153,10 @@
     }
 
     .ng-enter {
-        -webkit-animation-duration: 2s;
-        -moz-animation-duration: 2s;
-        -o-animation-duration: 2s;
-        animation-duration: 2s;
+        -webkit-animation-duration: 1s;
+        -moz-animation-duration: 1s;
+        -o-animation-duration: 1s;
+        animation-duration: 1s;
         -webkit-animation-fill-mode: both;
         -moz-animation-fill-mode: both;
         -o-animation-fill-mode: both;
@@ -167,7 +167,7 @@
         animation-name: view-enter;
     }
 
-
+    .view-price-total {font-size: 24px !important;}
     .current-cat-name {width: 215px;}
     .navbar-collapse {padding: 0;}
     .navbar-left li.products a {padding: 15px 20px 15px 10px;}
@@ -176,7 +176,6 @@
     .panel-footer .btn-group {width: 100%;}
     .cart-view-line-items-btn-group .btn-group, .check-out-view-btn-group .btn-group {vertical-align: inherit; width: 100%;}
     .cart-view-btn-cancel  {float: left !important;}
-    .cart-view-line-items-product {margin-bottom: 25px;}
     .cart-view-line-items-repeater div.col-xs-3 { text-align:center; }
     .cart-view-btn-save {float: right !important;}
     .ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {}
