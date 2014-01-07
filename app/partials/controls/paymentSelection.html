@@ -1,7 +1,5 @@
 <div class="animated fadeInDown">
     <label>Payment Method</label>
-    <span ng-show="cart_billing.$error.paymentMethod">Stupid payment method</span>
-
     <span class="btn-group btn-group-sm">
     <button class="btn btn-default" ng-show="user.Permissions.contains('PayByPO')" ng-click="currentOrder.PaymentMethod = 'PurchaseOrder'">
         <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'PurchaseOrder' }"></i>
