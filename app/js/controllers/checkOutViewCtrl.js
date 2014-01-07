@@ -94,7 +94,6 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     });
 
     $scope.$watch('currentOrder.PaymentMethod', function(event) {
-	    console.log('watch');
 	    if (event == 'BudgetAccount' && ($scope.SpendingAccounts && $scope.SpendingAccounts.length == 1)) {
 		    $scope.currentOrder.BudgetAccountID = $scope.SpendingAccounts[0].ID;
 	    }
@@ -131,7 +130,6 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
             default:
                 return false;
         }
-	    console.log('valid = ' + valid + ' for ' + method);
         return valid;
     }
 
