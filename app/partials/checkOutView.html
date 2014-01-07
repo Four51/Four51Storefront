@@ -274,13 +274,17 @@
                     </button>
                 </li>
                 <li style="width: 25%;">
-                    <button ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" class="btn"  ng-class="{'btn-warning': cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid, 'btn-primary': !cart_shipping.$invalid || !cart_order.$invalid || !cart_billing.$invalid }" ng-click="saveChanges()">
-                        <i ng-show="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" class="fa fa-warning"></i>
-                        <span ng-hide="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">Save Order</span>
+                    <button class="btn btn-primary"  ng-click="saveChanges()">
+                       Save Order
                     </button>
                 </li>
                 <li>
-                    <button class="btn btn-success" ng-show="currentOrder" ng-click="submitOrder()" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">Submit Order</button>
+                    <button class="btn btn-success"
+                            ng-class="{'btn-warning': cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid, 'btn-primary': !cart_shipping.$invalid || !cart_order.$invalid || !cart_billing.$invalid }"
+                            ng-click="submitOrder()" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">
+                        <i ng-show="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" class="fa fa-warning"></i>
+                        <span>Submit Order</span>
+                    </button>
                 </li>
             </ul>
         </div>

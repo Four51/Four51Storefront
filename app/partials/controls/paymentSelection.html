@@ -9,7 +9,7 @@
         <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'Undetermined' }"></i>
         Approval Order
     </button>
-    <button ng-if="user.Permissions.contains('PayByBudgetAccount') && (SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 0" class="btn btn-default" ng-click="currentOrder.PaymentMethod = 'BudgetAccount'">
+    <button ng-if="user.Permissions.contains('PayByBudgetAccount') && (SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 0" class="btn btn-default" ng-click="setBudgetAccount((SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length)">
         <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'BudgetAccount' }"></i>
         Spending Account {{showSpendingAccount}}
     </button>
@@ -20,7 +20,7 @@
     </span>
 
     <div ng-if="user.Permissions.contains('PayByBudgetAccount')" ng-show="currentOrder.PaymentMethod == 'BudgetAccount'">
-        <div ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length == 1"class="alert alert-success">{{SpendingAccounts[0].Label + ' - Balance: ' + (SpendingAccounts[0].Balance | currency)}}</div>
+        <div ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length == 1" class="alert alert-success">{{selectedBudgetAccount.Label + ' - Balance: ' + (selectedBudgetAccount.Balance | currency)}}</div>
         <div class="row" style="margin-top:15px;">
             <div class="col-sm-6">
                 <select class="form-control" ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 1"
