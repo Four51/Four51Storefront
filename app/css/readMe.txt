@@ -41,7 +41,7 @@
                                             ngTouch
     Responsive breakpoints      -       app media queries that work alongside Twitter Bootstrap to provide more bulletproof design styles
                                         - /breakpoint
-    Form icons                  -       Form input field icons use the font-awesome resource.
+    //TODO needs updating Form icons                  -       Form input field icons use the font-awesome resource.
                                         - Add the class "view-form-icon" to the input
                                         - Add the font-awesome <i> tag anywhere in the form field parent container with the class" view-form-icon-fa"
                                             <div>

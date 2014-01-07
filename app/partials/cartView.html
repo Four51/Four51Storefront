@@ -18,8 +18,8 @@
                 </div>
                 <div class="panel-body">
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
-                        <span title="Remove Item" style="cursor:pointer; position:absolute; top:0; right:10px; font-size:1.5em;" ng-click="removeItem(item)">
-                          <i class="fa fa-times-circle text-danger"></i>
+                        <span title="Remove Item" class="view-corner-button"  ng-click="removeItem(item)">
+                            <i class="fa fa-times-circle text-danger"></i>
                         </span>
                         <div class="col-xs-3">
                             <div class="row">
@@ -52,17 +52,17 @@
                                 </div>
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="row">
-                                        <div class="col-xs-6" style="position:relative;">
+                                        <div class="col-xs-12 col-sm-6" style="position:relative;">
                                             <div ng-show="item.qtyError" style="padding:2px 5px; margin:0; position:absolute; height:100%;" class="alert alert-danger text-center">
                                                 <small>{{item.qtyError}}</small>
                                             </div>
                                             <p style="margin:0;" class="text-left" ng-if="!(user.Permissions.contains('HidePricing'))">
                                                 <small class="text-info">Total</small>
                                                 <br/>
-                                                <span class="text-success view-price-total" style="font-size: 36px;">{{item.LineTotal | currency}}</span>
+                                                <span class="text-success view-price-total" style="font-size: 34px;">{{item.LineTotal | currency}}</span>
                                             </p>
                                         </div>
-                                        <div class="col-xs-6" ng-if="!(user.Permissions.contains('HidePricing'))">
+                                        <div class="col-xs-12 col-sm-6" ng-if="!(user.Permissions.contains('HidePricing'))">
                                             <div>
                                                 <p style="margin:0;" class="text-left">
                                                     <small class="text-info">Unit Price</small>
@@ -120,10 +120,15 @@
                             <span class="text-info">Shipping, handling and tax may be added to this subtotal.</span>
                         </p>
                     </div>
-                    <div class="alert alert-success" ng-show="actionMessage">{{actionMessage}}</div>
                 </div>
             </div>
             <div class="view-footer navbar-fixed-bottom">
+                <div class="view-action-message alert-success" ng-show="actionMessage">
+                    <span title="Remove Message" class="view-corner-button" ng-click="actionMessage = false">
+                        <i class="fa fa-times-circle"></i>
+                    </span>
+                    {{actionMessage}}
+                </div>
                 <ul>
                     <li style="width: 25%;">
                         <button class="btn btn-danger" ng-click="cancelOrder()">Cancel Order</button>
