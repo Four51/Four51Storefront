@@ -247,7 +247,7 @@
                 </div>
             </div>
         <!--- copy billing section down one to include approval panel --->
-        <!--- TODO not exactly sure how you want to handle approvals form controls --->
+        <!--- TODO not exactly sure how you want to handle approvals form controls or if needs a form control --->
         <div ng-show="currentOrder.Approvals"  class="panel-heading" ng-class="{'no': cart_approval.$invalid, 'yes': !cart_approval.$invalid }">
             <h3 ng-click="checkOutSection = 'approval'" class="panel-title">
                 <i ng-class="{'fa fa-warning': cart_approval.$invalid, 'fa fa-check-circle': !cart_approval.$invalid }"></i>
