@@ -35,6 +35,10 @@ img {
     display: block;
 }
 
+div {
+    position: relative;
+}
+
 .view-form-field  {}
 /*select, input, .uneditable-input {
     max-width: 100%;
@@ -840,12 +844,24 @@ li.selected {
 /* Cart | Checkout */
 /* ----------------------------------------------------------------------------------------------- */
 
+.view-action-message {
+    padding: 15px;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    opacity: .9;
+}
+
+.view-corner-button {
+    cursor:pointer;
+    position:absolute;
+    top:0;
+    right:10px;
+    font-size:1.5em;
+}
 
 .view-footer{
     text-align: center;
     z-index: 999999999;
-    border-top: 1px solid #d6d6d6;
-    background-color:#fff;
 }
 
 
@@ -914,10 +930,6 @@ li.print {
     overflow: hidden;
     padding: 15px 0;
     position:relative;
-}
-
-div {
-    position: relative;
 }
 
 .view-form-icon > div {

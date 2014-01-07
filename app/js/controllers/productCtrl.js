@@ -147,6 +147,7 @@ four51.app.factory('ProductDisplayService', function($451, $sce, Variant, Produc
 			"percentage added to qty*unitprice:" + percentagePerLine + " & " + //"'other value' markup:" + otherValueMarkup + " & " +
 			"unit price:" + priceBreak.Price;
 		lineItem.LineTotal = total;
+		lineItem.UnitPrice = priceBreak.Price;
 	}
 	function productViewScope(scope){
 		scope.specChanged = function(spec){
