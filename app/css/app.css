@@ -851,6 +851,14 @@ li.selected {
     opacity: .9;
 }
 
+.view-corner-button {
+    cursor:pointer;
+    position:absolute;
+    top:0;
+    right:10px;
+    font-size:1.5em;
+}
+
 .view-footer{
     text-align: center;
     z-index: 999999999;

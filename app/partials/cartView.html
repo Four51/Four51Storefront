@@ -18,7 +18,7 @@
                 </div>
                 <div class="panel-body">
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
-                        <span title="Remove Item" style="cursor:pointer; position:absolute; top:0; right:10px; font-size:1.5em;" ng-click="removeItem(item)">
+                        <span title="Remove Item" class="view-corner-button"  ng-click="removeItem(item)">
                             <i class="fa fa-times-circle text-danger"></i>
                         </span>
                         <div class="col-xs-3">
@@ -124,7 +124,7 @@
             </div>
             <div class="view-footer navbar-fixed-bottom">
                 <div class="view-action-message alert-success" ng-show="actionMessage">
-                    <span title="Remove Message" style="cursor:pointer; position:absolute; top:0; right:10px; font-size:1.5em;opacity: 1;" ng-click="actionMessage = false">
+                    <span title="Remove Message" class="view-corner-button" ng-click="actionMessage = false">
                         <i class="fa fa-times-circle"></i>
                     </span>
                     {{actionMessage}}
