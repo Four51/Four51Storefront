@@ -17,7 +17,7 @@ four51.app.directive('node', function($compile) {
 		scope: {
 			node: '='
 		},
-		template: '<li><a ng-href="#/catalog/{{node.InteropID}}">{{node.Name}}</a></li>',
+		template: '<li><a ng-href="#/catalog/{{node.InteropID}}" ng-bind-html="node.Name"></a></li>',
 		link: function(scope, element) {
 			if (angular.isArray(scope.node.SubCategories)) {
 				element.append("<categorytree tree='node.SubCategories' />");
