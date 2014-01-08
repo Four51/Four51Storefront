@@ -153,7 +153,7 @@ textarea {
 }
 
 
-.cat-image img, .prod-image img {
+.cat-image img {
     margin: 0 auto;
     max-width: 100%;
     max-height: 200px;
@@ -809,7 +809,7 @@ li.selected {
     margin-top: 40px;
 }
 
-.product-details-add{
+.product-details-add {
     -webkit-animation-duration: 250ms;
     -moz-animation-duration: 250ms;
     -o-animation-duration: 250ms;
@@ -839,10 +839,48 @@ li.selected {
     animation-name: fadeOut;
 }
 
+.view-action-message.ng-hide-add {
+    -webkit-animation-duration: 250ms;
+    -moz-animation-duration: 250ms;
+    -o-animation-duration: 250ms;
+    animation-duration: 250ms;
+    animation-delay: 250ms;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeIn;
+    -moz-animation-name: fadeIn;
+    -o-animation-name: fadeIn;
+    animation-name: fadeIn;
+}
+
+.view-action-message, view-action-message.ng-animate.ng-hide-remove {
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    animation-delay: 5s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeOut;
+    -moz-animation-name: fadeOut;
+    -o-animation-name: fadeOut;
+    animation-name: fadeOut;
+
+}
 
 /* ----------------------------------------------------------------------------------------------- */
 /* Cart | Checkout */
 /* ----------------------------------------------------------------------------------------------- */
+
+.view-thumbnail {
+    max-height: 95px;
+    max-width: 100%;
+    margin: 0 auto;
+}
 
 .view-action-message {
     padding: 15px;
