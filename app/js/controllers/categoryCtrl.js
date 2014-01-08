@@ -5,7 +5,7 @@ four51.app.controller('CategoryCtrl', function ($routeParams, $sce, $scope, $451
 	$scope.trusted = function(d){
 		if(d) return $sce.trustAsHtml(d);
 	}
-	Product.search($routeParams.categoryInteropID, null, function(products) {
+	Product.search($routeParams.categoryInteropID, null, null, function(products) {
         $scope.products = products;
 		$scope.productLoadingIndicator = false;
     });

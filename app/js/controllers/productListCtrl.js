@@ -7,7 +7,7 @@ four51.app.controller('ProductListCtrl', function ($routeParams,$rootScope, $sco
         }
 
         if($scope.category) {
-            Product.search($scope.categoryInteropID, null, function(data) {
+            Product.search($scope.categoryInteropID, null, null, function(data) {
                 $scope.category.products = $scope.Products = data;
             });
         }

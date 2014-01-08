@@ -32,11 +32,13 @@ four51.app.factory('Product', function($resource, $451, Security){
 	         });
     }
 
-    var _search = function(categoryInteropID, searchTerm, success) {
-        if(!categoryInteropID && !searchTerm) return null;
+    var _search = function(categoryInteropID, searchTerm, relatedProductsGroupID, success) {
+        if(!categoryInteropID && !searchTerm && !relatedProductsGroupID) return null;
+
         var criteria = {
             'CategoryInteropID': categoryInteropID,
-            'SearchTerms': searchTerm ? searchTerm : ''
+            'SearchTerms': searchTerm ? searchTerm : '',
+			'RelatedProductGroupID': relatedProductsGroupID
         };
 	    //var cacheID = '451Cache.Products.' + criteria.CategoryInteropID + criteria.SearchTerms.replace(/ /g, "");
 		//var products = store.get(cacheID);
