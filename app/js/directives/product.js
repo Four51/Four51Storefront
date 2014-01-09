@@ -16,49 +16,14 @@ four51.app.directive('shortproductview', function(){
 
 	return obj;
 });
-/*
-four51.app.directive('vspecfield', function($451){
-	var template = '<select " ' +
-		'ng-model="s.SelectedOptionID" '+
-		'ng-options="option.ID as option.Value for option in s.Options" '+
-		'ng-if="s.Options.length" '+
-		'ng-required="s.Required" '+
-		'ng-change="ddlChange(s)"></select>';
-
-	template += '<span ng-show="s.AllowOtherValue" ng-click="otherVisible = !otherVisible">other...</span><input ng-change="otherChanged(s)" type=text ng-model="s.OtherTextValue" ng-show="otherVisible">';
-	template += '<input ng-if="!s.Options.length" placeholder="{{s.DefaultValue}}" type=text ng-required="s.Required" ng-model="s.Value">';
-
+four51.app.directive('relatedproducts', function(){
 	var obj = {
-		restrict: "E",
-		controller: function($scope){
-			$scope.otherVisible = $scope.s.OtherTextValue;
-		},
-		link: function(scope){
-
-			scope.otherChanged = function(spec){
-				spec.Value = spec.OtherTextValue;
-				spec.SelectedOptionID = null;
-				if(scope.changed)
-					scope.changed(spec);
-			};
-			scope.ddlChange = function(spec){
-				scope.otherVisible = false;
-				spec.OtherTextValue = null;
-				spec.Value = $451.filter(spec.Options, {Property:'ID', Value: spec.SelectedOptionID})[0].Value;
-				if(scope.changed)
-					scope.changed(spec);
-			};
-		},
-		scope: {
-			s: '=',
-			changed: '='
-		},
-		template: template
-	};
+		scope: {relatedgroupid: '='},
+		restrict: 'E',
+		templateUrl: 'partials/relatedProductsView.html',
+		controller: 'relatedProductsCtrl'};
 	return obj;
-
 });
-*/
 four51.app.directive('pricescheduletable', function(){
     var obj = {
         scope: {
