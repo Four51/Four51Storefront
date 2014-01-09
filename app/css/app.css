@@ -95,6 +95,15 @@ textarea {
     line-height: 150%;
 }
 
+h3 i:first-of-type {
+    float: left;
+}
+
+h3 i{
+    float: right;
+}
+
+
 .showSideNav {
     display: none;
 }
