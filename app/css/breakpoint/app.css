@@ -43,7 +43,23 @@
 
 /* x-xs */
 @media (max-width: 767px) {
+    textarea, select {
+        -webkit-appearance: none;
+    }
 
+    textarea, select {
+        border: 1px solid #555;
+        padding: 0.5em;
+        font-size: 15px;
+        line-height: 1.2em;
+        width: 80%;
+        background: #fff;
+        -webkit-appearance: none;
+        -webkit-box-shadow: 1px 1px 1px #fff;
+        -webkit-border-radius: 0.5em;
+    }
+    .btn-group {width: 100%;}
+    .btn-group .btn {width: 100%;padding: 15px;margin: 2px;}
     .view-price-total {font-size: 26px !important;}
     .current-cat-name {width: 215px;}
     .navbar-collapse {padding: 0;}

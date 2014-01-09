@@ -233,6 +233,7 @@ h3 i{
     font-size:1.5em;
 }
 
+.popover {display: none;}
 .shortproduct-view .caption { cursor: pointer; padding: 0 20px;}
 
 .shortproduct-info a.btn {

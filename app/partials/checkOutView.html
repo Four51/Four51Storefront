@@ -28,7 +28,7 @@
                                     <button type="button" class="btn btn-info" ng-click="applyCoupon()">Apply</button>
                                 </span>
                             </div>
-                            <div ng-show="couponError" class="alert alert-danger">{{couponError}}</div>
+
                         </div>
                     </div>
                     <p ng-show="currentOrder.Coupon">
@@ -54,7 +54,8 @@
                 </div>
             </div>
             <hr />
-            <a href="#/security">Concerned About Security?</a>
+            <button class="btn btn-default" redirect="/security">Concerned About Security?</button>
+
         </div>
     </div>
 
@@ -111,35 +112,23 @@
                 <div ng-show="addressform || (addresses | filter:{IsShipping:true}).length == 0 && user.Permissions.contains('CreateShipToAddress')">
                     <addressinput address='shipaddress' user='user'></addressinput>
                 </div>
-                <div class="alert-error" ng-if="!user.Permissions.contains('CreateShipToAddress') && (addresses | filter:{IsShipping:true}).length == 0">
-                    You're site is mis-configured. You do not have permission to create a shipping address nor do you have any addresses assigned to you. Please contact your support representative.
-                </div>
+
                 <div ng-show="!addressform">
-                    <form name="cart_shipping">
-                    <div class="error_list">
-                        <p class="alert alert-error" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</p>
-                        <p class="alert alert-error" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</p>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-9 col-xs-12">
-                            <span style="margin-bottom:15px;" class="btn-group" ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1 && user.ShipMethod != null && (addresses | filter:{IsShipping:true}).length > 1">
-                                <button class="btn btn-default" ng-click="shipToMultipleAddresses = false">
-                                    <i ng-class="{'fa fa-check': !shipToMultipleAddresses }"></i>
-                                    Ship to single address
-                                </button>
-                                <button class="btn btn-default" type="button" ng-click="shipToMultipleAddresses = true">
-                                    <i ng-class="{'fa fa-check': shipToMultipleAddresses }"></i>
-                                    Ship to multiple addresses
-                                </button>
-                            </span>
-                        </div>
-                        <div class="col-sm-3 col-xs-12">
-                            <button class="btn btn-info btn-block" type="button" class="btn btn-xs btn-danger"
-                                ng-hide="(addressform || (!addressform && (addresses | filter:{IsShipping:true}).length == 0) || !user.Permissions.contains('CreateShipToAddress')) || !shipToMultipleAddresses" ng-click="addressform = true" tabindex="-1">
-                                New Address
+                    <form name="cart_shipping" novalidate="">
+                        <span class="btn-group" ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1 && user.ShipMethod != null && (addresses | filter:{IsShipping:true}).length > 1">
+                            <button class="btn btn-default" ng-click="shipToMultipleAddresses = false">
+                                <i ng-class="{'fa fa-check': !shipToMultipleAddresses }"></i>
+                                Single Address
                             </button>
-                        </div>
-                    </div>
+                            <button class="btn btn-default" type="button" ng-click="shipToMultipleAddresses = true">
+                                <i ng-class="{'fa fa-check': shipToMultipleAddresses }"></i>
+                                Multiple Addresses
+                            </button>
+                                 <button class="btn btn-info" type="button"
+                                         ng-hide="(addressform || (!addressform && (addresses | filter:{IsShipping:true}).length == 0) || !user.Permissions.contains('CreateShipToAddress'))" ng-click="addressform = true" tabindex="-1">
+                                     New Address
+                                 </button>
+                        </span>
                     <div>
                         <loadingindicator ng-show="shippingUpdatingIndicator" title="Please wait while shipping costs are updated" />
                         <loadingindicator ng-show="shippingFetchIndicator" title="Please wait while available shippers are updated" />
@@ -147,7 +136,7 @@
                             <div ng-show="!shipToMultipleAddresses" class="view-form-icon">
                                 <div ng-show="(addresses | filter:{IsShipping:true}).length > 0">
                                     <label ng-show="currentOrder.ShipAddressID">Shipping Address</label>
-                                    <div class="input-group">
+                                    <div>
                                         <select class="form-control" name="shippingAddress"
                                                 ng-change="setShipAddressAtOrderLevel()"
                                                 ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
@@ -155,12 +144,7 @@
                                                 ng-required="!shipToMultipleAddresses">
                                             <option class="view-select-placeholder" value="" selected>Shipping Address</option>
                                         </select>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default btn-info pull-right" type="button" class="btn btn-xs btn-danger"
-                                                ng-hide="addressform || (!addressform && (addresses | filter:{IsShipping:true}).length == 0) || !user.Permissions.contains('CreateShipToAddress')" ng-click="addressform = true" tabindex="-1">
-                                                New Address
-                                            </button>
-                                        </span>
+
                                         <i class="fa fa-map-marker"></i>
                                     </div>
                                 </div>
@@ -177,7 +161,7 @@
                                 </div>
                             </div>
                             <div ng-show="!shipToMultipleAddresses && ShipAddress" class="check-out-view-selected-shipping" style="border: 1px solid #d6d6d6; padding: 15px; margin-top: 15px;">
-                                <p style="font-size: 11px; font-weight: bold;">Address Location</p>
+                                <p style="font-size: 11px; font-weight: bold;">Shipping Location</p>
                                 <p ng-show="ShipAddress.AddressName"><small>{{ShipAddress.AddressName}}</small></p>
                                 <p ng-show="ShipAddress.CompanyName"><small>{{ShipAddress.CompanyName}}</small></p>
                                 <p ng-show="ShipAddress.FirstName || ShipAddress.LastName"><small>{{ShipAddress.FirstName + ' ' + ShipAddress.LastName}}</small></p>
@@ -228,26 +212,28 @@
                 <div ng-show="addressform || (addresses | filter:{IsBilling:true}).length == 0 && user.Permissions.contains('CreateBillToAddress')">
                     <addressinput address='billaddress' user='user'></addressinput>
                 </div>
-                <div class="alert-error" ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
-                    You're site is mis-configured. You do not have permission to create a billing address nor do you have any addresses assigned to you. Please contact your support representative.
-                </div>
                 <div ng-show="!addressform">
-                    <form name="cart_billing">
+                    <form name="cart_billing" novalidate="">
+
                         <paymentselector></paymentselector>
-                        <div  style="padding-top:15px;">
-                            <label ng-show="currentOrder.BillAddressID">Billing Address</label>
-                            <div class="col-xs-7 col-collapse">
-                                <div class="input-group">
+                        <div class="view-form-icon">
+                            <div>
+                                <label ng-show="currentOrder.BillAddressID">Billing Address</label>
+                                <div>
+
                                     <select class="form-control" ng-show="(addresses | filter:{IsBilling:true}).length > 0" name="billingAddress"
-                                                ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required></select>
+                                        ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required>
+                                        <option class="view-select-placeholder" value="" selected>Billing Address</option>
+                                    </select>
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default btn-info pull-right" type="button" class="btn btn-xs btn-danger"
-                                                ng-hide="(addressform || (!addressform && (addresses | filter:{IsBilling:true}).length == 0) || !user.Permissions.contains('CreateBillToAddress'))"
-                                                ng-click="addressform = true" tabindex="-1">Add New Address</button>
+
                                     </span>
+                                    <i class="fa fa-map-marker"></i>
                                 </div>
                             </div>
-                            <div class="col-xs-5 col-collapse text-right check-out-view-selected-billing" style="padding-left:15px;">
+
+                            <div ng-show="BillAddress" class="check-out-view-selected-billing" style="border: 1px solid #d6d6d6; padding: 15px; margin-top: 15px;">
+                                <p style="font-size: 11px; font-weight: bold;">Billing Location</p>
                                 <p ng-show="BillAddress.AddressName"><small>{{BillAddress.AddressName}}</small></p>
                                 <p ng-show="BillAddress.CompanyName"><small>{{BillAddress.CompanyName}}</small></p>
                                 <p ng-show="BillAddress.FirstName || BillAddress.LastName"><small>{{BillAddress.FirstName + ' ' + BillAddress.LastName}}</small></p>
@@ -275,6 +261,18 @@
             </div>
         </div>
         <div class="view-footer navbar-fixed-bottom">
+                <div class="error_list">
+                    <div class="view-action-message alert-warning" ng-show="couponError">{{couponError}}</div>
+                    <div class="view-action-message alert-warning" ng-show="cart_order.orderid.$invalid">Enter an order id</div>
+                    <div class="view-action-message alert-warning" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</div>
+                    <div class="view-action-message alert-warning" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</div>
+                    <div class="view-action-message alert-warning" ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
+                        You're site is mis-configured. You do not have permission to create a billing address nor do you have any addresses assigned to you. Please contact your support representative.
+                    </div>
+                    <div class="view-action-message alert-warning" ng-if="!user.Permissions.contains('CreateShipToAddress') && (addresses | filter:{IsShipping:true}).length == 0">
+                        You're site is mis-configured. You do not have permission to create a shipping address nor do you have any addresses assigned to you. Please contact your support representative.
+                    </div>
+                </div>
             <ul>
                 <li style="width: 25%;">
                     <button class="btn btn-danger" ng-click="cancelOrder()">
