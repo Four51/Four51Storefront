@@ -1,4 +1,5 @@
-<div class="shortproduct-view row" ng-mouseover="toggle = true" ng-mouseleave="toggle = false" ng-class="{ 'howdy': toggle }" style="position:relative;">
+<div class="shortproduct-view row" ng-class="{ 'howdy': toggle }" style="position:relative;">
+
     <div class="col-md-6 col-sm-12">
         <a class="cat-link" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
             <figure ng-show="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl" ng-swipe-left="showSwipe = true">
@@ -17,28 +18,32 @@
                 <span ng-bind-html="trustedDescription(LineItem.Product)" ng-show="LineItem.Product.Description" />
             </p>
         </div>
-    </div>
-    <section style="position:absolute; top:0; bottom:0; width:50%; right:0;" class="hidden-xs hidden-sm">
-        <div class="shortproduct-info text-center" ng-class="{ 'product-details': toggle }" ng-show="toggle">
-            <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]" ng-if="!(user.Permissions.contains('HidePricing'))">
-                {{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
-                <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>
-                for {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
-            </p>
-            <p ng-show="LineItem.Product.UnitOfMeasure">
-                Unit of Measure: {{LineItem.Product.UnitOfMeasure}}
-            </p>
+        <section class="hidden-xs hidden-sm">
+            <div class="row" style="border: 1px solid #d6d6d6;padding: 10px;margin: 15px;">
+                <div class="col-md-6 text-left">
+                    <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]" ng-if="!(user.Permissions.contains('HidePricing'))">
+                        {{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
+                        <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>
+                        for {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
+                    </p>
+                    <p ng-show="LineItem.Product.UnitOfMeasure">
+                        Unit of Measure: {{LineItem.Product.UnitOfMeasure}}
+                    </p>
 
-            <p ng-show="LineItem.Product.DisplayInventory && inventoryDisplay(LineItem.Product, LineItem.Variant) != undefined">
-                QTY Available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
-            </p>
-            <p>
-                <a class="btn btn-default" style="width: 150px; margin: 0 auto;" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
-                    View Product
-                </a>
-            </p>
-        </div>
-    </section>
+                    <p ng-show="LineItem.Product.DisplayInventory && inventoryDisplay(LineItem.Product, LineItem.Variant) != undefined">
+                        QTY Available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        <a class="btn btn-default pull-right" style="width: 150px; margin: 0 auto;" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
+                            View Product
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
     <section class="shortproduct-view-swipe" ng-show="showSwipe" ng-swipe-right="showSwipe = false">
         <div class="shortproduct-info text-center" ng-class="{ 'product-details': toggle }">
             <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]" ng-if="!(user.Permissions.contains('HidePricing'))">

@@ -8,8 +8,8 @@
                     <span ng-show="showMega"><i class="fa fa-minus-circle" rel="tooltip" title="Close all Categories"></i></span>
                 </li>
                 <li class="text-nav">
-                    <span ng-bind-html="currentCategory.Name || 'Categories'"></span>
-                    <span ng-show="!currentCategory">Categories</span>
+                    <span class="text-primary" ng-bind-html="currentCategory.Name || 'Categories'"></span>
+                    <span class="text-primary" ng-show="!currentCategory">Categories</span>
                 </li>
                 <li class="pull-right">
                     <a href="#/search"><i class="fa fa-search" rel="tooltip" title="Search Products"></i></a>
@@ -29,7 +29,7 @@
         <div class="category-product product-navigation" ng-show="currentCategory" style="position: relative;">
             <loadingindicator ng-show="categoryLoadingIndicator" title="Please wait while we fetch all categories" />
             <div class="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image"></div>
-            <h3 ng-show="currentCategory.SubCategories.length && currentCategory.InteropID">Categoriesss</h3>
+            <h3 ng-show="currentCategory.SubCategories.length && currentCategory.InteropID">Categories</h3>
             <nav class="nav 451_lbl_subcatlist">
                 <ul>
                     <li class="nav-header well col-lg-3 col-md-4  col-sm-6 col-xs-12" ng-class="{ 'productList': productList, 'productGrid': !productList, 'category-view-aside': showMega }" ng-repeat="c in currentCategory.SubCategories">

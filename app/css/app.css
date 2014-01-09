@@ -189,17 +189,7 @@ h3 i{
 }
 
 
-.shortproduct-view:hover .shortproduct-name, .shortproduct-view .shortproduct-toggle, .shortproduct-view.howdy:hover .shortproduct-toggle {
-    display: none;
-}
 
-.shortproduct-view:hover .shortproduct-toggle, .shortproduct-view.howdy:hover .shortproduct-name {
-    display: block;
-}
-
-.shortproduct-toggle:hover {
-    color:red;
-}
 
 
 .shortproduct-arrow {
@@ -433,6 +423,9 @@ div.category-view-subcat ul li ul {
 
 .nav-cat-search ul li.text-nav {
     padding: 15px 5px;
+    font-size: 1em;
+    font-weight: bold;
+
 }
 
 .header .text-nav {
@@ -1154,12 +1147,21 @@ li.cart span.badge {
 .check-out-approvals {
     margin:0 -15px;
 }
+
+.check-out-view .panel-body {border-bottom: 1px solid #d6d6d6;}
 .panel-body .panel-footer {
     margin: 0 -30px -15px;
     border-bottom: 1px solid #d6d6d6;
 }
 
-
+.header .fa-caret-down {
+    position: absolute;
+    bottom: -20px;
+    right: 35%;
+    font-size: 32px;
+    color:#359FD5;
+    z-index: 5;
+}
 
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
