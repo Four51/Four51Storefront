@@ -22,10 +22,20 @@
             <table class="table table-striped table-hover table-bordered">
                 <thead>
                 <tr>
-                    <td colspan="6"><input class='form-control' type="text" placeholder="Search" ng-model="searchTerm" /></td>
+                    <td colspan="6" class="view-form-icon">
+                        <div>
+                        <label ng-show="searchTerm">Search</label>
+                            <input class='form-control' type="text" placeholder="Search" ng-model="searchTerm" />
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </td>
                 </tr>
                 <tr ng-show="(addresses | filter:searchTerm | filter:{IsCustEditable:true}).length > 0">
-                    <td><input type='checkbox' ng-click="checkAll($event)" /></td>
+                    <td>
+                        <div>
+                            <input type='checkbox' ng-click="checkAll($event)" />
+                        </div>
+                    </td>
                     <td>Name</td>
                     <td>City</td>
                     <td>State</td>
@@ -38,7 +48,11 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="address in addresses | filter:searchTerm | filter:{IsCustEditable:true}">
-                    <td><input type='checkbox' ng-model="address.Selected" /></td>
+                    <td>
+                        <div>
+                            <input type='checkbox' ng-model="address.Selected" />
+                        </div>
+                    </td>
                     <td><a ng-href="#/address/{{address.ID}}">{{address.AddressName}}</a></td>
                     <td>{{address.City}}</a></td>
                     <td>{{address.State}}</td>

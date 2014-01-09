@@ -65,9 +65,9 @@
                     <span class="alert-error" ng-show="user_form.confirm_password.$error.validator">Passwords do not match!</span><br />
                 </div>
             </div>
-            <div class="panel-body" ng-if="user.CustomFields">
-                <div class="list-group">
-                    <div ng-repeat="field in user.CustomFields" class="list-group-item">
+            <div class="panel-body" >
+                <div  ng-if="user.CustomFields" class="col-md-6 col-md-offset-3 col-collapse">
+                    <div ng-repeat="field in user.CustomFields">
                         <customfilefield customfield="field" ng-if="field.ControlType == 'File' && field.DisplayToUser"></customfilefield>
                         <customtextfield customfield="field" ng-if="field.ControlType == 'Text' && field.DisplayToUser"></customtextfield>
                         <customselectionfield customfield="field" ng-if="field.ControlType == 'Selection' && field.DisplayToUser"></customselectionfield>
@@ -76,7 +76,7 @@
             </div>
             <div class="panel-footer text-center">
                 <input class="btn btn-primary" type="submit" ng-disabled="user_form.$invalid" id="451_btn_user" value="{{user.Type == 'TempCustomer' ? 'Create Acccount' : 'Save'}}" />
-                <span class="alert alert-success" ng-show="saveSuccess">Your changes have been saved</span>
+                <span class="alert-success view-action-message" ng-show="saveSuccess">Your changes have been saved</span>
             </div>
         </div>
     </form>

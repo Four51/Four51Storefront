@@ -22,68 +22,7 @@
 
 /* x-sm */
 @media (min-width:768px) and (max-width: 1023px) {
-    @-webkit-keyframes view-enter {
-        0% {
-            opacity: 0;
-            -webkit-transform: translateY(2000px);
-        }
 
-        100% {
-            opacity: 1;
-            -webkit-transform: translateY(0);
-        }
-    }
-
-    @-moz-keyframes view-enter {
-        0% {
-            opacity: 0;
-            -moz-transform: translateY(2000px);
-        }
-
-        100% {
-            opacity: 1;
-            -moz-transform: translateY(0);
-        }
-    }
-
-    @-o-keyframes view-enter {
-        0% {
-            opacity: 0;
-            -o-transform: translateY(2000px);
-        }
-
-        100% {
-            opacity: 1;
-            -o-transform: translateY(0);
-        }
-    }
-
-    @keyframes view-enter {
-        0% {
-            opacity: 0;
-            transform: translateY(2000px);
-        }
-
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .ng-enter-active {
-        -webkit-animation-duration: 1s;
-        -moz-animation-duration: 1s;
-        -o-animation-duration: 1s;
-        animation-duration: 1s;
-        -webkit-animation-fill-mode: both;
-        -moz-animation-fill-mode: both;
-        -o-animation-fill-mode: both;
-        animation-fill-mode: both;
-        -webkit-animation-name: view-enter;
-        -moz-animation-name: view-enter;
-        -o-animation-name: view-enter;
-        animation-name: view-enter;
-    }
     .view-price-total {font-size: 24px !important;}
     .branding-view {text-align: center;}
     .branding-view-logo {float: none; margin: 0 auto 10px; max-height: 75px; }
@@ -104,68 +43,6 @@
 
 /* x-xs */
 @media (max-width: 767px) {
-    @-webkit-keyframes view-enter {
-        0% {
-            opacity: 0;
-            -webkit-transform: translateY(2000px);
-        }
-
-        100% {
-            opacity: 1;
-            -webkit-transform: translateY(0);
-        }
-    }
-
-    @-moz-keyframes view-enter {
-        0% {
-            opacity: 0;
-            -moz-transform: translateY(2000px);
-        }
-
-        100% {
-            opacity: 1;
-            -moz-transform: translateY(0);
-        }
-    }
-
-    @-o-keyframes view-enter {
-        0% {
-            opacity: 0;
-            -o-transform: translateY(2000px);
-        }
-
-        100% {
-            opacity: 1;
-            -o-transform: translateY(0);
-        }
-    }
-
-    @keyframes view-enter {
-        0% {
-            opacity: 0;
-            transform: translateY(2000px);
-        }
-
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .ng-enter {
-        -webkit-animation-duration: 1s;
-        -moz-animation-duration: 1s;
-        -o-animation-duration: 1s;
-        animation-duration: 1s;
-        -webkit-animation-fill-mode: both;
-        -moz-animation-fill-mode: both;
-        -o-animation-fill-mode: both;
-        animation-fill-mode: both;
-        -webkit-animation-name: view-enter;
-        -moz-animation-name: view-enter;
-        -o-animation-name: view-enter;
-        animation-name: view-enter;
-    }
 
     .view-price-total {font-size: 26px !important;}
     .current-cat-name {width: 215px;}
