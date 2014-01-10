@@ -1116,12 +1116,10 @@ li.cart span.badge {
     border: 1px solid rgba(86, 61, 124, 0.2);
 }
 
-/*
 .check-out-view-multiple-shipping .row {
-    padding:5px 0;
+    border-top: 1px solid #d6d6d6;
+    padding: 10px 0;
 }
-
-*/
 
 .cart-view-summary p span {
     float: left;
@@ -1149,7 +1147,7 @@ li.cart span.badge {
     margin:0 -15px;
 }
 
-.check-out-view .panel-body {border-bottom: 1px solid #d6d6d6;}
+.check-out-view .panel-default .panel-body {border-bottom: 1px solid #d6d6d6;}
 .panel-body .panel-footer {
     margin: 0 -30px -15px;
     border-bottom: 1px solid #d6d6d6;

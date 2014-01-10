@@ -55,7 +55,6 @@
             </div>
             <hr />
             <button class="btn btn-default" redirect="/security">Concerned About Security?</button>
-
         </div>
     </div>
 
@@ -124,10 +123,10 @@
                                 <i ng-class="{'fa fa-check': shipToMultipleAddresses }"></i>
                                 Multiple Addresses
                             </button>
-                                 <button class="btn btn-info" type="button"
-                                         ng-hide="(addressform || (!addressform && (addresses | filter:{IsShipping:true}).length == 0) || !user.Permissions.contains('CreateShipToAddress'))" ng-click="addressform = true" tabindex="-1">
-                                     New Address
-                                 </button>
+                             <button class="btn btn-info" type="button"
+                                     ng-hide="(addressform || (!addressform && (addresses | filter:{IsShipping:true}).length == 0) || !user.Permissions.contains('CreateShipToAddress'))" ng-click="addressform = true" tabindex="-1">
+                                New Address
+                             </button>
                         </span>
                     <div>
                         <loadingindicator ng-show="shippingUpdatingIndicator" title="Please wait while shipping costs are updated" />
@@ -135,7 +134,7 @@
                         <div>
                             <div ng-show="!shipToMultipleAddresses" class="view-form-icon">
                                 <div ng-show="(addresses | filter:{IsShipping:true}).length > 0">
-                                    <label ng-show="currentOrder.ShipAddressID">Shipping Address</label>
+                                    <label ng-class="{required: !shipToMultipleAddresses}" ng-show="currentOrder.ShipAddressID || !shipToMultipleAddresses">Shipping Address</label>
                                     <div>
                                         <select class="form-control" name="shippingAddress"
                                                 ng-change="setShipAddressAtOrderLevel()"
@@ -144,7 +143,6 @@
                                                 ng-required="!shipToMultipleAddresses">
                                             <option class="view-select-placeholder" value="" selected>Shipping Address</option>
                                         </select>
-
                                         <i class="fa fa-map-marker"></i>
                                     </div>
                                 </div>
@@ -175,23 +173,27 @@
                     </div>
                     <div style="margin-top:15px;" ng-show="shipToMultipleAddresses">
                         <div class="check-out-view-multiple-shipping">
-                            <div class="row" ng-class="{'ng-repeater-even-row': $even}" ng-repeat="item in currentOrder.LineItems">
+                            <div class="row view-form-icon" ng-class="{'ng-repeater-even-row': $even}" ng-repeat="item in currentOrder.LineItems">
                                 <div class="col-xs-12 col-sm-4"><strong>{{item.Product.Name}}</strong><small>{{' x ' + item.Quantity}}</small><br/>
                                     <span class="text-info">{{item.DateNeeded | date:'MM/dd/yyyy' }}</span></div>
                                 <div class="col-xs-12 col-sm-4">
+                                    <label ng-class="{required: shipToMultipleAddresses}" ng-show="currentOrder.ShipAddressID || shipToMultipleAddresses">Shipping Address</label>
                                     <select class="form-control" name="shippingAddress"
                                             ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
                                             ng-model="item.ShipAddressID"
                                             ng-required="shipToMultipleAddresses" >
                                     </select>
+                                    <i class="fa fa-map-marker"></i>
                                 </div>
                                 <div class="col-xs-12 col-sm-4">
+                                    <label ng-class="{required: !shipToMultipleAddresses && user.ShipMethod != null}" ng-show="currentOrder.LineItems[0].ShipperName">Shipping Method</label>
                                     <select class="form-control" ng-change="updateShipper(item)"
                                             ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
                                             ng-options="shipper.Name as shipper.Name for shipper in shippers | noliverates"
                                             ng-model="item.ShipperName"
                                             ng-required="shipToMultipleAddresses && user.ShipMethod != null" >
                                      </select>
+                                    <i class="fa fa-truck"></i>
                                 </div>
                             </div>
                         </div>
@@ -255,24 +257,23 @@
         <div ng-show="checkOutSection == 'approval'" class="panel-body check-out-view-approval">
             <approvalrulelist order="currentOrder" />
         </div>
-        <div class="panel-footer check-out-view-types">
-            <div ng-show="currentOrder">
-                <div class="alert alert-success" ng-show="actionMessage">{{actionMessage}}</div>
-            </div>
-        </div>
+
         <div class="view-footer navbar-fixed-bottom">
-                <div class="error_list">
-                    <div class="view-action-message alert-warning" ng-show="couponError">{{couponError}}</div>
-                    <div class="view-action-message alert-warning" ng-show="cart_order.orderid.$invalid">Enter an order id</div>
-                    <div class="view-action-message alert-warning" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</div>
-                    <div class="view-action-message alert-warning" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</div>
-                    <div class="view-action-message alert-warning" ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
-                        You're site is mis-configured. You do not have permission to create a billing address nor do you have any addresses assigned to you. Please contact your support representative.
-                    </div>
-                    <div class="view-action-message alert-warning" ng-if="!user.Permissions.contains('CreateShipToAddress') && (addresses | filter:{IsShipping:true}).length == 0">
-                        You're site is mis-configured. You do not have permission to create a shipping address nor do you have any addresses assigned to you. Please contact your support representative.
-                    </div>
+            <div class="error_list">
+                <div class="view-action-message alert-warning" ng-show="couponError">{{couponError}}</div>
+                <div class="view-action-message alert-warning" ng-show="cart_order.orderid.$invalid">Enter an order id</div>
+                <div class="view-action-message alert-warning" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</div>
+                <div class="view-action-message alert-warning" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</div>
+                <div class="view-action-message alert-warning" ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
+                    You're site is mis-configured. You do not have permission to create a billing address nor do you have any addresses assigned to you. Please contact your support representative.
                 </div>
+                <div class="view-action-message alert-warning" ng-if="!user.Permissions.contains('CreateShipToAddress') && (addresses | filter:{IsShipping:true}).length == 0">
+                    You're site is mis-configured. You do not have permission to create a shipping address nor do you have any addresses assigned to you. Please contact your support representative.
+                </div>
+            </div>
+            <div ng-show="currentOrder">
+                <div class="view-action-message alert-success" ng-show="actionMessage">{{actionMessage}}</div>
+            </div>
             <ul>
                 <li style="width: 25%;">
                     <button class="btn btn-danger" ng-click="cancelOrder()">

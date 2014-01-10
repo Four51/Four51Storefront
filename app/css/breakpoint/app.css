@@ -30,13 +30,7 @@
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
     .cart-view-btn-cancel  {float: left !important;}
     .cart-view-btn-save {float: right !important;}
-    .check-out-view-multiple-shipping .row [class*="col-"] {
-        border: none;
-        min-height: inherit;
-    }
-    .check-out-view-multiple-shipping .row [class*="col-"] {
-        /*border-bottom: 1px solid #d6d6d6;*/
-    }
+
 
 }
 
@@ -77,13 +71,7 @@
     .shortproduct-view:hover .shortproduct-name {display: block;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
     .caption {margin: 5px;}
-    .check-out-view-multiple-shipping .row [class*="col-"] {
-        border: none;
-        min-height: inherit;
-    }
-    .check-out-view-multiple-shipping .row {
-        border-bottom: 1px solid #d6d6d6;
-    }
+
     .credit-card-cvn-input{
         padding-top:15px;
     }
