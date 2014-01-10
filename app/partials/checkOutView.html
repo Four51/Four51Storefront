@@ -281,7 +281,7 @@
                 </li>
                 <li>
                     <button class="btn"
-                            ng-class="{'btn-warning': cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid, 'btn-primary': !cart_shipping.$invalid || !cart_order.$invalid || !cart_billing.$invalid }"
+                            ng-class="{'btn-warning': cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid, 'btn-success': !cart_shipping.$invalid || !cart_order.$invalid || !cart_billing.$invalid }"
                             ng-click="submitOrder()" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">
                         <i ng-show="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" class="fa fa-warning"></i>
                         <span>Submit Order</span>
