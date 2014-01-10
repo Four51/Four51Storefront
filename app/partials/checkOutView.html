@@ -113,7 +113,7 @@
                 </div>
 
                 <div ng-show="!addressform">
-                    <form name="cart_shipping" novalidate="">
+                    <form name="cart_shipping">
                         <span class="btn-group" ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1 && user.ShipMethod != null && (addresses | filter:{IsShipping:true}).length > 1">
                             <button class="btn btn-default" ng-click="shipToMultipleAddresses = false">
                                 <i ng-class="{'fa fa-check': !shipToMultipleAddresses }"></i>
@@ -215,7 +215,7 @@
                     <addressinput address='billaddress' user='user'></addressinput>
                 </div>
                 <div ng-show="!addressform">
-                    <form name="cart_billing" novalidate="">
+                    <form name="cart_billing">
                         <paymentselector></paymentselector>
                         <div class="view-form-icon">
                             <div>
@@ -281,7 +281,7 @@
                 </li>
                 <li>
                     <button class="btn"
-                            ng-class="{'btn-warning': cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid, 'btn-success': !cart_shipping.$invalid || !cart_order.$invalid || !cart_billing.$invalid }"
+                            ng-class="{'btn-warning': cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid, 'btn-success': !cart_shipping.$invalid && !cart_order.$invalid && !cart_billing.$invalid }"
                             ng-click="submitOrder()" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">
                         <i ng-show="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" class="fa fa-warning"></i>
                         <span>Submit Order</span>
