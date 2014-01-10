@@ -24,7 +24,7 @@
                 <h3 class="panel-title">{{user.Type == 'TempCustomer' ? 'Create' : 'My'}} Account</h3>
             </div>
             <div class="panel-body">
-                <div class="col-md-6 col-md-offset-3 col-collapse view-form-icon">
+                <div class="col-sm-6 view-form-icon">
                     <div>
                         <label ng-show="user.FirstName">First Name</label>
                         <input name="firstname" class="form-control" type="text" ng-model="user.FirstName" placeholder="First Name" />
@@ -45,7 +45,9 @@
                         <input name="email" class="form-control" type="email" ng-model="user.Email" required placeholder="Email Address" />
                         <i class="fa fa-envelope-o"></i>
                     </div>
-                    <span class="alert-error" ng-show="user_form.email.$invalid">Please enter a valid email address</span><br />
+                    <span class="alert-error" ng-show="user_form.email.$invalid">Please enter a valid email address</span>
+                </div>
+                <div class="col-sm-6 view-form-icon">
                     <div>
                         <label class="required">Username</label>
                         <input name="username" class="form-control" type="text" ng-model="user.TempUsername" required placeholder="User Name" />
@@ -66,7 +68,7 @@
                 </div>
             </div>
             <div class="panel-body" >
-                <div  ng-if="user.CustomFields" class="col-md-6 col-md-offset-3 col-collapse">
+                <div  ng-if="user.CustomFields" class="col-sm-6 view-form-icon">
                     <div ng-repeat="field in user.CustomFields">
                         <customfilefield customfield="field" ng-if="field.ControlType == 'File' && field.DisplayToUser"></customfilefield>
                         <customtextfield customfield="field" ng-if="field.ControlType == 'Text' && field.DisplayToUser"></customtextfield>
@@ -75,7 +77,7 @@
                 </div>
             </div>
             <div class="panel-footer text-center">
-                <input class="btn btn-primary" type="submit" ng-disabled="user_form.$invalid" id="451_btn_user" value="{{user.Type == 'TempCustomer' ? 'Create Acccount' : 'Save'}}" />
+                <input class="btn btn-primary pull-right" type="submit" ng-disabled="user_form.$invalid" id="451_btn_user" value="{{user.Type == 'TempCustomer' ? 'Create Acccount' : 'Save'}}" />
                 <span class="alert-success view-action-message" ng-show="saveSuccess">Your changes have been saved</span>
             </div>
         </div>
