@@ -771,10 +771,25 @@ li.selected {
     -moz-animation-fill-mode: both;
     -o-animation-fill-mode: both;
     animation-fill-mode: both;
-    -webkit-animation-name: fadeIn;
-    -moz-animation-name: fadeIn;
-    -o-animation-name: fadeIn;
-    animation-name: fadeIn;
+    -webkit-animation-name: fadeInUp;
+    -moz-animation-name: fadeInUp;
+    -o-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+}
+
+.check-out-view .panel-body.ng-hide-remove {
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeInDown;
+    -moz-animation-name: fadeInDown;
+    -o-animation-name: fadeInDown;
+    animation-name: fadeInDown;
 }
 
 .btn, .container {
@@ -792,9 +807,10 @@ li.selected {
     z-index: 999999;
     padding: 10px 0;
     background-color:#fff;
-    opacity: .85;
+    opacity: .75;
 
 }
+
 
 .app-loading-indicator {
     display: inline-block;
@@ -1147,7 +1163,9 @@ li.cart span.badge {
     margin:0 -15px;
 }
 
-.check-out-view .panel-default .panel-body {border-bottom: 1px solid #d6d6d6;}
+.check-out-view .panel-default .panel-body {border-bottom: 1px solid #d6d6d6;
+
+}
 .panel-body .panel-footer {
     margin: 0 -30px -15px;
     border-bottom: 1px solid #d6d6d6;

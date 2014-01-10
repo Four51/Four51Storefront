@@ -39,6 +39,8 @@
 @media (max-width: 767px) {
     textarea, select {
         -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
     }
 
     textarea, select {
@@ -51,6 +53,15 @@
         -webkit-appearance: none;
         -webkit-box-shadow: 1px 1px 1px #fff;
         -webkit-border-radius: 0.5em;
+
+        -moz-appearance: none;
+        -moz-appearance: 1px 1px 1px #fff;
+        -moz-appearance: 0.5em;
+
+        appearance: none;
+        appearance: 1px 1px 1px #fff;
+        appearance: 0.5em;
+
     }
     .btn-group {width: 100%;}
     .btn-group .btn {width: 100%;padding: 15px;margin: 2px;}
