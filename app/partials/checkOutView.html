@@ -147,7 +147,7 @@
                                     </div>
                                 </div>
                                 <div ng-show="user.ShipMethod != null && shippers">
-                                    <label ng-class="{required: !shipToMultipleAddresses && user.ShipMethod != null}" ng-show="currentOrder.LineItems[0].ShipperName">Shipping Method</label>
+                                    <label ng-class="{required: !shipToMultipleAddresses && user.ShipMethod != null}" ng-show="currentOrder.LineItems[0].ShipperName || !shipToMultipleAddresses && user.ShipMethod != null">Shipping Method</label>
                                     <select class="form-control" ng-change="updateShipper()"
                                             ng-model="currentOrder.LineItems[0].ShipperName"
                                             ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
@@ -186,7 +186,7 @@
                                     <i class="fa fa-map-marker"></i>
                                 </div>
                                 <div class="col-xs-12 col-sm-4">
-                                    <label ng-class="{required: !shipToMultipleAddresses && user.ShipMethod != null}" ng-show="currentOrder.LineItems[0].ShipperName">Shipping Method</label>
+                                    <label ng-class="{required: shipToMultipleAddresses && user.ShipMethod != null}" ng-show="currentOrder.LineItems[0].ShipperName || shipToMultipleAddresses && user.ShipMethod != null">Shipping Method</label>
                                     <select class="form-control" ng-change="updateShipper(item)"
                                             ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
                                             ng-options="shipper.Name as shipper.Name for shipper in shippers | noliverates"
