@@ -19,11 +19,9 @@
                     <div ng-show="!currentOrder.Coupon">
                         <div class="form-group view-form-icon">
                             <div class="input-group">
-                                <div>
                                     <label ng-show="currentOrder.CouponCode">Promotion code</label>
                                     <input class="form-control" type="text" ng-model="currentOrder.CouponCode" placeholder="Promotion Code"></input>
                                     <i class="fa fa-question-circle"></i>
-                                </div>
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-info" ng-click="applyCoupon()">Apply</button>
                                 </span>
