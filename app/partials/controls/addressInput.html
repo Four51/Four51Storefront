@@ -43,12 +43,12 @@
                     <input name="city" class="form-control" type="text" ng-model="address.City" placeholder="City" required />
                     <i class="fa fa-map-marker"></i>
                 </div>
-                <div>
+                <div ng-show="!hasStates()">
                     <label ng-class="{required: !hasStates}">State</label>
                     <input ng-show="!hasStates()" class="form-control" type="text" ng-model="address.State" placeholder="State" ng-required="!hasStates()" />
                     <i class="fa fa-map-marker"></i>
                 </div>
-                <div>
+                <div ng-show="hasStates()">
                     <label ng-class="{required: hasStates}">State</label>
                     <select ng-show="hasStates()" class="form-control" ng-options="state.value as state.label for state in states | filter:country" ng-model="address.State" placeholder="State" ng-required="hasStates()">
                         <option class="view-select-placeholder" value="" selected>State</option>

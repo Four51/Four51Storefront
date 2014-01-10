@@ -95,6 +95,15 @@ textarea {
     line-height: 150%;
 }
 
+h3 i:first-of-type {
+    float: left;
+}
+
+h3 i{
+    float: right;
+}
+
+
 .showSideNav {
     display: none;
 }
@@ -180,17 +189,7 @@ textarea {
 }
 
 
-.shortproduct-view:hover .shortproduct-name, .shortproduct-view .shortproduct-toggle, .shortproduct-view.howdy:hover .shortproduct-toggle {
-    display: none;
-}
 
-.shortproduct-view:hover .shortproduct-toggle, .shortproduct-view.howdy:hover .shortproduct-name {
-    display: block;
-}
-
-.shortproduct-toggle:hover {
-    color:red;
-}
 
 
 .shortproduct-arrow {
@@ -234,6 +233,7 @@ textarea {
     font-size:1.5em;
 }
 
+.popover {display: none;}
 .shortproduct-view .caption { cursor: pointer; padding: 0 20px;}
 
 .shortproduct-info a.btn {
@@ -424,6 +424,9 @@ div.category-view-subcat ul li ul {
 
 .nav-cat-search ul li.text-nav {
     padding: 15px 5px;
+    font-size: 1em;
+    font-weight: bold;
+
 }
 
 .header .text-nav {
@@ -768,10 +771,25 @@ li.selected {
     -moz-animation-fill-mode: both;
     -o-animation-fill-mode: both;
     animation-fill-mode: both;
-    -webkit-animation-name: fadeIn;
-    -moz-animation-name: fadeIn;
-    -o-animation-name: fadeIn;
-    animation-name: fadeIn;
+    -webkit-animation-name: fadeInUp;
+    -moz-animation-name: fadeInUp;
+    -o-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+}
+
+.check-out-view .panel-body.ng-hide-remove {
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeInDown;
+    -moz-animation-name: fadeInDown;
+    -o-animation-name: fadeInDown;
+    animation-name: fadeInDown;
 }
 
 .btn, .container {
@@ -789,9 +807,10 @@ li.selected {
     z-index: 999999;
     padding: 10px 0;
     background-color:#fff;
-    opacity: .85;
+    opacity: .75;
 
 }
+
 
 .app-loading-indicator {
     display: inline-block;
@@ -1113,12 +1132,10 @@ li.cart span.badge {
     border: 1px solid rgba(86, 61, 124, 0.2);
 }
 
-/*
 .check-out-view-multiple-shipping .row {
-    padding:5px 0;
+    border-top: 1px solid #d6d6d6;
+    padding: 10px 0;
 }
-
-*/
 
 .cart-view-summary p span {
     float: left;
@@ -1145,12 +1162,23 @@ li.cart span.badge {
 .check-out-approvals {
     margin:0 -15px;
 }
+
+.check-out-view .panel-default .panel-body {border-bottom: 1px solid #d6d6d6;
+
+}
 .panel-body .panel-footer {
     margin: 0 -30px -15px;
     border-bottom: 1px solid #d6d6d6;
 }
 
-
+.header .fa-caret-down {
+    position: absolute;
+    bottom: -20px;
+    right: 35%;
+    font-size: 32px;
+    color:#359FD5;
+    z-index: 5;
+}
 
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */

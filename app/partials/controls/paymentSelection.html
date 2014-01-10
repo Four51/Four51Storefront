@@ -1,24 +1,27 @@
-<div class="animated fadeInDown">
-    <label>Payment Method</label>
-    <span class="btn-group btn-group-sm">
-    <button class="btn btn-default" ng-show="user.Permissions.contains('PayByPO')" ng-click="currentOrder.PaymentMethod = 'PurchaseOrder'">
-        <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'PurchaseOrder' }"></i>
-        Purchase Order
-    </button>
-    <button class="btn btn-default" ng-show="user.Permissions.contains('SubmitForApproval') && currentOrder.Approvals" ng-click="currentOrder.PaymentMethod = 'Undetermined'">
-        <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'Undetermined' }"></i>
-        Approval Order
-    </button>
-    <button ng-if="user.Permissions.contains('PayByBudgetAccount') && (SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 0" class="btn btn-default" ng-click="setBudgetAccount((SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length)">
-        <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'BudgetAccount' }"></i>
-        Spending Account {{showSpendingAccount}}
-    </button>
-    <button ng-if="user.Company.MerchantAccount && user.AvailableCreditCards.length > 0 && user.Permissions.contains('PayByCreditCard')" class="btn btn-default" ng-click="currentOrder.PaymentMethod = 'CreditCard'">
-        <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'CreditCard' }"></i>
-        Credit Card
-    </button>
+<div>
+    <span class="btn-group">
+        <button class="btn btn-default" ng-show="user.Permissions.contains('PayByPO')" ng-click="currentOrder.PaymentMethod = 'PurchaseOrder'">
+            <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'PurchaseOrder' }"></i>
+            Purchase Order
+        </button>
+        <button class="btn btn-default" ng-show="user.Permissions.contains('SubmitForApproval') && currentOrder.Approvals" ng-click="currentOrder.PaymentMethod = 'Undetermined'">
+            <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'Undetermined' }"></i>
+            Approval Order
+        </button>
+        <button ng-if="user.Permissions.contains('PayByBudgetAccount') && (SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 0" class="btn btn-default" ng-click="setBudgetAccount((SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length)">
+            <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'BudgetAccount' }"></i>
+            Spending Account {{showSpendingAccount}}
+        </button>
+        <button ng-if="user.Company.MerchantAccount && user.AvailableCreditCards.length > 0 && user.Permissions.contains('PayByCreditCard')" class="btn btn-default" ng-click="currentOrder.PaymentMethod = 'CreditCard'">
+            <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'CreditCard' }"></i>
+            Credit Card
+        </button>
+            <button class="btn btn-info" type="button"
+                    ng-hide="(addressform || (!addressform && (addresses | filter:{IsBilling:true}).length == 0) || !user.Permissions.contains('CreateBillToAddress'))"
+                    ng-click="addressform = true" tabindex="-1">
+                New Address
+            </button>
     </span>
-
     <div ng-if="user.Permissions.contains('PayByBudgetAccount')" ng-show="currentOrder.PaymentMethod == 'BudgetAccount'">
         <div ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length == 1" class="alert alert-success">{{selectedBudgetAccount.Label + ' - Balance: ' + (selectedBudgetAccount.Balance | currency)}}</div>
         <div class="row" style="margin-top:15px;">
@@ -34,11 +37,13 @@
         </div>
         <hr/>
     </div>
-    <div ng-if="user.Permissions.contains('PayByCreditCard')" ng-show="currentOrder.PaymentMethod == 'CreditCard'">
-        <div class="row" style="padding:15px 0 8px 0;">
+    <div class="view-form-icon" ng-if="user.Permissions.contains('PayByCreditCard')" ng-show="currentOrder.PaymentMethod == 'CreditCard'">
+        <div class="row">
             <div class="col-xs-4">
-                <label for="credit-card-type">Type</label>
-                <select id="credit-card-type" class="form-control" ng-model="currentOrder.CreditCard.Type" ng-options="creditCard.Type as creditCard.DisplayName for creditCard in user.AvailableCreditCards"></select>
+                <label  ng-show="currentOrder.CreditCard.Type">Type</label>
+                <select id="credit-card-type" class="form-control" ng-model="currentOrder.CreditCard.Type" ng-options="creditCard.Type as creditCard.DisplayName for creditCard in user.AvailableCreditCards">
+
+                </select>
             </div>
             <div ng-if="user.Permissions.contains('CardholderName')" class="col-xs-8">
                 <label for="cardholder-name" ng-show="currentOrder.CreditCard.CardholderName">Cardholder Name</label>
