@@ -77,7 +77,7 @@
                         <i class="fa">#</i>
                     </div>
                 </div>
-                <div>
+                <div ng-if="user.Permissions.contains('Comments')">
                     <label ng-show="currentOrder.Comments">Comments:</label>
                     <textarea class="form-control" rows="5" cols="100" ng-model="currentOrder.Comments" placeholder="Comments..." />
                     <i class="fa fa-edit"></i>
