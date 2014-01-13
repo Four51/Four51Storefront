@@ -16,7 +16,7 @@
             <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'CreditCard' }"></i>
             Credit Card
         </button>
-            <button class="btn btn-info" type="button"
+            <button class="btn btn-info pull-right" type="button"
                     ng-hide="(addressform || (!addressform && (addresses | filter:{IsBilling:true}).length == 0) || !user.Permissions.contains('CreateBillToAddress'))"
                     ng-click="addressform = true" tabindex="-1">
                 New Address
