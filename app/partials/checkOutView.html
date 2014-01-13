@@ -64,7 +64,7 @@
                 <i ng-class="{'fa fa-caret-down': checkOutSection == 'order', 'fa fa-caret-up': checkOutSection == 'shipping' || checkOutSection == 'billing' }"></i>
             </h3>
         </div>
-        <form name="cart_order">
+        <form name="cart_order" novalidate="">
             <div ng-show="checkOutSection == 'order'" class="panel-body check-out-view-order view-form-icon">
                 <div ng-if="user.Permissions.contains('EditPOID')" ng-invalid>
                     <div class="input-group check-out-view-input-group-id">
@@ -111,7 +111,7 @@
                 </div>
 
                 <div ng-show="!addressform">
-                    <form name="cart_shipping">
+                    <form name="cart_shipping" novalidate="">
                         <span class="btn-group" ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1 && user.ShipMethod != null && (addresses | filter:{IsShipping:true}).length > 1">
                             <button class="btn btn-default" ng-click="shipToMultipleAddresses = false">
                                 <i ng-class="{'fa fa-check': !shipToMultipleAddresses }"></i>
@@ -213,7 +213,7 @@
                     <addressinput address='billaddress' user='user'></addressinput>
                 </div>
                 <div ng-show="!addressform">
-                    <form name="cart_billing">
+                    <form name="cart_billing" novalidate="">
                         <paymentselector></paymentselector>
                         <div class="view-form-icon">
                             <div>
