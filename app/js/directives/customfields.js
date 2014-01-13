@@ -5,11 +5,7 @@ four51.app.directive('customtextfield', function($451) {
         },
         restrict: 'E',
         transclude: true,
-        template: '<label ng-show="customfield.Value">{{customfield.Name}}</label>' +
-            '<div class="input-group" ng-if="customfield.Lines <= 1"><span class="input-group-addon" ng-if="customfield.Prefix">{{customfield.Prefix}}</span>' +
-            '<input class="form-control" placeholder="{{customfield.Name}}" size="{{customfield.Width * .13}}" max="{{customfield.MaxLength}}" ui-mask="{{customfield.MaskedInput}}" type="text" ng-required="{{customfield.Required}}" ng-model="customfield.Value"></input>' +
-            '<span class="input-group-addon" ng-if="customfield.Suffix">{{customfield.Suffix}}</span></div>' +
-	        '<textarea class="form-control" ng-if="customfield.Lines > 1" placeholder={{customefield.Name}} cols="{{customfield.Width * .13}} rows={{customfield.Lines}}" ng-maxlength="{{customfield.MaxLength}}" ng-required="{{customfield.Required}}" ng-model="customfield.Value"></textarea>',
+        templateUrl: 'partials/controls/customTextField.html',
 	    controller: function($scope) {
 			if (!$scope.customfield.Value && $scope.customfield.DefaultValue)
 				$scope.customfield.Value = $scope.customfield.DefaultValue;
@@ -27,10 +23,7 @@ four51.app.directive('customselectionfield', function($451) {
         },
         restrict: 'E',
         transclude: true,
-        template: '<label>{{customfield.Label}}</label>' +
-            '<select class="form-control" ng-init="init()" ng-required="customfield.Required" ng-change="changed()" ng-model="item" ng-options="option.Value for option in customfield.Options" ng-if="customfield.Options">' +
-            '<option value=""></option></select>' +
-            '<input class="form-control" type="text" ng-change="otherChanged()" ng-model="other" ng-show="customfield.isOtherSelected" ng-required="customfield.Required && customfield.isOtherSelected" />',
+        templateUrl: 'partials/controls/customSelectionField.html',
         link: function(scope, element, attr) {
             scope.changed = function() {
 	            //reset values
