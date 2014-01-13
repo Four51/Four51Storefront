@@ -24,7 +24,7 @@
     </span>
     <div ng-if="user.Permissions.contains('PayByBudgetAccount')" ng-show="currentOrder.PaymentMethod == 'BudgetAccount'">
         <div ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length == 1" class="alert alert-success">{{selectedBudgetAccount.Label + ' - Balance: ' + (selectedBudgetAccount.Balance | currency)}}</div>
-        <div class="row" style="margin-top:15px;">
+        <div class="row">
             <div class="col-sm-6">
                 <select class="form-control" ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 1"
                         ng-options="account.ID as (account.Label + ' - Balance: ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{AccountType.PurchaseCredit:true}"
@@ -37,34 +37,36 @@
         </div>
         <hr/>
     </div>
-    <div class="view-form-icon" ng-if="user.Permissions.contains('PayByCreditCard')" ng-show="currentOrder.PaymentMethod == 'CreditCard'">
-        <div class="row">
-            <div class="col-xs-4">
-                <label  ng-show="currentOrder.CreditCard.Type">Type</label>
+    <div ng-if="user.Permissions.contains('PayByCreditCard')" ng-show="currentOrder.PaymentMethod == 'CreditCard'">
+        <div class="row view-form-icon">
+            <div class="col-sm-4">
+                <label ng-show="currentOrder.CreditCard.Type">Type</label>
                 <select id="credit-card-type" class="form-control" ng-model="currentOrder.CreditCard.Type" ng-options="creditCard.Type as creditCard.DisplayName for creditCard in user.AvailableCreditCards">
-
                 </select>
+                <i class="fa fa-credit-card"></i>
             </div>
-            <div ng-if="user.Permissions.contains('CardholderName')" class="col-xs-8">
-                <label for="cardholder-name" ng-show="currentOrder.CreditCard.CardholderName">Cardholder Name</label>
+            <div ng-if="user.Permissions.contains('CardholderName')" class="col-sm-8">
+                <label ng-class="{required: currentOrder.PaymentMethod == 'CreditCard'}" for="cardholder-name" ng-show="currentOrder.CreditCard.CardholderName || currentOrder.PaymentMethod == 'CreditCard'">Cardholder Name</label>
                 <input id="cardholder-name" class="form-control" ng-model="currentOrder.CreditCard.CardholderName" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" placeholder="Cardholder Name" />
+                <i class="fa fa-user"></i>
             </div>
         </div>
-        <div class="row" style="padding:7px 0;">
-            <div class="col-xs-9 col-sm-8">
-                <label for="account-number" ng-show="currentOrder.CreditCard.AccountNumber">Account Number</label>
+        <div class="row view-form-icon">
+            <div class="col-sm-7">
+                <label ng-class="{required: currentOrder.PaymentMethod == 'CreditCard'}" for="account-number" ng-show="currentOrder.CreditCard.AccountNumber | currentOrder.PaymentMethod == 'CreditCard'">Account Number</label>
                 <input id="account-number" class="form-control" ng-model="currentOrder.CreditCard.AccountNumber" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" autocomplete="false" placeholder="Account Number" />
+                <i class="fa">#</i>
             </div>
-            <div class="col-xs-3 col-sm-2">
-                <label for="expiration-date" ng-show="currentOrder.CreditCard.ExpirationDate">Expiration Date (mm/yy)</label>
+            <div class="col-sm-3">
+                <label ng-class="{required: currentOrder.PaymentMethod == 'CreditCard'}" for="expiration-date" ng-show="currentOrder.CreditCard.ExpirationDate || currentOrder.PaymentMethod == 'CreditCard'">Expiration Date (mm/yy)</label>
                 <input id="expiration-date" class="form-control" ng-model="currentOrder.CreditCard.ExpirationDate" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" ui-mask="99/99" placeholder="Expiration Date" />
             </div>
-            <div ng-if="currentOrder.RequireCVN" class="col-xs-4 col-sm-2 credit-card-cvn-input">
-                <label for="cvn" ng-show="currentOrder.CreditCard.CVN">CVN</label>
+            <div ng-if="currentOrder.RequireCVN" class="col-sm-2 credit-card-cvn-input">
+                <label  ng-class="{required: currentOrder.PaymentMethod == 'CreditCard'}" for="cvn" ng-show="currentOrder.CreditCard.CVN || currentOrder.PaymentMethod == 'CreditCard'">CVN</label>
                 <input id="cvn" class="form-control" ng-model="currentOrder.CreditCard.CVN" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" placeholder="CVN" maxlength="4" />
             </div>
         </div>
-        <div ng-if="user.Permissions.contains('AllowSaveCreditCard')" style="padding:8px 0 0 0;">
+        <div ng-if="user.Permissions.contains('AllowSaveCreditCard')">
             <label class="checkbox-label"><input ng-model="currentOrder.CreditCard.Save"  type="checkbox" /> Save my credit card information</label>
         </div>
         <hr/>

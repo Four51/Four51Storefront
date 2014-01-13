@@ -41,14 +41,22 @@
                                             ngTouch
     Responsive breakpoints      -       app media queries that work alongside Twitter Bootstrap to provide more bulletproof design styles
                                         - /breakpoint
-    //TODO needs updating Form icons                  -       Form input field icons use the font-awesome resource.
-                                        - Add the class "view-form-icon" to the input
-                                        - Add the font-awesome <i> tag anywhere in the form field parent container with the class" view-form-icon-fa"
-                                            <div>
-                                                <label>label</label>
-                                                <input class="form-control view-form-icon" placeholder="placeholder" type="text" />
-                                                <i class="fa fa-calendar view-form-icon-fa"></i>
+    Form icons                  -       Form input field icons use the font-awesome resource
+                                        use class="required" for required fields
+                                        use ng-show="model.name" for styling
+                                        use ng-class="{required: isModelRequired}" for variable required fields
+                                        - Add the class "view-form-icon" to the parent block container
+                                        - Add a block container around the form field and label
+                                        - Add the font-awesome <i> tag with your custom icon class anywhere in the form field block container
+                                            <div class="col-sm-6 view-form-icon">
+                                                <div>
+                                                    <label ng-show="address.Street1">Label</label>
+                                                    <input class="form-control" type="text" ng-model="address.Street1" placeholder="Address Name" />
+                                                    <i class="fa fa-map-marker"></i>
+                                                </div>
                                             </div>
+                                        - remove HTML validation popovers
+                                            http://afarkas.github.io/webshim/demos/demos/webforms/1-webforms-lang-custom-bubble.html
 
 1.  Responsive
 
