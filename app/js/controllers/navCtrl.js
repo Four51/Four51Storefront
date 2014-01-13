@@ -31,6 +31,21 @@ four51.app.controller('NavCtrl', function ($location, $route, $scope, $451, User
         return result;
     };
 
+    // extension of above isActive in path
+    $scope.isInPath = function(path) {
+        var cur_path = $location.path().replace('/', '');
+        var result = false;
+
+        if(cur_path.indexOf(path) > -1) {
+            result = true;
+        }
+        else {
+            result = false;
+        }
+        return result;
+    };
+
+
 	$scope.Clear = function() {
 		localStorage.clear();
 		$route.reload();
