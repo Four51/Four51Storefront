@@ -49,7 +49,7 @@ four51.app.factory('$451', function(AppConst) {
 		debug: AppConst.debug,
 		isAnon: AppConst.isAnon,
 		//appname: four51.app.name,
-		apiName : four51.apiName,
+		apiName : four51.apiName(),
 		api: function(path) {
             return '/api/' + four51.apiName() + "/" + path;
 		},
