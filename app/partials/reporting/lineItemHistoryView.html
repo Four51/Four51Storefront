@@ -2,7 +2,7 @@
     <figure>
         <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}" >
     </figure>
-    <p>Product ID: {{LineItem.ProductIDText}}</p>
+    <p>Product ID {{LineItem.ProductIDText}}</p>
     <p ng-bind-html='LineItem.Product.Description'></p>
     <span ng-if="!(user.Permissions.contains('HidePricing'))">
        <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product' />

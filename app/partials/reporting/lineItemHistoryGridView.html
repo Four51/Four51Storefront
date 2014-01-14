@@ -31,7 +31,7 @@
         </div>
         <div class="col-xs-3 col-sm-2" ng-show="order.Status == 'Open'">{{item.TotalShipped}}</div>
         <address class="col-xs-3 col-sm-2" ng-show="item.ShipAddress">
-            <strong> Ship to:</strong><br>
+            <strong> Ship to</strong><br>
             {{item.ShipAddress.Street1}}<br>
             {{item.ShipAddress.Street2}}<br ng-show="item.ShipAddress.Street2">
             {{item.ShipAddress.City}}, {{item.ShipAddress.State}} {{item.ShipAddress.Zip}}

@@ -56,8 +56,11 @@
                                                 </div>
                                             </div>
                                         - remove HTML validation popovers
-                                            http://afarkas.github.io/webshim/demos/demos/webforms/1-webforms-lang-custom-bubble.html
-
+                                        use novalidate=""
+                                        http://afarkas.github.io/webshim/demos/demos/webforms/1-webforms-lang-custom-bubble.html
+    Classes                     -       No Id's unless they are 451 specific and primarily for bug tracking
+                                -       Classes are view specific starting with the partial view name ie: class="cart-view-[custom]"
+                                -       App wide classes will always start with the word "view" ie: class="view-[custom]"
 1.  Responsive
 
 1.0     Bootstrap 3
