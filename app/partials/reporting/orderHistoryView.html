@@ -9,9 +9,9 @@
             </ul>
             <hr />
         </nav>
-        <div class="col-collapse col-md-3 col-md-offset-1 col-md-push-8">
+        <div class="col-md-3 col-md-offset-1 col-md-push-8">
             <div class="row">
-                <div class="panel panel-primary order-history-view-header col-collapse col-sm-5 col-md-12">
+                <div class="panel panel-primary order-history-view-header col-collapse">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             Order Details
@@ -19,17 +19,7 @@
                     </div>
                     <div class="panel-body text-left">
                         <orderhistorydetails></orderhistorydetails>
-                    </div>
-                </div>
-
-                <div class="panel panel-default order-history-view-footer col-collapse col-sm-5 col-sm-offset-2 col-md-12 col-md-offset-0">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Order Summary
-                        </h3>
-                    </div>
-                    <div ng-if="!(user.Permissions.contains('HidePricing'))" class="panel-body text-left">
-                        <orderhistorysummary></orderhistorysummary>
+                        <orderhistorysummary ng-if="!(user.Permissions.contains('HidePricing'))"></orderhistorysummary>
                     </div>
                     <div class="panel-footer" ng-if="order.FromUserID == user.ID">
                         <div class="order-history-view-repeat">

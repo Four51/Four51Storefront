@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="col-sm-6 col-xs-12">
                                     <div class="row">
-                                        <div class="col-xs-12 col-sm-6" style="position:relative;">
+                                        <div class="col-xs-12 col-sm-6">
                                             <div ng-show="item.qtyError" style="padding:2px 5px; margin:0; position:absolute; height:100%;" class="alert alert-danger text-center">
                                                 <small>{{item.qtyError}}</small>
                                             </div>
@@ -74,7 +74,7 @@
                                         </div>
                                     </div>
                                     <div class="row view-form-icon"  ng-if="(user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')) || user.Permissions.contains('CostCenterPerLine')">
-                                      <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
+                                        <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
                                             <label ng-class="{required: user.Permissions.contains('DateNeededRequired')}" ng-show="item.DateNeeded || user.Permissions.contains('DateNeededRequired')">Date</label>
                                             <input class="form-control" placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
                                             <button style="margin: 0; position: absolute; border-radius: 0 4px 4px ; border: none;top: 0; bottom: 0;right: 15px; z-index: 2;" type="button" title="copy to all" class="btn btn-info cart-view-btn-copy" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" >
@@ -83,7 +83,6 @@
                                             <i class="fa fa-calendar"></i>
                                         </div>
                                         <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
-
                                             <label class="required">Cost Center</label>
                                             <select class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
                                             <input class="form-control view-form-icon" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />

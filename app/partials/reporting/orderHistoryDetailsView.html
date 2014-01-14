@@ -6,7 +6,7 @@
     <p ng-show="order.Comments"><span class="text-info">Comments</span>{{order.Comments}}</p>
     <p ng-show="orderCostCenter"><span class="text-info">Cost Center</span>{{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</p>
     <p><span class="text-info">Payment Method</span>{{order.PaymentMethodText}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong></p>
-    <p ng-show="order.CostCenter"><span class="text-info">Cost Center</span>{{order.CostCenter}}</p>
+    <p ng-show="order.CostCenter"><span class="text-info">Order Cost Center</span>{{order.CostCenter}}</p>
     <hr />
     <address ng-show="order.ShipAddress">
         <p class="text-left">

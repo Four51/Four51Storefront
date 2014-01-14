@@ -1,11 +1,25 @@
 <div class="container line-item-history-view">
-    <figure>
-        <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}" >
-    </figure>
-    <p>Product ID {{LineItem.ProductIDText}}</p>
-    <p ng-bind-html='LineItem.Product.Description'></p>
-    <span ng-if="!(user.Permissions.contains('HidePricing'))">
-       <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product' />
-    </span>
-    <staticspecstable specGroups="StaticSpecGroups"></staticspecstable>
+    <div class="col-md-5 col-collapse">
+        <figure style="background-color:#fff;">
+            <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}" >
+        </figure>
+    </div>
+
+
+    <div class="col-md-6 col-md-offset-1 col-collapse">
+        <h2>Product ID {{LineItem.ProductIDText}}</h2>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title panel-primary">Description</h3>
+            </div>
+            <div class="panel-body">
+                <p ng-bind-html='LineItem.Product.Description'></p>
+                <span ng-if="!(user.Permissions.contains('HidePricing'))">
+                   <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product' />
+                </span>
+            </div>
+        </div>
+        <staticspecstable specGroups="StaticSpecGroups"></staticspecstable>
+    </div>
+
 </div>
