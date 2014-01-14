@@ -925,6 +925,12 @@ li.selected {
     font-size: 11px;
 }
 
+.view-footer li div {
+    padding: 23px 0;
+    height: 100%;
+
+}
+
 .view-footer li:last-child .btn  {
     text-transform: uppercase;
     font-size: 14px;
@@ -1180,6 +1186,12 @@ li.cart span.badge {
     z-index: 5;
 }
 
+.cart-view-line-items-product a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
@@ -1309,6 +1321,10 @@ li.cart span.badge {
     clear: both;
     overflow: hidden;
     border-radius: 0;
+}
+
+.btn-group {
+    width: 100%;
 }
 
 /*--- ROB STUFF ---*/
