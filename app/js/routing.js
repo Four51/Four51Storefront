@@ -1,8 +1,9 @@
 'use strict'
 
 /* routing */
-four51.app.config(['$routeProvider', function($routeProvider) {
-		var concatProductView = function(routeParams){
+four51.app.config(function($routeProvider, $locationProvider) {
+	$locationProvider.html5Mode(true);
+	var concatProductView = function(routeParams){
 			return 'partials/productviews/'+ routeParams.view +'.html';
 		}
 		var concatSpecFormView = function(routeParams){
@@ -36,4 +37,4 @@ four51.app.config(['$routeProvider', function($routeProvider) {
             when('/security', { templateUrl: 'partials/security.html', controller: 'SecurityCtrl' }).
             when('/conditions', { templateUrl: 'partials/conditions.html', controller: 'ConditionsCtrl' }).
 			otherwise({redirectTo: '/catalog'});
-	}]);
+	});
