@@ -48,7 +48,7 @@
                                         - Add the class "view-form-icon" to the parent block container
                                         - Add a block container around the form field and label
                                         - Add the font-awesome <i> tag with your custom icon class anywhere in the form field block container
-                                            <div class="col-sm-6 view-form-icon">
+                                            <div class="view-form-icon">
                                                 <div>
                                                     <label ng-show="address.Street1">Label</label>
                                                     <input class="form-control" type="text" ng-model="address.Street1" placeholder="Address Name" />
@@ -56,8 +56,11 @@
                                                 </div>
                                             </div>
                                         - remove HTML validation popovers
-                                            http://afarkas.github.io/webshim/demos/demos/webforms/1-webforms-lang-custom-bubble.html
-
+                                        use novalidate=""
+                                        http://afarkas.github.io/webshim/demos/demos/webforms/1-webforms-lang-custom-bubble.html
+    Classes                     -       No Id's unless they are 451 specific and primarily for bug tracking
+                                -       Classes are view specific starting with the partial view name ie: class="cart-view-[custom]"
+                                -       App wide classes will always start with the word "view" ie: class="view-[custom]"
 1.  Responsive
 
 1.0     Bootstrap 3

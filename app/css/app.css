@@ -39,11 +39,6 @@ div {
     position: relative;
 }
 
-.view-form-field  {}
-/*select, input, .uneditable-input {
-    max-width: 100%;
-}*/
-
 /* iOS placeholder needs help to disappear on focus */
 :focus::-webkit-input-placeholder{color:transparent;}
 
@@ -103,6 +98,29 @@ h3 i{
     float: right;
 }
 
+input[type="file"]{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    cursor:pointer;
+    opacity:0;
+}
+.file-upload-required:after{
+    content:" Required";
+
+}
+.product-view-default-variant-box{
+    max-height:220px;
+    min-height:220px;
+    overflow-y:scroll;
+}
+
+.static-spec-panel-body {
+    padding-left:0;
+    padding-right:0;
+}
 
 .showSideNav {
     display: none;
@@ -158,18 +176,12 @@ h3 i{
     margin: 10px;
 }
 
-.shortproduct-view {
-    /*min-height: 275px;*/
-    /*position: relative;*/
-}
-
 .cat-image {
     min-height: 200px;
 }
 
 
 .cat-image img {
-    margin: 0 auto;
     max-width: 100%;
     max-height: 200px;
 }
@@ -864,15 +876,16 @@ li.selected {
     animation-name: fadeOut;
 }
 
+.order-history-summary-view {
+    padding: 15px;
+    border: 1px solid #d6d6d6;
+}
+
 .view-select-placeholder {display: none;}
 
 .check-out-view .address-input-view-shipping, .check-out-view .address-input-view-billing {
     visibility: hidden;
 }
-
-    /* ----------------------------------------------------------------------------------------------- */
-/* Cart | Checkout */
-/* ----------------------------------------------------------------------------------------------- */
 
 .view-thumbnail {
     max-height: 95px;
@@ -995,12 +1008,12 @@ li.print {
     left: 20px;
 }
 
-.cart-view-summary .panel-footer, .product-view-default .panel-footer {
-    background-color:transparent;
+.order-history-view-line-items-repeater {
+    border-bottom: 1px solid #d6d6d6;
+    padding-top: 10px;
 }
-
-.cart-view-summary, .order-history-view-footer {
-    padding: 0;
+.view-summary .panel-footer, .product-view-default .panel-footer {
+    background-color:transparent;
 }
 
 .cart-view .row input[type="text"] {
@@ -1067,7 +1080,7 @@ li.cart span.badge {
     margin-right: 25px;
 }
 
-.product-view-default img, .specform-default img {
+.product-view-default img, .specform-default img, .line-item-history-view img {
     margin: 15px auto;
     max-height: 300px;
     max-width: 100%;
@@ -1143,7 +1156,7 @@ li.cart span.badge {
     padding: 10px 0;
 }
 
-.cart-view-summary p span {
+.view-summary p span {
     float: left;
 }
 
@@ -1325,35 +1338,4 @@ li.cart span.badge {
 
 .btn-group {
     width: 100%;
-}
-
-/*--- ROB STUFF ---*/
-.shortproduct-name{
-    font-size:1.5em;
-}
-input[type="file"]{
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    cursor:pointer;
-    opacity:0;
-}
-.file-upload-required:after{
-    content:" Required";
-
-}
-.product-view-default-variant-box{
-    max-height:220px;
-    min-height:220px;
-    overflow-y:scroll;
-}
-
-.static-spec-panel-body {
-    padding-left:0;
-    padding-right:0;
-}
-.margin-bottom-15{
-    margin-bottom:15px;
 }
