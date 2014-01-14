@@ -48,7 +48,7 @@
                                         - Add the class "view-form-icon" to the parent block container
                                         - Add a block container around the form field and label
                                         - Add the font-awesome <i> tag with your custom icon class anywhere in the form field block container
-                                            <div class="col-sm-6 view-form-icon">
+                                            <div class="view-form-icon">
                                                 <div>
                                                     <label ng-show="address.Street1">Label</label>
                                                     <input class="form-control" type="text" ng-model="address.Street1" placeholder="Address Name" />
