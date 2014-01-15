@@ -88,7 +88,7 @@
                     <input class="form-control" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="currentOrder.CostCenter" type='text' required placeholder="Cost Center" />
                     <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{currentOrder.CostCenter}}</span>
                 </div>
-                <ul ng-if="currentOrder.OrderFields">
+                <ul ng-show="currentOrder.OrderFields">
                     <hr />
                     <li ng-repeat="field in currentOrder.OrderFields">
                         <customtextfield customfield="field" ng-if="field.ControlType == 'Text'" ng-required="field.IsRequired" />
