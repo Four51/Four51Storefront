@@ -63,6 +63,10 @@
                 </div>
             </div>
         </div>
+        <div class="view-footer navbar-fixed-bottom">
+            <loadingindicator ng-show="displayLoadingIndicator" />
+            <div class="view-action-message alert-success" ng-show="saveFavorite">Your order has been saved as a Favorite.</div>
+        </div>
     </div>
     <orderprint class="visible-print" />
 </section>

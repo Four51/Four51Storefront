@@ -6,6 +6,9 @@ Template: Four51 Single Page App - Ken Buras (http://www.kenburas.com/)
 ** If there is question on something the answer is most likely found in readMe.txt
 /* ----------------------------------------------------------------------------------------------- */
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
 
 html {
     height: 100%;
@@ -107,6 +110,17 @@ input[type="file"]{
     cursor:pointer;
     opacity:0;
 }
+
+.view-table-row {
+    border-bottom: 1px solid #d6d6d6;
+}
+
+.view-table-row span {
+    display: inline;
+    float: left;
+    width: 50%;
+}
+
 .file-upload-required:after{
     content:" Required";
 
@@ -135,6 +149,10 @@ input[type="file"]{
     padding: 2px 2% 0;
     width: 66%;
     height: 57px;
+}
+
+.search-view .view-form-icon  i.fa-search {
+        top: 22px;
 }
 
 .search-view-cancel {
