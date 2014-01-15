@@ -112,12 +112,12 @@
 
                 <div ng-show="!addressform">
                     <form name="cart_shipping" novalidate="">
-                        <span class="btn-group" ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1 && user.ShipMethod != null && (addresses | filter:{IsShipping:true}).length > 1">
-                            <button class="btn btn-default" ng-click="shipToMultipleAddresses = false">
+                        <span class="btn-group">
+                            <button ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1" class="btn btn-default" ng-click="shipToMultipleAddresses = false">
                                 <i ng-class="{'fa fa-check': !shipToMultipleAddresses }"></i>
                                 Single Address
                             </button>
-                            <button class="btn btn-default" type="button" ng-click="shipToMultipleAddresses = true">
+                            <button ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1" class="btn btn-default" type="button" ng-click="shipToMultipleAddresses = true">
                                 <i ng-class="{'fa fa-check': shipToMultipleAddresses }"></i>
                                 Multiple Addresses
                             </button>
