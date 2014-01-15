@@ -30,8 +30,6 @@
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
     .cart-view-btn-cancel  {float: left !important;}
     .cart-view-btn-save {float: right !important;}
-
-
 }
 
 
@@ -63,6 +61,7 @@
         appearance: 0.5em;
 
     }
+    .view-order-last-count {width: 100%;]}
     .btn-group {width: 100%;}
     .btn-group .btn {width: 100%;padding: 15px;margin: 2px;}
     .view-price-total {font-size: 26px !important;}

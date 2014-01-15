@@ -119,22 +119,28 @@
             <div class="row view-table-row" ng-repeat="order in orders">
                 <div class="col-xs-12 col-sm-2">
                     <span class="visible-xs text-info">ID</span>
-                    <a ng-href="#/order/{{order.ID}}">{{order.ExternalID}}</a></div>
+                    <a ng-href="#/order/{{order.ID}}">{{order.ExternalID}}</a>
+                </div>
                 <div class="col-xs-12 col-sm-2">
                     <span class="visible-xs text-info">Type</span>
-                    {{order.Type}}</div>
+                    {{order.Type}}
+                </div>
                 <div class="col-xs-12 col-sm-2">
                      <span class="visible-xs text-info">Status</span>
-                    {{order.StatusText}}</div>
+                    {{order.StatusText}}
+                </div>
                 <div class="col-xs-12 col-sm-2">
                     <span class="visible-xs text-info">Submitted By</span>
-                    {{order.FromUserFirstName + ' ' + order.FromUserLastName}}</div>
+                    {{order.FromUserFirstName + ' ' + order.FromUserLastName}}
+                </div>
                 <div class="col-xs-12 col-sm-2">
                     <span class="visible-xs text-info">Submitted Date</span>
-                    {{order.DateSubmitted || order.DateCreated | date:'short'}}</div>
+                    {{order.DateSubmitted || order.DateCreated | date:'short'}}
+                </div>
                 <div class="col-xs-12 col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">
                     <span class="visible-xs text-info">Total</span>
-                    {{order.Total | currency:"$"}}</div>
+                    {{order.Total | currency:"$"}}
+                </div>
             </div>
         </div>
     </div>
