@@ -113,6 +113,11 @@ input[type="file"]{
 
 .view-table-row {
     border-bottom: 1px solid #d6d6d6;
+    padding: 5px 0;
+}
+
+.view-table-row.panel-body {
+    padding: 10px;
 }
 
 .view-table-row span {
