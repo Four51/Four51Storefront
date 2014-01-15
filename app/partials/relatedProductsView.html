@@ -1,4 +1,10 @@
-related products
-<ul>
-	<li ng-repeat="p in relatedProducts"><a class="btn btn-default" style="width: 150px; margin: 0 auto;" href="#/product/default/{{p.InteropID}}">{{p.Name}}</a></li>
-</ul>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Related Products</h3>
+    </div>
+    <div class="panel-body">
+        <ul>
+            <li ng-repeat="p in relatedProducts"><a class="btn btn-default" style="width: 150px; margin: 0 auto;" href="#/product/default/{{p.InteropID}}">{{p.Name}}</a></li>
+        </ul>
+    </div>
+</div>

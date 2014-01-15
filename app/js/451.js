@@ -44,17 +44,14 @@ four51.app.factory('$451', function(AppConst) {
         else
             return array.indexOf(value) > -1;
     }
-	var _apiName = function(){
-		return four51.app.ApiAppName ? four51.app.ApiAppName : window.location.pathname.split('/')[1];
-	}
 
 	return {
 		debug: AppConst.debug,
 		isAnon: AppConst.isAnon,
-		appname: four51.app.name,
-		apiName : _apiName(),
+		//appname: four51.app.name,
+		apiName : four51.apiName(),
 		api: function(path) {
-            return '/api/' + _apiName() + "/" + path;
+            return '/api/' + four51.apiName() + "/" + path;
 		},
 		filter: function(input, options, op) {
 			return json_filter(input, options, op);
@@ -64,3 +61,6 @@ four51.app.factory('$451', function(AppConst) {
         }
 	};
 });
+four51.apiName = function(){
+	return four51.app.ApiAppName ? four51.app.ApiAppName : window.location.pathname.split('/')[1];
+};

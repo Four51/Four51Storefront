@@ -7,12 +7,11 @@
                 <li class="nav-header text-nav">{{order.Type}} Order<span ng-show="order.ExternalID"> ID: </span>{{order.ExternalID}}</li>
                 <li class="nav-header print pull-right" ng-click="onPrint()"><i class="fa fa-print" rel="tooltip" title="Print"></i></li>
             </ul>
-
             <hr />
         </nav>
-        <div class="col-collapse col-md-3 col-md-offset-1 col-md-push-8">
+        <div class="col-md-3 col-md-offset-1 col-md-push-8">
             <div class="row">
-                <div class="panel panel-default order-history-view-header col-collapse col-sm-5 col-md-12">
+                <div class="panel panel-primary order-history-view-header col-collapse">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             Order Details
@@ -20,28 +19,18 @@
                     </div>
                     <div class="panel-body text-left">
                         <orderhistorydetails></orderhistorydetails>
-                    </div>
-                </div>
-
-                <div class="panel panel-default order-history-view-footer col-collapse col-sm-5 col-sm-offset-2 col-md-12 col-md-offset-0">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Order Summary
-                        </h3>
-                    </div>
-                    <div ng-if="!(user.Permissions.contains('HidePricing'))" class="panel-body text-left">
-                        <orderhistorysummary></orderhistorysummary>
+                        <orderhistorysummary ng-if="!(user.Permissions.contains('HidePricing'))"></orderhistorysummary>
                     </div>
                     <div class="panel-footer" ng-if="order.FromUserID == user.ID">
                         <div class="order-history-view-repeat">
-                            <button ng-disabled="currentOrder" class="btn btn-primary" ng-click="repeatOrder()">Repeat Order</button>
+                            <button ng-disabled="currentOrder" class="btn btn-primary pull-right" ng-click="repeatOrder()">Repeat Order</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-collapse col-md-8 col-md-pull-4 order-history-view-grid">
-            <div class="panel panel-primary order-history-view-line-items">
+            <div class="panel panel-default order-history-view-line-items">
                 <div class="panel-heading">
                     <h3 class="panel-title panel-primary">
                         {{order.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in this order
@@ -50,14 +39,16 @@
                 <div class="panel-body">
                     <lineitemhistorygrid></lineitemhistorygrid>
                 </div>
-                <div class="panel-footer" ng-if="order.FromUserID == user.ID" style="position: relative;">
+                <div class="panel-footer" ng-if="order.FromUserID == user.ID">
                     <loadingindicator ng-show="displayLoadingIndicator" />
-                    <div class="input-group">
-                        <input type="text" ng-model="order.FavoriteName" placeholder="Favorite Name" class="form-control"/>
-                        <span class="input-group-btn">
-                    <!--- TODO the name does not appear to be saving ? --->
-                            <button type="button" ng-click="saveFavorite()" class="btn btn-default">Save as Favorite</button>
-                        </span>
+                   <div class="form-group view-form-icon">
+                        <div class="input-group">
+                            <input type="text" ng-model="order.FavoriteName" placeholder="Favorite Name" class="form-control"/>
+                            <i class="fa fa-star"></i>
+                            <span class="input-group-btn">
+                                <button type="button" ng-click="saveFavorite()" class="btn btn-info">Save as Favorite</button>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -71,6 +62,10 @@
                     <approvalrulelist order="order" />
                 </div>
             </div>
+        </div>
+        <div class="view-footer navbar-fixed-bottom">
+            <loadingindicator ng-show="displayLoadingIndicator" />
+            <div class="view-action-message alert-success" ng-show="saveFavorite">Your order has been saved as a Favorite.</div>
         </div>
     </div>
     <orderprint class="visible-print" />

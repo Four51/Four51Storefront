@@ -12,10 +12,9 @@
     </div>
     <div class="col-md-6 col-sm-12" style="position:relative;">
         <div class="text-left" style="padding:15px;">
-            <figcaption class="shortproduct-name">{{LineItem.Product.Name}}</figcaption>
-            <p>
-                <span ng-bind-html="trustedDescription(LineItem.Product)" ng-show="LineItem.Product.Description" />
-            </p>
+            <h3>{{LineItem.Product.Name}}</h3>
+            <p ng-bind-html="trustedDescription(LineItem.Product)" ng-show="LineItem.Product.Description" />
+
         </div>
         <section class="hidden-xs hidden-sm">
             <div class="row" style="border: 1px solid #d6d6d6;padding: 10px;margin: 15px;">
