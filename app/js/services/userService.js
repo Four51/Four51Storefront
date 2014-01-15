@@ -1,4 +1,4 @@
-four51.app.factory('User', function($q, $rootScope, $resource, $451, Security) {
+four51.app.factory('User', function($q, $rootScope, $resource, $451, Security, Error) {
     var _cacheName = '451Cache.User.' + $451.apiName;
 	function _then(fn, data) {
         if (angular.isFunction(fn))
@@ -33,12 +33,17 @@ four51.app.factory('User', function($q, $rootScope, $resource, $451, Security) {
             });
     }
 
-    var _save = function(user, success) {
-        $resource($451.api('user')).save(user).$promise.then(function(u) {
-            _extend(u);
-            _then(success,u);
-            store.set(_cacheName, u);
-        });
+    var _save = function(user, success, error) {
+        $resource($451.api('user')).save(user).$promise.then(
+	        function(u) {
+                _extend(u);
+                _then(success,u);
+                store.set(_cacheName, u);
+            },
+	        function(ex) {
+		        error(Error.format(ex));
+	        }
+        );
     }
 
     var _login = function(credentials,success) {

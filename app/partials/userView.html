@@ -65,6 +65,27 @@
                         <i class="fa fa-lock"></i>
                     </div>
                     <span class="alert-error" ng-show="user_form.confirm_password.$error.validator">Passwords do not match!</span><br />
+                    <span class="alert-warning" ng-show="securityWarning">
+                        <ul>
+                            <li>Your password does not meet the requirements set for length or complexity. It must be changed to meet the minimum requirements before continuing.</li>
+                            <li>There are three distinct password security levels. The rules are defined as:</li>
+                            <ul>
+                                <li>Low: No restrictions on passwords.</li>
+                                <li>Medium: A minimum of 6 characters required.</li>
+                                <li>High:</li>
+                                <ul>
+                                    <li>Minimum of 8 alphanumeric characters.></li>
+                                    <li>Two or more of the following kinds of characters</li>
+                                    <ol>
+                                        <li>Alphabetic (e.g., a-z, A-Z)</li>
+                                        <li>Numeric (i.e. 0-9)</li>
+                                        <li>Punctuation and other characters (e.g., !@#$%^&*()_+|~-=\`{}[]:";'<>?,./)</li>
+                                    </ol>
+                                    <li>** After 6 failed logon attempts, the user will be locked out for 30 minutes.</li>
+                                </ul>
+                            </ul>
+                        </ul>
+                    </span>
                 </div>
             </div>
             <div class="panel-body" >
@@ -78,7 +99,7 @@
             </div>
             <div class="panel-footer text-center">
                 <input class="btn btn-primary pull-right" type="submit" ng-disabled="user_form.$invalid" id="451_btn_user" value="{{user.Type == 'TempCustomer' ? 'Create Acccount' : 'Save'}}" />
-                <span class="alert-success view-action-message" ng-show="saveSuccess">Your changes have been saved</span>
+                <span class="alert-success view-action-message" ng-show="actionMessage">{{actionMessage}}</span>
             </div>
         </div>
     </form>
