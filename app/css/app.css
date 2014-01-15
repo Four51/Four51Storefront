@@ -127,8 +127,7 @@ input[type="file"]{
 }
 
 .view-order-last-count {
-    padding: 10px;
-    margin-top: 10px;
+    padding: 0 10px 10px;
     border: 1px solid #d6d6d6;
     border-radius: 4px;
 }

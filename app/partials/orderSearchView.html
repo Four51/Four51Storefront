@@ -78,11 +78,11 @@
                     <label ng-show="criteria.DateRangeTo">To</label>
                     <input type="text" class="form-control" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="criteria.DateRangeTo" placeholder="To" />
                 </div>
-                <div class="form-group pull-right view-order-last-count">
-                    <p class="pull-left text-info">
-                        <i class="fa fa-info-circle" style="position: relative;top: 0; margin-right: 5px;color:#3A87AD;"></i>
-                        <strong> Only</strong> display last
-                    </p>
+                <div class="form-group pull-right view-form-icon view-order-last-count">
+                    <div class="pull-left text-info">
+                        <p><i class="fa fa-info-circle" style="position: relative;top: 0; left: 0;color:#3A87AD;"></i>
+                        <strong> Only</strong> display last</p>
+                    </div>
                     <div class="pull-right">
                         <label ng-show="criteria.LastN"># of Orders</label>
                         <input class="form-control" type="text" ng-model="criteria.LastN" placeholder="# of Orders" />
