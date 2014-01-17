@@ -29,7 +29,7 @@
                             <span ng-show="!togglePS"><i class="fa fa-arrow-circle-up"></i> Hide</span>
                             <span ng-show="togglePS"><i class="fa fa-arrow-circle-down"></i> View</span>
                             Price Schedule</div>
-                        <priceScheduleTable ng-if="!(user.Permissions.contains('HidePricing')" ng-hide="(LineItem.PriceSchedule.PriceBreaks.length == 1 || LineItem.PriceSchedule.PriceBreaks.length > 5) && togglePS" ps='LineItem.PriceSchedule' p='LineItem.Product'/>
+                        <priceScheduleTable ng-if="!(user.Permissions.contains('HidePricing'))" ng-hide="(LineItem.PriceSchedule.PriceBreaks.length == 1 || LineItem.PriceSchedule.PriceBreaks.length > 5) && togglePS" ps='LineItem.PriceSchedule' p='LineItem.Product'/>
                     </div>
                 </div>
             </div>
