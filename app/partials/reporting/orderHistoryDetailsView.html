@@ -1,7 +1,7 @@
 <div class="view-summary text-right">
-    <p ng-show="order.DateSubmitted"><span class="text-info">Date Submitted</span>{{order.DateSubmitted | date}}</p>
+    <p ng-show="order.DateSubmitted"><span class="text-info">Date Submitted</span>{{order.DateSubmitted | date:'short'}}</p>
     <p><span class="text-info">Status</span>{{order.StatusText}}</p>
-    <p ng-show="order.DateCompleted"><span class="text-info">Date Completed</span>{{order.DateCompleted | date}}</p>
+    <p ng-show="order.DateCompleted"><span class="text-info">Date Completed</span>{{order.DateCompleted | date:'short'}}</p>
     <p><span class="text-info">Created By</span>{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</p>
     <p ng-show="order.Comments"><span class="text-info">Comments</span>{{order.Comments}}</p>
     <p ng-show="orderCostCenter"><span class="text-info">Cost Center</span>{{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</p>

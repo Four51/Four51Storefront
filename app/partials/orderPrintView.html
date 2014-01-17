@@ -8,7 +8,7 @@
         </div>
         <div>
             <h5>
-                Created on {{order.DateCreated | date}}
+                Created on {{order.DateCreated | date:'short'}}
             </h5>
         </div>
     </div>
@@ -21,9 +21,9 @@
                     </h3>
                 </div>
                 <div>
-                    <p ng-show="order.DateSubmitted">Date Submitted: <span style="float:right;">{{order.DateSubmitted | date}}</span></p>
+                    <p ng-show="order.DateSubmitted">Date Submitted: <span style="float:right;">{{order.DateSubmitted | date:'short'}}</span></p>
                     <p>Status: <span style="float:right;">{{order.StatusText}}</span></p>
-                    <p ng-show="order.DateCompleted">Date Completed: <span style="float:right;">{{order.DateCompleted | date}}</span></p>
+                    <p ng-show="order.DateCompleted">Date Completed: <span style="float:right;">{{order.DateCompleted | date:'short'}}</span></p>
                     <p>Created By: <span style="float:right;">{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</span></p>
                     <p ng-show="order.Comments">Comments: <span style="float:right;">{{order.Comments}}</span></p>
                     <p ng-show="orderCostCenter">Cost Center: <span style="float:right;">{{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</span></p>
@@ -130,7 +130,7 @@
                             <td ng-hide="rule.ApprovedByUserName">
                                 <span>{{rule.ApprovingPartyName}}</span>
                             <td>
-                                <strong>{{rule.Status}}</strong><span ng-show="rule.ApprovedByUserName"> by </span>{{rule.ApprovedByUserName}}<span ng-show="rule.ApprovedByUserName"> on {{rule.TimeStamp | date}}</span>
+                                <strong>{{rule.Status}}</strong><span ng-show="rule.ApprovedByUserName"> by </span>{{rule.ApprovedByUserName}}<span ng-show="rule.ApprovedByUserName"> on {{rule.TimeStamp | date:'short'}}</span>
                             </td>
                         </tr>
                         <tr>
