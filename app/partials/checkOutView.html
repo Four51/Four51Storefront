@@ -121,7 +121,7 @@
                                 <i ng-class="{'fa fa-check': shipToMultipleAddresses }"></i>
                                 Multiple Addresses
                             </button>
-                             <button class="btn btn-info" type="button"
+                             <button class="btn btn-info pull-right" type="button"
                                      ng-hide="(addressform || (!addressform && (addresses | filter:{IsShipping:true}).length == 0) || !user.Permissions.contains('CreateShipToAddress'))" ng-click="addressform = true" tabindex="-1">
                                 New Address
                              </button>
