@@ -233,9 +233,9 @@ input[type="file"]{
     padding-top: 75px;
 }
 
-
-
-
+.cart-view-btn-copy {
+    margin-top: 10px;
+}
 
 .shortproduct-arrow {
     position: absolute;
@@ -256,12 +256,9 @@ input[type="file"]{
     padding: 15px;
 }
 
-.product-navigation li.nav-header {
-    position: static;
-}
-
 .product-navigation li.nav-header h5 {
-    font-size: 13px;
+    margin-bottom: 0;
+    font-weight: bold;
 }
 
 .shortproduct-info {
@@ -278,8 +275,10 @@ input[type="file"]{
     font-size:1.5em;
 }
 
-.popover {display: none;}
-.shortproduct-view .caption { cursor: pointer; padding: 0 20px;}
+.shortproduct-view .caption {
+    cursor: pointer;
+    padding: 0 20px;
+}
 
 .shortproduct-info a.btn {
     position: absolute;
@@ -384,13 +383,12 @@ div.category-view-subcat ul li ul {
 
 .product-navigation li.nav-header {
     float: left;
-    font-size: .9em;
     text-align: center;
     padding: 0;
     text-transform: capitalize;
     text-shadow: none;
     font-weight: normal;
-    min-height: 275px;
+    min-height: 300px;
 }
 
 
@@ -471,7 +469,6 @@ div.category-view-subcat ul li ul {
     padding: 15px 5px;
     font-size: 1em;
     font-weight: bold;
-
 }
 
 .header .text-nav {
@@ -491,13 +488,10 @@ div.category-view-subcat ul li ul {
     cursor: pointer;
 }
 
-
 .admin-navigation .nav li > ul li {
     font-size: 14px;
     text-align: left;
 }
-
-
 
 .ui-show {
     opacity: 1;
@@ -519,6 +513,11 @@ li.selected {
 .user-view .list-group label {
     display: block;
     margin: 0;
+}
+
+.category-description {
+    margin-top: 0;
+    line-height: normal;
 }
 
 /* ----------------------------------------------------------------------------------------------- */
@@ -1038,7 +1037,7 @@ li.print {
 }
 
 .view-form-icon > div {
-    margin-top: 35px;
+    margin-top: 25px;
     position: relative;
 }
 
@@ -1217,6 +1216,7 @@ li.cart span.badge {
 .check-out-view-input-group-id input[type="checkbox"] {
     margin: 0;
     padding: 0;
+
 }
 
 .check-out-view-input-group-id {
