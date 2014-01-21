@@ -26,17 +26,20 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	$scope.shipToMultipleAddresses = shipToMultipleAddresses();
 
 	$scope.updateShipper = function(li) {
+		console.log('update shipper');
 		$scope.shippingUpdatingIndicator = true;
 		$scope.shippingFetchIndicator = true;
-		if (!$scope.shipToMultipleAddresses) {
+		if (!li) {
 			angular.forEach($scope.shippers, function(s) {
 				if (s.Name == $scope.currentOrder.LineItems[0].ShipperName)
 					$scope.currentOrder.Shipper = s;
 			});
+
 			angular.forEach($scope.currentOrder.LineItems, function(item) {
-				item.ShipperName = $scope.currentOrder.Shipper.Name;
-				item.ShipperID = $scope.currentOrder.Shipper.ID;
+				item.ShipperName = $scope.currentOrder.Shipper ? $scope.currentOrder.Shipper.Name : null;
+				item.ShipperID = $scope.currentOrder.Shipper ? $scope.currentOrder.Shipper.ID : null;
 			});
+
 			saveChanges(function() {
 				$scope.shippingUpdatingIndicator = false;
 				$scope.shippingFetchIndicator = false;
@@ -62,7 +65,6 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		$scope.currentOrder.LineItems[0].ShipperName = null;
 		$scope.currentOrder.LineItems[0].Shipper = null;
 		$scope.currentOrder.LineItems[0].ShipperID = null;
-		console.log('resetting');
 		angular.forEach($scope.currentOrder.LineItems, function(li) {
 			li.ShipAddressID = $scope.currentOrder.ShipAddressID;
 		});
@@ -86,6 +88,8 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 			});
 		});
 	};
+
+	$scope.$on('event:orderUpdate', $scope.updateShipper());
 
     $scope.$watch('currentOrder.ShipAddressID', function(newValue) {
         if (newValue) {
