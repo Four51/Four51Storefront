@@ -25,7 +25,7 @@
                         <h4 ng-show="LineItem.Product.ExternalID" class="text-info" style="margin:0;">ID: {{LineItem.Product.ExternalID}}</h4><br/>
                         <p ng-bind-html="trustedDescription(LineItem.Product)" />
                         <p ng-show="LineItem.Variant.Description" ng-bind-html="trustedDescription(LineItem.Variant)" />
-                        <div class="btn btn-default btn-block" ng-show="LineItem.PriceSchedule.PriceBreaks.length > 1 && LineItem.PriceSchedule.PriceBreaks.length > 5" ng-init="togglePS = true" ng-click="togglePS = !togglePS">
+                        <div class="btn btn-default btn-block" ng-if="!(user.Permissions.contains('HidePricing'))" ng-show="LineItem.PriceSchedule.PriceBreaks.length > 5" ng-init="togglePS = true" ng-click="togglePS = !togglePS">
                             <span ng-show="!togglePS"><i class="fa fa-arrow-circle-up"></i> Hide</span>
                             <span ng-show="togglePS"><i class="fa fa-arrow-circle-down"></i> View</span>
                             Price Schedule</div>
