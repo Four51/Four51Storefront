@@ -56,6 +56,13 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 
 	$scope.setShipAddressAtOrderLevel = function() {
 		$scope.shippingFetchIndicator = true;
+		$scope.currentOrder.ShipperName = null;
+		$scope.currentOrder.Shipper = null;
+		$scope.currentOrder.ShipperID = null;
+		$scope.currentOrder.LineItems[0].ShipperName = null;
+		$scope.currentOrder.LineItems[0].Shipper = null;
+		$scope.currentOrder.LineItems[0].ShipperID = null;
+		console.log('resetting');
 		angular.forEach($scope.currentOrder.LineItems, function(li) {
 			li.ShipAddressID = $scope.currentOrder.ShipAddressID;
 		});
@@ -67,7 +74,10 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		});
 	};
 
-	$scope.setShipAddressAtLineItem = function() {
+	$scope.setShipAddressAtLineItem = function(item) {
+		item.ShipperName = null;
+		item.Shipper = null;
+		item.ShipperID = null;
 		$scope.currentOrder.ShipAddressID = $scope.currentOrder.LineItems[0].ShipAddressID;
 		$scope.currentOrder.Shipper = $scope.currentOrder.LineItems[0].Shipper;
 		saveChanges(function(order) {
