@@ -26,7 +26,6 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	$scope.shipToMultipleAddresses = shipToMultipleAddresses();
 
 	$scope.updateShipper = function(li) {
-		console.log('update shipper');
 		$scope.shippingUpdatingIndicator = true;
 		$scope.shippingFetchIndicator = true;
 		if (!li) {
