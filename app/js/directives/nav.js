@@ -20,15 +20,13 @@ four51.app.directive('accountnavigation', function() {
 four51.app.directive('alertShow', function($animate) {
     return {
         scope: {
-            'alertShow': '=',
-            'afterShow': '&',
-            'afterHide': '&'
+            'alertShow': '='
         },
         link: function(scope, element) {
             scope.$watch('alertShow', function(show) {
                 if (show) {
-                    $animate.removeClass(element, 'ng-hide', scope.afterShow);
-                    $animate.addClass(element, 'ng-hide', scope.afterHide);
+                    $animate.removeClass(element, 'ng-hide');
+                    $animate.addClass(element, 'ng-hide');
                 }
 
             });

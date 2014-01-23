@@ -252,6 +252,9 @@
         </div>
 
         <div class="view-footer navbar-fixed-bottom">
+            <div class="view-action-message alert-success" alert-show="showSave">
+                <p>{{actionMessage}}</p>
+            </div>
             <div class="error_list">
                 <div class="alert-warning" ng-show="couponError">{{couponError}}</div>
                 <div class="alert-warning" ng-show="cart_order.orderid.$invalid">Enter an order id</div>
@@ -264,11 +267,6 @@
                     You're site is mis-configured. You do not have permission to create a shipping address nor do you have any addresses assigned to you. Please contact your support representative.
                 </div>
             </div>
-            <div ng-show="currentOrder">
-                <div class="view-action-message alert-success" alert-show="actionMessage" after-hide="afterHide()" after-show="afterShow()">
-                    <p>{{actionMessage}}</p>
-                </div>
-            </div>
             <ul>
                 <li style="width: 25%;">
                     <button class="btn btn-danger" ng-click="cancelOrder()">
@@ -277,7 +275,8 @@
                 </li>
                 <li style="width: 25%;">
                     <button class="btn btn-primary"  ng-click="saveChanges()">
-                       Save Order
+                        <loadingindicator ng-show="displayLoadingIndicator" />
+                        Save Order
                     </button>
                 </li>
                 <li>
