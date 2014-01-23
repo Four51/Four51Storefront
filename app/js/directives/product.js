@@ -68,8 +68,8 @@ four51.app.directive('productnav', function($451, ProductDisplayService){
 		restrict: 'E',
 		templateUrl: 'partials/controls/productNav.html',
 		controller: function($451, $scope){
-			if($scope.product)
-				ProductDisplayService.setProductViewName($scope.product);
+			//if($scope.product)
+			//	ProductDisplayService.setProductViewName($scope.product);
 		}
 	};
 	return obj;

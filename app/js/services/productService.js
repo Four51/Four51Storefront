@@ -7,6 +7,7 @@ four51.app.factory('Product', function($resource, $451, Security){
 	}
 
 	function _extend(product) {
+		product.ViewName = product.ViewName || 'default';
 		angular.forEach(product.Specs, function(spec) {
 			if (spec.ControlType == 'File' && spec.File && spec.File.Url.indexOf('auth') == -1)
 				spec.File.Url += "&auth=" + Security.auth();
@@ -45,7 +46,8 @@ four51.app.factory('Product', function($resource, $451, Security){
 	    //products ? _then(success, products) :
 	    var products = $resource($451.api('Products')).query(criteria).$promise.then(function(products) {
 		        //store.set(cacheID, products);
-	            _then(success, products);
+	            angular.forEach(products, _extend);
+				_then(success, products);
 	        });
     }
 	

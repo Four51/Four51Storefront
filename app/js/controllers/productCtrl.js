@@ -251,9 +251,9 @@ four51.app.factory('ProductDisplayService', function($451, $sce, Variant, Produc
 		//one view//ng-show="LineItem.Variant || LineItem.Product.Variants.length == 0"
 	}
 
-	function productViewName(p){
-		p.ViewName = staticSpecSPAConfig(p, 'ViewName') || 'default';
-	}
+	//function productViewName(p){
+	//	p.ViewName = staticSpecSPAConfig(p, 'ViewName') || 'default';
+	//}
 	function staticSpecSPAConfig(product, specName){
 		if(!product.StaticSpecGroups)
 			return null;
@@ -287,11 +287,11 @@ four51.app.factory('ProductDisplayService', function($451, $sce, Variant, Produc
 		},
 		setProductViewScope: function(scope){
 			productViewScope(scope);
-			productViewName(scope.LineItem.Product);
+			//productViewName(scope.LineItem.Product);
 		},
-		setProductViewName: function(p){
-			productViewName(p);
-		},
+		//setProductViewName: function(p){
+		//	productViewName(p);
+		//},
 		calculateLineTotal: function(lineItem){
 			return calcTotal(lineItem);
 		},
