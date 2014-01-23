@@ -22,6 +22,8 @@ four51.app.controller('LoginCtrl', function LoginCtrl($scope, $sce, $route, User
 					$scope.EmailNotFoundException = false;
 					$scope.showEmailHelp = false;
 					$scope.credentials.Email = null;
+					$scope.credentials.Username = null;
+					$scope.credentials.Password = null;
 				}
 
 			},
@@ -31,6 +33,7 @@ four51.app.controller('LoginCtrl', function LoginCtrl($scope, $sce, $route, User
 					$scope.actionMessage = $sce.trustAsHtml(ex.Message);
 				if (ex.Code.is('EmailNotFoundException') && $scope.credentials.Email)
 					$scope.actionMessage = $sce.trustAsHtml(ex.Detail);
+				$scope.credentials.Username = null;
 				$scope.credentials.Password = null;
 				$scope.credentials.CurrentPassword = null;
 				$scope.credentials.NewPassword = null;
