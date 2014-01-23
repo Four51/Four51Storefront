@@ -21,7 +21,7 @@ four51.app.controller('UserEditCtrl', function ($scope, $location, User) {
 			},
 			function(ex) {
 				$scope.displayLoadingIndicator = false;
-				$scope.actionMessage = ex.Detail;
+				$scope.actionMessage = ex.Message;
 				if (ex.Code.is('PasswordSecurityException'))
 					$scope.securityWarning = true;
 			}
