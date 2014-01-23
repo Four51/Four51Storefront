@@ -252,20 +252,19 @@
         </div>
 
         <div class="view-footer navbar-fixed-bottom">
-            <div class="error_list">
-                <div class="view-action-message alert-warning" ng-show="couponError">{{couponError}}</div>
-                <div class="view-action-message alert-warning" ng-show="cart_order.orderid.$invalid">Enter an order id</div>
-                <div class="view-action-message alert-warning" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</div>
-                <div class="view-action-message alert-warning" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</div>
-                <div class="view-action-message alert-warning" ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
-                    You're site is mis-configured. You do not have permission to create a billing address nor do you have any addresses assigned to you. Please contact your support representative.
-                </div>
-                <div class="view-action-message alert-warning" ng-if="!user.Permissions.contains('CreateShipToAddress') && (addresses | filter:{IsShipping:true}).length == 0">
-                    You're site is mis-configured. You do not have permission to create a shipping address nor do you have any addresses assigned to you. Please contact your support representative.
-                </div>
-            </div>
             <div ng-show="currentOrder">
                 <div class="view-action-message alert-success" ng-show="actionMessage">{{actionMessage}}</div>
+            </div>
+            <div class="error_list">
+                <ol class="alert-warning">
+                    <li class="view-action-message"><i class="fa fa-exclamation-circle"></i></li>
+                    <li class="view-action-message" ng-show="couponError">{{couponError}}</li>
+                    <li class="view-action-message" ng-show="cart_order.orderid.$invalid">Enter an order id</li>
+                    <li class="view-action-message" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</li>
+                    <li class="view-action-message" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</li>
+                    <li class="view-action-message" ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0"> You're site is mis-configured. You do not have permission to create a billing address nor do you have any addresses assigned to you. Please contact your support representative.</li>
+                    <li class="view-action-message" ng-if="!user.Permissions.contains('CreateShipToAddress') && (addresses | filter:{IsShipping:true}).length == 0">You're site is mis-configured. You do not have permission to create a shipping address nor do you have any addresses assigned to you. Please contact your support representative.</li>
+                </ol>
             </div>
             <ul>
                 <li style="width: 25%;">

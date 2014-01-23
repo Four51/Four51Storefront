@@ -985,7 +985,7 @@ li.selected {
 
 
 
-.view-footer  ul {
+.view-footer  ul, .view-footer  ol {
     list-style-type:none;
     padding: 0;
     margin: 0;
