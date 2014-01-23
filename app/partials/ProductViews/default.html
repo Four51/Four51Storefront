@@ -92,7 +92,7 @@
                             </div>
 							<div>
 								<button class="btn btn-success" type="button" id="451_btn_orderadd" ng-click="addToOrder()">
-									{{addToOrderText}} <span ng-if="!(user.Permissions.contains('HidePricing'))">{{(LineItem.LineTotal || variantLineItemsOrderTotal) | currency}}</span>
+									{{addToOrderText}} <span ng-if="!(user.Permissions.contains('HidePricing')) && (LineItem.LineTotal || variantLineItemsOrderTotal) > 0">{{(LineItem.LineTotal || variantLineItemsOrderTotal) | currency}}</span>
 								</button>
 
 							</div>

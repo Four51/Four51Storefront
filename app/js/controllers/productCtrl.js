@@ -72,9 +72,6 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 			return;
 		}
 
-
-
-		$scope.addToOrderIndicator = true;
 		if(!$scope.currentOrder){
 			$scope.currentOrder = {};
 			$scope.currentOrder.LineItems = [];
@@ -86,15 +83,15 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 					$scope.currentOrder.LineItems.push(item);
 					haveVariantQty = true;
 				}
-				if(!haveVariantQty){
-					alert("Please select a quantity");
-					return;
-				}
 			});
+			if(!haveVariantQty){
+				alert("Please select a quantity");
+				return;
+			}
 		}else{
 			$scope.currentOrder.LineItems.push($scope.LineItem);
 		}
-
+		$scope.addToOrderIndicator = true;
 		Order.save($scope.currentOrder,
 			function(o){
 				$scope.user.CurrentOrderID = o.ID;
