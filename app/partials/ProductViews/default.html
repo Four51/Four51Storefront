@@ -5,6 +5,10 @@
         <div class="col-md-5 col-collapse" ng-show="LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl || LineItem.Variant.PreviewUrl">
             <figure style="background-color:#fff;">
                 <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}">
+				<span ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant">
+					<button class="btn btn-xs btn-warning" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit">Edit</button>
+					<button class="btn btn-xs btn-warning" redirect="{{LineItem.Variant.ProofUrl}}">View PDF</button>
+            	</span>
             </figure>
         </div>
 
@@ -47,8 +51,12 @@
                         <loadingindicator ng-show="addToOrderIndicator" title="Adding product to cart"/>
                         <div ng-if="LineItem.Product.Variants.length > 0 && !LineItem.Variant">
                             <div class="row">
-                                <div class="col-sm-6"><h4>Choose a variant:</h4></div>
-                                <div class="col-sm-6"><input ng-model="queryVariants" type="text" class="form-control" placeholder="Filter variants"/></div>
+                                <div class="col-sm-6"><h4>Choose a variant:</h4>
+									<div ng-show="LineItem.Product.Type == 'VariableText'">
+										<button type="button" ng-show="!LineItem.Variant" class="btn btn-xs btn-danger" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/new/edit" tabindex="-1">Create New</button>
+									</div>
+								</div>
+                                <div class="col-sm-6" ng-if="LineItem.Product.Variants.length > 20"><input ng-model="queryVariants" type="text" class="form-control" placeholder="Filter variants"/></div>
                             </div>
                             <div class="product-view-default-variant-box">
                                 <div class="list-group" ng-repeat="v in LineItem.Product.Variants | filter:queryVariants">
