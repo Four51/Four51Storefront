@@ -111,6 +111,11 @@ input[type="file"]{
     opacity:0;
 }
 
+.view-fix-fixed .navbar-fixed-top,
+.view-fix-fixed .navbar-fixed-bottom {
+    display: none;
+}
+
 .view-table-row {
     border-bottom: 1px solid #d6d6d6;
     padding: 5px 0;
@@ -800,7 +805,7 @@ li.selected {
     from {-o-transform: rotate(0deg);}
     to {-o-transform: rotate(359deg);}
 }
-@keyframes rrockstep {
+@keyframes rockstep {
     from {transform: rotate(0deg);}
     to {transform: rotate(359deg);}
 }
@@ -819,6 +824,22 @@ li.selected {
     -moz-animation-name: fadeInUp;
     -o-animation-name: fadeInUp;
     animation-name: fadeInUp;
+}
+
+.navbar-fixed-top {
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    animation-delay: 1s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeInDown;
+    -moz-animation-name: fadeInDown;
+    -o-animation-name: fadeInDown;
+    animation-name: fadeInDown;
 }
 
 .check-out-view .panel-body.ng-hide-remove {
