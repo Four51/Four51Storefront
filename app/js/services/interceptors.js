@@ -29,6 +29,7 @@ four51.app.config(function($httpProvider) {
                     return $q.reject(response);
 				}
 
+				// login failed for:
 				if (response.status == 403) {
 					$rootScope.$broadcast('event:auth-loginFailed', response.data.Message);
                     return $q.reject(response);

@@ -52,7 +52,6 @@ four51.app.controller('NavCtrl', function ($location, $route, $scope, $451, User
 	}
 
 	$scope.$on('event:orderUpdate', function(event, order) {
-		var o = $scope.currentOrder || order;
-		$scope.cartCount = o ? o.Status != 'Unsubmitted' ? null : o.LineItems.length : null;
+		$scope.cartCount = order ? order.Status != 'Unsubmitted' ? null : order.LineItems.length : null;
 	});
 });
