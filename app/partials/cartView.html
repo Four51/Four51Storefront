@@ -124,8 +124,8 @@
                 </div>
             </div>
             <div class="view-footer navbar-fixed-bottom">
-                <div class="view-action-message alert-success" ng-show="actionMessage">
-                    {{actionMessage}}
+                <div class="view-action-message alert-success" alert-show="actionMessage" after-hide="afterHide()" after-show="afterShow()">
+                    <p>{{actionMessage}}</p>
                 </div>
                 <ul>
                     <li style="width: 25%;">
