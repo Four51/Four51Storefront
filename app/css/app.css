@@ -964,7 +964,9 @@ li.selected {
     -moz-animation-duration: 1s;
     -o-animation-duration: 1;
     animation-duration: 1s;
-    animation-delay: 5s;
+    animation-delay: 3s;
+    -webkit-animation-delay:2s;
+    -moz-animation-delay: 3s;
     -webkit-animation-fill-mode: both;
     -moz-animation-fill-mode: both;
     -o-animation-fill-mode: both;
