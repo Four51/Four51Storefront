@@ -10,11 +10,11 @@
         <div class="panel-body text-right">
             <loadingindicator ng-show="couponLoadingIndicator" title="Please wait while we verify and apply your promotion code" />
             <loadingindicator ng-show="couponRemoveIndicator" title="Please wait while we remove your promotion code" />
-            <div ng-if="!(user.Permissions.contains('HidePricing'))">
+            <div>
                 <p><span class="text-info">Items:</span> {{currentOrder.LineItems.length}}</p>
-                <p><span class="text-info">Subtotal:</span> {{currentOrder.Subtotal | currency}}</p>
-                <p><span class="text-info">Shipping Costs:</span> {{currentOrder.ShippingCost | currency}}</p>
-                <p><span class="text-info">Tax:</span> {{currentOrder.TaxCost || 0 | currency}}</p>
+                <p ng-if="!(user.Permissions.contains('HidePricing'))"><span class="text-info">Subtotal:</span> {{currentOrder.Subtotal | currency}}</p>
+                <p ng-if="!(user.Permissions.contains('HidePricing'))"><span class="text-info">Shipping Costs:</span> {{currentOrder.ShippingCost | currency}}</p>
+                <p ng-if="!(user.Permissions.contains('HidePricing'))"><span class="text-info">Tax:</span> {{currentOrder.TaxCost || 0 | currency}}</p>
                 <div ng-show="user.Permissions.contains('ViewPromotions')">
                     <div ng-show="!currentOrder.Coupon">
                         <div class="form-group view-form-icon">
@@ -38,8 +38,8 @@
                     </div>
                 </div>
                 <hr/>
-                <p><span class="text-info">Total</span> {{currentOrder.Total | currency}}</p>
-                <p class="text-info" ng-if="user.Company.TaxMethod != 'NoTax'">Shipping, handling and tax may be added to this subtotal.</p>
+                <p ng-if="!(user.Permissions.contains('HidePricing'))"><span class="text-info">Total</span> {{currentOrder.Total | currency}}</p>
+                <p class="text-info" ng-if="user.Company.TaxMethod != 'NoTax' || !(user.Permissions.contains('HidePricing'))">Shipping, handling and tax may be added to this subtotal.</p>
             </div>
         </div>
         <div class="panel-footer">
@@ -179,7 +179,8 @@
                                     <select class="form-control" name="shippingAddress"
                                             ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
                                             ng-model="item.ShipAddressID"
-                                            ng-required="shipToMultipleAddresses" >
+                                            ng-required="shipToMultipleAddresses"
+                                            ng-change="setShipAddressAtLineItem(item)">
                                     </select>
                                     <i class="fa fa-map-marker"></i>
                                 </div>
