@@ -2,11 +2,13 @@
 
 four51.app.controller('UserEditCtrl', function ($scope, $location, User) {
 	$scope.loginasuser = {};
+	$scope.actionMessage = null;
 
 	if($scope.user.Type != 'TempCustomer')
 		$scope.user.TempUsername = $scope.user.Username
 
 	$scope.save = function() {
+		$scope.actionMessage = null;
 		$scope.user.Username = $scope.user.TempUsername;
 		$scope.displayLoadingIndicator = true;
         if($scope.user.Type == 'TempCustomer')
@@ -16,7 +18,7 @@ four51.app.controller('UserEditCtrl', function ($scope, $location, User) {
 			function(u) {
 				$scope.securityWarning = false;
 				$scope.displayLoadingIndicator = false;
-				$scope.saveSuccess = 'Your changes have been saved';
+				$scope.actionMessage = 'Your changes have been saved';
 				$scope.user.TempUsername = u.Username;
 			},
 			function(ex) {
