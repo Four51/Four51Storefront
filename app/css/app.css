@@ -1028,19 +1028,6 @@ li.print {
     cursor: pointer;
 }
 
-.quantity input {
-    height: 100%;
-    outline: 0 none;
-    padding: .5em;
-    text-align: center;
-    width: 100%;
-    margin: 0;
-    border-radius: 0;
-    font-size: 24px !important;
-    color:#468847;
-    box-shadow: none;
-}
-
 .cart-view-line-items, .check-out-view-types {
     padding: 0;
 }
@@ -1090,6 +1077,20 @@ li.print {
     display: inline;
     font-size: 11px;
 }
+
+.panel-body .quantity input, .cart-view .row .quantity input {
+    height: 100%;
+    outline: 0 none;
+    padding: .5em;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    font-size: 24px;
+    color:#468847;
+    box-shadow: none;
+}
+
 
 li.cart a.cart {
     padding: 8px 20px;
