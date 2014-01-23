@@ -61,10 +61,10 @@
                     </div>
                     <div>
                         <label ng-show="user.ConfirmPassword">Confirm Password</label>
-                        <input name="confirm_password" match="'password'" class="form-control" type="password" ng-model="user.ConfirmPassword" ui-validate="'$value==user.Password'" ui-validate-watch="'user.Password'" placeholder="Confirm Password" />
+                        <input name="confirm_password" ng-match="user.Password" class="form-control" type="password" ng-model="user.ConfirmPassword" placeholder="Confirm Password" />
                         <i class="fa fa-lock"></i>
                     </div>
-                    <span class="alert-error" ng-show="user_form.confirm_password.$error.validator">Passwords do not match!</span><br />
+                    <span class="alert-error" ng-show="user_form.confirm_password.$error.match">Passwords do not match!</span><br />
                     <span class="alert-warning" ng-show="securityWarning">
                         <ul>
                             <li>Your password does not meet the requirements set for length or complexity. It must be changed to meet the minimum requirements before continuing.</li>
