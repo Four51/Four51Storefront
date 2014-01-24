@@ -74,7 +74,7 @@ four51.app.factory('Variant', function($resource, $451, Security){
 		var query = params.VariantInteropID ? params.VariantInteropID : params.SpecOptionIDs.join();
 		return '451Cache.' + $451.apiName + '.Variants.' + params.ProductInteropID + query;
 	}
-    var _get = function(params, success) {
+    var _get = function(params, success, error) {
 
 		var variant = store.get(getCacheName(params));
 		variant ? (function() { _extend(variant);	_then(success, variant); })() :
@@ -82,7 +82,9 @@ four51.app.factory('Variant', function($resource, $451, Security){
 		        _extend(variant);
 		        store.set(getCacheName(params), variant);
 	            _then(success, variant);
-	        });
+	        },function(ex) {
+				error(ex);
+			});
     }
 	var _save = function(variant, success) {
 		return $resource($451.api('variant')).save(variant).$promise.then(function(v) {
