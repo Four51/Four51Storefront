@@ -98,12 +98,12 @@
 								<label ng-class="{required: !allowAddFromVariantList}" ng-hide="allowAddFromVariantList">Order Quantity</label>
                                 <quantityfield required="true" lineitem="LineItem" class="quantity" />
                             </div>
-							<div>
-								<button class="btn btn-success" type="button" id="451_btn_orderadd" ng-click="addToOrder()">
+					        <hr />
+								<button class="btn btn-success btn-block btn-lg" type="button" id="451_btn_orderadd" ng-click="addToOrder()">
 									{{addToOrderText}} <span ng-if="!(user.Permissions.contains('HidePricing')) && (LineItem.LineTotal || variantLineItemsOrderTotal) > 0">{{(LineItem.LineTotal || variantLineItemsOrderTotal) | currency}}</span>
 								</button>
 
-							</div>
+
                         </div>
                     </div>
                 </div>
