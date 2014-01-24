@@ -47,11 +47,16 @@ four51.app.factory('User', function($q, $rootScope, $resource, $451, Security, E
         );
     }
 
-    var _login = function(credentials,success) {
+    var _login = function(credentials, success, error) {
 	    store.clear();
-        $resource($451.api('login')).get(credentials).$promise.then(function(u) {
-            _then(success,u);
-        });
+        $resource($451.api('login')).get(credentials).$promise.then(
+	        function(u) {
+                _then(success,u);
+	        },
+	        function(ex) {
+		        error(Error.format(ex));
+	        }
+        );
     }
 
     var _logout = function() {

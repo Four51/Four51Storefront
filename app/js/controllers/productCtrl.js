@@ -19,7 +19,12 @@ four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Produc
 	});
 	$scope.allowAddToOrder = true;
 	$scope.addToOrderText = "Save Line Item";
-	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
+	$scope.addToOrder = function(){
+		var err = $scope.beforeAddToOrder();
+		if(err){
+			alert(err);
+			return;
+		}
 		Order.save($scope.currentOrder, function(o){
 			$scope.currentOrder = o;
 			$location.path('/cart');
@@ -62,21 +67,33 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 		$scope.loadingIndicator = false;
 	});
 
-	$scope.addToOrder = function(quantity, productInteropID, variantInteropID){
-		$scope.addToOrderIndicator = true;
+	$scope.addToOrder = function(){
+
+		var err = $scope.beforeAddToOrder();
+		if(err){
+			alert(err);
+			return;
+		}
 		if(!$scope.currentOrder){
 			$scope.currentOrder = {};
 			$scope.currentOrder.LineItems = [];
 		}
 		if($scope.allowAddFromVariantList){
+			var haveVariantQty = false;
 			angular.forEach($scope.variantLineItems, function(item){
-				if(item.Quantity > 0)
+				if(item.Quantity > 0){
 					$scope.currentOrder.LineItems.push(item);
+					haveVariantQty = true;
+				}
 			});
+			if(!haveVariantQty){
+				alert("Please select a quantity");
+				return;
+			}
 		}else{
 			$scope.currentOrder.LineItems.push($scope.LineItem);
 		}
-
+		$scope.addToOrderIndicator = true;
 		Order.save($scope.currentOrder,
 			function(o){
 				$scope.user.CurrentOrderID = o.ID;
@@ -155,6 +172,22 @@ four51.app.factory('ProductDisplayService', function($451, $sce, Variant, Produc
 		lineItem.UnitPrice = priceBreak.Price;
 	}
 	function productViewScope(scope){
+		scope.beforeAddToOrder = function(){
+
+			if(!scope.LineItem.Variant && scope.LineItem.Product.IsVBOSS){
+				return "Please select an active product";
+			}
+
+			if(scope.addToOrderForm.$invalid){
+				var errMessage = "Please fill all required fields";
+				if(scope.LineItem.qtyError)
+					errMessage = scope.LineItem.qtyError
+
+				return errMessage
+			}
+			return null;
+		}
+
 		scope.specChanged = function(spec){
 			console.log('spec changed');
 			if(!spec){
@@ -185,6 +218,9 @@ four51.app.factory('ProductDisplayService', function($451, $sce, Variant, Produc
 						if(!data.IsDefaultVariant)
 							scope.LineItem.Variant = data;
 						newLineItemScope(scope);
+					}, function(ex){
+						scope.LineItem.Variant = null;
+						alert(ex.data.Message);
 					});
 				}
 			}
@@ -197,6 +233,7 @@ four51.app.factory('ProductDisplayService', function($451, $sce, Variant, Produc
 			var qa = product.IsVariantLevelInventory ? variant : product;
 			if(qa)
 				return qa.QuantityAvailable > 0 ? qa.QuantityAvailable : 0;
+			else return null;
 		}
 		if(scope.LineItem.Variant){
 			//scope.LineItem.Variant = variant;

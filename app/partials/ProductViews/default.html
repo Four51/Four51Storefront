@@ -5,6 +5,10 @@
         <div class="col-md-5 col-collapse" ng-show="LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl || LineItem.Variant.PreviewUrl">
             <figure style="background-color:#fff;">
                 <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}">
+				<span ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant">
+					<button class="btn btn-xs btn-warning" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit">Edit</button>
+					<button class="btn btn-xs btn-warning" redirect="{{LineItem.Variant.ProofUrl}}">View PDF</button>
+            	</span>
             </figure>
         </div>
 
@@ -47,8 +51,12 @@
                         <loadingindicator ng-show="addToOrderIndicator" title="Adding product to cart"/>
                         <div ng-if="LineItem.Product.Variants.length > 0 && !LineItem.Variant">
                             <div class="row">
-                                <div class="col-sm-6"><h4>Choose a variant:</h4></div>
-                                <div class="col-sm-6"><input ng-model="queryVariants" type="text" class="form-control" placeholder="Filter variants"/></div>
+                                <div class="col-sm-6"><h4>Choose a variant:</h4>
+									<div ng-show="LineItem.Product.Type == 'VariableText'">
+										<button type="button" ng-show="!LineItem.Variant" class="btn btn-xs btn-danger" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/new/edit" tabindex="-1">Create New</button>
+									</div>
+								</div>
+                                <div class="col-sm-6" ng-if="LineItem.Product.Variants.length > 20"><input ng-model="queryVariants" type="text" class="form-control" placeholder="Filter variants"/></div>
                             </div>
                             <div class="product-view-default-variant-box">
                                 <div class="list-group" ng-repeat="v in LineItem.Product.Variants | filter:queryVariants">
@@ -56,11 +64,11 @@
                                         <h5 class="list-group-item-heading">{{v.ExternalID}}</h5>
                                         <p class="list-group-item-text small"><small><span ng-show="v.Description" ng-bind-html="trustedDescription(v)" /></small></p>
                                         <div ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
-                                            {{v.QuantityAvailable}} in stock
-                                        </div>
+											Quantity available: {{v.QuantityAvailable}}
+										</div>
                                     </a>
                                     <div ng-if="allowAddFromVariantList" class="list-group-item" style="border-top-left-radius:0; border-top-right-radius:0;">
-                                        <h4 class="pull-left text-success" style="margin:0;">{{variantLineItems[v.InteropID].LineTotal | currency}}</h4>
+                                        <h4 ng-show="variantLineItems[v.InteropID].LineTotal > 0" class="pull-left text-success" style="margin:0;">{{variantLineItems[v.InteropID].LineTotal | currency}}</h4>
                                         <quantityfield required="false" calculated="calcVariantLineItems" lineitem="variantLineItems[v.InteropID]" class="quantity pull-right" />
                                         <div style="padding:5px 15px; margin:2px 15px;" class="alert alert-danger pull-right" ng-show="variantLineItems[v.InteropID].qtyError">{{variantLineItems[v.InteropID].qtyError}}</div>
                                         <div style="clear:both;"></div>
@@ -68,10 +76,7 @@
                                 </div>
                             </div>
                         </div>
-                        <p ng-show="LineItem.Product.DisplayInventory && (LineItem.Variant || LineItem.Product.Variants.length == 0)">
-                            <!-- nothing is accomodating the 0 level inventory and the custom message to be displayed -->
-                            {{inventoryDisplay(LineItem.Product, LineItem.Variant)}} in stock
-                        </p>
+
                         <br/>
                         <div id="451_list_vspec" ng-show="allowAddToOrder">
                             <div class="form-group" ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
@@ -81,20 +86,35 @@
                             </div>
                         </div>
                         <div class="form-group" ng-show="allowAddToOrder">
-                            <div>
-                                <label ng-class="{required: !allowAddFromVariantList}" ng-hide="allowAddFromVariantList">Order Quantity</label>
-                                <quantityfield ng-if="!allowAddFromVariantList" required="true" lineitem="LineItem" class="quantity" />
+
+							<div ng-show="LineItem.Product.DisplayInventory && (LineItem.Variant || LineItem.Product.Variants.length == 0)">
+								<!-- nothing is accomodating the 0 level inventory and the custom message to be displayed -->
+								Quantity available: {{inventoryDisplay(LineItem.Product, LineItem.Variant)}}
+							</div>
+							<div ng-show="LineItem.PriceSchedule.MinQuantity > 1">Minimum Quantity: {{LineItem.PriceSchedule.MinQuantity}}</div>
+							<div ng-show="LineItem.PriceSchedule.MaxQuantity">Maximum Quantity: {{LineItem.PriceSchedule.MaxQuantity}}</div>
+
+							<div ng-if="!allowAddFromVariantList">
+								<!--<label ng-class="{required: !allowAddFromVariantList}" ng-hide="allowAddFromVariantList">Order Quantity</label>-->
+                                <quantityfield required="true" lineitem="LineItem" class="quantity" />
                             </div>
+							<div>
+								<button class="btn btn-success" type="button" id="451_btn_orderadd" ng-click="addToOrder()">
+									{{addToOrderText}} <span ng-if="!(user.Permissions.contains('HidePricing')) && (LineItem.LineTotal || variantLineItemsOrderTotal) > 0">{{(LineItem.LineTotal || variantLineItemsOrderTotal) | currency}}</span>
+								</button>
+
+							</div>
                         </div>
                     </div>
                 </div>
 
                 <relatedproducts ng-if="LineItem.Product.RelatedProductsGroupID" relatedgroupid="LineItem.Product.RelatedProductsGroupID" />
 
+				<!--
                 <div class="view-footer navbar-fixed-bottom">
                     <loadingindicator ng-show="displayLoadingIndicator" />
 
-                    <div class="error-list" ng-show="allowAddToOrder">
+                    <div class="error-list" ng-show="false" ng-showx="allowAddToOrder">
                         <div class="view-action-message alert-warning" ng-show="LineItem.qtyError">{{LineItem.qtyError}}</div>
                         <div class="view-action-message alert-warning" ng-show="LineItem.PriceSchedule.MinQuantity > 1">Minimum Quantity: {{LineItem.PriceSchedule.MinQuantity}}</div>
                         <div class="view-action-message alert-warning" ng-show="LineItem.PriceSchedule.MaxQuantity">Maximum Quantity: {{LineItem.PriceSchedule.MaxQuantity}}</div>
@@ -117,7 +137,7 @@
                     </ul>
                 </div>
             </form>
-
+			-->
 
             <!--EDIT / VIEW VARIANT
             <span ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant">

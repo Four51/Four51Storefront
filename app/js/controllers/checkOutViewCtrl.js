@@ -183,6 +183,9 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
                 $scope.showSave = false;
 	        },
 	        function(ex) {
+		        if (ex.Code.is('ObjectExistsException')) { // unique id
+			        ex.Message = ex.Message.replace('{0}', 'Order ID (' + $scope.currentOrder.ExternalID + ')');
+		        }
 		        $scope.actionMessage = ex.Message;
 		        $scope.displayLoadingIndicator = false;
                 $scope.showSave = false;

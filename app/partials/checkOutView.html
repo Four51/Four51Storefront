@@ -68,8 +68,8 @@
             <div ng-show="checkOutSection == 'order'" class="panel-body check-out-view-order view-form-icon">
                 <div ng-if="user.Permissions.contains('EditPOID')" ng-invalid>
                     <div class="input-group check-out-view-input-group-id">
-                        <label class="required">Order Id</label>
-                        <input class="form-control" name="orderid" ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" placeholder="Order ID" required ui-mask="{{user.Company.POIDMask}}" />
+                        <label class="required">Order Id {{currentOrder.ExternalID}}</label>
+                        <input class="form-control" name="orderid" ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" placeholder="Order ID" required ui-mask="{{currentOrder.autoID ? null : user.Company.POIDMask}}" />
                         <span ng-if="user.Permissions.contains('AllowAutoGenPOID')" class="input-group-addon">
                             <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? null : 'auto'" ng-model='currentOrder.autoID' />
                             Use system-generated ID
@@ -256,15 +256,15 @@
                 <p>{{actionMessage}}</p>
             </div>
             <div class="error_list">
-                <div class="alert-warning" ng-show="couponError">{{couponError}}</div>
-                <div class="alert-warning" ng-show="cart_order.orderid.$invalid">Enter an order id</div>
-                <div class="alert-warning" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</div>
-                <div class="alert-warning" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</div>
-                <div class="alert-warning" ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
+                <div class="view-action-message alert-warning" ng-show="couponError">{{couponError}}</div>
+                <div class="view-action-message alert-warning" ng-show="cart_order.orderid.$invalid">Enter an order id</div>
+                <div class="view-action-message alert-warning" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</div>
+                <div class="view-action-message alert-warning" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</div>
+                <div class="view-action-message alert-warning" ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
                     You're site is mis-configured. You do not have permission to create a billing address nor do you have any addresses assigned to you. Please contact your support representative.
                 </div>
                 <div class="view-action-message alert-warning" ng-if="!user.Permissions.contains('CreateShipToAddress') && (addresses | filter:{IsShipping:true}).length == 0">
-                    You're site is mis-configured. You do not have permission to create a shipping address nor do you have any addresses assigned to you. Please contact your support representative.
+                    Your site is mis-configured. You do not have permission to create a shipping address nor do you have any addresses assigned to you. Please contact your support representative.
                 </div>
             </div>
             <ul>
