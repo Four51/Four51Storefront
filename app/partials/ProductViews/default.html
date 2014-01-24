@@ -95,7 +95,8 @@
                             <quantityfield required="true" lineitem="LineItem" class="quantity" />
                         </div>
                         <hr />
-                        <button class="btn btn-success btn-block btn-lg" type="button" id="451_btn_orderadd" ng-click="addToOrder()" ng-disabled="addToOrderForm.$invalid" ng-class="{'btn-warning':addToOrderForm.$invalid, 'btn-success': !addToOrderForm.$invalid }">
+                        <button class="btn btn-success btn-block btn-lg" type="button" id="451_btn_orderadd" ng-click="addToOrder()">
+                            <!---TODO: add indication with ng-show of warning icon to user that error exists in add to cart, but not disable the button or display a ton of errors on first view ie: browsing products --->
                             <i ng-show="addToOrderForm.$invalid" class="fa fa-warning"></i>
                             {{addToOrderText}}
                             <span class="badge" ng-if="!(user.Permissions.contains('HidePricing')) && (LineItem.LineTotal || variantLineItemsOrderTotal) > 0">
@@ -113,9 +114,6 @@
        <div class="view-error-list">
         <ol>
             <li class="alert-warning" ng-show="LineItem.qtyError">{{LineItem.qtyError}}</li>
-            <li class="alert-warning" ng-show="LineItem.PriceSchedule.MinQuantity > 1">Minimum Quantity: {{LineItem.PriceSchedule.MinQuantity}}</li>
-            <li class="alert-warning" ng-show="LineItem.PriceSchedule.MaxQuantity">Maximum Quantity: {{LineItem.PriceSchedule.MaxQuantity}}</li>
-            <li class="alert-warning" ng-show="addToOrderForm.$invalid" >Product is missing required Quantity</li>
             <li class="alert-warning" ng-show="addToOrderError">{{addToOrderError}}</li>
         </ol>
        </div>
