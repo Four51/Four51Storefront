@@ -2,7 +2,7 @@
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch product information" />
     <productnav product="LineItem.Product" variant="LineItem.Variant" />
 
-        <div class="col-md-5 col-collapse" ng-show="LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl || LineItem.Variant.PreviewUrl">
+        <div class="col-md-4 col-collapse" ng-show="LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl || LineItem.Variant.PreviewUrl">
             <figure style="background-color:#fff;">
                 <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}">
 				<span ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant">
@@ -12,7 +12,7 @@
             </figure>
         </div>
 
-        <div class="col-md-6 col-md-offset-1 col-collapse">
+        <div class="col-md-7 col-md-offset-1 col-collapse">
             <!--BASIC PRODUCT INFO!-->
             <h2 class="text-success pull-right" ng-show="LineItem.PriceSchedule.PriceBreaks.length == 1" ng-if="!(user.Permissions.contains('HidePricing'))">
                 {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
@@ -95,7 +95,7 @@
 							<div ng-show="LineItem.PriceSchedule.MaxQuantity">Maximum Quantity: {{LineItem.PriceSchedule.MaxQuantity}}</div>
 
 							<div ng-if="!allowAddFromVariantList">
-								<!--<label ng-class="{required: !allowAddFromVariantList}" ng-hide="allowAddFromVariantList">Order Quantity</label>-->
+								<label ng-class="{required: !allowAddFromVariantList}" ng-hide="allowAddFromVariantList">Order Quantity</label>
                                 <quantityfield required="true" lineitem="LineItem" class="quantity" />
                             </div>
 							<div>
