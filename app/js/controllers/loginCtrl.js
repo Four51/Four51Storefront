@@ -1,7 +1,7 @@
 'use strict';
 
 four51.app.controller('LoginCtrl', function LoginCtrl($scope, $sce, $route, User) {
-
+	$scope.actionMessage = null;
 	$scope.buttonText = "Logon";
 	$scope.$on('event:auth-loginFailed', function(event, message) {
 		$scope.actionMessage = message;
