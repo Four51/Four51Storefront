@@ -97,7 +97,7 @@
                         <hr />
                         <button class="btn btn-success btn-block btn-lg" type="button" id="451_btn_orderadd" ng-click="addToOrder()">
                             <!---TODO: add indication with ng-show of warning icon to user that error exists in add to cart, but not disable the button or display a ton of errors on first view ie: browsing products --->
-                            <i ng-show="addToOrderForm.$invalid" class="fa fa-warning"></i>
+                            <i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>
                             {{addToOrderText}}
                             <span class="badge" ng-if="!(user.Permissions.contains('HidePricing')) && (LineItem.LineTotal || variantLineItemsOrderTotal) > 0">
                                 {{(LineItem.LineTotal || variantLineItemsOrderTotal) | currency}}
@@ -109,13 +109,13 @@
         </form>
         <relatedproducts ng-if="LineItem.Product.RelatedProductsGroupID" relatedgroupid="LineItem.Product.RelatedProductsGroupID" />
     </div>
+
     <div class="view-footer navbar-fixed-bottom">
         <loadingindicator ng-show="displayLoadingIndicator" />
-       <div class="view-error-list">
-        <ol>
-            <li class="alert-warning" ng-show="LineItem.qtyError">{{LineItem.qtyError}}</li>
-            <li class="alert-warning" ng-show="addToOrderError">{{addToOrderError}}</li>
-        </ol>
+       <div class="view-error-list" ng-show="showAddToCartErrors">
+		   <ol ng-repeat="e in lineItemErrors">
+			   <li class="alert-warning">{{e}}</li>
+		   </ol>
        </div>
     </div>
 </section>
