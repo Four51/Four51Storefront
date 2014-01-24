@@ -7,9 +7,8 @@
         </div>
         <div class="panel-body">
             <div id="451_list_vspec" ng-show="true" class="view-tr">
-                <div ng-repeat="s in Variant.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: false}, {Property: 'DefinesVariant', Value: false}]">
-                    <label>{{s.Name}}</label>
-                        {{s.Prefix}}
+                <div class="form-group" ng-repeat="s in Variant.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: false}, {Property: 'DefinesVariant', Value: false}]">
+						{{s.Prefix}}
                         <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
                         <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
                         <customselectionfield customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
