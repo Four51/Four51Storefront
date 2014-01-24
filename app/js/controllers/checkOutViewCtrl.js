@@ -168,6 +168,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 
     function saveChanges(callback) {
 	    $scope.displayLoadingIndicator = true;
+        $scope.showSave = true;
 	    var auto = $scope.currentOrder.autoID;
         Order.save($scope.currentOrder,
 	        function(data) {
@@ -179,6 +180,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		        $scope.displayLoadingIndicator = false;
 		        if (callback) callback($scope.currentOrder);
 	            $scope.actionMessage = 'Your changes have been saved.';
+                $scope.showSave = false;
 	        },
 	        function(ex) {
 		        if (ex.Code.is('ObjectExistsException')) { // unique id
@@ -186,6 +188,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		        }
 		        $scope.actionMessage = ex.Message;
 		        $scope.displayLoadingIndicator = false;
+                $scope.showSave = false;
 	        }
         );
     };
