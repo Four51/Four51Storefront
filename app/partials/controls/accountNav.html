@@ -3,7 +3,8 @@
     <span class="btn-group">
         <button class="btn btn-default" ng-class="{'active': isActive('addresses')}" redirect="/addresses">Addresses</button>
         <button class="btn btn-default" ng-class="{'active': isActive('message')}" redirect="/message">Messages</button>
+        <a href="#" class="btn btn-default" ng-click="Clear()"><span class="text-nav">Clear Cache</span></a>
+        <button class="btn btn-danger pull-right 451_btn_logout" ng-click="Logout()" ng-if="user.Type=='Customer'">Log Out</button>
     </span>
-    <span ng-if="user.Type=='Customer'" class="logout pull-right"><button class="btn btn-danger 451_btn_logout" ng-click="Logout()">Log Out</button></span>
     <hr />
 </nav>

@@ -5,6 +5,7 @@
                 <div>
                     <label class="required">Address Name</label>
                     <input name="addressname" class="form-control" type="text" ng-model="address.AddressName" placeholder="Address Name" required />
+                    <i class="fa fa-edit"></i>
                 </div>
                 <div>
                     <label ng-show="address.FirstName || address.IsBilling" ng-class="{required: address.IsBilling}">First Name</label>

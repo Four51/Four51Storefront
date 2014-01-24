@@ -120,6 +120,12 @@
         noted issues:
         https://github.com/angular-ui/ui-router/issues/458
 
+        -webkit-...  // For Webkit browser(Chrome, Safari...)
+        -moz-...     // For Mozilla browser
+        -o-...       // For Opera browser
+        -ms-...      // For Microsoft browser
+        none...      // For all browser(Newest version)
+
 
 
 
