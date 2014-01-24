@@ -992,7 +992,7 @@ li.selected {
 }
 
 
-.error_list div {padding: 15px; border-top: 1px solid #fff;border-bottom: 1px solid #fff;opacity: .9;}
+.view-error-list .alert-warning {padding: 15px; border-top: 1px solid #fff;border-bottom: 1px solid #fff;opacity: .9;display: block;}
 /*
 .view-action-message.alert-success:not(.ng-hide), .view-action-message.alert-info:not(.ng-hide){
     -webkit-animation-duration: 1s;
