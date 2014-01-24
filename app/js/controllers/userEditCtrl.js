@@ -1,6 +1,6 @@
 'use strict';
 
-four51.app.controller('UserEditCtrl', function ($scope, $location, User) {
+four51.app.controller('UserEditCtrl', function ($scope, $location, $sce, User) {
 	$scope.loginasuser = {};
 	$scope.actionMessage = null;
 
@@ -9,6 +9,7 @@ four51.app.controller('UserEditCtrl', function ($scope, $location, User) {
 
 	$scope.save = function() {
 		$scope.actionMessage = null;
+		$scope.securityWarning = false;
 		$scope.user.Username = $scope.user.TempUsername;
 		$scope.displayLoadingIndicator = true;
         if($scope.user.Type == 'TempCustomer')
@@ -23,9 +24,10 @@ four51.app.controller('UserEditCtrl', function ($scope, $location, User) {
 			},
 			function(ex) {
 				$scope.displayLoadingIndicator = false;
-				$scope.actionMessage = ex.Message;
-				if (ex.Code.is('PasswordSecurityException'))
+				if (ex.Code.is('PasswordSecurity'))
 					$scope.securityWarning = true;
+				else
+					$scope.actionMessage = $sce.trustAsHtml(ex.Message);
 			}
 		);
     };

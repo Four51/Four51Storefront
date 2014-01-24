@@ -1,16 +1,17 @@
 'use strict';
 
 four51.app.controller('LoginCtrl', function LoginCtrl($scope, $sce, $route, User) {
-
-	$scope.buttonText = "Logon";
-	$scope.$on('event:auth-loginFailed', function(event, message) {
-		$scope.actionMessage = message;
-	});
-
 	var codes = ['PasswordSecurityException'];
 
+	$scope.loginMessage = null;
+	$scope.buttonText = "Logon";
+	$scope.$on('event:auth-loginFailed', function(event, message) {
+		$scope.loginMessage = message;
+	});
+
+
 	$scope.login = function() {
-		$scope.actionMessage = null;
+		$scope.loginMessage = null;
 		// need to reset any error codes that might be set so we can handle new one's
 		angular.forEach(codes, function(c) {
 			$scope[c] = null;
@@ -18,21 +19,20 @@ four51.app.controller('LoginCtrl', function LoginCtrl($scope, $sce, $route, User
 		User.login($scope.credentials,
 			function(data) {
 				if ($scope.credentials.Email) {
-					$scope.actionMessage = data.LogonInfoSent;
+					$scope.loginMessage = data.LogonInfoSent;
 					$scope.EmailNotFoundException = false;
 					$scope.showEmailHelp = false;
 					$scope.credentials.Email = null;
 					$scope.credentials.Username = null;
 					$scope.credentials.Password = null;
 				}
-
 			},
 			function(ex) {
 				$scope[ex.Code.text] = true;
 				if (ex.Code.is('PasswordSecurity'))
-					$scope.actionMessage = $sce.trustAsHtml(ex.Message);
+					$scope.loginMessage = $sce.trustAsHtml(ex.Message);
 				if (ex.Code.is('EmailNotFoundException') && $scope.credentials.Email)
-					$scope.actionMessage = $sce.trustAsHtml(ex.Detail);
+					$scope.loginMessage = $sce.trustAsHtml(ex.Detail);
 				$scope.credentials.Username = null;
 				$scope.credentials.Password = null;
 				$scope.credentials.CurrentPassword = null;
