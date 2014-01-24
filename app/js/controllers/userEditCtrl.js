@@ -9,6 +9,7 @@ four51.app.controller('UserEditCtrl', function ($scope, $location, $sce, User) {
 
 	$scope.save = function() {
 		$scope.actionMessage = null;
+		$scope.securityWarning = false;
 		$scope.user.Username = $scope.user.TempUsername;
 		$scope.displayLoadingIndicator = true;
         if($scope.user.Type == 'TempCustomer')
@@ -23,11 +24,10 @@ four51.app.controller('UserEditCtrl', function ($scope, $location, $sce, User) {
 			},
 			function(ex) {
 				$scope.displayLoadingIndicator = false;
-				$scope.actionMessage = $sce.trustAsHtml(ex.Message);
-				if (ex.Code.is('PasswordSecurityException')) {
+				if (ex.Code.is('PasswordSecurity'))
 					$scope.securityWarning = true;
-					//$scope.actionMessage = null;
-				}
+				else
+					$scope.actionMessage = $sce.trustAsHtml(ex.Message);
 			}
 		);
     };
