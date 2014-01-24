@@ -20,6 +20,11 @@ four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Produc
 	$scope.allowAddToOrder = true;
 	$scope.addToOrderText = "Save Line Item";
 	$scope.addToOrder = function(){
+		var err = $scope.beforeAddToOrder();
+		if(err){
+			alert(err);
+			return;
+		}
 		Order.save($scope.currentOrder, function(o){
 			$scope.currentOrder = o;
 			$location.path('/cart');
@@ -63,15 +68,12 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 	});
 
 	$scope.addToOrder = function(){
-		if($scope.addToOrderForm.$invalid){
-			var errMessage = "Please fill all required fields";
-			if($scope.LineItem.qtyError)
-				errMessage = $scope.LineItem.qtyError
 
-			alert(errMessage);
+		var err = $scope.beforeAddToOrder();
+		if(err){
+			alert(err);
 			return;
 		}
-
 		if(!$scope.currentOrder){
 			$scope.currentOrder = {};
 			$scope.currentOrder.LineItems = [];
@@ -170,6 +172,22 @@ four51.app.factory('ProductDisplayService', function($451, $sce, Variant, Produc
 		lineItem.UnitPrice = priceBreak.Price;
 	}
 	function productViewScope(scope){
+		scope.beforeAddToOrder = function(){
+
+			if(!scope.LineItem.Variant && scope.LineItem.Product.IsVBOSS){
+				return "Please select an active product";
+			}
+
+			if(scope.addToOrderForm.$invalid){
+				var errMessage = "Please fill all required fields";
+				if(scope.LineItem.qtyError)
+					errMessage = scope.LineItem.qtyError
+
+				return errMessage
+			}
+			return null;
+		}
+
 		scope.specChanged = function(spec){
 			console.log('spec changed');
 			if(!spec){
@@ -200,6 +218,9 @@ four51.app.factory('ProductDisplayService', function($451, $sce, Variant, Produc
 						if(!data.IsDefaultVariant)
 							scope.LineItem.Variant = data;
 						newLineItemScope(scope);
+					}, function(ex){
+						scope.LineItem.Variant = null;
+						alert(ex.data.Message);
 					});
 				}
 			}
