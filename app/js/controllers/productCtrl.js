@@ -28,6 +28,8 @@ four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Produc
 		Order.save($scope.currentOrder, function(o){
 			$scope.currentOrder = o;
 			$location.path('/cart');
+		}, function(ex){
+			alert('save line item error');//adding this until product error messaging is squared away
 		});
 	}
 });
@@ -105,6 +107,7 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 			function(ex) {
 				$scope.addToOrderIndicator = false;
 				$scope.addToOrderError = ex.Message;
+				alert(ex.Message);//adding this until product error messaging is squared away
 			}
 		);
 	}
