@@ -85,5 +85,7 @@
     .credit-card-cvn-input{
         padding-top:15px;
     }
+    .col-collapse-m {padding: 0;}
+    .view-variant-list li {margin-bottom: 15px !important;}
 
 }

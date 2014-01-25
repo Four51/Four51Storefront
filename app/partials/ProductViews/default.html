@@ -47,34 +47,55 @@
                 </div>
                 <div class="panel-body">
                     <loadingindicator ng-show="addToOrderIndicator" title="Adding product to cart"/>
-                    <div ng-if="LineItem.Product.Variants.length > 0 && !LineItem.Variant">
-                        <div class="row">
-                            <div class="col-sm-6"><h4>Choose a variant:</h4>
+
+                    <div ng-if="LineItem.Product.Variants.length > 0 && !LineItem.Variant" style="margin: -15px;border-bottom: 1px solid #d6d6d6;">
+
+                            <h3 class="panel-title text-info" style="border-bottom: 1px solid #d6d6d6;">
+                                Product Variants
+                            </h3>
+
+
+
                                 <div ng-show="LineItem.Product.Type == 'VariableText'">
                                     <button type="button" ng-show="!LineItem.Variant" class="btn btn-xs btn-danger" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/new/edit" tabindex="-1">Create New</button>
                                 </div>
+
+                            <div ng-if="LineItem.Product.Variants.length > 20">
+                                <input ng-model="queryVariants" type="text" class="form-control" placeholder="Filter variants"/>
                             </div>
-                            <div class="col-sm-6" ng-if="LineItem.Product.Variants.length > 20"><input ng-model="queryVariants" type="text" class="form-control" placeholder="Filter variants"/></div>
-                        </div>
-                        <div class="product-view-default-variant-box">
-                            <div class="list-group" ng-repeat="v in LineItem.Product.Variants | filter:queryVariants">
-                                <a class="list-group-item" href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>
-                                    <h5 class="list-group-item-heading">{{v.ExternalID}}</h5>
-                                    <p class="list-group-item-text small"><small><span ng-show="v.Description" ng-bind-html="trustedDescription(v)" /></small></p>
+
+                        <div class="product-view-default-variant-box" style="padding-left: 1.5em;">
+                            <ul class="view-variant-list" style="padding: 1.5em 0;">
+                            <li ng-repeat="v in LineItem.Product.Variants | filter:queryVariants" class="col-xs-12" style="margin: 2px 0;">
+<div class="row" style="margin-right: 0;">
+                                <a class="col-sm-8" ng-class="{'col-sm-8': allowAddFromVariantList, 'col-xs-12': !allowAddFromVariantList }" href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>
+
+
+                                    <h5>{{v.ExternalID}}</h5>
+                                    <p ng-show="v.Description" ng-bind-html="trustedDescription(v)" />
                                     <div ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
                                         Quantity available: {{v.QuantityAvailable}}
                                     </div>
+
                                 </a>
-                                <div ng-if="allowAddFromVariantList" class="list-group-item" style="border-top-left-radius:0; border-top-right-radius:0;">
-                                    <h4 ng-show="variantLineItems[v.InteropID].LineTotal > 0" class="pull-left text-success" style="margin:0;">{{variantLineItems[v.InteropID].LineTotal | currency}}</h4>
-                                    <quantityfield required="false" calculated="calcVariantLineItems" lineitem="variantLineItems[v.InteropID]" class="quantity pull-right" />
-                                    <div style="padding:5px 15px; margin:2px 15px;" class="alert alert-danger pull-right" ng-show="variantLineItems[v.InteropID].qtyError">{{variantLineItems[v.InteropID].qtyError}}</div>
-                                    <div style="clear:both;"></div>
-                                </div>
-                            </div>
+                                <div class="col-sm-2 col-collapse-m" ng-if="allowAddFromVariantList">
+                                <div  style="border: 1px solid #d6d6d6;text-align: center;height: 52px;" ng-show="variantLineItems[v.InteropID].LineTotal > 0"><small><span class="text-info">Total</span><br /><span class=" text-success">{{variantLineItems[v.InteropID].LineTotal | currency}}</span></small></div>
+                                 </div>
+                                <div class="col-sm-2 col-collapse"  ng-if="allowAddFromVariantList">
+
+
+
+                                    <quantityfield required="false" calculated="calcVariantLineItems" lineitem="variantLineItems[v.InteropID]" class="quantity" />
+
+
+
+                                </div></div>
+                            </li>
+
+                            </ul>
                         </div>
                     </div>
-                    <br/>
+
                     <div id="451_list_vspec" ng-show="allowAddToOrder">
                         <div class="form-group" ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
                             <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
@@ -82,6 +103,7 @@
                             <customselectionfield change="specChanged" customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
                         </div>
                     </div>
+
                     <div class="form-group" ng-show="allowAddToOrder">
                         <div ng-show="LineItem.Product.DisplayInventory && (LineItem.Variant || LineItem.Product.Variants.length == 0)">
                             <!-- nothing is accomodating the 0 level inventory and the custom message to be displayed -->
@@ -115,6 +137,7 @@
        <div class="view-error-list" ng-show="showAddToCartErrors">
 		   <ol ng-repeat="e in lineItemErrors">
 			   <li class="alert-warning">{{e}}</li>
+               <li class="alert-warning" ng-show="variantLineItems[v.InteropID].qtyError">{{variantLineItems[v.InteropID].qtyError}}</li>
 		   </ol>
        </div>
     </div>

@@ -146,9 +146,10 @@ input[type="file"]{
 
 }
 .product-view-default-variant-box{
-    max-height:220px;
+    max-height:320px;
     min-height:220px;
     overflow-y:scroll;
+    overflow-x: hidden;
 }
 
 .static-spec-panel-body {
@@ -1328,6 +1329,57 @@ li.cart span.badge {
     margin: 25px 0;
 }
 
+.product-view-default h2 {margin-top: 0;}
+
+
+ul.view-variant-list{
+    list-style-type: none;
+}
+.view-variant-list .quantity input {height: 52px;}
+.view-variant-list a{
+    position: relative;
+    display: block;
+    padding: .4em;
+    margin: 0;
+    background: #ddd;
+    color: #444;
+    text-decoration: none;
+    transition: all .3s ease-out;
+
+}
+
+.view-variant-list a:hover{
+    background: #eee;
+}
+
+.view-variant-list a:before{
+    position: absolute;
+    left: -1.5em;
+    top:0;
+    content: '';
+    font-weight: bold;
+    background: #fa8072;
+    height: 100%;
+    width: 1em;
+    padding-top: 1em;
+    line-height: 2em;
+    text-align: center;
+    font-weight: bold;
+}
+.view-variant-list a:after{
+    position: absolute;
+    content: '';
+    border: .5em solid transparent;
+    left: -.5em;
+    top: 50%;
+    margin-top: -.5em;
+    transition: all .3s ease-out;
+}
+
+.view-variant-list a:hover:after{
+    left: -.5em;
+    border-left-color: #fa8072;
+}
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
