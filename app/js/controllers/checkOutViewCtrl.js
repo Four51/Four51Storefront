@@ -93,6 +93,12 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     $scope.$watch('currentOrder.ShipAddressID', function(newValue) {
         if (newValue) {
             Address.get(newValue, function(add) {
+	            if ($scope.user.Permissions.contains('EditShipToName') && !add.IsCustEditable) {
+		            angular.forEach($scope.currentOrder.LineItems, function(item) {
+			            item.ShipFirstName = add.FirstName;
+			            item.ShipLastName = add.LastName;
+		            });
+	            }
                 $scope.ShipAddress = add;
             });
         }
@@ -101,6 +107,10 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     $scope.$watch('currentOrder.BillAddressID', function(newValue) {
         if (newValue) {
             Address.get(newValue, function(add) {
+	            if ($scope.user.Permissions.contains('EditBillToName') && !add.IsCustEditable) {
+	                $scope.currentOrder.BillFirstName = add.FirstName;
+	                $scope.currentOrder.BillLastName = add.LastName;
+                }
                 $scope.BillAddress = add;
             });
         }

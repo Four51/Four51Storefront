@@ -26,7 +26,6 @@
                                     <button type="button" class="btn btn-info" ng-click="applyCoupon()">Apply</button>
                                 </span>
                             </div>
-
                         </div>
                     </div>
                     <p ng-show="currentOrder.Coupon">
@@ -160,7 +159,13 @@
                                 <p style="font-size: 11px; font-weight: bold;">Shipping Location</p>
                                 <p ng-show="ShipAddress.AddressName"><small>{{ShipAddress.AddressName}}</small></p>
                                 <p ng-show="ShipAddress.CompanyName"><small>{{ShipAddress.CompanyName}}</small></p>
-                                <p ng-show="ShipAddress.FirstName || ShipAddress.LastName"><small>{{ShipAddress.FirstName + ' ' + ShipAddress.LastName}}</small></p>
+                                <p ng-show="(ShipAddress.FirstName || ShipAddress.LastName) && (!user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable)">
+                                    <small>{{ShipAddress.FirstName + ' ' + ShipAddress.LastName}}</small>
+                                </p>
+                                <p ng-show="user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable">
+                                    <input class="input-sm" ng-required="user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" type="text" ng-model="currentOrder.LineItems[0].ShipFirstName" placeholder="First Name" />
+                                    <input class="input-sm" ng-required="user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" type="text" ng-model="currentOrder.LineItems[0].ShipLastName" placeholder="Last Name" />
+                                </p>
                                 <p ng-show="ShipAddress.Street1"><small>{{ShipAddress.Street1}}</small></p>
                                 <p ng-show="ShipAddress.Street2"><small>{{ShipAddress.Street2}}</small></p>
                                 <p ng-show="ShipAddress.City || ShipAddress.State || ShipAddress.Zip"><small>{{ShipAddress.City}}<span ng-if="ShipAddress.City && ShipAddress.State">, </span> {{ShipAddress.State}} {{ShipAddress.Zip}}</small></p>
@@ -231,7 +236,13 @@
                                 <p style="font-size: 11px; font-weight: bold;">Billing Location</p>
                                 <p ng-show="BillAddress.AddressName"><small>{{BillAddress.AddressName}}</small></p>
                                 <p ng-show="BillAddress.CompanyName"><small>{{BillAddress.CompanyName}}</small></p>
-                                <p ng-show="BillAddress.FirstName || BillAddress.LastName"><small>{{BillAddress.FirstName + ' ' + BillAddress.LastName}}</small></p>
+                                <p ng-show="(BillAddress.FirstName || BillAddress.LastName) && (!user.Permissions.contains('EditBillToName') && BillAddress.IsCustEditable)">
+                                    <small>{{BillAddress.FirstName + ' ' + BillAddress.LastName}}</small>
+                                </p>
+                                <p ng-show="user.Permissions.contains('EditBillToName') && !BillAddress.IsCustEditable">
+                                    <input class="input-sm" ng-required="user.Permissions.contains('EditBillToName') && !BillAddress.IsCustEditable" type="text" ng-model="currentOrder.BillFirstName" placeholder="First Name" />
+                                    <input class="input-sm" ng-required="user.Permissions.contains('EditBillToName') && !BillAddress.IsCustEditable" type="text" ng-model="currentOrder.BillLastName" placeholder="Last Name" />
+                                </p>
                                 <p ng-show="BillAddress.Street1"><small>{{BillAddress.Street1}}</small></p>
                                 <p ng-show="BillAddress.Street2"><small>{{BillAddress.Street2}}</small></p>
                                 <p ng-show="BillAddress.City || BillAddress.State || BillAddress.Zip"><small>{{BillAddress.City}}<span ng-if="ShipAddress.City && ShipAddress.State">, </span> {{BillAddress.State}} {{BillAddress.Zip}}</small></p>
