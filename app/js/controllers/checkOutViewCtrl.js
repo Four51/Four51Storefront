@@ -19,11 +19,11 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		if (!order) return false;
 		var multi = false;
 		angular.forEach(order.LineItems, function(li, i) {
-			multi = multi || i > 0 ? li.ShipAddressID != order.LineItems[i-1].ShipAddressID : false;
+			multi = multi || i > 0 ? (li.ShipAddressID != order.LineItems[i-1].ShipAddressID || (li.ShipFirstName != order.LineItems[i-1].ShipFirstName || li.LineItems[i-1].ShipLastName != order.ShipLastName)) : false;
 		});
 		return multi;
 	};
-	$scope.shipToMultipleAddresses = shipToMultipleAddresses();
+	$scope.shipToMultipleAddresses = shipToMultipleAddresses($scope.currentOrder);
 
 	$scope.updateShipper = function(li) {
 		$scope.shippingUpdatingIndicator = true;
@@ -66,6 +66,8 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		$scope.currentOrder.LineItems[0].ShipperID = null;
 		angular.forEach($scope.currentOrder.LineItems, function(li) {
 			li.ShipAddressID = $scope.currentOrder.ShipAddressID;
+			li.ShipFirstName = null;
+			li.ShipLastName = null;
 		});
 		saveChanges(function(order) {
 			Shipper.query(order, function(list) {
@@ -80,6 +82,8 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		item.Shipper = null;
 		item.ShipperID = null;
 		$scope.currentOrder.ShipAddressID = $scope.currentOrder.LineItems[0].ShipAddressID;
+		$scope.currentOrder.ShipFirstName = null;
+		$scope.currentOrder.ShipLastName = null;
 		$scope.currentOrder.Shipper = $scope.currentOrder.LineItems[0].Shipper;
 		saveChanges(function(order) {
 			Shipper.query(order, function(list) {
@@ -88,9 +92,25 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		});
 	};
 
+	$scope.setSingleShipAddress = function() {
+		$scope.shipToMultipleAddresses = false;
+		angular.forEach($scope.currentOrder.LineItems, function(li) {
+			li.ShipFirstName = null;
+			li.ShipLastName = null;
+		});
+	}
+
 	$scope.$on('event:orderUpdate', $scope.updateShipper());
 
+
     $scope.$watch('currentOrder.ShipAddressID', function(newValue) {
+	    $scope.orderShipAddress = {};
+	    $scope.currentOrder.ShipFirstName = null;
+	    $scope.currentOrder.ShipLastName = null;
+	    angular.forEach($scope.currentOrder.LineItems, function(item) {
+		    item.ShipFirstName = null;
+		    item.ShipLastName = null;
+	    });
         if (newValue) {
             Address.get(newValue, function(add) {
 	            if ($scope.user.Permissions.contains('EditShipToName') && !add.IsCustEditable) {
@@ -99,7 +119,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 			            item.ShipLastName = add.LastName;
 		            });
 	            }
-                $scope.ShipAddress = add;
+                $scope.orderShipAddress = add;
             });
         }
     });
