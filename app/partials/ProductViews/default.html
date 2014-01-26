@@ -67,15 +67,16 @@
                         <div class="product-view-default-variant-box" style="padding-left: 1.5em;">
                             <ul class="view-variant-list" style="padding: 1.5em 0;">
                             <li ng-repeat="v in LineItem.Product.Variants | filter:queryVariants" class="col-xs-12" style="margin: 2px 0;">
-<div class="row" style="margin-right: 0;">
+                                    <div class="row" style="margin-right: 0;">
                                 <a class="col-sm-8" ng-class="{'col-sm-8': allowAddFromVariantList, 'col-xs-12': !allowAddFromVariantList }" href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>
 
 
-                                    <h5>{{v.ExternalID}}</h5>
+                                    <h5><strong>{{v.ExternalID}}</strong></h5>
                                     <p ng-show="v.Description" ng-bind-html="trustedDescription(v)" />
-                                    <div ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
+
+                                    <p ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
                                         Quantity available: {{v.QuantityAvailable}}
-                                    </div>
+                                    </p>
 
                                 </a>
                                 <div class="col-sm-2 col-collapse-m" ng-if="allowAddFromVariantList">
@@ -93,6 +94,7 @@
                             </li>
 
                             </ul>
+
                         </div>
                     </div>
 
@@ -112,13 +114,14 @@
                         <div ng-show="LineItem.PriceSchedule.MinQuantity > 1">Minimum Quantity: {{LineItem.PriceSchedule.MinQuantity}}</div>
                         <div ng-show="LineItem.PriceSchedule.MaxQuantity">Maximum Quantity: {{LineItem.PriceSchedule.MaxQuantity}}</div>
 
-                        <div ng-if="!allowAddFromVariantList">
+                        <div class="view-form-icon" ng-if="!allowAddFromVariantList">
+                           <div>
                             <label ng-class="{required: !allowAddFromVariantList}" ng-hide="allowAddFromVariantList">Order Quantity</label>
                             <quantityfield required="true" lineitem="LineItem" class="quantity" />
                         </div>
+                        </div>
                         <hr />
                         <button class="btn btn-success btn-block btn-lg" type="button" id="451_btn_orderadd" ng-click="addToOrder()">
-                            <!---TODO: add indication with ng-show of warning icon to user that error exists in add to cart, but not disable the button or display a ton of errors on first view ie: browsing products --->
                             <i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>
                             {{addToOrderText}}
                             <span class="badge" ng-if="!(user.Permissions.contains('HidePricing')) && (LineItem.LineTotal || variantLineItemsOrderTotal) > 0">

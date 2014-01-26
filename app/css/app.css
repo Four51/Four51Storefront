@@ -146,7 +146,7 @@ input[type="file"]{
 
 }
 .product-view-default-variant-box{
-    max-height:320px;
+    max-height:420px;
     min-height:220px;
     overflow-y:scroll;
     overflow-x: hidden;
@@ -1122,7 +1122,7 @@ li.print {
 }
 
 .panel-body .quantity input, .cart-view .row .quantity input {
-    height: 100%;
+    height: 52px;
     outline: 0 none;
     padding: .5em 0;
     text-align: center;
@@ -1133,7 +1133,6 @@ li.print {
     color:#468847;
     box-shadow: none;
 }
-
 
 li.cart a.cart {
     padding: 8px 20px;
@@ -1194,6 +1193,7 @@ li.cart span.badge {
     margin-right: 25px;
 }
 
+.product-view-default .panel-body .panel-title {text-transform: capitalize; letter-spacing: normal;}
 .product-view-default img, .specform-default img, .line-item-history-view img {
     margin: 15px auto;
     max-height: 300px;
@@ -1335,7 +1335,7 @@ li.cart span.badge {
 ul.view-variant-list{
     list-style-type: none;
 }
-.view-variant-list .quantity input {height: 52px;}
+
 .view-variant-list a{
     position: relative;
     display: block;
@@ -1380,6 +1380,104 @@ ul.view-variant-list{
     left: -.5em;
     border-left-color: #fa8072;
 }
+
+.view-variant-list p {margin: 0;padding: 10px 0;font-size: 11px;}
+
+
+.ribbon {
+    width: 100%;
+    height: 280px;
+    margin: 200px 0;
+    position: relative;
+    overflow: hidden; font-size: 11px;text-align: center;
+
+}
+
+.ribbon .inset {
+    width: 100%;
+    height: 55px;
+    position: absolute;
+    top: -50px;
+    left: -10px;
+
+
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+
+    background: rgba(0,0,0,0.3);
+
+    box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.3);
+}
+
+.ribbon .containerr {
+    position: relative;
+    width: 120px;
+    height: 250px;
+    overflow: hidden;
+    margin: 0 auto;
+    border-left: 1px solid #50ACDB;
+    border-right: 1px solid #50ACDB;
+}
+
+.ribbon .base {
+    height: 200px;
+    width: 120px;
+    padding-top: 10px;color:#fff;
+background-color:#359FD5;
+
+    position: relative;
+    z-index: 2;
+}
+
+
+
+.ribbon .base:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 106px;
+    left: 7px;
+    height: 242px;
+    border-left: 1px dashed #aeaeae;
+    border-right: 1px dashed #aeaeae;
+}
+
+.ribbon .left_corner {
+    width: 100px;
+    height: 100px;
+    background: #359FD5;
+    position: absolute;
+    bottom: 20px;
+    left: -50px;
+    z-index: 1;
+
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.ribbon .right_corner {
+    width: 100px;
+    height: 100px;
+    background: #359FD5;
+    position: absolute;
+    bottom: 20px;
+    right: -50px;
+    z-index: 1;
+
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.view-cou a {text-decoration: underline;}
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
@@ -1503,13 +1601,14 @@ ul.view-variant-list{
 .panel-heading {
     border-radius: 0;
     margin-top: 2px;
+    padding: 0;
 }
 
 .panel-title {
     font-size: 1em;
     letter-spacing: 0.08em;
     margin: 0;
-    padding: 10px;
+    padding: 20px 30px;
     text-align: center;
     text-transform: uppercase;
 }
