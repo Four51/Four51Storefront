@@ -1398,6 +1398,19 @@ ul.view-variant-list{
     font-size: 11px;
     text-align: center;
     border-top: 5px solid #f9f9f9;
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    animation-delay: 3s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeInDown;
+    -moz-animation-name: fadeInDown;
+    -o-animation-name: fadeInDown;
+    animation-name: fadeInDown;
 }
 
 .ribbon .tie {
@@ -1467,9 +1480,44 @@ ul.view-variant-list{
     box-shadow: 0 0 5px #C5C5C5;
 }
 
-.ribbon p .btn i {margin-right: 5px;}
+.ribbon p .btn i {
+    margin-right: 5px;
+}
+
 .view-cou a {
     text-decoration: underline;
+}
+
+.navbar-fixed-top.headroom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: all .2s ease-in-out;
+}
+
+.navbar-fixed-top.headroom--unpinned {
+    top: -100px;
+}
+
+.navbar-fixed-top.headroom--pinned {
+    top: 0;
+}
+
+.navbar-fixed-bottom.headroom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: all .2s ease-in-out;
+}
+
+.navbar-fixed-bottom.headroom--unpinned {
+    bottom: -100px;
+}
+
+.navbar-fixed-bottom.headroom--pinned {
+    bottom: 0;
 }
 
 /* ----------------------------------------------------------------------------------------------- */
