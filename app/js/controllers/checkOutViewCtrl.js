@@ -27,6 +27,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	$scope.shipToMultipleAddresses = shipToMultipleAddresses($scope.currentOrder);
 
 	$scope.updateShipper = function(li) {
+		if (!li || !li.ShipAddressID) return;
 		$scope.shippingUpdatingIndicator = true;
 		$scope.shippingFetchIndicator = true;
 		if (!li) {
@@ -262,6 +263,8 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		        }
 		        $scope.actionMessage = ex.Message;
 		        $scope.displayLoadingIndicator = false;
+		        $scope.shippingUpdatingIndicator = false;
+		        $scope.shippingFetchIndicator = false;
                 $scope.showSave = false;
 	        }
         );
