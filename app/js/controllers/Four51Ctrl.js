@@ -43,7 +43,6 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
 				$scope.tree = data;
 				$scope.$broadcast("treeComplete", data);
 	        });
-
         }
     }
 
