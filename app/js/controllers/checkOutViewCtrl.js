@@ -23,6 +23,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		});
 		return multi;
 	};
+
 	$scope.shipToMultipleAddresses = shipToMultipleAddresses($scope.currentOrder);
 
 	$scope.updateShipper = function(li) {
@@ -102,7 +103,6 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 
 	$scope.$on('event:orderUpdate', $scope.updateShipper());
 
-
     $scope.$watch('currentOrder.ShipAddressID', function(newValue) {
 	    $scope.orderShipAddress = {};
 	    $scope.currentOrder.ShipFirstName = null;
@@ -140,15 +140,65 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	    if (event == 'BudgetAccount' && ($scope.SpendingAccounts && $scope.SpendingAccounts.length == 1)) {
 		    $scope.currentOrder.BudgetAccountID = $scope.SpendingAccounts[0].ID;
 	    }
+	    else {
+		    if (!$scope.isSplitBilling) {
+		        $scope.currentOrder.BudgetAccountID = null;
+			    $scope.currentOrder.currentBudgetAccount = null;
+	        }
+	    }
         $scope.cart_billing.$setValidity('paymentMethod', validatePaymentMethod(event));
     });
 
-	$scope.$watch('currentOrder.BudgetAccountID', function() {
+	var budgetAccountCalculation = function(value) {
+		if (value) {
+			var valid = validatePaymentMethod('BudgetAccount');
+			angular.forEach($scope.SpendingAccounts, function(a) {
+				if (a.ID == value) {
+					$scope.currentBudgetAccount = a;
+				}
+			});
+			var discount = $scope.currentBudgetAccount.AccountType.MaxPercentageOfOrderTotal != 100 ?
+				$scope.currentOrder.Total * ($scope.currentBudgetAccount.AccountType.MaxPercentageOfOrderTotal *.01) :
+				$scope.currentBudgetAccount.Balance;
+			$scope.remainingOrderTotal = $scope.currentOrder.Total - discount;
+			$scope.cart_billing.$setValidity('paymentMethod', valid);
+		}
+	}
+
+	$scope.$watch('currentOrder.Total', function(total) {
 		if ($scope.currentOrder.BudgetAccountID)
-			$scope.cart_billing.$setValidity('paymentMethod', validatePaymentMethod('BudgetAccount'));
+			budgetAccountCalculation($scope.currentOrder.BudgetAccountID);
+	});
+
+	$scope.$watch('currentOrder.BudgetAccountID', function(value) {
+		$scope.currentBudgetAccount = null;
+		budgetAccountCalculation(value);
 	});
 
     function validatePaymentMethod(method) {
+	    var validateAccount = function() {
+		    var account = null;
+		    angular.forEach($scope.SpendingAccounts, function(a) {
+			    if ($scope.currentOrder && a.ID == $scope.currentOrder.BudgetAccountID)
+				    account = a;
+		    });
+		    if (account) {
+			    $scope.isSplitBilling = false;
+			    if (account.AccountType.MaxPercentageOfOrderTotal != 100) {
+			        $scope.isSplitBilling = true;
+				    return false;
+			    }
+
+			    if (account.Balance <= $scope.currentOrder.Total) {
+				    $scope.isSplitBilling = !account.AccountType.AllowExceed;
+				    return account.AccountType.AllowExceed;
+			    }
+			    else
+			        return true;
+		    }
+		    return false;
+	    }
+
         var valid = false;
         switch (method) {
             case 'Undetermined':
@@ -159,13 +209,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
                 break;
             case 'BudgetAccount':
                 valid = $scope.user.Permissions.contains('PayByBudgetAccount');
-                var account = null;
-                angular.forEach($scope.SpendingAccounts, function(a) {
-                    if ($scope.currentOrder && a.ID == $scope.currentOrder.BudgetAccountID)
-                        account = a;
-                });
-                if (account)
-                    valid = (account.AccountType.MaxPercentageOfOrderTotal == 100) && ((account.Balance >= $scope.currentOrder.Total) || account.AccountType.AllowExceed)
+                valid = valid ? validateAccount() : valid;
                 break;
             case 'CreditCard':
                 valid = $scope.user.Permissions.contains('PayByCreditCard');
