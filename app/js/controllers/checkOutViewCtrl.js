@@ -16,10 +16,10 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	});
 
 	var shipToMultipleAddresses = function(order) {
-		if (!order) return false;
+		if (!order || !$scope.user.Permissions.contains('ShipToMultipleAddresses')) return false;
 		var multi = false;
 		angular.forEach(order.LineItems, function(li, i) {
-			multi = multi || i > 0 ? (li.ShipAddressID != order.LineItems[i-1].ShipAddressID || (li.ShipFirstName != order.LineItems[i-1].ShipFirstName || li.LineItems[i-1].ShipLastName != order.ShipLastName)) : false;
+			multi = multi || i > 0 ? (li.ShipAddressID != order.LineItems[i-1].ShipAddressID || (li.ShipFirstName != order.LineItems[i-1].ShipFirstName || order.LineItems[i-1].ShipLastName != order.ShipLastName)) : false;
 		});
 		return multi;
 	};
