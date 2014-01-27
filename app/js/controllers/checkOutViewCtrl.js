@@ -166,7 +166,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	}
 
 	$scope.$watch('currentOrder.Total', function(total) {
-		if ($scope.currentOrder.BudgetAccountID)
+		if ($scope.currentOrder && $scope.currentOrder.BudgetAccountID)
 			budgetAccountCalculation($scope.currentOrder.BudgetAccountID);
 	});
 
