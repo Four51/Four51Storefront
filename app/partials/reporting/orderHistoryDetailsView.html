@@ -7,9 +7,9 @@
     <p ng-show="orderCostCenter"><span class="text-info">Cost Center</span>{{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</p>
     <p>
         <span class="text-info">Payment Method</span>
-        {{order.PaymentMethodText}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong> {{order.AmountOnAccount ? "(" + (order.Total - order.AmountOnAccount | currency) + ")" : ""}}
+        {{order.PaymentMethodText}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong> {{order.AmountOnAccount && order.PaymentMethod != 'BudgetAccount' ? "(" + (order.Total - order.AmountOnAccount | currency) + ")" : ""}}
     </p>
-    <p ng-show="order.AmountOnAccount">
+    <p ng-show="order.AmountOnAccount && order.PaymentMethod != 'BudgetAccount'">
         <span class="text-info"></span>
         {{(order.AccountName || order.AccountLabel) + " (" + (order.AmountOnAccount | currency) + ")"}}
     </p>
