@@ -254,8 +254,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		        }
 		        $scope.displayLoadingIndicator = false;
 		        if (callback) callback($scope.currentOrder);
-	            $scope.actionMessage = 'Your changes have been saved.';
-                $scope.showSave = false;
+	            $scope.showSave = false;
 	        },
 	        function(ex) {
 		        if (ex.Code.is('ObjectExistsException')) { // unique id
