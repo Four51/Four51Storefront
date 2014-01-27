@@ -78,7 +78,7 @@
                                             <label ng-class="{required: user.Permissions.contains('DateNeededRequired')}" ng-show="item.DateNeeded || user.Permissions.contains('DateNeededRequired')">Date</label>
                                             <input class="form-control" placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
                                             <button type="button" title="copy to all" class="btn btn-sm btn-info cart-view-btn-copy hidden-xs pull-right" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" >
-                                                <i class="fa fa-copy" style="position: relative; left: 0; top: 0;color:#fff;"></i> copy to all
+                                                <i class="fa fa-copy" style="position: relative; left: 0; top: 0;color:#fff;"></i>
                                             </button>
                                             <i class="fa fa-calendar"></i>
                                         </div>
@@ -88,7 +88,7 @@
                                             <input class="form-control view-form-icon" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />
                                             <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
                                             <button type="button" title="copy to all" class="btn btn-sm btn-info cart-view-btn-copy hidden-xs pull-right" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
-                                                <i class="fa fa-copy" style="position: relative; left: 0; top: 0;color:#fff;" ></i> copy to all
+                                                <i class="fa fa-copy" style="position: relative; left: 0; top: 0;color:#fff;" ></i>
                                             </button>
                                             <i class="fa fa-money"></i>
                                         </div>
