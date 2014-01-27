@@ -190,7 +190,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 				    return false;
 			    }
 
-			    if (account.Balance <= $scope.currentOrder.Total) {
+			    if (account.Balance < $scope.currentOrder.Total) {
 				    $scope.isSplitBilling = !account.AccountType.AllowExceed;
 				    return account.AccountType.AllowExceed;
 			    }
