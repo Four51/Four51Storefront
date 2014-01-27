@@ -40,12 +40,11 @@
         </section>
         <div ng-if="!user.Permissions.contains('UnBrandedSite')">
             <div class="ribbon">
-                <div class="inset"></div>
-                <div class="containerr" >
+                <div class="tie">
                     <div class="base">
                         <div>
-                            <p><i class="fa fa-cloud"></i><br /><b>Powered by <br /><br /><a href="http://www.four51.com/public/index.php/help" class="btn btn-info btn-sm" target="_new">Four51°</a></b></p>
-                            <p>Copyright © 2013<br /> Four51 Inc. <br>All Rights Reserved.</p>
+                            <p><i class="fa fa-cloud"></i><br /><b>Powered by <br /><br /><a href="http://www.four51.com/public/index.php/help" class="btn btn-default btn-sm" target="_new"><i class="fa fa-external-link"></i> Four51°</a></b></p>
+                            <p style="color:#666;">Copyright © 2013<br /> Four51 Inc. <br>All Rights Reserved.</p>
                             <p class="view-cou" ng-if="!(user.Permissions.contains('HideTerms'))"><a href="#/conditions">Conditions of Use</a></p>
                         </div>
                     </div>
