@@ -12,7 +12,6 @@ Template: Four51 Single Page App - Ken Buras (http://www.kenburas.com/)
 
 html {
     height: 100%;
-    background-color:#fff;
 }
 
 body {
@@ -129,11 +128,11 @@ input[type="file"]{
 .view-order-last-count {
     padding: 0 10px 10px;
     border: 1px solid #d6d6d6;
-    border-radius: 4px;
 }
 
 .view-order-last-count p {
-    padding-top: 5px;margin-right: 5px;
+    padding-top: 5px;
+    margin-right: 5px;
 }
 
 .file-upload-required:after{
@@ -480,7 +479,7 @@ div.category-view-subcat ul li ul {
     float: none;
 }
 
-.nav-cat-search i {
+.nav-cat-search span i {
     font-size: 18px;
     padding: 15px 20px;
     cursor: pointer;
@@ -808,7 +807,10 @@ li.selected {
     -moz-animation-duration: 1s;
     -o-animation-duration: 1s;
     animation-duration: 1s;
-    animation-delay: 1s;
+    -webkit-animation-delay: 1s;
+    -moz-animation-delay: 1s;
+    -o-animation-delay: 1s;
+    -ms-animation-delay: 1s;
     -webkit-animation-fill-mode: both;
     -moz-animation-fill-mode: both;
     -o-animation-fill-mode: both;
@@ -825,6 +827,10 @@ li.selected {
     -o-animation-duration: 1s;
     animation-duration: 1s;
     animation-delay: 1s;
+    -webkit-animation-delay: 1s;
+    -moz-animation-delay: 1s;
+    -o-animation-delay: 1s;
+    -ms-animation-delay: 1s;
     -webkit-animation-fill-mode: both;
     -moz-animation-fill-mode: both;
     -o-animation-fill-mode: both;
@@ -1384,18 +1390,16 @@ ul.view-variant-list{
 
 .copyright-view-footer {
     width: 100%;
-    margin: 25px 0 100px;
     font-size: 11px;
     text-align: center;
-    background-color:#fff;
-    border-top: 5px solid #F7F8F9;
     padding-top: 15px;
 
 }
 
 .copyright-view {
-    background-color: #F7F8F9;
+    background-color: #F5F5F5;
     border-radius: 17px;
+    border: 1px solid #fff;
     display: inline-block;
     color:#083353;
     margin: 15px;
