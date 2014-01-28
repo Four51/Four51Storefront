@@ -1,6 +1,7 @@
 four51.app.directive('paymentselector', function() {
    var obj = {
        restrict: 'E',
+	   priority: 99,
        templateUrl: 'partials/controls/paymentSelection.html',
        controller: function($scope, $rootScope) {
 	       $scope.isSplitBilling = false;
@@ -20,17 +21,20 @@ four51.app.directive('paymentselector', function() {
 		       });
 	       };
 
-	       if ($scope.currentOrder.PaymentMethod == 'BudgetAccount') {
-				if ($scope.currentOrder.BudgetAccountID == null) {
-					$scope.selectedBudgetAccount = $scope.SpendingAccounts[0];
-					$scope.currentOrder.BudgetAccountID = $scope.SpendingAccounts[0].ID;
-				}
-		       angular.forEach($scope.SpendingAccounts, function(a) {
-			       if (a.AccountType.PurchaseCredit && a.ID == $scope.currentOrder.BudgetAccountID) {
-				       $scope.selectedBudgetAccount = a;
-			       }
-		       });
-           }
+	       $rootScope.$on('event:SpendingAccountUpdate', function(event, accounts) {
+		       if ($scope.currentOrder.PaymentMethod == 'BudgetAccount') {
+			       angular.forEach(accounts, function(a) {
+				       if ($scope.selectedBudgetAccount) return;
+				       if ($scope.currentOrder.BudgetAccountID == null && a.AccountType.PurchaseCredit) {
+							$scope.currentOrder.BudgetAccountID = a.ID;
+							$scope.selectedBudgetAccount = a;
+				       }
+				       else if (a.AccountType.PurchaseCredit && a.ID == $scope.currentOrder.BudgetAccountID) {
+					       $scope.selectedBudgetAccount = a;
+				       }
+			       });
+		       }
+	       });
 	   }
    };
 
