@@ -103,6 +103,15 @@
             <button type="submit" class="btn btn-primary pull-right" ng-click="OrderSearch($event, criteria)">Search</button>
         </div>
     </div>
+    <div class="panel panel-default" ng-show="showNoResults">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <span class="alert alert-info">
+                    No Search Results Found
+                </span>
+            </h3>
+        </div>
+    </div>
     <div class="panel panel-default" ng-show="orders">
         <div class="panel-heading">
             <h3 class="panel-title">

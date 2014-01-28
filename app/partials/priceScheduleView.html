@@ -1,4 +1,10 @@
-<div class="price-schedule-view" ng-show="ps && p">
+<div class="btn btn-default btn-block" ng-show="ps.PriceBreaks.length > 5" ng-init="showPS = false" ng-click="showPS = !showPS">
+	<span ng-show="showPS"><i class="fa fa-arrow-circle-up"></i> Hide</span>
+	<span ng-show="!showPS"><i class="fa fa-arrow-circle-down"></i> View</span>
+	Price Schedule
+</div>
+
+<div class="price-schedule-view" ng-show="ps && p && showPS || ps.PriceBreaks.length <= 5">
     <span class="text-info">Price</span>
     <!--- example of 2 column responsive tabular structure --->
     <div id="451_list_pric_schd" class="view-tr">

@@ -146,7 +146,7 @@
                             </div>
                             <div ng-show="user.ShipMethod != null && shippers">
                                 <label ng-class="{required: !shipToMultipleAddresses && user.ShipMethod != null}" ng-show="currentOrder.LineItems[0].ShipperName || !shipToMultipleAddresses && user.ShipMethod != null">Shipping Method</label>
-                                <select class="form-control" ng-change="updateShipper()"
+                                <select class="form-control" ng-change="updateShipper()" name="shipMethod"
                                         ng-model="currentOrder.LineItems[0].ShipperName"
                                         ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
                                         ng-options="shipper.Name as shipper.Name for shipper in shippers"
@@ -156,14 +156,14 @@
                                 <i class="fa fa-truck"></i>
                             </div>
                         </div>
-                        <div ng-show="!shipToMultipleAddresses && orderShipAddress" class="check-out-view-selected-shipping" style="border: 1px solid #d6d6d6; padding: 15px; margin-top: 15px;">
+                        <div ng-show="!shipToMultipleAddresses && orderShipAddress.ID" class="check-out-view-selected-shipping" style="border: 1px solid #d6d6d6; padding: 15px; margin-top: 15px;">
                             <p style="font-size: 11px; font-weight: bold;">Shipping Location</p>
                             <p ng-show="orderShipAddress.AddressName"><small>{{orderShipAddress.AddressName}}</small></p>
                             <p ng-show="orderShipAddress.CompanyName"><small>{{orderShipAddress.CompanyName}}</small></p>
                             <p ng-show="(orderShipAddress.FirstName || orderShipAddress.LastName) && (!user.Permissions.contains('EditShipToName') && !orderShipAddress.IsCustEditable)">
                                 <small>{{orderShipAddress.FirstName + ' ' + orderShipAddress.LastName}}</small>
                             </p>
-                            <p ng-show="user.Permissions.contains('EditShipToName') && !orderShipAddress.IsCustEditable">
+                            <p ng-show="!shipToMultipleAddresses && user.Permissions.contains('EditShipToName') && (orderShipAddress && !orderShipAddress.IsCustEditable)">
                                 <input class="input-sm" type="text" ng-model="currentOrder.LineItems[0].ShipFirstName" placeholder="First Name" />
                                 <input class="input-sm" type="text" ng-model="currentOrder.LineItems[0].ShipLastName" placeholder="Last Name" />
                             </p>
@@ -204,8 +204,8 @@
                             </div>
                             <div class="col-xs-12 col-sm-4" ng-show="user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable">
                                 <span>Attn:</span>
-                                <input class="input-sm" ng-required="user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" type="text" ng-model="item.ShipFirstName" placeholder="First Name" />
-                                <input class="input-sm" ng-required="user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" type="text" ng-model="item.ShipLastName" placeholder="Last Name" />
+                                <input class="input-sm" ng-required="shipToMultipleAddresses && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" type="text" ng-model="item.ShipFirstName" placeholder="First Name" />
+                                <input class="input-sm" ng-required="shipToMultipleAddresses && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" type="text" ng-model="item.ShipLastName" placeholder="Last Name" />
                             </div>
                         </div>
                     </div>
@@ -273,14 +273,17 @@
         </div>
 
         <div class="view-footer navbar-fixed-bottom">
-            <div class="view-action-message alert-success" alert-show="showSave">
+            <div class="view-action-message alert-success" alert-show="showSave" ng-show="showSave">
+                <p>Your changes have been saved.</p>
+            </div>
+            <div class="view-action-message alert-success">
                 <p>{{actionMessage}}</p>
             </div>
             <div class="view-error-list">
                 <div class="alert-warning" ng-show="couponError">{{couponError}}</div>
                 <div class="alert-warning" ng-show="cart_order.orderid.$invalid">Enter an order id</div>
                 <div class="alert-warning" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</div>
-                <div class="alert-warning" ng-show="cart_shipping.shippingMethod.$invalid">Please choose a shipping method</div>
+                <div class="alert-warning" ng-show="cart_shipping.shipMethod.$invalid">Please choose a shipping method</div>
                 <div class="alert-warning" ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
                     You're site is mis-configured. You do not have permission to create a billing address nor do you have any addresses assigned to you. Please contact your support representative.
                 </div>
