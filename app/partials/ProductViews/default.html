@@ -83,7 +83,7 @@
                                                 Quantity available: {{v.QuantityAvailable}}
                                             </p>
                                         </a>
-                                        <div class="col-sm-2 col-collapse-m" ng-if="allowAddFromVariantList">
+                                        <div class="col-sm-2 col-collapse-m" ng-if="allowAddFromVariantList && !(user.Permissions.contains('HidePricing'))">
                                             <div  style="border: 1px solid #d6d6d6;text-align: center;height: 52px;" ng-show="variantLineItems[v.InteropID].LineTotal > 0">
                                                 <small><span class="text-info">Total</span><br /><span class=" text-success">{{variantLineItems[v.InteropID].LineTotal | currency}}</span></small>
                                             </div>
