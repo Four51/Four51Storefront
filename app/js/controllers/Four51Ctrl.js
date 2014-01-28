@@ -11,14 +11,13 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
 	}
 
     // fix Bootstrap fixed-top and fixed-bottom from jumping around on mobile input when virtual keyboard appears
-    var $body = jQuery('body');
     if ( $(window).width() < 960 ) {
         $(document)
-        .on('focus', ':input', function(e) {
-            $body.addClass('view-fix-fixed');
+        .on('focus', ':input:not("button")', function(e) {
+            $('.view-footer.navbar-fixed-bottom, .headroom.navbar-fixed-top').addClass('ng-hide');
         })
         .on('blur', ':input', function(e) {
-            $body.removeClass('view-fix-fixed');
+            $('.view-footer.navbar-fixed-bottom, .headroom.navbar-fixed-top').removeClass('ng-hide');
         });
     }
 

@@ -1393,8 +1393,6 @@ ul.view-variant-list{
     width: 100%;
     font-size: 11px;
     text-align: center;
-    padding-top: 15px;
-
 }
 
 .copyright-view {
@@ -1403,7 +1401,7 @@ ul.view-variant-list{
     border: 1px solid #fff;
     display: inline-block;
     color:#083353;
-    margin: 15px;
+    margin: 30px;
     padding: 15px 0;
     float: right;
 }
@@ -1450,8 +1448,6 @@ ul.view-variant-list{
 
 .cart-view-detail {position: static !important;}
 
-
-body.view-fix-fixed .view-footer.navbar-fixed-bottom, body.view-fix-fixed .headroom.navbar-fixed-top {display: none !important;}
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
