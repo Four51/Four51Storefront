@@ -1409,7 +1409,7 @@ ul.view-variant-list{
 }
 
 .copyright-view p {
-    margin: 0 25px;
+    margin: 0 15px;
 }
 
 .copyright-view .btn {
@@ -1449,6 +1449,9 @@ ul.view-variant-list{
 }
 
 .cart-view-detail {position: static !important;}
+
+
+body.view-fix-fixed .view-footer.navbar-fixed-bottom, body.view-fix-fixed .headroom.navbar-fixed-top {display: none !important;}
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
