@@ -21,6 +21,7 @@ body {
     font-smoothing: antialiased;
     -webkit-text-stroke: 1px transparent;
     margin-bottom: 100px;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5 {
