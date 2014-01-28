@@ -234,9 +234,15 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		        $location.path('/order/' + data.ID);
 	        },
 	        function(ex) {
-		        $scope.cart_billing.$setValidity('paymentMethod', false);
+		        if (ex.Code.is('ObjectExistsException')) { // unique id
+			        ex.Message = ex.Message.replace('{0}', 'Order ID (' + $scope.currentOrder.ExternalID + ')');
+		        }
+		        //$scope.cart_billing.$setValidity('paymentMethod', false);
 		        $scope.actionMessage = ex.Message;
 		        $scope.displayLoadingIndicator = false;
+		        $scope.shippingUpdatingIndicator = false;
+		        $scope.shippingFetchIndicator = false;
+		        $scope.showSave = false;
 	        }
         );
     };
