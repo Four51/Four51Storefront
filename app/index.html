@@ -38,21 +38,9 @@
         <section ng-controller="ErrorCtrl">
             <ng-include src="template.url" />
         </section>
-        <div ng-if="!user.Permissions.contains('UnBrandedSite')">
-            <div class="ribbon">
-                <div class="tie">
-                    <div class="base">
-                        <div>
-                            <p><i class="fa fa-cloud"></i><br /><b>Powered by <br /><br /><a href="http://www.four51.com/public/index.php/help" class="btn btn-default btn-sm" target="_new"><i class="fa fa-external-link"></i> Four51°</a></b></p>
-                            <p style="color:#666;">Copyright © 2013<br /> Four51 Inc. <br>All Rights Reserved.</p>
-                            <p class="view-cou" ng-if="!(user.Permissions.contains('HideTerms'))"><a href="#/conditions">Conditions of Use</a></p>
-                        </div>
-                    </div>
-                    <div class="left_corner"></div>
-                    <div class="right_corner"></div>
-                </div>
-            </div>
-        </div>
+        <section ng-if="!user.Permissions.contains('UnBrandedSite')">
+            <copyright />
+        </section>
     </section>
 </section>
 
@@ -72,10 +60,14 @@
     <script src="lib/angular/angular-touch.js"></script>
     <script src="lib/angular/angular-loader.js"></script>
 
+
     <script src="lib/angular/ui-bootstrap-0.2.0.js"></script>
     <script src="lib/angular/ui-date.js"></script>
     <script src="lib/angular/ui-validate.js"></script>
     <script src="lib/angular/ui-mask.js"></script>
+    <script src="lib/angular/Debouncer.js"></script>
+    <script src="lib/angular/headroom.js"></script>
+    <script src="lib/angular/angular.headroom.js"></script>
 
     <script src="js/app.js"></script>
     <script src="js/451.js"></script>
@@ -107,7 +99,7 @@
 	<script src="js/controllers/specFormCtrl.js"></script>
 	<script src="js/controllers/securityCtrl.js"></script>
 	<script src="js/controllers/conditionsCtrl.js"></script>
-
+    <script src="js/controllers/giftCardRedemptionCtrl.js"></script>
 
     <script src="js/services/interceptors.js"></script>
     <script src="js/services/errorService.js"></script>
@@ -125,6 +117,7 @@
     <script src="js/services/addressService.js"></script>
     <script src="js/services/shipperService.js"></script>
     <script src="js/services/couponService.js"></script>
+    <script src="js/services/giftCardService.js"></script>
     <script src="js/services/resourceService.js"></script>
 
     <script src="js/factories/fileReader.js"></script>
@@ -147,6 +140,8 @@
     <script src="js/directives/shortCartView.js"></script>
     <script src="js/directives/loadingindicator.js"></script>
     <script src="js/directives/alertShow.js"></script>
+    <script src="js/directives/giftcard.js"></script>
+    <script src="js/directives/copyright.js"></script>
 
     <script src="js/directives/printing.js"></script>
 

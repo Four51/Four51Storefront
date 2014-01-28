@@ -27,6 +27,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	$scope.shipToMultipleAddresses = shipToMultipleAddresses($scope.currentOrder);
 
 	$scope.updateShipper = function(li) {
+		if (!li || !li.ShipAddressID) return;
 		$scope.shippingUpdatingIndicator = true;
 		$scope.shippingFetchIndicator = true;
 		if (!li) {
@@ -189,7 +190,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 				    return false;
 			    }
 
-			    if (account.Balance <= $scope.currentOrder.Total) {
+			    if (account.Balance < $scope.currentOrder.Total) {
 				    $scope.isSplitBilling = !account.AccountType.AllowExceed;
 				    return account.AccountType.AllowExceed;
 			    }
@@ -253,8 +254,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		        }
 		        $scope.displayLoadingIndicator = false;
 		        if (callback) callback($scope.currentOrder);
-	            $scope.actionMessage = 'Your changes have been saved.';
-                $scope.showSave = false;
+	            $scope.showSave = false;
 	        },
 	        function(ex) {
 		        if (ex.Code.is('ObjectExistsException')) { // unique id
@@ -262,6 +262,8 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		        }
 		        $scope.actionMessage = ex.Message;
 		        $scope.displayLoadingIndicator = false;
+		        $scope.shippingUpdatingIndicator = false;
+		        $scope.shippingFetchIndicator = false;
                 $scope.showSave = false;
 	        }
         );

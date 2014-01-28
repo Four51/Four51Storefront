@@ -19,8 +19,20 @@ four51.app.directive('paymentselector', function() {
 			       }
 		       });
 	       };
+
+	       if ($scope.currentOrder.PaymentMethod == 'BudgetAccount') {
+				if ($scope.currentOrder.BudgetAccountID == null) {
+					$scope.selectedBudgetAccount = $scope.SpendingAccounts[0];
+					$scope.currentOrder.BudgetAccountID = $scope.SpendingAccounts[0].ID;
+				}
+		       angular.forEach($scope.SpendingAccounts, function(a) {
+			       if (a.AccountType.PurchaseCredit && a.ID == $scope.currentOrder.BudgetAccountID) {
+				       $scope.selectedBudgetAccount = a;
+			       }
+		       });
+           }
 	   }
-   }
+   };
 
    return obj;
 });
