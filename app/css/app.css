@@ -11,7 +11,7 @@ Template: Four51 Single Page App - Ken Buras (http://www.kenburas.com/)
 }
 
 html {
-    height: 100%;
+
 }
 
 body {
@@ -518,6 +518,7 @@ li.selected {
     line-height: normal;
 }
 
+.gift-card-redemption-view .form-group {width: 30%;}
 /* ----------------------------------------------------------------------------------------------- */
 /* Animations */
 /* ----------------------------------------------------------------------------------------------- */
@@ -1016,8 +1017,11 @@ li.selected {
     cursor:pointer;
     position:absolute;
     top:0;
-    right:10px;
+    right:0;
     font-size:1.5em;
+    display: block;
+    z-index: 2;
+    padding: 15px 20px;
 }
 
 .view-footer{
@@ -1393,6 +1397,7 @@ ul.view-variant-list{
     width: 100%;
     font-size: 11px;
     text-align: center;
+    padding-top: 50px;
 }
 
 .copyright-view {
@@ -1401,7 +1406,7 @@ ul.view-variant-list{
     border: 1px solid #fff;
     display: inline-block;
     color:#083353;
-    margin: 30px;
+    margin: 50px 0 0;
     padding: 15px 0;
     float: right;
 }

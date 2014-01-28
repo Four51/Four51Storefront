@@ -21,9 +21,9 @@
                         <span title="Remove Item" class="view-corner-button"  ng-click="removeItem(item)">
                             <i class="fa fa-times-circle text-danger"></i>
                         </span>
-                        <div class="col-xs-3">
+                        <div class="col-xs-12 col-md-3">
                             <div class="row">
-                                <div class="col-xs-12 col-sm-6" style="padding-right: 0;margin-bottom: 15px;">
+                                <div class="col-xs-6">
                                     <quantityfield lineitem="item" class="quantity"/>
                                     <div class="text-success" style="border: 1px solid #d6d6d6;border-top: 0; text-align: center;padding-top: 10px;">
                                         <p ng-show="item.Product.QuantityMultiplier = 1">
@@ -34,16 +34,16 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-6" style="padding-right: 0;">
+                                <div class="col-xs-6">
                                     <figure ng-show="item.Product.SmallImageUrl">
                                         <img class="view-thumbnail" ng-src="{{item.Product.SmallImageUrl}}"/>
                                     </figure>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-9 cart-view-line-items-product">
+                        <div class="col-xs-12 col-md-9 cart-view-line-items-product">
                             <div class="row">
-                                <div class="col-sm-6 col-xs-12" style="padding-bottom: 15px;">
+                                <div class="col-md-6 col-xs-12" style="padding-bottom: 15px;">
                                     <a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">
                                     <h3 class="text-primary" style="margin: 0; padding: 0;">
                                        {{item.ProductIDText}}
@@ -51,7 +51,7 @@
                                     <span>{{item.Product.Name}}</span>
                                     </a>
                                 </div>
-                                <div class="col-sm-6 col-xs-12">
+                                <div class="col-md-6 col-xs-12">
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-6">
                                             <div ng-show="item.qtyError" style="padding:2px 5px; margin:0; position:absolute; height:100%;" class="alert alert-danger text-center">
@@ -115,7 +115,7 @@
                 <div class="panel-footer">
                     <div class="text-right" ng-if="!(user.Permissions.contains('HidePricing'))">
                         <h4 class="text-primary">
-                            SubTotal: {{currentOrder.Subtotal | currency}}
+                            <strong>SubTotal:</strong> <span class="text-success">{{currentOrder.Subtotal | currency}}</span>
                         </h4>
                         <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
                             <span class="text-info">Shipping, handling and tax may be added to this subtotal.</span>

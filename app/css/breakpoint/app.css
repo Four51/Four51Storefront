@@ -17,14 +17,14 @@
     .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
     .branding-view h3 {line-height: 4em;}
-    .copyright-view {float: none; margin: 15px auto;}
+
 
 }
 
 /* x-sm */
 @media (min-width:768px) and (max-width: 1023px) {
 
-    .view-price-total {font-size: 24px !important;}
+
     .branding-view {text-align: center;}
     .branding-view-logo {float: none; margin: 0 auto 10px; max-height: 75px; }
     .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
@@ -66,7 +66,6 @@
     .view-order-last-count {width: 100%;}
     .btn-group {width: 100%;}
     .btn-group .btn {width: 100%;padding: 15px;margin: 2px;}
-    .view-price-total {font-size: 26px !important;}
     .current-cat-name {width: 215px;}
     .navbar-collapse {padding: 0;}
     .navbar-left li.products a {padding: 15px 20px 15px 10px;}
@@ -90,4 +89,9 @@
     .col-collapse-m {padding: 0;}
     .view-variant-list li {margin-bottom: 15px !important;}
     .copyright-view {float: none; margin: 15px auto;}
+    .gift-card-redemption-view .form-group {width: 100%;}
+    input, textarea, select, button {min-height: 45px;}
+    .view-form-icon  i {
+    top: 15px;
+    }
 }
