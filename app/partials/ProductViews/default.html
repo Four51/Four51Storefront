@@ -54,7 +54,7 @@
                 </div>
                 <div class="panel-body">
                     <loadingindicator ng-show="addToOrderIndicator" title="Adding product to cart"/>
-                    <div ng-if="LineItem.Product.Variants.length > 0 && !LineItem.Variant" style="margin: -15px;border-bottom: 1px solid #d6d6d6;">
+                    <div ng-if="(LineItem.Product.Variants.length > 0 || LineItem.Product.Type == 'VariableText') && !LineItem.Variant" style="margin: -15px;border-bottom: 1px solid #d6d6d6;">
                             <h3 class="panel-title text-info" style="border-bottom: 1px solid #d6d6d6;">
                                 Product Variants
                             </h3>
