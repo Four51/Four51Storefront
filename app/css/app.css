@@ -12,7 +12,7 @@ Template: Four51 Single Page App - Ken Buras (http://www.kenburas.com/)
 
 html {
     height: 100%;
-    background-color:#F7F7F7;
+    background-color:#fff;
 }
 
 body {
@@ -21,6 +21,7 @@ body {
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
     -webkit-text-stroke: 1px transparent;
+    margin-bottom: 100px;
 }
 
 h1, h2, h3, h4, h5 {
@@ -108,11 +109,6 @@ input[type="file"]{
     bottom:0;
     cursor:pointer;
     opacity:0;
-}
-
-.view-fix-fixed .navbar-fixed-top,
-.view-fix-fixed .navbar-fixed-bottom {
-    display: none;
 }
 
 .view-table-row {
@@ -1042,21 +1038,19 @@ li.selected {
     width: 100%;
     border: none;
     border-radius: 0;
-    padding: 25px 0;
+    padding: 20px 0;
     text-transform: lowercase;
-    font-size: 11px;
+    font-size: 14px;
 }
 
 .view-footer li div {
-    padding: 23px 0;
     height: 100%;
 
 }
 
 .view-footer li:last-child .btn  {
     text-transform: uppercase;
-    font-size: 14px;
-    padding: 23px 0;
+
 }
 
 .view-footer  li .btn-warning[disabled] {
@@ -1342,7 +1336,7 @@ ul.view-variant-list{
     display: block;
     padding: .4em;
     margin: 0;
-    background: #F5F5F5;
+    background: #eee;
     color: #444;
     text-decoration: none;
     transition: all .3s ease-out;
@@ -1350,7 +1344,7 @@ ul.view-variant-list{
 }
 
 .view-variant-list a:hover{
-    background: #eee;
+    background: #F9f9f9;
 }
 
 .view-variant-list a:before{
@@ -1388,91 +1382,33 @@ ul.view-variant-list{
     font-size: 11px;
 }
 
-.ribbon {
+.copyright-view-footer {
     width: 100%;
-    height: 280px;
-    margin: 100px 0 0;
-    position: relative;
+    margin: 25px 0 100px;
     font-size: 11px;
     text-align: center;
-    background-color:#F7F7F7;
-    border-top: 5px solid #fff;
-
-}
-
-.ribbon .tie {
-    position: relative;
-    width: 120px;
-    height: 250px;
-    overflow: hidden;
-    margin: -5px auto 0;
-    border-left: 1px solid #d6d6d6;
-    border-right: 1px solid #d6d6d6;
-}
-
-.ribbon .base {
-    height: 200px;
-    width: 120px;
-    padding-top: 15px;
-    color:#062F4F;
     background-color:#fff;
-    position: relative;
-    z-index: 2;
+    border-top: 5px solid #F7F8F9;
+    padding-top: 15px;
+
 }
 
-.ribbon .base:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    width: 106px;
-    left: 7px;
-    height: 242px;
-    border-left: 1px dashed #d6d6d6;
-    border-right: 1px dashed #d6d6d6;
+.copyright-view {
+    background-color: #F7F8F9;
+    border-radius: 17px;
+    display: inline-block;
+    color:#083353;
+    margin: 15px;
+    padding: 15px 0;
+    float: right;
 }
 
-.ribbon .left_corner {
-    width: 100px;
-    height: 100px;
-    background:#fff;
-    position: absolute;
-    bottom: 20px;
-    left: -50px;
-    z-index: 1;
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
-    -moz-box-shadow: 0 0 5px #C5C5C5;
-    -webkit-box-shadow: 0 0 5px #C5C5C5;
-    box-shadow: 0 0 5px #C5C5C5;
+.copyright-view p {
+    margin: 0 25px;
 }
 
-.ribbon .right_corner {
-    width: 100px;
-    height: 100px;
-    background: #fff;
-    position: absolute;
-    bottom: 20px;
-    right: -50px;
-    z-index: 1;
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
-    -moz-box-shadow: 0 0 5px #C5C5C5;
-    -webkit-box-shadow: 0 0 5px #C5C5C5;
-    box-shadow: 0 0 5px #C5C5C5;
-}
-
-.ribbon p .btn i {
-    margin-right: 5px;
-}
-
-.view-cou a {
-    text-decoration: underline;
+.copyright-view .btn {
+    margin: 5px 0;
 }
 
 .navbar-fixed-top.headroom {
@@ -1507,6 +1443,7 @@ ul.view-variant-list{
     bottom: 0;
 }
 
+.cart-view-detail {position: static !important;}
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */

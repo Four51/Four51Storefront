@@ -30,7 +30,6 @@ four51.app.controller('NavCtrl', function ($location, $route, $scope, $451, User
         }
         return result;
     };
-
     // extension of above isActive in path
     $scope.isInPath = function(path) {
         var cur_path = $location.path().replace('/', '');
@@ -45,7 +44,6 @@ four51.app.controller('NavCtrl', function ($location, $route, $scope, $451, User
         return result;
     };
 
-
 	$scope.Clear = function() {
 		localStorage.clear();
 		$route.reload();
@@ -57,6 +55,4 @@ four51.app.controller('NavCtrl', function ($location, $route, $scope, $451, User
 			order = $scope.currentOrder;
 		$scope.cartCount = order ? (order.Status == 'Unsubmitted' || order.Status == 'AwaitingApproval') ? order.LineItems.length : null : null;
 	});
-
-
 });

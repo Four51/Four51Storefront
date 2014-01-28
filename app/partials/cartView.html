@@ -123,18 +123,18 @@
                     </div>
                 </div>
             </div>
-            <div class="view-footer navbar-fixed-bottom" headroom>
-                <div class="view-action-message alert-success" alert-show="currentOrder" after-hide="afterHide()" after-show="afterShow()">
+            <div class="view-footer navbar-fixed-bottom">
+                <div class="view-action-message alert-success" alert-show="currentOrder">
                     <p>{{actionMessage}}</p>
                 </div>
                 <ul>
                     <li style="width: 25%;">
-                        <button class="btn btn-danger" ng-click="cancelOrder()">Cancel Order</button>
+                        <button class="btn btn-danger" ng-click="cancelOrder()"><small>Cancel Order</small></button>
                     </li>
                     <li style="width: 25%;">
                         <button class="btn btn-primary" ng-click="saveChanges()">
                             <loadingindicator ng-show="displayLoadingIndicator" />
-                            Save Order
+                            <small>Save Order</small>
                         </button>
                     </li>
                     <li>

@@ -17,6 +17,7 @@
     .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
     .branding-view h3 {line-height: 4em;}
+    .copyright-view {float: none; margin: 15px auto;}
 
 }
 
@@ -30,6 +31,7 @@
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
     .cart-view-btn-cancel  {float: left !important;}
     .cart-view-btn-save {float: right !important;}
+    .copyright-view {float: none; margin: 15px auto;}
 }
 
 
@@ -87,4 +89,5 @@
     }
     .col-collapse-m {padding: 0;}
     .view-variant-list li {margin-bottom: 15px !important;}
+    .copyright-view {float: none; margin: 15px auto;}
 }

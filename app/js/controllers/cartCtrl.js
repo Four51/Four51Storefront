@@ -100,4 +100,8 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 	    window.print();
     };
 
+   // $scope.$on('$viewContentLoaded', function () {
+   //     alert("blah");
+   // });
+
 });

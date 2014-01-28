@@ -1,13 +1,20 @@
-<div class="ribbon">
-    <div class="tie">
-        <div class="base">
-            <div>
-                <p><i class="fa fa-cloud"></i><br /><b>Powered by <br /><br /><a href="http://www.four51.com/public/index.php/help" class="btn btn-info btn-sm" target="_new"><i class="fa fa-external-link"></i> Four51°</a></b></p>
-                <p>Copyright © 2013<br /> Four51 Inc. <br>All Rights Reserved.</p>
-                <p class="view-cou" ng-if="!(user.Permissions.contains('HideTerms'))"><a href="#/conditions">Conditions of Use</a></p>
-            </div>
-        </div>
-        <div class="left_corner"></div>
-        <div class="right_corner"></div>
+<footer class="container copyright-view-footer">
+    <div class="copyright-view">
+        <p class="pull-left">
+            Copyright © 2013<br /> Four51 Inc. <br>All Rights Reserved.<br />
+            <span ng-if="!(user.Permissions.contains('HideTerms'))">
+                <a class="btn btn-default btn-sm" href="#/conditions">
+                    Conditions of Use
+                </a>
+            </span>
+        </p>
+        <p class="pull-right">
+            <i class="fa fa-cloud"></i><br />
+            <strong>Powered by</strong><br />
+            <a href="http://www.four51.com/public/index.php/help" class="btn btn-info btn-sm" target="_new">
+                <i class="fa fa-external-link"></i>
+                Four51°
+            </a>
+        </p>
     </div>
-</div>
+</footer>
