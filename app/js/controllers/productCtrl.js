@@ -190,17 +190,22 @@ four51.app.factory('ProductDisplayService', function($451, $sce, Variant, Produc
 				if(scope.LineItem.Product.Type == 'VariableText' && !Object.keys(scope.variantLineItems).length)
 					newErrorList.push("Please create a variant.");
 				else if(!haveQty) newErrorList.push("please select a quantity");
-			}
+			}else if(!scope.LineItem.Quantity && !scope.LineItem.qtyError)//if there's a qty error, just use that. in this case, there's no qty error because it hasn't been validated yet.
+				newErrorList.push("Please select a quantity.");
 
 			if(scope.LineItem.qtyError)
 				newErrorList.push(scope.LineItem.qtyError);
+
 			if(!scope.LineItem.Variant && scope.LineItem.Product.IsVBOSS){
 				newErrorList.push("Please select an active product");
 			}
-
-			if(scope.addToOrderForm && scope.addToOrderForm.$invalid){
-				newErrorList.push("Please fill all required fields");
-			}
+			angular.forEach(scope.LineItem.Specs, function(s){
+				if(s.Required && !s.Value)
+					newErrorList.push(s.Name + " is a required field");
+			});
+			//if(scope.addToOrderForm && scope.addToOrderForm.$invalid){
+			//	newErrorList.push("Please fill all required fields");
+			//}
 			scope.lineItemErrors = newErrorList;
 		}
 
