@@ -1453,6 +1453,8 @@ ul.view-variant-list{
 
 .cart-view-detail {position: static !important;}
 
+.check-out-view-input-group-id .input-group-addon {font-size: 11px;padding-top: 0; padding-bottom: 0;border: none;}
+
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */

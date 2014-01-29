@@ -229,7 +229,7 @@ Headroom.prototype = {
  * @type {Object}
  */
 Headroom.options = {
-    tolerance : 5,
+    tolerance : 20,
     offset: 100,
     classes : {
         pinned : 'headroom--pinned',

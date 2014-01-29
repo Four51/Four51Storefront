@@ -21,7 +21,7 @@
                         <span title="Remove Item" class="view-corner-button"  ng-click="removeItem(item)">
                             <i class="fa fa-times-circle text-danger"></i>
                         </span>
-                        <div class="col-xs-12 col-md-3">
+                        <div class="col-md-3">
                             <div class="row">
                                 <div class="col-xs-6">
                                     <quantityfield lineitem="item" class="quantity"/>
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-md-9 cart-view-line-items-product">
+                        <div class="col-md-9 cart-view-line-items-product">
                             <div class="row">
                                 <div class="col-md-6 col-xs-12" style="padding-bottom: 15px;">
                                     <a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">
