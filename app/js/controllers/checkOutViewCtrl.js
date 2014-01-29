@@ -106,12 +106,15 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 
     $scope.$watch('currentOrder.ShipAddressID', function(newValue) {
 	    $scope.orderShipAddress = {};
-	    $scope.currentOrder.ShipFirstName = null;
-	    $scope.currentOrder.ShipLastName = null;
-	    angular.forEach($scope.currentOrder.LineItems, function(item) {
-		    item.ShipFirstName = null;
-		    item.ShipLastName = null;
-	    });
+	    if ($scope.currentOrder) {
+		    $scope.currentOrder.ShipFirstName = null;
+		    $scope.currentOrder.ShipLastName = null;
+		    angular.forEach($scope.currentOrder.LineItems, function(item) {
+			    item.ShipFirstName = null;
+			    item.ShipLastName = null;
+		    });
+	    }
+
         if (newValue) {
             Address.get(newValue, function(add) {
 	            if ($scope.user.Permissions.contains('EditShipToName') && !add.IsCustEditable) {
