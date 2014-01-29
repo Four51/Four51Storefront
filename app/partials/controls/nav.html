@@ -3,8 +3,13 @@
         <section class="header-nav-c1">
             <div class="collapse navbar-collapse navbar-ex1-collapse visible-xs">
                 <ul class="nav navbar-nav pull-left">
+                    <li class="back animated fadeInLeft" ng-class="{'ng-hide': isActive('catalog')}">
+                        <a href back-step class="back">
+                            <i class="fa fa-arrow-left"></i>
+                        </a>
+                    </li>
                     <li class="products" ng-class="{'active': isInPath('catalog') || isInPath('product') || isInPath('cart/default') || isInPath('search')}">
-                        <a ng-show="Four51User.isAuthenticated()" href="#/catalog"><i class="fa fa-home"></i><span class="text-nav">Products</span></a>
+                        <a ng-show="Four51User.isAuthenticated()" href="#/catalog"><i class="fa fa-home"></i><span class="text-nav hidden-xs">Products</span></a>
                     </li>
                     <li class="order" ng-class="{'active': isActive('order'), 'active-xs': isActive('favoriteorders')}">
                         <a href="#/order"><i class="fa fa-bar-chart-o"></i><span class="text-nav hidden-xs">Orders</span></a>

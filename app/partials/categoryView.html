@@ -15,8 +15,8 @@
                     <a href="#/search"><span><i class="fa fa-search" rel="tooltip" title="Search Products"></i></span></a>
                 </li>
             </ul>
-        <giftcardredemption />
         <hr />
+        <giftcardredemption />
     </nav>
     <aside class="col-sm-3 hidden-sm hidden-xs" ng-if="showMega" ng-class="{ 'category-view-aside': showMega }">
         <nav class="nav 451_cat_nav">
@@ -29,9 +29,6 @@
     <div class="cat-body" ng-class="{ 'move-cat-body col-sm-9 col-collapse': showMega }">
         <div class="category-product product-navigation" ng-show="currentCategory">
             <loadingindicator ng-show="categoryLoadingIndicator" title="Please wait while we fetch all categories" />
-
-            <div class="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image"> </div>
-
             <h3 class="text-primary" ng-show="currentCategory.SubCategories.length && currentCategory.InteropID">{{currentCategory.Name}} Categories</h3>
             <nav class="nav 451_lbl_subcatlist">
                 <ul>

@@ -39,7 +39,7 @@
             <ng-include src="template.url" />
         </section>
         <section ng-if="!user.Permissions.contains('UnBrandedSite')">
-            <copyright />
+            <ng-include src="'partials/copyrightView.html'"></ng-include>
         </section>
     </section>
 </section>
