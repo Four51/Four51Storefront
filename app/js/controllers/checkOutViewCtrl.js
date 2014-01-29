@@ -138,8 +138,20 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     });
 
     $scope.$watch('currentOrder.PaymentMethod', function(event) {
-	    if (event == 'BudgetAccount' && ($scope.SpendingAccounts && $scope.SpendingAccounts.length == 1)) {
-		    $scope.currentOrder.BudgetAccountID = $scope.SpendingAccounts[0].ID;
+	    if (event == 'BudgetAccount' && $scope.SpendingAccounts) {
+		    if ($scope.SpendingAccounts.length == 1)
+		        $scope.currentOrder.BudgetAccountID = $scope.SpendingAccounts[0].ID;
+		    else {
+			    var count = 0, account;
+			    angular.forEach($scope.SpendingAccounts, function(s) {
+				    if (s.AccountType.PurchaseCredit) {
+				        count += 1;
+					    account = s;
+				    }
+			    });
+			    if (count == 1 && account)
+			        $scope.currentOrder.BudgetAccountID = account.ID;
+		    }
 	    }
 	    else {
 		    if (!$scope.isSplitBilling) {
