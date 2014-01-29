@@ -37,7 +37,7 @@
     </div>
     <!--- SWIPE INFO ON PHONE --->
     <section class="shortproduct-view-swipe" ng-show="showSwipe" ng-swipe-right="showSwipe = false">
-        <div class="shortproduct-info text-center" ng-class="{ 'product-details': toggle }">
+        <div class="shortproduct-info panel-body text-center" ng-class="{ 'product-details': toggle }">
             <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]" ng-if="!(user.Permissions.contains('HidePricing'))">
                 {{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
                 <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>
@@ -49,11 +49,9 @@
             <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
                 QTY Available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
             </p>
-            <p>
-                <a class="btn btn-default" style="width: 150px; margin: 0 auto;" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
-                    View Product
-                </a>
-            </p>
+            <button class="btn btn-default btn-block" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
+                View Product
+            </button>
         </div>
     </section>
 </div>
