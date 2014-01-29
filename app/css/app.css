@@ -11,7 +11,7 @@ Template: Four51 Single Page App - Ken Buras (http://www.kenburas.com/)
 }
 
 html {
-    height: 100%;
+
 }
 
 body {
@@ -518,6 +518,7 @@ li.selected {
     line-height: normal;
 }
 
+.gift-card-redemption-view .form-group {width: 30%;}
 /* ----------------------------------------------------------------------------------------------- */
 /* Animations */
 /* ----------------------------------------------------------------------------------------------- */
@@ -1016,8 +1017,11 @@ li.selected {
     cursor:pointer;
     position:absolute;
     top:0;
-    right:10px;
+    right:0;
     font-size:1.5em;
+    display: block;
+    z-index: 2;
+    padding: 15px 20px;
 }
 
 .view-footer{
@@ -1393,28 +1397,32 @@ ul.view-variant-list{
     width: 100%;
     font-size: 11px;
     text-align: center;
-    padding-top: 15px;
-
+    padding-top: 50px;
 }
 
 .copyright-view {
-    background-color: #F5F5F5;
-    border-radius: 17px;
+    border-radius: 4px;
     border: 1px solid #fff;
-    display: inline-block;
     color:#083353;
-    margin: 15px;
-    padding: 15px 0;
-    float: right;
+    margin: 50px 0 0;
 }
 
 .copyright-view p {
-    margin: 0 25px;
+    padding: 15px 20px;
+    margin: 0;
+    height: 115px;
 }
+
+.copyright-view p:first-of-type {color:#359FD5;   background-color: #F5F5F5;}
+.copyright-view p:last-of-type {color:#fff; background-color:#359FD5;}
+.copyright-view p:last-of-type .btn {background-color:#1C638D;color:#fff;}
+.copyright-view p:first-of-type .btn {font-size: 11px;}
+.copyright-view p:last-of-type .btn:hover {background-color:#3d3d3d;}
 
 .copyright-view .btn {
     margin: 5px 0;
 }
+
 
 .navbar-fixed-top.headroom {
     position: fixed;
@@ -1449,6 +1457,24 @@ ul.view-variant-list{
 }
 
 .cart-view-detail {position: static !important;}
+
+.check-out-view-input-group-id .input-group-addon {font-size: 11px;padding-top: 0; padding-bottom: 0;border: none;}
+
+
+
+.category-product li:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-width: 0 16px 16px 0;
+    border-style: solid;
+    border-color: #eee #eee #fff #fff;
+    background: #658E15;
+    display: block; width: 0;
+}
+
+
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */

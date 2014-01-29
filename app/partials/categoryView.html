@@ -29,8 +29,10 @@
     <div class="cat-body" ng-class="{ 'move-cat-body col-sm-9 col-collapse': showMega }">
         <div class="category-product product-navigation" ng-show="currentCategory">
             <loadingindicator ng-show="categoryLoadingIndicator" title="Please wait while we fetch all categories" />
-            <div class="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image"></div>
-            <h3 class="text-info" ng-show="currentCategory.SubCategories.length && currentCategory.InteropID">Categories</h3>
+
+            <div class="451_lbl_curcat" ng-show="currentCategory.Name || currentCategory.Image"> </div>
+
+            <h3 class="text-primary" ng-show="currentCategory.SubCategories.length && currentCategory.InteropID">{{currentCategory.Name}} Categories</h3>
             <nav class="nav 451_lbl_subcatlist">
                 <ul>
                     <li class="nav-header well col-lg-3 col-md-4 col-sm-6 col-xs-12 productGrid" ng-class="{ 'category-view-aside': showMega }" ng-repeat="c in currentCategory.SubCategories">
@@ -50,7 +52,10 @@
         </div>
         <div id="451_lst_prod" class="product-navigation" ng-if="currentCategory.InteropID" style="position: relative;">
             <loadingindicator ng-show="productLoadingIndicator" title="Please wait while we fetch all products"/>
-            <h3 class="text-info" ng-show="products">Products</h3>
+            <h3 class="text-primary" ng-show="products">{{currentCategory.Name}} Products</h3>
+            <div ng-show="products" class="alert alert-info hidden-md hidden-lg text-center">
+                <i class="fa fa-arrow-circle-o-left"></i> Swipe Product Left
+            </div>
             <nav class="nav">
                 <ul>
                     <li style="min-height:0;" class="nav-header well productList" ng-class="{ 'category-view-aside': showMega }" ng-repeat="product in products">
