@@ -186,7 +186,10 @@ four51.app.factory('ProductDisplayService', function($451, $sce, Variant, Produc
 						haveQty = true;
 					}
 				});
-				if(!haveQty) newErrorList.push("please select a quantity");
+
+				if(scope.LineItem.Product.Type == 'VariableText' && !Object.keys(scope.variantLineItems).length)
+					newErrorList.push("Please create a variant.");
+				else if(!haveQty) newErrorList.push("please select a quantity");
 			}
 
 			if(scope.LineItem.qtyError)
@@ -280,7 +283,11 @@ four51.app.factory('ProductDisplayService', function($451, $sce, Variant, Produc
 			});
 		}
 
-		scope.allowAddFromVariantList = (scope.LineItem.Product.ShowSpecsWithVariantList || !hasAddToOrderSpecs)&& !scope.LineItem.Variant && scope.LineItem.Product.Variants && scope.LineItem.Product.Variants.length > 0;
+		scope.allowAddFromVariantList =
+			(scope.LineItem.Product.ShowSpecsWithVariantList || !hasAddToOrderSpecs)
+			&& !scope.LineItem.Variant
+			&& scope.LineItem.Product.Variants
+			&& (scope.LineItem.Product.Variants.length > 0 || scope.LineItem.Product.Type == 'VariableText')
 
 		if(scope.LineItem.Variant){
 			scope.LineItem.PriceSchedule = scope.LineItem.Variant.StandardPriceSchedule ? scope.LineItem.Variant.StandardPriceSchedule : scope.LineItem.Product.StandardPriceSchedule; //include user permissions to decide to show
