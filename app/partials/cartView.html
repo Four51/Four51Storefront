@@ -115,7 +115,7 @@
                 <div class="panel-footer">
                     <div class="text-right" ng-if="!(user.Permissions.contains('HidePricing'))">
                         <h4 class="text-primary">
-                            <strong>SubTotal:</strong> <span class="text-success">{{currentOrder.Subtotal | currency}}</span>
+                            <strong>SubTotal</strong> <span class="text-success"> {{currentOrder.Subtotal | currency}}</span>
                         </h4>
                         <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
                             <span class="text-info">Shipping, handling and tax may be added to this subtotal.</span>

@@ -38,8 +38,8 @@
                     </div>
                 </div>
                 <hr/>
-                <p ng-if="!(user.Permissions.contains('HidePricing'))"><span class="text-info">Total</span> {{currentOrder.Total | currency}}</p>
-                <p class="text-info" ng-if="user.Company.TaxMethod != 'NoTax' || !(user.Permissions.contains('HidePricing'))">Shipping, handling and tax may be added to this subtotal.</p>
+                <h4 class="text-primary" ng-if="!(user.Permissions.contains('HidePricing'))"><strong class="pull-left">Total</strong> <span class="text-success">{{currentOrder.Total | currency}}</span></h4>
+                <p class="help-block text-left" ng-if="user.Company.TaxMethod != 'NoTax' || !(user.Permissions.contains('HidePricing'))">Shipping, handling and tax may be added to this subtotal.</p>
             </div>
         </div>
         <div class="panel-footer">
@@ -274,12 +274,13 @@
         </div>
 
         <div class="view-footer navbar-fixed-bottom">
-            <div class="view-action-message alert-success" alert-show="showSave" ng-show="showSave">
+            <div class="view-action-message alert-success ng-hide" alert-show="showSave">
                 <p>Your changes have been saved.</p>
             </div>
+            <!--- is this a different type of message? vve should discuss, as this sits on top and covers the content below even when not visible on screen inhibiting the ux
             <div class="view-action-message alert-success">
                 <p>{{actionMessage}}</p>
-            </div>
+            </div> --->
             <div class="view-error-list">
                 <div class="alert-warning" ng-show="couponError">{{couponError}}</div>
                 <div class="alert-warning" ng-show="cart_order.orderid.$invalid">Enter an order id</div>

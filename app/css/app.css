@@ -808,25 +808,7 @@ li.selected {
     -moz-animation-duration: 1s;
     -o-animation-duration: 1s;
     animation-duration: 1s;
-    -webkit-animation-delay: 1s;
-    -moz-animation-delay: 1s;
-    -o-animation-delay: 1s;
-    -ms-animation-delay: 1s;
-    -webkit-animation-fill-mode: both;
-    -moz-animation-fill-mode: both;
-    -o-animation-fill-mode: both;
-    animation-fill-mode: both;
-    -webkit-animation-name: fadeInUp;
-    -moz-animation-name: fadeInUp;
-    -o-animation-name: fadeInUp;
-    animation-name: fadeInUp;
-}
-
-.navbar-fixed-top {
-    -webkit-animation-duration: 1s;
-    -moz-animation-duration: 1s;
-    -o-animation-duration: 1s;
-    animation-duration: 1s;
+    -ms-animation-duration: 1s;
     animation-delay: 1s;
     -webkit-animation-delay: 1s;
     -moz-animation-delay: 1s;
@@ -836,10 +818,35 @@ li.selected {
     -moz-animation-fill-mode: both;
     -o-animation-fill-mode: both;
     animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
+    -webkit-animation-name: fadeInUp;
+    -moz-animation-name: fadeInUp;
+    -o-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+    -ms-animation-name: fadeInUp;
+}
+
+.navbar-fixed-top {
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    -ms-animation-duration: 1s;
+    animation-delay: 1s;
+    -webkit-animation-delay: 1s;
+    -moz-animation-delay: 1s;
+    -o-animation-delay: 1s;
+    -ms-animation-delay: 1s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
     -webkit-animation-name: fadeInDown;
     -moz-animation-name: fadeInDown;
     -o-animation-name: fadeInDown;
     animation-name: fadeInDown;
+    -ms-animation-name: fadeInDown;
 }
 
 .check-out-view .panel-body.ng-hide-remove {
@@ -1412,7 +1419,7 @@ ul.view-variant-list{
     height: 115px;
 }
 
-.copyright-view p:first-of-type {color:#359FD5;   background-color: #F5F5F5;}
+.copyright-view p:first-of-type {color:#1C638D;   background-color: #fff;}
 .copyright-view p:last-of-type {color:#fff; background-color:#359FD5;}
 .copyright-view p:last-of-type .btn {background-color:#1C638D;color:#fff;}
 .copyright-view p:first-of-type .btn {font-size: 11px;}
@@ -1424,10 +1431,6 @@ ul.view-variant-list{
 
 
 .navbar-fixed-top.headroom {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
     transition: all .5s ease-in-out;
 }
 
@@ -1440,10 +1443,6 @@ ul.view-variant-list{
 }
 
 .navbar-fixed-bottom.headroom {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
     transition: all .5s ease-in-out;
 }
 
@@ -1454,8 +1453,6 @@ ul.view-variant-list{
 .navbar-fixed-bottom.headroom--pinned {
     bottom: 0;
 }
-
-.cart-view-detail {position: static !important;}
 
 .check-out-view-input-group-id .input-group-addon {font-size: 11px;padding-top: 0; padding-bottom: 0;border: none;}
 
@@ -1468,7 +1465,7 @@ ul.view-variant-list{
     right: 0;
     border-width: 0 16px 16px 0;
     border-style: solid;
-    border-color: #eee #eee #fff #fff;
+    border-color: #F7F6F6 #F7F6F6 #fff #fff;
     background: #658E15;
     display: block; width: 0;
 }
