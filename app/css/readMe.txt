@@ -1,6 +1,7 @@
 
 
 0.  App Front End Strategy
+    * If ng-cloak is not working as intended on a static file, instead of calling the partial in a directive - try including the partial as an ng-include.
 
     Customizing the Four51 SPA  -       Do not modify the app.css files
                                         - no !important rules in the app.css file, everything should cascade according to specificity

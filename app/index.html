@@ -39,7 +39,7 @@
             <ng-include src="template.url" />
         </section>
         <section ng-if="!user.Permissions.contains('UnBrandedSite')">
-            <copyright />
+            <ng-include src="'partials/copyrightView.html'"></ng-include>
         </section>
     </section>
 </section>
@@ -143,6 +143,10 @@
     <script src="js/directives/giftcard.js"></script>
     <script src="js/directives/copyright.js"></script>
     <script src="js/directives/ordersummary.js"></script>
+    <script src="js/directives/orderdetails.js"></script>
+    <script src="js/directives/ordershipping.js"></script>
+    <script src="js/directives/orderbilling.js"></script>
+    <script src="js/directives/orderapprovals.js"></script>
 
     <script src="js/directives/printing.js"></script>
 

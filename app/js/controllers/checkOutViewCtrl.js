@@ -1,4 +1,4 @@
-four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList, Shipper, Coupon, SpendingAccount, Address) {
+four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, FavoriteOrder, AddressList) {
 	if (!$scope.currentOrder) {
         $location.path('catalog');
     }
@@ -7,233 +7,8 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
         $scope.addresses = list;
     });
 
-	Shipper.query($scope.currentOrder, function(list) {
-		$scope.shippers = list;
-	});
-
-	SpendingAccount.query(function(data) {
-		$scope.SpendingAccounts = data;
-	});
-
-	var shipToMultipleAddresses = function(order) {
-		if (!order || !$scope.user.Permissions.contains('ShipToMultipleAddresses')) return false;
-		var multi = false;
-		angular.forEach(order.LineItems, function(li, i) {
-			multi = multi || i > 0 ? (li.ShipAddressID != order.LineItems[i-1].ShipAddressID || (li.ShipFirstName != order.LineItems[i-1].ShipFirstName || order.LineItems[i-1].ShipLastName != order.ShipLastName)) : false;
-		});
-		return multi;
-	};
-
-	$scope.shipToMultipleAddresses = shipToMultipleAddresses($scope.currentOrder);
-
-	$scope.updateShipper = function(li) {
-		$scope.shippingUpdatingIndicator = true;
-		$scope.shippingFetchIndicator = true;
-		if (!li) {
-			angular.forEach($scope.shippers, function(s) {
-				if (s.Name == $scope.currentOrder.LineItems[0].ShipperName)
-					$scope.currentOrder.Shipper = s;
-			});
-
-			angular.forEach($scope.currentOrder.LineItems, function(item) {
-				item.ShipperName = $scope.currentOrder.Shipper ? $scope.currentOrder.Shipper.Name : null;
-				item.ShipperID = $scope.currentOrder.Shipper ? $scope.currentOrder.Shipper.ID : null;
-			});
-
-			saveChanges(function() {
-				$scope.shippingUpdatingIndicator = false;
-				$scope.shippingFetchIndicator = false;
-			});
-		}
-		else {
-			angular.forEach($scope.shippers, function(s) {
-				if (s.Name == li.ShipperName)
-					li.Shipper = s;
-			});
-			li.ShipperName = li.Shipper.Name;
-			li.ShipperID = li.Shipper.ID;
-			$scope.shippingUpdatingIndicator = false;
-			$scope.shippingFetchIndicator = false;
-		}
-	};
-
-	$scope.setShipAddressAtOrderLevel = function() {
-		$scope.shippingFetchIndicator = true;
-		$scope.currentOrder.ShipperName = null;
-		$scope.currentOrder.Shipper = null;
-		$scope.currentOrder.ShipperID = null;
-		$scope.currentOrder.LineItems[0].ShipperName = null;
-		$scope.currentOrder.LineItems[0].Shipper = null;
-		$scope.currentOrder.LineItems[0].ShipperID = null;
-		angular.forEach($scope.currentOrder.LineItems, function(li) {
-			li.ShipAddressID = $scope.currentOrder.ShipAddressID;
-			li.ShipFirstName = null;
-			li.ShipLastName = null;
-		});
-		saveChanges(function(order) {
-			Shipper.query(order, function(list) {
-				$scope.shippers = list;
-				$scope.shippingFetchIndicator = false;
-			});
-		});
-	};
-
-	$scope.setShipAddressAtLineItem = function(item) {
-		item.ShipperName = null;
-		item.Shipper = null;
-		item.ShipperID = null;
-		$scope.currentOrder.ShipAddressID = $scope.currentOrder.LineItems[0].ShipAddressID;
-		$scope.currentOrder.ShipFirstName = null;
-		$scope.currentOrder.ShipLastName = null;
-		$scope.currentOrder.Shipper = $scope.currentOrder.LineItems[0].Shipper;
-		saveChanges(function(order) {
-			Shipper.query(order, function(list) {
-				$scope.shippers = list;
-			});
-		});
-	};
-
-	$scope.setSingleShipAddress = function() {
-		$scope.shipToMultipleAddresses = false;
-		angular.forEach($scope.currentOrder.LineItems, function(li) {
-			li.ShipFirstName = null;
-			li.ShipLastName = null;
-		});
-	}
-
-	$scope.$on('event:orderUpdate', $scope.updateShipper());
-
-    $scope.$watch('currentOrder.ShipAddressID', function(newValue) {
-	    $scope.orderShipAddress = {};
-	    if ($scope.currentOrder) {
-		    $scope.currentOrder.ShipFirstName = null;
-		    $scope.currentOrder.ShipLastName = null;
-		    angular.forEach($scope.currentOrder.LineItems, function(item) {
-			    item.ShipFirstName = null;
-			    item.ShipLastName = null;
-		    });
-	    }
-
-        if (newValue) {
-            Address.get(newValue, function(add) {
-	            if ($scope.user.Permissions.contains('EditShipToName') && !add.IsCustEditable) {
-		            angular.forEach($scope.currentOrder.LineItems, function(item) {
-			            item.ShipFirstName = add.FirstName;
-			            item.ShipLastName = add.LastName;
-		            });
-	            }
-                $scope.orderShipAddress = add;
-            });
-        }
-    });
-
-    $scope.$watch('currentOrder.BillAddressID', function(newValue) {
-        if (newValue) {
-            Address.get(newValue, function(add) {
-	            if ($scope.user.Permissions.contains('EditBillToName') && !add.IsCustEditable) {
-	                $scope.currentOrder.BillFirstName = add.FirstName;
-	                $scope.currentOrder.BillLastName = add.LastName;
-                }
-                $scope.BillAddress = add;
-            });
-        }
-    });
-
-    $scope.$watch('currentOrder.PaymentMethod', function(event) {
-	    if (event == 'BudgetAccount' && $scope.SpendingAccounts) {
-		    if ($scope.SpendingAccounts.length == 1)
-		        $scope.currentOrder.BudgetAccountID = $scope.SpendingAccounts[0].ID;
-		    else {
-			    var count = 0, account;
-			    angular.forEach($scope.SpendingAccounts, function(s) {
-				    if (s.AccountType.PurchaseCredit) {
-				        count += 1;
-					    account = s;
-				    }
-			    });
-			    if (count == 1 && account)
-			        $scope.currentOrder.BudgetAccountID = account.ID;
-		    }
-	    }
-	    else {
-		    if (!$scope.isSplitBilling) {
-		        $scope.currentOrder.BudgetAccountID = null;
-			    $scope.currentOrder.currentBudgetAccount = null;
-	        }
-	    }
-        $scope.cart_billing.$setValidity('paymentMethod', validatePaymentMethod(event));
-    });
-
-	var budgetAccountCalculation = function(value) {
-		if (value) {
-			var valid = validatePaymentMethod('BudgetAccount');
-			angular.forEach($scope.SpendingAccounts, function(a) {
-				if (a.ID == value) {
-					$scope.currentBudgetAccount = a;
-				}
-			});
-			var discount = $scope.currentBudgetAccount.AccountType.MaxPercentageOfOrderTotal != 100 ?
-				$scope.currentOrder.Total * ($scope.currentBudgetAccount.AccountType.MaxPercentageOfOrderTotal *.01) :
-				$scope.currentBudgetAccount.Balance;
-			$scope.remainingOrderTotal = $scope.currentOrder.Total - discount;
-			$scope.cart_billing.$setValidity('paymentMethod', valid);
-		}
-	}
-
-	$scope.$watch('currentOrder.Total', function(total) {
-		if ($scope.currentOrder && $scope.currentOrder.BudgetAccountID)
-			budgetAccountCalculation($scope.currentOrder.BudgetAccountID);
-	});
-
-	$scope.$watch('currentOrder.BudgetAccountID', function(value) {
-		$scope.currentBudgetAccount = null;
-		budgetAccountCalculation(value);
-	});
-
-    function validatePaymentMethod(method) {
-	    var validateAccount = function() {
-		    var account = null;
-		    angular.forEach($scope.SpendingAccounts, function(a) {
-			    if ($scope.currentOrder && a.ID == $scope.currentOrder.BudgetAccountID)
-				    account = a;
-		    });
-		    if (account) {
-			    $scope.isSplitBilling = false;
-			    if (account.AccountType.MaxPercentageOfOrderTotal != 100) {
-			        $scope.isSplitBilling = true;
-				    return false;
-			    }
-
-			    if (account.Balance < $scope.currentOrder.Total) {
-				    $scope.isSplitBilling = !account.AccountType.AllowExceed;
-				    return account.AccountType.AllowExceed;
-			    }
-			    else
-			        return true;
-		    }
-		    return false;
-	    }
-
-        var valid = false;
-        switch (method) {
-            case 'Undetermined':
-                valid = $scope.user.Permissions.contains('SubmitForApproval');
-                break;
-            case 'PurchaseOrder':
-                valid = $scope.user.Permissions.contains('PayByPO');
-                break;
-            case 'BudgetAccount':
-                valid = $scope.user.Permissions.contains('PayByBudgetAccount');
-                valid = valid ? validateAccount() : valid;
-                break;
-            case 'CreditCard':
-                valid = $scope.user.Permissions.contains('PayByCreditCard');
-                break;
-            default:
-                return false;
-        }
-        return valid;
-    }
+	$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
+	$scope.billaddress = { Country: 'US', IsShipping: false, IsBilling: true };
 
     function submitOrder() {
 	    $scope.displayLoadingIndicator = true;
@@ -251,7 +26,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		        if (ex.Code.is('ObjectExistsException')) { // unique id
 			        ex.Message = ex.Message.replace('{0}', 'Order ID (' + $scope.currentOrder.ExternalID + ')');
 		        }
-		        //$scope.cart_billing.$setValidity('paymentMethod', false);
+		        $scope.cart_billing.$setValidity('paymentMethod', false);
 		        $scope.actionMessage = ex.Message;
 		        $scope.displayLoadingIndicator = false;
 		        $scope.shippingUpdatingIndicator = false;
@@ -328,29 +103,6 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     $scope.saveFavorite = function() {
         FavoriteOrder.save($scope.currentOrder);
     };
-
-	$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
-	$scope.billaddress = { Country: 'US', IsShipping: false, IsBilling: true };
-
-	$scope.$on('event:AddressCancel', function(event) {
-		$scope.addressform = false;
-	});
-    $scope.$on('event:AddressSaved', function(event, address) {
-	    if (address.IsShipping) {
-            $scope.currentOrder.ShipAddressID = address.ID;
-            if (!$scope.shipToMultipleAddresses)
-                $scope.setShipAddressAtOrderLevel();
-        }
-        if (address.IsBilling) {
-            $scope.currentOrder.BillAddressID = address.ID;
-        }
-        AddressList.query(function(list) {
-            $scope.addresses = list;
-        });
-        $scope.addressform = false;
-	    $scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
-	    $scope.billaddress = { Country: 'US', IsShipping: false, IsBilling: true };
-    });
 
     $scope.checkOutSection = 'order';
 });
