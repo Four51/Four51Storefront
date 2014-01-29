@@ -84,7 +84,7 @@
         </div>
         <hr/>
     </div>
-    <div class="alert alert-warning" ng-show="cart-billing.$error.paymentMethod && curentOrder.PaymentMethod == 'BudgetAccount'">
+    <div class="alert alert-warning" ng-show="cart-billing.$error.paymentMethod && currentOrder.PaymentMethod == 'BudgetAccount'">
         The account, {{currentBudgetAccount.Label}}, is not sufficient for the order total.
     </div>
     <div class="alert alert-success" ng-show="isSplitBilling" style="padding:6px 0; text-align:center; margin:0;">
