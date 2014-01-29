@@ -12,7 +12,7 @@
         <input name="upload" class="upload" type="file"></input>
     </div>
     <br />
-    <input type="hidden" ng-required="customfield.Required" ng-model="customfield.File.ID"></input>
+    <input type="hidden" name="Logo" ng-required="customfield.Required" ng-model="customfield.File.ID"></input>
     <div class="error ui-state-error-text"></div>
     <div class="alert alert-info" ng-show="replace || !customfield.File">
         {{customfield.UploadInstructions}}

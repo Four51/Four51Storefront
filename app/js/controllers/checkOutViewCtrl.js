@@ -27,7 +27,6 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	$scope.shipToMultipleAddresses = shipToMultipleAddresses($scope.currentOrder);
 
 	$scope.updateShipper = function(li) {
-		if (!li || !li.ShipAddressID) return;
 		$scope.shippingUpdatingIndicator = true;
 		$scope.shippingFetchIndicator = true;
 		if (!li) {
@@ -329,33 +328,6 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     $scope.saveFavorite = function() {
         FavoriteOrder.save($scope.currentOrder);
     };
-
-	$scope.applyCoupon = function() {
-		$scope.couponLoadingIndicator = true;
-		$scope.couponError = null;
-		Coupon.apply($scope.currentOrder.CouponCode,
-			function(coupon) {
-				$scope.currentOrder.Coupon = coupon;
-				saveChanges(function() {
-					$scope.couponLoadingIndicator = false;
-				});
-			},
-			function(ex) {
-				$scope.couponError = ex.Message;
-				$scope.couponLoadingIndicator = false;
-			}
-		);
-	};
-
-	$scope.removeCoupon = function() {
-		$scope.couponError = null;
-		$scope.couponRemoveIndicator = true;
-		Coupon.remove(function() {
-			saveChanges(function() {
-				$scope.couponRemoveIndicator = false;
-			});
-		});
-	};
 
 	$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
 	$scope.billaddress = { Country: 'US', IsShipping: false, IsBilling: true };
