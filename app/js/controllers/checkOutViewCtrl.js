@@ -106,12 +106,15 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 
     $scope.$watch('currentOrder.ShipAddressID', function(newValue) {
 	    $scope.orderShipAddress = {};
-	    $scope.currentOrder.ShipFirstName = null;
-	    $scope.currentOrder.ShipLastName = null;
-	    angular.forEach($scope.currentOrder.LineItems, function(item) {
-		    item.ShipFirstName = null;
-		    item.ShipLastName = null;
-	    });
+	    if ($scope.currentOrder) {
+		    $scope.currentOrder.ShipFirstName = null;
+		    $scope.currentOrder.ShipLastName = null;
+		    angular.forEach($scope.currentOrder.LineItems, function(item) {
+			    item.ShipFirstName = null;
+			    item.ShipLastName = null;
+		    });
+	    }
+
         if (newValue) {
             Address.get(newValue, function(add) {
 	            if ($scope.user.Permissions.contains('EditShipToName') && !add.IsCustEditable) {
@@ -138,8 +141,20 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     });
 
     $scope.$watch('currentOrder.PaymentMethod', function(event) {
-	    if (event == 'BudgetAccount' && ($scope.SpendingAccounts && $scope.SpendingAccounts.length == 1)) {
-		    $scope.currentOrder.BudgetAccountID = $scope.SpendingAccounts[0].ID;
+	    if (event == 'BudgetAccount' && $scope.SpendingAccounts) {
+		    if ($scope.SpendingAccounts.length == 1)
+		        $scope.currentOrder.BudgetAccountID = $scope.SpendingAccounts[0].ID;
+		    else {
+			    var count = 0, account;
+			    angular.forEach($scope.SpendingAccounts, function(s) {
+				    if (s.AccountType.PurchaseCredit) {
+				        count += 1;
+					    account = s;
+				    }
+			    });
+			    if (count == 1 && account)
+			        $scope.currentOrder.BudgetAccountID = account.ID;
+		    }
 	    }
 	    else {
 		    if (!$scope.isSplitBilling) {

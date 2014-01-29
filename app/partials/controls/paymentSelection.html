@@ -17,7 +17,7 @@
                 ng-if="user.Permissions.contains('PayByBudgetAccount') && (SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 0"
                 ng-click="setBudgetAccount((SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length)">
             <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'BudgetAccount' }"></i>
-            Spending Account {{showSpendingAccount}}
+            Spending Account
         </button>
         <button class="btn btn-default" type="button"
                 ng-if="user.Company.MerchantAccount && user.AvailableCreditCards.length > 0 && user.Permissions.contains('PayByCreditCard')"
@@ -84,7 +84,7 @@
         </div>
         <hr/>
     </div>
-    <div class="alert alert-warning" ng-show="cart-billing.$error.paymentMethod && curentOrder.PaymentMethod == 'BudgetAccount'">
+    <div class="alert alert-warning" ng-show="cart-billing.$error.paymentMethod && currentOrder.PaymentMethod == 'BudgetAccount'">
         The account, {{currentBudgetAccount.Label}}, is not sufficient for the order total.
     </div>
     <div class="alert alert-success" ng-show="isSplitBilling" style="padding:6px 0; text-align:center; margin:0;">
