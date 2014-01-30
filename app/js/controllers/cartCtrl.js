@@ -1,4 +1,4 @@
-four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, OrderConfig, User) {
+four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, OrderConfig, User, GiftCard) {
     $scope.continueShopping = function() {
 	    if (!$scope.cart.$invalid) {
 	        if (confirm('Do you want to save changes to your order before continuing?') == true)

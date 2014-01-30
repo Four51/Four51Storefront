@@ -12,9 +12,17 @@
             <loadingindicator ng-show="displayLoadingIndicator" title="Please wait while we save your order"/>
             <div class="panel panel-default cart-view-line-items">
                 <div class="panel-heading">
-                    <h3 class="panel-title">
-                        {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
-                    </h3>
+                    <div class="row">
+                        <!--- TODO: need to get giftcard in scope and apply ng-class based on giftcard true or false --->
+                        <div ng-class="{'col-sm-6': giftcard.Code, 'col-xs-12': !giftcard.Code }">
+                            <h3 class="panel-title">
+                                {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
+                            </h3>
+                        </div>
+                        <div class="col-sm-6">
+                            <giftcardredemption />
+                        </div>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
@@ -90,14 +98,16 @@
                                             <i class="fa fa-calendar"></i>
                                         </div>
                                         <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
-                                            <label class="required">Cost Center</label>
-                                            <select class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
-                                            <input class="form-control view-form-icon" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />
-                                            <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
+                                           <div>
+                                                <label class="required">Cost Center</label>
+                                                <select class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
+                                                <input class="form-control view-form-icon" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />
+                                                <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
+                                                <i class="fa fa-money"></i>
+                                           </div>
                                             <button type="button" title="copy to all" class="btn btn-sm btn-info hidden-xs pull-right" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
                                                 <span class="fa fa-copy"></span>
                                             </button>
-                                            <i class="fa fa-money"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -122,7 +132,7 @@
                 <div class="panel-footer">
                     <div class="text-right" ng-if="!(user.Permissions.contains('HidePricing'))">
                         <h4 class="text-primary">
-                            <strong>SubTotal</strong> <span class="text-success"> {{currentOrder.Subtotal | currency}}</span>
+                            <strong style>SubTotal</strong> <span class="text-success"> {{currentOrder.Subtotal | currency}}</span>
                         </h4>
                         <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
                             <span class="text-info">Shipping, handling and tax may be added to this subtotal.</span>
