@@ -120,7 +120,7 @@
                         <hr />
                         <button class="btn btn-success btn-block btn-lg" type="button" id="451_btn_orderadd" ng-click="addToOrder()">
                             <i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>
-                            {{addToOrderForm.$valid}} {{addToOrderText}} {{addToOrderForm.Logo.$valid}}
+                            {{addToOrderText}}
                             <span class="badge" ng-if="!(user.Permissions.contains('HidePricing')) && (LineItem.LineTotal || variantLineItemsOrderTotal) > 0">
                                 {{(LineItem.LineTotal || variantLineItemsOrderTotal) | currency}}
                             </span>
