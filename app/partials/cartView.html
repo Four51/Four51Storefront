@@ -18,12 +18,16 @@
                 </div>
                 <div class="panel-body">
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
-                        <span title="Remove Item" class="view-corner-button"  ng-click="removeItem(item)">
-                            <i class="fa fa-times-circle text-danger"></i>
-                        </span>
-                        <div class="col-md-3">
+                        <div class="row">
+                           <div class="col-xs-12">
+                                <button title="Remove Item" class="btn btn-danger btn-md pull-right" style="margin-bottom: 15px;border-radius: 0;"  ng-click="removeItem(item)">
+                                    <i class="fa fa-times-circle"></i>
+                                </button>
+                           </div>
+                        </div>
+                        <div class="col-sm-3">
                             <div class="row">
-                                <div class="col-sm-6 cart-view-quantity-line">
+                                <div class="col-xs-6 col-sm-12 col-md-6 cart-view-quantity-line">
                                     <quantityfield lineitem="item" class="quantity"/>
                                     <div class="text-success" style="border: 1px solid #d6d6d6;border-top: 0; text-align: center;padding-top: 10px;">
                                         <p ng-show="item.Product.QuantityMultiplier = 1">
@@ -34,33 +38,33 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 text-center">
+                                <div class="col-xs-6 col-sm-12 col-md-6 text-center">
                                     <figure ng-show="item.Product.SmallImageUrl">
                                         <img class="view-thumbnail" ng-src="{{item.Product.SmallImageUrl}}"/>
                                     </figure>
+                                    <div class="btn btn-default btn-block"  ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">
+                                        View Product
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-9 cart-view-line-items-product">
+                        <div class="col-sm-9 cart-view-line-items-product">
                             <div class="row">
-                                <div class="col-md-6 col-xs-12" style="padding-bottom: 15px;">
-                                    <a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">
+                                <div class="col-md-6">
                                     <h3 class="text-primary" style="margin: 0; padding: 0;">
-                                       {{item.ProductIDText}}    <div class="btn btn-default pull-right"  ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">
-                                        View Product
-                                    </div>
+                                        <a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">
+                                            {{item.ProductIDText}}
+                                        </a>
                                     </h3>
-                                    <span>{{item.Product.Name}}</span>
-
-                                    </a>
+                                    <p>{{item.Product.Name}}</p>
                                 </div>
-                                <div class="col-md-6 col-xs-12">
+                                <div class="col-md-6">
                                     <div class="row">
-                                        <div class="col-xs-12 col-sm-6">
-                                            <div ng-show="item.qtyError" style="padding:2px 5px; margin:0; position:absolute; height:100%;" class="alert alert-danger text-center">
+                                        <div class="col-sm-6">
+                                            <div ng-show="item.qtyError" class="alert alert-danger text-center">
                                                 <small>{{item.qtyError}}</small>
                                             </div>
-                                            <p style="margin:0;" class="text-left" ng-if="!(user.Permissions.contains('HidePricing'))">
+                                            <p style="margin:0;" ng-hide="item.qtyError" class="text-left" ng-if="!(user.Permissions.contains('HidePricing'))">
                                                 <small class="text-info">Total</small>
                                                 <br/>
                                                 <span class="text-success view-price-total" style="font-size: 34px;">{{item.LineTotal | currency}}</span>
@@ -80,8 +84,8 @@
                                         <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
                                             <label ng-class="{required: user.Permissions.contains('DateNeededRequired')}" ng-show="item.DateNeeded || user.Permissions.contains('DateNeededRequired')">Date</label>
                                             <input class="form-control" placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
-                                            <button type="button" title="copy to all" class="btn btn-sm btn-info cart-view-btn-copy hidden-xs pull-right" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" >
-                                                <i class="fa fa-copy" style="position: relative; left: 0; top: 0;color:#fff;"></i>
+                                            <button type="button" title="copy to all" class="btn btn-sm btn-info hidden-xs pull-right" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" >
+                                                <span class="fa fa-copy"></span>
                                             </button>
                                             <i class="fa fa-calendar"></i>
                                         </div>
@@ -90,8 +94,8 @@
                                             <select class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
                                             <input class="form-control view-form-icon" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />
                                             <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
-                                            <button type="button" title="copy to all" class="btn btn-sm btn-info cart-view-btn-copy hidden-xs pull-right" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
-                                                <i class="fa fa-copy" style="position: relative; left: 0; top: 0;color:#fff;" ></i>
+                                            <button type="button" title="copy to all" class="btn btn-sm btn-info hidden-xs pull-right" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
+                                                <span class="fa fa-copy"></span>
                                             </button>
                                             <i class="fa fa-money"></i>
                                         </div>
@@ -147,6 +151,7 @@
                         </button>
                     </li>
                 </ul>
+
             </div>
         </form>
     </div>

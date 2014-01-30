@@ -1,14 +1,14 @@
 <div class="shortproduct-view row" ng-swipe-left="showSwipe = true">
 
     <div class="col-sm-4">
-        <a class="cat-link" href="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
+        <a href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
             <figure ng-show="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl" >
                 <img class="view-thumbnail" ng-src="{{LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl}}"/>
             </figure>
             <div class="empty view-thumbnail" ng-hide="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl">
                 <span class="fa empty"><i class="fa fa-camera"></i></span>
             </div>
-            <div class="btn btn-default" style="margin: 25px auto 0;">
+            <div class="btn btn-default">
                 View Product
             </div>
         </a>
@@ -49,7 +49,7 @@
             <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
                 QTY Available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
             </p>
-            <button class="btn btn-default btn-block" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
+            <button class="btn btn-default btn-block" redirect="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
                 View Product
             </button>
         </div>

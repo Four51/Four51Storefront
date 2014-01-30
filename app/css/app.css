@@ -231,10 +231,6 @@ input[type="file"]{
     padding-top: 75px;
 }
 
-.cart-view-btn-copy {
-    margin-top: 10px;
-}
-
 .shortproduct-arrow {
     position: absolute;
     bottom: -15px;
@@ -434,7 +430,7 @@ div.category-view-subcat ul li ul {
     text-decoration: none;
 }
 
-.product-navigation .nav li.nav-header a img {
+.product-navigation .nav li.nav-header a.cat-link img {
     margin: 0 auto;
 }
 
@@ -955,10 +951,14 @@ li.selected {
     visibility: hidden;
 }
 
+.cart-view-quantity-line {
+    margin-bottom: 15px;
+}
+
 .view-thumbnail {
     max-height: 95px;
     max-width: 100%;
-    margin: 0 auto;
+    margin: 0 auto 15px;
 }
 
 .view-action-message.ng-hide-add {
@@ -1090,7 +1090,7 @@ li.print {
     border-top: 1px solid #d6d6d6;
     clear: both;
     overflow: hidden;
-    padding: 15px 0;
+    padding: 0 0 35px;
     position:relative;
 }
 
@@ -1326,12 +1326,6 @@ li.cart span.badge {
     z-index: 5;
 }
 
-.cart-view-line-items-product a {
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-}
-
 /* dropdown issues on android and bootstrap */
 .dropdown-backdrop {
     position: static;
@@ -1474,16 +1468,6 @@ ul.view-variant-list{
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
-
-/* modal was changed in new bootstrap, this is temporary fix for internal error messaging */
-.modal.fade.in  {
-    display: block;
-    overflow: hidden;
-    max-width: 60%;
-    max-height: 40%;
-    margin: 15px auto;
-    background-color:#fff;
-}
 
 /* full screen: if we want to go back to default bootstrap widths, simply remove the below container rule */
 .container {
