@@ -1,9 +1,9 @@
-four51.app.directive('ordersummary', function() {
+four51.app.directive('ordersummary', function(Order, Coupon) {
 	var obj = {
 		restrict: 'AE',
 		templateUrl: 'partials/controls/orderSummary.html',
 		controller: function($scope) {
-			var save = function() {
+			var save = function(callback) {
 				Order.save($scope.currentOrder,
 					function(data) {
 						$scope.currentOrder = data;
@@ -36,7 +36,7 @@ four51.app.directive('ordersummary', function() {
 				$scope.couponError = null;
 				$scope.couponRemoveIndicator = true;
 				Coupon.remove(function() {
-					saveChanges(function() {
+					save(function() {
 						$scope.couponRemoveIndicator = false;
 					});
 				});
