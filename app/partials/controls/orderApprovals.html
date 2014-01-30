@@ -1,0 +1,9 @@
+<div ng-show="currentOrder.Approvals"  class="panel-heading" ng-class="{'no': cart_approval.$invalid, 'yes': !cart_approval.$invalid }">
+    <h3 ng-click="checkOutSection = 'approval'" class="panel-title">
+        <i class="fa fa-info-circle"></i>
+        Approval Rules
+    </h3>
+</div>
+<div ng-show="checkOutSection == 'approval'" class="panel-body check-out-view-approval">
+    <approvalrulelist order="currentOrder" />
+</div>

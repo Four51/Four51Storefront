@@ -98,7 +98,7 @@
                     </div>
                     <div id="451_list_vspec" ng-show="allowAddToOrder">
                         <div class="form-group" ng-repeat="s in LineItem.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
-                            <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
+                            <customfilefield customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>{{s.Value}}
                             <customtextfield customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
                             <customselectionfield change="specChanged" customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
                         </div>
