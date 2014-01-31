@@ -10,25 +10,39 @@
         <orderbilling />
         <orderapprovals />
         <div class="view-footer navbar-fixed-bottom">
-            <div class="view-action-message alert-success" alert-show="showSave" ng-show="showSave">
+            <div class="view-response-message alert-success ng-hide" alert-show="showSave">
                 <p>Your changes have been saved.</p>
             </div>
-            <div class="view-action-message alert-success">
+            <div class="view-response-message alert-success">
                 <p>{{actionMessage}}</p>
             </div>
-            <div class="view-error-list">
-                <div class="alert-warning" ng-show="couponError">{{couponError}}</div>
-                <div class="alert-warning" ng-show="cart_order.orderid.$invalid">Enter an order id</div>
-                <div class="alert-warning" ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</div>
-                <div class="alert-warning" ng-show="cart_shipping.shipMethod.$invalid">Please choose a shipping method</div>
-                <div class="alert-warning" ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
-                    You're site is mis-configured. You do not have permission to create a billing address nor do you have any addresses assigned to you. Please contact your support representative.
-                </div>
-                <div class="alert-warning" ng-if="!user.Permissions.contains('CreateShipToAddress') && (addresses | filter:{IsShipping:true}).length == 0">
-                    Your site is mis-configured. You do not have permission to create a shipping address nor do you have any addresses assigned to you. Please contact your support representative.
-                </div>
+            <div class="view-error-message">
+                <ul class="row">
+                    <li class="col-sm-1 alert-warning">
+                        <i class="fa fa-exclamation-circle text-danger"></i>
+                        <!--- badge only displays if errors > 1 --->
+                        <span class="badge">2 errors</span>
+                    </li>
+                    <li class="col-sm-10 alert-warning" style="margin: 0; padding: 0">
+                        <ul>
+                            <!--- first error message in list always displays, if errors > 1 then display first error but hide the others --->
+                            <li ng-show="couponError">{{couponError}}</li>
+                            <li ng-show="cart_order.orderid.$invalid">Enter an order id</li>
+                            <li ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</li>
+                            <li ng-show="cart_shipping.shipMethod.$invalid">Please choose a shipping method</li>
+                            <li ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
+                                You're site is mis-configured. You do not have permission to create a billing address nor do you have any addresses assigned to you. Please contact your support representative.
+                            </li>
+                            <li ng-if="!user.Permissions.contains('CreateShipToAddress') && (addresses | filter:{IsShipping:true}).length == 0">
+                                Your site is mis-configured. You do not have permission to create a shipping address nor do you have any addresses assigned to you. Please contact your support representative.
+                            </li>
+                        </ul>
+                    </li>
+                    <!--- this arrow only appears if errors > 1 and will toggle display of all errors --->
+                    <li class="col-sm-1"><a class="fa fa-caret-down"></a></li>
+                </ul>
             </div>
-            <ul>
+            <ul class="view-footer-buttons">
                 <li style="width: 25%;">
                     <button class="btn btn-danger" ng-click="cancelOrder()">
                         Cancel Order
