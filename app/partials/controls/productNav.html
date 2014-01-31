@@ -2,8 +2,8 @@
     <hr />
     <ul>
         <li><a href="#/product/{{product.ViewName}}/{{product.InteropID}}">{{product.Name}}</a></li>
-        <li ng-show="variant"><a href="#/product/{{product.ViewName}}/{{product.InteropID}}/{{variant.InteropID}}">order -{{variant.ExternalID}}</a></li>
-     <li ng-show="editvariant"><a href="#.#">edit -</a></li>
+        <li ng-if="variant"><a href="#/product/{{product.ViewName}}/{{product.InteropID}}/{{variant.InteropID}}">Order {{variant.ExternalID}}</a></li>
+        <li ng-if="editvariant"><a href="#.#">Edit</a></li>
     </ul>
     <hr />
 </nav>

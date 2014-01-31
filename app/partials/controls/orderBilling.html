@@ -12,16 +12,15 @@
         </div>
         <div ng-show="!addressform">
             <form name="cart_billing" novalidate="">
+                <div>
                 <paymentselector></paymentselector>
                 <div class="view-form-icon">
                     <div>
                         <label class="required">Billing Address</label>
-                        <div>
-                            <select class="form-control" ng-show="(addresses | filter:{IsBilling:true}).length > 0" name="billingAddress"
-                                    ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required>
-                            </select>
-                            <i class="fa fa-map-marker"></i>
-                        </div>
+                        <select class="form-control" ng-show="(addresses | filter:{IsBilling:true}).length > 0" name="billingAddress"
+                                ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required>
+                        </select>
+                        <i class="fa fa-map-marker"></i>
                     </div>
                     <div ng-show="BillAddress" class="check-out-view-selected-billing" style="border: 1px solid #d6d6d6; padding: 15px; margin-top: 15px;">
                         <p style="font-size: 11px; font-weight: bold;">Billing Location</p>
@@ -39,6 +38,7 @@
                         <p ng-show="BillAddress.City || BillAddress.State || BillAddress.Zip"><small>{{BillAddress.City}}<span ng-if="ShipAddress.City && ShipAddress.State">, </span> {{BillAddress.State}} {{BillAddress.Zip}}</small></p>
                         <p ng-show="BillAddress.Phone"><small>{{BillAddress.Phone}}</small></p>
                     </div>
+                </div>
                 </div>
             </form>
         </div>
