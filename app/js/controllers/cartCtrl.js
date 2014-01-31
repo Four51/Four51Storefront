@@ -32,6 +32,7 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 
 	$scope.saveChanges = function(callback) {
 		$scope.actionMessage = null;
+		$scope.errorMessage = null;
 		if($scope.currentOrder.LineItems.length == $451.filter($scope.currentOrder.LineItems, {Property:'Selected', Value: true}).length) {
 			$scope.cancelOrder();
 		}
@@ -46,7 +47,7 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 	                $scope.actionMessage = 'Your Changes Have Been Saved!';
 				},
 				function(ex) {
-					$scope.actionMessage = 'An error occurred: ' + ex.Message;
+					$scope.errorMessage = ex.Message;
 					$scope.displayLoadingIndicator = false;
 				}
 			);
@@ -99,13 +100,4 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
     $scope.onPrint = function()  {
 	    window.print();
     };
-
-    // $scope.$on('$viewContentLoaded', function () {
-    //    $('.view-footer').removeClass('navbar-fixed-bottom');
-    // });
-
-   // $scope.$on('$viewContentLoaded', function () {
-   //     alert("blah");
-   // });
-
 });
