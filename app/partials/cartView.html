@@ -11,7 +11,7 @@
         <form name="cart" novalidate="">
             <loadingindicator ng-show="displayLoadingIndicator" title="Please wait while we save your order"/>
             <div class="panel panel-default cart-view-line-items">
-                <div class="panel-heading">
+                <div ng-if="user.Permissions.contains('ViewPromotions')"  class="panel-heading">
                     <div class="row">
                         <!--- TODO: need to get giftcard in scope and apply ng-class based on giftcard true or false --->
                         <div ng-class="{'col-sm-6': giftcard_redeem, 'col-xs-12': !giftcard_redeem }">
@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-sm-12 col-md-6 text-center">
-                                    <figure ng-show="item.Product.SmallImageUrl">
+                                    <figure ng-show="item.Variant.SmallImageUrl || item.Product.SmallImageUrl">
                                         <img class="view-thumbnail" ng-src="{{item.Product.SmallImageUrl}}"/>
                                     </figure>
                                 </div>
@@ -89,7 +89,7 @@
                                     <div class="row view-form-icon"  ng-if="(user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')) || user.Permissions.contains('CostCenterPerLine')">
                                         <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
                                             <label ng-class="{required: user.Permissions.contains('DateNeededRequired')}" ng-show="item.DateNeeded || user.Permissions.contains('DateNeededRequired')">Date</label>
-                                            <input class="form-control" placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
+                                            <input name="dateneeded" class="form-control" placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
                                             <button type="button" title="copy to all" class="btn btn-sm btn-info hidden-xs pull-right" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" >
                                                 <span class="fa fa-copy"></span>
                                             </button>
@@ -140,22 +140,19 @@
                 <div class="view-response-message alert-success" alert-show="currentOrder">
                     <p>{{actionMessage}}</p>
                 </div>
-                <div class="view-error-message">
+                <div class="view-error-message" ng-show="cart.$error.required.length + (errorMessage ? 1 : 0) > 0">
                     <ul class="row">
                         <li class="col-sm-1 alert-warning">
                             <i class="fa fa-exclamation-circle text-danger"></i>
-                            <!--- badge only displays if errors > 1 --->
-                            <span class="badge">2 errors</span>
+                            <span class="badge" ng-show="cart.$error.required.length + (errorMessage ? 1 : 0) > 1">{{cart.$error.required.length + (errorMessage ? 1 : 0)}}</span>
                         </li>
                         <li class="col-sm-10 alert-warning" style="margin: 0; padding: 0">
                             <ul>
-                                <!--- first error message in list always displays, if errors > 1 then display first error but hide the others --->
-                                <li>
-                                    {{actionMessage}}
-                                </li>
+                                <li ng-show="cart.dateneeded.$invalid">Date needed is required</li>
+                                <li ng-show="cart.qtyInput.$invalid">You have entered an invalid quantity</li>
+                                <li ng-show="errorMessage">{{errorMessage}}</li>
                             </ul>
                         </li>
-                        <!--- this arrow only appears if errors > 1 and will toggle display of all errors --->
                         <li class="col-sm-1"><a class="fa fa-caret-down"></a></li>
                     </ul>
                 </div>
