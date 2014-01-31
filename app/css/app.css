@@ -945,8 +945,6 @@ li.selected {
     border: 1px solid #d6d6d6;
 }
 
-.view-select-placeholder {display: none;}
-
 .check-out-view .address-input-view-shipping, .check-out-view .address-input-view-billing {
     visibility: hidden;
 }
