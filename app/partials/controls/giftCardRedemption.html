@@ -1,6 +1,5 @@
 <form name="giftcard_redeem" ng-submit="redeemGiftCard()" class="gift-card-redemption-view">
-    <div class="alert alert-success">
-        <div class="row">
+        <div class="row" style="padding: 10px;">
             <div class="col-md-6">
                 <div ng-show="giftcard.Balance" class="alert alert-info">
                     A gift card, <strong>{{giftcard.Code}}</strong>, with a balance of <strong>{{giftcard.Balance | currency}}</strong> has been attached to your account and will be available during the billing step of the checkout process while a balance remains.
@@ -15,8 +14,6 @@
                         <button type="submit" class="btn btn-success"><span class="fa fa-check"></span></button>
                     </span>
                 </div>
-                <div ng-show="actionMessage" class="alert alert-warning">{{actionMessage}}</div>
             </div>
         </div>
-    </div>
 </form>
