@@ -1,40 +1,42 @@
-<div class="panel-heading" ng-class="{'no': cart_order.$invalid, 'yes': !cart_order.$invalid }">
-    <h3 ng-click="checkOutSection = 'order'" class="panel-title panel-primary">
-        <i ng-class="{'fa fa-warning': cart_order.$invalid, 'fa fa-check-circle': !cart_order.$invalid }"></i>
-        Order
-        <i ng-class="{'fa fa-caret-down': checkOutSection == 'order', 'fa fa-caret-up': checkOutSection == 'shipping' || checkOutSection == 'billing' }"></i>
-    </h3>
-</div>
-<div ng-show="checkOutSection == 'order'" class="panel-body check-out-view-order view-form-icon">
-    <form name="cart_order" novalidate="">
-        <div class="view-form-icon" ng-if="user.Permissions.contains('EditPOID')" ng-invalid>
-            <div class="input-group check-out-view-input-group-id">
-                <label class="required">Order ID</label>
-                <input class="form-control" name="orderid" ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" placeholder="Order ID" required ui-mask="{{currentOrder.autoID ? null : user.Company.POIDMask}}" />
-                    <span ng-if="user.Permissions.contains('AllowAutoGenPOID')" class="input-group-addon">
-                        <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? null : 'auto'" ng-model='currentOrder.autoID' />
-                    </span>
-                <span class="input-group-addon">Auto ID</span>
-                <i class="fa">#</i>
+<div class="panel panel-default">
+    <div class="panel-heading" ng-class="{'no': cart_order.$invalid, 'yes': !cart_order.$invalid }">
+        <h3 ng-click="checkOutSection = 'order'" class="panel-title panel-primary">
+            <i ng-class="{'fa fa-warning': cart_order.$invalid, 'fa fa-check-circle': !cart_order.$invalid }"></i>
+            Order
+            <i ng-class="{'fa fa-caret-down': checkOutSection == 'order', 'fa fa-caret-up': checkOutSection == 'shipping' || checkOutSection == 'billing' }"></i>
+        </h3>
+    </div>
+    <div ng-show="checkOutSection == 'order'" class="panel-body check-out-view-order view-form-icon">
+        <form name="cart_order" novalidate="">
+            <div class="view-form-icon" ng-if="user.Permissions.contains('EditPOID')" ng-invalid>
+                <div class="input-group check-out-view-input-group-id">
+                    <label class="required">Order ID</label>
+                    <input class="form-control" name="orderid" ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" placeholder="Order ID" required ui-mask="{{currentOrder.autoID ? null : user.Company.POIDMask}}" />
+                        <span ng-if="user.Permissions.contains('AllowAutoGenPOID')" class="input-group-addon">
+                            <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? null : 'auto'" ng-model='currentOrder.autoID' />
+                        </span>
+                    <span class="input-group-addon">Auto ID</span>
+                    <i class="fa">#</i>
+                </div>
             </div>
-        </div>
-        <div ng-if="user.Permissions.contains('Comments')">
-            <label ng-show="currentOrder.Comments">Comments:</label>
-            <textarea class="form-control" rows="5" cols="100" ng-model="currentOrder.Comments" placeholder="Comments..." />
-            <i class="fa fa-edit"></i>
-        </div>
-        <div ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')">
-            <label ng-show="currentOrder.CostCenter">Cost Center</label>
-            <select class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="currentOrder.CostCenter"></select>
-            <input class="form-control" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="currentOrder.CostCenter" type='text' required placeholder="Cost Center" />
-            <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{currentOrder.CostCenter}}</span>
-        </div>
-        <ul ng-show="currentOrder.OrderFields">
-            <hr />
-            <li ng-repeat="field in currentOrder.OrderFields">
-                <customtextfield customfield="field" ng-if="field.ControlType == 'Text'" ng-required="field.IsRequired" />
-                <customselectionfield customfield="field" ng-if="field.ControlType == 'Selection'" ng-required="field.IsRequired" />
-            </li>
-        </ul>
-    </form>
+            <div ng-if="user.Permissions.contains('Comments')">
+                <label ng-show="currentOrder.Comments">Comments:</label>
+                <textarea class="form-control" rows="5" cols="100" ng-model="currentOrder.Comments" placeholder="Comments..." />
+                <i class="fa fa-edit"></i>
+            </div>
+            <div ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')">
+                <label ng-show="currentOrder.CostCenter">Cost Center</label>
+                <select class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="currentOrder.CostCenter"></select>
+                <input class="form-control" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="currentOrder.CostCenter" type='text' required placeholder="Cost Center" />
+                <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{currentOrder.CostCenter}}</span>
+            </div>
+            <ul ng-show="currentOrder.OrderFields">
+                <hr />
+                <li ng-repeat="field in currentOrder.OrderFields">
+                    <customtextfield customfield="field" ng-if="field.ControlType == 'Text'" ng-required="field.IsRequired" />
+                    <customselectionfield customfield="field" ng-if="field.ControlType == 'Selection'" ng-required="field.IsRequired" />
+                </li>
+            </ul>
+        </form>
+    </div>
 </div>

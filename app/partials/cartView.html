@@ -50,9 +50,9 @@
                                     <figure ng-show="item.Product.SmallImageUrl">
                                         <img class="view-thumbnail" ng-src="{{item.Product.SmallImageUrl}}"/>
                                     </figure>
-                                    <div class="btn btn-default btn-block"  ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">
+                                    <a class="btn btn-default btn-block"  ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">
                                         View Product
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -98,13 +98,11 @@
                                             <i class="fa fa-calendar"></i>
                                         </div>
                                         <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
-                                           <div>
-                                                <label class="required">Cost Center</label>
-                                                <select class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
-                                                <input class="form-control view-form-icon" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />
-                                                <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
-                                                <i class="fa fa-money"></i>
-                                           </div>
+                                            <label class="required">Cost Center</label>
+                                            <select class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
+                                            <input class="form-control view-form-icon" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />
+                                            <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
+                                            <i class="fa fa-money"></i>
                                             <button type="button" title="copy to all" class="btn btn-sm btn-info hidden-xs pull-right" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
                                                 <span class="fa fa-copy"></span>
                                             </button>

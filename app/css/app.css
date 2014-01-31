@@ -1167,8 +1167,9 @@ li.cart span.badge {
     list-style-type: none;
 }
 
-.check-out-view-types.panel {
+.check-out-view-types .panel {
     margin-bottom: 0;
+    border-bottom: none;
 }
 
 
@@ -1309,9 +1310,6 @@ li.cart span.badge {
     margin:0 -15px;
 }
 
-.check-out-view .panel-default .panel-body {border-bottom: 1px solid #d6d6d6;
-
-}
 .panel-body .panel-footer {
     margin: 0 -30px -15px;
     border-bottom: 1px solid #d6d6d6;
