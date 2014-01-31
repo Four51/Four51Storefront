@@ -1,8 +1,9 @@
-<nav class="nav nav-cat-search"  ng-show="product.Variants || product.Type == 'VariableText'">
+<nav class="nav nav-cat-search crumbs"  ng-show="product.Variants || product.Type == 'VariableText'">
     <hr />
     <ul>
-        <li class="nav-header text-nav"><a href="#/product/{{product.ViewName}}/{{product.InteropID}}" style="text-decoration: underline;">{{product.Name}}</a></li>
-        <li class="nav-header text-nav"><a href="#/product/{{product.ViewName}}/{{product.InteropID}}/{{variant.InteropID}}"> - {{variant.ExternalID}}</a></li>
+        <li><a href="#/product/{{product.ViewName}}/{{product.InteropID}}">{{product.Name}}</a></li>
+        <li><a href="#/product/{{product.ViewName}}/{{product.InteropID}}/{{variant.InteropID}}">order -{{variant.ExternalID}}</a></li>
+     <li><a href="#.#">edit -</a></li>
     </ul>
     <hr />
 </nav>
