@@ -63,7 +63,8 @@ four51.app.directive('productnav', function($451, ProductDisplayService){
 	var obj = {
 		scope: {
 			product: '=',
-			variant: '='
+			variant: '=',
+			editvariant: '='
 		},
 		restrict: 'E',
 		templateUrl: 'partials/controls/productNav.html',
