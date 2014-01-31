@@ -38,7 +38,7 @@ four51.app.directive('orderbilling', function(SpendingAccount, Address) {
 					}
 				}
 				else {
-					if (!$scope.isSplitBilling) {
+					if (!$scope.isSplitBilling && $scope.currentOrder) {
 						$scope.currentOrder.BudgetAccountID = null;
 						$scope.currentOrder.currentBudgetAccount = null;
 					}
