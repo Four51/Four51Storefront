@@ -1,4 +1,4 @@
-four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, OrderConfig, User, GiftCard) {
+four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, OrderConfig, User) {
     $scope.continueShopping = function() {
 	    if (!$scope.cart.$invalid) {
 	        if (confirm('Do you want to save changes to your order before continuing?') == true)
@@ -101,7 +101,7 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
     };
 
     // $scope.$on('$viewContentLoaded', function () {
-    //    $('.view-footer').removeClass('ng-hide');
+    //    $('.view-footer').removeClass('navbar-fixed-bottom');
     // });
 
    // $scope.$on('$viewContentLoaded', function () {
