@@ -100,25 +100,48 @@
     .view-form-icon  i {
     top: 15px;
     }
-    .crumbs ul {width: 100%;}
-    .crumbs ul li {
+    .crumbs ul {
         width: 100%;
-        clear: both;
-        overflow: hidden;text-align: center;float: none;
     }
-    .crumbs ul li a {width: 100%;padding: 20px;}
-    .crumbs ul li a:before, .crumbs ul li a:after {display: none;border: none; }
+
+    .crumbs ul li {
+        display: block;
+        text-align: center;
+        float: none;
+    }
+    .crumbs ul li a {
+        width: 100%;
+        padding: 20px;
+        margin: 0 0 20px 0;
+        text-align: center;
+        display: block;
+    }
+    .crumbs ul li a:after {
+        display: none;
+    }
+
+    .crumbs ul li a:before {
+        content: "";
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-top: 15px solid #50ACDB;
+        position: absolute;
+        bottom: 0;
+        left: 47%;
+        top: -20px;
+    }
+
     .crumbs ul li:first-child a {
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
-        border-bottom-left-radius: 0;position: static;
+        border-bottom-left-radius: 0;
     }
     .crumbs ul li:last-child a {
         padding-bottom: 20px;
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
         border-top-right-radius: 0;
-        padding-right: 20px;
-
     }
+
+
 }

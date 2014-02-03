@@ -573,10 +573,7 @@ li.selected {
 }
 
 .crumbs ul li a:hover {
-    background: #359FD5;
-}
-.crumbs ul li a:hover:after {
-    border-left-color: #359FD5;
+    background: #50ACDB;
 }
 
 /* ----------------------------------------------------------------------------------------------- */
