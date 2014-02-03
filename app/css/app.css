@@ -1528,7 +1528,7 @@ ul.view-variant-list{
     display: block; width: 0;
 }
 
-
+.view-phone-alert {display: block;}
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
@@ -1563,7 +1563,6 @@ ul.view-variant-list{
 
 .alert {
     margin-top: 20px;
-    text-align: center;
 }
 
 .btn.btn-primary {

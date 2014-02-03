@@ -53,7 +53,7 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <loadingindicator ng-show="addToOrderIndicator" title="Adding product to cart"/>
+
                     <div ng-if="(LineItem.Product.Variants.length > 0 || LineItem.Product.Type == 'VariableText') && !LineItem.Variant" style="margin: -15px;border-bottom: 1px solid #d6d6d6;">
                             <h3 class="panel-title text-info" style="border-bottom: 1px solid #d6d6d6;">
                                 Product Variants
@@ -119,6 +119,7 @@
                         </div>
                         <hr />
                         <button class="btn btn-success btn-block btn-lg" type="button" id="451_btn_orderadd" ng-click="addToOrder()">
+                            <loadingindicator ng-show="addToOrderIndicator" />
                             <i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>
                             {{addToOrderText}}
                             <span class="badge" ng-if="!(user.Permissions.contains('HidePricing')) && (LineItem.LineTotal || variantLineItemsOrderTotal) > 0">

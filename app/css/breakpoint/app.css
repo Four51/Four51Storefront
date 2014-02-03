@@ -5,6 +5,7 @@
     .product-view-default .fa.empty {text-align: left;}
     .cat-image {overflow: hidden;}
     .branding-view h3 {line-height: 4em;}
+    .view-phone-alert {display: none;}
 }
 
 
@@ -17,7 +18,7 @@
     .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
     .branding-view h3 {line-height: 4em;}
-
+    .view-phone-alert {display: none;}
 
 }
 
@@ -37,6 +38,7 @@
     .view-form-icon  i {
         top: 15px;
     }
+    .view-phone-alert {display: none;}
 }
 
 
@@ -119,5 +121,4 @@
         padding-right: 20px;
 
     }
-
 }
