@@ -42,10 +42,12 @@
                     ng-options="account.ID as (account.Label + ' - Balance: ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{AccountType.PurchaseCredit:true}"
                     ng-model="currentOrder.BudgetAccountID"
                     ng-required="currentOrder.PaymentMethod == 'BudgetAccount'">
+                    <option class="view-select-placeholder" value="" selected>Spending Account</option>
                 </select>
                 <i class="fa fa-dollar"></i>
             </div>
         </div>
+        <hr/>
     </div>
     <div ng-if="user.Permissions.contains('PayByCreditCard')" ng-show="currentOrder.PaymentMethod == 'CreditCard'">
         <div class="row view-form-icon">
@@ -80,25 +82,20 @@
         <div ng-if="user.Permissions.contains('AllowSaveCreditCard')">
             <label class="checkbox-label"><input ng-model="currentOrder.CreditCard.Save"  type="checkbox" /> Save my credit card information</label>
         </div>
+        <hr/>
     </div>
     <div class="alert alert-warning" ng-show="cart-billing.$error.paymentMethod && currentOrder.PaymentMethod == 'BudgetAccount'">
         The account, {{currentBudgetAccount.Label}}, is not sufficient for the order total.
     </div>
-    <div class="alert alert-success" ng-show="isSplitBilling">
-        The spending account, <strong>{{currentBudgetAccount.Label}}</strong>, is not sufficient for the order total.
+    <div class="alert alert-success" ng-show="isSplitBilling" style="padding:6px 0; text-align:center; margin:0;">
+        The spending account, {{currentBudgetAccount.Label}}, is not sufficient for the order total.<br />
         <span ng-show="currentOrder.PaymentMethod == 'BudgetAccount'">
-            Please select an additional payment type to cover the remaining
-            <span ng-show="user.Permissions.contains('HidePricing')"><strong>{{remainingOrderTotal | currency}}</strong></span>
-            <span ng-show="!user.Permissions.contains('HidePricing')">balance</span>
-            or remove this account from your payment options.
-            <br /><br />
-            <button type="button" class="btn btn-danger" ng-click="currentOrder.BudgetAccountID = null; isSplitBilling = null">Remove</button>
+            Please supply additional payment to cover the remaining <span ng-show="user.Permissions.contains('HidePricing')">{{remainingOrderTotal | currency}}</span> <span ng-show="!user.Permissions.contains('HidePricing')">balance</span> or remove this account from your payment options.
         </span>
         <span ng-show="currentOrder.PaymentMethod != 'BudgetAccount'">
-            This additional payment will cover the remaining
-            <span ng-show="user.Permissions.contains('HidePricing')"><strong>{{remainingOrderTotal | currency}}</strong></span>
-            <span ng-show="!user.Permissions.contains('HidePricing')">balance</span>
-           <!---  <span ng-show="!user.Permissions.contains('HidePricing')">or remove this account from your payment options.</span> --->
+            This additional payment will cover the remaining <span ng-show="user.Permissions.contains('HidePricing')">{{remainingOrderTotal | currency}}</span> <span ng-show="!user.Permissions.contains('HidePricing')">or remove this account from your payment options.
         </span>
+        <br />
+        <button type="button" class="btn btn-danger" ng-click="currentOrder.BudgetAccountID = null; isSplitBilling = null">Remove</button>
     </div>
 </div>
