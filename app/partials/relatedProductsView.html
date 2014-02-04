@@ -1,10 +1,30 @@
-<div class="panel panel-default">
+<div class="panel panel-default related-products-view product-navigation">
     <div class="panel-heading">
         <h3 class="panel-title">Related Products</h3>
     </div>
-    <div class="panel-body">
+    <nav class="nav">
         <ul>
-            <li ng-repeat="p in relatedProducts"><a class="btn btn-default" style="width: 150px; margin: 0 auto;" href="#/product/default/{{p.InteropID}}">{{p.Name}}</a></li>
+            <li class="nav-header well productList" ng-repeat="p in relatedProducts" style="min-height:0;">
+                <div class="shortproduct-view row">
+                    <div class="col-sm-4 text-center">
+                        <a href="#/product/default/{{p.InteropID}}">
+                            <figure>
+                                <img class="view-thumbnail" ng-src="{{p.SmallImageUrl}}"/>
+                            </figure>
+                            <div class="empty view-thumbnail" ng-hide="p.SmallImageUrl">
+                                <span class="fa empty"><i class="fa fa-camera"></i></span>
+                            </div>
+                            <div class="btn btn-default">View Product</div>
+                        </a>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="text-left panel-body">
+                            <h3>{{p.Name}}</h3>
+                            <p>{{p.Description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
         </ul>
-    </div>
+    </nav>
 </div>

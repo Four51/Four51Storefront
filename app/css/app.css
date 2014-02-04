@@ -228,7 +228,7 @@ input[type="file"]{
     font-size: 25px;
     display: block;
     opacity: .25;
-    padding-top: 75px;
+    padding-top: 45px;
 }
 
 .shortproduct-arrow {
@@ -1027,7 +1027,7 @@ li.selected {
     margin-bottom: 15px;
 }
 
-.view-thumbnail {
+.view-thumbnail, .related-products-view .view-thumbnail {
     max-height: 95px;
     max-width: 100%;
     margin: 0 auto 15px;

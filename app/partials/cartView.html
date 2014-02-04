@@ -13,7 +13,6 @@
             <div class="panel panel-default cart-view-line-items">
                 <div ng-if="user.Permissions.contains('ViewPromotions')"  class="panel-heading">
                     <div class="row">
-                        <!--- TODO: need to get giftcard in scope and apply ng-class based on giftcard true or false --->
                         <div ng-class="{'col-sm-6': giftcard_redeem, 'col-xs-12': !giftcard_redeem }">
                             <h3 class="panel-title">
                                 {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart

@@ -2,7 +2,6 @@
 @media (min-width: 1200px) {
 
     .nav li span.nav-name {float:right;}
-    .product-view-default .fa.empty {text-align: left;}
     .cat-image {overflow: hidden;}
     .branding-view h3 {line-height: 4em;}
     .view-phone-alert {display: none;}
