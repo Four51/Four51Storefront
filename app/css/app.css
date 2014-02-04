@@ -576,6 +576,14 @@ li.selected {
     background: #50ACDB;
 }
 
+.view-form-select:before {
+    content: "Select";
+    position: absolute;
+    left: 25px;
+    top: 9px;
+    color:#ccc;
+}
+
 /* ----------------------------------------------------------------------------------------------- */
 /* Animations */
 /* ----------------------------------------------------------------------------------------------- */
@@ -1010,6 +1018,9 @@ li.selected {
 .check-out-view .address-input-view-shipping, .check-out-view .address-input-view-billing {
     visibility: hidden;
 }
+.address-input-view .row {margin: 0;}
+.address-input-view-shipping label, .address-input-view-billing label { position: static;display: block;}
+.address-input-view-shipping input, .address-input-view-billing input {}
 
 .cart-view-quantity-line {
     margin-bottom: 15px;
