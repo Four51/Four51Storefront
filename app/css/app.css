@@ -581,7 +581,8 @@ li.selected {
     position: absolute;
     left: 25px;
     top: 9px;
-    color:#ccc;
+    color:#999;
+    pointer-events:none;
 }
 
 /* ----------------------------------------------------------------------------------------------- */

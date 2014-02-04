@@ -49,7 +49,7 @@
                     <input ng-show="!hasStates()" class="form-control" type="text" ng-model="address.State" placeholder="State" ng-required="!hasStates()" />
                     <i class="fa fa-map-marker"></i>
                 </div>
-                <div class="view-form-select" ng-show="hasStates()">
+                <div class="" ng-show="hasStates()" ng-class="{'view-form-select': !address.State, '': address.State }">
                     <label ng-class="{required: hasStates}">State</label>
                     <select ng-show="hasStates()" class="form-control" ng-options="state.value as state.label for state in states | filter:country" ng-model="address.State" placeholder="State" ng-required="hasStates()">
                     </select>
