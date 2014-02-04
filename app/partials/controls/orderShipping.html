@@ -101,14 +101,14 @@
                             </div>
                             <div class="col-xs-12 col-sm-4" ng-show="user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable">
                                 <span>Attn:</span>
-                                <input class="input-sm" ng-required="shipToMultipleAddresses && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" type="text" ng-model="item.ShipFirstName" placeholder="First Name" />
-                                <input class="input-sm" ng-required="shipToMultipleAddresses && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" type="text" ng-model="item.ShipLastName" placeholder="Last Name" />
+                                <input class="input-sm" ng-required="shipToMultipleAddresses && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" type="text" ng-model="item.ShipFirstName" placeholder="First Name" autocomplete="off" />
+                                <input class="input-sm" ng-required="shipToMultipleAddresses && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" type="text" ng-model="item.ShipLastName" placeholder="Last Name" autocomplete="off" />
                             </div>
                         </div>
                     </div>
                 </div>
                 <label ng-show="currentOrder.LineItems[0].ShipAccount">Ship Account: </label>
-                <input class="form-control" ng-if="user.ShipMethod.AskForAccountNumber" placeholder="Shipping Account Number" type="text" ng-model="currentOrder.LineItems[0].ShipAccount" />
+                <input class="form-control" ng-if="user.ShipMethod.AskForAccountNumber" placeholder="Shipping Account Number" type="text" ng-model="currentOrder.LineItems[0].ShipAccount" autocomplete="off" />
             </form>
         </div>
     </div>

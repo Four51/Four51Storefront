@@ -30,8 +30,8 @@
                             <small>{{BillAddress.FirstName + ' ' + BillAddress.LastName}}</small>
                         </p>
                         <p ng-show="user.Permissions.contains('EditBillToName') && !BillAddress.IsCustEditable">
-                            <input class="input-sm" ng-required="user.Permissions.contains('EditBillToName') && !BillAddress.IsCustEditable" type="text" ng-model="currentOrder.BillFirstName" placeholder="First Name" />
-                            <input class="input-sm" ng-required="user.Permissions.contains('EditBillToName') && !BillAddress.IsCustEditable" type="text" ng-model="currentOrder.BillLastName" placeholder="Last Name" />
+                            <input class="input-sm" ng-required="user.Permissions.contains('EditBillToName') && !BillAddress.IsCustEditable" type="text" ng-model="currentOrder.BillFirstName" placeholder="First Name" autocomplete="off" />
+                            <input class="input-sm" ng-required="user.Permissions.contains('EditBillToName') && !BillAddress.IsCustEditable" type="text" ng-model="currentOrder.BillLastName" placeholder="Last Name" autocomplete="off" />
                         </p>
                         <p ng-show="BillAddress.Street1"><small>{{BillAddress.Street1}}</small></p>
                         <p ng-show="BillAddress.Street2"><small>{{BillAddress.Street2}}</small></p>

@@ -59,14 +59,14 @@
             </div>
             <div ng-if="user.Permissions.contains('CardholderName')" class="col-sm-8">
                 <label ng-class="{required: currentOrder.PaymentMethod == 'CreditCard'}" for="cardholder-name" ng-show="currentOrder.CreditCard.CardholderName || currentOrder.PaymentMethod == 'CreditCard'">Cardholder Name</label>
-                <input id="cardholder-name" class="form-control" ng-model="currentOrder.CreditCard.CardholderName" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" placeholder="Cardholder Name" />
+                <input id="cardholder-name" class="form-control" ng-model="currentOrder.CreditCard.CardholderName" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" placeholder="Cardholder Name" autocomplete="off" />
                 <i class="fa fa-user"></i>
             </div>
         </div>
         <div class="row view-form-icon">
             <div class="col-sm-7">
                 <label ng-class="{required: currentOrder.PaymentMethod == 'CreditCard'}" for="account-number" ng-show="currentOrder.CreditCard.AccountNumber || currentOrder.PaymentMethod == 'CreditCard'">Account Number</label>
-                <input id="account-number" class="form-control" ng-model="currentOrder.CreditCard.AccountNumber" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" autocomplete="false" placeholder="Account Number" />
+                <input id="account-number" class="form-control" ng-model="currentOrder.CreditCard.AccountNumber" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" autocomplete="false" placeholder="Account Number" autocomplete="off" />
                 <i class="fa">#</i>
             </div>
             <div class="col-sm-3">
@@ -75,7 +75,7 @@
             </div>
             <div ng-if="currentOrder.RequireCVN" class="col-sm-2 credit-card-cvn-input">
                 <label  ng-class="{required: currentOrder.PaymentMethod == 'CreditCard'}" for="cvn" ng-show="currentOrder.CreditCard.CVN || currentOrder.PaymentMethod == 'CreditCard'">CVN</label>
-                <input id="cvn" class="form-control" ng-model="currentOrder.CreditCard.CVN" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" placeholder="CVN" maxlength="4" />
+                <input id="cvn" class="form-control" ng-model="currentOrder.CreditCard.CVN" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" placeholder="CVN" maxlength="4" autocomplete="off" />
             </div>
         </div>
         <div ng-if="user.Permissions.contains('AllowSaveCreditCard')">

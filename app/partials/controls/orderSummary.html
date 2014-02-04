@@ -17,7 +17,7 @@
                     <div class="form-group view-form-icon">
                         <div class="input-group">
                             <label ng-show="currentOrder.CouponCode">Promotion code</label>
-                            <input class="form-control" type="text" ng-model="currentOrder.CouponCode" placeholder="Promotion Code"></input>
+                            <input class="form-control" type="text" ng-model="currentOrder.CouponCode" placeholder="Promotion Code" autocomplete="off"></input>
                             <i class="fa fa-question-circle"></i>
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-success" ng-click="applyCoupon()"><div class="fa fa-check"></div></button>
@@ -42,7 +42,7 @@
         <div class="view-form-icon" ng-show="user.Permissions.contains('SendOrderNotificationToOthers') && !(cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid)" >
             <div class="form-group">
                 <label ng-show="currentOrder.ExternalOrderDetailRecipients">Email Notification</label>
-                <input class="form-control" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" placeholder="Email Address" />
+                <input class="form-control" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" placeholder="Email Address" autocomplete="off" />
                 <i class="fa fa-envelope-o"></i>
                 <span class="help-block text-left"><small>Provide an email address if you would like to receive notifications concerning this order.</small></span>
             </div>

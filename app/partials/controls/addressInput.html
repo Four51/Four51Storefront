@@ -4,49 +4,49 @@
             <div class="col-sm-6 view-form-icon">
                 <div>
                     <label class="required">Address Name</label>
-                    <input name="addressname" class="form-control" type="text" ng-model="address.AddressName" placeholder="Address Name" required />
+                    <input name="addressname" class="form-control" type="text" ng-model="address.AddressName" placeholder="Address Name" autocomplete="off" required />
                     <i class="fa fa-edit"></i>
                 </div>
                 <div>
                     <label ng-show="address.FirstName || address.IsBilling" ng-class="{required: address.IsBilling}">First Name</label>
-                    <input name="firstname" class="form-control" type="text" ng-model="address.FirstName" placeholder="First Name" ng-required="address.IsBilling" />
+                    <input name="firstname" class="form-control" type="text" ng-model="address.FirstName" placeholder="First Name" autocomplete="off" ng-required="address.IsBilling" />
                     <i class="fa fa-user"></i>
                 </div>
                 <div>
                     <label ng-show="address.LastName || address.IsBilling" ng-class="{required: address.IsBilling}">Last Name</label>
-                    <input name="lastname" class="form-control" type="text" ng-model="address.LastName" placeholder="Last Name" ng-required="address.IsBilling" />
+                    <input name="lastname" class="form-control" type="text" ng-model="address.LastName" placeholder="Last Name" autocomplete="off" ng-required="address.IsBilling" />
                     <i class="fa fa-user"></i>
                 </div>
                 <div>
                     <label ng-show="address.CompanyName">Company Name</label>
-                    <input name="companyname" class="form-control" type="text" ng-model="address.CompanyName" placeholder="Company Name" />
+                    <input name="companyname" class="form-control" type="text" ng-model="address.CompanyName" autocomplete="off" placeholder="Company Name" />
                     <i class="fa fa-user"></i>
                 </div>
                 <div>
-                    <label ng-class="{required: isPhoneRequired}">Phone</label>
-                    <input name="phone" class="form-control" type="text" ng-model="address.Phone" placeholder="Phone" ng-required="isPhoneRequired()" />
+                    <label ng-show="isPhoneRequired" ng-class="{required: isPhoneRequired}">Phone</label>
+                    <input name="phone" class="form-control" type="text" ng-model="address.Phone" placeholder="Phone" autocomplete="off" ng-required="isPhoneRequired()" />
                     <i class="fa fa-phone"></i>
                 </div>
             </div>
             <div class="col-sm-6 view-form-icon">
                 <div>
                     <label class="required">Address Line 1</label>
-                    <input name="street1" class="form-control" type="text" ng-model="address.Street1" placeholder="Address Line 1" required />
+                    <input name="street1" class="form-control" type="text" ng-model="address.Street1" placeholder="Address Line 1" autocomplete="off" required />
                     <i class="fa fa-map-marker"></i>
                 </div>
                 <div>
                     <label ng-show="address.Street2">Address Line 2</label>
-                    <input name="street2" class="form-control" type="text" ng-model="address.Street2" placeholder="Address Line 2" />
+                    <input name="street2" class="form-control" type="text" ng-model="address.Street2" placeholder="Address Line 2" autocomplete="off" />
                     <i class="fa fa-map-marker"></i>
                 </div>
                 <div>
                     <label class="required">City</label>
-                    <input name="city" class="form-control" type="text" ng-model="address.City" placeholder="City" required />
+                    <input name="city" class="form-control" type="text" ng-model="address.City" placeholder="City" autocomplete="off" required />
                     <i class="fa fa-map-marker"></i>
                 </div>
                 <div ng-show="!hasStates()">
                     <label ng-class="{required: !hasStates}">State</label>
-                    <input ng-show="!hasStates()" class="form-control" type="text" ng-model="address.State" placeholder="State" ng-required="!hasStates()" />
+                    <input ng-show="!hasStates()" class="form-control" type="text" ng-model="address.State" placeholder="State" autocomplete="off" ng-required="!hasStates()" />
                     <i class="fa fa-map-marker"></i>
                 </div>
                 <div class="" ng-show="hasStates()" ng-class="{'view-form-select': !address.State, '': address.State }">
@@ -57,7 +57,7 @@
                 </div>
                 <div>
                     <label ng-class="{required: hasStates}">Zip</label>
-                    <input name="zip" class="form-control" type="text" ng-model="address.Zip" placeholder="Zip" ng-required="hasStates()" />
+                    <input name="zip" class="form-control" type="text" ng-model="address.Zip" placeholder="Zip" autocomplete="off" ng-required="hasStates()" />
                     <i class="fa fa-map-marker"></i>
                 </div>
                 <div>
