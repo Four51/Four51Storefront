@@ -20,7 +20,7 @@
                     <div class="col-sm-8">
                         <div class="text-left panel-body">
                             <h3>{{p.Name}}</h3>
-                            <p>{{p.Description}}</p>
+                            <p ng-bind-html="trusted(p.Description)" />
                         </div>
                     </div>
                 </div>
