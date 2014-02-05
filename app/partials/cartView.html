@@ -27,7 +27,7 @@
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
                         <div class="row">
                            <div class="col-xs-12">
-                                <button title="Remove Item" class="btn btn-md btn-danger pull-right" style="border-radius: 0;"  ng-click="removeItem(item)">
+                                <button title="Remove Item" class="btn btn-md btn-danger pull-right" style="border-radius: 0;margin-bottom: 15px;"  ng-click="removeItem(item)">
                                     <i class="fa fa-minus-circle fa-inverse"></i>
                                 </button>
                            </div>
@@ -71,20 +71,18 @@
                                             <div ng-show="item.qtyError" class="alert alert-danger text-center">
                                                 <small>{{item.qtyError}}</small>
                                             </div>
-                                            <p style="margin:0;" ng-hide="item.qtyError" class="text-left" ng-if="!(user.Permissions.contains('HidePricing'))">
+                                            <p  ng-hide="item.qtyError" ng-if="!(user.Permissions.contains('HidePricing'))">
                                                 <small>Total</small>
                                                 <br/>
                                                 <span class="text-success view-price-total" style="font-size: 32px;margin-top: 0;">{{item.LineTotal | currency}}</span>
                                             </p>
                                         </div>
                                         <div class="col-xs-6" ng-if="!(user.Permissions.contains('HidePricing'))">
-                                            <div>
-                                                <p style="margin:0;" class="text-left">
-                                                    <small>Unit Price</small>
-                                                    <br/>
-                                                    {{item.UnitPrice | currency}}
-                                                </p>
-                                            </div>
+                                            <p >
+                                                <small>Unit Price</small>
+                                                <br/>
+                                                {{item.UnitPrice | currency}}
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="row view-form-icon" ng-if="(user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')) || user.Permissions.contains('CostCenterPerLine')">
@@ -96,7 +94,7 @@
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
                                                 <div class="col-xs-3">
-                                                    <button type="button" title="copy to all" class="btn btn-info pull-right" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" >
+                                                    <button type="button" title="copy to all" class="btn btn-default pull-right" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" >
                                                         <span class="fa fa-copy"></span>
                                                     </button>
                                                 </div>
@@ -112,7 +110,7 @@
                                                     <i class="fa fa-money"></i>
                                                 </div>
                                                 <div class="col-xs-3">
-                                                    <button type="button" title="copy to all" class="btn btn-info pull-right" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
+                                                    <button type="button" title="copy to all" class="btn btn-default pull-right" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
                                                         <span class="fa fa-copy"></span>
                                                     </button>
                                                 </div>
