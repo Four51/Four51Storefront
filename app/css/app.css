@@ -1529,6 +1529,7 @@ ul.view-variant-list{
 
 .alert {
     margin-top: 20px;
+    word-wrap:break-word;
 }
 
 .btn.btn-primary {
