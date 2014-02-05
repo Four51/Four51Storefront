@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-sm-3">
                             <div class="row">
-                                <div class="col-xs-6 col-sm-12 col-md-6 cart-view-quantity-line">
+                                <div class="col-sm-12 col-md-6 cart-view-quantity-line" ng-class="{'col-xs-6': item.Product.SmallImageUrl, 'col-xs-12': !item.Product.SmallImageUrl }">
                                     <quantityfield lineitem="item" class="quantity"/>
                                     <div class="text-success" style="border: 1px solid #d6d6d6;border-top: 0; text-align: center;padding-top: 10px;">
                                         <p ng-show="item.Product.QuantityMultiplier = 1">
@@ -45,8 +45,8 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-xs-6 col-sm-12 col-md-6 text-center">
-                                    <figure ng-show="item.Variant.SmallImageUrl || item.Product.SmallImageUrl">
+                                <div class="col-xs-6 col-sm-12 col-md-6 text-center" ng-show="item.Variant.SmallImageUrl || item.Product.SmallImageUrl">
+                                    <figure>
                                         <img class="view-thumbnail" ng-src="{{item.Product.SmallImageUrl}}"/>
                                     </figure>
                                 </div>
@@ -55,13 +55,15 @@
                         <div class="col-sm-9 cart-view-line-items-product">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h3 class="text-primary" style="margin: 0; padding: 0;">
-                                        <a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">
+                                    <a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">
+                                        <h3 class="text-primary" style="margin: 0; padding: 0;">
                                             <i class="fa fa-edit"></i>
                                             {{item.ProductIDText}}
-                                        </a>
-                                    </h3>
-                                    <p>{{item.Product.Name}}</p>
+                                        </h3>
+                                        <p>
+                                            {{item.Product.Name}}
+                                        </p>
+                                    </a>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="row">

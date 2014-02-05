@@ -8,10 +8,11 @@ Template: Four51 Single Page App - Ken Buras (http://www.kenburas.com/)
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
+    overflow: hidden !important;
 }
 
 html {
-
+ overflow-y: scroll;
 }
 
 body {
@@ -21,7 +22,7 @@ body {
     font-smoothing: antialiased;
     -webkit-text-stroke: 1px transparent;
     margin-bottom: 100px;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 h1, h2, h3, h4, h5 {
@@ -31,6 +32,7 @@ h1, h2, h3, h4, h5 {
 
 hr {
     clear: both;
+    margin: 15px 0;
 }
 
 
@@ -354,11 +356,13 @@ input[type="file"]{
     outline: none;
 }
 
-.fa-shopping-cart {
-    border: 1px solid #fff;
-    font-size: 15px;
-    border-radius: 25px;
-    padding: 13px;
+li.cart span.badge {
+    position: absolute;
+    top: 10px;
+    left: -12px;
+    z-index: 999999999;
+    background-color:#3D3D3D;
+    padding: 4px 7px;
 }
 
 div.category-view-subcat ul li ul {
@@ -876,11 +880,6 @@ li.selected {
     -o-animation-duration: 1s;
     animation-duration: 1s;
     -ms-animation-duration: 1s;
-    animation-delay: 1s;
-    -webkit-animation-delay: 1s;
-    -moz-animation-delay: 1s;
-    -o-animation-delay: 1s;
-    -ms-animation-delay: 1s;
     -webkit-animation-fill-mode: both;
     -moz-animation-fill-mode: both;
     -o-animation-fill-mode: both;
@@ -899,11 +898,6 @@ li.selected {
     -o-animation-duration: 1s;
     animation-duration: 1s;
     -ms-animation-duration: 1s;
-    animation-delay: 1s;
-    -webkit-animation-delay: 1s;
-    -moz-animation-delay: 1s;
-    -o-animation-delay: 1s;
-    -ms-animation-delay: 1s;
     -webkit-animation-fill-mode: both;
     -moz-animation-fill-mode: both;
     -o-animation-fill-mode: both;
@@ -921,14 +915,18 @@ li.selected {
     -moz-animation-duration: 1s;
     -o-animation-duration: 1s;
     animation-duration: 1s;
+    -ms-animation-duration: 1s;
     -webkit-animation-fill-mode: both;
     -moz-animation-fill-mode: both;
     -o-animation-fill-mode: both;
     animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
     -webkit-animation-name: fadeInDown;
     -moz-animation-name: fadeInDown;
     -o-animation-name: fadeInDown;
     animation-name: fadeInDown;
+    -ms-animation-name: fadeInDown;
+
 }
 
 .btn, .container {
@@ -978,7 +976,7 @@ li.selected {
 }
 .app-loading-indicator-title p {margin: 0 auto; width: 500px;padding: 10px;}
 .container-content {
-    margin-top: 40px;
+    padding: 15px 0;
 }
 
 .product-details-add {
@@ -1165,10 +1163,10 @@ li.print {
     padding: 0 0 35px;
     position:relative;
 }
-.cart-view-line-items-product h3 a:hover:before {content: "Edit Line Item"; color:#ccc;font-size: 12px;position: absolute; left: 15px; top: -25px;}
-.cart-view-line-items-product h3 a {display: block; width: 100%;border: 1px solid transparent; }
-.cart-view-line-items-product h3 a:hover {text-decoration: none;background-color:#F9F9F9;border-radius: 4px; border: 1px solid #d6d6d6;}
-.cart-view-line-items-product h3 a i {color:#ccc;margin: 2px;}
+.cart-view-line-items-product a:hover:before {content: "Edit Line Item"; color:#ccc;font-size: 12px;position: absolute; left: 15px; top: -15px;}
+.cart-view-line-items-product a {display: block; width: 100%;border: 1px solid transparent;padding: 5px; }
+.cart-view-line-items-product a:hover {text-decoration: none;background-color:#F9F9F9;border-radius: 4px; border: 1px solid #d6d6d6;}
+.cart-view-line-items-product a i {color:#ccc;margin: 2px;}
 .view-form-icon > div {
     margin-top: 25px;
     position: relative;
@@ -1214,19 +1212,6 @@ li.print {
     font-size: 24px;
     color:#468847;
     box-shadow: none;
-}
-
-li.cart a.cart {
-    padding: 8px 15px;
-}
-
-li.cart span.badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 999999999;
-    background-color:#3D3D3D;
-    padding: 4px 7px;
 }
 
 .badge {
@@ -1281,39 +1266,6 @@ li.cart span.badge {
     margin: 15px auto;
     max-height: 300px;
     max-width: 100%;
-}
-
-.product-view-default-toggle-panel .panel-title.panel-selected {
-    background: rgba(255, 255, 255, 0);
-}
-
-.product-view-default-toggle-panel .panel-heading {
-    border-bottom: none;
-    width: 100%;
-    clear: both;
-    overflow: hidden;
-    padding: 0;
-}
-
-.product-view-default-toggle-panel .panel-switch {
-    cursor: pointer;
-    display: inline-block;
-    width: 50%;
-    text-align: center;
-    float: left;
-    padding: 20px 25px;
-    position: relative;
-    background: rgba(255, 255, 255, 0.75);
-}
-
-.product-view-default-toggle-panel .icon {
-    position: absolute;
-    bottom: -10px;
-    left: 48%;
-}
-.product-view-default-toggle-panel .icon i {
-    font-size: 32px;
-    color: #fff;
 }
 
 .col-collapse {
@@ -1555,11 +1507,7 @@ ul.view-variant-list{
     transition: all ease-in-out .2s;
 }
 
-/* tighten the transitions with smoother interaction for the ux */
-.navbar .nav > li > a,
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus,
+/* tighten the button transitions with smoother interaction for the ux */
 .btn,
 .btn:hover,
 .btn:focus {
@@ -1582,6 +1530,8 @@ ul.view-variant-list{
 .navbar {
     margin-bottom: 0;
     border: none;
+    border-radius: 0;
+    min-height: 60px
 }
 
 .navbar-collapse {
@@ -1631,6 +1581,9 @@ ul.view-variant-list{
     border: none;
 }
 
+.jumbotron {
+    margin-bottom: 0;
+}
 
 .form-control:focus {
     box-shadow: none;
