@@ -89,12 +89,18 @@
                                     </div>
                                     <div class="row view-form-icon" ng-if="(user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')) || user.Permissions.contains('CostCenterPerLine')">
                                         <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
-                                            <label ng-class="{required: user.Permissions.contains('DateNeededRequired')}" ng-show="item.DateNeeded || user.Permissions.contains('DateNeededRequired')">Date</label>
-                                            <input name="dateneeded" class="form-control" placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
-                                            <button type="button" title="copy to all" class="btn btn-sm btn-info hidden-xs pull-right" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" >
-                                                <span class="fa fa-copy"></span>
-                                            </button>
-                                            <i class="fa fa-calendar"></i>
+                                            <div class="row">
+                                                <div class="col-xs-10">
+                                                    <label ng-class="{required: user.Permissions.contains('DateNeededRequired')}" ng-show="item.DateNeeded || user.Permissions.contains('DateNeededRequired')">Date</label>
+                                                    <input name="dateneeded" class="form-control" placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <button type="button" title="copy to all" class="btn btn-info" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" >
+                                                        <span class="fa fa-copy"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
                                             <label class="required">Cost Center</label>
