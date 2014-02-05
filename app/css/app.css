@@ -1014,8 +1014,8 @@ li.selected {
     border: 1px solid #d6d6d6;
 }
 
-.check-out-view .address-input-view-shipping, .check-out-view .address-input-view-billing {
-    visibility: hidden;
+.check-out-view .address-input-view-shipping, .check-out-view .address-input-view-billing, .check-out-view .address-input-view-btn-delete {
+    display: none;
 }
 .address-input-view .row {margin: 0;}
 .address-input-view-shipping label, .address-input-view-billing label { position: static;display: block;}
@@ -1494,6 +1494,8 @@ ul.view-variant-list{
 }
 
 .view-phone-alert {display: block;}
+
+
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */

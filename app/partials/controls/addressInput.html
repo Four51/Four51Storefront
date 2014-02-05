@@ -83,9 +83,9 @@
         </p>
         <div class="panel-footer">
             <span class="alert alert-warning" ng-show="objectExists">An address with that name already exists. Please specify another name</span><br />
-            <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" class="btn btn-small btn-danger" ng-click="delete()" type="button">Delete</button>
-            <button class="btn btn-small btn-danger" type="button" ng-click="cancel()">Cancel</button>
-            <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" class="btn btn-small btn-primary pull-right" type="submit" ng-disabled="addressEdit.$invalid" id="451_btn_user">Save</button>
+            <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" class="btn btn-small btn-danger address-input-view-btn-delete" ng-click="delete()" type="button">Delete</button>
+            <button class="btn btn-small btn-danger address-input-view-btn-cancel" type="button" ng-click="cancel()">Cancel</button>
+            <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" class="btn btn-small btn-primary pull-right" type="submit" ng-disabled="addressEdit.$invalid" id="451_btn_user">Save {{address.AddressName}}</button>
         </div>
     </form>
 </div>

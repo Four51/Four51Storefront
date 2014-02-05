@@ -34,7 +34,7 @@
                 </div>
             </div>
             <hr/>
-            <h4 ng-if="!(user.Permissions.contains('HidePricing'))"><strong class="pull-left">Total</strong><span class="text-success">{{currentOrder.Total | currency}}</span></h4>
+            <h4 ng-if="!(user.Permissions.contains('HidePricing'))"><strong class="pull-left">Total</strong><span class="text-success"><strong>{{currentOrder.Total | currency}}</strong></span></h4>
             <p class="text-info text-left" ng-if="user.Company.TaxMethod != 'NoTax' || !(user.Permissions.contains('HidePricing'))">Shipping, handling and tax may be added to this subtotal.</p>
         </div>
     </div>
