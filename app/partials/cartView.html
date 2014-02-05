@@ -34,9 +34,9 @@
                         </div>
                         <div class="col-sm-3">
                             <div class="row">
-                                <div class="col-sm-12 col-md-6 cart-view-quantity-line" ng-class="{'col-xs-6': item.Product.SmallImageUrl, 'col-xs-12': !item.Product.SmallImageUrl }">
+                                <div class="col-xs-6 col-sm-12 col-md-6 cart-view-quantity-line">
                                     <quantityfield lineitem="item" class="quantity"/>
-                                    <div class="text-success" style="border: 1px solid #d6d6d6;border-top: 0; text-align: center;padding-top: 10px;">
+                                    <div class="text-success" style="border: 1px solid #d6d6d6;border-top: 0; text-align: center;padding-top: 10px;background-color:#F9F9F9;">
                                         <p ng-show="item.Product.QuantityMultiplier = 1">
                                             <small>Total Quantity {{item.Quantity * item.Product.QuantityMultiplier}}</small>
                                         </p>
@@ -67,7 +67,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-xs-6">
                                             <div ng-show="item.qtyError" class="alert alert-danger text-center">
                                                 <small>{{item.qtyError}}</small>
                                             </div>
@@ -77,7 +77,7 @@
                                                 <span class="text-success view-price-total" style="font-size: 34px;">{{item.LineTotal | currency}}</span>
                                             </p>
                                         </div>
-                                        <div class="col-xs-12 col-sm-6" ng-if="!(user.Permissions.contains('HidePricing'))">
+                                        <div class="col-xs-6" ng-if="!(user.Permissions.contains('HidePricing'))">
                                             <div>
                                                 <p style="margin:0;" class="text-left">
                                                     <small class="text-info">Unit Price</small>
