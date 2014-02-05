@@ -230,7 +230,7 @@ Headroom.prototype = {
  */
 Headroom.options = {
     tolerance : 20,
-    offset: 100,
+    offset: 200,
     classes : {
         pinned : 'headroom--pinned',
         unpinned : 'headroom--unpinned',
