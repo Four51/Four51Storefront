@@ -128,11 +128,11 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 
                 if(priceSchedule.MinQuantity > value){
 					scope.valid = false;
-                    scope.lineitem.qtyError = "must be greater than " + priceSchedule.MinQuantity;
+                    scope.lineitem.qtyError = "must be equal or greater than " + priceSchedule.MinQuantity;
                 }
 
                 if(priceSchedule.MaxQuantity && priceSchedule.MaxQuantity < value){
-					scope.lineitem.qtyError = "must be less than " + priceSchedule.MaxQuantity;
+					scope.lineitem.qtyError = "must be equal or less than " + priceSchedule.MaxQuantity;
                     scope.valid = false;
                 }
 
