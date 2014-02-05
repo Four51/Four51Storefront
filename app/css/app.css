@@ -646,14 +646,17 @@ li.selected {
     -moz-animation-duration: 1s;
     -o-animation-duration: 1s;
     animation-duration: 1s;
+    -ms-animation-duration: 1s;
     -webkit-animation-fill-mode: both;
     -moz-animation-fill-mode: both;
     -o-animation-fill-mode: both;
     animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
     -webkit-animation-name: view-enter;
     -moz-animation-name: view-enter;
     -o-animation-name: view-enter;
     animation-name: view-enter;
+    -ms-animation-name: view-enter;
 }
 
 .ng-enter-active {
