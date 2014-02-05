@@ -27,8 +27,8 @@
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
                         <div class="row">
                            <div class="col-xs-12">
-                                <button title="Remove Item" class="btn btn-danger btn-md pull-right" style="margin-bottom: 15px;border-radius: 0;"  ng-click="removeItem(item)">
-                                    <i class="fa fa-times-circle"></i>
+                                <button title="Remove Item" class="btn btn-md btn-danger pull-right" style="border-radius: 0;"  ng-click="removeItem(item)">
+                                    <i class="fa fa-minus-circle fa-inverse"></i>
                                 </button>
                            </div>
                         </div>
@@ -74,7 +74,7 @@
                                             <p style="margin:0;" ng-hide="item.qtyError" class="text-left" ng-if="!(user.Permissions.contains('HidePricing'))">
                                                 <small class="text-info">Total</small>
                                                 <br/>
-                                                <span class="text-success view-price-total" style="font-size: 34px;">{{item.LineTotal | currency}}</span>
+                                                <span class="text-success view-price-total" style="font-size: 32px;margin-top: 0;">{{item.LineTotal | currency}}</span>
                                             </p>
                                         </div>
                                         <div class="col-xs-6" ng-if="!(user.Permissions.contains('HidePricing'))">
