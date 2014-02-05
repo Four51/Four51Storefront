@@ -78,8 +78,11 @@
                 <input id="cvn" class="form-control" ng-model="currentOrder.CreditCard.CVN" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" placeholder="CVN" maxlength="4" autocomplete="off" />
             </div>
         </div>
-        <div ng-if="user.Permissions.contains('AllowSaveCreditCard')">
-            <label class="checkbox-label"><input ng-model="currentOrder.CreditCard.Save"  type="checkbox" /> Save my credit card information</label>
+        <div class="row view-form-icon" ng-if="user.Permissions.contains('AllowSaveCreditCard')">
+            <div class="col-xs-12">
+                <label class="checkbox-label">Save my credit card information</label>
+                <input ng-model="currentOrder.CreditCard.Save"  type="checkbox" />
+            </div>
         </div>
         <hr/>
     </div>
