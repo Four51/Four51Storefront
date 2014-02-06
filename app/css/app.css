@@ -1163,8 +1163,7 @@ li.print {
     border-top: 1px solid #d6d6d6;
     clear: both;
     overflow: hidden;
-    padding: 0 0 15px;
-    position:relative;
+    padding: 15px 0;
 }
 
 .cart-view-line-items-product a {display: block; width: 100%;border: 1px solid transparent;padding: 5px; }
@@ -1176,7 +1175,6 @@ li.print {
 .cart-view-line-items-product a i {color:#ccc;margin: 2px;}
 .view-form-icon > div {
     margin-top: 25px;
-    position: relative;
 }
 
 .view-form-icon input, .view-form-icon select, .view-form-icon text, .view-form-icon textarea {

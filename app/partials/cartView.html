@@ -25,13 +25,13 @@
                 </div>
                 <div class="panel-body">
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
-                        <div class="row">
-                           <div class="col-xs-12">
-                                <button title="Remove Item" class="btn btn-md btn-danger pull-right" style="border-radius: 0;margin-bottom: 15px;"  ng-click="removeItem(item)">
-                                    <i class="fa fa-minus-circle fa-inverse"></i>
+
+
+                                <button title="Remove Item" class="btn btn-danger" style="border-radius: 0;margin-bottom: 15px;position: absolute; top: 0; right: 0; z-index: 1;"  ng-click="removeItem(item)">
+                                    <span class="fa fa-minus-circle fa-inverse"></span>
                                 </button>
-                           </div>
-                        </div>
+
+
                         <div class="col-sm-3">
                             <div class="row">
                                 <div class="col-xs-6 col-sm-12 col-md-6 cart-view-quantity-line">
