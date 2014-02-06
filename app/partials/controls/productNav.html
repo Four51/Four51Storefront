@@ -1,7 +1,7 @@
 <nav class="nav nav-cat-search crumbs"  ng-show="product.Variants || product.Type == 'VariableText'">
     <hr />
     <ul>
-        <li><a>Product Navigation</a></li>
+        <li><a><strong>Product Navigation</strong></a></li>
         <li><a href="#/product/{{product.ViewName}}/{{product.InteropID}}">{{product.Name}}</a></li>
         <li ng-if="variant" ng-hide="!variant.ExternalID"><a href="#/product/{{product.ViewName}}/{{product.InteropID}}/{{variant.InteropID}}">{{variant.ExternalID}}</a></li>
         <li ng-if="editvariant && variant.ExternalID"><a>Edit</a></li>
