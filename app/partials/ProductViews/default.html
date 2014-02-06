@@ -3,13 +3,19 @@
     <productnav product="LineItem.Product" variant="LineItem.Variant" />
 
     <div class="col-md-4 col-collapse" ng-show="LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl || LineItem.Variant.PreviewUrl">
-        <figure style="background-color:#fff;">
-            <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}">
-            <span ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant">
-                <button class="btn btn-xs btn-warning" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit">Edit</button>
-                <button class="btn btn-xs btn-warning" redirect="{{LineItem.Variant.ProofUrl}}">View PDF</button>
-            </span>
-        </figure>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <figure>
+                    <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}">
+                </figure>
+            </div>
+            <div class="panel-footer"  ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant">
+                <span class="btn-group">
+                    <button class="btn btn-default" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit">Edit</button>
+                    <button class="btn btn-default" redirect="{{LineItem.Variant.ProofUrl}}">View PDF</button>
+                </span>
+            </div>
+        </div>
     </div>
 
     <div class="col-md-7 col-md-offset-1 col-collapse">
@@ -53,22 +59,25 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-
                     <div ng-if="(LineItem.Product.Variants.length > 0 || LineItem.Product.Type == 'VariableText') && !LineItem.Variant" style="margin: -15px;border-bottom: 1px solid #d6d6d6;">
-                            <h3 class="panel-title text-info" style="border-bottom: 1px solid #d6d6d6;">
-                                Product Variants
-                            </h3>
-                            <div ng-show="LineItem.Product.Type == 'VariableText'">
-                                <button type="button" ng-show="!LineItem.Variant" class="btn btn-xs btn-danger" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/new/edit" tabindex="-1">
-                                    Create New
-                                </button>
-                            </div>
-                            <div ng-if="LineItem.Product.Variants.length > 20">
+                         <div class="panel-heading">
+                             <div class="container" style="padding-top: 15px;">
+                                 <h3 class="panel-title text-info col-xs-9 col-collapse" style="text-align: left;padding-left: 0;">
+                                    Product Variants
+                                 </h3>
+                                 <div class="col-xs-3 col-collapse" ng-show="LineItem.Product.Type == 'VariableText'">
+                                     <button type="button" ng-show="!LineItem.Variant" class="btn btn-info pull-right" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/new/edit" tabindex="-1">
+                                        Create New
+                                     </button>
+                                </div>
+                             </div>
+                             <div class="container" ng-if="LineItem.Product.Variants.length > 20">
                                 <input ng-model="queryVariants" type="text" class="form-control" placeholder="Filter variants" autocomplete="off"/>
-                            </div>
-                        <div class="product-view-default-variant-box" style="padding-left: 1.5em;">
-                            <ul class="view-variant-list" style="padding: 1.5em 0;">
-                                <li ng-repeat="v in LineItem.Product.Variants | filter:queryVariants" class="col-xs-12" style="margin: 2px 0;">
+                             </div>
+                         </div>
+                        <div class="product-view-default-variant-box">
+                            <ul class="view-variant-list">
+                                <li ng-repeat="v in LineItem.Product.Variants | filter:queryVariants" class="col-xs-12">
                                     <div class="row" style="margin-right: 0;">
                                         <a class="col-sm-8" ng-class="{'col-sm-8': allowAddFromVariantList, 'col-xs-12': !allowAddFromVariantList }" href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>
                                             <h5>

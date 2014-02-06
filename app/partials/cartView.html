@@ -25,13 +25,9 @@
                 </div>
                 <div class="panel-body">
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
-
-
-                                <button title="Remove Item" class="btn btn-danger" style="border-radius: 0;margin-bottom: 15px;position: absolute; top: 0; right: 0; z-index: 1;"  ng-click="removeItem(item)">
+                                <button title="Remove Item" class="btn btn-danger cart-view-btn-remove" ng-click="removeItem(item)">
                                     <span class="fa fa-minus-circle fa-inverse"></span>
                                 </button>
-
-
                         <div class="col-sm-3">
                             <div class="row">
                                 <div class="col-xs-6 col-sm-12 col-md-6 cart-view-quantity-line">
@@ -71,14 +67,15 @@
                                             <div ng-show="item.qtyError" class="alert alert-danger text-center">
                                                 <small>{{item.qtyError}}</small>
                                             </div>
-                                            <p  ng-hide="item.qtyError" ng-if="!(user.Permissions.contains('HidePricing'))">
+                                            <div  ng-hide="item.qtyError" ng-if="!(user.Permissions.contains('HidePricing'))">
                                                 <small>Total</small>
-                                                <br/>
-                                                <span class="text-success view-price-total" style="font-size: 32px;margin-top: 0;">{{item.LineTotal | currency}}</span>
-                                            </p>
+                                                <h2 class="text-success">
+                                                    {{item.LineTotal | currency}}
+                                                </h2>
+                                            </div>
                                         </div>
                                         <div class="col-xs-6" ng-if="!(user.Permissions.contains('HidePricing'))">
-                                            <p >
+                                            <p>
                                                 <small>Unit Price</small>
                                                 <br/>
                                                 {{item.UnitPrice | currency}}

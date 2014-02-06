@@ -114,6 +114,7 @@
         margin: 0 0 20px 0;
         text-align: center;
         display: block;
+        border: 1px solid #ccc;
     }
     .crumbs ul li a:after {
         display: none;
@@ -123,11 +124,11 @@
         content: "";
         border-left: 15px solid transparent;
         border-right: 15px solid transparent;
-        border-top: 15px solid #50ACDB;
+        border-top: 15px solid #fff;
         position: absolute;
         bottom: 0;
-        left: 47%;
-        top: -20px;
+        left: 46%;
+        top: -22px;
     }
 
     .crumbs ul li:first-child a {

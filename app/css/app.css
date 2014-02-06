@@ -44,6 +44,10 @@ div {
     position: relative;
 }
 
+a {
+    cursor: pointer;
+}
+
 /* iOS placeholder needs help to disappear on focus */
 :focus::-webkit-input-placeholder{color:transparent;}
 
@@ -144,6 +148,7 @@ input[type="file"]{
 }
 .product-view-default-variant-box{
     min-height:220px;
+    padding-left: 1.5em;
 }
 
 .static-spec-panel-body {
@@ -530,19 +535,21 @@ li.selected {
 .crumbs ul li a {
     display: block;
     float: left;
-    background: #50ACDB;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-left: none;
     text-align: center;
     padding: 20px 20px 20px 40px;
     position: relative;
     margin: 0 10px 0 0;
     text-decoration: none;
-    color: #fff;
+    color: #333;
 }
 .crumbs ul li a:after {
     content: "";
     border-top: 30px solid transparent;
     border-bottom: 30px solid transparent;
-    border-left: 30px solid #50ACDB;
+    border-left: 30px solid #fff;
     position: absolute;
     right: -30px;
     top: 0;
@@ -553,7 +560,7 @@ li.selected {
     content: "";
     border-top: 30px solid transparent;
     border-bottom: 30px solid transparent;
-    border-left: 30px solid #d4f2ff;
+    border-left: 30px solid #F7F6F6;
     position: absolute;
     left: 0;
     top: 0;
@@ -562,6 +569,8 @@ li.selected {
 .crumbs ul li:first-child a {
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
+    border-left: 1px solid #ccc;
+    cursor: default;
 }
 .crumbs ul li:first-child a:before {
     display: none;
@@ -577,7 +586,7 @@ li.selected {
 }
 
 .crumbs ul li a:hover {
-    background: #50ACDB;
+    background: #fff;
 }
 
 .view-form-select:before {
@@ -1197,7 +1206,7 @@ li.print {
     border-bottom: 1px solid #d6d6d6;
     padding-top: 10px;
 }
-.view-summary .panel-footer, .product-view-default .panel-footer {
+.view-summary .panel-footer {
     background-color:transparent;
 }
 
@@ -1370,7 +1379,10 @@ li.print {
 
 ul.view-variant-list{
     list-style-type: none;
+    padding: 1.5em 0;
 }
+
+.view-variant-list li {margin: 2px 0;}
 
 .view-variant-list a{
     position: relative;
@@ -1496,7 +1508,16 @@ ul.view-variant-list{
 
 .view-phone-alert {display: block;}
 
+.cart-view-btn-remove {
+    border-radius: 0;
+    margin-bottom: 15px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
 
+.row h2 {margin: 0;}
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
