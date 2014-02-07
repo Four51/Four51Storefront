@@ -36,7 +36,7 @@
             {{selectedBudgetAccount.Label + ' - Balance: ' + (selectedBudgetAccount.Balance | currency)}}
         </div>
         <div class="row view-form-icon" ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 1">
-            <div class="col-sm-6">
+            <div class="col-sm-6" ng-class="{'view-form-select': !currentOrder.BudgetAccountID, '': currentOrder.BudgetAccountID }">
                 <label ng-show="currentOrder.BudgetAccountID">Spending Account</label>
                 <select class="form-control" placeholder="Spending Account"
                     ng-options="account.ID as (account.Label + ' - Balance: ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{AccountType.PurchaseCredit:true}"

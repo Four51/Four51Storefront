@@ -60,7 +60,7 @@
                     <input name="zip" class="form-control" type="text" ng-model="address.Zip" placeholder="Zip" autocomplete="off"ng-required="hasStates()" />
                     <i class="fa fa-map-marker"></i>
                 </div>
-                <div>
+                <div ng-class="{'view-form-select': !address.Country, '': address.Country }">
                     <label class="required">Country</label>
                     <select name="country" class="form-control" ng-options="country.value as country.label for country in countries" ng-model="address.Country" placeholder="Country" required />
                     <i class="fa fa-globe"></i>

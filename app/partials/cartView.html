@@ -31,7 +31,9 @@
                         <div class="col-sm-3">
                             <div class="row">
                                 <div class="col-xs-6 col-sm-12 col-md-6 cart-view-quantity-line">
-                                    <quantityfield lineitem="item" class="quantity"/>
+                                    <div class="view-form-icon">
+                                        <quantityfield lineitem="item" class="quantity"/>
+                                    </div>
                                     <div style="border: 1px solid #d6d6d6;border-top: 0; text-align: center;padding-top: 10px;background-color:#F9F9F9;">
                                         <p ng-show="item.Product.QuantityMultiplier = 1">
                                             <small>Total Quantity {{item.Quantity * item.Product.QuantityMultiplier}}</small>
@@ -82,9 +84,9 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="row view-form-icon" ng-if="(user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')) || user.Permissions.contains('CostCenterPerLine')">
+                                    <div class="row" ng-if="(user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')) || user.Permissions.contains('CostCenterPerLine')">
                                         <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
-                                            <div class="row">
+                                            <div class="row view-form-icon">
                                                 <div class="col-xs-9">
                                                     <label ng-class="{required: user.Permissions.contains('DateNeededRequired')}" ng-show="item.DateNeeded || user.Permissions.contains('DateNeededRequired')">Date</label>
                                                     <input name="dateneeded" class="form-control" placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
@@ -98,13 +100,14 @@
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
-                                            <div class="row">
-                                                <div class="col-xs-9" >
+                                            <div class="row view-form-icon">
+                                                <div class="col-xs-9">
                                                     <label class="required">Cost Center</label>
                                                     <select class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
                                                     <input class="form-control view-form-icon" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' autocomplete="off" required placeholder="Cost Center" />
                                                     <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
-                                                    <i class="fa fa-money"></i>
+                                                    <i class="fa fa-money" ng-if="user.Permissions.contains('FreeFormCostCenter')"></i>
+                                                    <i class="fa fa-arrow-down" ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')"></i>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <button type="button" title="copy to all" class="btn btn-default pull-right" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1">

@@ -31,7 +31,7 @@
                     <loadingindicator ng-show="shippingUpdatingIndicator" title="Please wait while shipping costs are updated" />
                     <loadingindicator ng-show="shippingFetchIndicator" title="Please wait while available shippers are updated" />
                     <div>
-                        <div ng-show="!shipToMultipleAddresses" class="view-form-icon" >
+                        <div ng-show="!shipToMultipleAddresses" class="view-form-icon">
                             <div ng-show="(addresses | filter:{IsShipping:true}).length > 0" ng-class="{'view-form-select': !currentOrder.ShipAddressID, '': currentOrder.ShipAddressID }">
                                 <label ng-class="{required: !shipToMultipleAddresses}" ng-show="currentOrder.ShipAddressID || !shipToMultipleAddresses">Shipping Address</label>
                                     <select class="form-control" name="shippingAddress"
@@ -42,7 +42,7 @@
                                     </select>
                                     <i class="fa fa-map-marker"></i>
                             </div>
-                            <div ng-show="user.ShipMethod != null && shippers" ng-class="{'view-form-select': !currentOrder.LineItems[0].ShipperName, '': currentOrder.LineItems[0].ShipperName }">
+                            <div ng-show="user.ShipMethod != null && shippers"  ng-class="{'view-form-select': !currentOrder.LineItems[0].ShipperName, '': currentOrder.LineItems[0].ShipperName }">
                                 <label ng-class="{required: !shipToMultipleAddresses && user.ShipMethod != null}" ng-show="currentOrder.LineItems[0].ShipperName || !shipToMultipleAddresses && user.ShipMethod != null">Shipping Method</label>
                                 <select class="form-control" ng-change="updateShipper()" name="shipMethod"
                                         ng-model="currentOrder.LineItems[0].ShipperName"
@@ -79,7 +79,7 @@
                         <div class="row view-form-icon" ng-class="{'ng-repeater-even-row': $even}" ng-repeat="item in currentOrder.LineItems">
                             <div class="col-xs-12 col-sm-4"><strong>{{item.Product.Name}}</strong><small>{{' x ' + item.Quantity}}</small><br/>
                                 <span class="text-info">{{item.DateNeeded | date:'MM/dd/yyyy' }}</span></div>
-                            <div class="col-xs-12 col-sm-4">
+                            <div class="col-xs-12 col-sm-4" ng-class="{'view-form-select': !item.ShipAddressID, '': item.ShipAddressID }">
                                 <label ng-class="{required: shipToMultipleAddresses}" ng-show="currentOrder.ShipAddressID || shipToMultipleAddresses">Shipping Address</label>
                                 <select class="form-control" name="shippingAddress"
                                         ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
@@ -89,7 +89,7 @@
                                 </select>
                                 <i class="fa fa-map-marker"></i>
                             </div>
-                            <div class="col-xs-12 col-sm-4">
+                            <div class="col-xs-12 col-sm-4" ng-class="{'view-form-select': !item.ShipperName, '': item.ShipperName }">
                                 <label ng-class="{required: shipToMultipleAddresses && user.ShipMethod != null}" ng-show="currentOrder.LineItems[0].ShipperName || shipToMultipleAddresses && user.ShipMethod != null">Shipping Method</label>
                                 <select class="form-control" ng-change="updateShipper(item)"
                                         ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
