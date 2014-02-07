@@ -2,12 +2,15 @@
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch product information" />
     <productnav product="LineItem.Product" variant="LineItem.Variant" />
 
-    <div class="col-md-4 col-collapse" ng-show="LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl || LineItem.Variant.PreviewUrl">
+    <div class="col-md-4 col-collapse">
         <div class="panel panel-default">
             <div class="panel-body">
                 <figure>
                     <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}">
                 </figure>
+                <div class="empty view-thumbnail" ng-hide="LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl">
+                    <span class="fa empty"><i class="fa fa-camera"></i></span>
+                </div>
             </div>
             <div class="panel-footer"  ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant">
                 <span class="btn-group">

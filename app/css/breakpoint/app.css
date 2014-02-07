@@ -13,7 +13,6 @@
 
     .nav li span.nav-name {float:right;}
     .nav li span.hidden-sm {float:right;}
-    .product-view-default .fa.empty {text-align: left;}
     .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
     .branding-view h3 {line-height: 4em;}
