@@ -12,7 +12,7 @@ Template: Four51 Single Page App - Ken Buras (http://www.kenburas.com/)
 }
 
 html {
- overflow-y: scroll;
+    overflow-y: scroll;
 }
 
 body {
@@ -477,7 +477,6 @@ div.category-view-subcat ul li ul {
 .header .text-nav {
     padding: 0 5px;
     display: inline-block;
-    float: right;
 }
 
 .header .dropdown .text-nav {
@@ -539,7 +538,7 @@ li.selected {
     border: 1px solid #ccc;
     border-left: none;
     text-align: center;
-    padding: 20px 20px 20px 40px;
+    padding: 10px 10px 10px 40px;
     position: relative;
     margin: 0 10px 0 0;
     text-decoration: none;
@@ -547,20 +546,20 @@ li.selected {
 }
 .crumbs ul li a:after {
     content: "";
-    border-top: 30px solid transparent;
-    border-bottom: 30px solid transparent;
-    border-left: 30px solid #fff;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #fff;
     position: absolute;
-    right: -30px;
+    right: -20px;
     top: 0;
     z-index: 1;
 }
 
 .crumbs ul li a:before {
     content: "";
-    border-top: 30px solid transparent;
-    border-bottom: 30px solid transparent;
-    border-left: 30px solid #F7F6F6;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #F7F6F6;
     position: absolute;
     left: 0;
     top: 0;
@@ -571,13 +570,14 @@ li.selected {
     border-bottom-left-radius: 4px;
     border-left: 1px solid #ccc;
     cursor: default;
+    padding-left: 10px;
 }
 .crumbs ul li:first-child a:before {
     display: none;
 }
 
 .crumbs ul li:last-child a {
-    padding-right: 40px;
+    padding-right: 20px;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
 }
@@ -588,7 +588,16 @@ li.selected {
 .crumbs ul li a:hover {
     background: #fff;
 }
+.view-spec-form .col-sm-2 {padding: 6px 0;}
+.view-spec-form .col-sm-8 {padding: 0;}
+.view-spec-form .col-sm-2 {  background-color: #EEEEEE;
+    border: 1px solid #CCCCCC;
 
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+
+    text-align: center;}
 .view-form-select:before {
     content: "Select";
     position: absolute;
@@ -598,6 +607,9 @@ li.selected {
     pointer-events:none;
 }
 
+.row .view-form-select:before {
+    left:50px;
+}
 /* ----------------------------------------------------------------------------------------------- */
 /* Animations */
 /* ----------------------------------------------------------------------------------------------- */
@@ -1527,6 +1539,11 @@ ul.view-variant-list{
     max-width: 100%;
 }
 
+/* ie needs bootstrap help to keep scroll from overlapping content */
+@-ms-viewport{
+    width: auto !important;
+}
+
 .navbar .nav a {
     -webkit-transition: all ease-in-out .2s;
     -moz-transition: all ease-in-out .2s;
@@ -1569,7 +1586,7 @@ ul.view-variant-list{
 }
 
 .navbar-nav > li {
-    display: inline;
+    display: inline-block;
     float: left;
 }
 .navbar-collapse li a.visible-sm.visible-xs {
@@ -1595,7 +1612,9 @@ ul.view-variant-list{
 
 .navbar-nav > li > a {
     padding: 20px;
+    height: 60px;
 }
+
 
 .navbar-collapse .navbar-nav.navbar-left:first-child {
     margin-left: 0;
@@ -1618,6 +1637,9 @@ ul.view-variant-list{
     box-shadow: none;
 }
 
+.form-group {
+    margin-bottom: 0;
+}
 
 .well {
     border: none;
@@ -1656,6 +1678,5 @@ ul.view-variant-list{
     border-radius: 0;
 }
 
-.btn-group {
-    width: 100%;
-}
+
+

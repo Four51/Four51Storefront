@@ -50,7 +50,7 @@
     </div>
     <div ng-if="user.Permissions.contains('PayByCreditCard')" ng-show="currentOrder.PaymentMethod == 'CreditCard'">
         <div class="row view-form-icon">
-            <div class="col-sm-4">
+            <div class="col-sm-4" ng-class="{'view-form-select': !currentOrder.CreditCard.Type, '': currentOrder.CreditCard.Type }">
                 <label ng-show="currentOrder.CreditCard.Type">Type</label>
                 <select id="credit-card-type" class="form-control" ng-model="currentOrder.CreditCard.Type"
                         ng-options="creditCard.Type as creditCard.DisplayName for creditCard in user.AvailableCreditCards">

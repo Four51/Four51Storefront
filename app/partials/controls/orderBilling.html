@@ -15,7 +15,7 @@
                 <div>
                 <paymentselector></paymentselector>
                 <div class="view-form-icon">
-                    <div>
+                    <div ng-class="{'view-form-select': !currentOrder.BillAddressID, '': currentOrder.BillAddressID }">
                         <label class="required">Billing Address</label>
                         <select class="form-control" ng-show="(addresses | filter:{IsBilling:true}).length > 0" name="billingAddress"
                                 ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required>

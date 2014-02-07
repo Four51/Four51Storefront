@@ -127,7 +127,7 @@
         border-top: 15px solid #fff;
         position: absolute;
         bottom: 0;
-        left: 46%;
+        left: 45%;
         top: -22px;
     }
 
@@ -143,5 +143,7 @@
         border-top-right-radius: 0;
     }
     .container-content .container {padding: 0 5px;}
+    .address-input-view .panel-footer .btn {display: block; width: 100%;margin: 5px 0;}
+
 
 }
