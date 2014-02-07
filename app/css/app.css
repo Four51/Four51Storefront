@@ -1530,6 +1530,8 @@ ul.view-variant-list{
 }
 
 .row h2 {margin: 0;}
+
+.cart-view-line-items-product {border-left: 1px solid #d6d6d6;}
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
@@ -1678,5 +1680,8 @@ ul.view-variant-list{
     border-radius: 0;
 }
 
+.btn-group {
+    width: 100%;
+}
 
 
