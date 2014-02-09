@@ -144,5 +144,5 @@
     .container-content .container {padding: 0 5px;}
     .address-input-view .panel-footer .btn {display: block; width: 100%;margin: 5px 0;}
     .cart-view-line-items-product {border-left: none;}
-
+    .panel-footer .btn-primary {width: 100%; display: block; margin: 5px 0;}
 }

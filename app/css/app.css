@@ -364,7 +364,7 @@ input[type="file"]{
 li.cart span.badge {
     position: absolute;
     top: 10px;
-    left: -12px;
+    left: 10px;
     z-index: 999999999;
     background-color:#3D3D3D;
     padding: 4px 7px;
@@ -607,9 +607,7 @@ li.selected {
     pointer-events:none;
 }
 
-.row .view-form-select:before {
-    left:50px;
-}
+
 /* ----------------------------------------------------------------------------------------------- */
 /* Animations */
 /* ----------------------------------------------------------------------------------------------- */
@@ -1093,25 +1091,8 @@ li.selected {
 }
 
 .view-error-message {background-color:#FBF8E5;}
-.view-error-message li {padding: 15px; border-top: 1px solid #fff;border-bottom: 1px solid #fff;opacity: .9;display: block;}
-/*
-.view-action-message.alert-success:not(.ng-hide), .view-action-message.alert-info:not(.ng-hide){
-    -webkit-animation-duration: 1s;
-    -moz-animation-duration: 1s;
-    -o-animation-duration: 1;
-    animation-duration: 1s;
-    animation-delay: 3s;
-    -webkit-animation-fill-mode: both;
-    -moz-animation-fill-mode: both;
-    -o-animation-fill-mode: both;
-    animation-fill-mode: both;
-    -webkit-animation-name: fadeOutDown;
-    -moz-animation-name: fadeOutDown;
-    -o-animation-name: fadeOutDown;
-    animation-name: fadeOutDown;
+.view-error-message li {padding: 15px; border-top: 1px solid #fff;opacity: .9;display: block;}
 
-}
-*/
 
 .view-corner-button {
     cursor:pointer;
@@ -1194,8 +1175,9 @@ li.print {
     -o-transition: all ease-in-out .5s;
     transition: all ease-in-out .5s;}
 .cart-view-line-items-product a i {color:#ccc;margin: 2px;}
+
 .view-form-icon > div {
-    margin-top: 25px;
+    margin: 25px 0 40px;
 }
 
 .view-form-icon input, .view-form-icon select, .view-form-icon text, .view-form-icon textarea {
@@ -1332,10 +1314,6 @@ li.print {
     margin-right: 0;
 }
 
-.check-out-view-multiple-shipping .row {
-    border-top: 1px solid #d6d6d6;
-}
-
 .view-summary p span {
     float: left;
 }
@@ -1354,6 +1332,7 @@ li.print {
     margin-bottom:15px;
 }
 
+.check-out-view-multiple-shipping {border-top: 1px solid #d6d6d6;padding-top: 15px;}
 .check-out-view-selected-shipping p,
 .check-out-view-selected-billing p{
     margin:0;
@@ -1532,6 +1511,7 @@ ul.view-variant-list{
 .row h2 {margin: 0;}
 
 .cart-view-line-items-product {border-left: 1px solid #d6d6d6;}
+.navbar .fa-shopping-cart {  border-radius: 50%;   border: 1px solid #fff; text-align:center; padding: 10px;margin-top: -5px;}
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
