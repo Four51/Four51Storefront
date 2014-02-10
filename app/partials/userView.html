@@ -9,8 +9,8 @@
 			</div>
 			<div class="panel-body">
                 <div class="col-md-6 col-md-offset-3 col-collapse">
-                    <label>Username</label><input name="username" class="form-control" type="text" ng-model="loginasuser.Username" required placeholder="User Name" /><br />
-                    <label>Password</label><input name="password" class="form-control" type="password" ng-model="loginasuser.Password" required placeholder="Password" /><br />
+                    <label>Username</label><input name="username" class="form-control" type="text" ng-model="loginasuser.Username" autocomplete="off" required placeholder="User Name" /><br />
+                    <label>Password</label><input name="password" class="form-control" type="password" ng-model="loginasuser.Password" autocomplete="off" required placeholder="Password" /><br />
                 </div>
 			</div>
 			<div class="panel-footer">
@@ -27,22 +27,22 @@
                 <div class="col-sm-6 view-form-icon">
                     <div>
                         <label ng-show="user.FirstName">First Name</label>
-                        <input name="firstname" class="form-control" type="text" ng-model="user.FirstName" placeholder="First Name" />
+                        <input name="firstname" class="form-control" type="text" ng-model="user.FirstName" placeholder="First Name" autocomplete="off" />
                         <i class="fa fa-user"></i>
                     </div>
                     <div>
                         <label ng-show="user.LastName">Last Name</label>
-                        <input name="lastname" class="form-control" type="text" ng-model="user.LastName" placeholder="Last Name" />
+                        <input name="lastname" class="form-control" type="text" ng-model="user.LastName" placeholder="Last Name" autocomplete="off" />
                         <i class="fa fa-user"></i>
                     </div>
                     <div>
                         <label ng-show="user.Phone">Phone</label>
-                        <input name="phone" class="form-control" type="text" ng-model="user.Phone" ui-mask="(999) 999-9999" placeholder="Phone Number" />
+                        <input name="phone" class="form-control" type="text" ng-model="user.Phone" ui-mask="(999) 999-9999" placeholder="Phone Number" autocomplete="off" />
                         <i class="fa fa-phone"></i>
                     </div>
                     <div>
                         <label class="required">Email</label>
-                        <input name="email" class="form-control" type="email" ng-model="user.Email" required placeholder="Email Address" />
+                        <input name="email" class="form-control" type="email" ng-model="user.Email" required placeholder="Email Address" autocomplete="off" />
                         <i class="fa fa-envelope-o"></i>
                     </div>
                     <span class="alert-error" ng-show="user_form.email.$invalid">Please enter a valid email address</span>
@@ -50,18 +50,18 @@
                 <div class="col-sm-6 view-form-icon">
                     <div>
                         <label class="required">Username</label>
-                        <input name="username" class="form-control" type="text" ng-model="user.TempUsername" required placeholder="User Name" />
+                        <input name="username" class="form-control" type="text" ng-model="user.TempUsername" required placeholder="User Name" autocomplete="off" />
                         <i class="fa fa-user"></i>
                     </div>
                     <!--TODO username input shouldn't default to temporary usernames, if the user is temp, make the placeholder show instead !-->
                     <div>
                         <label ng-show="user.Password">Password</label>
-                        <input name="password" class="form-control" type="password" ng-model="user.Password" placeholder="Password" />
+                        <input name="password" class="form-control" type="password" ng-model="user.Password" placeholder="Password" autocomplete="off" />
                         <i class="fa fa-lock"></i>
                     </div>
                     <div>
                         <label ng-show="user.ConfirmPassword">Confirm Password</label>
-                        <input name="confirm_password" ng-match="user.Password" class="form-control" type="password" ng-model="user.ConfirmPassword" placeholder="Confirm Password" />
+                        <input name="confirm_password" ng-match="user.Password" class="form-control" type="password" ng-model="user.ConfirmPassword" placeholder="Confirm Password" autocomplete="off" />
                         <i class="fa fa-lock"></i>
                     </div>
                     <span class="alert-error" ng-show="user_form.confirm_password.$error.match">Passwords do not match!</span><br />

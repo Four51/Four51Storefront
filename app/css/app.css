@@ -8,10 +8,11 @@ Template: Four51 Single Page App - Ken Buras (http://www.kenburas.com/)
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
+    overflow: hidden !important;
 }
 
 html {
-
+    overflow-y: scroll;
 }
 
 body {
@@ -21,7 +22,7 @@ body {
     font-smoothing: antialiased;
     -webkit-text-stroke: 1px transparent;
     margin-bottom: 100px;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 h1, h2, h3, h4, h5 {
@@ -31,6 +32,7 @@ h1, h2, h3, h4, h5 {
 
 hr {
     clear: both;
+    margin: 15px 0;
 }
 
 
@@ -40,6 +42,10 @@ img {
 
 div {
     position: relative;
+}
+
+a {
+    cursor: pointer;
 }
 
 /* iOS placeholder needs help to disappear on focus */
@@ -142,6 +148,7 @@ input[type="file"]{
 }
 .product-view-default-variant-box{
     min-height:220px;
+    padding-left: 1.5em;
 }
 
 .static-spec-panel-body {
@@ -228,7 +235,7 @@ input[type="file"]{
     font-size: 25px;
     display: block;
     opacity: .25;
-    padding-top: 75px;
+    padding-top: 45px;
 }
 
 .shortproduct-arrow {
@@ -354,11 +361,13 @@ input[type="file"]{
     outline: none;
 }
 
-.fa-shopping-cart {
-    border: 1px solid #fff;
-    font-size: 15px;
-    border-radius: 25px;
-    padding: 13px;
+li.cart span.badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 999999999;
+    background-color:#3D3D3D;
+    padding: 4px 7px;
 }
 
 div.category-view-subcat ul li ul {
@@ -468,7 +477,6 @@ div.category-view-subcat ul li ul {
 .header .text-nav {
     padding: 0 5px;
     display: inline-block;
-    float: right;
 }
 
 .header .dropdown .text-nav {
@@ -526,30 +534,32 @@ li.selected {
 .crumbs ul li a {
     display: block;
     float: left;
-    background: #50ACDB;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-left: none;
     text-align: center;
-    padding: 20px 20px 20px 40px;
+    padding: 10px 10px 10px 40px;
     position: relative;
     margin: 0 10px 0 0;
     text-decoration: none;
-    color: #fff;
+    color: #333;
 }
 .crumbs ul li a:after {
     content: "";
-    border-top: 30px solid transparent;
-    border-bottom: 30px solid transparent;
-    border-left: 30px solid #50ACDB;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #fff;
     position: absolute;
-    right: -30px;
+    right: -20px;
     top: 0;
     z-index: 1;
 }
 
 .crumbs ul li a:before {
     content: "";
-    border-top: 30px solid transparent;
-    border-bottom: 30px solid transparent;
-    border-left: 30px solid #d4f2ff;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #F7F6F6;
     position: absolute;
     left: 0;
     top: 0;
@@ -558,13 +568,16 @@ li.selected {
 .crumbs ul li:first-child a {
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
+    border-left: 1px solid #ccc;
+    cursor: default;
+    padding-left: 10px;
 }
 .crumbs ul li:first-child a:before {
     display: none;
 }
 
 .crumbs ul li:last-child a {
-    padding-right: 80px;
+    padding-right: 20px;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
 }
@@ -573,11 +586,27 @@ li.selected {
 }
 
 .crumbs ul li a:hover {
-    background: #359FD5;
+    background: #fff;
 }
-.crumbs ul li a:hover:after {
-    border-left-color: #359FD5;
+.view-spec-form .col-sm-2 {padding: 6px 0;}
+.view-spec-form .col-sm-8 {padding: 0;}
+.view-spec-form .col-sm-2 {  background-color: #EEEEEE;
+    border: 1px solid #CCCCCC;
+
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+
+    text-align: center;}
+.view-form-select:before {
+    content: "Select";
+    position: absolute;
+    left: 25px;
+    top: 9px;
+    color:#999;
+    pointer-events:none;
 }
+
 
 /* ----------------------------------------------------------------------------------------------- */
 /* Animations */
@@ -636,14 +665,17 @@ li.selected {
     -moz-animation-duration: 1s;
     -o-animation-duration: 1s;
     animation-duration: 1s;
+    -ms-animation-duration: 1s;
     -webkit-animation-fill-mode: both;
     -moz-animation-fill-mode: both;
     -o-animation-fill-mode: both;
     animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
     -webkit-animation-name: view-enter;
     -moz-animation-name: view-enter;
     -o-animation-name: view-enter;
     animation-name: view-enter;
+    -ms-animation-name: view-enter;
 }
 
 .ng-enter-active {
@@ -870,11 +902,6 @@ li.selected {
     -o-animation-duration: 1s;
     animation-duration: 1s;
     -ms-animation-duration: 1s;
-    animation-delay: 1s;
-    -webkit-animation-delay: 1s;
-    -moz-animation-delay: 1s;
-    -o-animation-delay: 1s;
-    -ms-animation-delay: 1s;
     -webkit-animation-fill-mode: both;
     -moz-animation-fill-mode: both;
     -o-animation-fill-mode: both;
@@ -893,11 +920,6 @@ li.selected {
     -o-animation-duration: 1s;
     animation-duration: 1s;
     -ms-animation-duration: 1s;
-    animation-delay: 1s;
-    -webkit-animation-delay: 1s;
-    -moz-animation-delay: 1s;
-    -o-animation-delay: 1s;
-    -ms-animation-delay: 1s;
     -webkit-animation-fill-mode: both;
     -moz-animation-fill-mode: both;
     -o-animation-fill-mode: both;
@@ -915,14 +937,18 @@ li.selected {
     -moz-animation-duration: 1s;
     -o-animation-duration: 1s;
     animation-duration: 1s;
+    -ms-animation-duration: 1s;
     -webkit-animation-fill-mode: both;
     -moz-animation-fill-mode: both;
     -o-animation-fill-mode: both;
     animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
     -webkit-animation-name: fadeInDown;
     -moz-animation-name: fadeInDown;
     -o-animation-name: fadeInDown;
     animation-name: fadeInDown;
+    -ms-animation-name: fadeInDown;
+
 }
 
 .btn, .container {
@@ -972,7 +998,7 @@ li.selected {
 }
 .app-loading-indicator-title p {margin: 0 auto; width: 500px;padding: 10px;}
 .container-content {
-    margin-top: 40px;
+    padding: 15px 0;
 }
 
 .product-details-add {
@@ -1010,15 +1036,18 @@ li.selected {
     border: 1px solid #d6d6d6;
 }
 
-.check-out-view .address-input-view-shipping, .check-out-view .address-input-view-billing {
-    visibility: hidden;
+.check-out-view .address-input-view-shipping, .check-out-view .address-input-view-billing, .check-out-view .address-input-view-btn-delete {
+    display: none;
 }
+.address-input-view .row {margin: 0;}
+.address-input-view-shipping label, .address-input-view-billing label { position: static;display: block;}
+.address-input-view-shipping input, .address-input-view-billing input {}
 
 .cart-view-quantity-line {
     margin-bottom: 15px;
 }
 
-.view-thumbnail {
+.view-thumbnail, .related-products-view .view-thumbnail {
     max-height: 95px;
     max-width: 100%;
     margin: 0 auto 15px;
@@ -1062,25 +1091,8 @@ li.selected {
 }
 
 .view-error-message {background-color:#FBF8E5;}
-.view-error-message li {padding: 15px; border-top: 1px solid #fff;border-bottom: 1px solid #fff;opacity: .9;display: block;}
-/*
-.view-action-message.alert-success:not(.ng-hide), .view-action-message.alert-info:not(.ng-hide){
-    -webkit-animation-duration: 1s;
-    -moz-animation-duration: 1s;
-    -o-animation-duration: 1;
-    animation-duration: 1s;
-    animation-delay: 3s;
-    -webkit-animation-fill-mode: both;
-    -moz-animation-fill-mode: both;
-    -o-animation-fill-mode: both;
-    animation-fill-mode: both;
-    -webkit-animation-name: fadeOutDown;
-    -moz-animation-name: fadeOutDown;
-    -o-animation-name: fadeOutDown;
-    animation-name: fadeOutDown;
+.view-error-message li {padding: 15px; border-top: 1px solid #fff;opacity: .9;display: block;}
 
-}
-*/
 
 .view-corner-button {
     cursor:pointer;
@@ -1153,13 +1165,19 @@ li.print {
     border-top: 1px solid #d6d6d6;
     clear: both;
     overflow: hidden;
-    padding: 0 0 35px;
-    position:relative;
+    padding: 15px 0;
 }
 
+.cart-view-line-items-product a {display: block; width: 100%;border: 1px solid transparent;padding: 5px; }
+.cart-view-line-items-product a:hover {text-decoration: none;background-color:#F9F9F9;border-radius: 4px; border: 1px solid #d6d6d6;    -webkit-transition: all ease-in-out .5s;
+    -moz-transition: all ease-in-out .5s;
+    -ms-transition: all ease-in-out .5s;
+    -o-transition: all ease-in-out .5s;
+    transition: all ease-in-out .5s;}
+.cart-view-line-items-product a i {color:#ccc;margin: 2px;}
+
 .view-form-icon > div {
-    margin-top: 25px;
-    position: relative;
+    margin: 25px 0 40px;
 }
 
 .view-form-icon input, .view-form-icon select, .view-form-icon text, .view-form-icon textarea {
@@ -1167,11 +1185,10 @@ li.print {
 }
 
 .view-form-icon  i {
-    color: #CCCCCC;
+    color: #CCC;
     left: 5px;
     position: absolute;
     top: 10px;
-    z-index: 10;
 }
 
 .row.view-form-icon i {
@@ -1182,7 +1199,7 @@ li.print {
     border-bottom: 1px solid #d6d6d6;
     padding-top: 10px;
 }
-.view-summary .panel-footer, .product-view-default .panel-footer {
+.view-summary .panel-footer {
     background-color:transparent;
 }
 
@@ -1202,19 +1219,6 @@ li.print {
     font-size: 24px;
     color:#468847;
     box-shadow: none;
-}
-
-li.cart a.cart {
-    padding: 8px 15px;
-}
-
-li.cart span.badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 999999999;
-    background-color:#3D3D3D;
-    padding: 4px 7px;
 }
 
 .badge {
@@ -1271,39 +1275,6 @@ li.cart span.badge {
     max-width: 100%;
 }
 
-.product-view-default-toggle-panel .panel-title.panel-selected {
-    background: rgba(255, 255, 255, 0);
-}
-
-.product-view-default-toggle-panel .panel-heading {
-    border-bottom: none;
-    width: 100%;
-    clear: both;
-    overflow: hidden;
-    padding: 0;
-}
-
-.product-view-default-toggle-panel .panel-switch {
-    cursor: pointer;
-    display: inline-block;
-    width: 50%;
-    text-align: center;
-    float: left;
-    padding: 20px 25px;
-    position: relative;
-    background: rgba(255, 255, 255, 0.75);
-}
-
-.product-view-default-toggle-panel .icon {
-    position: absolute;
-    bottom: -10px;
-    left: 48%;
-}
-.product-view-default-toggle-panel .icon i {
-    font-size: 32px;
-    color: #fff;
-}
-
 .col-collapse {
     padding: 0;
 }
@@ -1342,10 +1313,6 @@ li.cart span.badge {
     margin-right: 0;
 }
 
-.check-out-view-multiple-shipping .row {
-    border-top: 1px solid #d6d6d6;
-}
-
 .view-summary p span {
     float: left;
 }
@@ -1364,6 +1331,7 @@ li.cart span.badge {
     margin-bottom:15px;
 }
 
+.check-out-view-multiple-shipping {border-top: 1px solid #d6d6d6;padding-top: 15px;}
 .check-out-view-selected-shipping p,
 .check-out-view-selected-billing p{
     margin:0;
@@ -1401,7 +1369,10 @@ li.cart span.badge {
 
 ul.view-variant-list{
     list-style-type: none;
+    padding: 1.5em 0;
 }
+
+.view-variant-list li {margin: 2px 0;}
 
 .view-variant-list a{
     position: relative;
@@ -1525,7 +1496,21 @@ ul.view-variant-list{
     display: block; width: 0;
 }
 
+.view-phone-alert {display: block;}
 
+.cart-view-btn-remove {
+    border-radius: 0;
+    margin-bottom: 15px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.row h2 {margin: 0;}
+
+.cart-view-line-items-product {border-left: 1px solid #d6d6d6;}
+.navbar .fa-shopping-cart {  border-radius: 50%;   border: 1px solid #fff; text-align:center; padding: 10px;margin-top: -5px;}
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
@@ -1533,6 +1518,11 @@ ul.view-variant-list{
 /* full screen: if we want to go back to default bootstrap widths, simply remove the below container rule */
 .container {
     max-width: 100%;
+}
+
+/* ie needs bootstrap help to keep scroll from overlapping content */
+@-ms-viewport{
+    width: auto !important;
 }
 
 .navbar .nav a {
@@ -1543,11 +1533,7 @@ ul.view-variant-list{
     transition: all ease-in-out .2s;
 }
 
-/* tighten the transitions with smoother interaction for the ux */
-.navbar .nav > li > a,
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus,
+/* tighten the button transitions with smoother interaction for the ux */
 .btn,
 .btn:hover,
 .btn:focus {
@@ -1558,6 +1544,11 @@ ul.view-variant-list{
     transition: all ease-in-out .5s;
 }
 
+.alert {
+    margin-top: 20px;
+    word-wrap:break-word;
+}
+
 .btn.btn-primary {
     border: none;
     text-transform: uppercase;
@@ -1566,6 +1557,8 @@ ul.view-variant-list{
 .navbar {
     margin-bottom: 0;
     border: none;
+    border-radius: 0;
+    min-height: 60px
 }
 
 .navbar-collapse {
@@ -1574,7 +1567,7 @@ ul.view-variant-list{
 }
 
 .navbar-nav > li {
-    display: inline;
+    display: inline-block;
     float: left;
 }
 .navbar-collapse li a.visible-sm.visible-xs {
@@ -1600,7 +1593,9 @@ ul.view-variant-list{
 
 .navbar-nav > li > a {
     padding: 20px;
+    height: 60px;
 }
+
 
 .navbar-collapse .navbar-nav.navbar-left:first-child {
     margin-left: 0;
@@ -1615,11 +1610,17 @@ ul.view-variant-list{
     border: none;
 }
 
+.jumbotron {
+    margin-bottom: 0;
+}
 
 .form-control:focus {
     box-shadow: none;
 }
 
+.form-group {
+    margin-bottom: 0;
+}
 
 .well {
     border: none;
@@ -1661,3 +1662,5 @@ ul.view-variant-list{
 .btn-group {
     width: 100%;
 }
+
+
