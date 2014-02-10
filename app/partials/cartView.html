@@ -143,6 +143,7 @@
                 <div class="view-response-message alert-success" alert-show="currentOrder">
                     <p>{{actionMessage}}</p>
                 </div>
+                <div class="view-response-message alert-danger" alert-show="gcMessage">{{gcMessage}}</div>
                 <div class="view-error-message" ng-show="cart.$error.required.length + (errorMessage ? 1 : 0) > 0">
                     <ul class="row">
                         <li class="col-xs-2 alert-warning">
@@ -154,7 +155,6 @@
                                 <li ng-show="cart.dateneeded.$invalid">Date needed is required</li>
                                 <li ng-show="cart.costcenter.$invalid">Cost Center is required</li>
                                 <li ng-show="cart.qtyInput.$invalid">You have entered an invalid quantity</li>
-                                <li ng-show="errorMessage">{{errorMessage}}</li>
                             </ul>
                         </li>
                         <li class="col-xs-2"><a class="fa fa-caret-down" ng-show="cart.$error.required.length + (errorMessage ? 1 : 0) > 1"></a></li>
