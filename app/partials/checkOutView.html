@@ -1,10 +1,10 @@
 <section class="container check-out-view">
-    <hr />
     <loadingindicator ng-show="displayLoadingIndicator" title="Please wait while we update your order" />
+    <div class="col-collapse col-md-4 col-md-offset-1 col-md-push-7">
+        <ordersummary />
+    </div>
 
-    <ordersummary />
-
-    <div class="col-md-7 col-md-pull-5 check-out-view-types" ng-show="currentOrder && currentOrder.isEditable" ng-click="showSuccessAlert = false">
+    <div class="col-md-7 col-md-pull-5 col-collapse check-out-view-types" ng-show="currentOrder && currentOrder.isEditable" ng-click="showSuccessAlert = false">
         <orderdetails />
         <ordershipping />
         <orderbilling />

@@ -1,5 +1,6 @@
 four51.app.controller('ProductSearchCtrl', function($scope, Product, $routeParams, $location){
 
+
 	if($routeParams.searchTerm){
 		$scope.searchTerm = $routeParams.searchTerm;
 		Product.search(null, $scope.searchTerm, null, function(products) {
@@ -33,11 +34,14 @@ four51.app.controller('LineItemEditCtrl', function ($routeParams, $scope, Produc
 		});
 	}
 });
-four51.app.controller('relatedProductsCtrl', function($scope, Product){
-	if($scope.relatedgroupid){
+four51.app.controller('relatedProductsCtrl', function($scope, Product, $sce){
+    if($scope.relatedgroupid){
 		Product.search(null, null, $scope.relatedgroupid, function(products) {
 			$scope.relatedProducts = products;
 		});
+        $scope.trusted = function(d){
+            if(d) return $sce.trustAsHtml(d);
+        }
 	}
 });
 four51.app.controller('shortProductViewCtrl', function ($routeParams, $scope, ProductDisplayService) {

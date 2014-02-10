@@ -2,9 +2,9 @@
 @media (min-width: 1200px) {
 
     .nav li span.nav-name {float:right;}
-    .product-view-default .fa.empty {text-align: left;}
     .cat-image {overflow: hidden;}
     .branding-view h3 {line-height: 4em;}
+    .view-phone-alert {display: none;}
 }
 
 
@@ -13,11 +13,10 @@
 
     .nav li span.nav-name {float:right;}
     .nav li span.hidden-sm {float:right;}
-    .product-view-default .fa.empty {text-align: left;}
     .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
     .shortproduct-view:hover .shortproduct-toggle {display: none;}
     .branding-view h3 {line-height: 4em;}
-
+    .view-phone-alert {display: none;}
 
 }
 
@@ -37,6 +36,7 @@
     .view-form-icon  i {
         top: 15px;
     }
+    .view-phone-alert {display: none;}
 }
 
 
@@ -98,6 +98,51 @@
     .view-form-icon  i {
     top: 15px;
     }
+    .crumbs ul {
+        width: 100%;
+    }
 
+    .crumbs ul li {
+        display: block;
+        text-align: center;
+        float: none;
+    }
+    .crumbs ul li a {
+        width: 100%;
+        padding: 20px;
+        margin: 0 0 20px 0;
+        text-align: center;
+        display: block;
+        border: 1px solid #ccc;
+    }
+    .crumbs ul li a:after {
+        display: none;
+    }
 
+    .crumbs ul li a:before {
+        content: "";
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-top: 15px solid #fff;
+        position: absolute;
+        bottom: 0;
+        left: 45%;
+        top: -22px;
+    }
+
+    .crumbs ul li:first-child a {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border-bottom-left-radius: 0;
+    }
+    .crumbs ul li:last-child a {
+        padding-bottom: 20px;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-top-right-radius: 0;
+    }
+    .container-content .container {padding: 0 5px;}
+    .address-input-view .panel-footer .btn {display: block; width: 100%;margin: 5px 0;}
+    .cart-view-line-items-product {border-left: none;}
+    .panel-footer .btn-primary {width: 100%; display: block; margin: 5px 0;}
 }

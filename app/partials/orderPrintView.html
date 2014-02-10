@@ -24,7 +24,7 @@
                     <p ng-show="order.DateSubmitted">Date Submitted: <span style="float:right;">{{order.DateSubmitted | date:'short'}}</span></p>
                     <p>Status: <span style="float:right;">{{order.StatusText}}</span></p>
                     <p ng-show="order.DateCompleted">Date Completed: <span style="float:right;">{{order.DateCompleted | date:'short'}}</span></p>
-                    <p>Created By: <span style="float:right;">{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</span></p>
+                    <p ng-show="order.FromUserFirstName || order.FromUserLastName">Created By: <span style="float:right;">{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</span></p>
                     <p ng-show="order.Comments">Comments: <span style="float:right;">{{order.Comments}}</span></p>
                     <p ng-show="orderCostCenter">Cost Center: <span style="float:right;">{{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</span></p>
                     <p>Payment Method: <span style="float:right;">{{order.PaymentMethodText}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong></span></p>

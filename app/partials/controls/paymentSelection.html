@@ -36,7 +36,7 @@
             {{selectedBudgetAccount.Label + ' - Balance: ' + (selectedBudgetAccount.Balance | currency)}}
         </div>
         <div class="row view-form-icon" ng-show="(SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length > 1">
-            <div class="col-sm-6">
+            <div class="col-sm-6" ng-class="{'view-form-select': !currentOrder.BudgetAccountID, '': currentOrder.BudgetAccountID }">
                 <label ng-show="currentOrder.BudgetAccountID">Spending Account</label>
                 <select class="form-control" placeholder="Spending Account"
                     ng-options="account.ID as (account.Label + ' - Balance: ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{AccountType.PurchaseCredit:true}"
@@ -50,7 +50,7 @@
     </div>
     <div ng-if="user.Permissions.contains('PayByCreditCard')" ng-show="currentOrder.PaymentMethod == 'CreditCard'">
         <div class="row view-form-icon">
-            <div class="col-sm-4">
+            <div class="col-sm-4" ng-class="{'view-form-select': !currentOrder.CreditCard.Type, '': currentOrder.CreditCard.Type }">
                 <label ng-show="currentOrder.CreditCard.Type">Type</label>
                 <select id="credit-card-type" class="form-control" ng-model="currentOrder.CreditCard.Type"
                         ng-options="creditCard.Type as creditCard.DisplayName for creditCard in user.AvailableCreditCards">
@@ -59,14 +59,14 @@
             </div>
             <div ng-if="user.Permissions.contains('CardholderName')" class="col-sm-8">
                 <label ng-class="{required: currentOrder.PaymentMethod == 'CreditCard'}" for="cardholder-name" ng-show="currentOrder.CreditCard.CardholderName || currentOrder.PaymentMethod == 'CreditCard'">Cardholder Name</label>
-                <input id="cardholder-name" class="form-control" ng-model="currentOrder.CreditCard.CardholderName" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" placeholder="Cardholder Name" />
+                <input id="cardholder-name" class="form-control" ng-model="currentOrder.CreditCard.CardholderName" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" placeholder="Cardholder Name" autocomplete="off" />
                 <i class="fa fa-user"></i>
             </div>
         </div>
         <div class="row view-form-icon">
             <div class="col-sm-7">
                 <label ng-class="{required: currentOrder.PaymentMethod == 'CreditCard'}" for="account-number" ng-show="currentOrder.CreditCard.AccountNumber || currentOrder.PaymentMethod == 'CreditCard'">Account Number</label>
-                <input id="account-number" class="form-control" ng-model="currentOrder.CreditCard.AccountNumber" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" autocomplete="false" placeholder="Account Number" />
+                <input id="account-number" class="form-control" ng-model="currentOrder.CreditCard.AccountNumber" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" autocomplete="false" placeholder="Account Number" autocomplete="off" />
                 <i class="fa">#</i>
             </div>
             <div class="col-sm-3">
@@ -75,26 +75,45 @@
             </div>
             <div ng-if="currentOrder.RequireCVN" class="col-sm-2 credit-card-cvn-input">
                 <label  ng-class="{required: currentOrder.PaymentMethod == 'CreditCard'}" for="cvn" ng-show="currentOrder.CreditCard.CVN || currentOrder.PaymentMethod == 'CreditCard'">CVN</label>
-                <input id="cvn" class="form-control" ng-model="currentOrder.CreditCard.CVN" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" placeholder="CVN" maxlength="4" />
+                <input id="cvn" class="form-control" ng-model="currentOrder.CreditCard.CVN" ng-required="currentOrder.PaymentMethod == 'CreditCard'" type="text" placeholder="CVN" maxlength="4" autocomplete="off" />
             </div>
         </div>
-        <div ng-if="user.Permissions.contains('AllowSaveCreditCard')">
-            <label class="checkbox-label"><input ng-model="currentOrder.CreditCard.Save"  type="checkbox" /> Save my credit card information</label>
+        <div class="row view-form-icon" ng-if="user.Permissions.contains('AllowSaveCreditCard')">
+            <div class="col-xs-12">
+                <label class="checkbox-label">Save my credit card information</label>
+                <input ng-model="currentOrder.CreditCard.Save"  type="checkbox" />
+            </div>
         </div>
         <hr/>
     </div>
     <div class="alert alert-warning" ng-show="cart-billing.$error.paymentMethod && currentOrder.PaymentMethod == 'BudgetAccount'">
         The account, {{currentBudgetAccount.Label}}, is not sufficient for the order total.
     </div>
-    <div class="alert alert-success" ng-show="isSplitBilling" style="padding:6px 0; text-align:center; margin:0;">
-        The spending account, {{currentBudgetAccount.Label}}, is not sufficient for the order total.<br />
-        <span ng-show="currentOrder.PaymentMethod == 'BudgetAccount'">
-            Please supply additional payment to cover the remaining <span ng-show="user.Permissions.contains('HidePricing')">{{remainingOrderTotal | currency}}</span> <span ng-show="!user.Permissions.contains('HidePricing')">balance</span> or remove this account from your payment options.
-        </span>
-        <span ng-show="currentOrder.PaymentMethod != 'BudgetAccount'">
-            This additional payment will cover the remaining <span ng-show="user.Permissions.contains('HidePricing')">{{remainingOrderTotal | currency}}</span> <span ng-show="!user.Permissions.contains('HidePricing')">or remove this account from your payment options.
-        </span>
-        <br />
-        <button type="button" class="btn btn-danger" ng-click="currentOrder.BudgetAccountID = null; isSplitBilling = null">Remove</button>
+    <div class="alert alert-warning text-center row" ng-show="isSplitBilling">
+        <p>
+        The spending account, {{currentBudgetAccount.Label}}, is not sufficient for the order total.
+        </p>
+        <p class="col-sm-6 text-left alert alert-info" ng-show="currentOrder.PaymentMethod == 'BudgetAccount'">
+            <strong>Please select an additional payment type</strong> to cover the remaining
+            <span ng-show="user.Permissions.contains('HidePricing')">
+                <strong>{{remainingOrderTotal | currency}}</strong>
+            </span>
+            <span ng-show="!user.Permissions.contains('HidePricing')">
+                balance
+            </span>
+            or remove this spending account from your payment options.
+        </p>
+        <p class="col-sm-6 text-left alert alert-success" ng-show="currentOrder.PaymentMethod != 'BudgetAccount'">
+            <strong>This additional payment</strong> will cover the remaining
+            <span ng-show="user.Permissions.contains('HidePricing')">
+                <strong>{{remainingOrderTotal | currency}}</strong>
+            </span>
+            <span ng-show="!user.Permissions.contains('HidePricing')">
+                balance or remove this spending account from your payment options.
+            </span>
+        </p>
+        <p class="col-sm-6">
+            <button type="button" class="btn btn-danger" ng-click="currentOrder.BudgetAccountID = null; isSplitBilling = null">Remove {{currentBudgetAccount.Label}}</button>
+        </p>
     </div>
 </div>

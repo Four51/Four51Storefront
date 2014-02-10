@@ -1,4 +1,4 @@
-<div class="panel panel-primary view-summary col-collapse col-md-4 col-md-offset-1 col-md-push-7">
+<div class="panel panel-primary view-summary ">
     <div class="panel-heading">
         <h3 class="panel-title panel-primary">
             Checkout Summary
@@ -17,7 +17,7 @@
                     <div class="form-group view-form-icon">
                         <div class="input-group">
                             <label ng-show="currentOrder.CouponCode">Promotion code</label>
-                            <input class="form-control" type="text" ng-model="currentOrder.CouponCode" placeholder="Promotion Code"></input>
+                            <input class="form-control" type="text" ng-model="currentOrder.CouponCode" placeholder="Promotion Code" autocomplete="off"></input>
                             <i class="fa fa-question-circle"></i>
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-success" ng-click="applyCoupon()"><div class="fa fa-check"></div></button>
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <hr/>
-            <h4 ng-if="!(user.Permissions.contains('HidePricing'))"><strong class="pull-left">Total</strong><span class="text-success">{{currentOrder.Total | currency}}</span></h4>
+            <h4 ng-if="!(user.Permissions.contains('HidePricing'))"><strong class="pull-left">Total</strong><span class="text-success"><strong>{{currentOrder.Total | currency}}</strong></span></h4>
             <p class="text-info text-left" ng-if="user.Company.TaxMethod != 'NoTax' || !(user.Permissions.contains('HidePricing'))">Shipping, handling and tax may be added to this subtotal.</p>
         </div>
     </div>
@@ -42,12 +42,14 @@
         <div class="view-form-icon" ng-show="user.Permissions.contains('SendOrderNotificationToOthers') && !(cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid)" >
             <div class="form-group">
                 <label ng-show="currentOrder.ExternalOrderDetailRecipients">Email Notification</label>
-                <input class="form-control" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" placeholder="Email Address" />
+                <input class="form-control" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" type="text" ng-model="currentOrder.ExternalOrderDetailRecipients" placeholder="Email Address" autocomplete="off" />
                 <i class="fa fa-envelope-o"></i>
                 <span class="help-block text-left"><small>Provide an email address if you would like to receive notifications concerning this order.</small></span>
             </div>
         </div>
         <hr />
-        <button class="btn btn-default" redirect="/security">Concerned About Security?</button>
+        <button class="btn btn-default" redirect="/security">
+            <span class="fa fa-info-circle"></span> Concerned About Security?
+        </button>
     </div>
 </div>

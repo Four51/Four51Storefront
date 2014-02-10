@@ -1,10 +1,10 @@
 <div class="view-form-icon">
-    <div>
-
+    <div class="input-group">
         <label ng-class="{required: customfield.Required}">{{customfield.Label || customfield.Name}}</label>
+        <div class="input-group-addon"  ng-if="customfield.Prefix">{{customfield.Prefix}}</div>
         <select class="form-control" ng-init="init()" ng-required="customfield.Required" ng-change="changed()" ng-model="item" ng-options="option.Value for option in customfield.Options" ng-if="customfield.Options">
             <option value=""></option></select>
-        <input class="form-control" type="text" ng-change="otherChanged()" ng-model="other" ng-show="customfield.isOtherSelected" ng-required="customfield.Required && customfield.isOtherSelected" />
-        <i class="fa fa-arrow-down"></i>
+        <input class="form-control" type="text" ng-change="otherChanged()" ng-model="other" ng-show="customfield.isOtherSelected" autocomplete="off" ng-required="customfield.Required && customfield.isOtherSelected" />
+        <span class="input-group-addon"  ng-if="customfield.Suffix">{{customfield.Suffix}}</span>
     </div>
 </div>
