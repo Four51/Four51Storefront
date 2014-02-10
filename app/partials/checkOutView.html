@@ -24,6 +24,7 @@
                     </li>
                     <li class="col-sm-10 alert-warning" style="margin: 0; padding: 0">
                         <ul>
+                            <li ng-show="errorMessage">{{errorMessage}}</li>
                             <li ng-show="couponError">{{couponError}}</li>
                             <li ng-show="cart_order.orderid.$invalid">Enter an order id</li>
                             <li ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</li>

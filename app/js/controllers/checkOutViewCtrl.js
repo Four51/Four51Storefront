@@ -12,6 +12,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 
     function submitOrder() {
 	    $scope.displayLoadingIndicator = true;
+	    $scope.errorMessage = null;
         Order.submit($scope.currentOrder,
 	        function(data) {
 				$scope.user.CurrentOrderID = null;
@@ -38,6 +39,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 
     function saveChanges(callback) {
 	    $scope.displayLoadingIndicator = true;
+	    $scope.errorMessage = null;
         $scope.showSave = true;
 	    var auto = $scope.currentOrder.autoID;
         Order.save($scope.currentOrder,
@@ -56,7 +58,8 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		        if (ex.Code.is('ObjectExistsException')) { // unique id
 			        ex.Message = ex.Message.replace('{0}', 'Order ID (' + $scope.currentOrder.ExternalID + ')');
 		        }
-		        $scope.actionMessage = ex.Message;
+		        $scope.currentOrder.ExternalID = null;
+		        $scope.errorMessage = ex.Message;
 		        $scope.displayLoadingIndicator = false;
 		        $scope.shippingUpdatingIndicator = false;
 		        $scope.shippingFetchIndicator = false;
