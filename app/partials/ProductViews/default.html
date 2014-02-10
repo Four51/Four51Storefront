@@ -15,7 +15,7 @@
             <div class="panel-footer"  ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant">
                 <span class="btn-group">
                     <button class="btn btn-default" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit">Edit</button>
-                    <button class="btn btn-default" redirect="{{LineItem.Variant.ProofUrl}}">View PDF</button>
+                    <a class="btn btn-default" href="{{LineItem.Variant.ProofUrl}}">View PDF</a>
                 </span>
             </div>
         </div>
