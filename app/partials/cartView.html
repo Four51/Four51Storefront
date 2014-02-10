@@ -86,21 +86,20 @@
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
                                                 <div class="col-xs-3">
-                                                    <button type="button" title="copy to all" class="btn btn-default pull-right" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1" >
+                                                    <button type="button" title="copy to all" class="btn btn-default pull-right" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1 && user.CostCenters.length != 1" >
                                                         <span class="fa fa-copy"></span>
                                                     </button>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
-                                            <label class="required">Cost Center</label>
-                                            <select class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
-                                            <input class="form-control view-form-icon" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />
-                                                    <select class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
-                                            <i class="fa fa-money"></i>
-                                            <button type="button" title="copy to all" class="btn btn-sm btn-info hidden-xs pull-right" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1 &&  && user.CostCenters.length != 1">
-                                                <span class="fa fa-copy"></span>
-                                            </button>
+                                            <div class="row view-form-icon">
+                                                <div class="col-xs-9">
+                                                    <label class="required">Cost Center</label>
+                                                    <select name="costcenter" class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
+                                                    <input name="costcenter" class="form-control view-form-icon" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />
+                                                    <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter.Name}}</span>
+                                                    <i class="fa fa-money"></i>
                                                 </div>
                                                 <div class="col-xs-3">
                                                     <button type="button" title="copy to all" class="btn btn-default pull-right" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
@@ -156,7 +155,7 @@
                         <li class="col-xs-8 alert-warning" style="margin: 0; padding: 0">
                             <ul>
                                 <li ng-show="cart.dateneeded.$invalid">Date needed is required</li>
-                                <li ng-show="cart.$error.required.CostCenter">Cost Center is required</li>
+                                <li ng-show="cart.costcenter.$invalid">Cost Center is required</li>
                                 <li ng-show="cart.qtyInput.$invalid">You have entered an invalid quantity</li>
                                 <li ng-show="errorMessage">{{errorMessage}}</li>
                             </ul>
