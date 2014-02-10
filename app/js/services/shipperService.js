@@ -14,11 +14,11 @@ four51.app.factory('Shipper', function($resource, $451) {
 
     var _query = function(order, success) {
 	    if (!order) return null;
-	    var id = buildCacheID(order),
-		    shippers = store.get(id);
-		shippers ? _then(success, shippers) :
+	    //var id = buildCacheID(order),
+		//    shippers = store.get(id);
+		//shippers ? _then(success, shippers) :
 	        $resource($451.api('shipper')).query().$promise.then(function(list) {
-		        store.set(id, list);
+		//        store.set(id, list);
 	            _then(success, list);
 	        });
     }

@@ -44,7 +44,7 @@
                                         </select>
                                         <i class="fa fa-map-marker"></i>
                                 </div>
-                                <div ng-show="user.ShipMethod != null && shippers"  ng-class="{'view-form-select': !currentOrder.LineItems[0].ShipperName, '': currentOrder.LineItems[0].ShipperName }">
+                                <div ng-show="user.ShipMethod != null && shippers" ng-class="{'view-form-select': !currentOrder.LineItems[0].ShipperName, '': currentOrder.LineItems[0].ShipperName }">
                                     <label ng-class="{required: !shipToMultipleAddresses && user.ShipMethod != null}" ng-show="currentOrder.LineItems[0].ShipperName || !shipToMultipleAddresses && user.ShipMethod != null">Shipping Method</label>
                                     <select class="form-control" ng-change="updateShipper()" name="shipMethod"
                                             ng-model="currentOrder.LineItems[0].ShipperName"

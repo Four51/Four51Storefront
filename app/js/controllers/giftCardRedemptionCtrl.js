@@ -5,7 +5,7 @@ four51.app.controller('GiftCardRedemptionCtrl', function($scope, GiftCard) {
 				$scope.giftcard = card;
 			},
 			function(ex) {
-				$scope.errorMessage = ex.Message;
+				$scope.$parent.errorMessage = ex.Message;
 			}
 		);
 	}

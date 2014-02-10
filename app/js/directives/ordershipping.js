@@ -1,4 +1,4 @@
-four51.app.directive('ordershipping', function(Order, Shipper, Address) {
+four51.app.directive('ordershipping', function(Order, Shipper, Address, OrderConfig) {
 	var obj = {
 		restrict: 'AE',
 		templateUrl: 'partials/controls/orderShipping.html',
@@ -17,6 +17,7 @@ four51.app.directive('ordershipping', function(Order, Shipper, Address) {
 					function(data) {
 						$scope.currentOrder = data;
 						$scope.displayLoadingIndicator = false;
+						OrderConfig.costcenter($scope.currentOrder, $scope.user).address($scope.currentOrder, $scope.user);
 						if (callback) callback($scope.currentOrder);
 					},
 					function(ex) {
@@ -130,8 +131,6 @@ four51.app.directive('ordershipping', function(Order, Shipper, Address) {
 					$scope.shippingFetchIndicator = false;
 				}
 			};
-
-			$scope.$on('event:orderUpdate', $scope.updateShipper());
 
 			$scope.$on('event:AddressCancel', function(event) {
 				$scope.addressform = false;

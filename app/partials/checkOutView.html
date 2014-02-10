@@ -16,20 +16,20 @@
             <div class="view-response-message alert-success">
                 <p>{{actionMessage}}</p>
             </div>
-            <div class="view-error-message">
+            <div class="view-error-message" ng-show="cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length + (errorMessage ? 1 : 0) > 0">
                 <ul class="row">
                     <li class="col-sm-1 alert-warning">
                         <i class="fa fa-exclamation-circle text-danger"></i>
-                        <!--- badge only displays if errors > 1 --->
-                        <span class="badge">2 errors</span>
+                        <span class="badge" ng-show="cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length + (errorMessage ? 1 : 0) > 1">{{cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length + (errorMessage ? 1 : 0)}}</span>
                     </li>
                     <li class="col-sm-10 alert-warning" style="margin: 0; padding: 0">
                         <ul>
-                            <!--- first error message in list always displays, if errors > 1 then display first error but hide the others --->
                             <li ng-show="couponError">{{couponError}}</li>
                             <li ng-show="cart_order.orderid.$invalid">Enter an order id</li>
                             <li ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</li>
                             <li ng-show="cart_shipping.shipMethod.$invalid">Please choose a shipping method</li>
+                            <li ng-show="cart_billing.billingAddress.$invalid">Please choose a billing address</li>
+                            <li ng-show="cart_billing.$error.paymentMethod">Please choose a valid payment method</li>
                             <li ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
                                 You're site is mis-configured. You do not have permission to create a billing address nor do you have any addresses assigned to you. Please contact your support representative.
                             </li>
