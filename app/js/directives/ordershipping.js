@@ -140,22 +140,7 @@ four51.app.directive('ordershipping', function(Order, Shipper, Address, OrderCon
 			$scope.$on('event:AddressCancel', function(event) {
 				$scope.addressform = false;
 			});
-			$scope.$on('event:AddressSaved', function(event, address) {
-				if (address.IsShipping) {
-					$scope.currentOrder.ShipAddressID = address.ID;
-					if (!$scope.shipToMultipleAddresses)
-						$scope.setShipAddressAtOrderLevel();
-				}
-				if (address.IsBilling) {
-					$scope.currentOrder.BillAddressID = address.ID;
-				}
-				AddressList.query(function(list) {
-					$scope.addresses = list;
-				});
-				$scope.addressform = false;
-				$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
-				$scope.billaddress = { Country: 'US', IsShipping: false, IsBilling: true };
-			});
+
 		}
 	};
 	return obj;
