@@ -28,11 +28,8 @@
                                         <quantityfield lineitem="item" class="quantity"/>
                                     </div>
                                     <div style="border: 1px solid #d6d6d6;border-top: 0; text-align: center;padding-top: 10px;background-color:#F9F9F9;">
-                                        <p ng-show="item.Product.QuantityMultiplier == 1">
+                                        <p>
                                             <small>Total Quantity {{item.Quantity * item.Product.QuantityMultiplier}}</small>
-                                        </p>
-                                        <p ng-show="item.Product.QuantityMultiplier != 1">
-                                            <small>Total Quantity {{item.Quantity}} x {{item.Quantity * item.Product.QuantityMultiplier}}</small>
                                         </p>
                                     </div>
                                 </div>
