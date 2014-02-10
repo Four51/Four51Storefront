@@ -11,14 +11,10 @@
                 <quantityfield calculated="calcVariantLineItems" lineitem="variantLineItems[v.InteropID]" class="quantity" /> {{variantLineItems[v.InteropID].qtyError}} {{variantLineItems[v.InteropID].LineTotal | currency}}
             </div>
             <div ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
-                <div ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
-                    {{v.QuantityAvailable + ' in stock'}}
-                </div>
+                {{v.QuantityAvailable + ' in stock'}}
             </div>
             <div ng-show="v.Description">
-                <div>
-                    {{v.Description}}
-                </div>
+                {{v.Description}}
             </div>
             <hr/>
         </div>

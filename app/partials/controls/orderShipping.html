@@ -23,7 +23,7 @@
                                 <i ng-class="{'fa fa-check': shipToMultipleAddresses }"></i>
                                 Multiple Addresses
                             </button>
-                             <button class="btn btn-success pull-right" type="button"
+                             <button class="btn btn-info pull-right" type="button"
                                      ng-hide="(addressform || (!addressform && (addresses | filter:{IsShipping:true}).length == 0) || !user.Permissions.contains('CreateShipToAddress'))" ng-click="addressform = true" tabindex="-1">
                                  New Address
                              </button>
@@ -62,16 +62,12 @@
                                 <p ng-show="(orderShipAddress.FirstName || orderShipAddress.LastName) && (!user.Permissions.contains('EditShipToName') && !orderShipAddress.IsCustEditable)">
                                     <small>{{orderShipAddress.FirstName + ' ' + orderShipAddress.LastName}}</small>
                                 </p>
-                                <div class="row view-form-icon" ng-show="!shipToMultipleAddresses && user.Permissions.contains('EditShipToName') && (orderShipAddress && !orderShipAddress.IsCustEditable)">
-                                    <div class="col-xs-6">
-                                        <label ng-show="currentOrder.LineItems[0].ShipFirstName">First Name</label>
-                                        <input class="form-control" type="text" ng-model="currentOrder.LineItems[0].ShipFirstName" placeholder="First Name" />
-                                        <i class="fa fa-user"></i>
+                                <div class="row view-order-shipping-edit-name" ng-show="!shipToMultipleAddresses && user.Permissions.contains('EditShipToName') && (orderShipAddress && !orderShipAddress.IsCustEditable)">
+                                    <div class="col-sm-2">
+                                         <input class="form-control" type="text" ng-model="currentOrder.LineItems[0].ShipFirstName" placeholder="First Name" />
                                     </div>
-                                    <div class="col-xs-6">
-                                        <label ng-show="currentOrder.LineItems[0].ShipLastName">Last Name</label>
+                                    <div class="col-sm-2">
                                         <input class="form-control" type="text" ng-model="currentOrder.LineItems[0].ShipLastName" placeholder="Last Name" />
-                                        <i class="fa fa-user"></i>
                                     </div>
                                 </div>
                                 <p ng-show="orderShipAddress.Street1"><small>{{orderShipAddress.Street1}}</small></p>

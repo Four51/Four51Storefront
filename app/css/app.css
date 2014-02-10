@@ -1511,6 +1511,7 @@ ul.view-variant-list{
 
 .cart-view-line-items-product {border-left: 1px solid #d6d6d6;}
 .navbar .fa-shopping-cart {  border-radius: 50%;   border: 1px solid #fff; text-align:center; padding: 10px;margin-top: -5px;}
+.view-order-shipping-edit-name input {padding: 0 5px;}
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */
