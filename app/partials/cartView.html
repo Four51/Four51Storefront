@@ -101,9 +101,9 @@
                                             <label class="required">Cost Center</label>
                                             <select class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
                                             <input class="form-control view-form-icon" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />
-                                            <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
+                                            <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter.Name}}</span>
                                             <i class="fa fa-money"></i>
-                                            <button type="button" title="copy to all" class="btn btn-sm btn-info hidden-xs pull-right" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
+                                            <button type="button" title="copy to all" class="btn btn-sm btn-info hidden-xs pull-right" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1 &&  && user.CostCenters.length != 1">
                                                 <span class="fa fa-copy"></span>
                                             </button>
                                         </div>
