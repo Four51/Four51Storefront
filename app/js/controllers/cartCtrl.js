@@ -70,11 +70,17 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 
     $scope.checkOut = function() {
 	    $scope.displayLoadingIndicator = true;
-        Order.save($scope.currentOrder, function(data) {
-            $scope.currentOrder = data;
-            $location.path('checkout');
-            $scope.displayLoadingIndicator = false;
-        });
+        Order.save($scope.currentOrder,
+	        function(data) {
+                $scope.currentOrder = data;
+                $location.path('checkout');
+                $scope.displayLoadingIndicator = false;
+	        },
+	        function(ex) {
+		        $scope.errorMessage = ex.Message;
+		        $scope.displayLoadingIndicator = false;
+	        }
+        );
     };
 
 	$scope.$watch('currentOrder.LineItems', function(newval) {

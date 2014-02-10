@@ -21,6 +21,10 @@ four51.app.directive('orderbilling', function(SpendingAccount, Address) {
 				}
 			});
 
+			$scope.$on('event:AddressCancel', function(event) {
+				$scope.billaddressform = false;
+			});
+
 			$scope.$watch('currentOrder.PaymentMethod', function(event) {
 				if (event == 'BudgetAccount' && $scope.SpendingAccounts) {
 					if ($scope.SpendingAccounts.length == 1)

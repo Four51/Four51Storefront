@@ -12,9 +12,9 @@
             <loadingindicator ng-show="displayLoadingIndicator" title="Please wait while we save your order"/>
             <div class="panel panel-default cart-view-line-items">
                 <div class="panel-heading">
-                            <h3 class="panel-title">
-                                {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
-                            </h3>
+                    <h3 class="panel-title">
+                        {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
+                    </h3>
                 </div>
                 <div class="panel-body">
                     <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
@@ -28,9 +28,7 @@
                                         <quantityfield lineitem="item" class="quantity"/>
                                     </div>
                                     <div style="border: 1px solid #d6d6d6;border-top: 0; text-align: center;padding-top: 10px;background-color:#F9F9F9;">
-                                        <p>
-                                            <small>Total Quantity {{item.Quantity * item.Product.QuantityMultiplier}}</small>
-                                        </p>
+                                        <small>Total Quantity {{item.Quantity * item.Product.QuantityMultiplier}}</small>
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-sm-12 col-md-6 text-center" ng-show="item.Variant.SmallImageUrl || item.Product.SmallImageUrl">

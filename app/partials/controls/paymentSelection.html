@@ -26,8 +26,8 @@
             Credit Card
         </button>
         <button class="btn btn-info pull-right" type="button"
-                ng-hide="(addressform || (!addressform && (addresses | filter:{IsBilling:true}).length == 0) || !user.Permissions.contains('CreateBillToAddress'))"
-                ng-click="addressform = true">
+                ng-hide="(billaddressform || (!addressform && (addresses | filter:{IsBilling:true}).length == 0) || !user.Permissions.contains('CreateBillToAddress'))"
+                ng-click="billaddressform = true">
             New Address
         </button>
     </span>
