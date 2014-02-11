@@ -1,47 +1,26 @@
 /* x-lg */
 @media (min-width: 1200px) {
-
-    .nav li span.nav-name {float:right;}
-    .cat-image {overflow: hidden;}
-    .branding-view h3 {line-height: 4em;}
     .view-phone-alert {display: none;}
 }
 
 
 /* x-md */
 @media (min-width: 980px) and (max-width: 1199px) {
-
-    .nav li span.nav-name {float:right;}
-    .nav li span.hidden-sm {float:right;}
-    .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
-    .shortproduct-view:hover .shortproduct-toggle {display: none;}
-    .branding-view h3 {line-height: 4em;}
     .view-phone-alert {display: none;}
-
 }
 
 /* x-sm */
 @media (min-width:768px) and (max-width: 1023px) {
-
-
+    input, textarea, select, button {min-height: 45px;}
     .branding-view {text-align: center;}
     .branding-view-logo {float: none; margin: 0 auto 10px; max-height: 75px; }
-    .shortproduct-view:hover .shortproduct-name {display: block; cursor: default;}
-    .shortproduct-view:hover .shortproduct-toggle {display: none;}
-    .cart-view-btn-cancel  {float: left !important;}
-    .cart-view-btn-save {float: right !important;}
-
-    .gift-card-redemption-view .form-group {width: 100%;}
-    input, textarea, select, button {min-height: 45px;}
-    .view-form-icon  i {
-        top: 15px;
-    }
-    .view-phone-alert {display: none;}
+    .view-form-icon  i {top: 15px;}
 }
 
 
 /* x-xs */
 @media (max-width: 767px) {
+    input, textarea, select, button {min-height: 45px;}
     textarea, select {
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -78,9 +57,7 @@
     .cart-view-btn-continue {width: 100%;margin-top: 10px;}
     .panel-footer .btn-group {width: 100%;}
     .cart-view-line-items-btn-group .btn-group, .check-out-view-btn-group .btn-group {vertical-align: inherit; width: 100%;}
-    .cart-view-btn-cancel  {float: left !important;}
     .cart-view-line-items-repeater div.col-xs-3 { text-align:center; }
-    .cart-view-btn-save {float: right !important;}
     .ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {}
     .branding-view {text-align: center;}
     .branding-view-logo {float: none; margin: 0 auto 10px; max-height: 75px; }
@@ -94,7 +71,6 @@
     .view-variant-list li {margin-bottom: 15px !important;}
     .copyright-view {float: none; margin: 15px auto;}
 
-    input, textarea, select, button {min-height: 45px;}
     .view-form-icon  i {
     top: 15px;
     }

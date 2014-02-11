@@ -27,9 +27,9 @@
                                     <div class="view-form-icon">
                                         <quantityfield lineitem="item" class="quantity"/>
                                     </div>
-                                    <div style="border: 1px solid #d6d6d6;border-top: 0; text-align: center;padding-top: 10px;background-color:#F9F9F9;">
+                                    <p style="border: 1px solid #d6d6d6;border-top: 0; text-align: center;padding: 10px 0;background-color:#F9F9F9;">
                                         <small>Total Quantity {{item.Quantity * item.Product.QuantityMultiplier}}</small>
-                                    </div>
+                                    </p>
                                 </div>
                                 <div class="col-xs-6 col-sm-12 col-md-6 text-center" ng-show="item.Variant.SmallImageUrl || item.Product.SmallImageUrl">
                                     <figure>
@@ -54,10 +54,7 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-xs-6">
-                                            <div ng-show="item.qtyError" class="alert alert-danger text-center">
-                                                <small>{{item.qtyError}}</small>
-                                            </div>
-                                            <div  ng-hide="item.qtyError" ng-if="!(user.Permissions.contains('HidePricing'))">
+                                            <div ng-if="!(user.Permissions.contains('HidePricing'))">
                                                 <small>Total</small>
                                                 <h2 class="text-success">
                                                     {{item.LineTotal | currency}}
