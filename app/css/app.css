@@ -1367,14 +1367,14 @@ li.print {
 .product-view-default h2 {margin-top: 0;}
 
 .view-inline-error {
-
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
     padding: 15px;
     position: absolute;
     left: 0; right: 0;
     top: 100%;
-    white-space: normal;word-break:normal;
+    white-space: normal;
+    word-break:normal;
     z-index: 1;
     background-color: #F2DEDE;
     border: 1px solid #EBCCD1;
@@ -1386,7 +1386,7 @@ li.print {
     width:0;
     height:0;
     top: -10px;
-    left: 50%;
+    left: 10px;
     border-bottom:10px solid #F2DEDE;
     border-left:10px solid transparent;
     border-right:10px solid transparent;position: absolute;
