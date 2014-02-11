@@ -70,18 +70,15 @@ four51.app.factory('Variant', function($resource, $451, Security){
 		});
 	}
 
-	function getCacheName(params){
-		var query = params.VariantInteropID ? params.VariantInteropID : params.SpecOptionIDs.join();
-		return '451Cache.' + $451.apiName + '.Variants.' + params.ProductInteropID + query;
-	}
+	//function getCacheName(params){
+	//	var query = params.VariantInteropID ? params.VariantInteropID : params.SpecOptionIDs.join();
+	//	return '451Cache.' + $451.apiName + '.Variants.' + params.ProductInteropID + query;
+	//}
     var _get = function(params, success, error) {
 
-		var variant = store.get(getCacheName(params));
-		variant ? (function() { _extend(variant);	_then(success, variant); })() :
-	        $resource($451.api('variant')).get(params).$promise.then(function(variant) {
+		$resource($451.api('variant')).get(params).$promise.then(function(variant) {
 		        _extend(variant);
-		        store.set(getCacheName(params), variant);
-	            _then(success, variant);
+		        _then(success, variant);
 	        },function(ex) {
 				error(ex);
 			});
@@ -89,9 +86,9 @@ four51.app.factory('Variant', function($resource, $451, Security){
 	var _save = function(variant, success) {
 		return $resource($451.api('variant')).save(variant).$promise.then(function(v) {
 			var queryParams = {ProductInteropID: v.ProductInteropID, VariantInteropID: v.InteropID};
-			store.remove(getCacheName(queryParams));
+			//store.remove(getCacheName(queryParams));
 			_extend(v);
-			store.set(getCacheName(queryParams), v);
+			//store.set(getCacheName(queryParams), v);
 			_then(success, v);
 		});
 	}
