@@ -1161,10 +1161,8 @@ li.print {
     padding: 0;
 }
 
-.cart-view-line-items-repeater {
+.panel-body.cart-view-line-items-repeater {
     border-top: 1px solid #d6d6d6;
-    clear: both;
-    overflow: hidden;
     padding: 15px 0;
 }
 

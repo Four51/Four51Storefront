@@ -16,8 +16,7 @@
                         {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
                     </h3>
                 </div>
-                <div class="panel-body">
-                    <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
+                    <div ng-repeat="item in currentOrder.LineItems" class="panel-body cart-view-line-items-repeater">
                         <button title="Remove Item" class="btn btn-danger cart-view-btn-remove" ng-click="removeItem(item)">
                             <span class="fa fa-minus-circle fa-inverse"></span>
                         </button>
@@ -119,7 +118,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
                 <div class="panel-footer">
                     <div ng-if="user.Permissions.contains('ViewPromotions')" class="row">
                         <giftcardredemption />
