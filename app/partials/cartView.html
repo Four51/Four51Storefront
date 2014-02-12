@@ -16,8 +16,7 @@
                         {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
                     </h3>
                 </div>
-                <div class="panel-body">
-                    <div ng-repeat="item in currentOrder.LineItems" class="cart-view-line-items-repeater">
+                    <div ng-repeat="item in currentOrder.LineItems" class="panel-body cart-view-line-items-repeater">
                         <button title="Remove Item" class="btn btn-danger cart-view-btn-remove" ng-click="removeItem(item)">
                             <span class="fa fa-minus-circle fa-inverse"></span>
                         </button>
@@ -28,7 +27,9 @@
                                         <quantityfield required="true" lineitem="item" class="quantity"/>
                                     </div>
                                     <div style="border: 1px solid #d6d6d6;border-top: 0; text-align: center;padding-top: 10px;background-color:#F9F9F9;">
-                                        <small>Total Quantity <span ng-show="item.Quantity * item.Product.QuantityMultiplier">{{item.Quantity * item.Product.QuantityMultiplier}}</span></small>
+                                        <p>
+                                            <small>Total Quantity <span ng-show="item.Quantity * item.Product.QuantityMultiplier">{{item.Quantity * item.Product.QuantityMultiplier}}</span></small>
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-sm-12 col-md-6 text-center" ng-show="item.Variant.SmallImageUrl || item.Product.SmallImageUrl">
@@ -54,10 +55,7 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-xs-6">
-                                            <div ng-show="item.qtyError" class="alert alert-danger text-center">
-                                                <small>{{item.qtyError}}</small>
-                                            </div>
-                                            <div  ng-hide="item.qtyError" ng-if="!(user.Permissions.contains('HidePricing'))">
+                                            <div ng-if="!(user.Permissions.contains('HidePricing'))">
                                                 <small>Total</small>
                                                 <h2 class="text-success">
                                                     {{item.LineTotal | currency}}
@@ -122,7 +120,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
                 <div class="panel-footer">
                     <div ng-if="user.Permissions.contains('ViewPromotions')" class="row">
                         <giftcardredemption />

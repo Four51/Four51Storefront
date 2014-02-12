@@ -25,9 +25,4 @@ four51.app.controller('CategoryCtrl', function ($routeParams, $sce, $scope, $451
 		}
 	});
 
-    // No tooltips on phone, tablet portrait
-    if (!window.matchMedia || (window.matchMedia("(min-width: 1023px)").matches)) {
-        $('.fa').tooltip();
-    }
-
 });

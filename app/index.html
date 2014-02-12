@@ -35,9 +35,7 @@
         <section class="container-content">
             <ng-view autoscroll />
         </section>
-        <section ng-if="!user.Permissions.contains('UnBrandedSite')">
-            <ng-include src="'partials/copyrightView.html'" />
-        </section>
+        <copyright ng-if="!user.Permissions.contains('UnBrandedSite')" />
     </section>
 </section>
 
@@ -132,7 +130,7 @@
     <script src="js/directives/tree.js"></script>
     <script src="js/directives/addressinput.js"></script>
     <script src="js/directives/reporting.js"></script>
-    <script src="js/directives/panel.js"></script>
+    <script src="js/directives/inlineerror.js"></script>
     <script src="js/directives/nav.js"></script>
     <script src="js/directives/branding.js"></script>
     <script src="js/directives/login.js"></script>

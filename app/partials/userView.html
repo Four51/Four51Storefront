@@ -44,8 +44,8 @@
                         <label class="required">Email</label>
                         <input name="email" class="form-control" type="email" ng-model="user.Email" required placeholder="Email Address" autocomplete="off" />
                         <i class="fa fa-envelope-o"></i>
+                        <inlineerror ng-show="user_form.email.$invalid" title="Please enter a valid email address" />
                     </div>
-                    <span class="alert-error" ng-show="user_form.email.$invalid">Please enter a valid email address</span>
                 </div>
                 <div class="col-sm-6 view-form-icon">
                     <div>
@@ -63,8 +63,9 @@
                         <label ng-show="user.ConfirmPassword">Confirm Password</label>
                         <input name="confirm_password" ng-match="user.Password" class="form-control" type="password" ng-model="user.ConfirmPassword" placeholder="Confirm Password" autocomplete="off" />
                         <i class="fa fa-lock"></i>
+                        <inlineerror ng-show="user_form.confirm_password.$error.match" title="Passwords do not match!" />
                     </div>
-                    <span class="alert-error" ng-show="user_form.confirm_password.$error.match">Passwords do not match!</span><br />
+
                     <span class="alert-warning" ng-show="securityWarning">
                         <ul>
                             <li>Your password does not meet the requirements set for length or complexity. It must be changed to meet the minimum requirements before continuing.</li>
