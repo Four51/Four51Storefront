@@ -45,12 +45,10 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		        if (ex.Code.is('ObjectExistsException')) { // unique id
 			        ex.Message = ex.Message.replace('{0}', 'Order ID (' + $scope.currentOrder.ExternalID + ')');
 		        }
-		        $scope.cart_billing.$setValidity('paymentMethod', false);
-		        $scope.actionMessage = ex.Message;
+		        $scope.errorMessage = ex.Message;
 		        $scope.displayLoadingIndicator = false;
 		        $scope.shippingUpdatingIndicator = false;
 		        $scope.shippingFetchIndicator = false;
-		        $scope.showSave = false;
 	        }
         );
     };
@@ -58,7 +56,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     function saveChanges(callback) {
 	    $scope.displayLoadingIndicator = true;
 	    $scope.errorMessage = null;
-        $scope.showSave = true;
+	    $scope.actionMessage = null;
 	    var auto = $scope.currentOrder.autoID;
         Order.save($scope.currentOrder,
 	        function(data) {
@@ -70,7 +68,7 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		        }
 		        $scope.displayLoadingIndicator = false;
 		        if (callback) callback($scope.currentOrder);
-	            $scope.showSave = false;
+	            $scope.actionMessage = "Your changes have been saved";
 	        },
 	        function(ex) {
 		        if (ex.Code.is('ObjectExistsException')) { // unique id
@@ -81,7 +79,6 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		        $scope.displayLoadingIndicator = false;
 		        $scope.shippingUpdatingIndicator = false;
 		        $scope.shippingFetchIndicator = false;
-                $scope.showSave = false;
 	        }
         );
     };

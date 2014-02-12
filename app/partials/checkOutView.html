@@ -10,9 +10,6 @@
         <orderbilling />
         <orderapprovals />
         <div class="view-footer navbar-fixed-bottom">
-            <div class="view-response-message alert-success ng-hide" alert-show="showSave">
-                <p>Your changes have been saved.</p>
-            </div>
             <div class="view-response-message alert-success" alert-show="actionMessage">
                 <p>{{actionMessage}}</p>
             </div>
@@ -26,7 +23,7 @@
                 <ul class="row">
                     <li class="col-sm-1 alert-warning">
                         <i class="fa fa-exclamation-circle text-danger"></i>
-                        <span class="badge" ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length) > 1">{{cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length + (errorMessage ? 1 : 0)}}</span>
+                        <span class="badge" ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length) > 1">{{cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length}}</span>
                     </li>
                     <li class="col-sm-10 alert-warning" style="margin: 0; padding: 0">
                         <ul ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
