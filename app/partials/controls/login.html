@@ -52,10 +52,8 @@
                                     <label ng-show="credentials.ConfirmPassword">Confirm Password</label>
                                     <input class="form-control" name="confirm_password" type="password" ng-model="credentials.ConfirmPassword"  placeholder="Confirm Password" ng-match="credentials.NewPassword" />
                                     <i class="fa fa-lock"></i>
+                                    <inlineerror ng-show="login_form.confirm_password.$error.match" title="Passwords do not match!" />
                                 </div>
-                                <p class="alert alert-warning" ng-show="login_form.confirm_password.$error.match">
-                                    Passwords do not match!
-                                </p>
                             </div>
                         </div>
                         <input ng-disabled="login_form.$invalid" class="btn btn-large btn-primary btn-block" id="451_btn_login" type="submit" value="{{buttonText}}" />
