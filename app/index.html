@@ -35,9 +35,7 @@
         <section class="container-content">
             <ng-view autoscroll />
         </section>
-        <section ng-if="!user.Permissions.contains('UnBrandedSite')">
-            <ng-include src="'partials/copyrightView.html'" />
-        </section>
+        <copyright ng-if="!user.Permissions.contains('UnBrandedSite')" />
     </section>
 </section>
 
