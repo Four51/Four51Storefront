@@ -13,19 +13,23 @@
             <div class="view-response-message alert-success ng-hide" alert-show="showSave">
                 <p>Your changes have been saved.</p>
             </div>
-            <div class="view-response-message alert-success">
+            <div class="view-response-message alert-success" alert-show="actionMessage">
                 <p>{{actionMessage}}</p>
             </div>
-            <div class="view-error-message" ng-show="cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length + (errorMessage ? 1 : 0) > 0">
+            <div class="view-response-message alert-warning" alert-show="errorMessage">
+                <p>{{errorMessage}}</p>
+            </div>
+            <div class="view-response-message alert-warning" alert-show="couponError">
+                <p>{{couponError}}</p>
+            </div>
+            <div class="view-error-message" ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length) > 0">
                 <ul class="row">
                     <li class="col-sm-1 alert-warning">
                         <i class="fa fa-exclamation-circle text-danger"></i>
-                        <span class="badge" ng-show="cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length + (errorMessage ? 1 : 0) > 1">{{cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length + (errorMessage ? 1 : 0)}}</span>
+                        <span class="badge" ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length) > 1">{{cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length + (errorMessage ? 1 : 0)}}</span>
                     </li>
                     <li class="col-sm-10 alert-warning" style="margin: 0; padding: 0">
                         <ul>
-                            <li ng-show="errorMessage">{{errorMessage}}</li>
-                            <li ng-show="couponError">{{couponError}}</li>
                             <li ng-show="cart_order.orderid.$invalid">Enter an order id</li>
                             <li ng-show="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</li>
                             <li ng-show="cart_shipping.shipMethod.$invalid">Please choose a shipping method</li>

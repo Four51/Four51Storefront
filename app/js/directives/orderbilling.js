@@ -4,9 +4,11 @@ four51.app.directive('orderbilling', function(SpendingAccount, Address) {
 		restrict: 'AE',
 		templateUrl: 'partials/controls/orderBilling.html',
 		controller: function($scope) {
-			SpendingAccount.query(function(data) {
-				$scope.SpendingAccounts = data;
-				budgetAccountCalculation($scope.currentOrder.BudgetAccountID);
+			$scope.$on('event:orderUpdate', function(order) {
+				SpendingAccount.query(function(data) {
+					$scope.SpendingAccounts = data;
+					budgetAccountCalculation($scope.currentOrder.BudgetAccountID);
+				});
 			});
 
 			$scope.$watch('currentOrder.BillAddressID', function(newValue) {
