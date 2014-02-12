@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="col-xs-6 col-sm-12 col-md-6 text-center" ng-show="item.Variant.SmallImageUrl || item.Product.SmallImageUrl">
                                     <figure>
-                                        <img class="view-thumbnail" ng-src="{{item.Product.SmallImageUrl}}" />
+                                        <img class="view-thumbnail" ng-src="{{item.Product.SmallImageUrl || item.Variant.SmallImageUrl}}" />
                                     </figure>
                                 </div>
                             </div>
@@ -142,11 +142,11 @@
                     <p>{{actionMessage}}</p>
                 </div>
                 <div class="view-response-message alert-danger" alert-show="gcMessage">{{gcMessage}}</div>
-                <div class="view-error-message" ng-show="cart.$error.required.length + (errorMessage ? 1 : 0) > 0">
+                <div class="view-error-message" ng-show="cart.$error.required.length > 0">
                     <ul class="row">
                         <li class="col-xs-2 alert-warning">
                             <i class="fa fa-exclamation-circle text-danger"></i>
-                            <span class="badge" ng-show="cart.$error.required.length + (errorMessage ? 1 : 0) > 1">{{cart.$error.required.length + (errorMessage ? 1 : 0)}}</span>
+                            <span class="badge" ng-show="cart.$error.required.length > 1">{{cart.$error.required.length}}</span>
                         </li>
                         <li class="col-xs-8 alert-warning" style="margin: 0; padding: 0">
                             <ul>
