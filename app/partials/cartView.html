@@ -27,7 +27,9 @@
                                         <quantityfield required="true" lineitem="item" class="quantity"/>
                                     </div>
                                     <div style="border: 1px solid #d6d6d6;border-top: 0; text-align: center;padding-top: 10px;background-color:#F9F9F9;">
-                                        <small>Total Quantity <span ng-show="item.Quantity * item.Product.QuantityMultiplier">{{item.Quantity * item.Product.QuantityMultiplier}}</span></small>
+                                        <p>
+                                            <small>Total Quantity <span ng-show="item.Quantity * item.Product.QuantityMultiplier">{{item.Quantity * item.Product.QuantityMultiplier}}</span></small>
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-sm-12 col-md-6 text-center" ng-show="item.Variant.SmallImageUrl || item.Product.SmallImageUrl">
