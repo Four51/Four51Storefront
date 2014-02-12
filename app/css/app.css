@@ -1536,6 +1536,11 @@ ul.view-variant-list{
 .cart-view-line-items-product {border-left: 1px solid #d6d6d6;}
 .navbar .fa-shopping-cart {  border-radius: 50%;   border: 1px solid #fff; text-align:center; padding: 10px;margin-top: -5px;}
 .view-order-shipping-edit-name input {padding: 0 5px;}
+
+.view-error-message li a {text-decoration: none;}
+.view-error-message ul li ul.two li {display: none;}
+.view-error-message ul li ul li:first-child {display: block;}
+.view-error-message ul li a i {display: block; height: 100%; width: 100%;}
 /* ----------------------------------------------------------------------------------------------- */
 /* Hello bootstrap, how do you do? */
 /* ----------------------------------------------------------------------------------------------- */

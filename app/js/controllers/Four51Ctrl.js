@@ -45,6 +45,8 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
         }
     }
 
+    $scope.errorSection = '';
+
     function cleanup() {
         Security.clear();
     }
