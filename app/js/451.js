@@ -44,7 +44,9 @@ four51.app.factory('$451', function(AppConst) {
         else
             return array.indexOf(value) > -1;
     }
-
+	var _isPositiveInteger = function(n) {
+		return n >>> 0 === parseFloat(n);
+	}
 	return {
 		debug: AppConst.debug,
 		isAnon: AppConst.isAnon,
@@ -58,7 +60,8 @@ four51.app.factory('$451', function(AppConst) {
 		},
         contains: function(array, value) {
             return arrayContainsValue(array, value);
-        }
+        },
+		isPositiveInteger: _isPositiveInteger
 	};
 });
 four51.apiName = function(){

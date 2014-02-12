@@ -106,8 +106,7 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 				var variant = lineItem.Variant;
 				var product = lineItem.Product;
 				var priceSchedule = lineItem.PriceSchedule;
-
-
+				
 				if(value == "" && !scope.required)
 				{
 					lineItem.qtyError = null;
@@ -117,7 +116,6 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 					scope.lineitem.qtyError = null;
 					return scope.valid | true;
 				}
-
                 if(!product && !variant)
 					return scope.valid | true;
 
@@ -126,6 +124,12 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 
 				scope.valid = true;
 
+				if(!$451.isPositiveInteger(value))
+				{
+					scope.lineitem.qtyError = "Please select a valid quantity";
+					scope.valid = false;
+					return scope.valid;
+				}
                 if(priceSchedule.MinQuantity > value){
 					scope.valid = false;
                     scope.lineitem.qtyError = "must be equal or greater than " + priceSchedule.MinQuantity;
