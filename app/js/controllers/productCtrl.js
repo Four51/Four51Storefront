@@ -185,15 +185,21 @@ four51.app.factory('ProductDisplayService', function($451, $sce, Variant, Produc
 
 			if(scope.allowAddFromVariantList){
 				var haveQty = false;
+				var haveQtyError = false;
 				angular.forEach(scope.variantLineItems, function(item){
-					if(item.Quantity > 0){
+					if(item.Quantity > 0)
 						haveQty = true;
+					if(item.qtyError && !haveQtyError)
+					{
+						newErrorList.push(item.qtyError);
+						haveQtyError = true;
 					}
 				});
-
 				if(scope.LineItem.Product.Type == 'VariableText' && !Object.keys(scope.variantLineItems).length)
 					newErrorList.push("Please create a variant.");
-				else if(!haveQty) newErrorList.push("please select a quantity");
+				else if(!haveQty && !haveQtyError)
+					newErrorList.push("Please select a quantity");
+
 			}else if(!scope.LineItem.Quantity && !scope.LineItem.qtyError)//if there's a qty error, just use that. in this case, there's no qty error because it hasn't been validated yet.
 				newErrorList.push("Please select a quantity.");
 
