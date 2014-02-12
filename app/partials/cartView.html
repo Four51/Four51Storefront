@@ -146,13 +146,18 @@
                             <span class="badge" ng-show="cart.$error.required.length > 1">{{cart.$error.required.length}}</span>
                         </li>
                         <li class="col-xs-8 alert-warning" style="margin: 0; padding: 0">
-                            <ul>
-                                <li ng-show="cart.dateneeded.$invalid">Date needed is required</li>
-                                <li ng-show="cart.costcenter.$invalid">Cost Center is required</li>
-                                <li ng-show="cart.qtyInput.$invalid">You have entered an invalid quantity</li>
+                            <ul ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
+                                <li ng-if="cart.dateneeded.$invalid">Date needed is required</li>
+                                <li ng-if="cart.costcenter.$invalid">Cost Center is required</li>
+                                <li ng-if="cart.qtyInput.$invalid">You have entered an invalid quantity</li>
                             </ul>
                         </li>
-                        <li class="col-xs-2"><a class="fa fa-caret-down" ng-show="cart.$error.required.length + (errorMessage ? 1 : 0) > 1"></a></li>
+                        <li class="col-xs-2">
+                            <a ng-show="cart.$error.required.length + (errorMessage ? 1 : 0) > 1">
+                                <i class="fa fa-caret-up" ng-click="errorSection = 'open'" ng-hide="errorSection == 'open'"></i>
+                                <i class="fa fa-caret-down" ng-click="errorSection = ''" ng-show="errorSection == 'open'"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <ul class="view-footer-buttons">
