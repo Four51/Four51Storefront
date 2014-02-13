@@ -13,7 +13,7 @@ four51.app.directive('ordershipping', function(Order, Shipper, Address, OrderCon
 			};
 
 			var saveChanges = function(callback) {
-				$scope.$parent.errorMessage = null;
+				$scope.errorMessage = null;
 				Order.save($scope.currentOrder,
 					function(data) {
 						$scope.currentOrder = data;
@@ -22,11 +22,8 @@ four51.app.directive('ordershipping', function(Order, Shipper, Address, OrderCon
 						if (callback) callback($scope.currentOrder);
 					},
 					function(ex) {
-						if (ex.Code.is('ObjectExistsException')) { // unique id
-							ex.Message = ex.Message.replace('{0}', 'Order ID (' + $scope.currentOrder.ExternalID + ')');
-						}
 						$scope.currentOrder.ExternalID = null;
-						$scope.$parent.errorMessage = ex.Message;
+						$scope.errorMessage = ex.Message;
 						$scope.shippingUpdatingIndicator = false;
 						$scope.shippingFetchIndicator = false;
 					}

@@ -19,10 +19,10 @@
                             </div>
                         </div>
                         <div>
-                            <p class="alert alert-info" ng-show="showEmailHelp && !EmailNotFoundException">
+                            <p class="alert alert-info" ng-show="showEmailHelp && (!EmailNotFoundException || !PasswordSecurityException)">
                                 If you would like to be reminded of your User Name or have the option to reset your Password, please provide your email address and your log on information will be emailed to you immediately.
                             </p>
-                            <btn class="btn btn-info btn-block" ng-show="!showEmailHelp" ng-click="showEmailHelp = !showEmailHelp; buttonText = 'Submit'">
+                            <btn class="btn btn-info btn-block" ng-show="!showEmailHelp && !EmailNotFoundException && !PasswordSecurityException" ng-click="showEmailHelp = !showEmailHelp; buttonText = 'Submit'">
                                 Need help logging on?
                             </btn>
                             <div class="view-form-icon" ng-show="showEmailHelp">
