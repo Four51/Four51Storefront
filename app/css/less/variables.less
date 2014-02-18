@@ -1,0 +1,26 @@
+// new variabless
+// Single primary color that all mixins use. Str8 ballin.
+@primary:        hsl(202, 100%, 50%);
+
+// Primary Variants -
+@primaryLight:   hsl(hue(@primary), 100%, 70%);
+@primaryDark:    hsl(hue(@primary), 60%, 40%);
+@primaryFaded:   hsl(hue(@primary), 60%, 65%);
+
+// 180degree Variants
+@variant:         spin((@primary), 180);
+@variantLight:    hsl(hue(@variant), 100%, 70%);
+@variantDark:     hsl(hue(@variant), 60%, 40%);
+@variantFaded:    hsl(hue(@variant), 60%, 65%);
+
+// 90degree Variants
+@corner:         spin((@primary), 70);
+@cornerLight:    hsl(hue(@corner), 100%, 70%);
+@cornerDark:     hsl(hue(@corner), 60%, 40%);
+@cornerFaded:    hsl(hue(@corner), 60%, 65%);
+
+// existing variable
+// reapply my own color variable to existing bootstrap variable
+@btn-primary-color: hsl(202, 100%, 50%);
+
+
