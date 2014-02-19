@@ -1,4 +1,4 @@
-/*! normalize.css v3.0.0 | MIT License | git.io/normalize ff*/
+/*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -2032,7 +2032,7 @@ fieldset[disabled] .btn {
 }
 .btn-default {
   color: #333333;
-  background-color: #ffffff;
+  background-color: #00f6ff;
   border-color: #cccccc;
 }
 .btn-default:hover,
@@ -2041,7 +2041,7 @@ fieldset[disabled] .btn {
 .btn-default.active,
 .open .dropdown-toggle.btn-default {
   color: #333333;
-  background-color: #ebebeb;
+  background-color: #00cfd6;
   border-color: #adadad;
 }
 .btn-default:active,
@@ -2064,15 +2064,15 @@ fieldset[disabled] .btn-default:active,
 .btn-default.disabled.active,
 .btn-default[disabled].active,
 fieldset[disabled] .btn-default.active {
-  background-color: #ffffff;
+  background-color: #00f6ff;
   border-color: #cccccc;
 }
 .btn-default .badge {
-  color: #ffffff;
+  color: #00f6ff;
   background-color: #333333;
 }
 .btn-primary {
-  color: #00a1ff;
+  color: #ffffff;
   background-color: #428bca;
   border-color: #357ebd;
 }
@@ -2081,7 +2081,7 @@ fieldset[disabled] .btn-default.active {
 .btn-primary:active,
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
-  color: #00a1ff;
+  color: #ffffff;
   background-color: #3276b1;
   border-color: #285e8e;
 }
@@ -2110,12 +2110,12 @@ fieldset[disabled] .btn-primary.active {
 }
 .btn-primary .badge {
   color: #428bca;
-  background-color: #00a1ff;
+  background-color: #ffffff;
 }
 .btn-success {
   color: #ffffff;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
+  background-color: #ee2b2b;
+  border-color: #ec1313;
 }
 .btn-success:hover,
 .btn-success:focus,
@@ -2123,8 +2123,8 @@ fieldset[disabled] .btn-primary.active {
 .btn-success.active,
 .open .dropdown-toggle.btn-success {
   color: #ffffff;
-  background-color: #47a447;
-  border-color: #398439;
+  background-color: #de1212;
+  border-color: #b30f0f;
 }
 .btn-success:active,
 .btn-success.active,
@@ -2146,11 +2146,11 @@ fieldset[disabled] .btn-success:active,
 .btn-success.disabled.active,
 .btn-success[disabled].active,
 fieldset[disabled] .btn-success.active {
-  background-color: #5cb85c;
-  border-color: #4cae4c;
+  background-color: #ee2b2b;
+  border-color: #ec1313;
 }
 .btn-success .badge {
-  color: #5cb85c;
+  color: #ee2b2b;
   background-color: #ffffff;
 }
 .btn-info {
