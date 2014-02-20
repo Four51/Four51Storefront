@@ -37,7 +37,6 @@ four51.app.directive('ordershipping', function(Order, Shipper, Address, OrderCon
 			}
 
 			$scope.setSingleShipAddress = function() {
-				console.log('setting single');
 				angular.forEach($scope.currentOrder.LineItems, function(li) {
 					li.ShipAddressID = $scope.currentOrder.LineItems[0].ShipAddressID;
 					li.ShipFirstName = $scope.currentOrder.LineItems[0].ShipFirstName;
