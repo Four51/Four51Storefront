@@ -58,8 +58,8 @@ four51.app.factory('OrderConfig', function() {
 	    address: function(o, u) {
 			order = o; user = u;
 		    // not supporting cost center default addreses due to issues with assignments to the user
-		    //if (!_hasAddress())
-			//    setDefaultAddress();
+		    if (!_hasAddress())
+			    setDefaultAddress();
 		    return this;
 	    },
         costcenter: function(o, u) {
