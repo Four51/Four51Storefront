@@ -5,10 +5,15 @@ four51.app.directive('ordershipping', function(Order, Shipper, Address, OrderCon
 		controller: function($scope) {
 			var saveChanges = function(callback) {
 				$scope.errorMessage = null;
+				var auto = $scope.currentOrder.autoID;
 				Order.save($scope.currentOrder,
 					function(data) {
 						$scope.currentOrder = data;
 						$scope.displayLoadingIndicator = false;
+						if (auto) {
+							$scope.currentOrder.autoID = true;
+							$scope.currentOrder.ExternalID = 'auto';
+						}
 						OrderConfig.costcenter($scope.currentOrder, $scope.user).address($scope.currentOrder, $scope.user);
 						if (callback) callback($scope.currentOrder);
 					},
