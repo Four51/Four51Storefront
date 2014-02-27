@@ -19,14 +19,14 @@ function e2eLogin(strUsername, strPassword, blnDebug){
 
     it('should allow us to enter a user/pass', function(){
 
-        input("user.Username").enter(strUsername);
-        input("user.Password").enter(strPassword);
+        input("credentials.Username").enter(strUsername);
+        input("credentials.Password").enter(strPassword);
         if(blnDebug){
             pause();
         }
 
-        expect(input("user.Username").val()).toBe(strUsername);
-        expect(input("user.Password").val()).toBe(strPassword);
+        expect(input("credentials.Username").val()).toBe(strUsername);
+        expect(input("credentials.Password").val()).toBe(strPassword);
 
         element("#451_btn_login").click();
 
@@ -52,8 +52,8 @@ function e2eLoginNoTest(strUsername, strPassword, blnDebug){ //this version does
 
     it('should allow us to enter a user/pass', function(){
 
-        input("user.Username").enter(strUsername);
-        input("user.Password").enter(strPassword);
+        input("credentials.Username").enter(strUsername);
+        input("credentials.Password").enter(strPassword);
         if(blnDebug){
             pause();
         }
