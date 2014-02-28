@@ -3,21 +3,17 @@ four51.app.directive('ordershipping', function(Order, Shipper, Address, OrderCon
 		restrict: 'AE',
 		templateUrl: 'partials/controls/orderShipping.html',
 		controller: function($scope) {
-			var shipToMultipleAddresses = function(order) {
-				if (!order || !$scope.user.Permissions.contains('ShipToMultipleAddresses')) return false;
-				var multi = false;
-				angular.forEach(order.LineItems, function(li, i) {
-					multi = multi || i > 0 ? (li.ShipAddressID != order.LineItems[i-1].ShipAddressID || (li.ShipFirstName != order.LineItems[i-1].ShipFirstName || order.LineItems[i-1].ShipLastName != order.ShipLastName)) : false;
-				});
-				return multi;
-			};
-
 			var saveChanges = function(callback) {
 				$scope.errorMessage = null;
+				var auto = $scope.currentOrder.autoID;
 				Order.save($scope.currentOrder,
 					function(data) {
 						$scope.currentOrder = data;
 						$scope.displayLoadingIndicator = false;
+						if (auto) {
+							$scope.currentOrder.autoID = true;
+							$scope.currentOrder.ExternalID = 'auto';
+						}
 						OrderConfig.costcenter($scope.currentOrder, $scope.user).address($scope.currentOrder, $scope.user);
 						if (callback) callback($scope.currentOrder);
 					},
@@ -34,13 +30,23 @@ four51.app.directive('ordershipping', function(Order, Shipper, Address, OrderCon
 				$scope.shippers = list;
 			});
 
-			$scope.shipToMultipleAddresses = shipToMultipleAddresses($scope.currentOrder);
-
-			$scope.setSingleShipAddress = function() {
-				$scope.shipToMultipleAddresses = false;
-				angular.forEach($scope.currentOrder.LineItems, function(li) {
+			$scope.setMultipleShipAddress = function() {
+				angular.forEach($scope.currentOrder.LineItems, function(li, i) {
+					if (i == 0) return;
+					li.ShipAddressID = null;
 					li.ShipFirstName = null;
 					li.ShipLastName = null;
+					li.ShipperID = null;
+					li.ShipperName = null;
+				});
+			}
+
+			$scope.setSingleShipAddress = function() {
+				angular.forEach($scope.currentOrder.LineItems, function(li) {
+					li.ShipAddressID = $scope.currentOrder.LineItems[0].ShipAddressID;
+					li.ShipFirstName = $scope.currentOrder.LineItems[0].ShipFirstName;
+					li.ShipLastName = $scope.currentOrder.LineItems[0].ShipLastName;
+					li.ShipperID = $scope.currentOrder.LineItems[0].ShipperID;
 				});
 			};
 
@@ -69,13 +75,8 @@ four51.app.directive('ordershipping', function(Order, Shipper, Address, OrderCon
 			});
 
 			$scope.setShipAddressAtLineItem = function(item) {
-				item.ShipperName = null;
-				item.Shipper = null;
-				item.ShipperID = null;
-				$scope.currentOrder.ShipAddressID = $scope.currentOrder.LineItems[0].ShipAddressID;
-				$scope.currentOrder.ShipFirstName = null;
-				$scope.currentOrder.ShipLastName = null;
-				$scope.currentOrder.Shipper = $scope.currentOrder.LineItems[0].Shipper;
+				item.ShipFirstName = null;
+				item.ShipLastName = null;
 				saveChanges(function(order) {
 					Shipper.query(order, function(list) {
 						$scope.shippers = list;
@@ -88,13 +89,13 @@ four51.app.directive('ordershipping', function(Order, Shipper, Address, OrderCon
 				$scope.currentOrder.ShipperName = null;
 				$scope.currentOrder.Shipper = null;
 				$scope.currentOrder.ShipperID = null;
-				$scope.currentOrder.LineItems[0].ShipperName = null;
-				$scope.currentOrder.LineItems[0].Shipper = null;
-				$scope.currentOrder.LineItems[0].ShipperID = null;
 				angular.forEach($scope.currentOrder.LineItems, function(li) {
 					li.ShipAddressID = $scope.currentOrder.ShipAddressID;
 					li.ShipFirstName = null;
 					li.ShipLastName = null;
+					li.ShipperName = null;
+					li.Shipper = null;
+					li.ShipperID = null;
 				});
 				saveChanges(function(order) {
 					Shipper.query(order, function(list) {
@@ -129,8 +130,10 @@ four51.app.directive('ordershipping', function(Order, Shipper, Address, OrderCon
 					});
 					li.ShipperName = li.Shipper.Name;
 					li.ShipperID = li.Shipper.ID;
-					$scope.shippingUpdatingIndicator = false;
-					$scope.shippingFetchIndicator = false;
+					saveChanges(function() {
+						$scope.shippingUpdatingIndicator = false;
+						$scope.shippingFetchIndicator = false;
+					});
 				}
 			};
 

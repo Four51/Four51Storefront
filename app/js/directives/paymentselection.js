@@ -22,6 +22,7 @@ four51.app.directive('paymentselector', function() {
 	       };
 
 	       $rootScope.$on('event:SpendingAccountUpdate', function(event, accounts) {
+		       if (!$scope.currentOrder) return;
 		       if ($scope.currentOrder.PaymentMethod == 'BudgetAccount') {
 			       angular.forEach(accounts, function(a) {
 				       if ($scope.selectedBudgetAccount) return;
