@@ -1,1 +1,113 @@
-// mixins
+// 451 mixins
+
+// Smoother transitions
+.navbar .nav a {
+  -webkit-transition: all ease-in-out .2s;
+  -moz-transition: all ease-in-out .2s;
+  -ms-transition: all ease-in-out .2s;
+  -o-transition: all ease-in-out .2s;
+  transition: all ease-in-out .2s;
+}
+
+.btn,
+.btn:hover,
+.btn:focus {
+  -webkit-transition: all ease-in-out .5s;
+  -moz-transition: all ease-in-out .5s;
+  -ms-transition: all ease-in-out .5s;
+  -o-transition: all ease-in-out .5s;
+  transition: all ease-in-out .5s;
+}
+
+// Buttons
+.btn.btn-primary {
+  text-transform: uppercase;
+}
+
+.btn-group {
+  width: 100%;
+}
+
+// Forms
+.form-control:focus {
+  box-shadow: none;
+}
+
+// Navbar
+.navbar-nav > li {
+  display: inline-block;
+  float: left;
+}
+
+.navbar-fixed-bottom {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  -webkit-animation-name: fadeInUp;
+  -moz-animation-name: fadeInUp;
+  -o-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+  -ms-animation-name: fadeInUp;
+}
+
+.navbar-fixed-top {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  -webkit-animation-name: fadeInDown;
+  -moz-animation-name: fadeInDown;
+  -o-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  -ms-animation-name: fadeInDown;
+}
+
+// Navs
+.navbar-nav > li > a {
+  height: 60px;
+}
+
+// Jumbotron
+.jumbotron {
+  margin-bottom: 0;
+}
+
+// Panels
+.panel-heading {
+  margin-top: 2px;
+  padding: 0;
+}
+
+.panel-title {
+  letter-spacing: 0.08em;
+  margin: 0;
+  padding: 20px 30px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.panel-footer {
+  padding: 30px 15px;
+  clear: both;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+// Wells
+.well {
+  border: none;
+  border-radius: 0;
+}

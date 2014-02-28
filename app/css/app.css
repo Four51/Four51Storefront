@@ -17,18 +17,12 @@ html {
 }
 
 body {
-    font-family: 'Droid Sans', sans-serif;
     font-smooth:always;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
     -webkit-text-stroke: 1px transparent;
     margin-bottom: 100px;
     overflow: hidden;
-}
-
-h1, h2, h3, h4, h5 {
-    font-family: 'Lato', sans-serif;
-    line-height: 1.5em;
 }
 
 hr {
@@ -116,6 +110,11 @@ input[type="file"]{
     bottom:0;
     cursor:pointer;
     opacity:0;
+}
+
+/* ie needs this help to keep scroll from overlapping content */
+@-ms-viewport{
+    width: auto !important;
 }
 
 .view-table-row {
@@ -362,15 +361,6 @@ input[type="file"]{
     outline: none;
 }
 
-li.cart span.badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 999999999;
-    background-color:#3D3D3D;
-    padding: 4px 7px;
-}
-
 div.category-view-subcat ul li ul {
     display: none;
 }
@@ -489,11 +479,6 @@ div.category-view-subcat ul li ul {
     font-size: 18px;
     padding: 15px 20px;
     cursor: pointer;
-}
-
-.admin-navigation .nav li > ul li {
-    font-size: 14px;
-    text-align: left;
 }
 
 .ui-show {
@@ -897,41 +882,7 @@ li.selected {
     to {transform: rotate(359deg);}
 }
 
-.navbar-fixed-bottom {
-    -webkit-animation-duration: 1s;
-    -moz-animation-duration: 1s;
-    -o-animation-duration: 1s;
-    animation-duration: 1s;
-    -ms-animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    -moz-animation-fill-mode: both;
-    -o-animation-fill-mode: both;
-    animation-fill-mode: both;
-    -ms-animation-fill-mode: both;
-    -webkit-animation-name: fadeInUp;
-    -moz-animation-name: fadeInUp;
-    -o-animation-name: fadeInUp;
-    animation-name: fadeInUp;
-    -ms-animation-name: fadeInUp;
-}
 
-.navbar-fixed-top {
-    -webkit-animation-duration: 1s;
-    -moz-animation-duration: 1s;
-    -o-animation-duration: 1s;
-    animation-duration: 1s;
-    -ms-animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    -moz-animation-fill-mode: both;
-    -o-animation-fill-mode: both;
-    animation-fill-mode: both;
-    -ms-animation-fill-mode: both;
-    -webkit-animation-name: fadeInDown;
-    -moz-animation-name: fadeInDown;
-    -o-animation-name: fadeInDown;
-    animation-name: fadeInDown;
-    -ms-animation-name: fadeInDown;
-}
 
 .check-out-view .panel-body.ng-hide-remove {
     -webkit-animation-duration: 1s;
@@ -1219,11 +1170,6 @@ li.print {
     font-size: 24px;
     color:#468847;
     box-shadow: none;
-}
-
-.badge {
-    background-color:#3D3D3D;
-    padding: 4px 7px;
 }
 
 .cart-view-variable {
@@ -1542,156 +1488,3 @@ ul.view-variant-list{
 .view-error-message ul li ul.two li {display: none;}
 .view-error-message ul li ul li:first-child {display: block;}
 .view-error-message ul li a i {display: block; height: 100%; width: 100%;}
-/* ----------------------------------------------------------------------------------------------- */
-/* Hello bootstrap, how do you do? */
-/* ----------------------------------------------------------------------------------------------- */
-
-/* full screen: if we want to go back to default bootstrap widths, simply remove the below container rule */
-.container {
-    max-width: 100%;
-}
-
-/* ie needs bootstrap help to keep scroll from overlapping content */
-@-ms-viewport{
-    width: auto !important;
-}
-
-.navbar .nav a {
-    -webkit-transition: all ease-in-out .2s;
-    -moz-transition: all ease-in-out .2s;
-    -ms-transition: all ease-in-out .2s;
-    -o-transition: all ease-in-out .2s;
-    transition: all ease-in-out .2s;
-}
-
-/* tighten the button transitions with smoother interaction for the ux */
-.btn,
-.btn:hover,
-.btn:focus {
-    -webkit-transition: all ease-in-out .5s;
-    -moz-transition: all ease-in-out .5s;
-    -ms-transition: all ease-in-out .5s;
-    -o-transition: all ease-in-out .5s;
-    transition: all ease-in-out .5s;
-}
-
-.alert {
-    margin-top: 20px;
-    word-wrap:break-word;
-}
-
-.btn.btn-primary {
-    border: none;
-    text-transform: uppercase;
-}
-
-.navbar {
-    margin-bottom: 0;
-    border: none;
-    border-radius: 0;
-    min-height: 60px
-}
-
-.navbar-collapse {
-    max-height: inherit;
-    padding: 0;
-}
-
-.navbar-nav > li {
-    display: inline-block;
-    float: left;
-}
-.navbar-collapse li a.visible-sm.visible-xs {
-    display: inline-block !important;
-}
-
-.nav.navbar-right {
-    float: right;
-}
-
-.nav.navbar-left {
-    float: left;
-}
-
-.navbar-nav {
-    margin: 0;
-}
-
-.jumbotron {
-    padding-bottom: 24px;
-    padding-top: 24px;
-}
-
-.navbar-nav > li > a {
-    padding: 20px;
-    height: 60px;
-}
-
-
-.navbar-collapse .navbar-nav.navbar-left:first-child {
-    margin-left: 0;
-}
-
-.cart .well {
-    padding: 0 !important;
-}
-
-.navbar-inner {
-    padding: 0;
-    border: none;
-}
-
-.jumbotron {
-    margin-bottom: 0;
-}
-
-.form-control:focus {
-    box-shadow: none;
-}
-
-.form-group {
-    margin-bottom: 0;
-}
-
-.well {
-    border: none;
-    border-radius: 0;
-}
-
-.panel {
-
-    border-radius: 0;
-    word-wrap: break-word;
-}
-
-.panel-primary {
-    border: none;
-}
-
-.panel-heading {
-    border-radius: 0;
-    margin-top: 2px;
-    padding: 0;
-}
-
-.panel-title {
-    font-size: 1em;
-    letter-spacing: 0.08em;
-    margin: 0;
-    padding: 20px 30px;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.panel-footer {
-    padding: 30px 15px;
-    clear: both;
-    overflow: hidden;
-    border-radius: 0;
-}
-
-.btn-group {
-    width: 100%;
-}
-
-
