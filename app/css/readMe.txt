@@ -64,7 +64,7 @@
                                 -       App wide classes will always start with the word "view" ie: class="view-[custom]"
 1.  Responsive
 
-1.0     Bootstrap 3
+1.0     Bootstrap 3.1.1
         http://getbootstrap.com/
 
         *Local Bootstrap and font-awesome files, no external URL
