@@ -3632,7 +3632,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   min-height: 60px;
-  margin-bottom: 0;
+  margin-bottom: 20px;
   border: 1px solid transparent;
 }
 @media (min-width: 768px) {
@@ -5903,7 +5903,17 @@ button::-moz-focus-inner {
   height: 60px;
 }
 .jumbotron {
-  margin-bottom: 0;
+  margin: -20px 0 0;
+  display: none;
+}
+.jumbotron.active {
+  display: block;
+}
+.jumbotron img {
+  max-height: 130px;
+  float: left;
+  display: block;
+  margin-right: 25px;
 }
 .panel {
   word-wrap: break-word;
@@ -5929,6 +5939,10 @@ button::-moz-focus-inner {
 }
 .well {
   border: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -o-border-radius: 0;
+  -ms-border-radius: 0;
   border-radius: 0;
   margin-bottom: 0;
 }
@@ -5963,6 +5977,9 @@ button::-moz-focus-inner {
   border-radius: 3px 3px 3px 3px;
   text-shadow: 0 -1px 0 #666666;
   -webkit-transition: all 150ms ease;
+  -moz-transition: all 150ms ease;
+  -o-transition: all 150ms ease;
+  -ms-transition: all 150ms ease;
   transition: all 150ms ease;
 }
 .order-cloud .form-signin .btn-primary:focus {
@@ -5970,14 +5987,23 @@ button::-moz-focus-inner {
 }
 .order-cloud .form-signin .btn-primary:hover {
   -webkit-animation: pulsate 1.2s linear infinite;
+  -moz-animation: pulsate 1.2s linear infinite;
+  -o-animation: pulsate 1.2s linear infinite;
+  -ms-animation: pulsate 1.2s linear infinite;
   animation: pulsate 1.2s linear infinite;
 }
 .order-cloud .form-signin .btn-primary:active {
   text-shadow: 0 -1px 0 #444444, 0 0 5px #ffffdd, 0 0 8px #ffffff;
   box-shadow: 0 1px 0 #666666, 0 1px 0 #444444, 0 1px 1px rgba(0, 0, 0, 0.9);
   -webkit-transform: translateY(2px);
+  -moz-transform: translateY(2px);
+  -o-transform: translateY(2px);
+  -ms-transform: translateY(2px);
   transform: translateY(2px);
   -webkit-animation: none;
+  -moz-animation: none;
+  -o-animation: none;
+  -ms-animation: none;
   animation: none;
   outline: none;
 }
