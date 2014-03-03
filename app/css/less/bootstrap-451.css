@@ -5772,12 +5772,43 @@ button.close {
     display: none !important;
   }
 }
-.navbar .nav a {
-  -webkit-transition: all ease-in-out 0.2s;
-  -moz-transition: all ease-in-out 0.2s;
-  -ms-transition: all ease-in-out 0.2s;
-  -o-transition: all ease-in-out 0.2s;
-  transition: all ease-in-out 0.2s;
+html {
+  overflow-y: scroll;
+}
+body {
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  -webkit-text-stroke: 1px transparent;
+  margin-bottom: 100px;
+  overflow: hidden;
+}
+hr {
+  clear: both;
+}
+img {
+  display: block;
+}
+div {
+  position: relative;
+}
+a {
+  cursor: pointer;
+}
+a:focus {
+  outline: none;
+}
+h3 i {
+  float: right;
+}
+h3 i:first-of-type {
+  float: left;
+}
+.btn-group {
+  width: 100%;
+}
+.btn {
+  position: relative;
 }
 .btn,
 .btn:hover,
@@ -5791,11 +5822,34 @@ button.close {
 .btn.btn-primary {
   text-transform: uppercase;
 }
-.btn-group {
-  width: 100%;
+label {
+  top: -20px;
+  font-size: 11px;
+  position: absolute;
+  display: block;
 }
-.btn {
-  position: relative;
+label.required {
+  color: red;
+}
+option {
+  color: #555;
+}
+textarea {
+  resize: vertical;
+  width: 100%;
+  line-height: 150%;
+}
+input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  opacity: 0;
+}
+button::-moz-focus-inner {
+  border: 0;
 }
 .form-control:focus {
   box-shadow: none;
@@ -5837,6 +5891,13 @@ button.close {
   -o-animation-name: fadeInDown;
   animation-name: fadeInDown;
   -ms-animation-name: fadeInDown;
+}
+.navbar .nav a {
+  -webkit-transition: all ease-in-out 0.2s;
+  -moz-transition: all ease-in-out 0.2s;
+  -ms-transition: all ease-in-out 0.2s;
+  -o-transition: all ease-in-out 0.2s;
+  transition: all ease-in-out 0.2s;
 }
 .navbar-nav > li > a {
   height: 60px;

@@ -12,62 +12,9 @@ Template: Four51 Single Page App - Ken Buras (http://www.kenburas.com)
     overflow: hidden !important;
 }
 
-html {
-    overflow-y: scroll;
-}
-
-body {
-    font-smooth:always;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-    -webkit-text-stroke: 1px transparent;
-    margin-bottom: 100px;
-    overflow: hidden;
-}
-
-hr {
-    clear: both;
-    margin: 15px 0;
-}
-
-
-img {
-    display: block;
-}
-
-div {
-    position: relative;
-}
-
-a {
-    cursor: pointer;
-}
-
-/* iOS placeholder needs help to disappear on focus */
-:focus::-webkit-input-placeholder{color:transparent;}
-
-a:focus {
-    outline: none;
-}
-
-button::-moz-focus-inner {
-    border: 0;
-}
-
 .ng-invalid .help-block,
 .ng-invalid .control-label {
     color: #b94a48;
-}
-
-label {
-    top: -20px;
-    font-size: 11px;
-    position: absolute;
-    display: block;
-}
-
-label.required{
-    color: red;
 }
 
 input.ng-invalid, textarea.ng-invalid, select.ng-invalid,
@@ -77,6 +24,7 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     color:#ccc;
 }
+
 input.ng-invalid:focus, textarea.ng-invalid:focus, select.ng-invalid:focus
 input.ng-invalid:invalid:focus, textarea.ng-invalid:invalid:focus, select.ng-invalid:invalid:focus  {
     border-color: #953b39;
@@ -85,38 +33,13 @@ input.ng-invalid:invalid:focus, textarea.ng-invalid:invalid:focus, select.ng-inv
     color: #ccc;
 }
 
-option {
-    color:#555;
-}
-
-textarea {
-    resize: vertical;
-    width: 100%;
-    line-height: 150%;
-}
-
-h3 i:first-of-type {
-    float: left;
-}
-
-h3 i {
-    float: right;
-}
-
-input[type="file"]{
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    cursor:pointer;
-    opacity:0;
-}
-
-/* ie needs this help to keep scroll from overlapping content */
+/* ie needs this help to keep scroll-y from overlapping content */
 @-ms-viewport{
     width: auto !important;
 }
+
+/* iOS placeholder needs help to disappear on focus */
+:focus::-webkit-input-placeholder{color:transparent;}
 
 .view-table-row {
     border-bottom: 1px solid #d6d6d6;
