@@ -215,4 +215,40 @@ button::-moz-focus-inner {
   -o-background-size: cover;
   -ms-background-size: cover;
   background-size: cover;
+
+  .form-signin {
+    max-width: 26em;
+    padding: 1.357em 2.071em 2.071em;
+    margin: 2em auto 5em;
+    background: rgba(22, 145, 190, .15);
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    -o-border-radius: 1em;
+    -ms-border-radius: 1em;
+    border-radius: 1em;
+    & .btn-primary  {
+      letter-spacing: .04em;
+      padding: 15px;
+      border-radius: 3px 3px 3px 3px;
+      text-shadow: 0 -1px 0 #666;
+      -webkit-transition: all 150ms ease;
+      transition: all 150ms ease;
+      &:focus {
+        outline: none;
+      }
+      &:hover {
+        -webkit-animation: pulsate 1.2s linear infinite;
+        animation: pulsate 1.2s linear infinite;
+      }
+      &:active {
+        text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff;
+        box-shadow: 0 1px 0 #666, 0 1px 0 #444, 0 1px 1px rgba(0,0,0,0.9);
+        -webkit-transform: translateY(2px);
+        transform: translateY(2px);
+        -webkit-animation: none;
+        animation: none;
+        outline: none;
+      }
+    }
+  }
 }

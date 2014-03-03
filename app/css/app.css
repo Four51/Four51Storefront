@@ -184,32 +184,8 @@ input.ng-invalid:invalid:focus, textarea.ng-invalid:invalid:focus, select.ng-inv
     right: 50px;
 }
 
-
-.form-signin {
-    max-width: 26em;
-    padding: 1.357em 2.071em 2.071em;
-    margin: 2em auto 5em;
-    background: rgba(22, 145, 190, .15);
-    -webkit-border-radius: 1em;
-    -moz-border-radius: 1em;
-    border-radius: 1em;
-}
-
-
 .form-signin .form-signin-heading, .form-signin .checkbox {
     margin-bottom: 0.714em;
-}
-
-
-
-.form-signin .btn-primary  {
-    letter-spacing: .04em;
-    padding: 15px;
-    border-radius: 3px 3px 3px 3px;
-    text-shadow: 0 -1px 0 #666;
-    -webkit-transition: all 150ms ease;
-    transition: all 150ms ease;
-
 }
 
 @-webkit-keyframes pulsate
@@ -226,33 +202,12 @@ input.ng-invalid:invalid:focus, textarea.ng-invalid:invalid:focus, select.ng-inv
     100% { color: #ddd; text-shadow: 0 -1px 0 #000; }
 }
 
-.form-signin .btn-primary:hover {
-    -webkit-animation: pulsate 1.2s linear infinite;
-    animation: pulsate 1.2s linear infinite;
-}
-
-.form-signin .btn-primary:active    {
-    text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff;
-    box-shadow: 0 1px 0 #666, 0 1px 0 #444, 0 1px 1px rgba(0,0,0,0.9);
-    -webkit-transform: translateY(2px);
-    transform: translateY(2px);
-    -webkit-animation: none;
-    animation: none;
-    outline: none;
-}
-
-.form-signin .btn-primary:focus {
-    outline: none;
-}
-
 .product-navigation li a {
     padding: .75em;
     display: block;
     text-align: center;
     text-decoration: none;
 }
-
-
 
 .product-navigation li  {
     float: left;
