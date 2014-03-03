@@ -5932,3 +5932,17 @@ button::-moz-focus-inner {
   border-radius: 0;
   margin-bottom: 0;
 }
+.order-cloud {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  background: url(../images/orderCloud.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -ms-background-size: cover;
+  background-size: cover;
+}

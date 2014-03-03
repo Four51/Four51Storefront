@@ -7,6 +7,7 @@ Template: Four51 Single Page App - Ken Buras (http://www.kenburas.com)
 ** If there is question on something the answer is most likely found in readMe.txtt
 /* ----------------------------------------------------------------------------------------------- */
 
+/* angular styles */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
     overflow: hidden !important;
@@ -41,6 +42,7 @@ input.ng-invalid:invalid:focus, textarea.ng-invalid:invalid:focus, select.ng-inv
 /* iOS placeholder needs help to disappear on focus */
 :focus::-webkit-input-placeholder{color:transparent;}
 
+/* fake table - this is going away */
 .view-table-row {
     border-bottom: 1px solid #d6d6d6;
     padding: 5px 0;
@@ -182,23 +184,11 @@ input.ng-invalid:invalid:focus, textarea.ng-invalid:invalid:focus, select.ng-inv
     right: 50px;
 }
 
-.order-cloud {
-    width:100%;
-    height:100%;
-    position:fixed;
-    left:0;top:0;
-    overflow:hidden;
-    background: url(images/orderCloud.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
 
 .form-signin {
     max-width: 26em;
     padding: 1.357em 2.071em 2.071em;
-    margin: 10% auto 5em;
+    margin: 2em auto 5em;
     background: rgba(22, 145, 190, .15);
     -webkit-border-radius: 1em;
     -moz-border-radius: 1em;
