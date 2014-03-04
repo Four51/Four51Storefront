@@ -5845,12 +5845,33 @@ input[type="file"] {
 button::-moz-focus-inner {
   border: 0;
 }
+.form-control {
+  margin-top: 0;
+}
 .form-control:focus {
   box-shadow: none;
 }
-.navbar-nav > li {
+.navbar-nav {
+  margin: 0 -5px;
+}
+.navbar-nav.pull-left > li {
   display: inline-block;
   float: left;
+}
+.navbar-nav.pull-right li a .fa-shopping-cart {
+  border-radius: 50%;
+  border: 1px solid #fff;
+  text-align: center;
+  padding: 10px;
+  margin-top: -5px;
+}
+.navbar-nav.pull-right li a .fa-caret-down {
+  position: absolute;
+  bottom: -20px;
+  right: 35%;
+  font-size: 32px;
+  color: #359FD5;
+  z-index: 5;
 }
 .navbar-fixed-bottom {
   -webkit-animation-duration: 1s;
@@ -5951,6 +5972,56 @@ button::-moz-focus-inner {
   border-radius: 0;
   margin-bottom: 0;
 }
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+  overflow: hidden !important;
+}
+.ng-invalid .help-block,
+.ng-invalid .control-label {
+  color: #f2dede;
+}
+input.ng-invalid,
+textarea.ng-invalid,
+select.ng-invalid,
+input.ng-invalid:invalid,
+textarea.ng-invalid:invalid,
+select.ng-invalid:invalid {
+  border-color: #d9534f;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  color: #ccc;
+}
+input.ng-invalid:focus,
+textarea.ng-invalid:focus,
+select.ng-invalid:focus,
+input.ng-invalid:invalid:focus,
+textarea.ng-invalid:invalid:focus,
+select.ng-invalid:invalid:focus,
+input.ng-invalid.ng-invalid:focus,
+textarea.ng-invalid.ng-invalid:focus,
+select.ng-invalid.ng-invalid:focus,
+input.ng-invalid:invalid.ng-invalid:focus,
+textarea.ng-invalid:invalid.ng-invalid:focus,
+select.ng-invalid:invalid.ng-invalid:focus,
+input.ng-invalid:invalid:focus,
+textarea.ng-invalid:invalid:focus,
+select.ng-invalid:invalid:focus,
+input.ng-invalid:invalid:invalid:focus,
+textarea.ng-invalid:invalid:invalid:focus,
+select.ng-invalid:invalid:invalid:focus {
+  border-color: #d9534f;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+  color: #ccc;
+}
+@-ms-viewport {
+  width: auto !important;
+}
 .order-cloud {
   width: 100%;
   height: 100%;
@@ -5979,6 +6050,7 @@ button::-moz-focus-inner {
 .order-cloud .form-signin .btn-primary {
   letter-spacing: .04em;
   padding: 15px;
+  margin-top: 15px;
   border-radius: 3px 3px 3px 3px;
   text-shadow: 0 -1px 0 #666666;
   -webkit-transition: all 150ms ease;
@@ -6046,6 +6118,11 @@ button::-moz-focus-inner {
 .cart-view .panel-body {
   border-top: 1px solid #d6d6d6;
 }
+.cart-view .panel-body img {
+  max-height: 95px;
+  max-width: 100%;
+  margin: 0 auto 15px;
+}
 .cart-view .panel-body .col-sm-9 {
   border-left: 1px solid #d6d6d6;
 }
@@ -6079,4 +6156,526 @@ button::-moz-focus-inner {
 }
 .cart-view .panel-body .row h2 {
   margin: 0;
+}
+.category-view .category-product li:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-width: 0 16px 16px 0;
+  border-style: solid;
+  border-color: #F7F6F6 #F7F6F6 #fff #fff;
+  background: #658E15;
+  display: block;
+  width: 0;
+}
+.category-view img {
+  margin: 0 auto;
+}
+.category-view .category-list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1em;
+  font-weight: 300;
+}
+.category-view .category-list ul li {
+  float: left;
+  text-align: center;
+  padding: 0;
+  text-transform: capitalize;
+  text-shadow: none;
+  font-weight: normal;
+  min-height: 300px;
+  background-color: #f9f9f9;
+  background-color: #fff;
+}
+.category-view .category-list ul li a {
+  padding: .75em;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+.category-view .category-list ul li a img {
+  max-width: 100%;
+  max-height: 200px;
+}
+.category-view .product-list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1em;
+  font-weight: 300;
+}
+.category-view .product-list ul li {
+  float: left;
+  text-align: center;
+  padding: 0;
+  text-transform: capitalize;
+  text-shadow: none;
+  font-weight: normal;
+  min-height: 300px;
+  background-color: #f9f9f9;
+  background-color: #fff;
+}
+.category-view .product-list ul li.well {
+  width: 100%;
+  min-height: 0;
+}
+.category-view .product-list ul li a {
+  padding: .75em;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+.category-view .product-list ul li a img {
+  max-height: 95px;
+  max-width: 100%;
+  margin: 0 auto 15px;
+}
+.category-view .fa.empty {
+  width: 100%;
+  height: 200px;
+  text-align: center;
+}
+.category-view .fa.empty i {
+  font-size: 25px;
+  display: block;
+  opacity: .25;
+  padding-top: 45px;
+}
+.app-loading-indicator-cell {
+  text-align: center;
+  position: absolute;
+  min-height: 60px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 999999;
+  padding: 10px 0;
+  background-color: #fff;
+  opacity: .75;
+}
+.app-loading-indicator-cell .app-loading-indicator {
+  display: inline-block;
+  float: none;
+  height: 20px;
+  width: 20px;
+  margin: -3px auto 0;
+  position: relative;
+  -webkit-animation: rockstep .8s infinite linear;
+  -moz-animation: rockstep .8s infinite linear;
+  -o-animation: rockstep .8s infinite linear;
+  animation: rockstep .8s infinite linear;
+  border-left: 3px solid rgba(0, 174, 239, 0.15);
+  border-right: 3px solid rgba(0, 174, 239, 0.15);
+  border-bottom: 3px solid rgba(0, 174, 239, 0.15);
+  border-top: 3px solid #00aeef;
+  border-radius: 100%;
+}
+.app-loading-indicator-cell .app-loading-indicator .app-loading-indicator-title {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 5%;
+}
+.app-loading-indicator-cell .app-loading-indicator .app-loading-indicator-title p {
+  margin: 0 auto;
+  width: 500px;
+  padding: 10px;
+}
+.view-inline-error {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  padding: 15px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  white-space: normal;
+  word-break: normal;
+  z-index: 1;
+  background-color: #F2DEDE;
+  border: 1px solid #EBCCD1;
+  color: #A94442;
+}
+.view-inline-error:before {
+  content: "";
+  width: 0;
+  height: 0;
+  top: -10px;
+  left: 10px;
+  border-bottom: 10px solid #F2DEDE;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  position: absolute;
+}
+.navbar-fixed-top.headroom {
+  transition: all 0.5s ease-in-out;
+}
+.navbar-fixed-top.headroom.headroom--unpinned {
+  top: -100px;
+}
+.navbar-fixed-top.headroom.headroom--pinned {
+  top: 0;
+}
+.navbar-fixed-bottom.headroom {
+  transition: all 0.5s ease-in-out;
+}
+.navbar-fixed-bottom.headroom.headroom--unpinned {
+  bottom: -100px;
+}
+.navbar-fixed-bottom.headroom.headroom--pinned {
+  bottom: 0;
+}
+.related-products-view .product-list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1em;
+  font-weight: 300;
+}
+.related-products-view .product-list ul li {
+  float: left;
+  text-align: center;
+  padding: 0;
+  text-transform: capitalize;
+  text-shadow: none;
+  font-weight: normal;
+  min-height: 300px;
+  background-color: #f9f9f9;
+  background-color: #fff;
+}
+.related-products-view .product-list ul li.well {
+  width: 100%;
+  min-height: 0;
+}
+.related-products-view .product-list ul li a {
+  padding: .75em;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+.related-products-view .product-list ul li a img {
+  max-height: 95px;
+  max-width: 100%;
+  margin: 0 auto 15px;
+}
+.product-view-default img {
+  margin: 15px auto;
+  max-height: 300px;
+  max-width: 100%;
+}
+.copyright-view {
+  width: 100%;
+  font-size: 11px;
+  padding-top: 50px;
+}
+.copyright-view p {
+  padding: 15px 20px;
+  margin: 0;
+  height: 115px;
+}
+.copyright-view p:first-of-type {
+  color: #1C638D;
+  background-color: #fff;
+}
+.copyright-view p:first-of-type .btn {
+  font-size: 11px;
+}
+.copyright-view p:last-of-type {
+  color: #fff;
+  background-color: #359FD5;
+}
+.copyright-view p:last-of-type .btn {
+  background-color: #1C638D;
+  color: #fff;
+}
+.copyright-view p:last-of-type .btn:hover {
+  background-color: #3d3d3d;
+}
+@-webkit-keyframes pulsate {
+  0% {
+    color: #ddd;
+    text-shadow: 0 -1px 0 #000000;
+  }
+  50% {
+    color: #fff;
+    text-shadow: 0 -1px 0 #444444, 0 0 5px #ffffdd, 0 0 8px #ffffff;
+  }
+  100% {
+    color: #ddd;
+    text-shadow: 0 -1px 0 #000000;
+  }
+}
+@keyframes pulsate {
+  0% {
+    color: #ddd;
+    text-shadow: 0 -1px 0 #000000;
+  }
+  50% {
+    color: #fff;
+    text-shadow: 0 -1px 0 #444444, 0 0 5px #ffffdd, 0 0 8px #ffffff;
+  }
+  100% {
+    color: #ddd;
+    text-shadow: 0 -1px 0 #000000;
+  }
+}
+@-webkit-keyframes view-enter {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+  }
+}
+@-moz-keyframes view-enter {
+  0% {
+    opacity: 0;
+    -moz-transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    -moz-transform: translateY(0);
+  }
+}
+@-o-keyframes view-enter {
+  0% {
+    opacity: 0;
+    -o-transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    -o-transform: translateY(0);
+  }
+}
+@keyframes view-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.ng-enter {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  -webkit-animation-name: view-enter;
+  -moz-animation-name: view-enter;
+  -o-animation-name: view-enter;
+  animation-name: view-enter;
+  -ms-animation-name: view-enter;
+}
+.ng-enter-active {
+  opacity: 1;
+}
+.ng-leave {
+  opacity: 0;
+}
+.ng-leave-active {
+  opacity: 0;
+}
+.category-view-aside-add {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  animation-delay: .5s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeInRight;
+  -moz-animation-name: fadeInRight;
+  -o-animation-name: fadeInRight;
+  animation-name: fadeInRight;
+}
+.category-view-aside-add-active {
+  opacity: 1;
+}
+.category-view-aside-remove {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeOut;
+  -moz-animation-name: fadeOut;
+  -o-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+.category-view-aside-remove-active {
+  opacity: 0;
+}
+@-moz-keyframes cat-body-move-right {
+  0% {
+    opacity: 0;
+    -moz-transform: translateX(-25%);
+  }
+  100% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+}
+@-o-keyframes cat-body-move-right {
+  0% {
+    opacity: 0;
+    -o-transform: translateX(-25%);
+  }
+  100% {
+    opacity: 1;
+    -o-transform: translateX(0);
+  }
+}
+@keyframes cat-body-move-right {
+  0% {
+    opacity: 0;
+    transform: translateX(-25%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.move-cat-body-add {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  aniamtion-delay: 1s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: cat-body-move-right;
+  -moz-animation-name: cat-body-move-right;
+  -o-animation-name: cat-body-move-right;
+  animation-name: cat-body-move-right;
+}
+.move-cat-body-add-active {
+  opacity: 1;
+}
+@-webkit-keyframes cat-body-move-left {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(25%);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+}
+@-moz-keyframes cat-body-move-left {
+  0% {
+    opacity: 1;
+    -moz-transform: translateX(25%);
+  }
+  100% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+}
+@-o-keyframes cat-body-move-left {
+  0% {
+    opacity: 1;
+    -o-transform: translateX(25%);
+  }
+  100% {
+    opacity: 1;
+    -o-transform: translateX(0);
+  }
+}
+@keyframes cat-body-move-left {
+  0% {
+    opacity: 1;
+    transform: translateX(25%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.move-cat-body-remove {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: cat-body-move-left;
+  -moz-animation-name: cat-body-move-left;
+  -o-animation-name: cat-body-move-left;
+  animation-name: cat-body-move-left;
+}
+.move-cat-body-remove-active {
+  opacity: 1;
+}
+@-webkit-keyframes rockstep {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+@-moz-keyframes rockstep {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(359deg);
+  }
+}
+@-o-keyframes rockstep {
+  from {
+    -o-transform: rotate(0deg);
+  }
+  to {
+    -o-transform: rotate(359deg);
+  }
+}
+@keyframes rockstep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+.check-out-view .panel-body.ng-hide-remove {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  -webkit-animation-name: fadeInDown;
+  -moz-animation-name: fadeInDown;
+  -o-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  -ms-animation-name: fadeInDown;
 }

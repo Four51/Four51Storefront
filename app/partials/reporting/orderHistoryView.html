@@ -4,14 +4,14 @@
         <nav class="nav nav-cat-search">
             <hr />
             <ul>
-                <li class="nav-header text-nav">{{order.Type}} Order<span ng-show="order.ExternalID"> ID: </span>{{order.ExternalID}}</li>
-                <li class="nav-header print pull-right" ng-click="onPrint()"><i class="fa fa-print" rel="tooltip" title="Print"></i></li>
+                <li>{{order.Type}} Order<span ng-show="order.ExternalID"> ID: </span>{{order.ExternalID}}</li>
+                <li class="pull-right" ng-click="onPrint()"><i class="fa fa-print" rel="tooltip" title="Print"></i></li>
             </ul>
             <hr />
         </nav>
         <div class="col-md-3 col-md-offset-1 col-md-push-8">
             <div class="row">
-                <div class="panel panel-primary order-history-view-header col-collapse">
+                <div class="panel panel-primary order-history-view-header">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             Order Details
@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-collapse col-md-8 col-md-pull-4 order-history-view-grid">
+        <div class="col-md-8 col-md-pull-4 order-history-view-grid">
             <div class="panel panel-default order-history-view-line-items">
                 <div class="panel-heading">
                     <h3 class="panel-title panel-primary">

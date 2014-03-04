@@ -3,8 +3,8 @@
         <nav class="nav nav-cat-search">
             <hr />
             <ul>
-                <li class="nav-header text-nav">Your Cart</li>
-                <li class="nav-header print pull-right" ng-click="onPrint()"><span><i class="fa fa-print" rel="tooltip" title="Print" ></i></span></li>
+                <li>Your Cart</li>
+                <li class="pull-right" ng-click="onPrint()"><span><i class="fa fa-print" rel="tooltip" title="Print" ></i></span></li>
             </ul>
             <hr />
         </nav>
@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="col-xs-6 col-sm-12 col-md-6 text-center" ng-show="item.Variant.SmallImageUrl || item.Product.SmallImageUrl">
                                     <figure>
-                                        <img class="view-thumbnail" ng-src="{{item.Product.SmallImageUrl || item.Variant.SmallImageUrl}}" />
+                                        <img ng-src="{{item.Product.SmallImageUrl || item.Variant.SmallImageUrl}}" />
                                     </figure>
                                 </div>
                             </div>

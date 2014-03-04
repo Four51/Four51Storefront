@@ -1,12 +1,10 @@
 /* x-lg */
 @media (min-width: 1200px) {
-    .view-phone-alert {display: none;}
 }
 
 
 /* x-md */
 @media (min-width: 980px) and (max-width: 1199px) {
-    .view-phone-alert {display: none;}
 }
 
 /* x-sm */
@@ -67,7 +65,6 @@
     .credit-card-cvn-input{
         padding-top:15px;
     }
-    .col-collapse-m {padding: 0;}
     .view-variant-list li {margin-bottom: 15px !important;}
     .copyright-view {float: none; margin: 15px auto;}
 
