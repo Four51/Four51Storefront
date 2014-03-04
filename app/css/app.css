@@ -755,10 +755,6 @@ li.selected {
     border: 1px solid #d6d6d6;
 }
 
-.check-out-view .address-input-view-shipping, .check-out-view .address-input-view-billing, .check-out-view .address-input-view-btn-delete {
-    display: none;
-}
-
 .address-input-view .row {margin: 0;}
 .address-input-view-shipping label, .address-input-view-billing label { position: static;display: block;}
 .address-input-view-shipping input, .address-input-view-billing input {}
@@ -873,10 +869,6 @@ li.print {
     cursor: pointer;
 }
 
-.cart-view-line-items, .check-out-view-types {
-    padding: 0;
-}
-
 .cart-view-line-items .panel-body, .product-view-default .panel{
     padding: 0;
 }
@@ -947,21 +939,6 @@ li.print {
     list-style-type: none;
 }
 
-.check-out-view-types .panel {
-    margin-bottom: 0;
-    border-bottom: none;
-}
-
-
-.check-out-view-types .panel-title {
-    cursor: pointer;
-}
-
-.check-out-view-order ul {
-    list-style-type: none;
-    margin: 0; padding: 0;
-}
-
 .check-out-view .ng-leave {
     display: none;
 }
@@ -976,15 +953,6 @@ li.print {
     padding: 0;
 }
 
-.panel-heading.yes i:first-of-type {
-    color:#19B698;
-    font-size: 22px;
-}
-
-.panel-heading.no i:first-of-type {
-    color:#F0AD4E;
-    font-size: 22px;
-}
 
 .category-view-aside ul {
     padding-left: 15px;
@@ -1018,16 +986,6 @@ li.print {
     margin-top: 0;
 }
 
-.check-out-view-input-group-id input[type="checkbox"] {
-    margin: 0;
-    padding: 0;
-
-}
-
-.check-out-view-input-group-id {
-    margin-bottom:15px;
-}
-
 .check-out-view-multiple-shipping {border-top: 1px solid #d6d6d6;padding-top: 15px;}
 .check-out-view-selected-shipping p,
 .check-out-view-selected-billing p{
@@ -1038,11 +996,6 @@ li.print {
     margin:0 -15px;
 }
 
-.panel-body .panel-footer {
-    margin: 0 -30px -15px;
-    border-bottom: 1px solid #d6d6d6;
-}
-
 .header .fa-caret-down {
     position: absolute;
     bottom: -20px;
@@ -1050,11 +1003,6 @@ li.print {
     font-size: 32px;
     color:#359FD5;
     z-index: 5;
-}
-
-/* dropdown issues on android and bootstrap */
-.dropdown-backdrop {
-    position: static;
 }
 
 .login input {
@@ -1201,10 +1149,6 @@ ul.view-variant-list{
 .navbar-fixed-bottom.headroom--pinned {
     bottom: 0;
 }
-
-.check-out-view-input-group-id .input-group-addon {font-size: 11px;padding-top: 0; padding-bottom: 0;border: none;}
-
-
 
 .category-product li:before {
     content: "";
