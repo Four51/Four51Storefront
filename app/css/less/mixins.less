@@ -18,7 +18,9 @@ hr {
   clear: both;
 }
 
-
+img {
+  display: block;
+}
 
 div {
   position: relative;
@@ -99,6 +101,7 @@ button::-moz-focus-inner {
   float: left;
 }
 
+// custom fade animate css
 .navbar-fixed-bottom {
   -webkit-animation-duration:   1s;
   -moz-animation-duration:      1s;
@@ -117,6 +120,7 @@ button::-moz-focus-inner {
   -ms-animation-name:           fadeInUp;
 }
 
+// custom animate css
 .navbar-fixed-top {
   -webkit-animation-duration:   1s;
   -moz-animation-duration:      1s;
@@ -136,6 +140,7 @@ button::-moz-focus-inner {
 }
 
 // Navs
+// smoother transitions on colors
 .navbar .nav a {
   -webkit-transition: all ease-in-out .2s;
   -moz-transition:    all ease-in-out .2s;
@@ -144,18 +149,21 @@ button::-moz-focus-inner {
   transition:         all ease-in-out .2s;
 }
 
+// custom default height
 .navbar-nav > li > a {
   height: 60px;
 }
 
 // Jumbotron
 .jumbotron {
+  // because we removed navbar margin bottom, bump jumbotron up and hide/show only on products::home page
   margin: -20px 0 0;
   display: none;
   &.active {
     display: block;
   }
 
+  // logo
   & img {
     max-height: 130px;
     float: left;
@@ -163,14 +171,17 @@ button::-moz-focus-inner {
 }
 
 // Panels
+// break strings to not overflow container
 .panel {
   word-wrap: break-word;
 }
 
+// custom padding and style a drop shadow effect on top border
 .panel-heading {
   margin-top: 2px;
   padding: 0;
 
+  // custom typography
   .panel-title {
     letter-spacing: 0.08em;
     font-size: ceil((@font-size-base * 1));
@@ -180,6 +191,7 @@ button::-moz-focus-inner {
   }
 }
 
+// custom padding and clear footer content
 .panel-footer {
   clear: both;
   overflow: hidden;
@@ -213,6 +225,7 @@ button::-moz-focus-inner {
   left: 0;
   top: 0;
   overflow: hidden;
+  // custom background image
   background: @fourfiveone-login-bg;
   -webkit-background-size:  cover;
   -moz-background-size:     cover;
@@ -230,6 +243,7 @@ button::-moz-focus-inner {
     -o-border-radius:       1em;
     -ms-border-radius:      1em;
     border-radius:          1em;
+    // custom pulse animation
     & .btn-primary  {
       letter-spacing: .04em;
       padding: 15px;
@@ -271,17 +285,14 @@ button::-moz-focus-inner {
 
 // Checkout
 .check-out-view {
-
+  // remove default styles
   ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
   }
 
-  .check-out-view-types {
-    padding: 0;
-  }
-
+  // custom panels for toggle sections
   .panel {
     margin-bottom: 0;
     border-bottom: none;
@@ -301,19 +312,20 @@ button::-moz-focus-inner {
     }
   }
 
-  // hide unnecessary html in new address partial from checkout
+  // hide unnecessary html in new address form from checkout include
   .address-input-view-shipping,
   .address-input-view-billing,
   .address-input-view-btn-delete {
     display: none;
   }
-
 }
 
 // Cart
 .cart-view {
-
-  .cart-view-line-items {
+  // remove default styles
+  ul {
+    list-style-type: none;
+    margin: 0;
     padding: 0;
   }
 

@@ -939,20 +939,11 @@ li.print {
     list-style-type: none;
 }
 
-.check-out-view .ng-leave {
-    display: none;
-}
-
 .product-view-default img, .specform-default img, .line-item-history-view img {
     margin: 15px auto;
     max-height: 300px;
     max-width: 100%;
 }
-
-.col-collapse {
-    padding: 0;
-}
-
 
 .category-view-aside ul {
     padding-left: 15px;
@@ -986,11 +977,7 @@ li.print {
     margin-top: 0;
 }
 
-.check-out-view-multiple-shipping {border-top: 1px solid #d6d6d6;padding-top: 15px;}
-.check-out-view-selected-shipping p,
-.check-out-view-selected-billing p{
-    margin:0;
-}
+
 
 .check-out-approvals {
     margin:0 -15px;
