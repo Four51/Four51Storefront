@@ -164,19 +164,19 @@ button::-moz-focus-inner {
   }
 
   // logo
-  & img {
+  img {
     max-height: 130px;
     float: left;
   }
 }
 
 // Panels
-// break strings to not overflow container
+// break long strings to not overflow container
 .panel {
   word-wrap: break-word;
 }
 
-// custom padding and style a drop shadow effect on top border
+// custom padding and style a drop shadow effect from top
 .panel-heading {
   margin-top: 2px;
   padding: 0;
@@ -190,6 +190,21 @@ button::-moz-focus-inner {
     text-transform: uppercase;
   }
 }
+.panel-body {
+  // custom quantity input
+  .quantity input {
+    height: 52px;
+    outline: 0 none;
+    padding: .5em 0;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    font-size: 24px;
+    color:#468847;
+    box-shadow: none;
+  }
+}
 
 // custom padding and clear footer content
 .panel-footer {
@@ -198,7 +213,7 @@ button::-moz-focus-inner {
   padding: 20px 15px;
 }
 
-// expand panel-footer to fill panel-body when inside partial view of another panel ie: checkout >  billing > new address
+// custom panel-footer to fill panel-body when inside partial view of another panel ie: checkout >  billing > new address
 .panel-body .panel-footer {
   margin: 0 -30px -15px;
   border-bottom: 1px solid #d6d6d6;
@@ -244,7 +259,7 @@ button::-moz-focus-inner {
     -ms-border-radius:      1em;
     border-radius:          1em;
     // custom pulse animation
-    & .btn-primary  {
+    .btn-primary  {
       letter-spacing: .04em;
       padding: 15px;
       border-radius: 3px 3px 3px 3px;
@@ -292,7 +307,7 @@ button::-moz-focus-inner {
     padding: 0;
   }
 
-  // custom panels for toggle sections
+  // custom panel styles
   .panel {
     margin-bottom: 0;
     border-bottom: none;
@@ -328,5 +343,50 @@ button::-moz-focus-inner {
     margin: 0;
     padding: 0;
   }
+
+  // line item top border
+  .panel-body {
+    border-top: 1px solid #d6d6d6;
+    // custom border to provide eye flow from price/img and line item info
+    .col-sm-9 {
+      border-left: 1px solid #d6d6d6;
+    }
+    // line item link
+    a {
+      display: block;
+      width: 100%;
+      border: 1px solid transparent;
+      padding: 5px;
+      &:hover {
+        text-decoration: none;
+        background-color:#F9F9F9;
+        border-radius: 4px;
+        border: 1px solid #d6d6d6;
+        -webkit-transition: all ease-in-out .5s;
+        -moz-transition: all ease-in-out .5s;
+        -ms-transition: all ease-in-out .5s;
+        -o-transition: all ease-in-out .5s;
+        transition: all ease-in-out .5s;
+      }
+      // line item link icon
+      i {
+        color:#ccc;
+      }
+    }
+    // remove line item button
+    .btn-danger {
+      border-radius: 0;
+      margin-bottom: 15px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+    }
+    // price
+    .row h2 {
+      margin: 0;
+    }
+  }
+
 
 }

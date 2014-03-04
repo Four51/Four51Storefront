@@ -5921,6 +5921,18 @@ button::-moz-focus-inner {
   text-align: center;
   text-transform: uppercase;
 }
+.panel-body .quantity input {
+  height: 52px;
+  outline: 0 none;
+  padding: .5em 0;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  font-size: 24px;
+  color: #468847;
+  box-shadow: none;
+}
 .panel-footer {
   clear: both;
   overflow: hidden;
@@ -6030,4 +6042,41 @@ button::-moz-focus-inner {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+.cart-view .panel-body {
+  border-top: 1px solid #d6d6d6;
+}
+.cart-view .panel-body .col-sm-9 {
+  border-left: 1px solid #d6d6d6;
+}
+.cart-view .panel-body a {
+  display: block;
+  width: 100%;
+  border: 1px solid transparent;
+  padding: 5px;
+}
+.cart-view .panel-body a:hover {
+  text-decoration: none;
+  background-color: #F9F9F9;
+  border-radius: 4px;
+  border: 1px solid #d6d6d6;
+  -webkit-transition: all ease-in-out 0.5s;
+  -moz-transition: all ease-in-out 0.5s;
+  -ms-transition: all ease-in-out 0.5s;
+  -o-transition: all ease-in-out 0.5s;
+  transition: all ease-in-out 0.5s;
+}
+.cart-view .panel-body a i {
+  color: #ccc;
+}
+.cart-view .panel-body .btn-danger {
+  border-radius: 0;
+  margin-bottom: 15px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+.cart-view .panel-body .row h2 {
+  margin: 0;
 }
