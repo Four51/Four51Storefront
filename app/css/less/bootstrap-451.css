@@ -269,7 +269,7 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
-  background-color: #f7f6f6;
+  background-color: #f0f0f0;
 }
 input,
 button,
@@ -314,7 +314,7 @@ img {
 .img-thumbnail {
   padding: 4px;
   line-height: 1.42857143;
-  background-color: #f7f6f6;
+  background-color: #f0f0f0;
   border: 1px solid #dddddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
@@ -1430,7 +1430,7 @@ th {
   border-top: 2px solid #dddddd;
 }
 .table .table {
-  background-color: #f7f6f6;
+  background-color: #f0f0f0;
 }
 .table-condensed > thead > tr > th,
 .table-condensed > tbody > tr > th,
@@ -3501,7 +3501,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
   color: #555555;
-  background-color: #f7f6f6;
+  background-color: #f0f0f0;
   border: 1px solid #dddddd;
   border-bottom-color: transparent;
   cursor: default;
@@ -3547,7 +3547,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .nav-tabs.nav-justified > .active > a,
   .nav-tabs.nav-justified > .active > a:hover,
   .nav-tabs.nav-justified > .active > a:focus {
-    border-bottom-color: #f7f6f6;
+    border-bottom-color: #f0f0f0;
   }
 }
 .nav-pills > li {
@@ -3615,7 +3615,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .nav-tabs-justified > .active > a,
   .nav-tabs-justified > .active > a:hover,
   .nav-tabs-justified > .active > a:focus {
-    border-bottom-color: #f7f6f6;
+    border-bottom-color: #f0f0f0;
   }
 }
 .tab-content > .tab-pane {
@@ -4394,7 +4394,7 @@ a.list-group-item.active > .badge,
   padding: 4px;
   margin-bottom: 20px;
   line-height: 1.42857143;
-  background-color: #f7f6f6;
+  background-color: #f0f0f0;
   border: 1px solid #dddddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
@@ -6015,6 +6015,7 @@ button::-moz-focus-inner {
   -ms-border-radius: 0;
   border-radius: 0;
   margin-bottom: 0;
+  min-height: 0;
 }
 [ng\:cloak],
 [ng-cloak],
@@ -6241,7 +6242,7 @@ select.ng-invalid:invalid:invalid:focus {
   right: 0;
   border-width: 0 16px 16px 0;
   border-style: solid;
-  border-color: #F7F6F6 #F7F6F6 #fff #fff;
+  border-color: #f0f0f0 #f0f0f0 #ffffff #ffffff;
   background: #658E15;
   display: block;
   width: 0;
@@ -6287,7 +6288,6 @@ select.ng-invalid:invalid:invalid:focus {
 }
 .category-view .product-list ul li.well {
   width: 100%;
-  min-height: 0;
 }
 .category-view .product-list ul li a {
   padding: .75em;
@@ -6514,7 +6514,7 @@ select.ng-invalid:invalid:invalid:focus {
   left: 45px;
 }
 .view-form-icon div {
-  margin: 25px 0 40px;
+  margin: 25px 0 0;
 }
 .view-form-icon input,
 .view-form-icon select,
@@ -6524,12 +6524,9 @@ select.ng-invalid:invalid:invalid:focus {
 }
 .view-form-icon i {
   color: #CCC;
-  left: 5px;
+  left: 10px;
   position: absolute;
   top: 10px;
-}
-.view-form-icon .row .view-form-icon i {
-  left: 10px;
 }
 .navbar-fixed-top.headroom {
   transition: all 0.5s ease-in-out;

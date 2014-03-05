@@ -301,6 +301,7 @@ button::-moz-focus-inner {
   -ms-border-radius:      0;
   border-radius:          0;
   margin-bottom:          0;
+  min-height:             0;
 }
 
 // 451 mixins :: components
@@ -548,7 +549,7 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
         background-color: rgb(249, 249, 249);
         background-color: rgba(249, 249, 249, 1);
         background-color:#fff;
-        // fold corner of categories
+        // fold right top corner of categories to differentiate from products
         &:before {
           content: "";
           position: absolute;
@@ -556,7 +557,7 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
           right: 0;
           border-width: 0 16px 16px 0;
           border-style: solid;
-          border-color: #F7F6F6 #F7F6F6 #fff #fff;
+          border-color: @body-bg @body-bg #fff #fff;
           background: #658E15;
           display: block; width: 0;
         }
@@ -606,10 +607,9 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
         background-color: rgb(249, 249, 249);
         background-color: rgba(249, 249, 249, 1);
         background-color:#fff;
-        // expand product-list well full width to differentiate from categories - yet need to come up with solution for mobile differentiation
+        // expand product-list well full width
         &.well {
           width: 100%;
-          min-height:0;
         }
         a {
           padding: .75em;
@@ -866,11 +866,11 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
   left: 45px;
 }
 
-// Form icons
+// Form field icons
 .view-form-icon {
   // Make room for labels
   div {
-    margin: 25px 0 40px;
+    margin: 25px 0 0;
   }
 
   // Make room for icons
@@ -884,14 +884,9 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
   // Icons
   i {
     color: #CCC;
-    left: 5px;
+    left: 10px;
     position: absolute;
     top: 10px;
-  }
-
-  // Icons inside a row
-  .row .view-form-icon i {
-    left: 10px;
   }
 }
 
