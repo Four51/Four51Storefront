@@ -1,8 +1,70 @@
-// Product view default
-.product-view-default {
+// Product default
+.product-default {
   img {
     margin: 15px auto;
     max-height: 300px;
     max-width: 100%;
+  }
+}
+
+.product-view-default-variant-box {
+  // make room for side color bar
+  padding-left: 1.5em;
+  p {
+    margin: 0;
+    padding: 10px 0;
+    font-size: 11px;
+  }
+  ul{
+    list-style-type: none;
+    padding: 1.5em 0;
+    li {margin: 2px 0;}
+  }
+  a{
+    position: relative;
+    display: block;
+    padding: .4em;
+    margin: 0;
+    background: #eee;
+    color: #444;
+    text-decoration: none;
+    transition: all .3s ease-out;
+    // color bar on left side :: arrow
+    &:before{
+      position: absolute;
+      left: -1.5em;
+      top:0;
+      content: '';
+      font-weight: bold;
+      background: #fa8072;
+      height: 100%;
+      width: 1em;
+      padding-top: 1em;
+      line-height: 2em;
+      text-align: center;
+      font-weight: bold;
+    }
+    &:after{
+      position: absolute;
+      content: '';
+      border: .5em solid transparent;
+      left: -.5em;
+      top: 50%;
+      margin-top: -.5em;
+      transition: all .3s ease-out;
+    }
+    &:hover{
+      background: #F9f9f9;
+    }
+    &:hover:after{
+      left: -.5em;
+      border-left-color: #fa8072;
+    }
+  }
+  // remove margin because no labels in variant list
+  .view-form-icon {
+    div {
+      margin-top: 0;
+    }
   }
 }

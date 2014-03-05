@@ -6664,49 +6664,6 @@ select.ng-invalid:invalid:invalid:focus {
   border-right: 10px solid transparent;
   position: absolute;
 }
-.related-products-view .product-list ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-size: 1em;
-  font-weight: 300;
-}
-.related-products-view .product-list ul li {
-  float: left;
-  text-align: center;
-  padding: 0;
-  text-transform: capitalize;
-  text-shadow: none;
-  font-weight: normal;
-  min-height: 300px;
-  background-color: #f9f9f9;
-  background-color: #fff;
-}
-.related-products-view .product-list ul li.well {
-  width: 100%;
-  min-height: 0;
-}
-.related-products-view .product-list ul li a {
-  padding: .75em;
-  display: block;
-  text-align: center;
-  text-decoration: none;
-}
-.related-products-view .product-list ul li a img {
-  max-height: 95px;
-  max-width: 100%;
-  margin: 0 auto 15px;
-}
-.related-products-view .fa.empty {
-  width: 100%;
-  text-align: center;
-}
-.related-products-view .fa.empty i {
-  font-size: 25px;
-  display: block;
-  opacity: .25;
-  padding-top: 45px;
-}
 .category-view img {
   margin: 0 auto;
 }
@@ -6760,14 +6717,16 @@ select.ng-invalid:invalid:invalid:focus {
   opacity: .25;
   padding-top: 45px;
 }
-.category-view .product-list ul {
+.category-view .product-list ul,
+.related-products-view .product-list ul {
   margin: 0;
   padding: 0;
   list-style: none;
   font-size: 1em;
   font-weight: 300;
 }
-.category-view .product-list ul li {
+.category-view .product-list ul li,
+.related-products-view .product-list ul li {
   float: left;
   text-align: center;
   padding: 0;
@@ -6777,25 +6736,30 @@ select.ng-invalid:invalid:invalid:focus {
   background-color: #f9f9f9;
   background-color: #fff;
 }
-.category-view .product-list ul li.well {
+.category-view .product-list ul li.well,
+.related-products-view .product-list ul li.well {
   width: 100%;
 }
-.category-view .product-list ul li a {
+.category-view .product-list ul li a,
+.related-products-view .product-list ul li a {
   padding: .75em;
   display: block;
   text-align: center;
   text-decoration: none;
 }
-.category-view .product-list ul li a img {
+.category-view .product-list ul li a img,
+.related-products-view .product-list ul li a img {
   max-height: 95px;
   max-width: 100%;
   margin: 0 auto 15px;
 }
-.category-view .product-list .fa.empty {
+.category-view .product-list .fa.empty,
+.related-products-view .product-list .fa.empty {
   width: 100%;
   text-align: center;
 }
-.category-view .product-list .fa.empty i {
+.category-view .product-list .fa.empty i,
+.related-products-view .product-list .fa.empty i {
   font-size: 25px;
   display: block;
   opacity: .25;
@@ -6814,10 +6778,67 @@ select.ng-invalid:invalid:invalid:focus {
   padding: 10px;
   font-size: 1.5em;
 }
-.product-view-default img {
+.product-default img {
   margin: 15px auto;
   max-height: 300px;
   max-width: 100%;
+}
+.product-view-default-variant-box {
+  padding-left: 1.5em;
+}
+.product-view-default-variant-box p {
+  margin: 0;
+  padding: 10px 0;
+  font-size: 11px;
+}
+.product-view-default-variant-box ul {
+  list-style-type: none;
+  padding: 1.5em 0;
+}
+.product-view-default-variant-box ul li {
+  margin: 2px 0;
+}
+.product-view-default-variant-box a {
+  position: relative;
+  display: block;
+  padding: .4em;
+  margin: 0;
+  background: #eee;
+  color: #444;
+  text-decoration: none;
+  transition: all 0.3s ease-out;
+}
+.product-view-default-variant-box a:before {
+  position: absolute;
+  left: -1.5em;
+  top: 0;
+  content: '';
+  background: #fa8072;
+  height: 100%;
+  width: 1em;
+  padding-top: 1em;
+  line-height: 2em;
+  text-align: center;
+  font-weight: bold;
+}
+.product-view-default-variant-box a:after {
+  position: absolute;
+  content: '';
+  border: .5em solid transparent;
+  left: -0.5em;
+  top: 50%;
+  margin-top: -0.5em;
+  transition: all 0.3s ease-out;
+}
+.product-view-default-variant-box a:hover {
+  background: #F9f9f9;
+}
+.product-view-default-variant-box a:hover:after {
+  left: -0.5em;
+  border-left-color: #fa8072;
+}
+.product-view-default-variant-box .view-form-icon div {
+  margin-top: 0;
 }
 .cart-view ul {
   list-style-type: none;

@@ -14,10 +14,10 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
     if ( $(window).width() < 960 ) {
         $(document)
         .on('focus', ':input:not("button")', function(e) {
-            $('.view-footer.navbar-fixed-bottom, .headroom.navbar-fixed-top').addClass('ng-hide');
+            $('.navbar-fixed-bottom, .headroom.navbar-fixed-top').addClass('ng-hide');
         })
         .on('blur', ':input', function(e) {
-            $('.view-footer.navbar-fixed-bottom, .headroom.navbar-fixed-top').removeClass('ng-hide');
+            $('.navbar-fixed-bottom, .headroom.navbar-fixed-top').removeClass('ng-hide');
         });
     }
 

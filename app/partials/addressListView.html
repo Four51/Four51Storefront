@@ -70,7 +70,7 @@
             <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" type="button" class="btn btn-primary pull-right" ng-click="newAddress($event)">New Address</button>
         </div>
 
-        <div class="view-footer navbar-fixed-bottom">
+        <div class="navbar-fixed-bottom">
             <loadingindicator ng-show="displayLoadingIndicator" />
             <div class="view-action-message alert-warning" ng-show="(addresses | filter:searchTerm | filter:{IsCustEditable:true}).length == 0">
                 Your search resulted in no records. Please refine your search.

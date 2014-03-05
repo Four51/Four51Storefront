@@ -1,4 +1,4 @@
-<section id="451_area_prod_desc" class="container product-view-default">
+<section id="451_area_prod_desc" class="container product-default">
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch product information" />
     <productnav product="LineItem.Product" variant="LineItem.Variant" />
 
@@ -79,7 +79,7 @@
                              </div>
                          </div>
                         <div class="product-view-default-variant-box">
-                            <ul class="view-variant-list">
+                            <ul>
                                 <li ng-repeat="v in LineItem.Product.Variants | filter:queryVariants" class="col-xs-12">
                                     <div class="row" style="margin-right: 0;">
                                         <a class="col-sm-8" ng-class="{'col-sm-8': allowAddFromVariantList, 'col-xs-12': !allowAddFromVariantList }" href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>
@@ -102,6 +102,7 @@
                                     </div>
                                 </li>
                             </ul>
+                            <hr />
                         </div>
                     </div>
                     <div id="451_list_vspec" ng-show="allowAddToOrder">
@@ -141,7 +142,7 @@
         <relatedproducts ng-if="LineItem.Product.RelatedProductsGroupID" relatedgroupid="LineItem.Product.RelatedProductsGroupID" />
     </div>
 
-    <div class="view-footer navbar-fixed-bottom">
+    <div class="navbar-fixed-bottom">
         <loadingindicator ng-show="displayLoadingIndicator" />
        <div class="view-error-list" ng-show="showAddToCartErrors">
 		   <ol ng-repeat="e in lineItemErrors">
