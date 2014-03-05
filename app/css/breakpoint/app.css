@@ -59,8 +59,6 @@
     .ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {}
     .branding-view {text-align: center;}
     .branding-view-logo {float: none; margin: 0 auto 10px; max-height: 75px; }
-    .shortproduct-view:hover .shortproduct-name {display: block;}
-    .shortproduct-view:hover .shortproduct-toggle {display: none;}
     .caption {margin: 5px;}
     .credit-card-cvn-input{
         padding-top:15px;

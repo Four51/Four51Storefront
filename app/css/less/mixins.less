@@ -97,33 +97,22 @@ button::-moz-focus-inner {
   }
 }
 
-// dropdown select placeholder
-.view-form-select:before {
-  content: "Select";
-  position: absolute;
-  left: 25px;
-  top: 9px;
-  color:#999;
-  pointer-events:none;
-}
-
-.col-sm-4.view-form-select:before {
-  left: 45px;
-}
-
 // Navbar
 .navbar-nav {
   margin: 0 -5px;
   &.pull-left {
-    // cowboy up the icons on phone
-  > li {
+  // cowboy up the icons on phone
+  li {
     display: inline-block;
     float: left;
       a {
-        padding: 20px;
         span {
           margin-left: 5px;
         }
+      }
+    // dropdown children on desktop
+    ul li {
+      width: 100%;
       }
     }
   }
@@ -276,6 +265,7 @@ button::-moz-focus-inner {
     text-transform: uppercase;
   }
 }
+
 .panel-body {
   // product quantity box
   .quantity input {
@@ -355,6 +345,11 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
 // ie needs this help to keep scroll bar from overlapping content
 @-ms-viewport{
   width: auto !important;
+}
+
+/* iOS placeholder needs help to disappear on focus */
+:focus::-webkit-input-placeholder{
+  color:transparent;
 }
 
 // Login
@@ -574,6 +569,19 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
         }
       }
     }
+
+    // no image available
+    .fa.empty {
+      width: 100%;
+      height: 200px;
+      text-align: center;
+      i {
+        font-size: 25px;
+        display: block;
+        opacity: .25;
+        padding-top: 45px;
+      }
+    }
   }
 
   .product-list {
@@ -613,18 +621,17 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
         }
       }
     }
-  }
 
-  // no image available
-  .fa.empty {
-    width: 100%;
-    height: 200px;
-    text-align: center;
-    i {
-      font-size: 25px;
-      display: block;
-      opacity: .25;
-      padding-top: 45px;
+    // no image available
+    .fa.empty {
+      width: 100%;
+      text-align: center;
+      i {
+        font-size: 25px;
+        display: block;
+        opacity: .25;
+        padding-top: 45px;
+      }
     }
   }
 }
@@ -819,6 +826,7 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
   background-color: #F2DEDE;
   border: 1px solid #EBCCD1;
   color: #A94442;
+  // arrow
   &:before {
     content:"";
     width:0;
@@ -829,6 +837,20 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
     border-left:10px solid transparent;
     border-right:10px solid transparent;position: absolute;
   }
+}
+
+// Form dropdown select placeholder
+.view-form-select:before {
+  content: "Select";
+  position: absolute;
+  left: 25px;
+  top: 9px;
+  color:#999;
+  pointer-events:none;
+}
+
+.col-sm-4.view-form-select:before {
+  left: 45px;
 }
 
 // Form icons
@@ -883,7 +905,6 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
 
 // Related products
 .related-products-view {
-  // style same as category product-list
   .product-list {
     ul {
       margin: 0;
@@ -902,7 +923,6 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
         background-color: rgb(249, 249, 249);
         background-color: rgba(249, 249, 249, 1);
         background-color:#fff;
-        // expand product-list well full width to differentiate from categories - yet need to come up with solution for mobile differentiation
         &.well {
           width: 100%;
           min-height:0;
@@ -922,6 +942,17 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
       }
     }
   }
+  // no image available
+  .fa.empty {
+    width: 100%;
+    text-align: center;
+    i {
+      font-size: 25px;
+      display: block;
+      opacity: .25;
+      padding-top: 45px;
+    }
+  }
 }
 
 // Product view default
@@ -931,6 +962,21 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
     max-height: 300px;
     max-width: 100%;
   }
+}
+
+// Short product info :: example swipe found in shortProductView.html
+.shortproduct-info {
+  background-color: rgba(0,0,0,.85);
+  color: #fff;
+  border-top: none;
+  position: absolute;
+  right: 15px;
+  left: 15px;
+  top:0;
+  height:100%;
+  z-index: 1;
+  padding: 10px;
+  font-size: 1.5em;
 }
 
 
