@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="css/jquery-ui.min.css"/>
     <link rel="stylesheet" href="css/animate.css"/>
     <link rel="stylesheet" href="css/app.css"/>
-    <link rel="stylesheet" href="css/print.css" media="print"/>
 </head>
 <body ng-cloak ng-class="ng-cloak">
 <section ng-controller="Four51Ctrl">
@@ -26,7 +25,7 @@
         <section class="hidden-print">
             <branding />
         </section>
-        <section>
+        <section class="container">
             <ng-view autoscroll />
         </section>
         <copyright ng-if="!user.Permissions.contains('UnBrandedSite')" />

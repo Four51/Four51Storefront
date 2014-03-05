@@ -6157,7 +6157,7 @@ button::-moz-focus-inner {
   box-shadow: none;
 }
 .panel .panel-body .panel-footer {
-  margin: 0 -10px -15px;
+  margin: 0 -20px -15px;
 }
 .panel .panel-footer {
   clear: both;
@@ -7113,4 +7113,13 @@ select.ng-invalid:invalid:invalid:focus {
 }
 .copyright-view p:last-of-type .btn:hover {
   background-color: #3d3d3d;
+}
+.branding-print-view-logo {
+  max-height: 50px;
+  display: inline;
+}
+.cart-print-view-header {
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #dddddd;
 }
