@@ -9,7 +9,7 @@
         <ordershipping />
         <orderbilling />
         <orderapprovals />
-        <div class="view-footer navbar-fixed-bottom">
+        <div class="navbar-fixed-bottom">
             <div class="view-response-message alert-success" alert-show="actionMessage">
                 <p>{{actionMessage}}</p>
             </div>
@@ -20,13 +20,13 @@
                 <p>{{couponError}}</p>
             </div>
             <div class="view-error-message" ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length) > 0">
-                <ul class="row">
-                    <li class="col-sm-1 alert-warning">
+                <ul class="alert-warning">
+                    <li>
                         <i class="fa fa-exclamation-circle text-danger"></i>
                         <span class="badge" ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length) > 1">{{cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length}}</span>
                     </li>
-                    <li class="col-sm-10 alert-warning" style="margin: 0; padding: 0">
-                        <ul ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
+                    <li>
+                        <ul class="col-xs-12" ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
                             <li ng-if="cart_order.orderid.$invalid">Enter an order id</li>
                             <li ng-if="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</li>
                             <li ng-if="cart_shipping.shipMethod.$invalid">Please choose a shipping method</li>
@@ -40,7 +40,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="col-sm-1">
+                    <li>
                         <a href ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length) > 1">
                             <i class="fa fa-caret-up" ng-click="errorSection = 'open'" ng-hide="errorSection == 'open'"></i>
                             <i class="fa fa-caret-down" ng-click="errorSection = ''" ng-show="errorSection == 'open'"></i>
@@ -48,13 +48,13 @@
                     </li>
                 </ul>
             </div>
-            <ul class="view-footer-buttons">
-                <li style="width: 25%;">
+            <ul>
+                <li>
                     <button class="btn btn-danger" ng-click="cancelOrder()">
                         Cancel Order
                     </button>
                 </li>
-                <li style="width: 25%;">
+                <li>
                     <button class="btn btn-primary"  ng-click="saveChanges()">
                         <loadingindicator ng-show="displayLoadingIndicator" />
                         Save Order

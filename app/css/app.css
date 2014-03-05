@@ -121,51 +121,10 @@
     right: 50px;
 }
 
-
-
-.nav-cat-search ul  {
-    list-style-type: none;
-    clear: both;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-cat-search ul li {
-    display: inline;
-    float: left;
-    padding: 0;
-}
-
-
-
-.nav-cat-search span i {
-    font-size: 18px;
-    padding: 15px 20px;
-    cursor: pointer;
-}
-
-.ui-show {
-    opacity: 1;
-    transition: all 0.5s ease;
-}
-.ui-hide {
-    opacity: 0;
-    transition: all 0.5s ease;
-}
-
-
-
-li.selected {
-    border: 1px solid #fff;
-}
-
 .user-view .list-group label {
     display: block;
     margin: 0;
 }
-
-
 
 .crumbs ul {
     list-style: none;
@@ -242,21 +201,6 @@ li.selected {
     line-height: 1;
 
     text-align: center;}
-.view-form-select:before {
-    content: "Select";
-    position: absolute;
-    left: 25px;
-    top: 9px;
-    color:#999;
-    pointer-events:none;
-}
-
-.col-sm-4.view-form-select:before {left: 45px;}
-
-/* ----------------------------------------------------------------------------------------------- */
-/* Animations */
-/* ----------------------------------------------------------------------------------------------- */
-
 
 
 
@@ -307,8 +251,7 @@ li.selected {
     opacity: 1;
 }
 
-.view-error-message {background-color:#FBF8E5;}
-.view-error-message li {padding: 15px; border-top: 1px solid #fff;opacity: .9;display: block;}
+
 
 
 .view-corner-button {
@@ -320,50 +263,6 @@ li.selected {
     display: block;
     z-index: 2;
     padding: 15px 20px;
-}
-
-.view-footer{
-    text-align: center;
-    z-index: 999999999;
-}
-
-
-
-.view-footer  ul, .view-footer  ol {
-    list-style-type:none;
-    padding: 0;
-    margin: 0;
-    clear: both;
-    overflow: hidden;
-}
-
-.view-footer  ul.view-footer-buttons li {
-    width: 50%;
-    display: inline-block;
-    float: left;
-}
-
-.view-footer  li .btn {
-    width: 100%;
-    border: none;
-    border-radius: 0;
-    padding: 20px 0;
-    text-transform: lowercase;
-    font-size: 14px;
-}
-
-.view-footer li div {
-    height: 100%;
-
-}
-
-.view-footer li:last-child .btn  {
-    text-transform: uppercase;
-
-}
-
-.view-footer  li .btn-warning[disabled] {
-    opacity: 1;
 }
 
 .view-form-icon > div {
@@ -503,7 +402,4 @@ ul.view-variant-list{
 
 
 .view-order-shipping-edit-name input {padding: 0 5px;}
-.view-error-message li a {text-decoration: none;}
-.view-error-message ul li ul.two li {display: none;}
-.view-error-message ul li ul li:first-child {display: block;}
-.view-error-message ul li a i {display: block; height: 100%; width: 100%;}
+

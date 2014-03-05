@@ -97,20 +97,41 @@ button::-moz-focus-inner {
   }
 }
 
+// dropdown select placeholder
+.view-form-select:before {
+  content: "Select";
+  position: absolute;
+  left: 25px;
+  top: 9px;
+  color:#999;
+  pointer-events:none;
+}
+
+.col-sm-4.view-form-select:before {
+  left: 45px;
+}
+
 // Navbar
 .navbar-nav {
   margin: 0 -5px;
   &.pull-left {
-    // keep icons inline on phone
+    // cowboy up the icons on phone
   > li {
     display: inline-block;
     float: left;
+      a {
+        padding: 20px;
+        span {
+          margin-left: 5px;
+        }
+      }
     }
   }
 
   &.pull-right {
     // cart icon
     li a {
+      padding: 20px;
       .fa-shopping-cart {
         border-radius: 50%;
         border: 1px solid #fff;
@@ -131,24 +152,6 @@ button::-moz-focus-inner {
   }
 }
 
-.navbar-fixed-bottom {
-  -webkit-animation-duration:   1s;
-  -moz-animation-duration:      1s;
-  -o-animation-duration:        1s;
-  animation-duration:           1s;
-  -ms-animation-duration:       1s;
-  -webkit-animation-fill-mode:  both;
-  -moz-animation-fill-mode:     both;
-  -o-animation-fill-mode:       both;
-  animation-fill-mode:          both;
-  -ms-animation-fill-mode:      both;
-  -webkit-animation-name:       fadeInUp;
-  -moz-animation-name:          fadeInUp;
-  -o-animation-name:            fadeInUp;
-  animation-name:               fadeInUp;
-  -ms-animation-name:           fadeInUp;
-}
-
 .navbar-fixed-top {
   -webkit-animation-duration:   1s;
   -moz-animation-duration:      1s;
@@ -167,7 +170,54 @@ button::-moz-focus-inner {
   -ms-animation-name:           fadeInDown;
 }
 
+.navbar-fixed-bottom {
+  -webkit-animation-duration:   1s;
+  -moz-animation-duration:      1s;
+  -o-animation-duration:        1s;
+  animation-duration:           1s;
+  -ms-animation-duration:       1s;
+  -webkit-animation-fill-mode:  both;
+  -moz-animation-fill-mode:     both;
+  -o-animation-fill-mode:       both;
+  animation-fill-mode:          both;
+  -ms-animation-fill-mode:      both;
+  -webkit-animation-name:       fadeInUp;
+  -moz-animation-name:          fadeInUp;
+  -o-animation-name:            fadeInUp;
+  animation-name:               fadeInUp;
+  -ms-animation-name:           fadeInUp;
+}
+
 // Navs
+.nav {
+  // content nav
+  ul  {
+    list-style-type: none;
+    clear: both;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    li {
+      display: inline;
+      float: left;
+      padding: 0;
+      span.text-primary {
+        display: inline-block;
+        margin-top: 15px;
+        font-size: 1em;
+        font-weight: bold;
+      }
+
+      // content nav icons
+      span i {
+        font-size: 18px;
+        padding: 15px 20px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
 .navbar .nav a {
   -webkit-transition: all ease-in-out .2s;
   -moz-transition:    all ease-in-out .2s;
@@ -213,6 +263,7 @@ button::-moz-focus-inner {
   }
 }
 .panel-body {
+  // product quantity box
   .quantity input {
     height: 52px;
     outline: 0 none;
@@ -249,12 +300,22 @@ button::-moz-focus-inner {
   margin-bottom:          0;
 }
 
-// 451 mixins
+// 451 mixins :: components
 
 // Angular
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
   overflow: hidden !important;
+}
+
+.ui-show {
+  opacity: 1;
+  transition: all 0.5s ease;
+}
+
+.ui-hide {
+  opacity: 0;
+  transition: all 0.5s ease;
 }
 
 // invlaid form color
@@ -313,6 +374,7 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
     -o-border-radius:       1em;
     -ms-border-radius:      1em;
     border-radius:          1em;
+
     // custom pulse animation
     .btn-primary  {
       letter-spacing: .04em;
@@ -409,10 +471,12 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
       max-width: 100%;
       margin: 0 auto 15px;
     }
+
     // custom border to provide eye flow from price/img and line item info
     .col-sm-9 {
       border-left: 1px solid #d6d6d6;
     }
+
     // line item link
     a {
       display: block;
@@ -435,6 +499,7 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
         color:#ccc;
       }
     }
+
     // remove line item button
     .btn-danger {
       border-radius: 0;
@@ -449,25 +514,10 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
       margin: 0;
     }
   }
-
-
 }
 
 // Category
 .category-view {
-  // fold corner of categories
-  .category-product li:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-width: 0 16px 16px 0;
-    border-style: solid;
-    border-color: #F7F6F6 #F7F6F6 #fff #fff;
-    background: #658E15;
-    display: block; width: 0;
-  }
-
   img {
     margin: 0 auto
   }
@@ -490,6 +540,18 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
         background-color: rgb(249, 249, 249);
         background-color: rgba(249, 249, 249, 1);
         background-color:#fff;
+        // fold corner of categories
+        &:before {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          border-width: 0 16px 16px 0;
+          border-style: solid;
+          border-color: #F7F6F6 #F7F6F6 #fff #fff;
+          background: #658E15;
+          display: block; width: 0;
+        }
         a {
           padding: .75em;
           display: block;
@@ -544,8 +606,6 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
     }
   }
 
-
-
   // no image available
   .fa.empty {
     width: 100%;
@@ -556,6 +616,101 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
       display: block;
       opacity: .25;
       padding-top: 45px;
+    }
+  }
+}
+
+// Navbar-fixed-bottom messaging + buttons
+.navbar-fixed-bottom {
+  text-align: center;
+  z-index: 999999999;
+  ul {
+    list-style-type:none;
+    padding: 0;
+    margin: 0;
+    clear: both;
+    overflow: hidden;
+    li {
+      display: inline-block;
+      float: left;
+      &:nth-of-type(1) {
+        width: 25%;
+        .btn {
+          font-size: @font-size-small;
+        }
+      }
+      &:nth-of-type(2) {
+        width: 25%;
+        .btn {
+          font-size: @font-size-small;
+        }
+      }
+      &:last-child {
+        width: 50%;
+        .btn  {
+          text-transform: uppercase;
+        }
+      }
+      .btn {
+        width: 100%;
+        height: @navbar-height;
+        border: none;
+        border-radius: 0;
+        padding: 20px 0;
+        text-transform: lowercase;
+        font-size: 14px;
+      }
+      .btn-warning[disabled] {
+        opacity: 1;
+      }
+    }
+  }
+  // Notification messaging
+  .view-response-message {
+
+  }
+  // Error messaging
+  .view-error-message {
+    ul.alert-warning {
+      border-top: 1px solid #fff;
+      opacity: .9;
+      margin: 0;
+      padding: 0;
+      li {
+        padding: 15px;
+        display: block;
+        &:nth-of-type(1) {
+          width: 16.6667%;
+        }
+        &:nth-of-type(2) {
+          width: 66.6667%;
+          ul li {
+            text-align: center;
+            width: 100%;
+            padding: 0;
+          }
+        }
+        &:nth-of-type(3) {
+          width: 16.6667%;
+          a {
+            display: block;
+            i {
+              width: 100%;
+              height: 100%;
+            }
+
+          }
+        }
+        ul {
+          &.two li {
+            display: none;
+          }
+          // always display first error
+          li:first-child {
+            display: block;
+          }
+        }
+      }
     }
   }
 }
@@ -702,6 +857,8 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
     max-width: 100%;
   }
 }
+
+
 
 // copyright
 .copyright-view {

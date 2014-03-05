@@ -1,11 +1,11 @@
 <div class="short-cart-view">
     <div ng-if="currentOrder" class="CartDetail">
         <form name="cart">
-            <div class="cart-view-line-items">
+            <div>
                 <h4>
                     Review {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
                 </h4>
-                <div ng-repeat="Item in currentOrder.LineItems"  class="cart-view-line-items-repeater">
+                <div ng-repeat="Item in currentOrder.LineItems">
                     <h5 class="col-md-2 col-xs-12">
                         {{Item.ProductIDText}}
                     </h5>
