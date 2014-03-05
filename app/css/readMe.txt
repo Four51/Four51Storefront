@@ -14,14 +14,11 @@
                                         - apply custom breakpoint styles in ~/breakpoint custom css files.
     Bootstrap                   -       Twitter Bootstrap 3
                                             http://getbootstrap.com/
-    Themes                      -       Bootstrap driven color themes via colourlovers API and paintstrap
-                                        - bootstrap-451.css
+    Themes                      -
                                         - bootstrap-black-white.css
                                         - bootstrap-blue.css
                                         - bootstrap-green.css
                                         - bootstrap-red.css
-                                            http://paintstrap.com/
-                                            http://www.colourlovers.com/
     Font                        -       Google web font ~ Driod Sans
                                             Droid Sans was optimized for user interfaces and to be comfortable for reading on a mobile handset in menus, web browser and other screen text.
                                             http://www.google.com/fonts/specimen/Droid+Sans
