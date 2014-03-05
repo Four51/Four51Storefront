@@ -21,7 +21,7 @@ var C_debug = false;
 
 describe('Category login', function() {
     it("should allow a user to login", function() {
-        browser().navigateTo('../../app/index.html');
+        browser().navigateTo('../../app/');
     });
 
     e2eLogin("coreproduser","fails345", C_debug);
@@ -39,6 +39,8 @@ describe('Category side link navigation', function() {
       browser().navigateTo('#/catalog');
       if(C_debug){pause();}
 
+      e2eClickOpenCategory();
+
       //check existence of categories, datawise
       expect(repeater('.451_cat_item').count()).toBeGreaterThan(0);
 
@@ -46,10 +48,10 @@ describe('Category side link navigation', function() {
       expect(element('.451_cat_item:first a').text()).toBeDefined(); //do we have a displayed top level category?
 
       //check the text of the A tag to make sure it matches the top level category name
-      expect(element('.451_cat_item:first a').text()).toEqualFuture(binding('category.Name'));
+      expect(element('.451_cat_item:first a').text()).toEqualFuture(binding('node.Name'));
 
       //check the href of the A tag to make sure it matches the top level category InteropID
-      expect(element('.451_cat_item:first a').attr('href')).toContainFuture(scope('.451_cat_item:first a', 'category.InteropID'));
+      expect(element('.451_cat_item:first a').attr('href')).toContainFuture(scope('.451_cat_item:first a', 'node.InteropID'));
 
       //okay, there is at least one category, continue
 
@@ -62,15 +64,18 @@ describe('Category side link navigation', function() {
         browser().navigateTo('#/catalog');
         if(C_debug){pause();}
 
+
+        e2eClickOpenCategory();
+
         //check existence of categories, datawise
         expect(repeater('.451_cat_item').count()).toBeGreaterThan(0); //has top level nav
 
         expect(repeater('.451_cat_item ul li a').count()).toBeGreaterThan(0); //has subcategory items, not necessarily hierarchically correct
 
-        expect(element('.451_cat_item ul li:first a:first').text()).toEqualFuture(scope('.451_cat_item ul li', 'category.Name'));
+        expect(element('.451_cat_item ul li:first a:first').text()).toEqualFuture(scope('.451_cat_item ul li', 'node.Name'));
 
         //check the href of the A tag to make sure it matches the top level category InteropID
-        expect(element('.451_cat_item ul li:first a:first').attr('href')).toContainFuture(scope('.451_cat_item ul li a', 'category.InteropID'));
+        expect(element('.451_cat_item ul li:first a:first').attr('href')).toContainFuture(scope('.451_cat_item ul li a', 'node.InteropID'));
 
         //let's see what this has in it:
         if(C_debug){
@@ -78,9 +83,9 @@ describe('Category side link navigation', function() {
             console.dir(element('.451_cat_item ul li:first a:first').text()); //should be the first subcategory link
             console.dir(repeater('.451_cat_item').column(0)); //this includes all categories, top level and sub and sub-sub
 
-            console.dir(repeater('.451_cat_item ul li').column('category.Name')); //this is an array of subcategories, although it also includes sub-subcategories
+            console.dir(repeater('.451_cat_item ul li').column('node.Name')); //this is an array of subcategories, although it also includes sub-subcategories
 
-            console.dir(scope('.451_cat_item ul li', 'category.InteropID')); //first subcategory's interopid
+            console.dir(scope('.451_cat_item ul li', 'node.InteropID')); //first subcategory's interopid
         };
 
         if(C_debug){pause();}
@@ -89,13 +94,13 @@ describe('Category side link navigation', function() {
 
     it('should display the top level category we click', function() {
 
-        element('.451_cat_item:first a').click();       //clicks first category nav link
-        //now check that the displayed category matches the nav item we clicked
-        expect(binding('currentCategory.Name')).toEqualFuture(scope('.451_cat_item:first a', 'category.Name'));
 
-        //for a given link, find the interopID of the category
-        //the URL hash fragment should have the interopID in it
-        expect(browser().window().hash()).toContainFuture(scope('.451_cat_item:first a', 'category.InteropID'));
+         element('.451_cat_item:first a').click();       //clicks first category nav link
+
+        e2eClickOpenCategory();
+
+        //now check that the displayed category matches the nav item we clicked
+        expect(binding('currentCategory.Name')).toEqualFuture(scope('.451_cat_item:first a', 'node.Name'));
 
       if(C_debug){pause();}
 
@@ -110,19 +115,17 @@ describe('Category side link navigation', function() {
             done();
         });
 
-        //for a given link, find the interopID of the SUBcategory
-        //click that link
-        //check that the URL fragment matches the interopID
-
         if(C_debug){pause();}
 
     });
 
     it('should display the 2nd top level category we clicked', function(){
 
-        element('.451_cat_item:eq(2) a').query(function (selectedElements, done) {
+        e2eClickOpenCategory();
 
-            element('.451_cat_item:eq(2) a').click();       //clicks second category nav link
+        element('.451_cat_item:nth-of-type(2) a:first').query(function (selectedElements, done) {
+
+            element('.451_cat_item:nth-of-type(2) a:first').click();       //clicks second category nav link
             expect(binding('currentCategory.Name')).toEqual(selectedElements.text());
             done();
 
@@ -132,22 +135,18 @@ describe('Category side link navigation', function() {
 
     it('should display the 3rd top level category we clicked', function(){
         if(C_debug){pause();}
-        element('.451_cat_item:eq(3) a:first').query(function (selectedElements, done) {
 
-            element('.451_cat_item:eq(3) a:first').click();       //clicks third category nav link
+        e2eClickOpenCategory();
+
+        element('.451_cat_item:nth-of-type(3) a:first').query(function (selectedElements, done) {
+
+            element('.451_cat_item:nth-of-type(3) a:first').click();       //clicks third category nav link
             expect(binding('currentCategory.Name')).toEqual(selectedElements.text());
             done();
 
         });
 
      if(C_debug){pause();}
-
-      //for a given link, find the interopID of the category
-      //click that link
-      //check that the URL fragment matches the interopID
-      //repeat for a subcategory
-
-      //----------------------------
 
   });
 });
@@ -159,11 +158,13 @@ describe('Main content area category links', function() {
         browser().navigateTo('#/catalog'); //start fresh on the catalog view
         if(C_debug){pause();}
 
+        e2eClickOpenCategory();
+
         //check existence of categories, datawise
         expect(repeater('.451_cat_item').count()).toBeGreaterThan(0); //there should be categories always, even if not displayed
 
         //before we click anything, sub category view should not be displayed
-        expect(element('.451_lbl_curcat:displayed')).not().toBeDefined();
+        expect(element('#451_lbl_curcat:displayed')).not().toBeDefined();
 
         if(C_debug){pause();}
     });
@@ -173,6 +174,8 @@ describe('Main content area category links', function() {
         browser().navigateTo('#/catalog'); //start fresh on the catalog view
         if(C_debug){pause();}
 
+        e2eClickOpenCategory();
+
         //check existence of categories, datawise
         expect(repeater('.451_cat_item').count()).toBeGreaterThan(0);
 
@@ -180,7 +183,7 @@ describe('Main content area category links', function() {
 
             element('.451_cat_item:first a:first').click();       //clicks first category nav link on category nav
             expect(binding('currentCategory.Name')).toEqual(selectedElements.text());
-            expect(element('.451_lbl_curcat').text()).toContain(selectedElements.text());
+            expect(element('#451_lbl_curcat').text()).toContain(selectedElements.text());
             done();
         });
     });
@@ -189,6 +192,8 @@ describe('Main content area category links', function() {
 
         browser().navigateTo('#/catalog'); //start fresh on the catalog view
         if(C_debug){pause();}
+
+        e2eClickOpenCategory();
 
         //check existence of categories, datawise
         expect(repeater('.451_cat_item').count()).toBeGreaterThan(0);
@@ -199,7 +204,7 @@ describe('Main content area category links', function() {
 
             element('.451_cat_item ul li:first a:first').click();       //clicks first category's subcategory nav link
             expect(binding('currentCategory.Name')).toEqual(selectedElements.text());
-            expect(element('.451_lbl_curcat').text()).toContain(selectedElements.text());
+            expect(element('#451_lbl_curcat').text()).toContain(selectedElements.text());
             done();
         });
 
@@ -209,7 +214,7 @@ describe('Main content area category links', function() {
     it('should display the current SUBcategory in the main area when clicked via MAIN area', function() {
 
         browser().navigateTo('#/catalog'); //start fresh on the catalog view
-
+        e2eClickOpenCategory();
         //check existence of categories, datawise
         expect(repeater('.451_cat_item').count()).toBeGreaterThan(0);
         e2eClickSideNavCategory(0,"SubCatTest");
@@ -221,7 +226,7 @@ describe('Main content area category links', function() {
 
             element('.451_lbl_subcatlist ul li:first a:first').click();       //clicks first category's subcategory nav link
 
-            expect(element('.451_lbl_curcat').text()).toContainFuture(binding('currentCategory.Name'));
+            expect(element('#451_lbl_curcat').text()).toContainFuture(binding('currentCategory.Name'));
             expect(strClickedSubCat).toContainFuture(binding('currentCategory.Name'));
             done();
         });
@@ -233,7 +238,7 @@ describe('Main content area category links', function() {
     it('should display the current SUB-SUBcategory in the main area when a SUB-category is clicked via MAIN area', function() {
 
         browser().navigateTo('#/catalog'); //start fresh on the catalog view
-
+        e2eClickOpenCategory();
         //check existence of categories, datawise
         expect(repeater('.nav-header').count()).toBeGreaterThan(0);
 
@@ -247,7 +252,7 @@ describe('Main content area category links', function() {
 
             element('.451_lbl_subcatlist ul li a:first').click();       //clicks first category's subcategory nav link
 
-            expect(element('.451_lbl_curcat').text()).toContainFuture(binding('currentCategory.Name'));
+            expect(element('#451_lbl_curcat').text()).toContainFuture(binding('currentCategory.Name'));
             expect(strClickedSubCat).toContainFuture(binding('currentCategory.Name'));
 
             done();
@@ -264,14 +269,19 @@ describe('testing e2eClickSideNavCategory nav functions', function(){
         if(C_debug){pause();}
         browser().navigateTo('#/catalog'); //start fresh on the catalog view
         if(C_debug){pause();}
+        e2eClickOpenCategory();
         e2eClickSideNavCategory(2);
         if(C_debug){pause();}
+
+        e2eClickOpenCategory();
         e2eClickSideNavCategory(1,"SubCatTest1");
         if(C_debug){pause();}
         browser().navigateTo('#/catalog'); //start fresh on the catalog view
+        e2eClickOpenCategory();
         e2eClickMainNavCategory(2);
         if(C_debug){pause();}
         browser().navigateTo('#/catalog'); //start fresh on the catalog view
+        e2eClickOpenCategory();
         e2eClickMainNavCategory(0,"SubCatTest");
         if(C_debug){pause();}
     });
