@@ -6592,6 +6592,9 @@ select.ng-invalid:invalid:invalid:focus {
   animation: none;
   outline: none;
 }
+.order-cloud .form-signin .btn-info {
+  margin-top: 15px;
+}
 .app-loading-indicator-cell {
   text-align: center;
   position: absolute;
@@ -6732,7 +6735,6 @@ select.ng-invalid:invalid:invalid:focus {
   border-width: 0 16px 16px 0;
   border-style: solid;
   border-color: #f0f0f0 #f0f0f0 #ffffff #ffffff;
-  background: #658E15;
   display: block;
   width: 0;
 }
@@ -6771,7 +6773,6 @@ select.ng-invalid:invalid:invalid:focus {
   text-transform: capitalize;
   text-shadow: none;
   font-weight: normal;
-  min-height: 300px;
   background-color: #f9f9f9;
   background-color: #fff;
 }
@@ -6804,10 +6805,10 @@ select.ng-invalid:invalid:invalid:focus {
   color: #fff;
   border-top: none;
   position: absolute;
-  right: 15px;
-  left: 15px;
+  right: 0;
+  left: 0;
   top: 0;
-  height: 100%;
+  bottom: 0;
   z-index: 1;
   padding: 10px;
   font-size: 1.5em;
