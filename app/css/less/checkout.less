@@ -28,9 +28,14 @@
   }
 
   // hide unnecessary html in new address form from checkout include
-  .address-input-view-shipping,
-  .address-input-view-billing,
-  .address-input-view-btn-delete {
-    display: none;
+  .address-input-view {
+    .create-address-type {
+      display: none;
+    }
+    .panel-footer {
+      .btn-danger {
+        display: none;
+      }
+    }
   }
 }

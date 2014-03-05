@@ -430,10 +430,6 @@ button::-moz-focus-inner {
 // Panels
 .panel {
   word-wrap: break-word;
-  .panel-body .panel-footer {
-    margin: 0 -30px -15px;
-    border-bottom: 1px solid #d6d6d6;
-  }
   &.panel-primary {
     p span {
       float: left;
@@ -442,41 +438,41 @@ button::-moz-focus-inner {
       background-color: transparent;
     }
   }
-}
-
-.panel-heading {
-  margin-top: 2px;
-  padding: 0;
-
-  .panel-title {
-    letter-spacing: 0.08em;
-    font-size: ceil((@font-size-base * 1));
-    padding: 20px 30px;
-    text-align: center;
-    text-transform: uppercase;
+  .panel-heading {
+    margin-top: 2px;
+    padding: 0;
+    .panel-title {
+      letter-spacing: 0.08em;
+      font-size: ceil((@font-size-base * 1));
+      padding: 20px 30px;
+      text-align: center;
+      text-transform: uppercase;
+    }
   }
-}
-
-.panel-body {
-  // product quantity box
-  .quantity input {
-    height: 52px;
-    outline: 0 none;
-    padding: .5em 0;
-    text-align: center;
-    width: 100%;
-    margin: 0;
-    border-radius: 0;
-    font-size: 24px;
-    color:#468847;
-    box-shadow: none;
+  .panel-body {
+    // product quantity box
+    .quantity input {
+      height: 52px;
+      outline: 0 none;
+      padding: .5em 0;
+      text-align: center;
+      width: 100%;
+      margin: 0;
+      border-radius: 0;
+      font-size: 24px;
+      color:#468847;
+      box-shadow: none;
+    }
+    // panel-footer in a panel-body is not like the others
+    .panel-footer {
+      margin: 0 -10px -15px;
+    }
   }
-}
-
-.panel-footer {
-  clear: both;
-  overflow: hidden;
-  padding: 20px 15px;
+  .panel-footer {
+    clear: both;
+    overflow: hidden;
+    padding: 20px 15px;
+  }
 }
 
 // Wells
@@ -490,6 +486,17 @@ button::-moz-focus-inner {
   margin-bottom:          0;
   min-height:             0;
 }
+
+
+// Addresses
+.address-input-view {
+  // create address type labels are not like the others
+  .create-address-type label {
+    position: static;
+    display: block;
+  }
+}
+
 
 // Animations
 // login button

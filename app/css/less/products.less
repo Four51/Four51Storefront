@@ -7,7 +7,7 @@
   }
 }
 
-.product-view-default-variant-box {
+.product-variants {
   // make room for side color bar
   padding-left: 1.5em;
   p {
@@ -18,9 +18,11 @@
   ul{
     list-style-type: none;
     padding: 1.5em 0;
-    li {margin: 2px 0;}
+    li {
+      margin: 2px 0;
+    }
   }
-  a{
+  a {
     position: relative;
     display: block;
     padding: .4em;
@@ -29,7 +31,7 @@
     color: #444;
     text-decoration: none;
     transition: all .3s ease-out;
-    // color bar on left side :: arrow
+    // color bar on left side :: hover :: arrow
     &:before{
       position: absolute;
       left: -1.5em;
@@ -61,7 +63,7 @@
       border-left-color: #fa8072;
     }
   }
-  // remove margin because no labels in variant list
+  // remove margin because no labels in variant list quantity input
   .view-form-icon {
     div {
       margin-top: 0;

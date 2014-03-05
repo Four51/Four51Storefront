@@ -62,7 +62,7 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <div ng-if="(LineItem.Product.Variants.length > 0 || LineItem.Product.Type == 'VariableText') && !LineItem.Variant" style="margin: -15px;border-bottom: 1px solid #d6d6d6;">
+                    <div ng-if="(LineItem.Product.Variants.length > 0 || LineItem.Product.Type == 'VariableText') && !LineItem.Variant" style="margin: -15px;">
                          <div class="panel-heading">
                              <div class="container" style="padding-top: 15px;">
                                  <h3 class="panel-title text-info col-xs-9" style="text-align: left;padding-left: 0;">
@@ -78,7 +78,7 @@
                                 <input ng-model="queryVariants" type="text" class="form-control" placeholder="Filter variants" autocomplete="off"/>
                              </div>
                          </div>
-                        <div class="product-view-default-variant-box">
+                        <div class="product-variants">
                             <ul>
                                 <li ng-repeat="v in LineItem.Product.Variants | filter:queryVariants" class="col-xs-12">
                                     <div class="row" style="margin-right: 0;">

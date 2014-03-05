@@ -6127,28 +6127,24 @@ button::-moz-focus-inner {
 .panel {
   word-wrap: break-word;
 }
-.panel .panel-body .panel-footer {
-  margin: 0 -30px -15px;
-  border-bottom: 1px solid #d6d6d6;
-}
 .panel.panel-primary p span {
   float: left;
 }
 .panel.panel-primary .panel-footer {
   background-color: transparent;
 }
-.panel-heading {
+.panel .panel-heading {
   margin-top: 2px;
   padding: 0;
 }
-.panel-heading .panel-title {
+.panel .panel-heading .panel-title {
   letter-spacing: 0.08em;
   font-size: 14px;
   padding: 20px 30px;
   text-align: center;
   text-transform: uppercase;
 }
-.panel-body .quantity input {
+.panel .panel-body .quantity input {
   height: 52px;
   outline: 0 none;
   padding: .5em 0;
@@ -6160,7 +6156,10 @@ button::-moz-focus-inner {
   color: #468847;
   box-shadow: none;
 }
-.panel-footer {
+.panel .panel-body .panel-footer {
+  margin: 0 -10px -15px;
+}
+.panel .panel-footer {
   clear: both;
   overflow: hidden;
   padding: 20px 15px;
@@ -6174,6 +6173,10 @@ button::-moz-focus-inner {
   border-radius: 0;
   margin-bottom: 0;
   min-height: 0;
+}
+.address-input-view .create-address-type label {
+  position: static;
+  display: block;
 }
 @-webkit-keyframes pulsate {
   0% {
@@ -6783,22 +6786,22 @@ select.ng-invalid:invalid:invalid:focus {
   max-height: 300px;
   max-width: 100%;
 }
-.product-view-default-variant-box {
+.product-variants {
   padding-left: 1.5em;
 }
-.product-view-default-variant-box p {
+.product-variants p {
   margin: 0;
   padding: 10px 0;
   font-size: 11px;
 }
-.product-view-default-variant-box ul {
+.product-variants ul {
   list-style-type: none;
   padding: 1.5em 0;
 }
-.product-view-default-variant-box ul li {
+.product-variants ul li {
   margin: 2px 0;
 }
-.product-view-default-variant-box a {
+.product-variants a {
   position: relative;
   display: block;
   padding: .4em;
@@ -6808,7 +6811,7 @@ select.ng-invalid:invalid:invalid:focus {
   text-decoration: none;
   transition: all 0.3s ease-out;
 }
-.product-view-default-variant-box a:before {
+.product-variants a:before {
   position: absolute;
   left: -1.5em;
   top: 0;
@@ -6821,7 +6824,7 @@ select.ng-invalid:invalid:invalid:focus {
   text-align: center;
   font-weight: bold;
 }
-.product-view-default-variant-box a:after {
+.product-variants a:after {
   position: absolute;
   content: '';
   border: .5em solid transparent;
@@ -6830,14 +6833,14 @@ select.ng-invalid:invalid:invalid:focus {
   margin-top: -0.5em;
   transition: all 0.3s ease-out;
 }
-.product-view-default-variant-box a:hover {
+.product-variants a:hover {
   background: #F9f9f9;
 }
-.product-view-default-variant-box a:hover:after {
+.product-variants a:hover:after {
   left: -0.5em;
   border-left-color: #fa8072;
 }
-.product-view-default-variant-box .view-form-icon div {
+.product-variants .view-form-icon div {
   margin-top: 0;
 }
 .cart-view ul {
@@ -6908,9 +6911,10 @@ select.ng-invalid:invalid:invalid:focus {
 .check-out-view .panel .panel-heading.no i:first-of-type {
   color: #f0ad4e;
 }
-.check-out-view .address-input-view-shipping,
-.check-out-view .address-input-view-billing,
-.check-out-view .address-input-view-btn-delete {
+.check-out-view .address-input-view .create-address-type {
+  display: none;
+}
+.check-out-view .address-input-view .panel-footer .btn-danger {
   display: none;
 }
 .copyright-view {
