@@ -1,0 +1,67 @@
+// Login
+.order-cloud {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  // custom background image
+  background: @fourfiveone-login-bg;
+  -webkit-background-size:  cover;
+  -moz-background-size:     cover;
+  -o-background-size:       cover;
+  -ms-background-size:      cover;
+  background-size:          cover;
+
+  .form-signin {
+    max-width: 26em;
+    padding: 1.357em 2.071em 2.071em;
+    margin: 2em auto 5em;
+    background: rgba(22, 145, 190, .15);
+    -webkit-border-radius:  1em;
+    -moz-border-radius:     1em;
+    -o-border-radius:       1em;
+    -ms-border-radius:      1em;
+    border-radius:          1em;
+
+    // custom pulse animation
+    .btn-primary  {
+      letter-spacing: .04em;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 3px 3px 3px 3px;
+      text-shadow: 0 -1px 0 #666;
+      -webkit-transition:   all 150ms ease;
+      -moz-transition:      all 150ms ease;
+      -o-transition:        all 150ms ease;
+      -ms-transition:       all 150ms ease;
+      transition:           all 150ms ease;
+      &:focus {
+        outline: none;
+      }
+      &:hover {
+        -webkit-animation:  pulsate 1.2s linear infinite;
+        -moz-animation:     pulsate 1.2s linear infinite;
+        -o-animation:       pulsate 1.2s linear infinite;
+        -ms-animation:      pulsate 1.2s linear infinite;
+        animation:          pulsate 1.2s linear infinite;
+      }
+      &:active {
+        text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff;
+        box-shadow: 0 1px 0 #666, 0 1px 0 #444, 0 1px 1px rgba(0,0,0,0.9);
+        -webkit-transform:  translateY(2px);
+        -moz-transform:     translateY(2px);
+        -o-transform:       translateY(2px);
+        -ms-transform:      translateY(2px);
+        transform:          translateY(2px);
+        -webkit-animation:  none;
+        -moz-animation:     none;
+        -o-animation:       none;
+        -ms-animation:      none;
+        animation:          none;
+        outline:            none;
+      }
+    }
+  }
+}

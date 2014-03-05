@@ -1,0 +1,40 @@
+// Angular
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+  overflow: hidden !important;
+}
+
+.ui-show {
+  opacity: 1;
+  transition: all 0.5s ease;
+}
+
+.ui-hide {
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+// invlaid form color
+.ng-invalid {
+  .help-block,
+  .control-label {
+    color: @state-danger-bg;
+  }
+}
+
+// invalid form fields
+input.ng-invalid, textarea.ng-invalid, select.ng-invalid,
+input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid {
+  border-color: @brand-danger;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  color:#ccc;
+  &:focus,
+  &.ng-invalid:focus,
+  &:invalid:focus  {
+    border-color: @brand-danger;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+    color: #ccc;
+  }
+}

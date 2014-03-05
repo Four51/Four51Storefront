@@ -1,0 +1,36 @@
+// Checkout
+.check-out-view {
+  // remove default styles
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  // custom panel styles
+  .panel {
+    margin-bottom: 0;
+    border-bottom: none;
+
+    // panel validation icons
+    .panel-heading {
+      cursor: pointer;
+      i:first-of-type {
+        font-size: ceil((@font-size-base * 1.7));
+      }
+      &.yes i:first-of-type {
+        color:@brand-success;
+      }
+      &.no i:first-of-type {
+        color:@brand-warning;
+      }
+    }
+  }
+
+  // hide unnecessary html in new address form from checkout include
+  .address-input-view-shipping,
+  .address-input-view-billing,
+  .address-input-view-btn-delete {
+    display: none;
+  }
+}

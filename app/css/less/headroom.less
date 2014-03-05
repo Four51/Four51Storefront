@@ -1,0 +1,20 @@
+// Headroom
+.navbar-fixed-top.headroom {
+  transition: all .5s ease-in-out;
+  &.headroom--unpinned {
+    top: -100px;
+  }
+  &.headroom--pinned {
+    top: 0;
+  }
+}
+
+.navbar-fixed-bottom.headroom {
+  transition: all .5s ease-in-out;
+  &.headroom--unpinned {
+    bottom: -100px;
+  }
+  &.headroom--pinned {
+    bottom: 0;
+  }
+}

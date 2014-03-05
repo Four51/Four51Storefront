@@ -14,6 +14,16 @@ body {
   overflow: hidden;
 }
 
+// ie needs this help to keep scroll bar from overlapping content
+@-ms-viewport{
+  width: auto !important;
+}
+
+/* iOS placeholder needs help to disappear on focus */
+:focus::-webkit-input-placeholder{
+  color:transparent;
+}
+
 hr {
   clear: both;
 }
@@ -94,6 +104,44 @@ button::-moz-focus-inner {
   margin-top: 0;
   &:focus {
     box-shadow: none;
+  }
+}
+
+// Form dropdown select placeholder
+.view-form-select:before {
+  content: "Select";
+  position: absolute;
+  left: 25px;
+  top: 9px;
+  color:#999;
+  pointer-events:none;
+}
+
+.col-sm-4.view-form-select:before {
+  left: 45px;
+}
+
+// Form field icons
+.view-form-icon {
+  // Make room for labels
+  div {
+    margin: 25px 0 0;
+  }
+
+  // Make room for icons
+  input,
+  select,
+  text,
+  textarea {
+    padding-left: 25px;
+  }
+
+  // Icons
+  i {
+    color: #CCC;
+    left: 10px;
+    position: absolute;
+    top: 10px;
   }
 }
 
@@ -179,465 +227,6 @@ button::-moz-focus-inner {
   -o-animation-name:            fadeInUp;
   animation-name:               fadeInUp;
   -ms-animation-name:           fadeInUp;
-}
-
-// Navs
-.nav {
-  // content nav
-  ul  {
-    list-style-type: none;
-    clear: both;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-    li {
-      display: inline;
-      float: left;
-      padding: 0;
-      span.text-primary {
-        display: inline-block;
-        margin-top: 15px;
-        font-size: 1em;
-        font-weight: bold;
-      }
-
-      // content nav icons
-      span i {
-        font-size: 18px;
-        padding: 15px 20px;
-        cursor: pointer;
-      }
-    }
-  }
-}
-
-.navbar .nav a {
-  -webkit-transition: all ease-in-out .2s;
-  -moz-transition:    all ease-in-out .2s;
-  -ms-transition:     all ease-in-out .2s;
-  -o-transition:      all ease-in-out .2s;
-  transition:         all ease-in-out .2s;
-}
-
-.navbar-nav > li > a {
-  height: 60px;
-}
-
-// Jumbotron
-.jumbotron {
-  // because we removed navbar margin bottom, bump jumbotron up and hide/show only on products::home page
-  margin: -20px 0 0;
-  display: none;
-  &.active {
-    display: block;
-  }
-
-  img {
-    max-height: 130px;
-    float: left;
-  }
-}
-
-// Panels
-.panel {
-  word-wrap: break-word;
-  .panel-body .panel-footer {
-    margin: 0 -30px -15px;
-    border-bottom: 1px solid #d6d6d6;
-  }
-  &.panel-primary {
-    p span {
-      float: left;
-    }
-    .panel-footer {
-      background-color: transparent;
-    }
-  }
-}
-
-
-
-.panel-heading {
-  margin-top: 2px;
-  padding: 0;
-
-  .panel-title {
-    letter-spacing: 0.08em;
-    font-size: ceil((@font-size-base * 1));
-    padding: 20px 30px;
-    text-align: center;
-    text-transform: uppercase;
-  }
-}
-
-.panel-body {
-  // product quantity box
-  .quantity input {
-    height: 52px;
-    outline: 0 none;
-    padding: .5em 0;
-    text-align: center;
-    width: 100%;
-    margin: 0;
-    border-radius: 0;
-    font-size: 24px;
-    color:#468847;
-    box-shadow: none;
-  }
-}
-
-.panel-footer {
-  clear: both;
-  overflow: hidden;
-  padding: 20px 15px;
-}
-
-// Wells
-.well {
-  border: none;
-  -webkit-border-radius:  0;
-  -moz-border-radius:     0;
-  -o-border-radius:       0;
-  -ms-border-radius:      0;
-  border-radius:          0;
-  margin-bottom:          0;
-  min-height:             0;
-}
-
-// 451 mixins :: components
-
-// Angular
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important;
-  overflow: hidden !important;
-}
-
-.ui-show {
-  opacity: 1;
-  transition: all 0.5s ease;
-}
-
-.ui-hide {
-  opacity: 0;
-  transition: all 0.5s ease;
-}
-
-// invlaid form color
-.ng-invalid {
-  .help-block,
-  .control-label {
-    color: @state-danger-bg;
-  }
-}
-
-// invalid form fields
-input.ng-invalid, textarea.ng-invalid, select.ng-invalid,
-input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid {
-  border-color: @brand-danger;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  color:#ccc;
-  &:focus,
-  &.ng-invalid:focus,
-  &:invalid:focus  {
-    border-color: @brand-danger;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
-    color: #ccc;
-  }
-}
-
-// ie needs this help to keep scroll bar from overlapping content
-@-ms-viewport{
-  width: auto !important;
-}
-
-/* iOS placeholder needs help to disappear on focus */
-:focus::-webkit-input-placeholder{
-  color:transparent;
-}
-
-// Login
-.order-cloud {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  overflow: hidden;
-  // custom background image
-  background: @fourfiveone-login-bg;
-  -webkit-background-size:  cover;
-  -moz-background-size:     cover;
-  -o-background-size:       cover;
-  -ms-background-size:      cover;
-  background-size:          cover;
-
-  .form-signin {
-    max-width: 26em;
-    padding: 1.357em 2.071em 2.071em;
-    margin: 2em auto 5em;
-    background: rgba(22, 145, 190, .15);
-    -webkit-border-radius:  1em;
-    -moz-border-radius:     1em;
-    -o-border-radius:       1em;
-    -ms-border-radius:      1em;
-    border-radius:          1em;
-
-    // custom pulse animation
-    .btn-primary  {
-      letter-spacing: .04em;
-      padding: 15px;
-      margin-top: 15px;
-      border-radius: 3px 3px 3px 3px;
-      text-shadow: 0 -1px 0 #666;
-      -webkit-transition:   all 150ms ease;
-      -moz-transition:      all 150ms ease;
-      -o-transition:        all 150ms ease;
-      -ms-transition:       all 150ms ease;
-      transition:           all 150ms ease;
-      &:focus {
-        outline: none;
-      }
-      &:hover {
-        -webkit-animation:  pulsate 1.2s linear infinite;
-        -moz-animation:     pulsate 1.2s linear infinite;
-        -o-animation:       pulsate 1.2s linear infinite;
-        -ms-animation:      pulsate 1.2s linear infinite;
-        animation:          pulsate 1.2s linear infinite;
-      }
-      &:active {
-        text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff;
-        box-shadow: 0 1px 0 #666, 0 1px 0 #444, 0 1px 1px rgba(0,0,0,0.9);
-        -webkit-transform:  translateY(2px);
-        -moz-transform:     translateY(2px);
-        -o-transform:       translateY(2px);
-        -ms-transform:      translateY(2px);
-        transform:          translateY(2px);
-        -webkit-animation:  none;
-        -moz-animation:     none;
-        -o-animation:       none;
-        -ms-animation:      none;
-        animation:          none;
-        outline:            none;
-      }
-    }
-  }
-}
-
-// Checkout
-.check-out-view {
-  // remove default styles
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  // custom panel styles
-  .panel {
-    margin-bottom: 0;
-    border-bottom: none;
-
-    // panel validation icons
-    .panel-heading {
-      cursor: pointer;
-      i:first-of-type {
-        font-size: ceil((@font-size-base * 1.7));
-      }
-      &.yes i:first-of-type {
-        color:@brand-success;
-      }
-      &.no i:first-of-type {
-        color:@brand-warning;
-      }
-    }
-  }
-
-  // hide unnecessary html in new address form from checkout include
-  .address-input-view-shipping,
-  .address-input-view-billing,
-  .address-input-view-btn-delete {
-    display: none;
-  }
-}
-
-// Cart
-.cart-view {
-  // remove default styles
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  // line item top border
-  .panel-body {
-    border-top: 1px solid #d6d6d6;
-    // thumbnail
-    img {
-      max-height: 95px;
-      max-width: 100%;
-      margin: 0 auto 15px;
-    }
-
-    // custom border to provide eye flow from price/img and line item info
-    .col-sm-9 {
-      border-left: 1px solid #d6d6d6;
-    }
-
-    // line item link
-    a {
-      display: block;
-      width: 100%;
-      border: 1px solid transparent;
-      padding: 5px;
-      &:hover {
-        text-decoration: none;
-        background-color:#F9F9F9;
-        border-radius: 4px;
-        border: 1px solid #d6d6d6;
-        -webkit-transition: all ease-in-out .5s;
-        -moz-transition: all ease-in-out .5s;
-        -ms-transition: all ease-in-out .5s;
-        -o-transition: all ease-in-out .5s;
-        transition: all ease-in-out .5s;
-      }
-      // line item link icon
-      i {
-        color:#ccc;
-      }
-    }
-
-    // remove line item button
-    .btn-danger {
-      border-radius: 0;
-      margin-bottom: 15px;
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 1;
-    }
-    // price
-    .row h2 {
-      margin: 0;
-    }
-  }
-}
-
-// Category
-.category-view {
-  img {
-    margin: 0 auto
-  }
-
-  .category-list {
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      font-size: 1em;
-      font-weight: 300;
-      li  {
-        float: left;
-        text-align: center;
-        padding: 0;
-        text-transform: capitalize;
-        text-shadow: none;
-        font-weight: normal;
-        min-height: 300px;
-        background-color: rgb(249, 249, 249);
-        background-color: rgba(249, 249, 249, 1);
-        background-color:#fff;
-        // fold right top corner of categories to differentiate from products
-        &:before {
-          content: "";
-          position: absolute;
-          top: 0;
-          right: 0;
-          border-width: 0 16px 16px 0;
-          border-style: solid;
-          border-color: @body-bg @body-bg #fff #fff;
-          background: #658E15;
-          display: block; width: 0;
-        }
-        a {
-          padding: .75em;
-          display: block;
-          text-align: center;
-          text-decoration: none;
-          // category image
-          img {
-            max-width: 100%;
-            max-height: 200px;
-          }
-        }
-      }
-    }
-
-    // no image available
-    .fa.empty {
-      width: 100%;
-      height: 200px;
-      text-align: center;
-      i {
-        font-size: 25px;
-        display: block;
-        opacity: .25;
-        padding-top: 45px;
-      }
-    }
-  }
-
-  .product-list {
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      font-size: 1em;
-      font-weight: 300;
-      li  {
-        float: left;
-        text-align: center;
-        padding: 0;
-        text-transform: capitalize;
-        text-shadow: none;
-        font-weight: normal;
-        min-height: 300px;
-        background-color: rgb(249, 249, 249);
-        background-color: rgba(249, 249, 249, 1);
-        background-color:#fff;
-        // expand product-list well full width
-        &.well {
-          width: 100%;
-        }
-        a {
-          padding: .75em;
-          display: block;
-          text-align: center;
-          text-decoration: none;
-          // product thumbnail
-          img {
-            max-height: 95px;
-            max-width: 100%;
-            margin: 0 auto 15px;
-          }
-        }
-      }
-    }
-
-    // no image available
-    .fa.empty {
-      width: 100%;
-      text-align: center;
-      i {
-        font-size: 25px;
-        display: block;
-        opacity: .25;
-        padding-top: 45px;
-      }
-    }
-  }
 }
 
 // Navbar-fixed-bottom messaging + buttons
@@ -742,9 +331,9 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
             font-size: 11px;
             line-height: normal;
             background-color:@brand-danger;
-              i {
-                font-size: 14px;
-              }
+            i {
+              font-size: 14px;
+            }
           }
         }
         &:nth-of-type(2) {
@@ -781,242 +370,125 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
   }
 }
 
-// Loading indicator
-.app-loading-indicator-cell {
-  text-align: center;
-  position: absolute;
-  min-height:60px;
-  left: 0;
-  right:0;
-  top: 0;
-  bottom: 0;
-  z-index: 999999;
-  padding: 10px 0;
-  background-color:#fff;
-  opacity: .75;
-  .app-loading-indicator {
-    display: inline-block;
-    float: none;
-    height: 20px;
-    width: 20px;
-    margin: -3px auto 0;
-    position:relative;
-    -webkit-animation: rockstep .8s infinite linear;
-    -moz-animation: rockstep .8s infinite linear;
-    -o-animation: rockstep .8s infinite linear;
-    animation: rockstep .8s infinite linear;
-    border-left:3px solid rgba(0,174,239,.15);
-    border-right:3px solid rgba(0,174,239,.15);
-    border-bottom:3px solid rgba(0,174,239,.15);
-    border-top:3px solid rgba(0,174,239,1);
-    border-radius:100%;
-    .app-loading-indicator-title {
-      text-align: center;
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 5%;
-      p {
-        margin: 0 auto;
-        width: 500px;
-        padding: 10px;
-      }
-    }
-  }
-}
-
-// Inline error message
-.view-inline-error {
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  padding: 15px;
-  position: absolute;
-  left: 0; right: 0;
-  top: 100%;
-  white-space: normal;
-  word-break:normal;
-  z-index: 1;
-  background-color: #F2DEDE;
-  border: 1px solid #EBCCD1;
-  color: #A94442;
-  // arrow
-  &:before {
-    content:"";
-    width:0;
-    height:0;
-    top: -10px;
-    left: 10px;
-    border-bottom:10px solid #F2DEDE;
-    border-left:10px solid transparent;
-    border-right:10px solid transparent;position: absolute;
-  }
-}
-
-// Form dropdown select placeholder
-.view-form-select:before {
-  content: "Select";
-  position: absolute;
-  left: 25px;
-  top: 9px;
-  color:#999;
-  pointer-events:none;
-}
-
-.col-sm-4.view-form-select:before {
-  left: 45px;
-}
-
-// Form field icons
-.view-form-icon {
-  // Make room for labels
-  div {
-    margin: 25px 0 0;
-  }
-
-  // Make room for icons
-  input,
-  select,
-  text,
-  textarea {
-    padding-left: 25px;
-  }
-
-  // Icons
-  i {
-    color: #CCC;
-    left: 10px;
-    position: absolute;
-    top: 10px;
-  }
-}
-
-// Headroom
-.navbar-fixed-top.headroom {
-  transition: all .5s ease-in-out;
-  &.headroom--unpinned {
-    top: -100px;
-  }
-  &.headroom--pinned {
-    top: 0;
-  }
-}
-
-.navbar-fixed-bottom.headroom {
-  transition: all .5s ease-in-out;
-  &.headroom--unpinned {
-    bottom: -100px;
-  }
-  &.headroom--pinned {
-    bottom: 0;
-  }
-}
-
-// Related products
-.related-products-view {
-  .product-list {
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      font-size: 1em;
-      font-weight: 300;
-      li  {
-        float: left;
-        text-align: center;
-        padding: 0;
-        text-transform: capitalize;
-        text-shadow: none;
-        font-weight: normal;
-        min-height: 300px;
-        background-color: rgb(249, 249, 249);
-        background-color: rgba(249, 249, 249, 1);
-        background-color:#fff;
-        &.well {
-          width: 100%;
-          min-height:0;
-        }
-        a {
-          padding: .75em;
-          display: block;
-          text-align: center;
-          text-decoration: none;
-          // product thumbnail
-          img {
-            max-height: 95px;
-            max-width: 100%;
-            margin: 0 auto 15px;
-          }
-        }
-      }
-    }
-  }
-  // no image available
-  .fa.empty {
-    width: 100%;
-    text-align: center;
-    i {
-      font-size: 25px;
-      display: block;
-      opacity: .25;
-      padding-top: 45px;
-    }
-  }
-}
-
-// Product view default
-.product-view-default {
-  img {
-    margin: 15px auto;
-    max-height: 300px;
-    max-width: 100%;
-  }
-}
-
-// Short product info :: example swipe found in shortProductView.html
-.shortproduct-info {
-  background-color: rgba(0,0,0,.85);
-  color: #fff;
-  border-top: none;
-  position: absolute;
-  right: 15px;
-  left: 15px;
-  top:0;
-  height:100%;
-  z-index: 1;
-  padding: 10px;
-  font-size: 1.5em;
-}
-
-
-
-// copyright
-.copyright-view {
-  width: 100%;
-  font-size: 11px;
-  padding-top: 50px;
-  p {
-    padding: 15px 20px;
+// Navs
+.nav {
+  // content nav
+  ul  {
+    list-style-type: none;
+    clear: both;
+    overflow: hidden;
     margin: 0;
-    height: 115px;
-    &:first-of-type {
-      color:#1C638D;
-      background-color: #fff;
-      .btn {
-        font-size: 11px;
+    padding: 0;
+    li {
+      display: inline;
+      float: left;
+      padding: 0;
+      span.text-primary {
+        display: inline-block;
+        margin-top: 15px;
+        font-size: 1em;
+        font-weight: bold;
       }
-    }
-    &:last-of-type {
-      color:#fff;
-      background-color:#359FD5;
-      .btn {
-        background-color:#1C638D;
-        color:#fff;
-        &:hover {
-          background-color:#3d3d3d;
-        }
+
+      // content nav icons
+      span i {
+        font-size: 18px;
+        padding: 15px 20px;
+        cursor: pointer;
       }
     }
   }
+}
+
+.navbar .nav a {
+  -webkit-transition: all ease-in-out .2s;
+  -moz-transition:    all ease-in-out .2s;
+  -ms-transition:     all ease-in-out .2s;
+  -o-transition:      all ease-in-out .2s;
+  transition:         all ease-in-out .2s;
+}
+
+.navbar-nav > li > a {
+  height: 60px;
+}
+
+// Jumbotron
+.jumbotron {
+  // because we removed navbar margin bottom, bump jumbotron up and hide/show only on products::home page
+  margin: -20px 0 0;
+  display: none;
+  &.active {
+    display: block;
+  }
+
+  img {
+    max-height: 130px;
+    float: left;
+  }
+}
+
+// Panels
+.panel {
+  word-wrap: break-word;
+  .panel-body .panel-footer {
+    margin: 0 -30px -15px;
+    border-bottom: 1px solid #d6d6d6;
+  }
+  &.panel-primary {
+    p span {
+      float: left;
+    }
+    .panel-footer {
+      background-color: transparent;
+    }
+  }
+}
+
+.panel-heading {
+  margin-top: 2px;
+  padding: 0;
+
+  .panel-title {
+    letter-spacing: 0.08em;
+    font-size: ceil((@font-size-base * 1));
+    padding: 20px 30px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+.panel-body {
+  // product quantity box
+  .quantity input {
+    height: 52px;
+    outline: 0 none;
+    padding: .5em 0;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    font-size: 24px;
+    color:#468847;
+    box-shadow: none;
+  }
+}
+
+.panel-footer {
+  clear: both;
+  overflow: hidden;
+  padding: 20px 15px;
+}
+
+// Wells
+.well {
+  border: none;
+  -webkit-border-radius:  0;
+  -moz-border-radius:     0;
+  -o-border-radius:       0;
+  -ms-border-radius:      0;
+  border-radius:          0;
+  margin-bottom:          0;
+  min-height:             0;
 }
 
 // Animations

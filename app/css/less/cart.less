@@ -1,0 +1,62 @@
+// Cart
+.cart-view {
+  // remove default styles
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  // line item top border
+  .panel-body {
+    border-top: 1px solid #d6d6d6;
+    // thumbnail
+    img {
+      max-height: 95px;
+      max-width: 100%;
+      margin: 0 auto 15px;
+    }
+
+    // custom border to provide eye flow from price/img and line item info
+    .col-sm-9 {
+      border-left: 1px solid #d6d6d6;
+    }
+
+    // line item link
+    a {
+      display: block;
+      width: 100%;
+      border: 1px solid transparent;
+      padding: 5px;
+      &:hover {
+        text-decoration: none;
+        background-color:#F9F9F9;
+        border-radius: 4px;
+        border: 1px solid #d6d6d6;
+        -webkit-transition: all ease-in-out .5s;
+        -moz-transition: all ease-in-out .5s;
+        -ms-transition: all ease-in-out .5s;
+        -o-transition: all ease-in-out .5s;
+        transition: all ease-in-out .5s;
+      }
+      // line item link icon
+      i {
+        color:#ccc;
+      }
+    }
+
+    // remove line item button
+    .btn-danger {
+      border-radius: 0;
+      margin-bottom: 15px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+    }
+    // price
+    .row h2 {
+      margin: 0;
+    }
+  }
+}
