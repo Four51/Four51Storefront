@@ -140,19 +140,21 @@
                 </div>
                 <div class="view-response-message alert-danger" alert-show="gcMessage">{{gcMessage}}</div>
                 <div class="view-error-message" ng-show="cart.$error.required.length > 0">
-                    <ul class="row alert-warning">
-                        <li class="col-xs-2">
-                            <i class="fa fa-exclamation-circle text-danger"></i>
-                            <span class="badge" ng-show="cart.$error.required.length > 1">{{cart.$error.required.length}}</span>
+                    <ul class="alert-warning">
+                        <li>
+                            <span class="badge">
+                                <i class="fa fa-exclamation-circle fa-inverse"></i>
+                                {{cart.$error.required.length}}
+                            </span>
                         </li>
-                        <li class="col-xs-8">
+                        <li>
                             <ul ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
                                 <li ng-if="cart.dateneeded.$invalid">Date needed is required</li>
                                 <li ng-if="cart.costcenter.$invalid">Cost Center is required</li>
                                 <li ng-if="cart.qtyInput.$invalid">You have entered an invalid quantity</li>
                             </ul>
                         </li>
-                        <li class="col-xs-2">
+                        <li>
                             <a ng-show="cart.$error.required.length + (errorMessage ? 1 : 0) > 1">
                                 <i class="fa fa-caret-up" ng-click="errorSection = 'open'" ng-hide="errorSection == 'open'"></i>
                                 <i class="fa fa-caret-down" ng-click="errorSection = ''" ng-show="errorSection == 'open'"></i>

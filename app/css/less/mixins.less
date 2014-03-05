@@ -738,6 +738,14 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
         display: block;
         &:nth-of-type(1) {
           width: 16.6667%;
+          .badge {
+            font-size: 11px;
+            line-height: normal;
+            background-color:@brand-danger;
+              i {
+                font-size: 14px;
+              }
+          }
         }
         &:nth-of-type(2) {
           width: 66.6667%;
@@ -759,10 +767,11 @@ input.ng-invalid:invalid, textarea.ng-invalid:invalid, select.ng-invalid:invalid
           }
         }
         ul {
+          // display all errors :: class injected by angular ng-click
           &.two li {
             display: none;
           }
-          // always display first error
+          // display first error
           li:first-child {
             display: block;
           }

@@ -22,11 +22,13 @@
             <div class="view-error-message" ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length) > 0">
                 <ul class="alert-warning">
                     <li>
-                        <i class="fa fa-exclamation-circle text-danger"></i>
-                        <span class="badge" ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length) > 1">{{cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length}}</span>
+                        <span class="badge">
+                            <i class="fa fa-exclamation-circle fa-inverse"></i>
+                            {{cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length}}
+                        </span>
                     </li>
                     <li>
-                        <ul class="col-xs-12" ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
+                        <ul ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
                             <li ng-if="cart_order.orderid.$invalid">Enter an order id</li>
                             <li ng-if="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</li>
                             <li ng-if="cart_shipping.shipMethod.$invalid">Please choose a shipping method</li>
