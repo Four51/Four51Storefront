@@ -110,7 +110,7 @@
                                     <span ng-show="toggleSpecs == true"><i class="fa fa-minus-circle"></i> Hide </span>
                                     Specifications
                                 </p>
-                                <ul style="list-style: none; padding:0;" ng-show="toggleSpecs == true">
+                                <ul style="list-style: none;" ng-show="toggleSpecs == true">
                                     <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
                                         <span class="text-info">{{spec.Name}}: </span>
                                         <span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span></span>
