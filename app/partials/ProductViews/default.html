@@ -1,4 +1,4 @@
-<section id="451_area_prod_desc" class="product-default">
+<section id="451_area_prod_desc">
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch product information" />
     <productnav product="LineItem.Product" variant="LineItem.Variant" />
 
@@ -6,7 +6,7 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <figure>
-                    <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}">
+                    <img id="451_img_prod_lg" class="product-image-large" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}">
                 </figure>
                 <div class="empty" ng-hide="LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl">
                     <span class="fa empty"><i class="fa fa-camera"></i></span>

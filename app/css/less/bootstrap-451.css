@@ -315,8 +315,8 @@ img {
 .img-thumbnail {
   padding: 4px;
   line-height: 1.42857143;
-  background-color: #f0f0f0;
-  border: 1px solid #dddddd;
+  background-color: transparent;
+  border: 1px solid none;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
@@ -4395,8 +4395,8 @@ a.list-group-item.active > .badge,
   padding: 4px;
   margin-bottom: 20px;
   line-height: 1.42857143;
-  background-color: #f0f0f0;
-  border: 1px solid #dddddd;
+  background-color: transparent;
+  border: 1px solid none;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
@@ -6164,6 +6164,14 @@ button::-moz-focus-inner {
   overflow: hidden;
   padding: 20px 15px;
 }
+.thumbnail {
+  margin-bottom: 0;
+}
+.thumbnail img {
+  max-height: 95px;
+  max-width: 100%;
+  margin: 0 auto 15px;
+}
 .well {
   border: none;
   -webkit-border-radius: 0;
@@ -6887,7 +6895,7 @@ select.ng-invalid:invalid:invalid:focus {
   opacity: .25;
   padding-top: 45px;
 }
-.product-default img {
+.product-image-large {
   margin: 15px auto;
   max-height: 300px;
   max-width: 100%;
@@ -6975,11 +6983,6 @@ select.ng-invalid:invalid:invalid:focus {
   text-align: center;
   text-decoration: none;
 }
-.product-list ul li a img {
-  max-height: 95px;
-  max-width: 100%;
-  margin: 0 auto 15px;
-}
 .product-list ul li a .fa.empty {
   width: 100%;
   text-align: center;
@@ -7050,31 +7053,26 @@ select.ng-invalid:invalid:invalid:focus {
 .cart-view .panel-body .row h2 {
   margin: 0;
 }
-.check-out-view ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-.check-out-view .panel {
+.panel {
   margin-bottom: 0;
   border-bottom: none;
 }
-.check-out-view .panel .panel-heading {
+.panel .panel-heading {
   cursor: pointer;
 }
-.check-out-view .panel .panel-heading i:first-of-type {
+.panel .panel-heading i:first-of-type {
   font-size: 24px;
 }
-.check-out-view .panel .panel-heading.yes i:first-of-type {
+.panel .panel-heading.yes i:first-of-type {
   color: #5cb85c;
 }
-.check-out-view .panel .panel-heading.no i:first-of-type {
+.panel .panel-heading.no i:first-of-type {
   color: #f0ad4e;
 }
-.check-out-view .address-input-view .create-address-type {
+.panel .address-input-view .create-address-type {
   display: none;
 }
-.check-out-view .address-input-view .panel-footer .btn-danger {
+.panel .address-input-view .panel-footer .btn-danger {
   display: none;
 }
 .copyright-view {
