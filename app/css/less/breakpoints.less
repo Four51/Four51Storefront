@@ -1,9 +1,10 @@
 // Breakpoints
 @media (max-width: @screen-xs-max) {
+  // form fields finger sized
   input, textarea, select, button {
     min-height: 45px;
   }
-
+  // style form fields to look like the others on phone
   textarea, select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -20,16 +21,14 @@
     -webkit-appearance: none;
     -webkit-box-shadow: 1px 1px 1px #fff;
     -webkit-border-radius: 0.5em;
-
     -moz-appearance: none;
     -moz-appearance: 1px 1px 1px #fff;
     -moz-appearance: 0.5em;
-
     appearance: none;
     appearance: 1px 1px 1px #fff;
     appearance: 0.5em;
-
   }
+
   .view-order-last-count {width: 100%;}
   .btn-group {width: 100%;}
   .btn-group .btn {width: 100%;padding: 15px;margin: 2px;}
@@ -104,14 +103,29 @@
 }
 
 @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
-  input, textarea, select, button {min-height: 45px;}
-  .branding-view {text-align: center;}
-  .branding-view-logo {float: none; margin: 0 auto 10px; max-height: 75px; }
-  .view-form-icon  i {top: 15px;}
+  // form fields finger sized
+  input, textarea, select, button {
+    min-height: 45px;
+  }
+  .jumbotron {
+    text-align: center;
+    img {
+      float: none;
+      margin: 0 auto 10px;
+      max-height: 75px;
+    }
+  }
+
+  // because form fields are finger sized :: need to reposition icon
+  .view-form-icon  i {
+    top: 15px;
+  }
 }
 
 @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+  // code
 }
 
 @media (min-width: @screen-lg-min){
+  // code
 }

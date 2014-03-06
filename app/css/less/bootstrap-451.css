@@ -6673,10 +6673,10 @@ select.ng-invalid:invalid:invalid:focus {
   button {
     min-height: 45px;
   }
-  .branding-view {
+  .jumbotron {
     text-align: center;
   }
-  .branding-view-logo {
+  .jumbotron img {
     float: none;
     margin: 0 auto 10px;
     max-height: 75px;
