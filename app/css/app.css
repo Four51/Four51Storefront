@@ -608,6 +608,16 @@ li.selected {
 
 .col-sm-4.view-form-select:before {left: 45px;}
 
+.view-form-select-saved:before {
+    content: "Select Saved Card";
+    position: absolute;
+    left: 25px;
+    top: 9px;
+    color:#999;
+    pointer-events:none;
+}
+
+.col-sm-4.view-form-select-saved:before {left: 45px;}
 /* ----------------------------------------------------------------------------------------------- */
 /* Animations */
 /* ----------------------------------------------------------------------------------------------- */

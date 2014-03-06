@@ -3,7 +3,8 @@ four51.app.directive('paymentselector', function() {
        restrict: 'E',
 	   priority: 99,
        templateUrl: 'partials/controls/paymentSelection.html',
-       controller: function($scope, $rootScope) {
+       controller: function($scope, $rootScope, SavedCreditCard) {
+	       $scope.paymentSelection = {};
 	       $scope.isSplitBilling = false;
            $scope.setPaymentMethod = function(type) {
                $scope.currentOrder.PaymentMethod = type;
@@ -35,6 +36,10 @@ four51.app.directive('paymentselector', function() {
 				       }
 			       });
 		       }
+	       });
+
+	       SavedCreditCard.query(function(cards) {
+		       $scope.paymentSelection.SavedCards = cards;
 	       });
 	   }
    };
