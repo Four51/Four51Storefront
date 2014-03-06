@@ -6102,6 +6102,14 @@ button::-moz-focus-inner {
   margin-bottom: 0;
   min-height: 0;
 }
+.view-tr .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+.view-tr .row [class*="col-"] {
+  border: 1px solid rgba(86, 61, 124, 0.2);
+  padding-top: 5px;
+}
 [ng\:cloak],
 [ng-cloak],
 [data-ng-cloak],
@@ -6694,76 +6702,6 @@ select.ng-invalid:invalid:invalid:focus {
   opacity: .25;
   padding-top: 45px;
 }
-.category-view-aside-add {
-  -webkit-animation-duration: 1s;
-  -moz-animation-duration: 1s;
-  -o-animation-duration: 1s;
-  animation-duration: 1s;
-  animation-delay: .5s;
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-name: fadeInRight;
-  -moz-animation-name: fadeInRight;
-  -o-animation-name: fadeInRight;
-  animation-name: fadeInRight;
-}
-.category-view-aside-add-active {
-  opacity: 1;
-}
-.category-view-aside-remove {
-  -webkit-animation-duration: 1s;
-  -moz-animation-duration: 1s;
-  -o-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-name: fadeOut;
-  -moz-animation-name: fadeOut;
-  -o-animation-name: fadeOut;
-  animation-name: fadeOut;
-}
-.category-view-aside-remove-active {
-  opacity: 0;
-}
-.move-cat-body-add {
-  -webkit-animation-duration: 1s;
-  -moz-animation-duration: 1s;
-  -o-animation-duration: 1s;
-  animation-duration: 1s;
-  aniamtion-delay: 1s;
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-name: cat-body-move-right;
-  -moz-animation-name: cat-body-move-right;
-  -o-animation-name: cat-body-move-right;
-  animation-name: cat-body-move-right;
-}
-.move-cat-body-add-active {
-  opacity: 1;
-}
-.move-cat-body-remove {
-  -webkit-animation-duration: 1s;
-  -moz-animation-duration: 1s;
-  -o-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-name: cat-body-move-left;
-  -moz-animation-name: cat-body-move-left;
-  -o-animation-name: cat-body-move-left;
-  animation-name: cat-body-move-left;
-}
-.move-cat-body-remove-active {
-  opacity: 1;
-}
 .product-image-large {
   margin: 15px auto;
   max-height: 300px;
@@ -6875,29 +6813,105 @@ select.ng-invalid:invalid:invalid:focus {
   padding: 10px;
   font-size: 1.5em;
 }
-.cart-view ul {
+.category-view-aside ul {
+  padding-left: 15px;
   list-style-type: none;
-  margin: 0;
+}
+.category-view-aside ul:first-child {
+  list-style-type: disc;
   padding: 0;
 }
-.cart-view .panel-body {
+.category-view-aside ul li a {
+  display: block;
+}
+.category-view-aside-add {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  animation-delay: .5s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeInRight;
+  -moz-animation-name: fadeInRight;
+  -o-animation-name: fadeInRight;
+  animation-name: fadeInRight;
+}
+.category-view-aside-add-active {
+  opacity: 1;
+}
+.category-view-aside-remove {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeOut;
+  -moz-animation-name: fadeOut;
+  -o-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+.category-view-aside-remove-active {
+  opacity: 0;
+}
+.move-cat-body-add {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  aniamtion-delay: 1s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: cat-body-move-right;
+  -moz-animation-name: cat-body-move-right;
+  -o-animation-name: cat-body-move-right;
+  animation-name: cat-body-move-right;
+}
+.move-cat-body-add-active {
+  opacity: 1;
+}
+.move-cat-body-remove {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: cat-body-move-left;
+  -moz-animation-name: cat-body-move-left;
+  -o-animation-name: cat-body-move-left;
+  animation-name: cat-body-move-left;
+}
+.move-cat-body-remove-active {
+  opacity: 1;
+}
+.panel-cart .panel-body {
   border-top: 1px solid #d6d6d6;
 }
-.cart-view .panel-body img {
+.panel-cart .panel-body img {
   max-height: 95px;
   max-width: 100%;
   margin: 0 auto 15px;
 }
-.cart-view .panel-body .col-sm-9 {
+.panel-cart .panel-body .col-sm-9 {
   border-left: 1px solid #d6d6d6;
 }
-.cart-view .panel-body a {
+.panel-cart .panel-body a {
   display: block;
   width: 100%;
   border: 1px solid transparent;
   padding: 5px;
 }
-.cart-view .panel-body a:hover {
+.panel-cart .panel-body a:hover {
   text-decoration: none;
   background-color: #F9F9F9;
   border-radius: 4px;
@@ -6908,10 +6922,10 @@ select.ng-invalid:invalid:invalid:focus {
   -o-transition: all ease-in-out 0.5s;
   transition: all ease-in-out 0.5s;
 }
-.cart-view .panel-body a i {
+.panel-cart .panel-body a i {
   color: #ccc;
 }
-.cart-view .panel-body .btn-danger {
+.panel-cart .panel-body .btn-danger {
   border-radius: 0;
   margin-bottom: 15px;
   position: absolute;
@@ -6919,7 +6933,7 @@ select.ng-invalid:invalid:invalid:focus {
   right: 0;
   z-index: 1;
 }
-.cart-view .panel-body .row h2 {
+.panel-cart .panel-body .row h2 {
   margin: 0;
 }
 .panel-orders {
