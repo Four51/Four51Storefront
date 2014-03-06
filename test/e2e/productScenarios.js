@@ -44,7 +44,7 @@ var C_debug = false;
 
 describe('Product login', function() {
     it("should allow a user to login", function() {
-        browser().navigateTo('../../app/index.html');
+        browser().navigateTo('../../app/');
     });
 
     e2eLogin("coreproduser","fails345", C_debug);
