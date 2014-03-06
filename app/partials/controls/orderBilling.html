@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="panel panel-default panel-orders">
     <div class="panel-heading" ng-class="{'no': cart_billing.$invalid, 'yes': !cart_billing.$invalid }">
         <h3 ng-click="checkOutSection = 'billing'" class="panel-title">
             <i class="pull-left" ng-class="{'fa fa-warning': cart_billing.$invalid, 'fa fa-check-circle': !cart_billing.$invalid }"></i>
@@ -6,7 +6,7 @@
             <i class="pull-right" ng-class="{'fa fa-caret-down': checkOutSection == 'billing', 'fa fa-caret-up': checkOutSection == 'shipping' || checkOutSection == 'order' }"></i>
         </h3>
     </div>
-    <div ng-show="checkOutSection == 'billing'" class="panel-body check-out-view-billing">
+    <div ng-show="checkOutSection == 'billing'" class="panel-body">
         <div ng-show="billaddressform || (addresses | filter:{IsBilling:true}).length == 0 && user.Permissions.contains('CreateBillToAddress')">
             <addressinput address='billaddress' user='user'></addressinput>
         </div>
@@ -22,7 +22,7 @@
                             </select>
                             <i class="fa fa-map-marker"></i>
                         </div>
-                        <div ng-show="BillAddress" class="check-out-view-selected-billing" style="border: 1px solid #d6d6d6; padding: 15px; margin-top: 15px;">
+                        <div ng-show="BillAddress" style="border: 1px solid #d6d6d6; padding: 15px; margin-top: 15px;">
                             <p style="font-size: 11px; font-weight: bold;">Billing Location</p>
                             <p ng-show="BillAddress.AddressName"><small>{{BillAddress.AddressName}}</small></p>
                             <p ng-show="BillAddress.CompanyName"><small>{{BillAddress.CompanyName}}</small></p>
