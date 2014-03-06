@@ -1693,4 +1693,5 @@ ul.view-variant-list{
     width: 100%;
 }
 
+.message-view label {position: static; display: block;}
 
