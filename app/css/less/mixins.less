@@ -316,7 +316,7 @@ button::-moz-focus-inner {
 }
 
 .navbar-nav > li > a {
-  height: 60px;
+  height: @navbar-height;
 }
 
 // Jumbotron
@@ -395,22 +395,12 @@ button::-moz-focus-inner {
 
 // Wells
 .well {
-  border: none;
-  -webkit-border-radius:  0;
-  -moz-border-radius:     0;
-  -o-border-radius:       0;
-  -ms-border-radius:      0;
-  border-radius:          0;
-  margin-bottom:          0;
-  min-height:             0;
+  margin-bottom: 0;
 }
-
-// Miscellaneous
-
 
 // 451
 
-// If you need a bootstrap row to display as a table row
+// If you need a bootstrap row to display as a table row :: ie: price schedule
 .view-tr  .row {
   margin-left: 0;
   margin-right: 0;
