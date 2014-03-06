@@ -56,6 +56,9 @@
                     <option value="" />
                 </select>
                 <i class="fa fa-credit-card"></i>
+                <button ng-show="showDelete(currentOrder.CreditCardID)" title="Delete" class="btn btn-danger cart-view-btn-remove" ng-click="deleteSavedCard(currentOrder.CreditCardID)">
+                    <span class="fa fa-minus-circle fa-inverse"></span>
+                </button>
             </div>
         </div>
         <div class="row view-form-icon" ng-show="!currentOrder.CreditCardID">
