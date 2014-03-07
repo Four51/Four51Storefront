@@ -157,16 +157,6 @@ button::-moz-focus-inner {
   display: block;
 }
 
-// Grid system
-// canonical selector :: remove outside primary column gutter-width and add back to ones that come after the first one for line items
-[class*="col-"] {
-  padding: 0;
-  ~ [class*="col-"] {
-    padding-left: @grid-gutter-width;
-    padding-right: @grid-gutter-width;
-  }
-}
-
 // Navbar
 .navbar-nav {
   margin: 0 -5px;

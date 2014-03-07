@@ -5893,13 +5893,6 @@ button::-moz-focus-inner {
   position: static;
   display: block;
 }
-[class*="col-"] {
-  padding: 0;
-}
-[class*="col-"] ~ [class*="col-"] {
-  padding-left: 10px;
-  padding-right: 10px;
-}
 .navbar-nav {
   margin: 0 -5px;
 }
