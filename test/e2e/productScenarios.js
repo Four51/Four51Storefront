@@ -38,7 +38,7 @@
     //vboss_variant_fergu_jagger
 
 
-var C_debug = false;
+var C_debug = true;
 
 ////////////////////////////////////////////////////
 
@@ -55,7 +55,8 @@ describe('Product List: ', function() {
 
     it('should display some products after a top level category has been clicked', function() {
 
-        browser().navigateTo('#/catalog');
+        e2eClickHome();
+        e2eClickOpenCategory();
         //check existence of categories, datawise
         expect(repeater('.451_cat_item').count()).toBeGreaterThan(0);
 
@@ -63,8 +64,9 @@ describe('Product List: ', function() {
 
         e2eClickSideNavCategory(0);
 
+        e2eClickOpenCategory();
         //now check that the displayed category matches the nav item we clicked
-        expect(binding('currentCategory.Name')).toEqualFuture(scope('.451_cat_item a', 'category.Name'));
+        expect(binding('currentCategory.Name')).toEqualFuture(scope('.451_cat_item a', 'node.Name'));
 
         if(C_debug){pause();}
 
@@ -75,10 +77,10 @@ describe('Product List: ', function() {
     it('should let us click a product from a top level category and display it', function() {
         if(C_debug){pause();}
 
-        expect(repeater('#451_lst_prod').count()).toBeGreaterThan(0); //there should be at least one product
+        expect(repeater('.451qa_prod_item').count()).toBeGreaterThan(0); //there should be at least one product
 
-        var strClickedProductName = element('#451_lst_prod span:nth-child(1) shortproductview a').text(); //get the product name for comparison later
-        e2eClickProductFromList(1);
+        var strClickedProductName = element('#451_lst_prod .451qa_prod_item:eq(0) div div h3').text(); //get the product name for comparison later
+        e2eClickProductFromList(0);
 
         var strShowedProductName = binding('LineItem.Product.Name');
 
@@ -91,12 +93,13 @@ describe('Product List: ', function() {
     });
 
     it('should let us click a product from a sub category and display it', function() {
-
+        e2eClickHome();
+        e2eClickOpenCategory();
         e2eClickSideNavCategory(1); //click first subcat
-        expect(repeater('#451_lst_prod').count()).toBeGreaterThan(0); //there should be at least one product
+        expect(repeater('.451qa_prod_item').count()).toBeGreaterThan(0); //there should be at least one product
 
-        var strClickedProductName = element('#451_lst_prod span:nth-child(1) shortproductview a').text(); //get the product name for comparison later
-        e2eClickProductFromList(1);
+        var strClickedProductName = element('#451_lst_prod .451qa_prod_item:eq(0) div div h3').text(); //get the product name for comparison later
+        e2eClickProductFromList(0);
 
         var strShowedProductName = binding('LineItem.Product.Name');
 
@@ -118,155 +121,156 @@ describe('Product List: ', function() {
 
 describe('Product View - Static No Variants "stat_prod_stat_specs_ALL_autotest"', function() {
     it('should display a product', function(){
-        browser().navigateTo('#/catalog'); //start fresh on the catalog view
+        e2eClickHome();
+        e2eClickOpenCategory();
         e2eClickSideNavCategory(0,"Auto Static Products");
-        if(C_debug){pause();}
         e2eClickProductFromList(0,"Static Prod With Static Specs-ALL Auto Test Product");
+        if(C_debug){pause();}
     });
     it('should have an image', function(){
+        if(C_debug){pause();}
         expect(element('#451_img_prod_lg[src]').count()).toBe(1);
     });
     it('should have a name', function(){
-        expect(element('#451_area_prod_desc').count()).toBe(1);
-        expect(element('#451_area_prod_desc tr td:contains("Static Prod With Static Specs-ALL Auto Test Product")').count()).toBe(1); //name
+        expect(element('#451qa_prod_name:contains("Static Prod With Static Specs-ALL Auto Test Product")').count()).toBe(1); //name
     });
     it('should have a description', function(){
-        expect(element('#451_area_prod_desc tr td:contains("Static Prod With Static Specs Auto Test Product")').count()).toBe(1);  //description
+        expect(element('#451qa_prod_desc:contains("Static Prod With Static Specs Auto Test Product")').count()).toBe(1);  //description
     });
-    it('should have a price box', function(){
-        expect(element("input[name]='qtyInput'").count()).toBe(1);
+    it('should have a price box, and only one price box', function(){
+        expect(element("#451qa_input_qty").count()).toBe(1);
     });
     it('should display a long list of all static specs', function(){
-        expect(element('#451_list_specgroup tbody tr').count()).toBe(266); //this number includes the TRs that display the spec group names
+        expect(element('#451_list_specgroup .451qa_spec_item').count()).toBe(252); //actually 251, but the hidden spec is still counted even though it's not displayed
     });
     it('should have grouped sets of static specs', function(){
-        expect(element('tr.451_hdr_spec_grp:contains("Business Card") ~ tr').count()).toBe(9); //this finds all the TR siblings underneath the header TR
-        expect(element('tr.451_hdr_spec_grp:contains("Continuous") ~ tr').count()).toBe(22);
-        expect(element('tr.451_hdr_spec_grp:contains("Custom Spec Group 1") ~ tr').count()).toBe(3); //interesting. (there's an invisible spec in it) it counts as 3, though only 2 are "displayed"
-        expect(element('tr.451_hdr_spec_grp:contains("Custom Spec Group 2") ~ tr').count()).toBe(1);
-        expect(element('tr.451_hdr_spec_grp:contains("Custom Spec Group 3") ~ tr').count()).toBe(1); //this should have a file link in it.  TODO- add check for file link.
-        expect(element('tr.451_hdr_spec_grp:contains("Envelope") ~ tr').count()).toBe(16);
-        expect(element('tr.451_hdr_spec_grp:contains("Fastening") ~ tr').count()).toBe(18);
-        expect(element('tr.451_hdr_spec_grp:contains("Ink") ~ tr').count()).toBe(91); //holy vegetable based inks, batman!
-        expect(element('tr.451_hdr_spec_grp:contains("Label") ~ tr').count()).toBe(24);
-        expect(element('tr.451_hdr_spec_grp:contains("Marginal Words") ~ tr').count()).toBe(12); //there is a possibility that there's a bug on the existing app that is not showing 7 fields that SHOULD be here. may want to add a TODO- here
-        expect(element('tr.451_hdr_spec_grp:contains("Numbering") ~ tr').count()).toBe(15);
-        expect(element('tr.451_hdr_spec_grp:contains("Pads") ~ tr').count()).toBe(2);
-        expect(element('tr.451_hdr_spec_grp:contains("Paper") ~ tr').count()).toBe(9);
-        expect(element('tr.451_hdr_spec_grp:contains("Unit Set") ~ tr').count()).toBe(29);
+        expect(element('.451qa_sg_item:contains("BUSINESS CARD") ~ li div').count()).toBe(9);
+        expect(element('.451qa_sg_item:contains("CONTINUOUS") ~ li div').count()).toBe(22);
+        expect(element('.451qa_sg_item:contains("CUSTOM SPEC GROUP 1") ~ li div').count()).toBe(3); //it counts as 3, though only 2 are "displayed"
+        expect(element('.451qa_sg_item:contains("CUSTOM SPEC GROUP 2") ~ li div').count()).toBe(1);
+        expect(element('.451qa_sg_item:contains("CUSTOM SPEC GROUP 3") ~ li div').count()).toBe(1); //this should have a file link in it.  TODO- add check for file link.
+        expect(element('.451qa_sg_item:contains("ENVELOPE") ~ li div').count()).toBe(16);
+        expect(element('.451qa_sg_item:contains("FASTENING") ~ li div').count()).toBe(18);
+        expect(element('.451qa_sg_item:contains("INK") ~ li div').count()).toBe(91); //holy vegetable based inks, batman!
+        expect(element('.451qa_sg_item:contains("LABEL") ~ li div').count()).toBe(24);
+        expect(element('.451qa_sg_item:contains("MARGINAL WORDS") ~ li div').count()).toBe(12); //there is a possibility that there's a bug on the existing app that is not showing 7 fields that SHOULD be here. may want to add a TODO- here
+        expect(element('.451qa_sg_item:contains("NUMBERING") ~ li div').count()).toBe(15);
+        expect(element('.451qa_sg_item:contains("PADS") ~ li div').count()).toBe(2);
+        expect(element('.451qa_sg_item:contains("PAPER") ~ li div').count()).toBe(9);
+        expect(element('.451qa_sg_item:contains("UNIT SET") ~ li div').count()).toBe(29);
     });
     it('should have several specs in each spec group', function(){
-        expect(element('tr.451_hdr_spec_grp:contains("Business Card") ~ tr').count()).toBe(9);
-            verifyStaticSpecRow("Business Card",0,"# of Inks","4");
-            verifyStaticSpecRow("Business Card",1,"# of Inks Back","1");
-            verifyStaticSpecRow("Business Card",2,"# of Inks Front","3");
-            verifyStaticSpecRow("Business Card",3,"Additional Comments","BC Comment");
-            verifyStaticSpecRow("Business Card",4,"Ink Colors","Cyan Magenta Yellow Black");
-            verifyStaticSpecRow("Business Card",5,"Ink Colors on Back","Black");
-            verifyStaticSpecRow("Business Card",6,"Ink Colors on Front","Cyan Magenta Yellow");
-            verifyStaticSpecRow("Business Card",7,"Size","2 x 3-1/2");
-            verifyStaticSpecRow("Business Card",8,"Stock","Aluminum");
+        expect(element('.451qa_sg_item:contains("BUSINESS CARD") ~ li div').count()).toBe(9);
+            verifyStaticSpecRow("BUSINESS CARD",0,"# of Inks","4");
+            verifyStaticSpecRow("BUSINESS CARD",1,"# of Inks Back","1");
+            verifyStaticSpecRow("BUSINESS CARD",2,"# of Inks Front","3");
+            verifyStaticSpecRow("BUSINESS CARD",3,"Additional Comments","BC Comment");
+            verifyStaticSpecRow("BUSINESS CARD",4,"Ink Colors","Cyan Magenta Yellow Black");
+            verifyStaticSpecRow("BUSINESS CARD",5,"Ink Colors on Back","Black");
+            verifyStaticSpecRow("BUSINESS CARD",6,"Ink Colors on Front","Cyan Magenta Yellow");
+            verifyStaticSpecRow("BUSINESS CARD",7,"Size","2 x 3-1/2");
+            verifyStaticSpecRow("BUSINESS CARD",8,"Stock","Aluminum");
 
-        expect(element('tr.451_hdr_spec_grp:contains("Continuous") ~ tr').count()).toBe(22);
-            verifyStaticSpecRow("Continuous",0,"Additional Comments","Continuous Comment");
-            verifyStaticSpecRow("Continuous",1,"Carbonless attr. Ply 1","CFB");
-            verifyStaticSpecRow("Continuous",2,"Carbonless attr. Ply 2","CB");
-            verifyStaticSpecRow("Continuous",3,"Carbonless attr. Ply 3","CB");
-            verifyStaticSpecRow("Continuous",4,"Carbonless attr. Ply 4","CF");
-            verifyStaticSpecRow("Continuous",5,"Carbonless attr. Ply 5","CF");
-            verifyStaticSpecRow("Continuous",6,"Carbonless attr. Ply 6","CF");
-            verifyStaticSpecRow("Continuous",7,"Color Ply 1","CANARY");
-            verifyStaticSpecRow("Continuous",8,"Color Ply 2","PINK");
-            verifyStaticSpecRow("Continuous",9,"Color Ply 3","BLUE");
-            verifyStaticSpecRow("Continuous",10,"Color Ply 4","WHITE");
-            verifyStaticSpecRow("Continuous",11,"Color Ply 5","GOLDENROD");
-            verifyStaticSpecRow("Continuous",12,"Color Ply 6","GREEN");
-            verifyStaticSpecRow("Continuous",13,"Detached Size","3\" x 2 1/2\"");
-            verifyStaticSpecRow("Continuous",14,"Number of Ply's","6");
-            verifyStaticSpecRow("Continuous",15,"Size","4\" x 2 1/2\"");
-            verifyStaticSpecRow("Continuous",16,"Weight Ply 1","5lb");
-            verifyStaticSpecRow("Continuous",17,"Weight Ply 2","7lb");
-            verifyStaticSpecRow("Continuous",18,"Weight Ply 3","30lb");
-            verifyStaticSpecRow("Continuous",19,"Weight Ply 4","1lb");
-            verifyStaticSpecRow("Continuous",20,"Weight Ply 5","1#");
-            verifyStaticSpecRow("Continuous",21,"Weight Ply 6","25#");
+        expect(element('.451qa_sg_item:contains("CONTINUOUS") ~ li div').count()).toBe(22);
+            verifyStaticSpecRow("CONTINUOUS",0,"Additional Comments","Continuous Comment");
+            verifyStaticSpecRow("CONTINUOUS",1,"Carbonless attr. Ply 1","CFB");
+            verifyStaticSpecRow("CONTINUOUS",2,"Carbonless attr. Ply 2","CB");
+            verifyStaticSpecRow("CONTINUOUS",3,"Carbonless attr. Ply 3","CB");
+            verifyStaticSpecRow("CONTINUOUS",4,"Carbonless attr. Ply 4","CF");
+            verifyStaticSpecRow("CONTINUOUS",5,"Carbonless attr. Ply 5","CF");
+            verifyStaticSpecRow("CONTINUOUS",6,"Carbonless attr. Ply 6","CF");
+            verifyStaticSpecRow("CONTINUOUS",7,"Color Ply 1","CANARY");
+            verifyStaticSpecRow("CONTINUOUS",8,"Color Ply 2","PINK");
+            verifyStaticSpecRow("CONTINUOUS",9,"Color Ply 3","BLUE");
+            verifyStaticSpecRow("CONTINUOUS",10,"Color Ply 4","WHITE");
+            verifyStaticSpecRow("CONTINUOUS",11,"Color Ply 5","GOLDENROD");
+            verifyStaticSpecRow("CONTINUOUS",12,"Color Ply 6","GREEN");
+            verifyStaticSpecRow("CONTINUOUS",13,"Detached Size","3\" x 2 1/2\"");
+            verifyStaticSpecRow("CONTINUOUS",14,"Number of Ply's","6");
+            verifyStaticSpecRow("CONTINUOUS",15,"Size","4\" x 2 1/2\"");
+            verifyStaticSpecRow("CONTINUOUS",16,"Weight Ply 1","5lb");
+            verifyStaticSpecRow("CONTINUOUS",17,"Weight Ply 2","7lb");
+            verifyStaticSpecRow("CONTINUOUS",18,"Weight Ply 3","30lb");
+            verifyStaticSpecRow("CONTINUOUS",19,"Weight Ply 4","1lb");
+            verifyStaticSpecRow("CONTINUOUS",20,"Weight Ply 5","1#");
+            verifyStaticSpecRow("CONTINUOUS",21,"Weight Ply 6","25#");
 
-        expect(element('tr.451_hdr_spec_grp:contains("Custom Spec Group 1") ~ tr').count()).toBe(3); //1 is hidden, but the row exists in HTML form
-            verifyStaticSpecRow("Custom Spec Group 1",0,"Custom Spec 1","CustomSpecValue1");
-            verifyStaticSpecRow("Custom Spec Group 1",1,"Custom Spec 2","CustomSpecValue2");
-            verifyStaticSpecRow("Custom Spec Group 1",2,"Custom Spec 3 INVISIBLE","CustomSpecValue3");
+        expect(element('.451qa_sg_item:contains("CUSTOM SPEC GROUP 1") ~ li div').count()).toBe(3); //it counts as 3, though only 2 are "displayed"
+            verifyStaticSpecRow("CUSTOM SPEC GROUP 1",0,"Custom Spec 1","CustomSpecValue1");
+            verifyStaticSpecRow("CUSTOM SPEC GROUP 1",1,"Custom Spec 2","CustomSpecValue2");
+            verifyStaticSpecRow("CUSTOM SPEC GROUP 1",2,"Custom Spec 3 INVISIBLE","CustomSpecValue3"); //not sure why we should bother verifying this...
 
-        expect(element('tr.451_hdr_spec_grp:contains("Custom Spec Group 2") ~ tr').count()).toBe(1);
-            verifyStaticSpecRow("Custom Spec Group 2",0,"Custom Spec 1 Group 2","CustomSpecValue2Spec1Group2");
+        expect(element('.451qa_sg_item:contains("CUSTOM SPEC GROUP 2") ~ li div').count()).toBe(1);
+            verifyStaticSpecRow("CUSTOM SPEC GROUP 2",0,"Custom Spec 1 Group 2","CustomSpecValue2Spec1Group2");
 
-        expect(element('tr.451_hdr_spec_grp:contains("Custom Spec Group 3") ~ tr').count()).toBe(1);
-            verifyStaticSpecRow("Custom Spec Group 3",0,"Custom Spec 1 Group 3 FILE","441725_Four51logo2008.eps.jpg");
+        expect(element('.451qa_sg_item:contains("CUSTOM SPEC GROUP 3") ~ li div').count()).toBe(1);
+            verifyStaticSpecRow("CUSTOM SPEC GROUP 3",0,"Custom Spec 1 Group 3 FILE","441725_Four51logo2008.eps.jpg");
 
-        expect(element('tr.451_hdr_spec_grp:contains("Envelope") ~ tr').count()).toBe(16);
-            verifyStaticSpecRow("Envelope",0,"# Ink Back","2");
-            verifyStaticSpecRow("Envelope",1,"# Ink Front","1");
-            verifyStaticSpecRow("Envelope",2,"Additional Comments","Envelope Comments");
-            verifyStaticSpecRow("Envelope",3,"Commercial Style","#10 4-1/8\" x 9-1/2\"");
-            verifyStaticSpecRow("Envelope",4,"Ink Colors Back","Red Cyan");
-            verifyStaticSpecRow("Envelope",5,"Ink Colors Front","Black");
-            verifyStaticSpecRow("Envelope",6,"Open End Catalog","#15 Catalog 10 x 15");
-            verifyStaticSpecRow("Envelope",7,"Open Side Booklet","#9 1/2 9\" x 12\"");
-            verifyStaticSpecRow("Envelope",8,"Paper Stock","Granite");
-            verifyStaticSpecRow("Envelope",9,"Paper Weight","15lb");
-            verifyStaticSpecRow("Envelope",10,"Social Style","3-5/8\" x 5-1/2\"");
-            verifyStaticSpecRow("Envelope",11,"Type","Commercial");
-            verifyStaticSpecRow("Envelope",12,"Window","Yes");
-            //verifyStaticSpecRow("Envelope",13,"Window from Bottom","1\"");  //TODO-SORTING BUG FOUND.  re-enable these statements once bug is fixed.
-            //verifyStaticSpecRow("Envelope",14,"Window from Left","2\"");
-            //verifyStaticSpecRow("Envelope",15,"Window Size","2 1/2\" 3\"");
+        expect(element('.451qa_sg_item:contains("ENVELOPE") ~ li div').count()).toBe(16);
+            verifyStaticSpecRow("ENVELOPE",0,"# Ink Back","2");
+            verifyStaticSpecRow("ENVELOPE",1,"# Ink Front","1");
+            verifyStaticSpecRow("ENVELOPE",2,"Additional Comments","Envelope Comments");
+            verifyStaticSpecRow("ENVELOPE",3,"Commercial Style","#10 4-1/8\" x 9-1/2\"");
+            verifyStaticSpecRow("ENVELOPE",4,"Ink Colors Back","Red Cyan");
+            verifyStaticSpecRow("ENVELOPE",5,"Ink Colors Front","Black");
+            verifyStaticSpecRow("ENVELOPE",6,"Open End Catalog","#15 Catalog 10 x 15");
+            verifyStaticSpecRow("ENVELOPE",7,"Open Side Booklet","#9 1/2 9\" x 12\"");
+            verifyStaticSpecRow("ENVELOPE",8,"Paper Stock","Granite");
+            verifyStaticSpecRow("ENVELOPE",9,"Paper Weight","15lb");
+            verifyStaticSpecRow("ENVELOPE",10,"Social Style","3-5/8\" x 5-1/2\"");
+            verifyStaticSpecRow("ENVELOPE",11,"Type","Commercial");
+            verifyStaticSpecRow("ENVELOPE",12,"Window","Yes");
+            verifyStaticSpecRow("ENVELOPE",13,"Window from Bottom","1\"");  //TODO-SORTING BUG FOUND.
+            verifyStaticSpecRow("ENVELOPE",14,"Window from Left","2\"");
+            verifyStaticSpecRow("ENVELOPE",15,"Window Size","2 1/2\" 3\"");
 
-        expect(element('tr.451_hdr_spec_grp:contains("Fastening") ~ tr').count()).toBe(18);
-            verifyStaticSpecRow("Fastening",0,"Crimp Left","No");
-            verifyStaticSpecRow("Fastening",1,"Crimp Right","Yes");
-            verifyStaticSpecRow("Fastening",2,"Edge Glue","Yes");
-            verifyStaticSpecRow("Fastening",3,"Edge Glue At","Left");
-            verifyStaticSpecRow("Fastening",4,"Line Glue","Yes");
-            verifyStaticSpecRow("Fastening",5,"Line Glue - Cont Form L","Yes");
-            verifyStaticSpecRow("Fastening",6,"Line Glue - Cont Form R","No");
-            verifyStaticSpecRow("Fastening",7,"Line Glue At","Top");
-            verifyStaticSpecRow("Fastening",8,"Line Glue Carbon","Yes");
-            verifyStaticSpecRow("Fastening",9,"Line Glue Paper","Yes");
-            verifyStaticSpecRow("Fastening",10,"Line Glue Points","1");
-            verifyStaticSpecRow("Fastening",11,"Notes","Fastening Notes");
-            verifyStaticSpecRow("Fastening",12,"Spot Glue","Yes");
-            verifyStaticSpecRow("Fastening",13,"Spot Glue At","Left Center Right Top");
-            verifyStaticSpecRow("Fastening",14,"Spot Glue Carbon","Probably");
-            verifyStaticSpecRow("Fastening",15,"Spot Glue Paper","Yes?");
-            verifyStaticSpecRow("Fastening",16,"Spot Glue Pts","3");
-            verifyStaticSpecRow("Fastening",17,"Standard Glueing","Yes");
+        expect(element('.451qa_sg_item:contains("FASTENING") ~ li div').count()).toBe(18);
+            verifyStaticSpecRow("FASTENING",0,"Crimp Left","No");
+            verifyStaticSpecRow("FASTENING",1,"Crimp Right","Yes");
+            verifyStaticSpecRow("FASTENING",2,"Edge Glue","Yes");
+            verifyStaticSpecRow("FASTENING",3,"Edge Glue At","Left");
+            verifyStaticSpecRow("FASTENING",4,"Line Glue","Yes");
+            verifyStaticSpecRow("FASTENING",5,"Line Glue - Cont Form L","Yes");
+            verifyStaticSpecRow("FASTENING",6,"Line Glue - Cont Form R","No");
+            verifyStaticSpecRow("FASTENING",7,"Line Glue At","Top");
+            verifyStaticSpecRow("FASTENING",8,"Line Glue Carbon","Yes");
+            verifyStaticSpecRow("FASTENING",9,"Line Glue Paper","Yes");
+            verifyStaticSpecRow("FASTENING",10,"Line Glue Points","1");
+            verifyStaticSpecRow("FASTENING",11,"Notes","Fastening Notes");
+            verifyStaticSpecRow("FASTENING",12,"Spot Glue","Yes");
+            verifyStaticSpecRow("FASTENING",13,"Spot Glue At","Left Center Right Top");
+            verifyStaticSpecRow("FASTENING",14,"Spot Glue Carbon","Probably");
+            verifyStaticSpecRow("FASTENING",15,"Spot Glue Paper","Yes?");
+            verifyStaticSpecRow("FASTENING",16,"Spot Glue Pts","3");
+            verifyStaticSpecRow("FASTENING",17,"Standard Glueing","Yes");
 
         //ink is a long beast...
 
-        expect(element('tr.451_hdr_spec_grp:contains("Label") ~ tr').count()).toBe(24);
-            verifyStaticSpecRow("Label",0,"# of labels per roll","150");
-            verifyStaticSpecRow("Label",1,"Adhesive","Permanent");
-            verifyStaticSpecRow("Label",2,"Center to Center Width","1.5\"");
-            verifyStaticSpecRow("Label",3,"Horizontal center to center","Center");
-            verifyStaticSpecRow("Label",4,"Ink Colors -Back","Red");
-            verifyStaticSpecRow("Label",5,"Ink Colors -Front","Black Yellow");
-            verifyStaticSpecRow("Label",6,"Ink Quantity -Back","1");
-            verifyStaticSpecRow("Label",7,"Ink Quantity -Front","2");
-            verifyStaticSpecRow("Label",8,"Label Depth","3\"");
-            verifyStaticSpecRow("Label",9,"Label Width","6\"");
-            verifyStaticSpecRow("Label",10,"Labels Across -Qty.","1");
-            verifyStaticSpecRow("Label",11,"Liner Material","Stuff");
-            verifyStaticSpecRow("Label",12,"Liner Width","2\"");
-            verifyStaticSpecRow("Label",13,"Paper Stock","Waxy");
-            verifyStaticSpecRow("Label",14,"Perforation locations","Each");
-            verifyStaticSpecRow("Label",15,"Perforations","Yes");
-            verifyStaticSpecRow("Label",16,"Punching","Yes");
-            verifyStaticSpecRow("Label",17,"Punching locations","Around");
-            verifyStaticSpecRow("Label",18,"Repeat Length","1");
-            verifyStaticSpecRow("Label",19,"Roll diameter (inside)","3\"");
-            verifyStaticSpecRow("Label",20,"roll max. diameter","4\"");  //TODO-SORTING BUG FOUND. probably same reason as above (Capitalization affects sorting somehow)
-            verifyStaticSpecRow("Label",21,"Type","CONTINUIOUS"); //(SIC)
-            verifyStaticSpecRow("Label",22,"Unwind Direction","Forward");
-            verifyStaticSpecRow("Label",23,"Usage Information","Peel sticker and apply");
+        expect(element('.451qa_sg_item:contains("LABEL") ~ li div').count()).toBe(24);
+            verifyStaticSpecRow("LABEL",0,"# of labels per roll","150");
+            verifyStaticSpecRow("LABEL",1,"Adhesive","Permanent");
+            verifyStaticSpecRow("LABEL",2,"Center to Center Width","1.5\"");
+            verifyStaticSpecRow("LABEL",3,"Horizontal center to center","Center");
+            verifyStaticSpecRow("LABEL",4,"Ink Colors -Back","Red");
+            verifyStaticSpecRow("LABEL",5,"Ink Colors -Front","Black Yellow");
+            verifyStaticSpecRow("LABEL",6,"Ink Quantity -Back","1");
+            verifyStaticSpecRow("LABEL",7,"Ink Quantity -Front","2");
+            verifyStaticSpecRow("LABEL",8,"Label Depth","3\"");
+            verifyStaticSpecRow("LABEL",9,"Label Width","6\"");
+            verifyStaticSpecRow("LABEL",10,"Labels Across -Qty.","1");
+            verifyStaticSpecRow("LABEL",11,"Liner Material","Stuff");
+            verifyStaticSpecRow("LABEL",12,"Liner Width","2\"");
+            verifyStaticSpecRow("LABEL",13,"Paper Stock","Waxy");
+            verifyStaticSpecRow("LABEL",14,"Perforation locations","Each");
+            verifyStaticSpecRow("LABEL",15,"Perforations","Yes");
+            verifyStaticSpecRow("LABEL",16,"Punching","Yes");
+            verifyStaticSpecRow("LABEL",17,"Punching locations","Around");
+            verifyStaticSpecRow("LABEL",18,"Repeat Length","1");
+            verifyStaticSpecRow("LABEL",19,"Roll diameter (inside)","3\"");
+            verifyStaticSpecRow("LABEL",20,"roll max. diameter","4\"");  //TODO-SORTING BUG FOUND. probably same reason as above (Capitalization affects sorting somehow)
+            verifyStaticSpecRow("LABEL",21,"Type","CONTINUIOUS"); //(SIC)
+            verifyStaticSpecRow("LABEL",22,"Unwind Direction","Forward");
+            verifyStaticSpecRow("LABEL",23,"Usage Information","Peel sticker and apply");
 
         //there are plenty more static specs to check on this product, but after a certain point these tests become redundant.  optionally this can be expanded.
 

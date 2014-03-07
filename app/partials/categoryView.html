@@ -46,7 +46,7 @@
                 </ul>
             </nav>
         </div>
-        <div id="451_lst_prod" class="product-navigation" ng-if="currentCategory.InteropID">
+        <div class="product-navigation" ng-if="currentCategory.InteropID">
             <loadingindicator ng-show="productLoadingIndicator" title="Please wait while we fetch all products"/>
             <h3 class="text-primary" ng-show="products">Products</h3>
             <div ng-show="products" class="alert alert-info text-center view-phone-alert">
@@ -55,7 +55,7 @@
             </div>
             <nav class="nav">
                 <ul>
-                    <li style="min-height:0;" class="nav-header well productList" ng-class="{ 'category-view-aside': showMega }" ng-repeat="product in products">
+                    <li id="451_lst_prod" style="min-height:0;" class="nav-header well productList" ng-class="{ 'category-view-aside': showMega }" ng-repeat="product in products">
                         <shortproductview p="product" user="user" />
                     </li>
                 </ul>
