@@ -6737,6 +6737,7 @@ select.ng-invalid:invalid:invalid:focus {
   left: 0;
   top: 0;
   overflow: hidden;
+  padding: 0 5px;
   background: url(../images/orderCloud.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -6748,12 +6749,16 @@ select.ng-invalid:invalid:invalid:focus {
   margin-top: 0;
   color: #fff;
   font-size: 30px;
-  text-shadow: 1px 1px 1px #2687b9;
+  -webkit-animation: pulsate 4s linear infinite;
+  -moz-animation: pulsate 4s linear infinite;
+  -o-animation: pulsate 4s linear infinite;
+  -ms-animation: pulsate 4s linear infinite;
+  animation: pulsate 4s linear infinite;
 }
 .order-cloud .form-signin {
   max-width: 26em;
   padding: 1em 1em 2em;
-  margin: 1em auto 5em;
+  margin: 2em auto;
   background: rgba(22, 145, 190, 0.15);
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -6774,13 +6779,6 @@ select.ng-invalid:invalid:invalid:focus {
 }
 .order-cloud .form-signin .btn-primary:focus {
   outline: none;
-}
-.order-cloud .form-signin .btn-primary:hover {
-  -webkit-animation: pulsate 1.2s linear infinite;
-  -moz-animation: pulsate 1.2s linear infinite;
-  -o-animation: pulsate 1.2s linear infinite;
-  -ms-animation: pulsate 1.2s linear infinite;
-  animation: pulsate 1.2s linear infinite;
 }
 .order-cloud .form-signin .btn-primary:active {
   text-shadow: 0 -1px 0 #444444, 0 0 5px #ffffdd, 0 0 8px #ffffff;

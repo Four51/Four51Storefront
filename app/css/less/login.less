@@ -6,6 +6,7 @@
   left: 0;
   top: 0;
   overflow: hidden;
+  padding: 0 5px;
   // custom background image
   background: @fourfiveone-login-bg;
   -webkit-background-size:  cover;
@@ -17,12 +18,16 @@
     margin-top: 0;
     color:#fff;
     font-size: @font-size-h2;
-    text-shadow: 1px 1px 1px lighten(@brand-primary, 30%);
+    -webkit-animation:  pulsate 4s linear infinite;
+    -moz-animation:     pulsate 4s linear infinite;
+    -o-animation:       pulsate 4s linear infinite;
+    -ms-animation:      pulsate 4s linear infinite;
+    animation:          pulsate 4s linear infinite;
   }
   .form-signin {
     max-width: 26em;
     padding: 1em 1em 2em;
-    margin: 1em auto 5em;
+    margin: 2em auto;
     background: rgba(22, 145, 190, .15);
     -webkit-border-radius:  @border-radius-large;
     -moz-border-radius:     @border-radius-large;
@@ -43,13 +48,6 @@
       transition:           all 150ms ease;
       &:focus {
         outline: none;
-      }
-      &:hover {
-        -webkit-animation:  pulsate 1.2s linear infinite;
-        -moz-animation:     pulsate 1.2s linear infinite;
-        -o-animation:       pulsate 1.2s linear infinite;
-        -ms-animation:      pulsate 1.2s linear infinite;
-        animation:          pulsate 1.2s linear infinite;
       }
       &:active {
         text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff;
