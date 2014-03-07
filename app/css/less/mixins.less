@@ -43,6 +43,11 @@ a {
   }
 }
 
+// Typography
+small,
+.small {
+  font-size: @font-size-small;
+}
 // Buttons
 .btn-group {
   width: 100%;
@@ -68,16 +73,12 @@ a {
 // Forms
 label {
   top: -20px;
-  font-size: 11px;
+  font-size: @font-size-small;
   position: absolute;
   display: block;
   &.required {
     color: red;
   }
-}
-
-option {
-  color: #555;
 }
 
 textarea {
@@ -154,6 +155,21 @@ button::-moz-focus-inner {
 // Navbar
 .navbar-nav {
   margin: 0 -5px;
+  // active arrow
+  .fa-caret-down {
+    display: none;
+  }
+  li {
+    &.active .fa-caret-down {
+      position: absolute;
+      bottom: -20px;
+      right: 40%;
+      font-size: 32px;
+      color:#359FD5;
+      z-index: 5;
+      display: block;
+    }
+  }
   &.pull-left {
   // cowboy up the icons on phone
   li {
@@ -185,15 +201,6 @@ button::-moz-focus-inner {
         text-align:center;
         padding: 10px;
         margin-top: -5px;
-      }
-      // cart active arrow
-      .fa-caret-down {
-        position: absolute;
-        bottom: -20px;
-        right: 35%;
-        font-size: 32px;
-        color:#359FD5;
-        z-index: 5;
       }
     }
   }
@@ -328,15 +335,19 @@ button::-moz-focus-inner {
     display: block;
   }
 
+  h1 {
+    margin: 0;
+  }
+
   img {
-    max-height: 130px;
+    max-height: @fourfiveone-thumbnail-height;
+    max-width: auto;
     float: left;
   }
 }
 
 // Panels
 .panel {
-  // Grrr :: keep long strings inside panel
   word-wrap: break-word;
   &.panel-primary {
     p span {
@@ -358,19 +369,25 @@ button::-moz-focus-inner {
     }
   }
   .panel-body {
-    // product quantity box
-    .quantity input {
-      height: 52px;
-      outline: 0 none;
-      padding: .5em 0;
-      text-align: center;
-      width: 100%;
-      margin: 0;
-      border-radius: 0;
-      font-size: 24px;
-      color:#468847;
-      box-shadow: none;
+    // quantity input is not like the others
+    .quantity {
+      div {
+        margin: 0;
+        input {
+          height: 52px;
+          outline: 0 none;
+          padding: .5em 0;
+          text-align: center;
+          width: 100%;
+          margin: 0;
+          border-radius: 0;
+          font-size: 24px;
+          color:#468847;
+          box-shadow: none;
+        }
+      }
     }
+
     // panel-footer in a panel-body is not like the others
     .panel-footer {
       margin: 0 -20px -15px;
@@ -387,7 +404,7 @@ button::-moz-focus-inner {
 .thumbnail {
   margin-bottom: 0;
   img {
-    max-height: 95px;
+    max-height: @fourfiveone-thumbnail-height;
     max-width: 100%;
     margin: 0 auto 15px;
   }
@@ -398,9 +415,15 @@ button::-moz-focus-inner {
   margin-bottom: 0;
 }
 
+// Badges
+.badge {
+  // more perfect circle
+  padding: 4px 7px;
+}
+
 // 451
 
-// If you need a bootstrap row to display as a table row :: ie: price schedule
+// if you need a bootstrap row to display as a table row :: ie: price schedule
 .view-tr  .row {
   margin-left: 0;
   margin-right: 0;

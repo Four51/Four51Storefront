@@ -9,19 +9,36 @@
                         </a>
                     </li>
                     <li class="products" ng-class="{'active': isInPath('catalog') || isInPath('product') || isInPath('cart/default') || isInPath('search')}">
-                        <a ng-show="Four51User.isAuthenticated()" href="#/catalog"><i class="fa fa-home"></i><span class="hidden-xs pull-right">Products</span></a>
+                        <a ng-show="Four51User.isAuthenticated()" href="#/catalog">
+                            <i class="fa fa-home"></i>
+                            <span class="hidden-xs pull-right">Products</span>
+                            <i class="fa fa-caret-down"></i>
+                        </a>
                     </li>
                     <li class="order" ng-class="{'active': isActive('order'), 'active-xs': isActive('favoriteorders')}">
-                        <a href="#/order"><i class="fa fa-bar-chart-o"></i><span class="hidden-xs">Orders</span></a>
+                        <a href="#/order">
+                            <i class="fa fa-bar-chart-o"></i>
+                            <span class="hidden-xs">Orders</span>
+                            <i class="fa fa-caret-down"></i>
+                        </a>
                     </li>
                     <li class="favorites hidden-xs" ng-class="{'active': isActive('favoriteorders')}">
-                        <a href="#/favoriteorders" ><i class="fa fa-star"></i><span class="hidden-xs">Favorites</span></a>
+                        <a href="#/favoriteorders">
+                            <i class="fa fa-star"></i>
+                            <span class="hidden-xs">Favorites</span>
+                            <i class="fa fa-caret-down"></i>
+                        </a>
                     </li>
                     <li ng-class="{'active': isActive(['admin', 'addresses', 'address', 'messages', 'message'])}">
                         <a href="#/admin" class="hidden-md hidden-lg"><i class="fa fa-cog"></i><span class="hidden-xs">Account</span></a>
                     </li>
                     <li class="dropdown admin-user visible-md visible-lg" ng-class="{'active': isActive(['admin', 'addresses', 'address', 'messages', 'message'])}">
-                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i><span>Account</span> <b class="caret"></b></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-cog"></i>
+                            <span>Account</span>
+                            <b class="caret"></b>
+                            <i class="fa fa-caret-down"></i>
+                        </a>
                         <ul class="dropdown-menu">
                             <li ng-show="user.Permissions.contains('ViewSelfAdmin')" class="admin"><a href="#/admin">User Information</a></li>
 							<li ng-show="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" class="addresses"><a href="#/addresses">Addresses</a></li>
@@ -41,7 +58,7 @@
                         <a ng-show="cartCount" class="cart" href="#/cart">
                             <span ng-bind="cartCount" class="badge badge-cart"></span>
                             <i class="fa fa-shopping-cart"></i>
-                            <i class="fa fa-caret-down" ng-show="isActive(['cart', 'checkout'])"></i>
+                            <i class="fa fa-caret-down"></i>
                         </a>
                     </li>
                 </ul>
