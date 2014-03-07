@@ -5792,7 +5792,7 @@ body {
 }
 hr {
   clear: both;
-  margin: 5px;
+  margin: 5px 0;
 }
 img {
   display: block;
@@ -5896,7 +5896,6 @@ button::-moz-focus-inner {
 }
 .navbar-nav {
   margin-top: 0;
-  margin-bottom: 0;
 }
 .navbar-nav .fa-caret-down {
   display: none;
@@ -6061,7 +6060,7 @@ button::-moz-focus-inner {
   height: 60px;
 }
 .jumbotron {
-  margin: -20px 0 15px;
+  margin: 0 5px;
   display: none;
 }
 .jumbotron.active {

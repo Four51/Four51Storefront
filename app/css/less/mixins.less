@@ -26,7 +26,7 @@ body {
 
 hr {
   clear: both;
-  margin: 5px;
+  margin: 5px 0;
 }
 
 img {
@@ -162,7 +162,6 @@ button::-moz-focus-inner {
 // Navbar
 .navbar-nav {
   margin-top: 0;
-  margin-bottom: 0;
   // active arrow
   .fa-caret-down {
     display: none;
@@ -350,8 +349,7 @@ button::-moz-focus-inner {
 
 // Jumbotron
 .jumbotron {
-  // because we removed navbar margin bottom, bump jumbotron up
-  margin: -20px 0 15px;
+  margin: 0 5px;
   // hide/show only on products::home page
   display: none;
   &.active {
