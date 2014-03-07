@@ -191,15 +191,15 @@ button::-moz-focus-inner {
         color: darken(@navbar-default-bg, 35%)
       }
     }
-      a {
-        padding: @nav-link-padding;
-        span {
-          margin-left: 5px;
-        }
-        i {
-          font-size: @font-size-large;
-        }
+    a {
+      padding: @nav-link-padding;
+      span {
+        margin-left: 5px;
       }
+      i {
+        font-size: @font-size-large;
+      }
+    }
     // dropdown children on desktop
     ul li {
       width: 100%;
@@ -439,6 +439,9 @@ button::-moz-focus-inner {
 .well {
   margin-bottom: 0;
   border-radius: 0;
+  border-width: 1px;
+  box-shadow: none;
+  margin: 0;
 }
 
 // Badges
