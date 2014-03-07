@@ -26,6 +26,7 @@ body {
 
 hr {
   clear: both;
+  margin: 5px;
 }
 
 img {
@@ -48,6 +49,7 @@ small,
 .small {
   font-size: @font-size-small;
 }
+
 // Buttons
 .btn-group {
   width: 100%;
@@ -81,6 +83,9 @@ label {
   }
 }
 
+option {
+  color: @gray-dark;
+}
 textarea {
   resize: vertical;
   width: 100%;
@@ -124,12 +129,12 @@ button::-moz-focus-inner {
 
 // Form field icons
 .view-form-icon {
-  // Make room for labels
+  // make room for labels
   div {
     margin: 25px 0 0;
   }
 
-  // Make room for icons
+  // make room for icons
   input,
   select,
   text,
@@ -137,9 +142,9 @@ button::-moz-focus-inner {
     padding-left: 25px;
   }
 
-  // Icons
+  // icons
   i {
-    color: #CCC;
+    color: @gray-light;
     left: 10px;
     position: absolute;
     top: 10px;
@@ -150,6 +155,16 @@ button::-moz-focus-inner {
 .create-address-type label {
   position: static;
   display: block;
+}
+
+// Grid system
+// canonical selector :: remove outside primary column gutter-width and add back to ones that come after the first one for line items
+[class*="col-"] {
+  padding: 0;
+  ~ [class*="col-"] {
+    padding-left: @grid-gutter-width;
+    padding-right: @grid-gutter-width;
+  }
 }
 
 // Navbar
@@ -163,7 +178,7 @@ button::-moz-focus-inner {
     &.active .fa-caret-down {
       position: absolute;
       bottom: -20px;
-      right: 40%;
+      left: 40%;
       font-size: 32px;
       color:#359FD5;
       z-index: 5;
@@ -175,10 +190,23 @@ button::-moz-focus-inner {
   li {
     display: inline-block;
     float: left;
+    &.fadeInLeft {
+      -webkit-animation-duration:   1s;
+      -moz-animation-duration:      1s;
+      -o-animation-duration:        1s;
+      animation-duration:           1s;
+      -ms-animation-duration:       1s;
+      a i {
+        color: darken(@navbar-default-bg, 35%)
+      }
+    }
       a {
         padding: @nav-link-padding;
         span {
           margin-left: 5px;
+        }
+        i {
+          font-size: @font-size-large;
         }
       }
     // dropdown children on desktop
@@ -192,15 +220,15 @@ button::-moz-focus-inner {
   }
 
   &.pull-right {
-    // cart icon
     li a {
       padding: 20px;
-      .fa-shopping-cart {
+      // cart icon
+      i:first-of-type {
         border-radius: 50%;
         border: 1px solid #fff;
         text-align:center;
         padding: 10px;
-        margin-top: -5px;
+        margin-top: -10px;
       }
     }
   }
@@ -240,7 +268,7 @@ button::-moz-focus-inner {
   -o-animation-name:            fadeInUp;
   animation-name:               fadeInUp;
   -ms-animation-name:           fadeInUp;
-  // Fixed bottom buttons
+  // fixed bottom buttons
   ul {
     list-style-type:none;
     padding: 0;
@@ -285,8 +313,8 @@ button::-moz-focus-inner {
 }
 
 // Navs
+// shared nav styles
 .nav {
-  // content nav
   ul  {
     list-style-type: none;
     clear: both;
@@ -304,11 +332,11 @@ button::-moz-focus-inner {
         font-weight: bold;
       }
 
-      // content nav icons
       span i {
-        font-size: 18px;
+        font-size: @font-size-large;
         padding: 15px 20px;
         cursor: pointer;
+        color: darken(@navbar-default-bg, 35%);
       }
     }
   }
@@ -337,12 +365,16 @@ button::-moz-focus-inner {
 
   h1 {
     margin: 0;
-  }
-
-  img {
-    max-height: @fourfiveone-thumbnail-height;
-    max-width: auto;
-    float: left;
+    font-size: @font-size-h2;
+    img {
+      max-height: @fourfiveone-thumbnail-height;
+      max-width: auto;
+      float: left;
+    }
+    span {
+      display: block;
+      clear: left;
+    }
   }
 }
 
