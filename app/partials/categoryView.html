@@ -2,13 +2,13 @@
     <nav id="451qa_nav_hdr" class="nav">
         <hr />
             <ul>
-                <!--- TODO would like to see the toggle in scope and stay open if opened while navigation through categories and products until user decides to close aside nav --->
                 <li class="hidden-sm hidden-xs" ng-click="showMega = ! showMega" href="#">
-                    <span ng-show="!showMega"><i class="fa fa-plus" data-title="Open all Categories" data-placement="right" bs-tooltip></i></span>
-                    <span ng-show="showMega"><i class="fa fa-minus-circle" data-title="Close all Categories" data-placement="right" bs-tooltip></i></span>
+                    <span ng-show="!showMega"><i class="fa fa-align-justify"></i></span>
+                    <span ng-show="showMega"><i class="fa fa-minus-circle"></i></span>
                 </li>
                 <li>
                     <span id="451_lbl_curcat" class="text-primary" ng-bind-html="currentCategory.Name || 'All Categories'"></span>
+                    <span class="text-primary" ng-show="currentCategory.SubCategories.length && currentCategory.InteropID">Categories</span>
                     <span class="text-primary" ng-show="!currentCategory">All Categories</span>
                 </li>
                 <li class="pull-right">
@@ -28,7 +28,6 @@
     <div class="cat-body" ng-class="{ 'move-cat-body col-sm-9': showMega }">
         <div class="category-list" ng-show="currentCategory">
             <loadingindicator ng-show="categoryLoadingIndicator" title="Please wait while we fetch all categories" />
-            <h3 class="text-primary" ng-show="currentCategory.SubCategories.length && currentCategory.InteropID">Categories</h3>
             <nav class="nav 451_lbl_subcatlist">
                 <ul>
                     <li class="nav-header well col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-class="{ 'category-view-aside': showMega }" ng-repeat="c in currentCategory.SubCategories">

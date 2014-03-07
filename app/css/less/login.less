@@ -13,28 +13,29 @@
   -o-background-size:       cover;
   -ms-background-size:      cover;
   background-size:          cover;
-  h2 {
+  h1 {
     margin-top: 0;
+    color:#fff;
+    font-size: @font-size-h2;
+    text-shadow: 1px 1px 1px lighten(@brand-primary, 30%);
   }
   .form-signin {
     max-width: 26em;
-    padding: 1.357em 2.071em 2.071em;
-    margin: 2em auto 5em;
+    padding: 1em 1em 2em;
+    margin: 1em auto 5em;
     background: rgba(22, 145, 190, .15);
-    -webkit-border-radius:  1em;
-    -moz-border-radius:     1em;
-    -o-border-radius:       1em;
-    -ms-border-radius:      1em;
-    border-radius:          1em;
-
+    -webkit-border-radius:  @border-radius-large;
+    -moz-border-radius:     @border-radius-large;
+    -o-border-radius:       @border-radius-large;
+    -ms-border-radius:      @border-radius-large;
+    border-radius:          @border-radius-large;
+    box-shadow: 1px 1px 1px lighten(rgba(22, 145, 190, .15), 50%);
 
     // custom pulse animation
     .btn-primary  {
-      letter-spacing: .04em;
       padding: 15px;
       margin-top: 15px;
-      border-radius: 3px 3px 3px 3px;
-      text-shadow: 0 -1px 0 #666;
+      text-shadow: 0 -1px 0 @gray-darker;
       -webkit-transition:   all 150ms ease;
       -moz-transition:      all 150ms ease;
       -o-transition:        all 150ms ease;

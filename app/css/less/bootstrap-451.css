@@ -6041,12 +6041,12 @@ button::-moz-focus-inner {
 }
 .nav ul li span.text-primary {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 15px;
   font-weight: bold;
 }
 .nav ul li span i {
   font-size: 18px;
-  padding: 20px;
+  padding: 15px;
   cursor: pointer;
   color: #154964;
 }
@@ -6179,7 +6179,7 @@ select.ng-invalid:invalid {
   border-color: #d9534f;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  color: #ccc;
+  color: #cccccc;
 }
 input.ng-invalid:focus,
 textarea.ng-invalid:focus,
@@ -6202,7 +6202,7 @@ select.ng-invalid:invalid:invalid:focus {
   border-color: #d9534f;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
-  color: #ccc;
+  color: #cccccc;
 }
 .ng-enter {
   -webkit-animation-duration: 1s;
@@ -6744,26 +6744,28 @@ select.ng-invalid:invalid:invalid:focus {
   -ms-background-size: cover;
   background-size: cover;
 }
-.order-cloud h2 {
+.order-cloud h1 {
   margin-top: 0;
+  color: #fff;
+  font-size: 30px;
+  text-shadow: 1px 1px 1px #2687b9;
 }
 .order-cloud .form-signin {
   max-width: 26em;
-  padding: 1.357em 2.071em 2.071em;
-  margin: 2em auto 5em;
+  padding: 1em 1em 2em;
+  margin: 1em auto 5em;
   background: rgba(22, 145, 190, 0.15);
-  -webkit-border-radius: 1em;
-  -moz-border-radius: 1em;
-  -o-border-radius: 1em;
-  -ms-border-radius: 1em;
-  border-radius: 1em;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -o-border-radius: 6px;
+  -ms-border-radius: 6px;
+  border-radius: 6px;
+  box-shadow: 1px 1px 1px rgba(216, 241, 251, 0.15);
 }
 .order-cloud .form-signin .btn-primary {
-  letter-spacing: .04em;
   padding: 15px;
   margin-top: 15px;
-  border-radius: 3px 3px 3px 3px;
-  text-shadow: 0 -1px 0 #666666;
+  text-shadow: 0 -1px 0 #222222;
   -webkit-transition: all 150ms ease;
   -moz-transition: all 150ms ease;
   -o-transition: all 150ms ease;
@@ -6926,7 +6928,6 @@ select.ng-invalid:invalid:invalid:focus {
   margin: 0;
   padding: 0;
   list-style: none;
-  font-size: 1em;
   font-weight: 300;
 }
 .category-list ul li {
