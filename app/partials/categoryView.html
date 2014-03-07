@@ -18,12 +18,12 @@
         <hr />
     </nav>
     <aside class="col-sm-3 hidden-sm hidden-xs" ng-if="showMega" ng-class="{ 'category-view-aside': showMega }">
-        <nav class="451_cat_nav">
+        <div class="451_cat_nav">
             <a href="#/catalog">All Products</a>
             <ul class="nav-header 451_cat_item">
                 <categorytree tree='tree' current='currentCategory' />
             </ul>
-        </nav>
+        </div>
     </aside>
     <div class="cat-body" ng-class="{ 'move-cat-body col-sm-9': showMega }">
         <div class="category-list" ng-show="currentCategory">

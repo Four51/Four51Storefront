@@ -159,7 +159,8 @@ button::-moz-focus-inner {
 
 // Navbar
 .navbar-nav {
-  margin: 0 -5px;
+  margin-top: 0;
+  margin-bottom: 0;
   // active arrow
   .fa-caret-down {
     display: none;
@@ -305,6 +306,8 @@ button::-moz-focus-inner {
 // Navs
 // shared nav styles
 .nav {
+  margin-top: 0;
+  margin-bottom: 0;
   ul  {
     list-style-type: none;
     clear: both;
@@ -347,7 +350,7 @@ button::-moz-focus-inner {
 // Jumbotron
 .jumbotron {
   // because we removed navbar margin bottom, bump jumbotron up and hide/show only on products::home page
-  margin: -20px 0 0;
+  margin: -20px 0 15px;
   display: none;
   &.active {
     display: block;
@@ -435,6 +438,7 @@ button::-moz-focus-inner {
 // Wells
 .well {
   margin-bottom: 0;
+  border-radius: 0;
 }
 
 // Badges
