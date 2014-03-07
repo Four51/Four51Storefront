@@ -6749,11 +6749,11 @@ select.ng-invalid:invalid:invalid:focus {
   margin-top: 0;
   color: #fff;
   font-size: 30px;
-  -webkit-animation: pulsate 4s linear infinite;
-  -moz-animation: pulsate 4s linear infinite;
-  -o-animation: pulsate 4s linear infinite;
-  -ms-animation: pulsate 4s linear infinite;
-  animation: pulsate 4s linear infinite;
+  -webkit-animation: pulsate 3s linear infinite;
+  -moz-animation: pulsate 3s linear infinite;
+  -o-animation: pulsate 3s linear infinite;
+  -ms-animation: pulsate 3s linear infinite;
+  animation: pulsate 3s linear infinite;
 }
 .order-cloud .form-signin {
   max-width: 26em;
