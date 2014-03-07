@@ -5802,6 +5802,7 @@ div {
 }
 a {
   cursor: pointer;
+  display: inline-block;
 }
 a:focus {
   outline: none;
@@ -7172,16 +7173,15 @@ select.ng-invalid:invalid:invalid:focus {
   border-left: 1px solid #cccccc;
 }
 .panel-cart .panel-body a {
-  display: block;
   width: 100%;
   border: 1px solid transparent;
   padding: 5px;
 }
 .panel-cart .panel-body a:hover {
   text-decoration: none;
-  background-color: #F9F9F9;
+  background-color: #f5f5f5;
   border-radius: 4px;
-  border: 1px solid #d6d6d6;
+  border: 1px solid #cccccc;
   -webkit-transition: all ease-in-out 0.5s;
   -moz-transition: all ease-in-out 0.5s;
   -ms-transition: all ease-in-out 0.5s;
