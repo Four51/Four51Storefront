@@ -121,7 +121,8 @@ button::-moz-focus-inner {
   left: 25px;
   top: 9px;
   color:#999;
-  pointer-events:none;
+  // allow click through
+  pointer-events: none;
 }
 
 .col-sm-4.view-form-select:before {
@@ -295,7 +296,6 @@ button::-moz-focus-inner {
         border-radius: 0;
         padding: 20px 0;
         text-transform: lowercase;
-        font-size: 14px;
       }
       .btn-warning[disabled] {
         opacity: 1;
@@ -319,18 +319,18 @@ button::-moz-focus-inner {
       display: inline;
       float: left;
       padding: 0;
-      span.text-primary {
-        display: inline-block;
-        margin-top: 15px;
-        font-size: 1em;
-        font-weight: bold;
-      }
-
-      span i {
-        font-size: @font-size-large;
-        padding: 15px 20px;
-        cursor: pointer;
-        color: darken(@navbar-default-bg, 35%);
+      span {
+        &.text-primary {
+          display: inline-block;
+          margin-top: 20px;
+          font-weight: bold;
+        }
+        i {
+          font-size: @font-size-large;
+          padding: 20px;
+          cursor: pointer;
+          color: darken(@navbar-default-bg, 35%);
+        }
       }
     }
   }
@@ -350,8 +350,9 @@ button::-moz-focus-inner {
 
 // Jumbotron
 .jumbotron {
-  // because we removed navbar margin bottom, bump jumbotron up and hide/show only on products::home page
+  // because we removed navbar margin bottom, bump jumbotron up
   margin: -20px 0 15px;
+  // hide/show only on products::home page
   display: none;
   &.active {
     display: block;
@@ -416,7 +417,7 @@ button::-moz-focus-inner {
 
     // panel-footer in a panel-body is not like the others
     .panel-footer {
-      margin: 0 -20px -15px;
+      margin: 0 -15px -15px;
     }
   }
   .panel-footer {
@@ -447,7 +448,7 @@ button::-moz-focus-inner {
 
 // Badges
 .badge {
-  // more perfect circle
+  // a more perfect circle
   padding: 4px 7px;
 }
 

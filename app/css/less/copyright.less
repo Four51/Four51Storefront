@@ -10,18 +10,22 @@
     &:first-of-type {
       color:#1C638D;
       background-color: #fff;
-      .btn {
-        font-size: @font-size-small;
-      }
+    }
+    .btn {
+      margin-top: 5px;
     }
     &:last-of-type {
       color:#fff;
-      background-color:#359FD5;
+      background-color:@fourfiveone-blue;
       .btn {
-        background-color:#1C638D;
-        color:#fff;
+        background-color:darken(@fourfiveone-blue, 6.5%);
+        color:#fff;;
+        border: none;
         &:hover {
-          background-color:#3d3d3d;
+          background-color:darken(@fourfiveone-blue, 45%);
+        }
+        i {
+          margin-right: 5px;
         }
       }
     }
