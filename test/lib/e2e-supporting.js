@@ -94,6 +94,12 @@ function e2eClickMainNavCategory(intNthCat,strCatName){
     element(strSelector).click();
 }
 
+function e2eClickOpenCategory(){
+    //open the category tree that's hidden by default
+    sleep(3); //timing issue, sleep a few seconds
+    element('#451qa_nav_hdr ul li').click();
+}
+
 //product functions
 function e2eClickProductFromList(intNthProd,strProdName){
     var strSelector = "";

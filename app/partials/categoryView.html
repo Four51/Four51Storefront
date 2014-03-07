@@ -1,5 +1,5 @@
-<section>
-    <nav class="nav">
+<section class="container category-view">
+    <nav id="451qa_nav_hdr" class="nav nav-cat-search">
         <hr />
             <ul>
                 <!--- TODO would like to see the toggle in scope and stay open if opened while navigation through categories and products until user decides to close aside nav --->
@@ -9,6 +9,8 @@
                 </li>
                 <li>
                     <span class="text-primary" ng-bind-html="currentCategory.Name || 'All Categories'"></span>
+                <li class="text-nav">
+                    <span id="451_lbl_curcat" class="text-primary" ng-bind-html="currentCategory.Name || 'All Categories'"></span>
                     <span class="text-primary" ng-show="!currentCategory">All Categories</span>
                 </li>
                 <li class="pull-right">
@@ -18,12 +20,12 @@
         <hr />
     </nav>
     <aside class="col-sm-3 hidden-sm hidden-xs" ng-if="showMega" ng-class="{ 'category-view-aside': showMega }">
-        <div class="451_cat_nav">
+        <nav class="nav 451_cat_nav">
             <a href="#/catalog">All Products</a>
-            <ul class="nav-header 451_cat_item">
+            <ul class="nav-header">
                 <categorytree tree='tree' current='currentCategory' />
             </ul>
-        </div>
+        </nav>
     </aside>
     <div class="cat-body" ng-class="{ 'move-cat-body col-sm-9': showMega }">
         <div class="category-list" ng-show="currentCategory">
