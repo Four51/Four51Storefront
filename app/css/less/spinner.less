@@ -2,7 +2,6 @@
 .app-loading-indicator-cell {
   text-align: center;
   position: absolute;
-  min-height:0;
   left: 0;
   right:0;
   top: 0;
@@ -27,5 +26,9 @@
     border-bottom:3px solid rgba(0,174,239,.15);
     border-top:3px solid darken(@navbar-default-bg, 35%);
     border-radius:100%;
+  }
+  .app-loading-indicator-title {
+    background-color:lighten(@brand-primary, 80%);
+    color:darken(@navbar-default-bg, 35%);
   }
 }
