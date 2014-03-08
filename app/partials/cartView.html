@@ -121,24 +121,26 @@
                         </div>
                     </div>
                 <div class="panel-footer">
-                    <div ng-if="user.Permissions.contains('ViewPromotions')" class="row">
-                        <giftcardredemption />
-                    </div>
-                    <div class="text-right" ng-if="!(user.Permissions.contains('HidePricing'))">
-                        <h4 class="text-primary">
-                            <strong>Subtotal <span class="text-success">{{currentOrder.Subtotal | currency}}</span></strong>
-                        </h4>
-                        <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
-                            <span class="text-info">Shipping, handling and tax may be added to this subtotal.</span>
-                        </p>
+                    <div class="row">
+                        <div class="col-md-4 col-lg-3">
+                            <giftcardredemption ng-if="user.Permissions.contains('ViewPromotions')" />
+                        </div>
+                        <div class="col-md-3 col-md-offset-5 col-lg-4 text-right" ng-if="!(user.Permissions.contains('HidePricing'))">
+                            <h4 class="text-primary">
+                                <strong>Subtotal <span class="text-success">{{currentOrder.Subtotal | currency}}</span></strong>
+                            </h4>
+                            <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
+                                <span class="text-info">Shipping, handling and tax may be added to this subtotal.</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="navbar-fixed-bottom">
-                <div class="view-response-message alert-success" alert-show="currentOrder">
+                <div class="view-response-message alert-success text-center" alert-show="currentOrder">
                     <p>{{actionMessage}}</p>
                 </div>
-                <div class="view-response-message alert-danger" alert-show="gcMessage">{{gcMessage}}</div>
+                <div class="view-response-message alert-danger text-center" alert-show="gcMessage">{{gcMessage}}</div>
                 <div class="view-error-message" ng-show="cart.$error.required.length > 0">
                     <ul class="alert-warning">
                         <li class="text-center">

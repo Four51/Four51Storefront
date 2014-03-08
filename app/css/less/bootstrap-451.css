@@ -6085,6 +6085,9 @@ button::-moz-focus-inner {
 .panel.panel-primary p span {
   float: left;
 }
+.panel.panel-primary .panel-heading {
+  margin-top: 0;
+}
 .panel.panel-primary .panel-footer {
   background-color: transparent;
 }
@@ -6232,14 +6235,14 @@ select.ng-invalid:invalid:invalid:focus {
 .app-loading-indicator-cell {
   text-align: center;
   position: absolute;
-  min-height: 60px;
+  min-height: 0;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 999999;
+  z-index: 1031;
   padding: 10px 0;
-  background-color: #fff;
+  background-color: #e4f2f9;
   opacity: .75;
 }
 .app-loading-indicator-cell .app-loading-indicator {
@@ -6256,20 +6259,8 @@ select.ng-invalid:invalid:invalid:focus {
   border-left: 3px solid rgba(0, 174, 239, 0.15);
   border-right: 3px solid rgba(0, 174, 239, 0.15);
   border-bottom: 3px solid rgba(0, 174, 239, 0.15);
-  border-top: 3px solid #00aeef;
+  border-top: 3px solid #154964;
   border-radius: 100%;
-}
-.app-loading-indicator-cell .app-loading-indicator .app-loading-indicator-title {
-  text-align: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 5%;
-}
-.app-loading-indicator-cell .app-loading-indicator .app-loading-indicator-title p {
-  margin: 0 auto;
-  width: 500px;
-  padding: 10px;
 }
 .view-response-message.ng-hide-add {
   display: block !important;

@@ -10,13 +10,13 @@
         <orderbilling />
         <orderapprovals />
         <div class="navbar-fixed-bottom">
-            <div class="view-response-message alert-success" alert-show="actionMessage">
+            <div class="view-response-message alert-success text-center" alert-show="actionMessage">
                 <p>{{actionMessage}}</p>
             </div>
-            <div class="view-response-message alert-warning" alert-show="errorMessage">
+            <div class="view-response-message alert-warning text-center" alert-show="errorMessage">
                 <p>{{errorMessage}}</p>
             </div>
-            <div class="view-response-message alert-warning" alert-show="couponError">
+            <div class="view-response-message alert-warning text-center" alert-show="couponError">
                 <p>{{couponError}}</p>
             </div>
             <div class="view-error-message" ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length) > 0">

@@ -2,14 +2,14 @@
 .app-loading-indicator-cell {
   text-align: center;
   position: absolute;
-  min-height:60px;
+  min-height:0;
   left: 0;
   right:0;
   top: 0;
   bottom: 0;
-  z-index: 999999;
+  z-index: 1031;
   padding: 10px 0;
-  background-color:#fff;
+  background-color:lighten(@brand-primary, 80%);
   opacity: .75;
   .app-loading-indicator {
     display: inline-block;
@@ -25,19 +25,7 @@
     border-left:3px solid rgba(0,174,239,.15);
     border-right:3px solid rgba(0,174,239,.15);
     border-bottom:3px solid rgba(0,174,239,.15);
-    border-top:3px solid rgba(0,174,239,1);
+    border-top:3px solid darken(@navbar-default-bg, 35%);
     border-radius:100%;
-    .app-loading-indicator-title {
-      text-align: center;
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 5%;
-      p {
-        margin: 0 auto;
-        width: 500px;
-        padding: 10px;
-      }
-    }
   }
 }
