@@ -129,7 +129,7 @@ button::-moz-focus-inner {
   }
 }
 
-// Form dropdown select placeholder
+// Form placeholder text for select field
 .view-form-select:before {
   content: "Select";
   position: absolute;
@@ -191,6 +191,33 @@ button::-moz-focus-inner {
     left: 10px;
     position: absolute;
     top: 13px;
+  }
+}
+
+@media (max-width: @screen-xs-max) {
+  // style form fields consistently on phone
+  textarea, select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  textarea, select {
+    border: 1px solid #555;
+    padding: 0.5em;
+    font-size: 15px;
+    line-height: 1.2em;
+    width: 80%;
+    background: #fff;
+    -webkit-appearance: none;
+    -webkit-box-shadow: 1px 1px 1px #fff;
+    -webkit-border-radius: 0.5em;
+    -moz-appearance: none;
+    -moz-appearance: 1px 1px 1px #fff;
+    -moz-appearance: 0.5em;
+    appearance: none;
+    appearance: 1px 1px 1px #fff;
+    appearance: 0.5em;
   }
 }
 

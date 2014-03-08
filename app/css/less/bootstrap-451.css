@@ -5970,6 +5970,32 @@ button::-moz-focus-inner {
   position: absolute;
   top: 13px;
 }
+@media (max-width: 767px) {
+  textarea,
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  textarea,
+  select {
+    border: 1px solid #555;
+    padding: 0.5em;
+    font-size: 15px;
+    line-height: 1.2em;
+    width: 80%;
+    background: #fff;
+    -webkit-appearance: none;
+    -webkit-box-shadow: 1px 1px 1px #fff;
+    -webkit-border-radius: 0.5em;
+    -moz-appearance: none;
+    -moz-appearance: 1px 1px 1px #fff;
+    -moz-appearance: 0.5em;
+    appearance: none;
+    appearance: 1px 1px 1px #fff;
+    appearance: 0.5em;
+  }
+}
 .navbar-nav {
   margin-top: 0;
 }
@@ -6454,30 +6480,6 @@ select.ng-invalid:invalid:invalid:focus {
   position: absolute;
 }
 @media (max-width: 767px) {
-  textarea,
-  select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-  }
-  textarea,
-  select {
-    border: 1px solid #555;
-    padding: 0.5em;
-    font-size: 15px;
-    line-height: 1.2em;
-    width: 80%;
-    background: #fff;
-    -webkit-appearance: none;
-    -webkit-box-shadow: 1px 1px 1px #fff;
-    -webkit-border-radius: 0.5em;
-    -moz-appearance: none;
-    -moz-appearance: 1px 1px 1px #fff;
-    -moz-appearance: 0.5em;
-    appearance: none;
-    appearance: 1px 1px 1px #fff;
-    appearance: 0.5em;
-  }
   .btn-group {
     width: 100%;
     vertical-align: inherit;
@@ -6585,19 +6587,6 @@ select.ng-invalid:invalid:invalid:focus {
     width: 100%;
     display: block;
     margin: 5px 0;
-  }
-}
-@media (min-width: 768px) and (max-width: 991px) {
-  .jumbotron {
-    text-align: center;
-  }
-  .jumbotron img {
-    float: none;
-    margin: 0 auto 10px;
-    max-height: 75px;
-  }
-  .view-form-icon i {
-    top: 15px;
   }
 }
 @-webkit-keyframes view-enter {
