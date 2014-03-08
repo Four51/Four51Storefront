@@ -1,0 +1,36 @@
+// Utilities
+
+// A more perfect table
+.panel-table {
+  padding: 0;
+  border: 1px solid #d6d6d6;
+  margin: 15px;
+
+  input,
+  select,
+  text,
+  textarea {
+    margin: 0;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+    border-bottom: 1px solid @fourfiveone-gray-medium;
+    &:last-child {
+      border-bottom: none;
+    }
+    // border columns as cells
+    [class*="col-"] {
+      min-height: 45px;
+    }
+    .btn {
+      margin: 2px 0;
+    }
+  }
+  &:extend(.clearfix all);
+}

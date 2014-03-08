@@ -170,6 +170,11 @@ button::-moz-focus-inner {
     }
   }
 
+  .input-group-addon {
+    border: none;
+    padding: 0 5px;
+  }
+
   label {
     top: -20px;
     font-size: @font-size-small;
@@ -191,33 +196,6 @@ button::-moz-focus-inner {
     left: 10px;
     position: absolute;
     top: 13px;
-  }
-}
-
-@media (max-width: @screen-xs-max) {
-  // style form fields consistently on phone
-  textarea, select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-  }
-
-  textarea, select {
-    border: 1px solid #555;
-    padding: 0.5em;
-    font-size: 15px;
-    line-height: 1.2em;
-    width: 80%;
-    background: #fff;
-    -webkit-appearance: none;
-    -webkit-box-shadow: 1px 1px 1px #fff;
-    -webkit-border-radius: 0.5em;
-    -moz-appearance: none;
-    -moz-appearance: 1px 1px 1px #fff;
-    -moz-appearance: 0.5em;
-    appearance: none;
-    appearance: 1px 1px 1px #fff;
-    appearance: 0.5em;
   }
 }
 
@@ -412,20 +390,21 @@ button::-moz-focus-inner {
 // Jumbotron
 .jumbotron {
   margin: 0 5px;
-  // hide/show only on products::home page
+  // hide/show only on products::home page / remove this to display jumbotron on all pages
   display: none;
   &.active {
     display: block;
   }
 
-  h1 {
+  // branding
+  h2 {
     margin: 0;
-    font-size: @font-size-h2;
+    // buyer logo
     img {
       max-height: @fourfiveone-thumbnail-height;
       max-width: auto;
-      float: left;
     }
+    // buyer name
     span {
       display: block;
       clear: left;
@@ -436,6 +415,7 @@ button::-moz-focus-inner {
 // Panels
 .panel {
   word-wrap: break-word;
+
   &.panel-primary {
     p span {
       float: left;
@@ -474,38 +454,6 @@ button::-moz-focus-inner {
   }
 }
 
-// a more perfect table
-.panel-table {
-  padding: 0;
-  border: 1px solid #d6d6d6;
-  margin: 15px;
-
-  input,
-  select,
-  text,
-  textarea {
-    margin: 0;
-  }
-  a {
-    text-decoration: underline;
-  }
-  .row {
-    margin-left: 0;
-    margin-right: 0;
-    border-bottom: 1px solid @fourfiveone-gray-medium;
-    &:last-child {
-      border-bottom: none;
-    }
-    // border columns as cells
-    [class*="col-"] {
-      min-height: 45px;
-    }
-    .btn {
-      margin: 2px 0;
-    }
-  }
-  &:extend(.clearfix all);
-}
 // Thumbnails
 .thumbnail {
   margin-bottom: 0;
@@ -530,5 +478,3 @@ button::-moz-focus-inner {
   // a more perfect circle
   padding: 4px 7px;
 }
-
-// 451

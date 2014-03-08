@@ -62,7 +62,10 @@
                     {{order.Type}}
                 </div>
                 <div class="col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">
-                    <button ng-disabled="currentOrder" type="button" class="btn btn-default" ng-click="repeat(order)">Repeat Order</button>
+                    <button ng-disabled="currentOrder" type="button" class="btn btn-default pull-right" ng-click="repeat(order)">
+                        <i ng-show="currentOrder" class="fa fa-warning"></i>
+                        Repeat Order
+                    </button>
                 </div>
             </div>
         </div>
