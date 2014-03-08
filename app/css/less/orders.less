@@ -2,6 +2,7 @@
 .panel-order {
   margin-bottom: 0;
   border-bottom: none;
+
   // panel validation icons
   .panel-heading {
     cursor: pointer;
@@ -49,7 +50,16 @@
   &:extend(.panel-default all);
 }
 
-// I can see future styles for this, so creating a panel type
 .panel-order-history {
+  &:extend(.panel-body all);
+}
+
+.panel-order-shipping-multiple {
+  // line item top border
+  border: none;
+  // canonical selector :: remove border from first panel-body and add back to ones that come after the first one for line items
+  ~ .panel-body {
+    border-top: 1px solid @fourfiveone-border-color;
+  }
   &:extend(.panel-body all);
 }
