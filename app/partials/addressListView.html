@@ -36,26 +36,26 @@
                 <div class="col-sm-2 hidden-xs">Billing</div>
             </div>
             <div class="row"  ng-repeat="address in addresses | filter:searchTerm | filter:{IsCustEditable:true}">
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <input type='checkbox' ng-model="address.Selected" />
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">Name</span>
                     <a ng-href="#/address/{{address.ID}}">{{address.AddressName}}</a>
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">City</span>
                     {{address.City}}</a>
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">State</span>
                     {{address.State}}
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">Shipping</span>
                     <i ng-class="{'fa fa-check': address.IsShipping }"></i>
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">Billing</span>
                     <i ng-class="{'fa fa-check': address.IsBilling }"></i>
                 </div>

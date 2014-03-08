@@ -1,5 +1,5 @@
 // Orders
-.panel-orders {
+.panel-order {
   margin-bottom: 0;
   border-bottom: none;
   // panel validation icons
@@ -46,6 +46,12 @@
       }
     }
   }
+  &:extend(.panel-default all);
+}
+
+.panel-order-history {
+  // I can see future styles in here so creating a panel type
+  &:extend(.panel-body all);
 }
 
 // Miscellaneous
@@ -53,18 +59,6 @@
   padding: 15px;
   border: 1px solid @fourfiveone-gray-medium;
 }
-
-.order-history-view-line-items-repeater {
-  border-bottom: 1px solid @fourfiveone-gray-medium;
-  padding-top: 10px;
-}
-
-
-.order-types ul {
-  list-style-type: none;
-}
-
-
 
 .view-order-last-count {
   padding: 0 10px 10px;

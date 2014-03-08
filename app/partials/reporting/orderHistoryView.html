@@ -1,11 +1,11 @@
 <section class="container order-history-view">
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch your order"></loadingindicator>
-    <div class="order-history-view-detail hidden-print">
+    <div class="hidden-print">
         <nav class="nav">
             <hr />
             <ul>
-                <li>{{order.Type}} Order<span ng-show="order.ExternalID"> ID: </span>{{order.ExternalID}}</li>
-                <li class="pull-right" ng-click="onPrint()"><i class="fa fa-print" rel="tooltip" title="Print"></i></li>
+                <li><span class="text-primary">{{order.Type}} Order<span ng-show="order.ExternalID"> ID: </span>{{order.ExternalID}}</span></li>
+                <li class="pull-right" ng-click="onPrint()"><span><i class="fa fa-print" rel="tooltip" title="Print"></i></span></li>
             </ul>
             <hr />
         </nav>
@@ -23,7 +23,10 @@
                     </div>
                     <div class="panel-footer" ng-if="order.FromUserID == user.ID">
                         <div class="order-history-view-repeat">
-                            <button ng-disabled="currentOrder" class="btn btn-primary pull-right" ng-click="repeatOrder()">Repeat Order</button>
+                            <button ng-disabled="currentOrder" class="btn btn-primary pull-right" ng-click="repeatOrder()">
+                                <i ng-show="currentOrder" class="fa fa-warning"></i>
+                                Repeat Order
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -36,9 +39,7 @@
                         {{order.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in this order
                     </h3>
                 </div>
-                <div class="panel-body">
-                    <lineitemhistorygrid></lineitemhistorygrid>
-                </div>
+                <lineitemhistorygrid />
                 <div class="panel-footer" ng-if="order.FromUserID == user.ID">
                     <loadingindicator ng-show="displayLoadingIndicator" />
                    <div class="form-group view-form-icon">

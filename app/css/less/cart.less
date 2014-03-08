@@ -1,50 +1,50 @@
 // Cart
+
 .panel-cart {
   // line item top border
-  .panel-body {
-    border: none;
-    // canonical selector :: remove border from first panel-body and add back to ones that come after the first one for line items
-    ~ .panel-body {
-      border-top: 1px solid @fourfiveone-gray-medium;
+  border: none;
+  // canonical selector :: remove border from first panel-body and add back to ones that come after the first one for line items
+  ~ .panel-body {
+    border-top: 1px solid @fourfiveone-gray-medium;
+  }
+  .col-sm-9 {
+    border-left: 1px solid @fourfiveone-gray-medium;
+  }
+  // line item link
+  a {
+    width: 100%;
+    // make room for hover with border
+    border: 1px solid transparent;
+    padding: 5px;
+    &:hover {
+      text-decoration: none;
+      background-color:@panel-default-heading-bg;
+      border-radius: @border-radius-base;
+      border: 1px solid @fourfiveone-gray-medium;
+      -webkit-transition: all ease-in-out .5s;
+      -moz-transition: all ease-in-out .5s;
+      -ms-transition: all ease-in-out .5s;
+      -o-transition: all ease-in-out .5s;
+      transition: all ease-in-out .5s;
     }
-    .col-sm-9 {
-      border-left: 1px solid @fourfiveone-gray-medium;
-    }
-    // line item link
-    a {
-      width: 100%;
-      // make room for hover with border
-      border: 1px solid transparent;
-      padding: 5px;
-      &:hover {
-        text-decoration: none;
-        background-color:@panel-default-heading-bg;
-        border-radius: @border-radius-base;
-        border: 1px solid @fourfiveone-gray-medium;
-        -webkit-transition: all ease-in-out .5s;
-        -moz-transition: all ease-in-out .5s;
-        -ms-transition: all ease-in-out .5s;
-        -o-transition: all ease-in-out .5s;
-        transition: all ease-in-out .5s;
-      }
-      // line item link icon
-      i {
-        color:@fourfiveone-gray-medium;
-      }
-    }
-
-    // remove line item button
-    .btn-danger {
-      border-radius: 0;
-      margin-bottom: 15px;
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 1;
-    }
-    // line item price
-    .row h2 {
-      margin: 0;
+    // line item link icon
+    i {
+      color:@fourfiveone-gray-medium;
     }
   }
+
+  // remove line item button
+  .btn-danger {
+    border-radius: 0;
+    margin-bottom: 15px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+  }
+  // line item price
+  .row h2 {
+    margin: 0;
+  }
+  &:extend(.panel-body all);
 }

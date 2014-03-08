@@ -29,6 +29,14 @@ hr {
   margin: 5px 0;
 }
 
+// remove default style type
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+
 img {
   display: block;
 }
@@ -141,6 +149,25 @@ button::-moz-focus-inner {
   // make room for labels
   div {
     margin: 25px 0 0;
+  }
+
+  // quantity input is not like the others
+  .quantity {
+    div {
+      margin: 0;
+      input {
+        height: 52px;
+        outline: 0 none;
+        padding: .5em 0;
+        text-align: center;
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        font-size: 24px;
+        color:#468847;
+        box-shadow: none;
+      }
+    }
   }
 
   label {
@@ -393,6 +420,7 @@ button::-moz-focus-inner {
       background-color: transparent;
     }
   }
+
   .panel-heading {
     margin-top: 2px;
     padding: 0;
@@ -404,32 +432,14 @@ button::-moz-focus-inner {
       text-transform: uppercase;
     }
   }
+
   .panel-body {
-
-    // quantity input is not like the others
-    .quantity {
-      div {
-        margin: 0;
-        input {
-          height: 52px;
-          outline: 0 none;
-          padding: .5em 0;
-          text-align: center;
-          width: 100%;
-          margin: 0;
-          border-radius: 0;
-          font-size: 24px;
-          color:#468847;
-          box-shadow: none;
-        }
-      }
-    }
-
     // panel-footer in a panel-body is not like the others
     .panel-footer {
       margin: 0 -15px -15px;
     }
   }
+
   .panel-footer {
     clear: both;
     overflow: hidden;
@@ -442,6 +452,7 @@ button::-moz-focus-inner {
   padding: 0;
   border: 1px solid #d6d6d6;
   margin: 15px;
+
   input,
   select,
   text,
@@ -462,7 +473,11 @@ button::-moz-focus-inner {
     [class*="col-"] {
       min-height: 45px;
     }
+    .btn {
+      margin: 2px 0;
+    }
   }
+  &:extend(.clearfix all);
 }
 // Thumbnails
 .thumbnail {

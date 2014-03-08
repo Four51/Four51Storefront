@@ -10,116 +10,116 @@
         </nav>
         <form name="cart" novalidate="">
             <loadingindicator ng-show="displayLoadingIndicator" title="Please wait while we save your order"/>
-            <div class="panel panel-default panel-cart">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
                     </h3>
                 </div>
-                    <div ng-repeat="item in currentOrder.LineItems" class="panel-body">
-                        <button title="Remove Item" class="btn btn-danger" ng-click="removeItem(item)">
-                            <span class="fa fa-minus-circle fa-inverse"></span>
-                        </button>
-                        <div class="col-sm-3">
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-12 col-md-6 ">
-                                    <div class="view-form-icon">
-                                        <quantityfield required="true" lineitem="item" class="quantity"/>
-                                    </div>
-                                    <div style="border: 1px solid #d6d6d6;border-top: 0; text-align: center;padding-top: 10px;background-color:#F9F9F9;margin-bottom: 15px;">
-                                        <p>
-                                            <small>Total Quantity <span ng-show="item.Quantity * item.Product.QuantityMultiplier">{{item.Quantity * item.Product.QuantityMultiplier}}</span></small>
-                                        </p>
-                                    </div>
+                <div class="panel-cart" ng-repeat="item in currentOrder.LineItems">
+                    <button title="Remove Item" class="btn btn-danger" ng-click="removeItem(item)">
+                        <span class="fa fa-minus-circle fa-inverse"></span>
+                    </button>
+                    <div class="col-sm-3">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-12 col-md-6 ">
+                                <div class="view-form-icon">
+                                    <quantityfield required="true" lineitem="item" class="quantity"/>
                                 </div>
-                                <div class="col-xs-6 col-sm-12 col-md-6 thumbnail" ng-show="item.Variant.SmallImageUrl || item.Product.SmallImageUrl">
-                                    <figure>
-                                        <img ng-src="{{item.Product.SmallImageUrl || item.Variant.SmallImageUrl}}" />
-                                    </figure>
+                                <div style="border: 1px solid #d6d6d6;border-top: 0; text-align: center;padding-top: 10px;background-color:#F9F9F9;margin-bottom: 15px;">
+                                    <p>
+                                        <small>Total Quantity <span ng-show="item.Quantity * item.Product.QuantityMultiplier">{{item.Quantity * item.Product.QuantityMultiplier}}</span></small>
+                                    </p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-9">
-                            <div class="row">
-                                <div class="col-md-6" >
-                                    <a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">
-                                        <h3 class="text-primary" style="margin: 0; padding: 0;">
-                                            <i class="fa fa-edit"></i>
-                                            {{item.ProductIDText}}
-                                        </h3>
-                                        <p>
-                                            {{item.Product.Name}}
-                                        </p>
-                                    </a>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <div ng-if="!(user.Permissions.contains('HidePricing'))">
-                                                <small>Total</small>
-                                                <h2 class="text-success">
-                                                    {{item.LineTotal | currency}}
-                                                </h2>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6" ng-if="!(user.Permissions.contains('HidePricing'))">
-                                            <p>
-                                                <small>Unit Price</small>
-                                                <br/>
-                                                {{item.UnitPrice | currency}}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="row" ng-if="(user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')) || user.Permissions.contains('CostCenterPerLine')">
-                                        <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
-                                            <div class="row view-form-icon">
-                                                <div class="col-xs-9">
-                                                    <label ng-class="{required: user.Permissions.contains('DateNeededRequired')}" ng-show="item.DateNeeded || user.Permissions.contains('DateNeededRequired')">Date</label>
-                                                    <input name="dateneeded" class="form-control" placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <div class="col-xs-3">
-                                                    <button type="button" title="copy to all" class="btn btn-default pull-right" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1 && user.CostCenters.length != 1" >
-                                                        <span class="fa fa-copy"></span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
-                                            <div class="row view-form-icon">
-                                                <div class="col-xs-9">
-                                                    <label class="required">Cost Center</label>
-                                                    <select name="costcenter" class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
-                                                    <input name="costcenter" class="form-control view-form-icon" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />
-                                                    <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
-                                                    <i ng-if="user.CostCenters.length != 1" class="fa fa-money"></i>
-                                                </div>
-                                                <div class="col-xs-3">
-                                                    <button type="button" title="copy to all" class="btn btn-default pull-right" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
-                                                        <span class="fa fa-copy"></span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <p style="cursor:pointer; padding:15px; margin-bottom:0;" class="text-info" ng-show="item.SpecsLength > 0" ng-init="toggleSpecs = false" ng-click="toggleSpecs = !toggleSpecs">
-                                    <span ng-show="toggleSpecs == false"><i class="fa fa-plus-circle"></i> Show </span>
-                                    <span ng-show="toggleSpecs == true"><i class="fa fa-minus-circle"></i> Hide </span>
-                                    Specifications
-                                </p>
-                                <ul style="list-style: none;" ng-show="toggleSpecs == true">
-                                    <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
-                                        <span class="text-info">{{spec.Name}}: </span>
-                                        <span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span></span>
-                                        <span ng-if="spec.ControlType != 'File'">{{spec.Value || '(unspecified)'}}</span>
-                                    </li>
-                                </ul>
+                            <div class="col-xs-6 col-sm-12 col-md-6 thumbnail" ng-show="item.Variant.SmallImageUrl || item.Product.SmallImageUrl">
+                                <figure>
+                                    <img ng-src="{{item.Product.SmallImageUrl || item.Variant.SmallImageUrl}}" />
+                                </figure>
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-9">
+                        <div class="row">
+                            <div class="col-md-6" >
+                                <a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">
+                                    <h3 class="text-primary" style="margin: 0; padding: 0;">
+                                        <i class="fa fa-edit"></i>
+                                        {{item.ProductIDText}}
+                                    </h3>
+                                    <p>
+                                        {{item.Product.Name}}
+                                    </p>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <div ng-if="!(user.Permissions.contains('HidePricing'))">
+                                            <small>Total</small>
+                                            <h2 class="text-success">
+                                                {{item.LineTotal | currency}}
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6" ng-if="!(user.Permissions.contains('HidePricing'))">
+                                        <p>
+                                            <small>Unit Price</small>
+                                            <br/>
+                                            {{item.UnitPrice | currency}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="(user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')) || user.Permissions.contains('CostCenterPerLine')">
+                                    <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
+                                        <div class="row view-form-icon">
+                                            <div class="col-xs-9">
+                                                <label ng-class="{required: user.Permissions.contains('DateNeededRequired')}" ng-show="item.DateNeeded || user.Permissions.contains('DateNeededRequired')">Date</label>
+                                                <input name="dateneeded" class="form-control" placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <button type="button" title="copy to all" class="btn btn-default pull-right" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1 && user.CostCenters.length != 1" >
+                                                    <span class="fa fa-copy"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
+                                        <div class="row view-form-icon">
+                                            <div class="col-xs-9">
+                                                <label class="required">Cost Center</label>
+                                                <select name="costcenter" class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
+                                                <input name="costcenter" class="form-control view-form-icon" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />
+                                                <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
+                                                <i ng-if="user.CostCenters.length != 1" class="fa fa-money"></i>
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <button type="button" title="copy to all" class="btn btn-default pull-right" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
+                                                    <span class="fa fa-copy"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p style="cursor:pointer; padding:15px; margin-bottom:0;" class="text-info" ng-show="item.SpecsLength > 0" ng-init="toggleSpecs = false" ng-click="toggleSpecs = !toggleSpecs">
+                                <span ng-show="toggleSpecs == false"><i class="fa fa-plus-circle"></i> Show </span>
+                                <span ng-show="toggleSpecs == true"><i class="fa fa-minus-circle"></i> Hide </span>
+                                Specifications
+                            </p>
+                            <ul style="list-style: none;" ng-show="toggleSpecs == true">
+                                <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
+                                    <span class="text-info">{{spec.Name}}: </span>
+                                    <span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span></span>
+                                    <span ng-if="spec.ControlType != 'File'">{{spec.Value || '(unspecified)'}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 <div class="panel-footer">
                     <div class="row">
                         <div class="col-md-4 col-lg-3">
