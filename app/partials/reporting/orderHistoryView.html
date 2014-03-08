@@ -1,4 +1,4 @@
-<section class="container order-history-view">
+<section class="container">
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch your order"></loadingindicator>
     <div class="hidden-print">
         <nav class="nav">
@@ -11,7 +11,7 @@
         </nav>
         <div class="col-md-3 col-md-offset-1 col-md-push-8">
             <div class="row">
-                <div class="panel panel-primary order-history-view-header">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             Order Details
@@ -22,18 +22,16 @@
                         <orderhistorysummary ng-if="!(user.Permissions.contains('HidePricing'))"></orderhistorysummary>
                     </div>
                     <div class="panel-footer" ng-if="order.FromUserID == user.ID">
-                        <div class="order-history-view-repeat">
-                            <button ng-disabled="currentOrder" class="btn btn-primary pull-right" ng-click="repeatOrder()">
-                                <i ng-show="currentOrder" class="fa fa-warning"></i>
-                                Repeat Order
-                            </button>
-                        </div>
+                        <button ng-disabled="currentOrder" class="btn btn-primary pull-right" ng-click="repeatOrder()">
+                            <i ng-show="currentOrder" class="fa fa-warning"></i>
+                            Repeat Order
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-8 col-md-pull-4 order-history-view-grid">
-            <div class="panel panel-default order-history-view-line-items">
+        <div class="col-md-8 col-md-pull-4">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title panel-primary">
                         {{order.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in this order

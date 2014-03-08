@@ -62,38 +62,40 @@
         </div>
         <div class="panel-body">
             <div class="form-inline">
-                <div class="col-xs-12  col-sm-9 view-form-icon">
-                <div class="form-group">
-                    <label ng-show="criteria.OrderID">Order ID</label>
-                    <input class="form-control" type="text" ng-model="criteria.OrderID" placeholder="Order ID" autocomplete="off" />
-                    <i class="fa">#</i>
-                </div>
-                <div class="form-group">
-                    <label ng-show="criteria.ShippingAddress">Shipping Address</label>
-                    <input class="form-control" type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" autocomplete="off" />
-                    <i class="fa fa-map-marker"></i>
-                </div>
-                <div class="form-group">
-                    <label ng-show="criteria.DateRangeFrom">From</label>
-                    <input type="text" class="form-control" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="criteria.DateRangeFrom" placeholder="From" />
-                    <i class="fa fa-calendar"></i>
-                </div>
-                <div class="form-group">
-                    <label ng-show="criteria.DateRangeTo">To</label>
-                    <input type="text" class="form-control" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="criteria.DateRangeTo" placeholder="To" />
-                    <i class="fa fa-calendar"></i>
-                </div>
-            </div>
-                <div class="col-xs-12 col-sm-3 view-order-last-count">
-                    <div class="text-info text-center">
-                        <p><i class="fa fa-info-circle" style="position: relative;top: 0; left: 0;color:#3A87AD;"></i>
-                        <strong> Only</strong> display last</p>
-                    </div>
+                <div class="col-sm-7 col-lg-9">
                     <div class="view-form-icon">
-                        <div>
-                            <label ng-show="criteria.LastN"># of Orders</label>
-                            <input class="form-control" type="text" ng-model="criteria.LastN" placeholder="Number of Orders" autocomplete="off" />
-                            <i class="fa fa-edit"></i>
+                        <div class="form-group">
+                            <label ng-show="criteria.OrderID">Order ID</label>
+                            <input class="form-control" type="text" ng-model="criteria.OrderID" placeholder="Order ID" autocomplete="off" />
+                            <i class="fa">#</i>
+                        </div>
+                        <div class="form-group">
+                            <label ng-show="criteria.ShippingAddress">Shipping Address</label>
+                            <input class="form-control" type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" autocomplete="off" />
+                            <i class="fa fa-map-marker"></i>
+                        </div>
+                        <div class="form-group">
+                            <label ng-show="criteria.DateRangeFrom">From</label>
+                            <input type="text" class="form-control" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="criteria.DateRangeFrom" placeholder="From" />
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <div class="form-group">
+                            <label ng-show="criteria.DateRangeTo">To</label>
+                            <input type="text" class="form-control" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="criteria.DateRangeTo" placeholder="To" />
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5 col-lg-3">
+                    <div class="alert alert-info">
+                        <i class="fa fa-info-circle"></i>
+                        Only display last
+                        <div class="view-form-icon">
+                            <div>
+                                <label ng-show="criteria.LastN"># of Orders</label>
+                                <input class="form-control" type="text" ng-model="criteria.LastN" placeholder="Number of Orders" autocomplete="off" />
+                                <i class="fa fa-edit"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
