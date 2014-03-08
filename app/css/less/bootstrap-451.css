@@ -5830,13 +5830,20 @@ small,
   text-transform: uppercase;
 }
 label {
-  top: -20px;
-  font-size: 11px;
-  position: absolute;
   display: block;
 }
 label.required {
   color: red;
+}
+.create-address-type label {
+  position: static;
+  display: block;
+}
+input,
+textarea,
+select,
+button {
+  min-height: 40px;
 }
 option {
   color: #333333;
@@ -5868,8 +5875,8 @@ button::-moz-focus-inner {
   content: "Select";
   position: absolute;
   left: 25px;
-  top: 9px;
-  color: #999;
+  top: 12px;
+  color: #cccccc;
   pointer-events: none;
 }
 .col-sm-4.view-form-select:before {
@@ -5877,6 +5884,12 @@ button::-moz-focus-inner {
 }
 .view-form-icon div {
   margin: 25px 0 0;
+}
+.view-form-icon label {
+  top: -20px;
+  font-size: 11px;
+  position: absolute;
+  display: block;
 }
 .view-form-icon input,
 .view-form-icon select,
@@ -5888,11 +5901,7 @@ button::-moz-focus-inner {
   color: #cccccc;
   left: 10px;
   position: absolute;
-  top: 10px;
-}
-.create-address-type label {
-  position: static;
-  display: block;
+  top: 13px;
 }
 .navbar-nav {
   margin-top: 0;
@@ -6125,6 +6134,31 @@ button::-moz-focus-inner {
   overflow: hidden;
   padding: 20px 15px;
 }
+.panel-table {
+  padding: 0;
+  border: 1px solid #d6d6d6;
+  margin: 15px;
+}
+.panel-table input,
+.panel-table select,
+.panel-table text,
+.panel-table textarea {
+  margin: 0;
+}
+.panel-table a {
+  text-decoration: underline;
+}
+.panel-table .row {
+  margin-left: 0;
+  margin-right: 0;
+  border-bottom: 1px solid #cccccc;
+}
+.panel-table .row:last-child {
+  border-bottom: none;
+}
+.panel-table .row [class*="col-"] {
+  min-height: 45px;
+}
 .thumbnail {
   margin-bottom: 0;
 }
@@ -6142,14 +6176,6 @@ button::-moz-focus-inner {
 }
 .badge {
   padding: 4px 7px;
-}
-.view-tr .row {
-  margin-left: 0;
-  margin-right: 0;
-}
-.view-tr .row [class*="col-"] {
-  border: 1px solid rgba(86, 61, 124, 0.2);
-  padding-top: 5px;
 }
 [ng\:cloak],
 [ng-cloak],
@@ -6371,12 +6397,6 @@ select.ng-invalid:invalid:invalid:focus {
   position: absolute;
 }
 @media (max-width: 767px) {
-  input,
-  textarea,
-  select,
-  button {
-    min-height: 45px;
-  }
   textarea,
   select {
     -webkit-appearance: none;
@@ -6456,9 +6476,6 @@ select.ng-invalid:invalid:invalid:focus {
     float: none;
     margin: 15px auto;
   }
-  .view-form-icon i {
-    top: 15px;
-  }
   .crumbs ul {
     width: 100%;
   }
@@ -6517,12 +6534,6 @@ select.ng-invalid:invalid:invalid:focus {
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
-  input,
-  textarea,
-  select,
-  button {
-    min-height: 45px;
-  }
   .jumbotron {
     text-align: center;
   }
@@ -7244,18 +7255,6 @@ select.ng-invalid:invalid:invalid:focus {
 }
 .order-types ul {
   list-style-type: none;
-}
-.view-table-row {
-  border-bottom: 1px solid #cccccc;
-  padding: 5px 0;
-}
-.view-table-row.panel-body {
-  padding: 10px;
-}
-.view-table-row span {
-  display: inline;
-  float: left;
-  width: 50%;
 }
 .view-order-last-count {
   padding: 0 10px 10px;
