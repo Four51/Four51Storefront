@@ -7116,8 +7116,12 @@ select.ng-invalid:invalid:invalid:focus {
 }
 .copyright-view {
   width: 100%;
+  height: 100%;
   font-size: 11px;
+  margin-top: 50px;
+  background-color: #f0f0f0;
   padding-top: 50px;
+  padding-bottom: 50px;
 }
 .copyright-view p {
   padding: 15px 20px;
@@ -7127,6 +7131,7 @@ select.ng-invalid:invalid:invalid:focus {
 .copyright-view p:first-of-type {
   color: #1C638D;
   background-color: #fff;
+  border: 1px solid #cccccc;
 }
 .copyright-view p .btn {
   margin-top: 5px;
@@ -7134,6 +7139,7 @@ select.ng-invalid:invalid:invalid:focus {
 .copyright-view p:last-of-type {
   color: #fff;
   background-color: #50acdb;
+  border: 1px solid #359fd5;
 }
 .copyright-view p:last-of-type .btn {
   background-color: #359fd5;
