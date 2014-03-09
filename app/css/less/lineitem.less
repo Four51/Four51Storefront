@@ -1,6 +1,6 @@
 // Cart
 
-.panel-cart {
+.panel-lineitem {
   // line item top border
   border: none;
   // canonical selector :: remove border from first panel-body and add back to ones that come after the first one for line items
@@ -42,9 +42,12 @@
     right: 0;
     z-index: 1;
   }
-  // line item price
-  .row h2 {
-    margin: 0;
+
+  .row {
+    // line item price and name
+    h2, h3 {
+      margin: 0;
+    }
   }
   &:extend(.panel-body all);
 }
