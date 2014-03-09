@@ -1,6 +1,10 @@
-// Core bootstrap mixins
+//
+// Mixins ** Bootstrap
+// --------------------------------------------------
 
-// Scaffolding
+//== Colors
+
+//== Scaffolding
 html {
   overflow-y: scroll;
 }
@@ -14,12 +18,12 @@ body {
   overflow: hidden;
 }
 
-// ie needs this help to keep scroll bar from overlapping content
+//** ie needs this help to keep scroll bar from overlapping content
 @-ms-viewport{
   width: auto !important;
 }
 
-/* iOS placeholder needs help to disappear on focus */
+//** iOS placeholder needs help to disappear on focus */
 :focus::-webkit-input-placeholder{
   color:transparent;
 }
@@ -29,7 +33,7 @@ hr {
   margin: 5px 0;
 }
 
-// remove default style type
+//** remove default style type
 ul {
   list-style-type: none;
   margin: 0;
@@ -53,13 +57,17 @@ a {
   }
 }
 
-// Typography
+//== Typography
 small,
 .small {
   font-size: @font-size-small;
 }
 
-// Buttons
+//== Components
+
+//== Tables
+
+//== Buttons
 .btn-group {
   width: 100%;
 }
@@ -81,20 +89,20 @@ small,
   }
 }
 
-// Forms
+//== Forms
 label {
   display: block;
   &.required {
     color: red;
   }
 }
-// Create address type labels are not like the others
+//** create address type labels are not like the others
 .create-address-type label {
   position: static;
   display: block;
 }
 
-// minimum target size for touch
+//** minimum target size for touch
 input, textarea, select, button {
   min-height: 40px;
 }
@@ -129,7 +137,7 @@ button::-moz-focus-inner {
   }
 }
 
-// Form placeholder text for select field
+//** form placeholder text for select field
 .view-form-select:before {
   content: "Select";
   position: absolute;
@@ -144,14 +152,14 @@ button::-moz-focus-inner {
   left: 45px;
 }
 
-// Form field icons
+//** form field icons
 .view-form-icon {
   // make room for labels
   div {
     margin: 25px 0 0;
   }
 
-  // quantity input is not like the others
+  //** quantity input is not like the others
   .quantity {
     div {
       margin: 0;
@@ -182,7 +190,7 @@ button::-moz-focus-inner {
     display: block;
   }
 
-  // make room for icons
+  //** make room for icons
   input,
   select,
   text,
@@ -190,7 +198,7 @@ button::-moz-focus-inner {
     padding-left: 25px;
   }
 
-  // icons
+  //** icons
   i {
     color: @fourfiveone-gray-medium;
     left: 10px;
@@ -199,7 +207,99 @@ button::-moz-focus-inner {
   }
 }
 
-// Navbar
+//== Dropdowns
+
+//== Media queries breakpoints
+//** phone < 618px
+@media (max-width: @screen-xs-max) {
+  //** style these form fields consistent
+  textarea, select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  textarea, select {
+    border: 1px solid #555;
+    padding: 0.5em;
+    font-size: 15px;
+    line-height: 1.2em;
+    width: 80%;
+    background: #fff;
+    -webkit-appearance: none;
+    -webkit-box-shadow: 1px 1px 1px #fff;
+    -webkit-border-radius: 0.5em;
+    -moz-appearance: none;
+    -moz-appearance: 1px 1px 1px #fff;
+    -moz-appearance: 0.5em;
+    appearance: none;
+    appearance: 1px 1px 1px #fff;
+    appearance: 0.5em;
+  }
+
+  //** block these buttons for minimum target size for touch
+  .panel-footer {
+    .btn {
+      width: 100%;
+      padding: 15px;
+      margin: 2px;
+    }
+    //** input group buttons are not like the others
+    .input-group-btn {
+      .btn {
+        margin: 0;
+        padding: 6px 12px;
+        width: auto;
+      }
+    }
+  }
+  .btn-group {
+    width: 100%;
+    vertical-align: inherit;
+    .btn {
+      width: 100%;
+      padding: 15px;
+      margin: 2px;
+    }
+  }
+
+  //** center branding
+  .jumbotron {
+    text-align: center;
+  }
+
+  //** minimum target size for touch
+  .breadcrumb li {
+    display: block;
+    a {
+      padding: 15px;
+    }
+  }
+}
+
+//** tablet portrait < 768px
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+  //** center branding
+  .jumbotron {
+    text-align: center;
+  }
+}
+
+//** tablet landscape & desktop  < 1024p
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+  // code
+}
+
+//** desktops > 1200px
+@media (min-width: @screen-lg-min){
+  // code
+}
+
+//== Grid system
+
+//== Container sizes
+
+//== Navbar
 .navbar-nav {
   margin-top: 0;
   // active arrow
@@ -218,7 +318,7 @@ button::-moz-focus-inner {
     }
   }
   &.pull-left {
-  // cowboy up the icons on phone
+  //** cowboy up the icons on phone
   li {
     display: inline-block;
     float: left;
@@ -300,7 +400,7 @@ button::-moz-focus-inner {
   -o-animation-name:            fadeInUp;
   animation-name:               fadeInUp;
   -ms-animation-name:           fadeInUp;
-  // fixed bottom buttons
+  //** fixed bottom buttons
   ul {
     list-style-type:none;
     padding: 0;
@@ -343,8 +443,8 @@ button::-moz-focus-inner {
   }
 }
 
-// Navs
-// shared nav styles
+//== Navs
+//** shared nav styles
 .nav {
   margin-top: 0;
   margin-bottom: 0;
@@ -387,23 +487,31 @@ button::-moz-focus-inner {
   height: @navbar-height;
 }
 
-// Jumbotron
+//== Tabs
+
+//== Pills
+
+//== Pagination
+
+//== Pager
+
+//== Jumbotron
 .jumbotron {
-  // hide/show only on products::home page / remove this to display jumbotron on all pages
+  //** hide/show only on products::home page / remove this to display jumbotron on all pages
   display: none;
   &.active {
     display: block;
   }
 
-  // branding
+  //** branding
   h2 {
     margin: 0;
-    // buyer logo
+    //**buyer logo
     img {
       max-height: @fourfiveone-thumbnail-height;
       max-width: auto;
     }
-    // buyer name
+    //** buyer name
     span {
       display: block;
       clear: left;
@@ -411,7 +519,23 @@ button::-moz-focus-inner {
   }
 }
 
-// Panels
+//== Form states and alerts
+
+//== Tooltips
+
+//== Popovers
+
+//== Labels
+
+//== Modals
+
+//== Alerts
+
+//== Progress bars
+
+//== List group
+
+//== Panels
 .panel {
   word-wrap: break-word;
 
@@ -440,7 +564,7 @@ button::-moz-focus-inner {
   }
 
   .panel-body {
-    // panel-footer in a panel-body is not like the others
+    //** panel-footer in a panel-body is not like the others
     .panel-footer {
       margin: 0 -15px -15px;
     }
@@ -453,7 +577,7 @@ button::-moz-focus-inner {
   }
 }
 
-// Thumbnails
+//== Thumbnails
 .thumbnail {
   margin-bottom: 0;
   img {
@@ -463,7 +587,7 @@ button::-moz-focus-inner {
   }
 }
 
-// Wells
+//== Wells
 .well {
   margin-bottom: 0;
   border-radius: 0;
@@ -472,15 +596,23 @@ button::-moz-focus-inner {
   margin: 0;
 }
 
-// Badges
+//== Badges
 .badge {
-  // a more perfect circle
+  //** a more perfect circle
   padding: 4px 7px;
 }
 
-// Breadcrumbs
+//== Breadcrumbs
 .breadcrumb {
   a {
     text-decoration: underline;
   }
 }
+
+//== Carousel
+
+//== Close
+
+//== Type
+
+//== Miscellaneous

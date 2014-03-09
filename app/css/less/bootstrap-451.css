@@ -5853,7 +5853,6 @@ body {
 @-ms-viewport {
   width: auto !important;
 }
-/* iOS placeholder needs help to disappear on focus */
 :focus::-webkit-input-placeholder {
   color: transparent;
 }
@@ -5993,6 +5992,65 @@ button::-moz-focus-inner {
   left: 10px;
   position: absolute;
   top: 13px;
+}
+@media (max-width: 767px) {
+  textarea,
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  textarea,
+  select {
+    border: 1px solid #555;
+    padding: 0.5em;
+    font-size: 15px;
+    line-height: 1.2em;
+    width: 80%;
+    background: #fff;
+    -webkit-appearance: none;
+    -webkit-box-shadow: 1px 1px 1px #fff;
+    -webkit-border-radius: 0.5em;
+    -moz-appearance: none;
+    -moz-appearance: 1px 1px 1px #fff;
+    -moz-appearance: 0.5em;
+    appearance: none;
+    appearance: 1px 1px 1px #fff;
+    appearance: 0.5em;
+  }
+  .panel-footer .btn {
+    width: 100%;
+    padding: 15px;
+    margin: 2px;
+  }
+  .panel-footer .input-group-btn .btn {
+    margin: 0;
+    padding: 6px 12px;
+    width: auto;
+  }
+  .btn-group {
+    width: 100%;
+    vertical-align: inherit;
+  }
+  .btn-group .btn {
+    width: 100%;
+    padding: 15px;
+    margin: 2px;
+  }
+  .jumbotron {
+    text-align: center;
+  }
+  .breadcrumb li {
+    display: block;
+  }
+  .breadcrumb li a {
+    padding: 15px;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .jumbotron {
+    text-align: center;
+  }
 }
 .navbar-nav {
   margin-top: 0;
@@ -6416,65 +6474,6 @@ select.ng-invalid:invalid:invalid:focus {
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   position: absolute;
-}
-@media (max-width: 767px) {
-  textarea,
-  select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-  }
-  textarea,
-  select {
-    border: 1px solid #555;
-    padding: 0.5em;
-    font-size: 15px;
-    line-height: 1.2em;
-    width: 80%;
-    background: #fff;
-    -webkit-appearance: none;
-    -webkit-box-shadow: 1px 1px 1px #fff;
-    -webkit-border-radius: 0.5em;
-    -moz-appearance: none;
-    -moz-appearance: 1px 1px 1px #fff;
-    -moz-appearance: 0.5em;
-    appearance: none;
-    appearance: 1px 1px 1px #fff;
-    appearance: 0.5em;
-  }
-  .panel-footer .btn {
-    width: 100%;
-    padding: 15px;
-    margin: 2px;
-  }
-  .panel-footer .input-group-btn .btn {
-    margin: 0;
-    padding: 6px 12px;
-    width: auto;
-  }
-  .btn-group {
-    width: 100%;
-    vertical-align: inherit;
-  }
-  .btn-group .btn {
-    width: 100%;
-    padding: 15px;
-    margin: 2px;
-  }
-  .jumbotron {
-    text-align: center;
-  }
-  .breadcrumb li {
-    display: block;
-  }
-  .breadcrumb li a {
-    padding: 15px;
-  }
-}
-@media (min-width: 768px) and (max-width: 991px) {
-  .jumbotron {
-    text-align: center;
-  }
 }
 @-webkit-keyframes view-enter {
   0% {
