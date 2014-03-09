@@ -62,7 +62,7 @@
                                 <p ng-show="(orderShipAddress.FirstName || orderShipAddress.LastName) && (!user.Permissions.contains('EditShipToName') && !orderShipAddress.IsCustEditable)">
                                     <small>{{orderShipAddress.FirstName + ' ' + orderShipAddress.LastName}}</small>
                                 </p>
-                                <div class="row view-order-shipping-edit-name" ng-show="!currentOrder.IsMultipleShip() && user.Permissions.contains('EditShipToName') && (orderShipAddress && !orderShipAddress.IsCustEditable)">
+                                <div class="row" ng-show="!currentOrder.IsMultipleShip() && user.Permissions.contains('EditShipToName') && (orderShipAddress && !orderShipAddress.IsCustEditable)">
                                     <div class="col-sm-2">
                                          <input class="form-control" type="text" ng-model="currentOrder.LineItems[0].ShipFirstName" placeholder="First Name" />
                                     </div>
