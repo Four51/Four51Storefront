@@ -23,15 +23,21 @@
 
     <div class="col-md-7 col-md-offset-1">
         <!--BASIC PRODUCT INFO!-->
-        <h2 class="text-success pull-right" ng-show="LineItem.PriceSchedule.PriceBreaks.length == 1" ng-if="!(user.Permissions.contains('HidePricing'))">
-            {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
-        </h2>
-        <h2 ng-hide="LineItem.Variant.ExternalID">
-            {{LineItem.Product.Name}}
-        </h2>
-        <h2 ng-show="LineItem.Variant.ExternalID">
-            {{LineItem.Variant.ExternalID}}
-        </h2>
+        <div class="row">
+            <div class="col-sm-8">
+                <h2 ng-hide="LineItem.Variant.ExternalID">
+                    {{LineItem.Product.Name}}
+                </h2>
+                <h2 ng-show="LineItem.Variant.ExternalID">
+                    {{LineItem.Variant.ExternalID}} {{LineItem.Product.Name}}
+                </h2>
+            </div>
+            <div class="col-sm-4">
+                <h2 class="text-success text-right" ng-show="LineItem.PriceSchedule.PriceBreaks.length == 1" ng-if="!(user.Permissions.contains('HidePricing'))">
+                    {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
+                </h2>
+            </div>
+        </div>
         <div ng-show="LineItem.Product.Description">
             <!-- PRODUCT DESCRIPTION PANEL! --->
             <div class="panel panel-primary">
