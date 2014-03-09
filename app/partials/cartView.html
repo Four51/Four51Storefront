@@ -1,12 +1,10 @@
 <section>
     <div ng-show="currentOrder" class="hidden-print">
         <nav class="nav">
-            <hr />
             <ul>
                 <li><span class="text-primary">Your Cart</span></li>
                 <li class="pull-right" ng-click="onPrint()"><span><i class="fa fa-print" rel="tooltip" title="Print" ></i></span></li>
             </ul>
-            <hr />
         </nav>
         <form name="cart" novalidate="">
             <loadingindicator ng-show="displayLoadingIndicator" title="Please wait while we save your order"/>

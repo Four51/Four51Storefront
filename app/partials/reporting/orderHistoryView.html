@@ -2,12 +2,10 @@
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch your order"></loadingindicator>
     <div class="hidden-print">
         <nav class="nav">
-            <hr />
             <ul>
                 <li><span class="text-primary">{{order.Type}} Order<span ng-show="order.ExternalID"> ID: </span>{{order.ExternalID}}</span></li>
                 <li class="pull-right" ng-click="onPrint()"><span><i class="fa fa-print" rel="tooltip" title="Print"></i></span></li>
             </ul>
-            <hr />
         </nav>
         <div class="col-md-3 col-md-offset-1 col-md-push-8">
             <div class="row">

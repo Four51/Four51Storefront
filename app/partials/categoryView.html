@@ -1,21 +1,19 @@
 <section>
     <nav id="451qa_nav_hdr" class="nav">
-        <hr />
-            <ul>
-                <li class="hidden-sm hidden-xs" ng-click="showMega = ! showMega" href="#">
-                    <span ng-show="!showMega"><i class="fa fa-reorder"></i></span>
-                    <span ng-show="showMega"><i class="fa fa-minus-circle"></i></span>
-                </li>
-                <li>
-                    <span id="451_lbl_curcat" class="text-primary" ng-bind-html="currentCategory.Name || 'All Categories'"></span>
-                    <span class="text-primary" ng-show="currentCategory.SubCategories.length && currentCategory.InteropID">Categories</span>
-                    <span class="text-primary" ng-show="!currentCategory">All Categories</span>
-                </li>
-                <li class="pull-right">
-                    <a href="#/search"><span><i class="fa fa-search" data-title="Search Products" data-placement="left" bs-tooltip></i></span></a>
-                </li>
-            </ul>
-        <hr />
+        <ul>
+            <li class="hidden-sm hidden-xs" ng-click="showMega = ! showMega" href="#">
+                <span ng-show="!showMega"><i class="fa fa-reorder"></i></span>
+                <span ng-show="showMega"><i class="fa fa-minus-circle"></i></span>
+            </li>
+            <li>
+                <span id="451_lbl_curcat" class="text-primary" ng-bind-html="currentCategory.Name || 'All Categories'"></span>
+                <span class="text-primary" ng-show="currentCategory.SubCategories.length && currentCategory.InteropID">Categories</span>
+                <span class="text-primary" ng-show="!currentCategory">All Categories</span>
+            </li>
+            <li class="pull-right">
+                <a href="#/search"><span><i class="fa fa-search"></i></span></a>
+            </li>
+        </ul>
     </nav>
     <aside class="col-sm-3 hidden-sm hidden-xs" ng-if="showMega" ng-class="{ 'category-view-aside': showMega }">
         <nav class="nav 451_cat_nav">
