@@ -1,7 +1,7 @@
 // Products
 .product-image-large {
     margin: 15px auto;
-    max-height: 300px;
+    max-height: @fourfiveone-product-image-height;
     max-width: 100%;
 }
 
@@ -96,17 +96,6 @@
         display: block;
         text-align: center;
         text-decoration: none;
-        // no image available
-        .fa.empty {
-          width: 100%;
-          text-align: center;
-          i {
-            font-size: 25px;
-            display: block;
-            opacity: .25;
-            padding-top: 45px;
-          }
-        }
       }
       // Short product info :: example swipe found in shortProductView.html
       .shortproduct-info {

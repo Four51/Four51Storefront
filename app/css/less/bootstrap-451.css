@@ -6833,16 +6833,8 @@ select.ng-invalid:invalid:invalid:focus {
   max-height: 200px;
   margin: 0 auto;
 }
-.category-list ul li a .fa.empty {
-  width: 100%;
+.category-list .empty {
   height: 200px;
-  text-align: center;
-}
-.category-list ul li a .fa.empty i {
-  font-size: 25px;
-  display: block;
-  opacity: .25;
-  padding-top: 45px;
 }
 .product-image-large {
   margin: 15px auto;
@@ -6931,16 +6923,6 @@ select.ng-invalid:invalid:invalid:focus {
   display: block;
   text-align: center;
   text-decoration: none;
-}
-.product-list ul li a .fa.empty {
-  width: 100%;
-  text-align: center;
-}
-.product-list ul li a .fa.empty i {
-  font-size: 25px;
-  display: block;
-  opacity: .25;
-  padding-top: 45px;
 }
 .product-list ul li .shortproduct-info {
   background-color: rgba(0, 0, 0, 0.85);
@@ -7186,6 +7168,16 @@ select.ng-invalid:invalid:invalid:focus {
 .app-loading-indicator-cell .app-loading-indicator-title {
   background-color: #e4f2f9;
   color: #154964;
+}
+.empty,
+.category-list .empty {
+  width: 100%;
+  text-align: center;
+}
+.empty .empty i,
+.category-list .empty .category-list .empty i {
+  opacity: .25;
+  padding: 45px 0;
 }
 .branding-print-view-logo {
   max-height: 50px;
