@@ -16,7 +16,7 @@
     <div id="451_msg_reply" ng-show="replying">
         <label>To: {{message.FromName}}</label>
         <label>Subject</label><input id="451_inp_subj" type="text" ng-model="message.Subject" value="{{'RE: ' + message.Subject}}" autocomplete="off" />
-        <label>Body</label><span><textarea id="451_inp_body" style="width: 500px; height: 300px;" ng-model="message.Body" /></span>
+        <label>Body</label><span><textarea id="451_inp_body" ng-model="message.Body" /></span>
         <br />
         <span>
             <button type="button" id="451_btn_cancel" class="btn btn-small btn-warning" ng-click="replying = !replying">Cancel</button>

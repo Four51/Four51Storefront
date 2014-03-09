@@ -47,7 +47,7 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <h4 ng-show="LineItem.Product.ExternalID" class="text-info" style="margin:0;">
+                    <h4 ng-show="LineItem.Product.ExternalID" class="text-info">
                         ID: {{LineItem.Product.ExternalID}}
                     </h4>
                     <p ng-bind-html="trustedDescription(LineItem.Product)" />
@@ -68,26 +68,26 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <div ng-if="(LineItem.Product.Variants.length > 0 || LineItem.Product.Type == 'VariableText') && !LineItem.Variant" style="margin: -15px;">
-                         <div class="panel-heading">
-                             <div class="container" style="padding-top: 15px;">
-                                 <h3 class="panel-title text-info col-xs-9" style="text-align: left;padding-left: 0;">
-                                    Product Variants
-                                 </h3>
+                    <div ng-if="(LineItem.Product.Variants.length > 0 || LineItem.Product.Type == 'VariableText') && !LineItem.Variant">
+                         <div class="container">
+                                 <div class="panel-title col-xs-9">
+                                    <h4 class="text-info">
+                                        Product Variants
+                                    </h4>
+                                 </div>
                                  <div class="col-xs-3" ng-show="LineItem.Product.Type == 'VariableText'">
                                      <button type="button" ng-show="!LineItem.Variant" class="btn btn-info pull-right" redirect="/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/new/edit" tabindex="-1">
                                         Create New
                                      </button>
                                 </div>
-                             </div>
                              <div class="container" ng-if="LineItem.Product.Variants.length > 20">
                                 <input ng-model="queryVariants" type="text" class="form-control" placeholder="Filter variants" autocomplete="off"/>
                              </div>
                          </div>
                         <div class="product-variants">
                             <ul>
-                                <li ng-repeat="v in LineItem.Product.Variants | filter:queryVariants" class="col-xs-12">
-                                    <div class="row" style="margin-right: 0;">
+                                <li ng-repeat="v in LineItem.Product.Variants | filter:queryVariants">
+                                    <div class="row">
                                         <a class="col-sm-8" ng-class="{'col-sm-8': allowAddFromVariantList, 'col-xs-12': !allowAddFromVariantList }" href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>
                                             <h5>
                                                 <strong>{{v.ExternalID}}</strong>
@@ -98,7 +98,7 @@
                                             </p>
                                         </a>
                                         <div class="col-sm-2" ng-if="allowAddFromVariantList && !(user.Permissions.contains('HidePricing'))">
-                                            <div  style="border: 1px solid #d6d6d6;text-align: center;height: 52px;" ng-show="variantLineItems[v.InteropID].LineTotal > 0">
+                                            <div class="quantity-total-variants text-center" ng-show="variantLineItems[v.InteropID].LineTotal > 0">
                                                 <small><span class="text-info">Total</span><br /><span class=" text-success">{{variantLineItems[v.InteropID].LineTotal | currency}}</span></small>
                                             </div>
                                         </div>
@@ -107,6 +107,7 @@
                                         </div>
                                     </div>
                                 </li>
+                                <hr />
                             </ul>
                             <hr />
                         </div>

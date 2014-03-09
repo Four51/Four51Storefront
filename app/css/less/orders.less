@@ -36,6 +36,15 @@
     -ms-animation-name: fadeInDown;
   }
 
+  .order-location {
+    border: 1px solid @fourfiveone-border-color;
+    padding: 15px;
+    margin-top: 15px;
+    p {
+      margin-bottom: 0;
+    }
+  }
+
   // Hide unnecessary html in new address form from checkout include
   .address-input-view {
     .create-address-type {
@@ -60,6 +69,11 @@
   // canonical selector :: remove border from first panel-body and add back to ones that come after the first one for line items
   ~ .panel-body {
     border-top: 1px solid @fourfiveone-border-color;
+  }
+  .row {
+    .row {
+      border-left: 1px solid @fourfiveone-border-color;
+    }
   }
   &:extend(.panel-body all);
 }

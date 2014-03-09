@@ -6287,6 +6287,7 @@ button::-moz-focus-inner {
   border-width: 1px;
   box-shadow: none;
   margin: 0;
+  min-height: 0;
 }
 .badge {
   padding: 4px 7px;
@@ -6836,6 +6837,45 @@ select.ng-invalid:invalid:invalid:focus {
 .category-list .empty {
   height: 200px;
 }
+.product-list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1em;
+  font-weight: 300;
+}
+.product-list ul li {
+  float: left;
+  text-align: center;
+  padding: 0;
+  text-transform: capitalize;
+  text-shadow: none;
+  font-weight: normal;
+  background-color: #f9f9f9;
+  background-color: #fff;
+}
+.product-list ul li.well {
+  width: 100%;
+}
+.product-list ul li a {
+  padding: .75em;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+.product-list ul li .shortproduct-info {
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  border-top: none;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  padding: 10px;
+  font-size: 1.5em;
+}
 .product-image-large {
   margin: 15px auto;
   max-height: 300px;
@@ -6843,6 +6883,10 @@ select.ng-invalid:invalid:invalid:focus {
 }
 .product-variants {
   padding-left: 1.5em;
+}
+.product-variants .quantity-total-variants {
+  border: 1px solid #cccccc;
+  height: 52px;
 }
 .product-variants p {
   margin: 0;
@@ -6898,45 +6942,6 @@ select.ng-invalid:invalid:invalid:focus {
 .product-variants .view-form-icon div {
   margin-top: 0;
 }
-.product-list ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-size: 1em;
-  font-weight: 300;
-}
-.product-list ul li {
-  float: left;
-  text-align: center;
-  padding: 0;
-  text-transform: capitalize;
-  text-shadow: none;
-  font-weight: normal;
-  background-color: #f9f9f9;
-  background-color: #fff;
-}
-.product-list ul li.well {
-  width: 100%;
-}
-.product-list ul li a {
-  padding: .75em;
-  display: block;
-  text-align: center;
-  text-decoration: none;
-}
-.product-list ul li .shortproduct-info {
-  background-color: rgba(0, 0, 0, 0.85);
-  color: #fff;
-  border-top: none;
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 1;
-  padding: 10px;
-  font-size: 1.5em;
-}
 .file-upload-required:after {
   content: " Required";
 }
@@ -6952,7 +6957,7 @@ select.ng-invalid:invalid:invalid:focus {
 }
 .view-spec-form .col-sm-2 {
   background-color: #EEEEEE;
-  border: 1px solid #CCCCCC;
+  border: 1px solid #cccccc;
   font-size: 14px;
   font-weight: normal;
   line-height: 1;
@@ -6967,8 +6972,17 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-lineitem ~ .panel-order-shipping-multiple {
   border-top: 1px solid #cccccc;
 }
+.panel-lineitem .quantity-total {
+  border: 1px solid #cccccc;
+  border-top: 0;
+  padding: 5px 0;
+  background-color: #f5f5f5;
+}
 .panel-lineitem .col-sm-9 {
   border-left: 1px solid #cccccc;
+}
+.panel-lineitem .col-sm-9 input {
+  font-size: 11px;
 }
 .panel-lineitem a {
   width: 100%;
@@ -7037,6 +7051,14 @@ select.ng-invalid:invalid:invalid:focus {
   animation-name: fadeInDown;
   -ms-animation-name: fadeInDown;
 }
+.panel-order .order-location {
+  border: 1px solid #cccccc;
+  padding: 15px;
+  margin-top: 15px;
+}
+.panel-order .order-location p {
+  margin-bottom: 0;
+}
 .panel-order .address-input-view .create-address-type {
   display: none;
 }
@@ -7051,6 +7073,9 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-order-shipping-multiple ~ .panel-order-history,
 .panel-order-shipping-multiple ~ .panel-order-shipping-multiple {
   border-top: 1px solid #cccccc;
+}
+.panel-order-shipping-multiple .row .row {
+  border-left: 1px solid #cccccc;
 }
 .copyright-view {
   width: 100%;

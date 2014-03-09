@@ -1,6 +1,6 @@
-<div style="padding:10px;">
+<div>
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we process your request."></loadingindicator>
-    <textarea class="form-control" style="margin-bottom:10px;" ng-model="order.ApprovalComment" placeholder="Approval Comments..."></textarea><br />
+    <textarea class="form-control" ng-model="order.ApprovalComment" placeholder="Approval Comments..."></textarea><br />
      <span class="pull-right btn-group">
         <span class="ui-state-error-text" ng-show="error">{{error}}</span>
         <button class="btn btn-small btn-action" ng-click="approveOrder()">Approve</button>

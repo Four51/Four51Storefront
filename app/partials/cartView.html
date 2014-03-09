@@ -24,11 +24,9 @@
                                 <div class="view-form-icon">
                                     <quantityfield required="true" lineitem="item" class="quantity"/>
                                 </div>
-                                <div style="border: 1px solid #d6d6d6;border-top: 0; text-align: center;padding-top: 10px;background-color:#F9F9F9;margin-bottom: 15px;">
-                                    <p>
-                                        <small>Total Quantity <span ng-show="item.Quantity * item.Product.QuantityMultiplier">{{item.Quantity * item.Product.QuantityMultiplier}}</span></small>
-                                    </p>
-                                </div>
+                                <p class="quantity-total text-center">
+                                    <small>Total Quantity <span ng-show="item.Quantity * item.Product.QuantityMultiplier">{{item.Quantity * item.Product.QuantityMultiplier}}</span></small>
+                                </p>
                             </div>
                             <div class="col-xs-6 col-sm-12 col-md-6 thumbnail" ng-show="item.Variant.SmallImageUrl || item.Product.SmallImageUrl">
                                 <figure>
@@ -103,12 +101,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <p style="cursor:pointer; padding:15px; margin-bottom:0;" class="text-info" ng-show="item.SpecsLength > 0" ng-init="toggleSpecs = false" ng-click="toggleSpecs = !toggleSpecs">
+                            <p class="text-info" ng-show="item.SpecsLength > 0" ng-init="toggleSpecs = false" ng-click="toggleSpecs = !toggleSpecs">
                                 <span ng-show="toggleSpecs == false"><i class="fa fa-plus-circle"></i> Show </span>
                                 <span ng-show="toggleSpecs == true"><i class="fa fa-minus-circle"></i> Hide </span>
                                 Specifications
                             </p>
-                            <ul style="list-style: none;" ng-show="toggleSpecs == true">
+                            <ul ng-show="toggleSpecs == true">
                                 <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
                                     <span class="text-info">{{spec.Name}}: </span>
                                     <span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span></span>

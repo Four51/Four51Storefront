@@ -1,13 +1,62 @@
 // Products
+.product-list {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 1em;
+    font-weight: 300;
+    li  {
+      float: left;
+      text-align: center;
+      padding: 0;
+      text-transform: capitalize;
+      text-shadow: none;
+      font-weight: normal;
+      background-color: rgb(249, 249, 249);
+      background-color: rgba(249, 249, 249, 1);
+      background-color:#fff;
+      // expand product-list well full width
+      &.well {
+        width: 100%;
+      }
+      a {
+        padding: .75em;
+        display: block;
+        text-align: center;
+        text-decoration: none;
+      }
+      // Short product info :: example swipe found in shortProductView.html
+      .shortproduct-info {
+        background-color: rgba(0,0,0,.85);
+        color: #fff;
+        border-top: none;
+        position: absolute;
+        right: 0;
+        left: 0;
+        top:0;
+        bottom: 0;
+        z-index: 1;
+        padding: 10px;
+        font-size: 1.5em;
+      }
+    }
+  }
+}
+
 .product-image-large {
-    margin: 15px auto;
-    max-height: @fourfiveone-product-image-height;
-    max-width: 100%;
+  margin: 15px auto;
+  max-height: @fourfiveone-product-image-height;
+  max-width: 100%;
 }
 
 .product-variants {
   // make room for side color bar
   padding-left: 1.5em;
+  .quantity-total-variants {
+    border: 1px solid @fourfiveone-border-color;
+    height: 52px;
+  }
   p {
     margin: 0;
     padding: 10px 0;
@@ -69,52 +118,6 @@
   }
 }
 
-
-.product-list {
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-size: 1em;
-    font-weight: 300;
-    li  {
-      float: left;
-      text-align: center;
-      padding: 0;
-      text-transform: capitalize;
-      text-shadow: none;
-      font-weight: normal;
-      background-color: rgb(249, 249, 249);
-      background-color: rgba(249, 249, 249, 1);
-      background-color:#fff;
-      // expand product-list well full width
-      &.well {
-        width: 100%;
-      }
-      a {
-        padding: .75em;
-        display: block;
-        text-align: center;
-        text-decoration: none;
-      }
-      // Short product info :: example swipe found in shortProductView.html
-      .shortproduct-info {
-        background-color: rgba(0,0,0,.85);
-        color: #fff;
-        border-top: none;
-        position: absolute;
-        right: 0;
-        left: 0;
-        top:0;
-        bottom: 0;
-        z-index: 1;
-        padding: 10px;
-        font-size: 1.5em;
-      }
-    }
-  }
-}
-
 // Miscellaneous
 .file-upload-required:after{
   content:" Required";
@@ -129,7 +132,7 @@
 .view-spec-form .col-sm-2 {padding: 6px 0;}
 .view-spec-form .col-sm-8 {padding: 0;}
 .view-spec-form .col-sm-2 {  background-color: #EEEEEE;
-  border: 1px solid #CCCCCC;
+  border: 1px solid @fourfiveone-border-color;
   font-size: 14px;
   font-weight: normal;
   line-height: 1;
