@@ -6223,6 +6223,7 @@ button::-moz-focus-inner {
   height: 60px;
 }
 .jumbotron {
+  margin: 0 5px;
   display: none;
 }
 .jumbotron.active {
@@ -6258,7 +6259,7 @@ button::-moz-focus-inner {
 .panel .panel-heading .panel-title {
   letter-spacing: 0.08em;
   font-size: 14px;
-  padding: 20px 30px;
+  padding: 15px;
   text-align: center;
   text-transform: uppercase;
 }
@@ -6666,10 +6667,9 @@ select.ng-invalid:invalid:invalid:focus {
   -ms-background-size: cover;
   background-size: cover;
 }
-.order-cloud h1 {
+.order-cloud h2 {
   margin-top: 0;
   color: #fff;
-  font-size: 30px;
   -webkit-animation: pulsate 3s linear infinite;
   -moz-animation: pulsate 3s linear infinite;
   -o-animation: pulsate 3s linear infinite;
@@ -7031,6 +7031,9 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-order .panel-heading.no i:first-of-type {
   color: #f0ad4e;
 }
+.panel-order .panel-heading h3 .fa-caret-down ~ h3 {
+  cursor: default;
+}
 .panel-order .panel-body.ng-hide-remove,
 .panel-order .panel-lineitem.ng-hide-remove,
 .panel-order .panel-order-history.ng-hide-remove,
@@ -7078,8 +7081,6 @@ select.ng-invalid:invalid:invalid:focus {
   border-left: 1px solid #cccccc;
 }
 .copyright-view {
-  width: 100%;
-  height: 100%;
   font-size: 11px;
   margin-top: 50px;
   background-color: #f0f0f0;
@@ -7203,6 +7204,10 @@ select.ng-invalid:invalid:invalid:focus {
 .category-list .empty .category-list .empty i {
   opacity: .25;
   padding: 45px 0;
+}
+.col-collapse {
+  padding-left: 0;
+  padding-right: 0;
 }
 .branding-print-view-logo {
   max-height: 50px;

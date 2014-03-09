@@ -9,11 +9,18 @@
     i:first-of-type {
       font-size: ceil((@font-size-base * 1.7));
     }
+    //** valid
     &.yes i:first-of-type {
       color:@brand-success;
     }
+    //** invalid
     &.no i:first-of-type {
       color:@brand-warning;
+    }
+    h3 {
+      .fa-caret-down {
+        ~ h3 {cursor: default;}
+      }
     }
   }
 

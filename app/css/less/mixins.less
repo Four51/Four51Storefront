@@ -498,7 +498,8 @@ button::-moz-focus-inner {
 
 //== Jumbotron
 .jumbotron {
-  //** hide/show only on products::home page / remove this to display jumbotron on all pages
+  margin: 0 5px;
+  //** hide/show only on products::home page / remove this as well as active in path angular check to display jumbotron on all pages
   display: none;
   &.active {
     display: block;
@@ -558,7 +559,7 @@ button::-moz-focus-inner {
     .panel-title {
       letter-spacing: 0.08em;
       font-size: ceil((@font-size-base * 1));
-      padding: 20px 30px;
+      padding: 15px;
       text-align: center;
       text-transform: uppercase;
     }
