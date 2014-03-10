@@ -1,4 +1,7 @@
+//
 // Orders
+// --------------------------------------------------
+
 .panel-order {
   margin-bottom: 0;
   border-bottom: none;
@@ -24,7 +27,7 @@
     }
   }
 
-  // Animate orders content
+  //** animate orders content
   .panel-body.ng-hide-remove {
     -webkit-animation-duration: 1s;
     -moz-animation-duration: 1s;
@@ -52,7 +55,7 @@
     }
   }
 
-  // Hide unnecessary html in new address form from checkout include
+  //** hide unnecessary html in new address form from checkout include
   .address-input-view {
     .create-address-type {
       display: none;
@@ -71,9 +74,9 @@
 }
 
 .panel-order-shipping-multiple {
-  // line item top border
+  //** line item top border
   border: none;
-  // canonical selector :: remove border from first panel-body and add back to ones that come after the first one for line items
+  //** canonical selector :: remove border from first panel-body and add back to ones that come after the first one for line items
   ~ .panel-body {
     border-top: 1px solid @fourfiveone-border-color;
   }

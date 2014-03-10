@@ -1,6 +1,8 @@
+//
 // Notifications
+// --------------------------------------------------
 
-// Response message
+//== Response message
 .view-response-message {
   &.ng-hide-add {
     display:block !important;
@@ -41,7 +43,7 @@
   }
 }
 
-// Error message
+//== Error message
 .view-error-message {
   ul.alert-warning {
     border-top: 1px solid #fff;
@@ -81,11 +83,11 @@
         }
       }
       ul {
-        // display all errors :: class injected by angular ng-click
+        //** display all errors :: class injected by angular ng-click
         &.two li {
           display: none;
         }
-        // display first error
+        //** display first error
         li:first-child {
           display: block;
         }
@@ -94,7 +96,7 @@
   }
 }
 
-// Inline error message
+//== Inline error message
 .view-inline-error {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
@@ -108,7 +110,7 @@
   background-color: #F2DEDE;
   border: 1px solid #EBCCD1;
   color: #A94442;
-  // arrow
+  //== arrow
   &:before {
     content:"";
     width:0;
