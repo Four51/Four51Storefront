@@ -6965,7 +6965,7 @@ select.ng-invalid:invalid:invalid:focus {
   padding: 0;
 }
 .view-spec-form .col-sm-2 {
-  background-color: #EEEEEE;
+  background-color: #f5f5f5;
   border: 1px solid #cccccc;
   font-size: 14px;
   font-weight: normal;
