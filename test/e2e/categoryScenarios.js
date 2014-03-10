@@ -15,7 +15,7 @@
  element('.nav-header:nth-child(3) a:first').click(); //clicks third category nav link
  */
 
-var C_debug = false;
+var C_debug = true;
 
 ////////////////////////////////////////////////////
 
@@ -287,6 +287,25 @@ describe('testing e2eClickSideNavCategory nav functions', function(){
     });
 });
 
+describe('testing e2eClickGo Main nav functions', function(){
+    it('should navigate to the view requested by function name', function(){
+        if(C_debug){pause();}
+        e2eClickHome(); //start fresh on the catalog view
+        if(C_debug){pause();}
+        e2eClickOrders();
+        if(C_debug){pause();}
+        e2eClickFaves();
+        if(C_debug){pause();}
+        e2eClickAccount();
+        if(C_debug){pause();}
+        e2eClickUser();
+        if(C_debug){pause();}
+        e2eClickAddresses();
+        if(C_debug){pause();}
+        e2eClickMessages();
+        if(C_debug){pause();}
+    });
+});
 
 describe('logout/cleanup', function(){
     e2eLogout(C_debug);
