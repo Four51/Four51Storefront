@@ -28,9 +28,9 @@
                             <span class="text-success">{{item.UnitPrice | currency:"$"}}</span> x {{item.Quantity * (item.Product.QuantityMultiplier || 1)}}
                         </p>
                     </div>
-                    <div class="col-xs-12 col-sm-4" ng-show="order.Status == 'Open'">
+                    <div class="col-xs-12 col-sm-4" ng-show="item.TotalShipped">
                         <p>
-                            <small class="text-info">Shipped</small><br />
+                            <small class="text-info">Qty Shipped</small><br />
                             {{item.TotalShipped}}
                         </p>
                     </div>

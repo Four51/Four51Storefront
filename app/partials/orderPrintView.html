@@ -111,7 +111,7 @@
                         <div ng-if="!(user.Permissions.contains('HidePricing'))">
                             {{item.LineTotal | currency:"$"}}
                         </div>
-                        <div ng-show="order.Status == 'Open'">{{item.TotalShipped}}</div>
+                        <div ng-show="item.TotalShipped">Qty Shipped: {{item.TotalShipped}}</div>
                     </div>
                 </div>
             </div>
