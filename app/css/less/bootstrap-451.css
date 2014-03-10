@@ -6942,6 +6942,16 @@ select.ng-invalid:invalid:invalid:focus {
 .product-variants .view-form-icon div {
   margin-top: 0;
 }
+.empty,
+.category-list .empty {
+  width: 100%;
+  text-align: center;
+}
+.empty .empty i,
+.category-list .empty .category-list .empty i {
+  opacity: .25;
+  padding: 45px 0;
+}
 .file-upload-required:after {
   content: " Required";
 }
@@ -7194,16 +7204,6 @@ select.ng-invalid:invalid:invalid:focus {
 .app-loading-indicator-cell .app-loading-indicator-title {
   background-color: #e4f2f9;
   color: #154964;
-}
-.empty,
-.category-list .empty {
-  width: 100%;
-  text-align: center;
-}
-.empty .empty i,
-.category-list .empty .category-list .empty i {
-  opacity: .25;
-  padding: 45px 0;
 }
 .col-collapse {
   padding-left: 0;
