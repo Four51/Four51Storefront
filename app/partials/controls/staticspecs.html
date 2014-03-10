@@ -10,10 +10,10 @@
             <div id="451_list_specgroup" class="row">
                 <div  ng-class="{'col-md-6': length > 1}" >
                     <ul  ng-if="$even" class="list-group" ng-repeat="sg in specgroups">
-                        <li class="list-group-item text-center" ng-show="hasvisiblechild(sg.Specs)"><h5>{{sg.Name | uppercase}}</h5></li>
-                        <li class="list-group-item" >
-                            <div class="text-center" ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
-                                <span class="text-info">{{s.Name}}: </span>
+                        <li class="451qa_sg_item list-group-item text-center" ng-show="hasvisiblechild(sg.Specs)"><h5 style="margin:0;">{{sg.Name | uppercase}}</h5></li>
+                        <li class="list-group-item">
+                            <div class="451qa_spec_item text-center" ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
+                                <span class="text-info">{{s.Name}}</span>
                                 <a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value}}</a>
                                 <span ng-if="!s.FileURL">{{s.Value}}</span>
                             </div>
@@ -22,10 +22,10 @@
                 </div>
                 <div  ng-class="{'col-md-6': length > 1}" >
                     <ul ng-if="$odd" class="list-group" ng-repeat="sg in specgroups">
-                        <li class="list-group-item text-center" ng-show="hasvisiblechild(sg.Specs)"><h5>{{sg.Name | uppercase}}</h5></li>
-                        <li class="list-group-item" >
-                            <div class="text-center" ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
-                                <span class="text-info">{{s.Name}}: </span>
+                        <li class="451qa_sg_item list-group-item text-center" ng-show="hasvisiblechild(sg.Specs)"><h5 style="margin:0;">{{sg.Name | uppercase}}</h5></li>
+                        <li class="list-group-item">
+                            <div class="451qa_spec_item text-center" ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
+                                <span class="text-info">{{s.Name}}</span>
                                 <a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value}}</a>
                                 <span ng-if="!s.FileURL">{{s.Value}}</span>
                             </div>

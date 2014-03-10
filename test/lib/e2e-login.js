@@ -94,8 +94,8 @@ function e2eLoginProduct(strUsername, strPassword, blnDebug, strProductID){ //th
 
         browser().navigateTo('../../app/index.html#/product/default/' + strProductID);
 
-        input("user.Username").enter(strUsername);
-        input("user.Password").enter(strPassword);
+        input("credentials.Username").enter(strUsername);
+        input("credentials.Password").enter(strPassword);
         if(blnDebug){
             pause();
         }

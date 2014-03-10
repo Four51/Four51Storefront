@@ -30,14 +30,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input type='checkbox' ng-click="checkAll($event)" /></td>
+                    <td><input id="451_chk_all" type='checkbox' ng-click="checkAll($event)" /></td>
                     <td>Status</td>
                     <td>Date</td>
                     <td>Subject</td>
                     <td>From</td>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="451_list_msg">
                 <tr ng-repeat="message in messages | filter:searchTerm">
                     <td><input type='checkbox' ng-model="message.Selected" /></td>
                     <td>{{message.Box}}</td>
@@ -49,7 +49,7 @@
             </table>
         </div>
         <div class="panel-footer">
-            <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)">Delete Selected</button>
+            <button id="451qa_btn_delmsg" type="button" class="btn btn-danger" ng-click="deleteSelected($event)">Delete Selected</button>
         </div>
     </div>
 </section>

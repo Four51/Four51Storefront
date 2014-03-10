@@ -65,6 +65,31 @@ Number.prototype.formatMoney = function(c){ //found this currency formatting fun
 };
 
 //navigation functions
+function e2eClickHome(){
+    element('#451qa_home_link').click();
+}
+function e2eClickOrders(){
+    element('#451qa_order_link').click();
+}
+function e2eClickFaves(){
+    element('#451qa_fave_link').click();
+}
+function e2eClickAccount(){
+    element('#451qa_acct_link').click();
+}
+function e2eClickUser(){
+    element('#451qa_acct_link2').click();
+    element('#451qa_user_link').click();
+}
+function e2eClickAddresses(){
+    element('#451qa_acct_link2').click();
+    element('#451qa_addy_link').click();
+}
+function e2eClickMessages(){
+    element('#451qa_acct_link2').click();
+    element('#451qa_mesg_link').click();
+}
+
 function e2eClickSideNavCategory(intCatLevel,strCatName){
     var strNLevelsSelect = ""; //each level of depth is "ul li "
     var strSelector = "";
@@ -93,7 +118,6 @@ function e2eClickMainNavCategory(intNthCat,strCatName){
 
     element(strSelector).click();
 }
-
 function e2eClickOpenCategory(){
     //open the category tree that's hidden by default
     sleep(3); //timing issue, sleep a few seconds
@@ -105,10 +129,10 @@ function e2eClickProductFromList(intNthProd,strProdName){
     var strSelector = "";
 
     if(strProdName != null){
-        strSelector = "#451_lst_prod span shortproductview a:contains('" + strProdName + "')";
+        strSelector = "#451_lst_prod .451qa_prod_item:has(div h3:contains('" + strProdName + "')) div a";
     }
     else{//if strProdName isn't specified just pick the first at the nth level
-        strSelector = "#451_lst_prod span:nth-child(" + intNthProd + ") shortproductview a";
+        strSelector = "#451_lst_prod .451qa_prod_item:eq(" + intNthProd + ") div a";
     }
 
     element(strSelector).click();
@@ -145,8 +169,8 @@ function e2eChangeProdQty(blnRestrictedQty,intQty){
 }
 
 function verifyStaticSpecRow(strGroup,intRow,strLabel,strValue){
-    expect(element('tr.451_hdr_spec_grp:contains("' + strGroup + '") ~ tr:eq(' + intRow + ') td:first').text()).toBe(strLabel);
-    expect(element('tr.451_hdr_spec_grp:contains("' + strGroup + '") ~ tr:eq(' + intRow + ') td:nth-child(2)').text()).toBe(strValue);
+    expect(element('.451qa_sg_item:contains("' + strGroup + '") ~ li div:eq(' + intRow + ') span:first').text()).toBe(strLabel);
+    expect(element('.451qa_sg_item:contains("' + strGroup + '") ~ li div:eq(' + intRow + ') span:eq(1)').text()).toBe(strValue);
 }
 
 function verifyVariantRow(intRow,strLabel,strDescription){

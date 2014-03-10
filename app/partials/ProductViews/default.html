@@ -1,4 +1,4 @@
-<section id="451_area_prod_desc">
+<section class="container product-view-default">
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch product information" />
     <productnav product="LineItem.Product" variant="LineItem.Variant" />
 
@@ -23,21 +23,15 @@
 
     <div class="col-md-7 col-md-offset-1 col-collapse">
         <!--BASIC PRODUCT INFO!-->
-        <div class="row">
-            <div class="col-xs-8">
-                <h2 ng-hide="LineItem.Variant.ExternalID">
-                    {{LineItem.Product.Name}}
-                </h2>
-                <h2 ng-show="LineItem.Variant.ExternalID">
-                    {{LineItem.Variant.ExternalID}} {{LineItem.Product.Name}}
-                </h2>
-            </div>
-            <div class="col-xs-4">
-                <h2 class="text-success text-right" ng-show="LineItem.PriceSchedule.PriceBreaks.length == 1" ng-if="!(user.Permissions.contains('HidePricing'))">
-                    {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
-                </h2>
-            </div>
-        </div>
+        <h2 class="text-success pull-right" ng-show="LineItem.PriceSchedule.PriceBreaks.length == 1" ng-if="!(user.Permissions.contains('HidePricing'))">
+            {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
+        </h2>
+        <h2 id="451qa_prod_name" ng-hide="LineItem.Variant.ExternalID">
+            {{LineItem.Product.Name}}
+        </h2>
+        <h2 ng-show="LineItem.Variant.ExternalID">
+            {{LineItem.Variant.ExternalID}}
+        </h2>
         <div ng-show="LineItem.Product.Description">
             <!-- PRODUCT DESCRIPTION PANEL! --->
             <div class="panel panel-primary">
@@ -46,11 +40,11 @@
                         Description
                     </h3>
                 </div>
-                <div class="panel-body">
-                    <h4 ng-show="LineItem.Product.ExternalID" class="text-info">
+                <div class="panel-body" id="451_area_prod_desc">
+                    <h4 ng-show="LineItem.Product.ExternalID" class="text-info" style="margin:0;">
                         ID: {{LineItem.Product.ExternalID}}
                     </h4>
-                    <p ng-bind-html="trustedDescription(LineItem.Product)" />
+                    <p id="451qa_prod_desc" ng-bind-html="trustedDescription(LineItem.Product)" />
                     <p ng-show="LineItem.Variant.Description" ng-bind-html="trustedDescription(LineItem.Variant)" />
 
                     <priceScheduleTable ng-if="!(user.Permissions.contains('HidePricing')) && LineItem.PriceSchedule.PriceBreaks.length > 1" ps='LineItem.PriceSchedule' p='LineItem.Product'/>
