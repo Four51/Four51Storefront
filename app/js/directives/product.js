@@ -148,7 +148,7 @@ four51.app.directive('quantityfield', function($451, ProductDisplayService){
 					var qtyAvail = (product.IsVariantLevelInventory ? variant.QuantityAvailable : product.QuantityAvailable) + (lineItem.OriginalQuantity || 0);
 
 					if(qtyAvail < value && product.AllowExceedInventory == false){
-						scope.lineitem.qtyError = "not enough available inventory " +  qtyAvail;
+						scope.lineitem.qtyError = "cannot exceed the Quantity Available of " +  qtyAvail;
 						scope.valid = false;
 					}
 				}

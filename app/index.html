@@ -5,20 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Order Cloud</title>
-	<link rel="stylesheet" href="css/bootstrap/{{AppConst.bootstrapFileName || 'bootstrap-451.css'}}">
+    <!--- bootstrap-451.css is non editable --->
+	<link rel="stylesheet" href="css/less/bootstrap-451.css">
+    <!--- custom.css is editable --->
+    <link rel="stylesheet" href="css/less/custom.css">
     <link href="css/font-awesome.css" rel="stylesheet"/>
     <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
     <link href='//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'/>
     <link rel="stylesheet" href="css/jquery-ui.min.css"/>
     <link rel="stylesheet" href="css/animate.css"/>
-    <link rel="stylesheet" href="css/app.css"/>
-    <link rel="stylesheet" href="css/custom.css"/>
-    <link rel="stylesheet" href="css/breakpoint/app.css" media="screen"/>
-    <link rel="stylesheet" href="css/breakpoint/custom-large.css" media="screen"/>
-    <link rel="stylesheet" href="css/breakpoint/custom-medium.css" media="screen"/>
-    <link rel="stylesheet" href="css/breakpoint/custom-small.css" media="screen"/>
-    <link rel="stylesheet" href="css/breakpoint/custom-extra-small.css" media="screen"/>
-    <link rel="stylesheet" href="css/print.css" media="print"/>
 </head>
 <body ng-cloak ng-class="ng-cloak">
 <section ng-controller="Four51Ctrl">
@@ -32,7 +27,7 @@
         <section class="hidden-print">
             <branding />
         </section>
-        <section class="container-content">
+        <section class="container">
             <ng-view autoscroll />
         </section>
         <copyright ng-if="!user.Permissions.contains('UnBrandedSite')" />

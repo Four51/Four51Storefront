@@ -1,10 +1,8 @@
-<nav class="nav nav-cat-search visible-sm visible-xs account-nav">
-    <hr />
+<nav class="nav visible-sm visible-xs">
     <span class="btn-group">
         <button class="btn btn-default" ng-class="{'active': isActive('addresses')}" redirect="/addresses">Addresses</button>
         <button class="btn btn-default" ng-class="{'active': isActive('message')}" redirect="/message">Messages</button>
-        <a href="#" class="btn btn-default" ng-click="Clear()"><span class="text-nav">Clear Cache</span></a>
-        <button class="btn btn-danger pull-right 451_btn_logout" ng-click="Logout()" ng-if="user.Type=='Customer'">Log Out</button>
+        <a ng-if="AppConst.debug" href="#" class="btn btn-default" ng-click="Clear()"><span>Clear Cache</span></a>
+        <button class="btn btn-danger pull-right 451_btn_logout" ng-click="Logout()" ng-if="user.Type=='Customer'"><i class="fa fa-power-off"></i> Log Out</button>
     </span>
-    <hr />
 </nav>

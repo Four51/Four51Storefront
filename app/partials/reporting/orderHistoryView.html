@@ -1,17 +1,15 @@
-<section class="container order-history-view">
+<section class="container">
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch your order"></loadingindicator>
-    <div class="order-history-view-detail hidden-print">
-        <nav class="nav nav-cat-search">
-            <hr />
+    <div class="hidden-print">
+        <nav class="nav">
             <ul>
-                <li class="nav-header text-nav">{{order.Type}} Order<span ng-show="order.ExternalID"> ID: </span>{{order.ExternalID}}</li>
-                <li class="nav-header print pull-right" ng-click="onPrint()"><i class="fa fa-print" rel="tooltip" title="Print"></i></li>
+                <li><span class="text-primary">{{order.Type}} Order<span ng-show="order.ExternalID"> ID: </span>{{order.ExternalID}}</span></li>
+                <li class="pull-right" ng-click="onPrint()"><span><i class="fa fa-print" rel="tooltip" title="Print"></i></span></li>
             </ul>
-            <hr />
         </nav>
         <div class="col-md-3 col-md-offset-1 col-md-push-8">
             <div class="row">
-                <div class="panel panel-primary order-history-view-header col-collapse">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             Order Details
@@ -22,23 +20,22 @@
                         <orderhistorysummary ng-if="!(user.Permissions.contains('HidePricing'))"></orderhistorysummary>
                     </div>
                     <div class="panel-footer" ng-if="order.FromUserID == user.ID">
-                        <div class="order-history-view-repeat">
-                            <button ng-disabled="currentOrder" class="btn btn-primary pull-right" ng-click="repeatOrder()">Repeat Order</button>
-                        </div>
+                        <button ng-disabled="currentOrder" class="btn btn-primary pull-right" ng-click="repeatOrder()">
+                            <i ng-show="currentOrder" class="fa fa-warning"></i>
+                            Repeat Order
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-collapse col-md-8 col-md-pull-4 order-history-view-grid">
-            <div class="panel panel-default order-history-view-line-items">
+        <div class="col-md-8 col-md-pull-4">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title panel-primary">
                         {{order.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in this order
                     </h3>
                 </div>
-                <div class="panel-body">
-                    <lineitemhistorygrid></lineitemhistorygrid>
-                </div>
+                <lineitemhistorygrid />
                 <div class="panel-footer" ng-if="order.FromUserID == user.ID">
                     <loadingindicator ng-show="displayLoadingIndicator" />
                    <div class="form-group view-form-icon">
@@ -63,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="view-footer navbar-fixed-bottom">
+        <div class="navbar-fixed-bottom">
             <loadingindicator ng-show="displayLoadingIndicator" />
             <div class="view-action-message alert-success" ng-show="saveFavorite">Your order has been saved as a Favorite.</div>
         </div>

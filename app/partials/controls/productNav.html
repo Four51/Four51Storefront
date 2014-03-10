@@ -1,12 +1,8 @@
-<nav class="nav nav-cat-search crumbs"  ng-show="product.Variants || product.Type == 'VariableText'">
-    <hr />
-    <ul>
-        <li><a href style="cursor: default;"><strong>Product Navigation</strong></a></li>
-        <li><a href="#/product/{{product.ViewName}}/{{product.InteropID}}">{{product.Name}}</a></li>
-        <li ng-if="variant && variant.ExternalID"><a href="#/product/{{product.ViewName}}/{{product.InteropID}}/{{variant.InteropID}}">{{variant.ExternalID}}</a></li>
-    </ul>
-    <hr />
-</nav>
+<ol class="breadcrumb" ng-show="product.Variants || product.Type == 'VariableText'">
+    <li><strong>Product Navigation</strong></li>
+    <li><a href="#/product/{{product.ViewName}}/{{product.InteropID}}">{{product.Name}}</a></li>
+    <li ng-if="variant && variant.ExternalID"><a href="#/product/{{product.ViewName}}/{{product.InteropID}}/{{variant.InteropID}}">{{variant.ExternalID}}</a></li>
+</ol>
 
 
 

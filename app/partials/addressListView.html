@@ -1,4 +1,4 @@
-<section class="container address-list-view">
+<section class="address-list-view">
     <loadingindicator ng-show="displayLoadingIndicator" />
     <accountnavigation />
     <div class="panel panel-default" ng-if="(addresses | filter:{IsCustEditable:true}).length == 0">
@@ -16,50 +16,46 @@
         <div class="panel-heading">
             <h3 class="panel-title">Addresses</h3>
         </div>
-        <div class="panel-body view-form-icon view-table-row">
+        <div class="panel-body view-form-icon">
             <div>
                 <label ng-show="searchTerm">Search</label>
                 <input class='form-control' type="text" placeholder="Search" ng-model="searchTerm" autocomplete="off" />
                 <i class="fa fa-search"></i>
             </div>
         </div>
-        <div class="panel-body">
-            <div class="row hidden-xs text-info" ng-show="(addresses | filter:searchTerm | filter:{IsCustEditable:true}).length > 0">
-                <div class="col-xs-12 col-sm-2">  <input type='checkbox' ng-click="checkAll($event)" /></div>
-                <div class="col-xs-12 col-sm-2">Name</div>
-                <div class="col-xs-12 col-sm-2">City</div>
-                <div class="col-xs-12 col-sm-2">State</div>
-                <div class="col-xs-12 col-sm-2">Shipping</div>
-                <div class="col-xs-12 col-sm-2">Billing</div>
-            </div>
-            <div class="visible-xs view-form-icon row view-table-row">
-                <div class="col-xs-4">
-                    <label>Select All</label>
+        <div class="panel-table">
+            <div class="row text-info" ng-show="(addresses | filter:searchTerm | filter:{IsCustEditable:true}).length > 0">
+                <div class="col-sm-2">
+                    <label class="visible-xs">Select all</label>
                     <input type='checkbox' ng-click="checkAll($event)" />
                 </div>
+                <div class="col-sm-2 hidden-xs">Name</div>
+                <div class="col-sm-2 hidden-xs">City</div>
+                <div class="col-sm-2 hidden-xs">State</div>
+                <div class="col-sm-2 hidden-xs">Shipping</div>
+                <div class="col-sm-2 hidden-xs">Billing</div>
             </div>
-            <div class="row view-table-row"  ng-repeat="address in addresses | filter:searchTerm | filter:{IsCustEditable:true}">
-                <div class="col-xs-12 col-sm-2">
-                    <span class="visible-xs text-info">Select</span>
+            <div class="row"  ng-repeat="address in addresses | filter:searchTerm | filter:{IsCustEditable:true}">
+                <div class="col-sm-2">
                     <input type='checkbox' ng-model="address.Selected" />
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">Name</span>
                     <a ng-href="#/address/{{address.ID}}">{{address.AddressName}}</a>
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">City</span>
                     {{address.City}}</a>
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">State</span>
                     {{address.State}}
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">Shipping</span>
                     <i ng-class="{'fa fa-check': address.IsShipping }"></i>
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">Billing</span>
                     <i ng-class="{'fa fa-check': address.IsBilling }"></i>
                 </div>
@@ -70,7 +66,7 @@
             <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" type="button" class="btn btn-primary pull-right" ng-click="newAddress($event)">New Address</button>
         </div>
 
-        <div class="view-footer navbar-fixed-bottom">
+        <div class="navbar-fixed-bottom">
             <loadingindicator ng-show="displayLoadingIndicator" />
             <div class="view-action-message alert-warning" ng-show="(addresses | filter:searchTerm | filter:{IsCustEditable:true}).length == 0">
                 Your search resulted in no records. Please refine your search.

@@ -35,9 +35,8 @@
                 </div>
         </section>
     </div>
-    <!--- SWIPE INFO ON PHONE --->
-    <section class="shortproduct-view-swipe" ng-show="showSwipe" ng-swipe-right="showSwipe = false">
-        <div class="shortproduct-info panel-body text-center" ng-class="{ 'product-details': toggle }">
+    <section ng-show="showSwipe" ng-swipe-right="showSwipe = false">
+        <div class="shortproduct-info panel-body text-center">
             <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]" ng-if="!(user.Permissions.contains('HidePricing'))">
                 {{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
                 <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>

@@ -1,11 +1,9 @@
-<section class="container favorite-order-list-view">
-    <nav class="nav nav-cat-search visible-xs">
-        <hr />
+<section class="favorite-order-list-view">
+    <nav class="nav visible-xs">
         <span class="btn-group">
             <button class="btn btn-default" ng-class="{'active': isActive('order')}" redirect="/order">Orders</button>
             <button class="btn btn-default" ng-class="{'active': isActive('favoriteorders')}" redirect="/favoriteorders">Favorites</button>
         </span>
-        <hr />
     </nav>
     <div class="panel panel-default" ng-if="favoriteorders.length == 0">
         <div class="panel-heading">
@@ -22,56 +20,55 @@
         <div class="panel-heading">
             <h3 class="panel-title panel-primary">Favorite Orders</h3>
         </div>
-        <div class="panel-body view-form-icon view-table-row">
+        <div class="panel-body view-form-icon">
             <div>
                 <label ng-show="searchTerm">Search</label>
                 <input class="form-control" type="text" placeholder="Search" ng-model="searchTerm" autocomplete="off" />
                 <i class="fa fa-search"></i>
             </div>
         </div>
-        <div class="panel-body">
-            <div class="row hidden-xs text-info">
-                <div class="col-xs-12 col-sm-2"><input type='checkbox' ng-click="checkAll($event)" /></div>
-                <div class="col-xs-12 col-sm-2">Name</div>
-                <div class="col-xs-12 col-sm-2">Order ID</div>
-                <div class="col-xs-12 col-sm-2">Date Completed</div>
-                <div class="col-xs-12 col-sm-2">Order Type</div>
-                <div class="col-xs-12 col-sm-2"></div>
-            </div>
-            <div class="visible-xs view-form-icon row view-table-row">
-                <div class="col-xs-4">
-                    <label>Select All</label>
+        <div class="panel-table">
+            <div class="row text-info">
+                <div class="col-sm-2">
+                    <label class="visible-xs">Select all</label>
                     <input type='checkbox' ng-click="checkAll($event)" />
                 </div>
+                <div class="col-sm-2 hidden-xs">Name</div>
+                <div class="col-sm-2 hidden-xs">Order ID</div>
+                <div class="col-sm-2 hidden-xs">Date Completed</div>
+                <div class="col-sm-2 hidden-xs">Order Type</div>
+                <div class="col-sm-2 hidden-xs"></div>
             </div>
-            <div class="row view-table-row" ng-repeat="order in favoriteorders | filter:searchTerm">
-                <div class="col-xs-12 col-sm-2">
-                    <span class="visible-xs text-info">Select</span>
+            <div class="row" ng-repeat="order in favoriteorders | filter:searchTerm">
+                <div class="col-sm-2">
                     <input type='checkbox' ng-model="order.Selected" />
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">Name</span>
                     {{order.FavoriteName}}
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">Order ID</span>
                     <a ng-href="#/order/{{order.ID}}">{{order.ExternalID}}</a>
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">Date Completed</span>
                     {{order.DateCompleted | date:'medium'}}
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">Order Type</span>
                     {{order.Type}}
                 </div>
-                <div class="col-xs-12 col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">
-                    <button ng-disabled="currentOrder" type="button" class="btn btn-default" ng-click="repeat(order)">Repeat Order</button>
+                <div class="col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">
+                    <button ng-disabled="currentOrder" type="button" class="btn btn-default pull-right" ng-click="repeat(order)">
+                        <i ng-show="currentOrder" class="fa fa-warning"></i>
+                        Repeat Order
+                    </button>
                 </div>
             </div>
         </div>
         <div class="panel-footer">
-            <button type="button" class="btn btn-small btn-danger" ng-click="deleteSelected($event)">Delete Selected</button>
+            <button type="button" class="btn btn-small btn-danger" ng-click="deleteSelected($event)" ng-show="(favoriteorders | filter:searchTerm | filter:{Selected:true}).length > 0">Delete Selected</button>
         </div>
     </div>
 </section>

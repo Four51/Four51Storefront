@@ -1,19 +1,19 @@
-<div class="panel panel-default">
+<div class="panel panel-default panel-order">
     <div class="panel-heading" ng-class="{'no': cart_shipping.$invalid, 'yes': !cart_shipping.$invalid }" ng-click="showSuccessAlert = false">
         <h3 ng-click="checkOutSection = 'shipping'" class="panel-title panel-primary">
-            <i ng-class="{'fa fa-warning': cart_shipping.$invalid, 'fa fa-check-circle': !cart_shipping.$invalid }"></i>
+            <i class="pull-left" ng-class="{'fa fa-warning': cart_shipping.$invalid, 'fa fa-check-circle': !cart_shipping.$invalid }"></i>
             Shipping
-            <i ng-class="{'fa fa-caret-down': checkOutSection == 'shipping', 'fa fa-caret-up': checkOutSection == 'order' || checkOutSection == 'billing' }"></i>
+            <i class="pull-right" ng-class="{'fa fa-caret-down': checkOutSection == 'shipping', 'fa fa-caret-up': checkOutSection == 'order' || checkOutSection == 'billing' }"></i>
         </h3>
     </div>
-    <div class="panel-body" ng-show="checkOutSection == 'shipping'" class="panel-body check-out-view-shipping">
+    <div class="panel-body" ng-show="checkOutSection == 'shipping'" class="panel-body ">
         <div ng-show="addressform || (addresses | filter:{IsShipping:true}).length == 0 && user.Permissions.contains('CreateShipToAddress')">
             <addressinput address='shipaddress' user='user'></addressinput>
         </div>
         <div ng-show="!addressform">
             <form name="cart_shipping" novalidate="">
                 <div>
-                    <div style="margin-bottom: 15px;">
+                    <div>
                         <span class="btn-group">
                             <button ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1" class="btn btn-default" ng-click="setSingleShipAddress()">
                                 <i ng-class="{'fa fa-check': !currentOrder.IsMultipleShip() }"></i>
@@ -55,14 +55,14 @@
                                     <i class="fa fa-truck"></i>
                                 </div>
                             </div>
-                            <div ng-show="!currentOrder.IsMultipleShip() && orderShipAddress.ID" class="check-out-view-selected-shipping" style="border: 1px solid #d6d6d6; padding: 15px; margin-top: 15px;">
-                                <p style="font-size: 11px; font-weight: bold;">Shipping Location</p>
+                            <div class="order-location" ng-show="!currentOrder.IsMultipleShip() && orderShipAddress.ID">
+                                <p><strong><small>Shipping Location</small></strong></p>
                                 <p ng-show="orderShipAddress.AddressName"><small>{{orderShipAddress.AddressName}}</small></p>
                                 <p ng-show="orderShipAddress.CompanyName"><small>{{orderShipAddress.CompanyName}}</small></p>
                                 <p ng-show="(orderShipAddress.FirstName || orderShipAddress.LastName) && (!user.Permissions.contains('EditShipToName') && !orderShipAddress.IsCustEditable)">
                                     <small>{{orderShipAddress.FirstName + ' ' + orderShipAddress.LastName}}</small>
                                 </p>
-                                <div class="row view-order-shipping-edit-name" ng-show="!currentOrder.IsMultipleShip() && user.Permissions.contains('EditShipToName') && (orderShipAddress && !orderShipAddress.IsCustEditable)">
+                                <div class="row" ng-show="!currentOrder.IsMultipleShip() && user.Permissions.contains('EditShipToName') && (orderShipAddress && !orderShipAddress.IsCustEditable)">
                                     <div class="col-sm-2">
                                          <input class="form-control" type="text" ng-model="currentOrder.LineItems[0].ShipFirstName" placeholder="First Name" />
                                     </div>
@@ -79,53 +79,55 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row check-out-view-multiple-shipping" ng-repeat="item in currentOrder.LineItems" ng-show="currentOrder.IsMultipleShip()">
-                        <div class="col-sm-6">
-                            <p>
-                                <span class="text-info">{{item.DateNeeded | date:'MM/dd/yyyy' }}</span><br />
-                                <small><strong>{{item.Product.Name}}</strong>{{' x ' + item.Quantity}}</small>
-                            </p>
-                            <div class="row" ng-show="user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable">
-                                <p class="col-xs-12"><small>Attention:</small></p>
-                                <div class="view-form-icon col-sm-6">
-                                    <div>
-                                        <label ng-show="item.ShipFirstName || currentOrder.IsMultipleShip() && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" ng-class="{required: currentOrder.IsMultipleShip() && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable}">First Name</label>
-                                        <input class="form-control" ng-required="currentOrder.IsMultipleShip() && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" type="text" ng-model="item.ShipFirstName" placeholder="First Name" autocomplete="off" />
-                                        <i class="fa fa-user"></i>
+                    <div class="panel-order-shipping-multiple" ng-repeat="item in currentOrder.LineItems" ng-show="currentOrder.IsMultipleShip()">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p>
+                                    <span class="text-info">{{item.DateNeeded | date:'MM/dd/yyyy' }}</span><br />
+                                    <small><strong>{{item.Product.Name}}</strong>{{' x ' + item.Quantity}}</small>
+                                </p>
+                                <div class="row" ng-show="user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable">
+                                    <p><small>Attention:</small></p>
+                                    <div class="view-form-icon col-sm-6">
+                                        <div>
+                                            <label ng-show="item.ShipFirstName || currentOrder.IsMultipleShip() && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" ng-class="{required: currentOrder.IsMultipleShip() && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable}">First Name</label>
+                                            <input class="form-control" ng-required="currentOrder.IsMultipleShip() && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" type="text" ng-model="item.ShipFirstName" placeholder="First Name" autocomplete="off" />
+                                            <i class="fa fa-user"></i>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="view-form-icon col-sm-6">
-                                    <div>
-                                        <label ng-show="item.ShipLastName || currentOrder.IsMultipleShip() && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" ng-class="{required: currentOrder.IsMultipleShip() && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable}">Last Name</label>
-                                        <input class="form-control" ng-required="currentOrder.IsMultipleShip() && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" type="text" ng-model="item.ShipLastName" placeholder="Last Name" autocomplete="off" />
-                                        <i class="fa fa-user"></i>
+                                    <div class="view-form-icon col-sm-6">
+                                        <div>
+                                            <label ng-show="item.ShipLastName || currentOrder.IsMultipleShip() && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" ng-class="{required: currentOrder.IsMultipleShip() && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable}">Last Name</label>
+                                            <input class="form-control" ng-required="currentOrder.IsMultipleShip() && user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable" type="text" ng-model="item.ShipLastName" placeholder="Last Name" autocomplete="off" />
+                                            <i class="fa fa-user"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row col-sm-5 col-sm-offset-1" style="border-left: 1px solid #d6d6d6;">
-                            <div class="view-form-icon col-xs-12">
-                                <div ng-class="{'view-form-select': !item.ShipAddressID, '': item.ShipAddressID }">
-                                    <label ng-class="{required: currentOrder.IsMultipleShip()}" ng-show="currentOrder.ShipAddressID || currentOrder.IsMultipleShip()">Shipping Address</label>
-                                    <select class="form-control" name="shippingAddress"
-                                            ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
-                                            ng-model="item.ShipAddressID"
-                                            ng-required="currentOrder.IsMultipleShip()"
-                                            ng-change="setShipAddressAtLineItem(item)">
-                                    </select>
-                                    <i class="fa fa-map-marker"></i>
+                            <div class="row col-sm-5 col-sm-offset-1">
+                                <div class="view-form-icon">
+                                    <div ng-class="{'view-form-select': !item.ShipAddressID, '': item.ShipAddressID }">
+                                        <label ng-class="{required: currentOrder.IsMultipleShip()}" ng-show="currentOrder.ShipAddressID || currentOrder.IsMultipleShip()">Shipping Address</label>
+                                        <select class="form-control" name="shippingAddress"
+                                                ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
+                                                ng-model="item.ShipAddressID"
+                                                ng-required="currentOrder.IsMultipleShip()"
+                                                ng-change="setShipAddressAtLineItem(item)">
+                                        </select>
+                                        <i class="fa fa-map-marker"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="view-form-icon col-xs-12">
-                                <div ng-class="{'view-form-select': !item.ShipperName, '': item.ShipperName }">
-                                    <label ng-class="{required: currentOrder.IsMultipleShip() && user.ShipMethod != null}" ng-show="currentOrder.LineItems[0].ShipperName || currentOrder.IsMultipleShip() && user.ShipMethod != null">Shipping Method</label>
-                                    <select class="form-control" ng-change="updateShipper(item)"
-                                            ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
-                                            ng-options="shipper.Name as shipper.Name for shipper in shippers | noliverates"
-                                            ng-model="item.ShipperName"
-                                            ng-required="currentOrder.IsMultipleShip() && user.ShipMethod != null" >
-                                    </select>
-                                    <i class="fa fa-truck"></i>
+                                <div class="view-form-icon">
+                                    <div ng-class="{'view-form-select': !item.ShipperName, '': item.ShipperName }">
+                                        <label ng-class="{required: currentOrder.IsMultipleShip() && user.ShipMethod != null}" ng-show="currentOrder.LineItems[0].ShipperName || currentOrder.IsMultipleShip() && user.ShipMethod != null">Shipping Method</label>
+                                        <select class="form-control" ng-change="updateShipper(item)"
+                                                ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
+                                                ng-options="shipper.Name as shipper.Name for shipper in shippers | noliverates"
+                                                ng-model="item.ShipperName"
+                                                ng-required="currentOrder.IsMultipleShip() && user.ShipMethod != null" >
+                                        </select>
+                                        <i class="fa fa-truck"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
