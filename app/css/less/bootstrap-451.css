@@ -6905,8 +6905,7 @@ select.ng-invalid:invalid:invalid:focus {
   display: block;
   padding: .4em;
   margin: 0;
-  background: #eee;
-  color: #444;
+  background-color: #f5f5f5;
   text-decoration: none;
   transition: all 0.3s ease-out;
 }
@@ -6915,7 +6914,7 @@ select.ng-invalid:invalid:invalid:focus {
   left: -1.5em;
   top: 0;
   content: '';
-  background: #fa8072;
+  background-color: #d9534f;
   height: 100%;
   width: 1em;
   padding-top: 1em;
@@ -6933,11 +6932,11 @@ select.ng-invalid:invalid:invalid:focus {
   transition: all 0.3s ease-out;
 }
 .product-variants a:hover {
-  background: #F9f9f9;
+  background: #fafafa;
 }
 .product-variants a:hover:after {
   left: -0.5em;
-  border-left-color: #fa8072;
+  border-left-color: #d9534f;
 }
 .product-variants .view-form-icon div {
   margin-top: 0;
@@ -7072,10 +7071,10 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-order .order-location p {
   margin-bottom: 0;
 }
-.panel-order .address-input-view .create-address-type {
+.panel-order .create-address-type {
   display: none;
 }
-.panel-order .address-input-view .panel-footer .btn-danger {
+.panel-order .panel-footer .btn-danger {
   display: none;
 }
 .panel-order-shipping-multiple {

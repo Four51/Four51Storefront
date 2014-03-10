@@ -76,8 +76,7 @@
     display: block;
     padding: .4em;
     margin: 0;
-    background: #eee;
-    color: #444;
+    background-color: @panel-default-heading-bg;
     text-decoration: none;
     transition: all .3s ease-out;
     //** color bar on left side :: hover :: arrow
@@ -87,7 +86,7 @@
       top:0;
       content: '';
       font-weight: bold;
-      background: #fa8072;
+      background-color: @brand-danger;
       height: 100%;
       width: 1em;
       padding-top: 1em;
@@ -105,11 +104,11 @@
       transition: all .3s ease-out;
     }
     &:hover{
-      background: #F9f9f9;
+      background: lighten(@panel-default-heading-bg, 2%);
     }
     &:hover:after{
       left: -.5em;
-      border-left-color: #fa8072;
+      border-left-color: @brand-danger;
     }
   }
   //** is not like the others
