@@ -1,0 +1,7 @@
+<section>
+    <ul>
+        <li ng-repeat="report in Reports">
+            Name: {{report.Name}} | Type: {{report.Type}} | <a ng-href="{{'report/' + report.ID}}">Preview</a>
+        </li>
+    </ul>
+</section>
