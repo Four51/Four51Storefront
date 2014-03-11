@@ -14,7 +14,7 @@
                     <li class="order" ng-class="{'active': isActive('order'), 'active-xs': isActive('orders')}">
                         <a id="451qa_order_link" href="#/order"><i class="fa fa-bar-chart-o pull-left"></i><span class="text-nav hidden-xs pull-right">Orders</span></a>
                     </li>
-                    <li class="order" ng-class="{'active': isActive('reports'), 'active-xs': isActive('reports')}">
+                    <li ng-if="user.Permissions.contains('AdvancedReporting')" class="order" ng-class="{'active': isActive('reports'), 'active-xs': isActive('reports')}">
                         <a id="451qa_order_link" href="#/reports"><i class="fa fa-clipboard pull-left"></i><span class="text-nav hidden-xs pull-right">Reports</span></a>
                     </li>
                     <li class="favorites hidden-xs" ng-class="{'active': isActive('favoriteorders')}">
