@@ -3,8 +3,19 @@ four51.app.directive('paymentselector', function() {
        restrict: 'E',
 	   priority: 99,
        templateUrl: 'partials/controls/paymentSelection.html',
-       controller: function($scope, $rootScope) {
+       controller: function($scope, $rootScope, SavedCreditCard) {
+	       $scope.paymentSelection = {};
 	       $scope.isSplitBilling = false;
+
+	       var getCardByID = function(id) {
+		       var selectedCard = null;
+		       angular.forEach($scope.paymentSelection.SavedCards, function(card) {
+			       if (card.ID == id)
+				       selectedCard = card;
+		       });
+		       return selectedCard;
+	       };
+
            $scope.setPaymentMethod = function(type) {
                $scope.currentOrder.PaymentMethod = type;
                $rootScope.$broadcast('event:paymentMethodChange', type);
@@ -35,6 +46,27 @@ four51.app.directive('paymentselector', function() {
 				       }
 			       });
 		       }
+	       });
+
+	       $scope.deleteSavedCard = function(id) {
+		       if (confirm('Are you sure you wish to delete this saved credit card? This cannot be undone') == true) {
+			       var card = getCardByID(id);
+			       SavedCreditCard.delete(card, function() {
+				       SavedCreditCard.query(function(cards) {
+					       $scope.currentOrder.CreditCardID = null;
+					       $scope.paymentSelection.SavedCards = cards;
+				       });
+			       });
+		       }
+	       };
+	       $scope.showDelete = function(id) {
+		       if (id == null) return false;
+		       var card = getCardByID(id);
+		       return card.IsCustEditable;
+	       };
+
+	       SavedCreditCard.query(function(cards) {
+		       $scope.paymentSelection.SavedCards = cards;
 	       });
 	   }
    };
