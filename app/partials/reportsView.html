@@ -1,7 +1,44 @@
 <section>
-    <ul>
-        <li ng-repeat="report in Reports">
-            Name: {{report.Name}} | Type: {{report.Type}} | <a ng-href="{{'report/' + report.ID}}">Preview</a>
-        </li>
-    </ul>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Saved Reports</h3>
+        </div>
+        <div class="panel-body view-form-icon">
+            <div>
+                <label ng-show="searchTerm">Search</label>
+                <input class='form-control' type="text" placeholder="Search" ng-model="searchTerm" autocomplete="off" />
+                <i class="fa fa-search"></i>
+            </div>
+        </div>
+        <div class="panel-table">
+            <div class="row text-info">
+                <div class="col-sm-2 hidden-xs">Name</div>
+                <div class="col-sm-2 hidden-xs">Type</div>
+                <div class="col-sm-2 hidden-xs"></div>
+            </div>
+            <div class="row" ng-repeat="report in Reports | filter:searchTerm">
+                <div class="col-sm-2">
+                    <span class="visible-xs text-info">Name</span>
+                    <a ng-href="{{'report/' + report.ID}}">{{report.Name}}</a>
+                </div>
+                <div class="col-sm-2">
+                    <span class="visible-xs text-info">Type</span>
+                    {{report.Type}}
+                </div>
+                <div class="col-sm-2">
+                    <span class="visible-xs text-info"></span>
+                    <a ng-click="GetReport($event, '{{report.ID}}')">Preview</a>
+                </div>
+             </div>
+        </div>
+        <div class="panel-table">
+            <div class="row" ng-repeat="row in report">
+                <div class="col-sm-2" ng-repeat="col in row">
+                    {{col}}
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+        </div>
+    </div>
 </section>
