@@ -1,31 +1,42 @@
-<section class="container cat-body search-view animated slideInDown">
-    <div ng-hide="products">
-        <form role="search">
-            <div>
-                <div class="view-form-icon">
-                <input type="text" ng-model="searchTerm"  class="form-control search-view-search" placeholder="Search Products" autocomplete="off" />
-                <i class="fa fa-search"></i>
-                </div>
-                <div class="search-view-cancel">
-                    <a href="#/catalog"><i class="fa fa-times-circle"></i></a>
-                    <div class="hidden-xs search-view-cancel-name">Press enter to search</div>
-                </div>
-                <button type="submit" ng-click="search()" class="btn btn-default" style="visibility:hidden;">Submit</button>
-            </div>
-        </form>
-    </div>
-    <div ng-show="products" class="product-navigation">
-        <div>Search results
-            <a href="#/catalog"><i class="close-toggle fa fa-times-circle"></i></a>
+<section>
+    <div class="panel panel-search">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Search
+            </h3>
         </div>
-         <div>
-            <nav class="nav">
-                <ul>
-                    <li class="nav-header well col-lg-3 col-md-4  col-sm-6 col-xs-12" ng-repeat="product in products">
-                        <shortproductview p="product" />
-                    </li>
-                </ul>
-            </nav>
-         </div>
+        <div class="panel-body">
+            <form role="search">
+                <div class="view-form-icon">
+                    <div class="input-group">
+                        <input type="text" ng-model="searchTerm"  class="form-control" placeholder="Search Products" autocomplete="off" />
+                        <i class="fa fa-search"></i>
+                        <span class="hidden-xs input-group-addon">
+                            <small>Press enter to search</small>
+                        </span>
+                        <span class="input-group-addon">
+                            <button type="button" class="btn" redirect="catalog"><i class="fa fa-times-circle"></i></button>
+                        </span>
+                    </div>
+                    <button type="submit" ng-click="search()" class="btn btn-default">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="panel-body">
+            <div ng-show="products" class="product-list">
+                <div class="alert alert-info">
+                    Search results
+                </div>
+                <div>
+                    <nav class="nav">
+                        <ul>
+                            <li class="well" ng-repeat="product in products">
+                                <shortproductview p="product" />
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
     </div>
 </section>

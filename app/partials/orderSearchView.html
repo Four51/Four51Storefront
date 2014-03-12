@@ -1,11 +1,9 @@
-<section class="container order-search-view">
-    <nav class="nav nav-cat-search visible-xs" ng-show="hasStandardTypes || hasReplenishmentTypes || hasPriceRequestTypes">
-        <hr />
+<section class="order-search-view">
+    <nav class="nav visible-xs" ng-show="hasStandardTypes || hasReplenishmentTypes || hasPriceRequestTypes">
         <span class="btn-group">
             <button class="btn btn-default" ng-class="{'active': isActive('order')}" redirect="/order">Orders</button>
             <button class="btn btn-default" ng-class="{'active': isActive('favoriteorders')}" redirect="/favoriteorders">Favorites</button>
         </span>
-        <hr />
     </nav>
     <div class="panel panel-default" ng-if="!hasStandardTypes && !hasReplenishmentTypes && !hasPriceRequestTypes">
         <div class="panel-heading">
@@ -62,38 +60,40 @@
         </div>
         <div class="panel-body">
             <div class="form-inline">
-                <div class="col-xs-12  col-sm-9 col-collapse view-form-icon">
-                <div class="form-group">
-                    <label ng-show="criteria.OrderID">Order ID</label>
-                    <input class="form-control" type="text" ng-model="criteria.OrderID" placeholder="Order ID" autocomplete="off" />
-                    <i class="fa">#</i>
-                </div>
-                <div class="form-group">
-                    <label ng-show="criteria.ShippingAddress">Shipping Address</label>
-                    <input class="form-control" type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" autocomplete="off" />
-                    <i class="fa fa-map-marker"></i>
-                </div>
-                <div class="form-group">
-                    <label ng-show="criteria.DateRangeFrom">From</label>
-                    <input type="text" class="form-control" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="criteria.DateRangeFrom" placeholder="From" />
-                    <i class="fa fa-calendar"></i>
-                </div>
-                <div class="form-group">
-                    <label ng-show="criteria.DateRangeTo">To</label>
-                    <input type="text" class="form-control" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="criteria.DateRangeTo" placeholder="To" />
-                    <i class="fa fa-calendar"></i>
-                </div>
-            </div>
-                <div class="col-xs-12 col-sm-3 view-order-last-count">
-                    <div class="text-info text-center">
-                        <p><i class="fa fa-info-circle" style="position: relative;top: 0; left: 0;color:#3A87AD;"></i>
-                        <strong> Only</strong> display last</p>
-                    </div>
+                <div class="col-sm-7 col-lg-9">
                     <div class="view-form-icon">
-                        <div>
-                            <label ng-show="criteria.LastN"># of Orders</label>
-                            <input class="form-control" type="text" ng-model="criteria.LastN" placeholder="Number of Orders" autocomplete="off" />
-                            <i class="fa fa-edit"></i>
+                        <div class="form-group">
+                            <label ng-show="criteria.OrderID">Order ID</label>
+                            <input class="form-control" type="text" ng-model="criteria.OrderID" placeholder="Order ID" autocomplete="off" />
+                            <i class="fa">#</i>
+                        </div>
+                        <div class="form-group">
+                            <label ng-show="criteria.ShippingAddress">Shipping Address</label>
+                            <input class="form-control" type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" autocomplete="off" />
+                            <i class="fa fa-map-marker"></i>
+                        </div>
+                        <div class="form-group">
+                            <label ng-show="criteria.DateRangeFrom">From</label>
+                            <input type="text" class="form-control" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="criteria.DateRangeFrom" placeholder="From" />
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <div class="form-group">
+                            <label ng-show="criteria.DateRangeTo">To</label>
+                            <input type="text" class="form-control" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="criteria.DateRangeTo" placeholder="To" />
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5 col-lg-3">
+                    <div class="alert alert-info">
+                        <i class="fa fa-info-circle"></i>
+                        Only display last
+                        <div class="view-form-icon">
+                            <div>
+                                <label ng-show="criteria.LastN"># of Orders</label>
+                                <input class="form-control" type="text" ng-model="criteria.LastN" placeholder="Number of Orders" autocomplete="off" />
+                                <i class="fa fa-edit"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -124,8 +124,7 @@
                 </span>
             </h3>
         </div>
-        <!--- TODO template this as a 451 table-block example--->
-        <div class="panel-body">
+        <div class="panel-table">
             <div class="row hidden-xs text-info">
                 <div class="col-xs-12 col-sm-2">ID</div>
                 <div class="col-xs-12 col-sm-2">Type</div>
@@ -134,28 +133,28 @@
                 <div class="col-xs-12 col-sm-2">Submitted Date</div>
                 <div class="col-xs-12 col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">Total</div>
             </div>
-            <div class="row view-table-row" ng-repeat="order in orders">
-                <div class="col-xs-12 col-sm-2">
+            <div class="row" ng-repeat="order in orders">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">ID</span>
                     <a ng-href="#/order/{{order.ID}}">{{order.ExternalID}}</a>
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">Type</span>
                     {{order.Type}}
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                      <span class="visible-xs text-info">Status</span>
                     {{order.StatusText}}
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">Submitted By</span>
                     {{order.FromUserFirstName + ' ' + order.FromUserLastName}}
                 </div>
-                <div class="col-xs-12 col-sm-2">
+                <div class="col-sm-2">
                     <span class="visible-xs text-info">Submitted Date</span>
                     {{order.DateSubmitted || order.DateCreated | date:'short'}}
                 </div>
-                <div class="col-xs-12 col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">
+                <div class="col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">
                     <span class="visible-xs text-info">Total</span>
                     {{order.Total | currency:"$"}}
                 </div>

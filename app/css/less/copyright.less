@@ -1,0 +1,40 @@
+//
+// Copyright
+// --------------------------------------------------
+
+.copyright-view {
+  font-size: @font-size-small;
+  margin-top: 50px;
+  background-color: @body-bg;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  p {
+    padding: 15px 20px;
+    margin: 0;
+    height: 115px;
+    &:first-of-type {
+      color:#1C638D;
+      background-color: #fff;
+      border: 1px solid @fourfiveone-gray-medium;
+    }
+    .btn {
+      margin-top: 5px;
+    }
+    &:last-of-type {
+      color:#fff;
+      background-color:@fourfiveone-blue;
+      border: 1px solid darken(@fourfiveone-blue, 6.5%);
+      .btn {
+        background-color:darken(@fourfiveone-blue, 6.5%);
+        color:#fff;;
+        border: none;
+        &:hover {
+          background-color:darken(@fourfiveone-blue, 45%);
+        }
+        i {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}

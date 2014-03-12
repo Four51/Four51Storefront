@@ -1,0 +1,87 @@
+//
+// Orders
+// --------------------------------------------------
+
+.panel-order {
+  margin-bottom: 0;
+  border-bottom: none;
+
+  // panel validation icons
+  .panel-heading {
+    cursor: pointer;
+    i:first-of-type {
+      font-size: ceil((@font-size-base * 1.7));
+    }
+    //** valid
+    &.yes i:first-of-type {
+      color:@brand-success;
+    }
+    //** invalid
+    &.no i:first-of-type {
+      color:@brand-warning;
+    }
+    h3 {
+      .fa-caret-down {
+        ~ h3 {cursor: default;}
+      }
+    }
+  }
+
+  //** animate orders content
+  .panel-body.ng-hide-remove {
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    -ms-animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
+    -webkit-animation-name: fadeInDown;
+    -moz-animation-name: fadeInDown;
+    -o-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+    -ms-animation-name: fadeInDown;
+  }
+
+  .order-location {
+    border: 1px solid @fourfiveone-border-color;
+    padding: 15px;
+    margin-top: 15px;
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  //** hide unnecessary html in new address form from checkout include
+  .create-address-type {
+    display: none;
+  }
+  .panel-footer {
+    .btn-danger {
+      display: none;
+    }
+  }
+  &:extend(.panel-default all);
+}
+
+.panel-order-history {
+  &:extend(.panel-body all);
+}
+
+.panel-order-shipping-multiple {
+  //** line item top border
+  border: none;
+  //** canonical selector :: remove border from first panel-body and add back to ones that come after the first one for line items
+  ~ .panel-body {
+    border-top: 1px solid @fourfiveone-border-color;
+  }
+  .row {
+    .row {
+      border-left: 1px solid @fourfiveone-border-color;
+    }
+  }
+  &:extend(.panel-body all);
+}

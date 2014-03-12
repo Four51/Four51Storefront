@@ -1,0 +1,621 @@
+//
+// Mixins ** Bootstrap
+// --------------------------------------------------
+
+//== Colors
+
+//== Scaffolding
+html {
+  overflow-y: scroll;
+}
+
+body {
+  font-smooth:always;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  -webkit-text-stroke: 1px transparent;
+  margin-bottom: 100px;
+  overflow: hidden;
+}
+
+//** ie needs this help to keep scroll bar from overlapping content
+@-ms-viewport{
+  width: auto !important;
+}
+
+//** iOS placeholder needs help to disappear on focus */
+:focus::-webkit-input-placeholder{
+  color:transparent;
+}
+
+hr {
+  clear: both;
+  margin: 5px 0;
+}
+
+//** remove default style type
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+img {
+  display: block;
+}
+
+div {
+  position: relative;
+}
+
+a {
+  cursor: pointer;
+  display: inline-block;
+  &:focus {
+    outline: none;
+  }
+}
+
+//== Typography
+small,
+.small {
+  font-size: @font-size-small;
+}
+
+//== Components
+
+//== Tables
+
+//== Buttons
+.btn-group {
+  width: 100%;
+}
+
+.btn {
+  position: relative;
+  &,
+  &:hover,
+  &:focus {
+    -webkit-transition: all ease-in-out .5s;
+    -moz-transition:    all ease-in-out .5s;
+    -ms-transition:     all ease-in-out .5s;
+    -o-transition:      all ease-in-out .5s;
+    transition:         all ease-in-out .5s;
+  }
+
+  &.btn-primary {
+    text-transform: uppercase;
+  }
+}
+
+//== Forms
+label {
+  display: block;
+  &.required {
+    color: red;
+  }
+}
+//** create address type labels are not like the others
+.create-address-type label {
+  position: static;
+  display: block;
+}
+
+//** minimum target size for touch
+input, textarea, select, button {
+  min-height: 40px;
+}
+
+option {
+  color: @gray-dark;
+}
+textarea {
+  resize: vertical;
+  width: 100%;
+  line-height: 150%;
+}
+
+input[type="file"]{
+  position: absolute;
+  top:      0;
+  left:     0;
+  right:    0;
+  bottom:   0;
+  opacity:  0;
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+.form-control {
+  margin-top: 0;
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+//** form placeholder text for select field
+.view-form-select:before {
+  content: "Select";
+  position: absolute;
+  left: 25px;
+  top: 12px;
+  color: @fourfiveone-gray-medium;
+  // allow click through
+  pointer-events: none;
+}
+
+.col-sm-4.view-form-select:before {
+  left: 45px;
+}
+
+//** form field icons
+.view-form-icon {
+  // make room for labels
+  div {
+    margin: 25px 0 0;
+  }
+
+  //** quantity input is not like the others
+  .quantity {
+    div {
+      margin: 0;
+      input {
+        height: 52px;
+        outline: 0 none;
+        padding: .5em 0;
+        text-align: center;
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        font-size: 24px;
+        color:#468847;
+        box-shadow: none;
+      }
+    }
+  }
+
+  .input-group-addon {
+    border: none;
+    padding: 0 5px;
+  }
+
+  label {
+    top: -20px;
+    font-size: @font-size-small;
+    position: absolute;
+    display: block;
+  }
+
+  //** make room for icons
+  input,
+  select,
+  text,
+  textarea {
+    padding-left: 25px;
+  }
+
+  //** icons
+  i {
+    color: @fourfiveone-form-icon-color;
+    left: 10px;
+    position: absolute;
+    top: 13px;
+    z-index: 2;
+  }
+}
+
+//== Dropdowns
+
+//== Media queries breakpoints
+//** phone < 618px
+@media (max-width: @screen-xs-max) {
+  //** style these form fields consistent
+  textarea, select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  textarea, select {
+    border: 1px solid #555;
+    padding: 0.5em;
+    font-size: 15px;
+    line-height: 1.2em;
+    width: 80%;
+    background: #fff;
+    -webkit-appearance: none;
+    -webkit-box-shadow: 1px 1px 1px #fff;
+    -webkit-border-radius: 0.5em;
+    -moz-appearance: none;
+    -moz-appearance: 1px 1px 1px #fff;
+    -moz-appearance: 0.5em;
+    appearance: none;
+    appearance: 1px 1px 1px #fff;
+    appearance: 0.5em;
+  }
+
+  //** block these buttons for minimum target size for touch
+  .panel-footer {
+    .btn {
+      width: 100%;
+      padding: 15px;
+      margin: 2px;
+    }
+    //** input group buttons are not like the others
+    .input-group-btn {
+      .btn {
+        margin: 0;
+        padding: 6px 12px;
+        width: auto;
+      }
+    }
+  }
+  .btn-group {
+    width: 100%;
+    vertical-align: inherit;
+    .btn {
+      width: 100%;
+      padding: 15px;
+      margin: 2px;
+    }
+  }
+
+  //** center branding
+  .jumbotron {
+    text-align: center;
+  }
+
+  //** minimum target size for touch
+  .breadcrumb li {
+    display: block;
+    a {
+      padding: 15px;
+    }
+  }
+}
+
+//** tablet portrait < 768px
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+  //** center branding
+  .jumbotron {
+    text-align: center;
+  }
+}
+
+//** tablet landscape & desktop  < 1024p
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+  // code
+}
+
+//** desktops > 1200px
+@media (min-width: @screen-lg-min){
+  // code
+}
+
+//== Grid system
+
+//== Container sizes
+
+//== Navbar
+.navbar-nav {
+  margin-top: 0;
+  // active arrow
+  .fa-caret-down {
+    display: none;
+  }
+  li {
+    &.active .fa-caret-down {
+      position: absolute;
+      bottom: -20px;
+      left: 40%;
+      font-size: 32px;
+      color:#359FD5;
+      z-index: 5;
+      display: block;
+    }
+  }
+  &.pull-left {
+  //** cowboy up the icons on phone
+  li {
+    display: inline-block;
+    float: left;
+    &.fadeInLeft {
+      -webkit-animation-duration:   1s;
+      -moz-animation-duration:      1s;
+      -o-animation-duration:        1s;
+      animation-duration:           1s;
+      -ms-animation-duration:       1s;
+      a i {
+        color: darken(@navbar-default-bg, 35%);
+      }
+    }
+    a {
+      padding: @nav-link-padding;
+      span {
+        margin-left: 5px;
+      }
+      i {
+        font-size: @font-size-large;
+      }
+    }
+    // dropdown children on desktop
+    ul li {
+      width: 100%;
+        a {
+          padding: 10px 20px;
+        }
+      }
+    }
+  }
+
+  &.pull-right {
+    li a {
+      padding: 20px;
+      // cart icon
+      i:first-of-type {
+        border-radius: 50%;
+        border: 1px solid #fff;
+        text-align:center;
+        padding: 10px;
+        margin-top: -10px;
+      }
+    }
+  }
+}
+
+.navbar-fixed-top {
+  -webkit-animation-duration:   1s;
+  -moz-animation-duration:      1s;
+  -o-animation-duration:        1s;
+  animation-duration:           1s;
+  -ms-animation-duration:       1s;
+  -webkit-animation-fill-mode:  both;
+  -moz-animation-fill-mode:     both;
+  -o-animation-fill-mode:       both;
+  animation-fill-mode:          both;
+  -ms-animation-fill-mode:      both;
+  -webkit-animation-name:       fadeInDown;
+  -moz-animation-name:          fadeInDown;
+  -o-animation-name:            fadeInDown;
+  animation-name:               fadeInDown;
+  -ms-animation-name:           fadeInDown;
+}
+
+.navbar-fixed-bottom {
+  -webkit-animation-duration:   1s;
+  -moz-animation-duration:      1s;
+  -o-animation-duration:        1s;
+  animation-duration:           1s;
+  -ms-animation-duration:       1s;
+  -webkit-animation-fill-mode:  both;
+  -moz-animation-fill-mode:     both;
+  -o-animation-fill-mode:       both;
+  animation-fill-mode:          both;
+  -ms-animation-fill-mode:      both;
+  -webkit-animation-name:       fadeInUp;
+  -moz-animation-name:          fadeInUp;
+  -o-animation-name:            fadeInUp;
+  animation-name:               fadeInUp;
+  -ms-animation-name:           fadeInUp;
+  //** fixed bottom buttons
+  ul {
+    list-style-type:none;
+    padding: 0;
+    margin: 0;
+    clear: both;
+    overflow: hidden;
+    li {
+      display: inline-block;
+      float: left;
+      &:nth-of-type(1) {
+        width: 25%;
+        .btn {
+          font-size: @font-size-small;
+        }
+      }
+      &:nth-of-type(2) {
+        width: 25%;
+        .btn {
+          font-size: @font-size-small;
+        }
+      }
+      &:last-child {
+        width: 50%;
+        .btn  {
+          text-transform: uppercase;
+        }
+      }
+      .btn {
+        width: 100%;
+        height: @navbar-height;
+        border: none;
+        border-radius: 0;
+        padding: 20px 0;
+        text-transform: lowercase;
+      }
+      .btn-warning[disabled] {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+//== Navs
+//** shared nav styles
+.nav {
+  margin-top: 0;
+  margin-bottom: 0;
+  ul  {
+    list-style-type: none;
+    clear: both;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    li {
+      display: inline;
+      float: left;
+      padding: 0;
+      span {
+        &.text-primary {
+          display: inline-block;
+          margin-top: 15px;
+          font-weight: bold;
+        }
+        i {
+          font-size: @font-size-large;
+          padding: 15px;
+          cursor: pointer;
+          color: darken(@navbar-default-bg, 35%);
+        }
+      }
+    }
+  }
+}
+
+.navbar .nav a {
+  -webkit-transition: all ease-in-out .2s;
+  -moz-transition:    all ease-in-out .2s;
+  -ms-transition:     all ease-in-out .2s;
+  -o-transition:      all ease-in-out .2s;
+  transition:         all ease-in-out .2s;
+}
+
+.navbar-nav > li > a {
+  height: @navbar-height;
+}
+
+//== Tabs
+
+//== Pills
+
+//== Pagination
+
+//== Pager
+
+//== Jumbotron
+.jumbotron {
+  margin: 0 5px;
+  //** hide/show only on products::home page / remove this as well as active in path angular check to display jumbotron on all pages
+  display: none;
+  &.active {
+    display: block;
+  }
+
+  //** branding
+  h2 {
+    margin: 0;
+    //**buyer logo
+    img {
+      max-height: @fourfiveone-thumbnail-height;
+      max-width: auto;
+    }
+    //** buyer name
+    span {
+      display: block;
+      clear: left;
+    }
+  }
+}
+
+//== Form states and alerts
+
+//== Tooltips
+
+//== Popovers
+
+//== Labels
+
+//== Modals
+
+//== Alerts
+
+//== Progress bars
+
+//== List group
+
+//== Panels
+.panel {
+  word-wrap: break-word;
+
+  &.panel-primary {
+    p span {
+      float: left;
+    }
+    .panel-heading {
+      margin-top: 0;
+    }
+    .panel-footer {
+      background-color: transparent;
+    }
+  }
+
+  .panel-heading {
+    margin-top: 2px;
+    padding: 0;
+    .panel-title {
+      letter-spacing: 0.08em;
+      font-size: ceil((@font-size-base * 1));
+      padding: 15px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+
+  .panel-body {
+    //** panel-footer in a panel-body is not like the others
+    .panel-footer {
+      margin: 0 -15px -15px;
+    }
+  }
+
+  .panel-footer {
+    clear: both;
+    overflow: hidden;
+    padding: 20px 15px;
+  }
+}
+
+//== Thumbnails
+.thumbnail {
+  margin-bottom: 0;
+  img {
+    max-height: @fourfiveone-thumbnail-height;
+    max-width: 100%;
+    margin: 0 auto 15px;
+  }
+}
+
+//== Wells
+.well {
+  margin-bottom: 0;
+  border-radius: 0;
+  border-width: 1px;
+  box-shadow: none;
+  margin: 0;
+  min-height: 0;
+}
+
+//== Badges
+.badge {
+  //** a more perfect circle
+  padding: 4px 7px;
+}
+
+//== Breadcrumbs
+.breadcrumb {
+  a {
+    text-decoration: underline;
+  }
+}
+
+//== Carousel
+
+//== Close
+
+//== Type
+
+//== Miscellaneous

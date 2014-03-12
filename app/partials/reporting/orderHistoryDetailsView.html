@@ -1,4 +1,4 @@
-<div class="view-summary text-right">
+<div class="text-right">
     <p ng-show="order.DateSubmitted"><span class="text-info">Date Submitted</span>{{order.DateSubmitted | date:'short'}}</p>
     <p><span class="text-info">Status</span>{{order.StatusText}}</p>
     <p ng-show="order.DateCompleted"><span class="text-info">Date Completed</span>{{order.DateCompleted | date:'short'}}</p>
@@ -16,23 +16,29 @@
     <p ng-show="order.CostCenter"><span class="text-info">Cost Center</span>{{order.CostCenter}}</p>
     <hr />
     <address ng-show="order.ShipAddress">
-        <p class="text-left">
+        <div class="text-left">
             <span class="text-primary"><strong>Ship to</strong></span><br />
-            <span ng-show="order.LineItems[0].ShipFirstName || order.LineItems[0].ShipLastName">{{order.LineItems[0].ShipFirstName}} {{order.LineItems[0].ShipLastName}}</span>
-            <span ng-show="!order.LineItems[0].ShipFirstName || !order.LineItems[0].ShipLastName">{{order.ShipAddress.FirstName}} {{order.ShipAddress.LastName}}</span>
-            <br />{{order.ShipAddress.Street1}}<br>
-            {{order.ShipAddress.Street2}}<br ng-show="order.ShipAddress.Street2">
-            {{order.ShipAddress.City}}, {{order.ShipAddress.State}} {{order.ShipAddress.Zip}}
-        </p>
+            <div>
+                <span ng-show="order.LineItems[0].ShipFirstName || order.LineItems[0].ShipLastName">{{order.LineItems[0].ShipFirstName}} {{order.LineItems[0].ShipLastName}}</span>
+                <span ng-show="!order.LineItems[0].ShipFirstName || !order.LineItems[0].ShipLastName">{{order.ShipAddress.FirstName}} {{order.ShipAddress.LastName}}</span>
+            </div>
+            <div>{{order.ShipAddress.Street1}}</div>
+            <div ng-if="order.ShipAddress.Street2">{{order.ShipAddress.Street2}}</div>
+            <div>{{order.ShipAddress.City}}, {{order.ShipAddress.State}} {{order.ShipAddress.Zip}}</div>
+            <div ng-if="order.ShipAddress.Country != 'US'">{{order.ShipAddress.Country}}</div>
+        </div>
     </address>
     <address ng-show="order.BillAddress">
-        <p class="text-left">
-            <span class="text-primary"><strong>Bill to</strong></span><br />
-            <span ng-show="order.BillFirstName || order.BillLastName">{{order.BillFirstName}} {{order.BillLastName}}</span>
-            <span ng-show="!order.BillFirstName || !order.BillLastName">{{order.BillAddress.FirstName}} {{order.BillAddress.LastName}}</span>
-            <br />{{order.BillAddress.Street1}}<br>
-            {{order.BillAddress.Street2}}<br ng-show="order.BillAddress.Street2">
-            {{order.BillAddress.City}}, {{order.BillAddress.State}} {{order.BillAddress.Zip}}
-        </p>
+        <div class="text-left">
+            <span class="text-primary"><strong>Ship to</strong></span><br />
+            <div>
+                <span ng-show="order.LineItems[0].BillFirstName || order.LineItems[0].BillLastName">{{order.LineItems[0].BillFirstName}} {{order.LineItems[0].BillLastName}}</span>
+                <span ng-show="!order.LineItems[0].BillFirstName || !order.LineItems[0].BillLastName">{{order.BillAddress.FirstName}} {{order.BillAddress.LastName}}</span>
+            </div>
+            <div>{{order.BillAddress.Street1}}</div>
+            <div ng-if="order.BillAddress.Street2">{{order.BillAddress.Street2}}</div>
+            <div>{{order.BillAddress.City}}, {{order.BillAddress.State}} {{order.BillAddress.Zip}}</div>
+            <div ng-if="order.BillAddress.Country != 'US'">{{order.BillAddress.Country}}</div>
+        </div>
     </address>
 </div>

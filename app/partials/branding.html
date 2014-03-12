@@ -1,13 +1,10 @@
-<section class="jumbotron branding-view" ng-class="{'active': isActive('catalog')}" ng-show="user.Company.LogoUrl">
-    <!--- product centric sliders, new products, features and buyer company branded info would be nice here --->
+<section class="jumbotron" ng-class="{'active': isActive('catalog')}" ng-show="user.Company.LogoUrl">
     <div class="container">
-        <h3 ng-show="Four51User.isAuthenticated()">
-            <figure>
-                <a ng-show="Four51User.isAuthenticated()" ng-click="refreshUser()" href="#/catalog">
-                    <img class="branding-view-logo" ng-src="{{user.Company.LogoUrl}}" />
-                </a>
-            </figure>
+        <h2 class="thumbnail" ng-show="Four51User.isAuthenticated()">
+            <a ng-click="refreshUser()" href="#/catalog">
+                <img ng-src="{{user.Company.LogoUrl}}" />
+            </a>
             <span>{{user.Company.Name}}</span>
-        </h3>
+        </h2>
     </div>
 </section>

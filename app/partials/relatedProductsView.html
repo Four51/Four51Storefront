@@ -1,30 +1,32 @@
-<div class="panel panel-default related-products-view product-navigation">
+<div class="panel panel-default related-products">
     <div class="panel-heading">
         <h3 class="panel-title">Related Products</h3>
     </div>
-    <nav class="nav">
-        <ul>
-            <li class="nav-header well productList" ng-repeat="p in relatedProducts" style="min-height:0;">
-                <div class="shortproduct-view row">
-                    <div class="col-sm-4 text-center">
-                        <a href="#/product/default/{{p.InteropID}}">
-                            <figure>
-                                <img class="view-thumbnail" ng-src="{{p.SmallImageUrl}}"/>
-                            </figure>
-                            <div class="empty view-thumbnail" ng-hide="p.SmallImageUrl">
-                                <span class="fa empty"><i class="fa fa-camera"></i></span>
+    <div class="product-list">
+        <nav class="nav">
+            <ul>
+                <li class="well" ng-repeat="p in relatedProducts">
+                    <div class="row">
+                        <div class="col-sm-4 text-center">
+                            <a class="thumbnail" href="#/product/default/{{p.InteropID}}">
+                                <figure>
+                                    <img ng-src="{{p.SmallImageUrl}}"/>
+                                </figure>
+                                <div class="empty" ng-hide="p.SmallImageUrl">
+                                    <span class="fa empty"><i class="fa fa-camera"></i></span>
+                                </div>
+                                <div class="btn btn-default">View Product</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="text-left panel-body">
+                                <h3>{{p.Name}}</h3>
+                                <p ng-bind-html="trusted(p.Description)" />
                             </div>
-                            <div class="btn btn-default">View Product</div>
-                        </a>
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="text-left panel-body">
-                            <h3>{{p.Name}}</h3>
-                            <p ng-bind-html="trusted(p.Description)" />
                         </div>
                     </div>
-                </div>
-            </li>
-        </ul>
-    </nav>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </div>

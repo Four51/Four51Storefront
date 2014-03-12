@@ -1,4 +1,4 @@
-<div id="address_edit" class="col-sm-12 address-input-view">
+<div id="address_edit">
     <form name="addressEdit" ng-submit="save()">
         <div class="row">
             <div class="col-sm-6 view-form-icon">
@@ -68,12 +68,12 @@
             </div>
         </div>
         <hr />
-        <div class="row">
-            <span class="address-input-view-shipping">
+        <div class="row create-address-type">
+            <span>
                 <label ng-show="user.Permissions.contains('CreateShipToAddress')">Save to Shipping Address Book</label>
                 <input name="isShipping" type="checkbox" ng-model="address.IsShipping" ng-required="!address.IsBilling" />
             </span>
-            <span class="address-input-view-billing">
+            <span>
                 <label ng-show="user.Permissions.contains('CreateBillToAddress')">Save to Billing Address Book </label>
                 <input name="isBilling" type="checkbox" ng-model="address.IsBilling" ng-required="!address.IsShipping" />
             </span>
@@ -83,9 +83,9 @@
         </p>
         <div class="panel-footer">
             <span class="alert alert-warning" ng-show="objectExists">An address with that name already exists. Please specify another name</span><br />
-            <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" class="btn btn-small btn-danger address-input-view-btn-delete" ng-click="delete()" type="button">Delete</button>
-            <button class="btn btn-small btn-warning address-input-view-btn-cancel" type="button" ng-click="cancel()">Cancel</button>
-            <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" class="btn btn-small btn-primary pull-right" type="submit" ng-disabled="addressEdit.$invalid" id="451_btn_user">
+            <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" class="btn btn-danger" ng-click="delete()" type="button">Delete</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" class="btn btn-primary pull-right" type="submit" ng-disabled="addressEdit.$invalid" id="451_btn_user">
                 <i ng-show="addressEdit.$invalid" class="fa fa-warning"></i>
                 Save {{address.AddressName}}
             </button>

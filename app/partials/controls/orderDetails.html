@@ -1,15 +1,15 @@
-<div class="panel panel-default">
+<div class="panel panel-default panel-order">
     <div class="panel-heading" ng-class="{'no': cart_order.$invalid, 'yes': !cart_order.$invalid }">
         <h3 ng-click="checkOutSection = 'order'" class="panel-title panel-primary">
-            <i ng-class="{'fa fa-warning': cart_order.$invalid, 'fa fa-check-circle': !cart_order.$invalid }"></i>
+            <i class="pull-left" ng-class="{'fa fa-warning': cart_order.$invalid, 'fa fa-check-circle': !cart_order.$invalid }"></i>
             Order
-            <i ng-class="{'fa fa-caret-down': checkOutSection == 'order', 'fa fa-caret-up': checkOutSection == 'shipping' || checkOutSection == 'billing' }"></i>
+            <i class="pull-right" ng-class="{'fa fa-caret-down': checkOutSection == 'order', 'fa fa-caret-up': checkOutSection == 'shipping' || checkOutSection == 'billing' }"></i>
         </h3>
     </div>
-    <div ng-show="checkOutSection == 'order'" class="panel-body check-out-view-order view-form-icon">
+    <div ng-show="checkOutSection == 'order'" class="panel-body">
         <form name="cart_order" novalidate="">
             <div class="view-form-icon" ng-if="user.Permissions.contains('EditPOID')" ng-invalid>
-                <div class="input-group check-out-view-input-group-id">
+                <div class="input-group">
                     <label class="required">Order ID</label>
                     <input class="form-control" name="orderid" ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" placeholder="Order ID" required ui-mask="{{currentOrder.autoID ? null : user.Company.POIDMask}}" />
                         <span ng-if="user.Permissions.contains('AllowAutoGenPOID')" class="input-group-addon">
@@ -35,13 +35,13 @@
                     <i class="fa fa-arrow-down" ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')"></i>
                 </div>
             </div>
-            <ul ng-show="currentOrder.OrderFields">
+            <div ng-show="currentOrder.OrderFields">
                 <hr />
-                <li ng-repeat="field in currentOrder.OrderFields">
+                <div ng-repeat="field in currentOrder.OrderFields">
                     <customtextfield customfield="field" ng-if="field.ControlType == 'Text'" ng-required="field.IsRequired" />
                     <customselectionfield customfield="field" ng-if="field.ControlType == 'Selection'" ng-required="field.IsRequired" />
-                </li>
-            </ul>
+                </div>
+            </div>
         </form>
     </div>
 </div>
