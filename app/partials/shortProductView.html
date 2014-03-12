@@ -1,11 +1,11 @@
-<div class="451qa_prod_item shortproduct-view row" ng-swipe-left="showSwipe = true">
+<div class="451qa_prod_item row" ng-swipe-left="showSwipe = true">
 
     <div class="col-sm-4">
-        <a href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
+        <a class="thumbnail" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
             <figure ng-show="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl" >
-                <img class="view-thumbnail" ng-src="{{LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl}}"/>
+                <img ng-src="{{LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl}}"/>
             </figure>
-            <div class="empty view-thumbnail" ng-hide="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl">
+            <div class="empty" ng-hide="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl">
                 <span class="fa empty"><i class="fa fa-camera"></i></span>
             </div>
             <div class="btn btn-default">
