@@ -6210,6 +6210,9 @@ button::-moz-focus-inner {
   cursor: pointer;
   color: #154964;
 }
+.nav.visible-sm.visible-xs {
+  margin-bottom: 10px;
+}
 .navbar .nav a {
   -webkit-transition: all ease-in-out 0.2s;
   -moz-transition: all ease-in-out 0.2s;

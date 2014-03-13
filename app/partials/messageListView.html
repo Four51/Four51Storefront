@@ -1,4 +1,4 @@
-<section class="message-list-view">
+<section>
     <accountnavigation />
     <div class="panel panel-default" ng-if="messages.length == 0">
         <div class="panel-heading">
@@ -7,10 +7,7 @@
         <div class="panel-body">
             <p class="alert alert-warning">You have no messages yet!</p>
         </div>
-        <div class="panel-footer">
-        </div>
     </div>
-
     <div class="panel panel-default" ng-if="messages.length > 0">
         <loadingindicator ng-show="displayLoadingIndicator" />
         <div class="panel-heading">
@@ -25,14 +22,14 @@
         </div>
         <div class="panel-table">
             <div class="row text-info">
-                    <div class="col-sm-2">
-                        <label class="visible-xs">Select all</label>
-                        <input id="451_chk_all" type='checkbox' ng-click="checkAll($event)" />
-                    </div>
-                    <div class="col-sm-2 hidden-xs">Status</div>
-                    <div class="col-sm-2 hidden-xs">Date</div>
-                    <div class="col-sm-2 hidden-xs">Subject</div>
-                    <div class="col-sm-2 hidden-xs">From</div>
+                <div class="col-sm-2">
+                    <label class="visible-xs">Select all</label>
+                    <input id="451_chk_all" type='checkbox' ng-click="checkAll($event)" />
+                </div>
+                <div class="col-sm-2 hidden-xs">Status</div>
+                <div class="col-sm-2 hidden-xs">Date</div>
+                <div class="col-sm-2 hidden-xs">Subject</div>
+                <div class="col-sm-2 hidden-xs">From</div>
              </div>
             <div id="451_list_msg" class="row" ng-repeat="message in messages | filter:searchTerm">
                 <div class="col-sm-2">

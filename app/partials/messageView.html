@@ -1,26 +1,40 @@
-<section class="container message-view">
+<section>
     <accountnavigation />
-    <div id="451_msg_read" ng-hide="replying">
-        <label>Date: {{message.DateSent | date:'medium'}}</label><br />
-        <label>To: {{message.ToName}}</label><br />
-        <label>From: {{message.FromName}}</label><br />
-        <label>Subject: {{message.Subject}}</label><br />
-        <span><pre>{{message.Body}}</pre></span><br />
-        <span>
-            <button id="451_btn_del" ng-click="delete($event)" type="button" class="btn btn-small btn-danger">Delete</button>
-            <button id="451_btn_reply" ng-show="canReply()" type="button" class="btn btn-small btn-info" ng-click="replying = !replying">Reply</button>
-            <button id="451_btn_ok" ng-click="ok()" type="button" class="btn btn-small btn-success">OK</button>
-        </span>
+    <div id="451_msg_read" ng-hide="replying" class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{message.Subject}}</h3>
+        </div>
+        <div class="panel-body">
+            <p><span class="text-info">Date</span> {{message.DateSent | date:'medium'}}</p>
+            <p><span class="text-info">To</span> {{message.ToName}}</p>
+            <p><span class="text-info">From</span> {{message.FromName}}</p>
+            <p><span class="text-info">Subject</span> {{message.Subject}}</p>
+            <pre>{{message.Body}}</pre>
+        </div>
+        <div class="panel-footer text-right">
+            <button id="451_btn_del" ng-click="delete($event)" type="button" class="btn btn-danger pull-left">Delete</button>
+            <button id="451_btn_reply" ng-show="canReply()" type="button" class="btn btn-info" ng-click="replying = !replying">Reply</button>
+            <button id="451_btn_ok" ng-click="ok()" type="button" class="btn btn-success">OK</button>
+        </div>
     </div>
-
-    <div id="451_msg_reply" ng-show="replying">
-        <label>To: {{message.FromName}}</label>
-        <label>Subject</label><input id="451_inp_subj" type="text" ng-model="message.Subject" value="{{'RE: ' + message.Subject}}" autocomplete="off" />
-        <label>Body</label><span><textarea id="451_inp_body" ng-model="message.Body" /></span>
-        <br />
-        <span>
-            <button type="button" id="451_btn_cancel" class="btn btn-small btn-warning" ng-click="replying = !replying">Cancel</button>
-            <button type="button" id="451_btn_send" class="btn btn-small btn-primary" ng-click="send($event)">Send</button>
-        </span>
+    <div id="451_msg_reply" ng-show="replying" class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Reply</h3>
+        </div>
+        <div class="panel-body">
+            <p><span class="text-info">To</span> {{message.FromName}}</p>
+            <p class="text-info">
+                Subject<br />
+                <input id="451_inp_subj" type="text" ng-model="message.Subject" value="{{'RE: ' + message.Subject}}" autocomplete="off" />
+            </p>
+            <p class="text-info">
+                Body<br />
+                <textarea id="451_inp_body" ng-model="message.Body" />
+            </p>
+        </div>
+        <div class="panel-footer text-right">
+            <button type="button" id="451_btn_cancel" class="btn btn-warning pull-left" ng-click="replying = !replying">Cancel</button>
+            <button type="button" id="451_btn_send" class="btn  btn-primary" ng-click="send($event)">Send</button>
+        </div>
     </div>
 </section>
