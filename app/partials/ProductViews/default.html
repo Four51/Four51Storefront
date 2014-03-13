@@ -79,7 +79,7 @@
                              </div>
                          </div>
                         <div class="product-variants">
-                            <ul>
+                            <ul id="451qa_list_variants">
                                 <li ng-repeat="v in LineItem.Product.Variants | filter:queryVariants">
                                     <div class="row">
                                         <a class="col-sm-8" ng-class="{'col-sm-8': allowAddFromVariantList, 'col-xs-12': !allowAddFromVariantList }" href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}}>
@@ -132,7 +132,7 @@
                             <loadingindicator ng-show="addToOrderIndicator" />
                             <i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>
                             {{addToOrderText}}
-                            <span class="badge" ng-if="!(user.Permissions.contains('HidePricing')) && (LineItem.LineTotal || variantLineItemsOrderTotal) > 0">
+                            <span id="451qa_lineitem_total" class="badge" ng-if="!(user.Permissions.contains('HidePricing')) && (LineItem.LineTotal || variantLineItemsOrderTotal) > 0">
                                 {{(LineItem.LineTotal || variantLineItemsOrderTotal) | currency}}
                             </span>
                         </button>
