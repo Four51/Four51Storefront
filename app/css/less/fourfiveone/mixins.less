@@ -319,32 +319,32 @@ button::-moz-focus-inner {
     }
   }
   &.pull-left {
-  //** cowboy up the icons on phone
-  li {
-    display: inline-block;
-    float: left;
-    &.fadeInLeft {
-      -webkit-animation-duration:   1s;
-      -moz-animation-duration:      1s;
-      -o-animation-duration:        1s;
-      animation-duration:           1s;
-      -ms-animation-duration:       1s;
-      a i {
-        color: darken(@navbar-default-bg, 35%);
+    //** cowboy up the icons on phone
+    li {
+      display: inline-block;
+      float: left;
+      &.fadeInLeft {
+        -webkit-animation-duration:   1s;
+        -moz-animation-duration:      1s;
+        -o-animation-duration:        1s;
+        animation-duration:           1s;
+        -ms-animation-duration:       1s;
+        a i {
+          color: darken(@navbar-default-bg, 35%);
+        }
       }
-    }
-    a {
-      padding: @nav-link-padding;
-      span {
-        margin-left: 5px;
+      a {
+        padding: @nav-link-padding;
+        span {
+          margin-left: 5px;
+        }
+        i {
+          font-size: @font-size-large;
+        }
       }
-      i {
-        font-size: @font-size-large;
-      }
-    }
-    // dropdown children on desktop
-    ul li {
-      width: 100%;
+      // dropdown children on desktop
+      ul li {
+        width: 100%;
         a {
           padding: 10px 20px;
         }
@@ -451,8 +451,6 @@ button::-moz-focus-inner {
   margin-bottom: 0;
   ul  {
     list-style-type: none;
-    clear: both;
-    overflow: hidden;
     margin: 0;
     padding: 0;
     li {

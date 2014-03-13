@@ -6191,8 +6191,6 @@ button::-moz-focus-inner {
 }
 .nav ul {
   list-style-type: none;
-  clear: both;
-  overflow: hidden;
   margin: 0;
   padding: 0;
 }
@@ -7152,6 +7150,10 @@ select.ng-invalid:invalid:invalid:focus {
 }
 .panel-table .row .btn {
   margin: 2px 0;
+}
+.panel-table .row span {
+  float: left;
+  margin-right: 10px;
 }
 .navbar-fixed-top.headroom {
   transition: all 0.5s ease-in-out;
