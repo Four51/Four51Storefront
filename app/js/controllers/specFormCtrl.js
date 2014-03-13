@@ -23,7 +23,7 @@ four51.app.controller('SpecFormCtrl', function ($location,$route, $routeParams, 
 	$scope.save = function(){
 		Variant.save($scope.Variant, function(data){
 			//if(!varID)
-				$location.path('/product/' + $routeParams.view +'/' + $scope.Product.InteropID + '/'+ data.InteropID);
+				$location.path('/product/' + $scope.Product.InteropID + '/'+ data.InteropID);
 			//var d = new Date();
 			//var n = d.getTime();
 			//$scope.Variant = data;
