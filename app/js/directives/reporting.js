@@ -1,7 +1,7 @@
 four51.app.directive('orderhistorydetails', function() {
 	var obj = {
 		restrict: 'E',
-		templateUrl: 'partials/reporting/orderHistoryDetailsView.html'
+		templateUrl: 'partials/Reporting/orderHistoryDetailsView.html'
 	}
 	return obj;
 });
@@ -9,7 +9,7 @@ four51.app.directive('orderhistorydetails', function() {
 four51.app.directive('orderhistorysummary', function($location, Order, User) {
 	var obj = {
 		restrict: 'E',
-		templateUrl: 'partials/reporting/orderHistorySummaryView.html'
+		templateUrl: 'partials/Reporting/orderHistorySummaryView.html'
 	}
 	return obj;
 });
@@ -17,7 +17,7 @@ four51.app.directive('orderhistorysummary', function($location, Order, User) {
 four51.app.directive('lineitemhistorygrid', function() {
 	var obj = {
 		restrict: 'E',
-		templateUrl: 'partials/reporting/lineItemHistoryGridView.html'
+		templateUrl: 'partials/Reporting/lineItemHistoryGridView.html'
 	}
 	return obj;
 });

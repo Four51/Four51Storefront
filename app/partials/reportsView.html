@@ -27,13 +27,13 @@
                 </div>
                 <div class="col-sm-2">
                     <span class="visible-xs text-info"></span>
-                    <a ng-click="GetReport($event, '{{report.ID}}')">Preview</a>
+                    <a ng-href="{{'report/' + report.ID}}">Preview</a>
                 </div>
              </div>
         </div>
         <div class="panel-table">
-            <div class="row" ng-repeat="row in report">
-                <div class="col-sm-2" ng-repeat="col in row">
+            <div class="row" ng-repeat="row in report.Data">
+                <div class="col-sm-1" ng-repeat="col in row">
                     {{col}}
                 </div>
             </div>
