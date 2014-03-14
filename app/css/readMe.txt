@@ -1,11 +1,11 @@
 //== Front End Strategy
 
-    Customize the Four51 SPA    -       Do not edit CSS, work in the LESS framework
+    Customize the Four51 SPA    -       Do not edit custom.css, work in the LESS framework
+                                            ~/less/customizations
                                             http://lesscss.org/
-    Theme the Four51 SPA        -       Do not edit the LESS, work in the custom.css file
-                                            ~/less/custom.css
 
-
+    Theme the Four51 SPA        -       Do not edit the LESS, work in the static custom.css file
+                                            ~/less/customizations/custom.css
 
     Bootstrap 3.1.1             -       http://getbootstrap.com/
 
@@ -13,11 +13,13 @@
                                             Droid Sans was optimized for user interfaces and to be comfortable for reading on a mobile handset in menus, web browser and other screen text.
                                             https://developers.google.com/fonts/
                                             http://googlewebfonts.blogspot.com/
+
     Font Awesome Icons 4.0.3    -       http://fortawesome.github.io/Font-Awesome/
+
     Animate.css                 -       http://daneden.github.io/animate.css/
-    Angular strap               -       Is running alongside bootstrap.js files for UI utilities
-                                            http://mgcrea.github.io/angular-strap/
+
     Classes                     -       No Id's unless they are 451 specific / bug tracking
+
 
 //== Templates
 
