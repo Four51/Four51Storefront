@@ -5971,6 +5971,7 @@ button::-moz-focus-inner {
   width: 100%;
   margin: 0;
   border-radius: 0;
+  border-color: #dddddd;
   font-size: 24px;
   color: #468847;
   box-shadow: none;
@@ -6191,8 +6192,6 @@ button::-moz-focus-inner {
 }
 .nav ul {
   list-style-type: none;
-  clear: both;
-  overflow: hidden;
   margin: 0;
   padding: 0;
 }
@@ -6211,6 +6210,9 @@ button::-moz-focus-inner {
   padding: 15px;
   cursor: pointer;
   color: #154964;
+}
+.nav.visible-sm.visible-xs {
+  margin-bottom: 10px;
 }
 .navbar .nav a {
   -webkit-transition: all ease-in-out 0.2s;
@@ -6525,7 +6527,7 @@ select.ng-invalid:invalid:invalid:focus {
 @-webkit-keyframes pulsate {
   0% {
     color: #ddd;
-    text-shadow: 0 0 0 #000000;
+    text-shadow: 0 0 0 #4d4d4d;
   }
   50% {
     color: #fff;
@@ -6533,13 +6535,13 @@ select.ng-invalid:invalid:invalid:focus {
   }
   100% {
     color: #ddd;
-    text-shadow: 0 0 0 #000000;
+    text-shadow: 0 0 0 #4d4d4d;
   }
 }
 @keyframes pulsate {
   0% {
     color: #ddd;
-    text-shadow: 0 0 0 #000000;
+    text-shadow: 0 0 0 #4d4d4d;
   }
   50% {
     color: #fff;
@@ -6547,7 +6549,7 @@ select.ng-invalid:invalid:invalid:focus {
   }
   100% {
     color: #ddd;
-    text-shadow: 0 0 0 #000000;
+    text-shadow: 0 0 0 #4d4d4d;
   }
 }
 @-webkit-keyframes rockstep {
@@ -6670,11 +6672,11 @@ select.ng-invalid:invalid:invalid:focus {
 .order-cloud h2 {
   margin-top: 0;
   color: #fff;
-  -webkit-animation: pulsate 3s linear infinite;
-  -moz-animation: pulsate 3s linear infinite;
-  -o-animation: pulsate 3s linear infinite;
-  -ms-animation: pulsate 3s linear infinite;
-  animation: pulsate 3s linear infinite;
+  -webkit-animation: pulsate 8s linear infinite;
+  -moz-animation: pulsate 8s linear infinite;
+  -o-animation: pulsate 8s linear infinite;
+  -ms-animation: pulsate 8s linear infinite;
+  animation: pulsate 8s linear infinite;
 }
 .order-cloud .form-signin {
   max-width: 26em;
@@ -6691,7 +6693,7 @@ select.ng-invalid:invalid:invalid:focus {
 .order-cloud .form-signin .btn-primary {
   padding: 15px;
   margin-top: 15px;
-  text-shadow: 0 -1px 0 #222222;
+  text-shadow: 0 -1px 0 #999999;
   -webkit-transition: all 150ms ease;
   -moz-transition: all 150ms ease;
   -o-transition: all 150ms ease;
@@ -6885,7 +6887,7 @@ select.ng-invalid:invalid:invalid:focus {
   padding-left: 1.5em;
 }
 .product-variants .quantity-total-variants {
-  border: 1px solid #cccccc;
+  border: 1px solid #dddddd;
   height: 52px;
 }
 .product-variants p {
@@ -6966,7 +6968,7 @@ select.ng-invalid:invalid:invalid:focus {
 }
 .view-spec-form .col-sm-2 {
   background-color: #f5f5f5;
-  border: 1px solid #cccccc;
+  border: 1px solid #dddddd;
   font-size: 14px;
   font-weight: normal;
   line-height: 1;
@@ -6979,16 +6981,16 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-lineitem ~ .panel-lineitem,
 .panel-lineitem ~ .panel-order-history,
 .panel-lineitem ~ .panel-order-shipping-multiple {
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid #dddddd;
 }
 .panel-lineitem .quantity-total {
-  border: 1px solid #cccccc;
+  border: 1px solid #dddddd;
   border-top: 0;
   padding: 5px 0;
   background-color: #f5f5f5;
 }
 .panel-lineitem .col-sm-9 {
-  border-left: 1px solid #cccccc;
+  border-left: 1px solid #dddddd;
 }
 .panel-lineitem .col-sm-9 input {
   font-size: 11px;
@@ -7002,7 +7004,7 @@ select.ng-invalid:invalid:invalid:focus {
   text-decoration: none;
   background-color: #f5f5f5;
   border-radius: 4px;
-  border: 1px solid #cccccc;
+  border: 1px solid #dddddd;
   -webkit-transition: all ease-in-out 0.5s;
   -moz-transition: all ease-in-out 0.5s;
   -ms-transition: all ease-in-out 0.5s;
@@ -7064,7 +7066,7 @@ select.ng-invalid:invalid:invalid:focus {
   -ms-animation-name: fadeInDown;
 }
 .panel-order .order-location {
-  border: 1px solid #cccccc;
+  border: 1px solid #dddddd;
   padding: 15px;
   margin-top: 15px;
 }
@@ -7084,10 +7086,10 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-order-shipping-multiple ~ .panel-lineitem,
 .panel-order-shipping-multiple ~ .panel-order-history,
 .panel-order-shipping-multiple ~ .panel-order-shipping-multiple {
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid #dddddd;
 }
 .panel-order-shipping-multiple .row .row {
-  border-left: 1px solid #cccccc;
+  border-left: 1px solid #dddddd;
 }
 .copyright-view {
   font-size: 11px;
@@ -7127,7 +7129,7 @@ select.ng-invalid:invalid:invalid:focus {
 }
 .panel-table {
   padding: 0;
-  border: 1px solid #cccccc;
+  border: 1px solid #dddddd;
   margin: 15px;
 }
 .panel-table input,
@@ -7142,7 +7144,7 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-table .row {
   margin-left: 0;
   margin-right: 0;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #dddddd;
 }
 .panel-table .row:last-child {
   border-bottom: none;
@@ -7152,6 +7154,10 @@ select.ng-invalid:invalid:invalid:focus {
 }
 .panel-table .row .btn {
   margin: 2px 0;
+}
+.panel-table .row span {
+  float: left;
+  margin-right: 10px;
 }
 .navbar-fixed-top.headroom {
   transition: all 0.5s ease-in-out;
