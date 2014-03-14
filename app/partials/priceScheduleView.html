@@ -1,18 +1,18 @@
-<div class="btn btn-default btn-block" ng-show="ps.PriceBreaks.length > 5" ng-init="showPS = false" ng-click="showPS = !showPS">
+<div id="451qa_btn_showhide_psched" class="btn btn-default btn-block" ng-show="ps.PriceBreaks.length > 5" ng-init="showPS = false" ng-click="showPS = !showPS">
 	<span ng-show="showPS"><i class="fa fa-arrow-circle-up"></i> Hide</span>
 	<span ng-show="!showPS"><i class="fa fa-arrow-circle-down"></i> View</span>
 	Price Schedule
 </div>
 
-<div class="price-schedule-view" ng-show="ps && p && showPS || ps.PriceBreaks.length <= 5">
+<div id="451qa_list_pric_schd" class="price-schedule-view" ng-show="ps && p && showPS || ps.PriceBreaks.length <= 5">
     <span class="text-info">Price</span>
     <!--- example of 2 column responsive tabular structure --->
-    <div id="451_list_pric_schd" class="view-tr">
+    <div class="view-tr">
         <div class="row">
             <div class="col-xs-6">Quantity <span ng-show="p.QuantityMultiplier > 1 && !ps.RestrictedQuantity"> (x {{p.QuantityMultiplier}})</span></div>
             <div class="col-xs-6">Price <span ng-show="p.QuantityMultiplier > 1 && !ps.RestrictedQuantity" > (per {{p.QuantityMultiplier}})</span></div>
         </div>
-        <div class="row" ng-repeat="pb in ps.PriceBreaks">
+        <div class="451qa_list_pricebreaks row" ng-repeat="pb in ps.PriceBreaks">
             <div class="col-xs-6">{{pb.Quantity * (ps.RestrictedQuantity ? p.QuantityMultiplier : 1)}}
                     <span ng-show="!ps.RestrictedQuantity">
                         <span ng-show="ps.PriceBreaks[$index + 1].Quantity"> - {{ ps.PriceBreaks[$index + 1].Quantity - 1  }}</span>
