@@ -38,7 +38,7 @@
     //vboss_variant_fergu_jagger
 
 
-var C_debug = true;
+var C_debug = false;
 
 ////////////////////////////////////////////////////
 
@@ -203,8 +203,10 @@ describe('Product View - Static No Variants "stat_prod_stat_specs_ALL_autotest"'
         expect(element('.451qa_sg_item:contains("CUSTOM SPEC GROUP 2") ~ li div').count()).toBe(1);
             verifyStaticSpecRow("CUSTOM SPEC GROUP 2",0,"Custom Spec 1 Group 2","CustomSpecValue2Spec1Group2");
 
-        expect(element('.451qa_sg_item:contains("CUSTOM SPEC GROUP 3") ~ li div').count()).toBe(1);
-            verifyStaticSpecRow("CUSTOM SPEC GROUP 3",0,"Custom Spec 1 Group 3 FILE","441725_Four51logo2008.eps.jpg");
+        expect(element('.451qa_sg_item:contains("CUSTOM SPEC GROUP 3") ~ li div').count()).toBe(1); //the layout for this file spec is different so we can't use the function
+            //verifyStaticSpecRow("CUSTOM SPEC GROUP 3",0,"Custom Spec 1 Group 3 FILE","441725_Four51logo2008.eps.jpg");
+            expect(element('.451qa_sg_item:contains("CUSTOM SPEC GROUP 3") ~ li div:eq(0) span:first').text()).toBe("Custom Spec 1 Group 3 FILE");
+            expect(element('.451qa_sg_item:contains("CUSTOM SPEC GROUP 3") ~ li div:eq(0) a').text()).toBe("441725_Four51logo2008.eps.jpg");
 
         expect(element('.451qa_sg_item:contains("ENVELOPE") ~ li div').count()).toBe(16);
             verifyStaticSpecRow("ENVELOPE",0,"# Ink Back","2");
@@ -277,14 +279,14 @@ describe('Product View - Static No Variants "stat_prod_stat_specs_ALL_autotest"'
     });
 
     it('should NOT display custom static specs that are set to be NOT visible to customer (visibletocustomer=false)', function(){
-        expect(element('#451_list_specgroup tbody tr td:contains("INVISIBLE")').count()).toBe(1); //row with the INVISIBLE custom spec exists...
-        expect(element('#451_list_specgroup tbody tr td:contains("INVISIBLE"):hidden').count()).toBe(1); //but should NOT be displayed (should be hidden)
-        expect(element('#451_list_specgroup tbody tr td:contains("INVISIBLE"):visible').count()).toBe(0); //but should NOT be displayed (should be hidden)
+        expect(element('.451qa_spec_item span:contains("INVISIBLE")').count()).toBe(1); //row with the INVISIBLE custom spec exists...
+        expect(element('.451qa_spec_item span:contains("INVISIBLE"):hidden').count()).toBe(1); //but should NOT be displayed (should be hidden)
+        expect(element('.451qa_spec_item span:contains("INVISIBLE"):visible').count()).toBe(0); //but should NOT be displayed (should be hidden)
         //this custom static spec actually has INVISIBLE in the spec name, that's just an easy way of selecting the element
     });
     it('should display an A tag around custom specs that are FILE specs', function(){
-        expect(element('#451_list_specgroup tbody tr td:contains("441725_Four51logo2008.eps.jpg") a').count()).toBe(1); //this should have a filename in it.
-        expect(element('#451_list_specgroup tbody tr td:contains("441725_Four51logo2008.eps.jpg") a[href]:contains("441725_Four51logo2008.eps.jpg")').count()).toBe(1); //this should have a file link in it.
+        expect(element('.451qa_spec_item:contains("441725_Four51logo2008.eps.jpg") a').count()).toBe(1); //this should have a filename in it.
+        expect(element('.451qa_spec_item:contains("441725_Four51logo2008.eps.jpg") a[href]:contains("441725_Four51logo2008.eps.jpg")').count()).toBe(1); //this should have a file link in it.
     });
     e2eLogout(false)
 
@@ -299,37 +301,36 @@ describe('Product View - Static With Variants "stat_prod_stat_specs_variant_auto
         expect(element('#451_img_prod_lg[src]').count()).toBe(1);
     });
     it('should have variants', function(){
-        expect(repeater('.451_list_vars tr').count()).toBe(4); //there should be 3 variants, including a header row
+        expect(repeater('#451qa_list_variants li:has("div a")').count()).toBe(3);
             //test variant display...
                 //check order input box exists
                 //check add to order button exists
 
-        verifyVariantRow(1,"stat_prod_stat_specs_variant_autotest_var1_all_override","Variant 1\r\nstat_prod_stat_specs_variant_autotest_var1_all_override\r\n(Business Card Static Specs, All Override)");
-        verifyVariantRow(2,"stat_prod_stat_specs_variant_autotest_var1_no_override","Variant 3\r\nstat_prod_stat_specs_variant_autotest_var1_no_override\r\n(Business Card - No Specs Override)");
-        verifyVariantRow(3,"stat_prod_stat_specs_variant_autotest_var1_some_override","Variant 2\r\nstat_prod_stat_specs_variant_autotest_var1_some_override\r\n(Business Card Specs, Some Override)");
+        verifyVariantRow(0,"stat_prod_stat_specs_variant_autotest_var1_all_override","Variant 1\nstat_prod_stat_specs_variant_autotest_var1_all_override\n(Business Card Static Specs, All Override)");
+        verifyVariantRow(1,"stat_prod_stat_specs_variant_autotest_var1_no_override","Variant 3\nstat_prod_stat_specs_variant_autotest_var1_no_override\n(Business Card - No Specs Override)");
+        verifyVariantRow(2,"stat_prod_stat_specs_variant_autotest_var1_some_override","Variant 2\nstat_prod_stat_specs_variant_autotest_var1_some_override\n(Business Card Specs, Some Override)");
     });
     it('should have a static spec group', function(){
-        expect(element('tr.451_hdr_spec_grp:contains("Business Card") ~ tr').count()).toBe(9);
-            verifyStaticSpecRow("Business Card",0,"# of Inks","6");
-            verifyStaticSpecRow("Business Card",1,"# of Inks Back","1");
-            verifyStaticSpecRow("Business Card",2,"# of Inks Front","1");
-            verifyStaticSpecRow("Business Card",3,"Additional Comments","Product Comments");
-            verifyStaticSpecRow("Business Card",4,"Ink Colors","Inky Pinky Blinky Clyde Sue Snagglepuss");
-            verifyStaticSpecRow("Business Card",5,"Ink Colors on Back","Black");
-            verifyStaticSpecRow("Business Card",6,"Ink Colors on Front","Red");
-            verifyStaticSpecRow("Business Card",7,"Size","2 x 3-1/2");
-            verifyStaticSpecRow("Business Card",8,"Stock","Gold Leaf");
+        expect(element('.451qa_sg_item:contains("BUSINESS CARD") ~ li div').count()).toBe(9);
+            verifyStaticSpecRow("BUSINESS CARD",0,"# of Inks","6");
+            verifyStaticSpecRow("BUSINESS CARD",1,"# of Inks Back","1");
+            verifyStaticSpecRow("BUSINESS CARD",2,"# of Inks Front","1");
+            verifyStaticSpecRow("BUSINESS CARD",3,"Additional Comments","Product Comments");
+            verifyStaticSpecRow("BUSINESS CARD",4,"Ink Colors","Inky Pinky Blinky Clyde Sue Snagglepuss");
+            verifyStaticSpecRow("BUSINESS CARD",5,"Ink Colors on Back","Black");
+            verifyStaticSpecRow("BUSINESS CARD",6,"Ink Colors on Front","Red");
+            verifyStaticSpecRow("BUSINESS CARD",7,"Size","2 x 3-1/2");
+            verifyStaticSpecRow("BUSINESS CARD",8,"Stock","Gold Leaf");
 
     });
     it('should allow us to click on a variant and display it', function(){
-        expect(repeater('.451_list_vars tr').count()).toBeGreaterThan(1); //there should be at least one variant
-        e2eClickVariantFromProductList(2); //click the first variant
-        //element('.451_list_vars tr:nth-child(2) td a').click();
+        expect(repeater('#451qa_list_variants li:has("div a")').count()).toBeGreaterThan(1); //there should be at least one variant
+        e2eClickVariantFromProductList(0); //click the first variant
 
         if(C_debug){pause();}
     });
     it('should display existing product description and pricing', function(){
-        expect(repeater('.451_list_vars tr:hidden').count()).toBe(4); //there should be no variants displayed (they're there, they are just hidden)
+        expect(repeater('#451qa_list_variants').count()).toBe(0); //there should be no variants displayed
         //todo-rerun tests that check description and pricing, maybe turn those checks into functions
 
 
@@ -339,61 +340,61 @@ describe('Product View - Static With Variants "stat_prod_stat_specs_variant_auto
 
 
 
-        expect(element('tr.451_hdr_spec_grp:contains("Business Card") ~ tr').count()).toBe(9);
+        expect(element('.451qa_sg_item:contains("BUSINESS CARD") ~ li div').count()).toBe(9);
 
         if(C_debug){pause();}
     });
     it('should display specs for the 1st variant (all override)', function(){
-        expect(repeater('.451_list_vars tr:hidden').count()).toBe(4); //there should be no variants displayed
+        expect(repeater('#451qa_list_variants').count()).toBe(0); //there should be no variants displayed
 
-        expect(element('tr.451_hdr_spec_grp:contains("Business Card") ~ tr').count()).toBe(9);
-        verifyStaticSpecRow("Business Card",0,"# of Inks","2");
-        verifyStaticSpecRow("Business Card",1,"# of Inks Back","2");
-        verifyStaticSpecRow("Business Card",2,"# of Inks Front","2");
-        verifyStaticSpecRow("Business Card",3,"Additional Comments","Variant Comment");
-        verifyStaticSpecRow("Business Card",4,"Ink Colors","PacMan Mrs.PacMan");
-        verifyStaticSpecRow("Business Card",5,"Ink Colors on Back","Red Blue");
-        verifyStaticSpecRow("Business Card",6,"Ink Colors on Front","Yellow Green");
-        verifyStaticSpecRow("Business Card",7,"Size","2 x 3-1/2"); //strictly speaking this isn't overriding the original spec, but that's because there's only one possible value
-        verifyStaticSpecRow("Business Card",8,"Stock","Silver Leaf");
+        expect(element('.451qa_sg_item:contains("BUSINESS CARD") ~ li div').count()).toBe(9);
+        verifyStaticSpecRow("BUSINESS CARD",0,"# of Inks","2");
+        verifyStaticSpecRow("BUSINESS CARD",1,"# of Inks Back","2");
+        verifyStaticSpecRow("BUSINESS CARD",2,"# of Inks Front","2");
+        verifyStaticSpecRow("BUSINESS CARD",3,"Additional Comments","Variant Comment");
+        verifyStaticSpecRow("BUSINESS CARD",4,"Ink Colors","PacMan Mrs.PacMan");
+        verifyStaticSpecRow("BUSINESS CARD",5,"Ink Colors on Back","Red Blue");
+        verifyStaticSpecRow("BUSINESS CARD",6,"Ink Colors on Front","Yellow Green");
+        verifyStaticSpecRow("BUSINESS CARD",7,"Size","2 x 3-1/2"); //strictly speaking this isn't overriding the original spec, but that's because there's only one possible value
+        verifyStaticSpecRow("BUSINESS CARD",8,"Stock","Silver Leaf");
 
         if(C_debug){pause();}
         e2eViewProductFromInteropID("stat_prod_stat_specs_variant_autotest") //go back to our parent product preparing for the next variant
 
     });
     it('should display specs for the 3rd variant (no override)', function(){
-        e2eClickVariantFromProductList(3);
-        expect(repeater('.451_list_vars tr:hidden').count()).toBe(4); //there should be no variants displayed
+        e2eClickVariantFromProductList(1);
+        expect(repeater('#451qa_list_variants').count()).toBe(0); //there should be no variants displayed
 
-        expect(element('tr.451_hdr_spec_grp:contains("Business Card") ~ tr').count()).toBe(9);
-        verifyStaticSpecRow("Business Card",0,"# of Inks","6");
-        verifyStaticSpecRow("Business Card",1,"# of Inks Back","1");
-        verifyStaticSpecRow("Business Card",2,"# of Inks Front","1");
-        verifyStaticSpecRow("Business Card",3,"Additional Comments","Product Comments");
-        verifyStaticSpecRow("Business Card",4,"Ink Colors","Inky Pinky Blinky Clyde Sue Snagglepuss");
-        verifyStaticSpecRow("Business Card",5,"Ink Colors on Back","Black");
-        verifyStaticSpecRow("Business Card",6,"Ink Colors on Front","Red");
-        verifyStaticSpecRow("Business Card",7,"Size","2 x 3-1/2");
-        verifyStaticSpecRow("Business Card",8,"Stock","Gold Leaf");
+        expect(element('.451qa_sg_item:contains("BUSINESS CARD") ~ li div').count()).toBe(9);
+        verifyStaticSpecRow("BUSINESS CARD",0,"# of Inks","6");
+        verifyStaticSpecRow("BUSINESS CARD",1,"# of Inks Back","1");
+        verifyStaticSpecRow("BUSINESS CARD",2,"# of Inks Front","1");
+        verifyStaticSpecRow("BUSINESS CARD",3,"Additional Comments","Product Comments");
+        verifyStaticSpecRow("BUSINESS CARD",4,"Ink Colors","Inky Pinky Blinky Clyde Sue Snagglepuss");
+        verifyStaticSpecRow("BUSINESS CARD",5,"Ink Colors on Back","Black");
+        verifyStaticSpecRow("BUSINESS CARD",6,"Ink Colors on Front","Red");
+        verifyStaticSpecRow("BUSINESS CARD",7,"Size","2 x 3-1/2");
+        verifyStaticSpecRow("BUSINESS CARD",8,"Stock","Gold Leaf");
 
         if(C_debug){pause();}
         e2eViewProductFromInteropID("stat_prod_stat_specs_variant_autotest") //go back to our parent product preparing for the next variant
 
     });
     it('should display specs for the 2nd variant (some override)', function(){
-        e2eClickVariantFromProductList(4);
-        expect(repeater('.451_list_vars tr:hidden').count()).toBe(4); //there should be no variants displayed
+        e2eClickVariantFromProductList(2);
+        expect(repeater('#451qa_list_variants').count()).toBe(0); //there should be no variants displayed
 
-        expect(element('tr.451_hdr_spec_grp:contains("Business Card") ~ tr').count()).toBe(9);
-        verifyStaticSpecRow("Business Card",0,"# of Inks","6");
-        verifyStaticSpecRow("Business Card",1,"# of Inks Back","1");
-        verifyStaticSpecRow("Business Card",2,"# of Inks Front","1");
-        verifyStaticSpecRow("Business Card",3,"Additional Comments","Variant 2 Comments");
-        verifyStaticSpecRow("Business Card",4,"Ink Colors","Inky Pinky Blinky Clyde Sue Snagglepuss");
-        verifyStaticSpecRow("Business Card",5,"Ink Colors on Back","Override Red");
-        verifyStaticSpecRow("Business Card",6,"Ink Colors on Front","Red");
-        verifyStaticSpecRow("Business Card",7,"Size","2 x 3-1/2");
-        verifyStaticSpecRow("Business Card",8,"Stock","Copper Leaf");
+        expect(element('.451qa_sg_item:contains("BUSINESS CARD") ~ li div').count()).toBe(9);
+        verifyStaticSpecRow("BUSINESS CARD",0,"# of Inks","6");
+        verifyStaticSpecRow("BUSINESS CARD",1,"# of Inks Back","1");
+        verifyStaticSpecRow("BUSINESS CARD",2,"# of Inks Front","1");
+        verifyStaticSpecRow("BUSINESS CARD",3,"Additional Comments","Variant 2 Comments");
+        verifyStaticSpecRow("BUSINESS CARD",4,"Ink Colors","Inky Pinky Blinky Clyde Sue Snagglepuss");
+        verifyStaticSpecRow("BUSINESS CARD",5,"Ink Colors on Back","Override Red");
+        verifyStaticSpecRow("BUSINESS CARD",6,"Ink Colors on Front","Red");
+        verifyStaticSpecRow("BUSINESS CARD",7,"Size","2 x 3-1/2");
+        verifyStaticSpecRow("BUSINESS CARD",8,"Stock","Copper Leaf");
 
         if(C_debug){pause();}
         e2eViewProductFromInteropID("stat_prod_stat_specs_variant_autotest") //go back to our parent product
@@ -409,18 +410,18 @@ describe('Product View - Static With Variants "stat_prod_stat_specs_variant_auto
 describe('Product View - Price Schedules 1 Display Tests "pstest1", nonrestricted quantity, no markups, input field', function(){
     it('should display product containing price 5 price breaks',function(){
         e2eViewProductFromInteropID("pstest1") //this test is setup to have 5 price breaks and set to a specific price schedule (associated with this user)
-        expect(repeater('#451_list_pric_schd tbody tr').count()).toBe(6); //there should be 5 price breaks, but 1 header row (for now)
+        expect(repeater('.451qa_list_pricebreaks').count()).toBe(5); //there should be 5 price breaks
         if(C_debug){pause();}
     });
     it('should have a header for the price schedule table', function(){
         //1-4 $3, 5-14 $2.50, 15-34 $2.25, 35-74 $2.00, 75+ $1.50
 
         //check the headers
-        expect(element('#451_list_pric_schd tr:nth-child(1) td:nth-child(1)').text()).toContain("Quantity"); //quantity
-        expect(element('#451_list_pric_schd tr:nth-child(1) td:nth-child(1) span:hidden').text()).toContainFuture(binding("p.QuantityMultiplier")); //the multiplier should be hidden unless quantity is restricted
+        expect(element('#451qa_list_pric_schd div div div:first').text()).toContain("Quantity"); //quantity
+        expect(element('#451qa_list_pric_schd div div div:first span:hidden').text()).toContainFuture(binding("p.QuantityMultiplier")); //the multiplier should be hidden unless quantity is restricted
 
-        expect(element('#451_list_pric_schd tr:nth-child(1) td:nth-child(2)').text()).toContain("Price");
-        expect(element('#451_list_pric_schd tr:nth-child(1) td:nth-child(2) span:hidden').text()).toContainFuture(binding("p.QuantityMultiplier")); //the multiplier should be hidden unless quantity is restricted
+        expect(element('#451qa_list_pric_schd div div div:eq(1)').text()).toContain("Price");
+        expect(element('#451qa_list_pric_schd div div div:eq(1) span:hidden').text()).toContainFuture(binding("p.QuantityMultiplier")); //the multiplier should be hidden unless quantity is restricted
 
     });
     it('should have 5 price breaks', function(){
@@ -429,23 +430,20 @@ describe('Product View - Price Schedules 1 Display Tests "pstest1", nonrestricte
         //expect(element('#451_list_pric_schd tr:nth-child(2) td:first-child').text()).toBe("1 - 4"); //quantity
         //repeat for each row
 
-        //row 1 is the header row
-        expect(element('#451_list_pric_schd tr:nth-child(2) td:nth-child(2)').text()).toBe((3).formatMoney(2)); //price
-        expect(element('#451_list_pric_schd tr:nth-child(3) td:nth-child(2)').text()).toBe((2.5).formatMoney(2)); //price
-        expect(element('#451_list_pric_schd tr:nth-child(4) td:nth-child(2)').text()).toBe((2.25).formatMoney(2)); //price
-        expect(element('#451_list_pric_schd tr:nth-child(5) td:nth-child(2)').text()).toBe((2).formatMoney(2)); //price
-        expect(element('#451_list_pric_schd tr:nth-child(6) td:nth-child(2)').text()).toBe((1.50).formatMoney(2)); //price
+        expect(element('.451qa_list_pricebreaks:eq(0) div:eq(1)').text()).toBe((3).formatMoney(2)); //price
+        expect(element('.451qa_list_pricebreaks:eq(1) div:eq(1)').text()).toBe((2.5).formatMoney(2)); //price
+        expect(element('.451qa_list_pricebreaks:eq(2) div:eq(1)').text()).toBe((2.25).formatMoney(2)); //price
+        expect(element('.451qa_list_pricebreaks:eq(3) div:eq(1)').text()).toBe((2).formatMoney(2)); //price
+        expect(element('.451qa_list_pricebreaks:eq(4) div:eq(1)').text()).toBe((1.50).formatMoney(2)); //price
 
 
         if(C_debug){pause();}
         e2eChangeProdQty(false,1);
-        expect(binding("LineItem.LineTotal")).toEqual((3).formatMoney(2));
-        if(C_debug){pause();}
+        expect(element("#451qa_lineitem_total").text()).toContain((3).formatMoney(2));
         e2eChangeProdQty(false,5);
-        expect(binding("LineItem.LineTotal")).toEqual((12.50).formatMoney(2));
-        if(C_debug){pause();}
+        expect(element("#451qa_lineitem_total").text()).toContain((12.50).formatMoney(2));
         e2eChangeProdQty(false,14);
-        expect(binding("LineItem.LineTotal")).toEqual((35).formatMoney(2));
+        expect(element("#451qa_lineitem_total").text()).toContain((35).formatMoney(2));
         if(C_debug){pause();}
     });
 });
@@ -453,7 +451,7 @@ describe('Product View - Price Schedules 1 Display Tests "pstest1", nonrestricte
 describe('Product View - Price Schedules 1 Value Tests "pstest1", nonrestricted quantity, no markups, input field', function(){
     it('should display product containing price 5 price breaks',function(){
         e2eViewProductFromInteropID("pstest1") //this test is setup to have 5 price breaks and set to a specific price schedule (associated with this user)
-        expect(repeater('#451_list_pric_schd tbody tr').count()).toBe(6); //there should be 5 price breaks, but 1 header row (for now)
+        expect(repeater('.451qa_list_pricebreaks').count()).toBe(5); //there should be 5 price breaks
         if(C_debug){pause();}
     });
     it('should apply 5 price breaks based on quantity', function(){
@@ -461,59 +459,61 @@ describe('Product View - Price Schedules 1 Value Tests "pstest1", nonrestricted 
         //1-4 $3, 5-14 $2.50, 15-34 $2.25, 35-74 $2.00, 75+ $1.50
         if(C_debug){pause();}
         e2eChangeProdQty(false,1);
-        expect(binding("LineItem.LineTotal")).toEqual((3).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckLineItemTotal(3);
+
         e2eChangeProdQty(false,5);
-        expect(binding("LineItem.LineTotal")).toEqual((12.50).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckLineItemTotal(12.50);
+
         e2eChangeProdQty(false,14);
-        expect(binding("LineItem.LineTotal")).toEqual((35).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckLineItemTotal(35);
+
         e2eChangeProdQty(false,15);
-        expect(binding("LineItem.LineTotal")).toEqual((33.75).formatMoney(2));
-        if(C_debug){pause();}
+        expect(element("#451qa_lineitem_total").text()).toContain((33.75).formatMoney(2));
         e2eChangeProdQty(false,35);
-        expect(binding("LineItem.LineTotal")).toEqual((70).formatMoney(2));
-        if(C_debug){pause();}
+        expect(element("#451qa_lineitem_total").text()).toContain((70).formatMoney(2));
         e2eChangeProdQty(false,75);
-        expect(binding("LineItem.LineTotal")).toEqual((112.50).formatMoney(2));
-        if(C_debug){pause();}
+        expect(element("#451qa_lineitem_total").text()).toContain((112.50).formatMoney(2));
         e2eChangeProdQty(false,74);
-        expect(binding("LineItem.LineTotal")).toEqual((148).formatMoney(2));
-        if(C_debug){pause();}
+        expect(element("#451qa_lineitem_total").text()).toContain((148).formatMoney(2));
         e2eChangeProdQty(false,112);
-        expect(binding("LineItem.LineTotal")).toEqual((168).formatMoney(2));
+        expect(element("#451qa_lineitem_total").text()).toContain((168).formatMoney(2));
         if(C_debug){pause();}
     });
     it('should allow changing the quantity INPUT field and prevent invalid values, disabling Add To Order button', function(){
 
-        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0); //button should be disabled by default
+        e2eViewProductFromInteropID("pstest1") //this test is setup to have 5 price breaks and set to a specific price schedule (associated with this user)
+
+        e2eCheckButtonStatus(false)
+        e2eChangeProdQty(false,"1")
+        e2eCheckButtonStatus(true)
+
+        e2eChangeProdQty(false,1) //integer make a difference?
+        e2eCheckButtonStatus(true)
 
         e2eChangeProdQty(false,"foo");
-        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0);
+        e2eCheckButtonStatus(false)
         e2eChangeProdQty(false,1);
-        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0); //nope, still need a required spec
-        e2eChangeProdQty(false,0);
-        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0);
+        e2eCheckButtonStatus(true)
         e2eChangeProdQty(false,100);
-        using('#451_list_vspec tbody tr:nth-child(2) td:nth-child(2)').input("s.Value").enter("playstation portable");
-        expect(element("#451_btn_orderadd:enabled").count()).toBeGreaterThan(0); //now we should have an enabled button
+
+        e2eChangeTextSpec("VariableSpecTextReq1","")
+        e2eCheckButtonStatus(false)
+        e2eChangeTextSpec("VariableSpecTextReq1","playstation portable")
+        e2eCheckButtonStatus(true)
         e2eChangeProdQty(false,"foo");
-        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0); //now back to disabled
+        e2eCheckButtonStatus(false)
         e2eChangeProdQty(false,1);
-        expect(element("#451_btn_orderadd:enabled").count()).toBeGreaterThan(0); //enabled
+        e2eCheckButtonStatus(true)
         e2eChangeProdQty(false,0);
-        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0); //will you make up your mind?
+        e2eCheckButtonStatus(false)
 
         if(C_debug){pause();}
         e2eChangeProdQty(false,1);
-        expect(binding("LineItem.LineTotal")).toEqual((3).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckLineItemTotal(3);
         e2eChangeProdQty(false,5);
-        expect(binding("LineItem.LineTotal")).toEqual((12.50).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckLineItemTotal(12.50);
         e2eChangeProdQty(false,14);
-        expect(binding("LineItem.LineTotal")).toEqual((35).formatMoney(2));
+        e2eCheckLineItemTotal(35);
         if(C_debug){pause();}
      });
 });
@@ -521,21 +521,28 @@ describe('Product View - Price Schedules 1 Value Tests "pstest1", nonrestricted 
 describe('Product View - Price Schedules 2 Display Tests "pstest2", restricted quantity, no markup, select field', function(){
     it('should display product containing 10 price breaks',function(){
         e2eViewProductFromInteropID("pstest2"); //this test is setup to have 10 price breaks and set to a specific price schedule (associated with this user)
-        expect(repeater('#451_list_pric_schd tbody tr').count()).toBe(11); //there should be 10 price breaks (incl header row). restricted to multiples of 250
+        expect(repeater('.451qa_list_pricebreaks').count()).toBe(10); //there should be 5 price breaks
         if(C_debug){pause();}
     });
     it('should have a header for the price schedule table', function(){
         //1 250, 2 480, 3 675, 4 800, 5 950, 6 1050, 7 1050, 8 1000, 9 900, 10 750
 
         //check the headers
-        expect(element('#451_list_pric_schd tr:nth-child(1) td:nth-child(1)').text()).toContain("Quantity"); //quantity
-        expect(element('#451_list_pric_schd tr:nth-child(1) td:nth-child(1) span:hidden').text()).toContainFuture(binding("p.QuantityMultiplier")); //the multiplier shouldn't appear here
+        expect(element('#451qa_list_pric_schd div div div:first').text()).toContain("Quantity"); //quantity
+        expect(element('#451qa_list_pric_schd div div div:first span:hidden').text()).toContainFuture(binding("p.QuantityMultiplier")); //the multiplier should be hidden unless quantity is restricted
 
-        expect(element('#451_list_pric_schd tr:nth-child(1) td:nth-child(2)').text()).toContain("Price");
-        expect(element('#451_list_pric_schd tr:nth-child(1) td:nth-child(2) span:hidden').text()).toContainFuture(binding("p.QuantityMultiplier")); //the multiplier shouldn't appear here
+        expect(element('#451qa_list_pric_schd div div div:eq(1)').text()).toContain("Price");
+        expect(element('#451qa_list_pric_schd div div div:eq(1) span:hidden').text()).toContainFuture(binding("p.QuantityMultiplier")); //the multiplier should be hidden unless quantity is restricted
 
         //right now the QuantityMultiplier is hidden, to match the live site, this may be a future feature addition
     });
+    it('should hide or display the price schedule when the user clicks view/hide', function(){
+        expect(element('#451qa_list_pric_schd:hidden').count()).toBe(1); //should start off hidden
+        element('#451qa_btn_showhide_psched').click();
+        expect(element('#451qa_list_pric_schd:hidden').count()).toBe(0); //should now be shown
+        if(C_debug){pause();}
+    });
+
     it('should have 10 price breaks', function(){
 
         //TODO- jeff will write a function that will provide the content of the Quantity column in a more readable fashion so this next check will be usable
@@ -543,27 +550,24 @@ describe('Product View - Price Schedules 2 Display Tests "pstest2", restricted q
         //repeat for each row
 
         //row 1 is the header row
-        expect(element('#451_list_pric_schd tr:nth-child(2) td:nth-child(2)').text()).toBe((250).formatMoney(2)); //price
-        expect(element('#451_list_pric_schd tr:nth-child(3) td:nth-child(2)').text()).toBe((480).formatMoney(2)); //price
-        expect(element('#451_list_pric_schd tr:nth-child(4) td:nth-child(2)').text()).toBe((675).formatMoney(2)); //price
-        expect(element('#451_list_pric_schd tr:nth-child(5) td:nth-child(2)').text()).toBe((800).formatMoney(2)); //price
-        expect(element('#451_list_pric_schd tr:nth-child(6) td:nth-child(2)').text()).toBe((950).formatMoney(2)); //price
-        expect(element('#451_list_pric_schd tr:nth-child(7) td:nth-child(2)').text()).toBe((1050).formatMoney(2)); //price
-        expect(element('#451_list_pric_schd tr:nth-child(8) td:nth-child(2)').text()).toBe((1050).formatMoney(2)); //price
-        expect(element('#451_list_pric_schd tr:nth-child(9) td:nth-child(2)').text()).toBe((1000).formatMoney(2)); //price
-        expect(element('#451_list_pric_schd tr:nth-child(10) td:nth-child(2)').text()).toBe((900).formatMoney(2)); //price
-        expect(element('#451_list_pric_schd tr:nth-child(11) td:nth-child(2)').text()).toBe((750).formatMoney(2)); //price
-
+        expect(element('.451qa_list_pricebreaks:eq(0) div:eq(1)').text()).toBe((250).formatMoney(2)); //price
+        expect(element('.451qa_list_pricebreaks:eq(1) div:eq(1)').text()).toBe((480).formatMoney(2)); //price
+        expect(element('.451qa_list_pricebreaks:eq(2) div:eq(1)').text()).toBe((675).formatMoney(2)); //price
+        expect(element('.451qa_list_pricebreaks:eq(3) div:eq(1)').text()).toBe((800).formatMoney(2)); //price
+        expect(element('.451qa_list_pricebreaks:eq(4) div:eq(1)').text()).toBe((950).formatMoney(2)); //price
+        expect(element('.451qa_list_pricebreaks:eq(5) div:eq(1)').text()).toBe((1050).formatMoney(2)); //price
+        expect(element('.451qa_list_pricebreaks:eq(6) div:eq(1)').text()).toBe((1050).formatMoney(2)); //price
+        expect(element('.451qa_list_pricebreaks:eq(7) div:eq(1)').text()).toBe((1000).formatMoney(2)); //price
+        expect(element('.451qa_list_pricebreaks:eq(8) div:eq(1)').text()).toBe((900).formatMoney(2)); //price
+        expect(element('.451qa_list_pricebreaks:eq(9) div:eq(1)').text()).toBe((750).formatMoney(2)); //price
 
         if(C_debug){pause();}
         e2eChangeProdQty(true,0);
-        expect(binding("LineItem.LineTotal")).toEqual((250).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckLineItemTotal(250);
         e2eChangeProdQty(true,4);
-        expect(binding("LineItem.LineTotal")).toEqual((950).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckLineItemTotal(950);
         e2eChangeProdQty(true,9);
-        expect(binding("LineItem.LineTotal")).toEqual((750).formatMoney(2));
+        e2eCheckLineItemTotal(750);
         if(C_debug){pause();}
     });
 });
@@ -575,71 +579,54 @@ describe('Product View - Price Schedules 2 Value Tests "pstest2", restricted qua
     });
     it('should apply 10 price breaks (no markup yet)', function(){
 
-        if(C_debug){pause();}
         e2eChangeProdQty(true,0); //The select box is 0 based instead of 1 based
-        expect(binding("LineItem.LineTotal")).toEqual((250).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckLineItemTotal(250);
         e2eChangeProdQty(true,1);
-        expect(binding("LineItem.LineTotal")).toEqual((480).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckLineItemTotal(480);
         e2eChangeProdQty(true,2);
-        expect(binding("LineItem.LineTotal")).toEqual((675).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckLineItemTotal(675);
         e2eChangeProdQty(true,3);
-        expect(binding("LineItem.LineTotal")).toEqual((800).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckLineItemTotal(800);
         e2eChangeProdQty(true,4);
-        expect(binding("LineItem.LineTotal")).toEqual((950).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckLineItemTotal(950);
         e2eChangeProdQty(true,5);
-        expect(binding("LineItem.LineTotal")).toEqual((1050).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckLineItemTotal(1050);
         e2eChangeProdQty(true,6);
-        expect(binding("LineItem.LineTotal")).toEqual((1050).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckLineItemTotal(1050);
         e2eChangeProdQty(true,7);
-        expect(binding("LineItem.LineTotal")).toEqual((1000).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckLineItemTotal(1000);
         e2eChangeProdQty(true,8);
-        expect(binding("LineItem.LineTotal")).toEqual((900).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckLineItemTotal(900);
         e2eChangeProdQty(true,9);
-        expect(binding("LineItem.LineTotal")).toEqual((750).formatMoney(2));
+        e2eCheckLineItemTotal(750);
         if(C_debug){pause();}
     });
     it('should allow changing the quantity SELECT field and enable/disable Add To Order button', function(){
+        e2eViewProductFromInteropID("pstest2") //start fresh on the page
 
-        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0); //button should be disabled by default
-
-        e2eChangeProdQty(true,"foo");
-
-        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0);
-        e2eChangeProdQty(true,1);
-
-        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0); //nope, still need a required spec
-        e2eChangeProdQty(true,0);
-
-        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0);
-        e2eChangeProdQty(true,100);
-
-        using('#451_list_vspec tbody tr:nth-child(2) td:nth-child(2)').input("s.Value").enter("playstation portable");
-        expect(element("#451_btn_orderadd:enabled").count()).toBeGreaterThan(0); //now we should have an enabled button
-        e2eChangeProdQty(true,"foo");
+        e2eCheckButtonStatus(false); //button should be disabled by default, we haven't entered a quantity
 
         e2eChangeProdQty(true,1);
-        expect(element("#451_btn_orderadd:enabled").count()).toBeGreaterThan(0); //enabled
-        e2eChangeProdQty(false,"##"); //angular's UI controls should handle some of these invalid values
-        expect(element("#451_btn_orderadd:enabled").count()).toBeGreaterThan(0);
+        e2eCheckButtonStatus(true) //enabled again
 
-        if(C_debug){pause();}
+        e2eChangeTextSpec("VariableSpecTextReq1","") //now we're missing a required vspec
+        e2eCheckButtonStatus(false)
         e2eChangeProdQty(true,0);
-        expect(binding("LineItem.LineTotal")).toEqual((250).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckButtonStatus(false) //should still be false
+        e2eChangeTextSpec("VariableSpecTextReq1","hello dolly") //now we have our required vspec
         e2eChangeProdQty(true,4);
-        expect(binding("LineItem.LineTotal")).toEqual((950).formatMoney(2));
+        e2eCheckButtonStatus(true)
+        e2eChangeProdQty(true,100);
+        e2eCheckButtonStatus(true)
+        e2eChangeProdQty(true,1);
+        e2eCheckButtonStatus(true)
         if(C_debug){pause();}
+        e2eChangeProdQty(true,0);
+        e2eCheckLineItemTotal(250);
+        e2eChangeProdQty(true,4);
+        e2eCheckLineItemTotal(950);
         e2eChangeProdQty(true,9);
-        expect(binding("LineItem.LineTotal")).toEqual((750).formatMoney(2));
+        e2eCheckLineItemTotal(750);
         if(C_debug){pause();}
     });
 });
@@ -648,74 +635,57 @@ describe('Product View - Required Variable Specs With Markup 1 Display Tests "re
     it('should display product containing with required variable specs with markups',function(){
         e2eViewProductFromInteropID("reqvarspecmarkuptest1") //this test is setup to have 10 price breaks with variable specs that add markups
         if(C_debug){pause();}
+        //TODO- check text spec inputs for rows, width, and character length, not implemented yet
     });
     it('should display 7 variable specs in a particular order', function(){
-        expect(repeater('#451_list_vspec tr').count()).toBe(7); //there should be 7 variable specs
+        expect(repeater('#451_list_vspec label').count()).toBe(7); //there should be 7 variable specs
         //test display order of specs
-        expect(element('#451_list_vspec tr:nth-child(1) td:nth-child(1):contains("ReqVarTextSpec1")').count()).toEqual(1); //expects the first rows first cell to be ReqVarDropMarkupUnitSpec1
-        expect(element('#451_list_vspec tr:nth-child(2) td:nth-child(1):contains("ReqVarDropMarkupUnitSpec1")').count()).toEqual(1); //expects the first rows first cell to be ReqVarImageSpec1
-        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(1):contains("ReqVarRadioMarkupLineSpec1")').count()).toEqual(1); //expects the first rows first cell to be ReqVarRadioMarkupLineSpec1
-        expect(element('#451_list_vspec tr:nth-child(4) td:nth-child(1):contains("ReqVarImageSpec1")').count()).toEqual(1); //expects the first rows first cell to be ReqVarTextDefToolSpec1
-        expect(element('#451_list_vspec tr:nth-child(5) td:nth-child(1):contains("ReqVarTextDefToolSpec1")').count()).toEqual(1); //expects the first rows first cell to be ReqVarTextSpec1
-        expect(element('#451_list_vspec tr:nth-child(6) td:nth-child(1):contains("VariableSpecTextNonReq1")').count()).toEqual(1); //expects the first rows first cell to be VariableSpecTextNonReq1
-        expect(element('#451_list_vspec tr:nth-child(7) td:nth-child(1):contains("VariableSpecTextReq1")').count()).toEqual(1); //expects the first rows first cell to be VariableSpecTextNonReq1
-
-        expect(element('#451_list_vspec tr:nth-child(1) td:nth-child(2):contains("mr")').count()).toEqual(1); //should have the prefix "mr"
-        expect(element('#451_list_vspec tr:nth-child(1) td:nth-child(2) input[placeholder="foo1"]').count()).toEqual(1); //this spec should be set to "foo1" by default
-        expect(element('#451_list_vspec tr:nth-child(1) td:nth-child(2):contains("son")').count()).toEqual(1); //should have the prefix "son"
-        //TODO- check text spec inputs for rows, width, and character length, not implemented yet
-
-        expect(element('#451_list_vspec tr:nth-child(2) td:nth-child(2):contains("mr")').count()).toEqual(1); //should have the prefix "mr"
-        expect(element('#451_list_vspec tr:nth-child(2) td:nth-child(2) select:contains("Torgo")').count()).toEqual(1); //no default but it should have 3 values populated in the options
-        expect(element('#451_list_vspec tr:nth-child(2) td:nth-child(2) select:contains("Fergu")').count()).toEqual(1); //no default but it should have 3 values populated in the options
-        expect(element('#451_list_vspec tr:nth-child(2) td:nth-child(2) select:contains("Ander")').count()).toEqual(1); //no default but it should have 3 values populated in the options
-        expect(element('#451_list_vspec tr:nth-child(2) td:nth-child(2) select:contains("Melan")').count()).toEqual(0); //should definitely not include this value
-        expect(element('#451_list_vspec tr:nth-child(2) td:nth-child(2):contains("son")').count()).toEqual(1); //should have the prefix "son"
-
-        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(2):contains("mr")').count()).toEqual(1); //should have the prefix "mr"
-        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(2) input[type="radio"] + label:contains("Cooper")').count()).toEqual(1); //radio button exists next to a text label
-        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(2) input[type="radio"] + label:contains("Jagger")').count()).toEqual(1); //radio button exists next to a text label
-        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(2) input[type="radio"] + label:contains("Petty")').count()).toEqual(1); //radio button exists next to a text label
-        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(2) input[type="radio"] + label:contains("Gilmour")').count()).toEqual(1); //radio button exists next to a text label
-        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(2) input[type="radio"] + label:contains("Other")').count()).toEqual(1); //have the Other option
-
-
-        //when we click the Other radio button, a new field should appear to allow us to enter an "other" value
-        //element('#451_list_vspec tr:nth-child(3) td:nth-child(2) input[type="radio"] + label:contains("Other")').click(); //click the other radio
-
-        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(2) input[ng-Model="s.OtherTextValue"]:hidden ').count()).toEqual(1);
-        element('#451_list_vspec tr:nth-child(3) td:nth-child(2) span:contains("other")').click(); //click the other radio/text
-        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(2) input[ng-Model="s.OtherTextValue"]:visible ').count()).toEqual(1);
-
-    });
-    it('should display 7 variable specs in a particular order (pt 2)', function(){
-
-        pause();
-        //next 2 spec fields aren't implemented yet and no idea how we will, so it's pointless to write tests for them yet
-        expect(element('#451_list_vspec tr:nth-child(4) td:nth-child(2):contains("ReqVarImageSpec1")').count()).toEqual(1); //expects the first rows first cell to be ReqVarTextDefToolSpec1
-        expect(element('#451_list_vspec tr:nth-child(5) td:nth-child(2):contains("ReqVarTextDefToolSpec1")').count()).toEqual(1); //expects the first rows first cell to be ReqVarTextSpec1
-        expect(element('#451_list_vspec tr:nth-child(6) td:nth-child(2):contains("VariableSpecTextNonReq1")').count()).toEqual(1); //expects the first rows first cell to be VariableSpecTextNonReq1
-        expect(element('#451_list_vspec tr:nth-child(7) td:nth-child(2):contains("VariableSpecTextReq1")').count()).toEqual(1); //expects the first rows first cell to be VariableSpecTextNonReq1
+        expect(element('#451_list_vspec label:eq(0):contains("ReqVarTextSpec1")').count()).toEqual(1);
+        expect(element('#451_list_vspec label:eq(1):contains("ReqVarDropMarkupUnitSpec1")').count()).toEqual(1);
+        expect(element('#451_list_vspec label:eq(2):contains("ReqVarRadioMarkupLineSpec1")').count()).toEqual(1);
+        expect(element('#451_list_vspec label:eq(3):contains("ReqVarImageSpec1")').count()).toEqual(1);
+        expect(element('#451_list_vspec label:eq(4):contains("ReqVarTextDefToolSpec1")').count()).toEqual(1);
+        expect(element('#451_list_vspec label:eq(5):contains("VariableSpecTextNonReq1")').count()).toEqual(1);
+        expect(element('#451_list_vspec label:eq(6):contains("VariableSpecTextReq1")').count()).toEqual(1);
 
         if(C_debug){pause();}
+        e2eCheckTextSpec("ReqVarTextSpec1","foo1","mr","son");
+        var arrOptions;
+
+        arrOptions = ["","Torgo","Fergu","Ander"]; //the selector has a blank "default" option
+        e2eCheckSelectionSpec("ReqVarDropMarkupUnitSpec1","",arrOptions,"mr","son");
+
+        arrOptions = ["","Cooper","Jagger","Dylan","Petty","Gilmour","Other"];
+        e2eCheckSelectionSpec("ReqVarRadioMarkupLineSpec1","",arrOptions,"mr","");
+
+        expect(element('#451_list_vspec label:contains("ReqVarRadioMarkupLineSpec1") ~ input[ng-Model="other"]:hidden').count()).toEqual(1);
+
+        e2eChangeSelectionSpec("ReqVarRadioMarkupLineSpec1","Other",true,"OtherValue");
+
+        //let's just check that Other box pops up correctly.
+        expect(element('#451_list_vspec label:contains("ReqVarRadioMarkupLineSpec1") ~ input[ng-Model="other"]:hidden').count()).toEqual(0); //no longer hidden
+
+        if(C_debug){pause();}
+
 
     });
     it('should display 7 variable specs most of which are required', function(){
         //test that specs are required
 
-        expect(element('#451_list_vspec tr:nth-child(1) td:nth-child(1):contains("*")').count()).toEqual(1); //expects the first rows first cell to be required and thus have an *
-        expect(element('#451_list_vspec tr:nth-child(2) td:nth-child(1):contains("*")').count()).toEqual(1); //expects the 2nd rows first cell to be required and thus have an *
-        expect(element('#451_list_vspec tr:nth-child(3) td:nth-child(1):contains("*")').count()).toEqual(1); //expects the third rows first cell to be required and thus have an *
-        expect(element('#451_list_vspec tr:nth-child(4) td:nth-child(1):contains("*")').count()).toEqual(1); //expects the fourth rows first cell to be required and thus have an *
-        expect(element('#451_list_vspec tr:nth-child(5) td:nth-child(1):contains("*")').count()).toEqual(1); //expects the fifth rows first cell to be required and thus have an *
-        //6 is not required
-        expect(element('#451_list_vspec tr:nth-child(7) td:nth-child(1):contains("*")').count()).toEqual(1); //expects the seventh rows first cell to be required and thus have an *
+        expect(element('#451_list_vspec label:eq(0):contains("ReqVarTextSpec1") ~ textarea[required="required"]').count()).toEqual(1);
+        expect(element('#451_list_vspec label:eq(1):contains("ReqVarDropMarkupUnitSpec1") ~ select[required="required"]').count()).toEqual(1);
+        expect(element('#451_list_vspec label:eq(2):contains("ReqVarRadioMarkupLineSpec1") ~ select[required="required"]').count()).toEqual(1);
+        expect(element('#451_list_vspec label:eq(3):contains("ReqVarImageSpec1") ~ input[required="required"]').count()).toEqual(1);
+        expect(element('#451_list_vspec label:eq(4):contains("ReqVarTextDefToolSpec1") ~ input[required="required"]').count()).toEqual(1);
+        expect(element('#451_list_vspec label:eq(5):contains("VariableSpecTextNonReq1") ~ input[required!="required"]').count()).toEqual(1);
+        expect(element('#451_list_vspec label:eq(6):contains("VariableSpecTextReq1") ~ input[required="required"]').count()).toEqual(1);
 
-        expect(element("#451_btn_orderadd:disabled").count()).toBeGreaterThan(0); //add to order button should be disabled by default
+        e2eCheckButtonStatus(false);
 
     });
     it('should apply markup values as specified', function(){
-        pause();
+        //let's start fresh
+        e2eViewProductFromInteropID("reqvarspecmarkuptest1");
 
         //TODO - for each added spec, verify line item total price is incremented by quantity as well as markup, each time
         //BASE price breaks
@@ -724,63 +694,62 @@ describe('Product View - Required Variable Specs With Markup 1 Display Tests "re
 
         if(C_debug){pause();}
         e2eChangeProdQty(true,0);
-        expect(binding("LineItem.LineTotal")).toEqual((250).formatMoney(2));
-        if(C_debug){pause();}
+        e2eCheckLineItemTotal(250);
         e2eChangeProdQty(true,5);
-        expect(binding("LineItem.LineTotal")).toEqual((1050).formatMoney(2));
+        e2eCheckLineItemTotal(1050);
         //at this point no markups should be applied
         if(C_debug){pause();}
 
-        //now let's apply some specs without markup
-        using('#451_list_vspec tbody tr:nth-child(1) td:nth-child(2)').input("s.Value").enter("foo2");//change foo1 to foo2 in the first text input.  this should not change the markup/line item total.
-        //the reason we use Using is because there are multiple fields with the same "name" (ng-model) so we can narrow it down using Using to specify the DOM branch it's in
+        //now let's apply some specs WITHOUT markup
+        e2eChangeTextSpec("ReqVarTextSpec1","foo2");//change foo1 to foo2 in the first text input.  this should not change the markup/line item total.
+
         e2eChangeProdQty(true,5);
-        expect(binding("LineItem.LineTotal")).toEqual((1050).formatMoney(2)); //still 1050
-
-        using('#451_list_vspec tbody tr:nth-child(4) td:nth-child(2)').input("s.Value").enter("image upload");//change (image control) to "image" in the image upload input.  this should not change the markup/line item total.
+        e2eCheckLineItemTotal(1050);
+        alert("Please upload a file manually")
+        pause();
+        pause();
         e2eChangeProdQty(true,0);
-        expect(binding("LineItem.LineTotal")).toEqual((250).formatMoney(2)); //should only be 250
+        e2eCheckLineItemTotal(250);
 
-        using('#451_list_vspec tbody tr:nth-child(5) td:nth-child(2)').input("s.Value").enter("cusack");
+        e2eChangeTextSpec("ReqVarTextDefToolSpec1","Cusack");
         e2eChangeProdQty(true,1);
-        expect(binding("LineItem.LineTotal")).toEqual((480).formatMoney(2));
-
+        e2eCheckLineItemTotal(480);
         //specifically not changing the value in #6 because it's not required
 
-        using('#451_list_vspec tbody tr:nth-child(7) td:nth-child(2)').input("s.Value").enter("playstation portable");
+        e2eChangeTextSpec("ReqVarTextDefToolSpec1","Playstation Portable");
         e2eChangeProdQty(true,2);
-        expect(binding("LineItem.LineTotal")).toEqual((675).formatMoney(2));
+        e2eCheckLineItemTotal(675);
 
-        //now let's apply some specs WITH markup (by quantity)
+        //now let's apply some specs WITH markup (by UNIT/quantity)
 
-        using('#451_list_vspec tbody tr:nth-child(2) td:nth-child(2)').select("s.SelectedOptionID").option(1); //torgo
+        e2eChangeSelectionSpec("ReqVarDropMarkupUnitSpec1","Torgo",false,"");
         e2eChangeProdQty(true,0);
-        expect(binding("LineItem.LineTotal")).toEqual((251.12).formatMoney(2));
+        e2eCheckLineItemTotal(251.12);
 
-        using('#451_list_vspec tbody tr:nth-child(2) td:nth-child(2)').select("s.SelectedOptionID").option(2); //fergu
+
+        e2eChangeSelectionSpec("ReqVarDropMarkupUnitSpec1","Fergu",false,"");
         e2eChangeProdQty(true,0);
-        expect(binding("LineItem.LineTotal")).toEqual((251.12).formatMoney(2));
+        e2eCheckLineItemTotal(251.12);
         e2eChangeProdQty(true,1);
-        expect(binding("LineItem.LineTotal")).toEqual((482.24).formatMoney(2));
+        e2eCheckLineItemTotal(482.24);
 
         //now let's apply some specs WITH markup (by lineitem total)
 
-        using('#451_list_vspec tbody tr:nth-child(3) td:nth-child(2)').select("s.SelectedOptionID").option(0); //cooper
+        e2eChangeSelectionSpec("ReqVarRadioMarkupLineSpec1","Cooper",false,"");
         e2eChangeProdQty(true,0);
-        expect(binding("LineItem.LineTotal")).toEqual((252.25).formatMoney(2));
+        e2eCheckLineItemTotal(252.25); //we've added the spec value Cooper which has a line-item type markup of 1.13
 
-        using('#451_list_vspec tbody tr:nth-child(3) td:nth-child(2)').select("s.SelectedOptionID").option(0); //cooper
         e2eChangeProdQty(true,1);
-        expect(binding("LineItem.LineTotal")).toEqual((483.37).formatMoney(2));
+        e2eCheckLineItemTotal(483.37);
 
-        using('#451_list_vspec tbody tr:nth-child(3) td:nth-child(2)').select("s.SelectedOptionID").option(5); //gilmore
+        e2eChangeSelectionSpec("ReqVarRadioMarkupLineSpec1","Gilmour",false,"");
         e2eChangeProdQty(true,9);
-        expect(binding("LineItem.LineTotal")).toEqual((762.33).formatMoney(2));
-        using('#451_list_vspec tbody tr:nth-child(3) td:nth-child(2)').input("s.OtherTextValue").enter("Van Halen"); //other value
-        e2eChangeProdQty(true,7);
-        expect(binding("LineItem.LineTotal")).toEqual((1010.09).formatMoney(2));
+        e2eCheckLineItemTotal(762.33);
 
-        expect(using('#451_list_vspec tbody tr:nth-child(5) td:nth-child(2)').input("s.Value")).toBe("Core"); //default set to be [[FirstName]], SPA may not support this
+        e2eChangeSelectionSpec("ReqVarRadioMarkupLineSpec1","Other",true,"Van Halen");
+        e2eChangeProdQty(true,7);
+        e2eCheckLineItemTotal(1010.09);
+
     });
 });
 
@@ -805,7 +774,7 @@ describe('testing e2eProduct nav functions', function(){
     it(':e2eClickProductFromList(nth-child method) should display product',function(){
         if(C_debug){pause();}
         e2eClickSideNavCategory("Products")
-        e2eClickProductFromList(1)
+        e2eClickProductFromList(0)
     });
 
     it(':e2eClickProductFromList(product name method) should display product',function(){
@@ -822,7 +791,7 @@ describe('testing e2eProduct nav functions', function(){
 
         e2eViewProductFromInteropID("StaticProdWithVar")
         pause();
-        e2eClickVariantFromProductList(2); //uses TRs right now and there's a header row
+        e2eClickVariantFromProductList(1);
 
         if(C_debug){pause();}
         pause();
