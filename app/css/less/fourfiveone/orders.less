@@ -47,7 +47,7 @@
   }
 
   .order-location {
-    border: 1px solid @fourfiveone-border-color;
+    border: 1px solid @panel-default-border;
     padding: 15px;
     margin-top: 15px;
     p {
@@ -76,11 +76,11 @@
   border: none;
   //** canonical selector :: remove border from first panel-body and add back to ones that come after the first one for line items
   ~ .panel-body {
-    border-top: 1px solid @fourfiveone-border-color;
+    border-top: 1px solid @panel-default-border;
   }
   .row {
     .row {
-      border-left: 1px solid @fourfiveone-border-color;
+      border-left: 1px solid @panel-default-border;
     }
   }
   &:extend(.panel-body all);

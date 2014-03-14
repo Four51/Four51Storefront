@@ -4,7 +4,7 @@
             Variants
         </h3>
     </div>
-    <div class="panel-body">
+    <div id="451qa_list_variants" class="panel-body">
         <div class="row" ng-repeat="v in LineItem.Product.Variants">
             <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}} class="text-info">{{v.ExternalID}}</a>
             <div class="pull-right view-form-icon" ng-if="allowAddFromVariantList">

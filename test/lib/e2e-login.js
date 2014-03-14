@@ -92,7 +92,7 @@ function e2eLoginProduct(strUsername, strPassword, blnDebug, strProductID){ //th
 
     it('should display the requested product once authorization is granted', function(){
 
-        browser().navigateTo('../../app/index.html#/product/default/' + strProductID);
+        browser().navigateTo('../../app/product/default/' + strProductID);
 
         input("credentials.Username").enter(strUsername);
         input("credentials.Password").enter(strPassword);

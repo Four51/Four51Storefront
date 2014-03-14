@@ -5,7 +5,7 @@
 //== A more perfect table
 .panel-table {
   padding: 0;
-  border: 1px solid @fourfiveone-border-color;
+  border: 1px solid @panel-default-border;
   margin: 15px;
 
   input,
@@ -22,7 +22,7 @@
   .row {
     margin-left: 0;
     margin-right: 0;
-    border-bottom: 1px solid @fourfiveone-border-color;
+    border-bottom: 1px solid @panel-default-border;
     &:last-child {
       border-bottom: none;
     }
@@ -32,6 +32,10 @@
     }
     .btn {
       margin: 2px 0;
+    }
+    span {
+      float: left;
+      margin-right: 10px;
     }
   }
   &:extend(.clearfix all);

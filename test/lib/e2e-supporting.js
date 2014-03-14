@@ -113,7 +113,7 @@ function e2eClickMainNavCategory(intNthCat,strCatName){
         strSelector = ".451_lbl_subcatlist ul li a:contains('" + strCatName + "'):first"
     }
     else{//if strcatname isn't specified just pick the first at the nth level
-        strSelector = ".451_lbl_subcatlist ul li:nth-child(" + intNthCat + ") a"
+        strSelector = ".451_lbl_subcatlist ul li:eq(" + intNthCat + ") a"
     }
 
     element(strSelector).click();
@@ -138,18 +138,18 @@ function e2eClickProductFromList(intNthProd,strProdName){
     element(strSelector).click();
 }
 function e2eViewProductFromInteropID(strProdInteropID){
-    browser().navigateTo('../../app/index.html#/product/default/' + strProdInteropID);
+    browser().navigateTo('../../app/product/default/' + strProdInteropID);
 }
 
 function e2eClickVariantFromProductList(intNthVariant,strVariantName){
     var strSelector = "";
 
     if(strVariantName != null){
-        strSelector = ".451_list_vars tbody tr td a:contains('" + strVariantName + "'):first";
+        strSelector = "#451qa_list_variants li div a:contains('" + strVariantName + "')";
 
     }
     else{//if strProdName isn't specified just pick the first at the nth level
-        strSelector = ".451_list_vars tbody tr:nth-child(" + intNthVariant + ") td a"; //this may function incorrectly until the header <TR> is changed to <TH> or something else
+        strSelector = "#451qa_list_variants li:eq(" + intNthVariant + ") div a"; //this may function incorrectly until the header <TR> is changed to <TH> or something else
     }
 
     element(strSelector).click();
@@ -165,16 +165,83 @@ function e2eChangeProdQty(blnRestrictedQty,intQty){
     else{
         input("lineitem.Quantity").enter(intQty);
     }
-
 }
+
+function e2eCheckButtonStatus(blnShouldItBeEnabled){
+    if(blnShouldItBeEnabled){
+        expect(element("#451_btn_orderadd i.ng-hide").count()).toBeGreaterThan(0); //if the icon (i) is hidden, the form is valid
+    }
+    else{
+        expect(element("#451_btn_orderadd i.ng-hide").count()).toBe(0); //if the icon (i) is shown, the form is invalid
+    }
+}
+
+function e2eCheckLineItemTotal(intExpectedPrice){
+    expect(element("#451qa_lineitem_total").text()).toContain((intExpectedPrice).formatMoney(2));
+}
+
 
 function verifyStaticSpecRow(strGroup,intRow,strLabel,strValue){
     expect(element('.451qa_sg_item:contains("' + strGroup + '") ~ li div:eq(' + intRow + ') span:first').text()).toBe(strLabel);
     expect(element('.451qa_sg_item:contains("' + strGroup + '") ~ li div:eq(' + intRow + ') span:eq(1)').text()).toBe(strValue);
 }
+//TODO - let's add a set of VSPEC changing and checking functions here
+function e2eChangeTextSpec(strSpecName, strSpecValue){
+
+    using('#451_list_vspec label:contains("' + strSpecName + '") ~').input("customfield.Value").enter(strSpecValue);
+}
+function e2eChangeSelectionSpec(strSpecName,strSpecValue,blnOther,strOtherValue){
+
+    if(blnOther){
+        using('#451_list_vspec label:contains("' + strSpecName + '") ~').select("item").option("Other");
+        using('#451_list_vspec label:contains("' + strSpecName + '") ~').input("other").enter(strOtherValue);
+    }
+    else{
+        using('#451_list_vspec label:contains("' + strSpecName + '") ~').select("item").option(strSpecValue);
+    }
+}
+function e2eCheckTextSpec(strSpecName,strDefault,strPre,strSuf){
+    if(strPre != ""){
+        expect(element('#451_list_vspec label:contains("' + strSpecName + '") ~ span:eq(0)').text()).toBe(strPre);
+    }
+    expect(using('#451_list_vspec label:contains("' + strSpecName + '") ~').input("customfield.Value").val()).toBe(strDefault);
+    if(strSuf != ""){
+        expect(element('#451_list_vspec label:contains("' + strSpecName + '") ~ span:eq(1)').text()).toBe(strSuf);
+    }
+}
+function e2eCheckSelectionSpec(strSpecName,strDefault,arrOptions,strPre,strSuf){
+
+    var blnTruthy = element('#451_list_vspec label:contains("' + strSpecName + '") ~ select option').query(function (selectedElements, done) {
+        for(var i=0; i < selectedElements.length; i++){
+            if(arrOptions[i] == selectedElements[i].text){
+                blnTruthy = true;
+            }
+            else{
+                blnTruthy= false
+                console.log("mismatched element was:" + i)
+                break;
+            }
+        }
+        done(null,blnTruthy);
+
+    });
+
+    expect(blnTruthy).toEqual(true);  //compared the elements in the option list
+
+    if(strPre != ""){
+        expect(element('#451_list_vspec label:contains("' + strSpecName + '") ~ div').text()).toBe(strPre);
+    }
+
+    expect(using('#451_list_vspec label:contains("' + strSpecName + '") ~').input("item").val()).toBe(strDefault);
+
+    if(strSuf != ""){
+        expect(element('#451_list_vspec label:contains("' + strSpecName + '") ~ span').text()).toBe(strSuf);
+    }
+}
+
 
 function verifyVariantRow(intRow,strLabel,strDescription){
-    expect(element('.451_list_vars tr:eq(' + intRow + ') td:first').text()).toBe(strLabel);
-    expect(element('.451_list_vars tr:eq(' + intRow + ') td:nth-child(2)').text()).toBe(strDescription);
+    expect(element('#451qa_list_variants li:eq(' + intRow + ') div a h5 strong').text()).toBe(strLabel);
+    expect(element('#451qa_list_variants li:eq(' + intRow + ') div p:eq(0)').text()).toBe(strDescription);
 
 }
