@@ -7,11 +7,11 @@
   border: none;
   // canonical selector :: remove border from first panel-body and add back to ones that come after the first one for line items
   ~ .panel-body {
-    border-top: 1px solid @fourfiveone-border-color;
+    border-top: 1px solid @panel-default-border;
   }
 
   .quantity-total {
-    border: 1px solid @fourfiveone-border-color;
+    border: 1px solid @panel-default-border;
     border-top: 0;
     padding: 5px 0;
     background-color:@panel-default-heading-bg;
@@ -19,7 +19,7 @@
 
   //** second column
   .col-sm-9 {
-    border-left: 1px solid @fourfiveone-border-color;
+    border-left: 1px solid @panel-default-border;
     input {
       font-size: @font-size-small;
     }
@@ -35,7 +35,7 @@
       text-decoration: none;
       background-color:@panel-default-heading-bg;
       border-radius: @border-radius-base;
-      border: 1px solid @fourfiveone-border-color;
+      border: 1px solid @panel-default-border;
       -webkit-transition: all ease-in-out .5s;
       -moz-transition: all ease-in-out .5s;
       -ms-transition: all ease-in-out .5s;
