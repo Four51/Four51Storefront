@@ -9,6 +9,8 @@
 
     Bootstrap 3.1.1             -       http://getbootstrap.com/
 
+    Headroom 0.5.0              -       https://github.com/WickyNilliams/headroom.js/blob/master/dist/headroom.js
+
     Font                        -       Google web font ~ Driod Sans for body & Lato for headings
                                             Droid Sans was optimized for user interfaces and to be comfortable for reading on a mobile handset in menus, web browser and other screen text.
                                             https://developers.google.com/fonts/
