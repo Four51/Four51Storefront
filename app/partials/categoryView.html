@@ -13,17 +13,15 @@
             </li>
         </ul>
     </nav>
-    <aside class="col-sm-3 visible-md visible-lg">
-        <div class="451_cat_nav">
-            <ul class="nav-header">
-                <li>
-                    <a href="#/catalog">All Products</a>
-                    <categorytree tree='tree' current='currentCategory' />
-                </li>
-            </ul>
+    <aside class="col-sm-3 col-collapse visible-md visible-lg">
+        <div class="nav-side">
+            <span>
+                <a href="#/catalog">All Products</a>
+            </span>
+            <categorytree tree='tree' current='currentCategory' />
         </div>
     </aside>
-    <div class="col-sm-12 col-md-9">
+    <div class="col-sm-12 col-md-8 col-md-offset-1 col-collapse">
         <div class="category-list" ng-show="currentCategory">
             <loadingindicator ng-show="categoryLoadingIndicator" title="Please wait while we fetch all categories" />
             <nav class="nav 451_lbl_subcatlist">
