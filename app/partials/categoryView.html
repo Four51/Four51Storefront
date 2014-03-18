@@ -1,36 +1,34 @@
 <section>
     <nav id="451qa_nav_hdr" class="nav">
         <ul>
-            <li class="hidden-sm hidden-xs" ng-click="showMega = ! showMega" href="#">
-                <span ng-show="!showMega"><i class="fa fa-bars"></i></span>
-                <span ng-show="showMega"><i class="fa fa-minus-circle"></i></span>
-            </li>
             <li>
                 <span id="451_lbl_curcat" class="text-primary" ng-bind-html="currentCategory.Name || 'All Categories'"></span>
                 <span class="text-primary" ng-show="currentCategory.SubCategories.length && currentCategory.InteropID">Categories</span>
                 <span class="text-primary" ng-show="!currentCategory">All Categories</span>
             </li>
             <li class="pull-right">
-                <a href="#/search"><span><i class="fa fa-search"></i></span></a>
+                <a href="#/search">
+                    <span><i class="fa fa-search"></i></span>
+                </a>
             </li>
         </ul>
     </nav>
-    <aside ng-if="showMega" ng-class="{ 'category-view-aside col-sm-3': showMega }">
-        <div class="451_cat_nav">
-            <ul class="nav-header">
-                <li>
+    <aside class="col-sm-3 col-collapse visible-md visible-lg">
+        <div class="panel">
+            <div class="panel-nav">
+                <span>
                     <a href="#/catalog">All Products</a>
-                    <categorytree tree='tree' current='currentCategory' />
-                </li>
-            </ul>
+                </span>
+                <categorytree tree='tree' current='currentCategory' />
+            </div>
         </div>
     </aside>
-    <div class="cat-body" ng-class="{ 'move-cat-body col-sm-9': showMega }">
+    <div class="col-md-8 col-md-offset-1 col-collapse">
         <div class="category-list" ng-show="currentCategory">
             <loadingindicator ng-show="categoryLoadingIndicator" title="Please wait while we fetch all categories" />
             <nav class="nav 451_lbl_subcatlist">
                 <ul>
-                    <li class="nav-header well col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-class="{ 'category-view-aside': showMega }" ng-repeat="c in currentCategory.SubCategories">
+                    <li class="nav-header well col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="c in currentCategory.SubCategories">
                         <a ng-href="#/catalog/{{c.InteropID}}">
                             <figure ng-show="c.Image.URL">
                                 <img ng-src="{{c.Image.URL}}"/>
@@ -54,7 +52,7 @@
             </div>
             <nav class="nav">
                 <ul>
-                    <li id="451_lst_prod" class="nav-header well" ng-class="{ 'category-view-aside': showMega }" ng-repeat="product in products">
+                    <li id="451_lst_prod" class="nav-header well" ng-repeat="product in products">
                         <shortproductview p="product" user="user" />
                     </li>
                 </ul>
