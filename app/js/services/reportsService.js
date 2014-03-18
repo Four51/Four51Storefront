@@ -8,8 +8,9 @@ four51.app.factory('SavedReports', function($resource, $451) {
 	function _extend(report) {
 		switch (report.ReportType) {
 			case 'LineItem':
-				report.OrderTypeOptions = ["Standard + Replenishment", "Order", "Replenishment", "Price Request"];
+				//report.OrderTypeOptions = ["Standard + Replenishment", "Order", "Replenishment", "Price Request"];
 				report.OrderStatusOptions = ["All", "Open", "Completed", "Cancelled"];
+				report.PaymentMethodOptions = ["All", "CreditCard", "PurchaseOrder", "SpendingAccount"];
 				break;
 			default:
 				return;

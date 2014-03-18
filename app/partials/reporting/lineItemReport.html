@@ -16,12 +16,17 @@
             </div>
             <div>
                 <label>Order Type</label>
-                <select class="form-control" ng-options="type for type in report.OrderTypeOptions" ng-model="report.OrderType" />
+                <select class="form-control" ng-options="value for (key,value) in report.OrderTypeOptions" ng-model="report.OrderType" />
                 <i class="fa fa-dot-circle-o"></i>
             </div>
             <div>
                 <label>Order Status</label>
                 <select class="form-control" ng-options="status for status in report.OrderStatusOptions" ng-model="report.OrderStatus" />
+                <i class="fa fa-dot-circle-o"></i>
+            </div>
+            <div>
+                <label>Payment Method</label>
+                <select class="form-control" ng-options="pm for pm in report.PaymentMethodOptions" ng-model="report.PaymentMethod" />
                 <i class="fa fa-dot-circle-o"></i>
             </div>
         </div>

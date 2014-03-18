@@ -14,11 +14,17 @@
                             <span class="hidden-xs">Products</span>
                         </a>
                     </li>
-                    <li class="order" ng-class="{'active': isActive('order'), 'active-xs': isActive('orders')}">
-                        <a id="451qa_order_link" href="#/order"><i class="fa fa-bar-chart-o pull-left"></i><span class="text-nav hidden-xs pull-right">Orders</span></a>
+                    <li class="order" ng-class="{'active': isActive('order'), 'active-xs': isActive('favoriteorders')}">
+                        <a id="451qa_order_link" href="#/order">
+                            <i class="fa fa-bar-chart-o"></i>
+                            <span class="hidden-xs">Orders</span>
+                        </a>
                     </li>
-                    <li ng-if="user.Permissions.contains('AdvancedReporting')" class="order" ng-class="{'active': isActive('reports'), 'active-xs': isActive('reports')}">
-                        <a id="451qa_order_link" href="#/reports"><i class="fa fa-clipboard pull-left"></i><span class="text-nav hidden-xs pull-right">Reports</span></a>
+                    <li class="order" ng-class="{'active': isActive('order'), 'active-xs': isActive('reports')}">
+                        <a id="451qa_order_link" href="#/reports">
+                            <i class="fa fa-clipboard"></i>
+                            <span class="hidden-xs">Report</span>
+                        </a>
                     </li>
                     <li class="favorites hidden-xs" ng-class="{'active': isActive('favoriteorders')}">
                         <a id="451qa_fave_link" href="#/favoriteorders">
@@ -44,7 +50,7 @@
                                     User Information
                                 </a>
                             </li>
-							<li id="451qa_addy_link" ng-show="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" class="addresses">
+                            <li id="451qa_addy_link" ng-show="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" class="addresses">
                                 <a href="#/addresses">
                                     Addresses
                                 </a>
@@ -83,4 +89,3 @@
         </section>
     </nav>
 </header>
-

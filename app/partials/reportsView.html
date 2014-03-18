@@ -31,8 +31,9 @@
                 </div>
              </div>
         </div>
-        <div class="panel-footer">
+        <div class="col-sm-6 panel-footer">
             <button type="button" class="btn btn-danger" redirect="report/new">New Report</button>
+            <select class="form-control" ng-options="value for (key,value) in Reports.AvailableTypes" ng-model="report.Type" placeholder="Report Types" />
         </div>
     </div>
 </section>

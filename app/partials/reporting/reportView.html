@@ -9,7 +9,7 @@
             </tr>
             <tr ng-repeat="row in report.Data">
                 <td ng-repeat="header in report.Columns">
-                    {{report.Data[$index][header]}}
+                    {{row[header]}}
                 </td>
             </tr>
         </table>
