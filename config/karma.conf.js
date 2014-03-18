@@ -5,7 +5,6 @@ files = [
 	JASMINE_ADAPTER,
 	'app/lib/angular/angular.1.1.5.js',
 	'app/lib/angular/angular-*.min.js',
-	'app/lib/angular/ui-date.js',
 	'test/lib/angular/angular-mocks.js',
     'app/lib/angular/ui-validate.js',
     'app/lib/angular/ui-mask.js',
