@@ -844,7 +844,7 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.position'])
         dayHeaderFormat: 'EEE',
         dayTitleFormat: 'MMMM yyyy',
         monthTitleFormat: 'yyyy',
-        showWeeks: true,
+        showWeeks: false,
         startingDay: 0,
         yearRange: 20,
         minDate: null,
@@ -1095,8 +1095,8 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.position'])
         clearText: 'Clear',
         closeText: 'Done',
         closeOnDateSelection: true,
-        appendToBody: false,
-        showButtonBar: true
+        appendToBody: true,
+        showButtonBar: false
     })
 
     .directive('datepickerPopup', ['$compile', '$parse', '$document', '$position', 'dateFilter', 'datepickerPopupConfig', 'datepickerConfig',
