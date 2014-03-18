@@ -3437,38 +3437,30 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .input-group-btn:last-child > .btn-group {
   margin-left: -1px;
 }
-.nav,
-.nav-side {
+.nav {
   margin-bottom: 0;
   padding-left: 0;
   list-style: none;
 }
-.nav > li,
-.nav-side > li {
+.nav > li {
   position: relative;
   display: block;
 }
-.nav > li > a,
-.nav-side > li > a {
+.nav > li > a {
   position: relative;
   display: block;
   padding: 20px;
 }
 .nav > li > a:hover,
-.nav > li > a:focus,
-.nav-side > li > a:hover,
-.nav-side > li > a:focus {
+.nav > li > a:focus {
   text-decoration: none;
   background-color: #eeeeee;
 }
-.nav > li.disabled > a,
-.nav-side > li.disabled > a {
+.nav > li.disabled > a {
   color: #999999;
 }
 .nav > li.disabled > a:hover,
-.nav > li.disabled > a:focus,
-.nav-side > li.disabled > a:hover,
-.nav-side > li.disabled > a:focus {
+.nav > li.disabled > a:focus {
   color: #999999;
   text-decoration: none;
   background-color: transparent;
@@ -3476,22 +3468,17 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .nav .open > a,
 .nav .open > a:hover,
-.nav .open > a:focus,
-.nav-side .open > a,
-.nav-side .open > a:hover,
-.nav-side .open > a:focus {
+.nav .open > a:focus {
   background-color: #eeeeee;
   border-color: #0c2a3a;
 }
-.nav .nav-divider,
-.nav-side .nav-divider {
+.nav .nav-divider {
   height: 1px;
   margin: 9px 0;
   overflow: hidden;
   background-color: #e5e5e5;
 }
-.nav > li > a > img,
-.nav-side > li > a > img {
+.nav > li > a > img {
   max-width: none;
 }
 .nav-tabs {
@@ -4765,7 +4752,7 @@ a.list-group-item-danger.active:focus {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 .panel-body,
-.nav-side,
+.panel-nav,
 .panel-lineitem,
 .panel-order-history,
 .panel-order-shipping-multiple {
@@ -4872,8 +4859,8 @@ a.list-group-item-danger.active:focus {
 }
 .panel > .panel-body + .table,
 .panel > .panel-body + .table-responsive,
-.panel > .nav-side + .table,
-.panel > .nav-side + .table-responsive,
+.panel > .panel-nav + .table,
+.panel > .panel-nav + .table-responsive,
 .panel > .panel-lineitem + .table,
 .panel > .panel-lineitem + .table-responsive,
 .panel > .panel-order-history + .table,
@@ -4957,7 +4944,7 @@ a.list-group-item-danger.active:focus {
   border-bottom: 0;
 }
 .panel-group .panel-heading + .panel-collapse .panel-body,
-.panel-group .panel-heading + .panel-collapse .nav-side,
+.panel-group .panel-heading + .panel-collapse .panel-nav,
 .panel-group .panel-heading + .panel-collapse .panel-lineitem,
 .panel-group .panel-heading + .panel-collapse .panel-order-history,
 .panel-group .panel-heading + .panel-collapse .panel-order-shipping-multiple {
@@ -4967,7 +4954,7 @@ a.list-group-item-danger.active:focus {
   border-top: 0;
 }
 .panel-group .panel-footer + .panel-collapse .panel-body,
-.panel-group .panel-footer + .panel-collapse .nav-side,
+.panel-group .panel-footer + .panel-collapse .panel-nav,
 .panel-group .panel-footer + .panel-collapse .panel-lineitem,
 .panel-group .panel-footer + .panel-collapse .panel-order-history,
 .panel-group .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -4986,8 +4973,8 @@ a.list-group-item-danger.active:focus {
   border-color: #dddddd;
 }
 .panel-default > .panel-heading + .panel-collapse .panel-body,
-.panel-default > .panel-heading + .panel-collapse .nav-side,
 .panel-search > .panel-heading + .panel-collapse .panel-body,
+.panel-default > .panel-heading + .panel-collapse .panel-nav,
 .panel-default > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-order > .panel-heading + .panel-collapse .panel-body,
 .panel-default > .panel-heading + .panel-collapse .panel-order-history,
@@ -4995,8 +4982,8 @@ a.list-group-item-danger.active:focus {
   border-top-color: #dddddd;
 }
 .panel-default > .panel-footer + .panel-collapse .panel-body,
-.panel-default > .panel-footer + .panel-collapse .nav-side,
 .panel-search > .panel-footer + .panel-collapse .panel-body,
+.panel-default > .panel-footer + .panel-collapse .panel-nav,
 .panel-default > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-order > .panel-footer + .panel-collapse .panel-body,
 .panel-default > .panel-footer + .panel-collapse .panel-order-history,
@@ -5012,14 +4999,14 @@ a.list-group-item-danger.active:focus {
   border-color: #cccccc;
 }
 .panel-primary > .panel-heading + .panel-collapse .panel-body,
-.panel-primary > .panel-heading + .panel-collapse .nav-side,
+.panel-primary > .panel-heading + .panel-collapse .panel-nav,
 .panel-primary > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-primary > .panel-heading + .panel-collapse .panel-order-history,
 .panel-primary > .panel-heading + .panel-collapse .panel-order-shipping-multiple {
   border-top-color: #cccccc;
 }
 .panel-primary > .panel-footer + .panel-collapse .panel-body,
-.panel-primary > .panel-footer + .panel-collapse .nav-side,
+.panel-primary > .panel-footer + .panel-collapse .panel-nav,
 .panel-primary > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-primary > .panel-footer + .panel-collapse .panel-order-history,
 .panel-primary > .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -5034,14 +5021,14 @@ a.list-group-item-danger.active:focus {
   border-color: #d6e9c6;
 }
 .panel-success > .panel-heading + .panel-collapse .panel-body,
-.panel-success > .panel-heading + .panel-collapse .nav-side,
+.panel-success > .panel-heading + .panel-collapse .panel-nav,
 .panel-success > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-success > .panel-heading + .panel-collapse .panel-order-history,
 .panel-success > .panel-heading + .panel-collapse .panel-order-shipping-multiple {
   border-top-color: #d6e9c6;
 }
 .panel-success > .panel-footer + .panel-collapse .panel-body,
-.panel-success > .panel-footer + .panel-collapse .nav-side,
+.panel-success > .panel-footer + .panel-collapse .panel-nav,
 .panel-success > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-success > .panel-footer + .panel-collapse .panel-order-history,
 .panel-success > .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -5056,14 +5043,14 @@ a.list-group-item-danger.active:focus {
   border-color: #bce8f1;
 }
 .panel-info > .panel-heading + .panel-collapse .panel-body,
-.panel-info > .panel-heading + .panel-collapse .nav-side,
+.panel-info > .panel-heading + .panel-collapse .panel-nav,
 .panel-info > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-info > .panel-heading + .panel-collapse .panel-order-history,
 .panel-info > .panel-heading + .panel-collapse .panel-order-shipping-multiple {
   border-top-color: #bce8f1;
 }
 .panel-info > .panel-footer + .panel-collapse .panel-body,
-.panel-info > .panel-footer + .panel-collapse .nav-side,
+.panel-info > .panel-footer + .panel-collapse .panel-nav,
 .panel-info > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-info > .panel-footer + .panel-collapse .panel-order-history,
 .panel-info > .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -5078,14 +5065,14 @@ a.list-group-item-danger.active:focus {
   border-color: #faebcc;
 }
 .panel-warning > .panel-heading + .panel-collapse .panel-body,
-.panel-warning > .panel-heading + .panel-collapse .nav-side,
+.panel-warning > .panel-heading + .panel-collapse .panel-nav,
 .panel-warning > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-warning > .panel-heading + .panel-collapse .panel-order-history,
 .panel-warning > .panel-heading + .panel-collapse .panel-order-shipping-multiple {
   border-top-color: #faebcc;
 }
 .panel-warning > .panel-footer + .panel-collapse .panel-body,
-.panel-warning > .panel-footer + .panel-collapse .nav-side,
+.panel-warning > .panel-footer + .panel-collapse .panel-nav,
 .panel-warning > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-warning > .panel-footer + .panel-collapse .panel-order-history,
 .panel-warning > .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -5100,14 +5087,14 @@ a.list-group-item-danger.active:focus {
   border-color: #ebccd1;
 }
 .panel-danger > .panel-heading + .panel-collapse .panel-body,
-.panel-danger > .panel-heading + .panel-collapse .nav-side,
+.panel-danger > .panel-heading + .panel-collapse .panel-nav,
 .panel-danger > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-danger > .panel-heading + .panel-collapse .panel-order-history,
 .panel-danger > .panel-heading + .panel-collapse .panel-order-shipping-multiple {
   border-top-color: #ebccd1;
 }
 .panel-danger > .panel-footer + .panel-collapse .panel-body,
-.panel-danger > .panel-footer + .panel-collapse .nav-side,
+.panel-danger > .panel-footer + .panel-collapse .panel-nav,
 .panel-danger > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-danger > .panel-footer + .panel-collapse .panel-order-history,
 .panel-danger > .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -5698,10 +5685,8 @@ button.close {
 .modal-footer:after,
 .panel-table:before,
 .panel-table:after,
-.nav-side:before,
-.nav-side:after,
-.nav-side:before,
-.nav-side:after,
+.panel-nav:before,
+.panel-nav:after,
 .panel-lineitem:before,
 .panel-lineitem:after,
 .panel-order-history:before,
@@ -5726,8 +5711,7 @@ button.close {
 .panel-body:after,
 .modal-footer:after,
 .panel-table:after,
-.nav-side:after,
-.nav-side:after,
+.panel-nav:after,
 .panel-lineitem:after,
 .panel-order-history:after,
 .panel-order-shipping-multiple:after {
@@ -6219,42 +6203,35 @@ button::-moz-focus-inner {
 .navbar-fixed-bottom ul li .btn-warning[disabled] {
   opacity: 1;
 }
-.nav,
-.nav-side {
+.nav {
   margin-top: 0;
   margin-bottom: 0;
 }
-.nav ul,
-.nav-side ul {
+.nav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
-.nav ul li,
-.nav-side ul li {
+.nav ul li {
   display: inline;
   float: left;
   padding: 0;
 }
-.nav ul li span.text-primary,
-.nav-side ul li span.text-primary {
+.nav ul li span.text-primary {
   display: inline-block;
   margin-top: 15px;
   font-weight: bold;
 }
-.nav ul li span i,
-.nav-side ul li span i {
+.nav ul li span i {
   font-size: 18px;
   padding: 15px;
   cursor: pointer;
   color: #154964;
 }
-.nav.visible-sm.visible-xs,
-.nav-side.visible-sm.visible-xs {
+.nav.visible-sm.visible-xs {
   margin-bottom: 10px;
 }
-.navbar .nav a,
-.navbar .nav-side a {
+.navbar .nav a {
   -webkit-transition: all ease-in-out 0.2s;
   -moz-transition: all ease-in-out 0.2s;
   -ms-transition: all ease-in-out 0.2s;
@@ -6306,7 +6283,7 @@ button::-moz-focus-inner {
   text-transform: uppercase;
 }
 .panel .panel-body .panel-footer,
-.panel .nav-side .panel-footer,
+.panel .panel-nav .panel-footer,
 .panel .panel-lineitem .panel-footer,
 .panel .panel-order-history .panel-footer,
 .panel .panel-order-shipping-multiple .panel-footer {
@@ -6338,38 +6315,6 @@ button::-moz-focus-inner {
 }
 .breadcrumb a {
   text-decoration: underline;
-}
-.nav-side {
-  background-color: #fff;
-}
-.nav-side ul li {
-  float: left;
-  display: block;
-  width: 100%;
-}
-.nav-side ul li a {
-  width: 100%;
-  padding: 3px 0;
-}
-.nav-side .nav,
-.nav-side .nav-side {
-  border-top: 2px solid #d6d6d6;
-}
-.nav-side .nav li:first-child a,
-.nav-side .nav-side li:first-child a {
-  border-top: 1px dashed #d6d6d6;
-}
-.nav-side .nav .nav,
-.nav-side .nav-side .nav-side {
-  border-top: none;
-}
-.nav-side .nav .nav li,
-.nav-side .nav-side .nav-side li {
-  padding: 0 10px;
-}
-.nav-side .nav .nav .nav a,
-.nav-side .nav-side .nav-side .nav-side a {
-  border-top: none;
 }
 [ng\:cloak],
 [ng-cloak],
@@ -6727,78 +6672,29 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-search button[type="submit"] {
   visibility: hidden;
 }
-.product-nav-details {
-  padding-left: 15px;
+.panel-nav ul li {
+  float: left;
+  display: block;
+  width: 100%;
 }
-.category-view-aside-add {
-  -webkit-animation-duration: 1s;
-  -moz-animation-duration: 1s;
-  -o-animation-duration: 1s;
-  animation-duration: 1s;
-  animation-delay: .5s;
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-name: fadeInRight;
-  -moz-animation-name: fadeInRight;
-  -o-animation-name: fadeInRight;
-  animation-name: fadeInRight;
+.panel-nav ul li a {
+  width: 100%;
+  padding: 3px 0;
 }
-.category-view-aside-add-active {
-  opacity: 1;
+.panel-nav .nav {
+  border-top: 2px solid #dddddd;
 }
-.category-view-aside-remove {
-  -webkit-animation-duration: 1s;
-  -moz-animation-duration: 1s;
-  -o-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-name: fadeOut;
-  -moz-animation-name: fadeOut;
-  -o-animation-name: fadeOut;
-  animation-name: fadeOut;
+.panel-nav .nav li:first-child a {
+  border-top: 1px dashed #dddddd;
 }
-.category-view-aside-remove-active {
-  opacity: 0;
+.panel-nav .nav .nav {
+  border-top: none;
 }
-.move-cat-body-add {
-  -webkit-animation-duration: 1s;
-  -moz-animation-duration: 1s;
-  -o-animation-duration: 1s;
-  animation-duration: 1s;
-  aniamtion-delay: 1s;
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-name: cat-body-move-right;
-  -moz-animation-name: cat-body-move-right;
-  -o-animation-name: cat-body-move-right;
-  animation-name: cat-body-move-right;
+.panel-nav .nav .nav li {
+  padding: 0 10px;
 }
-.move-cat-body-add-active {
-  opacity: 1;
-}
-.move-cat-body-remove {
-  -webkit-animation-duration: 1s;
-  -moz-animation-duration: 1s;
-  -o-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-name: cat-body-move-left;
-  -moz-animation-name: cat-body-move-left;
-  -o-animation-name: cat-body-move-left;
-  animation-name: cat-body-move-left;
-}
-.move-cat-body-remove-active {
-  opacity: 1;
+.panel-nav .nav .nav .nav a {
+  border-top: none;
 }
 .category-list ul {
   margin: 0;
@@ -6981,7 +6877,7 @@ select.ng-invalid:invalid:invalid:focus {
   border: none;
 }
 .panel-lineitem ~ .panel-body,
-.panel-lineitem ~ .nav-side,
+.panel-lineitem ~ .panel-nav,
 .panel-lineitem ~ .panel-lineitem,
 .panel-lineitem ~ .panel-order-history,
 .panel-lineitem ~ .panel-order-shipping-multiple {
@@ -7050,7 +6946,7 @@ select.ng-invalid:invalid:invalid:focus {
   cursor: default;
 }
 .panel-order .panel-body.ng-hide-remove,
-.panel-order .nav-side.ng-hide-remove,
+.panel-order .panel-nav.ng-hide-remove,
 .panel-order .panel-lineitem.ng-hide-remove,
 .panel-order .panel-order-history.ng-hide-remove,
 .panel-order .panel-order-shipping-multiple.ng-hide-remove {
@@ -7088,7 +6984,7 @@ select.ng-invalid:invalid:invalid:focus {
   border: none;
 }
 .panel-order-shipping-multiple ~ .panel-body,
-.panel-order-shipping-multiple ~ .nav-side,
+.panel-order-shipping-multiple ~ .panel-nav,
 .panel-order-shipping-multiple ~ .panel-lineitem,
 .panel-order-shipping-multiple ~ .panel-order-history,
 .panel-order-shipping-multiple ~ .panel-order-shipping-multiple {

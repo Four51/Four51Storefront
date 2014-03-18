@@ -14,14 +14,16 @@
         </ul>
     </nav>
     <aside class="col-sm-3 col-collapse visible-md visible-lg">
-        <div class="nav-side">
-            <span>
-                <a href="#/catalog">All Products</a>
-            </span>
-            <categorytree tree='tree' current='currentCategory' />
+        <div class="panel">
+            <div class="panel-nav">
+                <span>
+                    <a href="#/catalog">All Products</a>
+                </span>
+                <categorytree tree='tree' current='currentCategory' />
+            </div>
         </div>
     </aside>
-    <div class="col-sm-12 col-md-8 col-md-offset-1 col-collapse">
+    <div class="col-md-8 col-md-offset-1 col-collapse">
         <div class="category-list" ng-show="currentCategory">
             <loadingindicator ng-show="categoryLoadingIndicator" title="Please wait while we fetch all categories" />
             <nav class="nav 451_lbl_subcatlist">

@@ -1,0 +1,36 @@
+//
+// Navs
+// --------------------------------------------------
+
+//== Side Navigation
+.panel-nav {
+  &:extend(.panel-body all);
+  ul {
+    li {
+      float: left;
+      display: block;
+      width: 100%;
+      a {
+        width: 100%;
+        padding: 3px 0;
+      }
+    }
+  }
+  .nav {
+    border-top: 2px solid @panel-default-border;
+    li:first-child {
+      a {
+        border-top: 1px dashed @panel-default-border;
+      }
+    }
+    .nav {
+      border-top: none;
+      li {padding: 0 10px;}
+      .nav {
+        a {
+          border-top: none;
+        }
+      }
+    }
+  }
+}
