@@ -21,3 +21,11 @@ four51.app.directive('lineitemhistorygrid', function() {
 	}
 	return obj;
 });
+
+four51.app.directive('lineitemreport', function() {
+	var obj = {
+		restrict: 'E',
+		templateUrl: 'partials/Reporting/lineItemReport.html'
+	};
+	return obj;
+})

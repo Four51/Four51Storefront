@@ -5,6 +5,17 @@ four51.app.factory('SavedReports', function($resource, $451) {
 		}
 	}
 
+	function _extend(report) {
+		switch (report.ReportType) {
+			case 'LineItem':
+				report.OrderTypeOptions = ["Standard + Replenishment", "Order", "Replenishment", "Price Request"];
+				report.OrderStatusOptions = ["All", "Open", "Completed", "Cancelled"];
+				break;
+			default:
+				return;
+		}
+	}
+
 	var _query = function(success) {
 		var reports = store.get('451Cache.SavedReports');
 		reports ? _then(success, reports) :
@@ -16,6 +27,7 @@ four51.app.factory('SavedReports', function($resource, $451) {
 
 	var _get = function(id, success) {
 		$resource($451.api('savedreports/:id'), { id: '@id' }).get({ id: id }).$promise.then(function(data) {
+			_extend(data);
 			_then(success, data);
 		});
 	}

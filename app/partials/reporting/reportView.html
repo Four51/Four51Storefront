@@ -1,1 +1,17 @@
-{{report}}
+<section class="report-view">
+    <div class="panel panel-default">
+        <lineitemreport />
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <td ng-repeat="header in report.Columns">{{header}}</td>
+            </tr>
+            <tr ng-repeat="row in report.Data">
+                <td ng-repeat="header in report.Columns">
+                    {{report.Data[$index][header]}}
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>

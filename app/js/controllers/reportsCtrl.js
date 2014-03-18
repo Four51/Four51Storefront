@@ -12,9 +12,11 @@ four51.app.controller('ReportsCtrl', function ($scope, $location, $451, SavedRep
 });
 
 four51.app.controller('ReportCtrl', function($scope, $routeParams, $451, SavedReports) {
-	$routeParams.id ?
+	$routeParams.id != 'new' && $routeParams.id ?
 		SavedReports.get($routeParams.id, function(data) {
 			$scope.report = data;
 		}) :
-		$scope.report = {};
+		$scope.report = {
+			Type: 'LineItem'
+		};
 });
