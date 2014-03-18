@@ -7116,6 +7116,12 @@ select.ng-invalid:invalid:invalid:focus {
   padding-left: 0;
   padding-right: 0;
 }
+table.datepicker-table {
+  margin-left: 5px;
+  margin-right: 5px;
+  border-collapse: separate;
+  border-spacing: 1px;
+}
 .branding-print-view-logo {
   max-height: 50px;
   display: inline;
