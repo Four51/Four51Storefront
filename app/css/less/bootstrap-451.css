@@ -7122,12 +7122,6 @@ table.datepicker-table {
   border-collapse: separate;
   border-spacing: 1px;
 }
-table.datepicker-table i {
-  color: #333;
-  position: relative;
-  left: 0;
-  top: 0;
-}
 .branding-print-view-logo {
   max-height: 50px;
   display: inline;
