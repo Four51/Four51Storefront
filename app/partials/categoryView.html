@@ -2,8 +2,8 @@
     <nav id="451qa_nav_hdr" class="nav">
         <ul>
             <li class="nav-header hidden-sm hidden-xs pull-left" ng-click="panelNav = ! panelNav" href="#">
-                <span ng-show="!showMega"><i class="fa fa-bars" data-title="Open all Categories" data-placement="right" bs-tooltip></i></span>
-                <span ng-show="showMega"><i class="fa fa-compress"></i></span>
+                <span ng-show="!panelNav" ><i class="fa fa-bars"></i></span>
+                <span ng-show="panelNav"><i class="fa fa-bars text-info"></i></span>
             </li>
             <li>
                 <span id="451_lbl_curcat" class="text-primary" ng-bind-html="currentCategory.Name || 'All Categories'"></span>
@@ -23,9 +23,7 @@
                 </h3>
             </div>
             <nav class="nav 451_cat_nav panel-body">
-                <span>
-                    <a href="#/catalog">All Products</a>
-                </span>
+                <btn class="btn btn-default btn-block" redirect=/catalog">View All</btn>
                 <ul class="451_cat_item">
                     <categorytree tree='tree' current='currentCategory' />
                 </ul>

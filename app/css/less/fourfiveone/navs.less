@@ -5,10 +5,16 @@
 //== Side Nav
 .panel-nav {
   &:extend(.panel-default all);
-  border-right: 1px solid @body-bg;
-  border-top: 1px solid @body-bg;
 
+  font-size: 13px;
   .panel-body {
+
+    .btn {
+      &:first-of-type {
+        margin-bottom: 10px;
+      }
+    }
+
     ul {
       li {
         float: left;
@@ -23,6 +29,9 @@
 
     .nav {
       border-top: 1px solid @panel-default-border;
+      a {
+        font-weight: 700;
+      }
       li:first-child {
         a {
           border-top: 1px dashed @panel-default-border;
@@ -30,6 +39,10 @@
       }
       .nav {
         border-top: none;
+        a {
+          font-weight: inherit;
+          color: @text-color;
+        }
         li {padding: 0 10px;}
         .nav {
           a {

@@ -6210,7 +6210,6 @@ button::-moz-focus-inner {
   font-size: 18px;
   padding: 15px;
   cursor: pointer;
-  color: #154964;
 }
 .nav.visible-sm.visible-xs {
   margin-bottom: 10px;
@@ -6655,8 +6654,13 @@ select.ng-invalid:invalid:invalid:focus {
   visibility: hidden;
 }
 .panel-nav {
-  border-right: 1px solid #f0f0f0;
-  border-top: 1px solid #f0f0f0;
+  font-size: 13px;
+}
+.panel-nav .panel-body .btn:first-of-type,
+.panel-nav .panel-lineitem .btn:first-of-type,
+.panel-nav .panel-order-history .btn:first-of-type,
+.panel-nav .panel-order-shipping-multiple .btn:first-of-type {
+  margin-bottom: 10px;
 }
 .panel-nav .panel-body ul li,
 .panel-nav .panel-lineitem ul li,
@@ -6679,6 +6683,12 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-nav .panel-order-shipping-multiple .nav {
   border-top: 1px solid #dddddd;
 }
+.panel-nav .panel-body .nav a,
+.panel-nav .panel-lineitem .nav a,
+.panel-nav .panel-order-history .nav a,
+.panel-nav .panel-order-shipping-multiple .nav a {
+  font-weight: 700;
+}
 .panel-nav .panel-body .nav li:first-child a,
 .panel-nav .panel-lineitem .nav li:first-child a,
 .panel-nav .panel-order-history .nav li:first-child a,
@@ -6690,6 +6700,13 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-nav .panel-order-history .nav .nav,
 .panel-nav .panel-order-shipping-multiple .nav .nav {
   border-top: none;
+}
+.panel-nav .panel-body .nav .nav a,
+.panel-nav .panel-lineitem .nav .nav a,
+.panel-nav .panel-order-history .nav .nav a,
+.panel-nav .panel-order-shipping-multiple .nav .nav a {
+  font-weight: inherit;
+  color: #333333;
 }
 .panel-nav .panel-body .nav .nav li,
 .panel-nav .panel-lineitem .nav .nav li,
@@ -6730,7 +6747,7 @@ select.ng-invalid:invalid:invalid:focus {
   right: 0;
   border-width: 0 16px 16px 0;
   border-style: solid;
-  border-color: #f0f0f0 #f0f0f0 #ffffff #ffffff;
+  border-color: #f5f5f5 #f5f5f5 #ffffff #ffffff;
   display: block;
   width: 0;
 }
