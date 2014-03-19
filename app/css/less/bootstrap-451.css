@@ -4752,6 +4752,7 @@ a.list-group-item-danger.active:focus {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 .panel-body,
+.panel-product-list,
 .panel-lineitem,
 .panel-order-history,
 .panel-order-shipping-multiple {
@@ -4858,6 +4859,8 @@ a.list-group-item-danger.active:focus {
 }
 .panel > .panel-body + .table,
 .panel > .panel-body + .table-responsive,
+.panel > .panel-product-list + .table,
+.panel > .panel-product-list + .table-responsive,
 .panel > .panel-lineitem + .table,
 .panel > .panel-lineitem + .table-responsive,
 .panel > .panel-order-history + .table,
@@ -4941,6 +4944,7 @@ a.list-group-item-danger.active:focus {
   border-bottom: 0;
 }
 .panel-group .panel-heading + .panel-collapse .panel-body,
+.panel-group .panel-heading + .panel-collapse .panel-product-list,
 .panel-group .panel-heading + .panel-collapse .panel-lineitem,
 .panel-group .panel-heading + .panel-collapse .panel-order-history,
 .panel-group .panel-heading + .panel-collapse .panel-order-shipping-multiple {
@@ -4950,6 +4954,7 @@ a.list-group-item-danger.active:focus {
   border-top: 0;
 }
 .panel-group .panel-footer + .panel-collapse .panel-body,
+.panel-group .panel-footer + .panel-collapse .panel-product-list,
 .panel-group .panel-footer + .panel-collapse .panel-lineitem,
 .panel-group .panel-footer + .panel-collapse .panel-order-history,
 .panel-group .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -4972,6 +4977,7 @@ a.list-group-item-danger.active:focus {
 .panel-default > .panel-heading + .panel-collapse .panel-body,
 .panel-search > .panel-heading + .panel-collapse .panel-body,
 .panel-nav > .panel-heading + .panel-collapse .panel-body,
+.panel-default > .panel-heading + .panel-collapse .panel-product-list,
 .panel-default > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-order > .panel-heading + .panel-collapse .panel-body,
 .panel-default > .panel-heading + .panel-collapse .panel-order-history,
@@ -4981,6 +4987,7 @@ a.list-group-item-danger.active:focus {
 .panel-default > .panel-footer + .panel-collapse .panel-body,
 .panel-search > .panel-footer + .panel-collapse .panel-body,
 .panel-nav > .panel-footer + .panel-collapse .panel-body,
+.panel-default > .panel-footer + .panel-collapse .panel-product-list,
 .panel-default > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-order > .panel-footer + .panel-collapse .panel-body,
 .panel-default > .panel-footer + .panel-collapse .panel-order-history,
@@ -4996,12 +5003,14 @@ a.list-group-item-danger.active:focus {
   border-color: #cccccc;
 }
 .panel-primary > .panel-heading + .panel-collapse .panel-body,
+.panel-primary > .panel-heading + .panel-collapse .panel-product-list,
 .panel-primary > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-primary > .panel-heading + .panel-collapse .panel-order-history,
 .panel-primary > .panel-heading + .panel-collapse .panel-order-shipping-multiple {
   border-top-color: #cccccc;
 }
 .panel-primary > .panel-footer + .panel-collapse .panel-body,
+.panel-primary > .panel-footer + .panel-collapse .panel-product-list,
 .panel-primary > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-primary > .panel-footer + .panel-collapse .panel-order-history,
 .panel-primary > .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -5016,12 +5025,14 @@ a.list-group-item-danger.active:focus {
   border-color: #d6e9c6;
 }
 .panel-success > .panel-heading + .panel-collapse .panel-body,
+.panel-success > .panel-heading + .panel-collapse .panel-product-list,
 .panel-success > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-success > .panel-heading + .panel-collapse .panel-order-history,
 .panel-success > .panel-heading + .panel-collapse .panel-order-shipping-multiple {
   border-top-color: #d6e9c6;
 }
 .panel-success > .panel-footer + .panel-collapse .panel-body,
+.panel-success > .panel-footer + .panel-collapse .panel-product-list,
 .panel-success > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-success > .panel-footer + .panel-collapse .panel-order-history,
 .panel-success > .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -5036,12 +5047,14 @@ a.list-group-item-danger.active:focus {
   border-color: #bce8f1;
 }
 .panel-info > .panel-heading + .panel-collapse .panel-body,
+.panel-info > .panel-heading + .panel-collapse .panel-product-list,
 .panel-info > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-info > .panel-heading + .panel-collapse .panel-order-history,
 .panel-info > .panel-heading + .panel-collapse .panel-order-shipping-multiple {
   border-top-color: #bce8f1;
 }
 .panel-info > .panel-footer + .panel-collapse .panel-body,
+.panel-info > .panel-footer + .panel-collapse .panel-product-list,
 .panel-info > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-info > .panel-footer + .panel-collapse .panel-order-history,
 .panel-info > .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -5056,12 +5069,14 @@ a.list-group-item-danger.active:focus {
   border-color: #faebcc;
 }
 .panel-warning > .panel-heading + .panel-collapse .panel-body,
+.panel-warning > .panel-heading + .panel-collapse .panel-product-list,
 .panel-warning > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-warning > .panel-heading + .panel-collapse .panel-order-history,
 .panel-warning > .panel-heading + .panel-collapse .panel-order-shipping-multiple {
   border-top-color: #faebcc;
 }
 .panel-warning > .panel-footer + .panel-collapse .panel-body,
+.panel-warning > .panel-footer + .panel-collapse .panel-product-list,
 .panel-warning > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-warning > .panel-footer + .panel-collapse .panel-order-history,
 .panel-warning > .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -5076,12 +5091,14 @@ a.list-group-item-danger.active:focus {
   border-color: #ebccd1;
 }
 .panel-danger > .panel-heading + .panel-collapse .panel-body,
+.panel-danger > .panel-heading + .panel-collapse .panel-product-list,
 .panel-danger > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-danger > .panel-heading + .panel-collapse .panel-order-history,
 .panel-danger > .panel-heading + .panel-collapse .panel-order-shipping-multiple {
   border-top-color: #ebccd1;
 }
 .panel-danger > .panel-footer + .panel-collapse .panel-body,
+.panel-danger > .panel-footer + .panel-collapse .panel-product-list,
 .panel-danger > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-danger > .panel-footer + .panel-collapse .panel-order-history,
 .panel-danger > .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -5091,7 +5108,7 @@ a.list-group-item-danger.active:focus {
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   border: 1px solid #f0f0f0;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
@@ -5672,6 +5689,8 @@ button.close {
 .modal-footer:after,
 .panel-table:before,
 .panel-table:after,
+.panel-product-list:before,
+.panel-product-list:after,
 .panel-lineitem:before,
 .panel-lineitem:after,
 .panel-order-history:before,
@@ -5696,6 +5715,7 @@ button.close {
 .panel-body:after,
 .modal-footer:after,
 .panel-table:after,
+.panel-product-list:after,
 .panel-lineitem:after,
 .panel-order-history:after,
 .panel-order-shipping-multiple:after {
@@ -6266,6 +6286,7 @@ button::-moz-focus-inner {
   text-transform: uppercase;
 }
 .panel .panel-body .panel-footer,
+.panel .panel-product-list .panel-footer,
 .panel .panel-lineitem .panel-footer,
 .panel .panel-order-history .panel-footer,
 .panel .panel-order-shipping-multiple .panel-footer {
@@ -6285,10 +6306,8 @@ button::-moz-focus-inner {
   margin: 0 auto 15px;
 }
 .well {
-  margin-bottom: 0;
   border-radius: 0;
   box-shadow: none;
-  margin: 0;
   min-height: 0;
 }
 .badge {
@@ -6657,12 +6676,14 @@ select.ng-invalid:invalid:invalid:focus {
   font-size: 13px;
 }
 .panel-nav .panel-body .btn:first-of-type,
+.panel-nav .panel-product-list .btn:first-of-type,
 .panel-nav .panel-lineitem .btn:first-of-type,
 .panel-nav .panel-order-history .btn:first-of-type,
 .panel-nav .panel-order-shipping-multiple .btn:first-of-type {
   margin-bottom: 10px;
 }
 .panel-nav .panel-body ul li,
+.panel-nav .panel-product-list ul li,
 .panel-nav .panel-lineitem ul li,
 .panel-nav .panel-order-history ul li,
 .panel-nav .panel-order-shipping-multiple ul li {
@@ -6671,6 +6692,7 @@ select.ng-invalid:invalid:invalid:focus {
   width: 100%;
 }
 .panel-nav .panel-body ul li a,
+.panel-nav .panel-product-list ul li a,
 .panel-nav .panel-lineitem ul li a,
 .panel-nav .panel-order-history ul li a,
 .panel-nav .panel-order-shipping-multiple ul li a {
@@ -6678,30 +6700,42 @@ select.ng-invalid:invalid:invalid:focus {
   padding: 3px 0;
 }
 .panel-nav .panel-body .nav,
+.panel-nav .panel-product-list .nav,
 .panel-nav .panel-lineitem .nav,
 .panel-nav .panel-order-history .nav,
 .panel-nav .panel-order-shipping-multiple .nav {
   border-top: 1px solid #dddddd;
 }
+.panel-nav .panel-body .nav:first-of-type,
+.panel-nav .panel-product-list .nav:first-of-type,
+.panel-nav .panel-lineitem .nav:first-of-type,
+.panel-nav .panel-order-history .nav:first-of-type,
+.panel-nav .panel-order-shipping-multiple .nav:first-of-type {
+  border-top: none;
+}
 .panel-nav .panel-body .nav a,
+.panel-nav .panel-product-list .nav a,
 .panel-nav .panel-lineitem .nav a,
 .panel-nav .panel-order-history .nav a,
 .panel-nav .panel-order-shipping-multiple .nav a {
   font-weight: 700;
 }
 .panel-nav .panel-body .nav li:first-child a,
+.panel-nav .panel-product-list .nav li:first-child a,
 .panel-nav .panel-lineitem .nav li:first-child a,
 .panel-nav .panel-order-history .nav li:first-child a,
 .panel-nav .panel-order-shipping-multiple .nav li:first-child a {
   border-top: 1px dashed #dddddd;
 }
 .panel-nav .panel-body .nav .nav,
+.panel-nav .panel-product-list .nav .nav,
 .panel-nav .panel-lineitem .nav .nav,
 .panel-nav .panel-order-history .nav .nav,
 .panel-nav .panel-order-shipping-multiple .nav .nav {
   border-top: none;
 }
 .panel-nav .panel-body .nav .nav a,
+.panel-nav .panel-product-list .nav .nav a,
 .panel-nav .panel-lineitem .nav .nav a,
 .panel-nav .panel-order-history .nav .nav a,
 .panel-nav .panel-order-shipping-multiple .nav .nav a {
@@ -6709,12 +6743,14 @@ select.ng-invalid:invalid:invalid:focus {
   color: #333333;
 }
 .panel-nav .panel-body .nav .nav li,
+.panel-nav .panel-product-list .nav .nav li,
 .panel-nav .panel-lineitem .nav .nav li,
 .panel-nav .panel-order-history .nav .nav li,
 .panel-nav .panel-order-shipping-multiple .nav .nav li {
   padding: 0 10px;
 }
 .panel-nav .panel-body .nav .nav .nav a,
+.panel-nav .panel-product-list .nav .nav .nav a,
 .panel-nav .panel-lineitem .nav .nav .nav a,
 .panel-nav .panel-order-history .nav .nav .nav a,
 .panel-nav .panel-order-shipping-multiple .nav .nav .nav a {
@@ -6736,20 +6772,8 @@ select.ng-invalid:invalid:invalid:focus {
   text-transform: capitalize;
   text-shadow: none;
   font-weight: normal;
-  min-height: 300px;
   background-color: #f9f9f9;
   background-color: #fff;
-}
-.category-list ul li:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  border-width: 0 16px 16px 0;
-  border-style: solid;
-  border-color: #f5f5f5 #f5f5f5 #ffffff #ffffff;
-  display: block;
-  width: 0;
 }
 .category-list ul li a {
   padding: .75em;
@@ -6762,17 +6786,21 @@ select.ng-invalid:invalid:invalid:focus {
   max-height: 200px;
   margin: 0 auto;
 }
+.category-list .well {
+  margin: 1px;
+  padding: 0;
+}
 .category-list .empty {
   height: 200px;
 }
-.product-list ul {
+.panel-product-list ul {
   margin: 0;
   padding: 0;
   list-style: none;
   font-size: 1em;
   font-weight: 300;
 }
-.product-list ul li {
+.panel-product-list ul li {
   float: left;
   text-align: center;
   padding: 0;
@@ -6781,17 +6809,15 @@ select.ng-invalid:invalid:invalid:focus {
   font-weight: normal;
   background-color: #f9f9f9;
   background-color: #fff;
-}
-.product-list ul li.well {
   width: 100%;
 }
-.product-list ul li a {
+.panel-product-list ul li a {
   padding: .75em;
   display: block;
   text-align: center;
   text-decoration: none;
 }
-.product-list ul li .shortproduct-info {
+.panel-product-list ul li .shortproduct-info {
   background-color: rgba(0, 0, 0, 0.85);
   color: #fff;
   border-top: none;
@@ -6803,6 +6829,11 @@ select.ng-invalid:invalid:invalid:focus {
   z-index: 1;
   padding: 10px;
   font-size: 1.5em;
+}
+.panel-product-list .well {
+  margin: 1px;
+  width: 100%;
+  padding: 0;
 }
 .product-image-large {
   margin: 15px auto;
@@ -6904,6 +6935,7 @@ select.ng-invalid:invalid:invalid:focus {
   border: none;
 }
 .panel-lineitem ~ .panel-body,
+.panel-lineitem ~ .panel-product-list,
 .panel-lineitem ~ .panel-lineitem,
 .panel-lineitem ~ .panel-order-history,
 .panel-lineitem ~ .panel-order-shipping-multiple {
@@ -6972,6 +7004,7 @@ select.ng-invalid:invalid:invalid:focus {
   cursor: default;
 }
 .panel-order .panel-body.ng-hide-remove,
+.panel-order .panel-product-list.ng-hide-remove,
 .panel-order .panel-lineitem.ng-hide-remove,
 .panel-order .panel-order-history.ng-hide-remove,
 .panel-order .panel-order-shipping-multiple.ng-hide-remove {
@@ -7009,6 +7042,7 @@ select.ng-invalid:invalid:invalid:focus {
   border: none;
 }
 .panel-order-shipping-multiple ~ .panel-body,
+.panel-order-shipping-multiple ~ .panel-product-list,
 .panel-order-shipping-multiple ~ .panel-lineitem,
 .panel-order-shipping-multiple ~ .panel-order-history,
 .panel-order-shipping-multiple ~ .panel-order-shipping-multiple {

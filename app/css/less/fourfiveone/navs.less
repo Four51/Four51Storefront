@@ -29,6 +29,9 @@
 
     .nav {
       border-top: 1px solid @panel-default-border;
+      &:first-of-type {
+        border-top: none;
+      }
       a {
         font-weight: 700;
       }
@@ -37,6 +40,7 @@
           border-top: 1px dashed @panel-default-border;
         }
       }
+
       .nav {
         border-top: none;
         a {
@@ -44,6 +48,7 @@
           color: @text-color;
         }
         li {padding: 0 10px;}
+
         .nav {
           a {
             border-top: none;

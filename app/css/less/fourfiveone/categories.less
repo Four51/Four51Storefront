@@ -18,21 +18,9 @@
       text-transform: capitalize;
       text-shadow: none;
       font-weight: normal;
-      min-height: 300px;
       background-color: rgb(249, 249, 249);
       background-color: rgba(249, 249, 249, 1);
       background-color:#fff;
-      // fold right top corner of categories to differentiate from products
-      &:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 0;
-        border-width: 0 16px 16px 0;
-        border-style: solid;
-        border-color: @panel-default-heading-bg @panel-default-heading-bg #fff #fff;
-        display: block; width: 0;
-      }
       a {
         padding: .75em;
         display: block;
@@ -47,6 +35,7 @@
       }
     }
   }
+  .well {margin: 1px; padding: 0;}
   //** no image available
   .empty {
     &:extend(.empty all);
