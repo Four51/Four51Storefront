@@ -74,13 +74,37 @@
                         </div>
                         <div class="form-group">
                             <label ng-show="criteria.DateRangeFrom">From</label>
-                            <input type="text" class="form-control" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="criteria.DateRangeFrom" placeholder="From" />
+
+                            <!--Default Datepicker -->
+                            <input name="daterangefrom" placeholder="From" ng-model="criteria.DateRangeFrom"
+                                   type="text"
+                                   class="form-control hidden-xs hidden-sm"
+                                   datepicker-popup="MM/dd/yy"
+                                   is-open="opened-from"/>
+
+                            <!-- Small Screen (touch) Date Input -->
+                            <input name="daterangefrom" placeholder="From" ng-model="criteria.DateRangeFrom"
+                                   type="date"
+                                   class="form-control hidden-md hidden-lg"/>
                             <i class="fa fa-calendar"></i>
+
                         </div>
                         <div class="form-group">
                             <label ng-show="criteria.DateRangeTo">To</label>
-                            <input type="text" class="form-control" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="criteria.DateRangeTo" placeholder="To" />
+                            <!--Default Datepicker -->
+                            <input name="daterangeto" placeholder="To" ng-model="criteria.DateRangeTo"
+                                   type="text"
+                                   class="form-control hidden-xs hidden-sm"
+                                   datepicker-popup="MM/dd/yy"
+                                   is-open="opened-to"/>
+
+                            <!-- Small Screen (touch) Date Input -->
+                            <input name="daterangeto" placeholder="To" ng-model="criteria.DateRangeTo"
+                                   type="date"
+                                   class="form-control hidden-md hidden-lg"/>
                             <i class="fa fa-calendar"></i>
+
+
                         </div>
                     </div>
                 </div>

@@ -71,8 +71,19 @@
                                         <div class="row view-form-icon">
                                             <div class="col-xs-9">
                                                 <label ng-class="{required: user.Permissions.contains('DateNeededRequired')}" ng-show="item.DateNeeded || user.Permissions.contains('DateNeededRequired')">Date</label>
-                                                <input name="dateneeded" class="form-control" placeholder="Date" type="text" ui-date="{ dateFormat: 'mm/dd/yy' }" ui-date-format ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')" />
+                                                <!--Default Datepicker -->
+                                                <input name="dateneeded" placeholder="Date" ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')"
+                                                       type="text"
+                                                       class="form-control hidden-xs hidden-sm"
+                                                       datepicker-popup="MM/dd/yy"
+                                                       is-open="opened"/>
+
+                                                <!-- Small Screen (touch) Date Input -->
+                                                <input name="dateneeded" placeholder="Date" ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')"
+                                                       type="date"
+                                                       class="form-control hidden-md hidden-lg"/>
                                                 <i class="fa fa-calendar"></i>
+
                                             </div>
                                             <div class="col-xs-3">
                                                 <button type="button" title="copy to all" class="btn btn-default pull-right" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1 && user.CostCenters.length != 1" >
