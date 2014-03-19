@@ -4752,7 +4752,6 @@ a.list-group-item-danger.active:focus {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 .panel-body,
-.panel-nav,
 .panel-lineitem,
 .panel-order-history,
 .panel-order-shipping-multiple {
@@ -4859,8 +4858,6 @@ a.list-group-item-danger.active:focus {
 }
 .panel > .panel-body + .table,
 .panel > .panel-body + .table-responsive,
-.panel > .panel-nav + .table,
-.panel > .panel-nav + .table-responsive,
 .panel > .panel-lineitem + .table,
 .panel > .panel-lineitem + .table-responsive,
 .panel > .panel-order-history + .table,
@@ -4944,7 +4941,6 @@ a.list-group-item-danger.active:focus {
   border-bottom: 0;
 }
 .panel-group .panel-heading + .panel-collapse .panel-body,
-.panel-group .panel-heading + .panel-collapse .panel-nav,
 .panel-group .panel-heading + .panel-collapse .panel-lineitem,
 .panel-group .panel-heading + .panel-collapse .panel-order-history,
 .panel-group .panel-heading + .panel-collapse .panel-order-shipping-multiple {
@@ -4954,7 +4950,6 @@ a.list-group-item-danger.active:focus {
   border-top: 0;
 }
 .panel-group .panel-footer + .panel-collapse .panel-body,
-.panel-group .panel-footer + .panel-collapse .panel-nav,
 .panel-group .panel-footer + .panel-collapse .panel-lineitem,
 .panel-group .panel-footer + .panel-collapse .panel-order-history,
 .panel-group .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -4962,11 +4957,13 @@ a.list-group-item-danger.active:focus {
 }
 .panel-default,
 .panel-search,
+.panel-nav,
 .panel-order {
   border-color: #dddddd;
 }
 .panel-default > .panel-heading,
 .panel-search > .panel-heading,
+.panel-nav > .panel-heading,
 .panel-order > .panel-heading {
   color: #333333;
   background-color: #f5f5f5;
@@ -4974,7 +4971,7 @@ a.list-group-item-danger.active:focus {
 }
 .panel-default > .panel-heading + .panel-collapse .panel-body,
 .panel-search > .panel-heading + .panel-collapse .panel-body,
-.panel-default > .panel-heading + .panel-collapse .panel-nav,
+.panel-nav > .panel-heading + .panel-collapse .panel-body,
 .panel-default > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-order > .panel-heading + .panel-collapse .panel-body,
 .panel-default > .panel-heading + .panel-collapse .panel-order-history,
@@ -4983,7 +4980,7 @@ a.list-group-item-danger.active:focus {
 }
 .panel-default > .panel-footer + .panel-collapse .panel-body,
 .panel-search > .panel-footer + .panel-collapse .panel-body,
-.panel-default > .panel-footer + .panel-collapse .panel-nav,
+.panel-nav > .panel-footer + .panel-collapse .panel-body,
 .panel-default > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-order > .panel-footer + .panel-collapse .panel-body,
 .panel-default > .panel-footer + .panel-collapse .panel-order-history,
@@ -4999,14 +4996,12 @@ a.list-group-item-danger.active:focus {
   border-color: #cccccc;
 }
 .panel-primary > .panel-heading + .panel-collapse .panel-body,
-.panel-primary > .panel-heading + .panel-collapse .panel-nav,
 .panel-primary > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-primary > .panel-heading + .panel-collapse .panel-order-history,
 .panel-primary > .panel-heading + .panel-collapse .panel-order-shipping-multiple {
   border-top-color: #cccccc;
 }
 .panel-primary > .panel-footer + .panel-collapse .panel-body,
-.panel-primary > .panel-footer + .panel-collapse .panel-nav,
 .panel-primary > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-primary > .panel-footer + .panel-collapse .panel-order-history,
 .panel-primary > .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -5021,14 +5016,12 @@ a.list-group-item-danger.active:focus {
   border-color: #d6e9c6;
 }
 .panel-success > .panel-heading + .panel-collapse .panel-body,
-.panel-success > .panel-heading + .panel-collapse .panel-nav,
 .panel-success > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-success > .panel-heading + .panel-collapse .panel-order-history,
 .panel-success > .panel-heading + .panel-collapse .panel-order-shipping-multiple {
   border-top-color: #d6e9c6;
 }
 .panel-success > .panel-footer + .panel-collapse .panel-body,
-.panel-success > .panel-footer + .panel-collapse .panel-nav,
 .panel-success > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-success > .panel-footer + .panel-collapse .panel-order-history,
 .panel-success > .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -5043,14 +5036,12 @@ a.list-group-item-danger.active:focus {
   border-color: #bce8f1;
 }
 .panel-info > .panel-heading + .panel-collapse .panel-body,
-.panel-info > .panel-heading + .panel-collapse .panel-nav,
 .panel-info > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-info > .panel-heading + .panel-collapse .panel-order-history,
 .panel-info > .panel-heading + .panel-collapse .panel-order-shipping-multiple {
   border-top-color: #bce8f1;
 }
 .panel-info > .panel-footer + .panel-collapse .panel-body,
-.panel-info > .panel-footer + .panel-collapse .panel-nav,
 .panel-info > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-info > .panel-footer + .panel-collapse .panel-order-history,
 .panel-info > .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -5065,14 +5056,12 @@ a.list-group-item-danger.active:focus {
   border-color: #faebcc;
 }
 .panel-warning > .panel-heading + .panel-collapse .panel-body,
-.panel-warning > .panel-heading + .panel-collapse .panel-nav,
 .panel-warning > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-warning > .panel-heading + .panel-collapse .panel-order-history,
 .panel-warning > .panel-heading + .panel-collapse .panel-order-shipping-multiple {
   border-top-color: #faebcc;
 }
 .panel-warning > .panel-footer + .panel-collapse .panel-body,
-.panel-warning > .panel-footer + .panel-collapse .panel-nav,
 .panel-warning > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-warning > .panel-footer + .panel-collapse .panel-order-history,
 .panel-warning > .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -5087,14 +5076,12 @@ a.list-group-item-danger.active:focus {
   border-color: #ebccd1;
 }
 .panel-danger > .panel-heading + .panel-collapse .panel-body,
-.panel-danger > .panel-heading + .panel-collapse .panel-nav,
 .panel-danger > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-danger > .panel-heading + .panel-collapse .panel-order-history,
 .panel-danger > .panel-heading + .panel-collapse .panel-order-shipping-multiple {
   border-top-color: #ebccd1;
 }
 .panel-danger > .panel-footer + .panel-collapse .panel-body,
-.panel-danger > .panel-footer + .panel-collapse .panel-nav,
 .panel-danger > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-danger > .panel-footer + .panel-collapse .panel-order-history,
 .panel-danger > .panel-footer + .panel-collapse .panel-order-shipping-multiple {
@@ -5685,8 +5672,6 @@ button.close {
 .modal-footer:after,
 .panel-table:before,
 .panel-table:after,
-.panel-nav:before,
-.panel-nav:after,
 .panel-lineitem:before,
 .panel-lineitem:after,
 .panel-order-history:before,
@@ -5711,7 +5696,6 @@ button.close {
 .panel-body:after,
 .modal-footer:after,
 .panel-table:after,
-.panel-nav:after,
 .panel-lineitem:after,
 .panel-order-history:after,
 .panel-order-shipping-multiple:after {
@@ -6283,7 +6267,6 @@ button::-moz-focus-inner {
   text-transform: uppercase;
 }
 .panel .panel-body .panel-footer,
-.panel .panel-nav .panel-footer,
 .panel .panel-lineitem .panel-footer,
 .panel .panel-order-history .panel-footer,
 .panel .panel-order-shipping-multiple .panel-footer {
@@ -6305,7 +6288,6 @@ button::-moz-focus-inner {
 .well {
   margin-bottom: 0;
   border-radius: 0;
-  border-width: 1px;
   box-shadow: none;
   margin: 0;
   min-height: 0;
@@ -6672,29 +6654,57 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-search button[type="submit"] {
   visibility: hidden;
 }
-.panel-nav ul li {
+.panel-nav {
+  border-right: 1px solid #f0f0f0;
+  border-top: 1px solid #f0f0f0;
+}
+.panel-nav .panel-body ul li,
+.panel-nav .panel-lineitem ul li,
+.panel-nav .panel-order-history ul li,
+.panel-nav .panel-order-shipping-multiple ul li {
   float: left;
   display: block;
   width: 100%;
 }
-.panel-nav ul li a {
+.panel-nav .panel-body ul li a,
+.panel-nav .panel-lineitem ul li a,
+.panel-nav .panel-order-history ul li a,
+.panel-nav .panel-order-shipping-multiple ul li a {
   width: 100%;
   padding: 3px 0;
 }
-.panel-nav .nav {
-  border-top: 2px solid #dddddd;
+.panel-nav .panel-body .nav,
+.panel-nav .panel-lineitem .nav,
+.panel-nav .panel-order-history .nav,
+.panel-nav .panel-order-shipping-multiple .nav {
+  border-top: 1px solid #dddddd;
 }
-.panel-nav .nav li:first-child a {
+.panel-nav .panel-body .nav li:first-child a,
+.panel-nav .panel-lineitem .nav li:first-child a,
+.panel-nav .panel-order-history .nav li:first-child a,
+.panel-nav .panel-order-shipping-multiple .nav li:first-child a {
   border-top: 1px dashed #dddddd;
 }
-.panel-nav .nav .nav {
+.panel-nav .panel-body .nav .nav,
+.panel-nav .panel-lineitem .nav .nav,
+.panel-nav .panel-order-history .nav .nav,
+.panel-nav .panel-order-shipping-multiple .nav .nav {
   border-top: none;
 }
-.panel-nav .nav .nav li {
+.panel-nav .panel-body .nav .nav li,
+.panel-nav .panel-lineitem .nav .nav li,
+.panel-nav .panel-order-history .nav .nav li,
+.panel-nav .panel-order-shipping-multiple .nav .nav li {
   padding: 0 10px;
 }
-.panel-nav .nav .nav .nav a {
+.panel-nav .panel-body .nav .nav .nav a,
+.panel-nav .panel-lineitem .nav .nav .nav a,
+.panel-nav .panel-order-history .nav .nav .nav a,
+.panel-nav .panel-order-shipping-multiple .nav .nav .nav a {
   border-top: none;
+}
+.category-list h3 {
+  margin-top: 0;
 }
 .category-list ul {
   margin: 0;
@@ -6877,7 +6887,6 @@ select.ng-invalid:invalid:invalid:focus {
   border: none;
 }
 .panel-lineitem ~ .panel-body,
-.panel-lineitem ~ .panel-nav,
 .panel-lineitem ~ .panel-lineitem,
 .panel-lineitem ~ .panel-order-history,
 .panel-lineitem ~ .panel-order-shipping-multiple {
@@ -6946,7 +6955,6 @@ select.ng-invalid:invalid:invalid:focus {
   cursor: default;
 }
 .panel-order .panel-body.ng-hide-remove,
-.panel-order .panel-nav.ng-hide-remove,
 .panel-order .panel-lineitem.ng-hide-remove,
 .panel-order .panel-order-history.ng-hide-remove,
 .panel-order .panel-order-shipping-multiple.ng-hide-remove {
@@ -6984,7 +6992,6 @@ select.ng-invalid:invalid:invalid:focus {
   border: none;
 }
 .panel-order-shipping-multiple ~ .panel-body,
-.panel-order-shipping-multiple ~ .panel-nav,
 .panel-order-shipping-multiple ~ .panel-lineitem,
 .panel-order-shipping-multiple ~ .panel-order-history,
 .panel-order-shipping-multiple ~ .panel-order-shipping-multiple {

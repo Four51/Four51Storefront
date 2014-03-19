@@ -25,4 +25,6 @@ four51.app.controller('CategoryCtrl', function ($routeParams, $sce, $scope, $451
 		}
 	});
 
+    // panel-nav
+    $scope.panelNav = 'true';
 });

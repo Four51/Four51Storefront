@@ -1,10 +1,12 @@
 <section>
     <nav id="451qa_nav_hdr" class="nav">
         <ul>
+            <li class="nav-header hidden-sm hidden-xs pull-left" ng-click="panelNav = ! panelNav" href="#">
+                <span ng-show="!showMega"><i class="fa fa-bars" data-title="Open all Categories" data-placement="right" bs-tooltip></i></span>
+                <span ng-show="showMega"><i class="fa fa-compress"></i></span>
+            </li>
             <li>
                 <span id="451_lbl_curcat" class="text-primary" ng-bind-html="currentCategory.Name || 'All Categories'"></span>
-                <span class="text-primary" ng-show="currentCategory.SubCategories.length && currentCategory.InteropID">Categories</span>
-                <span class="text-primary" ng-show="!currentCategory">All Categories</span>
             </li>
             <li class="pull-right">
                 <a href="#/search">
@@ -13,9 +15,14 @@
             </li>
         </ul>
     </nav>
-    <aside class="col-sm-3 col-collapse visible-md visible-lg">
-        <div class="panel">
-            <nav class="nav 451_cat_nav panel-nav">
+    <aside class="col-sm-3 col-collapse visible-md visible-lg" ng-if="panelNav">
+        <div class="panel panel-nav">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Category List
+                </h3>
+            </div>
+            <nav class="nav 451_cat_nav panel-body">
                 <span>
                     <a href="#/catalog">All Products</a>
                 </span>
@@ -25,40 +32,57 @@
             </nav>
         </div>
     </aside>
-    <div class="col-md-8 col-md-offset-1 col-collapse">
-        <div class="category-list" ng-show="currentCategory">
-            <loadingindicator ng-show="categoryLoadingIndicator" title="Please wait while we fetch all categories" />
-            <nav class="nav 451_lbl_subcatlist">
-                <ul>
-                    <li class="nav-header well col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="c in currentCategory.SubCategories">
-                        <a ng-href="#/catalog/{{c.InteropID}}">
-                            <figure ng-show="c.Image.URL">
-                                <img ng-src="{{c.Image.URL}}"/>
-                            </figure>
-                            <div class="empty" ng-show="!c.Image.URL">
-                                <span class="fa empty"><i class="fa fa-camera"></i></span>
-                            </div>
-                            <h5><span ng-bind-html="c.Name"></span></h5>
-                            <figcaption ng-bind-html="trusted(c.Description)"></figcaption>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <div class="product-list" ng-if="currentCategory.InteropID">
-            <loadingindicator ng-show="productLoadingIndicator" title="Please wait while we fetch all products"/>
-            <h3 ng-show="products">Products</h3>
-            <div ng-show="products" class="alert alert-info text-center hidden-sm hidden-md hidden-lg">
-                <i class="fa fa-arrow-circle-o-left"></i>
-                Swipe product left for more info
+    <div class="col-collapse" ng-class="{ 'col-md-8 col-md-offset-1': panelNav }" >
+        <div class="panel panel-default" ng-show="currentCategory.SubCategories.length">
+            <div class="panel-heading" >
+                <h3 class="panel-title" >
+                   Categories
+                </h3>
             </div>
-            <nav class="nav">
-                <ul>
-                    <li id="451_lst_prod" class="nav-header well" ng-repeat="product in products">
-                        <shortproductview p="product" user="user" />
-                    </li>
-                </ul>
-            </nav>
+            <div class="panel-body">
+                <div class="category-list">
+                    <loadingindicator ng-show="categoryLoadingIndicator" title="Please wait while we fetch all categories" />
+                    <nav class="nav 451_lbl_subcatlist">
+                        <ul>
+                            <li class="nav-header well col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="c in currentCategory.SubCategories">
+                                <a ng-href="#/catalog/{{c.InteropID}}">
+                                    <figure ng-show="c.Image.URL">
+                                        <img ng-src="{{c.Image.URL}}"/>
+                                    </figure>
+                                    <div class="empty" ng-show="!c.Image.URL">
+                                        <span class="fa empty"><i class="fa fa-camera"></i></span>
+                                    </div>
+                                    <h5><span ng-bind-html="c.Name"></span></h5>
+                                    <figcaption ng-bind-html="trusted(c.Description)"></figcaption>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default" ng-show="products">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Products
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="product-list" ng-if="currentCategory.InteropID">
+                    <loadingindicator ng-show="productLoadingIndicator" title="Please wait while we fetch all products"/>
+                    <div ng-show="products" class="alert alert-info text-center hidden-sm hidden-md hidden-lg">
+                        <i class="fa fa-arrow-circle-o-left"></i>
+                        Swipe product left for more info
+                    </div>
+                    <nav class="nav">
+                        <ul>
+                            <li id="451_lst_prod" class="nav-header well" ng-repeat="product in products">
+                                <shortproductview p="product" user="user" />
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
         </div>
     </div>
 </section>
