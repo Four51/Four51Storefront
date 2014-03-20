@@ -76,12 +76,14 @@
                                                        type="text"
                                                        class="form-control hidden-xs hidden-sm"
                                                        datepicker-popup="MM/dd/yy"
-                                                       is-open="opened"/>
+                                                       is-open="opened"
+                                                       min="currentDate"/>
 
                                                 <!-- Small Screen (touch) Date Input -->
                                                 <input name="dateneeded" placeholder="Date" ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')"
                                                        type="date"
-                                                       class="form-control hidden-md hidden-lg"/>
+                                                       class="form-control hidden-md hidden-lg"
+                                                       min="currentDate"/>
                                                 <i class="fa fa-calendar"></i>
 
                                             </div>
