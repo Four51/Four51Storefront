@@ -1,4 +1,5 @@
 four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, OrderConfig, User) {
+
 	$scope.errorMessage = null;
     $scope.continueShopping = function() {
 	    if (!$scope.cart.$invalid) {
@@ -39,10 +40,10 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 		}
 		else {
 			$scope.displayLoadingIndicator = true;
+			OrderConfig.address($scope.currentOrder, $scope.user);
 			Order.save($scope.currentOrder,
 				function(data) {
 					$scope.currentOrder = data;
-					OrderConfig.costcenter(data, $scope.user).address(data, $scope.user);
 					$scope.displayLoadingIndicator = false;
 					if (callback) callback();
 	                $scope.actionMessage = 'Your Changes Have Been Saved!';
@@ -70,6 +71,7 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
 
     $scope.checkOut = function() {
 	    $scope.displayLoadingIndicator = true;
+	    OrderConfig.address($scope.currentOrder, $scope.user);
         Order.save($scope.currentOrder,
 	        function(data) {
                 $scope.currentOrder = data;

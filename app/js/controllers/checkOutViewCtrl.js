@@ -1,4 +1,4 @@
-four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, OrderConfig, FavoriteOrder, AddressList) {
+four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, Analytics, User, Order, OrderConfig, FavoriteOrder, AddressList) {
 	if (!$scope.currentOrder) {
         $location.path('catalog');
     }
@@ -62,10 +62,10 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 	    $scope.errorMessage = null;
 	    $scope.actionMessage = null;
 	    var auto = $scope.currentOrder.autoID;
-        Order.save($scope.currentOrder,
+	    OrderConfig.address($scope.currentOrder, $scope.user);
+	    Order.save($scope.currentOrder,
 	        function(data) {
 		        $scope.currentOrder = data;
-		        OrderConfig.costcenter($scope.currentOrder, $scope.user).address($scope.currentOrder, $scope.user);
 		        if (auto) {
 			        $scope.currentOrder.autoID = true;
 			        $scope.currentOrder.ExternalID = 'auto';
