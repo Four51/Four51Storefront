@@ -303,64 +303,72 @@ button::-moz-focus-inner {
 //== Container sizes
 
 //== Navbar
-.navbar-nav {
-  margin-top: 0;
-  // active arrow
-  .fa-caret-down {
-    display: none;
-  }
-  li {
-    &.active .fa-caret-down {
-      position: absolute;
-      bottom: -20px;
-      left: 40%;
-      font-size: 32px;
-      color:#359FD5;
-      z-index: 5;
-      display: block;
-    }
-  }
-  &.pull-left {
-    //** cowboy up the icons on phone
-    li {
-      display: inline-block;
-      float: left;
-      &.fadeInLeft {
-        -webkit-animation-duration:   1s;
-        -moz-animation-duration:      1s;
-        -o-animation-duration:        1s;
-        animation-duration:           1s;
-        -ms-animation-duration:       1s;
-        a i {
-          color: darken(@navbar-default-bg, 35%);
-        }
-      }
-      a {
-        padding: @nav-link-padding;
-        span {
-          margin-left: 5px;
-        }
-      }
-      // dropdown children on desktop
-      ul li {
-        width: 100%;
-        a {
-          padding: 10px 20px;
-        }
-      }
-    }
-  }
+.navbar {
+  .container {
+    padding: 0;
+    .navbar-nav {
+      &:extend(.clearfix all);
+      margin: 0;
+      padding: 0;
 
-  &.pull-right {
-    li a {
-      padding: 20px;
-      // cart icon
-      i:first-of-type {
-        border-radius: 50%;
-        border: 1px solid #fff;
-        text-align:center;
-        padding: 10px;
-        margin-top: -10px;
+      // active arrow
+      .fa-caret-down {
+        display: none;
+      }
+      li {
+        &.active .fa-caret-down {
+          position: absolute;
+          bottom: -20px;
+          left: 40%;
+          font-size: 32px;
+          color:#359FD5;
+          z-index: 5;
+          display: block;
+        }
+      }
+      &.pull-left {
+        //** cowboy up the icons on phone
+        li {
+          display: inline-block;
+          float: left;
+          &.fadeInLeft {
+            -webkit-animation-duration:   1s;
+            -moz-animation-duration:      1s;
+            -o-animation-duration:        1s;
+            animation-duration:           1s;
+            -ms-animation-duration:       1s;
+            a i {
+              color: darken(@navbar-default-bg, 35%);
+            }
+          }
+          a {
+            padding: @nav-link-padding;
+            span {
+              margin-left: 5px;
+            }
+          }
+          // dropdown children on desktop
+          ul li {
+            width: 100%;
+            a {
+              padding: 10px 20px;
+            }
+          }
+        }
+      }
+
+      &.pull-right {
+        li a {
+          padding: 20px;
+          // cart icon
+          i:first-of-type {
+            border-radius: 50%;
+            border: 1px solid #fff;
+            text-align:center;
+            padding: 10px;
+            margin-top: -10px;
+          }
+        }
       }
     }
   }
