@@ -35,6 +35,7 @@
                         <br />{{order.ShipAddress.Street1}}<br>
                         {{order.ShipAddress.Street2}}<br ng-show="order.ShipAddress.Street2">
                         {{order.ShipAddress.City}}, {{order.ShipAddress.State}} {{order.ShipAddress.Zip}}
+                        <div ng-if="order.ShipAddress.Country != 'US'">{{order.ShipAddress.Country}}</div>
                     </address><br />
                     <address ng-show="order.BillAddress">
                         <span class="text-primary"><strong>Bill to</strong></span><br />
@@ -43,6 +44,7 @@
                         <br />{{order.BillAddress.Street1}}<br>
                         {{order.BillAddress.Street2}}<br ng-show="order.BillAddress.Street2">
                         {{order.BillAddress.City}}, {{order.BillAddress.State}} {{order.BillAddress.Zip}}
+                        <div ng-if="order.BillAddress.Country != 'US'">{{order.BillAddress.Country}}</div>
                     </address>
                 </div>
             </div>
