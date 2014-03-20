@@ -19,9 +19,9 @@ four51.app.config(function($routeProvider, $locationProvider) {
             when('/product/:productInteropID/:variantInteropID', {templateUrl: concatProductView, controller: 'ProductCtrl'}).
 			when('/product/:productInteropID/:variantInteropID/edit', {templateUrl: concatSpecFormView, controller: 'SpecFormCtrl'}).
 			when('/order', { templateUrl: 'partials/orderSearchView.html', controller: 'OrderSearchCtrl' }).
-			when('/order/:id', { templateUrl: 'partials/reporting/orderHistoryView.html', controller: 'OrderViewCtrl' }).
+			when('/order/:id', { templateUrl: 'partials/Reporting/orderHistoryView.html', controller: 'OrderViewCtrl' }).
 			when('/favoriteorders', { templateUrl: 'partials/favoriteOrderListView.html', controller: 'FavoriteOrderCtrl' }).
-			when('/order/:orderid/:lineitemindex/', { templateUrl: 'partials/reporting/lineItemHistoryView.html', controller: 'LineItemViewCtrl' }).
+			when('/order/:orderid/:lineitemindex/', { templateUrl: 'partials/Reporting/lineItemHistoryView.html', controller: 'LineItemViewCtrl' }).
 			when('/message', { templateUrl: 'partials/messageListView.html', controller: 'MessageListCtrl' }).
 			when('/message/:id', { templateUrl: 'partials/messageView.html', controller: 'MessageViewCtrl' }).
             when('/admin', { templateUrl: 'partials/userView.html', controller: 'UserEditCtrl' }).
@@ -36,5 +36,7 @@ four51.app.config(function($routeProvider, $locationProvider) {
             when('/search/:searchTerm', { templateUrl: 'partials/searchView.html', controller: 'ProductSearchCtrl' }).
             when('/security', { templateUrl: 'partials/security.html', controller: 'SecurityCtrl' }).
             when('/conditions', { templateUrl: 'partials/conditions.html', controller: 'ConditionsCtrl' }).
+			when('/reports', { templateUrl: 'partials/reportsView.html', controller: 'ReportsCtrl' }).
+			when('/report/:id', { templateUrl: 'partials/Reporting/reportView.html', controller: 'ReportCtrl' }).
 			otherwise({redirectTo: '/catalog'});
 	});

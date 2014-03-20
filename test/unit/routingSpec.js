@@ -135,7 +135,7 @@ describe('$451 Routing:', function(){
     });
     it("should route order detail requests properly", function() {
 
-        unitTestRoute('partials/reporting/orderHistoryView.html','order','/order/:id','partials/reporting/orderHistoryView.html','OrderViewCtrl')
+        unitTestRoute('partials/Reporting/orderHistoryView.html','order','/order/:id','partials/Reporting/orderHistoryView.html','OrderViewCtrl')
 
     });
     it("should route favorite order requests properly", function() {
@@ -145,7 +145,7 @@ describe('$451 Routing:', function(){
     });
     it("should route line item requests properly", function() {
 
-        unitTestRoute('partials/reporting/lineItemHistoryView.html','lineitem','/lineitem/:orderid/:lineitemid/','partials/reporting/lineItemHistoryView.html','LineItemViewCtrl')
+        unitTestRoute('partials/Reporting/lineItemHistoryView.html','lineitem','/lineitem/:orderid/:lineitemid/','partials/Reporting/lineItemHistoryView.html','LineItemViewCtrl')
 
     });
     it("should route message list requests properly", function() {
