@@ -8,20 +8,20 @@ four51.app.factory('SavedReports', function($resource, $451) {
 	function _extend(report) {
 		switch (report.ReportType) {
 			case 'LineItem':
-				//report.OrderTypeOptions = ["Standard + Replenishment", "Order", "Replenishment", "Price Request"];
-				report.OrderStatusOptions = ["All", "Open", "Completed", "Cancelled"];
-				report.PaymentMethodOptions = ["All", "CreditCard", "PurchaseOrder", "SpendingAccount"];
-				break;
 			default:
-				return;
+				break;
 		}
+		report.AvailableTypes = {"LineItem": "Line Item", "Order": "Order" };
+		if (report.ColumnOptions)
+			report.ColumnOptionsLength = Object.keys(report.ColumnOptions).length;
 	}
 
 	var _query = function(success) {
 		var reports = store.get('451Cache.SavedReports');
-		reports ? _then(success, reports) :
+		reports ? (function() { _extend(reports); _then(success, reports); })() :
 			$resource($451.api('savedreports')).query().$promise.then(function(list) {
 				store.set('451Cache.SavedReports', list);
+				_extend(list);
 				_then(success, list);
 			});
 	}
