@@ -32,7 +32,7 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
 	            if (user.CurrentOrderID) {
                     Order.get(user.CurrentOrderID, function(ordr) {
                         $scope.currentOrder = ordr;
-			            OrderConfig.costcenter(ordr, user).address(ordr, user);
+			            OrderConfig.costcenter(ordr, user);
                     });
                 }
                 else
