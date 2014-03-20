@@ -30,7 +30,7 @@
     </address>
     <address ng-show="order.BillAddress">
         <div class="text-left">
-            <span class="text-primary"><strong>Ship to</strong></span><br />
+            <span class="text-primary"><strong>Bill to</strong></span><br />
             <div>
                 <span ng-show="order.LineItems[0].BillFirstName || order.LineItems[0].BillLastName">{{order.LineItems[0].BillFirstName}} {{order.LineItems[0].BillLastName}}</span>
                 <span ng-show="!order.LineItems[0].BillFirstName || !order.LineItems[0].BillLastName">{{order.BillAddress.FirstName}} {{order.BillAddress.LastName}}</span>
