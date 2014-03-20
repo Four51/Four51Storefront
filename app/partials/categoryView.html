@@ -1,9 +1,8 @@
 <section>
     <nav id="451qa_nav_hdr" class="nav">
         <ul>
-            <li class="hidden-sm hidden-xs pull-left" ng-click="toggleNav()" href="#">
-                <span ng-show="!navStatus.visible" ><i class="fa fa-bars"></i></span>
-                <span ng-show="navStatus.visible"><i class="fa fa-bars text-info"></i></span>
+            <li class="hidden-sm hidden-xs">
+                <span ng-click="toggleNav()"><i class="fa fa-bars" ng-class="{ 'text-info': navStatus.visible }"></i></span>
             </li>
             <li>
                 <span id="451_lbl_curcat" class="text-primary" ng-bind-html="currentCategory.Name || 'All Categories'"></span>

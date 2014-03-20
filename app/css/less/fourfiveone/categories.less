@@ -4,6 +4,8 @@
 
 .panel-category-list {
   &:extend(.panel-body all);
+  padding: 2px;
+
   h3 {
     margin-top: 0;
   }
@@ -28,7 +30,11 @@
         }
         //** no image available
         .empty {
+          &:extend(.panel-default all);
           min-height: @fourfiveone-category-image-height;
+          i.fa {
+            padding-top: (@fourfiveone-category-image-height / 2);
+          }
         }
       }
     }
