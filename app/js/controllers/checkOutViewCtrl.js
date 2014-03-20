@@ -1,4 +1,4 @@
-four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, User, Order, OrderConfig, FavoriteOrder, AddressList) {
+four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, Analytics, User, Order, OrderConfig, FavoriteOrder, AddressList) {
 	if (!$scope.currentOrder) {
         $location.path('catalog');
     }
@@ -73,6 +73,9 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
 		        $scope.displayLoadingIndicator = false;
 		        if (callback) callback($scope.currentOrder);
 	            $scope.actionMessage = "Your changes have been saved";
+
+
+
 	        },
 	        function(ex) {
 		        $scope.currentOrder.ExternalID = null;

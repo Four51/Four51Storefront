@@ -1,4 +1,5 @@
 four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, OrderConfig, User) {
+
 	$scope.errorMessage = null;
     $scope.continueShopping = function() {
 	    if (!$scope.cart.$invalid) {

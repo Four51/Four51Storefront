@@ -16,4 +16,3 @@ four51.app.factory('SpendingAccount', function($resource, $rootScope, $451){
         query: _query
     };
 });
-
