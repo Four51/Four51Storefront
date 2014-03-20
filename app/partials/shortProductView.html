@@ -1,6 +1,5 @@
 <div class="451qa_prod_item row" ng-swipe-left="showSwipe = true">
-
-    <div class="col-sm-4">
+    <div class="col-sm-4 text-center">
         <a class="thumbnail" href="#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}">
             <figure ng-show="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl" >
                 <img ng-src="{{LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl}}"/>
@@ -13,26 +12,24 @@
             </div>
         </a>
     </div>
-    <div class="col-sm-8">
-        <div class="text-left panel-body">
+    <div class="col-sm-8 text-left">
+        <div class="panel-body">
             <h3>{{LineItem.Product.Name}}</h3>
             <p ng-bind-html="trustedDescription(LineItem.Product)" ng-show="LineItem.Product.Description" />
         </div>
         <section class="hidden-xs hidden-sm panel-body">
-                <div class="text-left">
-                    <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]" ng-if="!(user.Permissions.contains('HidePricing'))">
-                        {{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
-                        <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>
-                        for {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
-                    </p>
-                    <p ng-show="LineItem.Product.UnitOfMeasure">
-                        Unit of Measure: {{LineItem.Product.UnitOfMeasure}}
-                    </p>
+            <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]" ng-if="!(user.Permissions.contains('HidePricing'))">
+                {{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
+                <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>
+                for {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
+            </p>
+            <p ng-show="LineItem.Product.UnitOfMeasure">
+                Unit of Measure: {{LineItem.Product.UnitOfMeasure}}
+            </p>
 
-                    <p ng-show="LineItem.Product.DisplayInventory && inventoryDisplay(LineItem.Product, LineItem.Variant) != undefined">
-                        QTY Available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
-                    </p>
-                </div>
+            <p ng-show="LineItem.Product.DisplayInventory && inventoryDisplay(LineItem.Product, LineItem.Variant) != undefined">
+                QTY Available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
+            </p>
         </section>
     </div>
     <section ng-show="showSwipe" ng-swipe-right="showSwipe = false">

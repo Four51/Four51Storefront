@@ -35,6 +35,7 @@ hr {
 
 //** remove default style type
 ul {
+  &:extend(.clearfix all);
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -401,11 +402,7 @@ button::-moz-focus-inner {
   -ms-animation-name:           fadeInUp;
   //** fixed bottom buttons
   ul {
-    list-style-type:none;
-    padding: 0;
-    margin: 0;
-    clear: both;
-    overflow: hidden;
+    &:extend(.clearfix all);
     li {
       display: inline-block;
       float: left;
@@ -445,12 +442,7 @@ button::-moz-focus-inner {
 //== Navs
 //** shared nav styles
 .nav {
-  margin-top: 0;
-  margin-bottom: 0;
   ul  {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
     li {
       display: inline;
       float: left;
@@ -572,8 +564,7 @@ button::-moz-focus-inner {
   }
 
   .panel-footer {
-    clear: both;
-    overflow: hidden;
+    &:extend(.clearfix all);
     padding: 20px 15px;
   }
 }

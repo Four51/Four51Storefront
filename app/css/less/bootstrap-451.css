@@ -5687,6 +5687,12 @@ button.close {
 .panel-body:after,
 .modal-footer:before,
 .modal-footer:after,
+ul:before,
+ul:after,
+.navbar-fixed-bottom ul:before,
+.navbar-fixed-bottom ul:after,
+.panel .panel-footer:before,
+.panel .panel-footer:after,
 .panel-table:before,
 .panel-table:after,
 .panel-product-list:before,
@@ -5714,6 +5720,9 @@ button.close {
 .pager:after,
 .panel-body:after,
 .modal-footer:after,
+ul:after,
+.navbar-fixed-bottom ul:after,
+.panel .panel-footer:after,
 .panel-table:after,
 .panel-product-list:after,
 .panel-lineitem:after,
@@ -6167,13 +6176,6 @@ button::-moz-focus-inner {
   animation-name: fadeInUp;
   -ms-animation-name: fadeInUp;
 }
-.navbar-fixed-bottom ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  clear: both;
-  overflow: hidden;
-}
 .navbar-fixed-bottom ul li {
   display: inline-block;
   float: left;
@@ -6206,15 +6208,6 @@ button::-moz-focus-inner {
 }
 .navbar-fixed-bottom ul li .btn-warning[disabled] {
   opacity: 1;
-}
-.nav {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-.nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
 }
 .nav ul li {
   display: inline;
@@ -6293,8 +6286,6 @@ button::-moz-focus-inner {
   margin: 0 -15px -15px;
 }
 .panel .panel-footer {
-  clear: both;
-  overflow: hidden;
   padding: 20px 15px;
 }
 .thumbnail {
@@ -6793,28 +6784,12 @@ select.ng-invalid:invalid:invalid:focus {
 .category-list .empty {
   height: 200px;
 }
-.panel-product-list ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-size: 1em;
-  font-weight: 300;
-}
 .panel-product-list ul li {
-  float: left;
-  text-align: center;
-  padding: 0;
-  text-transform: capitalize;
-  text-shadow: none;
-  font-weight: normal;
-  background-color: #f9f9f9;
-  background-color: #fff;
   width: 100%;
 }
 .panel-product-list ul li a {
   padding: .75em;
   display: block;
-  text-align: center;
   text-decoration: none;
 }
 .panel-product-list ul li .shortproduct-info {
@@ -6828,7 +6803,6 @@ select.ng-invalid:invalid:invalid:focus {
   bottom: 0;
   z-index: 1;
   padding: 10px;
-  font-size: 1.5em;
 }
 .panel-product-list .well {
   margin: 1px;

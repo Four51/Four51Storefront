@@ -5,26 +5,11 @@
 .panel-product-list {
   &:extend(.panel-body all);
   ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-size: 1em;
-    font-weight: 300;
     li  {
-      float: left;
-      text-align: center;
-      padding: 0;
-      text-transform: capitalize;
-      text-shadow: none;
-      font-weight: normal;
-      background-color: rgb(249, 249, 249);
-      background-color: rgba(249, 249, 249, 1);
-      background-color:#fff;
       width: 100%;
       a {
         padding: .75em;
         display: block;
-        text-align: center;
         text-decoration: none;
       }
       //** example swipe
@@ -39,11 +24,14 @@
         bottom: 0;
         z-index: 1;
         padding: 10px;
-        font-size: 1.5em;
       }
     }
   }
-  .well {margin: 1px;width: 100%;padding: 0;}
+  .well {
+    margin: 1px;
+    width: 100%;
+    padding: 0;
+  }
 }
 
 .product-image-large {
