@@ -32,11 +32,12 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
 	            if (user.CurrentOrderID) {
                     Order.get(user.CurrentOrderID, function(ordr) {
                         $scope.currentOrder = ordr;
-			            OrderConfig.costcenter(ordr, user).address(ordr, user);
+			            OrderConfig.costcenter(ordr, user);
                     });
                 }
                 else
                     $scope.currentOrder = null;
+
             });
             Category.tree(function(data) {
 				$scope.tree = data;
@@ -44,6 +45,17 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
 	        });
         }
     }
+
+	function analytics(id) {
+		if (id.length == 0) return;
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', id, 'four51.com');
+		ga('require', 'ecommerce', 'ecommerce.js');
+	}
 
     $scope.errorSection = '';
 
@@ -53,6 +65,7 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
 
     $scope.$on('event:auth-loginConfirmed', function(){
         $route.reload();
+	    analytics($scope.user.Company.GoogleAnalyticsCode);
 	});
 	$scope.$on("$routeChangeSuccess", init);
     $scope.$on('event:auth-loginRequired', cleanup);
