@@ -64,9 +64,13 @@ four51.app.controller('ProductCtrl', function ($routeParams, $scope, Product, Pr
 			$scope.variantLineItemsOrderTotal += item.LineTotal || 0;
 		})
 	};
+	function setDefaultQty(lineitem) {
+		$scope.LineItem.Quantity = lineitem.Product.StandardPriceSchedule.DefaultQuantity > 0 ? lineitem.Product.StandardPriceSchedule.DefaultQuantity : null;
+	}
 	ProductDisplayService.getProductAndVariant($routeParams.productInteropID,$routeParams.variantInteropID, function(data){
 		$scope.LineItem.Product = data.product;
 		$scope.LineItem.Variant = data.variant;
+		setDefaultQty($scope.LineItem);
 		ProductDisplayService.setNewLineItemScope($scope);
 		ProductDisplayService.setProductViewScope($scope);
 		$scope.$broadcast('ProductGetComplete');
