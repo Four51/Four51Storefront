@@ -1,0 +1,46 @@
+<section>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Saved Reports</h3>
+        </div>
+        <div class="panel-body view-form-icon">
+            <div class="input-group">
+                <label ng-show="searchTerm">Search</label>
+                <input class='form-control' type="text" placeholder="Search" ng-model="searchTerm" autocomplete="off" />
+                <i class="fa fa-search"></i>
+                <div class="input-group-btn">
+                    <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span>New Report</span>
+                    </button>
+                    <ul class="dropdown-menu pull-right" role="menu">
+                        <li ng-repeat="(key,value) in Reports.AvailableTypes">
+                            <a role="presentation" tabindex="-1" href="#/report/{{key}}">{{value}}</a>
+                        </li>
+                    </ul>
+                </div>
+             </div>
+        </div>
+        <div class="panel-table">
+            <div class="row text-info">
+                <div class="col-sm-2 hidden-xs">Name</div>
+                <div class="col-sm-2 hidden-xs">Type</div>
+                <div class="col-sm-2 hidden-xs"></div>
+            </div>
+            <div class="row" ng-repeat="report in Reports | filter:searchTerm">
+                <div class="col-sm-2">
+                    <span class="visible-xs text-info">Name</span>
+                    <a ng-href="{{'report/' + report.ID}}">{{report.Name}}</a>
+                </div>
+                <div class="col-sm-2">
+                    <span class="visible-xs text-info">Type</span>
+                    {{report.Type}}
+                </div>
+                <div class="col-sm-2">
+                    <span class="visible-xs text-info"></span>
+                    <a ng-href="{{'report/' + report.ID}}">Preview</a>
+                </div>
+             </div>
+        </div>
+    </div>
+</section>

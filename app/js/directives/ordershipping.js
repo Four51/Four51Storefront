@@ -14,7 +14,6 @@ four51.app.directive('ordershipping', function(Order, Shipper, Address, OrderCon
 							$scope.currentOrder.autoID = true;
 							$scope.currentOrder.ExternalID = 'auto';
 						}
-						OrderConfig.costcenter($scope.currentOrder, $scope.user).address($scope.currentOrder, $scope.user);
 						if (callback) callback($scope.currentOrder);
 					},
 					function(ex) {
