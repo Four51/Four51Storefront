@@ -35,6 +35,7 @@ hr {
 
 //** remove default style type
 ul {
+  &:extend(.clearfix all);
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -302,64 +303,72 @@ button::-moz-focus-inner {
 //== Container sizes
 
 //== Navbar
-.navbar-nav {
-  margin-top: 0;
-  // active arrow
-  .fa-caret-down {
-    display: none;
-  }
-  li {
-    &.active .fa-caret-down {
-      position: absolute;
-      bottom: -20px;
-      left: 40%;
-      font-size: 32px;
-      color:#359FD5;
-      z-index: 5;
-      display: block;
-    }
-  }
-  &.pull-left {
-    //** cowboy up the icons on phone
-    li {
-      display: inline-block;
-      float: left;
-      &.fadeInLeft {
-        -webkit-animation-duration:   1s;
-        -moz-animation-duration:      1s;
-        -o-animation-duration:        1s;
-        animation-duration:           1s;
-        -ms-animation-duration:       1s;
-        a i {
-          color: darken(@navbar-default-bg, 35%);
-        }
-      }
-      a {
-        padding: @nav-link-padding;
-        span {
-          margin-left: 5px;
-        }
-      }
-      // dropdown children on desktop
-      ul li {
-        width: 100%;
-        a {
-          padding: 10px 20px;
-        }
-      }
-    }
-  }
+.navbar {
+  .container {
+    padding: 0;
+    .navbar-nav {
+      &:extend(.clearfix all);
+      margin: 0;
+      padding: 0;
 
-  &.pull-right {
-    li a {
-      padding: 20px;
-      // cart icon
-      i:first-of-type {
-        border-radius: 50%;
-        border: 1px solid #fff;
-        text-align:center;
-        padding: 10px;
-        margin-top: -10px;
+      // active arrow
+      .fa-caret-down {
+        display: none;
+      }
+      li {
+        &.active .fa-caret-down {
+          position: absolute;
+          bottom: -20px;
+          left: 40%;
+          font-size: 32px;
+          color:#359FD5;
+          z-index: 5;
+          display: block;
+        }
+      }
+      &.pull-left {
+        //** cowboy up the icons on phone
+        li {
+          display: inline-block;
+          float: left;
+          &.fadeInLeft {
+            -webkit-animation-duration:   1s;
+            -moz-animation-duration:      1s;
+            -o-animation-duration:        1s;
+            animation-duration:           1s;
+            -ms-animation-duration:       1s;
+            a i {
+              color: darken(@navbar-default-bg, 35%);
+            }
+          }
+          a {
+            padding: @nav-link-padding;
+            span {
+              margin-left: 5px;
+            }
+          }
+          // dropdown children on desktop
+          ul li {
+            width: 100%;
+            a {
+              padding: 10px 20px;
+            }
+          }
+        }
+      }
+
+      &.pull-right {
+        li a {
+          padding: 20px;
+          // cart icon
+          i:first-of-type {
+            border-radius: 50%;
+            border: 1px solid #fff;
+            text-align:center;
+            padding: 10px;
+            margin-top: -10px;
+          }
+        }
       }
     }
   }
@@ -401,11 +410,7 @@ button::-moz-focus-inner {
   -ms-animation-name:           fadeInUp;
   //** fixed bottom buttons
   ul {
-    list-style-type:none;
-    padding: 0;
-    margin: 0;
-    clear: both;
-    overflow: hidden;
+    &:extend(.clearfix all);
     li {
       display: inline-block;
       float: left;
@@ -445,12 +450,7 @@ button::-moz-focus-inner {
 //== Navs
 //** shared nav styles
 .nav {
-  margin-top: 0;
-  margin-bottom: 0;
   ul  {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
     li {
       display: inline;
       float: left;
@@ -465,7 +465,6 @@ button::-moz-focus-inner {
           font-size: @font-size-large;
           padding: 15px;
           cursor: pointer;
-          color: darken(@navbar-default-bg, 35%);
         }
       }
     }
@@ -573,8 +572,7 @@ button::-moz-focus-inner {
   }
 
   .panel-footer {
-    clear: both;
-    overflow: hidden;
+    &:extend(.clearfix all);
     padding: 20px 15px;
   }
 }
@@ -591,11 +589,8 @@ button::-moz-focus-inner {
 
 //== Wells
 .well {
-  margin-bottom: 0;
   border-radius: 0;
-  border-width: 1px;
   box-shadow: none;
-  margin: 0;
   min-height: 0;
 }
 
@@ -619,3 +614,4 @@ button::-moz-focus-inner {
 //== Type
 
 //== Miscellaneous
+
