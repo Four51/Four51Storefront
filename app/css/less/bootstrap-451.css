@@ -6783,11 +6783,14 @@ select.ng-invalid:invalid:invalid:focus {
   right: 5px;
   border-bottom: 1px solid #d6d6d6;
 }
+.dropdown-mega p {
+  margin-left: 5px;
+}
 .dropdown-mega > a {
   float: none;
   margin: 0 auto;
   display: block;
-  width: 40px;
+  width: 45px;
   font-size: 18px;
   color: #154964;
 }
