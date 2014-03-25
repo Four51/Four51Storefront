@@ -6,7 +6,7 @@
     </div>
     <div id="451qa_list_variants" class="panel-body">
         <div class="row" ng-repeat="v in LineItem.Product.Variants">
-            <a href=#/product/{{LineItem.Product.ViewName}}/{{LineItem.Product.InteropID}}/{{v.InteropID}} class="text-info">{{v.ExternalID}}</a>
+            <a href=#/product/{{LineItem.Product.InteropID}}/{{v.InteropID}} class="text-info">{{v.ExternalID}}</a>
             <div class="pull-right view-form-icon" ng-if="allowAddFromVariantList">
                 <quantityfield calculated="calcVariantLineItems" lineitem="variantLineItems[v.InteropID]" class="quantity" /> {{variantLineItems[v.InteropID].qtyError}} {{variantLineItems[v.InteropID].LineTotal | currency}}
             </div>

@@ -49,7 +49,7 @@ four51.app.factory('$451', function(AppConst) {
 	}
 	return {
 		debug: AppConst.debug,
-		isAnon: AppConst.isAnon,
+		isAnon: four51IsAnonUser,
 		//appname: four51.app.name,
 		apiName : four51.apiName(),
 		api: function(path) {
