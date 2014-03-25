@@ -6811,7 +6811,7 @@ select.ng-invalid:invalid:invalid:focus {
 .dropdown-mega .dropdown-mega .dropdown-menu a {
   padding: 3px 0;
 }
-@media (max-width: 767px) {
+@media (max-width: 992px) {
   .dropdown-mega .dropdown-menu a,
   .dropdown-mega .dropdown-mega .dropdown-menu a {
     padding: 10px 0;
@@ -6834,7 +6834,7 @@ select.ng-invalid:invalid:invalid:focus {
 .dropdown-mega .dropdown-mega .dropdown-menu > ul > li > a {
   font-weight: bold;
 }
-@media (max-width: 767px) {
+@media (max-width: 992px) {
   .dropdown-mega .dropdown-menu > ul > li > a,
   .dropdown-mega .dropdown-mega .dropdown-menu > ul > li > a {
     border-top: 1px solid #dddddd;

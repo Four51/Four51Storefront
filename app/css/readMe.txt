@@ -1,10 +1,14 @@
 //== Front End Strategy
 
     Customize the Four51 SPA    -       Do not edit custom.css, work in the LESS framework
+                                        Do not edit the core bootstrap-451.less/css file
+                                        Do not edit the bootstrap or fourfiveone directories
+                                        Do edit the customizations directory and files
                                             ~/less/customizations
                                             http://lesscss.org/
 
-    Theme the Four51 SPA        -       Do not edit the LESS, work in the static custom.css file
+    Theme the Four51 SPA        -       Do not edit the LESS,
+                                        Do edit the static custom.css file
                                             ~/less/customizations/custom.css
 
     Bootstrap 3.1.1             -       http://getbootstrap.com/
