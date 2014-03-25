@@ -5968,7 +5968,6 @@ body {
   font-smoothing: antialiased;
   -webkit-text-stroke: 1px transparent;
   margin-bottom: 100px;
-  overflow: hidden;
 }
 @-ms-viewport {
   width: auto !important;
@@ -6781,7 +6780,7 @@ select.ng-invalid:invalid:invalid:focus {
   height: 40px;
   left: 5px;
   right: 5px;
-  border-bottom: 1px solid #d6d6d6;
+  border-bottom: 1px solid #dddddd;
 }
 .dropdown-mega p {
   margin-left: 5px;
@@ -7053,8 +7052,7 @@ select.ng-invalid:invalid:invalid:focus {
   margin: 0;
 }
 .panel-order {
-  margin-bottom: 0;
-  border-bottom: none;
+  margin-bottom: 5px;
 }
 .panel-order .panel-heading {
   cursor: pointer;
