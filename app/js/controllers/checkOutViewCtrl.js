@@ -7,13 +7,9 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
         $scope.addresses = list;
     });
 
-	var showOrderConfig = function() {
-		return ($scope.user.Permissions.contains('EditPOID') ||
-			$scope.user.Permissions.contains('Comments') ||
-			($scope.user.Permissions.contains('CostCenterPerOrder') && !$scope.user.Permissions.contains('CostCenterPerLine')) ||
-			$scope.currentOrder.OrderFields.length > 0);
-	}
-	$scope.hasOrderConfig = showOrderConfig();
+	$scope.hasOrderConfig = OrderConfig.hasConfig($scope.currentOrder, $scope.user);
+	$scope.checkOutSection = $scope.hasOrderConfig ? 'order' : 'shipping';
+
 	$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
 	$scope.billaddress = { Country: 'US', IsShipping: false, IsBilling: true };
 
@@ -123,6 +119,4 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     $scope.saveFavorite = function() {
         FavoriteOrder.save($scope.currentOrder);
     };
-
-    $scope.checkOutSection = showOrderConfig() ? 'order' : 'shipping';
 });

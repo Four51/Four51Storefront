@@ -46,6 +46,13 @@ four51.app.factory('OrderConfig', function() {
 		});
 	}
 
+	var showOrderDetails = function() {
+		return (user.Permissions.contains('EditPOID') ||
+			user.Permissions.contains('Comments') ||
+			(user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')) ||
+			order.OrderFields.length > 0);
+	}
+
 	function _hasAddress() {
 		if (order.ShipAddressID != null) return true;
 		angular.forEach(order.LineItems, function(li) {
@@ -75,7 +82,11 @@ four51.app.factory('OrderConfig', function() {
                 setPaymentMethod(a);
             }
             return this;
-        }
+        },
+	    hasConfig: function(o,u) {
+		    order = o; user = u;
+		    return showOrderDetails();
+	    }
     };
 });
 

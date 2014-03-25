@@ -65,7 +65,9 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
 
     $scope.$on('event:auth-loginConfirmed', function(){
         $route.reload();
-	    analytics($scope.user.Company.GoogleAnalyticsCode);
+	    User.get(function(user) {
+		    analytics(user.Company.GoogleAnalyticsCode);
+	    });
 	});
 	$scope.$on("$routeChangeSuccess", init);
     $scope.$on('event:auth-loginRequired', cleanup);
