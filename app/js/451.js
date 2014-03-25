@@ -1,6 +1,4 @@
-/* Four51 Global Namespace */
-
-four51.app.factory('$451', function(AppConst) {
+four51.app.factory('$451', function() {
 	function json_filter(input, options, op) {
 		if (input == null || options == null) return;
 		var result = [];
@@ -48,9 +46,8 @@ four51.app.factory('$451', function(AppConst) {
 		return n >>> 0 === parseFloat(n);
 	}
 	return {
-		debug: AppConst.debug,
+		debug: true,
 		isAnon: four51IsAnonUser,
-		//appname: four51.app.name,
 		apiName : four51.apiName(),
 		api: function(path) {
             return '/api/' + four51.apiName() + "/" + path;
