@@ -56,15 +56,24 @@
     font-size: @font-size-small;
   }
   ul{
+    &:extend(.clearfix all);
     list-style-type: none;
     padding: 1.5em 0;
     li {
       margin: 2px 0;
+      @media (max-width: @screen-sm-min) {
+        .row {
+          div {
+            padding: 0;
+          }
+        }
+      }
     }
   }
   a {
     position: relative;
     display: block;
+    height: 52px;
     padding: .4em;
     margin: 0;
     background-color: @panel-default-heading-bg;

@@ -4,6 +4,7 @@
 
 //== A more perfect table
 .panel-table {
+  &:extend(.clearfix all);
   padding: 0;
   border: 1px solid @panel-default-border;
   margin: 15px;
@@ -33,12 +34,12 @@
     .btn {
       margin: 2px 0;
     }
-    span {
+    span.panel-th {
       float: left;
       margin-right: 10px;
     }
   }
-  &:extend(.clearfix all);
+
 }
 
 //== Headroom
