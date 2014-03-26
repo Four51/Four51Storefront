@@ -1,9 +1,9 @@
-four51.app.factory('SavedCreditCard', function($resource, $rootScope, $451){
+four51.app.factory('SavedCreditCard', ['$resource', '$rootScope', '$451', function($resource, $rootScope, $451) {
 	function _then(fn, data) {
         if (angular.isFunction(fn)) {
             fn(data);
         }
-    };
+    }
 
     var _query = function(success) {
 	    var cards = store.get('451Cache.SavedCards');
@@ -25,4 +25,4 @@ four51.app.factory('SavedCreditCard', function($resource, $rootScope, $451){
         query: _query,
 	    delete: _delete
     };
-});
+}]);

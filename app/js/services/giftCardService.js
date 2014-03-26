@@ -1,4 +1,4 @@
-four51.app.factory('GiftCard', function($resource, $451, Error) {
+four51.app.factory('GiftCard', ['$resource', '$451', 'Error', function($resource, $451, Error) {
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
@@ -19,4 +19,4 @@ four51.app.factory('GiftCard', function($resource, $451, Error) {
 	return {
 		redeem: _redeem
 	};
-});
+}]);

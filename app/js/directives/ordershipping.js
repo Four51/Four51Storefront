@@ -1,4 +1,4 @@
-four51.app.directive('ordershipping', function(Order, Shipper, Address, OrderConfig) {
+four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'OrderConfig', function(Order, Shipper, Address, OrderConfig) {
 	var obj = {
 		restrict: 'AE',
 		templateUrl: 'partials/controls/orderShipping.html',
@@ -143,4 +143,4 @@ four51.app.directive('ordershipping', function(Order, Shipper, Address, OrderCon
 		}
 	};
 	return obj;
-})
+}]);

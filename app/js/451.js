@@ -45,6 +45,7 @@ four51.app.factory('$451', function() {
 	var _isPositiveInteger = function(n) {
 		return n >>> 0 === parseFloat(n);
 	}
+
 	return {
 		debug: true,
 		isAnon: four51IsAnonUser,

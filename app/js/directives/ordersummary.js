@@ -1,4 +1,4 @@
-four51.app.directive('ordersummary', function(Order, Coupon) {
+four51.app.directive('ordersummary', ['Order', 'Coupon', function(Order, Coupon) {
 	var obj = {
 		restrict: 'AE',
 		templateUrl: 'partials/controls/orderSummary.html',
@@ -44,4 +44,4 @@ four51.app.directive('ordersummary', function(Order, Coupon) {
 		}
 	};
 	return obj;
-});
+}]);

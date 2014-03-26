@@ -1,4 +1,4 @@
-four51.app.factory('Coupon', function($resource, $451, Error){
+four51.app.factory('Coupon', ['$resource', '$451', 'Error', function($resource, $451, Error){
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
@@ -25,4 +25,4 @@ four51.app.factory('Coupon', function($resource, $451, Error){
 		apply: _save,
 		remove: _delete
 	};
-});
+}]);

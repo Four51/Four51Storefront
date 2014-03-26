@@ -1,5 +1,6 @@
 
-four51.app.controller('AddressListCtrl', function ($scope, $location, $451, AddressList) {
+four51.app.controller('AddressListCtrl', ['$scope', '$location', '$451', 'AddressList',
+function ($scope, $location, $451, AddressList) {
     AddressList.query(function(list) {
         $scope.addresses = list;
     });
@@ -21,5 +22,4 @@ four51.app.controller('AddressListCtrl', function ($scope, $location, $451, Addr
             add.Selected = event.currentTarget.checked;
         });
     }
-});
-
+}]);

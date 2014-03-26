@@ -1,4 +1,5 @@
-four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, OrderConfig, User) {
+four51.app.controller('CartViewCtrl', ['$scope', '$location', '$451', 'Order', 'OrderConfig', 'User',
+function ($scope, $location, $451, Order, OrderConfig, User) {
     $scope.currentDate = new Date();
 	$scope.errorMessage = null;
     $scope.continueShopping = function() {
@@ -109,4 +110,4 @@ four51.app.controller('CartViewCtrl', function ($scope, $location, $451, Order, 
     $scope.onPrint = function()  {
 	    window.print();
     };
-});
+}]);

@@ -3,17 +3,15 @@
 <head>
 	<!--baseTagToken-->
 	<!--headscriptToken-->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Order Cloud</title>
-    <!--- bootstrap-451.css is non editable --->
-	<link rel="stylesheet" href="css/less/bootstrap-451.css">
-    <!--- custom.css is editable --->
-    <link rel="stylesheet" href="css/less/custom.css">
-    <link href="css/font-awesome.min.css" rel="stylesheet"/>
-    <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
-    <link href='//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'/>
-    <link rel="stylesheet" href="css/animate.min.css"/>
+	<link rel="stylesheet" href="css/less/bootstrap-451.css" />
+    <link rel="stylesheet" href="css/less/custom.css" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css' />
+    <link href='//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="css/animate.min.css" />
 </head>
 <body ng-cloak ng-class="ng-cloak">
 <section>
@@ -34,119 +32,122 @@
     </section>
 </section>
 
-<!-- CDN libraries -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-sanitize.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-cookies.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-animate.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-resource.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-route.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-touch.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-loader.min.js"></script>
-<!-- end CDN libraries -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" data-group="cdn"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.js" data-group="cdn"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-sanitize.min.js" data-group="cdn"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-cookies.min.js" data-group="cdn"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-animate.min.js" data-group="cdn"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-resource.min.js" data-group="cdn"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-route.min.js" data-group="cdn"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-touch.min.js" data-group="cdn"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-loader.min.js" data-group="cdn"></script>
+    <!--<script src="js/source.js" data-group="cdn"></script>-->
+<!--<script src="js/resources.js" data-group="cdn"></script>-->
 
-<!-- minified references -->
-    <script src="lib/angular_ui/ui-utils.min.js"></script>
-    <script src="lib/angular_ui/ui-bootstrap-tpls-0.10.0.min.js"></script>
-    <script src="lib/angular/plugins/headroom.min.js"></script>
-    <script src="lib/angular/angular.headroom.min.js"></script>
-    <script src="lib/angular/angular-ga-analytics.js"></script>
-<!-- end minified references -->
+    <script src="lib/angular_ui/ui-utils.min.js" data-type="minified" data-group="resources"></script>
+    <script src="lib/angular_ui/ui-bootstrap-tpls-0.10.0.min.js" data-type="minified" data-group="resources"></script>
+    <script src="lib/angular/plugins/headroom.min.js" data-type="minified" data-group="resources"></script>
+    <script src="lib/angular/angular.headroom.min.js" data-type="minified" data-group="resources"></script>
+    <script src="lib/angular/angular-ga-analytics.js" data-type="minified" data-group="resources"></script>
 
-<!-- not minified -->
-    <script src="lib/angular/plugins/Debouncer.js"></script>
-    <script src="lib/store.js"></script>
-<!-- end not minified -->
+    <script src="lib/angular/plugins/Debouncer.js" data-type="unminified" data-group="resources"></script>
+    <script src="lib/store.js" data-type="minified" data-group="cdn"></script>
 
-<!-- Four51 source -->
-    <script src="js/app.js"></script>
-    <script src="js/451.js"></script>
-    <script src="js/filters.js"></script>
-    <script src="js/config.js"></script>
-    <script src="js/routing.js"></script>
-	<script src="js/four51consts.js"></script>
+    <script src="js/app.js" data-type="unminified" data-group="source"></script>
+    <script src="js/451.js" data-type="unminified" data-group="source"></script>
+    <script src="js/filters.js" data-type="unminified" data-group="source"></script>
+    <script src="js/config.js" data-type="unminified" data-group="source"></script>
+    <script src="js/routing.js" data-type="unminified" data-group="source"></script>
+	<script src="js/four51consts.js" data-type="unminified" data-group="source"></script>
 
-    <script src="js/controllers/Four51Ctrl.js"></script>
-    <script src="js/controllers/categoryCtrl.js"></script>
-    <script src="js/controllers/errorCtrl.js"></script>
-    <script src="js/controllers/loginCtrl.js"></script>
-    <script src="js/controllers/orderSearchCtrl.js"></script>
-    <script src="js/controllers/orderHistoryViewCtrl.js"></script>
-    <script src="js/controllers/lineItemHistoryCtrl.js"></script>
-    <script src="js/controllers/navCtrl.js"></script>
-    <script src="js/controllers/productCtrl.js"></script>
-    <script src="js/controllers/productListCtrl.js"></script>
-    <script src="js/controllers/messageListCtrl.js"></script>
-    <script src="js/controllers/messageViewCtrl.js"></script>
-    <script src="js/controllers/favoriteOrderCtrl.js"></script>
-    <script src="js/controllers/userEditCtrl.js"></script>
-    <script src="js/controllers/addressInputCtrl.js"></script>
-    <script src="js/controllers/addressListCtrl.js"></script>
-    <script src="js/controllers/addressViewCtrl.js"></script>
-    <script src="js/controllers/cartCtrl.js"></script>
-    <script src="js/controllers/lineItemGridCtrl.js"></script>
-    <script src="js/controllers/checkOutViewCtrl.js"></script>
-    <script src="js/controllers/approvalInputCtrl.js"></script>
-	<script src="js/controllers/specFormCtrl.js"></script>
-	<script src="js/controllers/securityCtrl.js"></script>
-	<script src="js/controllers/conditionsCtrl.js"></script>
-    <script src="js/controllers/giftCardRedemptionCtrl.js"></script>
-    <script src="js/controllers/reportsCtrl.js"></script>
+    <script src="js/controllers/Four51Ctrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/categoryCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/errorCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/loginCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/orderSearchCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/orderHistoryViewCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/lineItemHistoryCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/navCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/productCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/productListCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/messageListCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/messageViewCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/favoriteOrderCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/userEditCtrl.js" data-type="unminified" data-group="source"></script>
+	<script src="js/controllers/giftCardRedemptionCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/addressInputCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/addressListCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/addressViewCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/cartCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/checkOutViewCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/approvalInputCtrl.js" data-type="unminified" data-group="source"></script>
+	<script src="js/controllers/specFormCtrl.js" data-type="unminified" data-group="source"></script>
+	<script src="js/controllers/conditionsCtrl.js" data-type="unminified" data-group="source"></script>
+    <script src="js/controllers/reportsCtrl.js" data-type="unminified" data-group="source"></script>
+	<script src="js/controllers/reportCtrl.js" data-type="unminified" data-group="source"></script>
+	<script src="js/controllers/productSearchCtrl.js" data-type="unminified" data-group="source"></script>
+	<script src="js/controllers/lineItemEditCtrl.js" data-type="unminified" data-group="source"></script>
+	<script src="js/controllers/relatedProductsCtrl.js" data-type="unminified" data-group="source"></script>
+	<script src="js/controllers/shortProductViewCtrl.js" data-type="unminified" data-group="source"></script>
 
-    <script src="js/services/interceptors.js"></script>
-    <script src="js/services/errorService.js"></script>
-    <script src="js/services/securityService.js"></script>
-    <script src="js/services/userService.js"></script>
-    <script src="js/services/orderService.js"></script>
-    <script src="js/services/orderConfigService.js"></script>
-    <script src="js/services/orderSearchService.js"></script>
-    <script src="js/services/orderStatsService.js"></script>
-    <script src="js/services/productService.js"></script>
-    <script src="js/services/categoryService.js"></script>
-    <script src="js/services/messageService.js"></script>
-    <script src="js/services/favoriteOrderService.js"></script>
-    <script src="js/services/accountsService.js"></script>
-    <script src="js/services/addressService.js"></script>
-    <script src="js/services/shipperService.js"></script>
-    <script src="js/services/couponService.js"></script>
-    <script src="js/services/giftCardService.js"></script>
-    <script src="js/services/savedCreditCardService.js"></script>
-    <script src="js/services/resourceService.js"></script>
-    <script src="js/services/reportsService.js"></script>
-    <script src="js/services/analyticsService.js"></script>
-    <script src="js/services/navService.js"></script>
+    <script src="js/interceptors.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/errorService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/securityService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/userService.js" data-type="unminified" data-group="source"></script>
+	<script src="js/services/productDisplayService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/orderService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/orderConfigService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/orderSearchService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/orderStatsService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/productService.js" data-type="unminified" data-group="source"></script>
+	<script src="js/services/variantService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/categoryService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/messageService.js" data-type="unminified" data-group="source"></script>
+	<script src="js/services/messageListService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/favoriteOrderService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/accountsService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/addressService.js" data-type="unminified" data-group="source"></script>
+	<script src="js/services/addressListService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/shipperService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/couponService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/giftCardService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/savedCreditCardService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/resourceService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/reportsService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/analyticsService.js" data-type="unminified" data-group="source"></script>
+    <script src="js/services/navService.js" data-type="unminified" data-group="source"></script>
 
-    <script src="js/factories/fileReader.js"></script>
+    <script src="js/factories/fileReader.js" data-type="unminified" data-group="source"></script>
 
-    <script src="js/directives/match.js"></script>
-    <script src="js/directives/buttonredirect.js"></script>
-    <script src="js/directives/product.js"></script>
-    <script src="js/directives/paymentselection.js"></script>
-    <script src="js/directives/customfields.js"></script>
-    <script src="js/directives/approvalrulelist.js"></script>
-    <script src="js/directives/tree.js"></script>
-    <script src="js/directives/addressinput.js"></script>
-    <script src="js/directives/reporting.js"></script>
-    <script src="js/directives/inlineerror.js"></script>
-    <script src="js/directives/nav.js"></script>
-    <script src="js/directives/branding.js"></script>
-    <script src="js/directives/login.js"></script>
-    <script src="js/directives/approval.js"></script>
-    <script src="js/directives/fileinput.js"></script>
-    <script src="js/directives/shortCartView.js"></script>
-    <script src="js/directives/loadingindicator.js"></script>
-    <script src="js/directives/alertShow.js"></script>
-    <script src="js/directives/giftcard.js"></script>
-    <script src="js/directives/copyright.js"></script>
-    <script src="js/directives/ordersummary.js"></script>
-    <script src="js/directives/orderdetails.js"></script>
-    <script src="js/directives/ordershipping.js"></script>
-    <script src="js/directives/orderbilling.js"></script>
-    <script src="js/directives/orderapprovals.js"></script>
-    <script src="js/directives/daterange.js"></script>
-    <script src="js/directives/printing.js"></script>
-<!-- end Four51 source -->
+    <script src="js/directives/match.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/buttonredirect.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/product.js" data-type="unminified" data-group="source"></script>
+	<script src="js/directives/quantityfield.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/paymentselection.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/customtextfield.js" data-type="unminified" data-group="source"></script>
+	<script src="js/directives/customselectionfield.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/approvalrulelist.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/tree.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/addressinput.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/reporting.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/inlineerror.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/nav.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/branding.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/login.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/approval.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/customfieldfield.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/shortCartView.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/loadingindicator.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/alertShow.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/giftcard.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/copyright.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/ordersummary.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/orderdetails.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/ordershipping.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/orderbilling.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/orderapprovals.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/daterange.js" data-type="unminified" data-group="source"></script>
+    <script src="js/directives/printing.js" data-type="unminified" data-group="source"></script>
 
 </body>
 </html>

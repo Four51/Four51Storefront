@@ -1,5 +1,3 @@
-
-// used to define order properties as dictated by business requirements
 four51.app.factory('OrderConfig', function() {
     var user, order;
     var setCostCenter = function() {

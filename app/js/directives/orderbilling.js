@@ -1,5 +1,4 @@
-
-four51.app.directive('orderbilling', function(SpendingAccount, Address) {
+four51.app.directive('orderbilling', ['SpendingAccount', 'Address', function(SpendingAccount, Address) {
 	var obj = {
 		restrict: 'AE',
 		templateUrl: 'partials/controls/orderBilling.html',
@@ -123,4 +122,4 @@ four51.app.directive('orderbilling', function(SpendingAccount, Address) {
 		}
 	};
 	return obj;
-});
+}]);
