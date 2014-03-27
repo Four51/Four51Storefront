@@ -1,9 +1,8 @@
-
-four51.app.directive('orderbilling', function(SpendingAccount, Address) {
+four51.app.directive('orderbilling', ['SpendingAccount', 'Address', function(SpendingAccount, Address) {
 	var obj = {
 		restrict: 'AE',
 		templateUrl: 'partials/controls/orderBilling.html',
-		controller: function($scope) {
+		controller: ['$scope', function($scope) {
 			SpendingAccount.query(function(data) {
 				$scope.SpendingAccounts = data;
 				budgetAccountCalculation($scope.currentOrder.BudgetAccountID);
@@ -120,7 +119,7 @@ four51.app.directive('orderbilling', function(SpendingAccount, Address) {
 				}
 				return valid;
 			}
-		}
+		}]
 	};
 	return obj;
-});
+}]);

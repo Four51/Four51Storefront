@@ -1,4 +1,5 @@
-four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, $rootScope, $451, Analytics, User, Order, OrderConfig, FavoriteOrder, AddressList) {
+four51.app.controller('CheckOutViewCtrl', ['$scope', '$location', '$filter', '$rootScope', '$451', 'Analytics', 'User', 'Order', 'OrderConfig', 'FavoriteOrder', 'AddressList',
+function ($scope, $location, $filter, $rootScope, $451, Analytics, User, Order, OrderConfig, FavoriteOrder, AddressList) {
 	if (!$scope.currentOrder) {
         $location.path('catalog');
     }
@@ -119,4 +120,4 @@ four51.app.controller('CheckOutViewCtrl', function ($scope, $location, $filter, 
     $scope.saveFavorite = function() {
         FavoriteOrder.save($scope.currentOrder);
     };
-});
+}]);

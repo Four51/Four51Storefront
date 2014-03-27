@@ -10,7 +10,7 @@ four51.app.directive('categorytree', function() {
 	return obj;
 });
 
-four51.app.directive('node', function($compile) {
+four51.app.directive('node', ['$compile', function($compile) {
 	var obj = {
 		restrict: 'E',
 		replace: true,
@@ -26,4 +26,4 @@ four51.app.directive('node', function($compile) {
 		}
 	};
 	return obj;
-});
+}]);

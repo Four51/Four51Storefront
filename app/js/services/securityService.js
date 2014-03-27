@@ -1,4 +1,4 @@
-four51.app.factory('Security', function($451, $cookieStore) {
+four51.app.factory('Security', ['$451', '$cookieStore', function($451, $cookieStore) {
 	var _cookieName = 'user.' + $451.apiName;
     return {
         init: function(user, auth) {
@@ -29,4 +29,4 @@ four51.app.factory('Security', function($451, $cookieStore) {
             delete this.currentUser;
         }
     }
-});
+}]);

@@ -1,4 +1,4 @@
-four51.app.factory('User', function($q, $rootScope, $resource, $451, Security, Error) {
+four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security', 'Error', function($q, $rootScope, $resource, $451, Security, Error) {
     var _cacheName = '451Cache.User.' + $451.apiName;
 	function _then(fn, data) {
         if (angular.isFunction(fn))
@@ -42,7 +42,8 @@ four51.app.factory('User', function($q, $rootScope, $resource, $451, Security, E
                 store.set(_cacheName, u);
             },
 	        function(ex) {
-		        error(Error.format(ex));
+		        if (angular.isFunction(error))
+			        error(Error.format(ex));
 	        }
         );
     }
@@ -54,7 +55,8 @@ four51.app.factory('User', function($q, $rootScope, $resource, $451, Security, E
                 _then(success,u);
 	        },
 	        function(ex) {
-		        error(Error.format(ex));
+		        if (angular.isFunction(error))
+			        error(Error.format(ex));
 	        }
         );
     }
@@ -70,5 +72,5 @@ four51.app.factory('User', function($q, $rootScope, $resource, $451, Security, E
         save: _save,
         logout: _logout,
 	    refresh: _refresh
-    }
-});
+    };
+}]);

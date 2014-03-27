@@ -1,4 +1,4 @@
-four51.app.directive('redirect', function($location) {
+four51.app.directive('redirect', ['$location', function($location) {
 	return {
 		restrict: 'A',
 		link: function(scope, element, attrs) {
@@ -10,5 +10,5 @@ four51.app.directive('redirect', function($location) {
 				});
 			});
 		}
-	}
-});
+	};
+}]);

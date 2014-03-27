@@ -1,4 +1,4 @@
-four51.app.factory('SpendingAccount', function($resource, $rootScope, $451){
+four51.app.factory('SpendingAccount', ['$resource', '$rootScope', '$451', function($resource, $rootScope, $451) {
 	function _then(fn, data) {
         if (angular.isFunction(fn)) {
             fn(data);
@@ -15,4 +15,4 @@ four51.app.factory('SpendingAccount', function($resource, $rootScope, $451){
     return {
         query: _query
     };
-});
+}]);

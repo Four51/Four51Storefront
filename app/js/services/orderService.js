@@ -1,4 +1,4 @@
-four51.app.factory('Order', function($resource, $rootScope, $451, Security, Error) {
+four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Error', function($resource, $rootScope, $451, Security, Error) {
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
@@ -79,4 +79,4 @@ four51.app.factory('Order', function($resource, $rootScope, $451, Security, Erro
         delete: _delete,
         submit: _submit
     }
-});
+}]);
