@@ -26,13 +26,13 @@ four51.app.directive('lineitemreport', function() {
 	var obj = {
 		restrict: 'E',
 		templateUrl: 'partials/Reporting/lineItemReport.html',
-		controller: function($scope) {
+		controller: ['$scope', function($scope) {
 			$scope.open = function(cal, event) {
 				event.preventDefault();
 				event.stopPropagation();
 				$scope[cal] = true;
 			};
-		}
+		}]
 	};
 	return obj;
 });

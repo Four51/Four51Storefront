@@ -46,7 +46,7 @@ four51.app.directive('staticspecstable', function() {
         },
         restrict: 'E',
         templateUrl: 'partials/controls/staticSpecs.html',
-		controller: function($scope){
+		controller: ['$scope', function($scope){
 			$scope.hasvisiblechild = function(specs){
 				var hasChild = false;
 				angular.forEach(specs, function(item){
@@ -55,7 +55,7 @@ four51.app.directive('staticspecstable', function() {
 				})
 				return hasChild;
 			}
-		}
+		}]
     };
 
     return obj;

@@ -2,15 +2,12 @@ four51.app.directive('ordersummary', ['Order', 'Coupon', function(Order, Coupon)
 	var obj = {
 		restrict: 'AE',
 		templateUrl: 'partials/controls/orderSummary.html',
-		controller: function($scope) {
+		controller: ['$scope', function($scope) {
 			var save = function(callback) {
 				Order.save($scope.currentOrder,
 					function(data) {
 						$scope.currentOrder = data;
 						if (callback) callback($scope.currentOrder);
-					},
-					function(ex) {
-
 					}
 				);
 			};
@@ -41,7 +38,7 @@ four51.app.directive('ordersummary', ['Order', 'Coupon', function(Order, Coupon)
 					});
 				});
 			};
-		}
+		}]
 	};
 	return obj;
 }]);

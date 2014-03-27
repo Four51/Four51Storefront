@@ -1,10 +1,7 @@
 four51.app.directive('orderdetails', function() {
 	var obj = {
 		restrict: 'AE',
-		templateUrl: 'partials/controls/orderDetails.html',
-		controller: function($scope) {
-
-		}
+		templateUrl: 'partials/controls/orderDetails.html'
 	};
 	return obj;
 });

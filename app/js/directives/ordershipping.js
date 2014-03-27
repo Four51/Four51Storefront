@@ -2,7 +2,7 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'OrderConf
 	var obj = {
 		restrict: 'AE',
 		templateUrl: 'partials/controls/orderShipping.html',
-		controller: function($scope) {
+		controller: ['$scope', function($scope) {
 			var saveChanges = function(callback) {
 				$scope.errorMessage = null;
 				var auto = $scope.currentOrder.autoID;
@@ -139,8 +139,7 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'OrderConf
 			$scope.$on('event:AddressCancel', function(event) {
 				$scope.addressform = false;
 			});
-
-		}
+		}]
 	};
 	return obj;
 }]);

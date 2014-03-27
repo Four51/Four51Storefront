@@ -1,4 +1,4 @@
-four51.app.factory('ProductDisplayService', function($451, $sce, Variant, Product){
+four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product', function($sce, $451, Variant, Product){
 	function calcTotal(lineItem){
 
 		var ps = lineItem.PriceSchedule;
@@ -258,4 +258,4 @@ four51.app.factory('ProductDisplayService', function($451, $sce, Variant, Produc
 			return staticSpecSPAConfig(product, specName);
 		}
 	}
-});
+}]);
