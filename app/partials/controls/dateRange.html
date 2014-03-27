@@ -1,26 +1,37 @@
-<div class="panel-heading">
-    <h3 class="panel-title panel-primary">Date Range</h3>
-</div>
-<div class="row col-xs-12">
+<div class="row view-form-icon">
     <div class="col-md-4">
-        <div class="input-group">
-            <label>From</label>
-            <span class="input-group-btn">
-                <button class="btn btn-default" ng-click="open('fromopened', $event)">
-                    <span class="fa fa-calendar"></span>
-                </button>
-            </span>
-            <input type="text" class="form-control" datepicker-popup="MM/dd/yyyy" ng-model="fromdate" is-open="fromopened" min="minDate" ng-change="span = null" />
+        <label>Start Date</label>
+        <div class="btn btn-default btn-block btn-date hidden-lg hidden-md"
+             ng-click="$event.preventDefault();$event.stopPropagation();startopened = !startopened;"
+             style="margin:0; height:40px; padding-top:8px;">
+            {{fromdate ? '' : 'Tap to set a start date'}}
+            <span class="text-info">{{fromdate | date:'M/dd/yy'}}</span>
         </div>
+        <input placeholder="Start Date" ng-model="fromdate"
+               ng-change="span = null"
+               type="text"
+               class="form-control"
+               datepicker-popup="MM/dd/yy"
+               is-open="startopened"
+               min="minDate"/>
+        <i class="fa fa-calendar"></i>
     </div>
     <div class="col-md-4">
-        <div class="input-group">
-            <label>To</label>
-            <input type="text" class="form-control" datepicker-popup="MM/dd/yyyy" ng-model="todate" is-open="toopened" min="minDate" ng-change="span = null" />
-            <span class="input-group-btn">
-                <button class="btn btn-default" ng-click="open('toopened', $event)"><span class="fa fa-calendar"></span></button>
-            </span>
+        <label>End Date</label>
+        <div class="btn btn-default btn-block btn-date hidden-lg hidden-md"
+             ng-click="$event.preventDefault();$event.stopPropagation();endopened = !startopened;"
+             style="margin:0; height:40px; padding-top:8px;">
+            {{todate ? '' : 'Tap to set a start date'}}
+            <span class="text-info">{{todate | date:'M/dd/yy'}}</span>
         </div>
+        <input placeholder="Start Date" ng-model="todate"
+               ng-change="span = null"
+               type="text"
+               class="form-control"
+               datepicker-popup="MM/dd/yy"
+               is-open="endopened"
+               min="fromdate"/>
+        <i class="fa fa-calendar"></i>
     </div>
     <div class="col-md-4">
         <label>Time Span</label>

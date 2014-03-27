@@ -6073,7 +6073,7 @@ button::-moz-focus-inner {
 .col-sm-4.view-form-select:before {
   left: 45px;
 }
-.view-form-icon div {
+.view-form-icon > div {
   margin: 25px 0 0;
 }
 .view-form-icon .quantity div {
@@ -6144,6 +6144,7 @@ button::-moz-focus-inner {
     visibility: hidden;
     position: relative;
     top: -40px;
+    margin-bottom: -40px;
   }
   .panel-footer .btn {
     width: 100%;
@@ -6182,6 +6183,7 @@ button::-moz-focus-inner {
     visibility: hidden;
     position: relative;
     top: -40px;
+    margin-bottom: -40px;
   }
 }
 .navbar .container {
