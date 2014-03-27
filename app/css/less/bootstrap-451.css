@@ -6140,6 +6140,11 @@ button::-moz-focus-inner {
     appearance: 1px 1px 1px #fff;
     appearance: 0.5em;
   }
+  input[datepicker-popup] {
+    visibility: hidden;
+    position: relative;
+    top: -40px;
+  }
   .panel-footer .btn {
     width: 100%;
     padding: 15px;
@@ -6172,6 +6177,11 @@ button::-moz-focus-inner {
 @media (min-width: 768px) and (max-width: 991px) {
   .jumbotron {
     text-align: center;
+  }
+  input[datepicker-popup] {
+    visibility: hidden;
+    position: relative;
+    top: -40px;
   }
 }
 .navbar .container {
@@ -7244,7 +7254,7 @@ select.ng-invalid:invalid:invalid:focus {
   padding-left: 0;
   padding-right: 0;
 }
-table.datepicker-table {
+table[datepicker] {
   margin-left: 5px;
   margin-right: 5px;
   border-collapse: separate;
@@ -7264,18 +7274,4 @@ table.datepicker-table {
   margin-bottom: 30px;
   padding-bottom: 10px;
   border-bottom: 1px solid #dddddd;
-}
-@media (max-width: 767px) {
-  input[datepicker-popup] {
-    visibility: hidden;
-    position: relative;
-    top: -40px;
-  }
-}
-@media (min-width: 768px) and (max-width: 991px) {
-  input[datepicker-popup] {
-    visibility: hidden;
-    position: relative;
-    top: -40px;
-  }
 }
