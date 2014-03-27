@@ -6097,6 +6097,10 @@ button::-moz-focus-inner {
   color: #468847;
   box-shadow: none;
 }
+.view-form-icon .quantity div select {
+  border-radius: 0;
+  border-color: #dddddd;
+}
 .view-form-icon .input-group-addon {
   border: none;
   padding: 0 5px;
@@ -6349,9 +6353,6 @@ button::-moz-focus-inner {
 }
 .panel {
   word-wrap: break-word;
-}
-.panel.panel-primary p span {
-  float: left;
 }
 .panel.panel-primary .panel-heading {
   margin-top: 0;
@@ -6854,9 +6855,6 @@ select.ng-invalid:invalid:invalid:focus {
 .dropdown-mega .dropdown-mega .dropdown-menu > ul > li > ul li ul li > a {
   padding-left: 10px;
 }
-.panel-category-list {
-  padding: 2px;
-}
 .panel-category-list h3 {
   margin-top: 0;
 }
@@ -6883,9 +6881,6 @@ select.ng-invalid:invalid:invalid:focus {
 }
 .panel-category-list ul li a .empty i.fa {
   padding-top: 92.5px;
-}
-.panel-product-list {
-  padding: 2px;
 }
 .panel-product-list ul li {
   width: 100%;
@@ -7199,7 +7194,7 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-table .row .btn {
   margin: 2px 0;
 }
-.panel-table .row span.heading-xs {
+.panel-table .row span.panel-table-heading-xs {
   float: left;
   margin-right: 10px;
 }

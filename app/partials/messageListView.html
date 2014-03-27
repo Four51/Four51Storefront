@@ -36,21 +36,21 @@
                     <input type='checkbox' ng-model="message.Selected" />
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs heading-xs text-info">Status</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">Status</span>
                     {{message.Box}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs heading-xs text-info">Date</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">Date</span>
                     {{message.DateSent | date: 'medium'}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs heading-xs text-info">Subject</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">Subject</span>
                     <a ng-href="#/message/{{message.ID}}">
                         {{message.Subject}}
                     </a>
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs heading-xs text-info">From</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">From</span>
                     {{message.FromName}}
                 </div>
             </div>

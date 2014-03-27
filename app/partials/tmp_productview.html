@@ -1,5 +1,6 @@
 <sectionclass="product-detail-default">
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch product information" />
+    <!-- BREADCRUMB!-->
     <productnav product="LineItem.Product" variant="LineItem.Variant" />
     <!-- PRODUCT IMAGE PANEL!-->
     <div class="col-md-4 col-collapse">
@@ -92,7 +93,7 @@
                             <ul id="451qa_list_variants">
                                 <li ng-repeat="v in LineItem.Product.Variants | filter:queryVariants">
                                     <div class="row">
-                                        <a class="col-sm-8" ng-class="{'col-sm-8': allowAddFromVariantList, 'col-xs-12': !allowAddFromVariantList }" href=#/product/{{LineItem.Product.InteropID}}/{{v.InteropID}}>
+                                        <a ng-class="{'col-sm-8': allowAddFromVariantList }" href=#/product/{{LineItem.Product.InteropID}}/{{v.InteropID}}>
                                             <h5>
                                                 <strong>{{v.ExternalID}}</strong>
                                             </h5>

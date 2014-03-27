@@ -179,6 +179,10 @@ button::-moz-focus-inner {
         color:#468847;
         box-shadow: none;
       }
+      select {
+        border-radius: 0;
+        border-color: @panel-default-border;
+      }
     }
   }
 
@@ -543,9 +547,6 @@ button::-moz-focus-inner {
   word-wrap: break-word;
 
   &.panel-primary {
-    p span {
-      float: left;
-    }
     .panel-heading {
       margin-top: 0;
     }
