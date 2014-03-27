@@ -22,12 +22,20 @@
 //== Media queries breakpoints
 //** phone < 618px
 @media (max-width: @screen-xs-max) {
-  // code
+  input[datepicker-popup] {
+    visibility: hidden;
+    position: relative;
+    top: -40px;
+  }
 }
 
 //** tablet portrait < 768px
 @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
-  // code
+  input[datepicker-popup]{
+    visibility:hidden;
+    position:relative;
+    top:-40px;
+  }
 }
 
 //** tablet landscape & desktop  < 1024p

@@ -7265,3 +7265,17 @@ table.datepicker-table {
   padding-bottom: 10px;
   border-bottom: 1px solid #dddddd;
 }
+@media (max-width: 767px) {
+  input[datepicker-popup] {
+    visibility: hidden;
+    position: relative;
+    top: -40px;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  input[datepicker-popup] {
+    visibility: hidden;
+    position: relative;
+    top: -40px;
+  }
+}
