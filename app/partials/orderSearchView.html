@@ -163,23 +163,23 @@
                     <a ng-href="#/order/{{order.ID}}">{{order.ExternalID}}</a>
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs text-info">Type</span>
+                    <span class="visible-xs heading-xs text-info">Type</span>
                     {{order.Type}}
                 </div>
                 <div class="col-sm-2">
-                     <span class="visible-xs text-info">Status</span>
+                     <span class="visible-xs heading-xs text-info">Status</span>
                     {{order.StatusText}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs text-info">Submitted By</span>
+                    <span class="visible-xs heading-xs text-info">Submitted By</span>
                     {{order.FromUserFirstName + ' ' + order.FromUserLastName}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs text-info">Submitted Date</span>
+                    <span class="visible-xs heading-xs text-info">Submitted Date</span>
                     {{order.DateSubmitted || order.DateCreated | date:'short'}}
                 </div>
                 <div class="col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">
-                    <span class="visible-xs text-info">Total</span>
+                    <span class="visible-xs heading-xs text-info">Total</span>
                     {{order.Total | currency:"$"}}
                 </div>
             </div>

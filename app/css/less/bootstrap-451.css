@@ -7009,12 +7009,7 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-lineitem {
   border: none;
 }
-.panel-lineitem ~ .panel-body,
-.panel-lineitem ~ .panel-category-list,
-.panel-lineitem ~ .panel-product-list,
-.panel-lineitem ~ .panel-lineitem,
-.panel-lineitem ~ .panel-order-history,
-.panel-lineitem ~ .panel-order-shipping-multiple {
+.panel-lineitem ~ .panel-lineitem {
   border-top: 1px solid #dddddd;
 }
 .panel-lineitem .quantity-total {
@@ -7184,6 +7179,12 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-table a {
   text-decoration: underline;
 }
+.panel-table [class*="col-"] {
+  border-left: 1px solid #dddddd;
+}
+.panel-table [class*="col-"]:first-of-type {
+  border-left: none;
+}
 .panel-table .row {
   margin-left: 0;
   margin-right: 0;
@@ -7198,7 +7199,7 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-table .row .btn {
   margin: 2px 0;
 }
-.panel-table .row span.panel-th {
+.panel-table .row span.heading-xs {
   float: left;
   margin-right: 10px;
 }

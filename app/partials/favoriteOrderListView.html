@@ -44,19 +44,19 @@
                     <input type='checkbox' ng-model="order.Selected" />
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs text-info">Name</span>
+                    <span class="visible-xs heading-xs text-info">Name</span>
                     {{order.FavoriteName}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs text-info">Order ID</span>
+                    <span class="visible-xs heading-xs text-info">Order ID</span>
                     <a ng-href="#/order/{{order.ID}}">{{order.ExternalID}}</a>
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs text-info">Date Completed</span>
+                    <span class="visible-xs heading-xs text-info">Date Completed</span>
                     {{order.DateCompleted | date:'medium'}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs text-info">Order Type</span>
+                    <span class="visible-xs heading-xs text-info">Order Type</span>
                     {{order.Type}}
                 </div>
                 <div class="col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">

@@ -29,15 +29,15 @@
             </div>
             <div class="row" ng-repeat="report in Reports | filter:searchTerm">
                 <div class="col-sm-2">
-                    <span class="visible-xs text-info">Name</span>
+                    <span class="visible-xs heading-xs text-info">Name</span>
                     <a ng-href="{{'report/' + report.ID}}">{{report.Name}}</a>
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs text-info">Type</span>
+                    <span class="visible-xs heading-xs text-info">Type</span>
                     {{report.Type}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs text-info"></span>
+                    <span class="visible-xs heading-xs text-info"></span>
                     <a ng-href="{{'report/' + report.ID}}">Preview</a>
                 </div>
              </div>

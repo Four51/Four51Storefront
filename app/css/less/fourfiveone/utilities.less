@@ -2,7 +2,7 @@
 // Utilities
 // --------------------------------------------------
 
-//== A more perfect table
+//== A more perfect responsive table to display line items into block elements on phone
 .panel-table {
   &:extend(.clearfix all);
   padding: 0;
@@ -20,6 +20,13 @@
     text-decoration: underline;
   }
 
+  [class*="col-"] {
+    border-left: 1px solid @panel-default-border;
+    &:first-of-type {
+      border-left: none;
+    }
+  }
+
   .row {
     margin-left: 0;
     margin-right: 0;
@@ -34,7 +41,7 @@
     .btn {
       margin: 2px 0;
     }
-    span.panel-th {
+    span.heading-xs {
       float: left;
       margin-right: 10px;
     }
