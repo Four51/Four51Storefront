@@ -1,4 +1,4 @@
-four51.app.factory('$451', function() {
+four51.app.factory('$451', ['AppConst', function(AppConst) {
 	function json_filter(input, options, op) {
 		if (input == null || options == null) return;
 		var result = [];
@@ -47,7 +47,7 @@ four51.app.factory('$451', function() {
 	}
 
 	return {
-		debug: true,
+		debug: AppConst.debug,
 		isAnon: four51IsAnonUser,
 		apiName : four51.apiName(),
 		api: function(path) {
@@ -61,7 +61,7 @@ four51.app.factory('$451', function() {
         },
 		isPositiveInteger: _isPositiveInteger
 	};
-});
+}]);
 four51.apiName = function(){
 	return four51.app.ApiAppName ? four51.app.ApiAppName : window.location.pathname.split('/')[1];
 };
