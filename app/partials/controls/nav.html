@@ -20,7 +20,7 @@
                             <span class="hidden-xs">Orders</span>
                         </a>
                     </li>
-                    <li class="report" ng-class="{'active': isActive('reports'), 'active-xs': isActive('reports')}">
+                    <li class="report" ng-if="AppConst.debug" ng-class="{'active': isActive('reports'), 'active-xs': isActive('reports')}">
                         <a id="451qa_order_link" href="#/reports">
                             <i class="fa fa-clipboard"></i>
                             <span class="hidden-xs">Reports</span>

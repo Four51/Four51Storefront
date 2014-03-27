@@ -7078,6 +7078,9 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-order .panel-heading.no i:first-of-type {
   color: #f0ad4e;
 }
+.panel-order .panel-heading.open {
+  cursor: default;
+}
 .panel-order .panel-heading h3 .fa-caret-down ~ h3 {
   cursor: default;
 }
