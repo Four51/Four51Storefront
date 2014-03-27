@@ -6073,7 +6073,7 @@ button::-moz-focus-inner {
 .col-sm-4.view-form-select:before {
   left: 45px;
 }
-.view-form-icon div {
+.view-form-icon > div {
   margin: 25px 0 0;
 }
 .view-form-icon .quantity div {
@@ -6140,6 +6140,12 @@ button::-moz-focus-inner {
     appearance: 1px 1px 1px #fff;
     appearance: 0.5em;
   }
+  input[datepicker-popup] {
+    visibility: hidden;
+    position: relative;
+    top: -40px;
+    margin-bottom: -40px;
+  }
   .panel-footer .btn {
     width: 100%;
     padding: 15px;
@@ -6172,6 +6178,12 @@ button::-moz-focus-inner {
 @media (min-width: 768px) and (max-width: 991px) {
   .jumbotron {
     text-align: center;
+  }
+  input[datepicker-popup] {
+    visibility: hidden;
+    position: relative;
+    top: -40px;
+    margin-bottom: -40px;
   }
 }
 .navbar .container {
@@ -7244,7 +7256,7 @@ select.ng-invalid:invalid:invalid:focus {
   padding-left: 0;
   padding-right: 0;
 }
-table.datepicker-table {
+table[datepicker] {
   margin-left: 5px;
   margin-right: 5px;
   border-collapse: separate;
