@@ -1,7 +1,5 @@
-'use strict'
-
-four51.app.config(function($httpProvider) {
-	$httpProvider.interceptors.push(function($q, $rootScope, $451, Security) {
+four51.app.config(['$httpProvider', function($httpProvider) {
+	$httpProvider.interceptors.push(['$q', '$rootScope', '$451', 'Security', function($q, $rootScope, $451, Security) {
 		function appendAuth(config) {
 			config.headers['Authorization'] = Security.auth();
 			return config;
@@ -43,5 +41,5 @@ four51.app.config(function($httpProvider) {
 				return $q.reject(response);
 			}
 		};
-	});
-});
+	}]);
+}]);

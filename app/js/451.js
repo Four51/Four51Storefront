@@ -1,6 +1,4 @@
-/* Four51 Global Namespace */
-
-four51.app.factory('$451', function(AppConst) {
+four51.app.factory('$451', ['AppConst', function(AppConst) {
 	function json_filter(input, options, op) {
 		if (input == null || options == null) return;
 		var result = [];
@@ -47,10 +45,10 @@ four51.app.factory('$451', function(AppConst) {
 	var _isPositiveInteger = function(n) {
 		return n >>> 0 === parseFloat(n);
 	}
+
 	return {
 		debug: AppConst.debug,
-		isAnon: AppConst.isAnon,
-		//appname: four51.app.name,
+		isAnon: four51IsAnonUser,
 		apiName : four51.apiName(),
 		api: function(path) {
             return '/api/' + four51.apiName() + "/" + path;
@@ -63,7 +61,7 @@ four51.app.factory('$451', function(AppConst) {
         },
 		isPositiveInteger: _isPositiveInteger
 	};
-});
+}]);
 four51.apiName = function(){
 	return four51.app.ApiAppName ? four51.app.ApiAppName : window.location.pathname.split('/')[1];
 };

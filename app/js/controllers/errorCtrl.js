@@ -1,4 +1,4 @@
-four51.app.controller('ErrorCtrl', function ErrorCtrl($scope, $451) {
+four51.app.controller('ErrorCtrl', ['$scope', function ($scope) {
 	$scope.open = function() {
 		$scope.isError = true;
 	};
@@ -31,4 +31,4 @@ four51.app.controller('ErrorCtrl', function ErrorCtrl($scope, $451) {
 	});
 
 	$scope.template = { url: 'partials/errorView.html'};
-});
+}]);

@@ -1,4 +1,5 @@
-four51.app.controller('ApprovalInputCtrl', function ($scope, $rootScope, Order) {
+four51.app.controller('ApprovalInputCtrl', ['$scope', '$rootScope', 'Order',
+function ($scope, $rootScope, Order) {
 	$scope.approveOrder = function() {
 		$scope.loadingIndicator = true;
 		$scope.order.Approve = true;
@@ -22,4 +23,4 @@ four51.app.controller('ApprovalInputCtrl', function ($scope, $rootScope, Order) 
 			$scope.loadingIndicator = false;
 		});
 	}
-});
+}]);

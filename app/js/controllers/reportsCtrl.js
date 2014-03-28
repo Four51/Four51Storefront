@@ -1,4 +1,5 @@
-four51.app.controller('ReportsCtrl', function ($scope, $location, $451, SavedReports) {
+four51.app.controller('ReportsCtrl', ['$scope', '$location', '$451', 'SavedReports',
+function ($scope, $location, $451, SavedReports) {
 	SavedReports.query(function(list) {
 		$scope.Reports = list;
 	});
@@ -9,10 +10,4 @@ four51.app.controller('ReportsCtrl', function ($scope, $location, $451, SavedRep
 			$scope.report = data;
 		});
 	}
-});
-
-four51.app.controller('ReportCtrl', function($scope, $routeParams, $451, SavedReports) {
-	SavedReports.get($routeParams.id, function(data) {
-		$scope.report = data;
-	});
-});
+}]);

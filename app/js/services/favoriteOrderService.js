@@ -1,4 +1,4 @@
-four51.app.factory('FavoriteOrder', function($q, $resource, $451) {
+four51.app.factory('FavoriteOrder', ['$q', '$resource', '$451', function($q, $resource, $451) {
 	var _cacheName = '451Cache.FavoriteOrders.' + $451.apiName;
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
@@ -49,4 +49,4 @@ four51.app.factory('FavoriteOrder', function($q, $resource, $451) {
 		save: _save,
 		delete: _delete
 	}
-});
+}]);

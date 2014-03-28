@@ -1,4 +1,5 @@
-four51.app.controller('FavoriteOrderCtrl', function FavoriteOrderCtrl($scope, $location, $routeParams, FavoriteOrder, Order, User) {
+four51.app.controller('FavoriteOrderCtrl', ['$scope', '$location', '$routeParams', 'FavoriteOrder', 'Order', 'User',
+function ($scope, $location, $routeParams, FavoriteOrder, Order, User) {
     FavoriteOrder.query(function(favs) {
         $scope.favoriteorders = favs;
     });
@@ -31,5 +32,4 @@ four51.app.controller('FavoriteOrderCtrl', function FavoriteOrderCtrl($scope, $l
     $scope.saveFavoriteNow = function() {
         $location.path('order');
     };
-
-});
+}]);

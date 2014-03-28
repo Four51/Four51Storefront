@@ -1,6 +1,4 @@
-//stackoverflow.com/questions/14878761/angularjs-bind-scroll-toggle-class
-//body class="scroll || static" is global scroll check
-four51.app.directive("scroll", function ($window) {
+four51.app.directive("scroll", ['$window', function ($window) {
     return function(scope, element) {
         angular.element($window).bind("scroll", function() {
             if (this.pageYOffset >= 1) {
@@ -13,4 +11,4 @@ four51.app.directive("scroll", function ($window) {
             scope.$apply();
         });
     };
-});
+}]);

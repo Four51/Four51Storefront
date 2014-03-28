@@ -1,6 +1,5 @@
-'use strict';
-
-four51.app.controller('SpecFormCtrl', function ($location,$route, $routeParams, $scope, ProductDisplayService, Variant) {
+four51.app.controller('SpecFormCtrl', ['$scope', '$location', '$route', '$routeParams', 'ProductDisplayService', 'Variant',
+function ($scope, $location, $route, $routeParams, ProductDisplayService, Variant) {
 	var varID = $routeParams.variantInteropID == 'new' ? null :  $routeParams.variantInteropID;
 
 	ProductDisplayService.getProductAndVariant($routeParams.productInteropID, varID, function(data){
@@ -18,16 +17,11 @@ four51.app.controller('SpecFormCtrl', function ($location,$route, $routeParams, 
 				}
 			});
 		}
+	});
 
-	})
 	$scope.save = function(){
 		Variant.save($scope.Variant, function(data){
-			//if(!varID)
-				$location.path('/product/' + $routeParams.view +'/' + $scope.Product.InteropID + '/'+ data.InteropID);
-			//var d = new Date();
-			//var n = d.getTime();
-			//$scope.Variant = data;
-			//$scope.Variant.PreviewUrl = $scope.Variant.PreviewUrl + "?" + n;
+			$location.path('/product/' + $scope.Product.InteropID + '/'+ data.InteropID);
 		});
 	}
-});
+}]);

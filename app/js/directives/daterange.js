@@ -7,7 +7,7 @@ four51.app.directive('daterange', function() {
 		},
 		restrict: 'E',
 		templateUrl: 'partials/controls/dateRange.html',
-		controller: function($scope) {
+		controller: ['$scope', function($scope) {
 			var logic = {
 				'LastDay': function() {
 					var date = new Date();
@@ -49,7 +49,7 @@ four51.app.directive('daterange', function() {
 			$scope.changed = function() {
 				logic[$scope.span]();
 			}
-		}
+		}]
 	};
 
 	return obj;

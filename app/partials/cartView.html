@@ -38,7 +38,7 @@
                     <div class="col-sm-9">
                         <div class="row">
                             <div class="col-md-6" >
-                                <a ng-href="#/cart/{{item.Product.ViewName || 'default'}}/{{$index}}">
+                                <a ng-href="#/cart/{{item.Product.InteropID}}/{{$index}}">
                                     <h3 class="text-primary">
                                         <i class="fa fa-edit"></i>
                                         {{item.ProductIDText}}
@@ -72,21 +72,19 @@
                                             <div class="col-xs-9">
                                                 <label ng-class="{required: user.Permissions.contains('DateNeededRequired')}" ng-show="item.DateNeeded || user.Permissions.contains('DateNeededRequired')">Date</label>
                                                 <!--Default Datepicker -->
+                                                <div class="btn btn-default btn-block btn-date hidden-lg hidden-md"
+                                                     ng-click="$event.preventDefault();$event.stopPropagation();opened = !opened;"
+                                                     style="margin:0; height:40px; padding-top:8px;">
+                                                    {{item.DateNeeded ? '' : 'Tap to set a date'}}
+                                                    <span class="text-info">{{item.DateNeeded | date:'M/dd/yy'}}</span>
+                                                </div>
                                                 <input name="dateneeded" placeholder="Date" ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')"
                                                        type="text"
                                                        class="form-control"
                                                        datepicker-popup="MM/dd/yy"
                                                        is-open="opened"
                                                        min="currentDate"/>
-
-                                                <!--the input field's attributes cannot be dynamically populated. Using DatePicker for both mobile and desktop-->
-                                                <!--&lt;!&ndash; Small Screen (touch) Date Input &ndash;&gt;-->
-                                                <!--<input name="dateneeded" placeholder="yyyy-MM-dd" ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')"-->
-                                                       <!--type="date"-->
-                                                       <!--class="form-control hidden-md hidden-lg"-->
-                                                       <!--min="currentDateMobile"/>-->
-                                                <!--<i class="fa fa-calendar"></i>-->
-
+                                                <i class="fa fa-calendar"></i>
                                             </div>
                                             <div class="col-xs-3">
                                                 <button type="button" title="copy to all" class="btn btn-default pull-right" value="copy to all" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1 && user.CostCenters.length != 1" >

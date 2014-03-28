@@ -83,7 +83,7 @@
             </div>
             <div class="col-sm-3">
                 <label ng-class="{required: currentOrder.PaymentMethod == 'CreditCard'}" for="expiration-date" ng-show="currentOrder.CreditCard.ExpirationDate || currentOrder.PaymentMethod == 'CreditCard'">Expiration Date (mm/yy)</label>
-                <input id="expiration-date" class="form-control" ng-model="currentOrder.CreditCard.ExpirationDate" ng-required="currentOrder.PaymentMethod == 'CreditCard' && !currentOrder.CreditCardID" type="text" ui-mask="99/99" placeholder="Expiration Date" />
+                <input id="expiration-date" class="form-control" ng-model="currentOrder.CreditCard.ExpirationDate" ng-required="currentOrder.PaymentMethod == 'CreditCard' && !currentOrder.CreditCardID" type="text" ui-mask="99/99" />
             </div>
             <div ng-if="currentOrder.RequireCVN" class="col-sm-2 credit-card-cvn-input">
                 <label  ng-class="{required: currentOrder.PaymentMethod == 'CreditCard'}" for="cvn" ng-show="currentOrder.CreditCard.CVN || currentOrder.PaymentMethod == 'CreditCard'">CVN</label>

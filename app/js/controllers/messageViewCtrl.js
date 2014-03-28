@@ -1,4 +1,5 @@
-four51.app.controller('MessageViewCtrl', function($scope, $location, $routeParams, Message) {
+four51.app.controller('MessageViewCtrl', ['$scope', '$location', '$routeParams', 'Message',
+function($scope, $location, $routeParams, Message) {
     Message.get($routeParams.id, function(msg) {
         $scope.message = msg;
         $scope.canReply = function() {
@@ -21,4 +22,4 @@ four51.app.controller('MessageViewCtrl', function($scope, $location, $routeParam
 			$location.path('/message');
 		});
 	}
-});
+}]);

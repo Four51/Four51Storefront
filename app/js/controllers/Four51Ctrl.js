@@ -1,10 +1,10 @@
-four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $location, $451, User, Order, Security, OrderConfig, Category, SpendingAccount, AppConst) {
+four51.app.controller('Four51Ctrl', ['$scope', '$route', '$location', '$451', 'User', 'Order', 'Security', 'OrderConfig', 'Category', 'AppConst',
+function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, Category, AppConst) {
     $scope.AppConst = AppConst;
 	$scope.scroll = 0;
-    //$scope.appname = $451.appname; not needed?
 	$scope.isAnon = $451.isAnon; //need to know this before we have access to the user object
 	$scope.Four51User = Security;
-	if($451.isAnon && !Security.isAuthenticated()){
+	if ($451.isAnon && !Security.isAuthenticated()){
 		User.login(function() {
 			$route.reload();
 		});
@@ -65,9 +65,10 @@ four51.app.controller('Four51Ctrl', function ($scope, $route, $routeParams, $loc
 
     $scope.$on('event:auth-loginConfirmed', function(){
         $route.reload();
-	    analytics($scope.user.Company.GoogleAnalyticsCode);
+	    User.get(function(user) {
+		    analytics(user.Company.GoogleAnalyticsCode);
+	    });
 	});
 	$scope.$on("$routeChangeSuccess", init);
     $scope.$on('event:auth-loginRequired', cleanup);
-
-});
+}]);

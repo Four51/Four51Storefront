@@ -156,7 +156,7 @@ button::-moz-focus-inner {
 //** form field icons
 .view-form-icon {
   // make room for labels
-  div {
+  & > div {
     margin: 25px 0 0;
   }
 
@@ -240,6 +240,14 @@ button::-moz-focus-inner {
     appearance: 0.5em;
   }
 
+  //** datepicker input visible hidden and moved up 40 px
+  input[datepicker-popup]{
+    visibility:hidden;
+    position:relative;
+    top:-40px;
+    margin-bottom:-40px;
+  }
+
   //** block these buttons for minimum target size for touch
   .panel-footer {
     .btn {
@@ -285,6 +293,14 @@ button::-moz-focus-inner {
   //** center branding
   .jumbotron {
     text-align: center;
+  }
+
+  //** datepicker input visible hidden and moved up 40 px
+  input[datepicker-popup]{
+    visibility:hidden;
+    position:relative;
+    top:-40px;
+    margin-bottom:-40px;
   }
 }
 

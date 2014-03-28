@@ -1,4 +1,5 @@
-four51.app.directive('customfilefield', function($parse, $resource, $451, fileReader, Security) {
+four51.app.directive('customfilefield', ['$parse', '$resource', '$451', 'fileReader', 'Security',
+function($parse, $resource, $451, fileReader, Security) {
 	var obj = {
 		scope: {
 			customfield: '=',
@@ -75,6 +76,7 @@ four51.app.directive('customfilefield', function($parse, $resource, $451, fileRe
 			}
 			element.bind('change', updateModel);
 		}
-	}
+	};
+
 	return obj;
-});
+}]);
