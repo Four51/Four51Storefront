@@ -6124,6 +6124,12 @@ button::-moz-focus-inner {
   top: 13px;
   z-index: 2;
 }
+.view-form-icon .btn i {
+  position: relative;
+  left: auto;
+  top: auto;
+  color: inherit;
+}
 @media (max-width: 767px) {
   textarea,
   select {
@@ -7071,9 +7077,6 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-order .panel-heading.open {
   cursor: default;
 }
-.panel-order .panel-heading h3 .fa-caret-down ~ h3 {
-  cursor: default;
-}
 .panel-order .panel-body.ng-hide-remove,
 .panel-order .panel-category-list.ng-hide-remove,
 .panel-order .panel-product-list.ng-hide-remove,
@@ -7111,18 +7114,8 @@ select.ng-invalid:invalid:invalid:focus {
   display: none;
 }
 .panel-order-shipping-multiple {
-  border: none;
-}
-.panel-order-shipping-multiple ~ .panel-body,
-.panel-order-shipping-multiple ~ .panel-category-list,
-.panel-order-shipping-multiple ~ .panel-product-list,
-.panel-order-shipping-multiple ~ .panel-lineitem,
-.panel-order-shipping-multiple ~ .panel-order-history,
-.panel-order-shipping-multiple ~ .panel-order-shipping-multiple {
   border-top: 1px solid #dddddd;
-}
-.panel-order-shipping-multiple .row .row {
-  border-left: 1px solid #dddddd;
+  margin-top: 15px;
 }
 .copyright-view {
   font-size: 11px;
