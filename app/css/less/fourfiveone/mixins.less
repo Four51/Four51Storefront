@@ -15,7 +15,6 @@ body {
   font-smoothing: antialiased;
   -webkit-text-stroke: 1px transparent;
   margin-bottom: 100px;
-  overflow: hidden;
 }
 
 //** ie needs this help to keep scroll bar from overlapping content
@@ -87,6 +86,9 @@ small,
 
   &.btn-primary {
     text-transform: uppercase;
+  }
+  &.btn-lg {
+    margin: 10px 0;
   }
 }
 
@@ -177,6 +179,10 @@ button::-moz-focus-inner {
         color:#468847;
         box-shadow: none;
       }
+      select {
+        border-radius: 0;
+        border-color: @panel-default-border;
+      }
     }
   }
 
@@ -207,6 +213,16 @@ button::-moz-focus-inner {
     position: absolute;
     top: 13px;
     z-index: 2;
+  }
+
+  //** icons are not like the others inside a button
+  .btn {
+    i {
+      position: relative;
+      left: auto;
+      top: auto;
+      color: inherit;
+    }
   }
 }
 
@@ -557,9 +573,6 @@ button::-moz-focus-inner {
   word-wrap: break-word;
 
   &.panel-primary {
-    p span {
-      float: left;
-    }
     .panel-heading {
       margin-top: 0;
     }
@@ -630,4 +643,3 @@ button::-moz-focus-inner {
 //== Type
 
 //== Miscellaneous
-

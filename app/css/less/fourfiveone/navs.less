@@ -40,7 +40,7 @@
   height: 40px;
   left: 5px;
   right: 5px;
-  border-bottom: 1px solid #d6d6d6;
+  border-bottom: 1px solid @panel-default-border;
   p {
     margin-left: 5px;
   }
@@ -70,7 +70,7 @@
     border-color: @panel-default-border;
     a {
       padding: 3px 0;
-      @media (max-width: @screen-xs-max) {
+      @media (max-width: @screen-md-min) {
         padding: 10px 0;
         width: 100%;
       }
@@ -84,7 +84,7 @@
       }
       & > a {
         font-weight: bold;
-        @media (max-width: @screen-xs-max) {
+        @media (max-width: @screen-md-min) {
             border-top: 1px solid @panel-default-border;
         }
       }

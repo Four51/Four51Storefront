@@ -4,39 +4,52 @@
             Checkout Summary
         </h3>
     </div>
-    <div class="panel-body text-right">
+    <div class="panel-body">
         <loadingindicator ng-show="couponLoadingIndicator" title="Please wait while we verify and apply your promotion code" />
         <loadingindicator ng-show="couponRemoveIndicator" title="Please wait while we remove your promotion code" />
-        <div>
-            <p><span class="text-info">Items:</span> {{currentOrder.LineItems.length}}</p>
-            <p ng-if="!(user.Permissions.contains('HidePricing'))"><span class="text-info">Subtotal:</span> {{currentOrder.Subtotal | currency}}</p>
-            <p ng-if="!(user.Permissions.contains('HidePricing'))"><span class="text-info">Shipping Costs:</span> {{currentOrder.ShippingCost | currency}}</p>
-            <p ng-if="!(user.Permissions.contains('HidePricing'))"><span class="text-info">Tax:</span> {{currentOrder.TaxCost || 0 | currency}}</p>
-            <div ng-show="user.Permissions.contains('ViewPromotions')">
-                <div ng-show="!currentOrder.Coupon">
-                    <div class="form-group view-form-icon">
-                        <div class="input-group">
-                            <label ng-show="currentOrder.CouponCode">Promotion code</label>
-                            <input class="form-control" type="text" ng-model="currentOrder.CouponCode" placeholder="Promotion Code" autocomplete="off"></input>
-                            <i class="fa fa-question-circle"></i>
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-success" ng-click="applyCoupon()"><span class="fa fa-check"></span></button>
-                                </span>
-                        </div>
+        <p>
+            <span class="text-info">Items</span>
+            <span class="pull-right">{{currentOrder.LineItems.length}}</span>
+        </p>
+        <p ng-if="!(user.Permissions.contains('HidePricing'))">
+            <span class="text-info">Subtotal</span>
+            <span class="pull-right">{{currentOrder.Subtotal | currency}}</span
+        </p>
+        <p ng-if="!(user.Permissions.contains('HidePricing'))">
+            <span class="text-info">Shipping Costs</span>
+            <span class="pull-right">{{currentOrder.ShippingCost | currency}}</span>
+        </p>
+        <p ng-if="!(user.Permissions.contains('HidePricing'))">
+            <span class="text-info">Tax</span>
+            <span class="pull-right">{{currentOrder.TaxCost || 0 | currency}}</span>
+        </p>
+        <div ng-show="user.Permissions.contains('ViewPromotions')">
+            <div ng-show="!currentOrder.Coupon">
+                <div class="form-group view-form-icon">
+                    <div class="input-group">
+                        <label ng-show="currentOrder.CouponCode">Promotion Code</label>
+                        <input class="form-control" type="text" ng-model="currentOrder.CouponCode" placeholder="Promotion Code" autocomplete="off"></input>
+                        <i class="fa fa-question-circle"></i>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-success" ng-click="applyCoupon()"><i class="fa fa-check"></i></button>
+                            </span>
                     </div>
                 </div>
-                <p ng-show="currentOrder.Coupon">
-                    <span class="text-info">{{currentOrder.Coupon.Label}}:</span>{{currentOrder.Coupon.OrderDiscount * -1 | currency}}<br/>
-                </p>
-                <div ng-show="currentOrder.Coupon">
-                    <div class="btn btn-xs btn-danger pull-right" ng-click="removeCoupon()">Remove Coupon</div>
-                    <p class="text-left" ng-show="currentOrder.Coupon.ExpirationDate"><small class="text-danger">Expires: {{currentOrder.Coupon.ExpirationDate | date:'MM/dd/yyyy'}}</small></p>
-                </div>
             </div>
-            <hr/>
-            <h4 ng-if="!(user.Permissions.contains('HidePricing'))"><strong class="pull-left">Total</strong><span class="text-success"><strong>{{currentOrder.Total | currency}}</strong></span></h4>
-            <p class="text-info text-left" ng-if="user.Company.TaxMethod != 'NoTax' || !(user.Permissions.contains('HidePricing'))">Shipping, handling and tax may be added to this subtotal.</p>
+            <p ng-show="currentOrder.Coupon">
+                <span class="text-info">{{currentOrder.Coupon.Label}}:</span>{{currentOrder.Coupon.OrderDiscount * -1 | currency}}<br/>
+            </p>
+            <div ng-show="currentOrder.Coupon">
+                <button type="button"  class="btn btn-danger pull-right" ng-click="removeCoupon()">Remove Coupon</button>
+                <p class="text-left" ng-show="currentOrder.Coupon.ExpirationDate"><small class="text-danger">Expires: {{currentOrder.Coupon.ExpirationDate | date:'MM/dd/yyyy'}}</small></p>
+            </div>
         </div>
+        <hr/>
+        <h4 ng-if="!(user.Permissions.contains('HidePricing'))">
+            <strong>Total</strong>
+            <span class="text-success pull-right"><strong>{{currentOrder.Total | currency}}</strong></span>
+        </h4>
+        <p class="text-info text-left" ng-if="user.Company.TaxMethod != 'NoTax' || !(user.Permissions.contains('HidePricing'))">Shipping, handling and tax may be added to this subtotal.</p>
     </div>
     <div class="panel-footer">
         <div class="view-form-icon" ng-show="user.Permissions.contains('SendOrderNotificationToOthers') && !(cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid)" >
@@ -47,7 +60,6 @@
                 <span class="help-block text-left"><small>Provide an email address if you would like to receive notifications concerning this order.</small></span>
             </div>
         </div>
-        <hr />
         <button class="btn btn-default" redirect="/security">
             <span class="fa fa-info-circle"></span> Concerned About Security?
         </button>

@@ -5,7 +5,8 @@
         </div>
     </div>
     <form name="reportConditions">
-        <div class="col-sm-6 view-form-icon panel panel-default">
+        <div class="panel-body">
+        <div class="col-sm-6 view-form-icon">
             <div class="panel-heading">
                 <h3 class="panel-title panel-primary">Conditions</h3>
             </div>
@@ -64,7 +65,7 @@
             </div>
             <daterange ng-options="report.TimeSpanOptions" fromdate="report.FromDate" todate="report.ToDate" />
         </div>
-        <div class="col-sm-6 panel panel-default">
+        <div class="col-sm-6">
             <div class="panel-heading">
                 <h3 class="panel-title panel-primary">Display Columns</h3>
             </div>
@@ -73,6 +74,7 @@
                 <select multiple size="{{report.ColumnOptionsLength}}" class="form-control" ng-options="key as value for (key,value) in report.ColumnOptions" ng-model="report.Columns" />
                 <i class="fa fa-columns"></i>
             </div>
+        </div>
         </div>
         <div class="panel-footer">
             <div class="btn-group">
