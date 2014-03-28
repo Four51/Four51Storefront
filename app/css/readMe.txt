@@ -1,5 +1,10 @@
 //== Front End Strategy
 
+    There are 2 ways to design the app:
+    ie: change a color
+        1. Customization - when you make a change to a LESS variable to update the color
+        2. Theme - when you make a change to the static css ID/Class
+
     Customize the Four51 SPA    -       Do not edit custom.css, work in the LESS framework
                                         Do not edit the core bootstrap-451.less/css file
                                         Do not edit the bootstrap or fourfiveone directories
@@ -9,7 +14,6 @@
 
     Theme the Four51 SPA        -       Do not edit the LESS,
                                         Do edit the static custom.css file
-                                            ~/less/customizations/custom.css
 
     Bootstrap 3.1.1             -       http://getbootstrap.com/
 
