@@ -1,4 +1,4 @@
-four51.app.directive('ngMatch', function($parse) {
+four51.app.directive('ngMatch', ['$parse', function($parse) {
 	var obj = {
 		restrict: 'A',
 		require: '?ngModel',
@@ -23,4 +23,4 @@ four51.app.directive('ngMatch', function($parse) {
 		}
 	};
 	return obj;
-});
+}]);

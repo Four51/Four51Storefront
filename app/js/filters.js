@@ -1,8 +1,4 @@
-'use strict';
-
-/* Filters */
-
-four51.app.filter('onproperty', function($451) {
+four51.app.filter('onproperty', ['$451', function($451) {
 	var defaults = {
 		'OrderStats': 'Type',
 		'Message': 'Box'
@@ -14,7 +10,7 @@ four51.app.filter('onproperty', function($451) {
 		query.Property = query.Property || defaults[query.Model];
 		return $451.filter(input, query);
 	}
-});
+}]);
 
 four51.app.filter('kb', function() {
 	return function(value) {

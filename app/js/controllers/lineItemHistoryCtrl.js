@@ -1,6 +1,5 @@
-'use strict';
-
-four51.app.controller('LineItemViewCtrl', function ($scope, $routeParams, Order, Product) {
+four51.app.controller('LineItemViewCtrl', ['$scope', '$routeParams', 'Order', 'Product',
+function ($scope, $routeParams, Order, Product) {
     Order.get($routeParams.orderid, function(data){
         $scope.order = data;
         $scope.LineItem = data.LineItems[$routeParams.lineitemindex];
@@ -16,4 +15,4 @@ four51.app.controller('LineItemViewCtrl', function ($scope, $routeParams, Order,
 			$scope.StaticSpecGroups.VariableSpecs = {Name: 'Variable Specs', Specs: $scope.LineItem.Specs};
 		});
 	});
-});
+}]);

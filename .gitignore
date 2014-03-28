@@ -2,5 +2,8 @@
 logs/*
 !.gitkeep
 config/Four51APIAppName.js
+app/js/source.js
+app/js/resources.js
+app/css/source.css
 .orig
 node_modules/*

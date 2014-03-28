@@ -1,4 +1,5 @@
-four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $location, $routeParams, Order, FavoriteOrder, Address, User) {
+four51.app.controller('OrderViewCtrl', ['$scope', '$location', '$routeParams', 'Order', 'FavoriteOrder', 'Address', 'User',
+function ($scope, $location, $routeParams, Order, FavoriteOrder, Address, User) {
 	$scope.loadingIndicator = true;
 
 	var shipToMultipleAddresses = function(order) {
@@ -75,6 +76,4 @@ four51.app.controller('OrderViewCtrl', function OrderViewCtrl($scope, $location,
     $scope.onPrint = function()  {
         window.print();
     };
-
-});
-
+}]);

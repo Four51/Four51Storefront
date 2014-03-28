@@ -1,10 +1,13 @@
 <div class="view-form-icon">
-    <div class="input-group">
+    <div>
         <label ng-class="{required: customfield.Required}">{{customfield.Label || customfield.Name}}</label>
-        <div class="input-group-addon"  ng-if="customfield.Prefix">{{customfield.Prefix}}</div>
-        <select class="form-control" ng-init="init()" ng-required="customfield.Required" ng-change="changed()" ng-model="item" ng-options="option.Value for option in customfield.Options" ng-if="customfield.Options">
-            <option value=""></option></select>
-        <input class="form-control" type="text" ng-change="otherChanged()" ng-model="other" ng-show="customfield.isOtherSelected" autocomplete="off" ng-required="customfield.Required && customfield.isOtherSelected" />
-        <span class="input-group-addon"  ng-if="customfield.Suffix">{{customfield.Suffix}}</span>
+        <div ng-class="{'input-group':(customfield.Prefix || customfield.Suffix)}">
+            <div class="input-group-addon"  ng-if="customfield.Prefix">{{customfield.Prefix}}</div>
+            <select class="form-control" ng-init="init()" ng-required="customfield.Required" ng-change="changed()" ng-model="item" ng-options="option.Value for option in customfield.Options" ng-if="customfield.Options">
+                <option value=""></option></select>
+            <input class="form-control" type="text" ng-change="otherChanged()" ng-model="other" ng-show="customfield.isOtherSelected" autocomplete="off" ng-required="customfield.Required && customfield.isOtherSelected" />
+            <span class="input-group-addon"  ng-if="customfield.Suffix">{{customfield.Suffix}}</span>
+        </div>
+        <i class="fa fa-hand-o-up"></i>
     </div>
 </div>

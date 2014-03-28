@@ -5,7 +5,7 @@
     </div>
 
     <div class="col-md-7 col-md-pull-5 col-collapse" ng-show="currentOrder && currentOrder.isEditable" ng-click="showSuccessAlert = false">
-        <orderdetails ng-show="hasOrderConfig()" />
+        <orderdetails ng-show="hasOrderConfig" />
         <ordershipping />
         <orderbilling />
         <orderapprovals ng-show="currentOrder.Approvals" />

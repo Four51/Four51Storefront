@@ -1,5 +1,4 @@
-'use strict';
-four51.app.factory('Category', function($resource, $451){
+four51.app.factory('Category', ['$resource', '$451', function($resource, $451) {
     function _then(fn, data) {
         if (angular.isFunction(fn))
             fn(data);
@@ -28,5 +27,4 @@ four51.app.factory('Category', function($resource, $451){
         tree: _query,
         get: _get
     }
-});
-
+}]);

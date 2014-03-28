@@ -1,5 +1,4 @@
-
-four51.app.factory('fileReader', function($q, $log) {
+four51.app.factory('fileReader', ['$q', function($q) {
 	var onLoad = function(reader, deferred, scope) {
 		return function () {
 			scope.$apply(function () {
@@ -45,5 +44,5 @@ four51.app.factory('fileReader', function($q, $log) {
 
 	return {
 		readAsDataUrl: readAsDataURL
-	};
-});
+	}
+}]);

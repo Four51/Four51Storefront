@@ -11,7 +11,8 @@
             <div class="view-form-icon" ng-if="user.Permissions.contains('EditPOID')" ng-invalid>
                 <div class="input-group">
                     <label class="required">Order ID</label>
-                    <input class="form-control" name="orderid" ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID" placeholder="Order ID" required ui-mask="{{currentOrder.autoID ? null : user.Company.POIDMask}}" />
+                    <input class="form-control" name="orderid" ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID"
+                           required ui-mask="{{currentOrder.autoID ? null : user.Company.POIDMask}}"></input>
                         <span ng-if="user.Permissions.contains('AllowAutoGenPOID')" class="input-group-addon">
                             <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? null : 'auto'" ng-model='currentOrder.autoID' />
                         </span>
