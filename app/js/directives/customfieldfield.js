@@ -24,7 +24,7 @@ function($parse, $resource, $451, fileReader, Security) {
 					scope.customfield.Value = u.ID;
                     scope.uploadFileIndicator = false;
 				}).catch(function(ex) {
-					error_element.innerHTML = (ex.status == 500) ?
+					error_element.innerHTML = (!ex.data.Message) ?
 						"An error occurred. Please select a new file and try again." :
 						ex.data.Message;
                         scope.uploadFileIndicator = false;
