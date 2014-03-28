@@ -1,9 +1,9 @@
 <div class="panel panel-default panel-order">
-    <div class="panel-heading" ng-class="{'no': cart_billing.$invalid, 'yes': !cart_billing.$invalid }">
+    <div class="panel-heading" ng-class="{'no': cart_billing.$invalid, 'yes': !cart_billing.$invalid, 'open': checkOutSection == 'billing' }">
         <h3 ng-click="checkOutSection = 'billing'" class="panel-title">
             <i class="pull-left" ng-class="{'fa fa-warning': cart_billing.$invalid, 'fa fa-check-circle': !cart_billing.$invalid }"></i>
             Billing
-            <i class="pull-right" ng-class="{'fa fa-caret-down': checkOutSection == 'billing', 'fa fa-caret-up': checkOutSection == 'shipping' || checkOutSection == 'order' }"></i>
+            <i class="pull-right" ng-class="{'fa fa-caret-up': checkOutSection == 'billing', 'fa fa-caret-down': checkOutSection == 'shipping' || checkOutSection == 'order' }"></i>
         </h3>
     </div>
     <div ng-show="checkOutSection == 'billing'" class="panel-body">
