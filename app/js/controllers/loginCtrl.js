@@ -27,6 +27,7 @@ function ($scope, $sce, $route, User) {
 				}
 			},
 			function(ex) {
+				$scope.credentials = {};
 				$scope[ex.Code.text] = true;
 				if (ex.Code.is('PasswordSecurity'))
 					$scope.loginMessage = $sce.trustAsHtml(ex.Message);
