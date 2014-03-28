@@ -1,38 +1,46 @@
-<div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">
-                Specifications
-            </h3>
-        </div>
-
-        <div class="panel-body" ng-class="{'static-spec-panel-body': length > 1}">
-            <div id="451_list_specgroup" class="row">
-                <div  ng-class="{'col-md-6': length > 1}" >
-                    <ul  ng-if="$even" class="list-group" ng-repeat="sg in specgroups">
-                        <li class="451qa_sg_item list-group-item text-center" ng-show="hasvisiblechild(sg.Specs)"><h5 style="margin:0;">{{sg.Name | uppercase}}</h5></li>
-                        <li class="list-group-item">
-                            <div class="451qa_spec_item text-center" ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
-                                <span class="text-info">{{s.Name}}</span>
-                                <a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value}}</a>
-                                <span ng-if="!s.FileURL">{{s.Value}}</span>
+<div class="panel panel-default" ng-show="specgroups">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Specifications
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div id="451_list_specgroup" class="row">
+            <div ng-class="{'col-md-6': length > 1}" >
+                <ul class="list-group" ng-repeat="sg in specgroups.EvenSpecGroups" ng-show="hasvisiblechild(sg.Specs)">
+                    <li class="451qa_sg_item list-group-item text-center"><h5>{{sg.Name | uppercase}}</h5></li>
+                    <li class="list-group-item">
+                        <div class="451qa_spec_item" ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <span class="text-info">{{s.Name}}</span>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value}}</a>
+                                    <span ng-if="!s.FileURL">{{s.Value}}</span>
+                                </div>
                             </div>
-                        </li>
-                    </ul>
-                </div>
-                <div  ng-class="{'col-md-6': length > 1}" >
-                    <ul ng-if="$odd" class="list-group" ng-repeat="sg in specgroups">
-                        <li class="451qa_sg_item list-group-item text-center" ng-show="hasvisiblechild(sg.Specs)"><h5 style="margin:0;">{{sg.Name | uppercase}}</h5></li>
-                        <li class="list-group-item">
-                            <div class="451qa_spec_item text-center" ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
-                                <span class="text-info">{{s.Name}}</span>
-                                <a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value}}</a>
-                                <span ng-if="!s.FileURL">{{s.Value}}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div ng-class="{'col-md-6': length > 1}">
+                <ul class="list-group" ng-repeat="sg in specgroups.OddSpecGroups" ng-show="hasvisiblechild(sg.Specs)">
+                    <li class="451qa_sg_item list-group-item text-center"><h5>{{sg.Name | uppercase}}</h5></li>
+                    <li class="list-group-item">
+                        <div class="451qa_spec_item" ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <span class="text-info">{{s.Name}}</span>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value}}</a>
+                                    <span ng-if="!s.FileURL">{{s.Value}}</span>
+                                </div>
                             </div>
-                        </li>
-                    </ul>
-                </div>
-
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

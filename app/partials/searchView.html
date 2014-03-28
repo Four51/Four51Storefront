@@ -22,21 +22,17 @@
                 </div>
             </form>
         </div>
-        <div class="panel-body">
-            <div ng-show="products" class="product-list">
-                <div class="alert alert-info">
-                    Search results
-                </div>
-                <div>
-                    <nav class="nav">
-                        <ul>
-                            <li class="well" ng-repeat="product in products">
-                                <shortproductview p="product" />
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+        <div ng-show="products" class="panel-product-list">
+            <p class="alert alert-info">
+                Search results
+            </p>
+            <nav class="nav">
+                <ul>
+                    <li class="well" ng-repeat="product in products">
+                        <shortproductview p="product" />
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </section>

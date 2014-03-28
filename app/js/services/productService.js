@@ -19,7 +19,23 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', function($resour
 			});
 		});
 
-		product.StaticSpecLength = product.StaticSpecGroups ? Object.keys(product.StaticSpecGroups).length : 0;
+        if(product.StaticSpecGroups){
+            product.StaticSpecLength = 0;
+            product.StaticSpecGroups.EvenSpecGroups = [];
+            product.StaticSpecGroups.OddSpecGroups = [];
+            angular.forEach(product.StaticSpecGroups, function(g){
+                var visible = false;
+                for (var i in g.Specs) {
+                    if (g.Specs[i].VisibleToCustomer) {
+                        visible = true;
+                    }
+                }
+                if (visible) {
+                    product.StaticSpecGroups.EvenSpecGroups.length == product.StaticSpecGroups.OddSpecGroups.length ? product.StaticSpecGroups.EvenSpecGroups.push(g) : product.StaticSpecGroups.OddSpecGroups.push(g);
+                    product.StaticSpecLength++;
+                }
+            });
+        }
 	}
 
      var _get = function(param, success) {
