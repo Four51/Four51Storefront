@@ -20,7 +20,7 @@
                 <i class="fa fa-search"></i>
             </div>
         </div>
-        <div class="panel-table">
+        <div id="451qa_msg_list" class="panel-table">
             <div class="row text-info">
                 <div class="col-sm-2">
                     <label class="visible-xs">Select all</label>
@@ -31,7 +31,7 @@
                 <div class="col-sm-2 hidden-xs">Subject</div>
                 <div class="col-sm-2 hidden-xs">From</div>
              </div>
-            <div id="451_list_msg" class="row" ng-repeat="message in messages | filter:searchTerm">
+            <div class="451qa_msg_item row" ng-repeat="message in messages | filter:searchTerm">
                 <div class="col-sm-2">
                     <input type='checkbox' ng-model="message.Selected" />
                 </div>
