@@ -3,10 +3,11 @@
 // --------------------------------------------------
 
 .panel-lineitem {
+  &:extend(.panel-body all);
   // line item top border
   border: none;
-  // canonical selector :: remove border from first panel-body and add back to ones that come after the first one for line items
-  ~ .panel-body {
+  // canonical selector to add bordertop on repeating lineitems
+  ~ .panel-lineitem{
     border-top: 1px solid @panel-default-border;
   }
 
@@ -70,5 +71,4 @@
       margin: 0;
     }
   }
-  &:extend(.panel-body all);
 }

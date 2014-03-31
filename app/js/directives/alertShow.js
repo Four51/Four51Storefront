@@ -1,5 +1,4 @@
-// custom ng-show for alerts to auto hide itself after show with CSS and using a modified version of http://stackoverflow.com/questions/20921622/running-code-after-an-angularjs-animation-has-completed
-four51.app.directive('alertShow', function($animate) {
+four51.app.directive('alertShow', ['$animate', function($animate) {
     return {
         scope: {
             'alertShow': '='
@@ -10,8 +9,7 @@ four51.app.directive('alertShow', function($animate) {
                     $animate.removeClass(element, 'ng-hide');
                     $animate.addClass(element, 'ng-hide');
                 }
-
             });
         }
     }
-})
+}]);

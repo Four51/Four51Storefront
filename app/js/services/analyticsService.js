@@ -1,4 +1,4 @@
-four51.app.factory('Analytics', function($analytics) {
+four51.app.factory('Analytics', ['$analytics', function($analytics) {
 	var _order = function(data) {
 		$analytics.eventTrack('ecommerce:addTransaction', {
 			'id': data.ExternalID,
@@ -18,9 +18,9 @@ four51.app.factory('Analytics', function($analytics) {
 			});
 		});
 		$analytics.eventTrack('ecommerce:send', {});
-	}
+	};
 
 	return {
 		trackOrder: _order
 	}
-});
+}]);

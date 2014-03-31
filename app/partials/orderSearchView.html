@@ -73,38 +73,35 @@
                             <i class="fa fa-map-marker"></i>
                         </div>
                         <div class="form-group">
-                            <label ng-show="criteria.DateRangeFrom">From</label>
-
-                            <!--Default Datepicker -->
-                            <input name="daterangefrom" placeholder="From" ng-model="criteria.DateRangeFrom"
+                            <label ng-show="criteria.DateRangeFrom">Start Date</label>
+                            <div class="btn btn-default btn-block btn-date hidden-lg hidden-md"
+                                 ng-click="$event.preventDefault();$event.stopPropagation();startopened = !startopened;"
+                                 style="margin:0; height:40px; padding-top:8px;">
+                                {{criteria.DateRangeFrom ? '' : 'Tap to set a start date'}}
+                                <span class="text-info">{{criteria.DateRangeFrom | date:'M/dd/yy'}}</span>
+                            </div>
+                            <input name="daterangefrom" placeholder="Start Date" ng-model="criteria.DateRangeFrom"
                                    type="text"
-                                   class="form-control hidden-xs hidden-sm"
+                                   class="form-control"
                                    datepicker-popup="MM/dd/yy"
-                                   is-open="opened-from"/>
-
-                            <!-- Small Screen (touch) Date Input -->
-                            <input name="daterangefrom" placeholder="From" ng-model="criteria.DateRangeFrom"
-                                   type="date"
-                                   class="form-control hidden-md hidden-lg"/>
+                                   is-open="startopened"/>
                             <i class="fa fa-calendar"></i>
-
                         </div>
                         <div class="form-group">
-                            <label ng-show="criteria.DateRangeTo">To</label>
-                            <!--Default Datepicker -->
-                            <input name="daterangeto" placeholder="To" ng-model="criteria.DateRangeTo"
+                            <label ng-show="criteria.DateRangeTo">End Date</label>
+                            <div class="btn btn-default btn-block btn-date hidden-lg hidden-md"
+                                 ng-click="$event.preventDefault();$event.stopPropagation();endopened = !endopened;"
+                                 style="margin:0; height:40px; padding-top:8px;">
+                                {{criteria.DateRangeTo ? '' : 'Tap to set an end date'}}
+                                <span class="text-info">{{criteria.DateRangeTo | date:'M/dd/yy'}}</span>
+                            </div>
+                            <input name="daterangeto" placeholder="End Date" ng-model="criteria.DateRangeTo"
                                    type="text"
-                                   class="form-control hidden-xs hidden-sm"
+                                   class="form-control"
                                    datepicker-popup="MM/dd/yy"
-                                   is-open="opened-to"/>
-
-                            <!-- Small Screen (touch) Date Input -->
-                            <input name="daterangeto" placeholder="To" ng-model="criteria.DateRangeTo"
-                                   type="date"
-                                   class="form-control hidden-md hidden-lg"/>
+                                   is-open="endopened"
+                                   min="criteria.DateRangeFrom"/>
                             <i class="fa fa-calendar"></i>
-
-
                         </div>
                     </div>
                 </div>
@@ -159,27 +156,27 @@
             </div>
             <div class="row" ng-repeat="order in orders">
                 <div class="col-sm-2">
-                    <span class="visible-xs text-info">ID</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">ID</span>
                     <a ng-href="#/order/{{order.ID}}">{{order.ExternalID}}</a>
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs text-info">Type</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">Type</span>
                     {{order.Type}}
                 </div>
                 <div class="col-sm-2">
-                     <span class="visible-xs text-info">Status</span>
+                     <span class="visible-xs panel-table-heading-xs text-info">Status</span>
                     {{order.StatusText}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs text-info">Submitted By</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">Submitted By</span>
                     {{order.FromUserFirstName + ' ' + order.FromUserLastName}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs text-info">Submitted Date</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">Submitted Date</span>
                     {{order.DateSubmitted || order.DateCreated | date:'short'}}
                 </div>
                 <div class="col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">
-                    <span class="visible-xs text-info">Total</span>
+                    <span class="visible-xs heading-xs text-info">Total</span>
                     {{order.Total | currency:"$"}}
                 </div>
             </div>

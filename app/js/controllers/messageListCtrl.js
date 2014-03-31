@@ -1,4 +1,4 @@
-four51.app.controller('MessageListCtrl', function($scope, MessageList) {
+four51.app.controller('MessageListCtrl', ['$scope', 'MessageList', function($scope, MessageList) {
 	MessageList.query(function(list) {
         $scope.messages = list;
     });
@@ -18,5 +18,4 @@ four51.app.controller('MessageListCtrl', function($scope, MessageList) {
 			});
 		});
 	};
-});
-
+}]);

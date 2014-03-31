@@ -1,6 +1,5 @@
-'use strict';
-
-four51.app.controller('CategoryCtrl', function ($routeParams, $sce, $scope, $451, Category, Product, Nav) {
+four51.app.controller('CategoryCtrl', ['$routeParams', '$sce', '$scope', '$451', 'Category', 'Product', 'Nav',
+function ($routeParams, $sce, $scope, $451, Category, Product, Nav) {
 	$scope.productLoadingIndicator = true;
 	$scope.trusted = function(d){
 		if(d) return $sce.trustAsHtml(d);
@@ -29,4 +28,4 @@ four51.app.controller('CategoryCtrl', function ($routeParams, $sce, $scope, $451
     $scope.navStatus = Nav.status;
     $scope.toggleNav = Nav.toggle;
 
-});
+}]);

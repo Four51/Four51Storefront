@@ -1,4 +1,5 @@
-four51.app.controller('AddressInputCtrl', function ($scope, $rootScope, $location, User, Address, Resources) {
+four51.app.controller('AddressInputCtrl', ['$scope', '$rootScope', '$location', 'User', 'Address', 'Resources',
+function ($scope, $rootScope, $location, User, Address, Resources) {
     $scope.save = function() {
 	    $scope.objectExists = false;
         Address.save(this.address,
@@ -36,4 +37,4 @@ four51.app.controller('AddressInputCtrl', function ($scope, $rootScope, $locatio
         return ($scope.user.Permissions.contains('BillingAddressPhoneRequired') && $scope.address.IsBilling) ||
             ($scope.user.Permissions.contains('ShipAddressPhoneRequired') && $scope.address.IsShipping);
     }
-});
+}]);

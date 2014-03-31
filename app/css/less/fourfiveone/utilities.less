@@ -2,8 +2,9 @@
 // Utilities
 // --------------------------------------------------
 
-//== A more perfect table
+//== A more perfect responsive table to display line items into block elements on phone
 .panel-table {
+  &:extend(.clearfix all);
   padding: 0;
   border: 1px solid @panel-default-border;
   margin: 15px;
@@ -17,6 +18,13 @@
 
   a {
     text-decoration: underline;
+  }
+
+  [class*="col-"] {
+    border-left: 1px solid @panel-default-border;
+    &:first-of-type {
+      border-left: none;
+    }
   }
 
   .row {
@@ -33,12 +41,12 @@
     .btn {
       margin: 2px 0;
     }
-    span {
+    span.panel-table-heading-xs {
       float: left;
       margin-right: 10px;
     }
   }
-  &:extend(.clearfix all);
+
 }
 
 //== Headroom
@@ -104,13 +112,11 @@
 }
 
 //== datepicker table
-table{
-  &.datepicker-table{
+table[datepicker]{
     margin-left: 5px;
     margin-right: 5px;
     border-collapse: separate;
     border-spacing: 1px;
-  }
 }
 
 //** no image available

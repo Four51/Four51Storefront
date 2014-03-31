@@ -1,5 +1,4 @@
-
-four51.app.factory('OrderSearchCriteria', function($resource, $http, $451) {
+four51.app.factory('OrderSearchCriteria', ['$resource', '$http', '$451', function($resource, $http, $451) {
 
     var _query = function(success) {
         $resource($451.api('orderstats')).query().$promise.then(function(stats) {
@@ -11,4 +10,4 @@ four51.app.factory('OrderSearchCriteria', function($resource, $http, $451) {
 	return {
 		query: _query
 	}
-});
+}]);

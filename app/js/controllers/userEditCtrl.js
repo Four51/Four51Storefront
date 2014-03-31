@@ -1,6 +1,5 @@
-'use strict';
-
-four51.app.controller('UserEditCtrl', function ($scope, $location, $sce, User) {
+four51.app.controller('UserEditCtrl', ['$scope', '$location', '$sce', 'User',
+function ($scope, $location, $sce, User) {
 	$scope.loginasuser = {};
 	$scope.actionMessage = null;
 
@@ -36,4 +35,4 @@ four51.app.controller('UserEditCtrl', function ($scope, $location, $sce, User) {
 			$location.path("/catalog");
 		});
 	};
-});
+}]);

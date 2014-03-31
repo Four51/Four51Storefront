@@ -3,7 +3,6 @@ four51.app.factory('Nav', function() {
 
     var _toggle = function() {
         _status.visible = !_status.visible;
-        //callback(_status);
     }
 
     return {

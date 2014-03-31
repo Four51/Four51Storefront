@@ -1,6 +1,5 @@
-'use strict';
-
-four51.app.controller('LoginCtrl', function LoginCtrl($scope, $sce, $route, User) {
+four51.app.controller('LoginCtrl', ['$scope', '$sce', '$route', 'User',
+function ($scope, $sce, $route, User) {
 	var codes = ['PasswordSecurityException'];
 
 	$scope.loginMessage = null;
@@ -28,6 +27,7 @@ four51.app.controller('LoginCtrl', function LoginCtrl($scope, $sce, $route, User
 				}
 			},
 			function(ex) {
+				$scope.credentials = {};
 				$scope[ex.Code.text] = true;
 				if (ex.Code.is('PasswordSecurity'))
 					$scope.loginMessage = $sce.trustAsHtml(ex.Message);
@@ -41,4 +41,4 @@ four51.app.controller('LoginCtrl', function LoginCtrl($scope, $sce, $route, User
 			}
 		);
 	};
-});
+}]);

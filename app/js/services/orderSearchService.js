@@ -1,4 +1,4 @@
-four51.app.factory('OrderSearch', function($resource, $451) {
+four51.app.factory('OrderSearch', ['$resource', '$451', function($resource, $451) {
 
     var _search = function(stat, success) {
         $resource($451.api('order'),{},
@@ -12,4 +12,4 @@ four51.app.factory('OrderSearch', function($resource, $451) {
 	return {
 		search: _search
 	};
-});
+}]);

@@ -3,27 +3,28 @@
 // --------------------------------------------------
 
 .panel-order {
-  margin-bottom: 0;
-  border-bottom: none;
+  &:extend(.panel-default all);
+  margin-bottom: 5px;
 
-  // panel validation icons
   .panel-heading {
     cursor: pointer;
     i:first-of-type {
       font-size: ceil((@font-size-base * 1.7));
     }
+
     //** valid
     &.yes i:first-of-type {
       color:@brand-success;
     }
+
     //** invalid
     &.no i:first-of-type {
       color:@brand-warning;
     }
-    h3 {
-      .fa-caret-down {
-        ~ h3 {cursor: default;}
-      }
+
+    //** opened
+    &.open {
+      cursor: default;
     }
   }
 
@@ -64,7 +65,6 @@
       display: none;
     }
   }
-  &:extend(.panel-default all);
 }
 
 .panel-order-history {
@@ -72,16 +72,7 @@
 }
 
 .panel-order-shipping-multiple {
-  //** line item top border
-  border: none;
-  //** canonical selector :: remove border from first panel-body and add back to ones that come after the first one for line items
-  ~ .panel-body {
-    border-top: 1px solid @panel-default-border;
-  }
-  .row {
-    .row {
-      border-left: 1px solid @panel-default-border;
-    }
-  }
   &:extend(.panel-body all);
+  border-top: 1px solid @panel-default-border;
+  margin-top: 15px;
 }

@@ -1,4 +1,4 @@
-four51.app.factory('Shipper', function($resource, $451) {
+four51.app.factory('Shipper', ['$resource', '$451', function($resource, $451) {
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
@@ -26,4 +26,4 @@ four51.app.factory('Shipper', function($resource, $451) {
     return {
         query: _query
     }
-});
+}]);
