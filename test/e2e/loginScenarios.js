@@ -25,7 +25,7 @@ describe('SPA login with valid user/pass', function() {
 
 });
 
-describe('SPA login without valid user/pass', function() {
+describe('SPA login without valid username', function() {
     it("should navigate to the index page to login", function() {
         browser().navigateTo('../../app/');
     });
@@ -35,6 +35,32 @@ describe('SPA login without valid user/pass', function() {
     it("should display a line saying cannot find user or password", function() {
         expect(element('#451qa_msg_login').text()).toBe("User name and password not found."); //this won't work if the client changes the messages or we localize it.
      });
+
+});
+
+describe('SPA login without valid password', function() {
+    it("should navigate to the index page to login", function() {
+        browser().navigateTo('../../app/');
+    });
+
+    e2eLoginNoTest("coreproduser","fails543", C_debug);
+
+    it("should display a line saying cannot find user or password", function() {
+        expect(element('#451qa_msg_login').text()).toBe("User name and password not found."); //this won't work if the client changes the messages or we localize it.
+    });
+
+});
+
+describe('SPA login without user or pass', function() {
+    it("should navigate to the index page to login", function() {
+        browser().navigateTo('../../app/');
+    });
+
+    e2eLoginNoTest("","", C_debug);
+
+    it("should display a line saying cannot find user or password", function() {
+        expect(element('#451qa_msg_login').text()).toBe("User name and password not found."); //this won't work if the client changes the messages or we localize it.
+    });
 
 });
 

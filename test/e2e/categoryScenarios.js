@@ -4,16 +4,9 @@
 //category navigation test Scenarios
 
 //handy stuff:
-//console.dir(scope('.nav-header', 'tree'));
-//console.dir(scope('.nav-header', 'category'));
-//console.dir(scope('.nav-header', 'category.Name'));
+
 //console.dir(scope('.nav-header', 'category.InteropID'));
 //console.dir(binding('currentCategory.Name'));
-/*
- element('.nav-header li a:first').click(); //clicks first category's subcategory nav link
- element('.nav-header:nth-child(2) a:first').click(); //clicks second category nav link
- element('.nav-header:nth-child(3) a:first').click(); //clicks third category nav link
- */
 
 var C_debug = true;
 
@@ -28,13 +21,13 @@ describe('Category login', function() {
 
 });
 
-describe('Category side link navigation', function() {
+describe('Category top/dropdown link navigation', function() {
 
   it('should automatically redirect to /catalog when the location hash/fragment is empty', function() {
       expect(browser().location().url()).toBe("/catalog");
   });
 
-  it('should render a navigation list on the side with one or more categories', function() {
+  it('should render a navigation list on the top with one or more categories', function() {
 
       browser().navigateTo('#/catalog');
       if(C_debug){pause();}
@@ -151,6 +144,129 @@ describe('Category side link navigation', function() {
   });
 });
 
+describe('Category side link navigation', function() {
+
+    it('should automatically redirect to /catalog when the location hash/fragment is empty', function() {
+        expect(browser().location().url()).toBe("/catalog");
+    });
+
+    it('should render a navigation list on the side with one or more categories', function() {
+
+        browser().navigateTo('#/catalog');
+        if(C_debug){pause();}
+
+        e2eClickOpenCategory();
+
+        //check existence of categories, datawise
+        expect(repeater('.451_cat_item').count()).toBeGreaterThan(0);
+
+        //check existence of categories, displaywise
+        expect(element('.451_cat_item:first a').text()).toBeDefined(); //do we have a displayed top level category?
+
+        //check the text of the A tag to make sure it matches the top level category name
+        expect(element('.451_cat_item:first a').text()).toEqualFuture(binding('node.Name'));
+
+        //check the href of the A tag to make sure it matches the top level category InteropID
+        expect(element('.451_cat_item:first a').attr('href')).toContainFuture(scope('.451_cat_item:first a', 'node.InteropID'));
+
+        //okay, there is at least one category, continue
+
+        if(C_debug){pause();}
+
+    });
+
+    it('should render any SUBcategories that exist under each top level category', function() {
+
+        browser().navigateTo('#/catalog');
+        if(C_debug){pause();}
+
+
+        e2eClickOpenCategory();
+
+        //check existence of categories, datawise
+        expect(repeater('.451_cat_item').count()).toBeGreaterThan(0); //has top level nav
+
+        expect(repeater('.451_cat_item ul li a').count()).toBeGreaterThan(0); //has subcategory items, not necessarily hierarchically correct
+
+        expect(element('.451_cat_item ul li:first a:first').text()).toEqualFuture(scope('.451_cat_item ul li', 'node.Name'));
+
+        //check the href of the A tag to make sure it matches the top level category InteropID
+        expect(element('.451_cat_item ul li:first a:first').attr('href')).toContainFuture(scope('.451_cat_item ul li a', 'node.InteropID'));
+
+        //let's see what this has in it:
+        if(C_debug){
+            console.dir(repeater('.451_cat_item').row(0)); //this should be an array that has the first category and any subcategories
+            console.dir(element('.451_cat_item ul li:first a:first').text()); //should be the first subcategory link
+            console.dir(repeater('.451_cat_item').column(0)); //this includes all categories, top level and sub and sub-sub
+
+            console.dir(repeater('.451_cat_item ul li').column('node.Name')); //this is an array of subcategories, although it also includes sub-subcategories
+
+            console.dir(scope('.451_cat_item ul li', 'node.InteropID')); //first subcategory's interopid
+        };
+
+        if(C_debug){pause();}
+
+    });
+
+    it('should display the top level category we click', function() {
+
+
+        element('.451_cat_item:first a').click();       //clicks first category nav link
+
+        e2eClickOpenCategory();
+
+        //now check that the displayed category matches the nav item we clicked
+        expect(binding('currentCategory.Name')).toEqualFuture(scope('.451_cat_item:first a', 'node.Name'));
+
+        if(C_debug){pause();}
+
+    });
+
+    it('should display the SUBcategory we clicked', function() {
+
+        element('.451_cat_item ul li:first a:first').query(function (selectedElements, done) {
+
+            element('.451_cat_item ul li:first a:first').click();       //clicks first category's subcategory nav link
+            expect(binding('currentCategory.Name')).toEqual(selectedElements.text());
+            done();
+        });
+
+        if(C_debug){pause();}
+
+    });
+
+    it('should display the 2nd top level category we clicked', function(){
+
+        e2eClickOpenCategory();
+
+        element('.451_cat_item:nth-of-type(2) a:first').query(function (selectedElements, done) {
+
+            element('.451_cat_item:nth-of-type(2) a:first').click();       //clicks second category nav link
+            expect(binding('currentCategory.Name')).toEqual(selectedElements.text());
+            done();
+
+        });
+        if(C_debug){pause();}
+    });
+
+    it('should display the 3rd top level category we clicked', function(){
+        if(C_debug){pause();}
+
+        e2eClickOpenCategory();
+
+        element('.451_cat_item:nth-of-type(3) a:first').query(function (selectedElements, done) {
+
+            element('.451_cat_item:nth-of-type(3) a:first').click();       //clicks third category nav link
+            expect(binding('currentCategory.Name')).toEqual(selectedElements.text());
+            done();
+
+        });
+
+        if(C_debug){pause();}
+
+    });
+});
+
 describe('Main content area category links', function() {
 
     it('should NOT display any categories by default', function() {
@@ -239,8 +355,6 @@ describe('Main content area category links', function() {
 
         browser().navigateTo('#/catalog'); //start fresh on the catalog view
         e2eClickOpenCategory();
-        //check existence of categories, datawise
-        expect(repeater('.nav-header').count()).toBeGreaterThan(0);
 
         e2eClickSideNavCategory(0,"SubCatTest");
 

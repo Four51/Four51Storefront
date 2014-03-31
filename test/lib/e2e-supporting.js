@@ -64,7 +64,32 @@ Number.prototype.formatMoney = function(c){ //found this currency formatting fun
     return s + cn + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 };
 
-//navigation functions
+function e2eRepeaterRowValue(rptToExecute,intRow){
+
+    console.dir(rptToExecute)
+    var ftrRepeaterRow = rptToExecute;
+
+     //execute the future so we can access it now
+    ftrRepeaterRow.execute(function(){
+    });
+    return ftrRepeaterRow.value;
+}
+
+//function to execute a future and return a row value array
+//function e2eRepeaterRowValue(rowToExecute){
+//    console.log("EXECUTE");
+//    rowToExecute.execute(function(){}) //execute the future so we can access it now
+//
+//    var rowValue = rowToExecute;
+//    rowValue.execute(function(){
+//
+//        console.dir(rowValue.value)
+//        return rowValue.value;
+//    })
+//    return rowToExecute.value;
+//}
+
+//navigation shortcut (for maintenance reasons) functions
 function e2eClickHome(){
     element('#451qa_home_link').click();
 }
@@ -80,15 +105,15 @@ function e2eClickAccount(){
 function e2eClickUser(){
     element('#451qa_acct_link2').click();
     element('#451qa_user_link').click();
-}
+} //this doesn't seem to work
 function e2eClickAddresses(){
     element('#451qa_acct_link2').click();
     element('#451qa_addy_link').click();
-}
+} //this doesn't seem to work
 function e2eClickMessages(){
     element('#451qa_acct_link2').click();
     element('#451qa_mesg_link').click();
-}
+} //this doesn't seem to work
 
 function e2eClickSideNavCategory(intCatLevel,strCatName){
     var strNLevelsSelect = ""; //each level of depth is "ul li "
@@ -123,6 +148,12 @@ function e2eClickOpenCategory(){
     sleep(3); //timing issue, sleep a few seconds
     element('#451qa_nav_hdr ul li').click();
 }
+function e2eClickDropCategory(){
+    //open the category tree that's hidden by default
+    sleep(3); //timing issue, sleep a few seconds
+    element('.451qa_topnav ul li').click();
+}
+
 
 //product functions
 function e2eClickProductFromList(intNthProd,strProdName){
