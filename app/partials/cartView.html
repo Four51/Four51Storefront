@@ -28,9 +28,9 @@
                                     <small>Total Quantity <span ng-show="item.Quantity * item.Product.QuantityMultiplier">{{item.Quantity * item.Product.QuantityMultiplier}}</span></small>
                                 </p>
                             </div>
-                            <div class="col-xs-6 col-sm-12 col-md-6 thumbnail" ng-show="item.Variant.SmallImageUrl || item.Product.SmallImageUrl">
+                            <div class="col-xs-6 col-sm-12 col-md-6 thumbnail" ng-show="item.Variant.LargeImageUrl || item.Product.SmallImageUrl">
                                 <figure>
-                                    <img ng-src="{{item.Product.SmallImageUrl || item.Variant.SmallImageUrl}}" />
+                                    <img ng-src="{{item.Variant.LargeImageUrl || item.Product.SmallImageUrl}}" />
                                 </figure>
                             </div>
                         </div>
