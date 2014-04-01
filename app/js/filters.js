@@ -28,3 +28,11 @@ four51.app.filter('noliverates', function() {
 		return output;
 	}
 });
+
+four51.app.filter('paginate', function() {
+	return function(input, start) {
+		start = +start; //parse to int
+		console.log(start);
+		return input.slice(start);
+	}
+});

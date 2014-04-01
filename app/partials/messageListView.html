@@ -31,7 +31,7 @@
                 <div class="col-sm-2 hidden-xs">Subject</div>
                 <div class="col-sm-2 hidden-xs">From</div>
              </div>
-            <div id="451_list_msg" class="row" ng-repeat="message in messages | filter:searchTerm">
+            <div id="451_list_msg" class="row" ng-repeat="message in messages | filter:searchTerm | paginate:settings.currentPage * settings.pageSize | limitTo:settings.pageSize">
                 <div class="col-sm-2">
                     <input type='checkbox' ng-model="message.Selected" />
                 </div>
@@ -56,6 +56,8 @@
             </div>
         </div>
         <div class="panel-footer">
+            <pagination page="settings.currentPage" max-size="5" rotate="false" boundary-links="true" total-items="(messages|filter:searchTerm).length"
+                items-per-page="settings.pageSize" direction-links="false"></pagination>
             <button id="451qa_btn_delmsg" type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-show="(messages | filter:searchTerm | filter:{Selected:true}).length > 0">Delete Selected</button>
         </div>
     </div>
