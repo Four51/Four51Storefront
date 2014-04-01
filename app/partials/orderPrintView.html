@@ -76,7 +76,7 @@
                 <div>
                     <div class="order-print-view-line-items-repeater" ng-repeat="item in order.LineItems">
                         <div class="order-print-view-line-items-product">
-                            <p><a ng-href="#/order/{{order.ID}}/{{$index}}">{{item.ProductIDText}}</a></p>
+                            <p><a ng-href="order/{{order.ID}}/{{$index}}">{{item.ProductIDText}}</a></p>
                             <p>{{item.Product.Name}}</p>
                             <ul ng-show="item.Specs | filter:{'CanSetForLineItem':true}.length > 0">
                                 <li class="text-center" ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">

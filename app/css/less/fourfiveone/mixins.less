@@ -567,6 +567,12 @@ button::-moz-focus-inner {
 //== Progress bars
 
 //== List group
+.list-group {
+  a {
+    //** display block triggers .panel break-word on long anchor strings
+    display: block;
+  }
+}
 
 //== Panels
 .panel {
