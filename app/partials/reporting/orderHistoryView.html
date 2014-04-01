@@ -1,4 +1,4 @@
-<section class="container">
+<section>
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch your order"></loadingindicator>
     <div class="hidden-print">
         <nav class="nav">
@@ -62,7 +62,9 @@
         </div>
         <div class="navbar-fixed-bottom">
             <loadingindicator ng-show="displayLoadingIndicator" />
-            <div class="view-action-message alert-success" ng-show="saveFavorite">Your order has been saved as a Favorite.</div>
+            <div class="view-response-message alert-success text-center" alert-show="saveFavorite">
+                <p>{{actionMessage}}</p>
+            </div>
         </div>
     </div>
     <orderprint class="visible-print" />
