@@ -6031,6 +6031,9 @@ label {
 label.required {
   color: red;
 }
+select {
+  cursor: pointer;
+}
 .create-address-type label {
   position: static;
   display: block;
@@ -6116,6 +6119,9 @@ button::-moz-focus-inner {
 .view-form-icon text,
 .view-form-icon textarea {
   padding-left: 25px;
+}
+.view-form-icon select {
+  padding-top: 10px;
 }
 .view-form-icon i {
   color: #cccccc;
