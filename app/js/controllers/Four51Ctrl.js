@@ -14,10 +14,10 @@ function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, C
     if ( $(window).width() < 960 ) {
         $(document)
         .on('focus', ':input:not("button")', function(e) {
-            $('.navbar-fixed-bottom, .headroom.navbar-fixed-top').addClass('ng-hide');
+            $('.navbar-fixed-bottom, .headroom.navbar-fixed-top').css("position", "relative");
         })
         .on('blur', ':input', function(e) {
-            $('.navbar-fixed-bottom, .headroom.navbar-fixed-top').removeClass('ng-hide');
+            $('.navbar-fixed-bottom, .headroom.navbar-fixed-top').css("position", "fixed");
         });
     }
 

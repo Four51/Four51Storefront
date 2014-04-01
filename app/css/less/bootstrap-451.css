@@ -6369,6 +6369,9 @@ button::-moz-focus-inner {
   display: block;
   clear: left;
 }
+.list-group a {
+  display: block;
+}
 .panel {
   word-wrap: break-word;
 }

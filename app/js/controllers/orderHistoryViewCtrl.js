@@ -54,10 +54,13 @@ function ($scope, $location, $routeParams, Order, FavoriteOrder, Address, User) 
         });
 	});
 
-	$scope.saveFavorite = function() {
+	$scope.saveFavorite = function(callback) {
 		$scope.displayLoadingIndicator = true;
+        $scope.actionMessage = null;
         FavoriteOrder.save($scope.order, function() {
 	        $scope.displayLoadingIndicator = false;
+            if (callback) callback($scope.order);
+            $scope.actionMessage = "Your order has been saved as a Favorite";
         });
 	};
 
