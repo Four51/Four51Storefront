@@ -9,31 +9,31 @@
                         </a>
                     </li>
                     <li class="products" ng-class="{'active': isInPath('catalog') || isInPath('product') || isInPath('cart/default') || isInPath('search')}">
-                        <a id="451qa_home_link" ng-show="Four51User.isAuthenticated()" href="#/catalog">
+                        <a id="451qa_home_link" ng-show="Four51User.isAuthenticated()" href="catalog">
                             <i class="fa fa-home"></i>
                             <span class="hidden-xs">Products</span>
                         </a>
                     </li>
                     <li class="order" ng-class="{'active': isActive('order'), 'active-xs': isActive('favoriteorders')}">
-                        <a id="451qa_order_link" href="#/order">
+                        <a id="451qa_order_link" href="order">
                             <i class="fa fa-bar-chart-o"></i>
                             <span class="hidden-xs">Orders</span>
                         </a>
                     </li>
                     <li class="report" ng-if="AppConst.debug" ng-class="{'active': isActive('reports'), 'active-xs': isActive('reports')}">
-                        <a id="451qa_order_link" href="#/reports">
+                        <a id="451qa_order_link" href="reports">
                             <i class="fa fa-clipboard"></i>
                             <span class="hidden-xs">Reports</span>
                         </a>
                     </li>
                     <li class="favorites hidden-xs" ng-class="{'active': isActive('favoriteorders')}">
-                        <a id="451qa_fave_link" href="#/favoriteorders">
+                        <a id="451qa_fave_link" href="favoriteorders">
                             <i class="fa fa-heart"></i>
                             <span class="hidden-xs">Favorites</span>
                         </a>
                     </li>
                     <li ng-class="{'active': isActive(['admin', 'addresses', 'address', 'messages', 'message'])}">
-                        <a id="451qa_acct_link" href="#/admin" class="hidden-md hidden-lg">
+                        <a id="451qa_acct_link" href="admin" class="hidden-md hidden-lg">
                             <i class="fa fa-cog"></i>
                             <span class="hidden-xs">Account</span>
                         </a>
@@ -46,17 +46,17 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li id="451qa_user_link" ng-show="user.Permissions.contains('ViewSelfAdmin')" class="admin">
-                                <a href="#/admin">
+                                <a href="admin">
                                     User Information
                                 </a>
                             </li>
                             <li id="451qa_addy_link" ng-show="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" class="addresses">
-                                <a href="#/addresses">
+                                <a href="addresses">
                                     Addresses
                                 </a>
                             </li>
                             <li id="451qa_mesg_link" ng-show="user.Permissions.contains('ViewMessaging')" class="messages">
-                                <a href="#/message">
+                                <a href="message">
                                     Messages
                                 </a>
                             </li>
@@ -78,7 +78,7 @@
                 </ul>
                 <ul class="nav navbar-nav pull-right">
                     <li class="cart" ng-class="{'active': isActive(['cart', 'checkout'])}">
-                        <a id="451qa_cart_link" ng-show="cartCount" class="cart" href="#/cart">
+                        <a id="451qa_cart_link" ng-show="cartCount" class="cart" href="cart">
                             <span ng-bind="cartCount" class="badge"></span>
                             <i class="fa fa-shopping-cart"></i>
                             <i class="fa fa-caret-down"></i>
