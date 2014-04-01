@@ -567,6 +567,12 @@ button::-moz-focus-inner {
 //== Progress bars
 
 //== List group
+.list-group {
+  a {
+    //** display block triggers .panel break-word on long anchor strings
+    display: block;
+  }
+}
 
 //== Panels
 .panel {
@@ -587,7 +593,7 @@ button::-moz-focus-inner {
     .panel-title {
       letter-spacing: 0.08em;
       font-size: ceil((@font-size-base * 1));
-      padding: 25px 15px;
+      padding: 15px;
       text-align: center;
       text-transform: uppercase;
     }

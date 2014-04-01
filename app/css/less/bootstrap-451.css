@@ -6369,6 +6369,9 @@ button::-moz-focus-inner {
   display: block;
   clear: left;
 }
+.list-group a {
+  display: block;
+}
 .panel {
   word-wrap: break-word;
 }
@@ -6385,7 +6388,7 @@ button::-moz-focus-inner {
 .panel .panel-heading .panel-title {
   letter-spacing: 0.08em;
   font-size: 14px;
-  padding: 25px 15px;
+  padding: 15px;
   text-align: center;
   text-transform: uppercase;
 }
