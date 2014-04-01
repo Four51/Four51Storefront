@@ -1,19 +1,40 @@
-<div class="text-right">
-    <p ng-show="order.DateSubmitted"><span class="text-info">Date Submitted</span>{{order.DateSubmitted | date:'short'}}</p>
-    <p><span class="text-info">Status</span>{{order.StatusText}}</p>
-    <p ng-show="order.DateCompleted"><span class="text-info">Date Completed</span>{{order.DateCompleted | date:'short'}}</p>
-    <p ng-show="order.FromUserFirstName || order.FromUserLastName"><span class="text-info">Created By</span>{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</p>
-    <p ng-show="order.Comments"><span class="text-info">Comments</span>{{order.Comments}}</p>
-    <p ng-show="orderCostCenter"><span class="text-info">Cost Center</span>{{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</p>
+<div>
+    <p ng-show="order.DateSubmitted">
+        <span class="text-info">Date Submitted</span>
+        <span class="pull-right">{{order.DateSubmitted | date:'short'}}</span>
+    </p>
+    <p>
+        <span class="text-info">Status</span>
+        <span class="pull-right">{{order.StatusText}}</span>
+    </p>
+    <p ng-show="order.DateCompleted">
+        <span class="text-info">Date Completed</span>
+        <span class="pull-right">{{order.DateCompleted | date:'short'}}</span>
+    </p>
+    <p ng-show="order.FromUserFirstName || order.FromUserLastName">
+        <span class="text-info">Created By</span>
+        <span class="pull-right">{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</span>
+    </p>
+    <p ng-show="order.Comments">
+        <span class="text-info">Comments</span>
+        <span class="pull-right">{{order.Comments}}</span>
+    </p>
+    <p ng-show="orderCostCenter">
+        <span class="text-info">Cost Center</span>
+        <span class="pull-right">{{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</span>
+    </p>
     <p>
         <span class="text-info">Payment Method</span>
-        {{order.PaymentMethodText}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong> {{order.AmountOnAccount && order.PaymentMethod != 'BudgetAccount' ? "(" + (order.Total - order.AmountOnAccount | currency) + ")" : ""}}
+        <span class="pull-right">{{order.PaymentMethodText}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong> {{order.AmountOnAccount && order.PaymentMethod != 'BudgetAccount' ? "(" + (order.Total - order.AmountOnAccount | currency) + ")" : ""}}</span>
     </p>
     <p ng-show="order.AmountOnAccount && order.PaymentMethod != 'BudgetAccount'">
         <span class="text-info"></span>
-        {{(order.AccountName || order.AccountLabel) + " (" + (order.AmountOnAccount | currency) + ")"}}
+        <span class="pull-right">{{(order.AccountName || order.AccountLabel) + " (" + (order.AmountOnAccount | currency) + ")"}}</span>
     </p>
-    <p ng-show="order.CostCenter"><span class="text-info">Cost Center</span>{{order.CostCenter}}</p>
+    <p ng-show="order.CostCenter">
+        <span class="text-info">Cost Center</span>
+        <span class="pull-right">{{order.CostCenter}}</span>
+    </p>
     <hr />
     <address ng-show="order.ShipAddress">
         <div class="text-left">
