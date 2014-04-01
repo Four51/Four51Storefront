@@ -6082,7 +6082,62 @@ button::-moz-focus-inner {
   left: 45px;
 }
 .view-form-icon > div {
-  margin: 25px 0 0;
+  margin: 35px 0 0;
+}
+.view-form-icon.view-form-icon-input-group .input-group {
+  width: 100%;
+}
+.view-form-icon.view-form-icon-input-group input,
+.view-form-icon.view-form-icon-input-group select,
+.view-form-icon.view-form-icon-input-group text,
+.view-form-icon.view-form-icon-input-group textarea {
+  padding-left: 5px;
+  border-radius: 4px;
+}
+@media (max-width: 767px) {
+  .view-form-icon.view-form-icon-input-group input,
+  .view-form-icon.view-form-icon-input-group select,
+  .view-form-icon.view-form-icon-input-group text,
+  .view-form-icon.view-form-icon-input-group textarea {
+    padding-left: 25px;
+  }
+}
+.view-form-icon.view-form-icon-input-group .input-group-addon:first-of-type:before {
+  content: "\f044";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  padding-right: 5px;
+  padding-lefT: 5px;
+}
+@media (max-width: 767px) {
+  .view-form-icon.view-form-icon-input-group .input-group-addon:first-of-type:before {
+    content: "";
+    padding-lefT: 0;
+    margin-lefT: -5px;
+  }
+}
+@media (max-width: 767px) {
+  .view-form-icon.view-form-icon-input-group .input-group-addon {
+    clear: both;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 5px 0;
+    border-radius: 0;
+    background-color: #fff;
+  }
+}
+.view-form-icon.view-form-icon-input-group i {
+  display: none;
+}
+@media (max-width: 767px) {
+  .view-form-icon.view-form-icon-input-group i {
+    padding-left: 0;
+    top: 37px;
+    display: block;
+  }
 }
 .view-form-icon .quantity div {
   margin: 0;
