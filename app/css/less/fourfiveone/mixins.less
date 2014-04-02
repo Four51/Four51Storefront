@@ -265,11 +265,6 @@ button::-moz-focus-inner {
     padding-left: 25px;
   }
 
-  //** select is not like the others
-  select {
-    padding-top: 10px;
-  }
-
   //** icons
   i {
     color: @fourfiveone-form-icon-color;
@@ -395,6 +390,11 @@ button::-moz-focus-inner {
 }
 
 //== Grid system
+//** container to work with 'navbar-fixed-top position fixed/relative switching on focus' for mobile; adjusts for bootstrap fixed nav floating
+.container-view {
+  &:extend(.container all);
+  margin-top: 45px;
+}
 
 //== Container sizes
 
@@ -402,6 +402,7 @@ button::-moz-focus-inner {
 .navbar {
   .container {
     padding: 0;
+    border: none;
     .navbar-nav {
       &:extend(.clearfix all);
       margin: 0;
@@ -593,7 +594,8 @@ button::-moz-focus-inner {
 
 //== Jumbotron
 .jumbotron {
-  margin: 0 5px;
+  margin: 45px 5px -45px;
+
   //** hide/show only on products::home page / remove this as well as active in path angular check to display jumbotron on all pages
   display: none;
   &.active {
