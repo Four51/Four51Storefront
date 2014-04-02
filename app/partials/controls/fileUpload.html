@@ -24,6 +24,7 @@
             <li ng-if="customfield.MaxHeight > 0 && (customfield.File.IsImage || customfield.FileType == 'Image')">Maximum Height: {{customfield.MaxHeight + ' px'}}</li>
             <li ng-if="customfield.MinWidth > 0 && (customfield.File.IsImage || customfield.FileType == 'Image')">Minimum Width: {{customfield.MinWidth + ' px'}}</li>
             <li ng-if="customfield.MaxWidth > 0 && (customfield.File.IsImage || customfield.FileType == 'Image')">Maximum Width: {{customfield.MaxWidth + ' px'}}</li>
+            <li ng-if="customfield.MinDPI > 0 && (customfield.File.IsImage || customfield.FileType == 'Image')">Minimum DPI: {{customfield.MinDPI + ' dpi'}}</li>
             <li ng-if="customfield.MaxDPI > 0 && (customfield.File.IsImage || customfield.FileType == 'Image')">Maximum DPI: {{customfield.MaxDPI + ' dpi'}}</li>
         </ul>
     </div>
