@@ -18,6 +18,20 @@ four51.app.filter('kb', function() {
 	}
 });
 
+four51.app.filter('r', ['WhiteLabel', function(WhiteLabel) {
+	return function(value) {
+		var result = value, found = false;
+		angular.forEach(WhiteLabel.replacements, function(c) {
+			if (found) return;
+			if (c.key == value) {
+				result = c.value;
+				found = true;
+			}
+		});
+		return result;
+	}
+}]);
+
 four51.app.filter('noliverates', function() {
 	return function(value) {
 		var output = [];
