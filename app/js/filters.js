@@ -18,13 +18,13 @@ four51.app.filter('kb', function() {
 	}
 });
 
-four51.app.filter('r', ['WhiteLabel', function(WhiteLabel) {
+four51.app.filter('r', ['$sce', 'WhiteLabel', function($sce, WhiteLabel) {
 	return function(value) {
 		var result = value, found = false;
 		angular.forEach(WhiteLabel.replacements, function(c) {
 			if (found) return;
 			if (c.key == value) {
-				result = c.value;
+				result = $sce.trustAsHtml(c.value);
 				found = true;
 			}
 		});
