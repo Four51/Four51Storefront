@@ -45,7 +45,6 @@ function ($location, $route, $scope, $451, User) {
 
 	$scope.Clear = function() {
 		localStorage.clear();
-		$route.reload();
 	}
 
 	$scope.$on('event:orderUpdate', function(event, order) {

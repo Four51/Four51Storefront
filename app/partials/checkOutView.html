@@ -11,13 +11,13 @@
         <orderapprovals ng-show="currentOrder.Approvals" />
         <div class="navbar-fixed-bottom">
             <div class="view-response-message alert-success text-center" alert-show="actionMessage">
-                <p>{{actionMessage}}</p>
+                <p>{{actionMessage | r}}</p>
             </div>
             <div class="view-response-message alert-danger text-center" alert-show="errorMessage">
-                <p>{{errorMessage}}</p>
+                <p>{{errorMessage | r}}</p>
             </div>
             <div class="view-response-message alert-danger text-center" alert-show="couponError">
-                <p>{{couponError}}</p>
+                <p>{{couponError | r}}</p>
             </div>
             <div class="view-error-message" ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length) > 0">
                 <ul class="alert-warning">
@@ -30,10 +30,10 @@
                     <li class="text-center">
                         <ul ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
                             <li ng-if="cart_order.orderid.$invalid">Enter an order id</li>
-                            <li ng-if="cart_shipping.shippingAddress.$invalid">Please choose a shipping address</li>
-                            <li ng-if="cart_shipping.shipMethod.$invalid">Please choose a shipping method</li>
-                            <li ng-if="cart_billing.billingAddress.$invalid">Please choose a billing address</li>
-                            <li ng-if="cart_billing.$error.paymentMethod">Please choose a valid payment method</li>
+                            <li ng-if="cart_shipping.shippingAddress.$invalid">Please choose a {{'Shipping' | rl}} {{'Address' | rl}}</li>
+                            <li ng-if="cart_shipping.shipMethod.$invalid">Please choose a {{'Shipping Method' | rl}}</li>
+                            <li ng-if="cart_billing.billingAddress.$invalid">Please choose a {{'Billing' | rl}} {{'Address' | rl}}</li>
+                            <li ng-if="cart_billing.$error.paymentMethod">Please choose a valid {{'Payment' | rl}} {{'Method' | rl}}</li>
                             <li ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
                                 You're site is mis-configured. You do not have permission to create a billing address nor do you have any addresses assigned to you. Please contact your support representative.
                             </li>
@@ -53,13 +53,13 @@
             <ul>
                 <li>
                     <button class="btn btn-danger" ng-click="cancelOrder()">
-                        Cancel Order
+                        {{'Cancel' | r}} {{'Order' | r}}
                     </button>
                 </li>
                 <li>
                     <button class="btn btn-primary"  ng-click="saveChanges()">
                         <loadingindicator ng-show="displayLoadingIndicator" />
-                        Save Order
+                        {{'Save' | r}} {{'Order' | r}}
                     </button>
                 </li>
                 <li>
@@ -67,7 +67,7 @@
                             ng-class="{'btn-warning': cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid, 'btn-success': !cart_shipping.$invalid && !cart_order.$invalid && !cart_billing.$invalid }"
                             ng-click="submitOrder()" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">
                         <i ng-show="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" class="fa fa-warning"></i>
-                        <span>Submit Order</span>
+                        <span>{{'Submit' | r}} {{'Order' | r}}</span>
                     </button>
                 </li>
             </ul>

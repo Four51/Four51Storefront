@@ -8,7 +8,7 @@
                 <span class="fa empty"><i class="fa fa-camera"></i></span>
             </div>
             <div class="btn btn-default">
-                View Product
+                {{'View' | r}} {{'Product' | r}}
             </div>
         </a>
     </div>
@@ -24,11 +24,11 @@
                 for {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
             </p>
             <p ng-show="LineItem.Product.UnitOfMeasure">
-                Unit of Measure: {{LineItem.Product.UnitOfMeasure}}
+                {{'Unit of Measure' | r}}: {{LineItem.Product.UnitOfMeasure}}
             </p>
 
             <p ng-show="LineItem.Product.DisplayInventory && inventoryDisplay(LineItem.Product, LineItem.Variant) != undefined">
-                QTY Available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
+                {{'Quantity Available' | r}}: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
             </p>
         </section>
     </div>
@@ -40,13 +40,13 @@
                 for {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
             </p>
             <p ng-show="LineItem.Product.UnitOfMeasure">
-                Unit of Measure: {{LineItem.Product.UnitOfMeasure}}
+                {{'Unit of Measure' | r}}: {{LineItem.Product.UnitOfMeasure}}
             </p>
             <p ng-show="inventoryDisplay(LineItem.Product, LineItem.Variant)">
-                QTY Available: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
+                {{'Quantity Available' | r}}: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
             </p>
             <button class="btn btn-default" redirect="product/{{LineItem.Product.InteropID}}">
-                View Product
+                {{'View' | r}} {{'Product' | r}}
             </button>
         </div>
     </section>

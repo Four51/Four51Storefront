@@ -1,28 +1,28 @@
 <section>
     <nav class="nav visible-xs">
         <span class="btn-group">
-            <button class="btn btn-default" ng-class="{'active': isActive('order')}" redirect="/order">Orders</button>
-            <button class="btn btn-default" ng-class="{'active': isActive('favoriteorders')}" redirect="/favoriteorders">Favorites</button>
+            <button class="btn btn-default" ng-class="{'active': isActive('order')}" redirect="/order">{{'Orders' | r}}</button>
+            <button class="btn btn-default" ng-class="{'active': isActive('favoriteorders')}" redirect="/favoriteorders">{{'Favorites' | r}}</button>
         </span>
     </nav>
     <div class="panel panel-default" ng-if="favoriteorders.length == 0">
         <div class="panel-heading">
-            <h3 class="panel-title panel-primary">Favorite Orders</h3>
+            <h3 class="panel-title panel-primary">{{'Favorite' | r}} {{'Orders' | r}}</h3>
         </div>
         <div class="panel-body">
-            <p class="alert alert-warning">You have no favorite orders yet!</p>
+            <p class="alert alert-warning">You have no {{'Favorite' | rl}} {{'Orders' | rl}} yet!</p>
         </div>
         <div class="panel-footer">
-            <button type="button" class="btn btn-primary pull-right" ng-click="saveFavoriteNow()">View orders</button>
+            <button type="button" class="btn btn-primary pull-right" ng-click="saveFavoriteNow()">{{'View' | r}} {{'Orders' | r}}</button>
         </div>
     </div>
     <div class="panel panel-default" ng-if="favoriteorders.length > 0">
         <div class="panel-heading">
-            <h3 class="panel-title panel-primary">Favorite Orders</h3>
+            <h3 class="panel-title panel-primary">{{'Favorite' | r}} {{'Orders' | r}}</h3>
         </div>
         <div class="panel-body view-form-icon">
             <div>
-                <label ng-show="searchTerm">Search</label>
+                <label ng-show="searchTerm">{{'Search' | r}}</label>
                 <input class="form-control" type="text" placeholder="Search" ng-model="searchTerm" autocomplete="off" />
                 <i class="fa fa-search"></i>
             </div>
@@ -30,13 +30,13 @@
         <div class="panel-table">
             <div class="row text-info">
                 <div class="col-sm-2">
-                    <label class="visible-xs">Select all</label>
+                    <label class="visible-xs">{{'Select all' | r}}</label>
                     <input type='checkbox' ng-click="checkAll($event)" />
                 </div>
-                <div class="col-sm-2 hidden-xs">Name</div>
-                <div class="col-sm-2 hidden-xs">Order ID</div>
-                <div class="col-sm-2 hidden-xs">Date Completed</div>
-                <div class="col-sm-2 hidden-xs">Order Type</div>
+                <div class="col-sm-2 hidden-xs">{{'Name' | r}}</div>
+                <div class="col-sm-2 hidden-xs">{{'Order' | r}} {{'ID' | r}}</div>
+                <div class="col-sm-2 hidden-xs">{{'Date' | r}} {{'Completed' | r}}</div>
+                <div class="col-sm-2 hidden-xs">{{'Order' | r}} {{'Type' | r}}</div>
                 <div class="col-sm-2 hidden-xs"></div>
             </div>
             <div class="row" ng-repeat="order in favoriteorders | filter:searchTerm">
@@ -44,31 +44,31 @@
                     <input type='checkbox' ng-model="order.Selected" />
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">Name</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Name' | r}}</span>
                     {{order.FavoriteName}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">Order ID</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Order' | r}} {{'ID' | r}}</span>
                     <a ng-href="order/{{order.ID}}">{{order.ExternalID}}</a>
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">Date Completed</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Date' | r}} {{'Completed' | r}}</span>
                     {{order.DateCompleted | date:'medium'}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">Order Type</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Order' | r}} {{'Type' | r}}</span>
                     {{order.Type}}
                 </div>
                 <div class="col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">
                     <button ng-disabled="currentOrder" type="button" class="btn btn-default pull-right" ng-click="repeat(order)">
                         <i ng-show="currentOrder" class="fa fa-warning"></i>
-                        Repeat Order
+                        {{'Repeat' | r}} {{'Order' | r}}
                     </button>
                 </div>
             </div>
         </div>
         <div class="panel-footer">
-            <button type="button" class="btn btn-small btn-danger" ng-click="deleteSelected($event)" ng-show="(favoriteorders | filter:searchTerm | filter:{Selected:true}).length > 0">Delete Selected</button>
+            <button type="button" class="btn btn-small btn-danger" ng-click="deleteSelected($event)" ng-show="(favoriteorders | filter:searchTerm | filter:{Selected:true}).length > 0">{{'Delete' | r}} {{'Selected' | r}}</button>
         </div>
     </div>
 </section>

@@ -2,7 +2,7 @@
     <div class="panel panel-search">
         <div class="panel-heading">
             <h3 class="panel-title">
-                Search
+                {{'Search' | r}}
             </h3>
         </div>
         <div class="panel-body">
@@ -12,7 +12,7 @@
                         <input type="text" ng-model="searchTerm"  class="form-control" placeholder="Search Products" autocomplete="off" />
                         <i class="fa fa-search"></i>
                         <span class="hidden-xs input-group-addon">
-                            <small>Press enter to search</small>
+                            <small>{{'Press enter to search' | r}}</small>
                         </span>
                         <span class="input-group-addon">
                             <button type="button" class="btn" redirect="catalog"><i class="fa fa-times-circle"></i></button>
@@ -24,12 +24,12 @@
         </div>
         <div ng-show="products == 0" class="panel-product-list">
             <p class="alert alert-info">
-                No search results
+                {{'Your search resulted in no records. Please refine your search.' | r}}
             </p>
         </div>
         <div ng-show="products" class="panel-product-list">
             <p class="alert alert-info">
-                Search results
+                {{'Search' | r}}
             </p>
             <nav class="nav">
                 <ul>

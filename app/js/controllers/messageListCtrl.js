@@ -18,4 +18,8 @@ four51.app.controller('MessageListCtrl', ['$scope', 'MessageList', function($sco
 			});
 		});
 	};
+	$scope.settings = {
+		currentPage: 1,
+		pageSize: 10
+	};
 }]);

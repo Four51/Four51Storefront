@@ -1,21 +1,21 @@
 <div>
     <p>
-        <span class="text-info">Subtotal</span>
+        <span class="text-info">{{'Subtotal' | r}}</span>
         <span class="pull-right">{{order.Subtotal | currency:"$"}}</span>
     </p>
     <p>
-        <span class="text-info">Shipping & Handling</span>
+        <span class="text-info">{{'Shipping & Handling' | r}}</span>
         <span class="pull-right">{{order.ShippingCost | currency:"$"}}</span>
     </p>
     <p>
-        <span class="text-info">Tax</span>
+        <span class="text-info">{{'Tax' | r}}</span>
         <span class="pull-right">{{order.TaxCost | currency:"$"}}<span class="pull-right">
     </p>
     <p ng-if="order.Coupon">
-        <span class="text-info">Coupon ({{order.Coupon.Label}})</span>
+        <span class="text-info">{{'Coupon' | r}} ({{order.Coupon.Label}})</span>
         <span class="pull-right">{{order.Coupon.OrderDiscount * -1 | currency}}</span>
     </p>
-    <p><span class="text-info">Total</span>
+    <p><span class="text-info">{{'Total' | r}}</span>
         <span class="pull-right">{{order.Total | currency:"$"}}</span>
     </p>
 </div>

@@ -1,12 +1,18 @@
 four51.app.controller('MessageViewCtrl', ['$scope', '$location', '$routeParams', 'Message',
 function($scope, $location, $routeParams, Message) {
-    Message.get($routeParams.id, function(msg) {
-        $scope.message = msg;
-        $scope.canReply = function() {
-            return msg.Box == 'Inbox';
-        }
-    });
 
+	if ($routeParams.id == 'new') {
+		$scope.composing = true;
+		$scope.message = {};
+	}
+	else {
+		Message.get($routeParams.id, function (msg) {
+			$scope.message = msg;
+			$scope.canReply = function () {
+				return msg.Box == 'Inbox';
+			}
+		});
+	}
 	$scope.delete = function(event) {
 		event.preventDefault();
         Message.delete($scope.message, function() {

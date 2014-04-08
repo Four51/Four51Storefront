@@ -5,65 +5,65 @@
 	<form name="login_existing" ng-submit="loginExisting()" ng-if="user.Type == 'TempCustomer'">
 		<div class="panel panel-default" id="user_form">
 			<div class="panel-heading">
-				<h3 class="panel-title">Logon as existing user</h3>
+				<h3 class="panel-title">{{'Logon' | r}} {{'as existing user' | r}}</h3>
 			</div>
 			<div class="panel-body">
                 <div class="col-md-6 col-md-offset-3">
-                    <label>Username</label><input name="username" class="form-control" type="text" ng-model="loginasuser.Username" autocomplete="off" required placeholder="User Name" /><br />
-                    <label>Password</label><input name="password" class="form-control" type="password" ng-model="loginasuser.Password" autocomplete="off" required placeholder="Password" /><br />
+                    <label>{{'Username' | r}}</label><input name="username" class="form-control" type="text" ng-model="loginasuser.Username" autocomplete="off" required placeholder="{{'Username' | r}}" /><br />
+                    <label>{{'Password' | r}}</label><input name="password" class="form-control" type="password" ng-model="loginasuser.Password" autocomplete="off" required placeholder="{{'Password' | r}}" /><br />
                 </div>
 			</div>
 			<div class="panel-footer">
-				<input class="btn btn-medium btn-primary" type="submit" ng-disabled="login_existing.$invalid" id="451_btn_login_existing" value="Logon" />
+				<input class="btn btn-medium btn-primary" type="submit" ng-disabled="login_existing.$invalid" id="451_btn_login_existing" value="{{'Logon' | r}}" />
 			</div>
 		</div>
 	</form>
 	<form name="user_form" ng-submit="save()">
         <div class="panel panel-default" id="user_form">
             <div class="panel-heading">
-                <h3 class="panel-title">{{user.Type == 'TempCustomer' ? 'Create' : 'My'}} Account</h3>
+                <h3 class="panel-title">{{user.Type == 'TempCustomer' ? 'Create' : 'My'}} {{'Account' | r}}</h3>
             </div>
             <div class="panel-body">
                 <div class="col-sm-6 view-form-icon">
                     <div>
-                        <label ng-show="user.FirstName">First Name</label>
-                        <input name="firstname" class="form-control" type="text" required ng-model="user.FirstName" placeholder="First Name" autocomplete="off" />
+                        <label ng-show="user.FirstName">{{'First' | r}} {{'Name' | r}}</label>
+                        <input name="firstname" class="form-control" type="text" required ng-model="user.FirstName" placeholder="{{'First' | r}} {{'Name' | r}}" autocomplete="off" />
                         <i class="fa fa-user"></i>
                     </div>
                     <div>
-                        <label ng-show="user.LastName">Last Name</label>
-                        <input name="lastname" required class="form-control" type="text" ng-model="user.LastName" placeholder="Last Name" autocomplete="off" />
+                        <label ng-show="user.LastName">{{'Last' | r}} {{'Name' | r}}</label>
+                        <input name="lastname" required class="form-control" type="text" ng-model="user.LastName" placeholder="{{'Last' | r}} {{'Name' | r}}" autocomplete="off" />
                         <i class="fa fa-user"></i>
                     </div>
                     <div>
-                        <label ng-show="user.Phone">Phone</label>
+                        <label ng-show="user.Phone">{{'Phone' | r}}</label>
                         <input name="phone" class="form-control" type="text" ng-model="user.Phone" ui-mask="(999) 999-9999" autocomplete="off" />
                         <i class="fa fa-phone"></i>
                     </div>
                     <div>
-                        <label class="required">Email</label>
-                        <input name="email" class="form-control" type="email" ng-model="user.Email" required placeholder="Email Address" autocomplete="off" />
+                        <label class="required">{{'Email' | r}}</label>
+                        <input name="email" class="form-control" type="email" ng-model="user.Email" required placeholder="{{'Email' | r}}" autocomplete="off" />
                         <i class="fa fa-envelope-o"></i>
-                        <inlineerror ng-show="user_form.email.$invalid" title="Please enter a valid email address" />
+                        <inlineerror ng-show="user_form.email.$invalid" title="Please enter a valid {{'Email' | rl}} {{'Address' | rl}}" />
                     </div>
                 </div>
                 <div class="col-sm-6 view-form-icon">
                     <div>
-                        <label class="required">Username</label>
-                        <input name="username" class="form-control" type="text" ng-model="user.TempUsername" required placeholder="User Name" autocomplete="off" />
+                        <label class="required">{{'Username' | r}}</label>
+                        <input name="username" class="form-control" type="text" ng-model="user.TempUsername" required placeholder="{{'Username' | r}}" autocomplete="off" />
                         <i class="fa fa-user"></i>
                     </div>
                     <!--TODO username input shouldn't default to temporary usernames, if the user is temp, make the placeholder show instead !-->
                     <div>
-                        <label ng-show="user.Password">Password</label>
-                        <input name="password" class="form-control" required type="password" ng-model="user.Password" placeholder="Password" autocomplete="off" />
+                        <label ng-show="user.Password">{{'Password' | r}}</label>
+                        <input name="password" class="form-control" required type="password" ng-model="user.Password" placeholder="{{'Password' | r}}" autocomplete="off" />
                         <i class="fa fa-lock"></i>
                     </div>
                     <div>
-                        <label ng-show="user.ConfirmPassword">Confirm Password</label>
-                        <input name="confirm_password" ng-match="user.Password" required class="form-control" type="password" ng-model="user.ConfirmPassword" placeholder="Confirm Password" autocomplete="off" />
+                        <label ng-show="user.ConfirmPassword">{{'Confirm' | r}} {{'Password' | r}}</label>
+                        <input name="confirm_password" ng-match="user.Password" required class="form-control" type="password" ng-model="user.ConfirmPassword" placeholder="{{'Confirm' | r}} {{'Password' | r}}" autocomplete="off" />
                         <i class="fa fa-lock"></i>
-                        <inlineerror ng-show="user_form.confirm_password.$error.match" title="Passwords do not match!" />
+                        <inlineerror ng-show="user_form.confirm_password.$error.match" title="{{'Password' | r}}s do not match!" />
                     </div>
 
                     <span class="alert-warning" ng-show="securityWarning">
@@ -100,7 +100,7 @@
             </div>
             <div class="panel-footer text-center">
                 <input class="btn btn-primary pull-right" type="submit" ng-disabled="user_form.$invalid" id="451_btn_user" value="{{user.Type == 'TempCustomer' ? 'Create Acccount' : 'Save'}}" />
-                <span class="alert alert-success" ng-show="actionMessage" ng-bind-html="actionMessage"></span>
+                <span class="alert alert-success" ng-show="actionMessage" ng-bind-html="actionMessage | r"></span>
             </div>
         </div>
     </form>
