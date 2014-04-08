@@ -6462,6 +6462,9 @@ button::-moz-focus-inner {
   display: block;
   clear: left;
 }
+.list-group {
+  margin: 5px 0;
+}
 .list-group a {
   display: block;
 }

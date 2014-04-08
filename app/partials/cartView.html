@@ -113,18 +113,20 @@
                             </div>
                         </div>
                         <div class="row">
-                            <p class="text-info" ng-show="item.SpecsLength > 0" ng-init="toggleSpecs = false" ng-click="toggleSpecs = !toggleSpecs">
-                                <span ng-show="toggleSpecs == false"><i class="fa fa-plus-circle"></i> {{'Show' | r}} </span>
-                                <span ng-show="toggleSpecs == true"><i class="fa fa-minus-circle"></i> {{'Hide' | r}} </span>
-                                {{'Specification' | r}}
-                            </p>
-                            <ul ng-show="toggleSpecs == true">
-                                <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
-                                    <span class="text-info">{{spec.Name}}: </span>
-                                    <span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span></span>
-                                    <span ng-if="spec.ControlType != 'File'">{{spec.Value || '(unspecified)'}}</span>
-                                </li>
-                            </ul>
+                            <div class="col-xs-12">
+                                <button class="btn btn-default" ng-show="item.SpecsLength > 0" ng-init="toggleSpecs = false" ng-click="toggleSpecs = !toggleSpecs">
+                                    <span ng-show="toggleSpecs == false"><i class="fa fa-plus-circle"></i> {{'Show' | r}} </span>
+                                    <span ng-show="toggleSpecs == true"><i class="fa fa-minus-circle"></i> {{'Hide' | r}} </span>
+                                    {{'Specification' | r}}
+                                </button>
+                                <ul ng-show="toggleSpecs == true" class="list-group">
+                                    <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} " class="list-group-item">
+                                        <span class="text-info">{{spec.Name}}: </span>
+                                        <span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span></span>
+                                        <span ng-if="spec.ControlType != 'File'">{{spec.Value || '(unspecified)'}}</span>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
