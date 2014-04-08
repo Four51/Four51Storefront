@@ -59,7 +59,7 @@
                     <p>{{'Subtotal' | r}}:<span style="float: right;">{{order.Subtotal | currency:"$"}}</span></p>
                     <p>{{'Shipping & Handling' | r}}: <span style="float: right;">{{order.ShippingCost | currency:"$"}}</span></p>
                     <p>{{'Tax' | r}}: <span style="float: right;">{{order.TaxCost | currency:"$"}}</span></p>
-                    <p ng-if="order.Coupon">{{'Coupon' | r'}} ({{order.Coupon.Label}}): <span style="float: right;">{{order.Coupon.OrderDiscount * -1 | currency}}</span></p>
+                    <p ng-if="order.Coupon">{{'Coupon' | r}} ({{order.Coupon.Label}}): <span style="float: right;">{{order.Coupon.OrderDiscount * -1 | currency}}</span></p>
                     <p>{{'Total' | r}}: <span style="float: right;">{{order.Total | currency:"$"}}</span></p>
                 </div>
             </div>
@@ -76,10 +76,10 @@
                 <div>
                     <div class="order-print-view-line-items-repeater" ng-repeat="item in order.LineItems">
                         <div class="order-print-view-line-items-product">
-                            <p><a ng-href="order/{{order.ID}}/{{$index}}">{{item.ProductIDText}}</a></p>
+                            <p>{{item.ProductIDText}}</p>
                             <p>{{item.Product.Name}}</p>
-                            <ul ng-show="item.Specs | filter:{'CanSetForLineItem':true}.length > 0">
-                                <li class="text-center" ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
+                            <ul class="list-group" ng-show="item.Specs | filter:{'CanSetForLineItem':true}.length > 0">
+                                <li class="list-group-item" ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
                                     <span class="text-info">{{spec.Name}}: </span>
                                     <span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span></span>
                                     <span ng-if="spec.ControlType != 'File'">{{spec.Value || '(unspecified)'}}</span>
