@@ -99,6 +99,11 @@ label {
     color: red;
   }
 }
+
+select {
+  cursor: pointer;
+}
+
 //** create address type labels are not like the others
 .create-address-type label {
   position: static;
@@ -159,7 +164,61 @@ button::-moz-focus-inner {
 .view-form-icon {
   // make room for labels
   & > div {
-    margin: 25px 0 0;
+    margin: 35px 0 0;
+  }
+
+  &.view-form-icon-input-group {
+    .input-group {
+      width: 100%;
+    }
+    input,
+    select,
+    text,
+    textarea {
+      padding-left: 5px;
+      border-radius: 4px;
+      @media (max-width: @screen-xs-max) {
+      padding-left: 25px;
+      }
+    }
+    .input-group-addon {
+      &:first-of-type {
+        &:before {
+          content: "\f044";
+          font-family: FontAwesome;
+          font-style: normal;
+          font-weight: normal;
+          text-decoration: inherit;
+          padding-right: 5px;
+          padding-lefT: 5px;
+          @media (max-width: @screen-xs-max) {
+            content: "";
+            padding-lefT:0;
+            margin-lefT: -5px;
+          }
+        }
+      }
+
+
+      @media (max-width: @screen-xs-max) {
+        clear: both;
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 5px 0;
+        border-radius: 0;
+        background-color: #fff;
+      }
+    }
+
+    i {
+      display: none;
+      @media (max-width: @screen-xs-max) {
+        padding-left: 0;
+        top: 37px;
+        display: block;
+      }
+    }
   }
 
   //** quantity input is not like the others
@@ -331,6 +390,11 @@ button::-moz-focus-inner {
 }
 
 //== Grid system
+//** container to work with 'navbar-fixed-top position fixed/relative switching on focus' for mobile; adjusts for bootstrap fixed nav floating
+.container-view {
+  &:extend(.container all);
+  margin-top: 45px;
+}
 
 //== Container sizes
 
@@ -338,6 +402,7 @@ button::-moz-focus-inner {
 .navbar {
   .container {
     padding: 0;
+    border: none;
     .navbar-nav {
       &:extend(.clearfix all);
       margin: 0;
@@ -529,7 +594,8 @@ button::-moz-focus-inner {
 
 //== Jumbotron
 .jumbotron {
-  margin: 0 5px;
+  margin: 45px 5px -45px;
+
   //** hide/show only on products::home page / remove this as well as active in path angular check to display jumbotron on all pages
   display: none;
   &.active {
@@ -593,7 +659,7 @@ button::-moz-focus-inner {
     .panel-title {
       letter-spacing: 0.08em;
       font-size: ceil((@font-size-base * 1));
-      padding: 15px;
+      padding: 25px 15px;
       text-align: center;
       text-transform: uppercase;
     }

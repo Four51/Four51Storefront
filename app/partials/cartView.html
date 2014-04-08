@@ -103,7 +103,7 @@
                                                 <i ng-if="user.CostCenters.length != 1" class="fa fa-money"></i>
                                             </div>
                                             <div class="col-xs-3">
-                                                <button type="button" title="copy to all" class="btn btn-default pull-right" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
+                                                <button type="button" title="copy to all" class="btn btn-default pull-right" value="copy to all" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-hide="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
                                                     <span class="fa fa-copy text-info"></span>
                                                 </button>
                                             </div>
