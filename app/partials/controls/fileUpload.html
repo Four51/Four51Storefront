@@ -13,7 +13,7 @@
     </div>
     <br />
     <input type="hidden" ng-required="customfield.Required" ng-model="customfield.File.ID"></input>
-    <div class="error ui-state-error-text"></div>
+    <div class="error ui-state-error-text text-danger"></div>
     <div class="alert alert-info" ng-show="replace || !customfield.File">
         {{customfield.UploadInstructions}}
         <ul ng-show="replace || !customfield.File">
