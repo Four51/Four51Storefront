@@ -7410,3 +7410,8 @@ table[datepicker] {
   padding-bottom: 10px;
   border-bottom: 1px solid #dddddd;
 }
+.cart-print-view-line-items-repeater {
+  margin-top: 30px;
+  padding-top: 10px;
+  border-bottom: 1px solid #dddddd;
+}
