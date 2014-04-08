@@ -4,10 +4,10 @@
         <div class="btn btn-default btn-block btn-date hidden-lg hidden-md"
              ng-click="$event.preventDefault();$event.stopPropagation();startopened = !startopened;"
              style="margin:0; height:40px; padding-top:8px;">
-            {{fromdate ? '' : 'Tap to set a start date'}}
+            {{fromdate ? "" : "Tap"}}
             <span class="text-info">{{fromdate | date:'M/dd/yy'}}</span>
         </div>
-        <input placeholder="Start Date" ng-model="fromdate"
+        <input placeholder="{{'Start' | r}} {{'Date' | r}}" ng-model="fromdate"
                ng-change="span = null"
                type="text"
                class="form-control"
@@ -17,14 +17,14 @@
         <i class="fa fa-calendar"></i>
     </div>
     <div class="col-md-4">
-        <label>End Date</label>
+        <label>{{'End' | r}} {{'Date' | r}}</label>
         <div class="btn btn-default btn-block btn-date hidden-lg hidden-md"
              ng-click="$event.preventDefault();$event.stopPropagation();endopened = !startopened;"
              style="margin:0; height:40px; padding-top:8px;">
-            {{todate ? '' : 'Tap to set a start date'}}
+            {{todate ? "" : "Tap"}}
             <span class="text-info">{{todate | date:'M/dd/yy'}}</span>
         </div>
-        <input placeholder="Start Date" ng-model="todate"
+        <input placeholder="{{'Start' | r}} {{'Date' | r}}" ng-model="todate"
                ng-change="span = null"
                type="text"
                class="form-control"
@@ -34,7 +34,7 @@
         <i class="fa fa-calendar"></i>
     </div>
     <div class="col-md-4">
-        <label>Time Span</label>
+        <label>{{'Time Span' | r}}</label>
         <select class="form-control" ng-options="key as value for (key,value) in options" ng-change="changed()" ng-model="span" />
         <i class="fa fa-arrows-h"></i>
     </div>
