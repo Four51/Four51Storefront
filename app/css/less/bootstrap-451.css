@@ -6661,6 +6661,7 @@ select.ng-invalid:invalid:invalid:focus {
 }
 .view-error-message ul.alert-warning li:nth-of-type(3) {
   width: 16.6667%;
+  padding: 0;
 }
 .view-error-message ul.alert-warning li:nth-of-type(3) a {
   display: block;
@@ -6668,6 +6669,7 @@ select.ng-invalid:invalid:invalid:focus {
 .view-error-message ul.alert-warning li:nth-of-type(3) a i {
   width: 100%;
   height: 100%;
+  padding: 15px;
 }
 .view-error-message ul.alert-warning li ul.two li {
   display: none;
