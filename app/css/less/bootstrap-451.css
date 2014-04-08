@@ -7132,6 +7132,9 @@ select.ng-invalid:invalid:invalid:focus {
   padding: 5px 0;
   background-color: #f5f5f5;
 }
+.panel-lineitem .row {
+  padding-top: 5px;
+}
 .panel-lineitem .col-sm-3 .row {
   margin-left: -10px;
 }
