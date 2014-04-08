@@ -18,7 +18,7 @@
         <div class="panel panel-nav">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    Category List
+                    {{'Category List' | r}}
                 </h3>
             </div>
             <nav class="nav 451_cat_nav panel-body">
@@ -32,11 +32,11 @@
         <div class="panel panel-default" ng-show="currentCategory.SubCategories.length">
             <div class="panel-heading" >
                 <h3 class="panel-title" >
-                   Categories
+                   {{'Categories' | r}}
                 </h3>
             </div>
             <div class="panel-category-list">
-                <loadingindicator ng-show="categoryLoadingIndicator" title="Please wait while we fetch all categories" />
+                <loadingindicator ng-show="categoryLoadingIndicator" title="{{'Please wait while we fetch all categories' | r}}" />
                 <nav class="nav 451_lbl_subcatlist">
                     <ul>
                         <li class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="c in currentCategory.SubCategories">
@@ -60,11 +60,11 @@
         <div class="panel panel-default" ng-show="products">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    Products
+                    {{'Products' | r}}
                 </h3>
             </div>
             <div class="panel-product-list" ng-if="currentCategory.InteropID">
-                <loadingindicator ng-show="productLoadingIndicator" title="Please wait while we fetch all products"/>
+                <loadingindicator ng-show="productLoadingIndicator" title="{{'Please wait while we fetch all products' | r}}"/>
                 <div ng-show="products" class="alert alert-info text-center hidden-sm hidden-md hidden-lg">
                     <i class="fa fa-arrow-circle-o-left"></i>
                     Swipe product left for more info

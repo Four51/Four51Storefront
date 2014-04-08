@@ -3,22 +3,22 @@
     <accountnavigation />
     <div class="panel panel-default" ng-if="(addresses | filter:{IsCustEditable:true}).length == 0">
         <div class="panel-heading">
-            <h3 class="panel-title">Addresses</h3>
+            <h3 class="panel-title">{{'Addresses' | r}}</h3>
         </div>
         <div class="panel-body">
-            <p class="alert alert-warning">You have no addresses yet!</p>
+            <p class="alert alert-warning">You have no {{'addresses' | rc}} yet!</p>
         </div>
         <div class="panel-footer">
-            <button type="button" class="btn btn-primary" ng-click="newAddress($event)">Add an address now</button>
+            <button type="button" class="btn btn-primary" ng-click="newAddress($event)">Add an {{'address' | rc}} now</button>
         </div>
     </div>
     <div class="panel panel-default"  ng-if="(addresses | filter:{IsCustEditable:true}).length > 0">
         <div class="panel-heading">
-            <h3 class="panel-title">Addresses</h3>
+            <h3 class="panel-title">{{'Addresses' | r}}</h3>
         </div>
         <div class="panel-body view-form-icon">
             <div>
-                <label ng-show="searchTerm">Search</label>
+                <label ng-show="searchTerm">{{'Search' | r}}</label>
                 <input class='form-control' type="text" placeholder="Search" ng-model="searchTerm" autocomplete="off" />
                 <i class="fa fa-search"></i>
             </div>
@@ -26,14 +26,14 @@
         <div class="panel-table">
             <div class="row text-info" ng-show="(addresses | filter:searchTerm | filter:{IsCustEditable:true}).length > 0">
                 <div class="col-sm-2">
-                    <label class="visible-xs">Select all</label>
+                    <label class="visible-xs">{{'Select all' | r}}</label>
                     <input type='checkbox' ng-click="checkAll($event)" />
                 </div>
-                <div class="col-sm-2 hidden-xs">Name</div>
-                <div class="col-sm-2 hidden-xs">City</div>
-                <div class="col-sm-2 hidden-xs">State</div>
-                <div class="col-sm-2 hidden-xs">Shipping</div>
-                <div class="col-sm-2 hidden-xs">Billing</div>
+                <div class="col-sm-2 hidden-xs">{{'Name' | r}}</div>
+                <div class="col-sm-2 hidden-xs">{{'City' | r}}</div>
+                <div class="col-sm-2 hidden-xs">{{'State' | r}}</div>
+                <div class="col-sm-2 hidden-xs">{{'Shipping' | r}}</div>
+                <div class="col-sm-2 hidden-xs">{{'Billing' | r}}</div>
             </div>
             <div class="row"  ng-repeat="address in addresses | filter:searchTerm | filter:{IsCustEditable:true}">
                 <div class="col-sm-2">
@@ -44,35 +44,34 @@
                     <a ng-href="address/{{address.ID}}">{{address.AddressName}}</a>
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">City</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'City' | r}}</span>
                     {{address.City}}</a>
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">State</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'State' | r}}</span>
                     {{address.State}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">Shipping</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Shipping' | r}}</span>
                     <i ng-class="{'fa fa-check': address.IsShipping }"></i>
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">Billing</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Billing' | r}}</span>
                     <i ng-class="{'fa fa-check': address.IsBilling }"></i>
                 </div>
             </div>
         </div>
         <div class="panel-footer">
-            <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-show="(addresses | filter:searchTerm | filter:{Selected:true}).length > 0">Delete Selected</button>
-            <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" type="button" class="btn btn-primary pull-right" ng-click="newAddress($event)">New Address</button>
+            <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-show="(addresses | filter:searchTerm | filter:{Selected:true}).length > 0">{{'Delete' | r}} {{'Selected' | r}}</button>
+            <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" type="button" class="btn btn-primary pull-right" ng-click="newAddress($event)">{{'New' | r}} {{'Address' | r}}</button>
         </div>
 
         <div class="navbar-fixed-bottom">
             <loadingindicator ng-show="displayLoadingIndicator" />
             <div class="view-action-message alert-warning" ng-show="(addresses | filter:searchTerm | filter:{IsCustEditable:true}).length == 0">
-                Your search resulted in no records. Please refine your search.
+                {{'Your search resulted in no records. Please refine your search.' | r}}
             </div>
-            <div class="view-action-message alert-success" ng-show="actionMessage">{{actionMessage}}</div>
-
+            <div class="view-action-message alert-success" ng-show="actionMessage">{{actionMessage | r}}</div>
         </div>
     </div>
 </section>

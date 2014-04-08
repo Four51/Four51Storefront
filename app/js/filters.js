@@ -18,6 +18,48 @@ four51.app.filter('kb', function() {
 	}
 });
 
+four51.app.filter('r', ['$sce', 'WhiteLabel', function($sce, WhiteLabel) {
+	return function(value) {
+		var result = value, found = false;
+		angular.forEach(WhiteLabel.replacements, function(c) {
+			if (found) return;
+			if (c.key == value) {
+				result = $sce.trustAsHtml(c.value);
+				found = true;
+			}
+		});
+		return result;
+	}
+}]);
+
+four51.app.filter('rc', ['$sce', 'WhiteLabel', function($sce, WhiteLabel) {
+	return function(value) {
+		var result = value, found = false;
+		angular.forEach(WhiteLabel.replacements, function(c) {
+			if (found) return;
+			if (c.key.toLowerCase() == value.toLowerCase()) {
+				result = $sce.trustAsHtml(c.value);
+				found = true;
+			}
+		});
+		return result;
+	}
+}]);
+
+four51.app.filter('rl', ['$sce', 'WhiteLabel', function($sce, WhiteLabel) {
+	return function(value) {
+		var result = value, found = false;
+		angular.forEach(WhiteLabel.replacements, function(c) {
+			if (found) return;
+			if (c.key.toLowerCase() == value.toLowerCase()) {
+				result = $sce.trustAsHtml(c.value.toLowerCase());
+				found = true;
+			}
+		});
+		return result;
+	}
+}]);
+
 four51.app.filter('noliverates', function() {
 	return function(value) {
 		var output = [];
@@ -26,5 +68,12 @@ four51.app.filter('noliverates', function() {
 				output.push(v);
 		});
 		return output;
+	}
+});
+
+four51.app.filter('paginate', function() {
+	return function(input, start) {
+		start = +start; //parse to int
+		return input.slice(start);
 	}
 });

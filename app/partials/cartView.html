@@ -2,16 +2,16 @@
     <div ng-show="currentOrder" class="hidden-print">
         <nav class="nav">
             <ul>
-                <li><span class="text-primary">Your Cart</span></li>
-                <li class="pull-right" ng-click="onPrint()"><span><i class="fa fa-print" rel="tooltip" title="Print" ></i></span></li>
+                <li><span class="text-primary">{{'Cart' | r}}</span></li>
+                <li class="pull-right" ng-click="onPrint()"><span><i class="fa fa-print" rel="tooltip" title="{{'Print' | r}}" ></i></span></li>
             </ul>
         </nav>
         <form name="cart" novalidate="">
-            <loadingindicator ng-show="displayLoadingIndicator" title="Please wait while we save your order"/>
+            <loadingindicator ng-show="displayLoadingIndicator" title="{{'Please wait while we save your order' | r}}"/>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
+                        {{currentOrder.LineItems.length}} {{'Item' | rl}}{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your {{'Cart' | rl}}
                     </h3>
                 </div>
                 <div class="panel-lineitem" ng-repeat="item in currentOrder.LineItems">
@@ -25,7 +25,7 @@
                                     <quantityfield required="true" lineitem="item" class="quantity"/>
                                 </div>
                                 <p class="quantity-total text-center">
-                                    <small>Total Quantity <span ng-show="item.Quantity * item.Product.QuantityMultiplier">{{item.Quantity * item.Product.QuantityMultiplier}}</span></small>
+                                    <small>{{'Total Quantity' | r}} <span ng-show="item.Quantity * item.Product.QuantityMultiplier">{{item.Quantity * item.Product.QuantityMultiplier}}</span></small>
                                 </p>
                             </div>
                             <div class="col-xs-6 col-sm-12 col-md-6 thumbnail" ng-show="item.Variant.LargeImageUrl || item.Product.SmallImageUrl">
@@ -52,7 +52,7 @@
                                 <div class="row">
                                     <div class="col-xs-6">
                                         <div ng-if="!(user.Permissions.contains('HidePricing'))">
-                                            <small>Total</small>
+                                            <small>{{'Total' | r}}</small>
                                             <h2 class="text-success">
                                                 {{item.LineTotal | currency}}
                                             </h2>
@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="col-xs-6" ng-if="!(user.Permissions.contains('HidePricing'))">
                                         <p>
-                                            <small>Unit Price</small>
+                                            <small>{{'Unit Price' | r}}</small>
                                             <br/>
                                             {{item.UnitPrice | currency}}
                                         </p>
@@ -70,7 +70,7 @@
                                     <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
                                         <div class="row view-form-icon">
                                             <div class="col-xs-9">
-                                                <label ng-class="{required: user.Permissions.contains('DateNeededRequired')}" ng-show="item.DateNeeded || user.Permissions.contains('DateNeededRequired')">Date</label>
+                                                <label ng-class="{required: user.Permissions.contains('DateNeededRequired')}" ng-show="item.DateNeeded || user.Permissions.contains('DateNeededRequired')">{{'Date' | r}}</label>
                                                 <!--Default Datepicker -->
                                                 <div class="btn btn-default btn-block btn-date hidden-lg hidden-md"
                                                      ng-click="$event.preventDefault();$event.stopPropagation();opened = !opened;"
@@ -96,9 +96,9 @@
                                     <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
                                         <div class="row view-form-icon">
                                             <div class="col-xs-9">
-                                                <label class="required">Cost Center</label>
+                                                <label class="required">{{'Cost Center' | r}}</label>
                                                 <select name="costcenter" class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
-                                                <input name="costcenter" class="form-control view-form-icon" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="Cost Center" />
+                                                <input name="costcenter" class="form-control view-form-icon" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="{{'Cost Center' | r}}" />
                                                 <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
                                                 <i ng-if="user.CostCenters.length != 1" class="fa fa-money"></i>
                                             </div>
@@ -114,9 +114,9 @@
                         </div>
                         <div class="row">
                             <p class="text-info" ng-show="item.SpecsLength > 0" ng-init="toggleSpecs = false" ng-click="toggleSpecs = !toggleSpecs">
-                                <span ng-show="toggleSpecs == false"><i class="fa fa-plus-circle"></i> Show </span>
-                                <span ng-show="toggleSpecs == true"><i class="fa fa-minus-circle"></i> Hide </span>
-                                Specifications
+                                <span ng-show="toggleSpecs == false"><i class="fa fa-plus-circle"></i> {{'Show' | r}} </span>
+                                <span ng-show="toggleSpecs == true"><i class="fa fa-minus-circle"></i> {{'Hide' | r}} </span>
+                                {{'Specification' | r}}
                             </p>
                             <ul ng-show="toggleSpecs == true">
                                 <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
@@ -138,7 +138,7 @@
                                 <strong>Subtotal <span class="text-success">{{currentOrder.Subtotal | currency}}</span></strong>
                             </h4>
                             <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
-                                <span class="text-info">Shipping, handling and tax may be added to this subtotal.</span>
+                                <span class="text-info">{{'Shipping, handling and tax may be added to this subtotal.' | r}}</span>
                             </p>
                         </div>
                     </div>
@@ -146,7 +146,7 @@
             </div>
             <div class="navbar-fixed-bottom">
                 <div class="view-response-message alert-success text-center" alert-show="currentOrder">
-                    <p>{{actionMessage}}</p>
+                    <p>{{actionMessage | r}}</p>
                 </div>
                 <div class="view-response-message alert-danger text-center" alert-show="gcMessage">{{gcMessage}}</div>
                 <div class="view-error-message" ng-show="cart.$error.required.length > 0">
@@ -159,9 +159,9 @@
                         </li>
                         <li class="text-center">
                             <ul ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
-                                <li ng-if="cart.dateneeded.$invalid">Date needed is required</li>
-                                <li ng-if="cart.costcenter.$invalid">Cost Center is required</li>
-                                <li ng-if="cart.qtyInput.$invalid">You have entered an invalid quantity</li>
+                                <li ng-if="cart.dateneeded.$invalid">{{'Date needed'}} is {{'Required' | rl}}</li>
+                                <li ng-if="cart.costcenter.$invalid">{{'Cost Center' | r}} is {{'Required' | rl}}</li>
+                                <li ng-if="cart.qtyInput.$invalid">You have entered an invalid {{'Quantity' | rl}}</li>
                             </ul>
                         </li>
                         <li class="text-center">
@@ -174,18 +174,18 @@
                 </div>
                 <ul>
                     <li>
-                        <button class="btn btn-danger" ng-click="cancelOrder()"><small>Cancel Order</small></button>
+                        <button class="btn btn-danger" ng-click="cancelOrder()"><small>{{'Cancel' | r}} {{'Order' | r}}</small></button>
                     </li>
                     <li>
                         <button class="btn btn-primary" ng-click="saveChanges()">
                             <loadingindicator ng-show="displayLoadingIndicator" />
-                            <small>Save Order</small>
+                            <small>{{'Save' | r}} {{'Order' | r}}</small>
                         </button>
                     </li>
                     <li>
                         <button class="btn" ng-class="{'btn-warning': cart.$invalid, 'btn-success': !cart.$invalid }" ng-click="checkOut()" ng-disabled="cart.$invalid">
                             <i ng-show="cart.$invalid" class="fa fa-warning"></i>
-                            <span>Check Out {{window.outerWidth}}</span>
+                            <span>{{'Check Out' | r}} {{window.outerWidth}}</span>
                         </button>
                     </li>
                 </ul>

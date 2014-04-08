@@ -28,7 +28,7 @@
             </div>
             <div class="col-xs-12 col-sm-4" ng-show="item.TotalShipped">
                 <p>
-                    <small class="text-info">Qty Shipped</small><br />
+                    <small class="text-info">{{'Quantity' | r}} {{'Shipped' | r}}</small><br />
                     {{item.TotalShipped}}
                 </p>
             </div>
@@ -36,14 +36,14 @@
         <div class="row">
             <div class="col-xs-6">
                 <p ng-if="item.CostCenter">
-                    <span class="text-info">Item Cost Center</span> {{item.CostCenter}}
+                    <span class="text-info">{{'Item' | r}} {{'Cost Center' | r}}</span> {{item.CostCenter}}
                 </p>
                 <p ng-if="item.ShipperName">
-                    <strong>Shipper Name</strong><br />
+                    <strong>{{'Shipper' | r}} {{'Name' | r}}</strong><br />
                     {{item.ShipperName}}
                 </p>
                 <address ng-show="item.ShipAddress">
-                    <strong>Ship to</strong><br>
+                    <strong>{{'Ship to' | r}}</strong><br>
                     {{item.ShipAddress.Street1}}<br>
                     {{item.ShipAddress.Street2}}<br ng-show="item.ShipAddress.Street2">
                     {{item.ShipAddress.City}}, {{item.ShipAddress.State}} {{item.ShipAddress.Zip}}
@@ -51,7 +51,7 @@
             </div>
             <div class="col-xs-6">
                 <p ng-if="item.ShipAccount">
-                    <strong>Shipper Account</strong><br />
+                    <strong>{{'Shipper' | r}} {{'Account' | r}}</strong><br />
                     {{item.ShipAccount}}
                 </p>
             </div>

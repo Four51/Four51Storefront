@@ -3,7 +3,7 @@
         <form name="cart">
             <div>
                 <h4>
-                    Review {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
+                    {{'Review' | r}} {{currentOrder.LineItems.length}} {{'Item' | rl}}{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your {{'Cart' | rl}}
                 </h4>
                 <div ng-repeat="Item in currentOrder.LineItems">
                     <h5 class="col-md-2 col-xs-12">

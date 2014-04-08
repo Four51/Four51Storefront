@@ -5,11 +5,7 @@ four51.app.directive('customtextfield', function() {
         },
         restrict: 'E',
         transclude: true,
-        templateUrl: 'partials/controls/customTextField.html',
-	    controller: ['$scope', function($scope) {
-			if (!$scope.customfield.Value && $scope.customfield.DefaultValue)
-				$scope.customfield.Value = $scope.customfield.DefaultValue;
-	    }]
+        templateUrl: 'partials/controls/customTextField.html'
     }
     return obj;
 });
