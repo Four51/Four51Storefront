@@ -64,12 +64,40 @@ Number.prototype.formatMoney = function(c){ //found this currency formatting fun
     return s + cn + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 };
 
-//navigation functions
+function e2eRepeaterRowValue(rptToExecute,intRow){
+
+    console.dir(rptToExecute)
+    var ftrRepeaterRow = rptToExecute;
+
+     //execute the future so we can access it now
+    ftrRepeaterRow.execute(function(){
+    });
+    return ftrRepeaterRow.value;
+}
+
+//function to execute a future and return a row value array
+//function e2eRepeaterRowValue(rowToExecute){
+//    console.log("EXECUTE");
+//    rowToExecute.execute(function(){}) //execute the future so we can access it now
+//
+//    var rowValue = rowToExecute;
+//    rowValue.execute(function(){
+//
+//        console.dir(rowValue.value)
+//        return rowValue.value;
+//    })
+//    return rowToExecute.value;
+//}
+
+//navigation shortcut (for maintenance reasons) functions
 function e2eClickHome(){
     element('#451qa_home_link').click();
 }
 function e2eClickOrders(){
     element('#451qa_order_link').click();
+}
+function e2eClickReports(){
+    element('#451qa_report_link').click();
 }
 function e2eClickFaves(){
     element('#451qa_fave_link').click();
@@ -80,15 +108,15 @@ function e2eClickAccount(){
 function e2eClickUser(){
     element('#451qa_acct_link2').click();
     element('#451qa_user_link').click();
-}
+} //this doesn't seem to work
 function e2eClickAddresses(){
     element('#451qa_acct_link2').click();
     element('#451qa_addy_link').click();
-}
+} //this doesn't seem to work
 function e2eClickMessages(){
     element('#451qa_acct_link2').click();
     element('#451qa_mesg_link').click();
-}
+} //this doesn't seem to work
 
 function e2eClickSideNavCategory(intCatLevel,strCatName){
     var strNLevelsSelect = ""; //each level of depth is "ul li "
@@ -98,10 +126,10 @@ function e2eClickSideNavCategory(intCatLevel,strCatName){
     }
 
     if(strCatName != null){
-        strSelector = ".451_cat_item " + strNLevelsSelect + "a:contains('" + strCatName + "'):first"
+        strSelector = ".451qa_sidenav .451_cat_item " + strNLevelsSelect + "a:contains('" + strCatName + "'):first"
     }
     else{//if strcatname isn't specified just pick the first at the nth level
-        strSelector = ".451_cat_item " + strNLevelsSelect + "a:first"
+        strSelector = ".451qa_sidenav .451_cat_item " + strNLevelsSelect + "a:first"
     }
 
     element(strSelector).click();
@@ -110,10 +138,10 @@ function e2eClickMainNavCategory(intNthCat,strCatName){
     var strSelector = "";
 
     if(strCatName != null){
-        strSelector = ".451_lbl_subcatlist ul li a:contains('" + strCatName + "'):first"
+        strSelector = ".451_lbl_subcatlist ul li a h5:contains('" + strCatName + "'):first"
     }
     else{//if strcatname isn't specified just pick the first at the nth level
-        strSelector = ".451_lbl_subcatlist ul li:eq(" + intNthCat + ") a"
+        strSelector = ".451_lbl_subcatlist ul li:eq(" + intNthCat + ") a h5"
     }
 
     element(strSelector).click();
@@ -123,6 +151,12 @@ function e2eClickOpenCategory(){
     sleep(3); //timing issue, sleep a few seconds
     element('#451qa_nav_hdr ul li').click();
 }
+function e2eClickDropCategory(){
+    //open the category tree that's hidden by default
+    sleep(3); //timing issue, sleep a few seconds
+    element('a.dropdown-toggle').click();
+}
+
 
 //product functions
 function e2eClickProductFromList(intNthProd,strProdName){
@@ -185,6 +219,7 @@ function verifyStaticSpecRow(strGroup,intRow,strLabel,strValue){
     expect(element('.451qa_sg_item:contains("' + strGroup + '") ~ li div:eq(' + intRow + ') span:first').text()).toBe(strLabel);
     expect(element('.451qa_sg_item:contains("' + strGroup + '") ~ li div:eq(' + intRow + ') span:eq(1)').text()).toBe(strValue);
 }
+
 //TODO - let's add a set of VSPEC changing and checking functions here
 function e2eChangeTextSpec(strSpecName, strSpecValue){
 
@@ -200,6 +235,7 @@ function e2eChangeSelectionSpec(strSpecName,strSpecValue,blnOther,strOtherValue)
         using('#451_list_vspec label:contains("' + strSpecName + '") ~').select("item").option(strSpecValue);
     }
 }
+
 function e2eCheckTextSpec(strSpecName,strDefault,strPre,strSuf){
     if(strPre != ""){
         expect(element('#451_list_vspec label:contains("' + strSpecName + '") ~ span:eq(0)').text()).toBe(strPre);
