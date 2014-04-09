@@ -6240,7 +6240,7 @@ button::-moz-focus-inner {
   .panel-footer .btn {
     width: 100%;
     padding: 15px;
-    margin: 2px;
+    margin: 5px 0;
   }
   .panel-footer .input-group-btn .btn {
     margin: 0;
@@ -6254,7 +6254,7 @@ button::-moz-focus-inner {
   .btn-group .btn {
     width: 100%;
     padding: 15px;
-    margin: 2px;
+    margin: 5px 0;
   }
   .jumbotron {
     text-align: center;
@@ -6443,6 +6443,14 @@ button::-moz-focus-inner {
 }
 .navbar-nav > li > a {
   height: 60px;
+}
+.pagination {
+  margin: 15px 0;
+  width: 100%;
+  text-align: center;
+}
+.pagination li a {
+  float: none;
 }
 .jumbotron {
   margin: 45px 5px -45px;
@@ -7053,9 +7061,18 @@ select.ng-invalid:invalid:invalid:focus {
   margin: 2px 0;
 }
 @media (max-width: 768px) {
+  .product-variants ul li .row {
+    margin-top: 15px;
+  }
   .product-variants ul li .row div {
     padding: 0;
   }
+  .product-variants ul li [class*="col-"] {
+    margin: 5px 0;
+  }
+}
+.product-variants ul li .btn {
+  height: 52px;
 }
 .product-variants a {
   position: relative;
@@ -7332,7 +7349,7 @@ select.ng-invalid:invalid:invalid:focus {
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 1031;
+  z-index: 1029;
   padding: 10px 0;
   background-color: #e4f2f9;
   opacity: .75;
@@ -7357,6 +7374,14 @@ select.ng-invalid:invalid:invalid:focus {
 .app-loading-indicator-cell .app-loading-indicator-title {
   background-color: #e4f2f9;
   color: #154964;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  font-weight: 700;
+}
+.app-loading-indicator-cell .app-loading-indicator-title p {
+  text-align: center;
 }
 .col-collapse {
   padding-left: 0;

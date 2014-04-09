@@ -22,10 +22,8 @@
         </div>
         <div class="panel-table">
             <div class="row text-info">
-                <div class="col-sm-2">
+                <div class="col-sm-2 hidden-xs">
                     Select
-                    <!--<label class="visible-xs">Select all</label>-->
-                    <!--<input id="451_chk_all" type='checkbox' ng-click="checkAll($event)" />-->
                 </div>
                 <div class="col-sm-2 hidden-xs">{{'Status' | r}}</div>
                 <div class="col-sm-2 hidden-xs">{{'Date' | r}}</div>
@@ -57,20 +55,14 @@
             </div>
         </div>
         <div class="panel-footer">
-            <div class="col-sm-3">
-                <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="(messages|filter:searchTerm).length"
-                    items-per-page="settings.pageSize" direction-links="false"></pagination>
-            </div>
-            <div class="col-sm-9">
-                <div class="input-group-btn text-left">
-                    <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-show="(messages | filter:searchTerm | filter:{Selected:true}).length > 0">
-                        <span>{{'Delete' | r}} {{'Selected' | r}}</span>
-                    </button>
-                    <button class="btn btn-info" type="button" redirect="message/new">
-                        <span>{{'Compose' | r}}</span>
-                    </button>
-                </div>
-            </div>
+            <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="(messages|filter:searchTerm).length"
+                        items-per-page="settings.pageSize" direction-links="false"></pagination>
+            <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-show="(messages | filter:searchTerm | filter:{Selected:true}).length > 0">
+                <span>{{'Delete' | r}} {{'Selected' | r}}</span>
+            </button>
+            <button class="btn btn-info pull-right" type="button" redirect="message/new">
+                <span>{{'Compose' | r}}</span>
+            </button>
         </div>
     </div>
 </section>
