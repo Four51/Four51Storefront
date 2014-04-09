@@ -1,4 +1,4 @@
-four51.app.factory('Variant', ['$resource', '$451', 'Security', function($resource, $451, Security) {
+four51.app.factory('Variant', ['$resource', '$451', 'Security', 'Error', function($resource, $451, Security, Error) {
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
@@ -29,8 +29,21 @@ four51.app.factory('Variant', ['$resource', '$451', 'Security', function($resour
 			_then(success, v);
 		});
 	}
+
+	var _delete = function(variant, success, error) {
+		$resource($451.api('variant')).delete(variant).$promise.then(
+			function() {
+				_then(success);
+			},
+			function(ex) {
+				error(Error.format(ex));
+			}
+		);
+	};
+
 	return {
 		get: _get,
-		save: _save
+		save: _save,
+		delete: _delete
 	}
 }]);
