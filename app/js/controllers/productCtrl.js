@@ -14,16 +14,34 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 	function setDefaultQty(lineitem) {
 		$scope.LineItem.Quantity = lineitem.Product.StandardPriceSchedule.DefaultQuantity > 0 ? lineitem.Product.StandardPriceSchedule.DefaultQuantity : null;
 	}
-	ProductDisplayService.getProductAndVariant($routeParams.productInteropID,$routeParams.variantInteropID, function(data){
-		$scope.LineItem.Product = data.product;
-		$scope.LineItem.Variant = data.variant;
-		setDefaultQty($scope.LineItem);
-		ProductDisplayService.setNewLineItemScope($scope);
-		ProductDisplayService.setProductViewScope($scope);
-		$scope.$broadcast('ProductGetComplete');
-		$scope.loadingIndicator = false;
-		$scope.setAddToOrderErrors();
-	});
+	function init() {
+		ProductDisplayService.getProductAndVariant($routeParams.productInteropID, $routeParams.variantInteropID, function (data) {
+			$scope.LineItem.Product = data.product;
+			$scope.LineItem.Variant = data.variant;
+			setDefaultQty($scope.LineItem);
+			ProductDisplayService.setNewLineItemScope($scope);
+			ProductDisplayService.setProductViewScope($scope);
+			$scope.$broadcast('ProductGetComplete');
+			$scope.loadingIndicator = false;
+			$scope.setAddToOrderErrors();
+		});
+	}
+	init();
+
+	$scope.deleteVariant = function(v) {
+		if (!v.IsMpowerVariant) return;
+		v.ProductInteropID = $scope.LineItem.Product.InteropID;
+		Variant.delete(v,
+			function() {
+				init();
+			},
+			function(ex) {
+				$scope.lineItemErrors.push(ex.Message);
+				$scope.showAddToCartErrors = true;
+				console.log($scope.lineItemErrors);
+			}
+		);
+	}
 
 	$scope.addToOrder = function(){
 		if($scope.lineItemErrors && $scope.lineItemErrors.length){
