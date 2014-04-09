@@ -38,7 +38,21 @@
 
 
 //== Templates
-
+    Pagination                  -       You have two options when including pagination for select checkboxes:
+                                        1. Remove 'checkall' from selections
+                                        2. Accommodate for it
+                                        Include pagination in the panel-footer above buttons
+                                        example:
+                                            <div class="panel-footer">
+                                                <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="(messages|filter:searchTerm).length"
+                                                            items-per-page="settings.pageSize" direction-links="false"></pagination>
+                                                <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-show="(messages | filter:searchTerm | filter:{Selected:true}).length > 0">
+                                                    <span>{{'Delete' | r}} {{'Selected' | r}}</span>
+                                                </button>
+                                                <button class="btn btn-info pull-right" type="button" redirect="message/new">
+                                                    <span>{{'Compose' | r}}</span>
+                                                </button>
+                                            </div>
     Form icons                  -       Form input field icons use the font-awesome resource
                                         - Add the class "view-form-icon" to the parent lblock container
                                         - Add a <div> around the form field and label
