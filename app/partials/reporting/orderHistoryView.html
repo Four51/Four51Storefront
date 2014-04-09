@@ -3,8 +3,8 @@
     <div class="hidden-print">
         <nav class="nav">
             <ul>
-                <li><span class="text-primary">{{order.Type}} Order<span ng-show="order.ExternalID"> ID: </span>{{order.ExternalID}}</span></li>
-                <li class="pull-right" ng-click="onPrint()"><span><i class="fa fa-print" rel="tooltip" title="Print"></i></span></li>
+                <li><span class="text-primary">{{order.Type}} {{'Order' | r}}<span ng-show="order.ExternalID"> {{'ID' | r}}: </span>{{order.ExternalID}}</span></li>
+                <li class="pull-right" ng-click="onPrint()"><span><i class="fa fa-print" rel="tooltip" title="{{'Print' | r}}"></i></span></li>
             </ul>
         </nav>
         <div class="col-md-3 col-md-offset-1 col-md-push-8">
@@ -12,7 +12,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            Order Details
+                            {{'Order' | r}} {{'Details' | r}}
                         </h3>
                     </div>
                     <div class="panel-body">
@@ -22,7 +22,7 @@
                     <div class="panel-footer" ng-if="order.FromUserID == user.ID">
                         <button ng-disabled="currentOrder" class="btn btn-primary pull-right" ng-click="repeatOrder()">
                             <i ng-show="currentOrder" class="fa fa-warning"></i>
-                            Repeat Order
+                            {{'Repeat' | r}} {{'Order' | r}}
                         </button>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title panel-primary">
-                        {{order.LineItems.length}} item{{order.LineItems.length > 1 ? 's' : ''}} in this order
+                        {{order.LineItems.length}} {{'Item' | rl}}{{order.LineItems.length > 1 ? 's' : ''}} in this {{'Order' | rl}}
                     </h3>
                 </div>
                 <lineitemhistorygrid />
@@ -40,10 +40,10 @@
                     <loadingindicator ng-show="displayLoadingIndicator" />
                    <div class="form-group view-form-icon">
                         <div class="input-group">
-                            <input type="text" ng-model="order.FavoriteName" placeholder="Favorite Name" class="form-control" autocomplete="off" />
+                            <input type="text" ng-model="order.FavoriteName" placeholder="{{'Favorite' | r}} {{'Name' | r}}" class="form-control" autocomplete="off" />
                             <i class="fa fa-star"></i>
                             <span class="input-group-btn">
-                                <button type="button" ng-click="saveFavorite()" class="btn btn-info">Save as Favorite</button>
+                                <button type="button" ng-click="saveFavorite()" class="btn btn-info">{{'Save' | r}} {{'Favorite' | r}}</button>
                             </span>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
 
             <div ng-show="order.Approvals" class="panel panel-default approval-rule-status-summary">
                 <div class="panel-heading">
-                    <h3 class="panel-title panel-primary">Approvals</h3>
+                    <h3 class="panel-title panel-primary">{{'Approvals' | r}}</h3>
                 </div>
                 <div class="panel-body">
                     <approval ng-show="order.Status == 'AwaitingApproval' && (order.UserCanApprove || user.Permissions.contains('ApproveAllOrders'))" order="order"/>

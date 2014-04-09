@@ -9,20 +9,20 @@
         <div>
             <h5>
                 {{currentOrder.IncomingStatus + ' Order'}}<br/>
-                Created on {{currentOrder.DateCreated | date:'short'}}
+                {{'Created On ' | r}}{{currentOrder.DateCreated | date:'short'}}
             </h5>
         </div>
     </div>
         <div>
             <h3>
-                Cart Summary
+                {{'Cart Summary' | r}}
             </h3>
             <div ng-if="!user.Permissions.contains('HidePricing')">
                 <p>
-                    SubTotal: <span>{{currentOrder.Subtotal | currency}}</span>
+                    {{'Subtotal' | r}}: <span>{{currentOrder.Subtotal | currency}}</span>
                 </p>
                 <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
-                    Shipping, handling and tax may be added to this subtotal.
+                    {{'Shipping, handling and tax may be added to this subtotal.' | r}}
                 </p>
             </div>
         </div>
@@ -34,8 +34,8 @@
                 <div class="cart-print-view-line-items-product">
                     <p>{{item.ProductIDText}}</p>
                     <p>{{item.Product.Name}}</p>
-                    <ul ng-show="item.SpecsLength > 0">
-                        <li class="text-center" ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
+                    <ul class="list-group" ng-show="item.SpecsLength > 0">
+                        <li class="list-group-item" ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
                             <span class="text-info">{{spec.Name}}: </span>
                             <span ng-if="spec.ControlType == 'File'"><a ng-href="spec.File.Url">{{spec.File.OriginalName + Extension}}</a></span>
                             <span ng-if="spec.ControlType != 'File'">{{spec.Value || '(unspecified)'}}</span>
@@ -45,21 +45,21 @@
                 <div>
                     <div>
                         <div ng-if="!(user.Permissions.contains('HidePricing'))">
-                            Unit Price: {{item.UnitPrice | currency}}
+                            {{'Unit Price' | r}}: {{item.UnitPrice | currency}}
                         </div>
                         <div>
-                            Quantity: {{item.Quantity}}
+                            {{'Quantity' | r}}: {{item.Quantity}}
                         </div>
                         <div ng-if="!(user.Permissions.contains('HidePricing'))">
-                            Total: {{item.LineTotal | currency}}
+                            {{'Total' | r}}: {{item.LineTotal | currency}}
                         </div>
                     </div>
                     <div>
                         <div ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
-                            <p ng-show="item.DateNeeded">Date Needed: {{item.DateNeeded | date: 'MM/dd/yy'}}</p>
+                            <p ng-show="item.DateNeeded">{{'Date Needed' | r}}: {{item.DateNeeded | date: 'MM/dd/yy'}}</p>
                         </div>
                         <div ng-if="user.Permissions.contains('CostCenterPerLine')">
-                            <p ng-show="item.CostCenter">Cost Center: {{item.CostCenter}}</p>
+                            <p ng-show="item.CostCenter">{{'Cost Center' | r}}: {{item.CostCenter}}</p>
                         </div>
                     </div>
                 </div>

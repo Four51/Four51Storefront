@@ -2,20 +2,20 @@
     <accountnavigation />
     <div class="panel panel-default" ng-if="messages.length == 0">
         <div class="panel-heading">
-            <h3 class="panel-title">Messages</h3>
+            <h3 class="panel-title">{{'Messages' | r}}</h3>
         </div>
         <div class="panel-body">
-            <p class="alert alert-warning">You have no messages yet!</p>
+            <p class="alert alert-warning">You have no {{'Messages' | rl}} yet!</p>
         </div>
     </div>
     <div class="panel panel-default" ng-if="messages.length > 0">
         <loadingindicator ng-show="displayLoadingIndicator" />
         <div class="panel-heading">
-            <h3 class="panel-title">Messages</h3>
+            <h3 class="panel-title">{{'Messages' | r}}</h3>
         </div>
         <div class="panel-body view-form-icon">
             <div>
-                <label ng-show="searchTerm">Search</label>
+                <label ng-show="searchTerm">{{'Search' | r}}</label>
                 <input class="form-control" type="text" placeholder="Search" ng-model="searchTerm" autocomplete="off" />
                 <i class="fa fa-search"></i>
             </div>
@@ -27,31 +27,31 @@
                     <!--<label class="visible-xs">Select all</label>-->
                     <!--<input id="451_chk_all" type='checkbox' ng-click="checkAll($event)" />-->
                 </div>
-                <div class="col-sm-2 hidden-xs">Status</div>
-                <div class="col-sm-2 hidden-xs">Date</div>
-                <div class="col-sm-2 hidden-xs">Subject</div>
-                <div class="col-sm-2 hidden-xs">From</div>
+                <div class="col-sm-2 hidden-xs">{{'Status' | r}}</div>
+                <div class="col-sm-2 hidden-xs">{{'Date' | r}}</div>
+                <div class="col-sm-2 hidden-xs">{{'Subject' | r}}</div>
+                <div class="col-sm-2 hidden-xs">{{'From' | r}}</div>
              </div>
             <div class="451qa_msg_item row" ng-repeat="message in messages | filter:searchTerm | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
                 <div class="col-sm-2">
                     <input type='checkbox' ng-model="message.Selected" />
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">Status</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Status' | r}}</span>
                     {{message.Box.replace('Box', '')}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">Date</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Date' | r}}</span>
                     {{message.DateSent | date: 'medium'}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">Subject</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Subject' | r}}</span>
                     <a ng-href="message/{{message.ID}}">
                         {{message.Subject}}
                     </a>
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">From</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'From' | r}}</span>
                     {{message.FromName}}
                 </div>
             </div>
@@ -64,10 +64,10 @@
             <div class="col-sm-9">
                 <div class="input-group-btn text-left">
                     <button id="451qa_btn_delmsg" type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-show="(messages | filter:searchTerm | filter:{Selected:true}).length > 0">
-                        <span>Delete Selected</span>
+                        <span>{{'Delete' | r}} {{'Selected' | r}}</span>
                     </button>
-                    <button class="btn btn-info" type="button" redirect="message/new">
-                        <span>Compose</span>
+                    <button id="451qa_btn_cmpmsg" class="btn btn-info" type="button" redirect="message/new">
+                        <span>{{'Compose' | r}}</span>
                     </button>
                 </div>
             </div>

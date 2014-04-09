@@ -7,10 +7,10 @@
 
 
     <div class="col-md-6 col-md-offset-1">
-        <h2>Product ID {{LineItem.ProductIDText}}</h2>
+        <h2>{{'Product' | r}} {{'ID' | r}} {{LineItem.ProductIDText}}</h2>
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title panel-primary">Description</h3>
+                <h3 class="panel-title panel-primary">{{'Description' | r}}</h3>
             </div>
             <div class="panel-body">
                 <p ng-bind-html='LineItem.Product.Description'></p>
