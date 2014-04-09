@@ -64,6 +64,11 @@ describe('SPA login without user or pass', function() {
 
 });
 
+//TODO - login/fail 6 times to lockout user
+//TODO - password change - success
+//TODO - password change - fail due to mistyping
+//TODO - password change - fail due to complexity restrictions
+
 describe('SPA logout', function() {
     e2eLoginNoTest("coreproduser","fails345", C_debug);
 
