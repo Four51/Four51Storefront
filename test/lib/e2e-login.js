@@ -81,6 +81,7 @@ function e2eLogout(blnDebug){
         }
     });
     it("should show the login form again since we've logged out", function() {
+        sleep(1);
         expect(element('#login_form:visible').count()).toBe(1);
         //we found a login box.  is login_box the best way to check for it's existence?
 

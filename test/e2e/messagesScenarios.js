@@ -3,22 +3,57 @@
 /* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
 //Messages test Scenarios
 
-//handy stuff:
-//console.dir(scope('.nav-header', 'category'));
-//console.dir(scope('.nav-header', 'category.Name'));
-/*
-
  */
 
-var C_debug = false;
+var C_debug = true;
 
-function e2eViewMessage(strJQSelect, strMsgDate, strMsgFrom, strMsgSubject, blnReturn){
+function e2eViewMessage(strMsgBox, intIndex, strMsgDate, strMsgFrom, strMsgSubject, blnReturn, rptRow){
     //navigate to a message in a list/repeater, click it, verify the header information is the same, navigate back(or not)
 
     //navigate to a message in a list/repeater, click it, verify the header information is the same, delete it
 
-    element(strJQSelect).click(); //click the message specified by the passed JQselect
+
+    var arrRptValue = e2eRepeaterRowValue(rptRow);
+
+    console.dir(arrRptValue)
+
+    //this Jquery select may need to be changed if the table structure/layout changes
+    if(strMsgBox != ""){
+        element('#451_list_msg:has(div:eq(1):contains("' + strMsgBox + '")):eq(' + intIndex + ') div:eq(3) a').click(); //click the message specified by the passed parameters
+    }
+    else {
+        element('#451_list_msg:eq(' + intIndex + ') div:eq(3) a').click(); //click the message in the nth row
+    }
     if(C_debug){pause();}
+
+    console.dir(arrRptValue[1])
+    console.dir(binding("message.DateSent"))
+
+    //verify the message is there and fields are populated
+    expect(arrRptValue[1]).toEqualFuture(binding("message.DateSent"));
+    expect(strMsgSubject).toEqualFuture(binding("message.Subject"));
+    expect(strMsgFrom).toEqualFuture(binding("message.FromName"));
+
+    if(blnReturn){
+        element('#451_btn_ok').click();
+        if(C_debug){pause();}
+    }
+}
+
+function e2eViewMessagea(strMsgBox, intIndex, strMsgDate, strMsgFrom, strMsgSubject, blnReturn){
+    //navigate to a message in a list/repeater, click it, verify the header information is the same, navigate back(or not)
+    console.log("viewmessage");
+    //navigate to a message in a list/repeater, click it, verify the header information is the same, delete it
+
+    //this Jquery select may need to be changed if the table structure/layout changes
+    if(strMsgBox != ""){
+        element('#451_list_msg:has(div:eq(1):contains("' + strMsgBox + '")):eq(' + intIndex + ') div:eq(3) a').click(); //click the message specified by the passed parameters
+    }
+    else {
+        element('#451_list_msg:eq(' + intIndex + ') div:eq(3) a').click(); //click the message in the nth row
+    }
+    if(C_debug){pause();}
+
 
     //verify the message is there and fields are populated
     expect(strMsgDate).toEqualFuture(binding("message.DateSent"));
@@ -95,20 +130,42 @@ describe('Messages login', function() {
 
 describe('Message View', function() {  //TODO - add delete from view for Received messages
 
-    it('should be displayed when we click a Received message', function() {
+    it('should return the value of the future',function(){
+        browser().navigateTo('#/message');
+        sleep(5)
+        pause();
+
+        console.dir(repeater('#451qa_msg_list').count())
+        expect(repeater('#451qa_msg_list .451qa_msg_item').count()).toBeGreaterThan(0);
+        var rptObj = repeater('.451qa_msg_item').row(0);
+
+        var arrRowArray;
+
+        console.dir(rptObj.execute(function(done){
+        }));
+
+
+        //expect(arrRowArray).toContain("Inbox");
+        //console.dir(rptObj)
+        //console.dir(arrRowArray)
+
+        pause();
+
+    });
+
+    xit('should be displayed when we click a Received message', function() {
         browser().navigateTo('#/message');
 
-        sleep(5);
+        sleep(3);
         //check existence of messages, datawise
-        expect(repeater('#451_list_msg tr').count()).toBeGreaterThan(0);
+        expect(repeater('#451_list_msg').count()).toBeGreaterThan(0);
 
         var strDateSent = binding("message.DateSent");
         var strSubject = binding("message.Subject");
         var strSentFrom = binding("message.FromName");
 
-        //this Jquery select may need to be changed if the table structure/layout changes
-        e2eViewMessage('#451_list_msg tr:has(td:eq(1):contains("Inbox"):first) td:eq(3) a',strDateSent,strSentFrom,strSubject,false);
-        //that means, click the link in the 4th cell of the first row that has "Inbox" in the first column
+        e2eViewMessage("Inbox",0,strDateSent,strSentFrom,strSubject,false);
+        //that means, click the message in the 0th row that has "Inbox" in the first column
 
         expect(element('#451_btn_del').count()).toBeGreaterThan(0);
         expect(element('#451_btn_reply').count()).toBeGreaterThan(0);
@@ -125,36 +182,46 @@ describe('Message View', function() {  //TODO - add delete from view for Receive
     it('should be displayed when we click a Sent message, but with no Reply button', function() {
         browser().navigateTo('#message');
         //check existence of messages, datawise
-        sleep(5);
-        expect(repeater('#451_list_msg tr:has(td:eq(1):contains("SentBox"))').count()).toBeGreaterThan(0);
-        var strDateSent = element('#451_list_msg tr:has(td:eq(1):contains("SentBox"):first) td:eq(2)').text();
-        var strSubject = element('#451_list_msg tr:has(td:eq(1):contains("SentBox"):first) td:eq(3) a').text();
-        var strSentFrom = element('#451_list_msg tr:has(td:eq(1):contains("SentBox"):first) td:eq(4)').text();
 
-        //this Jquery select may need to be changed if the table structure/layout changes
-        e2eViewMessage('#451_list_msg tr:has(td:eq(1):contains("SentBox"):first) td:eq(3) a',strDateSent,strSentFrom,strSubject,false);
-        expect(element('#451_btn_del').count()).toBe(1);
-        expect(element('#451_btn_reply:hidden').count()).toBe(1);
-        expect(element('#451_btn_ok').count()).toBe(1);
+        var rptRowObject = repeater('#451_list_msg:has(div:eq(1):contains("SentBox"))').row(0);
+        var rptCountObject = repeater('#451_list_msg:has(div:eq(1):contains("SentBox"))').count();
+        rptCountObject.execute(function(){
+
+        });
+        expect(rptCountObject.value).toBe(1)
+
+        var arrRptValue = e2eRepeaterRowValue(rptRowObject);
+        //var arrRptValue = repeater('#451_list_msg:has(div:eq(1):contains("SentBox"))').row(0).execute(function(){})
+        //console.dir(arrRptValue)
+
+        //expect(arrRptValue[2]).toBe("f")
+        //expect(repeater('#451_list_msg:has(div:eq(1):contains("SentBox"))').row(0).value[0]).toBe("SentBox")
+
+
+        e2eViewMessage("SentBox",0,arrRptValue[1],arrRptValue[2],arrRptValue[3],false,rptRowObject);
+
+        //expect(element('#451_btn_del').count()).toBe(1);
+        //expect(element('#451_btn_reply:hidden').count()).toBe(1);
+        //expect(element('#451_btn_ok').count()).toBe(1);
         if(C_debug){pause();}
-        element('#451_btn_ok').click();
+        //element('#451_btn_ok').click();
     });
 
     it('should allow us to delete a Sent message', function() {
         browser().navigateTo('#/message');
-        var intMsgListCountBefore = repeater('#451_list_msg tr:has(td:eq(1):contains("SentBox"))').count();
+        var intMsgListCountBefore = repeater('#451_list_msg:has(div:eq(1):contains("SentBox"))').count();
         var intMsgListCountAfter;
 
-        sleep(5);
+        sleep(3);
         //check existence of messages, datawise
         expect(repeater('#451_list_msg').count()).toBeGreaterThan(0); //gotta have a message to reply to
 
-        e2eReplyMessage("#451_list_msg tr:first td:eq(3) a","Test Delete Sent-Reply Message","Please delete me!  I was born to be deleted!",true);
+        e2eReplyMessage("#451_list_msg:first div:eq(3) a","Test Delete Sent-Reply Message","Please delete me!  I was born to be deleted!",true);
 
         //this Jquery select may need to be changed if the table structure/layout changes
-        e2eDeleteMessageFromView('#451_list_msg tr:has(td:eq(1):contains("SentBox"):first) td:eq(3) a',"Test Delete Sent-Reply Message");
+        e2eDeleteMessageFromView('#451_list_msg:has(div:eq(1):contains("SentBox")):first div:eq(3) a',"Test Delete Sent-Reply Message");
 
-        intMsgListCountAfter = repeater('#451_list_msg tr:has(td:eq(1):contains("SentBox"))').count(); //we created a message and deleted a message; the before and after counts should match
+        intMsgListCountAfter = repeater('#451_list_msg:has(div:eq(1):contains("SentBox"))').count(); //we created a message and deleted a message; the before and after counts should match
 
         expect(intMsgListCountAfter).toEqualFuture(intMsgListCountBefore);
 
@@ -235,7 +302,8 @@ describe('MessageList: Received Messages', function() {
         var strDateSent = element("#451_list_msg tr:first td:eq(2)").text();
         var strSubject = element("#451_list_msg tr:first td:eq(3) a").text();
         var strSentFrom = element("#451_list_msg tr:first td:eq(4)").text();
-        //this Jquery select may need to be changed if the table structure/layout changes
+
+        e2eViewMessage("",0,strDateSent,strSentFrom,strSubject,false);
         e2eViewMessage("#451_list_msg tr:first td:eq(3) a",strDateSent,strSentFrom,strSubject,false);
 
         expect(browser().location().url()).not().toBe("/message"); //it should have the message ID in it, not just /message
