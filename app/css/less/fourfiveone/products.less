@@ -62,10 +62,17 @@
       margin: 2px 0;
       @media (max-width: @screen-sm-min) {
         .row {
+          margin-top: 15px;
           div {
             padding: 0;
           }
         }
+        [class*="col-"] {
+          margin: 5px 0;
+        }
+      }
+      .btn {
+        height: 52px;
       }
     }
   }
