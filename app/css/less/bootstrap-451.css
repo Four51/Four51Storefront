@@ -7061,9 +7061,18 @@ select.ng-invalid:invalid:invalid:focus {
   margin: 2px 0;
 }
 @media (max-width: 768px) {
+  .product-variants ul li .row {
+    margin-top: 15px;
+  }
   .product-variants ul li .row div {
     padding: 0;
   }
+  .product-variants ul li [class*="col-"] {
+    margin: 5px 0;
+  }
+}
+.product-variants ul li .btn {
+  height: 52px;
 }
 .product-variants a {
   position: relative;
