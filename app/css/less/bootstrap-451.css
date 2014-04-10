@@ -7354,13 +7354,14 @@ select.ng-invalid:invalid:invalid:focus {
   background-color: #e4f2f9;
   opacity: .75;
 }
-.app-loading-indicator-cell .app-loading-indicator {
-  display: inline-block;
-  float: none;
-  height: 20px;
-  width: 20px;
-  margin: -3px auto 0;
-  position: relative;
+.app-loading-indicator-cell:after {
+  content: "";
+  position: absolute;
+  top: 49%;
+  left: 49%;
+  height: 25px;
+  width: 25px;
+  margin-top: -15px;
   -webkit-animation: rockstep .8s infinite linear;
   -moz-animation: rockstep .8s infinite linear;
   -o-animation: rockstep .8s infinite linear;
@@ -7371,7 +7372,7 @@ select.ng-invalid:invalid:invalid:focus {
   border-top: 3px solid #154964;
   border-radius: 100%;
 }
-.app-loading-indicator-cell .app-loading-indicator-title {
+.app-loading-indicator-cell p {
   background-color: #e4f2f9;
   color: #154964;
   bottom: 0;
@@ -7379,8 +7380,6 @@ select.ng-invalid:invalid:invalid:focus {
   right: 0;
   position: absolute;
   font-weight: 700;
-}
-.app-loading-indicator-cell .app-loading-indicator-title p {
   text-align: center;
 }
 .col-collapse {
