@@ -6822,7 +6822,7 @@ select.ng-invalid:invalid:invalid:focus {
   top: 0;
   overflow: hidden;
   padding: 0 5px;
-  background: url(../images/orderCloud.jpg) no-repeat center center fixed;
+  background: url( '../images/orderCloud.jpg' ) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
