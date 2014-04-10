@@ -10,7 +10,7 @@
             <h3 class="panel-title">{{'Orders' | r}}</h3>
         </div>
         <div class="panel-body">
-            <p class="alert alert-warning">You have no orders yet!</p>
+            <p class="alert alert-warning">{{'Your search resulted in no records. Please refine your search.' | r}}</p>
         </div>
         <div class="panel-footer">
             <button type="button" class="btn btn-primary pull-right" redirect="catalog">{{'Continue Shopping' | r}}</button>
@@ -24,7 +24,7 @@
             <div class="panel-body">
                 <ul>
                     <li ng-repeat="criteria in OrderSearchCriteria | filter:{Type:'Standard'}" ng-show="criteria.Count">
-                        <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">{{criteria.DisplayName}} <span class="badge">{{criteria.Count}}</span></a>
+                        <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">{{criteria.DisplayName | r}} <span class="badge">{{criteria.Count}}</span></a>
                     </li>
                 </ul>
             </div>
@@ -36,7 +36,7 @@
             <div class="panel-body">
                 <ul>
                     <li ng-repeat="criteria in OrderSearchCriteria | filter:{Type:'Replenishment'}" ng-show="criteria.Count">
-                        <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">{{criteria.DisplayName}} <span class="badge" >{{criteria.Count}}</span></a>
+                        <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">{{criteria.DisplayName | r}} <span class="badge" >{{criteria.Count}}</span></a>
                     </li>
                 </ul>
             </div>
@@ -48,7 +48,7 @@
             <div class="panel-body">
                 <ul>
                     <li ng-repeat="criteria in OrderSearchCriteria | filter:{Type:'PriceRequest'}" ng-show="criteria.Count">
-                        <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">{{criteria.DisplayName}} <span clas="badge">{{criteria.Count}}</span></a>
+                        <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">{{criteria.DisplayName | r}} <span clas="badge">{{criteria.Count}}</span></a>
                     </li>
                 </ul>
             </div>
@@ -64,12 +64,12 @@
                     <div class="view-form-icon">
                         <div class="form-group">
                             <label ng-show="criteria.OrderID">{{'Order ID' | r}}</label>
-                            <input class="form-control" type="text" ng-model="criteria.OrderID" placeholder="Order ID" autocomplete="off" />
+                            <input class="form-control" type="text" ng-model="criteria.OrderID" placeholder="{{'Order' | r}} {{'ID' | r}}" autocomplete="off" />
                             <i class="fa">#</i>
                         </div>
                         <div class="form-group">
                             <label ng-show="criteria.ShippingAddress">{{'Shipping' | r}} {{'Address' | r}}</label>
-                            <input class="form-control" type="text" ng-model="criteria.ShippingAddress" placeholder="Shipping Address" autocomplete="off" />
+                            <input class="form-control" type="text" ng-model="criteria.ShippingAddress" placeholder="{{'Shipping' | r}} {{'Address' | r}}" autocomplete="off" />
                             <i class="fa fa-map-marker"></i>
                         </div>
                         <div class="form-group">
@@ -80,7 +80,7 @@
                                 {{criteria.DateRangeFrom ? '' : 'Tap'}}
                                 <span class="text-info">{{criteria.DateRangeFrom | date:'M/dd/yy'}}</span>
                             </div>
-                            <input name="daterangefrom" placeholder="Start Date" ng-model="criteria.DateRangeFrom"
+                            <input name="daterangefrom" placeholder="{{'Start' | r}} {{'Date' | r}}" ng-model="criteria.DateRangeFrom"
                                    type="text"
                                    class="form-control"
                                    datepicker-popup="MM/dd/yy"
@@ -95,7 +95,7 @@
                                 {{criteria.DateRangeTo ? '' : 'Tap'}}
                                 <span class="text-info">{{criteria.DateRangeTo | date:'M/dd/yy'}}</span>
                             </div>
-                            <input name="daterangeto" placeholder="End Date" ng-model="criteria.DateRangeTo"
+                            <input name="daterangeto" placeholder="{{'End' | r}} {{'Date' | r}}" ng-model="criteria.DateRangeTo"
                                    type="text"
                                    class="form-control"
                                    datepicker-popup="MM/dd/yy"
