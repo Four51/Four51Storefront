@@ -37,7 +37,7 @@
                     <ul class="list-group" ng-show="item.SpecsLength > 0">
                         <li class="list-group-item" ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
                             <span class="text-info">{{spec.Name}}: </span>
-                            <span ng-if="spec.ControlType == 'File'"><a ng-href="spec.File.Url">{{spec.File.OriginalName + Extension}}</a></span>
+                            <span ng-if="spec.ControlType == 'File'">{{spec.File.OriginalName + Extension}}</span>
                             <span ng-if="spec.ControlType != 'File'">{{spec.Value || '(unspecified)'}}</span>
                         </li>
                     </ul>
