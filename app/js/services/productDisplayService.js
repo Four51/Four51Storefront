@@ -230,13 +230,30 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 					Variant.get({VariantInteropID: variantInteropID, ProductInteropID: p.InteropID }, function(v) {
 						callback({product: p, variant: v});
 					});
-				}else{
+				}
+				else{
 					var variant = $451.filter(data.Variants, {Property: 'InteropID', Value: variantInteropID})[0];
 					callback({product: p, variant: variant});
 				}
 			}
 			else
-				callback({product:p});
+			{
+				if (p.Type == 'Static' && p.IsVBOSS) {
+					var options = [];
+					angular.forEach(p.Specs, function(s) {
+						if (s.DefinesVariant && s.Value) {
+							options.push(s.SelectedOptionID);
+						}
+					});
+					if (options.length > 0) {
+						Variant.get({'ProductInteropID': p.InteropID, 'SpecOptionIDs': options}, function(v) {
+							callback({product: p, variant: v});
+						});
+					}
+				}
+				else
+					callback({product:p});
+			}
 		});
 	};
 	return{
