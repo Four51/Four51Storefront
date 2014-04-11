@@ -37,10 +37,14 @@
     -ms-border-radius:      @border-radius-large;
     border-radius:          @border-radius-large;
     box-shadow: 1px 1px 1px lighten(rgba(22, 145, 190, .15), 50%);
+    //** need to scroll the content in case of password error
+    overflow-y: auto;
+    height: 420px;
 
     .btn-primary  {
       padding: 15px;
       margin-top: 15px;
+      margin-bottom: 15px;
       text-shadow: 0 -1px 0 @gray-light;
       -webkit-transition:   all 150ms ease;
       -moz-transition:      all 150ms ease;
@@ -68,6 +72,7 @@
     }
     .btn-info {
       margin-top: 15px;
+      padding: 15px;
     }
   }
 }

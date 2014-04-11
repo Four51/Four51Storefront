@@ -6856,10 +6856,13 @@ select.ng-invalid:invalid:invalid:focus {
   -ms-border-radius: 6px;
   border-radius: 6px;
   box-shadow: 1px 1px 1px rgba(216, 241, 251, 0.15);
+  overflow-y: auto;
+  height: 420px;
 }
 .order-cloud .form-signin .btn-primary {
   padding: 15px;
   margin-top: 15px;
+  margin-bottom: 15px;
   text-shadow: 0 -1px 0 #999999;
   -webkit-transition: all 150ms ease;
   -moz-transition: all 150ms ease;
@@ -6887,6 +6890,7 @@ select.ng-invalid:invalid:invalid:focus {
 }
 .order-cloud .form-signin .btn-info {
   margin-top: 15px;
+  padding: 15px;
 }
 .panel-search button[type="submit"] {
   visibility: hidden;
