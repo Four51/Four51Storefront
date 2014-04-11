@@ -236,8 +236,7 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 					callback({product: p, variant: variant});
 				}
 			}
-			else
-			{
+			else{
 				if (p.Type == 'Static' && p.IsVBOSS) {
 					var options = [];
 					angular.forEach(p.Specs, function(s) {
@@ -249,7 +248,8 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 						Variant.get({'ProductInteropID': p.InteropID, 'SpecOptionIDs': options}, function(v) {
 							callback({product: p, variant: v});
 						});
-					}
+					}else
+						callback({product:p});
 				}
 				else
 					callback({product:p});
