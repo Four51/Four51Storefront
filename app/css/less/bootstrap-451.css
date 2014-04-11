@@ -6062,6 +6062,9 @@ select,
 button {
   min-height: 40px;
 }
+select {
+  -webkit-appearance: listbox;
+}
 option {
   color: #333333;
 }
@@ -6091,7 +6094,7 @@ button::-moz-focus-inner {
 .view-form-select:before {
   content: "Select";
   position: absolute;
-  left: 25px;
+  left: 45px;
   top: 12px;
   color: #cccccc;
   pointer-events: none;

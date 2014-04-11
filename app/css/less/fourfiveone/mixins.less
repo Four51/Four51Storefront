@@ -115,6 +115,11 @@ input, textarea, select, button {
   min-height: 40px;
 }
 
+//** android is not like the others, we have to tell the dropdown list to be  a list
+select {
+  -webkit-appearance: listbox;
+}
+
 option {
   color: @gray-dark;
 }
@@ -149,7 +154,7 @@ button::-moz-focus-inner {
 .view-form-select:before {
   content: "Select";
   position: absolute;
-  left: 25px;
+  left: 45px;
   top: 12px;
   color: @fourfiveone-gray-medium;
   // allow click through
@@ -198,7 +203,6 @@ button::-moz-focus-inner {
           }
         }
       }
-
 
       @media (max-width: @screen-xs-max) {
         clear: both;
