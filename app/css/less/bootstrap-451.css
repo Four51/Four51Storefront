@@ -6336,6 +6336,7 @@ button::-moz-focus-inner {
 .navbar .container .navbar-nav.pull-left li ul li a,
 .navbar .container-view .navbar-nav.pull-left li ul li a {
   padding: 10px 20px;
+  color: #333 !important;
 }
 .navbar .container .navbar-nav.pull-right li a,
 .navbar .container-view .navbar-nav.pull-right li a {
