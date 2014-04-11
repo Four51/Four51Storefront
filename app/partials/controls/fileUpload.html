@@ -1,6 +1,6 @@
 <div class="fileInput">
     <loadingindicator ng-show="uploadFileIndicator" title="Uploading"/>
-    <label>{{customfield.Label || customfield.Name}}:</label>
+    <label>{{customfield.Label || customfield.Name | r}}:</label>
     <img ng-show="customfield.File.IsImage && customfield.FileType == 'Image'" ng-src="{{customfield.File.Url}}"></img>
     <a ng-href="{{customfield.File.Url}}">{{customfield.File.OriginalName}}</a>
     <div ng-show="customfield.File">
@@ -17,7 +17,7 @@
     <div class="alert alert-info" ng-show="replace || !customfield.File">
         {{customfield.UploadInstructions}}
         <ul ng-show="replace || !customfield.File">
-            <li>{{'Allowed File Types' | r}}: {{customfield.AllowedExt}}</li>
+            <li>{{'Allowed File Types' | r}}: {{customfield.AllowedExt | r}}</li>
             <li ng-if="customfield.MinSize > 0">Minimum File Size: {{(customfield.MinSize | kb) + ' KB'}}</li>
             <li ng-if="customfield.MaxSize > 0">Maximum File Size: {{(customfield.MaxSize | kb) + ' KB'}}</li>
             <li ng-if="customfield.MinHeight > 0 && (customfield.File.IsImage || customfield.FileType == 'Image')">Minimum Height: {{customfield.MinHeight + ' px'}}</li>
