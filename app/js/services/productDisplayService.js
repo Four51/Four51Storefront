@@ -245,9 +245,14 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 						}
 					});
 					if (options.length > 0) {
-						Variant.get({'ProductInteropID': p.InteropID, 'SpecOptionIDs': options}, function(v) {
-							callback({product: p, variant: v});
-						});
+						Variant.get({'ProductInteropID': p.InteropID, 'SpecOptionIDs': options},
+							function(v) {
+								callback({product: p, variant: v});
+							},
+							function(ex) {
+								callback({product:p});
+							}
+						);
 					}else
 						callback({product:p});
 				}

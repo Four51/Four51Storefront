@@ -33,6 +33,9 @@ function ($scope, $location, $sce, User) {
 	$scope.loginExisting = function(){
 		User.login({Username: $scope.loginasuser.Username, Password:  $scope.loginasuser.Password, ID: $scope.user.ID, Type: $scope.user.Type},function(u){
 			$location.path("/catalog");
+
+		}, function(err){
+			$scope.loginAsExistingError = err.Message;
 		});
 	};
 }]);
