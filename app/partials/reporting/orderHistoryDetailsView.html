@@ -36,7 +36,7 @@
         <span class="pull-right">{{order.CostCenter}}</span>
     </p>
     <hr />
-    <address ng-show="order.ShipAddress">
+    <address ng-show="!order.IsMultipleShip()">
         <span class="text-primary"><strong>{{'Ship to' | r}}</strong></span><br />
         <div>
             <span ng-show="order.LineItems[0].ShipFirstName || order.LineItems[0].ShipLastName">{{order.LineItems[0].ShipFirstName}} {{order.LineItems[0].ShipLastName}}</span>

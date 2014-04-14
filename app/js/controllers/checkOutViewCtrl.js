@@ -54,12 +54,15 @@ function ($scope, $location, $filter, $rootScope, $451, Analytics, User, Order, 
         );
     };
 
+	$scope.$watch('currentOrder.CostCenter', function() {
+		OrderConfig.address($scope.currentOrder, $scope.user);
+	});
+
     function saveChanges(callback) {
 	    $scope.displayLoadingIndicator = true;
 	    $scope.errorMessage = null;
 	    $scope.actionMessage = null;
 	    var auto = $scope.currentOrder.autoID;
-	    OrderConfig.address($scope.currentOrder, $scope.user);
 	    Order.save($scope.currentOrder,
 	        function(data) {
 		        $scope.currentOrder = data;
