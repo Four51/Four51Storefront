@@ -26,8 +26,7 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 			angular.forEach(order.LineItems, function(li, i) {
 				if (multi) return;
 				multi = i > 0 ?
-					(li.ShipAddressID != order.LineItems[i-1].ShipAddressID || li.ShipperID != order.LineItems[i-1].ShipperID ||
-					(li.ShipFirstName != order.LineItems[i-1].ShipFirstName && order.LineItems[i-1].ShipLastName != order.ShipLastName)) :
+					(li.ShipAddressID != order.LineItems[i-1].ShipAddressID || li.ShipperID != order.LineItems[i-1].ShipperID) :
 					false;
 			});
 			return multi;
