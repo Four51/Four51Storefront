@@ -159,6 +159,10 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 		}else{
 			scope.StaticSpecGroups = scope.LineItem.Product.StaticSpecGroups;
 		}
+		scope.getPdf = function(url){
+			window.location.href = url;
+		}
+
 	}
 	function newLineItemScope(scope){
 		function variantHasPriceSchedule(product, scheduleType){
