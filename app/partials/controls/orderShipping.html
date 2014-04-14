@@ -106,7 +106,7 @@
                             </div>
                             <div class="col-sm-5 col-sm-offset-1">
                                 <div class="view-form-icon">
-                                    <div ng-class="{'view-form-select': !item.ShipAddressID, '': item.ShipAddressID }">
+                                    <div ng-class="{'view-form-select': !item.ShipAddressID, '' : item.ShipAddressID }">
                                         <label ng-class="{required: currentOrder.IsMultipleShip()}" ng-show="currentOrder.ShipAddressID || currentOrder.IsMultipleShip()">{{'Shipping' | r}} {{'Address' | r}}</label>
                                         <select class="form-control" name="shippingAddress"
                                                 ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
@@ -118,7 +118,7 @@
                                     </div>
                                 </div>
                                 <div class="view-form-icon">
-                                    <div ng-class="{'view-form-select': !item.ShipperName, '': item.ShipperName }">
+                                    <div ng-class="{'view-form-select': !item.ShipperName, '' : item.ShipperName }">
                                         <label ng-class="{required: currentOrder.IsMultipleShip() && user.ShipMethod != null}" ng-show="currentOrder.LineItems[0].ShipperName || currentOrder.IsMultipleShip() && user.ShipMethod != null">{{'Shipping' | r}} {{'Method' | r}}</label>
                                         <select class="form-control" ng-change="updateShipper(item)"
                                                 ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"

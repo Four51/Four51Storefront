@@ -21,20 +21,20 @@ function ($scope, $location, $routeParams, Order, FavoriteOrder, Address, User) 
 				break;
 			}
 		}
-        $scope.hasShipperOnAnyLineItem = function() {
-            angular.forEach(data.LineItems, function(item) {
-                if (item.ShipperID) return true;
-            });
-            return false;
-        };
-        $scope.hasShipAccountOnAnyLineItem = function() {
-            angular.forEach(data.LineItems, function(item) {
-                if (item.ShipAccount) return true;
-            });
-            return false;
-        };
+//        $scope.hasShipperOnAnyLineItem = function() {
+//            angular.forEach(data.LineItems, function(item) {
+//                if (item.ShipperID) return true;
+//            });
+//            return false;
+//        };
+//        $scope.hasShipAccountOnAnyLineItem = function() {
+//            angular.forEach(data.LineItems, function(item) {
+//                if (item.ShipAccount) return true;
+//            });
+//            return false;
+//        };
 
-		if (shipToMultipleAddresses(data)) {
+		if ($scope.order.IsMultipleShip()) {
 	        angular.forEach(data.LineItems, function(item) {
 	            if (item.ShipAddressID) {
 	                Address.get(item.ShipAddressID, function(add) {
