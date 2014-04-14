@@ -19,7 +19,11 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 		order.IsMultipleShip = function() {
 			var multi = false;
 			angular.forEach(order.LineItems, function(li, i) {
-				multi = multi || i > 0 ? (li.ShipAddressID != order.LineItems[i-1].ShipAddressID || li.ShipperID != order.LineItems[i-1].ShipperID ||  (li.ShipFirstName != order.LineItems[i-1].ShipFirstName && order.LineItems[i-1].ShipLastName != order.ShipLastName)) : false;
+				if (multi) return;
+				multi = i > 0 ?
+					(li.ShipAddressID != order.LineItems[i-1].ShipAddressID || li.ShipperID != order.LineItems[i-1].ShipperID ||
+					(li.ShipFirstName != order.LineItems[i-1].ShipFirstName && order.LineItems[i-1].ShipLastName != order.ShipLastName)) :
+					false;
 			});
 			return multi;
 		}
