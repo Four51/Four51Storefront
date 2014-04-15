@@ -38,6 +38,7 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'OrderConf
 					li.ShipLastName = null;
 					li.ShipperID = null;
 					li.ShipperName = null;
+					li.ShipAccount = null;
 				});
 			}
 
@@ -48,6 +49,7 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'OrderConf
 					li.ShipFirstName = $scope.currentOrder.LineItems[0].ShipFirstName;
 					li.ShipLastName = $scope.currentOrder.LineItems[0].ShipLastName;
 					li.ShipperID = $scope.currentOrder.LineItems[0].ShipperID;
+					li.ShipAccount = $scope.currentOrder.LineItems[0].ShipAccount;
 				});
 			};
 

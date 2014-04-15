@@ -28,12 +28,16 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 	}
 	init();
 
-	$scope.deleteVariant = function(v) {
+	$scope.deleteVariant = function(v, redirect) {
 		if (!v.IsMpowerVariant) return;
-		v.ProductInteropID = $scope.LineItem.Product.InteropID;
-		Variant.delete(v,
+		// doing this because at times the variant is a large amount of data and not necessary to send all that.
+		var d = {
+			"ProductInteropID": $scope.LineItem.Product.InteropID,
+			"InteropID": v.InteropID
+		};
+		Variant.delete(d,
 			function() {
-				init();
+				redirect ? $location.path('/product/' + $scope.LineItem.Product.InteropID) : init();
 			},
 			function(ex) {
 				$scope.lineItemErrors.push(ex.Message);

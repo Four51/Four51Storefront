@@ -12,13 +12,15 @@ four51.app.factory('Variant', ['$resource', '$451', 'Security', 'Error', functio
 	}
 
 	var _get = function(params, success, error) {
-
-		$resource($451.api('variant')).get(params).$promise.then(function(variant) {
-			_extend(variant);
-			_then(success, variant);
-		},function(ex) {
-			error(ex);
-		});
+		$resource($451.api('variant')).get(params).$promise.then(
+			function(variant) {
+				_extend(variant);
+				_then(success, variant);
+			},
+			function(ex) {
+				if (error) error(ex);
+			}
+		);
 	}
 	var _save = function(variant, success) {
 		return $resource($451.api('variant')).save(variant).$promise.then(function(v) {
@@ -36,7 +38,7 @@ four51.app.factory('Variant', ['$resource', '$451', 'Security', 'Error', functio
 				_then(success);
 			},
 			function(ex) {
-				error(Error.format(ex));
+				if (error) error(Error.format(ex));
 			}
 		);
 	};
