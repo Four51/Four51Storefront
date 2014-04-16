@@ -51,7 +51,7 @@
     <div ng-if="user.Permissions.contains('PayByCreditCard')" ng-show="currentOrder.PaymentMethod == 'CreditCard'">
         <div class="row view-form-icon" ng-if="paymentSelection.SavedCards">
             <div class="col-sm-4" ng-class="{'view-form-select-saved': !currentOrder.CreditCardID, '': currentOrder.CreditCardID }">
-                <label ng-show="currentOrder.CreditCardID">{{'Saved' | r}} {{'Card' | r}}</label>
+                <label>{{'Saved' | r}} {{'Card' | r}}</label>
                 <select class="form-control" ng-model="currentOrder.CreditCardID" ng-options="card.ID as card.Name for card in paymentSelection.SavedCards">
                     <option value="" />
                 </select>
