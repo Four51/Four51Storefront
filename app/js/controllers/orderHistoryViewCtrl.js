@@ -36,24 +36,37 @@ function ($scope, $location, $routeParams, Order, FavoriteOrder, Address, User) 
 
 	$scope.saveFavorite = function(callback) {
 		$scope.displayLoadingIndicator = true;
+		$scope.errorMessage = null;
         $scope.actionMessage = null;
-        FavoriteOrder.save($scope.order, function() {
-	        $scope.displayLoadingIndicator = false;
-            if (callback) callback($scope.order);
-            $scope.actionMessage = "Your order has been saved as a Favorite";
-        });
+        FavoriteOrder.save($scope.order,
+		    function() {
+		        $scope.displayLoadingIndicator = false;
+	            if (callback) callback($scope.order);
+	            $scope.actionMessage = "Your order has been saved as a Favorite";
+	        },
+	        function(ex) {
+		        $scope.errorMessage = ex.Message;
+	        }
+        );
 	};
 
     $scope.repeatOrder = function() {
+	    $scope.errorMessage = null;
+	    $scope.errorMessage = null;
         $scope.order.Repeat = true;
-        Order.save($scope.order, function(data) {
-            $scope.currentOrder = data;
-            $scope.user.CurrentOrderID = data.ID;
-            User.save($scope.user, function(data){
-                $scope.user = data;
-                $location.path('/cart');
-            });
-        });
+        Order.save($scope.order,
+	        function(data) {
+	            $scope.currentOrder = data;
+	            $scope.user.CurrentOrderID = data.ID;
+	            User.save($scope.user, function(data){
+	                $scope.user = data;
+	                $location.path('/cart');
+	            });
+            },
+	        function(ex) {
+				$scope.errorMessage = ex.Message;
+	        }
+        );
     };
 
     $scope.onPrint = function()  {

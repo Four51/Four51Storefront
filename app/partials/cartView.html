@@ -137,7 +137,7 @@
                         </div>
                         <div class="col-md-3 col-md-offset-5 col-lg-4 text-right" ng-if="!(user.Permissions.contains('HidePricing'))">
                             <h4 class="text-primary">
-                                <strong>Subtotal <span class="text-success">{{currentOrder.Subtotal | currency}}</span></strong>
+                                <strong>{{'Subtotal' | r}} <span class="text-success">{{currentOrder.Subtotal | currency}}</span></strong>
                             </h4>
                             <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
                                 <span class="text-info">{{'Shipping, handling and tax may be added to this subtotal.' | r}}</span>
@@ -147,6 +147,9 @@
                 </div>
             </div>
             <div class="navbar-fixed-bottom">
+                <div class="alert-warning text-center" style="padding: 10px;">
+                    {{'Some items were not added to your repeat order' | r}}: {{currentOrder.RepeatError}}
+                </div>
                 <div class="view-response-message alert-success text-center" alert-show="currentOrder">
                     <p>{{actionMessage | r}}</p>
                 </div>

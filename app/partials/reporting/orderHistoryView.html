@@ -61,9 +61,11 @@
             </div>
         </div>
         <div class="navbar-fixed-bottom">
-            <loadingindicator ng-show="displayLoadingIndicator" />
             <div class="view-response-message alert-success text-center" alert-show="actionMessage">
                 <p>{{actionMessage}}</p>
+            </div>
+            <div class="view-response-message alert-danger text-center" alert-show="errorMessage">
+                <p>{{errorMessage | r}}</p>
             </div>
         </div>
     </div>
