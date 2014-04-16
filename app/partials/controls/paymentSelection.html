@@ -63,9 +63,10 @@
         </div>
         <div class="row view-form-icon" ng-show="!currentOrder.CreditCardID">
             <div class="col-sm-4" ng-class="{'view-form-select': !currentOrder.CreditCard.Type, '': currentOrder.CreditCard.Type }">
-                <label ng-show="currentOrder.CreditCard.Type">{{'Cart Type' | r}}</label>
+                <label ng-class="{required: currentOrder.PaymentMethod == 'CreditCard'}">{{'Card Type' | r}}</label>
                 <select id="credit-card-type" class="form-control" ng-model="currentOrder.CreditCard.Type"
-                        ng-options="creditCard.Type as creditCard.DisplayName for creditCard in user.AvailableCreditCards">
+                        ng-options="creditCard.Type as creditCard.DisplayName for creditCard in user.AvailableCreditCards"
+                        ng-required="currentOrder.PaymentMethod == 'CreditCard' && !currentOrder.CreditCardID">
                 </select>
                 <i class="fa fa-credit-card"></i>
             </div>
