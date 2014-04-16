@@ -6065,9 +6065,6 @@ button {
 select {
   -webkit-appearance: listbox;
 }
-input[type="checkbox"] {
-  min-width: 40px;
-}
 option {
   color: #333333;
 }
@@ -6281,6 +6278,9 @@ button::-moz-focus-inner {
     position: relative;
     top: -40px;
     margin-bottom: -40px;
+  }
+  input[type="checkbox"] {
+    min-width: 40px;
   }
 }
 .container-view {
