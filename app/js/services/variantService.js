@@ -1,7 +1,9 @@
-four51.app.factory('Variant', ['$resource', '$451', 'Security', 'Error', function($resource, $451, Security, Error) {
+four51.app.factory('Variant', ['$rootScope', '$resource', '$451', 'Security', 'Error', function($rootScope, $resource, $451, Security, Error) {
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
+		if (data.IsMpowerVariant && Object.keys(data.Specs).length > 0)
+			$rootScope.$broadcast('event:specFormReady', data);
 	}
 
 	function _extend(variant) {

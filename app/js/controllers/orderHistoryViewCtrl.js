@@ -2,14 +2,6 @@ four51.app.controller('OrderViewCtrl', ['$scope', '$location', '$routeParams', '
 function ($scope, $location, $routeParams, Order, FavoriteOrder, Address, User) {
 	$scope.loadingIndicator = true;
 
-	var shipToMultipleAddresses = function(order) {
-		if (!order) return false;
-		var multi = false;
-		angular.forEach(order.LineItems, function(li, i) {
-			multi = multi || i > 0 ? li.ShipAddressID != order.LineItems[i-1].ShipAddressID : false;
-		});
-		return multi;
-	};
 
 	Order.get($routeParams.id, function(data){
 		$scope.loadingIndicator = false;
@@ -21,18 +13,6 @@ function ($scope, $location, $routeParams, Order, FavoriteOrder, Address, User) 
 				break;
 			}
 		}
-//        $scope.hasShipperOnAnyLineItem = function() {
-//            angular.forEach(data.LineItems, function(item) {
-//                if (item.ShipperID) return true;
-//            });
-//            return false;
-//        };
-//        $scope.hasShipAccountOnAnyLineItem = function() {
-//            angular.forEach(data.LineItems, function(item) {
-//                if (item.ShipAccount) return true;
-//            });
-//            return false;
-//        };
 
 		if ($scope.order.IsMultipleShip()) {
 	        angular.forEach(data.LineItems, function(item) {

@@ -56,6 +56,7 @@ four51.app.factory('OrderConfig', function() {
 	}
 
 	function _hasAddress() {
+		if (!order) return false;
 		if (order.ShipAddressID != null) return true;
 		angular.forEach(order.LineItems, function(li) {
 			if (li.ShipAddressID != null) return true;

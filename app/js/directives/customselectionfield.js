@@ -1,8 +1,7 @@
 four51.app.directive('customselectionfield', ['$451', function($451) {
 	var obj = {
 		scope: {
-			customfield : '=',
-			change: '='
+			customfield : '='
 		},
 		restrict: 'E',
 		transclude: true,
@@ -25,14 +24,10 @@ four51.app.directive('customselectionfield', ['$451', function($451) {
 					scope.customfield.SelectedOptionID = this.item.ID;
 					scope.customfield.Value = scope.other;
 				}
-				if (scope.change)
-					scope.change(scope.customfield);
 			};
 			scope.otherChanged = function() {
 				scope.customfield.isOtherSelected = true;
 				scope.customfield.Value = scope.other;
-				if (scope.change)
-					scope.change(scope.customfield);
 			};
 			scope.item = {}, scope.other = ''; // initialize the item variable to avoid checking for null
 
