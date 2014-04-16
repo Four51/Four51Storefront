@@ -1,20 +1,22 @@
 //
 // Login
 // --------------------------------------------------
-
-.order-cloud {
+.order-cloud-image {
   width: 100%;
   height: 100%;
   position: fixed;
   left: 0;
   top: 0;
   overflow: hidden;
-  padding: 0 5px;
   -webkit-background-size:  cover;
   -moz-background-size:     cover;
   -o-background-size:       cover;
   -ms-background-size:      cover;
   background-size:          cover;
+}
+
+.order-cloud {
+  padding: 0 5px;
   h2 {
     margin-top: 0;
     color:#fff;
@@ -36,9 +38,6 @@
     -ms-border-radius:      @border-radius-large;
     border-radius:          @border-radius-large;
     box-shadow: 1px 1px 1px lighten(rgba(22, 145, 190, .15), 50%);
-    //** need to scroll the content in case of password error
-    overflow-y: auto;
-    height: 420px;
 
     .btn-primary  {
       padding: 15px;

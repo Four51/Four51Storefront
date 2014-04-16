@@ -39,9 +39,9 @@
             <div class="col-sm-6" ng-class="{'view-form-select': !currentOrder.BudgetAccountID, '': currentOrder.BudgetAccountID }">
                 <label ng-show="currentOrder.BudgetAccountID">{{'Spending Account' | r}}</label>
                 <select class="form-control" placeholder="Spending Account"
-                    ng-options="account.ID as (account.Label + ' - Balance: ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{ForPurchase:true}"
-                    ng-model="currentOrder.BudgetAccountID"
-                    ng-required="currentOrder.PaymentMethod == 'BudgetAccount'">
+                        ng-options="account.ID as (account.Label + ' - Balance: ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{ForPurchase:true}"
+                        ng-model="currentOrder.BudgetAccountID"
+                        ng-required="currentOrder.PaymentMethod == 'BudgetAccount'">
                 </select>
                 <i class="fa fa-dollar"></i>
             </div>
