@@ -50,8 +50,8 @@
     <address ng-show="order.BillAddress">
         <span class="text-primary"><strong>{{'Bill to' | r}}</strong></span><br />
         <div>
-            <span ng-show="order.LineItems[0].BillFirstName || order.LineItems[0].BillLastName">{{order.LineItems[0].BillFirstName}} {{order.LineItems[0].BillLastName}}</span>
-            <span ng-show="!order.LineItems[0].BillFirstName || !order.LineItems[0].BillLastName">{{order.BillAddress.FirstName}} {{order.BillAddress.LastName}}</span>
+            <span ng-show="order.BillFirstName || order.BillLastName">{{order.BillFirstName}} {{order.BillLastName}}</span>
+            <span ng-show="!order.BillFirstName || !order.BillLastName">{{order.BillAddress.FirstName}} {{order.BillAddress.LastName}}</span>
         </div>
         <div>{{order.BillAddress.Street1}}</div>
         <div ng-if="order.BillAddress.Street2">{{order.BillAddress.Street2}}</div>

@@ -32,6 +32,7 @@ four51.app.factory('OrderConfig', function() {
     }
 
 	var setDefaultAddress = function() {
+		if (!order) return;
 		angular.forEach(user.CostCenters, function(c) {
 			if (c.DefaultAddressID) {
 				if (order.CostCenter) {
