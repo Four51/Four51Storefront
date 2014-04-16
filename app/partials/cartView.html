@@ -11,7 +11,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        {{currentOrder.LineItems.length}} {{'Item' | rl}}{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your {{'Cart' | rl}}
+                        {{currentOrder.LineItems.length}} {{'Item' + (currentOrder.LineItems.length > 1 ? 's' : '') | rl}} in your {{'Cart' | rl}}
                     </h3>
                 </div>
                 <div class="panel-lineitem" ng-repeat="item in currentOrder.LineItems">
