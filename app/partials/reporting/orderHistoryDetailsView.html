@@ -5,7 +5,7 @@
     </p>
     <p>
         <span class="text-info">{{'Status' | r}}</span>
-        <span class="pull-right">{{order.StatusText}}</span>
+        <span class="pull-right">{{order.StatusText | r}}</span>
     </p>
     <p ng-show="order.DateCompleted">
         <span class="text-info">{{'Date' | r}} {{'Completed' | r}}</span>
@@ -25,7 +25,7 @@
     </p>
     <p>
         <span class="text-info">{{'Payment' | r}} {{'Method' | r}}</span>
-        <span class="pull-right">{{order.PaymentMethodText}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong> {{order.AmountOnAccount && order.PaymentMethod != 'BudgetAccount' ? "(" + (order.Total - order.AmountOnAccount | currency) + ")" : ""}}</span>
+        <span class="pull-right">{{order.PaymentMethodText | r}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong> {{order.AmountOnAccount && order.PaymentMethod != 'BudgetAccount' ? "(" + (order.Total - order.AmountOnAccount | currency) + ")" : ""}}</span>
     </p>
     <p ng-show="order.AmountOnAccount && order.PaymentMethod != 'BudgetAccount'">
         <span class="text-info"></span>

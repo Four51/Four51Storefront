@@ -147,7 +147,7 @@
                 </div>
             </div>
             <div class="navbar-fixed-bottom">
-                <div class="alert-warning text-center" style="padding: 10px;">
+                <div class="alert-warning text-center" style="padding: 10px;" ng-if="currentOrder.RepeatError">
                     {{'Some items were not added to your repeat order' | r}}: {{currentOrder.RepeatError}}
                 </div>
                 <div class="view-response-message alert-success text-center" alert-show="currentOrder">
