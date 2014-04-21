@@ -5,7 +5,7 @@
     </p>
     <p>
         <span class="text-info">{{'Status' | r}}</span>
-        <span class="pull-right">{{order.StatusText}}</span>
+        <span class="pull-right">{{order.StatusText | r}}</span>
     </p>
     <p ng-show="order.DateCompleted">
         <span class="text-info">{{'Date' | r}} {{'Completed' | r}}</span>
@@ -25,7 +25,7 @@
     </p>
     <p>
         <span class="text-info">{{'Payment' | r}} {{'Method' | r}}</span>
-        <span class="pull-right">{{order.PaymentMethodText}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong> {{order.AmountOnAccount && order.PaymentMethod != 'BudgetAccount' ? "(" + (order.Total - order.AmountOnAccount | currency) + ")" : ""}}</span>
+        <span class="pull-right">{{order.PaymentMethodText | r}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong> {{order.AmountOnAccount && order.PaymentMethod != 'BudgetAccount' ? "(" + (order.Total - order.AmountOnAccount | currency) + ")" : ""}}</span>
     </p>
     <p ng-show="order.AmountOnAccount && order.PaymentMethod != 'BudgetAccount'">
         <span class="text-info"></span>
@@ -36,7 +36,7 @@
         <span class="pull-right">{{order.CostCenter}}</span>
     </p>
     <hr />
-    <address ng-show="order.ShipAddress">
+    <address ng-show="!order.IsMultipleShip()">
         <span class="text-primary"><strong>{{'Ship to' | r}}</strong></span><br />
         <div>
             <span ng-show="order.LineItems[0].ShipFirstName || order.LineItems[0].ShipLastName">{{order.LineItems[0].ShipFirstName}} {{order.LineItems[0].ShipLastName}}</span>
@@ -50,8 +50,8 @@
     <address ng-show="order.BillAddress">
         <span class="text-primary"><strong>{{'Bill to' | r}}</strong></span><br />
         <div>
-            <span ng-show="order.LineItems[0].BillFirstName || order.LineItems[0].BillLastName">{{order.LineItems[0].BillFirstName}} {{order.LineItems[0].BillLastName}}</span>
-            <span ng-show="!order.LineItems[0].BillFirstName || !order.LineItems[0].BillLastName">{{order.BillAddress.FirstName}} {{order.BillAddress.LastName}}</span>
+            <span ng-show="order.BillFirstName || order.BillLastName">{{order.BillFirstName}} {{order.BillLastName}}</span>
+            <span ng-show="!order.BillFirstName || !order.BillLastName">{{order.BillAddress.FirstName}} {{order.BillAddress.LastName}}</span>
         </div>
         <div>{{order.BillAddress.Street1}}</div>
         <div ng-if="order.BillAddress.Street2">{{order.BillAddress.Street2}}</div>

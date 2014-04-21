@@ -1,7 +1,8 @@
 four51.app.directive('customtextfield', function() {
     var obj = {
         scope: {
-            customfield : '='
+            customfield : '=',
+	        changed: '='
         },
         restrict: 'E',
         transclude: true,

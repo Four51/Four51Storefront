@@ -39,9 +39,9 @@
             <div class="col-sm-6" ng-class="{'view-form-select': !currentOrder.BudgetAccountID, '': currentOrder.BudgetAccountID }">
                 <label ng-show="currentOrder.BudgetAccountID">{{'Spending Account' | r}}</label>
                 <select class="form-control" placeholder="Spending Account"
-                    ng-options="account.ID as (account.Label + ' - Balance: ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{ForPurchase:true}"
-                    ng-model="currentOrder.BudgetAccountID"
-                    ng-required="currentOrder.PaymentMethod == 'BudgetAccount'">
+                        ng-options="account.ID as (account.Label + ' - Balance: ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{ForPurchase:true}"
+                        ng-model="currentOrder.BudgetAccountID"
+                        ng-required="currentOrder.PaymentMethod == 'BudgetAccount'">
                 </select>
                 <i class="fa fa-dollar"></i>
             </div>
@@ -51,7 +51,7 @@
     <div ng-if="user.Permissions.contains('PayByCreditCard')" ng-show="currentOrder.PaymentMethod == 'CreditCard'">
         <div class="row view-form-icon" ng-if="paymentSelection.SavedCards">
             <div class="col-sm-4" ng-class="{'view-form-select-saved': !currentOrder.CreditCardID, '': currentOrder.CreditCardID }">
-                <label ng-show="currentOrder.CreditCardID">{{'Saved' | r}} {{'Card' | r}}</label>
+                <label>{{'Saved' | r}} {{'Card' | r}}</label>
                 <select class="form-control" ng-model="currentOrder.CreditCardID" ng-options="card.ID as card.Name for card in paymentSelection.SavedCards">
                     <option value="" />
                 </select>
@@ -63,9 +63,10 @@
         </div>
         <div class="row view-form-icon" ng-show="!currentOrder.CreditCardID">
             <div class="col-sm-4" ng-class="{'view-form-select': !currentOrder.CreditCard.Type, '': currentOrder.CreditCard.Type }">
-                <label ng-show="currentOrder.CreditCard.Type">{{'Cart Type' | r}}</label>
+                <label ng-class="{required: currentOrder.PaymentMethod == 'CreditCard'}">{{'Card Type' | r}}</label>
                 <select id="credit-card-type" class="form-control" ng-model="currentOrder.CreditCard.Type"
-                        ng-options="creditCard.Type as creditCard.DisplayName for creditCard in user.AvailableCreditCards">
+                        ng-options="creditCard.Type as creditCard.DisplayName for creditCard in user.AvailableCreditCards"
+                        ng-required="currentOrder.PaymentMethod == 'CreditCard' && !currentOrder.CreditCardID">
                 </select>
                 <i class="fa fa-credit-card"></i>
             </div>
