@@ -6992,7 +6992,7 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-category-list ul li .well {
   margin: 2px;
   padding: 0;
-  min-height: 335px;
+  min-height: 245px;
 }
 .panel-category-list ul li a {
   padding: .75em;
