@@ -28,7 +28,7 @@
         </div>
         <div>
             <h3>
-                {{currentOrder.LineItems.length}} item{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your cart
+                {{currentOrder.LineItems.length}} {{'Item' + (currentOrder.LineItems.length > 1 ? 's' : '') | rl}} in your {{'cart' | r}}
             </h3>
             <div ng-repeat="item in currentOrder.LineItems" class="cart-print-view-line-items-repeater">
                 <div class="cart-print-view-line-items-product">

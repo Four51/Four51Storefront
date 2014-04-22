@@ -49,7 +49,10 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', function($resour
     }
 
     var _search = function(categoryInteropID, searchTerm, relatedProductsGroupID, success) {
-        if(!categoryInteropID && !searchTerm && !relatedProductsGroupID) return null;
+        if(!categoryInteropID && !searchTerm && !relatedProductsGroupID){
+			_then(success, null);
+			return null;
+		}
 
         var criteria = {
             'CategoryInteropID': categoryInteropID,

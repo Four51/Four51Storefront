@@ -7,8 +7,7 @@
         <input name="replace" class="replace" type="checkbox" ng-model="replace"></input> {{'Replace' | r}}
         <input name="delete" class="delete" type="checkbox"></input> {{'Delete' | r}}
     </div>
-    <div ng-show="replace || !customfield.File" ng-class="{'file-upload-required btn-danger': customfield.Required }" class="btn btn-default" style="overflow:hidden; position:relative; margin-bottom:15px;">
-        <i class="fa fa-upload"></i> {{'Upload File' | r}}
+    <div ng-show="replace || !customfield.File" ng-class="{'file-upload-required text-danger': customfield.Required }" class="well">
         <input name="upload" class="upload" type="file"></input>
     </div>
     <br />

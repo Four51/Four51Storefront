@@ -5,7 +5,7 @@
                 <span ng-click="toggleNav()"><i class="fa fa-bars" ng-class="{ 'text-info': navStatus.visible }"></i></span>
             </li>
             <li>
-                <span id="451_lbl_curcat" class="text-primary" ng-bind-html="currentCategory.Name || 'Categories'"></span>
+                <span id="451_lbl_curcat" class="text-primary" ng-bind-html="currentCategory.Name || '  {{'Categories' | r}}'"></span>
             </li>
             <li class="pull-right">
                 <a href="search">
@@ -57,6 +57,7 @@
                 </nav>
             </div>
         </div>
+		<loadingindicator ng-show="productLoadingIndicator" title="{{'Please wait while we fetch all products' | r}}"/>
         <div class="panel panel-default" ng-show="products">
             <div class="panel-heading">
                 <h3 class="panel-title">
@@ -64,7 +65,7 @@
                 </h3>
             </div>
             <div class="panel-product-list" ng-if="currentCategory.InteropID">
-                <loadingindicator ng-show="productLoadingIndicator" title="{{'Please wait while we fetch all products' | r}}"/>
+
                 <div ng-show="products" class="alert alert-info text-center hidden-sm hidden-md hidden-lg">
                     <i class="fa fa-arrow-circle-o-left"></i>
                     Swipe product left for more info
