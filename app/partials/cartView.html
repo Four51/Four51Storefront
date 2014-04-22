@@ -11,7 +11,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        {{currentOrder.LineItems.length}} {{'Item' | rl}}{{currentOrder.LineItems.length > 1 ? 's' : ''}} in your {{'Cart' | rl}}
+                        {{currentOrder.LineItems.length}} {{'Item' + (currentOrder.LineItems.length > 1 ? 's' : '') | rl}} in your {{'Cart' | rl}}
                     </h3>
                 </div>
                 <div class="panel-lineitem" ng-repeat="item in currentOrder.LineItems">
@@ -137,7 +137,7 @@
                         </div>
                         <div class="col-md-3 col-md-offset-5 col-lg-4 text-right" ng-if="!(user.Permissions.contains('HidePricing'))">
                             <h4 class="text-primary">
-                                <strong>Subtotal <span class="text-success">{{currentOrder.Subtotal | currency}}</span></strong>
+                                <strong>{{'Subtotal' | r}} <span class="text-success">{{currentOrder.Subtotal | currency}}</span></strong>
                             </h4>
                             <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
                                 <span class="text-info">{{'Shipping, handling and tax may be added to this subtotal.' | r}}</span>
@@ -147,6 +147,9 @@
                 </div>
             </div>
             <div class="navbar-fixed-bottom">
+                <div class="alert-warning text-center" style="padding: 10px;" ng-if="currentOrder.RepeatError">
+                    {{'Some items were not added to your repeat order' | r}}: {{currentOrder.RepeatError}}
+                </div>
                 <div class="view-response-message alert-success text-center" alert-show="currentOrder">
                     <p>{{actionMessage | r}}</p>
                 </div>
