@@ -32,7 +32,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title panel-primary">
-                        {{order.LineItems.length}} {{'Item' | rl}}{{order.LineItems.length > 1 ? 's' : ''}} in this {{'Order' | rl}}
+                        {{order.LineItems.length}} {{'Item' + (order.LineItems.length > 1 ? 's' : '') | rl}} in this {{'Order' | rl}}
                     </h3>
                 </div>
                 <lineitemhistorygrid />
@@ -61,9 +61,11 @@
             </div>
         </div>
         <div class="navbar-fixed-bottom">
-            <loadingindicator ng-show="displayLoadingIndicator" />
             <div class="view-response-message alert-success text-center" alert-show="actionMessage">
                 <p>{{actionMessage}}</p>
+            </div>
+            <div class="view-response-message alert-danger text-center" alert-show="errorMessage">
+                <p>{{errorMessage | r}}</p>
             </div>
         </div>
     </div>

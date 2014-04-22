@@ -2,14 +2,6 @@ four51.app.controller('OrderViewCtrl', ['$scope', '$location', '$routeParams', '
 function ($scope, $location, $routeParams, Order, FavoriteOrder, Address, User) {
 	$scope.loadingIndicator = true;
 
-	var shipToMultipleAddresses = function(order) {
-		if (!order) return false;
-		var multi = false;
-		angular.forEach(order.LineItems, function(li, i) {
-			multi = multi || i > 0 ? li.ShipAddressID != order.LineItems[i-1].ShipAddressID : false;
-		});
-		return multi;
-	};
 
 	Order.get($routeParams.id, function(data){
 		$scope.loadingIndicator = false;
@@ -21,20 +13,8 @@ function ($scope, $location, $routeParams, Order, FavoriteOrder, Address, User) 
 				break;
 			}
 		}
-        $scope.hasShipperOnAnyLineItem = function() {
-            angular.forEach(data.LineItems, function(item) {
-                if (item.ShipperID) return true;
-            });
-            return false;
-        };
-        $scope.hasShipAccountOnAnyLineItem = function() {
-            angular.forEach(data.LineItems, function(item) {
-                if (item.ShipAccount) return true;
-            });
-            return false;
-        };
 
-		if (shipToMultipleAddresses(data)) {
+		if ($scope.order.IsMultipleShip()) {
 	        angular.forEach(data.LineItems, function(item) {
 	            if (item.ShipAddressID) {
 	                Address.get(item.ShipAddressID, function(add) {
@@ -56,24 +36,37 @@ function ($scope, $location, $routeParams, Order, FavoriteOrder, Address, User) 
 
 	$scope.saveFavorite = function(callback) {
 		$scope.displayLoadingIndicator = true;
+		$scope.errorMessage = null;
         $scope.actionMessage = null;
-        FavoriteOrder.save($scope.order, function() {
-	        $scope.displayLoadingIndicator = false;
-            if (callback) callback($scope.order);
-            $scope.actionMessage = "Your order has been saved as a Favorite";
-        });
+        FavoriteOrder.save($scope.order,
+		    function() {
+		        $scope.displayLoadingIndicator = false;
+	            if (callback) callback($scope.order);
+	            $scope.actionMessage = "Your order has been saved as a Favorite";
+	        },
+	        function(ex) {
+		        $scope.errorMessage = ex.Message;
+	        }
+        );
 	};
 
     $scope.repeatOrder = function() {
+	    $scope.errorMessage = null;
+	    $scope.errorMessage = null;
         $scope.order.Repeat = true;
-        Order.save($scope.order, function(data) {
-            $scope.currentOrder = data;
-            $scope.user.CurrentOrderID = data.ID;
-            User.save($scope.user, function(data){
-                $scope.user = data;
-                $location.path('/cart');
-            });
-        });
+        Order.save($scope.order,
+	        function(data) {
+	            $scope.currentOrder = data;
+	            $scope.user.CurrentOrderID = data.ID;
+	            User.save($scope.user, function(data){
+	                $scope.user = data;
+	                $location.path('/cart');
+	            });
+            },
+	        function(ex) {
+				$scope.errorMessage = ex.Message;
+	        }
+        );
     };
 
     $scope.onPrint = function()  {

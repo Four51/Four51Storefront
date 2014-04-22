@@ -1,11 +1,11 @@
 <div>
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we process your request."></loadingindicator>
     <textarea class="form-control" ng-model="order.ApprovalComment" placeholder="{{'Approval' | r}} {{'Comments' | r}}"></textarea><br />
-     <span class="pull-right btn-group">
-        <span class="ui-state-error-text" ng-show="error">{{error}}</span>
+    <div class="pull-right btn-group">
         <button class="btn btn-small btn-action" ng-click="approveOrder()">{{'Approve' | r}}</button>
         <button class="btn btn-small btn-danger" ng-click="declineOrder()">{{'Decline' | r}}</button>
-    </span>
+    </div>
+    <div class="view-error-message" ng-show="error">{{error}}</div>
 </div>
 <hr/>
 

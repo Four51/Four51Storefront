@@ -30,6 +30,7 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'OrderConf
 			});
 
 			$scope.setMultipleShipAddress = function() {
+				$scope.currentOrder.forceMultipleShip(true);
 				angular.forEach($scope.currentOrder.LineItems, function(li, i) {
 					if (i == 0) return;
 					li.ShipAddressID = null;
@@ -37,15 +38,18 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'OrderConf
 					li.ShipLastName = null;
 					li.ShipperID = null;
 					li.ShipperName = null;
+					li.ShipAccount = null;
 				});
 			}
 
 			$scope.setSingleShipAddress = function() {
+				$scope.currentOrder.forceMultipleShip(false);
 				angular.forEach($scope.currentOrder.LineItems, function(li) {
 					li.ShipAddressID = $scope.currentOrder.LineItems[0].ShipAddressID;
 					li.ShipFirstName = $scope.currentOrder.LineItems[0].ShipFirstName;
 					li.ShipLastName = $scope.currentOrder.LineItems[0].ShipLastName;
 					li.ShipperID = $scope.currentOrder.LineItems[0].ShipperID;
+					li.ShipAccount = $scope.currentOrder.LineItems[0].ShipAccount;
 				});
 			};
 

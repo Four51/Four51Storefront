@@ -6065,9 +6065,6 @@ button {
 select {
   -webkit-appearance: listbox;
 }
-input[type="checkbox"] {
-  min-width: 40px;
-}
 option {
   color: #333333;
 }
@@ -6075,15 +6072,6 @@ textarea {
   resize: vertical;
   width: 100%;
   line-height: 150%;
-}
-input[type="file"] {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0;
-  cursor: pointer;
 }
 button::-moz-focus-inner {
   border: 0;
@@ -6821,20 +6809,21 @@ select.ng-invalid:invalid:invalid:focus {
     transform: rotate(359deg);
   }
 }
-.order-cloud {
+.order-cloud-image {
   width: 100%;
   height: 100%;
   position: fixed;
   left: 0;
   top: 0;
   overflow: hidden;
-  padding: 0 5px;
-  background: url( '../images/orderCloud.jpg' ) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   -ms-background-size: cover;
   background-size: cover;
+}
+.order-cloud {
+  padding: 0 5px;
 }
 .order-cloud h2 {
   margin-top: 0;
@@ -6856,8 +6845,6 @@ select.ng-invalid:invalid:invalid:focus {
   -ms-border-radius: 6px;
   border-radius: 6px;
   box-shadow: 1px 1px 1px rgba(216, 241, 251, 0.15);
-  overflow-y: auto;
-  height: 420px;
 }
 .order-cloud .form-signin .btn-primary {
   padding: 15px;
