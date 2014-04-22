@@ -6270,6 +6270,9 @@ button::-moz-focus-inner {
     top: -40px;
     margin-bottom: -40px;
   }
+  input[type="checkbox"] {
+    min-width: 40px;
+  }
 }
 .container-view {
   margin-top: 45px;
