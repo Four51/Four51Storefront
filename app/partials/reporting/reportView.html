@@ -5,10 +5,10 @@
     <div class="table-responsive">
         <table class="table">
             <tr>
-                <td ng-repeat="header in report.Columns">{{header}}</td>
+                <td ng-repeat="header in report.DataColumns">{{header | r}}</td>
             </tr>
             <tr ng-repeat="row in report.Data">
-                <td ng-repeat="header in report.Columns">
+                <td ng-repeat="header in report.DataColumns">
                     {{row[header]}}
                 </td>
             </tr>

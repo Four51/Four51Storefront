@@ -20,7 +20,7 @@ four51.app.factory('Report', ['$resource', '$451', 'Error', function($resource, 
 		var reports = store.get('451Cache.Report');
 		reports ? (function() { _extend(reports); _then(success, reports); })() :
 			$resource($451.api('report')).query().$promise.then(function(list) {
-				store.set('451Cache.Report', list);
+				//store.set('451Cache.Report', list);
 				_extend(list);
 				_then(success, list);
 			});

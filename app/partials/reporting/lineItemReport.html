@@ -12,7 +12,7 @@
             </div>
             <div>
                 <label ng-show="report.OrderID">{{'Order' | r}} {{'ID' | r}}</label>
-                <input class="form-control" type="text" ng-model="report.OrderID" placeholder="Order ID" />
+                <input class="form-control" type="text" ng-model="report.ExternalID" placeholder="Order ID" />
                 <i class="fa fa-external-link"></i>
             </div>
             <div>
@@ -71,7 +71,7 @@
             </div>
             <div>
                 <label>&nbsp;</label>
-                <select multiple size="{{report.ColumnOptionsLength}}" class="form-control" ng-options="key as value for (key,value) in report.ColumnOptions" ng-model="report.Columns" />
+                <select multiple size="{{report.ColumnOptionsLength}}" class="form-control" ng-options="key as value for (key,value) in report.ColumnOptions" ng-model="report.SelectedColumns" />
                 <i class="fa fa-columns"></i>
             </div>
         </div>
