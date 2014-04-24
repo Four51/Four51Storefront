@@ -1,4 +1,4 @@
-four51.app.factory('Report', ['$resource', '$451', 'Error', function($resource, $451, Error) {
+four51.app.factory('Report', ['$resource','$q', '$451', 'Error', function($resource, $q, $451, Error) {
 	function _then(fn, data) {
 		if (angular.isFunction(fn)) {
 			fn(data);
@@ -6,34 +6,27 @@ four51.app.factory('Report', ['$resource', '$451', 'Error', function($resource, 
 	};
 
 	function _extend(report) {
-		switch (report.ReportType) {
-			case 'LineItem':
-			default:
-				break;
+		if (report.length) {
+			report.AvailableTypes = {"LineItem": "Line Item", "Order": "Order" };
 		}
-		report.AvailableTypes = {"LineItem": "Line Item", "Order": "Order" };
-		if (report.ColumnOptions)
-			report.ColumnOptionsLength = Object.keys(report.ColumnOptions).length;
 	};
 
 	var _query = function(success) {
-		var reports = store.get('451Cache.Report');
-		reports ? (function() { _extend(reports); _then(success, reports); })() :
-			$resource($451.api('report')).query().$promise.then(function(list) {
-				//store.set('451Cache.Report', list);
-				_extend(list);
-				_then(success, list);
-			});
+		$resource($451.api('report')).query().$promise.then(function(list) {
+			_extend(list);
+			_then(success, list);
+		});
 	};
 
-	var _get = function(id, success) {
+	// do not extend reports. it will break the api serialization
+	var _get = function(id, success, error) {
 		$resource($451.api('report/:id'), { id: '@id' }).get({ id: id }).$promise.then(
 			function(data) {
-				_extend(data);
 				_then(success, data);
 			},
 			function(ex) {
-				error(Error.format(ex));
+				if (error)
+					error(Error.format(ex));
 			}
 		);
 	};
@@ -41,18 +34,49 @@ four51.app.factory('Report', ['$resource', '$451', 'Error', function($resource, 
 	var _save = function(report, success, error) {
 		$resource($451.api('report')).save(report).$promise.then(
 			function(report) {
-				_extend(report);
 				_then(success, report);
 			},
 			function(ex) {
-				error(Error.format(ex));
+				if (error)
+					error(Error.format(ex));
 			}
 		);
 	};
 
+	var _delete = function(reports, success, error) {
+		var queue = [];
+		angular.forEach(reports, function(report) {
+			if (report.Selected) {
+				queue.push((function() {
+					var d = $q.defer();
+					$resource($451.api('report')).delete({'id': report.ID}).$promise.then(
+						function() {
+							d.resolve();
+						},
+						function(ex) {
+							d.reject(ex);
+						}
+					);
+					return d.promise;
+				})());
+			}
+		});
+
+		$q.all(queue).then(
+			function() {
+				_then(success);
+			},
+			function(ex) {
+				if (error)
+					error(Error.format(ex));
+			}
+		);
+	}
+
 	return {
 		query: _query,
 		save: _save,
-		get: _get
+		get: _get,
+		delete: _delete
 	};
 }]);

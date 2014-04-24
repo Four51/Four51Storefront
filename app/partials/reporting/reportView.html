@@ -1,17 +1,48 @@
 <section class="report-view">
-    <div class="panel panel-default">
-        <lineitemreport />
+    <div class="panel-body">
+        <div class="col-sm-6 view-form-icon">
+            <div ng-if="!report.ID">
+                <label>{{'Name' | r}}</label>
+                <input class="form-control" type="text" ng-model="report.Name" placeholder="{{'Name' | r}}" />
+                <i class="fa fa-bookmark-o"></i>
+            </div>
+        </div>
     </div>
-    <div class="table-responsive">
-        <table class="table">
-            <tr>
-                <td ng-repeat="header in report.DataColumns">{{header | r}}</td>
-            </tr>
-            <tr ng-repeat="row in report.Data">
-                <td ng-repeat="header in report.DataColumns">
-                    {{row[header]}}
-                </td>
-            </tr>
-        </table>
+    <div class="panel panel-default">
+        <section class="lineitem-report-view">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 ng-if="!report.ID" class="panel-title panel-primary">{{'Line Item' | r}} {{'Report' | r}}</h3>
+                    <h3 ng-if="report.ID" class="panel-title panel-primary">{{report.Name}}</h3>
+                </div>
+            </div>
+            <tabset>
+                <tab>
+                    <tab-heading>{{'Conditions' | r}}
+                        <i class="fa fa-briefcase"></i>
+                    </tab-heading>
+                    <lineitemreport />
+                    <button type="button" class="btn btn-primary pull-right" ng-click="saveReport()">{{'Save' | r}}</button>
+                </tab>
+                <tab>
+                    <tab-heading>
+                        {{'Report' | r}} {{'View' | r}}
+                        <i class="fa fa-cogs"></i>
+                    </tab-heading>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <td ng-repeat="header in report.DataColumns">{{header | r}}</td>
+                            </tr>
+                            <tr ng-repeat="row in report.Data">
+                                <td ng-repeat="header in report.DataColumns">
+                                    {{row[header]}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </tab>
+            </tabset>
+        </section>
     </div>
 </section>
