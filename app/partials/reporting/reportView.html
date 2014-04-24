@@ -1,23 +1,19 @@
 <section class="report-view">
     <loadingindicator ng-show="displayLoadingIndicator" />
-    <div class="panel-body">
-        <div class="col-sm-6 view-form-icon">
-            <div ng-if="!report.ID">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 ng-if="!report.ID" class="panel-title panel-primary">{{report.ReportType | r}}</h3>
+            <h3 ng-if="report.ID" class="panel-title panel-primary">{{report.Name}}</h3>
+        </div>
+        <div class="panel-body view-form-icon">
+            <div ng-if="report && !report.ID">
                 <label>{{'Name' | r}}</label>
                 <input required class="form-control" type="text" ng-model="report.Name" placeholder="{{'Name' | r}}" />
                 <i class="fa fa-bookmark-o"></i>
             </div>
         </div>
-    </div>
-    <div class="panel panel-default">
-        <section class="lineitem-report-view">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 ng-if="!report.ID" class="panel-title panel-primary">{{'Line Item' | r}} {{'Report' | r}}</h3>
-                    <h3 ng-if="report.ID" class="panel-title panel-primary">{{report.Name}}</h3>
-                </div>
-            </div>
-            <tabset>
+        <div class="panel-table">
+            <tabset ng-show="report" >
                 <tab>
                     <tab-heading>{{'Conditions' | r}}
                         <i class="fa fa-briefcase"></i>
@@ -27,7 +23,7 @@
                 </tab>
                 <tab>
                     <tab-heading>
-                        {{'Report' | r}} {{'View' | r}}
+                        {{'Report' | r}} {{'Data' | r}}
                         <i class="fa fa-cogs"></i>
                     </tab-heading>
                     <div class="table-responsive">
@@ -44,11 +40,9 @@
                     </div>
                 </tab>
             </tabset>
-        </section>
-    </div>
-    <div class="navbar-fixed-bottom">
-        <div class="view-response-message alert-success text-center" alert-show="actionMessage">
-            <p>{{actionMessage | r}}</p>
+            <div class="view-response-message text-center" ng-show="!report">
+                <p>{{actionMessage | r}}</p>
+            </div>
         </div>
     </div>
 </section>
