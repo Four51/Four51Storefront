@@ -7,7 +7,7 @@ four51.app.factory('Report', ['$resource','$q', '$451', 'Error', function($resou
 
 	function _extend(report) {
 		if (report.length) {
-			report.AvailableTypes = {"LineItem": "Line Item", "Order": "Order" };
+			report.AvailableTypes = {"LineItem": "Line Item"};
 		}
 	};
 

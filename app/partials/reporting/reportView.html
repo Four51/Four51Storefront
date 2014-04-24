@@ -1,9 +1,10 @@
 <section class="report-view">
+    <loadingindicator ng-show="displayLoadingIndicator" />
     <div class="panel-body">
         <div class="col-sm-6 view-form-icon">
             <div ng-if="!report.ID">
                 <label>{{'Name' | r}}</label>
-                <input class="form-control" type="text" ng-model="report.Name" placeholder="{{'Name' | r}}" />
+                <input required class="form-control" type="text" ng-model="report.Name" placeholder="{{'Name' | r}}" />
                 <i class="fa fa-bookmark-o"></i>
             </div>
         </div>
@@ -44,5 +45,10 @@
                 </tab>
             </tabset>
         </section>
+    </div>
+    <div class="navbar-fixed-bottom">
+        <div class="view-response-message alert-success text-center" alert-show="actionMessage">
+            <p>{{actionMessage | r}}</p>
+        </div>
     </div>
 </section>
