@@ -6056,7 +6056,7 @@ select {
   position: static;
   display: block;
 }
-input,
+input:not([type="checkbox"]),
 textarea,
 select,
 button {
@@ -6269,9 +6269,6 @@ button::-moz-focus-inner {
     position: relative;
     top: -40px;
     margin-bottom: -40px;
-  }
-  input[type="checkbox"] {
-    min-width: 40px;
   }
 }
 .container-view {
