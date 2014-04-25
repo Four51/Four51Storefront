@@ -111,7 +111,7 @@ select {
 }
 
 //** minimum target size for touch
-input, textarea, select, button {
+input:not([type="checkbox"]), textarea, select, button {
   min-height: 40px;
 }
 
@@ -371,11 +371,6 @@ button::-moz-focus-inner {
     position:relative;
     top:-40px;
     margin-bottom:-40px;
-  }
-
-  //** android checkbox is gray
-  input[type="checkbox"] {
-    min-width: 40px;
   }
 }
 
