@@ -29,7 +29,7 @@ function ($scope, $sce, $route, User) {
 			function(ex) {
 				$scope.credentials = {};
 				$scope[ex.Code.text] = true;
-				$scope.loginMessage = "User name and password not found.";
+				$scope.loginMessage = ex.Message || "User name and password not found";
 				if (ex.Code.is('PasswordSecurity'))
 					$scope.loginMessage = $sce.trustAsHtml(ex.Message);
 				if (ex.Code.is('EmailNotFoundException') && $scope.credentials.Email)
