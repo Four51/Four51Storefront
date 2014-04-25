@@ -6056,7 +6056,7 @@ select {
   position: static;
   display: block;
 }
-input,
+input:not([type="checkbox"]),
 textarea,
 select,
 button {
