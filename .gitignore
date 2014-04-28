@@ -7,3 +7,6 @@ app/js/resources.js
 app/css/source.css
 .orig
 node_modules/*
+*source.js
+*resources.js
+*source.css
