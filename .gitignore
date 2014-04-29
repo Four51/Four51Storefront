@@ -7,3 +7,6 @@ config/Four51APIAppName.js
 *source.css
 .orig
 node_modules/*
+*source.js
+*resources.js
+*source.css
