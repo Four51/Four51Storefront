@@ -27,6 +27,7 @@
                 <div class="col-sm-1 hidden-xs"></div>
                 <div class="col-sm-2 hidden-xs">{{'Name' | r}}</div>
                 <div class="col-sm-2 hidden-xs">{{'Type' | r}}</div>
+                <div class="col-sm-2 hidden-xs">{{'Download' | r}}</div>
             </div>
             <div class="row" ng-repeat="report in Reports | filter:searchTerm">
                 <div class="col-sm-1">
@@ -39,6 +40,10 @@
                 <div class="col-sm-2">
                     <span class="visible-xs panel-table-heading-xs text-info">{{'Type' | r}}</span>
                     {{report.Type}}
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-sm btn-info" ng-click="queueReport(report)">{{'Queue' | r}}</button>
+                    <button type="button" class="btn btn-sm btn-info" ng-click="downloadReport(report)">{{'Download' | r}}</button>
                 </div>
              </div>
         </div>

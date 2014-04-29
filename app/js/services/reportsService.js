@@ -73,10 +73,23 @@ four51.app.factory('Report', ['$resource','$q', '$451', 'Error', function($resou
 		);
 	}
 
+	var _download = function(id, success, error) {
+		$resource($451.api('downloadreport/:id'), { id: '@id' }).get({ id: id }).$promise.then(
+			function(data) {
+				_then(success, data);
+			},
+			function(ex) {
+				if (error)
+					error(Error.format(ex));
+			}
+		);
+	}
+
 	return {
 		query: _query,
 		save: _save,
 		get: _get,
-		delete: _delete
+		delete: _delete,
+		download: _download
 	};
 }]);
