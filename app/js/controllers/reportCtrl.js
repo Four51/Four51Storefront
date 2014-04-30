@@ -27,7 +27,7 @@ function($scope, $routeParams, $451, Report) {
 				$scope.displayLoadingIndicator = false;
 			}
 		);
-	}
+	};
 	$scope.downloadReport = function(report) {
 		$scope.displayDownloadIndicator = true;
 		Report.download(report.ID,
@@ -39,7 +39,7 @@ function($scope, $routeParams, $451, Report) {
 				$scope.displayDownloadIndicator = false;
 			}
 		);
-	}
+	};
 
 	$scope.getDownload = function() {
 		window.location = $scope.report.DownloadUrl;
