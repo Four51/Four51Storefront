@@ -28,4 +28,20 @@ function($scope, $routeParams, $451, Report) {
 			}
 		);
 	}
+	$scope.downloadReport = function(report) {
+		$scope.displayDownloadIndicator = true;
+		Report.download(report.ID,
+			function(data) {
+				$scope.report = data;
+			},
+			function(ex) {
+				$scope.actionMessage = ex.Message;
+				$scope.displayDownloadIndicator = false;
+			}
+		);
+	}
+
+	$scope.getDownload = function() {
+		window.location = $scope.report.DownloadUrl;
+	}
 }]);

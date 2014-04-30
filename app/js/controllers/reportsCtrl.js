@@ -22,22 +22,4 @@ function ($scope, $location, $451, Report) {
 			}
 		);
 	};
-
-	$scope.queueReport = function(report) {
-		$scope.displayDownloadIndicator = true;
-		Report.download(report.ID,
-			function(data) {
-				report = data;
-			},
-			function(ex) {
-				$scope.actionMessage = ex.Message;
-				$scope.displayDownloadIndicator = false;
-			}
-		);
-	}
-
-	$scope.downloadReport = function(report) {
-		console.log('Downloading: ' + report.DownloadUrl);
-		window.location = "https://core.four51.com/UI/Report.csv";
-	}
 }]);
