@@ -28,7 +28,7 @@
                         {{'Quantity Available' | r}}: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
                     </p>
                 </div>
-                <div class="btn btn-default btn-block">{{'View' | r}} {{'Product' | r}}</div>
+                <a class="btn btn-default btn-block" href="product/{{LineItem.Product.InteropID}}">{{'View' | r}} {{'Product' | r}}</a>
             </div>
         </div>
     </div>

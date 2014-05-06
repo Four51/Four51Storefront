@@ -1,86 +1,71 @@
-<section class="lineitem-report-view">
-    <div class="panel panel-default">
+<div class="panel-body">
+    <div class="col-sm-6 view-form-icon">
         <div class="panel-heading">
-            <h3 class="panel-title panel-primary">{{'Line Item' | r}} {{'Report' | r}}</h3>
+            <h3 class="panel-title panel-primary">{{'Conditions' | r}}</h3>
+        </div>
+        <div>
+            <label ng-show="report.OrderID">{{'Order' | r}} {{'ID' | r}}</label>
+            <input class="form-control" type="text" ng-model="report.ExternalID" placeholder="Order ID" />
+            <i class="fa fa-external-link"></i>
+        </div>
+        <div>
+            <label>{{'Order' | r}} {{'Type' | r}}</label>
+            <select class="form-control" ng-options="key as value for (key,value) in report.OrderTypeOptions" ng-model="report.OrderType" />
+            <i class="fa fa-dot-circle-o"></i>
+        </div>
+        <div>
+            <label>{{'Order' | r}} {{'Status' | r}}</label>
+            <select class="form-control" ng-options="status for status in report.OrderStatusOptions" ng-model="report.OrderStatus" />
+            <i class="fa fa-dot-circle-o"></i>
+        </div>
+        <div>
+            <label>{{'Payment' | r}} {{'Method' | r}}</label>
+            <select class="form-control" ng-options="pm for pm in report.PaymentMethodOptions" ng-model="report.PaymentMethod" />
+            <i class="fa fa-dot-circle-o"></i>
+        </div>
+        <div>
+            <label>{{'Categories' | r}}</label>
+            <select class="form-control" ng-options="cat for cat in report.Categories" ng-model="report.Category" />
+            <i class="fa fa-dot-circle-o"></i>
+        </div>
+        <div>
+            <label ng-show="report.Product">{{'Product' | r}}</label>
+            <input class="form-control" type="text" ng-model="report.Product" placeholder="Product" />
+            <i class="fa fa-tags"></i>
+        </div>
+        <div>
+            <label>{{'Cost Center' | r}}</label>
+            <select class="form-control" ng-options="center for center in report.CostCenters" ng-model="report.CostCenter" />
+            <i class="fa fa-dot-circle-o"></i>
+        </div>
+        <div>
+            <label>{{'User' | r}}</label>
+            <select class="form-control" ng-options="u for u in report.Users" ng-model="report.User" />
+            <i class="fa fa-users"></i>
+        </div>
+        <div>
+            <label>{{'Ship' | r}} {{'Addresses' | r}}</label>
+            <select class="form-control" ng-options="s for s in report.ShipAddresses" ng-model="report.ShipAddress" />
+            <i class="fa fa-truck"></i>
+        </div>
+        <div class="panel-heading">
+            <h3 class="panel-title panel-primary">{{'Subtotal' | r}}</h3>
+        </div>
+        <div>
+            <label>Column</label>
+            <select class="form-control" ng-options="key as value for (key,value) in report.SubtotalOptions" ng-model="report.Subtotal" />
+            <i class="fa fa-tasks"></i>
+        </div>
+        <daterange ng-options="report.TimeSpanOptions" fromdate="report.FromDate" todate="report.ToDate" />
+    </div>
+    <div class="col-sm-6">
+        <div class="panel-heading">
+            <h3 class="panel-title panel-primary">Display Columns</h3>
+        </div>
+        <div>
+            <label>&nbsp;</label>
+            <select multiple size="35" class="form-control" ng-options="key as value for (key,value) in report.ColumnOptions" ng-model="report.SelectedColumns" />
+            <i class="fa fa-columns"></i>
         </div>
     </div>
-    <form name="reportConditions">
-        <div class="panel-body">
-        <div class="col-sm-6 view-form-icon">
-            <div class="panel-heading">
-                <h3 class="panel-title panel-primary">{{'Conditions' | r}}</h3>
-            </div>
-            <div>
-                <label ng-show="report.OrderID">{{'Order' | r}} {{'ID' | r}}</label>
-                <input class="form-control" type="text" ng-model="report.OrderID" placeholder="Order ID" />
-                <i class="fa fa-external-link"></i>
-            </div>
-            <div>
-                <label>{{'Order' | r}} {{'Type' | r}}</label>
-                <select class="form-control" ng-options="key as value for (key,value) in report.OrderTypeOptions" ng-model="report.OrderType" />
-                <i class="fa fa-dot-circle-o"></i>
-            </div>
-            <div>
-                <label>{{'Order' | r}} {{'Status' | r}}</label>
-                <select class="form-control" ng-options="status for status in report.OrderStatusOptions" ng-model="report.OrderStatus" />
-                <i class="fa fa-dot-circle-o"></i>
-            </div>
-            <div>
-                <label>{{'Payment' | r}} {{'Method' | r}}</label>
-                <select class="form-control" ng-options="pm for pm in report.PaymentMethodOptions" ng-model="report.PaymentMethod" />
-                <i class="fa fa-dot-circle-o"></i>
-            </div>
-            <div>
-                <label>{{'Categories' | r}}</label>
-                <select class="form-control" ng-options="cat for cat in report.Categories" ng-model="report.Category" />
-                <i class="fa fa-dot-circle-o"></i>
-            </div>
-            <div>
-                <label ng-show="report.Product">{{'Product' | r}}</label>
-                <input class="form-control" type="text" ng-model="report.Product" placeholder="Product" />
-                <i class="fa fa-tags"></i>
-            </div>
-            <div>
-                <label>{{'Cost Center' | r}}</label>
-                <select class="form-control" ng-options="center for center in report.CostCenters" ng-model="report.CostCenter" />
-                <i class="fa fa-dot-circle-o"></i>
-            </div>
-            <div>
-                <label>{{'User' | r}}</label>
-                <select class="form-control" ng-options="u for u in report.Users" ng-model="report.User" />
-                <i class="fa fa-users"></i>
-            </div>
-            <div>
-                <label>{{'Ship' | r}} {{'Addresses' | r}}</label>
-                <select class="form-control" ng-options="s for s in report.ShipAddresses" ng-model="report.ShipAddress" />
-                <i class="fa fa-truck"></i>
-            </div>
-            <div class="panel-heading">
-                <h3 class="panel-title panel-primary">{{'Subtotal' | r}}</h3>
-            </div>
-            <div>
-                <label>Column</label>
-                <select class="form-control" ng-options="key as value for (key,value) in report.SubtotalOptions" ng-model="report.Subtotal" />
-                <i class="fa fa-tasks"></i>
-            </div>
-            <daterange ng-options="report.TimeSpanOptions" fromdate="report.FromDate" todate="report.ToDate" />
-        </div>
-        <div class="col-sm-6">
-            <div class="panel-heading">
-                <h3 class="panel-title panel-primary">Display Columns</h3>
-            </div>
-            <div>
-                <label>&nbsp;</label>
-                <select multiple size="{{report.ColumnOptionsLength}}" class="form-control" ng-options="key as value for (key,value) in report.ColumnOptions" ng-model="report.Columns" />
-                <i class="fa fa-columns"></i>
-            </div>
-        </div>
-        </div>
-        <div class="panel-footer">
-            <div class="btn-group">
-                <button type="button" class="btn btn-info">{{'Preview' | r}}</button>
-                <button type="button" class="btn btn-primary">{{'Save' | r}}</button>
-            </div>
-        </div>
-    </form>
-</section>
+</div>
