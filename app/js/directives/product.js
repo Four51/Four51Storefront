@@ -1,3 +1,21 @@
+four51.app.directive('productlistview', function() {
+    var obj = {
+        restrict: "E",
+        templateUrl:'partials/productListView.html'
+    };
+
+    return obj;
+});
+
+four51.app.directive('categorylistview', function() {
+    var obj = {
+        restrict: "E",
+        templateUrl:'partials/categoryListView.html'
+    };
+
+    return obj;
+});
+
 four51.app.directive('shortproductview', function() {
 	var obj = {
 		restrict: "E",
@@ -10,6 +28,20 @@ four51.app.directive('shortproductview', function() {
 	};
 
 	return obj;
+});
+
+four51.app.directive('shortproductviewinline', function() {
+    var obj = {
+        restrict: "E",
+        scope: {
+            p: '=',
+            user: '='
+        },
+        templateUrl:'partials/shortProductViewInline.html',
+        controller: 'shortProductViewCtrl'
+    };
+
+    return obj;
 });
 
 four51.app.directive('relatedproducts', function() {

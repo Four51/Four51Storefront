@@ -1,0 +1,74 @@
+<!--default-->
+<div class="panel panel-default" ng-show="products">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            {{'Products' | r}}
+        </h3>
+    </div>
+    <div class="panel-product-list" ng-if="currentCategory.InteropID">
+
+        <div ng-show="products" class="alert alert-info text-center hidden-sm hidden-md hidden-lg">
+            <i class="fa fa-arrow-circle-o-left"></i>
+            Swipe product left for more info
+        </div>
+        <nav class="nav">
+            <ul>
+                <li id="451_lst_prod" ng-repeat="product in products">
+                    <div class="well">
+                        <shortproductview p="product" user="user" />
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!--end default-->
+
+<!--inline-->
+<!--<div class="panel panel-default" ng-show="products">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            {{'Products' | r}}
+        </h3>
+    </div>
+    <div class="panel-product-list" ng-if="currentCategory.InteropID">
+        <nav class="nav">
+            <ul>
+                <li class="inline" id="451_lst_prod" ng-repeat="product in products">
+                    <div class="well">
+                        <shortproductviewinline p="product" user="user" />
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>-->
+<!--end inline-->
+
+<!--no panels-->
+<!--<div class="panel-product-list no-panels" ng-if="currentCategory.InteropID" ng-show="products">
+    <nav class="nav">
+        <ul>
+            <li id="451_lst_prod" ng-repeat="product in products">
+                <div class="well">
+                    <shortproductview p="product" user="user" />
+                </div>
+            </li>
+        </ul>
+    </nav>
+</div>-->
+<!--end no panels-->
+
+<!--no panels inline-->
+<!--<div class="panel-product-list no-panels" ng-if="currentCategory.InteropID" ng-show="products">
+    <nav class="nav">
+        <ul>
+            <li class="inline" id="451_lst_prod" ng-repeat="product in products">
+                <div class="well">
+                    <shortproductviewinline p="product" user="user" />
+                </div>
+            </li>
+        </ul>
+    </nav>
+</div>-->
+<!--end no panels inline-->
