@@ -1,0 +1,9 @@
+<div class="view-form-icon">
+    <label>{{customfield.Label || customfield.Name | r}}</label>
+    <div ng-class="{'input-group':(customfield.Prefix || customfield.Suffix)}">
+        <span class="input-group-addon" ng-if="customfield.Prefix">{{customfield.Prefix | r}}</span>
+        <input datepicker-popup="MM/dd/yy" class="form-control" placeholder="{{customfield.Label || customfield.Name | r}}" type="date" ng-required="customfield.Required" ng-model="customfield.Value"/>
+        <span class="input-group-addon" ng-if="customfield.Suffix">{{customfield.Suffix | r}}</span>
+        <i class="fa fa-calendar"></i>
+    </div>
+</div>
