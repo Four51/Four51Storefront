@@ -243,12 +243,16 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 			else{
 				if (p.Type == 'Static' && p.IsVBOSS) {
 					var options = [];
+					var hasAllDefinesAsVariant = true;
 					angular.forEach(p.Specs, function(s) {
-						if (s.DefinesVariant && s.Value) {
-							options.push(s.SelectedOptionID);
+						if (s.DefinesVariant) {
+							if(s.Value)
+								options.push(s.SelectedOptionID);
+							else
+								hasAllDefinesAsVariant = false;
 						}
 					});
-					if (options.length > 0) {
+					if (options.length > 0 && hasAllDefinesAsVariant) {
 						Variant.get({'ProductInteropID': p.InteropID, 'SpecOptionIDs': options},
 							function(v) {
 								callback({product: p, variant: v});

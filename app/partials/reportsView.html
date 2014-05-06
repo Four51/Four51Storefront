@@ -1,4 +1,5 @@
 <section>
+    <loadingindicator ng-show="displayLoadingIndicator" />
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">{{'Saved' | r}} {{'Reports' | r}}</h3>
@@ -23,11 +24,14 @@
         </div>
         <div class="panel-table">
             <div class="row text-info">
+                <div class="col-sm-1 hidden-xs"></div>
                 <div class="col-sm-2 hidden-xs">{{'Name' | r}}</div>
                 <div class="col-sm-2 hidden-xs">{{'Type' | r}}</div>
-                <div class="col-sm-2 hidden-xs"></div>
             </div>
             <div class="row" ng-repeat="report in Reports | filter:searchTerm">
+                <div class="col-sm-1">
+                    <input type="checkbox" ng-model="report.Selected" />
+                </div>
                 <div class="col-sm-2">
                     <span class="visible-xs panel-table-heading-xs text-info">{{'Name' | r}}</span>
                     <a ng-href="{{'report/' + report.ID}}">{{report.Name}}</a>
@@ -36,11 +40,15 @@
                     <span class="visible-xs panel-table-heading-xs text-info">{{'Type' | r}}</span>
                     {{report.Type}}
                 </div>
-                <div class="col-sm-2">
-                    <span class="visible-xs heading-xs text-info"></span>
-                    <a ng-href="{{'report/' + report.ID}}">{{'Preview' | r}}</a>
-                </div>
              </div>
+        </div>
+        <div class="navbar-fixed-bottom">
+            <div class="view-response-message alert-success text-center" alert-show="actionMessage">
+                <p>{{actionMessage | r}}</p>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-disabled="(Reports | filter:searchTerm | filter:{Selected:true}).length == 0">{{'Delete' | r}} {{'Selected' | r}}</button>
         </div>
     </div>
 </section>

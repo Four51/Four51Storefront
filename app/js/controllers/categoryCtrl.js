@@ -27,5 +27,11 @@ function ($routeParams, $sce, $scope, $451, Category, Product, Nav) {
     // panel-nav
     $scope.navStatus = Nav.status;
     $scope.toggleNav = Nav.toggle;
-
+	$scope.$watch('sort', function(s) {
+		if (!s) return;
+		(s.indexOf('Price') > -1) ?
+			$scope.sorter = 'StandardPriceSchedule.PriceBreaks[0].Price' :
+			$scope.sorter = s.replace(' DESC', "");
+		$scope.direction = s.indexOf('DESC') > -1;
+	});
 }]);

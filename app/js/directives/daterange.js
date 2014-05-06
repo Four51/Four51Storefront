@@ -39,9 +39,9 @@ four51.app.directive('daterange', function() {
 				},
 				'LastYear': function() {
 					var date = new Date();
-					var year = date.getYear();
-					date.setYear(year - 1);
-					$scope.fromdate = date;
+					var month = date.getMonth();
+					date.setMonth(month - 12);
+					$scope.fromdate = new Date(date);
 					$scope.todate = new Date();
 				}
 			};

@@ -6056,7 +6056,7 @@ select {
   position: static;
   display: block;
 }
-input,
+input:not([type="checkbox"]),
 textarea,
 select,
 button {
@@ -6330,7 +6330,6 @@ button::-moz-focus-inner {
 .navbar .container .navbar-nav.pull-left li ul li a,
 .navbar .container-view .navbar-nav.pull-left li ul li a {
   padding: 10px 20px;
-  color: #333 !important;
 }
 .navbar .container .navbar-nav.pull-right li a,
 .navbar .container-view .navbar-nav.pull-right li a {
@@ -6989,7 +6988,7 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-category-list ul li .well {
   margin: 2px;
   padding: 0;
-  min-height: 335px;
+  min-height: 245px;
 }
 .panel-category-list ul li a {
   padding: .75em;
