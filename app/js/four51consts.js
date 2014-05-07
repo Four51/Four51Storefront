@@ -1,1 +1,1 @@
-four51.app.constant("AppConst",{});
+four51.app.constant("AppConst",{"debug":true});
