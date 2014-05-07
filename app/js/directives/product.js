@@ -44,6 +44,34 @@ four51.app.directive('shortproductviewinline', function() {
     return obj;
 });
 
+four51.app.directive('shortproductviewminimal', function() {
+    var obj = {
+        restrict: "E",
+        scope: {
+            p: '=',
+            user: '='
+        },
+        templateUrl:'partials/shortProductViewMinimal.html',
+        controller: 'shortProductViewCtrl'
+    };
+
+    return obj;
+});
+
+four51.app.directive('shortproductviewgallery', function() {
+    var obj = {
+        restrict: "E",
+        scope: {
+            p: '=',
+            user: '='
+        },
+        templateUrl:'partials/shortProductViewGallery.html',
+        controller: 'shortProductViewCtrl'
+    };
+
+    return obj;
+});
+
 four51.app.directive('relatedproducts', function() {
 	var obj = {
 		scope: {

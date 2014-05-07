@@ -7006,6 +7006,9 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-category-list ul li a .empty i.fa {
   padding-top: 92.5px;
 }
+.panel-product-list nav .row.view-form-icon {
+  margin-bottom: 10px;
+}
 .panel-product-list ul li {
   width: 100%;
 }
@@ -7035,12 +7038,28 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-product-list ul li.inline .panel-footer > div:first-of-type {
   margin-bottom: 5px;
 }
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   .panel-product-list ul li.inline .panel-footer > div:first-of-type {
     min-height: 150px;
     max-height: 150px;
     overflow-y: scroll;
   }
+}
+.panel-product-list ul li.minimal .panel-body > div:first-of-type,
+.panel-product-list ul li.minimal .panel-category-list > div:first-of-type,
+.panel-product-list ul li.minimal .panel-product-list:not(.no-panels) > div:first-of-type,
+.panel-product-list ul li.minimal .panel-lineitem > div:first-of-type,
+.panel-product-list ul li.minimal .panel-order-history > div:first-of-type,
+.panel-product-list ul li.minimal .panel-order-shipping-multiple > div:first-of-type {
+  text-align: center;
+}
+.panel-product-list ul li.minimal .panel-body > div:first-of-type > p:first-of-type,
+.panel-product-list ul li.minimal .panel-category-list > div:first-of-type > p:first-of-type,
+.panel-product-list ul li.minimal .panel-product-list:not(.no-panels) > div:first-of-type > p:first-of-type,
+.panel-product-list ul li.minimal .panel-lineitem > div:first-of-type > p:first-of-type,
+.panel-product-list ul li.minimal .panel-order-history > div:first-of-type > p:first-of-type,
+.panel-product-list ul li.minimal .panel-order-shipping-multiple > div:first-of-type > p:first-of-type {
+  display: none;
 }
 .panel-product-list ul li a {
   padding: .75em;
@@ -7061,6 +7080,47 @@ select.ng-invalid:invalid:invalid:focus {
   bottom: 0;
   z-index: 1;
   padding: 10px;
+}
+.panel-product-list ul li.gallery a img {
+  margin: 0 auto;
+}
+.panel-product-list ul li.gallery .product-hover {
+  z-index: 3;
+  opacity: 0;
+  color: #fff;
+  position: absolute;
+  min-height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(12, 42, 58, 0.8);
+  padding: 10px;
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  transition: all 200ms;
+}
+.panel-product-list ul li.gallery .product-hover h3 {
+  margin: 0;
+}
+.panel-product-list ul li.gallery .product-hover > div:first-of-type {
+  position: absolute;
+  top: 35px;
+  bottom: 10px;
+  margin-top: 10px;
+  padding: 10px 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  left: 0px;
+  right: 0px;
+  overflow-y: scroll;
+}
+.panel-product-list ul li.gallery:hover .product-hover {
+  opacity: 1;
+  top: -45px;
+  bottom: -45px;
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  transition: all 200ms;
 }
 .panel-product-list .well {
   margin: 2px;
