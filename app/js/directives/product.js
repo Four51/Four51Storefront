@@ -23,7 +23,7 @@ four51.app.directive('shortproductview', function() {
 			p: '=',
             user: '='
 		},
-		templateUrl:'partials/shortProductView.html',
+		templateUrl:'partials/controls/shortProductView.html',
 		controller: 'shortProductViewCtrl'
 	};
 
@@ -37,7 +37,7 @@ four51.app.directive('shortproductviewinline', function() {
             p: '=',
             user: '='
         },
-        templateUrl:'partials/shortProductViewInline.html',
+        templateUrl:'partials/controls/shortProductViewInline.html',
         controller: 'shortProductViewCtrl'
     };
 
@@ -51,7 +51,7 @@ four51.app.directive('shortproductviewminimal', function() {
             p: '=',
             user: '='
         },
-        templateUrl:'partials/shortProductViewMinimal.html',
+        templateUrl:'partials/controls/shortProductViewMinimal.html',
         controller: 'shortProductViewCtrl'
     };
 
@@ -65,7 +65,7 @@ four51.app.directive('shortproductviewgallery', function() {
             p: '=',
             user: '='
         },
-        templateUrl:'partials/shortProductViewGallery.html',
+        templateUrl:'partials/controls/shortProductViewGallery.html',
         controller: 'shortProductViewCtrl'
     };
 
