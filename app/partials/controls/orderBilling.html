@@ -7,6 +7,9 @@
         </h3>
     </div>
     <div ng-show="checkOutSection == 'billing'" class="panel-body">
+        <div>
+            <billingmessage />
+        </div>
         <div ng-show="billaddressform || (addresses | filter:{IsBilling:true}).length == 0 && user.Permissions.contains('CreateBillToAddress')">
             <addressinput address='billaddress' user='user'></addressinput>
         </div>
