@@ -1,6 +1,9 @@
 <section>
     <loadingindicator ng-show="loadingIndicator" title="Please wait while we fetch your order"></loadingindicator>
     <div class="hidden-print">
+        <div>
+            <orderacknowledgemessage ng-show="order.recent" />
+        </div>
         <nav class="nav">
             <ul>
                 <li><span class="text-primary">{{order.Type}} {{'Order' | r}}<span ng-show="order.ExternalID"> {{'ID' | r}}: </span>{{order.ExternalID}}</span></li>

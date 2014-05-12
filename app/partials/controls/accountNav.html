@@ -1,7 +1,8 @@
 <nav class="nav visible-sm visible-xs">
     <span class="btn-group">
-        <button class="btn btn-default" ng-class="{'active': isActive('addresses')}" redirect="/addresses">{{'Addresses' | r}}</button>
-        <button class="btn btn-default" ng-class="{'active': isActive('message')}" redirect="/message">{{'Messages' | r}}</button>
+        <button class="btn btn-default" ng-show="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" ng-class="{'active': isActive('addresses')}" redirect="/addresses">{{'Addresses' | r}}</button>
+        <button class="btn btn-default" ng-show="user.Permissions.contains('ViewMessaging')" ng-class="{'active': isActive('message')}" redirect="/message">{{'Messages' | r}}</button>
+        <button class="btn btn-default" ng-show="user.Permissions.contains('ViewContactUs')" ng-class="{'active': isActive('contactus')}" redirect="/contactus">{{'Contact Us' | r}}</button>
         <a ng-if="AppConst.debug" href="#" class="btn btn-default" ng-click="Clear()"><span>Clear Cache</span></a>
         <button class="btn btn-danger pull-right 451_btn_logout" ng-click="Logout()" ng-if="user.Type=='Customer'"><i class="fa fa-power-off"></i>{{'Log Out' | r}}</button>
     </span>

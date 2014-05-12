@@ -42,3 +42,20 @@ four51.app.directive('ordersummary', ['Order', 'Coupon', function(Order, Coupon)
 	};
 	return obj;
 }]);
+
+four51.app.directive('orderconfirmationmessage', function() {
+	var obj = {
+		restrict: 'E',
+		templateUrl: 'partials/messages/orderConfirmation.html'
+	};
+	return obj;
+});
+
+
+four51.app.directive('orderacknowledgemessage', function() {
+	var obj = {
+		restrict: 'E',
+		templateUrl: 'partials/messages/orderAcknowledgement.html'
+	};
+	return obj;
+});

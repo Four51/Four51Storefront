@@ -5,3 +5,11 @@ four51.app.directive('shortcartview', function() {
     };
     return obj;
 });
+
+four51.app.directive('cartmessage', function() {
+	var obj = {
+		restrict: 'E',
+		templateUrl: 'partials/messages/viewCart.html'
+	};
+	return obj;
+});
