@@ -10,7 +10,7 @@ four51.app.directive('productlistview', function() {
 four51.app.directive('categorylistview', function() {
     var obj = {
         restrict: "E",
-        templateUrl:'partials/CategoryListViews/categoryListDefault.html'
+        templateUrl:'partials/categoryList.html'
     };
 
     return obj;
