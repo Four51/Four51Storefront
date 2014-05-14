@@ -1,4 +1,4 @@
-four51.app.factory('Product', ['$resource', '$451', 'Security', function($resource, $451, Security) {
+four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function($resource, $451, Security, User) {
 	//var _cacheName = '451Cache.Product.' + $451.apiName;
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
@@ -36,6 +36,31 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', function($resour
                 }
             });
         }
+
+		// parse old tokens to retrieve their values
+		angular.forEach(product.Specs, function(spec) {
+			if (spec.DefaultValue && spec.DefaultValue == spec.Value) {
+				var matches = spec.DefaultValue.match(/\[\[(.*?)\]\]/g);
+				if (matches) {
+					User.get(function (user) {
+						angular.forEach(matches, function(token) {
+							var fix = token.replace(/\[/g, '').replace(/\]/g, '');
+							var value = user[fix.replace('UserName', 'Username')] || lookupCustom(user, fix);
+							spec.Value = spec.Value.replace(token, value);
+							spec.DefaultValue = spec.DefaultValue.replace(token, value);
+						});
+					});
+				}
+			}
+		});
+		function lookupCustom(user, token) {
+			var value = '';
+			angular.forEach(user.CustomFields, function(f) {
+				if (f.Name == token)
+					value = f.Value;
+			});
+			return value;
+		}
 	}
 
      var _get = function(param, success) {
