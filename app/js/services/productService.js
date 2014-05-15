@@ -46,7 +46,7 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
 						angular.forEach(matches, function(token) {
 							var fix = token.replace(/\[/g, '').replace(/\]/g, '');
 							var value = user[fix.replace('UserName', 'Username')] || lookupCustom(user, fix);
-							spec.Value = spec.Value.replace(token, value);
+							spec.Value = spec.Value.replace(token, value).substr(0, spec.MaxLength);
 							spec.DefaultValue = spec.DefaultValue.replace(token, value);
 						});
 					});
