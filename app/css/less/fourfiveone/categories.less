@@ -3,7 +3,23 @@
 // --------------------------------------------------
 
 .panel-category-list {
-  &:extend(.panel-body all);
+  &.no-panels{
+    margin-bottom: @line-height-computed;
+    margin-left:-@line-height-computed/2;
+    margin-right:-@line-height-computed/2;
+    ul{
+      li{
+        .well {
+          border: 1px solid #ddd;
+          .box-shadow(0 1px 1px rgba(0,0,0,.05));
+          margin:0 @line-height-computed/2 @line-height-computed;
+        }
+      }
+    }
+  }
+  &:not(.no-panels){
+    &:extend(.panel-body all);
+  }
   h3 {
     margin-top: 0;
   }
@@ -16,6 +32,37 @@
         margin: 2px;
         padding: 0;
         min-height: (@fourfiveone-category-image-height + 60%);
+        &.image-bg {
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+          &.rows{
+            margin: 0;
+            border:none;
+          }
+          a {
+            height: (@fourfiveone-category-image-height + 60%);
+            background-color: fade(white, 50);
+            h4 {
+              position: absolute;
+              top: 40%;
+              left: 0;
+              bottom: 40%;
+              right: 0;
+              font-weight: bold;
+              text-shadow: 0 0 5px #FFF;
+            }
+          }
+          &.dark {
+            a {
+              background-color: fade(@brand-primary, 60);
+              h4 {
+                color: #FFF;
+                text-shadow: 0 0 5px @brand-primary;
+              }
+            }
+          }
+        }
       }
       a {
         padding: .75em;
