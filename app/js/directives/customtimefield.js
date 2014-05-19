@@ -5,12 +5,12 @@ four51.app.directive('customtimefield', function() {
 		},
 		restrict: 'E',
 		templateUrl: 'partials/controls/customTimeField.html',
-		controller: function($scope){
+		controller: ['$scope', function($scope){
 			$scope.$watch('customfield', function(c) {
 				if (c && c.Value == "")
 					c.Value = new Date().toISOString();
 			});
-		}
+		}]
 	};
 
 	return obj;

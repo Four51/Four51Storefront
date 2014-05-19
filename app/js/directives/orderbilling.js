@@ -123,3 +123,11 @@ four51.app.directive('orderbilling', ['SpendingAccount', 'Address', function(Spe
 	};
 	return obj;
 }]);
+
+four51.app.directive('billingmessage', function() {
+	var obj = {
+		restrict: 'E',
+		templateUrl: 'partials/messages/billing.html'
+	};
+	return obj;
+});

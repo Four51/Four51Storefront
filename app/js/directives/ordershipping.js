@@ -147,3 +147,11 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'OrderConf
 	};
 	return obj;
 }]);
+
+four51.app.directive('shippingmessage', function() {
+	var obj = {
+		restrict: 'E',
+		templateUrl: 'partials/messages/shipping.html'
+	};
+	return obj;
+});

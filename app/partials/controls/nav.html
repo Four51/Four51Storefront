@@ -60,6 +60,11 @@
                                     {{'Messages' | r}}
                                 </a>
                             </li>
+                            <li id="451qa_mesg_link" ng-show="user.Permissions.contains('ViewContactUs')" class="contactus">
+                                <a href="contactus">
+                                    {{'Contact Us' | r}}
+                                </a>
+                            </li>
                             <li class="divider"></li>
                             <li ng-show="user.Type!='TempCustomer'" class="logout">
                                 <a href="#"  class="451_btn_logout" ng-click="Logout()">

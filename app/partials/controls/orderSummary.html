@@ -7,6 +7,7 @@
     <div class="panel-body">
         <loadingindicator ng-show="couponLoadingIndicator" title="Please wait while we verify and apply your promotion code" />
         <loadingindicator ng-show="couponRemoveIndicator" title="Please wait while we remove your promotion code" />
+        <orderconfirmationmessage />
         <p>
             <span class="text-info">{{'Items' | r}}</span>
             <span class="pull-right">{{currentOrder.LineItems.length}}</span>
@@ -49,7 +50,7 @@
             <strong>Total</strong>
             <span class="text-success pull-right"><strong>{{currentOrder.Total | currency}}</strong></span>
         </h4>
-        <p class="text-info text-left" ng-if="user.Company.TaxMethod != 'NoTax' || !(user.Permissions.contains('HidePricing'))">{{'Shipping' | r}}, handling and tax may be added to this subtotal.</p>
+        <p class="text-info text-left" ng-if="user.Company.TaxMethod != 'NoTax' && !user.Permissions.contains('HidePricing')">{{'Shipping' | r}}, handling and tax may be added to this subtotal.</p>
     </div>
     <div class="panel-footer">
         <div class="view-form-icon" ng-show="user.Permissions.contains('SendOrderNotificationToOthers') && !(cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid)" >
