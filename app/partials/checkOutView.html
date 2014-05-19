@@ -35,10 +35,10 @@
                             <li ng-if="cart_billing.billingAddress.$invalid">Please choose a {{'Billing' | rl}} {{'Address' | rl}}</li>
                             <li ng-if="cart_billing.$error.paymentMethod">Please choose a valid {{'Payment' | rl}} {{'Method' | rl}}</li>
                             <li ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
-                                You're site is mis-configured. You do not have permission to create a billing address nor do you have any addresses assigned to you. Please contact your support representative.
+                                You have not been granted permission to create a Billing address, and no Billing addresses have been assigned to you. Therefore, you are not allowed to place this order at this time
                             </li>
                             <li ng-if="!user.Permissions.contains('CreateShipToAddress') && (addresses | filter:{IsShipping:true}).length == 0">
-                                Your site is mis-configured. You do not have permission to create a shipping address nor do you have any addresses assigned to you. Please contact your support representative.
+                                You have not been granted permission to create a Shipping address, and no Shipping addresses have been assigned to you. Therefore, you are not allowed to place this order at this time
                             </li>
                         </ul>
                     </li>
