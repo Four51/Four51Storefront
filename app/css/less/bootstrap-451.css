@@ -5035,14 +5035,12 @@ a.list-group-item-danger.active:focus {
 }
 .panel-default,
 .panel-search,
-.panel-nav,
 .panel-category-list ul li a .empty,
 .panel-order {
   border-color: #dddddd;
 }
 .panel-default > .panel-heading,
 .panel-search > .panel-heading,
-.panel-nav > .panel-heading,
 .panel-category-list ul li a .empty > .panel-heading,
 .panel-order > .panel-heading {
   color: #333333;
@@ -5051,7 +5049,6 @@ a.list-group-item-danger.active:focus {
 }
 .panel-default > .panel-heading + .panel-collapse .panel-body,
 .panel-search > .panel-heading + .panel-collapse .panel-body,
-.panel-nav > .panel-heading + .panel-collapse .panel-body,
 .panel-default > .panel-heading + .panel-collapse .panel-category-list:not(.no-panels),
 .panel-category-list ul li a .empty > .panel-heading + .panel-collapse .panel-body,
 .panel-default > .panel-heading + .panel-collapse .panel-product-list:not(.no-panels),
@@ -5063,7 +5060,6 @@ a.list-group-item-danger.active:focus {
 }
 .panel-default > .panel-footer + .panel-collapse .panel-body,
 .panel-search > .panel-footer + .panel-collapse .panel-body,
-.panel-nav > .panel-footer + .panel-collapse .panel-body,
 .panel-default > .panel-footer + .panel-collapse .panel-category-list:not(.no-panels),
 .panel-category-list ul li a .empty > .panel-footer + .panel-collapse .panel-body,
 .panel-default > .panel-footer + .panel-collapse .panel-product-list:not(.no-panels),
@@ -6476,11 +6472,8 @@ button::-moz-focus-inner {
 .panel.panel-primary .panel-heading {
   margin-top: 0;
 }
-.panel.panel-primary .panel-footer {
-  background-color: transparent;
-}
 .panel .panel-heading {
-  margin-top: 2px;
+  border-top: 2px solid #ffffff;
   padding: 0;
 }
 .panel .panel-heading .panel-title {
