@@ -4819,7 +4819,7 @@ a.list-group-item-danger.active:focus {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 .panel-body,
-.panel-category-list,
+.panel-category-list:not(.no-panels),
 .panel-product-list:not(.no-panels),
 .panel-lineitem,
 .panel-order-history,
@@ -4928,8 +4928,8 @@ a.list-group-item-danger.active:focus {
 }
 .panel > .panel-body + .table,
 .panel > .panel-body + .table-responsive,
-.panel > .panel-category-list + .table,
-.panel > .panel-category-list + .table-responsive,
+.panel > .panel-category-list:not(.no-panels) + .table,
+.panel > .panel-category-list:not(.no-panels) + .table-responsive,
 .panel > .panel-product-list:not(.no-panels) + .table,
 .panel > .panel-product-list:not(.no-panels) + .table-responsive,
 .panel > .panel-lineitem + .table,
@@ -5015,7 +5015,7 @@ a.list-group-item-danger.active:focus {
   border-bottom: 0;
 }
 .panel-group .panel-heading + .panel-collapse .panel-body,
-.panel-group .panel-heading + .panel-collapse .panel-category-list,
+.panel-group .panel-heading + .panel-collapse .panel-category-list:not(.no-panels),
 .panel-group .panel-heading + .panel-collapse .panel-product-list:not(.no-panels),
 .panel-group .panel-heading + .panel-collapse .panel-lineitem,
 .panel-group .panel-heading + .panel-collapse .panel-order-history,
@@ -5026,7 +5026,7 @@ a.list-group-item-danger.active:focus {
   border-top: 0;
 }
 .panel-group .panel-footer + .panel-collapse .panel-body,
-.panel-group .panel-footer + .panel-collapse .panel-category-list,
+.panel-group .panel-footer + .panel-collapse .panel-category-list:not(.no-panels),
 .panel-group .panel-footer + .panel-collapse .panel-product-list:not(.no-panels),
 .panel-group .panel-footer + .panel-collapse .panel-lineitem,
 .panel-group .panel-footer + .panel-collapse .panel-order-history,
@@ -5052,7 +5052,7 @@ a.list-group-item-danger.active:focus {
 .panel-default > .panel-heading + .panel-collapse .panel-body,
 .panel-search > .panel-heading + .panel-collapse .panel-body,
 .panel-nav > .panel-heading + .panel-collapse .panel-body,
-.panel-default > .panel-heading + .panel-collapse .panel-category-list,
+.panel-default > .panel-heading + .panel-collapse .panel-category-list:not(.no-panels),
 .panel-category-list ul li a .empty > .panel-heading + .panel-collapse .panel-body,
 .panel-default > .panel-heading + .panel-collapse .panel-product-list:not(.no-panels),
 .panel-default > .panel-heading + .panel-collapse .panel-lineitem,
@@ -5064,7 +5064,7 @@ a.list-group-item-danger.active:focus {
 .panel-default > .panel-footer + .panel-collapse .panel-body,
 .panel-search > .panel-footer + .panel-collapse .panel-body,
 .panel-nav > .panel-footer + .panel-collapse .panel-body,
-.panel-default > .panel-footer + .panel-collapse .panel-category-list,
+.panel-default > .panel-footer + .panel-collapse .panel-category-list:not(.no-panels),
 .panel-category-list ul li a .empty > .panel-footer + .panel-collapse .panel-body,
 .panel-default > .panel-footer + .panel-collapse .panel-product-list:not(.no-panels),
 .panel-default > .panel-footer + .panel-collapse .panel-lineitem,
@@ -5082,7 +5082,7 @@ a.list-group-item-danger.active:focus {
   border-color: #cccccc;
 }
 .panel-primary > .panel-heading + .panel-collapse .panel-body,
-.panel-primary > .panel-heading + .panel-collapse .panel-category-list,
+.panel-primary > .panel-heading + .panel-collapse .panel-category-list:not(.no-panels),
 .panel-primary > .panel-heading + .panel-collapse .panel-product-list:not(.no-panels),
 .panel-primary > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-primary > .panel-heading + .panel-collapse .panel-order-history,
@@ -5090,7 +5090,7 @@ a.list-group-item-danger.active:focus {
   border-top-color: #cccccc;
 }
 .panel-primary > .panel-footer + .panel-collapse .panel-body,
-.panel-primary > .panel-footer + .panel-collapse .panel-category-list,
+.panel-primary > .panel-footer + .panel-collapse .panel-category-list:not(.no-panels),
 .panel-primary > .panel-footer + .panel-collapse .panel-product-list:not(.no-panels),
 .panel-primary > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-primary > .panel-footer + .panel-collapse .panel-order-history,
@@ -5106,7 +5106,7 @@ a.list-group-item-danger.active:focus {
   border-color: #d6e9c6;
 }
 .panel-success > .panel-heading + .panel-collapse .panel-body,
-.panel-success > .panel-heading + .panel-collapse .panel-category-list,
+.panel-success > .panel-heading + .panel-collapse .panel-category-list:not(.no-panels),
 .panel-success > .panel-heading + .panel-collapse .panel-product-list:not(.no-panels),
 .panel-success > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-success > .panel-heading + .panel-collapse .panel-order-history,
@@ -5114,7 +5114,7 @@ a.list-group-item-danger.active:focus {
   border-top-color: #d6e9c6;
 }
 .panel-success > .panel-footer + .panel-collapse .panel-body,
-.panel-success > .panel-footer + .panel-collapse .panel-category-list,
+.panel-success > .panel-footer + .panel-collapse .panel-category-list:not(.no-panels),
 .panel-success > .panel-footer + .panel-collapse .panel-product-list:not(.no-panels),
 .panel-success > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-success > .panel-footer + .panel-collapse .panel-order-history,
@@ -5130,7 +5130,7 @@ a.list-group-item-danger.active:focus {
   border-color: #bce8f1;
 }
 .panel-info > .panel-heading + .panel-collapse .panel-body,
-.panel-info > .panel-heading + .panel-collapse .panel-category-list,
+.panel-info > .panel-heading + .panel-collapse .panel-category-list:not(.no-panels),
 .panel-info > .panel-heading + .panel-collapse .panel-product-list:not(.no-panels),
 .panel-info > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-info > .panel-heading + .panel-collapse .panel-order-history,
@@ -5138,7 +5138,7 @@ a.list-group-item-danger.active:focus {
   border-top-color: #bce8f1;
 }
 .panel-info > .panel-footer + .panel-collapse .panel-body,
-.panel-info > .panel-footer + .panel-collapse .panel-category-list,
+.panel-info > .panel-footer + .panel-collapse .panel-category-list:not(.no-panels),
 .panel-info > .panel-footer + .panel-collapse .panel-product-list:not(.no-panels),
 .panel-info > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-info > .panel-footer + .panel-collapse .panel-order-history,
@@ -5154,7 +5154,7 @@ a.list-group-item-danger.active:focus {
   border-color: #faebcc;
 }
 .panel-warning > .panel-heading + .panel-collapse .panel-body,
-.panel-warning > .panel-heading + .panel-collapse .panel-category-list,
+.panel-warning > .panel-heading + .panel-collapse .panel-category-list:not(.no-panels),
 .panel-warning > .panel-heading + .panel-collapse .panel-product-list:not(.no-panels),
 .panel-warning > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-warning > .panel-heading + .panel-collapse .panel-order-history,
@@ -5162,7 +5162,7 @@ a.list-group-item-danger.active:focus {
   border-top-color: #faebcc;
 }
 .panel-warning > .panel-footer + .panel-collapse .panel-body,
-.panel-warning > .panel-footer + .panel-collapse .panel-category-list,
+.panel-warning > .panel-footer + .panel-collapse .panel-category-list:not(.no-panels),
 .panel-warning > .panel-footer + .panel-collapse .panel-product-list:not(.no-panels),
 .panel-warning > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-warning > .panel-footer + .panel-collapse .panel-order-history,
@@ -5178,7 +5178,7 @@ a.list-group-item-danger.active:focus {
   border-color: #ebccd1;
 }
 .panel-danger > .panel-heading + .panel-collapse .panel-body,
-.panel-danger > .panel-heading + .panel-collapse .panel-category-list,
+.panel-danger > .panel-heading + .panel-collapse .panel-category-list:not(.no-panels),
 .panel-danger > .panel-heading + .panel-collapse .panel-product-list:not(.no-panels),
 .panel-danger > .panel-heading + .panel-collapse .panel-lineitem,
 .panel-danger > .panel-heading + .panel-collapse .panel-order-history,
@@ -5186,7 +5186,7 @@ a.list-group-item-danger.active:focus {
   border-top-color: #ebccd1;
 }
 .panel-danger > .panel-footer + .panel-collapse .panel-body,
-.panel-danger > .panel-footer + .panel-collapse .panel-category-list,
+.panel-danger > .panel-footer + .panel-collapse .panel-category-list:not(.no-panels),
 .panel-danger > .panel-footer + .panel-collapse .panel-product-list:not(.no-panels),
 .panel-danger > .panel-footer + .panel-collapse .panel-lineitem,
 .panel-danger > .panel-footer + .panel-collapse .panel-order-history,
@@ -5792,8 +5792,8 @@ ul:after,
 .container-view:after,
 .navbar .container-view .navbar-nav:before,
 .navbar .container-view .navbar-nav:after,
-.panel-category-list:before,
-.panel-category-list:after,
+.panel-category-list:not(.no-panels):before,
+.panel-category-list:not(.no-panels):after,
 .panel-product-list:not(.no-panels):before,
 .panel-product-list:not(.no-panels):after,
 .panel-lineitem:before,
@@ -5827,7 +5827,7 @@ ul:after,
 .panel-table:after,
 .container-view:after,
 .navbar .container-view .navbar-nav:after,
-.panel-category-list:after,
+.panel-category-list:not(.no-panels):after,
 .panel-product-list:not(.no-panels):after,
 .panel-lineitem:after,
 .panel-order-history:after,
@@ -6491,7 +6491,7 @@ button::-moz-focus-inner {
   text-transform: uppercase;
 }
 .panel .panel-body .panel-footer,
-.panel .panel-category-list .panel-footer,
+.panel .panel-category-list:not(.no-panels) .panel-footer,
 .panel .panel-product-list:not(.no-panels) .panel-footer,
 .panel .panel-lineitem .panel-footer,
 .panel .panel-order-history .panel-footer,
@@ -6979,6 +6979,17 @@ select.ng-invalid:invalid:invalid:focus {
 .dropdown-mega .dropdown-mega .dropdown-menu > ul > li > ul li ul li > a {
   padding-left: 10px;
 }
+.panel-category-list.no-panels {
+  margin-bottom: 20px;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+.panel-category-list.no-panels ul li .well {
+  border: 1px solid #ddd;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  margin: 0 10px 20px;
+}
 .panel-category-list h3 {
   margin-top: 0;
 }
@@ -6989,6 +7000,35 @@ select.ng-invalid:invalid:invalid:focus {
   margin: 2px;
   padding: 0;
   min-height: 245px;
+}
+.panel-category-list ul li .well.image-bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.panel-category-list ul li .well.image-bg.rows {
+  margin: 0;
+  border: none;
+}
+.panel-category-list ul li .well.image-bg a {
+  height: 245px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.panel-category-list ul li .well.image-bg a h4 {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  bottom: 40%;
+  right: 0;
+  font-weight: bold;
+  text-shadow: 0 0 5px #FFF;
+}
+.panel-category-list ul li .well.image-bg.dark a {
+  background-color: rgba(12, 42, 58, 0.6);
+}
+.panel-category-list ul li .well.image-bg.dark a h4 {
+  color: #FFF;
+  text-shadow: 0 0 5px #0c2a3a;
 }
 .panel-category-list ul li a {
   padding: .75em;
@@ -7046,7 +7086,7 @@ select.ng-invalid:invalid:invalid:focus {
   }
 }
 .panel-product-list ul li.minimal .panel-body > div:first-of-type,
-.panel-product-list ul li.minimal .panel-category-list > div:first-of-type,
+.panel-product-list ul li.minimal .panel-category-list:not(.no-panels) > div:first-of-type,
 .panel-product-list ul li.minimal .panel-product-list:not(.no-panels) > div:first-of-type,
 .panel-product-list ul li.minimal .panel-lineitem > div:first-of-type,
 .panel-product-list ul li.minimal .panel-order-history > div:first-of-type,
@@ -7054,7 +7094,7 @@ select.ng-invalid:invalid:invalid:focus {
   text-align: center;
 }
 .panel-product-list ul li.minimal .panel-body > div:first-of-type > p:first-of-type,
-.panel-product-list ul li.minimal .panel-category-list > div:first-of-type > p:first-of-type,
+.panel-product-list ul li.minimal .panel-category-list:not(.no-panels) > div:first-of-type > p:first-of-type,
 .panel-product-list ul li.minimal .panel-product-list:not(.no-panels) > div:first-of-type > p:first-of-type,
 .panel-product-list ul li.minimal .panel-lineitem > div:first-of-type > p:first-of-type,
 .panel-product-list ul li.minimal .panel-order-history > div:first-of-type > p:first-of-type,
@@ -7307,7 +7347,7 @@ select.ng-invalid:invalid:invalid:focus {
   cursor: default;
 }
 .panel-order .panel-body.ng-hide-remove,
-.panel-order .panel-category-list.ng-hide-remove,
+.panel-order .panel-category-list:not(.no-panels).ng-hide-remove,
 .panel-order .panel-product-list:not(.no-panels).ng-hide-remove,
 .panel-order .panel-lineitem.ng-hide-remove,
 .panel-order .panel-order-history.ng-hide-remove,
