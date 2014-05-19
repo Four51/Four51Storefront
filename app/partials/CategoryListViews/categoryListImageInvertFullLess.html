@@ -1,4 +1,4 @@
-<div class="panel-category-list no-panels">
+<div class="panel-category-list no-panels" ng-show="currentCategory.SubCategories.length">
     <loadingindicator ng-show="categoryLoadingIndicator" title="{{'Please wait while we fetch all categories' | r}}" />
     <nav class="nav 451_lbl_subcatlist">
         <ul>
@@ -16,7 +16,7 @@
                             <a ng-href="catalog/{{c.InteropID}}">
                                 <div class="description text-left">
                                     <h5>Description</h5>
-                                    <p ng-bind="c.Description"></p>
+                                    <p ng-bind-html="trusted(c.Description)"></p>
                                 </div>
                             </a>
                         </div>
