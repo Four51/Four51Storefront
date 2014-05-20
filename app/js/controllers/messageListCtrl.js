@@ -1,7 +1,17 @@
 four51.app.controller('MessageListCtrl', ['$scope', 'MessageList', function($scope, MessageList) {
-	MessageList.query(function(list) {
-        $scope.messages = list;
-    });
+	$scope.settings = {
+		currentPage: 1,
+		pageSize: 10
+	};
+
+	function GetList() {
+		$scope.displayLoadingIndicator = true;
+		MessageList.query($scope.settings.currentPage, $scope.settings.pageSize, function (list, count) {
+			$scope.messages = list;
+			$scope.settings.listCount = count;
+			$scope.displayLoadingIndicator = false;
+		});
+	}
 
 	$scope.checkAll = function(event) {
 		angular.forEach($scope.messages, function(msg) {
@@ -12,14 +22,18 @@ four51.app.controller('MessageListCtrl', ['$scope', 'MessageList', function($sco
 	$scope.deleteSelected = function() {
 		$scope.displayLoadingIndicator = true;
 		MessageList.delete($scope.messages, function() {
-			MessageList.query(function(list) {
-				$scope.messages = list;
+			MessageList.query(function(data) {
+				GetList();
 				$scope.displayLoadingIndicator = false;
 			});
 		});
 	};
-	$scope.settings = {
-		currentPage: 1,
-		pageSize: 10
-	};
+
+	$scope.$watch('settings.currentPage', function(n,o) {
+		GetList();
+	});
+
+	$scope.paged = function() {
+		GetList();
+	}
 }]);
