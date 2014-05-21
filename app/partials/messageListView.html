@@ -13,13 +13,6 @@
         <div class="panel-heading">
             <h3 class="panel-title">{{'Messages' | r}}</h3>
         </div>
-        <div class="panel-body view-form-icon">
-            <div>
-                <label ng-show="searchTerm">{{'Search' | r}}</label>
-                <input class="form-control" type="text" placeholder="Search" ng-model="searchTerm" autocomplete="off" />
-                <i class="fa fa-search"></i>
-            </div>
-        </div>
         <div id="451qa_msg_list" class="panel-table">
             <div class="row text-info">
                 <div class="col-sm-2 hidden-xs">
@@ -32,7 +25,7 @@
                 <div class="col-sm-2 hidden-xs">{{'Subject' | r}}</div>
                 <div class="col-sm-2 hidden-xs">{{'From' | r}}</div>
              </div>
-            <div class="451qa_msg_item row" ng-repeat="message in messages | filter:searchTerm | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize | orderBy:DateSent">
+            <div class="451qa_msg_item row" ng-repeat="message in messages | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize | orderBy:DateSent">
                 <div class="col-sm-2">
                     <input type='checkbox' ng-model="message.Selected" />
                 </div>
@@ -57,9 +50,9 @@
             </div>
         </div>
         <div class="panel-footer">
-            <pagination ng-model="settings.currentPage" ng-change="paged()" page="settings.currentPage" max-size="8" rotate="false" boundary-links="false" total-items="settings.listCount"
+            <pagination ng-model="settings.currentPage" ng-change="paged()" page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
                         items-per-page="settings.pageSize" direction-links="true"></pagination>
-            <button id="451qa_btn_delmsg" type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-show="(messages | filter:searchTerm | filter:{Selected:true}).length > 0">
+            <button id="451qa_btn_delmsg" type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-show="(messages | filter:{Selected:true}).length > 0">
                 <span>{{'Delete' | r}} {{'Selected' | r}}</span>
             </button>
             <button id="451qa_btn_cmpmsg" class="btn btn-info pull-right" type="button" redirect="message/new">
