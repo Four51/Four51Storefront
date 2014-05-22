@@ -21,13 +21,13 @@
                     </h3>
                 </div>
                 <div>
-                    <p ng-show="order.DateSubmitted">{{'Date' | r}} {{'Submitted' | r}}: <span style="float:right;">{{order.DateSubmitted | date:'short'}}</span></p>
-                    <p>{{'Status' | r}}: <span style="float:right;">{{order.StatusText}}</span></p>
-                    <p ng-show="order.DateCompleted">{{'Date' | r}} {{'Completed' | r}}: <span style="float:right;">{{order.DateCompleted | date:'short'}}</span></p>
-                    <p ng-show="order.FromUserFirstName || order.FromUserLastName">{{'Created By' | r}}: <span style="float:right;">{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</span></p>
-                    <p ng-show="order.Comments">{{'Comments' | r}}: <span style="float:right;">{{order.Comments}}</span></p>
-                    <p ng-show="orderCostCenter">{{'Cost Center' | r}}: <span style="float:right;">{{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</span></p>
-                    <p>{{'Payment' | r}} {{'Method' | r}}: <span style="float:right;">{{order.PaymentMethodText}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong></span></p>
+                    <p ng-show="order.DateSubmitted">{{'Date' | r}} {{'Submitted' | r}}: {{order.DateSubmitted | date:'short'}}</p>
+                    <p>{{'Status' | r}}: {{order.StatusText}}</p>
+                    <p ng-show="order.DateCompleted">{{'Date' | r}} {{'Completed' | r}}: {{order.DateCompleted | date:'short'}}</p>
+                    <p ng-show="order.FromUserFirstName || order.FromUserLastName">{{'Created By' | r}}: {{order.FromUserFirstName + ' ' + order.FromUserLastName}}</p>
+                    <p ng-show="order.Comments">{{'Comments' | r}}: {{order.Comments}}</p>
+                    <p ng-show="orderCostCenter">{{'Cost Center' | r}}: {{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</p>
+                    <p>{{'Payment' | r}} {{'Method' | r}}: {{order.PaymentMethodText}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong></p>
                     <address ng-show="order.ShipAddress">
                         <span class="text-primary"><strong>{{'Ship to' | r}}</strong></span><br />
                         <span ng-show="order.LineItems[0].ShipFirstName || order.LineItems[0].ShipLastName">{{order.LineItems[0].ShipFirstName}} {{order.LineItems[0].ShipLastName}}</span>
@@ -56,11 +56,11 @@
                     </h3>
                 </div>
                 <div>
-                    <p>{{'Subtotal' | r}}:<span style="float: right;">{{order.Subtotal | currency:"$"}}</span></p>
-                    <p>{{'Shipping & Handling' | r}}: <span style="float: right;">{{order.ShippingCost | currency:"$"}}</span></p>
-                    <p>{{'Tax' | r}}: <span style="float: right;">{{order.TaxCost | currency:"$"}}</span></p>
-                    <p ng-if="order.Coupon">{{'Coupon' | r}} ({{order.Coupon.Label}}): <span style="float: right;">{{order.Coupon.OrderDiscount * -1 | currency}}</span></p>
-                    <p>{{'Total' | r}}: <span style="float: right;">{{order.Total | currency:"$"}}</span></p>
+                    <p>{{'Subtotal' | r}}: {{order.Subtotal | currency:"$"}}</p>
+                    <p>{{'Shipping & Handling' | r}}: {{order.ShippingCost | currency:"$"}}</p>
+                    <p>{{'Tax' | r}}: {{order.TaxCost | currency:"$"}}</p>
+                    <p ng-if="order.Coupon">{{'Coupon' | r}} ({{order.Coupon.Label}}): {{order.Coupon.OrderDiscount * -1 | currency}}</p>
+                    <p>{{'Total' | r}}: {{order.Total | currency:"$"}}</p>
                 </div>
             </div>
         </div>
@@ -81,7 +81,7 @@
                             <ul class="list-group" ng-show="item.Specs | filter:{'CanSetForLineItem':true}.length > 0">
                                 <li class="list-group-item" ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
                                     <span class="text-info">{{spec.Name}}: </span>
-                                    <span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span></span>
+                                    <span ng-if="spec.ControlType == 'File'">{{spec.File.OriginalName + Extension}}</span></span>
                                     <span ng-if="spec.ControlType != 'File'">{{spec.Value || '(unspecified)'}}</span>
                                 </li>
                             </ul>
@@ -104,16 +104,21 @@
                             </div>
                         </div>
                         <div ng-if="!(user.Permissions.contains('HidePricing'))">
-                            <p>{{item.UnitPrice | currency:"$"}}</p>
+                            <p>{{'Unit Price' | r}}: {{item.UnitPrice | currency}}</p>
                         </div>
                         <div>
                             <p ng-show="item.Product.QuantityMultiplier == 1">x {{item.Quantity}}</span>
                             <p ng-show="item.Product.QuantityMultiplier > 1" >x {{item.Product.QuantityMultiplier * item.Quantity}}</span>
                         </div>
                         <div ng-if="!(user.Permissions.contains('HidePricing'))">
-                            {{item.LineTotal | currency:"$"}}
+                            {{'Total' | r}}: {{item.LineTotal | currency}}
                         </div>
-                        <div ng-show="item.TotalShipped">{{'Quantity' | r}} {{'Shipped' | r}}: {{item.TotalShipped}}</div>
+                        <div ng-show="item.TotalShipped">
+                            <p>{{'Quantity' | r}} {{'Shipped' | r}}: {{item.TotalShipped}}</p>
+                        </div>
+                        <div ng-if="user.Permissions.contains('CostCenterPerLine')">
+                            <p ng-show="item.CostCenter">{{'Cost Center' | r}}: {{item.CostCenter}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
