@@ -1,5 +1,6 @@
 four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function($resource, $451, Security, User) {
 	//var _cacheName = '451Cache.Product.' + $451.apiName;
+	var variantCache = [];
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
@@ -63,14 +64,22 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
 		}
 	}
 
-     var _get = function(param, success) {
+     var _get = function(param, page, pagesize, success) {
+	     page = page || 1;
+	     pagesize = pagesize || 2;
 	     //var product = store.get(_cacheName + param);
 	     //product ? (function() { _extend(product);	_then(success, product); })() :
-		 var product = $resource($451.api('Products/:interopID'), { interopID: '@ID' }).get({ interopID: param }).$promise.then(function(product) {
-				_extend(product);
-				//store.set(_cacheName + product.InteropID, product);
-				_then(success, product);
-	         });
+		 var product = $resource($451.api('Products/:interopID'), { interopID: '@ID' }).get({ interopID: param, page: page, pagesize: pagesize }).$promise.then(function(product) {
+			for (var i = 0; i <= product.VariantCount-1; i++) {
+				if (typeof variantCache[i] == 'object') continue;
+				variantCache[i] = product.Variants[i - ((page - 1) * pagesize)] || i;
+			}
+		    product.Variants = variantCache;
+
+		    _extend(product);
+			//store.set(_cacheName + product.InteropID, product);
+			_then(success, product);
+	     });
     }
 
     var _search = function(categoryInteropID, searchTerm, relatedProductsGroupID, success) {

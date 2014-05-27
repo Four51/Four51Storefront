@@ -15,9 +15,9 @@ four51.app.factory('MessageList', ['$q', '$resource', '$451', function($q, $reso
 			$resource($451.api('message')).get({ page: page, pagesize: pagesize }).$promise.then(function (list) {
 				for (var i = 0; i <= list.Count - 1; i++) {
 					if (typeof cache[i] == 'object') continue;
-					if (typeof cache[i] == 'undefined')
-						cache[i] = list.List[i - ((page - 1) * pagesize)];
+					cache[i] = list.List[i - ((page - 1) * pagesize)] || i;
 				}
+				console.log(cache.length);
 				_then(success, cache, list.Count);
 			});
 		}

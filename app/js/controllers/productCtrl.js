@@ -4,6 +4,10 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
     $scope.LineItem = {};
 	$scope.addToOrderText = "Add To Cart";
 	$scope.loadingIndicator = true;
+	$scope.settings = {
+		currentPage: 1,
+		pageSize: 10
+	};
 
 	$scope.calcVariantLineItems = function(i){
 		$scope.variantLineItemsOrderTotal = 0;
@@ -15,7 +19,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 		$scope.LineItem.Quantity = lineitem.Product.StandardPriceSchedule.DefaultQuantity > 0 ? lineitem.Product.StandardPriceSchedule.DefaultQuantity : null;
 	}
 	function init() {
-		ProductDisplayService.getProductAndVariant($routeParams.productInteropID, $routeParams.variantInteropID, function (data) {
+		ProductDisplayService.getProductAndVariant($routeParams.productInteropID, $routeParams.variantInteropID, $scope.settings.currentPage, $scope.settings.pageSize, function (data) {
 			$scope.LineItem.Product = data.product;
 			$scope.LineItem.Variant = data.variant;
 			setDefaultQty($scope.LineItem);
@@ -26,7 +30,8 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			$scope.setAddToOrderErrors();
 		});
 	}
-	init();
+	//init();
+	$scope.$watch('settings.currentPage', init);
 
 	$scope.deleteVariant = function(v, redirect) {
 		if (!v.IsMpowerVariant) return;

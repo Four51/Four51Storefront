@@ -169,7 +169,7 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 			if(!product.Variants)
 				return false;
 			for(var i = 0; i < product.Variants.length; i++){
-				if(product.Variants[i][scheduleType])
+				if(product.Variants[i] && product.Variants[i][scheduleType])
 					return true;
 			}
 			return false;
@@ -203,6 +203,7 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 				var p = scope.LineItem.Product;
 				scope.variantLineItems = {};
 				angular.forEach(p.Variants, function(v){
+					if (!v) return;
 					scope.variantLineItems[v.InteropID] = {PriceSchedule: v.StandardPriceSchedule || p.StandardPriceSchedule, Product: p, Variant: v, Specs: scope.LineItem.Specs};
 				});
 			}
@@ -226,8 +227,8 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 			return null;
 		return product.StaticSpecGroups.SPAProductConfig.Specs[specName].Value || escapeNull;
 	}
-	function _getProductAndVariant(productInteropID, variantInteropID, callback){
-		Product.get(productInteropID, function(data){
+	function _getProductAndVariant(productInteropID, variantInteropID, page, pagesize, callback){
+		Product.get(productInteropID, page, pagesize, function(data){
 			var p = data;
 			if(variantInteropID){
 				if(p.Type == 'VariableText'){
