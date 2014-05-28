@@ -38,22 +38,27 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
             });
         }
 
-		// parse old tokens to retrieve their values
-		angular.forEach(product.Specs, function(spec) {
-			if (spec.DefaultValue && spec.DefaultValue == spec.Value) {
-				var matches = spec.DefaultValue.match(/\[\[(.*?)\]\]/g);
-				if (matches) {
-					User.get(function (user) {
-						angular.forEach(matches, function(token) {
-							var fix = token.replace(/\[/g, '').replace(/\]/g, '');
-							var value = user[fix.replace('UserName', 'Username')] || lookupCustom(user, fix);
-							spec.Value = spec.Value.replace(token, value).substr(0, spec.MaxLength);
-							spec.DefaultValue = spec.DefaultValue.replace(token, value);
-						});
-					});
-				}
-			}
-		});
+        // parse old tokens to retrieve their values
+        angular.forEach(product.Specs, function(spec) {
+            if (spec.DefaultValue && spec.DefaultValue == spec.Value) {
+                var matches = spec.DefaultValue.match(/\[\[(.*?)\]\]/g);
+                if (matches) {
+                    User.get(function (user) {
+                        angular.forEach(matches, function(token) {
+                            var fix = token.replace(/\[/g, '').replace(/\]/g, '').replace(/\[/g, '');
+                            var split = fix.split(".");
+                            var temp = null, value;
+                            for(var i = 0; i <= split.length - 1; i++) {
+                                temp = temp ? temp[split[i]] : user[split[i]];
+                            }
+                            value = temp || lookupCustom(user, fix);
+                            spec.Value = spec.Value.replace(token, value).substr(0, spec.MaxLength);
+                            spec.DefaultValue = spec.DefaultValue.replace(token, value);
+                        });
+                    });
+                }
+            }
+        });
 		function lookupCustom(user, token) {
 			var value = '';
 			angular.forEach(user.CustomFields, function(f) {
