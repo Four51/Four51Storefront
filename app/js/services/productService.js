@@ -69,12 +69,13 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
 		}
 	}
 
-     var _get = function(param, page, pagesize, success) {
-	     page = page || 1;
-	     pagesize = pagesize || 2;
+     var _get = function(param, success, page, pagesize, searchTerm) {
+	     if (!angular.isUndefined(searchTerm)) {
+		     variantCache = [];
+	     }
 	     //var product = store.get(_cacheName + param);
 	     //product ? (function() { _extend(product);	_then(success, product); })() :
-		 var product = $resource($451.api('Products/:interopID'), { interopID: '@ID' }).get({ interopID: param, page: page, pagesize: pagesize }).$promise.then(function(product) {
+		 var product = $resource($451.api('Products/:interopID'), { interopID: '@ID' }).get({ interopID: param, page: page || 1, pagesize: pagesize || 10, searchTerm: searchTerm }).$promise.then(function(product) {
 			for (var i = 0; i <= product.VariantCount-1; i++) {
 				if (typeof variantCache[i] == 'object') continue;
 				variantCache[i] = product.Variants[i - ((page - 1) * pagesize)] || i;

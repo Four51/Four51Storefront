@@ -227,8 +227,8 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 			return null;
 		return product.StaticSpecGroups.SPAProductConfig.Specs[specName].Value || escapeNull;
 	}
-	function _getProductAndVariant(productInteropID, variantInteropID, page, pagesize, callback){
-		Product.get(productInteropID, page, pagesize, function(data){
+	function _getProductAndVariant(productInteropID, variantInteropID, callback, page, pagesize, searchTerm){
+		Product.get(productInteropID, function(data){
 			var p = data;
 			if(variantInteropID){
 				if(p.Type == 'VariableText'){
@@ -268,7 +268,7 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 				else
 					callback({product:p});
 			}
-		});
+		}, page, pagesize, searchTerm);
 	};
 	return{
 		getProductAndVariant: _getProductAndVariant,
