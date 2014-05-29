@@ -6,7 +6,7 @@
             <i class="pull-right" ng-class="{'fa fa-caret-up': checkOutSection == 'shipping', 'fa fa-caret-down': checkOutSection == 'order' || checkOutSection == 'billing' }"></i>
         </h3>
     </div>
-    <div class="panel-body" ng-show="checkOutSection == 'shipping'" class="panel-body ">
+    <div class="panel-body" collapse="checkOutSection != 'shipping'" class="panel-body ">
         <div>
             <shippingmessage />
         </div>
