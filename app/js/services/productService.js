@@ -1,6 +1,6 @@
 four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function($resource, $451, Security, User) {
 	//var _cacheName = '451Cache.Product.' + $451.apiName;
-	var variantCache = [];
+	var variantCache = [], productCache = [], productSearchTerm;
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
@@ -88,8 +88,13 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
 	     });
     }
 
-    var _search = function(categoryInteropID, searchTerm, relatedProductsGroupID, success) {
-        if(!categoryInteropID && !searchTerm && !relatedProductsGroupID){
+    var _search = function(categoryInteropID, searchTerm, relatedProductsGroupID, success, page, pagesize) {
+	    console.log(productSearchTerm + ' = ' + searchTerm);
+        if (productSearchTerm != searchTerm) {
+	        productSearchTerm = searchTerm;
+	        productCache = [];
+        }
+	    if(!categoryInteropID && !searchTerm && !relatedProductsGroupID){
 			_then(success, null);
 			return null;
 		}
@@ -97,16 +102,27 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
         var criteria = {
             'CategoryInteropID': categoryInteropID,
             'SearchTerms': searchTerm ? searchTerm : '',
-			'RelatedProductGroupID': relatedProductsGroupID
+			'RelatedProductGroupID': relatedProductsGroupID,
+	        'Page': page || 1,
+	        'PageSize': pagesize || 10
         };
 	    //var cacheID = '451Cache.Products.' + criteria.CategoryInteropID + criteria.SearchTerms.replace(/ /g, "");
 		//var products = store.get(cacheID);
 	    //products ? _then(success, products) :
-	    var products = $resource($451.api('Products')).query(criteria).$promise.then(function(products) {
-		        //store.set(cacheID, products);
-	            angular.forEach(products, _extend);
-				_then(success, products);
-	        });
+	    if (typeof productCache[(page-1) * pagesize] == 'object' && typeof productCache[(page * pagesize) - 1] == 'object') {
+		    _then(success, {List: productCache, Count: productCache.length});
+	    }
+	    else {
+		    var products = $resource($451.api('Products')).get(criteria).$promise.then(function (products) {
+			    for (var i = 0; i <= products.Count - 1; i++) {
+				    if (typeof productCache[i] == 'object') continue;
+				    productCache[i] = products.List[i - ((page - 1) * pagesize)] || i;
+			    }
+			    products.List = productCache;
+			    angular.forEach(products.List, _extend);
+			    _then(success, products);
+		    });
+	    }
     }
 	
 	return {
