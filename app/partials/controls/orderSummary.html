@@ -14,7 +14,7 @@
         </p>
         <p ng-if="!(user.Permissions.contains('HidePricing'))">
             <span class="text-info">{{'Subtotal' | r}}</span>
-            <span class="pull-right">{{currentOrder.Subtotal | currency}}</span
+            <span class="pull-right">{{currentOrder.Subtotal | currency}}</span>
         </p>
         <p ng-if="!(user.Permissions.contains('HidePricing'))">
             <span class="text-info">{{'Shipping' | r}} {{'Costs' | r}}</span>
@@ -27,13 +27,15 @@
         <div ng-show="user.Permissions.contains('ViewPromotions')">
             <div ng-show="!currentOrder.Coupon">
                 <div class="form-group view-form-icon">
-                    <div class="input-group">
+                    <div>
                         <label ng-show="currentOrder.CouponCode">{{'Promotion' | r}} {{'Code' | r}}</label>
-                        <input class="form-control" type="text" ng-model="currentOrder.CouponCode" placeholder="{{'Promotion' | r}} {{'Code' | r}}" autocomplete="off"></input>
-                        <i class="fa fa-question-circle"></i>
+                        <div class="input-group">
+                            <input class="form-control" type="text" ng-model="currentOrder.CouponCode" placeholder="{{'Promotion' | r}} {{'Code' | r}}" autocomplete="off"/>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-success" ng-click="applyCoupon()"><i class="fa fa-check"></i></button>
                             </span>
+                        </div>
+                        <i class="fa fa-question-circle"></i>
                     </div>
                 </div>
             </div>
