@@ -2,7 +2,7 @@ four51.app.controller('ProductSearchCtrl', ['$scope', 'Product', '$routeParams',
 function($scope, Product, $routeParams) {
 	$scope.settings = {
 		currentPage: 1,
-		pageSize: 10
+		pageSize: 40
 	};
 
 	$scope.searchTerm = $routeParams.searchTerm;
