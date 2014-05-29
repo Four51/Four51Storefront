@@ -5,7 +5,7 @@
             {{'Approval' | r}} {{'Rules' | r}}
         </h3>
     </div>
-    <div ng-show="checkOutSection == 'approval'" class="panel-body">
+    <div collapse="checkOutSection != 'approval'" class="panel-body">
         <approvalrulelist order="currentOrder" />
     </div>
 </div>
