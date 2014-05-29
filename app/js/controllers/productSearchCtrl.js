@@ -15,8 +15,9 @@ function($scope, Product, $routeParams) {
 
 	function Search() {
 		$scope.searchLoading = true;
-		Product.search(null, $scope.searchTerm, null, function(products) {
+		Product.search(null, $scope.searchTerm, null, function(products, count) {
 			$scope.products = products;
+			$scope.productCount = count;
 			$scope.searchLoading = false;
 		}, $scope.settings.currentPage, $scope.settings.pageSize);
 	}

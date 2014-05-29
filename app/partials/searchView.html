@@ -23,26 +23,26 @@
                 </div>
             </form>
         </div>
-        <div ng-show="products.Count == 0" class="panel-product-list">
+        <div ng-show="productCount == 0" class="panel-product-list">
             <p class="alert alert-info">
                 {{'Your search resulted in no records. Please refine your search.' | r}}
             </p>
         </div>
-        <div class="panel-footer" ng-show="products.Count > settings.pageSize">
-            <pagination page="settings.currentPage" max-size="10" rotate="false" boundary-links="true" total-items="products.Count"
+        <div class="panel-footer" ng-show="productCount > settings.pageSize">
+            <pagination page="settings.currentPage" max-size="10" rotate="false" boundary-links="true" total-items="productCount"
                         items-per-page="settings.pageSize" direction-links="true"></pagination>
         </div>
         <div ng-show="products" class="panel-product-list">
             <nav class="nav">
                 <ul>
-                    <li class="well" ng-repeat="product in products.List | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
+                    <li class="well" ng-repeat="product in products | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
                         <shortproductview p="product" />
                     </li>
                 </ul>
             </nav>
         </div>
-        <div class="panel-footer" ng-show="products.Count > settings.pageSize">
-            <pagination page="settings.currentPage" max-size="10" rotate="false" boundary-links="true" total-items="products.Count"
+        <div class="panel-footer" ng-show="productCount > settings.pageSize">
+            <pagination page="settings.currentPage" max-size="10" rotate="false" boundary-links="true" total-items="productCount"
                         items-per-page="settings.pageSize" direction-links="true"></pagination>
         </div>
     </div>

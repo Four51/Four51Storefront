@@ -1,9 +1,9 @@
 four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function($resource, $451, Security, User) {
 	//var _cacheName = '451Cache.Product.' + $451.apiName;
 	var variantCache = [], productCache = [], productSearchTerm;
-	function _then(fn, data) {
+	function _then(fn, data, count) {
 		if (angular.isFunction(fn))
-			fn(data);
+			fn(data, count);
 	}
 
 	function _extend(product) {
@@ -109,18 +109,18 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
 	    //var cacheID = '451Cache.Products.' + criteria.CategoryInteropID + criteria.SearchTerms.replace(/ /g, "");
 		//var products = store.get(cacheID);
 	    //products ? _then(success, products) :
-	    if (typeof productCache[(page-1) * pagesize] == 'object' && typeof productCache[(page * pagesize) - 1] == 'object') {
-		    _then(success, {List: productCache, Count: productCache.length});
+	    if (typeof productCache[(criteria.Page-1) * criteria.PageSize] == 'object' && typeof productCache[(criteria.Page * criteria.PageSize) - 1] == 'object') {
+		    _then(success, productCache, productCache.length);
 	    }
 	    else {
 		    var products = $resource($451.api('Products')).get(criteria).$promise.then(function (products) {
+			    angular.forEach(products.List, _extend);
 			    for (var i = 0; i <= products.Count - 1; i++) {
 				    if (typeof productCache[i] == 'object') continue;
-				    productCache[i] = products.List[i - ((page - 1) * pagesize)] || i;
+				    productCache[i] = products.List[i - ((criteria.Page - 1) * criteria.PageSize)] || i;
 			    }
-			    products.List = productCache;
-			    angular.forEach(products.List, _extend);
-			    _then(success, products);
+			    console.log(productCache);
+			    _then(success, productCache, products.Count);
 		    });
 	    }
     }

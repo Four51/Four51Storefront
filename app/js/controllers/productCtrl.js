@@ -7,7 +7,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 	$scope.searchTerm = null;
 	$scope.settings = {
 		currentPage: 1,
-		pageSize: 3
+		pageSize: 10
 	};
 
 	$scope.calcVariantLineItems = function(i){
