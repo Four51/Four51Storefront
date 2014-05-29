@@ -14,7 +14,9 @@
     </div>
     <div class="col-sm-8 text-left">
         <div class="panel-body">
-            <h3>{{LineItem.Product.Name}}</h3>
+            <h3>{{LineItem.Product.Name}}
+                <span class="pull-right">{{LineItem.Product.ExternalID}}</span>
+            </h3>
             <p ng-bind-html="trustedDescription(LineItem.Product)" ng-show="LineItem.Product.Description" />
         </div>
         <section class="hidden-xs hidden-sm panel-body">
