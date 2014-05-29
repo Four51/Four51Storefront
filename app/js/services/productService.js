@@ -89,7 +89,6 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
     }
 
     var _search = function(categoryInteropID, searchTerm, relatedProductsGroupID, success, page, pagesize) {
-	    console.log(productSearchTerm + ' = ' + searchTerm);
         if (productSearchTerm != searchTerm) {
 	        productSearchTerm = searchTerm;
 	        productCache = [];
@@ -119,7 +118,6 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
 				    if (typeof productCache[i] == 'object') continue;
 				    productCache[i] = products.List[i - ((criteria.Page - 1) * criteria.PageSize)] || i;
 			    }
-			    console.log(productCache);
 			    _then(success, productCache, products.Count);
 		    });
 	    }
