@@ -1,5 +1,6 @@
 four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function($resource, $451, Security, User) {
 	//var _cacheName = '451Cache.Product.' + $451.apiName;
+	var variantCache = [];
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
@@ -37,22 +38,27 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
             });
         }
 
-		// parse old tokens to retrieve their values
-		angular.forEach(product.Specs, function(spec) {
-			if (spec.DefaultValue && spec.DefaultValue == spec.Value) {
-				var matches = spec.DefaultValue.match(/\[\[(.*?)\]\]/g);
-				if (matches) {
-					User.get(function (user) {
-						angular.forEach(matches, function(token) {
-							var fix = token.replace(/\[/g, '').replace(/\]/g, '');
-							var value = user[fix.replace('UserName', 'Username')] || lookupCustom(user, fix);
-							spec.Value = spec.Value.replace(token, value).substr(0, spec.MaxLength);
-							spec.DefaultValue = spec.DefaultValue.replace(token, value);
-						});
-					});
-				}
-			}
-		});
+        // parse old tokens to retrieve their values
+        angular.forEach(product.Specs, function(spec) {
+            if (spec.DefaultValue && spec.DefaultValue == spec.Value) {
+                var matches = spec.DefaultValue.match(/\[\[(.*?)\]\]/g);
+                if (matches) {
+                    User.get(function (user) {
+                        angular.forEach(matches, function(token) {
+                            var fix = token.replace(/\[/g, '').replace(/\]/g, '').replace(/\[/g, '');
+                            var split = fix.split(".");
+                            var temp = null, value;
+                            for(var i = 0; i <= split.length - 1; i++) {
+                                temp = temp ? temp[split[i]] : user[split[i]];
+                            }
+                            value = temp || lookupCustom(user, fix);
+                            spec.Value = spec.Value.replace(token, value).substr(0, spec.MaxLength);
+                            spec.DefaultValue = spec.DefaultValue.replace(token, value);
+                        });
+                    });
+                }
+            }
+        });
 		function lookupCustom(user, token) {
 			var value = '';
 			angular.forEach(user.CustomFields, function(f) {
@@ -63,14 +69,23 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
 		}
 	}
 
-     var _get = function(param, success) {
+     var _get = function(param, success, page, pagesize, searchTerm) {
+	     if (!angular.isUndefined(searchTerm)) {
+		     variantCache = [];
+	     }
 	     //var product = store.get(_cacheName + param);
 	     //product ? (function() { _extend(product);	_then(success, product); })() :
-		 var product = $resource($451.api('Products/:interopID'), { interopID: '@ID' }).get({ interopID: param }).$promise.then(function(product) {
-				_extend(product);
-				//store.set(_cacheName + product.InteropID, product);
-				_then(success, product);
-	         });
+		 var product = $resource($451.api('Products/:interopID'), { interopID: '@ID' }).get({ interopID: param, page: page || 1, pagesize: pagesize || 10, searchTerm: searchTerm }).$promise.then(function(product) {
+			for (var i = 0; i <= product.VariantCount-1; i++) {
+				if (typeof variantCache[i] == 'object') continue;
+				variantCache[i] = product.Variants[i - ((page - 1) * pagesize)] || i;
+			}
+		    product.Variants = variantCache;
+
+		    _extend(product);
+			//store.set(_cacheName + product.InteropID, product);
+			_then(success, product);
+	     });
     }
 
     var _search = function(categoryInteropID, searchTerm, relatedProductsGroupID, success) {

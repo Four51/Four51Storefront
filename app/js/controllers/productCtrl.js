@@ -4,6 +4,11 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
     $scope.LineItem = {};
 	$scope.addToOrderText = "Add To Cart";
 	$scope.loadingIndicator = true;
+	$scope.searchTerm = null;
+	$scope.settings = {
+		currentPage: 1,
+		pageSize: 10
+	};
 
 	$scope.calcVariantLineItems = function(i){
 		$scope.variantLineItemsOrderTotal = 0;
@@ -14,7 +19,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 	function setDefaultQty(lineitem) {
 		$scope.LineItem.Quantity = lineitem.Product.StandardPriceSchedule.DefaultQuantity > 0 ? lineitem.Product.StandardPriceSchedule.DefaultQuantity : null;
 	}
-	function init() {
+	function init(searchTerm) {
 		ProductDisplayService.getProductAndVariant($routeParams.productInteropID, $routeParams.variantInteropID, function (data) {
 			$scope.LineItem.Product = data.product;
 			$scope.LineItem.Variant = data.variant;
@@ -24,9 +29,19 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			$scope.$broadcast('ProductGetComplete');
 			$scope.loadingIndicator = false;
 			$scope.setAddToOrderErrors();
-		});
+		}, $scope.settings.currentPage, $scope.settings.pageSize, searchTerm);
 	}
-	init();
+	$scope.$watch('settings.currentPage', function(n, o) {
+		if (n != o || (n == 1 && o == 1))
+			init($scope.searchTerm);
+	});
+
+	$scope.searchVariants = function(searchTerm) {
+		$scope.searchTerm = searchTerm;
+		$scope.settings.currentPage == 1 ?
+			init(searchTerm) :
+			$scope.settings.currentPage = 1;
+	};
 
 	$scope.deleteVariant = function(v, redirect) {
 		if (!v.IsMpowerVariant) return;

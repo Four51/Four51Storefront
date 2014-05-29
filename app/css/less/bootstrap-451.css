@@ -7591,3 +7591,6 @@ table[datepicker] {
   padding-top: 10px;
   border-top: 1px solid #dddddd;
 }
+.order-print-view-line-items h3 {
+  page-break-before: always;
+}
