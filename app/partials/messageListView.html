@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="panel-footer">
-            <pagination ng-model="settings.currentPage" ng-change="paged()" page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+            <pagination ng-change="paged()" page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
                         items-per-page="settings.pageSize" direction-links="true"></pagination>
             <button id="451qa_btn_delmsg" type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-show="(messages | filter:{Selected:true}).length > 0">
                 <span>{{'Delete' | r}} {{'Selected' | r}}</span>

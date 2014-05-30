@@ -10,6 +10,7 @@ function ($routeParams,$rootScope, $scope, Product) {
         if($scope.category) {
             Product.search($scope.categoryInteropID, null, null, function(data) {
                 $scope.category.products = $scope.Products = data;
+	            $scope.productCount = data.Count;
             });
         }
     }
