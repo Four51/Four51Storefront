@@ -1,8 +1,24 @@
 four51.app.controller('FavoriteOrderCtrl', ['$scope', '$location', '$routeParams', 'FavoriteOrder', 'Order', 'User',
 function ($scope, $location, $routeParams, FavoriteOrder, Order, User) {
-    FavoriteOrder.query(function(favs) {
-        $scope.favoriteorders = favs;
-    });
+	$scope.settings = {
+		currentPage: 1,
+		pageSize: 10
+	};
+
+	function Query(searchTerm) {
+		FavoriteOrder.query(function(favs, count) {
+			$scope.favoriteorders = favs;
+			$scope.settings.listCount = count;
+		}, searchTerm, $scope.settings.currentPage, $scope.settings.pageSize);
+	}
+
+	$scope.$watch('settings.currentPage', function(n,o) {
+		Query();
+	});
+
+	$scope.search = function(searchTerm) {
+		Query(searchTerm);
+	}
 
 	$scope.repeat = function(order) {
 		order.Repeat = true;
@@ -28,8 +44,4 @@ function ($scope, $location, $routeParams, FavoriteOrder, Order, User) {
             });
         });
 	};
-
-    $scope.saveFavoriteNow = function() {
-        $location.path('order');
-    };
 }]);
