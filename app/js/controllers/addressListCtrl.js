@@ -1,19 +1,33 @@
 
 four51.app.controller('AddressListCtrl', ['$scope', '$location', '$451', 'AddressList',
 function ($scope, $location, $451, AddressList) {
-    AddressList.query(function(list) {
-        $scope.addresses = list;
-    });
+	$scope.settings = {
+		currentPage: 1,
+		pageSize: 10
+	};
+	function Query() {
+		$scope.pagedIndicator = true;
+		AddressList.query(function (list, count) {
+			$scope.addresses = list;
+			$scope.settings.listCount = count;
+			$scope.pagedIndicator = false;
+		}, $scope.settings.currentPage, $scope.settings.pageSize);
+	}
+
     $scope.deleteSelected = function() {
 	    $scope.displayLoadingIndicator = true;
         AddressList.delete($scope.addresses, function() {
-	        AddressList.query(function(list) {
+	        AddressList.query(function(list, count) {
 		        $scope.addresses = list;
+		        $scope.settings.listCount = count;
 		        $scope.displayLoadingIndicator = false;
-	        });
+	        }, $scope.settings.currentPage, $scope.settings.pageSize);
         });
     };
 
+	$scope.$watch('settings.currentPage', function(n,o) {
+		Query();
+	});
     $scope.newAddress = function() {
         $location.path('address');
     };
