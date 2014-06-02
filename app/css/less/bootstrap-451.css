@@ -7954,6 +7954,10 @@ select.ng-invalid:invalid:invalid:focus {
     width: 25%;
   }
 }
+.panel-product-list ul li.inline h3 {
+  margin: 0 0 7px;
+  min-height: 60px;
+}
 .panel-product-list ul li.inline .panel-footer {
   padding: 10px 5px;
 }
@@ -8003,8 +8007,13 @@ select.ng-invalid:invalid:invalid:focus {
   z-index: 1;
   padding: 10px;
 }
+.panel-product-list ul li.gallery a {
+  min-height: 300px;
+}
 .panel-product-list ul li.gallery a img {
   margin: 0 auto;
+  max-width: 100%;
+  max-height: 280px;
 }
 .panel-product-list ul li.gallery .product-hover {
   z-index: 3;
@@ -8017,24 +8026,19 @@ select.ng-invalid:invalid:invalid:focus {
   right: 0;
   bottom: 0;
   background-color: rgba(12, 42, 58, 0.8);
-  padding: 10px;
   -webkit-transition: all 200ms;
   -moz-transition: all 200ms;
   transition: all 200ms;
 }
 .panel-product-list ul li.gallery .product-hover h3 {
+  padding: 10px;
   margin: 0;
 }
 .panel-product-list ul li.gallery .product-hover > div:first-of-type {
-  position: absolute;
-  top: 35px;
-  bottom: 10px;
-  margin-top: 10px;
-  padding: 10px 10px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.4);
-  left: 0px;
-  right: 0px;
+  padding: 10px;
   overflow-y: scroll;
+  max-height: 280px;
 }
 .panel-product-list ul li.gallery:hover .product-hover {
   opacity: 1;
