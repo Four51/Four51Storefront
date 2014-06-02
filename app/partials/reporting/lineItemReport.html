@@ -1,4 +1,4 @@
-<div class="panel-body">
+<div class="row">
     <div class="col-sm-6 view-form-icon">
         <div class="panel-heading">
             <h3 class="panel-title panel-primary">{{'Conditions' | r}}</h3>
@@ -48,15 +48,8 @@
             <select class="form-control" ng-options="s for s in report.ShipAddresses" ng-model="report.ShipAddress" />
             <i class="fa fa-truck"></i>
         </div>
-        <div class="panel-heading">
-            <h3 class="panel-title panel-primary">{{'Subtotal' | r}}</h3>
-        </div>
-        <div>
-            <label>Column</label>
-            <select class="form-control" ng-options="key as value for (key,value) in report.SubtotalOptions" ng-model="report.Subtotal" />
-            <i class="fa fa-tasks"></i>
-        </div>
         <daterange ng-options="report.TimeSpanOptions" fromdate="report.FromDate" todate="report.ToDate" />
+        <hr />
     </div>
     <div class="col-sm-6">
         <div class="panel-heading">
@@ -65,7 +58,16 @@
         <div>
             <label>&nbsp;</label>
             <select multiple size="35" class="form-control" ng-options="key as value for (key,value) in report.ColumnOptions" ng-model="report.SelectedColumns" />
-            <i class="fa fa-columns"></i>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row ">
+    <div class="col-sm-6 col-off-pull-6 view-form-icon">
+        <div>
+            <label>Subtotal by Column</label>
+            <select class="form-control" ng-options="key as value for (key,value) in report.SubtotalOptions" ng-model="report.Subtotal" />
+            <i class="fa fa-tasks"></i>
         </div>
     </div>
 </div>

@@ -66,6 +66,24 @@ small,
 //== Components
 
 //== Tables
+.table-responsive {
+  border-top: none;
+  border-left: none;
+  border-bottom:  none;
+  @media (max-width: @screen-xs-max) {
+    border-right: 1px solid @panel-default-border;
+  }
+  tbody {
+    border:  1px solid @panel-default-border;
+    @media (max-width: @screen-xs-max) {
+      border-right: none;
+    }
+    td {
+      border-left: 1px solid @panel-default-border;
+
+    }
+  }
+}
 
 //== Buttons
 .btn-group {
@@ -159,7 +177,7 @@ button::-moz-focus-inner {
 //** form field icons
 .view-form-icon {
   // make room for labels
-  & > div {
+  & > div:not(.panel-heading) {
     margin: 35px 0 0;
   }
 
@@ -590,6 +608,22 @@ button::-moz-focus-inner {
 }
 
 //== Tabs
+.panel {
+  .tabbable {
+    .panel-heading {
+      background-color: @panel-default-heading-bg;
+    }
+    ul {
+      margin: 0 15px;
+      li.active {
+        a,
+        & a:hover {
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}
 
 //== Pills
 
