@@ -16,15 +16,8 @@
         <div class="panel-heading">
             <h3 class="panel-title">{{'Addresses' | r}}</h3>
         </div>
-        <div class="panel-body view-form-icon">
-            <div>
-                <label ng-show="searchTerm">{{'Search' | r}}</label>
-                <input class='form-control' type="text" placeholder="Search" ng-model="searchTerm" autocomplete="off" />
-                <i class="fa fa-search"></i>
-            </div>
-        </div>
         <div class="panel-table">
-            <div class="row text-info" ng-show="(addresses | filter:searchTerm | filter:{IsCustEditable:true}).length > 0">
+            <div class="row text-info" ng-show="(addresses | filter:{IsCustEditable:true}).length > 0">
                 <div class="col-sm-2">
                     <label class="visible-xs">{{'Select all' | r}}</label>
                     <input type='checkbox' ng-click="checkAll($event)" />
@@ -35,7 +28,8 @@
                 <div class="col-sm-2 hidden-xs">{{'Shipping' | r}}</div>
                 <div class="col-sm-2 hidden-xs">{{'Billing' | r}}</div>
             </div>
-            <div class="row"  ng-repeat="address in addresses | filter:searchTerm | filter:{IsCustEditable:true}">
+            <div class="row"  ng-repeat="address in addresses | filter:{IsCustEditable:true} | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
+                <loadingindicator ng-show="pagedIndicator" />
                 <div class="col-sm-2">
                     <input type='checkbox' ng-model="address.Selected" />
                 </div>
@@ -62,15 +56,16 @@
             </div>
         </div>
         <div class="panel-footer">
-            <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-show="(addresses | filter:searchTerm | filter:{Selected:true}).length > 0">{{'Delete' | r}} {{'Selected' | r}}</button>
+            <div ng-show="settings.listCount > settings.pageSize">
+            <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+                        items-per-page="settings.pageSize" direction-links="true"></pagination>
+            </div>
+            <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-show="(addresses | filter:{Selected:true}).length > 0">{{'Delete' | r}} {{'Selected' | r}}</button>
             <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" type="button" class="btn btn-primary pull-right" ng-click="newAddress($event)">{{'New' | r}} {{'Address' | r}}</button>
         </div>
 
         <div class="navbar-fixed-bottom">
             <loadingindicator ng-show="displayLoadingIndicator" />
-            <div class="view-action-message alert-warning" ng-show="(addresses | filter:searchTerm | filter:{IsCustEditable:true}).length == 0">
-                {{'Your search resulted in no records. Please refine your search.' | r}}
-            </div>
             <div class="view-action-message alert-success" ng-show="actionMessage">{{actionMessage | r}}</div>
         </div>
     </div>
