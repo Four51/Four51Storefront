@@ -337,7 +337,17 @@ button::-moz-focus-inner {
   .btn-group {
     width: 100%;
     vertical-align: inherit;
-    .btn {
+    & > .btn {
+      &:first-child:not(:last-child):not(.dropdown-toggle){
+        .border-right-radius(@border-radius-base);
+      }
+      &:not(:first-child):not(:last-child):not(.dropdown-toggle){
+        .border-top-radius(@border-radius-base);
+        .border-bottom-radius(@border-radius-base);
+      }
+      &:last-child:not(:first-child):not(.dropdown-toggle){
+        .border-left-radius(@border-radius-base);
+      }
       width: 100%;
       padding: 15px;
       margin: 5px 0;
