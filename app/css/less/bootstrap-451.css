@@ -6018,6 +6018,27 @@ small,
 .small {
   font-size: 11px;
 }
+.table-responsive {
+  border-top: none;
+  border-left: none;
+  border-bottom: none;
+}
+@media (max-width: 767px) {
+  .table-responsive {
+    border-right: 1px solid #dddddd;
+  }
+}
+.table-responsive tbody {
+  border: 1px solid #dddddd;
+}
+@media (max-width: 767px) {
+  .table-responsive tbody {
+    border-right: none;
+  }
+}
+.table-responsive tbody td {
+  border-left: 1px solid #dddddd;
+}
 .btn-group {
   width: 100%;
 }
@@ -6089,7 +6110,7 @@ button::-moz-focus-inner {
 .col-sm-4.view-form-select:before {
   left: 45px;
 }
-.view-form-icon > div {
+.view-form-icon > div:not(.panel-heading) {
   margin: 35px 0 0;
 }
 .view-form-icon.view-form-icon-input-group .input-group {
@@ -6433,6 +6454,16 @@ button::-moz-focus-inner {
 }
 .navbar-nav > li > a {
   height: 60px;
+}
+.panel .tabbable .panel-heading {
+  background-color: #f5f5f5;
+}
+.panel .tabbable ul {
+  margin: 0 15px;
+}
+.panel .tabbable ul li.active a,
+.panel .tabbable ul li.active a:hover {
+  background-color: #fff;
 }
 .pagination {
   margin: 15px 0;
