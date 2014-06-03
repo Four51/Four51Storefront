@@ -1,10 +1,4 @@
 <section>
-    <nav class="nav visible-xs">
-        <span class="btn-group">
-            <button class="btn btn-default" ng-class="{'active': isActive('order')}" redirect="/order">{{'Orders' | r}}</button>
-            <button class="btn btn-default" ng-class="{'active': isActive('favoriteorders')}" redirect="/favoriteorders">{{'Favorites' | r}}</button>
-        </span>
-    </nav>
     <div class="panel panel-default" ng-if="favoriteorders.length == 0">
         <div class="panel-heading">
             <h3 class="panel-title panel-primary">{{'Favorite' | r}} {{'Orders' | r}}</h3>
@@ -77,7 +71,7 @@
                 <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
                             items-per-page="settings.pageSize" direction-links="true"></pagination>
             </div>
-            <button type="button" class="btn btn-small btn-danger" ng-click="deleteSelected($event)" ng-show="(favoriteorders | filter:{Selected:true}).length > 0">{{'Delete' | r}} {{'Selected' | r}}</button>
+            <button type="button" class="btn btn-small btn-danger" ng-click="deleteSelected($event)" ng-disabled="(favoriteorders | filter:{Selected:true}).length == 0">{{'Delete' | r}} {{'Selected' | r}}</button>
         </div>
     </div>
 </section>

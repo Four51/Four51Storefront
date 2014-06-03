@@ -1,10 +1,4 @@
 <section class="order-search-view">
-    <nav class="nav visible-xs" ng-show="hasStandardTypes || hasReplenishmentTypes || hasPriceRequestTypes">
-        <span class="btn-group">
-            <button class="btn btn-default" ng-class="{'active': isActive('order')}" redirect="/order">{{'Orders' | r}}</button>
-            <button class="btn btn-default" ng-class="{'active': isActive('favoriteorders')}" redirect="/favoriteorders">{{'Favorites' | r}}</button>
-        </span>
-    </nav>
     <div class="panel panel-default" ng-if="!hasStandardTypes && !hasReplenishmentTypes && !hasPriceRequestTypes">
         <div class="panel-heading">
             <h3 class="panel-title">{{'Orders' | r}}</h3>
