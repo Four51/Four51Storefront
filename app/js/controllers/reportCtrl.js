@@ -2,6 +2,11 @@ four51.app.controller('ReportCtrl', ['$scope', '$routeParams', '$451', 'Report',
 function($scope, $routeParams, $451, Report) {
 	$scope.displayLoadingIndicator = true;
 	$scope.actionMessage = null;
+	$scope.settings = {
+		currentPage: 1,
+		pageSize: 10
+	};
+
 	Report.get($routeParams.id,
 		function(data) {
 			$scope.report = data;
@@ -33,6 +38,7 @@ function($scope, $routeParams, $451, Report) {
 		Report.download(report.ID,
 			function(data) {
 				$scope.report = data;
+				$scope.settings.listCount = data.Data.length;
 			},
 			function(ex) {
 				$scope.actionMessage = ex.Message;
