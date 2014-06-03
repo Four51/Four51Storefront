@@ -5,7 +5,7 @@ four51.app.factory('MessageList', ['$q', '$resource', '$451', function($q, $reso
 			fn(data, count);
 	}
 
-	var _query = function(page, pagesize, success) {
+	function _query(page, pagesize, success) {
 		// first check that the requested page hasn't already been retrieved
 		if (typeof cache[(page-1) * pagesize] == 'object' && typeof cache[(page * pagesize) - 1] == 'object') {
 			_then(success, cache, cache.length);
@@ -17,13 +17,15 @@ four51.app.factory('MessageList', ['$q', '$resource', '$451', function($q, $reso
 					if (typeof cache[i] == 'object') continue;
 					cache[i] = list.List[i - ((page - 1) * pagesize)] || i;
 				}
+				console.log(cache.length);
 				_then(success, cache, list.Count);
 			});
 		}
 	}
 
-	var _delete = function(messages, success) {
+	function _delete(messages, success) {
 		var queue = [];
+		cache.splice(0, cache.length);
 		angular.forEach(messages, function(msg) {
 			if (msg.Selected) {
 				queue.push((function() {
