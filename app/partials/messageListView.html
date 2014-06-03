@@ -1,5 +1,4 @@
 <section>
-    <accountnavigation />
     <div class="panel panel-default" ng-if="messages.length == 0">
         <div class="panel-heading">
             <h3 class="panel-title">{{'Messages' | r}}</h3>
@@ -52,10 +51,10 @@
         <div class="panel-footer">
             <pagination ng-change="paged()" page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
                         items-per-page="settings.pageSize" direction-links="true"></pagination>
-            <button id="451qa_btn_delmsg" type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-show="(messages | filter:{Selected:true}).length > 0">
+            <button id="451qa_btn_delmsg" type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-disabled="(messages | filter:{Selected:true}).length == 0">
                 <span>{{'Delete' | r}} {{'Selected' | r}}</span>
             </button>
-            <button id="451qa_btn_cmpmsg" class="btn btn-info pull-right" type="button" redirect="message/new">
+            <button id="451qa_btn_cmpmsg" class="btn btn-primary pull-right" type="button" redirect="message/new">
                 <span>{{'Compose' | r}}</span>
             </button>
         </div>

@@ -1,6 +1,5 @@
 <section class="address-list-view">
     <loadingindicator ng-show="displayLoadingIndicator" />
-    <accountnavigation />
     <div class="panel panel-default" ng-if="(addresses | filter:{IsCustEditable:true}).length == 0">
         <div class="panel-heading">
             <h3 class="panel-title">{{'Addresses' | r}}</h3>
@@ -60,7 +59,7 @@
                 <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
                             items-per-page="settings.pageSize" direction-links="true"></pagination>
             </div>
-            <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-show="(addresses | filter:{Selected:true}).length > 0">{{'Delete' | r}} {{'Selected' | r}}</button>
+            <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-disbaled="(addresses | filter:{Selected:true}).length == 0">{{'Delete' | r}} {{'Selected' | r}}</button>
             <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" type="button" class="btn btn-primary pull-right" ng-click="newAddress($event)">{{'New' | r}} {{'Address' | r}}</button>
         </div>
 
