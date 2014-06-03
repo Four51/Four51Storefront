@@ -17,11 +17,8 @@ function ($scope, $location, $451, AddressList) {
     $scope.deleteSelected = function() {
 	    $scope.displayLoadingIndicator = true;
         AddressList.delete($scope.addresses, function() {
-	        AddressList.query(function(list, count) {
-		        $scope.addresses = list;
-		        $scope.settings.listCount = count;
-		        $scope.displayLoadingIndicator = false;
-	        }, $scope.settings.currentPage, $scope.settings.pageSize);
+	        $scope.displayLoadingIndicator = false;
+	        Query();
         });
     };
 

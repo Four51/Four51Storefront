@@ -25,7 +25,6 @@ four51.app.factory('MessageList', ['$q', '$resource', '$451', function($q, $reso
 
 	function _delete(messages, success) {
 		var queue = [];
-		cache.splice(0, cache.length);
 		angular.forEach(messages, function(msg) {
 			if (msg.Selected) {
 				queue.push((function() {
@@ -39,6 +38,7 @@ four51.app.factory('MessageList', ['$q', '$resource', '$451', function($q, $reso
 		});
 
 		$q.all(queue).then(function() {
+			cache.splice(0, cache.length);
 			_then(success);
 		});
 	}

@@ -71,7 +71,7 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
 
      var _get = function(param, success, page, pagesize, searchTerm) {
 	     if (!angular.isUndefined(searchTerm)) {
-		     variantCache = [];
+		     variantCache.splice(0, variantCache.length);
 	     }
 	     //var product = store.get(_cacheName + param);
 	     //product ? (function() { _extend(product);	_then(success, product); })() :
@@ -119,8 +119,6 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
 				    if (typeof productCache[i] == 'object') continue;
 				    productCache[i] = products.List[i - ((criteria.Page - 1) * criteria.PageSize)] || i;
 			    }
-			    console.log(products);
-			    console.log(productCache);
 			    _then(success, productCache, products.Count);
 		    });
 	    }

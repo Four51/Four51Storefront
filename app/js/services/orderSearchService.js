@@ -14,12 +14,13 @@ four51.app.factory('OrderSearch', ['$resource', '$451', function($resource, $451
 
 	    if (stat || stat != statCache) {
 		    statCache = stat;
-		    cache = [];
+		    cache.splice(0, cache.length);
 	    }
 	    if (typeof cache[(page-1) * pagesize] == 'object' && typeof cache[(page * pagesize) - 1] == 'object') {
 		    _then(success, cache, cache.length);
 	    }
 	    else {
+		    cache.splice(0, cache.length);
 		    $resource($451.api('order')).get(stat).$promise.then(function (list) {
 			    for (var i = 0; i <= list.Count - 1; i++) {
 				    if (typeof cache[i] == 'object') continue;
