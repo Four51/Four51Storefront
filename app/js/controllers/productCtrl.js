@@ -57,7 +57,6 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			function(ex) {
 				$scope.lineItemErrors.push(ex.Message);
 				$scope.showAddToCartErrors = true;
-				console.log($scope.lineItemErrors);
 			}
 		);
 	}
