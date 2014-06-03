@@ -33,7 +33,7 @@
                             <tr>
                                 <td ng-repeat="header in report.DataColumns">{{header | r}}</td>
                             </tr>
-                            <tr ng-repeat="row in report.Data">
+                            <tr ng-repeat="row in report.Data | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
                                 <td ng-repeat="header in report.DataColumns">
                                     {{row[header]}}
                                 </td>
@@ -42,7 +42,13 @@
                     </div>
                 </div>
                 <div class="panel-footer">
+                    <div ng-show="settings.listCount > settings.pageSize">
+                        <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+                                    items-per-page="settings.pageSize" direction-links="true"></pagination>
+                    </div>
                     <button type="button" class="btn btn-primary pull-right" ng-click="getDownload()">{{'Download' | r}}</button>
+                </div>
+                <div class="panel-footer">
                 </div>
             </tab>
         </tabset>
