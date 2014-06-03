@@ -3475,7 +3475,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li > a {
   position: relative;
   display: block;
-  padding: 20px;
+  padding: 20px 15px;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
@@ -6348,7 +6348,7 @@ button::-moz-focus-inner {
 }
 .navbar .container .navbar-nav.pull-left li a,
 .navbar .container-view .navbar-nav.pull-left li a {
-  padding: 20px;
+  padding: 20px 15px;
 }
 .navbar .container .navbar-nav.pull-left li a span,
 .navbar .container-view .navbar-nav.pull-left li a span {
@@ -6364,7 +6364,7 @@ button::-moz-focus-inner {
 }
 .navbar .container .navbar-nav.pull-right li a,
 .navbar .container-view .navbar-nav.pull-right li a {
-  padding: 20px;
+  padding: 20px 10px;
 }
 .navbar .container .navbar-nav.pull-right li a i:first-of-type,
 .navbar .container-view .navbar-nav.pull-right li a i:first-of-type {
@@ -6504,6 +6504,11 @@ button::-moz-focus-inner {
 .jumbotron h2 span {
   display: block;
   clear: left;
+}
+@media (max-width: 992px) {
+  .alert-info {
+    margin-top: 15px;
+  }
 }
 .list-group {
   margin: 5px 0;
@@ -6983,7 +6988,7 @@ select.ng-invalid:invalid:invalid:focus {
 @media (max-width: 992px) {
   .dropdown-mega .dropdown-menu a,
   .dropdown-mega .dropdown-mega .dropdown-menu a {
-    padding: 10px 0;
+    padding: 15px 0;
     width: 100%;
   }
 }
