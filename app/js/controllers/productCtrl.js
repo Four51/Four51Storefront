@@ -52,7 +52,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 		};
 		Variant.delete(d,
 			function() {
-				redirect ? $location.path('/product/' + $scope.LineItem.Product.InteropID) : init();
+				redirect ? $location.path('/product/' + $scope.LineItem.Product.InteropID) : $route.reload();
 			},
 			function(ex) {
 				$scope.lineItemErrors.push(ex.Message);
