@@ -6081,9 +6081,6 @@ select,
 button {
   min-height: 40px;
 }
-select {
-  -webkit-appearance: listbox;
-}
 option {
   color: #333333;
 }
@@ -6311,6 +6308,9 @@ button::-moz-focus-inner {
     position: relative;
     top: -40px;
     margin-bottom: -40px;
+  }
+  select {
+    -webkit-appearance: listbox;
   }
 }
 .container-view {

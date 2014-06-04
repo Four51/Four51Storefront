@@ -133,11 +133,6 @@ input:not([type="checkbox"]), textarea, select, button {
   min-height: 40px;
 }
 
-//** android is not like the others, we have to tell the dropdown list to be  a list
-select {
-  -webkit-appearance: listbox;
-}
-
 option {
   color: @gray-dark;
 }
@@ -409,6 +404,11 @@ button::-moz-focus-inner {
     position:relative;
     top:-40px;
     margin-bottom:-40px;
+  }
+
+  //** android is not like the others, we have to tell the dropdown list to be  a list
+  select {
+    -webkit-appearance: listbox;
   }
 }
 
