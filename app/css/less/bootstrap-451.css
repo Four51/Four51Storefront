@@ -6081,9 +6081,6 @@ select,
 button {
   min-height: 40px;
 }
-select {
-  -webkit-appearance: listbox;
-}
 option {
   color: #333333;
 }
@@ -6091,6 +6088,15 @@ textarea {
   resize: vertical;
   width: 100%;
   line-height: 150%;
+}
+input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  cursor: pointer;
 }
 button::-moz-focus-inner {
   border: 0;
@@ -6302,6 +6308,9 @@ button::-moz-focus-inner {
     position: relative;
     top: -40px;
     margin-bottom: -40px;
+  }
+  select {
+    -webkit-appearance: listbox;
   }
 }
 .container-view {

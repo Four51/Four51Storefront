@@ -133,11 +133,6 @@ input:not([type="checkbox"]), textarea, select, button {
   min-height: 40px;
 }
 
-//** android is not like the others, we have to tell the dropdown list to be  a list
-select {
-  -webkit-appearance: listbox;
-}
-
 option {
   color: @gray-dark;
 }
@@ -146,6 +141,16 @@ textarea {
   resize: vertical;
   width: 100%;
   line-height: 150%;
+}
+
+input[type="file"] {
+  position: absolute;
+  top:      0;
+  left:     0;
+  right:    0;
+  bottom:   0;
+  opacity:  0;
+  cursor: pointer;
 }
 
 button::-moz-focus-inner {
@@ -399,6 +404,11 @@ button::-moz-focus-inner {
     position:relative;
     top:-40px;
     margin-bottom:-40px;
+  }
+
+  //** android is not like the others, we have to tell the dropdown list to be  a list
+  select {
+    -webkit-appearance: listbox;
   }
 }
 
