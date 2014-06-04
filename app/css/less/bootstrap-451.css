@@ -6889,9 +6889,6 @@ select.ng-invalid:invalid:invalid:focus {
   margin-top: 15px;
   padding: 15px;
 }
-.panel-search button[type="submit"] {
-  visibility: hidden;
-}
 .panel-nav {
   font-size: 13px;
 }
