@@ -19,9 +19,17 @@ function ($scope, $location, $route, $routeParams, ProductDisplayService, Varian
 		}
 	});
 
-	$scope.save = function(){
-		Variant.save($scope.Variant, function(data){
+	function saveVariant(variant) {
+		Variant.save(variant, function(data){
 			$location.path('/product/' + $scope.Product.InteropID + '/'+ data.InteropID);
 		});
+	}
+	$scope.save = function(){
+		saveVariant($scope.Variant);
+	}
+
+	$scope.saveasnew = function() {
+		$scope.Variant.InteropID = null;
+		saveVariant($scope.Variant);
 	}
 }]);
