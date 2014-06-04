@@ -10,22 +10,22 @@
         </div>
         <div>
             <label>{{'Order' | r}} {{'Type' | r}}</label>
-            <select class="form-control" ng-options="key as value for (key,value) in report.OrderTypeOptions" ng-model="report.OrderType" />
+            <select class="form-control" ng-options="key as value for (key,value) in report.OrderTypeOptions" ng-model="report.OrderType"><option value=""></option></select>
             <i class="fa fa-dot-circle-o"></i>
         </div>
         <div>
             <label>{{'Order' | r}} {{'Status' | r}}</label>
-            <select class="form-control" ng-options="status for status in report.OrderStatusOptions" ng-model="report.OrderStatus" />
+            <select class="form-control" ng-options="status for status in report.OrderStatusOptions" ng-model="report.OrderStatus"><option value=""></option></select>
             <i class="fa fa-dot-circle-o"></i>
         </div>
         <div>
             <label>{{'Payment' | r}} {{'Method' | r}}</label>
-            <select class="form-control" ng-options="pm for pm in report.PaymentMethodOptions" ng-model="report.PaymentMethod" />
+            <select class="form-control" ng-options="pm for pm in report.PaymentMethodOptions" ng-model="report.PaymentMethod"><option value=""></option></select>
             <i class="fa fa-dot-circle-o"></i>
         </div>
         <div>
             <label>{{'Categories' | r}}</label>
-            <select class="form-control" ng-options="cat for cat in report.Categories" ng-model="report.Category" />
+            <select class="form-control" ng-options="cat for cat in report.Categories" ng-model="report.Category"><option value=""></option></select>
             <i class="fa fa-dot-circle-o"></i>
         </div>
         <div>
@@ -35,17 +35,17 @@
         </div>
         <div>
             <label>{{'Cost Center' | r}}</label>
-            <select class="form-control" ng-options="center for center in report.CostCenters" ng-model="report.CostCenter" />
+            <select class="form-control" ng-options="center for center in report.CostCenters" ng-model="report.CostCenter"><option value=""></option></select>
             <i class="fa fa-dot-circle-o"></i>
         </div>
         <div>
             <label>{{'User' | r}}</label>
-            <select class="form-control" ng-options="u for u in report.Users" ng-model="report.User" />
+            <select class="form-control" ng-options="u for u in report.Users" ng-model="report.User"><option value=""></option></select>
             <i class="fa fa-users"></i>
         </div>
         <div>
             <label>{{'Ship' | r}} {{'Addresses' | r}}</label>
-            <select class="form-control" ng-options="s for s in report.ShipAddresses" ng-model="report.ShipAddress" />
+            <select class="form-control" ng-options="s for s in report.ShipAddresses" ng-model="report.ShipAddress"><option value=""></option></select>
             <i class="fa fa-truck"></i>
         </div>
         <daterange ng-options="report.TimeSpanOptions" fromdate="report.FromDate" todate="report.ToDate" />
@@ -57,7 +57,7 @@
         </div>
         <div>
             <label>&nbsp;</label>
-            <select multiple size="35" class="form-control" ng-options="key as value for (key,value) in report.ColumnOptions" ng-model="report.SelectedColumns" />
+            <select multiple size="35" class="form-control" ng-options="key as value for (key,value) in report.ColumnOptions" ng-model="report.SelectedColumns"><option value=""></option></select>
         </div>
     </div>
 </div>
@@ -66,7 +66,7 @@
     <div class="col-sm-6 col-off-pull-6 view-form-icon">
         <div>
             <label>Subtotal by Column</label>
-            <select class="form-control" ng-options="key as value for (key,value) in report.SubtotalOptions" ng-model="report.Subtotal" />
+            <select class="form-control" ng-options="key as value for (key,value) in report.SubtotalOptions" ng-model="report.Subtotal"><option value=""></option></select>
             <i class="fa fa-tasks"></i>
         </div>
     </div>

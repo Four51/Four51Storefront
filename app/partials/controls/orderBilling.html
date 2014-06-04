@@ -22,6 +22,7 @@
                             <label class="required">{{'Billing' | r}} {{'Address' | r}}</label>
                             <select class="form-control" ng-show="(addresses | filter:{IsBilling:true}).length > 0" name="billingAddress"
                                     ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required>
+                                <option value=""></option>
                             </select>
                             <i class="fa fa-map-marker"></i>
                         </div>
