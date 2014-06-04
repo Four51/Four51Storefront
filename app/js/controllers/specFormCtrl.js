@@ -1,7 +1,7 @@
 four51.app.controller('SpecFormCtrl', ['$scope', '$location', '$route', '$routeParams', 'ProductDisplayService', 'Variant',
 function ($scope, $location, $route, $routeParams, ProductDisplayService, Variant) {
 	var varID = $routeParams.variantInteropID == 'new' ? null :  $routeParams.variantInteropID;
-
+	$scope.loadingImage = true;
 	ProductDisplayService.getProductAndVariant($routeParams.productInteropID, varID, function(data){
 		$scope.Product = data.product;
 		if(varID)
@@ -32,4 +32,8 @@ function ($scope, $location, $route, $routeParams, ProductDisplayService, Varian
 		$scope.Variant.InteropID = null;
 		saveVariant($scope.Variant);
 	}
+
+	$scope.$on('event:imageLoaded', function() {
+		$scope.loadingImage = false;
+	});
 }]);
