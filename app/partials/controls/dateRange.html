@@ -35,7 +35,7 @@
     </div>
     <div class="col-md-4">
         <label>{{'Time Span' | r}}</label>
-        <select class="form-control" ng-options="key as value for (key,value) in options" ng-change="changed()" ng-model="span" />
+        <select class="form-control" ng-options="key as value for (key,value) in options" ng-change="changed()" ng-model="span"><option value=""></option></select>
         <i class="fa fa-arrows-h"></i>
     </div>
 </div>

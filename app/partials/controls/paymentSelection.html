@@ -42,6 +42,7 @@
                         ng-options="account.ID as (account.Label + ' - Balance: ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{ForPurchase:true}"
                         ng-model="currentOrder.BudgetAccountID"
                         ng-required="currentOrder.PaymentMethod == 'BudgetAccount'">
+                    <option value=""></option>
                 </select>
                 <i class="fa fa-dollar"></i>
             </div>
