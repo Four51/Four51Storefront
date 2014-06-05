@@ -1,31 +1,36 @@
 four51.app.factory('FavoriteOrder', ['$q', '$resource', '$451', function($q, $resource, $451) {
-	var _cacheName = '451Cache.FavoriteOrders.' + $451.apiName;
-	function _then(fn, data) {
+	var cache = [], searchCache;
+	function _then(fn, data, count) {
 		if (angular.isFunction(fn))
-			fn(data);
+			fn(data, count);
 	}
 
-    var _query = function(success) {
-		var favorites = store.get(_cacheName);
-	    favorites ? _then(success, favorites) :
-	        $resource($451.api('favoriteorder'), {}, { isArray: true}).query(function(fav) {
-		        store.set(_cacheName, fav);
-	           _then(success, fav);
-	        });
+    var _query = function(success, search, page, pagesize) {
+	    if (search || search != searchCache) {
+		    searchCache = search;
+		    cache = [];
+	    }
+	    if (typeof cache[(page-1) * pagesize] == 'object' && typeof cache[(page * pagesize) - 1] == 'object') {
+		    _then(success, cache, cache.length);
+	    }
+	    else {
+		    $resource($451.api('favoriteorder')).get({ searchTerm: search, page: page, pagesize: pagesize}).$promise.then(function (list) {
+			    for (var i = 0; i <= list.Count - 1; i++) {
+				    if (typeof cache[i] == 'object') continue;
+				    cache[i] = list.List[i - ((page - 1) * pagesize)] || i;
+			    }
+			    _then(success, cache, list.Count);
+		    });
+	    }
     }
 
     var _save = function(order, success) {
-	    store.remove(_cacheName);
-	    store.remove('451Cache.Order.' + order.ID);
-        $resource($451.api('favoriteorder'), {},  { 'save': { method: 'POST', isArray: true }}).save(order).$promise.then(function(fav) {
-	        store.set(_cacheName, fav);
-            _then(success, fav);
+        $resource($451.api('favoriteorder')).save(order).$promise.then(function(f) {
+	        _then(success, f);
         });
     }
 
 	var _delete = function(orders, success) {
-		store.remove(_cacheName);
-
 		var queue = [];
 		angular.forEach(orders, function(o) {
 			if (o.Selected) {

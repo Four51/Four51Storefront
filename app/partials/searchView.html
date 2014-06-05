@@ -10,35 +10,36 @@
             <form role="search">
                 <div class="view-form-icon">
                     <div class="input-group">
-                        <input type="text" ng-model="searchTerm"  class="form-control" placeholder="Search Products" autocomplete="off" />
+                        <input type="text" ng-model="searchTerm"  class="form-control" placeholder="{{'Search' | r}} {{'Products' | r}}" autocomplete="off" />
                         <i class="fa fa-search"></i>
-                        <span class="hidden-xs input-group-addon">
-                            <small>{{'Press enter to search' | r}}</small>
-                        </span>
-                        <span class="input-group-addon">
-                            <button type="button" class="btn" redirect="catalog"><i class="fa fa-times-circle"></i></button>
-                        </span>
+                        <div class="input-group-btn">
+                            <button type="submit" ng-click="search()" class="btn btn-default">{{'Search' | r}}</button>
+                        </div>
                     </div>
-                    <button type="submit" ng-click="search()" class="btn btn-default">Submit</button>
                 </div>
             </form>
         </div>
-        <div ng-show="products == 0" class="panel-product-list">
+        <div ng-show="productCount == 0" class="panel-product-list">
             <p class="alert alert-info">
                 {{'Your search resulted in no records. Please refine your search.' | r}}
             </p>
         </div>
+        <div class="panel-footer" ng-show="productCount > settings.pageSize">
+            <pagination page="settings.currentPage" max-size="10" rotate="false" boundary-links="true" total-items="productCount"
+                        items-per-page="settings.pageSize" direction-links="true"></pagination>
+        </div>
         <div ng-show="products" class="panel-product-list">
-            <p class="alert alert-info">
-                {{'Search' | r}}
-            </p>
             <nav class="nav">
                 <ul>
-                    <li class="well" ng-repeat="product in products">
+                    <li class="well" ng-repeat="product in products | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
                         <shortproductview p="product" />
                     </li>
                 </ul>
             </nav>
+        </div>
+        <div class="panel-footer" ng-show="productCount > settings.pageSize">
+            <pagination page="settings.currentPage" max-size="10" rotate="false" boundary-links="true" total-items="productCount"
+                        items-per-page="settings.pageSize" direction-links="true"></pagination>
         </div>
     </div>
 </section>

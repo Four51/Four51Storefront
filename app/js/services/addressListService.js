@@ -1,21 +1,27 @@
 four51.app.factory('AddressList', ['$q', '$resource', '$451', function($q, $resource, $451) {
-	function _then(fn, data) {
+	var cache = [];
+	function _then(fn, data, count) {
 		if (angular.isFunction(fn))
-			fn(data);
+			fn(data, count);
 	}
 
-	var _query = function(success) {
-		var addresses = store.get('451Cache.Addresses');
-		addresses ? _then(success, addresses) :
-			$resource($451.api('address')).query().$promise.then(function(list) {
-				store.set('451Cache.Addresses', list);
-				_then(success, list);
+	var _query = function(success, page, pagesize) {
+		if (typeof cache[(page-1) * pagesize] == 'object' && typeof cache[(page * pagesize) - 1] == 'object') {
+			_then(success, cache, cache.length);
+		}
+		else {
+			cache.splice(0, cache.length);
+			$resource($451.api('address')).get({ page: page, pagesize: pagesize}).$promise.then(function (list) {
+				for (var i = 0; i <= list.Count - 1; i++) {
+					if (typeof cache[i] == 'object') continue;
+					cache[i] = list.List[i - ((page - 1) * pagesize)] || i;
+				}
+				_then(success, cache, list.Count);
 			});
+		}
 	}
 
 	var _delete = function(addresses, success) {
-		store.remove('451Cache.Addresses');
-
 		var queue = [];
 		angular.forEach(addresses, function(add) {
 			if (add.Selected) {
@@ -30,6 +36,7 @@ four51.app.factory('AddressList', ['$q', '$resource', '$451', function($q, $reso
 		});
 
 		$q.all(queue).then(function() {
+			cache.splice(0, cache.length);
 			_then(success);
 		});
 	}

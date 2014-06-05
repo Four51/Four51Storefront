@@ -9,8 +9,6 @@
 	<link rel="stylesheet" href="css/less/bootstrap-451.css" data-group="source" />
 	<link rel="stylesheet" href="css/editor.css" data-group="source" />
 	<link rel="stylesheet" href="css/custom.css" data-group="source" />
-
-    <link rel="stylesheet" href="css/font-awesome.min.css" data-group="source" />
     <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css' />
     <link href='//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="css/animate.min.css" />
@@ -30,7 +28,9 @@
         <section class="container-view">
             <ng-view autoscroll />
         </section>
-        <copyright ng-if="!user.Permissions.contains('UnBrandedSite')" />
+        <section class="hidden-print">
+            <copyright ng-if="!user.Permissions.contains('UnBrandedSite')" />
+        </section>
     </section>
 </section>
 
@@ -155,6 +155,7 @@
     <script src="js/directives/daterange.js" data-group="source"></script>
     <script src="js/directives/printing.js" data-group="source"></script>
 	<script src="js/directives/addToOrderSpecs.js" data-group="source"></script>
+    <script src="js/directives/imageonload.js" data-group="source"></script>
 
 </body>
 </html>

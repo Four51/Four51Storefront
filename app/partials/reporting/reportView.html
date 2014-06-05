@@ -1,4 +1,4 @@
-<section class="report-view">
+<section>
     <loadingindicator ng-show="displayLoadingIndicator" />
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -12,38 +12,48 @@
                 <i class="fa fa-bookmark-o"></i>
             </div>
         </div>
-        <div class="panel-table">
-            <tabset ng-show="report" >
-                <tab>
-                    <tab-heading>{{'Conditions' | r}}
-                        <i class="fa fa-briefcase"></i>
-                    </tab-heading>
+        <tabset ng-show="report">
+            <tab>
+                <tab-heading>{{'Conditions' | r}}
+                </tab-heading>
+                <div class="panel-body">
                     <lineitemreport />
+                </div>
+                <div class="panel-footer">
                     <button type="button" class="btn btn-primary pull-right" ng-click="saveReport()">{{'Save' | r}}</button>
-                </tab>
-                <tab>
-                    <tab-heading ng-click="downloadReport(report)">
-                        {{'Report' | r}} {{'Data' | r}}
-                        <i class="fa fa-cogs"></i>
-                    </tab-heading>
-                    <div class="table-responsive">
+                </div>
+            </tab>
+            <tab>
+                <tab-heading ng-click="downloadReport(report)">
+                    {{'Report' | r}} {{'Data' | r}}
+                </tab-heading>
+                <div class="panel-body">
+                    <div class="table-responsive hidden-xs">
                         <table class="table">
                             <tr>
                                 <td ng-repeat="header in report.DataColumns">{{header | r}}</td>
                             </tr>
-                            <tr ng-repeat="row in report.Data">
+                            <tr ng-repeat="row in report.Data | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
                                 <td ng-repeat="header in report.DataColumns">
                                     {{row[header]}}
                                 </td>
                             </tr>
                         </table>
-                        <button type="button" class="btn btn-primary pull-right" ng-click="getDownload()">{{'Download' | r}}</button>
                     </div>
-                </tab>
-            </tabset>
-            <div class="view-response-message text-center" ng-show="actionMessage">
-                <p>{{actionMessage | r}}</p>
-            </div>
+                </div>
+                <div class="panel-footer">
+                    <div ng-show="settings.listCount > settings.pageSize">
+                        <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+                                    items-per-page="settings.pageSize" direction-links="true"></pagination>
+                    </div>
+                    <button type="button" class="btn btn-primary pull-right" ng-click="getDownload()">{{'Download' | r}}</button>
+                </div>
+                <div class="panel-footer">
+                </div>
+            </tab>
+        </tabset>
+        <div class="view-response-message text-center" ng-show="actionMessage">
+            <p>{{actionMessage | r}}</p>
         </div>
     </div>
 </section>

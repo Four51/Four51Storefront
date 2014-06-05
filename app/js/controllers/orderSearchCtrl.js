@@ -1,11 +1,26 @@
 four51.app.controller('OrderSearchCtrl', ['$scope', '$location', 'OrderSearchCriteria', 'OrderSearch',
 function ($scope,  $location, OrderSearchCriteria, OrderSearch) {
-    OrderSearchCriteria.query(function(data) {
-        $scope.OrderSearchCriteria = data;
-        $scope.hasStandardTypes = _hasType(data, 'Standard');
-        $scope.hasReplenishmentTypes = _hasType(data, 'Replenishment');
-        $scope.hasPriceRequestTypes = _hasType(data, 'PriceRequest');
-    });
+	$scope.settings = {
+		currentPage: 1,
+		pageSize: 10
+	};
+
+	OrderSearchCriteria.query(function(data) {
+		$scope.OrderSearchCriteria = data;
+		$scope.hasStandardTypes = _hasType(data, 'Standard');
+		$scope.hasReplenishmentTypes = _hasType(data, 'Replenishment');
+		$scope.hasPriceRequestTypes = _hasType(data, 'PriceRequest');
+	});
+
+	$scope.$watch('settings.currentPage', function() {
+		Query($scope.currentCriteria);
+	});
+
+	$scope.OrderSearch = function($event, criteria) {
+		$event.preventDefault();
+		$scope.currentCriteria = criteria;
+		Query(criteria);
+	};
 
     function _hasType(data, type) {
         var hasType = false;
@@ -15,13 +30,17 @@ function ($scope,  $location, OrderSearchCriteria, OrderSearch) {
         });
         return hasType;
     }
-	$scope.OrderSearch = function($event, criteria) {
-		$event.preventDefault();
+
+	function Query(criteria) {
+		if (!criteria) return;
 		$scope.showNoResults = false;
-		OrderSearch.search(criteria, function(list) {
-            $scope.orders = list;
+		$scope.pagedIndicator = true;
+		OrderSearch.search(criteria, function (list, count) {
+			$scope.orders = list;
+			$scope.settings.listCount = count;
 			$scope.showNoResults = list.length == 0;
-        });
+			$scope.pagedIndicator = false;
+		}, $scope.settings.currentPage, $scope.settings.pageSize);
 		$scope.orderSearchStat = criteria;
-	};
+	}
 }]);

@@ -1,10 +1,4 @@
 <section>
-    <nav class="nav visible-xs">
-        <span class="btn-group">
-            <button class="btn btn-default" ng-class="{'active': isActive('order')}" redirect="/order">{{'Orders' | r}}</button>
-            <button class="btn btn-default" ng-class="{'active': isActive('favoriteorders')}" redirect="/favoriteorders">{{'Favorites' | r}}</button>
-        </span>
-    </nav>
     <div class="panel panel-default" ng-if="favoriteorders.length == 0">
         <div class="panel-heading">
             <h3 class="panel-title panel-primary">{{'Favorite' | r}} {{'Orders' | r}}</h3>
@@ -13,7 +7,7 @@
             <p class="alert alert-warning">You have no {{'Favorite' | rl}} {{'Orders' | rl}} yet!</p>
         </div>
         <div class="panel-footer">
-            <button type="button" class="btn btn-primary pull-right" ng-click="saveFavoriteNow()">{{'View' | r}} {{'Orders' | r}}</button>
+            <button type="button" class="btn btn-primary pull-right" redirect="order">{{'View' | r}} {{'Orders' | r}}</button>
         </div>
     </div>
     <div class="panel panel-default" ng-if="favoriteorders.length > 0">
@@ -21,11 +15,16 @@
             <h3 class="panel-title panel-primary">{{'Favorite' | r}} {{'Orders' | r}}</h3>
         </div>
         <div class="panel-body view-form-icon">
-            <div>
-                <label ng-show="searchTerm">{{'Search' | r}}</label>
-                <input class="form-control" type="text" placeholder="Search" ng-model="searchTerm" autocomplete="off" />
-                <i class="fa fa-search"></i>
-            </div>
+            <form role="search">
+                <div class="input-group">
+                    <label ng-show="searchTerm">{{'Search' | r}}</label>
+                    <input class="form-control" type="text" placeholder="Search" ng-model="searchTerm" autocomplete="off" />
+                    <i class="fa fa-search"></i>
+                    <div class="input-group-btn">
+                        <button type="submit" ng-click="search(searchTerm)" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="panel-table">
             <div class="row text-info">
@@ -39,7 +38,7 @@
                 <div class="col-sm-2 hidden-xs">{{'Order' | r}} {{'Type' | r}}</div>
                 <div class="col-sm-2 hidden-xs"></div>
             </div>
-            <div class="row" ng-repeat="order in favoriteorders | filter:searchTerm">
+            <div class="row" ng-repeat="order in favoriteorders | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
                 <div class="col-sm-2">
                     <input type='checkbox' ng-model="order.Selected" />
                 </div>
@@ -68,7 +67,11 @@
             </div>
         </div>
         <div class="panel-footer">
-            <button type="button" class="btn btn-small btn-danger" ng-click="deleteSelected($event)" ng-show="(favoriteorders | filter:searchTerm | filter:{Selected:true}).length > 0">{{'Delete' | r}} {{'Selected' | r}}</button>
+            <div ng-show="settings.listCount > settings.pageSize">
+                <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+                            items-per-page="settings.pageSize" direction-links="true"></pagination>
+            </div>
+            <button type="button" class="btn btn-small btn-danger" ng-click="deleteSelected($event)" ng-disabled="(favoriteorders | filter:{Selected:true}).length == 0">{{'Delete' | r}} {{'Selected' | r}}</button>
         </div>
     </div>
 </section>

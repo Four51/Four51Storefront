@@ -6,7 +6,7 @@
             <i class="pull-right" ng-class="{'fa fa-caret-up': checkOutSection == 'shipping', 'fa fa-caret-down': checkOutSection == 'order' || checkOutSection == 'billing' }"></i>
         </h3>
     </div>
-    <div class="panel-body" ng-show="checkOutSection == 'shipping'" class="panel-body ">
+    <div class="panel-body" collapse="checkOutSection != 'shipping'" class="panel-body ">
         <div>
             <shippingmessage />
         </div>
@@ -44,6 +44,7 @@
                                                 ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
                                                 ng-model="currentOrder.ShipAddressID"
                                                 ng-required="!currentOrder.IsMultipleShip()">
+                                            <option value=""></option>
                                         </select>
                                         <i class="fa fa-map-marker"></i>
                                 </div>
@@ -54,6 +55,7 @@
                                             ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
                                             ng-options="shipper.Name as shipper.Name for shipper in shippers"
                                             ng-required="!currentOrder.IsMultipleShip() && user.ShipMethod != null" >
+                                        <option value=""></option>
                                     </select>
                                     <i class="fa fa-truck"></i>
                                 </div>
@@ -123,6 +125,7 @@
                                                 ng-model="item.ShipAddressID"
                                                 ng-required="currentOrder.IsMultipleShip()"
                                                 ng-change="setShipAddressAtLineItem(item)">
+                                            <option value=""></option>
                                         </select>
                                         <i class="fa fa-map-marker"></i>
                                     </div>
@@ -135,6 +138,7 @@
                                                 ng-options="shipper.Name as shipper.Name for shipper in shippers | noliverates"
                                                 ng-model="item.ShipperName"
                                                 ng-required="currentOrder.IsMultipleShip() && user.ShipMethod != null" >
+                                            <option value=""></option>
                                         </select>
                                         <i class="fa fa-truck"></i>
                                     </div>

@@ -66,6 +66,24 @@ small,
 //== Components
 
 //== Tables
+.table-responsive {
+  border-top: none;
+  border-left: none;
+  border-bottom:  none;
+  @media (max-width: @screen-xs-max) {
+    border-right: 1px solid @panel-default-border;
+  }
+  tbody {
+    border:  1px solid @panel-default-border;
+    @media (max-width: @screen-xs-max) {
+      border-right: none;
+    }
+    td {
+      border-left: 1px solid @panel-default-border;
+
+    }
+  }
+}
 
 //== Buttons
 .btn-group {
@@ -115,11 +133,6 @@ input:not([type="checkbox"]), textarea, select, button {
   min-height: 40px;
 }
 
-//** android is not like the others, we have to tell the dropdown list to be  a list
-select {
-  -webkit-appearance: listbox;
-}
-
 option {
   color: @gray-dark;
 }
@@ -128,6 +141,16 @@ textarea {
   resize: vertical;
   width: 100%;
   line-height: 150%;
+}
+
+input[type="file"] {
+  position: absolute;
+  top:      0;
+  left:     0;
+  right:    0;
+  bottom:   0;
+  opacity:  0;
+  cursor: pointer;
 }
 
 button::-moz-focus-inner {
@@ -159,7 +182,7 @@ button::-moz-focus-inner {
 //** form field icons
 .view-form-icon {
   // make room for labels
-  & > div {
+  & > div:not(.panel-heading) {
     margin: 35px 0 0;
   }
 
@@ -337,7 +360,17 @@ button::-moz-focus-inner {
   .btn-group {
     width: 100%;
     vertical-align: inherit;
-    .btn {
+    & > .btn {
+      &:first-child:not(:last-child):not(.dropdown-toggle){
+        .border-right-radius(@border-radius-base);
+      }
+      &:not(:first-child):not(:last-child):not(.dropdown-toggle){
+        .border-top-radius(@border-radius-base);
+        .border-bottom-radius(@border-radius-base);
+      }
+      &:last-child:not(:first-child):not(.dropdown-toggle){
+        .border-left-radius(@border-radius-base);
+      }
       width: 100%;
       padding: 15px;
       margin: 5px 0;
@@ -371,6 +404,11 @@ button::-moz-focus-inner {
     position:relative;
     top:-40px;
     margin-bottom:-40px;
+  }
+
+  //** android is not like the others, we have to tell the dropdown list to be  a list
+  select {
+    -webkit-appearance: listbox;
   }
 }
 
@@ -451,7 +489,7 @@ button::-moz-focus-inner {
 
       &.pull-right {
         li a {
-          padding: 20px;
+          padding: 20px 10px;
           // cart icon
           i:first-of-type {
             border-radius: 50%;
@@ -580,6 +618,22 @@ button::-moz-focus-inner {
 }
 
 //== Tabs
+.panel {
+  .tabbable {
+    .panel-heading {
+      background-color: @panel-default-heading-bg;
+    }
+    ul {
+      margin: 0 15px;
+      li.active {
+        a,
+        & a:hover {
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}
 
 //== Pills
 
@@ -624,6 +678,11 @@ button::-moz-focus-inner {
 }
 
 //== Form states and alerts
+.alert-info {
+  @media (max-width: @screen-md-min) {
+    margin-top: 15px;
+  }
+}
 
 //== Tooltips
 

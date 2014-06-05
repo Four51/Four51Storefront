@@ -69,14 +69,18 @@
         </div>
         <hr />
         <div class="row create-address-type">
-            <span>
-                <label ng-show="user.Permissions.contains('CreateShipToAddress')">Save to Shipping Address Book</label>
-                <input name="isShipping" type="checkbox" ng-model="address.IsShipping" ng-required="!address.IsBilling" />
-            </span>
-            <span>
-                <label ng-show="user.Permissions.contains('CreateBillToAddress')">Save to Billing Address Book </label>
-                <input name="isBilling" type="checkbox" ng-model="address.IsBilling" ng-required="!address.IsShipping" />
-            </span>
+            <div class="checkbox">
+                <label ng-show="user.Permissions.contains('CreateShipToAddress')">
+                    <input name="isShipping" type="checkbox" ng-model="address.IsShipping" ng-required="!address.IsBilling" />
+                    Save to Shipping Address Book
+                </label>
+            </div>
+            <div class="checkbox">
+                <label ng-show="user.Permissions.contains('CreateBillToAddress')">
+                    <input name="isBilling" type="checkbox" ng-model="address.IsBilling" ng-required="!address.IsShipping" />
+                    Save to Billing Address Book
+                </label>
+            </div>
         </div>
         <p class="alert alert-warning text-center" ng-show="addressEdit.isShipping.$invalid || addressEdit.isBilling.$invalid">
             An address must saved to the shipping, billing or both address books.

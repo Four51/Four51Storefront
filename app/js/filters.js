@@ -73,6 +73,7 @@ four51.app.filter('noliverates', function() {
 
 four51.app.filter('paginate', function() {
 	return function(input, start) {
+		if (typeof input != 'object' || !input) return;
 		start = +start; //parse to int
 		return input.slice(start);
 	}

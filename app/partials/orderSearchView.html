@@ -1,10 +1,4 @@
 <section class="order-search-view">
-    <nav class="nav visible-xs" ng-show="hasStandardTypes || hasReplenishmentTypes || hasPriceRequestTypes">
-        <span class="btn-group">
-            <button class="btn btn-default" ng-class="{'active': isActive('order')}" redirect="/order">{{'Orders' | r}}</button>
-            <button class="btn btn-default" ng-class="{'active': isActive('favoriteorders')}" redirect="/favoriteorders">{{'Favorites' | r}}</button>
-        </span>
-    </nav>
     <div class="panel panel-default" ng-if="!hasStandardTypes && !hasReplenishmentTypes && !hasPriceRequestTypes">
         <div class="panel-heading">
             <h3 class="panel-title">{{'Orders' | r}}</h3>
@@ -146,6 +140,11 @@
             </h3>
         </div>
         <div class="panel-table">
+            <loadingindicator ng-show="pagedIndicator" />
+            <div ng-show="settings.listCount > settings.pageSize">
+                <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+                            items-per-page="settings.pageSize" direction-links="true"></pagination>
+            </div>
             <div class="row hidden-xs text-info">
                 <div class="col-xs-12 col-sm-2">{{'ID' | r}}</div>
                 <div class="col-xs-12 col-sm-2">{{'Type' | r}}</div>
@@ -154,7 +153,7 @@
                 <div class="col-xs-12 col-sm-2">{{'Submitted' | r}} {{'Date' | r}}</div>
                 <div class="col-xs-12 col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">{{'Total' | r}}</div>
             </div>
-            <div class="row" ng-repeat="order in orders">
+            <div class="row" ng-repeat="order in orders | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
                 <div class="col-sm-2">
                     <span class="visible-xs panel-table-heading-xs text-info">{{'ID' | r}}</span>
                     <a ng-href="order/{{order.ID}}">{{order.ExternalID}}</a>
@@ -179,6 +178,10 @@
                     <span class="visible-xs heading-xs text-info">{{'Total' | r}}</span>
                     {{order.Total | currency:"$"}}
                 </div>
+            </div>
+            <div ng-show="settings.listCount > settings.pageSize">
+                <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+                            items-per-page="settings.pageSize" direction-links="true"></pagination>
             </div>
         </div>
     </div>
