@@ -30,7 +30,7 @@
             <div class="view-form-icon" ng-if="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')">
                 <div ng-class="{'view-form-select': !currentOrder.CostCenter, '': currentOrder.CostCenter }">
                     <label class="required">{{'Cost Center' | r}}</label>
-                    <select class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="currentOrder.CostCenter"></select>
+                    <select class="form-control" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="currentOrder.CostCenter"><option value=""></option></select>
                     <input class="form-control" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="currentOrder.CostCenter" type='text' required placeholder="{{'Cost Center' | r}}" />
                     <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{currentOrder.CostCenter}}</span>
                     <i class="fa fa-arrow-down" ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')"></i>

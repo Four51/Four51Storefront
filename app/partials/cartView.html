@@ -100,7 +100,9 @@
                                         <div class="row view-form-icon">
                                             <div class="col-xs-9">
                                                 <label class="required">{{'Cost Center' | r}}</label>
-                                                <select name="costcenter" class="form-control " style="padding-left: 25px;" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter"></select>
+                                                <select name="costcenter" class="form-control " style="padding-left: 25px;" required ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter">
+                                                    <option value=""></option>
+                                                </select>
                                                 <input name="costcenter" class="form-control" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="{{'Cost Center' | r}}" />
                                                 <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
                                                 <i ng-if="user.CostCenters.length != 1" class="fa fa-money"></i>

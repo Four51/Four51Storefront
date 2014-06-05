@@ -4,6 +4,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
     $scope.LineItem = {};
 	$scope.addToOrderText = "Add To Cart";
 	$scope.loadingIndicator = true;
+	$scope.loadingImage = true;
 	$scope.searchTerm = null;
 	$scope.settings = {
 		currentPage: 1,
@@ -95,6 +96,11 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			}
 		);
 	}
+
+	$scope.$on('event:imageLoaded', function() {
+		//$scope.loadingImage = false;
+		alert('image loaded');
+	});
 }]);
 
 /* product matrix control
