@@ -78,7 +78,7 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
 		 var product = $resource($451.api('Products/:interopID'), { interopID: '@ID' }).get({ interopID: param, page: page || 1, pagesize: pagesize || 10, searchTerm: searchTerm }).$promise.then(function(product) {
 			for (var i = 0; i <= product.VariantCount-1; i++) {
 				if (typeof variantCache[i] == 'object') continue;
-				variantCache[i] = product.Variants[i - ((page - 1) * pagesize)] || i;
+				variantCache[i] = product.Variants[i - (((page || 1) - 1) * (pagesize || 100))] || i;
 			}
 		    product.Variants = variantCache;
 
@@ -116,7 +116,7 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
 			    angular.forEach(products.List, _extend);
 			    for (var i = 0; i <= products.Count - 1; i++) {
 				    if (typeof productCache[i] == 'object') continue;
-				    productCache[i] = products.List[i - ((criteria.Page - 1) * criteria.PageSize)] || i;
+				    productCache[i] = products.List[i - (((criteria.Page || 1) - 1) * (criteria.PageSize || 100))] || i;
 			    }
 			    _then(success, productCache, products.Count);
 		    });

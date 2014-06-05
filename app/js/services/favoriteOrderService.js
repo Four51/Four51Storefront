@@ -17,7 +17,7 @@ four51.app.factory('FavoriteOrder', ['$q', '$resource', '$451', function($q, $re
 		    $resource($451.api('favoriteorder')).get({ searchTerm: search, page: page, pagesize: pagesize}).$promise.then(function (list) {
 			    for (var i = 0; i <= list.Count - 1; i++) {
 				    if (typeof cache[i] == 'object') continue;
-				    cache[i] = list.List[i - ((page - 1) * pagesize)] || i;
+				    cache[i] = list.List[i - (((page || 1)) - 1) * (pagesize || 100)] || i;
 			    }
 			    _then(success, cache, list.Count);
 		    });

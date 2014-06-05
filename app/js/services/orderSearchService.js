@@ -23,7 +23,7 @@ four51.app.factory('OrderSearch', ['$resource', '$451', function($resource, $451
 		    $resource($451.api('order')).get(stat).$promise.then(function (list) {
 			    for (var i = 0; i <= list.Count - 1; i++) {
 				    if (typeof cache[i] == 'object') continue;
-				    cache[i] = list.List[i - ((page - 1) * pagesize)] || i;
+				    cache[i] = list.List[i - (((page || 1)) - 1) * (pagesize || 100)] || i;
 			    }
 			    _then(success, cache, list.Count);
 		    });
