@@ -10,7 +10,6 @@ four51.app.factory('AddressList', ['$q', '$resource', '$451', function($q, $reso
 			_then(success, cache, cache.length);
 		}
 		else {
-			cache.splice(0, cache.length);
 			$resource($451.api('address')).get({ page: page, pagesize: pagesize}).$promise.then(function (list) {
 				for (var i = 0; i <= list.Count - 1; i++) {
 					if (typeof cache[i] == 'object') continue;

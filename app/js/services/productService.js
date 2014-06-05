@@ -112,7 +112,6 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
 		    _then(success, productCache, productCache.length);
 	    }
 	    else {
-		    productCache.splice(0, productCache.length);
 		    $resource($451.api('Products')).get(criteria).$promise.then(function (products) {
 			    angular.forEach(products.List, _extend);
 			    for (var i = 0; i <= products.Count - 1; i++) {
