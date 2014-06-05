@@ -33,7 +33,8 @@ function ($scope, $location, $route, $routeParams, ProductDisplayService, Varian
 		saveVariant($scope.Variant);
 	}
 
-	$scope.$on('event:imageLoaded', function() {
-		$scope.loadingImage = false;
+	$scope.$on('event:imageLoaded', function(event, result) {
+		$scope.loadingImage = !result;
+		$scope.$apply();
 	});
 }]);
