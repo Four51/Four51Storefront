@@ -97,9 +97,9 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 		);
 	}
 
-	$scope.$on('event:imageLoaded', function() {
-		//$scope.loadingImage = false;
-		alert('image loaded');
+	$scope.$on('event:imageLoaded', function(event, result) {
+		$scope.loadingImage = !result;
+		$scope.$apply();
 	});
 }]);
 
