@@ -1,6 +1,6 @@
 four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function($resource, $451, Security, User) {
 	//var _cacheName = '451Cache.Product.' + $451.apiName;
-	var variantCache = [], productCache = [], productSearchTerm;
+	var variantCache = [], productCache = [], criteriaCache;
 	function _then(fn, data, count) {
 		if (angular.isFunction(fn))
 			fn(data, count);
@@ -91,10 +91,6 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
     }
 
     var _search = function(categoryInteropID, searchTerm, relatedProductsGroupID, success, page, pagesize) {
-        if (productSearchTerm != searchTerm) {
-	        productSearchTerm = searchTerm;
-	        productCache.splice(0, productCache.length);
-        }
 	    if(!categoryInteropID && !searchTerm && !relatedProductsGroupID){
 			_then(success, null);
 			return null;
@@ -107,6 +103,11 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
 	        'Page': page || 1,
 	        'PageSize': pagesize || 10
         };
+
+	    if (criteriaCache != criteria)
+		    productCache.splice(0, productCache.length);
+	    criteriaCache = criteria;
+
 	    //var cacheID = '451Cache.Products.' + criteria.CategoryInteropID + criteria.SearchTerms.replace(/ /g, "");
 		//var products = store.get(cacheID);
 	    //products ? _then(success, products) :
