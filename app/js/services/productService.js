@@ -70,6 +70,8 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
 	}
 
      var _get = function(param, success, page, pagesize, searchTerm) {
+	     page = page || 1;
+	     pagesize = pagesize || 100;
 	     if (!angular.isUndefined(searchTerm)) {
 		     variantCache.splice(0, variantCache.length);
 	     }
@@ -78,7 +80,7 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
 		 var product = $resource($451.api('Products/:interopID'), { interopID: '@ID' }).get({ interopID: param, page: page || 1, pagesize: pagesize || 10, searchTerm: searchTerm }).$promise.then(function(product) {
 			for (var i = 0; i <= product.VariantCount-1; i++) {
 				if (typeof variantCache[i] == 'object') continue;
-				variantCache[i] = product.Variants[i - (((page || 1) - 1) * (pagesize || 100))] || i;
+				variantCache[i] = product.Variants[i - (page - 1) * pagesize] || i;
 			}
 		    product.Variants = variantCache;
 
