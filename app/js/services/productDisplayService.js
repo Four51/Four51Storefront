@@ -17,7 +17,7 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 
 		var addToMarkups = function(spec){
 			var otherMarkup;
-			if(spec.isOtherSelected && spec.OtherValueMarkup > 0)
+			if(spec.AllowOtherValue && spec.Value && !spec.SelectedOptionID && spec.OtherValueMarkup > 0)
 				otherMarkup = spec.OtherValueMarkup;
 
 			if((spec.Options && spec.SelectedOptionID) || otherMarkup){
