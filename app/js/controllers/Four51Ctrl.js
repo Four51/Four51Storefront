@@ -1,5 +1,5 @@
-four51.app.controller('Four51Ctrl', ['$scope', '$route', '$location', '$451', 'User', 'Order', 'Security', 'OrderConfig', 'Category', 'AppConst',
-function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, Category, AppConst) {
+four51.app.controller('Four51Ctrl', ['$scope', '$route', '$location', '$451', 'User', 'Order', 'Security', 'OrderConfig', 'Category', 'AppConst','XLATService',
+function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, Category, AppConst, XLATService) {
     $scope.AppConst = AppConst;
 	$scope.scroll = 0;
 	$scope.isAnon = $451.isAnon; //need to know this before we have access to the user object
@@ -25,6 +25,7 @@ function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, C
         if (Security.isAuthenticated()) {
             User.get(function(user) {
                 $scope.user = user;
+                XLATService.getCurrentLanguage(user.Culture.Name);
 
 	            if (!$scope.user.TermsAccepted)
 		            $location.path('conditions');
