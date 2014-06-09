@@ -6,6 +6,8 @@ four51.app.factory('MessageList', ['$q', '$resource', '$451', function($q, $reso
 	}
 
 	function _query(page, pagesize, success) {
+		page = page || 1;
+		pagesize = pagesize || 100;
 		// first check that the requested page hasn't already been retrieved
 		if (typeof cache[(page-1) * pagesize] == 'object' && typeof cache[(page * pagesize) - 1] == 'object') {
 			_then(success, cache, cache.length);
@@ -15,7 +17,7 @@ four51.app.factory('MessageList', ['$q', '$resource', '$451', function($q, $reso
 			$resource($451.api('message')).get({ page: page, pagesize: pagesize }).$promise.then(function (list) {
 				for (var i = 0; i <= list.Count - 1; i++) {
 					if (typeof cache[i] == 'object') continue;
-					cache[i] = list.List[i - ((page - 1) * pagesize)] || i;
+					cache[i] = list.List[i - (page - 1) * pagesize] || i;
 				}
 				console.log(cache.length);
 				_then(success, cache, list.Count);

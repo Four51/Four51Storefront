@@ -6,6 +6,8 @@ four51.app.factory('OrderSearch', ['$resource', '$451', function($resource, $451
 	}
 
     var _search = function(stat, success, page, pagesize) {
+	    page = page || 1;
+	    pagesize = pagesize || 100;
 	    (stat.DateRangeFrom && typeof stat.DateRangeFrom != 'string') ? stat.DateRangeFrom = stat.DateRangeFrom.toISOString() : null;
 	    (stat.DateRangeTo && typeof stat.DateRangeTo != 'string') ? stat.DateRangeTo = stat.DateRangeTo.toISOString() : null;
 
@@ -20,11 +22,10 @@ four51.app.factory('OrderSearch', ['$resource', '$451', function($resource, $451
 		    _then(success, cache, cache.length);
 	    }
 	    else {
-		    cache.splice(0, cache.length);
 		    $resource($451.api('order')).get(stat).$promise.then(function (list) {
 			    for (var i = 0; i <= list.Count - 1; i++) {
 				    if (typeof cache[i] == 'object') continue;
-				    cache[i] = list.List[i - ((page - 1) * pagesize)] || i;
+				    cache[i] = list.List[i - (page - 1) * pagesize] || i;
 			    }
 			    _then(success, cache, list.Count);
 		    });

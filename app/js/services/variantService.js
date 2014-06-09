@@ -7,6 +7,9 @@ four51.app.factory('Variant', ['$rootScope', '$resource', '$451', 'Security', 'E
 	}
 
 	function _extend(variant) {
+		if(variant.PreviewUrl){
+			variant.PreviewUrl = variant.PreviewUrl + '?r=' + Math.random();
+		}
 		angular.forEach(variant.Specs, function(spec) {
 			if (spec.ControlType == 'File' && spec.File && spec.File.Url.indexOf('auth') == -1)
 				spec.File.Url += "&auth=" + Security.auth();
