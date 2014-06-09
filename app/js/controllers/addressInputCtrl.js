@@ -62,24 +62,24 @@ function ($scope, $rootScope, $location, User, Address, Resources) {
         $scope.address.AddressName = addressobj.name;
         addressobj.formatted_phone_number ? $scope.address.Phone = addressobj.formatted_phone_number : '';
             angular.forEach(addressobj.address_components, function(component){
-            component.types[0] == 'street_number'   ? (streetNum = component.long_name)     : null;
-            component.types[0] == 'route'           ? (streetName = component.long_name)    : null;
-            if (streetNum || streetName){
-                if (streetNum && streetName){
-                    streetComplete = streetNum + ' ' + streetName;
+                component.types[0] == 'street_number'   ? (streetNum = component.long_name)     : null;
+                component.types[0] == 'route'           ? (streetName = component.long_name)    : null;
+                if (streetNum || streetName){
+                    if (streetNum && streetName){
+                        streetComplete = streetNum + ' ' + streetName;
+                    }
+                    else if (streetNum){
+                        streetComplete = streetNum;
+                    }
+                    else{
+                        streetComplete = streetName;
+                    }
+                    $scope.address.Street1 = streetComplete;
                 }
-                else if (streetNum){
-                    streetComplete = streetNum;
-                }
-                else{
-                    streetComplete = streetName;
-                }
-                $scope.address.Street1 = streetComplete;
-            }
-            component.types[0] == 'locality'                    ? ($scope.address.City = component.long_name)       : '';
-            component.types[0] == 'administrative_area_level_1' ? ($scope.address.State = component.short_name)     : '';
-            component.types[0] == 'country'                     ? ($scope.address.Country = component.short_name)   : '';
-            component.types[0] == 'postal_code'                 ? ($scope.address.Zip = component.short_name)       : '';
+                component.types[0] == 'locality'                    ? ($scope.address.City = component.long_name)       : '';
+                component.types[0] == 'administrative_area_level_1' ? ($scope.address.State = component.short_name)     : '';
+                component.types[0] == 'country'                     ? ($scope.address.Country = component.short_name)   : '';
+                component.types[0] == 'postal_code'                 ? ($scope.address.Zip = component.short_name)       : '';
         });
     }
 }]);
