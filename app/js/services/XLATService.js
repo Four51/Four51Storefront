@@ -23,10 +23,11 @@ four51.app.factory('XLATService', ['$interpolate', function($interpolate) {
 
     var _xlat = function(value, parameters) {
         if (currentLanguage == 'en-US') return value;
-        //if (value.indexOf('no records') == -1) return value;
+        //if (value.indexOf('or both') == -1) return value;
         var table = tables[currentLanguage];
-        var isUpperCase = upperCase(value);
-        value = value.toLowerCase();
+        var isUpperCase = value ? upperCase(value) : false;
+        var original = value;
+        value = value ? value.toLowerCase() : value;
         while(table.hasOwnProperty(value) && $.isFunction(table[value])) {
             value = table[value](parameters);
         }
@@ -41,7 +42,7 @@ four51.app.factory('XLATService', ['$interpolate', function($interpolate) {
                 return result;
             }
         } else {
-            var result = isUpperCase ? value.charAt(0).toUpperCase() + value.slice(1) : value;
+            var result = isUpperCase ? original.charAt(0).toUpperCase() + original.slice(1) : original;
             return result;
         }
     };

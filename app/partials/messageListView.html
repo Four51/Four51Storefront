@@ -1,16 +1,16 @@
 <section>
     <div class="panel panel-default" ng-if="messages.length == 0">
         <div class="panel-heading">
-            <h3 class="panel-title">{{'Messages' | r}}</h3>
+            <h3 class="panel-title">{{'Messages' | r | xlat}}</h3>
         </div>
         <div class="panel-body">
-            <p class="alert alert-warning">You have no {{'Messages' | rl}} yet!</p>
+            <p class="alert alert-warning">{{'You have no ' + ('Messages' | rl) + ' yet!' | xlat}}</p>
         </div>
     </div>
     <div class="panel panel-default" ng-if="messages.length > 0">
         <loadingindicator ng-show="displayLoadingIndicator" />
         <div class="panel-heading">
-            <h3 class="panel-title">{{'Messages' | r}}</h3>
+            <h3 class="panel-title">{{'Messages' | r | xlat}}</h3>
         </div>
         <div id="451qa_msg_list" class="panel-table">
             <div class="row text-info">
@@ -19,43 +19,43 @@
                     <!--<label class="visible-xs">Select all</label>-->
                     <!--<input id="451_chk_all" type='checkbox' ng-click="checkAll($event)" />-->
                 </div>
-                <div class="col-sm-2 hidden-xs">{{'Status' | r}}</div>
-                <div class="col-sm-2 hidden-xs">{{'Date' | r}}</div>
-                <div class="col-sm-2 hidden-xs">{{'Subject' | r}}</div>
-                <div class="col-sm-2 hidden-xs">{{'From' | r}}</div>
+                <div class="col-sm-2 hidden-xs">{{'Status' | r | xlat}}</div>
+                <div class="col-sm-2 hidden-xs">{{'Date' | r | xlat}}</div>
+                <div class="col-sm-2 hidden-xs">{{'Subject' | r | xlat}}</div>
+                <div class="col-sm-2 hidden-xs">{{'From' | r | xlat}}</div>
              </div>
             <div class="451qa_msg_item row" ng-repeat="message in messages | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize | orderBy:DateSent">
                 <div class="col-sm-2">
                     <input type='checkbox' ng-model="message.Selected" />
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">{{'Status' | r}}</span>
-                    {{message.Box.replace('Box', '')}}
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Status' | r | xlat}}</span>
+                    {{message.Box.replace('Box', '') | xlat}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">{{'Date' | r}}</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Date' | r | xlat}}</span>
                     {{message.DateSent | date: 'medium'}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">{{'Subject' | r}}</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Subject' | r | xlat}}</span>
                     <a ng-href="message/{{message.ID}}">
                         {{message.Subject}}
                     </a>
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">{{'From' | r}}</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'From' | r | xlat}}</span>
                     {{message.FromName}}
                 </div>
             </div>
         </div>
         <div class="panel-footer">
             <pagination ng-change="paged()" ng-model="settings.currentPage" page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
-                        items-per-page="settings.pageSize" direction-links="true"></pagination>
+                        items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
             <button id="451qa_btn_delmsg" type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-disabled="(messages | filter:{Selected:true}).length == 0">
-                <span>{{'Delete' | r}} {{'Selected' | r}}</span>
+                <span>{{('Delete' | r) + ' ' + ('Selected' | r) | xlat}}</span>
             </button>
             <button id="451qa_btn_cmpmsg" class="btn btn-primary pull-right" type="button" redirect="message/new">
-                <span>{{'Compose' | r}}</span>
+                <span>{{'Compose' | r | xlat}}</span>
             </button>
         </div>
     </div>

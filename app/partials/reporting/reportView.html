@@ -2,36 +2,36 @@
     <loadingindicator ng-show="displayLoadingIndicator" />
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 ng-if="!report.ID" class="panel-title panel-primary">{{report.ReportType | r}}</h3>
+            <h3 ng-if="!report.ID" class="panel-title panel-primary">{{report.ReportType | r | xlat}}</h3>
             <h3 ng-if="report.ID" class="panel-title panel-primary">{{report.Name}}</h3>
         </div>
         <div class="panel-body view-form-icon">
             <div ng-if="report && !report.ID">
-                <label>{{'Name' | r}}</label>
-                <input required class="form-control" type="text" ng-model="report.Name" placeholder="{{'Name' | r}}" />
+                <label>{{'Name' | r | xlat}}</label>
+                <input required class="form-control" type="text" ng-model="report.Name" placeholder="{{'Name' | r | xlat}}" />
                 <i class="fa fa-bookmark-o"></i>
             </div>
         </div>
         <tabset ng-show="report">
             <tab>
-                <tab-heading>{{'Conditions' | r}}
+                <tab-heading>{{'Conditions' | r | xlat}}
                 </tab-heading>
                 <div class="panel-body">
                     <lineitemreport />
                 </div>
                 <div class="panel-footer">
-                    <button type="button" class="btn btn-primary pull-right" ng-click="saveReport()">{{'Save' | r}}</button>
+                    <button type="button" class="btn btn-primary pull-right" ng-click="saveReport()">{{'Save' | r  | xlat}}</button>
                 </div>
             </tab>
             <tab>
                 <tab-heading ng-click="downloadReport(report)">
-                    {{'Report' | r}} {{'Data' | r}}
+                    {{('Report' | r) + ' ' + ('Data' | r) | xlat}}
                 </tab-heading>
                 <div class="panel-body">
                     <div class="table-responsive hidden-xs">
                         <table class="table">
                             <tr>
-                                <td ng-repeat="header in report.DataColumns">{{header | r}}</td>
+                                <td ng-repeat="header in report.DataColumns">{{header | r | xlat}}</td>
                             </tr>
                             <tr ng-repeat="row in report.Data | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
                                 <td ng-repeat="header in report.DataColumns">
@@ -44,9 +44,9 @@
                 <div class="panel-footer">
                     <div ng-show="settings.listCount > settings.pageSize">
                         <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
-                                    items-per-page="settings.pageSize" direction-links="true"></pagination>
+                                    items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
                     </div>
-                    <button type="button" class="btn btn-primary pull-right" ng-click="getDownload()">{{'Download' | r}}</button>
+                    <button type="button" class="btn btn-primary pull-right" ng-click="getDownload()">{{'Download' | r | xlat}}</button>
                 </div>
                 <div class="panel-footer">
                 </div>

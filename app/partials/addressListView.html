@@ -2,30 +2,30 @@
     <loadingindicator ng-show="displayLoadingIndicator" />
     <div class="panel panel-default" ng-if="(addresses | filter:{IsCustEditable:true}).length == 0">
         <div class="panel-heading">
-            <h3 class="panel-title">{{'Addresses' | r}}</h3>
+            <h3 class="panel-title">{{'Addresses' | r | xlat}}</h3>
         </div>
         <div class="panel-body">
-            <p class="alert alert-warning">You have no {{'addresses' | rc}} yet!</p>
+            <p class="alert alert-warning">{{'You have no' + ' ' + ('addresses' | rc) + ' ' + 'yet!' | xlat}}</p>
         </div>
         <div class="panel-footer">
-            <button type="button" class="btn btn-primary" ng-click="newAddress($event)">Add an {{'address' | rc}} now</button>
+            <button type="button" class="btn btn-primary" ng-click="newAddress($event)">{{'Add an' + ' ' + ('address' | rc) + ' ' + 'now' | xlat}}</button>
         </div>
     </div>
     <div class="panel panel-default"  ng-if="(addresses | filter:{IsCustEditable:true}).length > 0">
         <div class="panel-heading">
-            <h3 class="panel-title">{{'Addresses' | r}}</h3>
+            <h3 class="panel-title">{{'Addresses' | r | xlat}}</h3>
         </div>
         <div class="panel-table">
             <div class="row text-info" ng-show="(addresses | filter:{IsCustEditable:true}).length > 0">
                 <div class="col-sm-2">
-                    <label class="visible-xs">{{'Select all' | r}}</label>
+                    <label class="visible-xs">{{'Select all' | r | xlat}}</label>
                     <input type='checkbox' ng-click="checkAll($event)" />
                 </div>
-                <div class="col-sm-2 hidden-xs">{{'Name' | r}}</div>
-                <div class="col-sm-2 hidden-xs">{{'City' | r}}</div>
-                <div class="col-sm-2 hidden-xs">{{'State' | r}}</div>
-                <div class="col-sm-2 hidden-xs">{{'Shipping' | r}}</div>
-                <div class="col-sm-2 hidden-xs">{{'Billing' | r}}</div>
+                <div class="col-sm-2 hidden-xs">{{'Name' | r | xlat}}</div>
+                <div class="col-sm-2 hidden-xs">{{'City' | r | xlat}}</div>
+                <div class="col-sm-2 hidden-xs">{{'State' | r | xlat}}</div>
+                <div class="col-sm-2 hidden-xs">{{'Shipping' | r | xlat}}</div>
+                <div class="col-sm-2 hidden-xs">{{'Billing' | r | xlat}}</div>
             </div>
             <div class="row"  ng-repeat="address in addresses | filter:{IsCustEditable:true} | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
                 <loadingindicator ng-show="pagedIndicator" />
@@ -37,19 +37,19 @@
                     <a ng-href="address/{{address.ID}}">{{address.AddressName}}</a>
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">{{'City' | r}}</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'City' | r | xlat}}</span>
                     {{address.City}}</a>
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">{{'State' | r}}</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'State' | r | xlat}}</span>
                     {{address.State}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">{{'Shipping' | r}}</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Shipping' | r | xlat}}</span>
                     <i ng-class="{'fa fa-check': address.IsShipping }"></i>
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">{{'Billing' | r}}</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Billing' | r | xlat}}</span>
                     <i ng-class="{'fa fa-check': address.IsBilling }"></i>
                 </div>
             </div>
@@ -57,10 +57,10 @@
         <div class="panel-footer">
             <div ng-show="settings.listCount > settings.pageSize">
                 <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
-                            items-per-page="settings.pageSize" direction-links="true"></pagination>
+                            items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
             </div>
-            <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-disbaled="(addresses | filter:{Selected:true}).length == 0">{{'Delete' | r}} {{'Selected' | r}}</button>
-            <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" type="button" class="btn btn-primary pull-right" ng-click="newAddress($event)">{{'New' | r}} {{'Address' | r}}</button>
+            <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-disbaled="(addresses | filter:{Selected:true}).length == 0">{{('Delete' | r) + ' ' + ('Selected' | r) | xlat}}</button>
+            <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" type="button" class="btn btn-primary pull-right" ng-click="newAddress($event)">{{('New' | r) + ' ' + ('Address' | r) | xlat}}</button>
         </div>
 
         <div class="navbar-fixed-bottom">
