@@ -2,7 +2,9 @@ four51.app.directive('customselectionfield', ['$451', function($451) {
 	var obj = {
 		scope: {
 			customfield : '=',
-			change: '='
+			change: '=',
+            hidesuffix: '@',
+            hideprefix: '@'
 		},
 		restrict: 'E',
 		transclude: true,
