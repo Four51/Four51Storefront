@@ -2,11 +2,11 @@
     <div>
         <label ng-class="{required: customfield.Required}">{{customfield.Label || customfield.Name | r}}</label>
         <div ng-class="{'input-group':(customfield.Prefix || customfield.Suffix)}">
-            <span class="input-group-addon"  ng-if="customfield.Prefix">{{customfield.Prefix | r}}</span>
+            <span ng-hide="hideprefix" class="input-group-addon"  ng-if="customfield.Prefix">{{customfield.Prefix | r}}</span>
             <select class="form-control" ng-init="init()" ng-required="customfield.Required" ng-change="changed()" ng-model="item" ng-options="option.Value for option in customfield.Options" ng-if="customfield.Options">
                 <option value=""></option></select>
             <input class="form-control" type="text" ng-change="otherChanged()" ng-model="other" ng-show="customfield.isOtherSelected" autocomplete="off" ng-required="customfield.Required && customfield.isOtherSelected" />
-            <span class="input-group-addon"  ng-if="customfield.Suffix">{{customfield.Suffix | r}}</span>
+            <span ng-hide="hidesuffix" class="input-group-addon"  ng-if="customfield.Suffix">{{customfield.Suffix | r}}</span>
         </div>
         <i class="fa fa-edit"></i>
     </div>
