@@ -6903,26 +6903,58 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-nav {
   font-size: 13px;
 }
+.panel-nav .panel-body,
+.panel-nav .panel-category-list:not(.no-panels),
+.panel-nav .panel-product-list:not(.no-panels),
+.panel-nav .panel-lineitem,
+.panel-nav .panel-order-history,
+.panel-nav .panel-order-shipping-multiple {
+  padding: 0 0 15px 0;
+}
+.panel-nav .panel-body > ul,
+.panel-nav .panel-category-list:not(.no-panels) > ul,
+.panel-nav .panel-product-list:not(.no-panels) > ul,
+.panel-nav .panel-lineitem > ul,
+.panel-nav .panel-order-history > ul,
+.panel-nav .panel-order-shipping-multiple > ul {
+  border-bottom: 1px solid #dddddd;
+}
+.panel-nav .panel-body > ul > ul > li:first-of-type,
+.panel-nav .panel-category-list:not(.no-panels) > ul > ul > li:first-of-type,
+.panel-nav .panel-product-list:not(.no-panels) > ul > ul > li:first-of-type,
+.panel-nav .panel-lineitem > ul > ul > li:first-of-type,
+.panel-nav .panel-order-history > ul > ul > li:first-of-type,
+.panel-nav .panel-order-shipping-multiple > ul > ul > li:first-of-type {
+  border-top: none;
+}
 .panel-nav ul li {
   border-top: 1px solid #dddddd;
   float: left;
   display: block;
   width: 100%;
+  padding: 0 15px;
+}
+.panel-nav ul li.active {
+  background-color: #f5f5f5;
 }
 .panel-nav ul li a {
   font-weight: 700;
   width: 100%;
   padding: 3px 0;
 }
-.panel-nav ul li li {
+.panel-nav ul li ul {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.panel-nav ul li ul li {
   border-top: none;
 }
-.panel-nav ul li li a {
+.panel-nav ul li ul li a {
   font-weight: inherit;
   color: #333333;
 }
-.panel-nav ul li li li {
-  padding-left: 10px;
+.panel-nav ul li ul li li {
+  padding-left: 25px;
 }
 .dropdown-mega {
   position: absolute;
@@ -8413,22 +8445,22 @@ table[datepicker] {
   -moz-osx-font-smoothing: grayscale;
 }
 .glyphicon-chevron-left:before {
-  content: '\f053';
+  content: "\f053";
 }
 .glyphicon-chevron-right:before {
-  content: '\f054';
+  content: "\f054";
 }
 .glyphicon-chevron-up:before {
-  content: '\f077';
+  content: "\f077";
 }
 .glyphicon-chevron-down:before {
-  content: '\f078';
+  content: "\f078";
 }
 .glyphicon-chevron-star:before {
-  content: '\f005';
+  content: "\f005";
 }
 .glyphicon-chevron-star-empty:before {
-  content: '\f006';
+  content: "\f006";
 }
 .branding-print-view-logo {
   max-height: 50px;
