@@ -6227,6 +6227,7 @@ button::-moz-focus-inner {
   top: auto;
   color: inherit;
 }
+.view-form-icon .col-md-4 i,
 .view-form-icon .col-xs-6 i,
 .view-form-icon .col-xs-9 i {
   left: 5px;
