@@ -6210,20 +6210,26 @@ button::-moz-focus-inner {
 .view-form-icon select,
 .view-form-icon text,
 .view-form-icon textarea {
-  padding-left: 25px;
+  padding-left: 30px;
 }
 .view-form-icon i {
   color: #cccccc;
-  left: 10px;
+  left: 0;
   position: absolute;
   top: 13px;
   z-index: 2;
+  width: 30px;
+  text-align: center;
 }
 .view-form-icon .btn i {
   position: relative;
   left: auto;
   top: auto;
   color: inherit;
+}
+.view-form-icon .col-xs-6 i,
+.view-form-icon .col-xs-9 i {
+  left: 5px;
 }
 @media (max-width: 767px) {
   textarea,
