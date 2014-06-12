@@ -5,6 +5,7 @@ four51.app.factory('XLATService', ['$interpolate', function($interpolate) {
 
     var _getCurrentLanguage = function(userLanguage) {
         currentLanguage =  userLanguage;
+        return currentLanguage;
     };
 
     var _setCurrentLanguage = function(newCurrentLanguage) {

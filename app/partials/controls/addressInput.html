@@ -1,8 +1,8 @@
 <div id="address_edit">
     <div class="view-form-icon">
         <div>
-            <label for="Autocomplete">Quick Address</label>
-            <input type="text" id="Autocomplete" class="form-control" details="addressobj" ng-autocomplete ng-model="addressresult"/>
+            <label for="Autocomplete">{{'Quick Address' | r | xlat}}</label>
+            <input type="text" id="Autocomplete" class="form-control" details="addressobj" placeholder="{{'Enter a location' | r | xlat}}" ng-autocomplete ng-model="addressresult"/>
             <i class="fa fa-map-marker"></i>
         </div>
     </div>

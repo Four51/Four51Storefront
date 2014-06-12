@@ -25,7 +25,8 @@ function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, C
         if (Security.isAuthenticated()) {
             User.get(function(user) {
                 $scope.user = user;
-                XLATService.getCurrentLanguage(user.Culture.Name);
+
+                $scope.culture = XLATService.getCurrentLanguage(user.Culture.Name);
 
 	            if (!$scope.user.TermsAccepted)
 		            $location.path('conditions');

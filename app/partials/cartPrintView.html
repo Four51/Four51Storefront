@@ -8,27 +8,27 @@
         </div>
         <div>
             <h5>
-                {{currentOrder.IncomingStatus + ' Order'}}<br/>
-                {{'Created On ' | r}}{{currentOrder.DateCreated | date:'short'}}
+                {{(currentOrder.IncomingStatus) + ' ' + ('Order' | r) | xlat}}<br/>
+                {{'Created On' | r | xlat}} {{currentOrder.DateCreated | date:'short'}}
             </h5>
         </div>
     </div>
         <div>
             <h3>
-                {{'Cart Summary' | r}}
+                {{'Cart Summary' | r | xlat}}
             </h3>
             <div ng-if="!user.Permissions.contains('HidePricing')">
                 <p>
-                    {{'Subtotal' | r}}: <span>{{currentOrder.Subtotal | currency}}</span>
+                    {{'Subtotal' | r | xlat}}: <span>{{currentOrder.Subtotal | currency}}</span>
                 </p>
                 <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
-                    {{'Shipping, handling and tax may be added to this subtotal.' | r}}
+                    {{'Shipping, handling and tax may be added to this subtotal.' | r | xlat}}
                 </p>
             </div>
         </div>
         <div>
             <h3>
-                {{currentOrder.LineItems.length}} {{'Item' + (currentOrder.LineItems.length > 1 ? 's' : '') | rl}} in your {{'cart' | r}}
+                {{currentOrder.LineItems.length}} {{'item' + (currentOrder.LineItems.length > 1 ? 's' : '') | rl | xlat}} {{'in your' | rl | xlat:(currentOrder.LineItems.length)}} {{'cart' | rl | xlat}}
             </h3>
             <div ng-repeat="item in currentOrder.LineItems" class="cart-print-view-line-items-repeater">
                 <div class="cart-print-view-line-items-product">
@@ -38,28 +38,28 @@
                         <li class="list-group-item" ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
                             <span class="text-info">{{spec.Name}}: </span>
                             <span ng-if="spec.ControlType == 'File'">{{spec.File.OriginalName + Extension}}</span>
-                            <span ng-if="spec.ControlType != 'File'">{{spec.Value || '(unspecified)'}}</span>
+                            <span ng-if="spec.ControlType != 'File'">{{spec.Value || ('(unspecified)' | xlat)}}</span>
                         </li>
                     </ul>
                 </div>
                 <div>
                     <div>
                         <div ng-if="!(user.Permissions.contains('HidePricing'))">
-                            {{'Unit Price' | r}}: {{item.UnitPrice | currency}}
+                            {{'Unit Price' | r | xlat}}: {{item.UnitPrice | currency}}
                         </div>
                         <div>
-                            {{'Quantity' | r}}: {{item.Quantity}}
+                            {{'Quantity' | r | xlat}}: {{item.Quantity}}
                         </div>
                         <div ng-if="!(user.Permissions.contains('HidePricing'))">
-                            {{'Total' | r}}: {{item.LineTotal | currency}}
+                            {{'Total' | r | xlat}}: {{item.LineTotal | currency}}
                         </div>
                     </div>
                     <div>
                         <div ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
-                            <p ng-show="item.DateNeeded">{{'Date Needed' | r}}: {{item.DateNeeded | date: 'MM/dd/yy'}}</p>
+                            <p ng-show="item.DateNeeded">{{'Date Needed' | r | xlat}}: {{item.DateNeeded | date: 'MM/dd/yy'}}</p>
                         </div>
                         <div ng-if="user.Permissions.contains('CostCenterPerLine')">
-                            <p ng-show="item.CostCenter">{{'Cost Center' | r}}: {{item.CostCenter}}</p>
+                            <p ng-show="item.CostCenter">{{'Cost Center' | r | xlat}}: {{item.CostCenter}}</p>
                         </div>
                     </div>
                 </div>
