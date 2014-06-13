@@ -155,7 +155,7 @@
                     {{'Some items were not added to your repeat order' | r | xlat}}: {{currentOrder.RepeatError}}
                 </div>
                 <div class="view-response-message alert-success text-center" alert-show="currentOrder">
-                    <p>{{actionMessage | r}}</p>
+                    <p>{{actionMessage | r | xlat}}</p>
                 </div>
                 <div class="view-response-message alert-danger text-center" alert-show="gcMessage">{{gcMessage}}</div>
                 <div class="view-error-message" ng-show="cart.$error.required.length > 0">
