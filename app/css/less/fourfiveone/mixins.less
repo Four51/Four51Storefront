@@ -280,18 +280,19 @@ button::-moz-focus-inner {
   select,
   text,
   textarea {
-    padding-left: 25px;
+    padding-left: 30px;
   }
 
   //** icons
   i {
     color: @fourfiveone-form-icon-color;
-    left: 10px;
+    left: 0;
     position: absolute;
     top: 13px;
     z-index: 2;
+    width:30px;
+    text-align:center;
   }
-
   //** icons are not like the others inside a button
   .btn {
     i {
@@ -299,6 +300,14 @@ button::-moz-focus-inner {
       left: auto;
       top: auto;
       color: inherit;
+    }
+  }
+  //** padding to account for icons on inputs inside of columns
+  .col-md-4,
+  .col-xs-6,
+  .col-xs-9{
+    i{
+      left:5px;
     }
   }
 }
