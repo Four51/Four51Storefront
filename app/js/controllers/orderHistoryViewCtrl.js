@@ -54,8 +54,7 @@ function ($scope, $location, $routeParams, Order, FavoriteOrder, Address, User) 
     $scope.repeatOrder = function() {
 	    $scope.errorMessage = null;
 	    $scope.errorMessage = null;
-        $scope.order.Repeat = true;
-        Order.save($scope.order,
+	    Order.repeat($scope.order.ID,
 	        function(data) {
 	            $scope.currentOrder = data;
 	            $scope.user.CurrentOrderID = data.ID;
