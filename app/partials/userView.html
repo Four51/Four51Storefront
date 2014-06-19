@@ -57,12 +57,12 @@
                     <!--TODO username input shouldn't default to temporary usernames, if the user is temp, make the placeholder show instead !-->
                     <div>
                         <label ng-show="user.Password">{{'Password' | r}}</label>
-                        <input name="password" class="form-control" required type="password" ng-model="user.Password" placeholder="{{'Password' | r}}" autocomplete="off" />
+                        <input name="password" class="form-control" ng-required="user.Type == 'TempCustomer'" type="password" ng-model="user.Password" placeholder="{{'Password' | r}}" autocomplete="off" />
                         <i class="fa fa-lock"></i>
                     </div>
                     <div>
                         <label ng-show="user.ConfirmPassword">{{'Confirm' | r}} {{'Password' | r}}</label>
-                        <input name="confirm_password" ng-match="user.Password" required class="form-control" type="password" ng-model="user.ConfirmPassword" placeholder="{{'Confirm' | r}} {{'Password' | r}}" autocomplete="off" />
+                        <input name="confirm_password" ng-match="user.Password" ng-required="user.Type == 'TempCustomer' || user.Password" class="form-control" type="password" ng-model="user.ConfirmPassword" placeholder="{{'Confirm' | r}} {{'Password' | r}}" autocomplete="off" />
                         <i class="fa fa-lock"></i>
                         <inlineerror ng-show="user_form.confirm_password.$error.match" title="{{'Password' | r}}s do not match!" />
                     </div>
