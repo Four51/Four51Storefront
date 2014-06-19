@@ -21,15 +21,20 @@ function ($scope, $location, $routeParams, FavoriteOrder, Order, User) {
 	}
 
 	$scope.repeat = function(order) {
-		order.Repeat = true;
-		Order.save(order, function(data) {
-			$scope.currentOrder = data;
-			$scope.user.CurrentOrderID = data.ID;
-			User.save($scope.user, function(data) {
-				$scope.user = data;
-				$location.path('/cart');
-			});
-		});
+		$scope.error = null;
+		Order.repeat(order.ID,
+			function(data) {
+				$scope.currentOrder = data;
+				$scope.user.CurrentOrderID = data.ID;
+				User.save($scope.user, function(data) {
+					$scope.user = data;
+					$location.path('/cart');
+				});
+			},
+			function(ex) {
+				$scope.error = ex.Message;
+			}
+		);
 	};
 
 	$scope.checkAll = function(event) {

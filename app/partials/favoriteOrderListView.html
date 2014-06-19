@@ -72,6 +72,7 @@
                             items-per-page="settings.pageSize" direction-links="true"></pagination>
             </div>
             <button type="button" class="btn btn-small btn-danger" ng-click="deleteSelected($event)" ng-disabled="(favoriteorders | filter:{Selected:true}).length == 0">{{'Delete' | r}} {{'Selected' | r}}</button>
+            <span class="alert alert-success" ng-show="error" ng-bind-html="error | r"></span>
         </div>
     </div>
 </section>
