@@ -22,6 +22,7 @@ function ($scope, $location, $routeParams, FavoriteOrder, Order, User) {
 
 	$scope.repeat = function(order) {
 		$scope.error = null;
+		$scope.loading = true;
 		Order.repeat(order.ID,
 			function(data) {
 				$scope.currentOrder = data;
@@ -33,6 +34,7 @@ function ($scope, $location, $routeParams, FavoriteOrder, Order, User) {
 			},
 			function(ex) {
 				$scope.error = ex.Message;
+				$scope.loading = false;
 			}
 		);
 	};
@@ -43,10 +45,10 @@ function ($scope, $location, $routeParams, FavoriteOrder, Order, User) {
 		});
 	};
 	$scope.deleteSelected = function() {
+		$scope.loading = true;
         FavoriteOrder.delete($scope.favoriteorders, function() {
-            FavoriteOrder.query(function(favs) {
-                $scope.favoriteorders = favs;
-            });
+            Query();
+	        $scope.loading = false;
         });
 	};
 }]);
