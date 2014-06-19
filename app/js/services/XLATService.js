@@ -23,7 +23,7 @@ four51.app.factory('XLATService', ['$interpolate', function($interpolate) {
     }
 
     var _xlat = function(value, parameters) {
-        if (currentLanguage == 'en-US') return value;
+        if (currentLanguage == 'en-US' || !tables[currentLanguage]) return value;
         //if (value.indexOf('or both') == -1) return value;
         var table = tables[currentLanguage];
         var isUpperCase = value ? upperCase(value) : false;
