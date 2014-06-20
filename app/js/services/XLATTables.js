@@ -1,4 +1,14 @@
 var XLATTables = {
+    'Currency': {
+        'en-US': '$',
+        'en-GB': '£',
+        'nl-NL': '€',
+        'en-IE': '€',
+        'pt-BR': 'R$',
+        'zh-CN': '￥',
+        'es-MX': '$',
+        'fr-FR': '€'
+    },
     'es-MX': {
         'active': 'activo',
         'accept': 'aceptar',
