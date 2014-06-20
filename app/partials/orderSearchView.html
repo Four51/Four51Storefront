@@ -176,7 +176,7 @@
                 </div>
                 <div class="col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">
                     <span class="visible-xs heading-xs text-info">{{'Total' | r}}</span>
-                    {{order.Total | currency:"$"}}
+                    {{order.Total | culturecurrency}}
                 </div>
             </div>
             <div ng-show="settings.listCount > settings.pageSize">

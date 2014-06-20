@@ -19,7 +19,7 @@
             </h3>
             <div ng-if="!user.Permissions.contains('HidePricing')">
                 <p>
-                    {{'Subtotal' | r | xlat}}: <span>{{currentOrder.Subtotal | currency}}</span>
+                    {{'Subtotal' | r | xlat}}: <span>{{currentOrder.Subtotal | culturecurrency}}</span>
                 </p>
                 <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
                     {{'Shipping, handling and tax may be added to this subtotal.' | r | xlat}}
@@ -45,13 +45,13 @@
                 <div>
                     <div>
                         <div ng-if="!(user.Permissions.contains('HidePricing'))">
-                            {{'Unit Price' | r | xlat}}: {{item.UnitPrice | currency}}
+                            {{'Unit Price' | r | xlat}}: {{item.UnitPrice | culturecurrency}}
                         </div>
                         <div>
                             {{'Quantity' | r | xlat}}: {{item.Quantity}}
                         </div>
                         <div ng-if="!(user.Permissions.contains('HidePricing'))">
-                            {{'Total' | r | xlat}}: {{item.LineTotal | currency}}
+                            {{'Total' | r | xlat}}: {{item.LineTotal | culturecurrency}}
                         </div>
                     </div>
                     <div>

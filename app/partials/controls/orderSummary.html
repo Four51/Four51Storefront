@@ -14,15 +14,15 @@
         </p>
         <p ng-if="!(user.Permissions.contains('HidePricing'))">
             <span class="text-info">{{'Subtotal' | r | xlat}}</span>
-            <span class="pull-right">{{currentOrder.Subtotal | currency}}</span>
+            <span class="pull-right">{{currentOrder.Subtotal | culturecurrency}}</span>
         </p>
         <p ng-if="!(user.Permissions.contains('HidePricing'))">
             <span class="text-info">{{('Shipping' | r) + ' ' + ('Costs' | r) | xlat}}</span>
-            <span class="pull-right">{{currentOrder.ShippingCost | currency}}</span>
+            <span class="pull-right">{{currentOrder.ShippingCost | culturecurrency}}</span>
         </p>
         <p ng-if="!(user.Permissions.contains('HidePricing'))">
             <span class="text-info">{{'Tax' | r | xlat}}</span>
-            <span class="pull-right">{{currentOrder.TaxCost || 0 | currency}}</span>
+            <span class="pull-right">{{currentOrder.TaxCost || 0 | culturecurrency}}</span>
         </p>
         <div ng-show="user.Permissions.contains('ViewPromotions')">
             <div ng-show="!currentOrder.Coupon">
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <p ng-show="currentOrder.Coupon">
-                <span class="text-info">{{currentOrder.Coupon.Label}}:</span>{{currentOrder.Coupon.OrderDiscount * -1 | currency}}<br/>
+                <span class="text-info">{{currentOrder.Coupon.Label}}:</span>{{currentOrder.Coupon.OrderDiscount * -1 | culturecurrency}}<br/>
             </p>
             <div ng-show="currentOrder.Coupon">
                 <button type="button"  class="btn btn-danger pull-right" ng-click="removeCoupon()">Remove {{'Coupon' | r | xlat}}</button>
@@ -50,7 +50,7 @@
         <hr/>
         <h4 ng-if="!(user.Permissions.contains('HidePricing'))">
             <strong>{{'Total' | r | xlat}}</strong>
-            <span class="text-success pull-right"><strong>{{currentOrder.Total | currency}}</strong></span>
+            <span class="text-success pull-right"><strong>{{currentOrder.Total | culturecurrency}}</strong></span>
         </h4>
         <p class="text-info text-left" ng-if="user.Company.TaxMethod != 'NoTax' && !user.Permissions.contains('HidePricing')">{{('Shipping' | r) + ', handling and tax may be added to this subtotal.' | xlat}}</p>
     </div>

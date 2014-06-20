@@ -56,11 +56,11 @@
                     </h3>
                 </div>
                 <div>
-                    <p>{{'Subtotal' | r | xlat}}: {{order.Subtotal | currency:"$"}}</p>
-                    <p>{{'Shipping & Handling' | r | xlat}}: {{order.ShippingCost | currency:"$"}}</p>
-                    <p>{{'Tax' | r | xlat}}: {{order.TaxCost | currency:"$"}}</p>
-                    <p ng-if="order.Coupon">{{'Coupon' | r | xlat}} ({{order.Coupon.Label}}): {{order.Coupon.OrderDiscount * -1 | currency}}</p>
-                    <p>{{'Total' | r | xlat}}: {{order.Total | currency:"$"}}</p>
+                    <p>{{'Subtotal' | r | xlat}}: {{order.Subtotal | culturecurrency}}</p>
+                    <p>{{'Shipping & Handling' | r | xlat}}: {{order.ShippingCost | culturecurrency}}</p>
+                    <p>{{'Tax' | r | xlat}}: {{order.TaxCost | culturecurrency}}</p>
+                    <p ng-if="order.Coupon">{{'Coupon' | r | xlat}} ({{order.Coupon.Label}}): {{order.Coupon.OrderDiscount * -1 | culturecurrency}}</p>
+                    <p>{{'Total' | r | xlat}}: {{order.Total | culturecurrency}}</p>
                 </div>
             </div>
         </div>
@@ -104,14 +104,14 @@
                             </div>
                         </div>
                         <div ng-if="!(user.Permissions.contains('HidePricing'))">
-                            <p>{{'Unit Price' | r | xlat}}: {{item.UnitPrice | currency}}</p>
+                            <p>{{'Unit Price' | r | xlat}}: {{item.UnitPrice | culturecurrency}}</p>
                         </div>
                         <div>
                             <p ng-show="item.Product.QuantityMultiplier == 1">x {{item.Quantity}}</span>
                             <p ng-show="item.Product.QuantityMultiplier > 1" >x {{item.Product.QuantityMultiplier * item.Quantity}}</span>
                         </div>
                         <div ng-if="!(user.Permissions.contains('HidePricing'))">
-                            {{'Total' | r | xlat}}: {{item.LineTotal | currency}}
+                            {{'Total' | r | xlat}}: {{item.LineTotal | culturecurrency}}
                         </div>
                         <div ng-show="item.TotalShipped">
                             <p>{{('Quantity' | r) + ' ' + ('Shipped' | r) | xlat}}: {{item.TotalShipped}}</p>

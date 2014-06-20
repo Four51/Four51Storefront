@@ -11,7 +11,7 @@
             <i class="fa fa-dollar"></i>
         </div>
         <div ng-show="giftcard.Balance" class="alert alert-info">
-            {{'A gift card' | xlat}}, <strong>{{giftcard.Code}}</strong>, {{'with a balance of' | xlat}} <strong>{{giftcard.Balance | currency}}</strong> {{'has been attached to your account and will be available during the billing step of the checkout process while a balance remains' | xlat}}.
+            {{'A gift card' | xlat}}, <strong>{{giftcard.Code}}</strong>, {{'with a balance of' | xlat}} <strong>{{giftcard.Balance | culturecurrency}}</strong> {{'has been attached to your account and will be available during the billing step of the checkout process while a balance remains' | xlat}}.
         </div>
     </div>
 </form>

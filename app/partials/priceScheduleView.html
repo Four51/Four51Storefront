@@ -42,7 +42,7 @@
                 </span>
             </div>
             <div class="col-xs-6">
-                {{pb.Price * (ps.RestrictedQuantity ? pb.Quantity : 1)| currency}}
+                {{pb.Price * (ps.RestrictedQuantity ? pb.Quantity : 1)| culturecurrency}}
             </div>
         </div>
     </div>

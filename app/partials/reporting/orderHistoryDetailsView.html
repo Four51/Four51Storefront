@@ -29,7 +29,7 @@
     </p>
     <p ng-show="order.AmountOnAccount && order.PaymentMethod != 'BudgetAccount'">
         <span class="text-info"></span>
-        <span class="pull-right">{{(order.AccountName || order.AccountLabel) + " (" + (order.AmountOnAccount | currency) + ")"}}</span>
+        <span class="pull-right">{{(order.AccountName || order.AccountLabel) + " (" + (order.AmountOnAccount | culturecurrency) + ")"}}</span>
     </p>
     <p ng-show="order.CostCenter">
         <span class="text-info">{{'Cost Center' | r | xlat}}</span>

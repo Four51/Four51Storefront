@@ -33,13 +33,13 @@
     </span>
     <div class="view-form-icon" ng-if="user.Permissions.contains('PayByBudgetAccount')" ng-show="currentOrder.PaymentMethod == 'BudgetAccount'">
         <div ng-show="(SpendingAccounts|filter:{ForPurchase:true}).length == 1" class="alert alert-success">
-            {{(selectedBudgetAccount.Label) + ' - ' + ('Balance' | xlat) + ': ' + (selectedBudgetAccount.Balance | currency)}}
+            {{(selectedBudgetAccount.Label) + ' - ' + ('Balance' | xlat) + ': ' + (selectedBudgetAccount.Balance | culturecurrency)}}
         </div>
         <div class="row view-form-icon" ng-show="(SpendingAccounts|filter:{ForPurchase:true}).length > 1">
             <div class="col-sm-6" ng-class="{'view-form-select': !currentOrder.BudgetAccountID, '': currentOrder.BudgetAccountID }">
                 <label ng-show="currentOrder.BudgetAccountID">{{'Spending Account' | r | xlat}}</label>
                 <select class="form-control" placeholder="{{'Spending Account' | r | xlat}}"
-                        ng-options="account.ID as (account.Label + ' - ' + ('Balance' | xlat) + ': ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{ForPurchase:true}"
+                        ng-options="account.ID as (account.Label + ' - ' + ('Balance' | xlat) + ': ' + (account.Balance | culturecurrency)) for account in SpendingAccounts | filter:{ForPurchase:true}"
                         ng-model="currentOrder.BudgetAccountID"
                         ng-required="currentOrder.PaymentMethod == 'BudgetAccount'">
                     <option value=""></option>
@@ -108,7 +108,7 @@
             <span>{{'The account, ' + (currentBudgetAccount.Label) + ', is not sufficient for the order total.' | xlat}}</span>
             <strong>{{'Please select an additional payment type to cover the remaining' | r | xlat}}</strong>
             <span ng-show="!user.Permissions.contains('HidePricing')">
-                <strong>{{remainingOrderTotal | currency}}</strong>
+                <strong>{{remainingOrderTotal | culturecurrency}}</strong>
             </span>
             <span ng-show="user.Permissions.contains('HidePricing')">
                 {{'balance' | xlat}}
@@ -119,7 +119,7 @@
             <span>{{'The account, ' | xlat}} + (currentBudgetAccount.Label) + {{', is not sufficient for the order total.' | xlat}}</span>
             <span>{{'This additional payment will cover the remaining' | r | xlat}}</span>
             <span ng-show="!user.Permissions.contains('HidePricing')">
-                <strong>{{remainingOrderTotal | currency}}</strong>
+                <strong>{{remainingOrderTotal | culturecurrency}}</strong>
             </span>
             <span ng-show="user.Permissions.contains('HidePricing')">
                 {{'balance or remove this spending account from your payment options.' | r | xlat}}

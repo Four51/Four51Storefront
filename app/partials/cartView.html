@@ -57,7 +57,7 @@
                                         <div ng-if="!(user.Permissions.contains('HidePricing'))">
                                             <small>{{'Total' | r | xlat}}</small>
                                             <h2 class="text-success">
-                                                {{item.LineTotal | currency}}
+                                                {{item.LineTotal | culturecurrency}}
                                             </h2>
                                         </div>
                                     </div>
@@ -65,7 +65,7 @@
                                         <p>
                                             <small>{{'Unit Price' | r | xlat}}</small>
                                             <br/>
-                                            {{item.UnitPrice | currency}}
+                                            {{item.UnitPrice | culturecurrency}}
                                         </p>
                                     </div>
                                 </div>
@@ -141,7 +141,7 @@
                         </div>
                         <div class="col-md-3 col-md-offset-5 col-lg-4 text-right" ng-if="!(user.Permissions.contains('HidePricing'))">
                             <h4 class="text-primary">
-                                <strong>{{'Subtotal' | r | xlat}} <span class="text-success">{{currentOrder.Subtotal | currency}}</span></strong>
+                                <strong>{{'Subtotal' | r | xlat}} <span class="text-success">{{currentOrder.Subtotal | culturecurrency}}</span></strong>
                             </h4>
                             <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
                                 <span class="text-info">{{'Shipping, handling and tax may be added to this subtotal.' | r | xlat}}</span>
