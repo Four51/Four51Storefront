@@ -61,6 +61,7 @@ four51.app.controller('CartViewCtrl', ['$scope', '$location', '$451', 'Order', '
 			if (confirm('Are you sure you wish to remove this item from your cart?') == true) {
 				Order.deletelineitem($scope.currentOrder.ID, item.ID,
 					function(order) {
+						if (!order) $location.path('/catalog');
 						$scope.currentOrder = order;
 						$scope.displayLoadingIndicator = false;
 						$scope.actionMessage = 'Your Changes Have Been Saved!';
