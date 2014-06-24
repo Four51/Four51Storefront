@@ -27,6 +27,7 @@ function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, C
                 $scope.user = user;
 
                 $scope.user.Culture.CurrencyPrefix = XLATService.getCurrentLanguage(user.Culture.Name)[1];
+                $scope.user.Culture.DateFormat = XLATService.getCurrentLanguage(user.Culture.Name)[2];
 
 	            if (!$scope.user.TermsAccepted)
 		            $location.path('conditions');

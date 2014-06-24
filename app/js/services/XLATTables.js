@@ -9,6 +9,40 @@ var XLATTables = {
         'es-MX': '$',
         'fr-FR': '€'
     },
+    'Date': {
+        'en-US': {
+            'short':'MM/dd/yy',
+            'long': 'MM/dd/yy hh:mm a'
+        },
+        'en-GB': {
+            'short':'dd/MM/yy',
+            'long': 'dd/MM/yy HH:mm'
+        },
+        'nl-NL': {
+            'short':'dd/MM/yy',
+            'long': 'dd/MM/yy HH:mm'
+        },
+        'en-IE': {
+            'short':'dd/MM/yy',
+            'long': 'dd/MM/yy HH:mm'
+        },
+        'pt-BR': {
+            'short':'dd/MM/yy',
+            'long': 'dd/MM/yy HH:mm'
+        },
+        'zh-CN': {
+            'short':'yyyy/M/dd',
+            'long': 'yyyy/M/dd HH:mm'
+        },
+        'es-MX': {
+            'short':'dd/MM/yy',
+            'long': 'dd/MM/yy hh:mm a'
+        },
+        'fr-FR': {
+            'short':'dd/MM/yy',
+            'long': 'dd/MM/yy HH:mm'
+        }
+    },
     'es-MX': {
         'active': 'activo',
         'accept': 'aceptar',

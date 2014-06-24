@@ -72,12 +72,12 @@
                                  ng-click="$event.preventDefault();$event.stopPropagation();startopened = !startopened;"
                                  style="margin:0; height:40px; padding-top:8px;">
                                 {{criteria.DateRangeFrom ? '' : 'Tap'}}
-                                <span class="text-info">{{criteria.DateRangeFrom | date:'M/dd/yy'}}</span>
+                                <span class="text-info">{{criteria.DateRangeFrom | date:user.Culture.DateFormat.short}}</span>
                             </div>
                             <input name="daterangefrom" placeholder="{{('Start' | r) + ' ' + ('Date' | r) | xlat}}" ng-model="criteria.DateRangeFrom"
                                    type="text"
                                    class="form-control"
-                                   datepicker-popup="MM/dd/yy"
+                                   datepicker-popup="{{user.Culture.DateFormat.short}}"
                                    is-open="startopened"/>
                             <i class="fa fa-calendar"></i>
                         </div>
@@ -87,12 +87,12 @@
                                  ng-click="$event.preventDefault();$event.stopPropagation();endopened = !endopened;"
                                  style="margin:0; height:40px; padding-top:8px;">
                                 {{criteria.DateRangeTo ? '' : 'Tap'}}
-                                <span class="text-info">{{criteria.DateRangeTo | date:'M/dd/yy'}}</span>
+                                <span class="text-info">{{criteria.DateRangeTo | date:user.Culture.DateFormat.short}}</span>
                             </div>
                             <input name="daterangeto" placeholder="{{('End' | r) + ' ' + ('Date' | r) | xlat}}" ng-model="criteria.DateRangeTo"
                                    type="text"
                                    class="form-control"
-                                   datepicker-popup="MM/dd/yy"
+                                   datepicker-popup="{{user.Culture.DateFormat.short}}"
                                    is-open="endopened"
                                    min="criteria.DateRangeFrom"/>
                             <i class="fa fa-calendar"></i>
@@ -172,7 +172,7 @@
                 </div>
                 <div class="col-sm-2">
                     <span class="visible-xs panel-table-heading-xs text-info">{{('Submitted' | r) + ' ' + ('Date' | r) | xlat}}</span>
-                    {{order.DateSubmitted || order.DateCreated | date:'short'}}
+                    {{order.DateSubmitted || order.DateCreated | date:user.Culture.DateFormat.long}}
                 </div>
                 <div class="col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">
                     <span class="visible-xs heading-xs text-info">{{'Total' | r}}</span>

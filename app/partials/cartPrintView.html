@@ -9,7 +9,7 @@
         <div>
             <h5>
                 {{(currentOrder.IncomingStatus) + ' ' + ('Order' | r) | xlat}}<br/>
-                {{'Created On' | r | xlat}} {{currentOrder.DateCreated | date:'short'}}
+                {{'Created On' | r | xlat}} {{currentOrder.DateCreated | date:user.Culture.DateFormat.short}}
             </h5>
         </div>
     </div>
@@ -56,7 +56,7 @@
                     </div>
                     <div>
                         <div ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
-                            <p ng-show="item.DateNeeded">{{'Date Needed' | r | xlat}}: {{item.DateNeeded | date: 'MM/dd/yy'}}</p>
+                            <p ng-show="item.DateNeeded">{{'Date Needed' | r | xlat}}: {{item.DateNeeded | date:user.Culture.DateFormat.short}}</p>
                         </div>
                         <div ng-if="user.Permissions.contains('CostCenterPerLine')">
                             <p ng-show="item.CostCenter">{{'Cost Center' | r | xlat}}: {{item.CostCenter}}</p>

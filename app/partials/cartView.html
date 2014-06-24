@@ -79,12 +79,12 @@
                                                      ng-click="$event.preventDefault();$event.stopPropagation();opened = !opened;"
                                                      style="margin:0; height:40px; padding-top:8px;">
                                                     {{item.DateNeeded ? '' : ('Tap to set a date' | xlat)}}
-                                                    <span class="text-info">{{item.DateNeeded | date:'M/dd/yy'}}</span>
+                                                    <span class="text-info">{{item.DateNeeded | date:user.Culture.DateFormat.short}}</span>
                                                 </div>
                                                 <input name="dateneeded" placeholder="{{'Date' | xlat}}" ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')"
                                                        type="text"
                                                        class="form-control"
-                                                       datepicker-popup="MM/dd/yy"
+                                                       datepicker-popup="{{user.Culture.DateFormat.short}}"
                                                        is-open="opened"
                                                        min="currentDate"/>
                                                 <i class="fa fa-calendar"></i>
