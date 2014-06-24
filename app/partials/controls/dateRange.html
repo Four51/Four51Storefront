@@ -5,13 +5,13 @@
              ng-click="$event.preventDefault();$event.stopPropagation();startopened = !startopened;"
              style="margin:0; height:40px; padding-top:8px;">
             {{fromdate ? "" : "Tap"}}
-            <span class="text-info">{{fromdate | date:'M/dd/yy'}}</span>
+            <span class="text-info">{{fromdate | date:$parent.user.Culture.DateFormat.short}}</span>
         </div>
         <input placeholder="{{('Start' | r) + ' ' + ('Date' | r) | xlat}}" ng-model="fromdate"
                ng-change="span = null"
                type="text"
                class="form-control"
-               datepicker-popup="MM/dd/yy"
+               datepicker-popup="{{$parent.user.Culture.DateFormat.short}}"
                is-open="startopened"
                min="minDate"/>
         <i class="fa fa-calendar"></i>
@@ -22,13 +22,13 @@
              ng-click="$event.preventDefault();$event.stopPropagation();endopened = !startopened;"
              style="margin:0; height:40px; padding-top:8px;">
             {{todate ? "" : "Tap"}}
-            <span class="text-info">{{todate | date:'M/dd/yy'}}</span>
+            <span class="text-info">{{todate | date:$parent.user.Culture.DateFormat.short}}</span>
         </div>
         <input placeholder="{{('End' | r) + ' ' + ('Date' | r) | xlat}}" ng-model="todate"
                ng-change="span = null"
                type="text"
                class="form-control"
-               datepicker-popup="MM/dd/yy"
+               datepicker-popup="{{$parent.user.Culture.DateFormat.short}}"
                is-open="endopened"
                min="fromdate"/>
         <i class="fa fa-calendar"></i>

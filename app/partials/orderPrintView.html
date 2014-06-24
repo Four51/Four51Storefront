@@ -8,7 +8,7 @@
         </div>
         <div>
             <h5>
-                {{'Created On' | r | xlat}} {{order.DateCreated | date:'short'}}
+                {{'Created On' | r | xlat}} {{order.DateCreated | date:user.Culture.DateFormat.short}}
             </h5>
         </div>
     </div>
@@ -21,9 +21,9 @@
                     </h3>
                 </div>
                 <div>
-                    <p ng-show="order.DateSubmitted">{{('Date' | r) + ' ' + ('Submitted' | r) | xlat}}: {{order.DateSubmitted | date:'short'}}</p>
+                    <p ng-show="order.DateSubmitted">{{('Date' | r) + ' ' + ('Submitted' | r) | xlat}}: {{order.DateSubmitted | date:user.Culture.DateFormat.short}}</p>
                     <p>{{'Status' | r}}: {{order.StatusText}}</p>
-                    <p ng-show="order.DateCompleted">{{('Date' | r) + ' ' + ('Completed' | r) | xlat}}: {{order.DateCompleted | date:'short'}}</p>
+                    <p ng-show="order.DateCompleted">{{('Date' | r) + ' ' + ('Completed' | r) | xlat}}: {{order.DateCompleted | date:user.Culture.DateFormat.short}}</p>
                     <p ng-show="order.FromUserFirstName || order.FromUserLastName">{{'Created By' | r | xlat}}: {{order.FromUserFirstName + ' ' + order.FromUserLastName}}</p>
                     <p ng-show="order.Comments">{{'Comments' | r | xlat}}: {{order.Comments}}</p>
                     <p ng-show="orderCostCenter">{{'Cost Center' | r | xlat}}: {{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</p>

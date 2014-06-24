@@ -1,7 +1,7 @@
 <div>
     <p ng-show="order.DateSubmitted">
         <span class="text-info">{{('Date' | r) + ' ' + ('Submitted' | r) | xlat}}</span>
-        <span class="pull-right">{{order.DateSubmitted | date:'short'}}</span>
+        <span class="pull-right">{{order.DateSubmitted | date:user.Culture.DateFormat.short}}</span>
     </p>
     <p>
         <span class="text-info">{{'Status' | r | xlat}}</span>
@@ -9,7 +9,7 @@
     </p>
     <p ng-show="order.DateCompleted">
         <span class="text-info">{{('Date' | r) + ' ' + ('Completed' | r) | xlat}}</span>
-        <span class="pull-right">{{order.DateCompleted | date:'short'}}</span>
+        <span class="pull-right">{{order.DateCompleted | date:user.Culture.DateFormat.short}}</span>
     </p>
     <p ng-show="order.FromUserFirstName || order.FromUserLastName">
         <span class="text-info">{{'Created By' | r}}</span>

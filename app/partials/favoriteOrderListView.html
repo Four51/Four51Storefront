@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-sm-2">
                     <span class="visible-xs panel-table-heading-xs text-info">{{('Date' | r) + ' ' + ('Completed' | r) | xlat}}</span>
-                    {{order.DateCompleted | date:'medium'}}
+                    {{order.DateCompleted | date:user.Culture.DateFormat.long}}
                 </div>
                 <div class="col-sm-2">
                     <span class="visible-xs panel-table-heading-xs text-info">{{('Order' | r) + ' ' + ('Type' | r) | xlat}}</span>

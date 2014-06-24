@@ -35,7 +35,8 @@
                             </tr>
                             <tr ng-repeat="row in report.Data | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
                                 <td ng-repeat="header in report.DataColumns">
-                                    {{row[header]}}
+                                    <span ng-if="header.indexOf('Date') == -1">{{row[header]}}</span>
+                                    <span ng-if="header.indexOf('Date') == 0">{{row[header] | date:user.Culture.DateFormat.long}}</span>
                                 </td>
                             </tr>
                         </table>

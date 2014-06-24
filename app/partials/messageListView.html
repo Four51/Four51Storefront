@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-sm-2">
                     <span class="visible-xs panel-table-heading-xs text-info">{{'Date' | r | xlat}}</span>
-                    {{message.DateSent | date: 'medium'}}
+                    {{message.DateSent | date:user.Culture.DateFormat.long}}
                 </div>
                 <div class="col-sm-2">
                     <span class="visible-xs panel-table-heading-xs text-info">{{'Subject' | r | xlat}}</span>

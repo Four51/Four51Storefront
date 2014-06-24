@@ -4,7 +4,7 @@
             <h3 class="panel-title">{{message.Subject}}</h3>
         </div>
         <div class="panel-body">
-            <p><span class="text-info">{{'Date' | r | xlat}}</span> {{message.DateSent | date:'medium'}}</p>
+            <p><span class="text-info">{{'Date' | r | xlat}}</span> {{message.DateSent | date:user.Culture.DateFormat.long}}</p>
             <p><span class="text-info">{{'To' | r | xlat}}</span> {{message.ToName}}</p>
             <p><span class="text-info">{{'From' | r | xlat}}</span> {{message.FromName}}</p>
             <p><span class="text-info">{{'Subject' | r | xlat}}</span> {{message.Subject}}</p>

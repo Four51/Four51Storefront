@@ -9,6 +9,7 @@
     <div class="panel-body" collapse="checkOutSection != 'shipping'" class="panel-body ">
         <div>
             <shippingmessage />
+            <shippingmessage />
         </div>
         <div ng-show="addressform || (addresses | filter:{IsShipping:true}).length == 0 && user.Permissions.contains('CreateShipToAddress')">
             <addressinput address='shipaddress' user='user'></addressinput>
@@ -95,7 +96,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <p>
-                                    <span class="text-info">{{item.DateNeeded | date:'MM/dd/yyyy' }}</span><br />
+                                    <span class="text-info">{{item.DateNeeded | date:user.Culture.DateFormat.short }}</span><br />
                                     <small><strong>{{item.Product.Name}}</strong>{{' x ' + item.Quantity}}</small>
                                 </p>
                                 <p ng-show="user.Permissions.contains('EditShipToName') && !ShipAddress.IsCustEditable"><small>Attention:</small></p>

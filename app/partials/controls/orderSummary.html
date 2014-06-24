@@ -44,7 +44,7 @@
             </p>
             <div ng-show="currentOrder.Coupon">
                 <button type="button"  class="btn btn-danger pull-right" ng-click="removeCoupon()">Remove {{'Coupon' | r | xlat}}</button>
-                <p class="text-left" ng-show="currentOrder.Coupon.ExpirationDate"><small class="text-danger">{{'Expires' | r | xlat}}: {{currentOrder.Coupon.ExpirationDate | date:'MM/dd/yyyy'}}</small></p>
+                <p class="text-left" ng-show="currentOrder.Coupon.ExpirationDate"><small class="text-danger">{{'Expires' | r | xlat}}: {{currentOrder.Coupon.ExpirationDate | date:user.Culture.DateFormat.short}}</small></p>
             </div>
         </div>
         <hr/>

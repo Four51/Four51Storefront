@@ -74,6 +74,13 @@ four51.app.factory('Report', ['$resource','$q', '$451', 'Error', function($resou
 	var _download = function(id, success, error) {
 		$resource($451.api('downloadreport/:id'), { id: '@id' }).get({ id: id }).$promise.then(
 			function(data) {
+                angular.forEach(data.Data, function(row) {
+                    for (var col in row) {
+                        if (col.indexOf('Date') == 0 && row[col]) {
+                            row[col] = new Date(row[col]).toISOString();
+                        }
+                    }
+                });
 				_then(success, data);
 			},
 			function(ex) {
