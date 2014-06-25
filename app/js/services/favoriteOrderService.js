@@ -47,6 +47,7 @@ four51.app.factory('FavoriteOrder', ['$q', '$resource', '$451', function($q, $re
 		});
 
 		$q.all(queue).then(function() {
+			cache.splice(0, cache.length);
 			_then(success);
 		});
 	}
