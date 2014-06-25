@@ -1,11 +1,11 @@
 <div>
     <label>{{customfield.Label || customfield.Name}}</label>
-    <div ng-class="{'input-group':(customfield.Prefix || customfield.Suffix && !(hidesuffix && hideprefix))}">
-        <span class="input-group-addon" ng-if="customfield.Prefix && !hideprefix && !((customfield.Prefix | r) == '')">{{customfield.Prefix}}</span>
+    <div ng-class="{'input-group':(customfield.Prefix || customfield.Suffix)}">
+        <span ng-hide="hideprefix" class="input-group-addon" ng-if="customfield.Prefix">{{customfield.Prefix}}</span>
         <div ng-model="customfield.Value">
             <timepicker show-meridian="true"></timepicker>
         </div>
-        <span class="input-group-addon" ng-if="customfield.Suffix && !hidesuffix && !((customfield.Suffix | r) == '')">{{customfield.Suffix}}</span>
+        <span ng-hide="hidesuffix" class="input-group-addon" ng-if="customfield.Suffix">{{customfield.Suffix}}</span>
     </div>
 </div>
 
