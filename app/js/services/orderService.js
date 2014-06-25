@@ -47,6 +47,7 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 		$resource($451.api('order')).save(order).$promise.then(
 			function(o) {
 				store.set('451Cache.Order.' + o.ID, o);
+				store.remove('451Cache.User' + $451.apiName);
 				_extend(o);
 				_then(success, o);
 			},
@@ -60,6 +61,7 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 		$resource($451.api('order')).delete().$promise.then(
 			function() {
 				store.remove('451Cache.Order.' + order.ID);
+				store.remove('451Cache.User' + $451.apiName);
 				_then(success);
 			},
 			function(ex) {
@@ -72,6 +74,7 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 		$resource($451.api('order'), { }, { submit: { method: 'PUT' }}).submit(order).$promise.then(
 			function(o) {
 				store.set('451Cache.Order.' + o.ID);
+				store.remove('451Cache.User' + $451.apiName);
 				_extend(o);
 				_then(success,o);
 			},
@@ -84,6 +87,8 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 	var _repeat = function(id, success, error) {
 		$resource($451.api('order/repeat/:id'), {'id': id}, { repeat: { method: 'PUT'}}).repeat().$promise.then(
 			function(o) {
+				store.set('451Cache.Order.' + o.ID);
+				store.remove('451Cache.User' + $451.apiName);
 				_extend(o);
 				_then(success, o);
 			},
@@ -125,8 +130,10 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 					store.set('451Cache.Order.' + o.ID, o);
 					_extend(o);
 					_then(success, o);
+				} else {
+					store.remove('451Cache.User' + $451.apiName);
+					_then(success, null);
 				}
-				_then(success, null);
 			},
 			function(ex) {
 				error(Error.format(ex));
