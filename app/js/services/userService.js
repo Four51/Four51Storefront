@@ -61,6 +61,20 @@ four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security',
         );
     }
 
+	var _reset = function(credentials, success, error) {
+		store.clear();
+		$resource($451.api('login')).save(credentials).$promise.then(
+			function(u) {
+				_then(success, u);
+			},
+			function(ex) {
+				if (angular.isFunction(error)) {
+					error(Error.format(ex));
+				}
+			}
+		)
+	}
+
     var _logout = function() {
         store.clear();
         Security.logout();
@@ -71,6 +85,7 @@ four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security',
         login: _login,
         save: _save,
         logout: _logout,
-	    refresh: _refresh
+	    refresh: _refresh,
+	    reset: _reset
     };
 }]);

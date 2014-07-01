@@ -1,20 +1,39 @@
-four51.app.controller('LoginCtrl', ['$scope', '$sce', '$route', 'User',
-function ($scope, $sce, $route, User) {
+four51.app.controller('LoginCtrl', ['$scope', '$sce', '$route', '$location', 'User',
+function ($scope, $sce, $route, $location, User) {
+	$scope.PasswordReset = $location.search().token != null;
 	var codes = ['PasswordSecurityException'];
 
 	$scope.loginMessage = null;
-	$scope.buttonText = "Logon";
+	$scope.buttonText = $scope.PasswordReset ? 'Reset Password' : "Logon";
 	$scope.$on('event:auth-loginFailed', function(event, message) {
 		$scope.loginMessage = message;
 	});
 
-
+	// build a post method for password reset
 	$scope.login = function() {
 		$scope.loginMessage = null;
 		// need to reset any error codes that might be set so we can handle new one's
 		angular.forEach(codes, function(c) {
 			$scope[c] = null;
 		});
+		$scope.credentials.PasswordResetToken = $location.search().token;
+		$scope.PasswordReset ? _reset() : _login();
+	};
+
+	var _reset = function() {
+		User.reset($scope.credentials,
+			function(user) {
+				delete $scope.PasswordReset;
+				delete $scope.credentials;
+				$location.path('catalog');
+			},
+			function(ex) {
+				$scope.loginMessage = $sce.trustAsHtml(ex.Message);
+			}
+		);
+	}
+
+	var _login = function() {
 		User.login($scope.credentials,
 			function(data) {
 				if ($scope.credentials.Email) {
@@ -41,5 +60,5 @@ function ($scope, $sce, $route, User) {
 				$scope.credentials.ConfirmPassword = null;
 			}
 		);
-	};
+	}
 }]);
