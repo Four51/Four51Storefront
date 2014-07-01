@@ -78,10 +78,10 @@
                         <div class="order-print-view-line-items-product">
                             <p>{{item.ProductIDText}}</p>
                             <p>{{item.Product.Name}}</p>
-                            <ul class="list-group" ng-show="item.Specs | filter:{'CanSetForLineItem':true}.length > 0">
-                                <li class="list-group-item" ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
+                            <ul class="list-group" ng-show="item.Specs | onproperty:{Property: 'CanSetForLineItem', Value: true}.length > 0">
+                                <li class="list-group-item" ng-repeat="spec in item.Specs | onproperty:{Property: 'CanSetForLineItem', Value: true} ">
                                     <span class="text-info">{{spec.Name}}: </span>
-                                    <span ng-if="spec.ControlType == 'File'">{{spec.File.OriginalName + Extension}}</span></span>
+                                    <span ng-if="spec.ControlType == 'File'">{{spec.File.OriginalName + Extension}}</span>
                                     <span ng-if="spec.ControlType != 'File'">{{spec.Value || '(unspecified)'}}</span>
                                 </li>
                             </ul>
