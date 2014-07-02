@@ -6139,11 +6139,10 @@ button::-moz-focus-inner {
     padding-left: 25px;
   }
 }
+.view-form-icon.view-form-icon-input-group .input-group-addon {
+  background-color: transparent;
+}
 .view-form-icon.view-form-icon-input-group .input-group-addon:first-of-type:before {
-  content: "\f044";
-  font-family: FontAwesome;
-  font-style: normal;
-  font-weight: normal;
   text-decoration: inherit;
   padding-right: 5px;
   padding-lefT: 5px;
@@ -6163,7 +6162,6 @@ button::-moz-focus-inner {
     text-align: left;
     padding: 5px 0;
     border-radius: 0;
-    background-color: #fff;
   }
 }
 .view-form-icon.view-form-icon-input-group i {
@@ -6229,7 +6227,8 @@ button::-moz-focus-inner {
 }
 .view-form-icon .col-md-4 i,
 .view-form-icon .col-xs-6 i,
-.view-form-icon .col-xs-9 i {
+.view-form-icon .col-xs-9 i,
+.view-form-icon .col-sm-4 i {
   left: 5px;
 }
 @media (max-width: 767px) {
@@ -8441,6 +8440,63 @@ table[datepicker] {
 }
 .empty i.fa {
   color: #cccccc;
+}
+.credit-card-widget .view-form-icon:first-of-type > div input {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-width: 0px;
+}
+.credit-card-widget .view-form-icon:nth-of-type(2) > div input {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-width: 0px;
+}
+.credit-card-widget .view-form-icon:nth-of-type(2) > div .card-type-icon {
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  width: 34px;
+  height: 20px;
+  background-size: contain;
+  -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  -webkit-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 200ms;
+  transition-duration: 200ms;
+}
+.credit-card-widget .view-form-icon:nth-of-type(2) > div .card-type-icon.active {
+  opacity: 1;
+  right: 10px;
+  -webkit-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 200ms;
+  transition-duration: 200ms;
+  -webkit-transition-delay: 200ms;
+  transition-delay: 200ms;
+}
+.credit-card-widget .view-form-icon > div.col-xs-6:first-of-type {
+  padding-right: 0;
+  border-right-width: 0px;
+}
+.credit-card-widget .view-form-icon > div.col-xs-6:first-of-type input {
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+}
+.credit-card-widget .view-form-icon > div.col-xs-6:last-of-type {
+  padding-left: 0;
+}
+.credit-card-widget .view-form-icon > div.col-xs-6:last-of-type input {
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+}
+.credit-card-widget .view-form-icon:not(:first-of-type) > div {
+  margin-top: 0px;
 }
 .glyphicon {
   display: inline-block;
