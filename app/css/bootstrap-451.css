@@ -8441,19 +8441,83 @@ table[datepicker] {
 .empty i.fa {
   color: #cccccc;
 }
+.credit-card-widget {
+  /*.view-form-icon:first-of-type{
+    & > div input{
+      .border-top-radius(@border-radius-base);
+      border-bottom-width:0px;
+    }
+  }
+  .view-form-icon:nth-of-type(2){
+    & > div{
+      input{
+        .border-bottom-radius(0px);
+        .border-top-radius(0px);
+        border-bottom-width:0px;
+      }
+      .card-type-icon{
+        position:absolute;
+        top:10px;
+        right:0px;
+        width:34px;
+        height:20px;
+        background-size:contain;
+        -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.5);
+        box-shadow: 0 0 3px 0 rgba(0,0,0,0.5);
+        opacity:0;
+        .transition-property(all);
+        .transition-duration(200ms);
+        &.active{
+          opacity:1;
+          right:10px;
+          .transition-property(all);
+          .transition-duration(200ms);
+          .transition-delay(200ms);
+        }
+      }
+    }
+  }
+  .view-form-icon{
+    & > div {
+      &.col-xs-6:first-of-type{
+        padding-right:0;
+        border-right-width:0px;
+        input{
+          .border-right-radius(0px);
+          .border-top-radius(0px);
+        }
+
+      }
+      &.col-xs-6:last-of-type{
+        padding-left:0;
+        input{
+          .border-left-radius(0px);
+          .border-top-radius(0px);
+        }
+      }
+    }
+  }
+  .view-form-icon:not(:first-of-type){
+    & > div{
+      margin-top:0px;
+    }
+  }*/
+}
+.credit-card-widget .view-form-icon > div input {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-width: 0;
+}
+.credit-card-widget .view-form-icon:not(:first-of-type) > div {
+  margin-top: 0;
+}
 .credit-card-widget .view-form-icon:first-of-type > div input {
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
-  border-bottom-width: 0px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
 }
-.credit-card-widget .view-form-icon:nth-of-type(2) > div input {
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
-  border-bottom-width: 0px;
-}
-.credit-card-widget .view-form-icon:nth-of-type(2) > div .card-type-icon {
+.credit-card-widget .view-form-icon > div.account-number-input .card-type-icon {
   position: absolute;
   top: 10px;
   right: 0px;
@@ -8468,7 +8532,7 @@ table[datepicker] {
   -webkit-transition-duration: 200ms;
   transition-duration: 200ms;
 }
-.credit-card-widget .view-form-icon:nth-of-type(2) > div .card-type-icon.active {
+.credit-card-widget .view-form-icon > div.account-number-input .card-type-icon.active {
   opacity: 1;
   right: 10px;
   -webkit-transition-property: all;
@@ -8478,25 +8542,25 @@ table[datepicker] {
   -webkit-transition-delay: 200ms;
   transition-delay: 200ms;
 }
-.credit-card-widget .view-form-icon > div.col-xs-6:first-of-type {
-  padding-right: 0;
-  border-right-width: 0px;
+.credit-card-widget .view-form-icon.double > div input {
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-bottom-width: 1px;
 }
-.credit-card-widget .view-form-icon > div.col-xs-6:first-of-type input {
+.credit-card-widget .view-form-icon.double > div.col-xs-6:first-of-type {
+  padding-right: 0;
+}
+.credit-card-widget .view-form-icon.double > div.col-xs-6:first-of-type input {
   border-bottom-right-radius: 0px;
   border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
+  border-right-width: 0;
 }
-.credit-card-widget .view-form-icon > div.col-xs-6:last-of-type {
+.credit-card-widget .view-form-icon.double > div.col-xs-6:last-of-type {
   padding-left: 0;
 }
-.credit-card-widget .view-form-icon > div.col-xs-6:last-of-type input {
+.credit-card-widget .view-form-icon.double > div.col-xs-6:last-of-type input {
   border-bottom-left-radius: 0px;
-  border-top-right-radius: 0px;
   border-top-left-radius: 0px;
-}
-.credit-card-widget .view-form-icon:not(:first-of-type) > div {
-  margin-top: 0px;
 }
 .glyphicon {
   display: inline-block;
