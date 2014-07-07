@@ -1,4 +1,4 @@
-four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security', 'Error', function($q, $rootScope, $resource, $451, Security, Error) {
+four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security', 'Error', '$window', function($q, $rootScope, $resource, $451, Security, Error, $window) {
     var _cacheName = '451Cache.User.' + $451.apiName;
 	function _then(fn, data) {
         if (angular.isFunction(fn))
@@ -78,6 +78,7 @@ four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security',
     var _logout = function() {
         store.clear();
         Security.logout();
+        $window.location.href = $window.location.pathname;
     }
 
     return {
