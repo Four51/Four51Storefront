@@ -40,10 +40,15 @@ four51.app.factory('AddressList', ['$q', '$resource', '$451', function($q, $reso
 			cache.splice(0, cache.length);
 			_then(success);
 		});
-	}
+	};
+
+	var _clear = function() {
+		cache.splice(0, cache.length);
+	};
 
 	return {
 		query: _query,
-		delete: _delete
+		delete: _delete,
+		clear: _clear
 	}
 }]);

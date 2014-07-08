@@ -71,6 +71,7 @@ four51.app.directive('paymentselector', function() {
 
            $scope.$watch('currentOrder.CreditCard.AccountNumber', function(ccnumber, o){
                //http://tamas.io/custom-angularjs-filter-to-determine-credit-card-type/
+	           if (!ccnumber) return;
                var len = ccnumber.length;
                if(ccnumber && len >= 4){
                    var  cardType,
