@@ -212,7 +212,7 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 				scope.variantLineItems = {};
 				angular.forEach(p.Variants, function(v){
 					if (!v) return;
-					scope.variantLineItems[v.InteropID] = {PriceSchedule: scope.currentOrder ? v[scope.currentOrder.Type + 'PriceSchedule'] : v.StandardPriceSchedule || scope.currentOrder ? p[scope.currentOrder.Type + 'PriceSchedule'] : p.StandardPriceSchedule, Product: p, Variant: v, Specs: scope.LineItem.Specs};
+					scope.variantLineItems[v.InteropID] = {PriceSchedule: (scope.currentOrder ? v[scope.currentOrder.Type + 'PriceSchedule'] : v.StandardPriceSchedule) || (scope.currentOrder ? p[scope.currentOrder.Type + 'PriceSchedule'] : p.StandardPriceSchedule), Product: p, Variant: v, Specs: scope.LineItem.Specs};
 				});
 			}
 		}
