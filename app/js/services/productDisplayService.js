@@ -206,13 +206,13 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 			scope.LineItem.PriceSchedule = determinePriceSchedule(); //include user permissions to decide to show
 			//moved to productViewScope scope.StaticSpecGroups = scope.LineItem.Variant.StaticSpecGroups || scope.LineItem.Product.StaticSpecGroups;
 		}else{
-			scope.LineItem.PriceSchedule = variantHasPriceSchedule(scope.LineItem.Product, 'StandardPriceSchedule') ? null : determinePriceSchedule(); //don't show price schedule if variant overrides parent PS
+			scope.LineItem.PriceSchedule = variantHasPriceSchedule(scope.LineItem.Product, scope.currentOrder ? scope.currentOrder.Type + 'PriceSchedule' : 'StandardPriceSchedule') ? null : determinePriceSchedule(); //don't show price schedule if variant overrides parent PS
 			if(scope.allowAddFromVariantList){
 				var p = scope.LineItem.Product;
 				scope.variantLineItems = {};
 				angular.forEach(p.Variants, function(v){
 					if (!v) return;
-					scope.variantLineItems[v.InteropID] = {PriceSchedule: v.StandardPriceSchedule || p.StandardPriceSchedule, Product: p, Variant: v, Specs: scope.LineItem.Specs};
+					scope.variantLineItems[v.InteropID] = {PriceSchedule: scope.currentOrder ? v[scope.currentOrder.Type + 'PriceSchedule'] : v.StandardPriceSchedule || scope.currentOrder ? p[scope.currentOrder.Type + 'PriceSchedule'] : p.StandardPriceSchedule, Product: p, Variant: v, Specs: scope.LineItem.Specs};
 				});
 			}
 		}
@@ -223,9 +223,9 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 
 		function canAddToOrderType(type) {
 			return scope.user.Permissions.contains(type + 'Order')
-				&& scope.LineItem.PriceSchedule
+				&& ((scope.variantLineItems && scope.variantLineItems[scope.LineItem.Product.Variants[0].InteropID].PriceSchedule) || scope.LineItem.PriceSchedule)
 				&& (scope.currentOrder ? scope.currentOrder.Type == type : true)
-				&& (scope.currentOrder ? scope.LineItem.PriceSchedule.OrderType == scope.currentOrder.Type : true);
+				&& (scope.currentOrder ? (scope.variantLineItems ? scope.variantLineItems[scope.LineItem.Product.Variants[0].InteropID].PriceSchedule.OrderType : scope.LineItem.PriceSchedule.OrderType) == scope.currentOrder.Type : true);
 		}
 		scope.allowAddToOrder = allowAddToOrder();
 		scope.canAddToStandardOrder = canAddToOrderType('Standard');

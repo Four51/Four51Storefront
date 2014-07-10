@@ -83,7 +83,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			$scope.currentOrder.LineItems.push($scope.LineItem);
 		}
 		$scope.addToOrderIndicator = true;
-		$scope.currentOrder.Type = $scope.LineItem.PriceSchedule.OrderType;
+		$scope.currentOrder.Type = $scope.variantLineItems ? $scope.variantLineItems[$scope.LineItem.Product.Variants[0].InteropID].PriceSchedule.OrderType : $scope.LineItem.PriceSchedule.OrderType;
 		Order.save($scope.currentOrder,
 			function(o){
 				$scope.user.CurrentOrderID = o.ID;
