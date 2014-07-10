@@ -223,9 +223,9 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 
 		function canAddToOrderType(type) {
 			return scope.user.Permissions.contains(type + 'Order')
-				&& ((scope.variantLineItems && scope.variantLineItems[scope.LineItem.Product.Variants[0].InteropID].PriceSchedule) || scope.LineItem.PriceSchedule)
-				&& (scope.currentOrder ? scope.currentOrder.Type == type : true)
-				&& (scope.currentOrder ? (scope.variantLineItems ? scope.variantLineItems[scope.LineItem.Product.Variants[0].InteropID].PriceSchedule.OrderType : scope.LineItem.PriceSchedule.OrderType) == scope.currentOrder.Type : true);
+				&& scope.variantLineItems ? scope.variantLineItems[scope.LineItem.Product.Variants[0].InteropID].Variant[type + 'PriceSchedule'] != null : scope.LineItem.Product[type + 'PriceSchedule'] != null
+				&& (scope.currentOrder && scope.currentOrder.ID ? scope.currentOrder.Type == type : true)
+				&& (scope.currentOrder && scope.currentOrder.ID ? (scope.variantLineItems ? scope.variantLineItems[scope.LineItem.Product.Variants[0].InteropID].PriceSchedule.OrderType : scope.LineItem.PriceSchedule.OrderType) == scope.currentOrder.Type : true);
 		}
 		scope.allowAddToOrder = allowAddToOrder();
 		scope.canAddToStandardOrder = canAddToOrderType('Standard');

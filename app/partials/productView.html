@@ -107,7 +107,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="product-variants">
+                        <div class="product-variants" ng-show="allowAddFromVariantList">
                             <ul id="451qa_list_variants">
                                 <loadingindicator ng-show="searchIndicator" />
                                 <li ng-repeat="v in LineItem.Product.Variants | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
@@ -121,15 +121,15 @@
                                                 {{'Quantity Available' | r}}: {{v.QuantityAvailable}}
                                             </p>
                                         </a>
-                                        <div class="col-sm-2" ng-if="allowAddFromVariantList && !(user.Permissions.contains('HidePricing'))">
+                                        <div class="col-sm-2" ng-show="allowAddFromVariantList && !(user.Permissions.contains('HidePricing'))">
                                             <div class="quantity-total-variants text-center" ng-show="variantLineItems[v.InteropID].LineTotal > 0">
                                                 <small><span class="text-info">Total</span><br /><span class=" text-success">{{variantLineItems[v.InteropID].LineTotal | currency}}</span></small>
                                             </div>
                                         </div>
-                                        <div class="col-sm-3 view-form-icon" ng-if="allowAddFromVariantList">
+                                        <div class="col-sm-3 view-form-icon" ng-show="allowAddFromVariantList">
                                             <quantityfield required="false" calculated="calcVariantLineItems" lineitem="variantLineItems[v.InteropID]" class="quantity" />
                                         </div>
-                                        <div class="col-sm-1" ng-if="v.IsMpowerVariant">
+                                        <div class="col-sm-1" ng-show="v.IsMpowerVariant">
                                             <button type="button" ng-click="deleteVariant(v, false)" class="btn btn-default btn-block">
                                                 <i class="fa fa-trash-o text-warning"></i> <span class="visible-xs text-warning">Delete</span>
                                             </button>
@@ -143,7 +143,9 @@
                                         items-per-page="settings.pageSize" direction-links="true"></pagination>
                         </div>
                     </div>
-                    <ordertypeselector ng-show="(canAddToStandardOrder && canAddToReplenishmentOrder) || !currentOrder.ID"></ordertypeselector>
+                    Standard: {{canAddToStandardOrder}}<br />
+                    Replen: {{canAddToReplenishmentOrder}}<br />
+                    <ordertypeselector ng-show="(canAddToStandardOrder && canAddToReplenishmentOrder && !currentOrder)"></ordertypeselector>
                     <addtoorderspecs></addtoorderspecs>
                     <div class="form-group">
                         <p ng-show="LineItem.Product.DisplayInventory && (LineItem.Variant || LineItem.Product.Variants.length == 0)">
