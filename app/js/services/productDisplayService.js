@@ -205,7 +205,12 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 		if(scope.LineItem.Variant){
 			scope.LineItem.PriceSchedule = determinePriceSchedule(); //include user permissions to decide to show
 			//moved to productViewScope scope.StaticSpecGroups = scope.LineItem.Variant.StaticSpecGroups || scope.LineItem.Product.StaticSpecGroups;
-		}else{
+		}
+		else if (!scope.LineItem.Product.IsVariantLevelInventory && (scope.currentOrder && scope.currentOrder.Type == 'Replenishment')) {
+			scope.LineItem.PriceSchedule = scope.LineItem.Product.ReplenishmentPriceSchedule;
+			scope.allowAddFromVariantList = false;
+		}
+		else{
 			scope.LineItem.PriceSchedule = variantHasPriceSchedule(scope.LineItem.Product, scope.currentOrder ? scope.currentOrder.Type + 'PriceSchedule' : 'StandardPriceSchedule') ? null : determinePriceSchedule(); //don't show price schedule if variant overrides parent PS
 			if(scope.allowAddFromVariantList){
 				var p = scope.LineItem.Product;
@@ -222,6 +227,12 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 		}
 
 		function canAddToOrderType(type) {
+			// this is such an outlier that I'm not sure how to weave it into the checks.
+			if ((scope.currentOrder && scope.currentOrder.Type == 'Replenishment') && type == 'Replenishment' && !scope.LineItem.Product.IsVariantLevelInventory && (scope.LineItem.PriceSchedule && scope.LineItem.PriceSchedule.OrderType == 'Replenishment')) {
+				scope.allowAddToOrder = true; // even have to reset this
+				return true;
+			}
+
 			return scope.user.Permissions.contains(type + 'Order')
 				&& scope.variantLineItems ? scope.variantLineItems[scope.LineItem.Product.Variants[0].InteropID].Variant[type + 'PriceSchedule'] != null : scope.LineItem.Product[type + 'PriceSchedule'] != null
 				&& (scope.currentOrder && scope.currentOrder.ID ? scope.currentOrder.Type == type : true)

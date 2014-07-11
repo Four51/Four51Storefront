@@ -25,7 +25,7 @@ four51.app.directive('quantityfield', ['$451', 'ProductDisplayService', function
 					scope.calculated(lineitem);
 			};
 			scope.validQuantityAddToOrder = function(value, lineItem){
-
+				if (!value) return true;
 				var variant = lineItem.Variant;
 				var product = lineItem.Product;
 				var priceSchedule = lineItem.PriceSchedule;
