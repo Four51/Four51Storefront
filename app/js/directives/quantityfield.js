@@ -25,7 +25,7 @@ four51.app.directive('quantityfield', ['$451', 'ProductDisplayService', function
 					scope.calculated(lineitem);
 			};
 			scope.validQuantityAddToOrder = function(value, lineItem){
-
+				if (!value) return true;
 				var variant = lineItem.Variant;
 				var product = lineItem.Product;
 				var priceSchedule = lineItem.PriceSchedule;
@@ -66,7 +66,7 @@ four51.app.directive('quantityfield', ['$451', 'ProductDisplayService', function
 				if(product.IsVariantLevelInventory && !variant){
 					//console.log('variant not selected can\'t check qty available'); //in vboss the user may select the qty before the variant. we may have to change when this gets called so inventory available can be re validated if the variant is chnaged based on a selection spec. It's probably not a big deal since the api will check inventory available on adding to order.
 				}
-				else{
+				else if (priceSchedule.OrderType != 'Replenishment') {
 					var qtyAvail = (product.IsVariantLevelInventory ? variant.QuantityAvailable : product.QuantityAvailable) + (lineItem.OriginalQuantity || 0);
 
 					if(qtyAvail < value && product.AllowExceedInventory == false){

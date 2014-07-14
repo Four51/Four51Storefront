@@ -20,7 +20,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 	function setDefaultQty(lineitem) {
 		$scope.LineItem.Quantity = lineitem.Product.StandardPriceSchedule.DefaultQuantity > 0 ? lineitem.Product.StandardPriceSchedule.DefaultQuantity : null;
 	}
-	function init(searchTerm) {
+	function init(searchTerm, callback) {
 		ProductDisplayService.getProductAndVariant($routeParams.productInteropID, $routeParams.variantInteropID, function (data) {
 			$scope.LineItem.Product = data.product;
 			$scope.LineItem.Variant = data.variant;
@@ -30,6 +30,8 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			$scope.$broadcast('ProductGetComplete');
 			$scope.loadingIndicator = false;
 			$scope.setAddToOrderErrors();
+			if (angular.isFunction(callback))
+				callback();
 		}, $scope.settings.currentPage, $scope.settings.pageSize, searchTerm);
 	}
 	$scope.$watch('settings.currentPage', function(n, o) {
@@ -71,6 +73,8 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			$scope.currentOrder = {};
 			$scope.currentOrder.LineItems = [];
 		}
+		if (!$scope.currentOrder.LineItems)
+			$scope.currentOrder.LineItems = [];
 		if($scope.allowAddFromVariantList){
 			angular.forEach($scope.variantLineItems, function(item){
 				if(item.Quantity > 0){
@@ -81,6 +85,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			$scope.currentOrder.LineItems.push($scope.LineItem);
 		}
 		$scope.addToOrderIndicator = true;
+		//$scope.currentOrder.Type = (!$scope.LineItem.Product.IsVariantLevelInventory && $scope.variantLineItems) ? $scope.variantLineItems[$scope.LineItem.Product.Variants[0].InteropID].PriceSchedule.OrderType : $scope.LineItem.PriceSchedule.OrderType;
 		Order.save($scope.currentOrder,
 			function(o){
 				$scope.user.CurrentOrderID = o.ID;
@@ -95,7 +100,16 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 				$route.reload();
 			}
 		);
-	}
+	};
+
+	$scope.setOrderType = function(type) {
+		if (!$scope.currentOrder) {
+			$scope.currentOrder = { 'Type': type };
+			init(null, function() {
+				//delete $scope.currentOrder;
+			});
+		}
+	};
 
 	$scope.$on('event:imageLoaded', function(event, result) {
 		$scope.loadingImage = false;

@@ -109,7 +109,6 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 		}
 
 		scope.specChanged = function(spec){
-			console.log('spec changed');
 			if(!spec){
 				return;
 			}
@@ -196,23 +195,54 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 				&& scope.LineItem.Product.Variants
 				&& (scope.LineItem.Product.Variants.length > 0 || scope.LineItem.Product.Type == 'VariableText')
 
+		function determinePriceSchedule() {
+			// default to standard if no order type
+			return (scope.currentOrder && scope.currentOrder.Type == 'Replenishment') ?
+				(scope.LineItem.Variant && scope.LineItem.Variant.ReplenishmentPriceSchedule) ? scope.LineItem.Variant.ReplenishmentPriceSchedule : scope.LineItem.Product.ReplenishmentPriceSchedule :
+				(scope.LineItem.Variant && scope.LineItem.Variant.StandardPriceSchedule) ? scope.LineItem.Variant.StandardPriceSchedule : scope.LineItem.Product.StandardPriceSchedule;
+		}
+
 		if(scope.LineItem.Variant){
-			scope.LineItem.PriceSchedule = scope.LineItem.Variant.StandardPriceSchedule ? scope.LineItem.Variant.StandardPriceSchedule : scope.LineItem.Product.StandardPriceSchedule; //include user permissions to decide to show
+			scope.LineItem.PriceSchedule = determinePriceSchedule(); //include user permissions to decide to show
 			//moved to productViewScope scope.StaticSpecGroups = scope.LineItem.Variant.StaticSpecGroups || scope.LineItem.Product.StaticSpecGroups;
-		}else{
-			scope.LineItem.PriceSchedule = variantHasPriceSchedule(scope.LineItem.Product, 'StandardPriceSchedule') ? null : scope.LineItem.Product.StandardPriceSchedule; //don't show price schedule if variant overrides parent PS
+		}
+		else if (!scope.LineItem.Product.IsVariantLevelInventory && (scope.currentOrder && scope.currentOrder.Type == 'Replenishment')) {
+			scope.LineItem.PriceSchedule = scope.LineItem.Product.ReplenishmentPriceSchedule;
+			scope.allowAddFromVariantList = false;
+		}
+		else{
+			scope.LineItem.PriceSchedule = variantHasPriceSchedule(scope.LineItem.Product, scope.currentOrder ? scope.currentOrder.Type + 'PriceSchedule' : 'StandardPriceSchedule') ? null : determinePriceSchedule(); //don't show price schedule if variant overrides parent PS
 			if(scope.allowAddFromVariantList){
 				var p = scope.LineItem.Product;
 				scope.variantLineItems = {};
 				angular.forEach(p.Variants, function(v){
 					if (!v) return;
-					scope.variantLineItems[v.InteropID] = {PriceSchedule: v.StandardPriceSchedule || p.StandardPriceSchedule, Product: p, Variant: v, Specs: scope.LineItem.Specs};
+					scope.variantLineItems[v.InteropID] = {PriceSchedule: (scope.currentOrder ? v[scope.currentOrder.Type + 'PriceSchedule'] : v.StandardPriceSchedule) || (scope.currentOrder ? p[scope.currentOrder.Type + 'PriceSchedule'] : p.StandardPriceSchedule), Product: p, Variant: v, Specs: scope.LineItem.Specs};
 				});
 			}
 		}
 
-		scope.allowAddToOrder =  scope.allowAddFromVariantList || (scope.LineItem.Variant || (scope.LineItem.Product.VariantCount == 0 && scope.LineItem.Product.Type != 'VariableText'));//this will include some order type and current order logic.
+		function allowAddToOrder() {
+			return (scope.currentOrder ? canAddToOrderType(scope.currentOrder.Type) : true) && (scope.allowAddFromVariantList || (scope.LineItem.Variant || (scope.LineItem.Product.VariantCount == 0 && scope.LineItem.Product.Type != 'VariableText')));//this will include some order type and current order logic.
+		}
 
+		function canAddToOrderType(type) {
+			// this is such an outlier that I'm not sure how to weave it into the checks.
+			if ((scope.currentOrder && scope.currentOrder.Type == 'Replenishment') && type == 'Replenishment' && !scope.LineItem.Product.IsVariantLevelInventory && (scope.LineItem.PriceSchedule && scope.LineItem.PriceSchedule.OrderType == 'Replenishment')) {
+				scope.allowAddToOrder = true; // even have to reset this
+				return true;
+			}
+
+			return scope.user.Permissions.contains(type + 'Order')
+				&& scope.variantLineItems ? scope.variantLineItems[scope.LineItem.Product.Variants[0].InteropID].Variant[type + 'PriceSchedule'] != null : scope.LineItem.Product[type + 'PriceSchedule'] != null
+				&& (scope.currentOrder && scope.currentOrder.ID ? scope.currentOrder.Type == type : true)
+				&& (scope.currentOrder && scope.currentOrder.ID ? (scope.variantLineItems ? scope.variantLineItems[scope.LineItem.Product.Variants[0].InteropID].PriceSchedule.OrderType : scope.LineItem.PriceSchedule.OrderType) == scope.currentOrder.Type : true);
+		}
+		scope.allowAddToOrder = allowAddToOrder();
+		scope.canAddToStandardOrder = canAddToOrderType('Standard');
+		scope.canAddToReplenishmentOrder = canAddToOrderType('Replenishment');
+		// the api has a property from the inventory settings on whether we display inventory. but, we also need to consider the current order type
+		scope.LineItem.Product.DisplayInventory = scope.LineItem.Product.DisplayInventory && (!scope.currentOrder || (scope.currentOrder && scope.currentOrder.Type == 'Standard'));
 		//short view//scope.allowAddToOrder = scope.LineItem.Product.Variants.length == 0 && scope.lineItemSpecs.length == 0 && scope.LineItem.Product.Type != 'VariableText';
 		//one view//ng-show="LineItem.Variant || LineItem.Product.Variants.length == 0"
 	}
