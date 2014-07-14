@@ -57,7 +57,7 @@
         </div>
         <div>
             <label>&nbsp;</label>
-            <select multiple size="35" class="form-control" ng-options="key as value for (key,value) in report.ColumnOptions" ng-model="report.SelectedColumns"><option value=""></option></select>
+            <select multiple size="35" required class="form-control" ng-options="key as value for (key,value) in report.ColumnOptions" ng-model="report.SelectedColumns"><option value=""></option></select>
         </div>
     </div>
 </div>
@@ -68,6 +68,19 @@
             <label>Subtotal by Column</label>
             <select class="form-control" ng-options="key as value for (key,value) in report.SubtotalOptions" ng-model="report.Subtotal"><option value=""></option></select>
             <i class="fa fa-tasks"></i>
+        </div>
+    </div>
+</div>
+<div class="row view-form-icon">
+    <div class="input-group" ng-if="report && !report.ID">
+        <label>{{'Name' | r}}</label>
+        <input required class="form-control" type="text" ng-model="report.Name" placeholder="{{'Name' | r}}" />
+        <i class="fa fa-bookmark-o"></i>
+        <div class="input-group-btn">
+            <button type="submit" ng-disabled="reportForm.$invalid" class="btn btn-primary pull-right">
+                <span>{{'Save' | r}}</span>
+                <i class="fa fa-save"></i>
+            </button>
         </div>
     </div>
 </div>
