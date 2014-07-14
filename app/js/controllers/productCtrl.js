@@ -32,6 +32,8 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			$scope.setAddToOrderErrors();
 			if (angular.isFunction(callback))
 				callback();
+			if (!$scope.currentOrder)
+				$scope.setOrderType('Standard');
 		}, $scope.settings.currentPage, $scope.settings.pageSize, searchTerm);
 	}
 	$scope.$watch('settings.currentPage', function(n, o) {
@@ -103,12 +105,11 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 	};
 
 	$scope.setOrderType = function(type) {
-		if (!$scope.currentOrder) {
-			$scope.currentOrder = { 'Type': type };
-			init(null, function() {
-				//delete $scope.currentOrder;
-			});
-		}
+		$scope.loadingPriceSchedule = true;
+		$scope.currentOrder = { 'Type': type };
+		init(null, function() {
+			$scope.loadingPriceSchedule = false;
+		});
 	};
 
 	$scope.$on('event:imageLoaded', function(event, result) {

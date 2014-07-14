@@ -1,4 +1,17 @@
 <div>
-    <span ng-click="setOrderType('Standard')">Standard</span>
-    <span ng-click="setOrderType('Replenishment')">Replenishment</span>
+    <div class="input-group-btn">
+        <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">
+            <loadingindicator ng-show="loadingPriceSchedule" />
+            <span>{{'Order' | r}} {{'Type' | r}} {{currentOrder.Type ? currentOrder.Type : 'Standard' | r}}</span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu pull-left" role="menu">
+            <li ng-show="currentOrder.Type != 'Standard'">
+                <a role="presentation" tabindex="-1" ng-click="setOrderType('Standard')">{{'Standard' | r}}</a>
+            </li>
+            <li ng-show="currentOrder.Type != 'Replenishment'">
+                <a role="presentation" tabindex="-1" ng-click="setOrderType('Replenishment')">{{'Replenishment' | r}}</a>
+            </li>
+        </ul>
+    </div>
 </div>
