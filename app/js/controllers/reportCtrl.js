@@ -34,15 +34,16 @@ function($scope, $routeParams, $451, Report) {
 		);
 	};
 	$scope.downloadReport = function(report) {
-		$scope.displayDownloadIndicator = true;
+		$scope.displayLoadingIndicator = true;
 		Report.download(report.ID,
 			function(data) {
 				$scope.report = data;
 				$scope.settings.listCount = data.Data.length;
+				$scope.displayLoadingIndicator = false;
 			},
 			function(ex) {
 				$scope.actionMessage = ex.Message;
-				$scope.displayDownloadIndicator = false;
+				$scope.displayLoadingIndicator = false;
 			}
 		);
 	};

@@ -1,7 +1,7 @@
 <section>
     <form name="reportForm" ng-submit="saveReport()">
-        <loadingindicator ng-show="displayLoadingIndicator" />
         <div class="panel panel-default">
+            <loadingindicator ng-show="displayLoadingIndicator" />
             <div class="panel-heading">
                 <h3 ng-if="!report.ID" class="panel-title panel-primary">{{report.ReportType | r}}</h3>
                 <h3 ng-if="report.ID" class="panel-title panel-primary">{{report.Name}}</h3>
