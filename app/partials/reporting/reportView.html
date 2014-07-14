@@ -21,7 +21,7 @@
                         <div class="table-responsive hidden-xs">
                             <table class="table">
                                 <tr>
-                                    <td ng-repeat="header in report.DataColumns">{{header | r}}</td>
+                                    <td ng-repeat="(key, value) in report.DisplayColumns">{{value | r}}</td>
                                 </tr>
                                 <tr ng-repeat="row in report.Data | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
                                     <td ng-repeat="header in report.DataColumns">
