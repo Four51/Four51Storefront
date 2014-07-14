@@ -105,10 +105,10 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 	};
 
 	$scope.setOrderType = function(type) {
-		$scope.loadingPriceSchedule = true;
+		$scope.loadingIndicator = true;
 		$scope.currentOrder = { 'Type': type };
 		init(null, function() {
-			$scope.loadingPriceSchedule = false;
+			$scope.loadingIndicator = false;
 		});
 	};
 
