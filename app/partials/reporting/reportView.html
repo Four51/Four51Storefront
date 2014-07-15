@@ -13,9 +13,9 @@
                         <orderreport ng-if="report.ReportType == 'Order'" />
                     </div>
                 </tab>
-                <tab>
+                <tab disabled="!report.ID">
                     <tab-heading ng-click="downloadReport(report)">
-                        {{'Report' | r}} {{'Data' | r}}
+                        {{'Report' | r}} {{'Data' | r}} {{report.ID}}
                     </tab-heading>
                     <div class="panel-body">
                         <div class="table-responsive hidden-xs">

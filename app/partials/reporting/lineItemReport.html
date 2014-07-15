@@ -1,8 +1,19 @@
 <div class="row">
-    <div class="col-sm-6 view-form-icon">
-        <div class="panel-heading">
-            <h3 class="panel-title panel-primary">{{'Conditions' | r}}</h3>
+    <div class="col-sm-12 view-form-icon">
+        <div class="input-group">
+            <label>{{'Name' | r}}</label>
+            <input required class="form-control" type="text" ng-model="report.Name" placeholder="{{'Name' | r}}" />
+            <i class="fa fa-bookmark-o"></i>
+            <div class="input-group-btn">
+                <button type="submit" ng-disabled="reportForm.$invalid" class="btn btn-primary pull-right">
+                    <span>{{'Save' | r}}</span>
+                    <i class="fa fa-save"></i>
+                </button>
+            </div>
         </div>
+    </div>
+    <div class="col-sm-6 view-form-icon">
+        <h3>{{'Conditions' | r}}</h3>
         <div>
             <label>{{'Order' | r}} {{'ID' | r}}</label>
             <input class="form-control" type="text" ng-model="report.ExternalID" placeholder="Order ID" />
@@ -50,37 +61,18 @@
         </div>
         <daterange ng-options="report.TimeSpanOptions" fromdate="report.FromDate" todate="report.ToDate" />
         <hr />
-    </div>
-    <div class="col-sm-6">
-        <div class="panel-heading">
-            <h3 class="panel-title panel-primary">Display Columns</h3>
-        </div>
-        <div>
-            <label>&nbsp;</label>
-            <select multiple size="35" required class="form-control" ng-options="key as value for (key,value) in report.ColumnOptions" ng-model="report.SelectedColumns"><option value=""></option></select>
-        </div>
-    </div>
-</div>
-<hr />
-<div class="row view-form-icon">
-    <div class="col-sm-6 col-off-pull-6 view-form-icon">
+        <h3>{{'Subtotal Options' | r}}</h3>
         <div>
             <label>Subtotal by Column</label>
             <select class="form-control" ng-options="key as value for (key,value) in report.SubtotalOptions" ng-model="report.Subtotal"><option value=""></option></select>
             <i class="fa fa-tasks"></i>
         </div>
     </div>
-</div>
-<div class="row view-form-icon">
-    <div class="input-group">
-        <label>{{'Name' | r}}</label>
-        <input required class="form-control" type="text" ng-model="report.Name" placeholder="{{'Name' | r}}" />
-        <i class="fa fa-bookmark-o"></i>
-        <div class="input-group-btn">
-            <button type="submit" ng-disabled="reportForm.$invalid" class="btn btn-primary pull-right">
-                <span>{{'Save' | r}}</span>
-                <i class="fa fa-save"></i>
-            </button>
+    <div class="col-sm-6">
+        <h3>Display Columns</h3>
+        <div>
+            <label>&nbsp;</label>
+            <select multiple size="35" required class="form-control" ng-options="key as value for (key,value) in report.ColumnOptions" ng-model="report.SelectedColumns"><option value=""></option></select>
         </div>
     </div>
 </div>
