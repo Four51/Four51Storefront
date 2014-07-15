@@ -19,6 +19,7 @@ function($scope, $routeParams, $451, Report) {
 	);
 
 	$scope.saveReport = function() {
+		$scope.errorMessage = null;
 		$scope.displayLoadingIndicator = true;
 		$scope.actionMessage = null;
 		Report.save($scope.report,
@@ -28,12 +29,13 @@ function($scope, $routeParams, $451, Report) {
 				$scope.displayLoadingIndicator = false;
 			},
 			function(ex) {
-				$scope.actionMessage = ex.Message;
+				$scope.errorMessage = ex.Message;
 				$scope.displayLoadingIndicator = false;
 			}
 		);
 	};
 	$scope.downloadReport = function(report) {
+		$scope.errorMessage = null;
 		$scope.displayLoadingIndicator = true;
 		Report.download(report.ID,
 			function(data) {
@@ -42,7 +44,7 @@ function($scope, $routeParams, $451, Report) {
 				$scope.displayLoadingIndicator = false;
 			},
 			function(ex) {
-				$scope.actionMessage = ex.Message;
+				$scope.errorMessage = ex.Message;
 				$scope.displayLoadingIndicator = false;
 			}
 		);

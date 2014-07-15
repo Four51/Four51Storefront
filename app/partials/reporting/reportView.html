@@ -36,12 +36,15 @@
                             <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
                                         items-per-page="settings.pageSize" direction-links="true"></pagination>
                         </div>
-                        <button type="button" class="btn btn-primary pull-right" ng-click="getDownload()">{{'Download' | r}}</button>
+                        <button ng-hide="errorMessage" type="button" class="btn btn-primary pull-right" ng-click="getDownload()">{{'Download' | r}}</button>
                     </div>
                 </tab>
             </tabset>
             <div class="view-response-message text-center" ng-show="actionMessage">
                 <p>{{actionMessage | r}}</p>
+            </div>
+            <div class="view-error-message alert-danger text-center" ng-show="errorMessage">
+                <p>{{errorMessage | r}}</p>
             </div>
         </div>
     </form>
