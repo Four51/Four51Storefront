@@ -4,7 +4,7 @@
             <h3 class="panel-title panel-primary">{{'Conditions' | r}}</h3>
         </div>
         <div>
-            <label ng-show="report.OrderID">{{'Order' | r}} {{'ID' | r}}</label>
+            <label>{{'Order' | r}} {{'ID' | r}}</label>
             <input class="form-control" type="text" ng-model="report.ExternalID" placeholder="Order ID" />
             <i class="fa fa-external-link"></i>
         </div>
@@ -72,7 +72,7 @@
     </div>
 </div>
 <div class="row view-form-icon">
-    <div class="input-group" ng-if="report && !report.ID">
+    <div class="input-group">
         <label>{{'Name' | r}}</label>
         <input required class="form-control" type="text" ng-model="report.Name" placeholder="{{'Name' | r}}" />
         <i class="fa fa-bookmark-o"></i>

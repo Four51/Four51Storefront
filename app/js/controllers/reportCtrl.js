@@ -36,6 +36,7 @@ function($scope, $routeParams, $451, Report) {
 	};
 	$scope.downloadReport = function(report) {
 		$scope.errorMessage = null;
+		$scope.actionMessage = null;
 		$scope.displayLoadingIndicator = true;
 		Report.download(report.ID,
 			function(data) {

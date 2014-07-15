@@ -6,7 +6,10 @@ four51.app.factory('Report', ['$resource','$q', '$451', 'Error', function($resou
 	};
 
 	function _extend(report) {
-		report.AvailableTypes = {"LineItem": "Line Item"};
+		report.AvailableTypes = {
+			"Order": "Order",
+			"LineItem": "Line Item"
+		};
 	};
 
 	var _query = function(success) {

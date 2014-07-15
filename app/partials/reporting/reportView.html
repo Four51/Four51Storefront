@@ -3,14 +3,14 @@
         <div class="panel panel-default">
             <loadingindicator ng-show="displayLoadingIndicator" />
             <div class="panel-heading">
-                <h3 ng-if="!report.ID" class="panel-title panel-primary">{{report.ReportType | r}}</h3>
-                <h3 ng-if="report.ID" class="panel-title panel-primary">{{report.Name}}</h3>
+                <h3 ng-if="!report.ID" class="panel-title panel-primary">{{report.ID ? report.Name : report.ReportType | r}}</h3>
             </div>
             <tabset ng-show="report">
                 <tab>
                     <tab-heading>{{'Conditions' | r}}</tab-heading>
                     <div class="panel-body">
-                        <lineitemreport />
+                        <lineitemreport ng-if="report.ReportType == 'LineItem'" />
+                        <orderreport ng-if="report.ReportType == 'Order'" />
                     </div>
                 </tab>
                 <tab>
