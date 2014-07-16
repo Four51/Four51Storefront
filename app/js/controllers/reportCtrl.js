@@ -2,6 +2,7 @@ four51.app.controller('ReportCtrl', ['$scope', '$routeParams', '$451', 'Report',
 function($scope, $routeParams, $451, Report) {
 	$scope.displayLoadingIndicator = true;
 	$scope.actionMessage = null;
+	$scope.errorMessage = null;
 	$scope.settings = {
 		currentPage: 1,
 		pageSize: 10
