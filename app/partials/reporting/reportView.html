@@ -11,6 +11,7 @@
                     <div class="panel-body">
                         <lineitemreport ng-if="report.ReportType == 'LineItem'" />
                         <orderreport ng-if="report.ReportType == 'Order'" />
+                        <inventoryreport ng-if="report.ReportType == 'Inventory'" />
                     </div>
                 </tab>
                 <tab disabled="!report.ID">

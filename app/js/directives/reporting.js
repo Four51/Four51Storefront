@@ -51,3 +51,18 @@ four51.app.directive('orderreport', function() {
 	};
 	return obj;
 });
+
+four51.app.directive('inventoryreport', function() {
+	var obj = {
+		restrict: 'E',
+		templateUrl: 'partials/Reporting/inventoryReport.html',
+		controller: ['$scope', function($scope) {
+			$scope.open = function(cal, event) {
+				event.preventDefault();
+				event.stopPropagation();
+				$scope[cal] = true;
+			};
+		}]
+	};
+	return obj;
+});
