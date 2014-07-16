@@ -54,5 +54,10 @@
             <label>&nbsp;</label>
             <select multiple size="35" required class="form-control" ng-options="key as value for (key,value) in report.ColumnOptions" ng-model="report.SelectedColumns"><option value=""></option></select>
         </div>
+        <h3>Display Order Field Columns</h3>
+        <div>
+            <label></label>
+            <select multiple size="10" class="form-control" ng-options="key as value for (key,value) in report.OrderFieldColumnOptions" ng-model="report.SelectedOrderFieldColumns"><option value=""></option></select>
+        </div>
     </div>
 </div>
