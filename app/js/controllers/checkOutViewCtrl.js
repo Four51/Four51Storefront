@@ -15,8 +15,10 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, Analytics,
     AddressList.query(function(list) {
         $scope.addresses = list;
 	    if (isEditforApproval) {
-		    $scope.addresses.push($scope.currentOrder.ShipAddress);
-		    $scope.addresses.push($scope.currentOrder.BillAddress);
+		    if (!AddressList.contains($scope.currentOrder.ShipAddress))
+		        $scope.addresses.push($scope.currentOrder.ShipAddress);
+		    if (!AddressList.contains($scope.currentOrder.ShipAddress))
+		        $scope.addresses.push($scope.currentOrder.BillAddress);
 	    }
     });
 
