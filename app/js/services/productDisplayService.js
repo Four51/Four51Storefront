@@ -229,8 +229,14 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 		function canAddToOrderType(type) {
 			// this is such an outlier that I'm not sure how to weave it into the checks.
 			if ((scope.currentOrder && scope.currentOrder.Type == 'Replenishment') && type == 'Replenishment' && !scope.LineItem.Product.IsVariantLevelInventory && (scope.LineItem.PriceSchedule && scope.LineItem.PriceSchedule.OrderType == 'Replenishment')) {
-				scope.allowAddToOrder = true; // even have to reset this
+				scope.allowAddToOrder = scope.user.Permissions.contains(type + 'Order'); // even have to reset this
 				return true;
+			}
+
+			// mpower variants
+			if ((scope.currentOrder && scope.currentOrder.Type != 'Replenishment') && type != 'Replenishment') {
+				if (scope.variantLineItems && scope.LineItem.Product.Type == 'VariableText')
+					return scope.LineItem.PriceSchedule.OrderType == 'Standard' && scope.user.Permissions.contains(type + 'Order');
 			}
 
 			return scope.user.Permissions.contains(type + 'Order')
