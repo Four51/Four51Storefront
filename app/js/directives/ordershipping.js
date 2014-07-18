@@ -17,7 +17,8 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'OrderConf
 						if (callback) callback($scope.currentOrder);
 					},
 					function(ex) {
-						$scope.currentOrder.ExternalID = null;
+						if (auto)
+							$scope.currentOrder.ExternalID = auto;
 						$scope.errorMessage = ex.Message;
 						$scope.shippingUpdatingIndicator = false;
 						$scope.shippingFetchIndicator = false;

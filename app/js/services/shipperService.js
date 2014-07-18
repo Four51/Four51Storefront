@@ -17,7 +17,7 @@ four51.app.factory('Shipper', ['$resource', '$451', function($resource, $451) {
 	    //var id = buildCacheID(order),
 		//    shippers = store.get(id);
 		//shippers ? _then(success, shippers) :
-	        $resource($451.api('shipper')).query().$promise.then(function(list) {
+	        $resource($451.api('shipper'), { id: '@id' }).query({ id: order.ID }).$promise.then(function(list) {
 		//        store.set(id, list);
 	            _then(success, list);
 	        });

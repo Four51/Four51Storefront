@@ -6,7 +6,11 @@ four51.app.factory('Report', ['$resource','$q', '$451', 'Error', function($resou
 	};
 
 	function _extend(report) {
-		report.AvailableTypes = {"LineItem": "Line Item"};
+		report.AvailableTypes = {
+			"Order": "Order",
+			"LineItem": "Line Item",
+			"Inventory": "Inventory"
+		};
 	};
 
 	var _query = function(success) {
@@ -19,6 +23,18 @@ four51.app.factory('Report', ['$resource','$q', '$451', 'Error', function($resou
 	// do not extend reports. it will break the api serialization
 	var _get = function(id, success, error) {
 		$resource($451.api('report/:id'), { id: '@id' }).get({ id: id }).$promise.then(
+			function(data) {
+				_then(success, data);
+			},
+			function(ex) {
+				if (error)
+					error(Error.format(ex));
+			}
+		);
+	};
+
+	var _download = function(id, success, error) {
+		$resource($451.api('report/:id/download'), { id: '@id' }).get({ id: id }).$promise.then(
 			function(data) {
 				_then(success, data);
 			},
@@ -69,19 +85,7 @@ four51.app.factory('Report', ['$resource','$q', '$451', 'Error', function($resou
 					error(Error.format(ex));
 			}
 		);
-	}
-
-	var _download = function(id, success, error) {
-		$resource($451.api('downloadreport/:id'), { id: '@id' }).get({ id: id }).$promise.then(
-			function(data) {
-				_then(success, data);
-			},
-			function(ex) {
-				if (error)
-					error(Error.format(ex));
-			}
-		);
-	}
+	};
 
 	return {
 		query: _query,

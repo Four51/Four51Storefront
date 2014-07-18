@@ -1,11 +1,25 @@
-four51.app.controller('CheckOutViewCtrl', ['$scope', '$location', '$filter', '$rootScope', '$451', 'Analytics', 'User', 'Order', 'OrderConfig', 'FavoriteOrder', 'AddressList',
-function ($scope, $location, $filter, $rootScope, $451, Analytics, User, Order, OrderConfig, FavoriteOrder, AddressList) {
+four51.app.controller('CheckOutViewCtrl', ['$scope', '$routeParams', '$location', '$filter', '$rootScope', '$451', 'Analytics', 'User', 'Order', 'OrderConfig', 'FavoriteOrder', 'AddressList',
+function ($scope, $routeParams, $location, $filter, $rootScope, $451, Analytics, User, Order, OrderConfig, FavoriteOrder, AddressList) {
+	var isEditforApproval = $routeParams.id != null && $scope.user.Permissions.contains('EditApprovalOrder');
+	if (isEditforApproval) {
+		Order.get($routeParams.id, function(order) {
+			$scope.currentOrder = order;
+		});
+	}
+
 	if (!$scope.currentOrder) {
         $location.path('catalog');
     }
 
+	AddressList.clear();
     AddressList.query(function(list) {
         $scope.addresses = list;
+	    if (isEditforApproval) {
+		    if (!AddressList.contains($scope.currentOrder.ShipAddress))
+		        $scope.addresses.push($scope.currentOrder.ShipAddress);
+		    if (!AddressList.contains($scope.currentOrder.ShipAddress))
+		        $scope.addresses.push($scope.currentOrder.BillAddress);
+	    }
     });
 
 	$scope.hasOrderConfig = OrderConfig.hasConfig($scope.currentOrder, $scope.user);
@@ -27,6 +41,10 @@ function ($scope, $location, $filter, $rootScope, $451, Analytics, User, Order, 
 		}
 		AddressList.query(function(list) {
 			$scope.addresses = list;
+			if (isEditforApproval) {
+				$scope.addresses.push($scope.currentOrder.ShipAddress);
+				$scope.addresses.push($scope.currentOrder.BillAddress);
+			}
 		});
 		$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
 		$scope.billaddress = { Country: 'US', IsShipping: false, IsBilling: true };
@@ -123,4 +141,8 @@ function ($scope, $location, $filter, $rootScope, $451, Analytics, User, Order, 
     $scope.saveFavorite = function() {
         FavoriteOrder.save($scope.currentOrder);
     };
+
+	$scope.cancelEdit = function() {
+		$location.path('order');
+	};
 }]);
