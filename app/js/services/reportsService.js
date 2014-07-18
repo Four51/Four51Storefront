@@ -9,7 +9,8 @@ four51.app.factory('Report', ['$resource','$q', '$451', 'Error', function($resou
 		report.AvailableTypes = {
 			"Order": "Order",
 			"LineItem": "Line Item",
-			"Inventory": "Inventory"
+			"Inventory": "Inventory",
+			"PendingApproval": "Pending Approval"
 		};
 	};
 

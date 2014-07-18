@@ -12,6 +12,7 @@
                         <lineitemreport ng-if="report.ReportType == 'LineItem'" />
                         <orderreport ng-if="report.ReportType == 'Order'" />
                         <inventoryreport ng-if="report.ReportType == 'Inventory'" />
+                        <pendingapprovalreport ng-if="report.ReportType == 'PendingApproval'" />
                     </div>
                 </tab>
                 <tab disabled="!report.ID">

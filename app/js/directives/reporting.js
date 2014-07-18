@@ -66,3 +66,18 @@ four51.app.directive('inventoryreport', function() {
 	};
 	return obj;
 });
+
+four51.app.directive('pendingapprovalreport', function() {
+	var obj = {
+		restrict: 'E',
+		templateUrl: 'partials/Reporting/pendingApprovalReport.html',
+		controller: ['$scope', function($scope) {
+			$scope.open = function(cal, event) {
+				event.preventDefault();
+				event.stopPropagation();
+				$scope[cal] = true;
+			};
+		}]
+	};
+	return obj;
+});
