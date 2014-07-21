@@ -81,3 +81,18 @@ four51.app.directive('pendingapprovalreport', function() {
 	};
 	return obj;
 });
+
+four51.app.directive('accountstatusreport', function() {
+	var obj = {
+		restrict: 'E',
+		templateUrl: 'partials/Reporting/accountStatusReport.html',
+		controller: ['$scope', function($scope) {
+			$scope.open = function(cal, event) {
+				event.preventDefault();
+				event.stopPropagation();
+				$scope[cal] = true;
+			};
+		}]
+	};
+	return obj;
+});
