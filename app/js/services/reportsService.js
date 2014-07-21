@@ -11,7 +11,9 @@ four51.app.factory('Report', ['$resource','$q', '$451', 'Error', function($resou
 			"LineItem": "Line Item",
 			"Inventory": "Inventory",
 			"PendingApproval": "Pending Approval",
-			"SpendingAccountStatus": "Account Status"
+			"SpendingAccountStatus": "Account Status",
+			"SpendingAccountTransaction": "Account Transactions",
+			"Shipment": "Shipment Report"
 		};
 	};
 

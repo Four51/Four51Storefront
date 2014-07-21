@@ -96,3 +96,33 @@ four51.app.directive('accountstatusreport', function() {
 	};
 	return obj;
 });
+
+four51.app.directive('accounttransactionreport', function() {
+	var obj = {
+		restrict: 'E',
+		templateUrl: 'partials/Reporting/accountTransactionReport.html',
+		controller: ['$scope', function($scope) {
+			$scope.open = function(cal, event) {
+				event.preventDefault();
+				event.stopPropagation();
+				$scope[cal] = true;
+			};
+		}]
+	};
+	return obj;
+});
+
+four51.app.directive('shipmentreport', function() {
+	var obj = {
+		restrict: 'E',
+		templateUrl: 'partials/Reporting/shipmentReport.html',
+		controller: ['$scope', function($scope) {
+			$scope.open = function(cal, event) {
+				event.preventDefault();
+				event.stopPropagation();
+				$scope[cal] = true;
+			};
+		}]
+	};
+	return obj;
+});

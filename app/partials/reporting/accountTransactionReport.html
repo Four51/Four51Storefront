@@ -13,12 +13,23 @@
         </div>
     </div>
     <div class="col-sm-6 view-form-icon">
-        <h3>{{'Conditions' | r}}</h3>
+        <h3>{{'Conditions' | r}} dd</h3>
+        <div>
+            <label>{{'User' | r}}</label>
+            <select class="form-control" ng-options="key as value for (key,value) in report.UserOptions" ng-model="report.User"><option value=""></option></select>
+            <i class="fa fa-folder-open"></i>
+        </div>
         <div>
             <label>{{'Account Type' | r}}</label>
             <select class="form-control" ng-options="key as value for (key,value) in report.AccountTypeOptions" ng-model="report.AccountType"><option value=""></option></select>
             <i class="fa fa-folder-open"></i>
         </div>
+        <div>
+            <label>{{'Account' | r}}</label>
+            <select class="form-control" ng-options="key as value for (key,value) in report.AccountOptions" ng-model="report.Account"><option value=""></option></select>
+            <i class="fa fa-folder-open"></i>
+        </div>
+        <daterange ng-options="report.TimeSpanOptions" fromdate="report.FromDate" todate="report.ToDate" />
     </div>
     <div class="col-sm-6">
         <h3>Display Columns</h3>

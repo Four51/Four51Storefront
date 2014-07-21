@@ -15,10 +15,11 @@
     <div class="col-sm-6 view-form-icon">
         <h3>{{'Conditions' | r}}</h3>
         <div>
-            <label>{{'Account Type' | r}}</label>
-            <select class="form-control" ng-options="key as value for (key,value) in report.AccountTypeOptions" ng-model="report.AccountType"><option value=""></option></select>
-            <i class="fa fa-folder-open"></i>
+            <label>{{'Order' | r}} {{'ID' | r}}</label>
+            <input class="form-control" type="text" ng-model="report.ExternalID" placeholder="{{'Order' | r}} {{'ID' | r}}" />
+            <i class="fa fa-external-link"></i>
         </div>
+        <daterange ng-options="report.TimeSpanOptions" fromdate="report.FromDate" todate="report.ToDate" />
     </div>
     <div class="col-sm-6">
         <h3>Display Columns</h3>
