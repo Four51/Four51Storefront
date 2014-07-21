@@ -30,7 +30,7 @@
                                 </tr>
                                 <tr ng-repeat="row in report.Data | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
                                     <td ng-repeat="header in report.DataColumns">
-                                        {{row[header]}}
+                                        {{row[header] | r}}
                                     </td>
                                 </tr>
                             </table>
