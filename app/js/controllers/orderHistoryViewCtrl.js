@@ -33,7 +33,7 @@ four51.app.controller('OrderViewCtrl', ['$scope', '$location', '$routeParams', '
 			Address.get(data.BillAddressID, function(add){
 				data.BillAddress = add;
 			});
-		});
+		}, true);
 
 		$scope.saveFavorite = function(callback) {
 			$scope.displayLoadingIndicator = true;
@@ -53,7 +53,7 @@ four51.app.controller('OrderViewCtrl', ['$scope', '$location', '$routeParams', '
 
 		$scope.repeatOrder = function() {
 			$scope.errorMessage = null;
-			$scope.errorMessage = null;
+			$scope.actionMessage = null;
 			Order.repeat($scope.order.ID,
 				function(data) {
 					$scope.currentOrder = data;
@@ -67,6 +67,23 @@ four51.app.controller('OrderViewCtrl', ['$scope', '$location', '$routeParams', '
 					$scope.errorMessage = ex.Message;
 				}
 			);
+		};
+
+		$scope.setCurrent = function() {
+			$scope.errorMessage = null;
+			$scope.actionMessage = null;
+			User.setcurrentorder($scope.order.ID,
+				function(data) {
+					$scope.user = data;
+					Order.get(data.CurrentOrderID, function(order) {
+						$scope.currentOrder = order;
+						$location.path('/cart');
+					});
+				},
+				function(ex) {
+					$scope.errorMessage = ex.Message;
+				}
+			)
 		};
 
 		$scope.onPrint = function()  {

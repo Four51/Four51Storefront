@@ -52,8 +52,9 @@
             </div>
             <ul>
                 <li>
-                    <button class="btn btn-danger" ng-click="cancelOrder()">
-                        {{'Cancel' | r}} {{'Order' | r}}
+                    <button class="btn btn-danger" ng-click="currentOrder.Status == 'AwaitingApproval' ? cancelEdit() : cancelOrder()">
+                        <small ng-if="currentOrder.Status != 'AwaitingApproval'">{{'Cancel' | r}} {{'Order' | r}}</small>
+                        <small ng-if="currentOrder.Status == 'AwaitingApproval'">{{'Cancel' | r}} {{'Edit' | r}}</small>
                     </button>
                 </li>
                 <li>

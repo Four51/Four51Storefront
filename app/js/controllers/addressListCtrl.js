@@ -7,6 +7,7 @@ function ($scope, $location, $451, AddressList) {
 	};
 	function Query() {
 		$scope.pagedIndicator = true;
+		$scope.addresses = null;
 		AddressList.query(function (list, count) {
 			$scope.addresses = list;
 			$scope.settings.listCount = count;

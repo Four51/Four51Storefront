@@ -1,13 +1,14 @@
 four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Error', function($resource, $rootScope, $451, Security, Error) {
 	var _multipleShip = false;
-	function _then(fn, data) {
+	function _then(fn, data, broadcast) {
 		if (angular.isFunction(fn))
 			fn(data);
-		$rootScope.$broadcast('event:orderUpdate', data);
+		if (!broadcast)
+			$rootScope.$broadcast('event:orderUpdate', data);
 	}
 
 	function _extend(order) {
-		order.isEditable = order.Status == 'Unsubmitted' || order.Status == 'Open';
+		order.isEditable = order.Status == 'Unsubmitted' || order.Status == 'Open' || order.Status == 'AwaitingApproval';
 		angular.forEach(order.LineItems, function(item) {
 			item.OriginalQuantity = item.Quantity; //needed to validate qty changes compared to available quantity
 			angular.forEach(item.Specs, function(spec) {
@@ -33,15 +34,15 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 		}
 	}
 
-	var _get = function(id, success) {
+	var _get = function(id, success, suppress) {
 		var currentOrder = store.get('451Cache.Order.' + id);
 		currentOrder ? (function() { _extend(currentOrder);	_then(success, currentOrder); })() :
 			$resource($451.api('order/:id'), { id: '@id' }).get({ id: id }).$promise.then(function(o) {
 				_extend(o);
 				store.set('451Cache.Order.' + id, o);
-				_then(success, o);
+				_then(success, o, suppress);
 			});
-	}
+	};
 
 	var _save = function(order, success, error) {
 		$resource($451.api('order')).save(order).$promise.then(
@@ -55,7 +56,7 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 				error(Error.format(ex));
 			}
 		);
-	}
+	};
 
 	var _delete = function(order, success, error) {
 		$resource($451.api('order')).delete().$promise.then(
@@ -68,7 +69,7 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 				error(Error.format(ex));
 			}
 		);
-	}
+	};
 
 	var _submit = function(order, success, error) {
 		$resource($451.api('order'), { }, { submit: { method: 'PUT' }}).submit(order).$promise.then(

@@ -22,7 +22,7 @@
                         <orderhistorydetails></orderhistorydetails>
                         <orderhistorysummary ng-if="!(user.Permissions.contains('HidePricing'))"></orderhistorysummary>
                     </div>
-                    <div class="panel-footer" ng-if="order.FromUserID == user.ID">
+                    <div class="panel-footer" ng-if="order.FromUserID == user.ID && order.Status != 'Unsubmitted'">
                         <button ng-disabled="currentOrder" class="btn btn-primary pull-right" ng-click="repeatOrder()">
                             <i ng-show="currentOrder" class="fa fa-warning"></i>
                             {{'Repeat' | r}} {{'Order' | r}}
@@ -39,8 +39,8 @@
                     </h3>
                 </div>
                 <lineitemhistorygrid />
-                <div class="panel-footer" ng-if="order.FromUserID == user.ID">
-                    <loadingindicator ng-show="displayLoadingIndicator" />
+                <div class="panel-footer" ng-if="order.FromUserID == user.ID && order.Status != 'Unsubmitted'">
+                   <loadingindicator ng-show="displayLoadingIndicator" />
                    <div class="form-group view-form-icon">
                         <div class="input-group">
                             <input type="text" ng-model="order.FavoriteName" placeholder="{{'Favorite' | r}} {{'Name' | r}}" class="form-control" autocomplete="off" />
@@ -48,6 +48,15 @@
                             <span class="input-group-btn">
                                 <button type="button" ng-click="saveFavorite()" class="btn btn-info">{{'Save' | r}} {{'Favorite' | r}}</button>
                             </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer" ng-if="order.FromUserID == user.ID && order.Status == 'Unsubmitted'">
+                    <loadingindicator ng-show="displayLoadingIndicator" />
+                    <div class="form-group view-form-icon">
+                        <div class="pull-right">
+                            <i class="fa fa-icon-random"></i>
+                            <button type="button" ng-click="setCurrent()" class="btn btn-info">{{'Set as Current' | r}} {{'Order' | r}}</button>
                         </div>
                     </div>
                 </div>

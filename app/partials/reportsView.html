@@ -28,7 +28,7 @@
                 <div class="col-sm-2 hidden-xs">{{'Name' | r}}</div>
                 <div class="col-sm-2 hidden-xs">{{'Type' | r}}</div>
             </div>
-            <div class="row" ng-repeat="report in Reports | filter:searchTerm">
+            <div class="row" ng-repeat="report in Reports | filter:{'Name': searchTerm}">
                 <div class="col-sm-1">
                     <input type="checkbox" ng-model="report.Selected" />
                 </div>

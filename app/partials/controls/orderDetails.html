@@ -16,7 +16,7 @@
                         <span ng-if="user.Permissions.contains('AllowAutoGenPOID')" class="input-group-addon">
                             <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? null : 'auto'" ng-model='currentOrder.autoID' />
                         </span>
-                    <span class="input-group-addon">{{'Auto' | r}} {{'ID' | r}}</span>
+                    <span class="input-group-addon" ng-show="user.Permissions.contains('AllowAutoGenPOID')">{{'Auto' | r}} {{'ID' | r}}</span>
                     <i class="fa">#</i>
                 </div>
             </div>
