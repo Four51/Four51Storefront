@@ -1,5 +1,5 @@
-four51.app.controller('CategoryCtrl', ['$routeParams', '$sce', '$scope', '$451', 'Category', 'Product', 'Nav', 'AddToOrder',
-function ($routeParams, $sce, $scope, $451, Category, Product, Nav, AddToOrder) {
+four51.app.controller('CategoryCtrl', ['$routeParams', '$sce', '$scope', '$451', 'Category', 'Product', 'Nav', 'AddToOrder', 'Order', '$route', 'User', '$location',
+function ($routeParams, $sce, $scope, $451, Category, Product, Nav, AddToOrder, Order, $route, User, $location) {
 	$scope.productLoadingIndicator = true;
 	$scope.settings = {
 		currentPage: 1,
@@ -53,8 +53,35 @@ function ($routeParams, $sce, $scope, $451, Category, Product, Nav, AddToOrder) 
 		$scope.direction = s.indexOf('DESC') > -1;
 	});
 
-    //Product List Functionality
-    $scope.Fetch = function(){
-        AddToOrder.addToOrder($scope.user);
-    }
+    //Add to Order Product List Functionality
+    $scope.currentOrder = {};
+    $scope.currentOrder.LineItems = [];
+    $scope.Checkout = function() {
+        $scope.$broadcast('checkout');
+        AddToOrder.returnLineItem(function (plLineItems) {
+            if ($scope.lineItemErrors && $scope.lineItemErrors.length) {
+                $scope.showAddToCartErrors = true;
+                return;
+            }
+            angular.forEach(plLineItems, function (li) {
+                if (li.Quantity > 0 && li != "") {
+                    $scope.currentOrder.LineItems.push(li);
+                }
+            });
+            Order.save($scope.currentOrder,
+                function (o) {
+                    $scope.user.CurrentOrderID = o.ID;
+                    User.save($scope.user, function () {
+                        $scope.addToOrderIndicator = true;
+                        $location.path('/cart');
+                    });
+                },
+                function (ex) {
+                    $scope.addToOrderIndicator = false;
+                    $scope.addToOrderError = ex.Message;
+                    $route.reload();
+                }
+            );
+        })
+    };
 }]);
