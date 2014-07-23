@@ -6,7 +6,7 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 			$scope.currentOrder = order;
 		});
 	}
-	throw new Error();
+	
 	$scope.currentDate = new Date();
 	$scope.errorMessage = null;
 	$scope.continueShopping = function() {
