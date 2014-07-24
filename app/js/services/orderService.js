@@ -140,7 +140,17 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 				error(Error.format(ex));
 			}
 		);
-	}
+	};
+
+	var _updateship = function(order) {
+		order.ShipperID = null;
+		angular.forEach(order.LineItems, function(li) {
+			li.ShipperName = null;
+			li.ShipperID = null;
+		});
+		order.ShipperName = null;
+		return this;
+	};
 
 	return {
 		get: _get,
@@ -150,6 +160,7 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 		repeat: _repeat,
 		approve: _approve,
 		decline: _decline,
-		deletelineitem: _deletelineitem
+		deletelineitem: _deletelineitem,
+		clearshipping: _updateship
 	}
 }]);
