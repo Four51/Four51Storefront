@@ -54,17 +54,28 @@ function ($routeParams, $sce, $scope, $451, Category, Product, Nav, AddToOrder, 
 	});
 
     //Add to Order Product List Functionality
+    $scope.quantityNotSet = true;
+    $scope.$watch("lineitem.Quantity", function(item){
+        if(item.Quantity){
+            $scope.quantityNotSet = false;
+        }
+        else{
+            $scope.quantityNotSet = true;
+        }
+        return $scope.quantityNotSet;
+    });
+
     $scope.currentOrder = {};
     $scope.currentOrder.LineItems = [];
     $scope.Checkout = function() {
         $scope.$broadcast('checkout');
-        AddToOrder.returnLineItem(function (plLineItems) {
+            var lineItems = AddToOrder.plLineItems;
             if ($scope.lineItemErrors && $scope.lineItemErrors.length) {
                 $scope.showAddToCartErrors = true;
                 return;
             }
-            angular.forEach(plLineItems, function (li) {
-                if (li.Quantity > 0 && li != "") {
+            angular.forEach(lineItems, function (li) {
+                if (li.Quantity > 0) {
                     $scope.currentOrder.LineItems.push(li);
                 }
             });
@@ -82,6 +93,5 @@ function ($routeParams, $sce, $scope, $451, Category, Product, Nav, AddToOrder, 
                     $route.reload();
                 }
             );
-        })
     };
 }]);

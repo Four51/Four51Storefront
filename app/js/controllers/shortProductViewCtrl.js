@@ -1,4 +1,4 @@
-four51.app.controller('shortProductViewCtrl', ['$routeParams', '$scope', 'ProductDisplayService', 'Order', 'User', '$location', '$route', 'AddToOrder', function ($routeParams, $scope, ProductDisplayService, Order, User, $location, $route, AddToOrder) {
+four51.app.controller('shortProductViewCtrl', ['$routeParams', '$scope', 'ProductDisplayService', 'Order', 'User', '$location', '$route', 'AddToOrder', '$rootScope', function ($routeParams, $scope, ProductDisplayService, Order, User, $location, $route, AddToOrder, $rootScope) {
 	$scope.LineItem = {};
 	$scope.LineItem.Product = $scope.p;
 	ProductDisplayService.setNewLineItemScope($scope);

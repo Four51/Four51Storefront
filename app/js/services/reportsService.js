@@ -10,7 +10,10 @@ four51.app.factory('Report', ['$resource','$q', '$451', 'Error', function($resou
 			"Order": "Order",
 			"LineItem": "Line Item",
 			"Inventory": "Inventory",
-			"PendingApproval": "Pending Approval"
+			"PendingApproval": "Pending Approval",
+			"SpendingAccountStatus": "Account Status",
+			"SpendingAccountTransaction": "Account Transactions",
+			"Shipment": "Shipment Report"
 		};
 	};
 

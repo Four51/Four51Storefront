@@ -13,6 +13,9 @@
                         <orderreport ng-if="report.ReportType == 'Order'" />
                         <inventoryreport ng-if="report.ReportType == 'Inventory'" />
                         <pendingapprovalreport ng-if="report.ReportType == 'PendingApproval'" />
+                        <accountStatusReport ng-if="report.ReportType == 'SpendingAccountStatus'" />
+                        <accounttransactionreport ng-if="report.ReportType == 'SpendingAccountTransaction'" />
+                        <shipmentreport ng-if="report.ReportType == 'Shipment'" />
                     </div>
                 </tab>
                 <tab disabled="!report.ID">
@@ -27,7 +30,7 @@
                                 </tr>
                                 <tr ng-repeat="row in report.Data | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
                                     <td ng-repeat="header in report.DataColumns">
-                                        {{row[header]}}
+                                        {{row[header] | r}}
                                     </td>
                                 </tr>
                             </table>

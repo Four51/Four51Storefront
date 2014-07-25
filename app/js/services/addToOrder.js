@@ -3,11 +3,24 @@ four51.app.factory('AddToOrder', ['$resource', '$451', 'Security', function($res
     var _addToOrder = function(lineItem) {
         plLineItems.push(lineItem);
     };
-    var _returnLineItem = function(){
-        return plLineItems;
+    var _clearLineItems = function() {
+        angular.forEach(plLineItems, function (li) {
+            if (li.Quantity != undefined) {
+                li.Quantity = null;
+            }
+        });
+    };
+    var _removeLineItems = function(item){
+        angular.forEach(plLineItems, function(li){
+            if(item.Product.ExternalID == li.Product.ExternalID && li.Quantity != undefined){
+                li.Quantity = null;
+            }
+        });
     };
     return {
         addToOrder: _addToOrder,
-        returnLineItem: _returnLineItem
+        clearLineItems: _clearLineItems,
+        removeLineItems: _removeLineItems,
+        plLineItems: plLineItems
     }
 }]);

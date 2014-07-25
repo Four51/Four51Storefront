@@ -1,4 +1,4 @@
-four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security', 'Error', '$window', function($q, $rootScope, $resource, $451, Security, Error, $window) {
+four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security', 'Error', function($q, $rootScope, $resource, $451, Security, Error) {
     var _cacheName = '451Cache.User.' + $451.apiName;
 	function _then(fn, data) {
         if (angular.isFunction(fn))
@@ -22,7 +22,7 @@ four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security',
 	var _refresh = function() {
 		store.remove(_cacheName);
 		_get();
-	}
+	};
 
     var _get = function(success) {
         var user = store.get(_cacheName);
@@ -32,7 +32,7 @@ four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security',
                 _then(success,u);
                 store.set(_cacheName, u);
             });
-    }
+    };
 
     var _save = function(user, success, error) {
         $resource($451.api('user')).save(user).$promise.then(
@@ -46,7 +46,7 @@ four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security',
 			        error(Error.format(ex));
 	        }
         );
-    }
+    };
 
     var _login = function(credentials, success, error) {
 	    store.clear();
@@ -59,7 +59,7 @@ four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security',
 			        error(Error.format(ex));
 	        }
         );
-    }
+    };
 
 	var _reset = function(credentials, success, error) {
 		store.clear();
@@ -73,13 +73,25 @@ four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security',
 				}
 			}
 		)
-	}
+	};
+
+	var _setorder = function(id, success, error) {
+		$resource($451.api('user/currentorder/:id'), { id: '@id' }).save({ id: id }).$promise.then(
+			function(data) {
+				store.set(_cacheName, data);
+				_then(success, data);
+			},
+			function(ex) {
+				if (error)
+					error(Error.format(ex));
+			}
+		);
+	};
 
     var _logout = function() {
         store.clear();
         Security.logout();
-        $window.location.href = $window.location.pathname;
-    }
+    };
 
     return {
         get: _get,
@@ -87,6 +99,7 @@ four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security',
         save: _save,
         logout: _logout,
 	    refresh: _refresh,
-	    reset: _reset
+	    reset: _reset,
+	    setcurrentorder: _setorder
     };
 }]);
