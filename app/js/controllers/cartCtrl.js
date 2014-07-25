@@ -6,7 +6,7 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User, AddTo
 			$scope.currentOrder = order;
 		});
 	}
-	
+
 	$scope.currentDate = new Date();
 	$scope.errorMessage = null;
 	$scope.continueShopping = function() {
@@ -71,6 +71,7 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User, AddTo
 				function(order) {
                     AddToOrder.removeLineItems(item);
 					$scope.currentOrder = order;
+					Order.clearshipping($scope.currentOrder);
 					if (!order) {
 						$scope.user.CurrentOrderID = null;
 						User.save($scope.user, function(){

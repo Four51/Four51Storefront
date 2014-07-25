@@ -111,7 +111,7 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'OrderConf
 			$scope.updateShipper = function(li) {
 				$scope.shippingUpdatingIndicator = true;
 				$scope.shippingFetchIndicator = true;
-				if (!li) {
+				if (!li) { // at the order level
 					angular.forEach($scope.shippers, function(s) {
 						if (s.Name == $scope.currentOrder.LineItems[0].ShipperName)
 							$scope.currentOrder.Shipper = s;
@@ -127,7 +127,7 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'OrderConf
 						$scope.shippingFetchIndicator = false;
 					});
 				}
-				else {
+				else { // at the lineitem level for multiple shipping
 					angular.forEach($scope.shippers, function(s) {
 						if (s.Name == li.ShipperName)
 							li.Shipper = s;

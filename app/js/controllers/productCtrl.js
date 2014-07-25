@@ -88,19 +88,21 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 		}
 		$scope.addToOrderIndicator = true;
 		//$scope.currentOrder.Type = (!$scope.LineItem.Product.IsVariantLevelInventory && $scope.variantLineItems) ? $scope.variantLineItems[$scope.LineItem.Product.Variants[0].InteropID].PriceSchedule.OrderType : $scope.LineItem.PriceSchedule.OrderType;
-		Order.save($scope.currentOrder,
-			function(o){
-				$scope.user.CurrentOrderID = o.ID;
-				User.save($scope.user, function(){
-					$scope.addToOrderIndicator = true;
-					$location.path('/cart');
-				});
-			},
-			function(ex) {
-				$scope.addToOrderIndicator = false;
-				$scope.addToOrderError = ex.Message;
-				$route.reload();
-			}
+		// shipper rates are not recalcuated when a line item is added. clearing out the shipper to force new selection, like 1.0
+		Order.clearshipping($scope.currentOrder).
+			save($scope.currentOrder,
+				function(o){
+					$scope.user.CurrentOrderID = o.ID;
+					User.save($scope.user, function(){
+						$scope.addToOrderIndicator = true;
+						$location.path('/cart');
+					});
+				},
+				function(ex) {
+					$scope.addToOrderIndicator = false;
+					$scope.addToOrderError = ex.Message;
+					$route.reload();
+				}
 		);
 	};
 
