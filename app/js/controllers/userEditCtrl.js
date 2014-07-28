@@ -2,6 +2,7 @@ four51.app.controller('UserEditCtrl', ['$scope', '$location', '$sce', 'User',
 function ($scope, $location, $sce, User) {
 	$scope.loginasuser = {};
 	$scope.actionMessage = null;
+	$scope.securityWarning = false;
 
 	if($scope.user.Type != 'TempCustomer')
 		$scope.user.TempUsername = $scope.user.Username
@@ -25,8 +26,9 @@ function ($scope, $location, $sce, User) {
 				$scope.displayLoadingIndicator = false;
 				if (ex.Code.is('PasswordSecurity'))
 					$scope.securityWarning = true;
-				else
+				else {
 					$scope.actionMessage = $sce.trustAsHtml(ex.Message);
+				}
 			}
 		);
     };
