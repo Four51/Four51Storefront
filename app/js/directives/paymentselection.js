@@ -29,7 +29,6 @@ four51.app.directive('paymentselector', function() {
 		       }
 		       else {
 			       if (!$scope.isSplitBilling && $scope.currentOrder) {
-//						$scope.currentOrder.BudgetAccountID = null;
 				       $scope.currentOrder.currentBudgetAccount = null;
 			       }
 		       }
@@ -47,7 +46,7 @@ four51.app.directive('paymentselector', function() {
 			       $scope.remainingOrderTotal = Order.calculatediscount($scope.currentOrder, $scope.currentBudgetAccount);
 			       $scope.cart_billing.$setValidity('paymentMethod', valid);
 		       }
-	       }
+	       };
 
 	       $scope.$watch('currentOrder.Total', function(total) {
 		       if ($scope.currentOrder && $scope.currentOrder.BudgetAccountID)
