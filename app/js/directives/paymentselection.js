@@ -37,15 +37,15 @@ four51.app.directive('paymentselector', function() {
 
 	       var budgetAccountCalculation = function(value) {
 		       if (value && $scope.SpendingAccounts) {
-			       var valid = validatePaymentMethod('BudgetAccount');
 			       angular.forEach($scope.SpendingAccounts, function(a) {
 				       if (a.ID == value) {
 					       $scope.currentBudgetAccount = a;
 				       }
 			       });
-			       $scope.remainingOrderTotal = Order.calculatediscount($scope.currentOrder, $scope.currentBudgetAccount);
-			       $scope.cart_billing.$setValidity('paymentMethod', valid);
 		       }
+		       var valid = validatePaymentMethod('BudgetAccount');
+		       $scope.remainingOrderTotal = Order.calculatediscount($scope.currentOrder, $scope.currentBudgetAccount);
+		       $scope.cart_billing.$setValidity('paymentMethod', valid);
 	       };
 
 	       $scope.$watch('currentOrder.Total', function(total) {
@@ -59,6 +59,7 @@ four51.app.directive('paymentselector', function() {
 	       });
 
 	       function validatePaymentMethod(method) {
+		       $scope.isSplitBilling = false;
 		       var validateAccount = function() {
 			       var account = null;
 			       angular.forEach($scope.SpendingAccounts, function(a) {
@@ -69,13 +70,11 @@ four51.app.directive('paymentselector', function() {
 				       $scope.isSplitBilling = false;
 				       if (account.AccountType.MaxPercentageOfOrderTotal != 100) {
 					       $scope.isSplitBilling = true;
-					       console.log($scope.isSplitBilling);
 					       return false;
 				       }
 
 				       if (account.Balance < $scope.currentOrder.Total) {
 					       $scope.isSplitBilling = !account.AccountType.AllowExceed;
-					       console.log($scope.isSplitBilling);
 					       return account.AccountType.AllowExceed;
 				       }
 				       else

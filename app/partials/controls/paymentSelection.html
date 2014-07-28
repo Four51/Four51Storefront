@@ -42,7 +42,6 @@
                         ng-options="account.ID as (account.Label + ' - Balance: ' + (account.Balance | currency)) for account in SpendingAccounts | filter:{ForPurchase:true}"
                         ng-model="currentOrder.BudgetAccountID"
                         ng-required="currentOrder.PaymentMethod == 'BudgetAccount'">
-                    <option value=""></option>
                 </select>
                 <i class="fa fa-dollar"></i>
             </div>
@@ -111,12 +110,12 @@
         </div>
         <hr/>
     </div>
-    <div class="alert alert-warning" ng-show="cart-billing.$error.paymentMethod && currentOrder.PaymentMethod == 'BudgetAccount'">
+    <div class="alert alert-warning" ng-show="cart-billing.$error.paymentMethod && currentOrder.PaymentMethod == 'BudgetAccount' && currentOrder.BudgetAccountID">
         The account, {{currentBudgetAccount.Label}}, is not sufficient for the order total.
     </div>
     <div class="alert alert-warning text-center row" ng-show="isSplitBilling">
         <p class="col-sm-6 text-left alert alert-info" ng-show="currentOrder.PaymentMethod == 'BudgetAccount'">
-            <span>The spending account, {{currentBudgetAccount.Label}}, is not sufficient for the order total.</span>
+            <span>{{isSplitBilling}} The spending account, {{currentBudgetAccount.Label}}, is not sufficient for the order total.</span>
             <strong>Please select an additional payment type</strong> to cover the remaining
             <span ng-show="!user.Permissions.contains('HidePricing')">
                 <strong>{{remainingOrderTotal | currency}}</strong>

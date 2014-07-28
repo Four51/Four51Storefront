@@ -153,6 +153,7 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 	};
 
 	var _calcdisc = function(order, acct) {
+		if (acct == null) return order.Total;
 		var discount = 0;
 		if (acct.AccountType.MaxPercentageOfOrderTotal != 100) {
 			var total = order.Total - acct.Balance;
