@@ -152,6 +152,13 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 		return this;
 	};
 
+	var _calcdisc = function(order, acct) {
+		var discount = acct.AccountType.MaxPercentageOfOrderTotal != 100 ?
+			order.Total * (acct.AccountType.MaxPercentageOfOrderTotal *.01) :
+			acct.Balance;
+		return order.Total - discount;
+	};
+
 	return {
 		get: _get,
 		save: _save,
@@ -161,6 +168,7 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 		approve: _approve,
 		decline: _decline,
 		deletelineitem: _deletelineitem,
-		clearshipping: _updateship
+		clearshipping: _updateship,
+		calculatediscount: _calcdisc
 	}
 }]);

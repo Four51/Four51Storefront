@@ -2,7 +2,7 @@ four51.app.directive('paymentselector', function() {
    var obj = {
        restrict: 'E',
        templateUrl: 'partials/controls/paymentSelection.html',
-       controller: ['$scope', '$rootScope', 'SavedCreditCard', 'SpendingAccount', function($scope, $rootScope, SavedCreditCard, SpendingAccount) {
+       controller: ['$scope', '$rootScope', 'SavedCreditCard', 'SpendingAccount', 'Order', function($scope, $rootScope, SavedCreditCard, SpendingAccount, Order) {
 	       $scope.paymentSelection = {};
 	       $scope.isSplitBilling = false;
 
@@ -44,10 +44,7 @@ four51.app.directive('paymentselector', function() {
 					       $scope.currentBudgetAccount = a;
 				       }
 			       });
-			       var discount = $scope.currentBudgetAccount.AccountType.MaxPercentageOfOrderTotal != 100 ?
-				       $scope.currentOrder.Total * ($scope.currentBudgetAccount.AccountType.MaxPercentageOfOrderTotal *.01) :
-				       $scope.currentBudgetAccount.Balance;
-			       $scope.remainingOrderTotal = $scope.currentOrder.Total - discount;
+			       $scope.remainingOrderTotal = Order.calculatediscount($scope.currentOrder, $scope.currentBudgetAccount);
 			       $scope.cart_billing.$setValidity('paymentMethod', valid);
 		       }
 	       }
