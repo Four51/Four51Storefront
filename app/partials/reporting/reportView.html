@@ -24,15 +24,19 @@
                     </tab-heading>
                     <div class="panel-body">
                         <div class="table-responsive hidden-xs">
-                            <table class="table">
-                                <tr>
-                                    <td ng-repeat="(key, value) in report.DataColumns">{{report.DisplayColumns[value] | r}}</td>
-                                </tr>
-                                <tr ng-repeat="row in report.Data | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
-                                    <td ng-repeat="header in report.DataColumns">
-                                        {{row[header] | r}}
-                                    </td>
-                                </tr>
+                            <table class="table table-striped table-condensed">
+                                <thead>
+                                    <tr class="info">
+                                        <td ng-repeat="(key, value) in report.DataColumns">{{report.DisplayColumns[value] | r}}</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="row in report.Data | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
+                                        <td ng-repeat="header in report.DataColumns">
+                                            {{row[header] | r}}
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>

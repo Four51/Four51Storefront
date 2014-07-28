@@ -134,7 +134,7 @@
                                 </button>
                                 <ul ng-show="toggleSpecs == true" class="list-group">
                                     <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} " class="list-group-item">
-                                        <span class="text-info">{{spec.Name}}: </span>
+                                        <span class="text-info">{{spec.Label || spec.Name}}: </span>
                                         <span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span></span>
                                         <span ng-if="spec.ControlType != 'File'">{{spec.Value || '(unspecified)'}}</span>
                                     </li>
