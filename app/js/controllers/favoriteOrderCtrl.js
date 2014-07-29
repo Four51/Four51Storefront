@@ -21,15 +21,22 @@ function ($scope, $location, $routeParams, FavoriteOrder, Order, User) {
 	}
 
 	$scope.repeat = function(order) {
-		order.Repeat = true;
-		Order.save(order, function(data) {
-			$scope.currentOrder = data;
-			$scope.user.CurrentOrderID = data.ID;
-			User.save($scope.user, function(data) {
-				$scope.user = data;
-				$location.path('/cart');
-			});
-		});
+		$scope.error = null;
+		$scope.loading = true;
+		Order.repeat(order.ID,
+			function(data) {
+				$scope.currentOrder = data;
+				$scope.user.CurrentOrderID = data.ID;
+				User.save($scope.user, function(data) {
+					$scope.user = data;
+					$location.path('/cart');
+				});
+			},
+			function(ex) {
+				$scope.error = ex.Message;
+				$scope.loading = false;
+			}
+		);
 	};
 
 	$scope.checkAll = function(event) {
@@ -38,10 +45,10 @@ function ($scope, $location, $routeParams, FavoriteOrder, Order, User) {
 		});
 	};
 	$scope.deleteSelected = function() {
+		$scope.loading = true;
         FavoriteOrder.delete($scope.favoriteorders, function() {
-            FavoriteOrder.query(function(favs) {
-                $scope.favoriteorders = favs;
-            });
+            Query();
+	        $scope.loading = false;
         });
 	};
 }]);

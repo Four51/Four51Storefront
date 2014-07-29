@@ -1,4 +1,11 @@
 <div id="address_edit">
+    <div class="view-form-icon">
+        <div>
+            <label for="Autocomplete">Quick Address</label>
+            <input type="text" id="Autocomplete" class="form-control" details="addressobj" ng-autocomplete ng-model="addressresult"/>
+            <i class="fa fa-map-marker"></i>
+        </div>
+    </div>
     <form name="addressEdit" ng-submit="save()">
         <div class="row">
             <div class="col-sm-6 view-form-icon">

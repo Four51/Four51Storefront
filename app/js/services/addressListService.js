@@ -40,10 +40,25 @@ four51.app.factory('AddressList', ['$q', '$resource', '$451', function($q, $reso
 			cache.splice(0, cache.length);
 			_then(success);
 		});
-	}
+	};
+
+	var _clear = function() {
+		cache.splice(0, cache.length);
+	};
+
+	var _contains = function(comparer) {
+		var does = false;
+		angular.forEach(cache, function(address) {
+			if (does) return;
+			does = address.ID == comparer.ID;
+		});
+		return does;
+	};
 
 	return {
 		query: _query,
-		delete: _delete
+		delete: _delete,
+		clear: _clear,
+		contains: _contains
 	}
 }]);

@@ -1,7 +1,9 @@
 four51.app.directive('customdatefield', function() {
 	var obj = {
 		scope: {
-			customfield : '='
+			customfield : '=',
+            hidesuffix: '@',
+            hideprefix: '@'
 		},
 		restrict: 'E',
 		templateUrl: 'partials/controls/customDateField.html'

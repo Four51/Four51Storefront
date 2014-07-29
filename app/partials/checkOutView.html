@@ -19,31 +19,31 @@
             <div class="view-response-message alert-danger text-center" alert-show="couponError">
                 <p>{{couponError | r}}</p>
             </div>
-            <div class="view-error-message" ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length) > 0">
+            <div class="view-error-message" ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length + cart_billing.$error.paymentMethod.length) > 0">
                 <ul class="alert-warning">
                     <li class="text-center">
                         <span class="badge">
                             <i class="fa fa-exclamation-circle fa-inverse"></i>
-                            {{cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length}}
+                            {{cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length + cart_billing.$error.paymentMethod.length}}
                         </span>
                     </li>
                     <li class="text-center">
                         <ul ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
-                            <li ng-if="cart_order.orderid.$invalid">Enter an order id</li>
-                            <li ng-if="cart_shipping.shippingAddress.$invalid">Please choose a {{'Shipping' | rl}} {{'Address' | rl}}</li>
-                            <li ng-if="cart_shipping.shipMethod.$invalid">Please choose a {{'Shipping Method' | rl}}</li>
-                            <li ng-if="cart_billing.billingAddress.$invalid">Please choose a {{'Billing' | rl}} {{'Address' | rl}}</li>
-                            <li ng-if="cart_billing.$error.paymentMethod">Please choose a valid {{'Payment' | rl}} {{'Method' | rl}}</li>
-                            <li ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
+                            <li ng-show="cart_order.orderid.$invalid">Enter an order id</li>
+                            <li ng-show="cart_shipping.shippingAddress.$invalid">Please choose a {{'Shipping' | rl}} {{'Address' | rl}}</li>
+                            <li ng-show="cart_shipping.shipMethod.$invalid">Please choose a {{'Shipping Method' | rl}}</li>
+                            <li ng-show="cart_billing.billingAddress.$invalid">Please choose a {{'Billing' | rl}} {{'Address' | rl}}</li>
+                            <li ng-show="cart_billing.$error.paymentMethod.length > 0">Please choose a valid {{'Payment' | rl}} {{'Method' | rl}}</li>
+                            <li ng-show="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
                                 You have not been granted permission to create a Billing address, and no Billing addresses have been assigned to you. Therefore, you are not allowed to place this order at this time
                             </li>
-                            <li ng-if="!user.Permissions.contains('CreateShipToAddress') && (addresses | filter:{IsShipping:true}).length == 0">
+                            <li ng-show="!user.Permissions.contains('CreateShipToAddress') && (addresses | filter:{IsShipping:true}).length == 0">
                                 You have not been granted permission to create a Shipping address, and no Shipping addresses have been assigned to you. Therefore, you are not allowed to place this order at this time
                             </li>
                         </ul>
                     </li>
                     <li class="text-center">
-                        <a href ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length) > 1">
+                        <a href ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length + cart_billing.$error.paymentMethod.length) > 1">
                             <i class="fa fa-caret-down" ng-click="errorSection = 'open'" ng-hide="errorSection == 'open'"></i>
                             <i class="fa fa-caret-up" ng-click="errorSection = ''" ng-show="errorSection == 'open'"></i>
                         </a>
@@ -52,8 +52,9 @@
             </div>
             <ul>
                 <li>
-                    <button class="btn btn-danger" ng-click="cancelOrder()">
-                        {{'Cancel' | r}} {{'Order' | r}}
+                    <button class="btn btn-danger" ng-click="currentOrder.Status == 'AwaitingApproval' ? cancelEdit() : cancelOrder()">
+                        <small ng-show="currentOrder.Status != 'AwaitingApproval'">{{'Cancel' | r}} {{'Order' | r}}</small>
+                        <small ng-show="currentOrder.Status == 'AwaitingApproval'">{{'Cancel' | r}} {{'Edit' | r}}</small>
                     </button>
                 </li>
                 <li>

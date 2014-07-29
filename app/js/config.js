@@ -7,7 +7,7 @@ four51.app.config(['$provide', function($provide) {
         return function $broadcastingExceptionHandler(ex, cause) {
             ex.status != 500 ?
 	            $delegate(ex, cause) :
-	            trackJs.error("API: " + JSON.stringify(ex));
+	            trackJs ? trackJs.error("API: " + JSON.stringify(ex)) : console.log(JSON.stringify(ex));
             $injector.get('$rootScope').$broadcast('exception', ex, cause);
         }
     }]);
