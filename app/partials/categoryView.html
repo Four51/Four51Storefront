@@ -37,15 +37,4 @@
         <productlistview></productlistview>
 
     </div>
-    <!--Product List Add to order Button-->
-    <button ng-hide="isActive('catalog')" class="btn btn-success btn-lg pull-right" type="button" ng-click="Checkout()">
-        <i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>
-        Add To Cart
-    </button>
-    <!-- ERROR MESSAGING! -->
-    <div class="navbar-fixed-bottom">
-        <div class="alert alert-warning" ng-show="addToOrderError || !quantityAdded">
-            <p class="text-center"><i class="fa fa-exclamation-circle"></i> Please Enter a Valid Quantity</p>
-        </div>
-    </div>
 </section>

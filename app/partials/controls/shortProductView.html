@@ -18,23 +18,27 @@
                 <small class="pull-right text-info">{{LineItem.Product.ExternalID}}</small>
             </h3>
             <p ng-bind-html="trustedDescription(LineItem.Product)" ng-show="LineItem.Product.Description" />
-        </div>
-        <section class="hidden-xs hidden-sm panel-body">
-            <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]" ng-if="!(user.Permissions.contains('HidePricing'))">
-                {{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
-                <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>
-                for {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
-            </p>
-            <p ng-show="LineItem.Product.UnitOfMeasure">
-                {{'Unit of Measure' | r}}: {{LineItem.Product.UnitOfMeasure}}
-            </p>
+            <section class="hidden-xs hidden-sm">
+                <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]" ng-if="!(user.Permissions.contains('HidePricing'))">
+                    {{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
+                    <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>
+                    for {{LineItem.PriceSchedule.PriceBreaks[0].Price | currency}}
+                </p>
+                <p ng-show="LineItem.Product.UnitOfMeasure">
+                    {{'Unit of Measure' | r}}: {{LineItem.Product.UnitOfMeasure}}
+                </p>
 
-            <p ng-show="LineItem.Product.DisplayInventory && inventoryDisplay(LineItem.Product, LineItem.Variant) != undefined">
-                {{'Quantity Available' | r}}: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
-            </p>
-            <!--Product List Add to Order Quantity Field-->
-            <quantityfield required="true" calculated="calcVariantLineItems" lineitem="LineItem" class="quantity"/>
-        </section>
+                <p ng-show="LineItem.Product.DisplayInventory && inventoryDisplay(LineItem.Product, LineItem.Variant) != undefined">
+                    {{'Quantity Available' | r}}: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
+                </p>
+            </section>
+            <div class="view-form-icon">
+                <div>
+                    <label class="required">Quantity</label>
+                    <quantityfield required="true" calculated="calcVariantLineItems" lineitem="LineItem" class="quantity"/>
+                </div>
+            </div>
+        </div>
     </div>
     <section ng-show="showSwipe" ng-swipe-right="showSwipe = false">
         <div class="shortproduct-info panel-body text-center">
