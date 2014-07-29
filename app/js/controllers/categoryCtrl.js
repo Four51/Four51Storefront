@@ -54,44 +54,63 @@ function ($routeParams, $sce, $scope, $451, Category, Product, Nav, AddToOrder, 
 	});
 
     //Add to Order Product List Functionality
-    $scope.quantityNotSet = true;
-    $scope.$watch("lineitem.Quantity", function(item){
-        if(item.Quantity){
-            $scope.quantityNotSet = false;
-        }
-        else{
-            $scope.quantityNotSet = true;
-        }
-        return $scope.quantityNotSet;
-    });
-
     $scope.currentOrder = {};
+    $scope.quantityAdded = true;
     $scope.currentOrder.LineItems = [];
+    $scope.lineItems = AddToOrder.plLineItems;
     $scope.Checkout = function() {
         $scope.$broadcast('checkout');
-            var lineItems = AddToOrder.plLineItems;
-            if ($scope.lineItemErrors && $scope.lineItemErrors.length) {
-                $scope.showAddToCartErrors = true;
-                return;
-            }
-            angular.forEach(lineItems, function (li) {
-                if (li.Quantity > 0) {
-                    $scope.currentOrder.LineItems.push(li);
+        $scope.$watch($scope.lineItems, function(){
+            $scope.addToOrderError = false;
+            $scope.quantityAdded = false;
+            angular.forEach($scope.lineItems, function(li){
+                if(li.qtyError != null){
+                    $scope.addToOrderError = true;
+                }
+                if(li.Quantity != undefined && !$scope.addToOrderError){
+                    $scope.quantityAdded = true;
                 }
             });
-            Order.save($scope.currentOrder,
-                function (o) {
-                    $scope.user.CurrentOrderID = o.ID;
-                    User.save($scope.user, function () {
-                        $scope.addToOrderIndicator = true;
-                        $location.path('/cart');
-                    });
-                },
-                function (ex) {
-                    $scope.addToOrderIndicator = false;
-                    $scope.addToOrderError = ex.Message;
-                    $route.reload();
+            if($scope.addToOrderError){
+                angular.forEach($scope.lineItems, function(li){
+                    if(li.qtyError != null){
+                        li.Quantity = null;
+                        $scope.lineItems.splice(li);
+                    }
+                })
+            }
+            else if(!$scope.quantityAdded){
+                angular.forEach($scope.lineItems, function(li){
+                    if(li.Quantity == undefined){
+                        $scope.lineItems.splice(li);
+                    }
+                })
+            }
+            else {
+                if ($scope.lineItemErrors && $scope.lineItemErrors.length) {
+                    $scope.showAddToCartErrors = true;
+                    return;
                 }
-            );
+                angular.forEach($scope.lineItems, function (li) {
+                    if (li.Quantity > 0) {
+                        $scope.currentOrder.LineItems.push(li);
+                    }
+                });
+                Order.save($scope.currentOrder,
+                    function (o) {
+                        $scope.user.CurrentOrderID = o.ID;
+                        User.save($scope.user, function () {
+                            $scope.addToOrderIndicator = true;
+                            $location.path('/cart');
+                        });
+                    },
+                    function (ex) {
+                        $scope.addToOrderIndicator = false;
+                        $scope.addToOrderError = ex.Message;
+                        $route.reload();
+                    }
+                );
+            }
+        }, true);
     };
 }]);

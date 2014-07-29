@@ -1,4 +1,4 @@
-four51.app.directive('quantityfield', ['$451', 'ProductDisplayService', 'AddToOrder', function($451, ProductDisplayService, AddToOrder){
+four51.app.directive('quantityfield', ['$451', 'ProductDisplayService', function($451, ProductDisplayService){
     var obj = {
         scope: {
             lineitem : '=',

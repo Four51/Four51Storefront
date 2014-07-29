@@ -32,6 +32,7 @@
             <p ng-show="LineItem.Product.DisplayInventory && inventoryDisplay(LineItem.Product, LineItem.Variant) != undefined">
                 {{'Quantity Available' | r}}: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
             </p>
+            <!--Product List Add to Order Quantity Field-->
             <quantityfield required="true" calculated="calcVariantLineItems" lineitem="LineItem" class="quantity"/>
         </section>
     </div>
