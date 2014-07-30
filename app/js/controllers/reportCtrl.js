@@ -40,6 +40,7 @@ function($scope, $routeParams, $451, Report) {
 		$scope.errorMessage = null;
 		$scope.actionMessage = null;
 		$scope.displayLoadingIndicator = true;
+		$scope.settings.listCount = 0;
 		Report.download($scope.report.ID,
 			function(data, count) {
 				$scope.report = data;
