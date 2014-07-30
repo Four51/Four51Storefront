@@ -5,7 +5,7 @@ function($scope, $routeParams, $451, Report) {
 	$scope.errorMessage = null;
 	$scope.settings = {
 		currentPage: 1,
-		pageSize: 4
+		pageSize: 10
 	};
 
 	Report.get($routeParams.id,
