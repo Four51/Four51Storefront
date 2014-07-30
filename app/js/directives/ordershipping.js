@@ -31,7 +31,7 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 				$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
 			});
 
-			var saveChanges = function(callback) {
+			var saveChanges = function(callback, error) {
 				$scope.errorMessage = null;
 				var auto = $scope.currentOrder.autoID;
 				Order.save($scope.currentOrder,
@@ -50,6 +50,7 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 						$scope.errorMessage = ex.Message;
 						$scope.shippingUpdatingIndicator = false;
 						$scope.shippingFetchIndicator = false;
+						if (error) error(ex);
 					}
 				);
 			};
@@ -109,11 +110,18 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 			$scope.setShipAddressAtLineItem = function(item) {
 				item.ShipFirstName = null;
 				item.ShipLastName = null;
-				saveChanges(function(order) {
-					Shipper.query(order, function(list) {
-						$scope.shippers = list;
-					});
-				});
+				saveChanges(
+					function(order) {
+						Shipper.query(order,
+							function(list) {
+								$scope.shippers = list;
+							}
+						);
+					},
+					function(ex) {
+						item.ShipAddressID = null;
+					}
+				);
 			};
 
 			$scope.setShipAddressAtOrderLevel = function() {
@@ -129,12 +137,21 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 					li.Shipper = null;
 					li.ShipperID = null;
 				});
-				saveChanges(function(order) {
-					Shipper.query(order, function(list) {
-						$scope.shippers = list;
-						$scope.shippingFetchIndicator = false;
-					});
-				});
+				saveChanges(
+					function(order) {
+						Shipper.query(order, function(list) {
+							$scope.shippers = list;
+								$scope.shippingFetchIndicator = false;
+							}
+						);
+					},
+					function(ex) {
+						$scope.currentOrder.ShipAddressID = null;
+						angular.forEach($scope.currentOrder.LineItems, function(li) {
+							li.ShipAddressID = null;
+						});
+					}
+				);
 			};
 			$scope.updateShipper = function(li) {
 				$scope.shippingUpdatingIndicator = true;
