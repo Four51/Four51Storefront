@@ -33,11 +33,11 @@
                             <li ng-show="cart_shipping.shippingAddress.$invalid">Please choose a {{'Shipping' | rl}} {{'Address' | rl}}</li>
                             <li ng-show="cart_shipping.shipMethod.$invalid">Please choose a {{'Shipping Method' | rl}}</li>
                             <li ng-show="cart_billing.billingAddress.$invalid">Please choose a {{'Billing' | rl}} {{'Address' | rl}}</li>
-                            <li ng-show="cart_billing.$error.paymentMethod.length > 0">Please choose a valid {{'Payment' | rl}} {{'Method' | rl}}</li>
-                            <li ng-show="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
+                            <li ng-show="cart_billing.$error.paymentMethod">Please choose a valid {{'Payment' | rl}} {{'Method' | rl}}</li>
+                            <li ng-show="!user.Permissions.contains('CreateBillToAddress') && billaddresses">
                                 You have not been granted permission to create a Billing address, and no Billing addresses have been assigned to you. Therefore, you are not allowed to place this order at this time
                             </li>
-                            <li ng-show="!user.Permissions.contains('CreateShipToAddress') && (addresses | filter:{IsShipping:true}).length == 0">
+                            <li ng-show="!user.Permissions.contains('CreateShipToAddress') && shipaddresses">
                                 You have not been granted permission to create a Shipping address, and no Shipping addresses have been assigned to you. Therefore, you are not allowed to place this order at this time
                             </li>
                         </ul>
