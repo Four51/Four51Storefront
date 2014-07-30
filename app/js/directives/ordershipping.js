@@ -1,8 +1,36 @@
-four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'OrderConfig', function(Order, Shipper, Address, OrderConfig) {
+four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressList', function(Order, Shipper, Address, AddressList) {
 	var obj = {
 		restrict: 'AE',
 		templateUrl: 'partials/controls/orderShipping.html',
 		controller: ['$scope', function($scope) {
+			AddressList.clear();
+			AddressList.shipping(function(list) {
+				$scope.shipaddresses = list;
+				if ($scope.isEditforApproval) {
+					if (!AddressList.contains($scope.currentOrder.ShipAddress))
+						$scope.addresses.push($scope.currentOrder.ShipAddress);
+				}
+			});
+			$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
+
+			$scope.$on('event:AddressSaved', function(event, address) {
+				if (address.IsShipping) {
+					$scope.currentOrder.ShipAddressID = address.ID;
+					if (!$scope.shipToMultipleAddresses)
+						$scope.setShipAddressAtOrderLevel();
+					$scope.addressform = false;
+				}
+
+				AddressList.shipping(function(list) {
+					$scope.shipaddresses = list;
+					if ($scope.isEditforApproval) {
+						$scope.addresses.push($scope.currentOrder.ShipAddress);
+						$scope.addresses.push($scope.currentOrder.BillAddress);
+					}
+				});
+				$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
+			});
+
 			var saveChanges = function(callback) {
 				$scope.errorMessage = null;
 				var auto = $scope.currentOrder.autoID;

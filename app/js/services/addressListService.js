@@ -22,6 +22,18 @@ four51.app.factory('AddressList', ['$q', '$resource', '$451', function($q, $reso
 		}
 	};
 
+	var _shipping = function(success) {
+		$resource($451.api('address/shipping')).get().$promise.then(function (list) {
+			_then(success, list.List, list.Count);
+		});
+	};
+
+	var _billing = function(success) {
+		$resource($451.api('address/billing')).get().$promise.then(function (list) {
+			_then(success, list.List, list.Count);
+		});
+	};
+
 	var _delete = function(addresses, success) {
 		var queue = [];
 		angular.forEach(addresses, function(add) {
@@ -59,6 +71,8 @@ four51.app.factory('AddressList', ['$q', '$resource', '$451', function($q, $reso
 		query: _query,
 		delete: _delete,
 		clear: _clear,
-		contains: _contains
+		contains: _contains,
+		billing: _billing,
+		shipping: _shipping
 	}
 }]);
