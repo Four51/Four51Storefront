@@ -2,13 +2,14 @@ four51.app.directive('paymentselector', function() {
    var obj = {
        restrict: 'E',
        templateUrl: 'partials/controls/paymentSelection.html',
-       controller: ['$scope', '$rootScope', 'SavedCreditCard', 'SpendingAccount', function($scope, $rootScope, SavedCreditCard, SpendingAccount) {
+       controller: ['$scope', '$rootScope', 'SavedCreditCard', 'SpendingAccount', 'Order', function($scope, $rootScope, SavedCreditCard, SpendingAccount, Order) {
 	       $scope.paymentSelection = {};
 	       $scope.isSplitBilling = false;
 
 	       SpendingAccount.query(function(data) {
 		       $scope.SpendingAccounts = data;
-		       budgetAccountCalculation($scope.currentOrder.BudgetAccountID);
+		       if ($scope.currentOrder.BudgetAccountID)
+		            budgetAccountCalculation($scope.currentOrder.BudgetAccountID);
 	       });
 
 	       $scope.$watch('currentOrder.PaymentMethod', function(event) {
@@ -29,7 +30,6 @@ four51.app.directive('paymentselector', function() {
 		       }
 		       else {
 			       if (!$scope.isSplitBilling && $scope.currentOrder) {
-//						$scope.currentOrder.BudgetAccountID = null;
 				       $scope.currentOrder.currentBudgetAccount = null;
 			       }
 		       }
@@ -38,19 +38,16 @@ four51.app.directive('paymentselector', function() {
 
 	       var budgetAccountCalculation = function(value) {
 		       if (value && $scope.SpendingAccounts) {
-			       var valid = validatePaymentMethod('BudgetAccount');
 			       angular.forEach($scope.SpendingAccounts, function(a) {
 				       if (a.ID == value) {
 					       $scope.currentBudgetAccount = a;
 				       }
 			       });
-			       var discount = $scope.currentBudgetAccount.AccountType.MaxPercentageOfOrderTotal != 100 ?
-				       $scope.currentOrder.Total * ($scope.currentBudgetAccount.AccountType.MaxPercentageOfOrderTotal *.01) :
-				       $scope.currentBudgetAccount.Balance;
-			       $scope.remainingOrderTotal = $scope.currentOrder.Total - discount;
-			       $scope.cart_billing.$setValidity('paymentMethod', valid);
 		       }
-	       }
+		       var valid = validatePaymentMethod('BudgetAccount');
+		       $scope.remainingOrderTotal = Order.calculatediscount($scope.currentOrder, $scope.currentBudgetAccount);
+		       $scope.cart_billing.$setValidity('paymentMethod', valid);
+	       };
 
 	       $scope.$watch('currentOrder.Total', function(total) {
 		       if ($scope.currentOrder && $scope.currentOrder.BudgetAccountID)
@@ -59,10 +56,12 @@ four51.app.directive('paymentselector', function() {
 
 	       $scope.$watch('currentOrder.BudgetAccountID', function(value) {
 		       $scope.currentBudgetAccount = null;
+		       if (!value) return;
 		       budgetAccountCalculation(value);
 	       });
 
 	       function validatePaymentMethod(method) {
+		       $scope.isSplitBilling = false;
 		       var validateAccount = function() {
 			       var account = null;
 			       angular.forEach($scope.SpendingAccounts, function(a) {
@@ -73,13 +72,11 @@ four51.app.directive('paymentselector', function() {
 				       $scope.isSplitBilling = false;
 				       if (account.AccountType.MaxPercentageOfOrderTotal != 100) {
 					       $scope.isSplitBilling = true;
-					       console.log($scope.isSplitBilling);
 					       return false;
 				       }
 
 				       if (account.Balance < $scope.currentOrder.Total) {
 					       $scope.isSplitBilling = !account.AccountType.AllowExceed;
-					       console.log($scope.isSplitBilling);
 					       return account.AccountType.AllowExceed;
 				       }
 				       else
@@ -170,76 +167,6 @@ four51.app.directive('paymentselector', function() {
 	       SavedCreditCard.query(function(cards) {
 		       $scope.paymentSelection.SavedCards = cards;
 	       });
-
-           $scope.$watch('currentOrder.CreditCard.AccountNumber', function(ccnumber, o){
-               //http://tamas.io/custom-angularjs-filter-to-determine-credit-card-type/
-	           if (!ccnumber) return;
-               var len = ccnumber.length;
-               if(ccnumber && len >= 4){
-                   var  cardType,
-                       valid,
-                       mul = 0,
-                       prodArr = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [0, 2, 4, 6, 8, 1, 3, 5, 7, 9]],
-                       sum = 0;
-
-                   while (len--) {
-                       sum += prodArr[mul][parseInt(ccnumber.charAt(len), 10)];
-                       mul ^= 1;
-                   }
-
-                   if (sum % 10 === 0 && sum > 0) {
-                       valid = "valid"
-                   } else {
-                       valid = "not valid"
-                   }
-                   ccnumber = ccnumber.toString().replace(/\s+/g, '');
-
-                   if(/^(34)|^(37)/.test(ccnumber)) {
-                       cardType = "AmericanExpress";
-                   }
-                   if(/^30[0-5]/.test(ccnumber)) {
-                       cardType = "DinersClub"; //Carte Blanche
-                   }
-                   if(/^(2014)|^(2149)/.test(ccnumber)) {
-                       cardType = "DinersClub"; //enRoute
-                   }
-                   if(/^36/.test(ccnumber)) {
-                       cardType = "DinersClub"; //International
-                   }
-                   if(/^(6011)|^(622(1(2[6-9]|[3-9][0-9])|[2-8][0-9]{2}|9([01][0-9]|2[0-5])))|^(64[4-9])|^65/.test(ccnumber)) {
-                       cardType = "Discover";
-                   }
-                   if(/^35(2[89]|[3-8][0-9])/.test(ccnumber)) {
-                       cardType = "JCB";
-                   }
-                   if(/^(6304)|^(6706)|^(6771)|^(6709)/.test(ccnumber)) {
-                       cardType = "Laser"; //Laser
-                   }
-                   if(/^(5018)|^(5020)|^(5038)|^(5893)|^(6304)|^(6759)|^(6761)|^(6762)|^(6763)|^(0604)/.test(ccnumber)) {
-                       cardType = "Switch"; //Maestro
-                   }
-                   if(/^5[1-5]/.test(ccnumber)) {
-                       cardType = "MasterCard";
-                   }
-                   if (/^4/.test(ccnumber)) {
-                       cardType = "Visa";
-                   }
-                   if (/^(4026)|^(417500)|^(4405)|^(4508)|^(4844)|^(4913)|^(4917)/.test(ccnumber)) {
-                       cardType = "Electron"; //Visa Electron
-                   }
-
-                   if(cardType){
-                       $scope.currentOrder.CreditCard.Type = cardType;
-                       $scope.creditCardIconUrl = 'css/images/CreditCardIcons/' + cardType + '.png';
-                   } else {
-                       $scope.currentOrder.CreditCard.Type = null;
-                       $scope.creditCardIconUrl = null;
-                   }
-               } else {
-                   $scope.currentOrder.CreditCard.Type = null;
-                   $scope.creditCardIconUrl = null;
-               }
-           });
 	   }]
    };
 

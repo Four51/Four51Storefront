@@ -35,22 +35,34 @@ function($scope, $routeParams, $451, Report) {
 			}
 		);
 	};
-	$scope.downloadReport = function(report) {
+
+	function Download() {
 		$scope.errorMessage = null;
 		$scope.actionMessage = null;
 		$scope.displayLoadingIndicator = true;
-		Report.download(report.ID,
-			function(data) {
+		$scope.settings.listCount = 0;
+		Report.download($scope.report.ID,
+			function(data, count) {
 				$scope.report = data;
-				$scope.settings.listCount = data.Data.length;
+				$scope.settings.listCount = count;
 				$scope.displayLoadingIndicator = false;
 			},
 			function(ex) {
 				$scope.errorMessage = ex.Message;
 				$scope.displayLoadingIndicator = false;
-			}
+			},
+			$scope.settings.currentPage, $scope.settings.pageSize
 		);
+	}
+	$scope.downloadReport = function() {
+		Report.clear();
+		Download();
 	};
+
+	$scope.$watch('settings.currentPage', function(n,o) {
+		if ($scope.report)
+			Download();
+	});
 
 	$scope.getDownload = function() {
 		window.location = $scope.report.DownloadUrl;

@@ -5,14 +5,14 @@ four51.app.factory('AddressList', ['$q', '$resource', '$451', function($q, $reso
 			fn(data, count);
 	}
 
-	var _query = function(success, page, pagesize) {
+	var _query = function(success, page, pagesize, key, editable) {
 		page = page || 1;
 		pagesize = pagesize || 100;
 		if (typeof cache[(page-1) * pagesize] == 'object' && typeof cache[(page * pagesize) - 1] == 'object') {
 			_then(success, cache, cache.length);
 		}
 		else {
-			$resource($451.api('address')).get({ page: page, pagesize: pagesize}).$promise.then(function (list) {
+			$resource($451.api('address')).get({ editable: editable, key: key, page: page, pagesize: pagesize}).$promise.then(function (list) {
 				for (var i = 0; i <= list.Count - 1; i++) {
 					if (typeof cache[i] == 'object') continue;
 					cache[i] = list.List[i - (page - 1) * pagesize] || i;
@@ -20,7 +20,19 @@ four51.app.factory('AddressList', ['$q', '$resource', '$451', function($q, $reso
 				_then(success, cache, list.Count);
 			});
 		}
-	}
+	};
+
+	var _shipping = function(success) {
+		$resource($451.api('address/shipping')).get().$promise.then(function (list) {
+			_then(success, list.List, list.Count);
+		});
+	};
+
+	var _billing = function(success) {
+		$resource($451.api('address/billing')).get().$promise.then(function (list) {
+			_then(success, list.List, list.Count);
+		});
+	};
 
 	var _delete = function(addresses, success) {
 		var queue = [];
@@ -59,6 +71,8 @@ four51.app.factory('AddressList', ['$q', '$resource', '$451', function($q, $reso
 		query: _query,
 		delete: _delete,
 		clear: _clear,
-		contains: _contains
+		contains: _contains,
+		billing: _billing,
+		shipping: _shipping
 	}
 }]);

@@ -10,18 +10,18 @@
         <div>
             <billingmessage />
         </div>
-        <div ng-show="billaddressform || (addresses | filter:{IsBilling:true}).length == 0 && user.Permissions.contains('CreateBillToAddress')">
+        <div ng-show="billaddressform || (!billaddresses && user.Permissions.contains('CreateBillToAddress'))">
             <addressinput address='billaddress' user='user'></addressinput>
         </div>
-        <div ng-hide="billaddressform || (addresses | filter:{IsBilling:true}).length == 0 && user.Permissions.contains('CreateBillToAddress')">
+        <div ng-hide="billaddressform || (!billaddresses && user.Permissions.contains('CreateBillToAddress'))">
             <form name="cart_billing" novalidate="">
                 <div>
                     <paymentselector></paymentselector>
                     <div class="view-form-icon">
                         <div ng-class="{'view-form-select': !currentOrder.BillAddressID, '': currentOrder.BillAddressID }">
                             <label class="required">{{'Billing' | r}} {{'Address' | r}}</label>
-                            <select class="form-control" ng-show="(addresses | filter:{IsBilling:true}).length > 0" name="billingAddress"
-                                    ng-options="address.ID as address.AddressName for address in addresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required>
+                            <select class="form-control" ng-show="billaddresses" name="billingAddress"
+                                    ng-options="address.ID as address.AddressName for address in billaddresses | filter:{IsBilling:true}" ng-model="currentOrder.BillAddressID" required>
                                 <option value=""></option>
                             </select>
                             <i class="fa fa-map-marker"></i>

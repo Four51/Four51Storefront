@@ -10,7 +10,7 @@
         <div>
             <shippingmessage />
         </div>
-        <div ng-show="addressform || (addresses | filter:{IsShipping:true}).length == 0 && user.Permissions.contains('CreateShipToAddress')">
+        <div ng-show="addressform || (!shipaddresses && user.Permissions.contains('CreateShipToAddress'))">
             <addressinput address='shipaddress' user='user'></addressinput>
         </div>
         <div ng-show="!addressform">
@@ -27,7 +27,7 @@
                                 Multiple {{'Addresses' | r}}
                             </button>
                              <button class="btn btn-info pull-right" type="button"
-                                     ng-hide="(addressform || (!addressform && (addresses | filter:{IsShipping:true}).length == 0) || !user.Permissions.contains('CreateShipToAddress'))" ng-click="addressform = true" tabindex="-1">
+                                     ng-hide="(addressform || (!addressform && !shipaddresses) || !user.Permissions.contains('CreateShipToAddress'))" ng-click="addressform = true" tabindex="-1">
                                  New {{'Address' | r}}
                              </button>
                         </span>
@@ -37,11 +37,11 @@
                         <loadingindicator ng-show="shippingFetchIndicator" title="Please wait while available shippers are updated" />
                         <div>
                             <div ng-show="!currentOrder.IsMultipleShip()" class="view-form-icon">
-                                <div ng-show="(addresses | filter:{IsShipping:true}).length > 0" ng-class="{'view-form-select': !currentOrder.ShipAddressID, '': currentOrder.ShipAddressID }">
+                                <div ng-show="shipaddresses" ng-class="{'view-form-select': !currentOrder.ShipAddressID, '': currentOrder.ShipAddressID }">
                                     <label ng-class="{required: !currentOrder.IsMultipleShip()}" ng-show="currentOrder.ShipAddressID || !currentOrder.IsMultipleShip()">{{'Shipping' | r}} {{'Address' | r}}</label>
                                         <select class="form-control" name="shippingAddress"
                                                 ng-change="setShipAddressAtOrderLevel()"
-                                                ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
+                                                ng-options="address.ID as address.AddressName for address in shipaddresses"
                                                 ng-model="currentOrder.ShipAddressID"
                                                 ng-required="!currentOrder.IsMultipleShip()">
                                             <option value=""></option>
@@ -121,7 +121,7 @@
                                     <div ng-class="{'view-form-select': !item.ShipAddressID, '' : item.ShipAddressID }">
                                         <label ng-class="{required: currentOrder.IsMultipleShip()}" ng-show="currentOrder.ShipAddressID || currentOrder.IsMultipleShip()">{{'Shipping' | r}} {{'Address' | r}}</label>
                                         <select class="form-control" name="shippingAddress"
-                                                ng-options="address.ID as address.AddressName for address in addresses | filter:{IsShipping:true}"
+                                                ng-options="address.ID as address.AddressName for address in shipaddresses"
                                                 ng-model="item.ShipAddressID"
                                                 ng-required="currentOrder.IsMultipleShip()"
                                                 ng-change="setShipAddressAtLineItem(item)">

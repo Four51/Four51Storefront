@@ -69,6 +69,7 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 			Order.deletelineitem($scope.currentOrder.ID, item.ID,
 				function(order) {
 					$scope.currentOrder = order;
+					Order.clearshipping($scope.currentOrder);
 					if (!order) {
 						$scope.user.CurrentOrderID = null;
 						User.save($scope.user, function(){

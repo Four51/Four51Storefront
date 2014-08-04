@@ -1,22 +1,33 @@
 <section class="address-list-view">
     <loadingindicator ng-show="displayLoadingIndicator" />
-    <div class="panel panel-default" ng-if="(addresses | filter:{IsCustEditable:true}).length == 0">
+    <div class="panel panel-default" ng-show="!addresses">
         <div class="panel-heading">
             <h3 class="panel-title">{{'Addresses' | r}}</h3>
         </div>
         <div class="panel-body">
-            <p class="alert alert-warning">You have no {{'addresses' | rc}} yet!</p>
+            <p class="alert alert-warning">No {{'addresses' | rc}} available</p>
         </div>
         <div class="panel-footer">
             <button type="button" class="btn btn-primary" ng-click="newAddress($event)">Add an {{'address' | rc}} now</button>
         </div>
     </div>
-    <div class="panel panel-default"  ng-if="(addresses | filter:{IsCustEditable:true}).length > 0">
+    <div class="panel panel-default" ng-show="addresses">
         <div class="panel-heading">
             <h3 class="panel-title">{{'Addresses' | r}}</h3>
         </div>
+        <div class="view-form-icon panel-body">
+            <form name="searchForm">
+                <div class="input-group">
+                        <input type="text" ng-model="searchTerm"  class="form-control" placeholder="{{'Search' | r}} {{'Addresses' | r}}" />
+                        <i class="fa fa-search"></i>
+                        <div class="input-group-btn">
+                            <button type="submit" ng-click="search($event)" class="btn btn-default">{{'Search' | r}}</button>
+                        </div>
+                </div>
+            </form>
+        </div>
         <div class="panel-table">
-            <div class="row text-info" ng-show="(addresses | filter:{IsCustEditable:true}).length > 0">
+            <div class="row text-info" ng-show="addresses">
                 <div class="col-sm-2">
                     <label class="visible-xs">{{'Select all' | r}}</label>
                     <input type='checkbox' ng-click="checkAll($event)" />
@@ -27,7 +38,7 @@
                 <div class="col-sm-2 hidden-xs">{{'Shipping' | r}}</div>
                 <div class="col-sm-2 hidden-xs">{{'Billing' | r}}</div>
             </div>
-            <div class="row"  ng-repeat="address in addresses | filter:{IsCustEditable:true} | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
+            <div class="row"  ng-repeat="address in addresses | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
                 <loadingindicator ng-show="pagedIndicator" />
                 <div class="col-sm-2">
                     <input type='checkbox' ng-model="address.Selected" />

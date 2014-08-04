@@ -140,7 +140,33 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 				error(Error.format(ex));
 			}
 		);
-	}
+	};
+
+	var _updateship = function(order) {
+		order.ShipperID = null;
+		angular.forEach(order.LineItems, function(li) {
+			li.ShipperName = null;
+			li.ShipperID = null;
+		});
+		order.ShipperName = null;
+		return this;
+	};
+
+	var _calcdisc = function(order, acct) {
+		if (acct == null) return order.Total;
+		var discount = 0;
+		if (acct.AccountType.MaxPercentageOfOrderTotal != 100) {
+			var total = order.Total - acct.Balance;
+			if (total < (total / acct.AccountType.MaxPercentageOfOrderTotal))
+				discount = total / acct.AccountType.MaxPercentageOfOrderTotal;
+			else
+				discount = acct.Balance;
+		}
+		else
+			discount = acct.Balance;
+
+		return order.Total - discount;
+	};
 
 	return {
 		get: _get,
@@ -150,6 +176,8 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 		repeat: _repeat,
 		approve: _approve,
 		decline: _decline,
-		deletelineitem: _deletelineitem
+		deletelineitem: _deletelineitem,
+		clearshipping: _updateship,
+		calculatediscount: _calcdisc
 	}
 }]);
