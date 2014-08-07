@@ -1,5 +1,5 @@
-four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$451', 'Order', 'OrderConfig', 'User',
-function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
+four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$451', 'Order', 'OrderConfig', 'User', 'AddToOrder',
+function ($scope, $routeParams, $location, $451, Order, OrderConfig, User, AddToOrder) {
 	var isEditforApproval = $routeParams.id != null && $scope.user.Permissions.contains('EditApprovalOrder');
 	if (isEditforApproval) {
 		Order.get($routeParams.id, function(order) {
@@ -20,6 +20,7 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 
 	$scope.cancelOrder = function() {
 		if (confirm('Are you sure you wish to cancel your order?') == true) {
+            AddToOrder.clearLineItems();
 			$scope.displayLoadingIndicator = true;
 			$scope.actionMessage = null;
 			Order.delete($scope.currentOrder,
@@ -68,6 +69,7 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 		if (confirm('Are you sure you wish to remove this item from your cart?') == true) {
 			Order.deletelineitem($scope.currentOrder.ID, item.ID,
 				function(order) {
+                    AddToOrder.removeLineItems(item);
 					$scope.currentOrder = order;
 					Order.clearshipping($scope.currentOrder);
 					if (!order) {
