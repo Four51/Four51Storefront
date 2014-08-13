@@ -70,6 +70,7 @@ small,
   border-top: none;
   border-left: none;
   border-bottom:  none;
+  font-size: 11px;
   @media (max-width: @screen-xs-max) {
     border-right: 1px solid @panel-default-border;
   }
@@ -197,16 +198,13 @@ button::-moz-focus-inner {
       padding-left: 5px;
       border-radius: 4px;
       @media (max-width: @screen-xs-max) {
-      padding-left: 25px;
+        padding-left: 25px;
       }
     }
     .input-group-addon {
+      background-color: transparent;
       &:first-of-type {
         &:before {
-          content: "\f044";
-          font-family: FontAwesome;
-          font-style: normal;
-          font-weight: normal;
           text-decoration: inherit;
           padding-right: 5px;
           padding-lefT: 5px;
@@ -225,7 +223,6 @@ button::-moz-focus-inner {
         text-align: left;
         padding: 5px 0;
         border-radius: 0;
-        background-color: #fff;
       }
     }
 
@@ -305,7 +302,8 @@ button::-moz-focus-inner {
   //** padding to account for icons on inputs inside of columns
   .col-md-4,
   .col-xs-6,
-  .col-xs-9{
+  .col-xs-9,
+  .col-sm-4{
     i{
       left:5px;
     }
@@ -785,4 +783,9 @@ button::-moz-focus-inner {
 
 //== Type
 
+//== Pagination
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus
+{
+  background-color: #0c2a3a !important;
+}
 //== Miscellaneous

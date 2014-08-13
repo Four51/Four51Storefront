@@ -132,6 +132,130 @@ table[datepicker]{
   }
 }
 
+//== Credit Card Payment
+.credit-card-widget{
+  .view-form-icon{
+    & > div input{
+      .border-top-radius(0);
+      .border-bottom-radius(0);
+      border-bottom-width:0;
+    }
+    &:not(:first-of-type) > div{
+      margin-top:0;
+    }
+    &:first-of-type{
+      & > div input{
+        .border-top-radius(@border-radius-base);
+      }
+    }
+    & > div.account-number-input{
+      .card-type-icon{
+        position:absolute;
+        top:10px;
+        right:0px;
+        width:34px;
+        height:20px;
+        background-size:contain;
+        -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.5);
+        box-shadow: 0 0 3px 0 rgba(0,0,0,0.5);
+        opacity:0;
+        .transition-property(all);
+        .transition-duration(200ms);
+        &.active{
+          opacity:1;
+          right:10px;
+          .transition-property(all);
+          .transition-duration(200ms);
+          .transition-delay(200ms);
+        }
+      }
+    }
+    &.double{
+      & > div {
+        input {
+          .border-bottom-radius(@border-radius-base);
+          border-bottom-width:1px;
+        }
+        &.col-xs-6{
+          &:first-of-type{
+            padding-right:0;
+            input{
+              .border-right-radius(0px);
+              border-right-width:0;
+            }
+          }
+          &:last-of-type{
+            padding-left:0;
+            input{
+              .border-left-radius(0px);
+            }
+          }
+        }
+      }
+    }
+  }
+  /*.view-form-icon:first-of-type{
+    & > div input{
+      .border-top-radius(@border-radius-base);
+      border-bottom-width:0px;
+    }
+  }
+  .view-form-icon:nth-of-type(2){
+    & > div{
+      input{
+        .border-bottom-radius(0px);
+        .border-top-radius(0px);
+        border-bottom-width:0px;
+      }
+      .card-type-icon{
+        position:absolute;
+        top:10px;
+        right:0px;
+        width:34px;
+        height:20px;
+        background-size:contain;
+        -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.5);
+        box-shadow: 0 0 3px 0 rgba(0,0,0,0.5);
+        opacity:0;
+        .transition-property(all);
+        .transition-duration(200ms);
+        &.active{
+          opacity:1;
+          right:10px;
+          .transition-property(all);
+          .transition-duration(200ms);
+          .transition-delay(200ms);
+        }
+      }
+    }
+  }
+  .view-form-icon{
+    & > div {
+      &.col-xs-6:first-of-type{
+        padding-right:0;
+        border-right-width:0px;
+        input{
+          .border-right-radius(0px);
+          .border-top-radius(0px);
+        }
+
+      }
+      &.col-xs-6:last-of-type{
+        padding-left:0;
+        input{
+          .border-left-radius(0px);
+          .border-top-radius(0px);
+        }
+      }
+    }
+  }
+  .view-form-icon:not(:first-of-type){
+    & > div{
+      margin-top:0px;
+    }
+  }*/
+}
+
 //== Glyphicon Fixes for ui.bootstrap tpls
 .glyphicon {
   display: inline-block;

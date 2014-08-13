@@ -1,13 +1,14 @@
 four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Error', function($resource, $rootScope, $451, Security, Error) {
 	var _multipleShip = false;
-	function _then(fn, data) {
+	function _then(fn, data, broadcast) {
 		if (angular.isFunction(fn))
 			fn(data);
-		$rootScope.$broadcast('event:orderUpdate', data);
+		if (!broadcast)
+			$rootScope.$broadcast('event:orderUpdate', data);
 	}
 
 	function _extend(order) {
-		order.isEditable = order.Status == 'Unsubmitted' || order.Status == 'Open';
+		order.isEditable = order.Status == 'Unsubmitted' || order.Status == 'Open' || order.Status == 'AwaitingApproval';
 		angular.forEach(order.LineItems, function(item) {
 			item.OriginalQuantity = item.Quantity; //needed to validate qty changes compared to available quantity
 			angular.forEach(item.Specs, function(spec) {
@@ -33,57 +34,62 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 		}
 	}
 
-	var _get = function(id, success) {
+	var _get = function(id, success, suppress) {
 		var currentOrder = store.get('451Cache.Order.' + id);
 		currentOrder ? (function() { _extend(currentOrder);	_then(success, currentOrder); })() :
-	        $resource($451.api('order')).get({'id': id }).$promise.then(function(o) {
-		        _extend(o);
-		        store.set('451Cache.Order.' + id, o);
-	            _then(success, o);
-	        });
-    }
+			$resource($451.api('order/:id'), { id: '@id' }).get({ id: id }).$promise.then(function(o) {
+				_extend(o);
+				store.set('451Cache.Order.' + id, o);
+				_then(success, o, suppress);
+			});
+	};
 
-    var _save = function(order, success, error) {
-        $resource($451.api('order')).save(order).$promise.then(
-	        function(o) {
-		        store.set('451Cache.Order.' + o.ID, o);
-		        _extend(o);
-	            _then(success, o);
-	        },
-	        function(ex) {
-		        error(Error.format(ex));
-	        }
-        );
-    }
+	var _save = function(order, success, error) {
+		$resource($451.api('order')).save(order).$promise.then(
+			function(o) {
+				store.set('451Cache.Order.' + o.ID, o);
+				store.remove('451Cache.User' + $451.apiName);
+				_extend(o);
+				_then(success, o);
+			},
+			function(ex) {
+				error(Error.format(ex));
+			}
+		);
+	};
 
-    var _delete = function(order, success, error) {
-        $resource($451.api('order')).delete().$promise.then(
-	        function() {
-		        store.remove('451Cache.Order.' + order.ID);
-	           _then(success);
-	        },
-	        function(ex) {
-		        error(Error.format(ex));
-	        }
-        );
-    }
+	var _delete = function(order, success, error) {
+		$resource($451.api('order')).delete().$promise.then(
+			function() {
+				store.remove('451Cache.Order.' + order.ID);
+				store.remove('451Cache.User' + $451.apiName);
+				_then(success);
+			},
+			function(ex) {
+				error(Error.format(ex));
+			}
+		);
+	};
 
-    var _submit = function(order, success, error) {
-        $resource($451.api('order'), { }, { submit: { method: 'PUT' }}).submit(order).$promise.then(
-	        function(o) {
-		        store.set('451Cache.Order.' + o.ID);
-		        _extend(o);
-	            _then(success,o);
-	        },
-	        function(ex) {
-		        error(Error.format(ex));
-	        }
-        );
-    }
+	var _submit = function(order, success, error) {
+		$resource($451.api('order'), { }, { submit: { method: 'PUT' }}).submit(order).$promise.then(
+			function(o) {
+				store.set('451Cache.Order.' + o.ID);
+				store.remove('451Cache.User' + $451.apiName);
+				_extend(o);
+				_then(success,o);
+			},
+			function(ex) {
+				error(Error.format(ex));
+			}
+		);
+	}
 
 	var _repeat = function(id, success, error) {
-		$resource($451.api('order'), {}, { repeat: { method: 'PUT', params: { 'id': id}}}).repeat().$promise.then(
+		$resource($451.api('order/repeat/:id'), {'id': id}, { repeat: { method: 'PUT'}}).repeat().$promise.then(
 			function(o) {
+				store.set('451Cache.Order.' + o.ID);
+				store.remove('451Cache.User' + $451.apiName);
 				_extend(o);
 				_then(success, o);
 			},
@@ -94,7 +100,7 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 	}
 
 	var _approve = function(order, success, error) {
-		$resource($451.api('orderapprovalapprove'), {}, { approve: { method: 'PUT', params: { 'id': order.ID, 'comment': order.ApprovalComment}}}).approve().$promise.then(
+		$resource($451.api('order/approve/:id'), {'id': order.ID}, { approve: { method: 'PUT', params: { 'comment': order.ApprovalComment}}}).approve().$promise.then(
 			function(o) {
 				_extend(o);
 				_then(success, o);
@@ -106,7 +112,7 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 	}
 
 	var _decline = function(order, success, error) {
-		$resource($451.api('orderapprovaldecline'), {}, { decline: { method: 'PUT', params: { 'id': order.ID, 'comment': order.ApprovalComment}}}).decline().$promise.then(
+		$resource($451.api('order/decline/:id'), {'id': order.ID}, { decline: { method: 'PUT', params: { 'comment': order.ApprovalComment}}}).decline().$promise.then(
 			function(o) {
 				_extend(o);
 				_then(success, o);
@@ -117,30 +123,61 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 		);
 	}
 
-	var _deletelineitem = function(id, success, error) {
+	var _deletelineitem = function(id, lineitemid, success, error) {
 		store.remove('451Cache.Order.' + id);
-		$resource($451.api('order'), {}, { deletelineitem: { method: 'DELETE', params: { 'id': id }}}).deletelineitem().$promise.then(
+		$resource($451.api('order/:id/lineitem/:lineitemid'), {'id': id, 'lineitemid': lineitemid }, { lineitemdelete: { method: 'DELETE'}}).lineitemdelete().$promise.then(
 			function(o) {
-				if (o) {
+				if (o.ID) {
 					store.set('451Cache.Order.' + o.ID, o);
 					_extend(o);
+					_then(success, o);
+				} else {
+					store.remove('451Cache.User' + $451.apiName);
+					_then(success, null);
 				}
-				_then(success, o);
 			},
 			function(ex) {
 				error(Error.format(ex));
 			}
 		);
-	}
+	};
 
-    return {
-        get: _get,
-        save: _save,
-        delete: _delete,
-        submit: _submit,
-	    repeat: _repeat,
-	    approve: _approve,
-	    decline: _decline,
-	    deletelineitem: _deletelineitem
-    }
+	var _updateship = function(order) {
+		order.ShipperID = null;
+		angular.forEach(order.LineItems, function(li) {
+			li.ShipperName = null;
+			li.ShipperID = null;
+		});
+		order.ShipperName = null;
+		return this;
+	};
+
+	var _calcdisc = function(order, acct) {
+		if (acct == null) return order.Total;
+		var discount = 0;
+		if (acct.AccountType.MaxPercentageOfOrderTotal != 100) {
+			var total = order.Total - acct.Balance;
+			if (total < (total / acct.AccountType.MaxPercentageOfOrderTotal))
+				discount = total / acct.AccountType.MaxPercentageOfOrderTotal;
+			else
+				discount = acct.Balance;
+		}
+		else
+			discount = acct.Balance;
+
+		return order.Total - discount;
+	};
+
+	return {
+		get: _get,
+		save: _save,
+		delete: _delete,
+		submit: _submit,
+		repeat: _repeat,
+		approve: _approve,
+		decline: _decline,
+		deletelineitem: _deletelineitem,
+		clearshipping: _updateship,
+		calculatediscount: _calcdisc
+	}
 }]);

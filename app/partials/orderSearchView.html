@@ -156,7 +156,7 @@
             <div class="row" ng-repeat="order in orders | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
                 <div class="col-sm-2">
                     <span class="visible-xs panel-table-heading-xs text-info">{{'ID' | r | xlat}}</span>
-                    <a ng-href="order/{{order.ID}}">{{order.ExternalID}}</a>
+                    <a ng-href="order/{{order.ID}}">{{order.ExternalID || ('(unspecified)' | xlat)}}</a>
                 </div>
                 <div class="col-sm-2">
                     <span class="visible-xs panel-table-heading-xs text-info">{{'Type' | r | xlat}}</span>

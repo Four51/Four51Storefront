@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-sm-12 view-form-icon">
+        <div class="input-group">
+            <label>{{'Name' | r | xlat}}</label>
+            <input required class="form-control" type="text" ng-model="report.Name" placeholder="{{'Name' | r | xlat}}" />
+            <i class="fa fa-bookmark-o"></i>
+            <div class="input-group-btn">
+                <button type="submit" ng-disabled="reportForm.$invalid" class="btn btn-primary pull-right">
+                    <span>{{'Save' | r | xlat}}</span>
+                    <i class="fa fa-save"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 view-form-icon">
+        <h3>{{'Conditions' | r | xlat}}</h3>
+        <div>
+            <label>{{'Account Type' | r | xlat}}</label>
+            <select class="form-control" ng-options="key as value for (key,value) in report.AccountTypeOptions" ng-model="report.AccountType"><option value=""></option></select>
+            <i class="fa fa-folder-open"></i>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <h3>{{'Display Columns' | r | xlat}}</h3>
+        <div>
+            <label>&nbsp;</label>
+            <select multiple size="18" required class="form-control" ng-options="key as (value | xlat) for (key,value) in report.ColumnOptions" ng-model="report.SelectedColumns"><option value=""></option></select>
+        </div>
+    </div>
+</div>
+

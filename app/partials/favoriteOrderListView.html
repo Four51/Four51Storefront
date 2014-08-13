@@ -1,4 +1,5 @@
 <section>
+    <loadingindicator ng-show="loading" />
     <div class="panel panel-default" ng-if="favoriteorders.length == 0">
         <div class="panel-heading">
             <h3 class="panel-title panel-primary">{{('Favorite' | r) + ' ' + ('Orders' | r) | xlat }}</h3>
@@ -72,6 +73,7 @@
                             items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
             </div>
             <button type="button" class="btn btn-small btn-danger" ng-click="deleteSelected($event)" ng-disabled="(favoriteorders | filter:{Selected:true}).length == 0">{{('Delete' | r) + ' ' + ('Selected' | r) | xlat}}</button>
+            <span class="alert alert-success" ng-show="error" ng-bind-html="error | r"></span>
         </div>
     </div>
 </section>

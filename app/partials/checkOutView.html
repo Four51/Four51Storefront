@@ -19,12 +19,12 @@
             <div class="view-response-message alert-danger text-center" alert-show="couponError">
                 <p>{{couponError | r | xlat}}</p>
             </div>
-            <div class="view-error-message" ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length) > 0">
+            <div class="view-error-message" ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length + cart_billing.$error.paymentMethod.length) > 0">
                 <ul class="alert-warning">
                     <li class="text-center">
                         <span class="badge">
                             <i class="fa fa-exclamation-circle fa-inverse"></i>
-                            {{cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length}}
+                            {{cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length + cart_billing.$error.paymentMethod.length}}
                         </span>
                     </li>
                     <li class="text-center">
@@ -34,16 +34,15 @@
                             <li ng-if="cart_shipping.shipMethod.$invalid">{{'Please choose a ' + ('Shipping' | rl) + ' ' + ('Method' | rl) | xlat}}</li>
                             <li ng-if="cart_billing.billingAddress.$invalid">{{'Please choose a ' + ('Billing' | rl) + ' ' + ('Address' | rl) | xlat}}</li>
                             <li ng-if="cart_billing.$error.paymentMethod">{{'Please choose a valid ' + ('Payment' | rl) + ' ' + ('Method' | rl) | xlat}}</li>
-                            <li ng-if="!user.Permissions.contains('CreateBillToAddress') && (addresses | filter:{IsBilling:true}).length == 0">
+                            <li ng-if="!user.Permissions.contains('CreateBillToAddress') && billaddresses">
                                 {{'You have not been granted permission to create a ' + ('Billing' | r) + ' ' + ('Address' | r) + ', and no ' + ('Billing' | r) + ' ' + ('Addresses' | r) + ' have been assigned to you. Therefore, you are not allowed to place this ' + ('Order' | r) + ' at this time' | xlat}}
                             </li>
-                            <li ng-if="!user.Permissions.contains('CreateShipToAddress') && (addresses | filter:{IsShipping:true}).length == 0">
+                            <li ng-if="!user.Permissions.contains('CreateShipToAddress') && shipaddresses">
                                 {{'You have not been granted permission to create a ' + ('Shipping' | r) + ' ' + ('Address' | r) + ', and no ' + ('Shipping' | r) + ' ' + ('Addresses' | r) + ' have been assigned to you. Therefore, you are not allowed to place this ' + ('Order' | r) + ' at this time' | xlat}}
-                            </li>
                         </ul>
                     </li>
                     <li class="text-center">
-                        <a href ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length) > 1">
+                        <a href ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length + cart_billing.$error.paymentMethod.length) > 1">
                             <i class="fa fa-caret-down" ng-click="errorSection = 'open'" ng-hide="errorSection == 'open'"></i>
                             <i class="fa fa-caret-up" ng-click="errorSection = ''" ng-show="errorSection == 'open'"></i>
                         </a>
@@ -52,8 +51,9 @@
             </div>
             <ul>
                 <li>
-                    <button class="btn btn-danger" ng-click="cancelOrder()">
-                        {{('Cancel' | r) + ' ' + ('Order' | r) | xlat}}
+                    <button class="btn btn-danger" ng-click="currentOrder.Status == 'AwaitingApproval' ? cancelEdit() : cancelOrder()">
+                        <small ng-show="currentOrder.Status != 'AwaitingApproval'">{{('Cancel' | r) + ' ' + ('Order' | r) | xlat}}</small>
+                        <small ng-show="currentOrder.Status == 'AwaitingApproval'">{{('Cancel' | r) + ' ' + ('Edit' | r) | xlat}}</small>
                     </button>
                 </li>
                 <li>

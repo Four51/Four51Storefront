@@ -3,7 +3,7 @@
         <nav class="nav">
             <ul>
                 <li><span class="text-primary">{{'Cart' | r | xlat}}</span></li>
-                <li class="pull-right" ng-click="onPrint()"><span><i class="fa fa-print text-primary" rel="tooltip" title="{{'Print' | r}}" ></i></span></li>
+                <li class="pull-right" ng-click="onPrint()"><span><i class="fa fa-print text-primary" rel="tooltip" title="{{'Print' | r | xlat}}" ></i></span></li>
             </ul>
         </nav>
         <form name="cart" novalidate="">
@@ -40,7 +40,7 @@
                     </div>
                     <div class="col-sm-9">
                         <div class="row">
-                            <div class="col-md-6" >
+                            <div class="col-md-6" ng-if="currentOrder.Status != 'AwaitingApproval'">
                                 <a ng-href="cart/{{item.Product.InteropID}}/{{$index}}">
                                     <h3 class="text-primary">
                                         <i class="fa fa-edit"></i>
@@ -50,6 +50,14 @@
                                         {{item.Product.Name}}
                                     </p>
                                 </a>
+                            </div>
+                            <div class="col-md-6" ng-if="currentOrder.Status == 'AwaitingApproval'">
+                                <h3 class="text-primary">
+                                    {{item.ProductIDText}}
+                                </h3>
+                                <p>
+                                    {{item.Product.Name}}
+                                </p>
                             </div>
                             <div class="col-md-6">
                                 <div class="row">
@@ -125,7 +133,7 @@
                                 </button>
                                 <ul ng-show="toggleSpecs == true" class="list-group">
                                     <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} " class="list-group-item">
-                                        <span class="text-info">{{spec.Name}}: </span>
+                                        <span class="text-info">{{spec.Label || spec.Name}}: </span>
                                         <span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span></span>
                                         <span ng-if="spec.ControlType != 'File'">{{spec.Value || ('(unspecified)' | xlat)}}</span>
                                     </li>
@@ -154,8 +162,11 @@
                 <div class="alert-warning text-center" style="padding: 10px;" ng-if="currentOrder.RepeatError">
                     {{'Some items were not added to your repeat order' | r | xlat}}: {{currentOrder.RepeatError}}
                 </div>
-                <div class="view-response-message alert-success text-center" alert-show="currentOrder">
+                <div class="view-response-message alert-success text-center" alert-show="actionMessage">
                     <p>{{actionMessage | r | xlat}}</p>
+                </div>
+                <div class="view-response-message alert-success text-center" alert-show="errorMessage">
+                    <p>{{errorMessage | r | xlat}}</p>
                 </div>
                 <div class="view-response-message alert-danger text-center" alert-show="gcMessage">{{gcMessage}}</div>
                 <div class="view-error-message" ng-show="cart.$error.required.length > 0">
@@ -183,7 +194,10 @@
                 </div>
                 <ul>
                     <li>
-                        <button class="btn btn-danger" ng-click="cancelOrder()"><small>{{('Cancel' | r) + ' ' + ('Order' | r) | xlat}}</small></button>
+                        <button class="btn btn-danger" ng-click="currentOrder.Status == 'AwaitingApproval' ? cancelEdit() : cancelOrder()">
+                            <small ng-if="currentOrder.Status != 'AwaitingApproval'">{{('Cancel' | r) + ' ' + ('Order' | r) | xlat}}</small>
+                            <small ng-if="currentOrder.Status == 'AwaitingApproval'">{{('Cancel' | r) + ' ' + ('Edit' | r) | xlat}}</small>
+                        </button>
                     </li>
                     <li>
                         <button class="btn btn-primary" ng-click="saveChanges()">

@@ -31,9 +31,19 @@
                 </li>
             </ul>
         </nav>
+        <button class="btn btn-success btn-lg btn-block" type="button" ng-click="Checkout()">
+            <i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>
+            Add To Cart
+        </button>
     </div>
     <div ng-show="productCount > settings.pageSize">
         <pagination page="settings.currentPage" max-size="10" rotate="false" boundary-links="true" total-items="productCount"
             items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
+    </div>
+    <!-- ERROR MESSAGING! -->
+    <div class="navbar-fixed-bottom">
+        <div class="alert alert-warning" ng-show="addToOrderError || !quantityAdded">
+            <p class="text-center"><i class="fa fa-exclamation-circle"></i> Please Enter a Valid Quantity</p>
+        </div>
     </div>
 </div>

@@ -1,5 +1,4 @@
-four51.app.controller('ApprovalInputCtrl', ['$scope', '$rootScope', 'Order',
-function ($scope, $rootScope, Order) {
+four51.app.controller('ApprovalInputCtrl', ['$scope', '$location', '$rootScope', 'Order', function ($scope, $location, $rootScope, Order) {
 	$scope.approveOrder = function() {
 		$scope.loadingIndicator = true;
 		Order.approve($scope.order,
@@ -26,5 +25,10 @@ function ($scope, $rootScope, Order) {
 				$scope.error = "An error occurred while processing.";
 			}
 		);
+	}
+
+	$scope.editOrder = function() {
+		$scope.loadingIndicator = true;
+		$location.path('cart/' + $scope.order.ID);
 	}
 }]);

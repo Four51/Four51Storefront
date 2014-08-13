@@ -7,11 +7,13 @@ function ($scope, $location, $451, AddressList) {
 	};
 	function Query() {
 		$scope.pagedIndicator = true;
+		$scope.addresses = null;
+		AddressList.clear();
 		AddressList.query(function (list, count) {
 			$scope.addresses = list;
 			$scope.settings.listCount = count;
 			$scope.pagedIndicator = false;
-		}, $scope.settings.currentPage, $scope.settings.pageSize);
+		}, $scope.settings.currentPage, $scope.settings.pageSize, $scope.searchTerm, true);
 	}
 
     $scope.deleteSelected = function() {
@@ -25,6 +27,7 @@ function ($scope, $location, $451, AddressList) {
 	$scope.$watch('settings.currentPage', function(n,o) {
 		Query();
 	});
+
     $scope.newAddress = function() {
         $location.path('address');
     };
@@ -32,5 +35,10 @@ function ($scope, $location, $451, AddressList) {
         angular.forEach($scope.addresses, function(add) {
             add.Selected = event.currentTarget.checked;
         });
-    }
+    };
+
+	$scope.search = function(e) {
+		e.preventDefault();
+		Query();
+	};
 }]);
