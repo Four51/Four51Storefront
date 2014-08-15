@@ -40,7 +40,7 @@
                 </div>
                 <lineitemhistorygrid />
 
-				<div  ng-show="shipments" ng-repeat="s in shipments">
+				<div class="panel-body" ng-show="shipments" ng-repeat="s in shipments">
 					<b>Shipper:</b> {{s.Shipper}}<br/>
 					<b>Tracking number:</b> {{s.TrackingNumber}}<br/>
 					<b>URL:</b> <a href="{{s.TrackingURL}}">{{s.TrackingURL}}</a><br>
