@@ -39,6 +39,17 @@
                     </h3>
                 </div>
                 <lineitemhistorygrid />
+
+				<div class="panel-body" ng-show="shipments" ng-repeat="s in shipments">
+					<b>Shipper:</b> {{s.Shipper}}<br/>
+					<b>Tracking number:</b> {{s.TrackingNumber}}<br/>
+					<b>URL:</b> <a href="{{s.TrackingURL}}">{{s.TrackingURL}}</a><br>
+					<b>Items: </b> <ul><li ng-repeat="item in s.Items">{{item.ProductID}} - {{item.QuantityShipped}}</li></ul>
+					<hr>
+				</div>
+
+
+
                 <div class="panel-footer" ng-if="order.FromUserID == user.ID && order.Status != 'Unsubmitted'">
                    <loadingindicator ng-show="displayLoadingIndicator" />
                    <div class="form-group view-form-icon">

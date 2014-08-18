@@ -1,7 +1,9 @@
 four51.app.controller('CheckOutViewCtrl', ['$scope', '$routeParams', '$location', '$filter', '$rootScope', '$451', 'Analytics', 'User', 'Order', 'OrderConfig', 'FavoriteOrder', 'AddressList',
 function ($scope, $routeParams, $location, $filter, $rootScope, $451, Analytics, User, Order, OrderConfig, FavoriteOrder, AddressList) {
-	var isEditforApproval = $routeParams.id != null && $scope.user.Permissions.contains('EditApprovalOrder');
-	if (isEditforApproval) {
+	$scope.errorSection = 'open';
+
+	$scope.isEditforApproval = $routeParams.id != null && $scope.user.Permissions.contains('EditApprovalOrder');
+	if ($scope.isEditforApproval) {
 		Order.get($routeParams.id, function(order) {
 			$scope.currentOrder = order;
 		});
@@ -11,44 +13,8 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, Analytics,
         $location.path('catalog');
     }
 
-	AddressList.clear();
-    AddressList.query(function(list) {
-        $scope.addresses = list;
-	    if (isEditforApproval) {
-		    if (!AddressList.contains($scope.currentOrder.ShipAddress))
-		        $scope.addresses.push($scope.currentOrder.ShipAddress);
-		    if (!AddressList.contains($scope.currentOrder.ShipAddress))
-		        $scope.addresses.push($scope.currentOrder.BillAddress);
-	    }
-    });
-
 	$scope.hasOrderConfig = OrderConfig.hasConfig($scope.currentOrder, $scope.user);
 	$scope.checkOutSection = $scope.hasOrderConfig ? 'order' : 'shipping';
-
-	$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
-	$scope.billaddress = { Country: 'US', IsShipping: false, IsBilling: true };
-
-	$scope.$on('event:AddressSaved', function(event, address) {
-		if (address.IsShipping) {
-			$scope.currentOrder.ShipAddressID = address.ID;
-			if (!$scope.shipToMultipleAddresses)
-				$scope.setShipAddressAtOrderLevel();
-			$scope.addressform = false;
-		}
-		if (address.IsBilling) {
-			$scope.currentOrder.BillAddressID = address.ID;
-			$scope.billaddressform = false;
-		}
-		AddressList.query(function(list) {
-			$scope.addresses = list;
-			if (isEditforApproval) {
-				$scope.addresses.push($scope.currentOrder.ShipAddress);
-				$scope.addresses.push($scope.currentOrder.BillAddress);
-			}
-		});
-		$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
-		$scope.billaddress = { Country: 'US', IsShipping: false, IsBilling: true };
-	});
 
     function submitOrder() {
 	    $scope.displayLoadingIndicator = true;
