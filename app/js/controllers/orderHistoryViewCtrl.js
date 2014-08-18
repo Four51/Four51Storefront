@@ -33,6 +33,11 @@ four51.app.controller('OrderViewCtrl', ['$scope', '$location', '$routeParams', '
 			Address.get(data.BillAddressID, function(add){
 				data.BillAddress = add;
 			});
+			if(data.HasShipments){
+				Order.listShipments(data, function(data){
+					$scope.shipments = data;
+				})
+			}
 		}, true);
 
 		$scope.saveFavorite = function(callback) {

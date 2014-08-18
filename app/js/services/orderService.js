@@ -168,6 +168,12 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 		return order.Total - discount;
 	};
 
+	var _listShipments = function(order, success){
+		$resource($451.api('order/:id/shipments'), { id: order.ID }).query().$promise.then(function(shipments) {
+			_then(success, shipments, true);
+		});
+	};
+
 	return {
 		get: _get,
 		save: _save,
@@ -178,6 +184,7 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 		decline: _decline,
 		deletelineitem: _deletelineitem,
 		clearshipping: _updateship,
-		calculatediscount: _calcdisc
+		calculatediscount: _calcdisc,
+		listShipments: _listShipments
 	}
 }]);
