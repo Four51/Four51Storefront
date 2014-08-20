@@ -4,6 +4,11 @@
             {{'Products' | r}}
         </h3>
     </div>
+    <div class="panel-product-list">
+    <button class="btn btn-success btn-lg btn-block" type="button" ng-click="Checkout()">
+        Add To Cart
+    </button>
+    </div>
     <div ng-show="productCount > settings.pageSize">
         <pagination page="settings.currentPage" max-size="10" rotate="false" boundary-links="true" total-items="productCount"
                     items-per-page="settings.pageSize" direction-links="true"></pagination>
@@ -32,7 +37,6 @@
             </ul>
         </nav>
         <button class="btn btn-success btn-lg btn-block" type="button" ng-click="Checkout()">
-            <i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>
             Add To Cart
         </button>
     </div>
