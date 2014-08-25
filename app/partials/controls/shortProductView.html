@@ -32,7 +32,7 @@
                     {{'Quantity Available' | r}}: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
                 </p>
             </section>
-            <div class="view-form-icon">
+            <div class="view-form-icon" ng-show="LineItem.Product.SpecCount == 0">
                 <div>
                     <label class="required">Quantity</label>
                     <quantityfield required="true" calculated="calcVariantLineItems" lineitem="LineItem" class="quantity"/>
