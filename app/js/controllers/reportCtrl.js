@@ -26,7 +26,7 @@ function($scope, $routeParams, $451, Report) {
 		Report.save($scope.report,
 			function(report) {
 				$scope.report = report;
-				$scope.actionMessage = "Your changes have been saved.";
+				$scope.actionMessage = "Your changes have been saved";
 				$scope.displayLoadingIndicator = false;
 			},
 			function(ex) {

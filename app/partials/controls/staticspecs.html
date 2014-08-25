@@ -1,7 +1,7 @@
 <div class="panel panel-default" ng-show="specgroups">
     <div class="panel-heading">
         <h3 class="panel-title">
-            {{'Specifications' | r}}
+            {{'Specifications' | r | xlat}}
         </h3>
     </div>
     <div class="panel-body">
@@ -13,11 +13,11 @@
                         <div class="451qa_spec_item" ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <span class="text-info">{{s.Name}}</span>
+                                    <span class="text-info">{{s.Name | xlat}}</span>
                                 </div>
                                 <div class="col-xs-6 text-right">
-                                    <a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value}}</a>
-                                    <span ng-if="!s.FileURL">{{s.Value}}</span>
+                                    <a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value | xlat}}</a>
+                                    <span ng-if="!s.FileURL">{{s.Value | xlat}}</span>
                                 </div>
                             </div>
                         </div>
@@ -31,11 +31,11 @@
                         <div class="451qa_spec_item" ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <span class="text-info">{{s.Name}}</span>
+                                    <span class="text-info">{{s.Name | xlat}}</span>
                                 </div>
                                 <div class="col-xs-6 text-right">
-                                    <a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value}}</a>
-                                    <span ng-if="!s.FileURL">{{s.Value}}</span>
+                                    <a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value | xlat}}</a>
+                                    <span ng-if="!s.FileURL">{{s.Value | xlat}}</span>
                                 </div>
                             </div>
                         </div>

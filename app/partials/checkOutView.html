@@ -1,5 +1,5 @@
 <section>
-    <loadingindicator ng-show="displayLoadingIndicator" title="Please wait while we update your order" />
+    <loadingindicator ng-show="displayLoadingIndicator" title="{{'Please wait while we update your order' | r | xlat}}" />
     <div class="col-md-4 col-md-offset-1 col-md-push-7 col-collapse">
         <ordersummary />
     </div>
@@ -11,13 +11,13 @@
         <orderapprovals ng-show="currentOrder.Approvals" />
         <div class="navbar-fixed-bottom">
             <div class="view-response-message alert-success text-center" alert-show="actionMessage">
-                <p>{{actionMessage | r}}</p>
+                <p>{{actionMessage | r | xlat}}</p>
             </div>
             <div class="view-response-message alert-danger text-center" alert-show="errorMessage">
-                <p>{{errorMessage | r}}</p>
+                <p>{{errorMessage | r | xlat}}</p>
             </div>
             <div class="view-response-message alert-danger text-center" alert-show="couponError">
-                <p>{{couponError | r}}</p>
+                <p>{{couponError | r | xlat}}</p>
             </div>
             <div class="view-error-message" ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length + cart_billing.$error.paymentMethod.length) > 0">
                 <ul class="alert-warning">
@@ -29,17 +29,16 @@
                     </li>
                     <li class="text-center">
                         <ul ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
-                            <li ng-show="cart_order.orderid.$invalid">Enter an order id</li>
-                            <li ng-show="cart_shipping.shippingAddress.$invalid">Please choose a {{'Shipping' | rl}} {{'Address' | rl}}</li>
-                            <li ng-show="cart_shipping.shipMethod.$invalid">Please choose a {{'Shipping Method' | rl}}</li>
-                            <li ng-show="cart_billing.billingAddress.$invalid">Please choose a {{'Billing' | rl}} {{'Address' | rl}}</li>
-                            <li ng-show="cart_billing.$error.paymentMethod">Please choose a valid {{'Payment' | rl}} {{'Method' | rl}}</li>
-                            <li ng-show="!user.Permissions.contains('CreateBillToAddress') && billaddresses">
-                                You have not been granted permission to create a Billing address, and no Billing addresses have been assigned to you. Therefore, you are not allowed to place this order at this time
+                            <li ng-if="cart_order.orderid.$invalid">{{'Enter an ' + ('order' | r) + ' ' + ('ID' | r) | xlat}}</li>
+                            <li ng-if="cart_shipping.shippingAddress.$invalid">{{'Please choose a ' + ('Shipping' | rl) + ' ' + ('Address' | rl) | xlat}}</li>
+                            <li ng-if="cart_shipping.shipMethod.$invalid">{{'Please choose a ' + ('Shipping' | rl) + ' ' + ('Method' | rl) | xlat}}</li>
+                            <li ng-if="cart_billing.billingAddress.$invalid">{{'Please choose a ' + ('Billing' | rl) + ' ' + ('Address' | rl) | xlat}}</li>
+                            <li ng-if="cart_billing.$error.paymentMethod">{{'Please choose a valid ' + ('Payment' | rl) + ' ' + ('Method' | rl) | xlat}}</li>
+                            <li ng-if="!user.Permissions.contains('CreateBillToAddress') && billaddresses">
+                                {{'You have not been granted permission to create a ' + ('Billing' | r) + ' ' + ('Address' | r) + ', and no ' + ('Billing' | r) + ' ' + ('Addresses' | r) + ' have been assigned to you. Therefore, you are not allowed to place this ' + ('Order' | r) + ' at this time' | xlat}}
                             </li>
-                            <li ng-show="!user.Permissions.contains('CreateShipToAddress') && shipaddresses">
-                                You have not been granted permission to create a Shipping address, and no Shipping addresses have been assigned to you. Therefore, you are not allowed to place this order at this time
-                            </li>
+                            <li ng-if="!user.Permissions.contains('CreateShipToAddress') && shipaddresses">
+                                {{'You have not been granted permission to create a ' + ('Shipping' | r) + ' ' + ('Address' | r) + ', and no ' + ('Shipping' | r) + ' ' + ('Addresses' | r) + ' have been assigned to you. Therefore, you are not allowed to place this ' + ('Order' | r) + ' at this time' | xlat}}
                         </ul>
                     </li>
                     <li class="text-center">
@@ -53,14 +52,14 @@
             <ul>
                 <li>
                     <button class="btn btn-danger" ng-click="currentOrder.Status == 'AwaitingApproval' ? cancelEdit() : cancelOrder()">
-                        <small ng-show="currentOrder.Status != 'AwaitingApproval'">{{'Cancel' | r}} {{'Order' | r}}</small>
-                        <small ng-show="currentOrder.Status == 'AwaitingApproval'">{{'Cancel' | r}} {{'Edit' | r}}</small>
+                        <small ng-show="currentOrder.Status != 'AwaitingApproval'">{{('Cancel' | r) + ' ' + ('Order' | r) | xlat}}</small>
+                        <small ng-show="currentOrder.Status == 'AwaitingApproval'">{{('Cancel' | r) + ' ' + ('Edit' | r) | xlat}}</small>
                     </button>
                 </li>
                 <li>
                     <button class="btn btn-primary"  ng-click="saveChanges()">
                         <loadingindicator ng-show="displayLoadingIndicator" />
-                        {{'Save' | r}} {{'Order' | r}}
+                        {{('Save' | r) + ' ' + ('Order' | r) | xlat}}
                     </button>
                 </li>
                 <li>
@@ -68,7 +67,7 @@
                             ng-class="{'btn-warning': cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid, 'btn-success': !cart_shipping.$invalid && !cart_order.$invalid && !cart_billing.$invalid }"
                             ng-click="submitOrder()" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid">
                         <i ng-show="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" class="fa fa-warning"></i>
-                        <span>{{'Submit' | r}} {{'Order' | r}}</span>
+                        <span>{{('Submit' | r) + ' ' + ('Order' | r) | xlat}}</span>
                     </button>
                 </li>
             </ul>

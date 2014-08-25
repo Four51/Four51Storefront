@@ -2,27 +2,27 @@
     <loadingindicator ng-show="loading" />
     <div class="panel panel-default" ng-if="favoriteorders.length == 0">
         <div class="panel-heading">
-            <h3 class="panel-title panel-primary">{{'Favorite' | r}} {{'Orders' | r}}</h3>
+            <h3 class="panel-title panel-primary">{{('Favorite' | r) + ' ' + ('Orders' | r) | xlat }}</h3>
         </div>
         <div class="panel-body">
-            <p class="alert alert-warning">You have no {{'Favorite' | rl}} {{'Orders' | rl}} yet!</p>
+            <p class="alert alert-warning">{{'You have no ' + ('Favorite' | rl) + ' ' + ('Orders' | rl) + ' yet!' | xlat}}</p>
         </div>
         <div class="panel-footer">
-            <button type="button" class="btn btn-primary pull-right" redirect="order">{{'View' | r}} {{'Orders' | r}}</button>
+            <button type="button" class="btn btn-primary pull-right" redirect="order">{{('View' | r) + ' ' + ('Orders' | r) | xlat}}</button>
         </div>
     </div>
     <div class="panel panel-default" ng-if="favoriteorders.length > 0">
         <div class="panel-heading">
-            <h3 class="panel-title panel-primary">{{'Favorite' | r}} {{'Orders' | r}}</h3>
+            <h3 class="panel-title panel-primary">{{('Favorite' | r) + ' ' + ('Orders' | r) | xlat }}</h3>
         </div>
         <div class="panel-body view-form-icon">
             <form role="search">
                 <div class="input-group">
-                    <label ng-show="searchTerm">{{'Search' | r}}</label>
-                    <input class="form-control" type="text" placeholder="Search" ng-model="searchTerm" autocomplete="off" />
+                    <label ng-show="searchTerm">{{'Search' | r | xlat}}</label>
+                    <input class="form-control" type="text" placeholder="{{'Search' | r | xlat}}" ng-model="searchTerm" autocomplete="off" />
                     <i class="fa fa-search"></i>
                     <div class="input-group-btn">
-                        <button type="submit" ng-click="search(searchTerm)" class="btn btn-primary">Search</button>
+                        <button type="submit" ng-click="search(searchTerm)" class="btn btn-primary">{{'Search' | r | xlat}}</button>
                     </div>
                 </div>
             </form>
@@ -30,13 +30,13 @@
         <div class="panel-table">
             <div class="row text-info">
                 <div class="col-sm-2">
-                    <label class="visible-xs">{{'Select all' | r}}</label>
+                    <label class="visible-xs">{{'Select all' | r | xlat}}</label>
                     <input type='checkbox' ng-click="checkAll($event)" />
                 </div>
-                <div class="col-sm-2 hidden-xs">{{'Name' | r}}</div>
-                <div class="col-sm-2 hidden-xs">{{'Order' | r}} {{'ID' | r}}</div>
-                <div class="col-sm-2 hidden-xs">{{'Date' | r}} {{'Completed' | r}}</div>
-                <div class="col-sm-2 hidden-xs">{{'Order' | r}} {{'Type' | r}}</div>
+                <div class="col-sm-2 hidden-xs">{{'Name' | r | xlat}}</div>
+                <div class="col-sm-2 hidden-xs">{{('Order' | r) + ' ' + ('ID' | r) | xlat}}</div>
+                <div class="col-sm-2 hidden-xs">{{('Date' | r) + ' ' + ('Completed' | r) | xlat}}</div>
+                <div class="col-sm-2 hidden-xs">{{('Order' | r) + ' ' + ('Type' | r) | xlat}}</div>
                 <div class="col-sm-2 hidden-xs"></div>
             </div>
             <div class="row" ng-repeat="order in favoriteorders | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
@@ -44,25 +44,25 @@
                     <input type='checkbox' ng-model="order.Selected" />
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">{{'Name' | r}}</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Name' | r | xlat}}</span>
                     {{order.FavoriteName}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">{{'Order' | r}} {{'ID' | r}}</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{('Order' | r) + ' ' + ('ID' | r) | xlat}}</span>
                     <a ng-href="order/{{order.ID}}">{{order.ExternalID}}</a>
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">{{'Date' | r}} {{'Completed' | r}}</span>
-                    {{order.DateCompleted | date:'medium'}}
+                    <span class="visible-xs panel-table-heading-xs text-info">{{('Date' | r) + ' ' + ('Completed' | r) | xlat}}</span>
+                    {{order.DateCompleted | date:user.Culture.DateFormat.long}}
                 </div>
                 <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">{{'Order' | r}} {{'Type' | r}}</span>
-                    {{order.Type}}
+                    <span class="visible-xs panel-table-heading-xs text-info">{{('Order' | r) + ' ' + ('Type' | r) | xlat}}</span>
+                    {{order.Type | xlat}}
                 </div>
                 <div class="col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">
                     <button ng-disabled="currentOrder" type="button" class="btn btn-default pull-right" ng-click="repeat(order)">
                         <i ng-show="currentOrder" class="fa fa-warning"></i>
-                        {{'Repeat' | r}} {{'Order' | r}}
+                        {{('Repeat' | r) + ' ' + ('Order' | r) | xlat}}
                     </button>
                 </div>
             </div>
@@ -70,9 +70,9 @@
         <div class="panel-footer">
             <div ng-show="settings.listCount > settings.pageSize">
                 <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
-                            items-per-page="settings.pageSize" direction-links="true"></pagination>
+                            items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
             </div>
-            <button type="button" class="btn btn-small btn-danger" ng-click="deleteSelected($event)" ng-disabled="(favoriteorders | filter:{Selected:true}).length == 0">{{'Delete' | r}} {{'Selected' | r}}</button>
+            <button type="button" class="btn btn-small btn-danger" ng-click="deleteSelected($event)" ng-disabled="(favoriteorders | filter:{Selected:true}).length == 0">{{('Delete' | r) + ' ' + ('Selected' | r) | xlat}}</button>
             <span class="alert alert-success" ng-show="error" ng-bind-html="error | r"></span>
         </div>
     </div>
