@@ -3,17 +3,17 @@
     <div class="panel panel-search">
         <div class="panel-heading">
             <h3 class="panel-title">
-                {{'Search' | r}}
+                {{'Search' | r | xlat}}
             </h3>
         </div>
         <div class="panel-body">
             <form role="search">
                 <div class="view-form-icon">
                     <div class="input-group">
-                        <input type="text" ng-model="searchTerm"  class="form-control" placeholder="{{'Search' | r}} {{'Products' | r}}" autocomplete="off" />
+                        <input type="text" ng-model="searchTerm"  class="form-control" placeholder="{{('Search' | r) + ' ' + ('Products' | r) | xlat}}" autocomplete="off" />
                         <i class="fa fa-search"></i>
                         <div class="input-group-btn">
-                            <button type="submit" ng-click="search()" class="btn btn-default">{{'Search' | r}}</button>
+                            <button type="submit" ng-click="search()" class="btn btn-default">{{'Search' | r | xlat}}</button>
                         </div>
                     </div>
                 </div>
@@ -21,12 +21,12 @@
         </div>
         <div ng-show="productCount == 0" class="panel-product-list">
             <p class="alert alert-info">
-                {{'Your search resulted in no records. Please refine your search.' | r}}
+                {{'Your search resulted in no records. Please refine your search.' | r | xlat}}
             </p>
         </div>
         <div class="panel-footer" ng-show="productCount > settings.pageSize">
             <pagination page="settings.currentPage" max-size="10" rotate="false" boundary-links="true" total-items="productCount"
-                        items-per-page="settings.pageSize" direction-links="true"></pagination>
+                        items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
         </div>
         <div ng-show="products" class="panel-product-list">
             <nav class="nav">
@@ -39,7 +39,7 @@
         </div>
         <div class="panel-footer" ng-show="productCount > settings.pageSize">
             <pagination page="settings.currentPage" max-size="10" rotate="false" boundary-links="true" total-items="productCount"
-                        items-per-page="settings.pageSize" direction-links="true"></pagination>
+                        items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
         </div>
     </div>
 </section>

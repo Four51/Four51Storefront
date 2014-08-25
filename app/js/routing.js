@@ -35,8 +35,8 @@ four51.app.config(['$routeProvider', '$locationProvider', function($routeProvide
 		when('/login', { templateUrl: 'partials/controls/login.html', controller: 'LoginCtrl' }).
 		when('/search', { templateUrl: 'partials/searchView.html', controller: 'ProductSearchCtrl' }).
         when('/search/:searchTerm', { templateUrl: 'partials/searchView.html', controller: 'ProductSearchCtrl' }).
-        when('/security', { templateUrl: 'partials/security.html', controller: 'SecurityCtrl' }).
-        when('/conditions', { templateUrl: 'partials/conditions.html', controller: 'ConditionsCtrl' }).
+        when('/security', { templateUrl: 'partials/Security/security.html', controller: 'SecurityCtrl' }).
+        when('/conditions', { templateUrl: 'partials//Conditions/conditions.html', controller: 'ConditionsCtrl' }).
 		when('/reports', { templateUrl: 'partials/reportsView.html', controller: 'ReportsCtrl' }).
 		when('/report/:id', { templateUrl: 'partials/Reporting/reportView.html', controller: 'ReportCtrl' }).
 		when('/contactus/', { templateUrl: 'partials/Messages/contactus.html' }).

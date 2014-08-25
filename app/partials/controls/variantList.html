@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">
-            {{'Variants' | r}}
+            {{'Variants' | r | xlat}}
         </h3>
     </div>
     <div id="451qa_list_variants" class="panel-body">
@@ -9,10 +9,10 @@
             <a href=product/{{LineItem.Product.InteropID}}/{{v.InteropID}} class="text-info">{{v.ExternalID}}</a>
             <div class="pull-right view-form-icon" ng-if="allowAddFromVariantList">
                 <quantityfield calculated="calcVariantLineItems" lineitem="variantLineItems[v.InteropID]" class="quantity" />
-                {{variantLineItems[v.InteropID].qtyError}} {{variantLineItems[v.InteropID].LineTotal | currency}}
+                {{variantLineItems[v.InteropID].qtyError}} {{variantLineItems[v.InteropID].LineTotal | culturecurrency}}
             </div>
             <div ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
-                {{v.QuantityAvailable + ' in stock'}}
+                {{v.QuantityAvailable}} {{'in stock'}}
             </div>
             <div ng-show="v.Description">
                 {{v.Description}}
