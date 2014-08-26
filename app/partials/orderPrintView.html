@@ -8,7 +8,7 @@
         </div>
         <div>
             <h5>
-                {{'Created On' | r}} {{order.DateCreated | date:'short'}}
+                {{'Created On' | r | xlat}} {{order.DateCreated | date:user.Culture.DateFormat.short}}
             </h5>
         </div>
     </div>
@@ -17,19 +17,19 @@
             <div class="order-print-view-details">
                 <div>
                     <h3>
-                        {{'Order' | r}} {{'Details' | r}}
+                        {{('Order' | r) + ' ' + ('Details' | r) | xlat}}
                     </h3>
                 </div>
                 <div>
-                    <p ng-show="order.DateSubmitted">{{'Date' | r}} {{'Submitted' | r}}: {{order.DateSubmitted | date:'short'}}</p>
+                    <p ng-show="order.DateSubmitted">{{('Date' | r) + ' ' + ('Submitted' | r) | xlat}}: {{order.DateSubmitted | date:user.Culture.DateFormat.short}}</p>
                     <p>{{'Status' | r}}: {{order.StatusText}}</p>
-                    <p ng-show="order.DateCompleted">{{'Date' | r}} {{'Completed' | r}}: {{order.DateCompleted | date:'short'}}</p>
-                    <p ng-show="order.FromUserFirstName || order.FromUserLastName">{{'Created By' | r}}: {{order.FromUserFirstName + ' ' + order.FromUserLastName}}</p>
-                    <p ng-show="order.Comments">{{'Comments' | r}}: {{order.Comments}}</p>
-                    <p ng-show="orderCostCenter">{{'Cost Center' | r}}: {{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</p>
-                    <p>{{'Payment' | r}} {{'Method' | r}}: {{order.PaymentMethodText}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong></p>
+                    <p ng-show="order.DateCompleted">{{('Date' | r) + ' ' + ('Completed' | r) | xlat}}: {{order.DateCompleted | date:user.Culture.DateFormat.short}}</p>
+                    <p ng-show="order.FromUserFirstName || order.FromUserLastName">{{'Created By' | r | xlat}}: {{order.FromUserFirstName + ' ' + order.FromUserLastName}}</p>
+                    <p ng-show="order.Comments">{{'Comments' | r | xlat}}: {{order.Comments}}</p>
+                    <p ng-show="orderCostCenter">{{'Cost Center' | r | xlat}}: {{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</p>
+                    <p>{{('Payment' | r) + ' ' + ('Method' | r) | xlat}}: {{order.PaymentMethodText}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong></p>
                     <address ng-show="order.ShipAddress">
-                        <span class="text-primary"><strong>{{'Ship to' | r}}</strong></span><br />
+                        <span class="text-primary"><strong>{{'Ship to' | r | xlat}}</strong></span><br />
                         <span ng-show="order.LineItems[0].ShipFirstName || order.LineItems[0].ShipLastName">{{order.LineItems[0].ShipFirstName}} {{order.LineItems[0].ShipLastName}}</span>
                         <span ng-show="!order.LineItems[0].ShipFirstName || !order.LineItems[0].ShipLastName">{{order.ShipAddress.FirstName}} {{order.ShipAddress.LastName}}</span>
                         <br />{{order.ShipAddress.Street1}}<br>
@@ -38,7 +38,7 @@
                         <div ng-if="order.ShipAddress.Country != 'US'">{{order.ShipAddress.Country}}</div>
                     </address><br />
                     <address ng-show="order.BillAddress">
-                        <span class="text-primary"><strong>{{'Bill to' | r}}</strong></span><br />
+                        <span class="text-primary"><strong>{{'Bill to' | r | xlat}}</strong></span><br />
                         <span ng-show="order.BillFirstName || order.BillLastName">{{order.BillFirstName}} {{order.BillLastName}}</span>
                         <span ng-show="!order.BillFirstName || !order.BillLastName">{{order.BillAddress.FirstName}} {{order.BillAddress.LastName}}</span>
                         <br />{{order.BillAddress.Street1}}<br>
@@ -52,15 +52,15 @@
             <div ng-if="!(user.Permissions.contains('HidePricing'))">
                 <div>
                     <h3>
-                        {{'Order' | r}} {{'Summary' | r}}
+                        {{('Order' | r) + ' ' + ('Summary' | r) | xlat}}
                     </h3>
                 </div>
                 <div>
-                    <p>{{'Subtotal' | r}}: {{order.Subtotal | currency:"$"}}</p>
-                    <p>{{'Shipping & Handling' | r}}: {{order.ShippingCost | currency:"$"}}</p>
-                    <p>{{'Tax' | r}}: {{order.TaxCost | currency:"$"}}</p>
-                    <p ng-if="order.Coupon">{{'Coupon' | r}} ({{order.Coupon.Label}}): {{order.Coupon.OrderDiscount * -1 | currency}}</p>
-                    <p>{{'Total' | r}}: {{order.Total | currency:"$"}}</p>
+                    <p>{{'Subtotal' | r | xlat}}: {{order.Subtotal | culturecurrency}}</p>
+                    <p>{{'Shipping & Handling' | r | xlat}}: {{order.ShippingCost | culturecurrency}}</p>
+                    <p>{{'Tax' | r | xlat}}: {{order.TaxCost | culturecurrency}}</p>
+                    <p ng-if="order.Coupon">{{'Coupon' | r | xlat}} ({{order.Coupon.Label}}): {{order.Coupon.OrderDiscount * -1 | culturecurrency}}</p>
+                    <p>{{'Total' | r | xlat}}: {{order.Total | culturecurrency}}</p>
                 </div>
             </div>
         </div>
@@ -70,7 +70,7 @@
             <div class="order-print-view-line-items">
                 <div>
                     <h3>
-                        {{order.LineItems.length}} {{'Item' + (order.LineItems.length > 1 ? 's' : '') | rl}} in this {{'Order' | rl}}
+                        {{order.LineItems.length}} {{'Item' + (order.LineItems.length > 1 ? 's' : '') | rl | xlat}} {{'in this' | rl | xlat:(currentOrder.LineItems.length)}} {{'Order' | rl | xlat}}
                     </h3>
                 </div>
                 <div>
@@ -82,7 +82,7 @@
                                 <li class="list-group-item" ng-repeat="spec in item.Specs | onproperty:{Property: 'CanSetForLineItem', Value: true} ">
                                     <span class="text-info">{{spec.Name}}: </span>
                                     <span ng-if="spec.ControlType == 'File'">{{spec.File.OriginalName + Extension}}</span>
-                                    <span ng-if="spec.ControlType != 'File'">{{spec.Value || '(unspecified)'}}</span>
+                                    <span ng-if="spec.ControlType != 'File'">{{spec.Value || ('(unspecified)' | xlat)}}</span>
                                 </li>
                             </ul>
                             <div>
@@ -95,7 +95,7 @@
                             </div>
                             <div ng-show="item.ShipAddress">
                                 <address>
-                                    <strong> {{'Ship to' | r}}:</strong><br>
+                                    <strong> {{'Ship to' | r | xlat}}:</strong><br>
                                     <span ng-show="item.ShipFirstName || item.ShipLastName">{{item.ShipFirstName}} {{item.ShipLastName}}</span>
                                     {{item.ShipAddress.Street1}}<br>
                                     {{item.ShipAddress.Street2}}<br ng-show="item.ShipAddress.Street2">
@@ -104,20 +104,20 @@
                             </div>
                         </div>
                         <div ng-if="!(user.Permissions.contains('HidePricing'))">
-                            <p>{{'Unit Price' | r}}: {{item.UnitPrice | currency}}</p>
+                            <p>{{'Unit Price' | r | xlat}}: {{item.UnitPrice | culturecurrency}}</p>
                         </div>
                         <div>
                             <p ng-show="item.Product.QuantityMultiplier == 1">x {{item.Quantity}}</span>
                             <p ng-show="item.Product.QuantityMultiplier > 1" >x {{item.Product.QuantityMultiplier * item.Quantity}}</span>
                         </div>
                         <div ng-if="!(user.Permissions.contains('HidePricing'))">
-                            {{'Total' | r}}: {{item.LineTotal | currency}}
+                            {{'Total' | r | xlat}}: {{item.LineTotal | culturecurrency}}
                         </div>
                         <div ng-show="item.TotalShipped">
-                            <p>{{'Quantity' | r}} {{'Shipped' | r}}: {{item.TotalShipped}}</p>
+                            <p>{{('Quantity' | r) + ' ' + ('Shipped' | r) | xlat}}: {{item.TotalShipped}}</p>
                         </div>
                         <div ng-if="user.Permissions.contains('CostCenterPerLine')">
-                            <p ng-show="item.CostCenter">{{'Cost Center' | r}}: {{item.CostCenter}}</p>
+                            <p ng-show="item.CostCenter">{{'Cost Center' | r | xlat}}: {{item.CostCenter}}</p>
                         </div>
                     </div>
                 </div>
@@ -125,15 +125,15 @@
 
             <div ng-show="order.Approvals" class="order-print-approval-rule-status-summary">
                 <div>
-                    <h3>{{'Approvals' | r}}</h3>
+                    <h3>{{'Approvals' | r | xlat}}</h3>
                 </div>
                 <div>
                     <table>
                         <thead>
                         <tr>
-                            <th>{{'Rule Summary' | r}}</th>
-                            <th>{{'Approver' | r}}</th>
-                            <th>{{'Status' | r}}</th>
+                            <th>{{'Rule Summary' | r | xlat}}</th>
+                            <th>{{'Approver' | r | xlat}}</th>
+                            <th>{{'Status' | r | xlat}}</th>
                         </tr>
                         </thead>
                         <tbody class="order-print-approval-rule-summary-rule" ng-repeat="rule in order.Approvals">
@@ -142,7 +142,7 @@
                             <td ng-hide="rule.ApprovedByUserName">
                                 <span>{{rule.ApprovingPartyName}}</span>
                             <td>
-                                <strong>{{rule.Status}}</strong><span ng-show="rule.ApprovedByUserName"> by </span>{{rule.ApprovedByUserName}}<span ng-show="rule.ApprovedByUserName"> on {{rule.TimeStamp | date:'short'}}</span>
+                                <strong>{{rule.Status | xlat}}</strong><span ng-show="rule.ApprovedByUserName"> {{'by' | xlat}} </span>{{rule.ApprovedByUserName}}<span ng-show="rule.ApprovedByUserName"> {{'on' | xlat}} {{rule.TimeStamp | date:'short'}}</span>
                             </td>
                         </tr>
                         <tr>

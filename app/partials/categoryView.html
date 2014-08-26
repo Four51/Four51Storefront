@@ -5,7 +5,7 @@
                 <span ng-click="toggleNav()"><i class="fa fa-bars" ng-class="{ 'text-info': navStatus.visible }"></i></span>
             </li>
             <li>
-                <span id="451_lbl_curcat" class="text-primary" ng-bind-html="currentCategory.Name || '  {{'Categories' | r}}'"></span>
+                <span id="451_lbl_curcat" class="text-primary" ng-bind-html="currentCategory.Name || '  {{'Categories' | r | xlat}}'"></span>
             </li>
             <li class="pull-right">
                 <a href="search">
@@ -18,7 +18,7 @@
         <div class="panel panel-default panel-nav">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    {{'Category List' | r}}
+                    {{'Category List' | r | xlat}}
                 </h3>
             </div>
             <nav class="nav 451qa_sidenav panel-body">
@@ -32,7 +32,7 @@
 
         <categorylistview></categorylistview>
 
-		<loadingindicator ng-show="productLoadingIndicator" title="{{'Please wait while we fetch all products' | r}}"/>
+		<loadingindicator ng-show="productLoadingIndicator" title="{{'Please wait while we fetch all products' | r | xlat}}"/>
 
         <productlistview></productlistview>
 

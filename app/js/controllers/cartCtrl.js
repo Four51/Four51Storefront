@@ -31,7 +31,7 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User, AddTo
 						$location.path('catalog');
 					});
 					$scope.displayLoadingIndicator = false;
-					$scope.actionMessage = 'Your Changes Have Been Saved!';
+					$scope.actionMessage = 'Your Changes Have Been Saved';
 				},
 				function(ex) {
 					$scope.actionMessage = 'An error occurred: ' + ex.Message;
@@ -55,7 +55,7 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User, AddTo
 					$scope.currentOrder = data;
 					$scope.displayLoadingIndicator = false;
 					if (callback) callback();
-					$scope.actionMessage = 'Your Changes Have Been Saved!';
+					$scope.actionMessage = 'Your Changes Have Been Saved';
 				},
 				function(ex) {
 					$scope.errorMessage = ex.Message;
@@ -79,7 +79,7 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User, AddTo
 						});
 					}
 					$scope.displayLoadingIndicator = false;
-					$scope.actionMessage = 'Your Changes Have Been Saved!';
+					$scope.actionMessage = 'Your Changes Have Been Saved';
 				},
 				function (ex) {
 					$scope.errorMessage = ex.Message.replace(/\<<Approval Page>>/g, 'Approval Page');

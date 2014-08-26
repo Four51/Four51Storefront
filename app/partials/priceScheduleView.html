@@ -1,7 +1,7 @@
 <section>
     <div class="panel-body" ng-show="ps.PriceBreaks.length > 5">
         <button id="451qa_btn_showhide_psched" class="btn btn-default btn-block" type="button"  ng-init="showPS = false" ng-click="showPS = !showPS">
-            {{'Price Schedule' | r}}
+            {{'Price Schedule' | r | xlat}}
             <i class="fa fa-caret-up" ng-show="showPS"></i>
             <i class="fa fa-caret-down" ng-show="!showPS"></i>
         </button>
@@ -10,14 +10,14 @@
         <div class="row" ng-hide="ps.PriceBreaks.length > 5">
             <div class="col-xs-12">
                 <h4>
-                    {{'Price Schedule' | r}}
+                    {{'Price Schedule' | r | xlat}}
                 </h4>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-6">
                 <span class="text-info">
-                    {{'Quantity' | r}}
+                    {{'Quantity' | r | xlat}}
                 </span>
                 <span ng-show="p.QuantityMultiplier > 1 && !ps.RestrictedQuantity">
                     (x {{p.QuantityMultiplier}})
@@ -25,7 +25,7 @@
             </div>
             <div class="col-xs-6">
                 <span class="text-info">
-                    {{'Price' | r}}
+                    {{'Price' | r | xlat}}
                 </span>
                 <span ng-show="p.QuantityMultiplier > 1 && !ps.RestrictedQuantity" >
                     (per {{p.QuantityMultiplier}})
@@ -42,7 +42,7 @@
                 </span>
             </div>
             <div class="col-xs-6">
-                {{pb.Price * (ps.RestrictedQuantity ? pb.Quantity : 1)| currency}}
+                {{pb.Price * (ps.RestrictedQuantity ? pb.Quantity : 1)| culturecurrency}}
             </div>
         </div>
     </div>
