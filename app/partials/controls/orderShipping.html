@@ -11,10 +11,10 @@
             <shippingmessage />
             <shippingmessage />
         </div>
-        <div ng-show="addressform || (!shipaddresses && user.Permissions.contains('CreateShipToAddress'))">
+        <div ng-show="shipaddressform || (shipaddresses.length == 0 && user.Permissions.contains('CreateShipToAddress'))">
             <addressinput address='shipaddress' user='user'></addressinput>
         </div>
-        <div ng-show="!addressform">
+        <div ng-hide="shipaddressform || (shipaddresses.length == 0 && user.Permissions.contains('CreateShipToAddress'))">
             <form name="cart_shipping" novalidate="">
                 <div>
                     <div>
@@ -28,7 +28,7 @@
                                 {{'Multiple ' + ('Addresses' | r) | xlat}}
                             </button>
                              <button class="btn btn-info pull-right" type="button"
-                                     ng-hide="(addressform || (!addressform && !shipaddresses) || !user.Permissions.contains('CreateShipToAddress'))" ng-click="addressform = true" tabindex="-1">
+                                     ng-hide="(shipaddressform || (!shipaddressform && !shipaddresses) || !user.Permissions.contains('CreateShipToAddress'))" ng-click="shipaddressform = true" tabindex="-1">
                                  {{'New ' + ('Address' | r) | xlat}}
                              </button>
                         </span>
