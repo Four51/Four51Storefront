@@ -10,14 +10,14 @@
         <div>
             <billingmessage />
         </div>
-        <div ng-show="billaddressform || (!billaddresses && user.Permissions.contains('CreateBillToAddress'))">
+        <div ng-show="billaddressform || (billaddresses.length == 0 && user.Permissions.contains('CreateBillToAddress'))">
             <addressinput address='billaddress' user='user'></addressinput>
         </div>
-        <div ng-hide="billaddressform || (!billaddresses && user.Permissions.contains('CreateBillToAddress'))">
+        <div ng-hide="billaddressform || (billaddresses.length == 0 && user.Permissions.contains('CreateBillToAddress'))">
             <form name="cart_billing" novalidate="">
                 <div>
                     <paymentselector></paymentselector>
-                    <div class="view-form-icon">
+                    <div class="view-form-icon" ng-show="billaddresses.length > 0">
                         <div ng-class="{'view-form-select': !currentOrder.BillAddressID, '': currentOrder.BillAddressID }">
                             <label class="required">{{('Billing' | r) + ' ' + ('Address' | r) | xlat}}</label>
                             <select class="form-control" ng-show="billaddresses" name="billingAddress"

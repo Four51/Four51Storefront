@@ -57,6 +57,15 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 
 			Shipper.query($scope.currentOrder, function(list) {
 				$scope.shippers = list;
+				// sometimes the current shipper is not longer available. we need to clear the shipping information in that case
+				var exists = false;
+				angular.forEach(list, function(s) {
+					if (!exists && $scope.currentOrder.LineItems[0].ShipperID == s.ID)
+						exists = true;
+				});
+				if (!exists) {
+					Order.clearshipping($scope.currentOrder);
+				}
 			});
 
 			$scope.setMultipleShipAddress = function() {
