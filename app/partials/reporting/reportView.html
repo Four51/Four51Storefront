@@ -3,7 +3,7 @@
         <div class="panel panel-default">
             <loadingindicator ng-show="displayLoadingIndicator" />
             <div class="panel-heading">
-                <h3 ng-if="!report.ID" class="panel-title panel-primary">{{report.ID ? report.Name : (report.ReportType | r | xlat)}}</h3>
+                <h3 ng-if="!report.ID" class="panel-title panel-primary">{{report.ID ? report.Name : (report.ReportTypeName | r | xlat)}}</h3>
             </div>
             <tabset ng-show="report">
                 <tab>
