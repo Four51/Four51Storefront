@@ -11,10 +11,10 @@
             <shippingmessage />
             <shippingmessage />
         </div>
-        <div ng-show="addressform || (!shipaddresses && user.Permissions.contains('CreateShipToAddress'))">
+        <div ng-show="shipaddressform || (shipaddresses.length == 0 && user.Permissions.contains('CreateShipToAddress'))">
             <addressinput address='shipaddress' user='user'></addressinput>
         </div>
-        <div ng-show="!addressform">
+        <div ng-hide="shipaddressform || (shipaddresses.length == 0 && user.Permissions.contains('CreateShipToAddress'))">
             <form name="cart_shipping" novalidate="">
                 <div>
                     <div>
@@ -28,7 +28,7 @@
                                 {{'Multiple ' + ('Addresses' | r) | xlat}}
                             </button>
                              <button class="btn btn-info pull-right" type="button"
-                                     ng-hide="(addressform || (!addressform && !shipaddresses) || !user.Permissions.contains('CreateShipToAddress'))" ng-click="addressform = true" tabindex="-1">
+                                     ng-hide="(shipaddressform || (!shipaddressform && !shipaddresses) || !user.Permissions.contains('CreateShipToAddress'))" ng-click="shipaddressform = true" tabindex="-1">
                                  {{'New ' + ('Address' | r) | xlat}}
                              </button>
                         </span>
@@ -121,7 +121,7 @@
                                 <div class="view-form-icon">
                                     <div ng-class="{'view-form-select': !item.ShipAddressID, '' : item.ShipAddressID }">
                                         <label ng-class="{required: currentOrder.IsMultipleShip()}" ng-show="currentOrder.ShipAddressID || currentOrder.IsMultipleShip()">{{('Shipping' | r) + ' ' + ('Address' | r) | xlat}}</label>
-                                        <select class="form-control" name="shippingAddress"
+                                        <select class="form-control" name="shippingAddressLineItem"
                                                 ng-options="address.ID as address.AddressName for address in shipaddresses"
                                                 ng-model="item.ShipAddressID"
                                                 ng-required="currentOrder.IsMultipleShip()"
