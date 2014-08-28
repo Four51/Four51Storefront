@@ -192,7 +192,7 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 		scope.allowAddFromVariantList =
 			(scope.LineItem.Product.ShowSpecsWithVariantList || !hasAddToOrderSpecs)
 				&& !scope.LineItem.Variant
-				&& scope.LineItem.Product.Variants
+				&& scope.LineItem.Product.Variants.length > 0
 				&& (scope.LineItem.Product.Variants.length > 0 || scope.LineItem.Product.Type == 'VariableText')
 
 		function determinePriceSchedule() {
@@ -214,7 +214,7 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 			scope.LineItem.PriceSchedule = variantHasPriceSchedule(scope.LineItem.Product, scope.currentOrder ? scope.currentOrder.Type + 'PriceSchedule' : 'StandardPriceSchedule') ? null : determinePriceSchedule(); //don't show price schedule if variant overrides parent PS
 			if(scope.allowAddFromVariantList){
 				var p = scope.LineItem.Product;
-				scope.variantLineItems = {};
+				scope.variantLineItems = [];
 				angular.forEach(p.Variants, function(v){
 					if (!v) return;
 					scope.variantLineItems[v.InteropID] = {PriceSchedule: (scope.currentOrder ? v[scope.currentOrder.Type + 'PriceSchedule'] : v.StandardPriceSchedule) || (scope.currentOrder ? p[scope.currentOrder.Type + 'PriceSchedule'] : p.StandardPriceSchedule), Product: p, Variant: v, Specs: scope.LineItem.Specs};
@@ -223,7 +223,11 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 		}
 
 		function allowAddToOrder() {
-			return (scope.currentOrder ? canAddToOrderType(scope.currentOrder.Type) : true) && (scope.allowAddFromVariantList || (scope.LineItem.Variant || (scope.LineItem.Product.VariantCount == 0 && scope.LineItem.Product.Type != 'VariableText')));//this will include some order type and current order logic.
+			return (scope.currentOrder ? canAddToOrderType(scope.currentOrder.Type) : true)
+				&& (scope.allowAddFromVariantList
+					|| (scope.LineItem.Variant
+						|| (scope.LineItem.Product.VariantCount == 0 && scope.LineItem.Product.Type != 'VariableText')));
+						//this will include some order type and current order logic.
 		}
 
 		function canAddToOrderType(type) {
