@@ -32,11 +32,31 @@
                     {{'Quantity Available' | r | xlat}}: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
                 </p>
             </section>
-            <div class="view-form-icon" ng-show="LineItem.Product.SpecCount == 0">
-                <div>
-                    <label class="required">Quantity</label>
-                    <quantityfield required="true" calculated="calcVariantLineItems" lineitem="LineItem" class="quantity"/>
+            <form name="addToOrderForm" ng-submit="addToOrder()">
+                <div class="view-form-icon" ng-show="allowAddToOrderInProductList">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <label class="required">Quantity</label>
+                            <quantityfield required="true" calculated="calcVariantLineItems" lineitem="LineItem" class="quantity"/>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <button style="height:52px;" class="btn btn-default btn-block btn-md" type="submit" ng-disabled="addToOrderForm.$invalid">
+                                <loadingindicator  ng-show="displayLoadingIndicator" />
+                                <i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>
+                                Add To Cart
+                            </button>
+                        </div>
+                    </div>
                 </div>
+            </form>
+        </div>
+        <!-- MESSAGING! -->
+        <div class="navbar-fixed-bottom">
+            <div class="view-response-message alert-success text-center" alert-show="actionMessage">
+                <p>{{actionMessage | r | xlat}}</p>
+            </div>
+            <div class="view-response-message alert-danger text-center" alert-show="errorMessage">
+                <p>{{errorMessage | r | xlat}}</p>
             </div>
         </div>
     </div>

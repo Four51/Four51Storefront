@@ -13,14 +13,6 @@
             <i class="fa fa-arrow-circle-o-left"></i>
             {{'Swipe product left for more info' | xlat}}
         </div>
-        <div class="panel-sticky" resizewidth scroll>
-            <div class="well">
-                <button class="btn btn-success btn-lg btn-block" type="button" ng-click="Checkout()">
-                    <i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>
-                    Add To Cart
-                </button>
-            </div>
-        </div>
         <nav class="nav">
             <loadingindicator ng-show="searchLoading" title="{{'Please wait while we fetch all products' | r | xlat}}" />
             <div class="row view-form-icon" ng-show="currentCategory.SortOptions.length > 0">
@@ -41,6 +33,6 @@
     </div>
     <div ng-show="productCount > settings.pageSize">
         <pagination page="settings.currentPage" max-size="10" rotate="false" boundary-links="true" total-items="productCount"
-                    items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
+            items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
     </div>
 </div>
