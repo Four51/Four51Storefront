@@ -192,8 +192,8 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 		scope.allowAddFromVariantList =
 			(scope.LineItem.Product.ShowSpecsWithVariantList || !hasAddToOrderSpecs)
 				&& !scope.LineItem.Variant
-				&& scope.LineItem.Product.Variants.length > 0
-				&& (scope.LineItem.Product.Variants.length > 0 || scope.LineItem.Product.Type == 'VariableText')
+				&& scope.LineItem.Product.Variants && scope.LineItem.Product.Variants.length > 0
+				&& ((scope.LineItem.Product.Variants && scope.LineItem.Product.Variants.length > 0) || scope.LineItem.Product.Type == 'VariableText')
 
 		function determinePriceSchedule() {
 			// default to standard if no order type
