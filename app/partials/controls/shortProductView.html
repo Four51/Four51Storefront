@@ -34,7 +34,7 @@
             </section>
             <div class="view-form-icon" ng-show="LineItem.Product.SpecCount == 0">
                 <div>
-                    <label class="required">Quantity</label>
+                    <label class="required">{{'Quantity' | r | xlat}}</label>
                     <quantityfield required="true" calculated="calcVariantLineItems" lineitem="LineItem" class="quantity"/>
                 </div>
             </div>
