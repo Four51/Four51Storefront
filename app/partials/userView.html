@@ -64,7 +64,7 @@
                         <label ng-show="user.ConfirmPassword">{{('Confirm' | r) + ' ' + ('Password' | r) | xlat}}</label>
                         <input name="confirm_password" ng-match="user.Password" ng-required="user.Type == 'TempCustomer' || user.Password" class="form-control" type="password" ng-model="user.ConfirmPassword" placeholder="{{('Confirm' | r) + ' ' + ('Password' | r) | xlat}}" autocomplete="off" />
                         <i class="fa fa-lock"></i>
-                        <inlineerror ng-show="user_form.confirm_password.$error.match" title="{{'Password' | r}}s do not match!" />
+                        <inlineerror ng-show="user_form.confirm_password.$error.match" title="{{('Password' | r) + 's do not match!' | xlat}}" />
                     </div>
                     <span class="alert-warning" ng-show="securityWarning">
                         <ul>
