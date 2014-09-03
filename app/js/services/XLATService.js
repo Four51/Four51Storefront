@@ -3,9 +3,10 @@ four51.app.factory('XLATService', ['$interpolate', function($interpolate) {
     var currentLanguage = "en-US";
     var tables = $.extend(true, {}, XLATTables);
 
-    var _getCurrentLanguage = function(userLanguage) {
+    var _getCurrentLanguage = function(userLanguage, userCulture) {
         currentLanguage =  userLanguage ? userLanguage : currentLanguage;
-        return [currentLanguage, tables["Currency"][currentLanguage], tables["Date"][currentLanguage]];
+        currentCulture =  userCulture ? userCulture : currentCulture;
+        return [currentCulture, tables["Currency"][currentCulture], tables["Date"][currentCulture]];
     };
 
     var _setCurrentLanguage = function(newCurrentLanguage) {
@@ -14,17 +15,11 @@ four51.app.factory('XLATService', ['$interpolate', function($interpolate) {
 
     function upperCase(char) {
         char = char.charAt(0);
-        if (char == char.toUpperCase()) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return char == char.toUpperCase();
     }
 
     var _xlat = function(value, parameters) {
         if (currentLanguage == 'en-US' || !tables[currentLanguage]) return value;
-        //if (value.indexOf('or both') == -1) return value;
         var table = tables[currentLanguage];
         var isUpperCase = value ? upperCase(value) : false;
         var original = value;

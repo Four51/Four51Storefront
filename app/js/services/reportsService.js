@@ -108,7 +108,7 @@ four51.app.factory('Report', ['$resource','$q', '$451', 'Error', function($resou
 
 	var _clear = function() {
 		cache.splice(0, cache.length);
-		downloade = null;
+		download = null;
 	};
 
 	return {
