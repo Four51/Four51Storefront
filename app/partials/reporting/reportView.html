@@ -44,7 +44,8 @@
                     <div class="panel-footer">
                         <div ng-show="settings.listCount > settings.pageSize">
                             <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
-                                        items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
+                                        items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}"
+                                        first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
                         </div>
                         <button ng-hide="errorMessage" type="button" class="btn btn-primary pull-right" ng-click="getDownload()">{{'Download' | r | xlat}}</button>
                     </div>

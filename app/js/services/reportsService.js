@@ -39,8 +39,8 @@ four51.app.factory('Report', ['$resource','$q', '$451', 'Error', function($resou
 	};
 
 	var _download = function(id, success, error, page, pagesize) {
-		page = page || 1;
-		pagesize = pagesize || 100;
+		//page = page || 1;
+		//pagesize = pagesize || 100;
 		if (typeof cache[(page - 1) * pagesize] == 'object' && typeof cache[(page * pagesize) - 1] == 'object') {
 			download.Data = cache;
 			_then(success, download, cache.length);
