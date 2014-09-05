@@ -36,11 +36,10 @@ function($scope, $routeParams, $451, Report) {
 		);
 	};
 
-	function Download() {
+	function getData() {
 		$scope.errorMessage = null;
 		$scope.actionMessage = null;
 		$scope.displayLoadingIndicator = true;
-		$scope.settings.listCount = 0;
 		Report.download($scope.report.ID,
 			function(data, count) {
 				$scope.report = data;
@@ -51,17 +50,22 @@ function($scope, $routeParams, $451, Report) {
 				$scope.errorMessage = ex.Message;
 				$scope.displayLoadingIndicator = false;
 			},
-			$scope.settings.currentPage, $scope.settings.pageSize
+			$scope.settings.currentPage || 1, $scope.settings.pageSize
 		);
 	}
+
 	$scope.downloadReport = function() {
 		Report.clear();
-		Download();
+		getData();
 	};
 
+	$scope.download = function() {
+		getData();
+	}
 	$scope.$watch('settings.currentPage', function(n,o) {
-		if ($scope.report)
-			Download();
+		if ($scope.report) {
+			getData(n);
+		}
 	});
 
 	$scope.getDownload = function() {
