@@ -18,18 +18,6 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 			$location.path('catalog');
 	};
 
-	$scope.startNewOrder = function() {
-		User.startneworder($scope.user,
-			function(user) {
-				$scope.user = user;
-				$location.path('/catalog');
-			},
-			function(ex) {
-				$scope.actionMessage = ex.Message;
-			}
-		);
-	}
-
 	$scope.cancelOrder = function() {
 		if (confirm('Are you sure you wish to cancel your order?') == true) {
 			$scope.displayLoadingIndicator = true;

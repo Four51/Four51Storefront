@@ -154,6 +154,10 @@
                             <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
                                 <span class="text-info">{{'Shipping, handling and tax may be added to this subtotal.' | r | xlat}}</span>
                             </p>
+                            <button neworder ng-if="user.Permissions.contains('MultipleShoppingCart') && currentOrder" class="btn btn-default" ng-click="newOrderLoadingIndicator = true;startNewOrder()">
+                                <loadingindicator  ng-show="newOrderLoadingIndicator" />
+                                <small>{{"Start" | r | xlat}} {{"New" | r | xlat}} {{"Order" | r | xlat}}</small>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -197,11 +201,6 @@
                         <button class="btn btn-danger" ng-click="currentOrder.Status == 'AwaitingApproval' ? cancelEdit() : cancelOrder()">
                             <small ng-if="currentOrder.Status != 'AwaitingApproval'">{{('Cancel' | r) + ' ' + ('Order' | r) | xlat}}</small>
                             <small ng-if="currentOrder.Status == 'AwaitingApproval'">{{('Cancel' | r) + ' ' + ('Edit' | r) | xlat}}</small>
-                        </button>
-                    </li>
-                    <li>
-                        <button class="btn btn-default" ng-click="startNewOrder()">
-                            <small>{{'New' | r | xlat}} {{'Order' | r | xlat}}</small>
                         </button>
                     </li>
                     <li>
