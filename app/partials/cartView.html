@@ -200,6 +200,11 @@
                         </button>
                     </li>
                     <li>
+                        <button class="btn btn-default" ng-click="startNewOrder()">
+                            <small>{{'New' | r | xlat}} {{'Order' | r | xlat}}</small>
+                        </button>
+                    </li>
+                    <li>
                         <button class="btn btn-primary" ng-click="saveChanges()">
                             <loadingindicator  ng-show="displayLoadingIndicator" />
                             <small>{{('Save' | r) + ' ' + ('Order' | r) | xlat}}</small>
