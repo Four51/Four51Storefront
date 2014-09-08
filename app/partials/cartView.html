@@ -154,6 +154,10 @@
                             <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
                                 <span class="text-info">{{'Shipping, handling and tax may be added to this subtotal.' | r | xlat}}</span>
                             </p>
+                            <button neworder ng-if="user.Permissions.contains('MultipleShoppingCart') && currentOrder" class="btn btn-default" ng-click="newOrderLoadingIndicator = true;startNewOrder()">
+                                <loadingindicator  ng-show="newOrderLoadingIndicator" />
+                                <small>{{"Start" | r | xlat}} {{"New" | r | xlat}} {{"Order" | r | xlat}}</small>
+                            </button>
                         </div>
                     </div>
                 </div>

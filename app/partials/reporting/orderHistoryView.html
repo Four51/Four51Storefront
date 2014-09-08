@@ -66,8 +66,9 @@
                     <loadingindicator ng-show="displayLoadingIndicator" />
                     <div class="form-group view-form-icon">
                         <div class="pull-right">
+                            <loadingindicator  ng-show="currentLoadingIndicator" />
                             <i class="fa fa-icon-random"></i>
-                            <button type="button" ng-click="setCurrent()" class="btn btn-info">{{'Set as Current' | r}} {{'Order' | r}}</button>
+                            <button type="button" ng-click="currentLoadingIndicator = true; setCurrent()" class="btn btn-info">{{'Set as Current' | r}} {{'Order' | r}}</button>
                         </div>
                     </div>
                 </div>
