@@ -60,7 +60,7 @@
             </div>
         </div>
     </div>
-    <section ng-show="showSwipe" ng-swipe-right="showSwipe = false">
+    <section class="hidden-lg hidden-md" ng-show="showSwipe" ng-swipe-right="showSwipe = false">
         <div class="shortproduct-info panel-body text-center">
             <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]" ng-if="!(user.Permissions.contains('HidePricing'))">
                 {{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
