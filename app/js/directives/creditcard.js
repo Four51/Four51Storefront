@@ -92,35 +92,38 @@ four51.app.directive('creditcard', function() {
 					$scope.cart_billing.$setValidity('creditCardNumber', true);
 					$scope.cart_billing.$setValidity('creditCardNumber', validateNumber(ccnumber));
 
-					switch (true) {
-						case /^(34)|$(37)/.test(ccnumber):
-							cardType = "AmericanExpress";
-							break;
-						case /^4/.test(ccnumber):
-							cardType = "Visa";
-							break;
-						case /^30[0-5]/.test(ccnumber):
-						case /^(2014)|^(2149)/.test(ccnumber):
-						case /^36/.test(ccnumber):
-							cardType = 'DinersClub';
-							break;
-						case /^(6011)|^(622(1(2[6-9]|[3-9][0-9])|[2-8][0-9]{2}|9([01][0-9]|2[0-5])))|^(64[4-9])|^65/.test(ccnumber):
-							cardType = 'Discover';
-							break;
-						case /^35(2[89]|[3-8][0-9])/.test(ccnumber):
-							cardType = 'JCB';
-							break;
-						case /^(5018)|^(5020)|^(5038)|^(5893)|^(6304)|^(6759)|^(6761)|^(6762)|^(6763)|^(0604)/.test(ccnumber):
-							cardType = 'Switch';
-							break;
-						case /^(6304)|^(6706)|^(6771)|^(6709)/.test(ccnumber):
-							cardType = 'Laser';
-							break;
-						case /^(4026)|^(417500)|^(4405)|^(4508)|^(4844)|^(4913)|^(4917)/.test(ccnumber):
-							cardType = 'Electron';
-							break;
-						default:
-							cardType = null;
+					if(/^(34)|^(37)/.test(ccnumber)) {
+						cardType = "AmericanExpress";
+					}
+					if(/^30[0-5]/.test(ccnumber)) {
+						cardType = "DinersClub"; //Carte Blanche
+					}
+					if(/^(2014)|^(2149)/.test(ccnumber)) {
+						cardType = "DinersClub"; //enRoute
+					}
+					if(/^36/.test(ccnumber)) {
+						cardType = "DinersClub"; //International
+					}
+					if(/^(6011)|^(622(1(2[6-9]|[3-9][0-9])|[2-8][0-9]{2}|9([01][0-9]|2[0-5])))|^(64[4-9])|^65/.test(ccnumber)) {
+						cardType = "Discover";
+					}
+					if(/^35(2[89]|[3-8][0-9])/.test(ccnumber)) {
+						cardType = "JCB";
+					}
+					if(/^(6304)|^(6706)|^(6771)|^(6709)/.test(ccnumber)) {
+						cardType = "Laser"; //Laser
+					}
+					if(/^(5018)|^(5020)|^(5038)|^(5893)|^(6304)|^(6759)|^(6761)|^(6762)|^(6763)|^(0604)/.test(ccnumber)) {
+						cardType = "Switch"; //Maestro
+					}
+					if(/^5[1-5]/.test(ccnumber)) {
+						cardType = "MasterCard";
+					}
+					if (/^4/.test(ccnumber)) {
+						cardType = "Visa";
+					}
+					if (/^(4026)|^(417500)|^(4405)|^(4508)|^(4844)|^(4913)|^(4917)/.test(ccnumber)) {
+						cardType = "Electron"; //Visa Electron
 					}
 					$scope.currentOrder.CreditCard.Type = cardType;
 					$scope.creditCardIconUrl = cardType ? 'css/images/CreditCardIcons/' + cardType + '.png' : null;
