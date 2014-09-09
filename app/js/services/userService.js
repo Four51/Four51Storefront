@@ -93,6 +93,7 @@ four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security',
 		$resource($451.api('/user/neworder')).save().$promise.then(
 			function(user) {
 				store.set(_cacheName, user);
+				$rootScope.$broadcast('event:orderUpdate', null);
 				_then(success, user);
 			},
 			function(ex) {
