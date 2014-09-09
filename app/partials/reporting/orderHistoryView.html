@@ -68,7 +68,9 @@
                         <div class="pull-right">
                             <loadingindicator  ng-show="currentLoadingIndicator" />
                             <i class="fa fa-icon-random"></i>
-                            <button type="button" ng-click="currentLoadingIndicator = true; setCurrent()" class="btn btn-info">{{'Set as Current' | r}} {{'Order' | r}}</button>
+                            <button ng-if="order.ID != currentOrder.ID" type="button" ng-click="currentLoadingIndicator = true; setCurrent()" class="btn btn-info">
+                                {{'Set as Current' | r}} {{'Order' | r}} {{order.ID}} = {{currentOrder.ID}}
+                            </button>
                         </div>
                     </div>
                 </div>
