@@ -18,7 +18,10 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 		})
 	};
 	function setDefaultQty(lineitem) {
-		$scope.LineItem.Quantity = lineitem.Product.StandardPriceSchedule.DefaultQuantity > 0 ? lineitem.Product.StandardPriceSchedule.DefaultQuantity : null;
+		if (lineitem.Product.StandardPriceSchedule)
+			$scope.LineItem.Quantity = lineitem.Product.StandardPriceSchedule.DefaultQuantity > 0 ? lineitem.Product.StandardPriceSchedule.DefaultQuantity : null;
+		else if (lineitem.Product.ReplishmentPriceSchedule)
+			$scope.LineItem.Quantity = lineitem.Product.ReplishmentPriceSchedule.DefaultQuantity > 0 ? lineitem.Product.ReplishmentPriceSchedule.DefaultQuantity : null;
 	}
 	function init(searchTerm, callback) {
 		ProductDisplayService.getProductAndVariant($routeParams.productInteropID, $routeParams.variantInteropID, function (data) {
@@ -32,8 +35,8 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			$scope.setAddToOrderErrors();
 			if (angular.isFunction(callback))
 				callback();
-			if (!$scope.currentOrder)
-				$scope.setOrderType('Standard');
+//			if (!$scope.currentOrder)
+//				$scope.setOrderType('Standard');
 		}, $scope.settings.currentPage, $scope.settings.pageSize, searchTerm);
 	}
 	$scope.$watch('settings.currentPage', function(n, o) {
@@ -72,7 +75,9 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			return;
 		}
 		if(!$scope.currentOrder){
-			$scope.currentOrder = {};
+			$scope.currentOrder = { };
+			$scope.currentOrder.Type = $scope.LineItem.PriceSchedule.OrderType;
+
 			$scope.currentOrder.LineItems = [];
 		}
 		if (!$scope.currentOrder.LineItems)

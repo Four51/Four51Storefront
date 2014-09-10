@@ -2,7 +2,7 @@ four51.app.factory('Variant', ['$rootScope', '$resource', '$451', 'Security', 'E
 	function _then(fn, data) {
 		if (angular.isFunction(fn))
 			fn(data);
-		if (data.IsMpowerVariant && Object.keys(data.Specs).length > 0)
+		if (data && data.IsMpowerVariant && Object.keys(data.Specs).length > 0)
 			$rootScope.$broadcast('event:specFormReady', data);
 	}
 
