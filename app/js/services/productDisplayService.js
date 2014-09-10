@@ -197,9 +197,25 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 
 		function determinePriceSchedule() {
 			// default to standard if no order type
-			return (scope.currentOrder && scope.currentOrder.Type == 'Replenishment') ?
-				(scope.LineItem.Variant && scope.LineItem.Variant.ReplenishmentPriceSchedule) ? scope.LineItem.Variant.ReplenishmentPriceSchedule : scope.LineItem.Product.ReplenishmentPriceSchedule :
-				(scope.LineItem.Variant && scope.LineItem.Variant.StandardPriceSchedule) ? scope.LineItem.Variant.StandardPriceSchedule : scope.LineItem.Product.StandardPriceSchedule;
+			if (scope.currentOrder && scope.currentOrder.Type == 'Replenishment') {
+				if (scope.LineItem.Variant && scope.LineItem.Variant.ReplenishmentPriceSchedule)
+					return scope.LineItem.Variant.ReplenishmentPriceSchedule;
+				return scope.LineItem.Product.ReplenishmentPriceSchedule;
+			}
+			else if (scope.currentOrder && scope.currentOrder.Type == 'Standard') {
+				if (scope.LineItem.Variant && scope.LineItem.Variant.StandardPriceSchedule)
+					return scope.LineItem.Variant.StandardPriceSchedule;
+				return scope.LineItem.Product.StandardPriceSchedule;
+			}
+			else {
+				if (scope.LineItem.Variant)
+					return scope.LineItem.Variant.StandardPriceSchedule || scope.LineItem.Variant.ReplenishmentPriceSchedule;
+				return scope.LineItem.Product.StandardPriceSchedule || scope.LineItem.Product.ReplenishmentPriceSchedule
+			}
+
+//			return (scope.currentOrder && scope.currentOrder.Type == 'Replenishment') ?
+//				(scope.LineItem.Variant && scope.LineItem.Variant.ReplenishmentPriceSchedule) ? scope.LineItem.Variant.ReplenishmentPriceSchedule : scope.LineItem.Product.ReplenishmentPriceSchedule :
+//				(scope.LineItem.Variant && scope.LineItem.Variant.StandardPriceSchedule) ? scope.LineItem.Variant.StandardPriceSchedule : scope.LineItem.Product.StandardPriceSchedule;
 		}
 
 		if(scope.LineItem.Variant){
@@ -223,10 +239,10 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 		}
 
 		function allowAddToOrder() {
-			return (scope.currentOrder ? canAddToOrderType(scope.currentOrder.Type) : true)
-				&& (scope.allowAddFromVariantList
-					|| (scope.LineItem.Variant
-						|| (scope.LineItem.Product.VariantCount == 0 && scope.LineItem.Product.Type != 'VariableText')));
+			return (scope.currentOrder ? canAddToOrderType(scope.currentOrder.Type) : true) &&
+					(scope.allowAddFromVariantList ||
+						(scope.LineItem.Variant || (scope.LineItem.Product.VariantCount == 0 && scope.LineItem.Product.Type != 'VariableText'))
+					);
 						//this will include some order type and current order logic.
 		}
 
@@ -248,9 +264,19 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 				&& (scope.currentOrder && scope.currentOrder.ID ? scope.currentOrder.Type == type : true)
 				&& (scope.currentOrder && scope.currentOrder.ID ? (scope.variantLineItems ? scope.variantLineItems[scope.LineItem.Product.Variants[0].InteropID].PriceSchedule.OrderType : scope.LineItem.PriceSchedule.OrderType) == scope.currentOrder.Type : true);
 		}
+
+		function canCreateVariant() {
+			if (scope.currentOrder && scope.currentOrder.Type == 'Replenishment')
+				return false;
+			if (scope.LineItem.Product.Type == 'VariableText') {
+				return true;
+			}
+			return false;
+		}
 		scope.allowAddToOrder = allowAddToOrder();
 		scope.canAddToStandardOrder = canAddToOrderType('Standard');
 		scope.canAddToReplenishmentOrder = canAddToOrderType('Replenishment');
+		scope.canCreateVariant = canCreateVariant();
 		// the api has a property from the inventory settings on whether we display inventory. but, we also need to consider the current order type
 		scope.LineItem.Product.DisplayInventory = scope.LineItem.Product.DisplayInventory && (!scope.currentOrder || (scope.currentOrder && scope.currentOrder.Type == 'Standard'));
 		//short view//scope.allowAddToOrder = scope.LineItem.Product.Variants.length == 0 && scope.lineItemSpecs.length == 0 && scope.LineItem.Product.Type != 'VariableText';
