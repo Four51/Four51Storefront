@@ -56,10 +56,14 @@
         </div>
     </div>
 </div>
-<div class="alert alert-warning" ng-show="cart_billing.$error.creditCardNumber || cart_billing.$error.cvnNumber || cart_billing.$error.expDate">
+<div class="alert alert-warning" ng-show="cart_billing.$error.creditCardNumber || cart_billing.$error.creditCardType|| cart_billing.$error.cvnNumber || cart_billing.$error.expDate">
     <p ng-show="cart_billing.$error.creditCardNumber">
         <i class="fa fa-exclamation-circle text-danger pull-left"></i>
         {{'Please enter a valid ' + ('Credit Card' | rl) + ' ' + ('Number' | rl) | xlat}}
+    </p>
+    <p ng-show="cart_billing.$error.creditCardType && !cart_billing.$error.creditCardNumber">
+        <i class="fa fa-exclamation-circle text-danger pull-left"></i>
+        {{friendlyName(currentOrder.CreditCard.Type) + ' is not supported' | rl | xlat}}
     </p>
     <p ng-show="cart_billing.$error.cvnNumber">
         <i class="fa fa-exclamation-circle text-danger pull-left"></i>
