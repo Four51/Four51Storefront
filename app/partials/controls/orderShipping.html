@@ -9,7 +9,6 @@
     <div class="panel-body" collapse="checkOutSection != 'shipping'" class="panel-body ">
         <div>
             <shippingmessage />
-            <shippingmessage />
         </div>
         <div ng-show="shipaddressform || (shipaddresses.length == 0 && user.Permissions.contains('CreateShipToAddress'))">
             <addressinput address='shipaddress' user='user'></addressinput>
