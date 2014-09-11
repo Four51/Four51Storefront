@@ -18,7 +18,8 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 		})
 	};
 	function setDefaultQty(lineitem) {
-		$scope.LineItem.Quantity = lineitem.PriceSchedule.DefaultQuantity;
+		if (lineitem.PriceSchedule)
+			$scope.LineItem.Quantity = lineitem.PriceSchedule.DefaultQuantity;
 	}
 	function init(searchTerm, callback) {
 		ProductDisplayService.getProductAndVariant($routeParams.productInteropID, $routeParams.variantInteropID, function (data) {
