@@ -11,7 +11,7 @@
         <label>{{customfield.Label || customfield.Name | r}}</label>
         <div ng-class="{'input-group':((customfield.Prefix && !hideprefix) || (customfield.Suffix && !hidesuffix))}">
             <span class="input-group-addon" ng-if="customfield.Prefix && !hideprefix && !((customfield.Prefix | r) == '')">{{customfield.Prefix | r}}</span>
-            <textarea class="form-control"  placeholder="{{customfield.Label || customfield.Name | r}}" cols="{{customfield.Width * .13}} rows={{customfield.Lines}}" ng-maxlength="{{customfield.MaxLength}}" ng-required="{{customfield.Required}}" ng-model="customfield.Value"></textarea>
+            <textarea class="form-control"  ng-attr-placeholder="{{customfield.Label || customfield.Name | r}}" cols="{{customfield.Width * .13}} rows={{customfield.Lines}}" ng-maxlength="{{customfield.MaxLength}}" ng-required="{{customfield.Required}}" ng-model="customfield.Value"></textarea>
             <span class="input-group-addon" ng-if="customfield.Suffix && !hidesuffix && !((customfield.Suffix | r) == '')">{{customfield.Suffix | r}}</span>
         </div>
     </div>
