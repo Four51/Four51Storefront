@@ -207,8 +207,12 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 					return scope.LineItem.Variant.StandardPriceSchedule;
 				return scope.LineItem.Product.StandardPriceSchedule;
 			}
+			else if (scope.LineItem.Product.Type == 'VariableText') {
+				// the opposite of default ps is true for variable products
+				return scope.LineItem.Product.ReplenishmentPriceSchedule || scope.LineItem.Product.StandardPriceSchedule;
+			}
 			else {
-				if (scope.LineItem.Variant)
+				if (scope.LineItem.Variant && !scope.LineItem.Product.IsVBOSS)
 					return scope.LineItem.Variant.StandardPriceSchedule || scope.LineItem.Variant.ReplenishmentPriceSchedule;
 				return scope.LineItem.Product.StandardPriceSchedule || scope.LineItem.Product.ReplenishmentPriceSchedule
 			}
@@ -243,7 +247,6 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 					(scope.allowAddFromVariantList ||
 						(scope.LineItem.Variant || (scope.LineItem.Product.VariantCount == 0 && scope.LineItem.Product.Type != 'VariableText'))
 					);
-						//this will include some order type and current order logic.
 		}
 
 		function canAddToOrderType(type) {

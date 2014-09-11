@@ -1,7 +1,7 @@
 <div>
     <div class="input-group-btn">
         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-            <span>{{currentOrder.Type | r}} {{'Order' | r}} {{'Type' | r}}</span>
+            <span>{{currentOrder.Type || 'Standard' | r}} {{'Order' | r}} {{'Type' | r}}</span>
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu pull-left" role="menu">
