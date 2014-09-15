@@ -8522,7 +8522,7 @@ table[datepicker] {
 .credit-card-widget .view-form-icon:not(:first-of-type) > div {
   margin-top: 0;
 }
-.credit-card-widget .view-form-icon:first-of-type > div input {
+.credit-card-widget .view-form-icon:nth-of-type(2) > div input {
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
 }

@@ -207,8 +207,12 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 					return scope.LineItem.Variant.StandardPriceSchedule;
 				return scope.LineItem.Product.StandardPriceSchedule;
 			}
+			else if (scope.LineItem.Product.Type == 'VariableText') {
+				// the opposite of default ps is true for variable products
+				return scope.LineItem.Product.ReplenishmentPriceSchedule || scope.LineItem.Product.StandardPriceSchedule;
+			}
 			else {
-				if (scope.LineItem.Variant)
+				if (scope.LineItem.Variant && !scope.LineItem.Product.IsVBOSS)
 					return scope.LineItem.Variant.StandardPriceSchedule || scope.LineItem.Variant.ReplenishmentPriceSchedule;
 				return scope.LineItem.Product.StandardPriceSchedule || scope.LineItem.Product.ReplenishmentPriceSchedule
 			}
@@ -227,7 +231,10 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 			scope.allowAddFromVariantList = false;
 		}
 		else{
-			scope.LineItem.PriceSchedule = variantHasPriceSchedule(scope.LineItem.Product, scope.currentOrder ? scope.currentOrder.Type + 'PriceSchedule' : 'StandardPriceSchedule') ? null : determinePriceSchedule(); //don't show price schedule if variant overrides parent PS
+			//don't show price schedule if variant overrides parent PS
+			scope.LineItem.PriceSchedule = variantHasPriceSchedule(scope.LineItem.Product, scope.currentOrder ?  scope.currentOrder.Type + 'PriceSchedule' : 'StandardPriceSchedule') ?
+				null :
+				determinePriceSchedule();
 			if(scope.allowAddFromVariantList){
 				var p = scope.LineItem.Product;
 				scope.variantLineItems = {};
@@ -243,7 +250,6 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 					(scope.allowAddFromVariantList ||
 						(scope.LineItem.Variant || (scope.LineItem.Product.VariantCount == 0 && scope.LineItem.Product.Type != 'VariableText'))
 					);
-						//this will include some order type and current order logic.
 		}
 
 		function canAddToOrderType(type) {
@@ -254,9 +260,11 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 			}
 
 			// mpower variants
-			if ((scope.currentOrder && scope.currentOrder.Type != 'Replenishment') && type != 'Replenishment') {
-				if (scope.variantLineItems && scope.LineItem.Product.Type == 'VariableText')
-					return scope.LineItem.PriceSchedule.OrderType == 'Standard' && scope.user.Permissions.contains(type + 'Order');
+			if (scope.variantLineItems && scope.LineItem.Product.Type == 'VariableText') {
+				if (!scope.user.Permissions.contains(type + 'Order')) return false;
+				if (scope.currentOrder && scope.currentOrder.ID && scope.currentOrder.Type != type) return false;
+				return scope.LineItem.Product[type + 'PriceSchedule'] != null;
+				//return scope.LineItem.PriceSchedule.OrderType == type && scope.user.Permissions.contains(type + 'Order');
 			}
 
 			return scope.user.Permissions.contains(type + 'Order')

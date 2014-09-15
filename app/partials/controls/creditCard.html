@@ -1,5 +1,5 @@
 <div class="credit-card-widget row">
-    <div class="col-md-4 col-sm-6">
+    <div class="col-lg-4 col-sm-6">
         <div class="view-form-icon">
             <div>
                 <label>{{'Please enter your credit card information' | r | xlat}}</label>
@@ -43,7 +43,7 @@
         </div>
     </div>
 
-    <div class="col-sm-4 col-sm-6" ng-show="!creditCardIconUrl && currentOrder.CreditCard.AccountNumber.length >= 4">
+    <div class="col-lg-4 col-sm-6" ng-show="!creditCardIconUrl && currentOrder.CreditCard.AccountNumber.length >= 4">
         <div class="view-form-icon">
             <div ng-class="{'view-form-select': !currentOrder.CreditCard.Type, '': currentOrder.CreditCard.Type }">
                 <label ng-class="{required: currentOrder.PaymentMethod == 'CreditCard'}">{{'Card Type' | r | xlat}}</label>
@@ -56,10 +56,14 @@
         </div>
     </div>
 </div>
-<div class="alert alert-warning" ng-show="cart_billing.$error.creditCardNumber || cart_billing.$error.cvnNumber || cart_billing.$error.expDate">
+<div class="alert alert-warning" ng-show="cart_billing.$error.creditCardNumber || cart_billing.$error.creditCardType|| cart_billing.$error.cvnNumber || cart_billing.$error.expDate">
     <p ng-show="cart_billing.$error.creditCardNumber">
         <i class="fa fa-exclamation-circle text-danger pull-left"></i>
         {{'Please enter a valid ' + ('Credit Card' | rl) + ' ' + ('Number' | rl) | xlat}}
+    </p>
+    <p ng-show="cart_billing.$error.creditCardType && !cart_billing.$error.creditCardNumber">
+        <i class="fa fa-exclamation-circle text-danger pull-left"></i>
+        {{friendlyName(currentOrder.CreditCard.Type) + ' is not supported' | rl | xlat}}
     </p>
     <p ng-show="cart_billing.$error.cvnNumber">
         <i class="fa fa-exclamation-circle text-danger pull-left"></i>

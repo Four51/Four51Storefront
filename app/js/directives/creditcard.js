@@ -3,6 +3,14 @@ four51.app.directive('creditcard', function() {
 		restrict: 'E',
 		templateUrl: 'partials/controls/creditCard.html',
 		controller: ['$scope', function($scope) {
+			function validateType(type) {
+				if (!type) // denotes a type we dont' even support.
+					return true;
+				if (type == 'AmericanExpress')
+					return $scope.user.Permissions.contains('PayByAmex');
+				else
+					return $scope.user.Permissions.contains('PayBy' + type);
+			}
 			function validateNumber(ccNumb) {
 				/* This script and many more are available free online at
 				 The JavaScript Source!! http://javascript.internet.com
@@ -37,7 +45,7 @@ four51.app.directive('creditcard', function() {
 				if((len == 0) && (bResult))  // nothing, field is blank AND passed above # check
 					bResult = false;
 				else {  // ccNumb is a number and the proper length - let's see if it is a valid card number
-					if(len >= 15){  // 15 or 16 for Amex or V/MC
+					if(len >= 14){  // 15 or 16 for Amex or V/MC
 						for(var i=len;i>0;i--){  // LOOP throught the digits of the card
 							calc = parseInt(iCCN) % 10;  // right most digit
 							calc = parseInt(calc);  // assure it is an integer
@@ -88,10 +96,6 @@ four51.app.directive('creditcard', function() {
 						mul ^= 1;
 					}
 
-					ccnumber = ccnumber.toString().replace(/\s+/g, '');
-					$scope.cart_billing.$setValidity('creditCardNumber', true);
-					$scope.cart_billing.$setValidity('creditCardNumber', validateNumber(ccnumber));
-
 					if(/^(34)|^(37)/.test(ccnumber)) {
 						cardType = "AmericanExpress";
 					}
@@ -127,6 +131,11 @@ four51.app.directive('creditcard', function() {
 					}
 					$scope.currentOrder.CreditCard.Type = cardType;
 					$scope.creditCardIconUrl = cardType ? 'css/images/CreditCardIcons/' + cardType + '.png' : null;
+
+					ccnumber = ccnumber.toString().replace(/\s+/g, '');
+					//$scope.cart_billing.$setValidity('creditCardNumber', true);
+					$scope.cart_billing.$setValidity('creditCardNumber', validateNumber(ccnumber));
+					$scope.cart_billing.$setValidity('creditCardType', validateType(cardType));
 				}
 			});
 
@@ -149,6 +158,17 @@ four51.app.directive('creditcard', function() {
 				var valid = (month > 0 && month < 13) && (year > current.getFullYear());
 				$scope.cart_billing.$setValidity('expDate', valid);
 			});
+
+			$scope.friendlyName = function(type) {
+				switch(type) {
+					case 'AmericanExpress':
+						return 'American Express'
+					case 'DinersClub':
+						return 'Diners Club'
+					default:
+						return type;
+				}
+			}
 		}]
 	};
 	return obj;
