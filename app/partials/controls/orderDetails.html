@@ -23,7 +23,7 @@
             <div class="view-form-icon" ng-if="user.Permissions.contains('Comments')">
                 <div>
                     <label ng-show="currentOrder.Comments">{{'Comments' | r | xlat}}:</label>
-                    <textarea class="form-control" rows="5" cols="100" ng-model="currentOrder.Comments" placeholder="{{'Comments' | r | xlat}}..." />
+                    <textarea class="form-control" rows="5" cols="100" ng-model="currentOrder.Comments" ng-attr-placeholder="{{'Comments' | r | xlat}}..." />
                     <i class="fa fa-edit"></i>
                 </div>
             </div>
