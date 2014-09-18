@@ -8,15 +8,3 @@
         <button class="btn btn-danger pull-right 451_btn_logout" ng-click="Logout()" ng-if="user.Type=='Customer'"><i class="fa fa-power-off"></i> {{'Log Out' | r}}</button>
     </span>
 </nav>
-
-<nav class="nav visible-sm visible-xs">
-    <span class="btn-group">
-		<button class="btn btn-default" ng-class="{'active': isActive('admin')}" redirect="/admin">{{'User Information' | r}}</button>
-		<button class="btn btn-default" ng-show="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" ng-class="{'active': isActive('addresses')}" redirect="/addresses">{{'Addresses' | r}}</button>
-        <button class="btn btn-default" ng-show="user.Permissions.contains('ViewMessaging')" ng-class="{'active': isActive('message')}" redirect="/message">{{'Messages' | r}}</button>
-        <button class="btn btn-default" id="451qa_fave_link" ng-class="{'active': isActive('favoriteorders')}" redirect="/favoriteorders">{{'Favorites' | r}}</button>
-        <button class="btn btn-default" ng-show="user.Permissions.contains('ViewContactUs')" ng-class="{'active': isActive('contact')}" redirect="/contact">{{'Contact Us' | r}}</button>
-        <button ng-if="AppConst.debug" href="#" class="btn btn-default" ng-click="Clear()">Clear Cache</button>
-        <button class="btn btn-danger pull-right 451_btn_logout" ng-click="Logout()" ng-if="user.Type=='Customer'"><i class="fa fa-power-off"></i> {{'Log Out' | r}}</button>
-    </span>
-</nav>
