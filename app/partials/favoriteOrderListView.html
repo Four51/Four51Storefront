@@ -2,11 +2,9 @@
     <loadingindicator ng-show="loading" />
     <div class="panel panel-default" ng-if="favoriteorders.length == 0">
         <div class="panel-heading">
-            <h3 class="panel-title panel-primary visible-xs visible-sm">{{(user.Type == 'TempCustomer' ? 'Create' : 'My') + ' ' + ('Account' | r | xlat)}}</h3>
-            <h3 class="panel-title panel-primary visible-md visible-lg">{{('Favorite' | r) + ' ' + ('Orders' | r | xlat)}}</h3>
+            <h3 class="panel-title panel-primary">{{('Favorite' | r) + ' ' + ('Orders' | r) | xlat }}</h3>
         </div>
         <div class="panel-body">
-            <accountnavigation />
             <p class="alert alert-warning">{{'You have no ' + ('Favorite' | rl) + ' ' + ('Orders' | rl) + ' yet!' | xlat}}</p>
         </div>
         <div class="panel-footer">
