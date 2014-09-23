@@ -72,8 +72,6 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 		}
 		if(!$scope.currentOrder){
 			$scope.currentOrder = { };
-			$scope.currentOrder.Type = $scope.LineItem.PriceSchedule.OrderType;
-
 			$scope.currentOrder.LineItems = [];
 		}
 		if (!$scope.currentOrder.LineItems)
@@ -82,10 +80,12 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			angular.forEach($scope.variantLineItems, function(item){
 				if(item.Quantity > 0){
 					$scope.currentOrder.LineItems.push(item);
+					$scope.currentOrder.Type = item.PriceSchedule.OrderType;
 				}
 			});
 		}else{
 			$scope.currentOrder.LineItems.push($scope.LineItem);
+			$scope.currentOrder.Type = $scope.LineItem.PriceSchedule.OrderType;
 		}
 		$scope.addToOrderIndicator = true;
 		//$scope.currentOrder.Type = (!$scope.LineItem.Product.IsVariantLevelInventory && $scope.variantLineItems) ? $scope.variantLineItems[$scope.LineItem.Product.Variants[0].InteropID].PriceSchedule.OrderType : $scope.LineItem.PriceSchedule.OrderType;
