@@ -101,8 +101,9 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 				},
 				function(ex) {
 					$scope.addToOrderIndicator = false;
-					$scope.addToOrderError = ex.Message;
-					$route.reload();
+					$scope.lineItemErrors.push(ex.Detail);
+					$scope.showAddToCartErrors = true;
+					//$route.reload();
 				}
 		);
 	};
