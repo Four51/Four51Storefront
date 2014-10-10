@@ -240,16 +240,21 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 				scope.variantLineItems = {};
 				angular.forEach(p.Variants, function(v){
 					if (!v) return;
-					scope.variantLineItems[v.InteropID] = {PriceSchedule: (scope.currentOrder ? v[scope.currentOrder.Type + 'PriceSchedule'] : v.StandardPriceSchedule) || (scope.currentOrder ? p[scope.currentOrder.Type + 'PriceSchedule'] : p.StandardPriceSchedule), Product: p, Variant: v, Specs: scope.LineItem.Specs};
+					scope.variantLineItems[v.InteropID] = {
+						PriceSchedule: (scope.currentOrder ? v[scope.currentOrder.Type + 'PriceSchedule'] : (v.StandardPriceSchedule || v.ReplenishmentPriceSchedule))
+							|| (scope.currentOrder ? p[scope.currentOrder.Type + 'PriceSchedule'] : (v.StandardPriceSchedule || v.ReplenishmentPriceSchedule)),
+						Product: p,
+						Variant: v,
+						Specs: scope.LineItem.Specs
+					};
 				});
 			}
 		}
 
 		function allowAddToOrder() {
 			return (scope.currentOrder ? canAddToOrderType(scope.currentOrder.Type) : true) &&
-					(scope.allowAddFromVariantList ||
-						(scope.LineItem.Variant || (scope.LineItem.Product.VariantCount == 0 && scope.LineItem.Product.Type != 'VariableText'))
-					);
+				   (scope.allowAddFromVariantList || (scope.LineItem.Variant || (scope.LineItem.Product.VariantCount == 0 && scope.LineItem.Product.Type != 'VariableText'))
+			);
 		}
 
 		function canAddToOrderType(type) {
