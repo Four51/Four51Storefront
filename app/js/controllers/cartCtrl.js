@@ -4,6 +4,19 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 	if (isEditforApproval) {
 		Order.get($routeParams.id, function(order) {
 			$scope.currentOrder = order;
+			// add cost center if it doesn't exists for the approving user
+			var exists = false;
+			angular.forEach(order.LineItems, function(li) {
+				angular.forEach($scope.user.CostCenters, function(cc) {
+					if (exists) return;
+					exists = cc == li.CostCenter;
+				});
+				if (!exists) {
+					$scope.user.CostCenters.push({
+						'Name': li.CostCenter
+					});
+				}
+			});
 		});
 	}
 

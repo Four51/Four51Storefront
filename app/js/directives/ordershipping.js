@@ -8,7 +8,7 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 				$scope.shipaddresses = list;
 				if ($scope.isEditforApproval) {
 					if (!AddressList.contains($scope.currentOrder.ShipAddress))
-						$scope.addresses.push($scope.currentOrder.ShipAddress);
+						$scope.shipaddresses.push($scope.currentOrder.ShipAddress);
 				}
 			});
 			$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
@@ -24,8 +24,8 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 				AddressList.shipping(function(list) {
 					$scope.shipaddresses = list;
 					if ($scope.isEditforApproval) {
-						$scope.addresses.push($scope.currentOrder.ShipAddress);
-						$scope.addresses.push($scope.currentOrder.BillAddress);
+						$scope.shipaddresses.push($scope.currentOrder.ShipAddress);
+						$scope.shipaddresses.push($scope.currentOrder.BillAddress);
 					}
 				});
 				$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
