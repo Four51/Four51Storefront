@@ -12,13 +12,15 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 				}
 			});
 			$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
-
+			$scope.$on('event:AddressCancel', function() {
+				$scope.shipaddressform = false;
+			});
 			$scope.$on('event:AddressSaved', function(event, address) {
 				if (address.IsShipping) {
 					$scope.currentOrder.ShipAddressID = address.ID;
 					if (!$scope.shipToMultipleAddresses)
 						$scope.setShipAddressAtOrderLevel();
-					$scope.addressform = false;
+					$scope.shipaddressform = false;
 				}
 
 				AddressList.shipping(function(list) {
