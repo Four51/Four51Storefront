@@ -52,15 +52,12 @@
                                 </a>
                             </div>
                             <div class="col-md-6" ng-if="currentOrder.Status == 'AwaitingApproval'">
-	                            <a ng-href="cart/{{item.Product.InteropID}}/{{$index}}/{{currentOrder.ID}}">
-		                            <h3 class="text-primary">
-			                            <i class="fa fa-edit"></i>
-			                            {{item.ProductIDText}}
-		                            </h3>
-		                            <p>
-			                            {{item.Product.Name}}
-		                            </p>
-	                            </a>
+                                <h3 class="text-primary">
+                                    {{item.ProductIDText}}
+                                </h3>
+                                <p>
+                                    {{item.Product.Name}}
+                                </p>
                             </div>
                             <div class="col-md-6">
                                 <div class="row">
