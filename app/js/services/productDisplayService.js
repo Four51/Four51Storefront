@@ -242,7 +242,7 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 					if (!v) return;
 					scope.variantLineItems[v.InteropID] = {
 						PriceSchedule: (scope.currentOrder ? v[scope.currentOrder.Type + 'PriceSchedule'] : (v.StandardPriceSchedule || v.ReplenishmentPriceSchedule))
-							|| (scope.currentOrder ? p[scope.currentOrder.Type + 'PriceSchedule'] : (v.StandardPriceSchedule || v.ReplenishmentPriceSchedule)),
+							|| (scope.currentOrder ? p[scope.currentOrder.Type + 'PriceSchedule'] : (v.StandardPriceSchedule || v.ReplenishmentPriceSchedule || scope.LineItem.PriceSchedule)),
 						Product: p,
 						Variant: v,
 						Specs: scope.LineItem.Specs
