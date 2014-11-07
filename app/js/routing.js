@@ -17,7 +17,6 @@ four51.app.config(['$routeProvider', '$locationProvider', function($routeProvide
         when('/product/:productInteropID', {templateUrl: concatProductView, controller: 'ProductCtrl'}).
         when('/product/:productInteropID/:variantInteropID', {templateUrl: concatProductView, controller: 'ProductCtrl'}).
 		when('/product/:productInteropID/:variantInteropID/edit', {templateUrl: concatSpecFormView, controller: 'SpecFormCtrl'}).
-		when('/product/:productInteropID/:variantInteropID/:lineItemIndex/:orderID/edit', {templateUrl: concatSpecFormView, controller: 'SpecFormCtrl'}).
 		when('/order', { templateUrl: 'partials/orderSearchView.html', controller: 'OrderSearchCtrl' }).
 		when('/order/:id', { templateUrl: 'partials/Reporting/orderHistoryView.html', controller: 'OrderViewCtrl' }).
 		when('/favoriteorders', { templateUrl: 'partials/favoriteOrderListView.html', controller: 'FavoriteOrderCtrl' }).
@@ -32,7 +31,6 @@ four51.app.config(['$routeProvider', '$locationProvider', function($routeProvide
         when('/checkout', { templateUrl: 'partials/checkOutView.html', controller: 'CheckOutViewCtrl' }).
 		when('/checkout/:id', { templateUrl: 'partials/checkOutView.html', controller: 'CheckOutViewCtrl' }).
 		when('/cart/:productInteropID/:lineItemIndex', { templateUrl: concatProductView, controller: 'LineItemEditCtrl'}).
-		when('/cart/:productInteropID/:lineItemIndex/:orderID', { templateUrl: concatProductView, controller: 'LineItemEditCtrl'}).
 		when('/cart/:id', { templateUrl: 'partials/cartView.html', controller: 'CartViewCtrl' }).
 		when('/login', { templateUrl: 'partials/controls/login.html', controller: 'LoginCtrl' }).
 		when('/search', { templateUrl: 'partials/searchView.html', controller: 'ProductSearchCtrl' }).

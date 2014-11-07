@@ -1,27 +1,24 @@
-four51.app.controller('SpecFormCtrl', ['$scope', '$location', '$route', '$routeParams', '$window', 'ProductDisplayService', 'Variant', 'Order',
-	function ($scope, $location, $route, $routeParams, $window, ProductDisplayService, Variant, Order) {
+four51.app.controller('SpecFormCtrl', ['$scope', '$location', '$route', '$routeParams', '$window', 'ProductDisplayService', 'Variant',
+function ($scope, $location, $route, $routeParams, $window, ProductDisplayService, Variant) {
 	$scope.variantErrors = [];
 	var varID = $routeParams.variantInteropID == 'new' ? null :  $routeParams.variantInteropID;
 	$scope.loadingImage = true;
-
-	function init() {
-		ProductDisplayService.getProductAndVariant($routeParams.productInteropID, varID, function (data) {
-			$scope.Product = data.product;
-			if (varID)
-				$scope.Variant = data.variant;
-			else {
-				$scope.Variant = {};
-				$scope.Variant.ProductInteropID = $scope.Product.InteropID;
-				$scope.Variant.Specs = {};
-				angular.forEach($scope.Product.Specs, function (item) {
-					if (!item.CanSetForLineItem) {
-						$scope.Variant.Specs[item.Name] = item;
-					}
-				});
-			}
-		});
-	}
-
+	ProductDisplayService.getProductAndVariant($routeParams.productInteropID, varID, function(data){
+		$scope.Product = data.product;
+		if(varID)
+			$scope.Variant = data.variant;
+		else{
+			$scope.Variant = {};
+			$scope.Variant.ProductInteropID = $scope.Product.InteropID;
+			$scope.Variant.Specs = {};
+			angular.forEach($scope.Product.Specs, function(item){
+				if(!item.CanSetForLineItem)
+				{
+					$scope.Variant.Specs[item.Name] = item;
+				}
+			});
+		}
+	});
 	function validateVariant(){
 		if(!$scope.Variant) return;
 		var newErrors = [];
@@ -31,17 +28,6 @@ four51.app.controller('SpecFormCtrl', ['$scope', '$location', '$route', '$routeP
 		});
 		$scope.variantErrors = newErrors;
 	}
-
-	var isEditforApproval = $routeParams.orderID != null && $scope.user.Permissions.contains('EditApprovalOrder');
-	if (isEditforApproval) {
-		Order.get($routeParams.orderID, function(order) {
-			$scope.currentOrder = order;
-			init();
-		});
-	}
-	else
-		init();
-
 	$scope.$watch('Variant.Specs', function(o, n){
 		validateVariant();
 	}, true);
@@ -54,10 +40,7 @@ four51.app.controller('SpecFormCtrl', ['$scope', '$location', '$route', '$routeP
 		}
 		if(saveNew) $scope.Variant.InteropID = null;
 		Variant.save(variant, function(data){
-			if (isEditforApproval)
-				$location.path('/cart/' + $scope.Product.InteropID + '/'+ $routeParams.lineItemIndex + '/' + $scope.currentOrder.ID);
-			else
-				$location.path('/product/' + $scope.Product.InteropID + '/'+ data.InteropID);
+			$location.path('/product/' + $scope.Product.InteropID + '/'+ data.InteropID);
 		});
 	}
 	$scope.save = function(hideErrorWindowAlert){
