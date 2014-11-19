@@ -40,6 +40,7 @@ function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, C
 				else
 					$scope.currentOrder = null;
 
+				analytics(user.Company.GoogleAnalyticsCode);
 			});
 			Category.tree(function (data) {
 				$scope.tree = data;
@@ -49,7 +50,7 @@ function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, C
 	}
 
 	function analytics(id) {
-		if (id.length == 0) return;
+		if (id.length == 0 || window.ga) return;
 		(function (i, s, o, g, r, a, m) {
 			i['GoogleAnalyticsObject'] = r;
 			i[r] = i[r] || function () {
@@ -81,9 +82,6 @@ function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, C
 
     $scope.$on('event:auth-loginConfirmed', function(){
         $route.reload();
-	    User.get(function(user) {
-		    analytics(user.Company.GoogleAnalyticsCode);
-	    });
 	});
 	$scope.$on("$routeChangeSuccess", init);
     $scope.$on('event:auth-loginRequired', cleanup);
