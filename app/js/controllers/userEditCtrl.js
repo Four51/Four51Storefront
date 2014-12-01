@@ -7,7 +7,7 @@ function ($scope, $location, $sce, User) {
 	if($scope.user.Type != 'TempCustomer')
 		$scope.user.TempUsername = $scope.user.Username
 	$scope.loginHelp = function(){
-
+		$scope.loginasuser.SendVerificationCodeByEmail = true;
 		User.login($scope.loginasuser, function(){
 								$scope.resetPasswordError = null;
 								$scope.enterResetToken = true;
