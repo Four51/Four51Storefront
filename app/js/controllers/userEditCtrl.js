@@ -6,7 +6,16 @@ function ($scope, $location, $sce, User) {
 
 	if($scope.user.Type != 'TempCustomer')
 		$scope.user.TempUsername = $scope.user.Username
+	$scope.loginHelp = function(){
 
+		User.login($scope.loginasuser, function(){
+								$scope.resetPasswordError = null;
+								$scope.enterResetToken = true;
+							},
+							function(err){
+								$scope.resetPasswordError = err.Message;
+							});
+	}
 	$scope.save = function() {
 		$scope.actionMessage = null;
 		$scope.securityWarning = false;

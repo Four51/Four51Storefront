@@ -18,6 +18,32 @@
 			</div>
 		</div>
 	</form>
+
+	<form ng-show="user.Permissions.contains('ViewSelfAdmin')" name="login_help" ng-submit="loginHelp()" ng-if="user.Type == 'TempCustomer'">
+		<div class="panel panel-default" id="user_form">
+			<div class="panel-heading">
+				<h3 class="panel-title">{{'Reset password' | r | xlat}}</h3>
+			</div>
+			<div class="panel-body">
+				<div ng-show="!enterResetToken" class="col-md-6 col-md-offset-3">
+					<label>{{'Email' | r | xlat}}</label><input name="username" class="form-control" type="text" ng-model="loginasuser.Email" autocomplete="off" placeholder="{{'Email' | r | xlat}}" />
+				</div>
+				<div ng-show="enterResetToken" class="col-md-6 col-md-offset-3">
+					<label>{{'Username' | r | xlat}}</label><input name="username" class="form-control" type="text" ng-model="loginasuser.UserName" autocomplete="off" placeholder="{{'Username' | r | xlat}}" />
+				</div>
+				<div ng-show="enterResetToken" class="col-md-6 col-md-offset-3">
+					<label>{{'Reset Token' | r | xlat}}</label><input name="token" class="form-control" type="text" ng-model="loginasuser.ResetToken" autocomplete="off" placeholder="{{'Token from email' | r | xlat}}" />
+				</div>
+
+			</div>
+			<div class="panel-footer">
+				<input class="btn btn-medium btn-primary" type="submit" ng-disabled="login_help.$invalid" id="451_btn_login_existing" value="{{'Reset' | r | xlat}}" />
+				<inlineerror ng-show="resetPasswordError" title="{{resetPasswordError}}" />
+			</div>
+		</div>
+
+	</form>
+
 	<form ng-show="user.Permissions.contains('ViewSelfAdmin')" name="user_form" ng-submit="save()">
         <div class="panel panel-default" id="user_form">
             <div class="panel-heading">
