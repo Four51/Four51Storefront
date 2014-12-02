@@ -8,13 +8,18 @@ function ($scope, $location, $sce, User) {
 		$scope.user.TempUsername = $scope.user.Username
 	$scope.loginHelp = function(){
 		$scope.loginasuser.SendVerificationCodeByEmail = true;
-		User.login($scope.loginasuser, function(){
-								$scope.resetPasswordError = null;
-								$scope.enterResetToken = true;
-							},
-							function(err){
-								$scope.resetPasswordError = err.Message;
-							});
+
+		if($scope.enterResetToken){
+			User.reset($scope.loginasuser, function(){console.log("success");}, function(err){$scope.resetPasswordError = err.Message;})
+		}else{
+			User.login($scope.loginasuser, function(){
+					$scope.resetPasswordError = null;
+					$scope.enterResetToken = true;
+				},
+				function(err){
+					$scope.resetPasswordError = err.Message;
+				});
+		}
 	}
 	$scope.save = function() {
 		$scope.actionMessage = null;

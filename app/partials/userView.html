@@ -22,7 +22,7 @@
 	<form ng-show="user.Permissions.contains('ViewSelfAdmin')" name="login_help" ng-submit="loginHelp()" ng-if="user.Type == 'TempCustomer'">
 		<div class="panel panel-default" id="user_form">
 			<div class="panel-heading">
-				<h3 class="panel-title">{{'Reset password' | r | xlat}}</h3>
+				<h3 class="panel-title">{{'Lost login information' | r | xlat}}</h3>
 			</div>
 			<div class="panel-body">
 				<div ng-show="!enterResetToken" class="col-md-6 col-md-offset-3">
@@ -32,7 +32,10 @@
 					<label>{{'Username' | r | xlat}}</label><input name="username" class="form-control" type="text" ng-model="loginasuser.UserName" autocomplete="off" placeholder="{{'Username' | r | xlat}}" />
 				</div>
 				<div ng-show="enterResetToken" class="col-md-6 col-md-offset-3">
-					<label>{{'Reset Token' | r | xlat}}</label><input name="token" class="form-control" type="text" ng-model="loginasuser.ResetToken" autocomplete="off" placeholder="{{'Token from email' | r | xlat}}" />
+					<label>{{'Verification code' | r | xlat}}</label><input name="token" class="form-control" type="text" ng-model="loginasuser.PasswordResetToken" autocomplete="off" placeholder="{{'Verification Code' | r | xlat}}" />
+				</div>
+				<div ng-show="enterResetToken" class="col-md-6 col-md-offset-3">
+					<label>{{'New Password' | r | xlat}}</label><input name="token" class="form-control" type="text" ng-model="loginasuser.NewPassword" autocomplete="off" placeholder="{{'New Password' | r | xlat}}" />
 				</div>
 
 			</div>
