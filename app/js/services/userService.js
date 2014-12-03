@@ -50,7 +50,7 @@ four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security',
 
     var _login = function(credentials, success, error) {
 	    store.clear();
-        $resource($451.api('login')).get(credentials).$promise.then(
+		$resource($451.api('login')).get(credentials).$promise.then(
 	        function(u) {
                 _then(success,u);
 	        },
