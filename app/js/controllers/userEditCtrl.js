@@ -10,14 +10,20 @@ function ($scope, $location, $sce, User) {
 		$scope.loginasuser.SendVerificationCodeByEmail = true;
 
 		if($scope.enterResetToken){
-			User.reset($scope.loginasuser, function(){console.log("success");}, function(err){$scope.resetPasswordError = err.Message;})
+			User.reset($scope.loginasuser, function(user){
+					delete $scope.loginasuser;
+					$location.path('catalog');
+				},
+				function(err){
+					$scope.resetPasswordError = $sce.trustAsHtml(err.Message);
+			});
 		}else{
 			User.login($scope.loginasuser, function(){
 					$scope.resetPasswordError = null;
 					$scope.enterResetToken = true;
 				},
 				function(err){
-					$scope.resetPasswordError = err.Message;
+					$scope.resetPasswordError =  $sce.trustAsHtml(err.Message);
 				});
 		}
 	}

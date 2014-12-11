@@ -50,7 +50,7 @@
 			</div>
 			<div class="panel-footer">
 				<input class="btn btn-medium btn-primary" type="submit" ng-disabled="login_help.$invalid" id="451_btn_login_existing" value="{{'Reset' | r | xlat}}" />
-				<inlineerror ng-show="resetPasswordError" title="{{resetPasswordError}}" />
+				<div class="view-inline-error" style="text-align: left" ng-show="resetPasswordError" ng-bind-html="resetPasswordError" />
 			</div>
 		</div>
 
