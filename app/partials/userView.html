@@ -28,9 +28,9 @@
 			<div class="panel-body">
 
 				<form name="login_help" ng-submit="getToken()">
-					<div class="col-md-6 col-md-offset-3">
-						<label>{{'Email' | r | xlat}}</label><input name="username" class="form-control" type="text" ng-model="loginasuser.Email" autocomplete="off" placeholder="{{'Email' | r | xlat}}" /><br/>
-					</div>
+
+					<label>{{'Email' | r | xlat}}</label> <input name="username" class="form-control" type="text" ng-model="loginasuser.Email" autocomplete="off" placeholder="{{'Email' | r | xlat}}" /><br/>
+
 					<div class="panel-footer">
 						<input class="btn btn-medium btn-primary" type="submit" ng-disabled="login_help.$invalid" id="451_btn_login_existing" value="{{'Reset' | r | xlat}}" />
 						<div class="view-inline-error" style="text-align: left" ng-show="resetPasswordError" ng-bind-html="resetPasswordError" />
