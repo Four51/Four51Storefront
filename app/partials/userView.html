@@ -20,55 +20,57 @@
 	</form>
 
 	<div ng-show="user.Permissions.contains('ViewSelfAdmin')" ng-if="user.Type == 'TempCustomer'">
-		<div  ng-show="!enterResetToken" class="panel panel-default" id="user_form">
+
+		<form name="login_help" ng-submit="getToken()">
+		<div ng-show="!enterResetToken" class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">{{'Lost login information' | r | xlat}}</h3>
-
 			</div>
 			<div class="panel-body">
 
-				<form name="login_help" ng-submit="getToken()">
-
-					<label>{{'Email' | r | xlat}}</label> <input name="username" class="form-control" type="text" ng-model="loginasuser.Email" autocomplete="off" placeholder="{{'Email' | r | xlat}}" /><br/>
-
+					<label>{{'Email' | r | xlat}}</label>
+					<input name="username" class="form-control" type="text" ng-model="loginasuser.Email" autocomplete="off" placeholder="{{'Email' | r | xlat}}" />
+					<br/>
 					<div class="panel-footer">
 						<input class="btn btn-medium btn-primary" type="submit" ng-disabled="login_help.$invalid" id="451_btn_login_existing" value="{{'Reset' | r | xlat}}" />
 						<div class="view-inline-error" style="text-align: left" ng-show="resetPasswordError" ng-bind-html="resetPasswordError" />
 					</div>
-				</form>
+
 			</div>
 		</div>
-		<div class="panel panel-default" ng-show="enterResetToken">
-			<div class="panel-heading">
-				<h3 class="panel-title">{{'Lost login information' | r | xlat}}</h3>
-			</div>
-			<div class="panel-body">
-				<form name="resetbytoken" ng-submit="resetWithToken()" >
+		</form>
+
+		<form name="resetbytoken" ng-submit="resetWithToken()" >
+			<div class="panel panel-default" ng-show="enterResetToken">
+				<div class="panel-heading">
+					<h3 class="panel-title">{{'Lost login information' | r | xlat}}</h3>
+				</div>
+				<div class="panel-body">
 					<p class="alert-warning">{{'An email was sent with your username and verification code.' | r | xlat}}</p>
-					<div class="col-md-6 col-md-offset-3">
+					<div class="row">
 						<label>{{'Username' | r | xlat}}</label>
 						<input required name="username" class="form-control" type="text" ng-model="loginasuser.UserName" autocomplete="off" placeholder="{{'Username' | r | xlat}}" />
 					</div>
-					<div class="col-md-6 col-md-offset-3">
+					<div class="row">
 						<label>{{'Verification code from email' | r | xlat}}</label>
 						<input required name="token" class="form-control" type="text" ng-model="loginasuser.PasswordResetToken" autocomplete="off" placeholder="{{'Verification Code' | r | xlat}}" />
 					</div>
-					<div class="col-md-6 col-md-offset-3">
+					<div class="row">
 						<label>New {{'Password' | r}}</label>
 						<input required class="form-control" name="new_password" type="password" ng-model="loginasuser.NewPassword" placeholder="New {{'Password' | r}}" />
 					</div>
-					<div  class="col-md-6 col-md-offset-3">
+					<div class="row">
 						<label>Confirm {{'Password' | r}}</label>
 						<input required class="form-control" name="confirm_password" type="password" ng-model="loginasuser.ConfirmPassword"  placeholder="Confirm {{'Password' | r}}" ng-match="loginasuser.NewPassword" />
 						<inlineerror ng-show="resetbytoken.confirm_password.$error.match" title="{{'Password' | r}} do not match!" /><br />
 					</div>
-					<div class="panel-footer">
+					<div xclass="panel-footer">
 						<input class="btn btn-medium btn-primary" type="submit" ng-disabled="resetbytoken.$invalid" value="{{'Reset' | r | xlat}}" />
 						<div class="view-inline-error" style="text-align: left" ng-show="resetPasswordError" ng-bind-html="resetPasswordError" />
 					</div>
-				</form>
+				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 
 	<form ng-show="user.Permissions.contains('ViewSelfAdmin')" name="user_form" ng-submit="save()">
