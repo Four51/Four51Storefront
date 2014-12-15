@@ -23,6 +23,7 @@
 
 		<form name="login_help" ng-submit="getToken()">
 		<div ng-show="!enterResetToken" class="panel panel-default">
+			<loadingindicator ng-show="emailResetLoadingIndicator" title="{{'Please wait while we email your verification code' | r | xlat}}" />
 			<div class="panel-heading">
 				<h3 class="panel-title">{{'Lost login information' | r | xlat}}</h3>
 			</div>
@@ -42,6 +43,7 @@
 
 		<form name="resetbytoken" ng-submit="resetWithToken()" >
 			<div class="panel panel-default" ng-show="enterResetToken">
+				<loadingindicator ng-show="emailResetLoadingIndicator" title="{{'Please wait while we reset your password' | r | xlat}}" />
 				<div class="panel-heading">
 					<h3 class="panel-title">{{'Lost login information' | r | xlat}}</h3>
 				</div>
