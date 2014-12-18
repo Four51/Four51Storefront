@@ -64,7 +64,7 @@
 					<div class="row">
 						<label>Confirm {{'Password' | r}}</label>
 						<input required class="form-control" name="confirm_password" type="password" ng-model="loginasuser.ConfirmPassword"  placeholder="Confirm {{'Password' | r}}" ng-match="loginasuser.NewPassword" />
-						<inlineerror ng-show="resetbytoken.confirm_password.$error.match" title="{{'Password' | r}} do not match!" /><br />
+						<inlineerror ng-show="resetbytoken.confirm_password.$error.match" title="{{'Password' | r}}s do not match!" /><br />
 					</div>
 					<div xclass="panel-footer">
 						<input class="btn btn-medium btn-primary" type="submit" ng-disabled="resetbytoken.$invalid" value="{{'Reset' | r | xlat}}" />
