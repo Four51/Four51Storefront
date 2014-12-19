@@ -44,6 +44,7 @@ function ($scope, $sce, $route, $location, User) {
 					$scope.credentials.Username = null;
 					$scope.credentials.Password = null;
 				}
+				delete $scope.credentials;
 			},
 			function(ex) {
 				$scope.credentials = {};

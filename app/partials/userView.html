@@ -23,13 +23,14 @@
 
 		<form name="login_help" ng-submit="getToken()">
 		<div ng-show="!enterResetToken" class="panel panel-default">
+			<loadingindicator ng-show="emailResetLoadingIndicator" title="{{'Please wait while we email your verification code' | r | xlat}}" />
 			<div class="panel-heading">
 				<h3 class="panel-title">{{'Lost login information' | r | xlat}}</h3>
 			</div>
 			<div class="panel-body">
 
 					<label>{{'Email' | r | xlat}}</label>
-					<input name="username" class="form-control" type="text" ng-model="loginasuser.Email" autocomplete="off" placeholder="{{'Email' | r | xlat}}" />
+					<input name="username" required class="form-control" type="text" ng-model="loginasuser.Email" autocomplete="off" placeholder="{{'Email' | r | xlat}}" />
 					<br/>
 					<div class="panel-footer">
 						<input class="btn btn-medium btn-primary" type="submit" ng-disabled="login_help.$invalid" id="451_btn_login_existing" value="{{'Reset' | r | xlat}}" />
@@ -42,6 +43,7 @@
 
 		<form name="resetbytoken" ng-submit="resetWithToken()" >
 			<div class="panel panel-default" ng-show="enterResetToken">
+				<loadingindicator ng-show="emailResetLoadingIndicator" title="{{'Please wait while we reset your password' | r | xlat}}" />
 				<div class="panel-heading">
 					<h3 class="panel-title">{{'Lost login information' | r | xlat}}</h3>
 				</div>
@@ -62,7 +64,7 @@
 					<div class="row">
 						<label>Confirm {{'Password' | r}}</label>
 						<input required class="form-control" name="confirm_password" type="password" ng-model="loginasuser.ConfirmPassword"  placeholder="Confirm {{'Password' | r}}" ng-match="loginasuser.NewPassword" />
-						<inlineerror ng-show="resetbytoken.confirm_password.$error.match" title="{{'Password' | r}} do not match!" /><br />
+						<inlineerror ng-show="resetbytoken.confirm_password.$error.match" title="{{'Password' | r}}s do not match!" /><br />
 					</div>
 					<div xclass="panel-footer">
 						<input class="btn btn-medium btn-primary" type="submit" ng-disabled="resetbytoken.$invalid" value="{{'Reset' | r | xlat}}" />

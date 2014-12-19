@@ -28,7 +28,7 @@
             <pagination page="settings.currentPage" max-size="10" rotate="false" boundary-links="true" total-items="productCount"
                         items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
         </div>
-        <div ng-show="products" class="panel-product-list">
+        <div ng-show="productCount > 0" class="panel-product-list">
             <nav class="nav">
                 <ul>
                     <li class="well" ng-repeat="product in products | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">

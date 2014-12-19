@@ -258,6 +258,9 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 		}
 
 		function canAddToOrderType(type) {
+			// ran across this is a highly unlikely scenario, but it's pretty applicable for any situation
+			if (!scope.variantLineItems && !scope.LineItem.PriceSchedule)
+				return false;
 			// this is such an outlier that I'm not sure how to weave it into the checks.
 			if ((scope.currentOrder && scope.currentOrder.Type == 'Replenishment') && type == 'Replenishment' && !scope.LineItem.Product.IsVariantLevelInventory && (scope.LineItem.PriceSchedule && scope.LineItem.PriceSchedule.OrderType == 'Replenishment')) {
 				scope.allowAddToOrder = scope.user.Permissions.contains(type + 'Order'); // even have to reset this
