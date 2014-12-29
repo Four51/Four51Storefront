@@ -6,26 +6,30 @@ function ($scope, $location, $sce, User) {
 
 	if($scope.user.Type != 'TempCustomer')
 		$scope.user.TempUsername = $scope.user.Username
-	$scope.loginHelp = function(){
+	$scope.getToken = function(){
 		$scope.loginasuser.SendVerificationCodeByEmail = true;
-
-		if($scope.enterResetToken){
-			User.reset($scope.loginasuser, function(user){
-					delete $scope.loginasuser;
-					$location.path('catalog');
-				},
-				function(err){
-					$scope.resetPasswordError = $sce.trustAsHtml(err.Message);
+		$scope.emailResetLoadingIndicator = true;
+		User.login($scope.loginasuser, function(){
+				$scope.resetPasswordError = null;
+				$scope.enterResetToken = true;
+				$scope.emailResetLoadingIndicator = false;
+			},
+			function(err){
+				$scope.resetPasswordError =  $sce.trustAsHtml(err.Message);
+				$scope.emailResetLoadingIndicator = false;
 			});
-		}else{
-			User.login($scope.loginasuser, function(){
-					$scope.resetPasswordError = null;
-					$scope.enterResetToken = true;
-				},
-				function(err){
-					$scope.resetPasswordError =  $sce.trustAsHtml(err.Message);
-				});
-		}
+
+	}
+	$scope.resetWithToken= function(){
+		$scope.emailResetLoadingIndicator = true;
+		User.reset($scope.loginasuser, function(user){
+				delete $scope.loginasuser;
+				$location.path('catalog');
+			},
+			function(err){
+				$scope.emailResetLoadingIndicator = false;
+				$scope.resetPasswordError = $sce.trustAsHtml(err.Message);
+		});
 	}
 	$scope.save = function() {
 		$scope.actionMessage = null;
