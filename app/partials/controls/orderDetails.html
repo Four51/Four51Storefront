@@ -9,7 +9,7 @@
     <div collapse="checkOutSection != 'order'" class="panel-body">
         <form name="cart_order" novalidate="">
             <div class="view-form-icon" ng-if="user.Permissions.contains('EditPOID')" ng-invalid>
-                <div class="input-group">
+                <div class="col-xs-12 input-group">
                     <label class="required">{{('Order' | r) + ' '  + ('ID' | r) | xlat}}</label>
                     <input class="form-control" name="orderid" ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID"
                            required ui-mask="{{currentOrder.autoID ? null : user.Company.POIDMask}}"></input>
