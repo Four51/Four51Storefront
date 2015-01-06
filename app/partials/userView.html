@@ -15,6 +15,7 @@
 				<h3 class="panel-title">{{('Logon' | r) + ' ' + ('as existing user' | r) | xlat}}</h3>
 			</div>
 			<div class="panel-body">
+                <accountnavigation />
                 <div class="col-md-6 col-md-offset-3">
                     <label>{{'Username' | r | xlat}}</label><input name="username" class="form-control" type="text" ng-model="loginasuser.Username" autocomplete="off" required placeholder="{{'Username' | r | xlat}}" /><br />
                     <label>{{'Password' | r | xlat}}</label><input name="password" class="form-control" type="password" ng-model="loginasuser.Password" autocomplete="off" required placeholder="{{'Password' | r | xlat}}" /><br />
@@ -28,7 +29,6 @@
 	</form>
 
 	<div ng-show="user.Permissions.contains('ViewSelfAdmin')" ng-if="user.Type == 'TempCustomer'">
-
 		<form name="login_help" ng-submit="getToken()">
 		<div ng-show="!enterResetToken" class="panel panel-default">
 			<loadingindicator ng-show="emailResetLoadingIndicator" title="{{'Please wait while we email your verification code' | r | xlat}}" />
@@ -36,7 +36,6 @@
 				<h3 class="panel-title">{{'Lost login information' | r | xlat}}</h3>
 			</div>
 			<div class="panel-body">
-
 					<label>{{'Email' | r | xlat}}</label>
 					<input name="username" required class="form-control" type="text" ng-model="loginasuser.Email" autocomplete="off" placeholder="{{'Email' | r | xlat}}" />
 					<br/>
@@ -44,7 +43,6 @@
 						<input class="btn btn-medium btn-primary" type="submit" ng-disabled="login_help.$invalid" id="451_btn_login_existing" value="{{'Reset' | r | xlat}}" />
 						<div class="view-inline-error" style="text-align: left" ng-show="resetPasswordError" ng-bind-html="resetPasswordError" />
 					</div>
-
 			</div>
 		</div>
 		</form>

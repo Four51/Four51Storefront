@@ -4,7 +4,18 @@
         <div class="panel-heading">
             <h3 class="panel-title">{{'Addresses' | r | xlat}}</h3>
         </div>
-        <div class="view-form-icon panel-body">
+        <div class="panel panel-default" ng-show="!addresses.length > 0">
+            <div class="panel-body">
+                <accountnavigation />
+                <p class="alert alert-warning">{{'No' + ' ' + ('addresses' | rc) + ' ' + 'available' | xlat}}</p>
+            </div>
+            <div class="panel-footer">
+                <button type="button" class="btn btn-primary" ng-click="newAddress($event)">{{'Add an' + ' ' + ('address' | rc) + ' ' + 'now' | xlat}}</button>
+            </div>
+        </div>
+        <div class="panel panel-default" ng-if="(addresses | filter:{IsCustEditable:true}).length > 0">
+        <div class="view-form-icon panel-body" ng-show="addresses.length > 0">
+            <accountnavigation />
             <form name="searchForm">
                 <div class="input-group">
                         <input type="text" ng-model="searchTerm"  class="form-control" placeholder="{{('Search' | r) + ' ' + ('Addresses' | r) | xlat}}" />
@@ -15,52 +26,27 @@
                 </div>
             </form>
         </div>
-        <div class="panel panel-default" ng-show="!addresses.length > 0">
-            <div class="panel-body">
-                <p class="alert alert-warning">{{'No' + ' ' + ('addresses' | rc) + ' ' + 'available' | xlat}}</p>
-            </div>
-            <div class="panel-footer">
-                <button type="button" class="btn btn-primary" ng-click="newAddress($event)">{{'Add an' + ' ' + ('address' | rc) + ' ' + 'now' | xlat}}</button>
-            </div>
-        </div>
-        <div class="panel-table" ng-show="addresses.length > 0">
-            <div class="row text-info">
-                <div class="col-sm-2">
-                    <label class="visible-xs">{{'Select all' | r | xlat}}</label>
-                    <input type='checkbox' ng-click="checkAll($event)" />
-                </div>
-                <div class="col-sm-2 hidden-xs">{{'Name' | r | xlat}}</div>
-                <div class="col-sm-2 hidden-xs">{{'City' | r | xlat}}</div>
-                <div class="col-sm-2 hidden-xs">{{'State' | r | xlat}}</div>
-                <div class="col-sm-2 hidden-xs">{{'Shipping' | r | xlat}}</div>
-                <div class="col-sm-2 hidden-xs">{{'Billing' | r | xlat}}</div>
-            </div>
-            <div class="row"  ng-repeat="address in addresses | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
-                <loadingindicator ng-show="pagedIndicator" />
-                <div class="col-sm-2">
-                    <input type='checkbox' ng-model="address.Selected" />
-                </div>
-                <div class="col-sm-2">
-                    <span class="visible-xs heading-xs text-info">Name</span>
-                    <a ng-href="address/{{address.ID}}">{{address.AddressName}}</a>
-                </div>
-                <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">{{'City' | r | xlat}}</span>
-                    {{address.City}}</a>
-                </div>
-                <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">{{'State' | r | xlat}}</span>
-                    {{address.State}}
-                </div>
-                <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">{{'Shipping' | r | xlat}}</span>
-                    <i ng-class="{'fa fa-check': address.IsShipping }"></i>
-                </div>
-                <div class="col-sm-2">
-                    <span class="visible-xs panel-table-heading-xs text-info">{{'Billing' | r | xlat}}</span>
-                    <i ng-class="{'fa fa-check': address.IsBilling }"></i>
-                </div>
-            </div>
+        <div class="panel-body table-responsive" ng-show="(addresses | filter:{IsCustEditable:true}).length > 0">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th><input type='checkbox' ng-click="checkAll($event)" /></th>
+                    <th>{{'Name' | r}}</th>
+                    <th>{{'City' | r}}</th>
+                    <th>{{'State' | r}}</th>
+                    <th>{{'Shipping' | r}}</th>
+                    <th>{{'Billing' | r}}</th>
+                </tr>
+                <tr ng-repeat="address in addresses | filter:{IsCustEditable:true} | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
+                    <td><input type='checkbox' ng-model="address.Selected" /></td>
+                    <td><a ng-href="address/{{address.ID}}">{{address.AddressName}}</a></td>
+                    <td>{{address.City}}</td>
+                    <td>{{address.State}}</td>
+                    <td><i ng-class="{'fa fa-check': address.IsShipping }"></i></td>
+                    <td><i ng-class="{'fa fa-check': address.IsBilling }"></i></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
         <div class="panel-footer" ng-show="addresses.length > 0">
             <div ng-show="settings.listCount > settings.pageSize">
