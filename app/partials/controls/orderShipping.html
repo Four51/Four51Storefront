@@ -6,7 +6,7 @@
             <i class="pull-right" ng-class="{'fa fa-caret-up': checkOutSection == 'shipping', 'fa fa-caret-down': checkOutSection == 'order' || checkOutSection == 'billing' }"></i>
         </h3>
     </div>
-    <div class="panel-body" collapse="checkOutSection != 'shipping'" class="panel-body ">
+    <div class="panel-body" collapse="checkOutSection != 'shipping'" class="panel-body">
         <div>
             <shippingmessage />
         </div>
@@ -130,9 +130,9 @@
                                         <i class="fa fa-map-marker"></i>
                                     </div>
                                 </div>
-                                <div class="view-form-icon">
+                                <div class="view-form-icon" ng-show="currentOrder.LineItems[0].ShipperName || currentOrder.IsMultipleShip() && user.ShipMethod != null">
                                     <div ng-class="{'view-form-select': !item.ShipperName, '' : item.ShipperName }">
-                                        <label ng-class="{required: currentOrder.IsMultipleShip() && user.ShipMethod != null}" ng-show="currentOrder.LineItems[0].ShipperName || currentOrder.IsMultipleShip() && user.ShipMethod != null">{{('Shipping' | r) + ' ' + ('Method' | r) | xlat}}</label>
+                                        <label ng-class="{required: currentOrder.IsMultipleShip() && user.ShipMethod != null}">{{('Shipping' | r) + ' ' + ('Method' | r) | xlat}}</label>
                                         <select class="form-control" ng-change="updateShipper(item)"
                                                 ng-show="user.ShipMethod.ShipperSelectionType == 'UserDropDown'"
                                                 ng-options="shipper.Name as shipper.Name for shipper in shippers | noliverates"
