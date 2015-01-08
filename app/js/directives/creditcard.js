@@ -155,7 +155,13 @@ four51.app.directive('creditcard', function() {
 				var month = parseInt(date.substring(0,2));
 				var year = parseInt(date.substring(2,4)) + 2000;
 				var current = new Date();
-				var valid = (month > 0 && month < 13) && (year > current.getFullYear());
+                var valid = false;
+                if (month > 0 && month < 13 && (year > current.getFullYear())) {
+                    valid = true;
+                }
+                else if (month > 0 && month < 13 && (month >= current.getMonth()+1) && (year == current.getFullYear())) {
+                    valid = true;
+                }
 				$scope.cart_billing.$setValidity('expDate', valid);
 			});
 
