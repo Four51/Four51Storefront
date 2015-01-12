@@ -25,6 +25,7 @@ function ($scope, $sce, $route, $location, User) {
 			function(user) {
 				delete $scope.PasswordReset;
 				delete $scope.credentials;
+                $scope.buttonText = "Logon";
 				$location.path('catalog');
 			},
 			function(ex) {
