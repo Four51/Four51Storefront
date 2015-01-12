@@ -312,7 +312,7 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 		return product.StaticSpecGroups.SPAProductConfig.Specs[specName].Value || escapeNull;
 	}
 	function _getProductAndVariant(productInteropID, variantInteropID, callback, page, pagesize, searchTerm){
-		Product.get(productInteropID, function(data){
+		Product.clearCache().get(productInteropID, function(data){
 			var p = data;
 			if(variantInteropID){
 				if(p.Type == 'VariableText'){

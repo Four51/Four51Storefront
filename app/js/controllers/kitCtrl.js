@@ -6,6 +6,13 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 		pageSize: 10
 	};
 
+	$scope.calcVariantLineItems = function(i){
+		$scope.variantLineItemsOrderTotal = 0;
+		angular.forEach($scope.variantLineItems, function(item){
+			$scope.variantLineItemsOrderTotal += item.LineTotal || 0;
+		})
+	};
+
 	// initial load. start from the kit parent
 	Kit.get($routeParams.id, function(kit) {
 		$scope.LineItem = {};
@@ -47,7 +54,7 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 					hasNext = true;
 				}
 				else {
-					var current = $scope.currentOrder.LineItems[0];
+					var current = $scope.currentOrder.LineItems[0]; // edit this to get the right line item if more than 1 exists
 					while(!hasNext && current.NextKitLineItem) {
 						if (current.NextKitLineItem && (current.ID == $scope.LineItem.ID)) {
 							$scope.LineItem = current.NextKitLineItem;
@@ -75,6 +82,7 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 
 	function SetupForOrder(product) {
 		ProductDisplayService.getProductAndVariant(product.InteropID, null, function(data) {
+			delete $scope.variantLineItems;
 			$scope.LineItem.Product = data.product;
 			$scope.LineItem.Variant = data.variant; // should never be a variant
 			ProductDisplayService.setNewLineItemScope($scope);
