@@ -1,18 +1,3 @@
-four51.app.factory('Kit', ['$resource', '$451', function($resource, $451) {
-
-	function _get(id, callback) {
-		$resource($451.api('kit/:interopID'), { interopID: id }).get().$promise.then(function(kit) {
-			callback(kit);
-		});
-	}
-
-	var svc = {
-		get: _get
-	};
-	return svc;
-
-}]);
-
 four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function($resource, $451, Security, User) {
 	//var _cacheName = '451Cache.Product.' + $451.apiName;
 	var variantCache = [], productCache = [], criteriaCache;

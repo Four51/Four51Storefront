@@ -13,7 +13,8 @@ four51.app.directive('kitaddtoorderspecs', [function() {
 		link: function(scope, element, attrs) {
 			//scope.specForm = 'addToOrderSpecForm.hcf?id=' + attrs.template;
 			attrs.$observe('template', function(val) {
-				scope.specForm = 'addtoOrderSpecForm.hcf?id=' + val;
+				if (val)
+					scope.specForm = 'addToOrderSpecForm.hcf?id=' + val;
 			});
 		}
 	};
