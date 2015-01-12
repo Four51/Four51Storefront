@@ -59,6 +59,7 @@ four51.app.filter('xlat', ['XLATService', function(XLATService) {
 
 four51.app.filter('culturecurrency', ['XLATService', function(XLATService) {
     return function(value) {
+        if (!value) value = 0;
         if (typeof(value) != 'undefined') {
             /**
              * Number.prototype.format(n, x, s, c)
