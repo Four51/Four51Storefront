@@ -1,21 +1,13 @@
 <section>
-    <div class="panel panel-default" ng-if="messages.length == 0">
-        <div class="panel-heading">
-            <h3 class="panel-title">{{'Messages' | r | xlat}}</h3>
-        </div>
-        <div class="panel-body">
-            <accountnavigation />
-            <p class="alert alert-warning">{{'You have no ' + ('Messages' | rl) + ' yet!' | xlat}}</p>
-        </div>
-    </div>
-    <div class="panel panel-default" ng-if="messages.length > 0">
+    <div class="panel panel-default">
         <loadingindicator ng-show="displayLoadingIndicator" />
         <div class="panel-heading">
             <h3 class="panel-title">{{'Messages' | r | xlat}}</h3>
         </div>
         <div class="panel-body">
             <accountnavigation />
-            <div class="table-responsive">
+            <p class="alert alert-warning" ng-show="messages.length == 0">{{'You have no ' + ('Messages' | rl) + ' yet!' | xlat}}</p>
+            <div class="table-responsive" ng-show="messages.length > 0">
                 <table class="table table-striped">
                     <tr>
                         <th><input type='checkbox' ng-click="checkAll($event)" /></th>
@@ -33,16 +25,17 @@
                     </tr>
                 </table>
             </div>
-        </div>
-        <div class="panel-footer">
-            <pagination ng-change="paged()" ng-model="settings.currentPage" page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+            <pagination ng-show="settings.listCount > settings.pageSize" ng-change="paged()" ng-model="settings.currentPage" page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
                         items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
-            <button id="451qa_btn_delmsg" type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-disabled="(messages | filter:{Selected:true}).length == 0">
-                <span>{{('Delete' | r) + ' ' + ('Selected' | r) | xlat}}</span>
-            </button>
-            <button id="451qa_btn_cmpmsg" class="btn btn-primary pull-right" type="button" redirect="message/new">
-                <span>{{'Compose' | r | xlat}}</span>
-            </button>
+            <div class="panel-footer">
+
+                <button id="451qa_btn_delmsg" type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-disabled="(messages | filter:{Selected:true}).length == 0">
+                    <span>{{('Delete' | r) + ' ' + ('Selected' | r) | xlat}}</span>
+                </button>
+                <button id="451qa_btn_cmpmsg" class="btn btn-primary pull-right" type="button" redirect="message/new">
+                    <span>{{'Compose' | r | xlat}}</span>
+                </button>
+            </div>
         </div>
     </div>
 </section>
