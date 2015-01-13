@@ -15,7 +15,7 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 
 	// initial load. start from the kit parent
 	Kit.get($routeParams.id, function(kit) {
-		$scope.LineItem = {};
+		$scope.LineItem = $routeParams.lineitemid ? $scope.currentOrder.LineItems[$routeParams.lineitemid] : {};
 		$scope.LineItem.IsKitParent = true;
 		$scope.kit = kit;
 		$scope.KitParent = kit.KitParent;
