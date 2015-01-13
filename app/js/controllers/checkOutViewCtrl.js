@@ -21,6 +21,9 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, Analytics,
 	    $scope.errorMessage = null;
         Order.submit($scope.currentOrder,
 	        function(data) {
+				if ($scope.user.Company.GoogleAnalyticsCode) {
+					Analytics.trackOrder(data, $scope.user);
+				}
 				$scope.user.CurrentOrderID = null;
 				User.save($scope.user, function(data) {
 			        $scope.user = data;

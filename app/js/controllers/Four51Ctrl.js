@@ -40,7 +40,10 @@ function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, C
 				else
 					$scope.currentOrder = null;
 
-				analytics(user.Company.GoogleAnalyticsCode);
+				if (user.Company.GoogleAnalyticsCode) {
+					analytics(user.Company.GoogleAnalyticsCode);
+				}
+
 			});
 			Category.tree(function (data) {
 				$scope.tree = data;

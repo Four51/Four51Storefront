@@ -1,8 +1,8 @@
 four51.app.factory('Analytics', ['$analytics', function($analytics) {
-	var _order = function(data) {
+	var _order = function(data, user) {
 		$analytics.eventTrack('ecommerce:addTransaction', {
 			'id': data.ExternalID,
-			'affiliation': $scope.user.Company.Name,
+			'affiliation': user.Company.Name,
 			'revenue': data.Total,
 			'shipping': data.ShippingCost,
 			'tax': data.TaxCost

@@ -37,8 +37,7 @@ function ($scope, $location, $451, AddressList) {
         });
     };
 
-	$scope.search = function(e) {
-		e.preventDefault();
+	$scope.search = function() {
 		Query();
 	};
 }]);
