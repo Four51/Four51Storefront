@@ -69,7 +69,7 @@
                                     {{"Start" | r | xlat}} {{"New" | r | xlat}} {{"Order" | r | xlat}}
                                 </a>
                             </li>
-                            <li class="divider"></li>
+                            <li class="divider" ng-show="user.Type!='TempCustomer' || AppConst.debug"></li>
                             <li ng-show="user.Type!='TempCustomer'" class="logout">
                                 <a href="#"  class="451_btn_logout" ng-click="Logout()">
                                     <i class="fa fa-power-off text-danger"></i>
