@@ -34,9 +34,8 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 	$scope.addToOrder = function() {
 		$scope.currentOrder = $scope.currentOrder || {};
 		$scope.currentOrder.LineItems = $scope.currentOrder.LineItems || [];
-		if ($scope.LineItem.Product.InteropID == $scope.kit.KitParent.InteropID)
+		if (!$scope.LineItem.ID)
 			$scope.currentOrder.LineItems.push($scope.LineItem);
-		// else ; handle all the kit children by updating lineitem
 
 		$scope.currentOrder.Type = $scope.LineItem.PriceSchedule.OrderType;
 		$scope.addToOrderIndicator = true;

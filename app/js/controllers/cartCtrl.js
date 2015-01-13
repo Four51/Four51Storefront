@@ -121,7 +121,8 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 		var newTotal = 0;
 		if (!$scope.currentOrder) return newTotal;
 		angular.forEach($scope.currentOrder.LineItems, function(item){
-			$scope.cart.$setValidity('kitValidation', item.IsKitParent && !item.KitIsInvalid);
+			if (item.IsKitParent)
+				$scope.cart.$setValidity('kitValidation', !item.KitIsInvalid);
 			newTotal += item.LineTotal;
 		});
 		$scope.currentOrder.Subtotal = newTotal;
