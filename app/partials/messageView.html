@@ -12,7 +12,7 @@
         </div>
         <div class="panel-footer text-right">
             <button id="451_btn_del" ng-click="delete($event)" type="button" class="btn btn-danger pull-left">{{'Delete' | r | xlat}}</button>
-            <button id="451_btn_reply" ng-show="canReply()" type="button" class="btn btn-info" ng-click="composing = !composing; message.Subject = 'RE: ' + message.Subject; message.Body = null">{{'Reply' | r | xlat}}</button>
+            <button id="451_btn_reply" ng-show="canReply()" type="button" class="btn btn-info" ng-click="reply()">{{'Reply' | r | xlat}}</button>
             <button id="451_btn_ok" ng-click="ok()" type="button" class="btn btn-success">{{'OK' | r | xlat}}</button>
         </div>
     </div>
@@ -32,7 +32,7 @@
             </p>
         </div>
         <div class="panel-footer text-right">
-            <button type="button" id="451_btn_cancel" class="btn btn-warning pull-left" ng-click="composing = !composing">{{'Cancel' | r | xlat}}</button>
+            <button type="button" id="451_btn_cancel" class="btn btn-warning pull-left" ng-click="cancel()">{{'Cancel' | r | xlat}}</button>
             <button type="button" id="451_btn_send" class="btn  btn-primary" ng-click="send($event)">{{'Send' | r | xlat}}</button>
         </div>
     </div>

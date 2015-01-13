@@ -28,4 +28,19 @@ function($scope, $location, $routeParams, Message) {
 			$location.path('/message');
 		});
 	}
+	$scope.reply = function() {
+		$scope.messageCopy = angular.copy($scope.message);
+		$scope.message.Subject = 'RE: ' + $scope.message.Subject;
+		$scope.message.Body = null;
+		$scope.composing = true;
+	}
+	$scope.cancel = function() {
+		if ($scope.messageCopy) {
+			$scope.message = $scope.messageCopy;
+			delete $scope.messageCopy;
+			$scope.composing = false;
+		} else {
+			$location.path('message');
+		}
+	}
 }]);

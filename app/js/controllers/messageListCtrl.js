@@ -4,10 +4,11 @@ four51.app.controller('MessageListCtrl', ['$scope', 'MessageList', function($sco
 		pageSize: 10
 	};
 
+	MessageList.clear();
+
 	function GetList() {
 		$scope.displayLoadingIndicator = true;
 		MessageList.query($scope.settings.currentPage, $scope.settings.pageSize, function (list, count) {
-			console.log(list);
 			$scope.messages = list;
 			$scope.settings.listCount = count;
 			$scope.displayLoadingIndicator = false;
@@ -23,7 +24,6 @@ four51.app.controller('MessageListCtrl', ['$scope', 'MessageList', function($sco
 	$scope.deleteSelected = function() {
 		$scope.displayLoadingIndicator = true;
 		MessageList.delete($scope.messages, function() {
-			console.log('get list');
 			GetList();
 		});
 	};
