@@ -32,6 +32,18 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 			});
 			return multi;
 		}
+
+		// if kit line items ensure all are configured
+		angular.forEach(order.LineItems, function(li) {
+			if (li.IsKitParent) {
+				var current = li.NextKitLineItem;
+				while (current) {
+					if (!current.IsConfigured)
+						li.KitIsInvalid = true;
+					current = current.NextKitLineItem;
+				}
+			}
+		});
 	}
 
 	var _get = function(id, success, suppress) {
