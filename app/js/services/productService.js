@@ -125,9 +125,15 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
 		    });
 	    }
     }
-	
+
+	var _clear = function() {
+		variantCache = [];
+		productCache = [];
+		return this;
+	}
 	return {
         get: _get,
-        search: _search
+        search: _search,
+		clearCache: _clear
     }
 }]);
