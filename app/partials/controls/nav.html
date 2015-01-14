@@ -44,17 +44,17 @@
                                     {{'User Information' | r | xlat}}
                                 </a>
                             </li>
-                            <li id="451qa_addy_link" ng-show="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" class="addresses">
+                            <li id="451qa_addy_link" ng-show="user.Type == 'Customer' && (user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress'))" class="addresses">
                                 <a href="addresses">
                                     {{'Addresses' | r | xlat}}
                                 </a>
                             </li>
-                            <li id="451qa_mesg_link" ng-show="user.Permissions.contains('ViewMessaging')" class="messages">
+                            <li id="451qa_mesg_link" ng-show="user.Type == 'Customer' && user.Permissions.contains('ViewMessaging')" class="messages">
                                 <a href="message">
                                     {{'Messages' | r | xlat}}
                                 </a>
                             </li>
-                            <li class="favorites hidden-xs">
+                            <li class="favorites" ng-show="user.Type == 'Customer'">
                                 <a id="451qa_fave_link" href="favoriteorders">
                                     {{'Favorites' | r | xlat}}
                                 </a>

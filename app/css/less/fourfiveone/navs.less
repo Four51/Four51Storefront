@@ -1,6 +1,44 @@
 //
 // Navs
 // --------------------------------------------------
+.account-navigation .expand-account-nav {
+  display:none;
+}
+
+@media(max-width:@screen-xs-max) {
+  .account-navigation {
+    position:relative;
+    .expand-account-nav {
+      cursor: pointer;
+      padding:20px;
+      position:absolute;
+      right:0;
+      top:5px;
+      z-index:1020;
+      &.visible-xs + .btn-group {
+        padding-right:50px;
+      }
+    }
+    .btn-group {
+      button {
+      }
+      &:not(.open) {
+        & > button{
+          &:not(.active) {
+            border-width:0;
+            min-height:0;
+            height:0;
+            padding:0;
+            margin:0;
+            overflow:hidden;
+          }
+        }
+      }
+      background-color:#fff;
+      padding:10px;
+    }
+  }
+}
 
 //== Side Nav
 .panel-nav {
