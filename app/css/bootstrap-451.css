@@ -6915,6 +6915,37 @@ select.ng-invalid:invalid:invalid:focus {
   margin-top: 15px;
   padding: 15px;
 }
+.account-navigation .expand-account-nav {
+  display: none;
+}
+@media (max-width: 767px) {
+  .account-navigation {
+    position: relative;
+  }
+  .account-navigation .expand-account-nav {
+    cursor: pointer;
+    padding: 20px;
+    position: absolute;
+    right: 0;
+    top: 5px;
+    z-index: 1020;
+  }
+  .account-navigation .expand-account-nav.visible-xs + .btn-group {
+    padding-right: 50px;
+  }
+  .account-navigation .btn-group {
+    background-color: #fff;
+    padding: 10px;
+  }
+  .account-navigation .btn-group:not(.open) > button:not(.active) {
+    border-width: 0;
+    min-height: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+}
 .panel-nav {
   font-size: 13px;
 }

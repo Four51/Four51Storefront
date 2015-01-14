@@ -14,13 +14,13 @@
                             <span class="hidden-xs">{{'Products' | rc | xlat}}</span>
                         </a>
                     </li>
-                    <li class="order" ng-class="{'active': isActive('order'), 'active-xs': isActive('favoriteorders')}">
+                    <li class="order" ng-if="user.Type == 'Customer'" ng-class="{'active': isActive('order'), 'active-xs': isActive('favoriteorders')}">
                         <a id="451qa_order_link" href="order">
                             <i class="fa fa-clipboard"></i>
                             <span class="hidden-xs">{{'Orders' | r | xlat}}</span>
                         </a>
                     </li>
-                    <li class="report" ng-if="user.Permissions.contains('AdvancedReporting')" ng-class="{'active': isActive('reports')}">
+                    <li class="report" ng-if="user.Type == 'Customer' && user.Permissions.contains('AdvancedReporting')" ng-class="{'active': isActive('reports')}">
                         <a id="451qa_order_link" href="reports">
                             <i class="fa fa-bar-chart-o"></i>
                             <span class="hidden-xs">{{'Reports' | r | xlat}}</span>
@@ -44,17 +44,17 @@
                                     {{'User Information' | r | xlat}}
                                 </a>
                             </li>
-                            <li id="451qa_addy_link" ng-show="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" class="addresses">
+                            <li id="451qa_addy_link" ng-show="user.Type == 'Customer' && (user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress'))" class="addresses">
                                 <a href="addresses">
                                     {{'Addresses' | r | xlat}}
                                 </a>
                             </li>
-                            <li id="451qa_mesg_link" ng-show="user.Permissions.contains('ViewMessaging')" class="messages">
+                            <li id="451qa_mesg_link" ng-show="user.Type == 'Customer' && user.Permissions.contains('ViewMessaging')" class="messages">
                                 <a href="message">
                                     {{'Messages' | r | xlat}}
                                 </a>
                             </li>
-                            <li class="favorites hidden-xs">
+                            <li class="favorites" ng-show="user.Type == 'Customer'">
                                 <a id="451qa_fave_link" href="favoriteorders">
                                     {{'Favorites' | r | xlat}}
                                 </a>

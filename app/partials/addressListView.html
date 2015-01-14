@@ -1,11 +1,11 @@
 <section class="address-list-view">
     <loadingindicator ng-show="displayLoadingIndicator" />
+    <accountnavigation />
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">{{'Addresses' | r | xlat}}</h3>
         </div>
         <div class="panel-body">
-            <accountnavigation />
                 <div class="view-form-icon">
                     <form name="searchForm" ng-submit="search()">
                         <div class="input-group">
