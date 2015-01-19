@@ -21,7 +21,7 @@ four51.app.directive('customselectionfield', ['$451', function($451) {
 				scope.customfield.SelectedOptionID = this.item == null ? null : this.item.ID;
 				if (this.item != null) this.item.Selected = true;
 
-				if (this.item != null && this.item.Value.indexOf('Other') > -1) {
+				if (this.item != null && this.item.Value.indexOf('Other') > -1 && this.item.ID.indexOf('_other') > -1) {
 					scope.customfield.isOtherSelected = true;
 					this.item.Selected = true;
 					scope.customfield.SelectedOptionID = this.item.ID;
