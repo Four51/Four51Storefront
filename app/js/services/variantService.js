@@ -14,10 +14,19 @@ four51.app.factory('Variant', ['$rootScope', '$resource', '$451', 'Security', 'E
 			if (spec.ControlType == 'File' && spec.File && spec.File.Url.indexOf('auth') == -1)
 				spec.File.Url += "&auth=" + Security.auth();
 		});
+        translateLineBreaks(variant, false);
 	}
 
+    function translateLineBreaks(variant, addBreaks) {
+        angular.forEach(variant.Specs, function(spec) {
+            if (spec.Value && spec.ControlType == 'Text' && spec.Lines > 1) {
+                spec.Value = addBreaks ? spec.Value.replace(/\n/g, "\r\n") : spec.Value.replace(/\r\n/g, "\n");
+            }
+        });
+    }
+
 	var _get = function(params, success, error) {
-		$resource($451.api('variant')).get(params).$promise.then(
+        $resource($451.api('variant')).get(params).$promise.then(
 			function(variant) {
 				_extend(variant);
 				_then(success, variant);
@@ -28,6 +37,7 @@ four51.app.factory('Variant', ['$rootScope', '$resource', '$451', 'Security', 'E
 		);
 	}
 	var _save = function(variant, success) {
+        translateLineBreaks(variant, true);
 		return $resource($451.api('variant')).save(variant).$promise.then(function(v) {
 			var queryParams = {ProductInteropID: v.ProductInteropID, VariantInteropID: v.InteropID};
 			//store.remove(getCacheName(queryParams));
