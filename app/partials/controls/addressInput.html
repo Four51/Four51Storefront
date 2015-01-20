@@ -30,7 +30,7 @@
                     <i class="fa fa-user"></i>
                 </div>
                 <div>
-                    <label ng-show="isPhoneRequired" ng-class="{required: isPhoneRequired}">{{'Phone' | r | xlat}}</label>
+                    <label ng-show="isPhoneRequired()" ng-class="{required: isPhoneRequired()}">{{'Phone' | r | xlat}}</label>
                     <input name="phone" class="form-control" type="text" ng-model="address.Phone" placeholder="{{'Phone' | r | xlat}}" autocomplete="off" ng-required="isPhoneRequired()" />
                     <i class="fa fa-phone"></i>
                 </div>
