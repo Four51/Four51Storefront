@@ -34,9 +34,8 @@ function ($scope, $rootScope, $location, User, Address, Resources) {
     };
 
     $scope.isPhoneRequired = function() {
-        return ($scope.user.Permissions.contains('BillingAddressPhoneRequired') && $scope.address.IsBilling) ||
-            ($scope.user.Permissions.contains('ShipAddressPhoneRequired') && $scope.address.IsShipping);
-    }
+        return ($scope.user.Permissions.contains('BillingAddressPhoneRequired') && $scope.address.IsBilling) || ($scope.user.Permissions.contains('ShipAddressPhoneRequired') && $scope.address.IsShipping) || ($scope.user.Permissions.contains('BillingAddressPhoneRequired') && $scope.user.Permissions.contains('ShipAddressPhoneRequired'));
+    };
 
     var streetComplete = null;
     var streetNum = null;
