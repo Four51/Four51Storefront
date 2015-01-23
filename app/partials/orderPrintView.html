@@ -21,6 +21,7 @@
                     </h3>
                 </div>
                 <div>
+                    <p ng-show="order.ExternalID">{{('Order' | r) + ' ' + ('ID' | r) | xlat}}: {{order.ExternalID}}</p>
                     <p ng-show="order.DateSubmitted">{{('Date' | r) + ' ' + ('Submitted' | r) | xlat}}: {{order.DateSubmitted | date:user.Culture.DateFormat.short}}</p>
                     <p>{{'Status' | r}}: {{order.StatusText}}</p>
                     <p ng-show="order.DateCompleted">{{('Date' | r) + ' ' + ('Completed' | r) | xlat}}: {{order.DateCompleted | date:user.Culture.DateFormat.short}}</p>
