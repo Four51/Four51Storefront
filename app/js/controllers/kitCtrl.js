@@ -50,8 +50,10 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 				if ($scope.LineItem.IsKitParent) {
 					// getting the current line item after the parent works because it has to be the last one in the order line item list
 					$scope.LineItem = $scope.currentOrder.LineItems[order.LineItems.length-1].NextKitLineItem;
-					SetupForOrder($scope.LineItem.Product);
-					hasNext = true;
+					if ($scope.LineItem) {
+						SetupForOrder($scope.LineItem.Product);
+						hasNext = true;
+					}
 				}
 				else {
 					var current = null; // = $scope.currentOrder.LineItems[0]; // edit this to get the right line item if more than 1 exists
