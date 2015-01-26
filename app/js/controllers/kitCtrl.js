@@ -51,7 +51,7 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 					// getting the current line item after the parent works because it has to be the last one in the order line item list
 					$scope.LineItem = $scope.currentOrder.LineItems[order.LineItems.length-1].NextKitLineItem;
 					if ($scope.LineItem) {
-						SetupForOrder($scope.LineItem.Product);
+						SetupForOrder($scope.LineItem.Product, $scope.LineItem.Variant);
 						hasNext = true;
 					}
 				}
@@ -67,7 +67,7 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 					while(!hasNext && current.NextKitLineItem) {
 						if (current.NextKitLineItem && (current.ID == $scope.LineItem.ID)) {
 							$scope.LineItem = current.NextKitLineItem;
-							SetupForOrder($scope.LineItem.Product);
+							SetupForOrder($scope.LineItem.Product, $scope.LineItem.Variant);
 							hasNext = true;
 						}
 						current = current.NextKitLineItem;
@@ -89,8 +89,8 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 		);
 	};
 
-	function SetupForOrder(product) {
-		ProductDisplayService.getProductAndVariant(product.InteropID, null, function(data) {
+	function SetupForOrder(product, variant) {
+		ProductDisplayService.getProductAndVariant(product.InteropID, variant ? variant.InteropID : null, function(data) {
 			delete $scope.variantLineItems; // have to delete this because the scope is held in the service singleton and inherits any previous variants
 			$scope.LineItem.Product = data.product;
 			$scope.LineItem.Variant = data.variant; // should never be a variant
