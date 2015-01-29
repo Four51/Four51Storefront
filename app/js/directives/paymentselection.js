@@ -89,17 +89,20 @@ four51.app.directive('paymentselector', function() {
 		       switch (method) {
 			       case 'Undetermined':
 				       valid = $scope.user.Permissions.contains('SubmitForApproval');
-				       break;
+                       valid = valid ? validateAccount() : valid;
+                       break;
 			       case 'PurchaseOrder':
 				       valid = $scope.user.Permissions.contains('PayByPO');
-				       break;
+                       valid = valid ? validateAccount() : valid;
+                       break;
 			       case 'BudgetAccount':
 				       valid = $scope.user.Permissions.contains('PayByBudgetAccount');
 				       valid = valid ? validateAccount() : valid;
 				       break;
 			       case 'CreditCard':
 				       valid = $scope.user.Permissions.contains('PayByCreditCard');
-				       break;
+                       valid = valid ? validateAccount() : valid;
+                       break;
 			       default:
 				       return false;
 		       }
