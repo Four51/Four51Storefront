@@ -31,6 +31,7 @@ four51.app.directive('paymentselector', function() {
 		       else {
 			       if (!$scope.isSplitBilling && $scope.currentOrder) {
 				       $scope.currentOrder.currentBudgetAccount = null;
+				       $scope.currentOrder.BudgetAccountID = null;
 			       }
 		       }
 		       $scope.cart_billing.$setValidity('paymentMethod', validatePaymentMethod(event));
