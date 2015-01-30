@@ -64,6 +64,7 @@ four51.app.directive('paymentselector', function() {
 	       function validatePaymentMethod(method) {
 		       $scope.isSplitBilling = false;
 		       var validateAccount = function() {
+                   var paymentMethod = $scope.currentOrder.PaymentMethod;
 			       var account = null;
 			       angular.forEach($scope.SpendingAccounts, function(a) {
 				       if ($scope.currentOrder && a.ID == $scope.currentOrder.BudgetAccountID)
@@ -73,17 +74,17 @@ four51.app.directive('paymentselector', function() {
 				       $scope.isSplitBilling = false;
 				       if (account.AccountType.MaxPercentageOfOrderTotal != 100) {
 					       $scope.isSplitBilling = true;
-					       return false;
+					       return (paymentMethod == 'BudgetAccount') ? false : true;
 				       }
 
 				       if (account.Balance < $scope.currentOrder.Total) {
 					       $scope.isSplitBilling = !account.AccountType.AllowExceed;
-					       return account.AccountType.AllowExceed;
+					       return (paymentMethod == 'BudgetAccount' ) ? account.AccountType.AllowExceed : true;
 				       }
 				       else
 					       return true;
 			       }
-			       return false;
+			       return (paymentMethod != 'BudgetAccount');
 		       }
 
 		       var valid = false;
