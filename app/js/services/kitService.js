@@ -1,14 +1,49 @@
-four51.app.factory('Kit', ['$resource', '$451', function($resource, $451) {
+four51.app.factory('Kit', ['$resource', '$451', 'Order', function($resource, $451, Order) {
+	var svc = {
+		get: _get,
+		saveOrder: _save,
+		mapKitToOrder: _map
+	};
 
-	function _get(id, callback) {
-		$resource($451.api('kit/:interopID'), { interopID: id }).get().$promise.then(function(kit) {
-			callback(kit);
+	function _extend(kit) {
+		angular.forEach(kit.KitItems, function(item) {
+			item.LineItem = {};
+			item.RequiresSelection = (item.Variant.IsDefaultVariant && item.Variant.IsMpowerVariant);
 		});
+		kit.KitParent.LineItem = {};
+		return kit;
 	}
 
-	var svc = {
-		get: _get
-	};
-	return svc;
+	function _map(kit, lineitem) {
+		angular.forEach(kit.KitItems, function(item) {
+			loop(item, lineitem);
+		});
 
+		function loop(kititem, lineitem) {
+			if (lineitem.IsKitChild && lineitem.KitItemID == kititem.ID) {
+				kititem.LineItem = lineitem;
+				return;
+			}
+			else if (lineitem.NextKitLineItem) {
+				loop(kititem, lineitem.NextKitLineItem);
+			}
+
+			return;
+		}
+	}
+
+	function _get(id, callback) {
+		var http = $resource($451.api('kit/:interopID'), { interopID: id }).get().$promise.then(success);
+		return http;
+
+		function success(kit) {
+			return _extend(kit);
+		}
+	}
+
+	function _save(order, success, error) {
+		Order.clearshipping(order).save(order, success, error);
+	}
+
+	return svc;
 }]);
