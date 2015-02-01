@@ -31,6 +31,7 @@ four51.app.directive('paymentselector', function() {
 		       else {
 			       if (!$scope.isSplitBilling && $scope.currentOrder) {
 				       $scope.currentOrder.currentBudgetAccount = null;
+				       $scope.currentOrder.BudgetAccountID = null;
 			       }
 		       }
 		       $scope.cart_billing.$setValidity('paymentMethod', validatePaymentMethod(event));
@@ -63,6 +64,7 @@ four51.app.directive('paymentselector', function() {
 	       function validatePaymentMethod(method) {
 		       $scope.isSplitBilling = false;
 		       var validateAccount = function() {
+                   var paymentMethod = $scope.currentOrder.PaymentMethod;
 			       var account = null;
 			       angular.forEach($scope.SpendingAccounts, function(a) {
 				       if ($scope.currentOrder && a.ID == $scope.currentOrder.BudgetAccountID)
@@ -72,34 +74,37 @@ four51.app.directive('paymentselector', function() {
 				       $scope.isSplitBilling = false;
 				       if (account.AccountType.MaxPercentageOfOrderTotal != 100) {
 					       $scope.isSplitBilling = true;
-					       return false;
+					       return (paymentMethod == 'BudgetAccount') ? false : true;
 				       }
 
 				       if (account.Balance < $scope.currentOrder.Total) {
 					       $scope.isSplitBilling = !account.AccountType.AllowExceed;
-					       return account.AccountType.AllowExceed;
+					       return (paymentMethod == 'BudgetAccount' ) ? account.AccountType.AllowExceed : true;
 				       }
 				       else
 					       return true;
 			       }
-			       return false;
+			       return (paymentMethod != 'BudgetAccount');
 		       }
 
 		       var valid = false;
 		       switch (method) {
 			       case 'Undetermined':
 				       valid = $scope.user.Permissions.contains('SubmitForApproval');
-				       break;
+                       valid = valid ? validateAccount() : valid;
+                       break;
 			       case 'PurchaseOrder':
 				       valid = $scope.user.Permissions.contains('PayByPO');
-				       break;
+                       valid = valid ? validateAccount() : valid;
+                       break;
 			       case 'BudgetAccount':
 				       valid = $scope.user.Permissions.contains('PayByBudgetAccount');
 				       valid = valid ? validateAccount() : valid;
 				       break;
 			       case 'CreditCard':
 				       valid = $scope.user.Permissions.contains('PayByCreditCard');
-				       break;
+                       valid = valid ? validateAccount() : valid;
+                       break;
 			       default:
 				       return false;
 		       }

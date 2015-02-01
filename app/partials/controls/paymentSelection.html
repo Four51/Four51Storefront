@@ -16,7 +16,7 @@
         <button class="btn btn-default" type="button"
                 ng-if="user.Permissions.contains('PayByBudgetAccount') && (SpendingAccounts|filter:{ForPurchase:true}).length > 0"
                 ng-click="setBudgetAccount((SpendingAccounts|filter:{AccountType.PurchaseCredit:true}).length)">
-            <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'BudgetAccount' }"></i>
+            <i ng-class="{'fa fa-check': currentOrder.PaymentMethod == 'BudgetAccount' || currentOrder.BudgetAccountID }"></i>
             {{'Spending Account' | r | xlat}}
         </button>
         <button class="btn btn-default" type="button"
@@ -66,30 +66,33 @@
     <div class="alert alert-warning" ng-show="cart-billing.$error.paymentMethod && currentOrder.PaymentMethod == 'BudgetAccount' && currentOrder.BudgetAccountID">
         {{'The account, ' + (currentBudgetAccount.Label) + ', is not sufficient for the order total.' | xlat}}
     </div>
-    <div class="alert alert-warning text-center row" ng-show="isSplitBilling">
-        <p class="col-sm-6 text-left alert alert-info" ng-show="currentOrder.PaymentMethod == 'BudgetAccount'">
-            <span>{{'The account, ' + (currentBudgetAccount.Label) + ', is not sufficient for the order total.' | xlat}}</span>
-            <strong>{{'Please select an additional payment type to cover the remaining' | r | xlat}}</strong>
+    <div class="alert alert-warning text-center" ng-show="isSplitBilling">
+        <div class="row">
+            <p class="col-sm-6 text-left alert alert-info" ng-show="currentOrder.PaymentMethod == 'BudgetAccount'">
+                <span>{{'The account, ' + (currentBudgetAccount.Label) + ', is not sufficient for the order total.' | xlat}}</span>
+                <strong>{{'Please select an additional payment type to cover the remaining' | r | xlat}}</strong>
             <span ng-show="!user.Permissions.contains('HidePricing')">
                 <strong>{{remainingOrderTotal | currency}}</strong>
             </span>
             <span ng-show="user.Permissions.contains('HidePricing')">
                 {{'balance' | xlat}}
             </span>
-            {{'or remove this spending account from your payment options.' | r | xlat}}
-        </p>
-        <p class="col-sm-6 text-left alert alert-success" ng-show="currentOrder.PaymentMethod != 'BudgetAccount'">
-            <span>{{'The account, ' | xlat}} + (currentBudgetAccount.Label) + {{', is not sufficient for the order total.' | xlat}}</span>
-            <span>{{'This additional payment will cover the remaining' | r | xlat}}</span>
+                {{'or remove this spending account from your payment options.' | r | xlat}}
+            </p>
+            <p class="col-sm-6 text-left alert alert-success" ng-show="currentOrder.PaymentMethod != 'BudgetAccount'">
+                <span>{{('The account, ' | xlat) + (currentBudgetAccount.Label) + (', is not sufficient for the order total.' | xlat)}}</span>
+                <span>{{'This additional payment will cover the remaining' | r | xlat}}</span>
             <span ng-show="!user.Permissions.contains('HidePricing')">
                 <strong>{{remainingOrderTotal | currency}}</strong>
             </span>
             <span ng-show="user.Permissions.contains('HidePricing')">
                 {{'balance or remove this spending account from your payment options.' | r | xlat}}
             </span>
-        </p>
-        <p class="col-sm-6">
-            <button type="button" class="btn btn-danger" ng-click="currentOrder.BudgetAccountID = null; isSplitBilling = null">{{'Remove' | xlat}} {{currentBudgetAccount.Label}} {{' as payment' | r | xlat}}</button>
-        </p>
+            </p>
+            <p class="col-sm-6">
+                <button type="button" class="btn btn-danger" ng-click="currentOrder.BudgetAccountID = null; isSplitBilling = null; currentOrder.PaymentMethod = (currentOrder.PaymentMethod == 'BudgetAccount') ? null : currentOrder.PaymentMethod;">{{'Remove' | xlat}} {{currentBudgetAccount.Label}} {{' as payment' | r | xlat}}</button>
+            </p>
+        </div>
+
     </div>
 </div>
