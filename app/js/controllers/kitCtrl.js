@@ -87,13 +87,15 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 
 		function success(order) {
 			$scope.currentOrder = order;
-			Kit.mapKitToOrder($scope.Kit, order.LineItems[$routeParams.lineitemid || $scope.currentOrder.LineItems.length - 1]);
+			var currentLineItem = order.LineItems[$routeParams.lineitemid || $scope.currentOrder.LineItems.length - 1];
+			Kit.mapKitToOrder($scope.Kit, currentLineItem);
 			$scope.user.CurrentOrderID = order.ID;
 			User.save($scope.user, function () {
 				$scope.addToOrderIndicator = false;
 				if (!$scope.Kit.KitHasConfigurableItems)
 					$location.path('/cart');
 			});
+			setupProduct(currentLineItem.Product, currentLineItem.Variant);
 		}
 
 		function fail(ex) {
