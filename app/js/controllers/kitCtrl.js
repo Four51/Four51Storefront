@@ -45,7 +45,7 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 
 	function setupProduct(product, variant) {
 		// have to empty this because the scope is held in the service singleton and inherits any previous variants
-		$scope.variantLineItems = {};
+		$scope.variantLineItems = null;
 		ProductDisplayService.getProductAndVariant(product.InteropID, variant ? variant.InteropID : null, function (data) {
 			$scope.LineItem.Product = data.product;
 			//$scope.LineItem.Variant = data.variant; // should never be a variant
@@ -91,6 +91,8 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 			$scope.user.CurrentOrderID = order.ID;
 			User.save($scope.user, function () {
 				$scope.addToOrderIndicator = false;
+				if (!$scope.Kit.KitHasConfigurableItems)
+					$location.path('/cart');
 			});
 		}
 
