@@ -66,6 +66,7 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 
 		if ($scope.lineItemErrors && $scope.lineItemErrors.length) {
 			$scope.showAddToCartErrors = true;
+			$scope.addToOrderIndicator = false;
 			return;
 		}
 
@@ -87,6 +88,7 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 		}
 
 		function fail(ex) {
+			console.log('error');
 			$scope.addToOrderIndicator = false;
 			$scope.lineItemErrors.push(ex.Detail);
 			$scope.showAddToCartErrors = true;
