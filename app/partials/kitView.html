@@ -92,7 +92,7 @@
 						</p>
 					</div>
 					<!-- VARIANT LIST! -->
-					<div ng-if="LineItem.Product.VariantCount > 0">
+					<div ng-if="LineItem.Product.VariantCount > 0 && ActiveKitItem.RequiresVariantSelection">
 						<div class="row">
 							<div class="panel-title col-xs-9" ng-show="ActiveKitItem.Variant.IsDefaultVariant && LineItem.Product.VariantCount > 0">
 								<h4 class="text-info">
@@ -127,7 +127,9 @@
 												</p>
 											</div>
 											<div class="col-xs-2">
-												<div ng-show="LineItem.Variant.InteropID == v.InteropID" class="alert alert-success text-center" style="padding:5px 2px;"> <i class="fa fa-check"></i><br/><small>Selected</small></div>
+												<div ng-show="LineItem.Variant.InteropID == v.InteropID" class="alert alert-success text-center" style="padding:5px 2px;">
+													<i class="fa fa-check"></i><br/><small>Selected</small>
+												</div>
 											</div>
 										</div>
 									</a>
@@ -166,7 +168,7 @@
 						</button>
 						<div class="btn-group" role="group" ng-show="LineItem.IsKitChild">
 							<loadingindicator ng-show="addToOrderIndicator" />
-							<button class="btn btn-success btn-block btn-lg" type="button" ng-click="saveKitItem()">
+							<button class="btn btn-success btn-block btn-lg" type="button" ng-click="saveKitItem()" ng-disabled="(ActiveKitItem.RequiresVariantSelection && !LineItem.Variant)">
 								<i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>
 								{{updateKitLineItemText | r | xlat}}
 							</button>

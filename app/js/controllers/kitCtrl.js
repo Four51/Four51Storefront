@@ -38,17 +38,24 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 	function setCurrent(item) {
 		if (!item.LineItem.IsConfigurable) return;
 		$scope.LineItem = item.LineItem;
+		$scope.LineItem.Quantity = item.Quantity;
 		$scope.ActiveKitItem = item;
 		setupProduct(item.LineItem.Product, item.LineItem.Variant);
 	}
 
 	function setupProduct(product, variant) {
+		// have to empty this because the scope is held in the service singleton and inherits any previous variants
+		$scope.variantLineItems = {};
 		ProductDisplayService.getProductAndVariant(product.InteropID, variant ? variant.InteropID : null, function (data) {
-			delete $scope.variantLineItems; // have to delete this because the scope is held in the service singleton and inherits any previous variants
 			$scope.LineItem.Product = data.product;
-			$scope.LineItem.Variant = data.variant; // should never be a variant
+			//$scope.LineItem.Variant = data.variant; // should never be a variant
 			ProductDisplayService.setNewLineItemScope($scope);
 			ProductDisplayService.setProductViewScope($scope);
+			if ($scope.variantLineItems) {
+				angular.forEach($scope.variantLineItems, function(li) {
+					li.Quantity = $scope.LineItem.Quantity;
+				});
+			}
 			$scope.setAddToOrderErrors();
 		});
 	}
@@ -88,7 +95,6 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 		}
 
 		function fail(ex) {
-			console.log('error');
 			$scope.addToOrderIndicator = false;
 			$scope.lineItemErrors.push(ex.Detail);
 			$scope.showAddToCartErrors = true;
@@ -104,6 +110,7 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 		function success(order) {
 			$scope.currentOrder = order;
 			$scope.addToOrderIndicator = false;
+			$scope.lineItemErrors = null;
 			Kit.mapKitToOrder($scope.Kit,  order.LineItems[$routeParams.lineitemid || $scope.currentOrder.LineItems.length - 1]);
 		}
 
