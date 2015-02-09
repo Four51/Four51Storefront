@@ -26,6 +26,14 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 	$scope.setItemAsCurrent = setCurrent;
 	$scope.calcVariantLineItems = calcVariantLineItems;
 	$scope.selectVariant = selectVariant;
+	$scope.searchVariants = searchVariants;
+
+	function searchVariants(searchTerm) {
+		$scope.searchTerm = searchTerm;
+		$scope.settings.currentPage == 1 ?
+			setupProduct($scope.LineItem.Product, null, searchTerm) :
+			$scope.settings.currentPage = 1;
+	}
 
 	function selectVariant(variant) {
 		angular.forEach($scope.LineItem.Product.Variants, function(v) {
@@ -43,7 +51,7 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 		setupProduct(item.LineItem.Product, item.LineItem.Variant);
 	}
 
-	function setupProduct(product, variant) {
+	function setupProduct(product, variant, searchTerm) {
 		// have to empty this because the scope is held in the service singleton and inherits any previous variants
 		$scope.variantLineItems = null;
 		ProductDisplayService.getProductAndVariant(product.InteropID, variant ? variant.InteropID : null, function (data) {
@@ -57,7 +65,7 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 				});
 			}
 			$scope.setAddToOrderErrors();
-		});
+		}, $scope.settings.currentPage, $scope.settings.pageSize, searchTerm);
 	}
 
 	function calcVariantLineItems() {
@@ -125,75 +133,3 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 		}
 	}
 }]);
-
-/*
-
-	$scope.selectVariant = function(variant) {
-		angular.forEach($scope.LineItem.Product.Variants, function(v) {
-			v.Selected = false;
-		});
-		variant.Selected = true;
-		$scope.LineItem.Variant = variant;
-	};
-
-	$scope.addToOrder = function() {
-		$scope.currentOrder = $scope.currentOrder || {};
-		$scope.currentOrder.LineItems = $scope.currentOrder.LineItems || [];
-		if (!$scope.LineItem.ID)
-			$scope.currentOrder.LineItems.push($scope.LineItem);
-
-		$scope.currentOrder.Type = $scope.LineItem.PriceSchedule.OrderType;
-		$scope.addToOrderIndicator = true;
-		Order.clearshipping($scope.currentOrder).
-			save($scope.currentOrder,
-			function(order){
-				// step 1, find the line item on the order we're configuring
-				// for now assume 0
-
-				var hasNext = false;
-				$scope.currentOrder = order;
-				if ($scope.LineItem.IsKitParent) {
-					// getting the current line item after the parent works because it has to be the last one in the order line item list
-					$scope.LineItem = $scope.currentOrder.LineItems[order.LineItems.length-1].NextKitLineItem;
-					if ($scope.LineItem) {
-						SetupForOrder($scope.LineItem.Product, $scope.LineItem.Variant);
-						hasNext = true;
-					}
-				}
-				else {
-					var current = null; // = $scope.currentOrder.LineItems[0]; // edit this to get the right line item if more than 1 exists
-					if ($scope.LineItem.IsKitChild) {
-						angular.forEach(order.LineItems, function(li) {
-							if (li.ID == $scope.LineItem.ParentKitLineItemID)
-								current = li;
-						});
-					}
-
-					while(!hasNext && current.NextKitLineItem) {
-						if (current.NextKitLineItem && (current.ID == $scope.LineItem.ID)) {
-							$scope.LineItem = current.NextKitLineItem;
-							SetupForOrder($scope.LineItem.Product, $scope.LineItem.Variant);
-							hasNext = true;
-						}
-						current = current.NextKitLineItem;
-					}
-				}
-
-				$scope.user.CurrentOrderID = order.ID;
-				User.save($scope.user, function() {
-					$scope.addToOrderIndicator = false;
-					if (!hasNext)
-						$location.path('/cart');
-				});
-			},
-			function(ex) {
-				$scope.addToOrderIndicator = false;
-				$scope.lineItemErrors.push(ex.Detail);
-				$scope.showAddToCartErrors = true;
-			}
-		);
-	};
-
-}]);
-
-*/

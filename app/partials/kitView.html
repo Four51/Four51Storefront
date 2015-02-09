@@ -23,8 +23,8 @@
 							<div class="col-sm-6"><b>Kit Item</b></div>
 							<div class="col-sm-3"><b>Quantity</b></div>
 						</li>
-						<li class="row kit-item-row" ng-repeat="item in Kit.KitItems" ng-class="{active: item == ActiveKitItem}" ng-click="setItemAsCurrent(item)">
-							<div>
+						<li class="row kit-item-row" ng-repeat="item in Kit.KitItems" ng-click="setItemAsCurrent(item)">
+							<div ng-class="{active: item.ID == ActiveKitItem.ID}">
 								<div class="col-sm-6">{{item.Variant.ExternalID}}</div>
 								<div class="col-xs-6 col-sm-3"><span class="hidden-md hidden-lg hidden-sm">Quantity: </span>{{item.Quantity}}</div>
 								<div class="col-xs-6 col-sm-3">
@@ -91,6 +91,7 @@
 							{{'Your current order does not allow this product to be added to your cart' | r | xlat}}
 						</p>
 					</div>
+					<kitaddtoorderspecs template="{{LineItem.Product.InteropID}}" ng-show="allowAddToOrder"></kitaddtoorderspecs>
 					<!-- VARIANT LIST! -->
 					<div ng-if="LineItem.Product.VariantCount > 0 && ActiveKitItem.RequiresVariantSelection">
 						<div class="row">
@@ -141,7 +142,6 @@
 							            items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
 						</div>
 					</div>
-					<kitaddtoorderspecs template="{{LineItem.Product.InteropID}}" ng-show="allowAddToOrder"></kitaddtoorderspecs>
 					<div class="form-group" ng-show="allowAddToOrder">
 						<p ng-show="LineItem.Product.DisplayInventory && (LineItem.Variant || LineItem.Product.Variants.length == 0)">
 							<span class="text-info">{{'Quantity Available' | r | xlat}}</span> {{inventoryDisplay(LineItem.Product, LineItem.Variant)}}

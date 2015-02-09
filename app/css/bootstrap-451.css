@@ -8263,7 +8263,8 @@ select.ng-invalid:invalid:invalid:focus {
   background-color: #f5f5f5;
 }
 .panel-kit .kit-item-row > div.active {
-  background-color: #f5f5f5;
+  background-color: #d9edf7;
+  border: #bce8f1;
 }
 .panel-lineitem {
   border: none;
