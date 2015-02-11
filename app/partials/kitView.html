@@ -93,7 +93,7 @@
 					</div>
 					<kitaddtoorderspecs template="{{LineItem.Product.InteropID}}" ng-show="allowAddToOrder"></kitaddtoorderspecs>
 					<!-- VARIANT LIST! -->
-					<div ng-if="LineItem.Product.VariantCount > 0 && ActiveKitItem.RequiresVariantSelection">
+					<div ng-if="ActiveKitItem.RequiresVariantSelection">
 						<div class="row">
 							<div class="panel-title col-xs-9" ng-show="ActiveKitItem.Variant.IsDefaultVariant && LineItem.Product.VariantCount > 0">
 								<h4 class="text-info">
@@ -101,7 +101,7 @@
 								</h4>
 							</div>
 						</div>
-						<div class="view-form-icon" ng-if="ActiveKitItem.Variant.IsDefaultVariant && LineItem.Product.VariantCount > settings.pageSize || searchTerm">
+						<div class="view-form-icon" ng-if="ActiveKitItem.Variant.IsDefaultVariant && (LineItem.Product.VariantCount > settings.pageSize || searchTerm)">
 							<div>
 								<div class="input-group">
 									<input ng-model="searchTerm" type="text" class="form-control" placeholder="{{'Search' | r | xlat}}" />
