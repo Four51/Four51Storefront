@@ -37,7 +37,7 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 
 	function selectVariant(variant) {
 		angular.forEach($scope.LineItem.Product.Variants, function(v) {
-			v.Selected = false;
+			if (v.Selected) v.Selected = false;
 		});
 		variant.Selected = true;
 		$scope.LineItem.Variant = variant;

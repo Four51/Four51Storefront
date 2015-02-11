@@ -9,7 +9,7 @@ four51.app.directive('addtoorderspecs', ['$routeParams',  function($routeParams)
 four51.app.directive('kitaddtoorderspecs', [function() {
 	var obj = {
 		restrict: 'E',
-		template: '<div><figure><img class="product-image-large img-responsive" ng-src="{{LineItem.Variant.LargeImageUrl}}" imageonload /></figure></div><div ng-include="specForm"></div>',
+		template: '<div ng-if="LineItem.Product.IsVBOSS"><figure><img class="product-image-large img-responsive" ng-src="{{LineItem.Variant.LargeImageUrl}}" imageonload /></figure></div><div ng-include="specForm"></div>',
 		priority: 500,
 		link: function(scope, element, attrs) {
 			attrs.$observe('template', function(val) {
