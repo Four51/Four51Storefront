@@ -4,7 +4,7 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 
 	$scope.settings = {
 		currentPage: 1,
-		pageSize: 10
+		pageSize: 4
 	};
 
 	// initial load. start from the kit parent
@@ -27,6 +27,12 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 	$scope.calcVariantLineItems = calcVariantLineItems;
 	$scope.selectVariant = selectVariant;
 	$scope.searchVariants = searchVariants;
+	$scope.$watch('settings.currentPage',changePage);
+
+	function changePage(n,o) {
+		if (n != o || (n == 1 && o == 1))
+			setupProduct($scope.LineItem.Product, null, $scope.searchTerm);
+	}
 
 	function searchVariants(searchTerm) {
 		$scope.searchTerm = searchTerm;

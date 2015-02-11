@@ -116,6 +116,7 @@
 							<ul>
 								<loadingindicator ng-show="searchIndicator" />
 								<li ng-repeat="v in LineItem.Product.Variants | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize" ng-click="selectVariant(v)">
+									{{v}}
 									<a>
 										<div class="row">
 											<div class="col-xs-10">
