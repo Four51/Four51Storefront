@@ -4,7 +4,7 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 
 	$scope.settings = {
 		currentPage: 1,
-		pageSize: 4
+		pageSize: 10
 	};
 
 	// initial load. start from the kit parent
