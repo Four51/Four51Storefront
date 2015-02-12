@@ -1,5 +1,4 @@
 /* Cloud Template 001 */
-/* code editor location: css/theme.css */
 @media (min-width: 990px){
 	.container, .container-view, .jumbotron .container, .jumbotron .container-view, .navbar-fixed-bottom, .navbar-fixed-top, .header.navbar.navbar-inner {
 		max-width: 960px; /* change to max-width:  1210px for large desktop */
@@ -11,7 +10,7 @@
 	}
 	.header {
 		position: relative;
-		height: 560px; /* ensure height matches height on .jumbotron .container below */
+		height: 215px; /* ensure height matches height on .jumbotron .container below */
 		max-width: 960px;
 		margin: 0 auto;
 		padding: 15px;
@@ -65,18 +64,12 @@
 		background-color: transparent;
 	}
 	.jumbotron .container {
-		height: 560px;
+
 		padding: 0;
 		background-color:#fff;
 		overflow: hidden;
 	}
-	.jumbotron .container .panel-body {
-		background-position:  center bottom;
-		background-repeat: no-repeat;
-		padding: 0;
-		padding-top: 15px;
-		border-top: 1px solid #d6d6d6;
-	}
+
 	.jumbotron .container h2.thumbnail {
 		padding: 0 15px;
 		margin-bottom: 0;
@@ -92,7 +85,7 @@
 		display: none;
 	}
 	body {
-		background:#fff url('../css/images/shutterstock_208315975.jpg');
+		background:#fff url('http://public.four51.com/ordercloud-2-0-assets/desktopThemes/img/shutterstock_208315975.jpg');
 	}
 	aside.col-sm-3 {
 		display: none !important;
