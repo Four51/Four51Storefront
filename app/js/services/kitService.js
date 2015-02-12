@@ -8,7 +8,6 @@ four51.app.factory('Kit', ['$resource', '$451', 'Order', function($resource, $45
 	function _extend(kit) {
 		angular.forEach(kit.KitItems, function(item) {
 			item.LineItem = {};
-			item.RequiresSelection = (item.Variant.IsDefaultVariant && item.Variant.IsMpowerVariant);
 		});
 		kit.KitParent.LineItem = {};
 		return kit;
@@ -32,7 +31,7 @@ four51.app.factory('Kit', ['$resource', '$451', 'Order', function($resource, $45
 		}
 	}
 
-	function _get(id, callback) {
+	function _get(id) {
 		var http = $resource($451.api('kit/:interopID'), { interopID: id }).get().$promise.then(success);
 		return http;
 
