@@ -1,0 +1,132 @@
+/* Cloud Template Base */
+/* code editor location: css/theme.css */
+@media (min-width: 990px){
+	.container, .container-view, .jumbotron .container, .jumbotron .container-view, .navbar-fixed-bottom, .navbar-fixed-top {
+		max-width: 960px; /* change to max-width:  1210px for large desktop */
+		margin: 0 auto;
+	}
+	.container-view {
+		padding: 15px 15px 0;
+		background-color: rgba(255, 255, 255, 0.5);
+	}
+	.header {
+		max-width: 960px;
+		margin: 15px auto 0;
+		padding: 15px 15px 0;
+		background-color: rgba(255, 255, 255, 0.5);
+	}
+	.navbar-fixed-top {
+		position: static;
+		margin-top: 170px /*  custom message no */
+		/* margin-top: 345px;  custom message yes | ensure margin matches height on .jumbotron .container below */
+	}
+	/* disable animation for desktop themes on top and bottom navs */
+	.navbar-fixed-top.headroom, .navbar-fixed-bottom  {
+		/*CSS transitions*/
+		-o-transition-property: none !important;
+		-moz-transition-property: none !important;
+		-ms-transition-property: none !important;
+		-webkit-transition-property: none !important;
+		transition-property: none !important;
+		/*CSS transforms*/
+		-o-transform: none !important;
+		-moz-transform: none !important;
+		-ms-transform: none !important;
+		-webkit-transform: none !important;
+		transform: none !important;
+		/*CSS animations*/
+		-webkit-animation: none !important;
+		-moz-animation: none !important;
+		-o-animation: none !important;
+		-ms-animation: none !important;
+		animation: none !important;
+	}
+	.navbar-fixed-top.headroom.headroom--pinned {
+		top: auto;
+	}
+	.navbar-fixed-bottom {
+		position: static; /* change to position: absolute to add fix to bottom back */
+		margin-bottom: 15px;
+	}
+	.jumbotron {
+		position: absolute;
+		padding: 0;
+		top: 15px;
+		left: 0;
+		right: 0;
+		margin: 0;
+		display: block;
+		text-align: center;
+		background-color: transparent;
+	}
+	.jumbotron .container {
+		height: 185px;  /* custom message no */
+		/* height: 360px;  custom message yes | ensure height matches margin-top on .navbar-fixed-top above */
+		padding: 0 15px;
+		overflow: hidden;
+	}
+	.jumbotron .container .panel-body {
+		padding: 0 15px; /* custom message requirement: 185px high and 960px wide.  Use custom message options on .jumbotron .container &amp; .navbar-fixed-top if custom message yes */
+		height: 185px;
+	}
+	.jumbotron .container h2.thumbnail {
+		padding: 15px 0;
+		margin-bottom: 0;
+	}
+	.jumbotron .container h2.thumbnail span {
+		visibility: hidden; /* change to visibility: visible to add company name back */
+	}
+	nav.dropdown-mega {
+		display: none;
+	}
+	.dropdown-mega .dropdown-menu {
+		left: 10px;
+		right: 10px;
+		top: 44px;
+	}
+	body {
+		/* background image full screen */
+		background:#fff url('../css/images/shutterstock_148368839.jpg') no-repeat center center fixed;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+	}
+	aside.col-sm-3 {
+		display: none !important;
+	}
+	aside + .col-md-8.col-md-offset-1 {
+		width: 100%;
+		margin-left: 0;
+	}
+	nav.nav ul li.hidden-sm {
+		display: none;
+	}
+	.panel-category-list li.col-md-6 {
+		width: 33.3333% !important;
+	}
+	.panel-category-list ul li .well {
+		min-height: 0;
+		padding: 0;
+	}
+	.panel-category-list ul li a {
+		padding: 0;
+	}
+	.panel-category-list ul li a img {
+		margin: 0 auto;
+		max-height: 185px;
+		/* width: 305px recommended for category images */
+	}
+	.panel-category-list ul li .well h5 {
+		display: none; /* change to display: block to add category name back */
+	}
+	.copyright-view p {
+		text-align: right;
+	}
+	.copyright-view p a i {
+		display: none;
+	}
+	.copyright-view p a.btn {
+		margin-top: 5px;
+	}
+}

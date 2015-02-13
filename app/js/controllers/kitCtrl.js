@@ -27,6 +27,12 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 	$scope.calcVariantLineItems = calcVariantLineItems;
 	$scope.selectVariant = selectVariant;
 	$scope.searchVariants = searchVariants;
+	$scope.$watch('settings.currentPage',changePage);
+
+	function changePage(n,o) {
+		if (n != o || (n == 1 && o == 1))
+			setupProduct($scope.LineItem.Product, null, $scope.searchTerm);
+	}
 
 	function searchVariants(searchTerm) {
 		$scope.searchTerm = searchTerm;
@@ -37,7 +43,7 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 
 	function selectVariant(variant) {
 		angular.forEach($scope.LineItem.Product.Variants, function(v) {
-			v.Selected = false;
+			if (v.Selected) v.Selected = false;
 		});
 		variant.Selected = true;
 		$scope.LineItem.Variant = variant;
