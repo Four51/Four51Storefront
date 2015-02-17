@@ -30,6 +30,7 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 	$scope.$watch('settings.currentPage',changePage);
 
 	function changePage(n,o) {
+		if (!$scope.LineItem) return;
 		if (n != o || (n == 1 && o == 1))
 			setupProduct($scope.LineItem.Product, null, $scope.searchTerm);
 	}
