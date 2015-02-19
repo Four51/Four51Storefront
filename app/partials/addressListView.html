@@ -37,7 +37,7 @@
                                 <th>{{'Shipping' | r}}</th>
                                 <th>{{'Billing' | r}}</th>
                             </tr>
-                            <tr ng-repeat="address in addresses | filter:{IsCustEditable:true} | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
+                            <tr ng-repeat="address in addresses | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize | filter:{IsCustEditable:true}">
                                 <td><input type='checkbox' ng-model="address.Selected" /></td>
                                 <td><a ng-href="address/{{address.ID}}">{{address.AddressName}}</a></td>
                                 <td>{{address.City}}</td>
