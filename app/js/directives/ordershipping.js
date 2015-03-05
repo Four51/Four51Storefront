@@ -115,6 +115,9 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 						}
 						$scope.orderShipAddress = add;
 					});
+                    if (!$scope.currentOrder.IsMultipleShip()) {
+                        $scope.setShipAddressAtOrderLevel();
+                    }
 				}
 			});
 
