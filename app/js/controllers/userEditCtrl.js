@@ -7,7 +7,7 @@ function ($scope, $location, $sce, User) {
         $scope.securityWarning = false;
 
         if ($scope.user.Type != 'TempCustomer')
-            $scope.user.TempUsername = $scope.user.Username
+            $scope.user.TempUsername = $scope.user.Username;
         $scope.getToken = function () {
             $scope.loginasuser.SendVerificationCodeByEmail = true;
             $scope.emailResetLoadingIndicator = true;
@@ -47,6 +47,9 @@ function ($scope, $location, $sce, User) {
                     $scope.displayLoadingIndicator = false;
                     $scope.actionMessage = 'Your changes have been saved';
                     $scope.user.TempUsername = u.Username;
+                    if ($scope.Routes && $scope.Routes.Old == 'cart') {
+                        $location.path("checkout");
+                    }
                 },
                 function (ex) {
                     $scope.displayLoadingIndicator = false;
@@ -60,8 +63,8 @@ function ($scope, $location, $sce, User) {
         };
         $scope.loginExisting = function () {
             User.login({Username: $scope.loginasuser.Username, Password: $scope.loginasuser.Password, ID: $scope.user.ID, Type: $scope.user.Type}, function (u) {
-                $location.path("/catalog");
-
+                var redirect = ($scope.Routes && $scope.Routes.Old == 'cart') ? 'checkout' : 'catalog';
+                $location.path(redirect);
             }, function (err) {
                 $scope.loginAsExistingError = err.Message;
             });

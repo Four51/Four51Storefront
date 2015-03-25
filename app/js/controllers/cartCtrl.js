@@ -1,7 +1,7 @@
 four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$451', 'Order', 'OrderConfig', 'User',
 function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
-	var isEditforApproval = $routeParams.id != null && $scope.user.Permissions.contains('EditApprovalOrder');
-	if (isEditforApproval) {
+	$scope.isEditforApproval = $routeParams.id != null && $scope.user.Permissions.contains('EditApprovalOrder');
+	if ($scope.isEditforApproval) {
 		Order.get($routeParams.id, function(order) {
 			$scope.currentOrder = order;
 			// add cost center if it doesn't exists for the approving user
@@ -102,12 +102,17 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 
 	$scope.checkOut = function() {
 		$scope.displayLoadingIndicator = true;
-		if (!isEditforApproval)
+		if (!$scope.isEditforApproval)
 			OrderConfig.address($scope.currentOrder, $scope.user);
 		Order.save($scope.currentOrder,
 			function(data) {
 				$scope.currentOrder = data;
-				$location.path(isEditforApproval ? 'checkout/' + $routeParams.id : 'checkout');
+                if ($scope.user.Type == 'TempCustomer') {
+                    $location.path('admin');
+                }
+                else {
+                    $location.path($scope.isEditforApproval ? 'checkout/' + $routeParams.id : 'checkout');
+                }
 				$scope.displayLoadingIndicator = false;
 			},
 			function(ex) {
