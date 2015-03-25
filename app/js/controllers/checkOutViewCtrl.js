@@ -13,9 +13,6 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, Analytics,
         $location.path('catalog');
     }
 
-    if ($scope.user.Type == 'TempCustomer')
-        $location.path('admin');
-
 	$scope.hasOrderConfig = OrderConfig.hasConfig($scope.currentOrder, $scope.user);
 	$scope.checkOutSection = $scope.hasOrderConfig ? 'order' : 'shipping';
 

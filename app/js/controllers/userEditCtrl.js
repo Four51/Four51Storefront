@@ -1,5 +1,11 @@
-four51.app.controller('UserEditCtrl', ['$scope', '$location', '$sce', 'User',
-function ($scope, $location, $sce, User) {
+four51.app.controller('UserEditCtrl', ['$scope', '$location', '$sce', '$injector', 'User',
+function ($scope, $location, $sce, $injector, User) {
+    var _AnonRouter;
+    try {
+        _AnonRouter = $injector.get('AnonRouter');
+    }
+    catch(ex){}
+
 	User.get(function(user) {
         $scope.user = user;
         $scope.loginasuser = {};
@@ -7,7 +13,7 @@ function ($scope, $location, $sce, User) {
         $scope.securityWarning = false;
 
         if ($scope.user.Type != 'TempCustomer')
-            $scope.user.TempUsername = $scope.user.Username
+            $scope.user.TempUsername = $scope.user.Username;
         $scope.getToken = function () {
             $scope.loginasuser.SendVerificationCodeByEmail = true;
             $scope.emailResetLoadingIndicator = true;
@@ -47,6 +53,7 @@ function ($scope, $location, $sce, User) {
                     $scope.displayLoadingIndicator = false;
                     $scope.actionMessage = 'Your changes have been saved';
                     $scope.user.TempUsername = u.Username;
+                    if (_AnonRouter) _AnonRouter.route();
                 },
                 function (ex) {
                     $scope.displayLoadingIndicator = false;
@@ -60,8 +67,7 @@ function ($scope, $location, $sce, User) {
         };
         $scope.loginExisting = function () {
             User.login({Username: $scope.loginasuser.Username, Password: $scope.loginasuser.Password, ID: $scope.user.ID, Type: $scope.user.Type}, function (u) {
-                $location.path("/catalog");
-
+                if (_AnonRouter) _AnonRouter.route();
             }, function (err) {
                 $scope.loginAsExistingError = err.Message;
             });
