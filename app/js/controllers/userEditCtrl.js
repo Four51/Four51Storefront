@@ -1,7 +1,8 @@
 four51.app.controller('UserEditCtrl', ['$scope', '$location', '$sce', '$injector', 'User',
 function ($scope, $location, $sce, $injector, User) {
+    var _AnonRouter;
     try {
-        _AnonRouter = $injector('AnonRouter');
+        _AnonRouter = $injector.get('AnonRouter');
     }
     catch(ex){}
 
