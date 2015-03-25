@@ -107,12 +107,7 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 		Order.save($scope.currentOrder,
 			function(data) {
 				$scope.currentOrder = data;
-                if ($scope.user.Type == 'TempCustomer') {
-                    $location.path('admin');
-                }
-                else {
-                    $location.path($scope.isEditforApproval ? 'checkout/' + $routeParams.id : 'checkout');
-                }
+                $location.path($scope.isEditforApproval ? 'checkout/' + $routeParams.id : 'checkout');
 				$scope.displayLoadingIndicator = false;
 			},
 			function(ex) {

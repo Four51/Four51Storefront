@@ -88,13 +88,4 @@ function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, C
 	});
 	$scope.$on("$routeChangeSuccess", init);
     $scope.$on('event:auth-loginRequired', cleanup);
-
-    $scope.Routes = {};
-    $scope.$on('$locationChangeStart', routeChange);
-    function routeChange(event, newUrl, oldUrl) {
-        $scope.Routes = {
-            'New': newUrl.split('/')[newUrl.split('/').length-1],
-            'Old': oldUrl.split('/')[oldUrl.split('/').length-1]
-        };
-    }
 }]);
