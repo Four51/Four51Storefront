@@ -128,7 +128,14 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <button type="button" class="btn btn-default" ng-show="item.SpecsLength > 0" ng-init="toggleSpecs = false" ng-click="toggleSpecs = !toggleSpecs">
+                                <span class="btn btn-group" ng-if="item.Variant.IsMpowerVariant">
+                                    <button title="{{'Download' | r | xlat}}" class="btn btn-primary" redirect="{{item.Variant.ProofUrl}}" target="_blank"><i class="fa fa-download"></i></button>
+                                    <button type="button" class="btn btn-default" ng-show="item.SpecsLength > 0" ng-init="toggleSpecs = false" ng-click="toggleSpecs = !toggleSpecs">
+                                        <span ng-show="toggleSpecs == false"><i class="fa fa-plus-circle"></i> {{('Show' | r) + ' ' + ('Specification' | r) | xlat}}</span>
+                                        <span ng-show="toggleSpecs == true"><i class="fa fa-minus-circle"></i> {{('Hide' | r) + ' ' + ('Specification' | r) | xlat}}</span>
+                                    </button>
+                                </span>
+                                <button ng-if="!item.Variant.IsMpowerVariant" type="button" class="btn btn-default" ng-show="item.SpecsLength > 0" ng-init="toggleSpecs = false" ng-click="toggleSpecs = !toggleSpecs">
                                     <span ng-show="toggleSpecs == false"><i class="fa fa-plus-circle"></i> {{('Show' | r) + ' ' + ('Specification' | r) | xlat}}</span>
                                     <span ng-show="toggleSpecs == true"><i class="fa fa-minus-circle"></i> {{('Hide' | r) + ' ' + ('Specification' | r) | xlat}}</span>
                                 </button>
