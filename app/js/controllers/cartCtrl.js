@@ -147,4 +147,8 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 	$scope.cancelEdit = function() {
 		$location.path('order');
 	};
+
+    $scope.downloadProof = function(item) {
+        window.location = item.Variant.ProofUrl;
+    };
 }]);

@@ -94,4 +94,8 @@ four51.app.controller('OrderViewCtrl', ['$scope', '$location', '$routeParams', '
 		$scope.onPrint = function()  {
 			window.print();
 		};
+
+        $scope.downloadProof = function(item) {
+            window.location = item.Variant.ProofUrl;
+        };
 	}]);
