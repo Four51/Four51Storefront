@@ -8,7 +8,7 @@ four51.app.directive('paymentselector', function() {
 
 	       SpendingAccount.query(function(data) {
 		       $scope.SpendingAccounts = data;
-		       if ($scope.currentOrder.BudgetAccountID)
+		       if ($scope.currentOrder && $scope.currentOrder.BudgetAccountID)
 		            budgetAccountCalculation($scope.currentOrder.BudgetAccountID);
 	       });
 
