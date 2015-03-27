@@ -24,7 +24,7 @@
                         <button type="button" class="btn btn-primary" ng-click="newAddress($event)">{{'Add an' + ' ' + ('address' | rc) + ' ' + 'now' | xlat}}</button>
                     </div>
                 </div>
-                <div ng-show="(addresses | filter:{IsCustEditable:true}).length > 0">
+                <div ng-show="addresses.length > 0">
                     <hr/>
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -37,8 +37,8 @@
                                 <th>{{'Shipping' | r}}</th>
                                 <th>{{'Billing' | r}}</th>
                             </tr>
-                            <tr ng-repeat="address in addresses | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize | filter:{IsCustEditable:true}">
-                                <td><input type='checkbox' ng-model="address.Selected" /></td>
+                            <tr ng-repeat="address in addresses | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
+                                <td><input type='checkbox' ng-model="address.Selected" ng-show="address.IsCustEditable" /></td>
                                 <td><a ng-href="address/{{address.ID}}">{{address.AddressName}}</a></td>
                                 <td>{{address.City}}</td>
                                 <td>{{address.State}}</td>
