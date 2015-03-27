@@ -68,6 +68,20 @@
 }
 
 .panel-order-history {
+  & > a {
+    position:absolute;
+    top:0;
+    right:0;
+    width:auto;
+    display:block;
+    padding:@padding-base-vertical @padding-base-horizontal;
+    background-color:fade(@fourfiveone-gray-medium, 60);
+    color:@text-color;
+    transition: background-color 300ms;
+    &:hover {
+      background-color:@fourfiveone-gray-medium;
+    }
+  }
   &:extend(.panel-body all);
 }
 

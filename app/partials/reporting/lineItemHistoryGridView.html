@@ -1,4 +1,5 @@
 <div class="panel-order-history" ng-repeat="item in order.LineItems">
+    <a href="" title="{{'Download' | r | xlat}}" ng-click="downloadProof(item)" ng-if="item.Variant.IsMpowerVariant"><i class="fa fa-download"></i></a>
     <div class="col-sm-6">
         <h3 class="text-primary">
             {{item.ProductIDText}}

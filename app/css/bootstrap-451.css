@@ -8290,12 +8290,12 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-lineitem .col-sm-9 input {
   font-size: 11px;
 }
-.panel-lineitem a {
+.panel-lineitem a.line-item-link {
   width: 100%;
   border: 1px solid transparent;
   padding: 5px;
 }
-.panel-lineitem a:hover {
+.panel-lineitem a.line-item-link:hover {
   text-decoration: none;
   background-color: #f5f5f5;
   border-radius: 4px;
@@ -8306,7 +8306,7 @@ select.ng-invalid:invalid:invalid:focus {
   -o-transition: all ease-in-out 0.5s;
   transition: all ease-in-out 0.5s;
 }
-.panel-lineitem a i {
+.panel-lineitem a.line-item-link i {
   color: #cccccc;
 }
 .panel-lineitem .btn-danger {
@@ -8320,6 +8320,27 @@ select.ng-invalid:invalid:invalid:focus {
 .panel-lineitem .row h2,
 .panel-lineitem .row h3 {
   margin: 0;
+}
+.panel-lineitem figure {
+  position: relative;
+}
+.panel-lineitem figure img {
+  max-height: 150px;
+  margin: 0 auto;
+}
+.panel-lineitem figure a {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: auto;
+  display: block;
+  padding: 6px 12px;
+  background-color: rgba(204, 204, 204, 0.6);
+  color: #333333;
+  transition: background-color 300ms;
+}
+.panel-lineitem figure a:hover {
+  background-color: #cccccc;
 }
 .panel-order {
   margin-bottom: 5px;
@@ -8374,6 +8395,20 @@ select.ng-invalid:invalid:invalid:focus {
 }
 .panel-order .panel-footer .btn-danger {
   display: none;
+}
+.panel-order-history > a {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: auto;
+  display: block;
+  padding: 6px 12px;
+  background-color: rgba(204, 204, 204, 0.6);
+  color: #333333;
+  transition: background-color 300ms;
+}
+.panel-order-history > a:hover {
+  background-color: #cccccc;
 }
 .panel-order-shipping-multiple {
   border-top: 1px solid #dddddd;
