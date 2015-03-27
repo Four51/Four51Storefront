@@ -1,5 +1,7 @@
-four51.app.config(['$locationProvider', function($locationProvider) {
+four51.app.config(['$locationProvider' , '$analyticsProvider', function($locationProvider, $analyticsProvider) {
     $locationProvider.html5Mode(false);
+    // Disabling this boolean will turn off automatic page tracking
+    $analyticsProvider.virtualPageviews(true);
 }]);
 
 four51.app.config(['$provide', function($provide) {
