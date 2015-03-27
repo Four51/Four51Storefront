@@ -40,8 +40,8 @@
                     </div>
                     <div class="col-sm-9">
                         <div class="row">
-                            <div class="col-md-6" ng-if="currentOrder.Status != 'AwaitingApproval'">
-                                <a ng-href="{{item.Product.Type == 'Kit' ? 'kit' : 'cart'}}/{{item.Product.InteropID}}/{{$index}}">
+                            <div class="col-md-6" ng-if="currentOrder.Status != 'AwaitingApproval' || isEditforApproval">
+                                <a ng-href="{{(item.Product.Type == 'Kit' ? 'kit' : 'cart') + '/' + (item.Product.InteropID) + '/' + (isEditforApproval ? (currentOrder.ID + '/') : '') + ($index)}}">
                                     <h3 class="text-primary">
                                         <i ng-show="!item.KitIsInvalid" class="fa fa-edit"></i>
                                         <i ng-show="item.KitIsInvalid" class="fa fa-exclamation-triangle"></i>
@@ -52,7 +52,7 @@
                                     </p>
                                 </a>
                             </div>
-                            <div class="col-md-6" ng-if="currentOrder.Status == 'AwaitingApproval'">
+                            <div class="col-md-6" ng-if="currentOrder.Status == 'AwaitingApproval' && !isEditforApproval">
                                 <h3 class="text-primary">
                                     {{item.ProductIDText}}
                                 </h3>
@@ -130,16 +130,16 @@
                             <div class="col-xs-12">
                                 <span class="btn btn-group" ng-if="item.Variant.IsMpowerVariant">
                                     <button title="{{'Download' | r | xlat}}" class="btn btn-primary" redirect="{{item.Variant.ProofUrl}}" target="_blank"><i class="fa fa-download"></i></button>
-                                    <button type="button" class="btn btn-default" ng-show="item.SpecsLength > 0" ng-init="toggleSpecs = false" ng-click="toggleSpecs = !toggleSpecs">
-                                        <span ng-show="toggleSpecs == false"><i class="fa fa-plus-circle"></i> {{('Show' | r) + ' ' + ('Specification' | r) | xlat}}</span>
-                                        <span ng-show="toggleSpecs == true"><i class="fa fa-minus-circle"></i> {{('Hide' | r) + ' ' + ('Specification' | r) | xlat}}</span>
+                                    <button type="button" class="btn btn-default" ng-show="item.SpecsLength > 0" ng-click="item.toggleSpecs = !item.toggleSpecs">
+                                        <span ng-show="!item.toggleSpecs"><i class="fa fa-plus-circle"></i> {{('Show' | r) + ' ' + ('Specification' | r) | xlat}}</span>
+                                        <span ng-show="item.toggleSpecs"><i class="fa fa-minus-circle"></i> {{('Hide' | r) + ' ' + ('Specification' | r) | xlat}}</span>
                                     </button>
                                 </span>
-                                <button ng-if="!item.Variant.IsMpowerVariant" type="button" class="btn btn-default" ng-show="item.SpecsLength > 0" ng-init="toggleSpecs = false" ng-click="toggleSpecs = !toggleSpecs">
-                                    <span ng-show="toggleSpecs == false"><i class="fa fa-plus-circle"></i> {{('Show' | r) + ' ' + ('Specification' | r) | xlat}}</span>
-                                    <span ng-show="toggleSpecs == true"><i class="fa fa-minus-circle"></i> {{('Hide' | r) + ' ' + ('Specification' | r) | xlat}}</span>
+                                <button ng-if="!item.Variant.IsMpowerVariant" type="button" class="btn btn-default" ng-show="item.SpecsLength > 0" ng-click="item.toggleSpecs = !item.toggleSpecs">
+                                    <span ng-show="!item.toggleSpecs"><i class="fa fa-plus-circle"></i> {{('Show' | r) + ' ' + ('Specification' | r) | xlat}}</span>
+                                    <span ng-show="item.toggleSpecs"><i class="fa fa-minus-circle"></i> {{('Hide' | r) + ' ' + ('Specification' | r) | xlat}}</span>
                                 </button>
-                                <ul ng-show="toggleSpecs == true" class="list-group">
+                                <ul ng-show="item.toggleSpecs == true" class="list-group">
                                     <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} " class="list-group-item">
                                         <span class="text-info">{{spec.Label || spec.Name}}: </span>
                                         <span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span></span>
