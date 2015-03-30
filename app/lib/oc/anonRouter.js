@@ -24,14 +24,21 @@ function run($rootScope, $location, User, before) {
     );
 }
 
-AnonRouter.$inject = ['$location', 'after'];
-function AnonRouter($location, after) {
+AnonRouter.$inject = ['$location', 'User', 'after'];
+function AnonRouter($location, User, after) {
     var service = {
         route: _route
     };
     return service;
 
     function _route() {
-        $location.path(after);
+        if (after == 'cart' || after == 'checkout') {
+            User.get(function(u) {
+                $location.path(u.CurrentOrderID ? after : 'catalog');
+            });
+        }
+        else {
+            $location.path(after);
+        }
     }
 }
