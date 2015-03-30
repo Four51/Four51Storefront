@@ -114,6 +114,7 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 	var _approve = function(order, success, error) {
 		$resource($451.api('order/approve/:id'), {'id': order.ID}, { approve: { method: 'PUT', params: { 'comment': order.ApprovalComment}}}).approve().$promise.then(
 			function(o) {
+                store.set('451Cache.Order.' + o.ID, o);
 				_extend(o);
 				_then(success, o);
 			},
@@ -126,6 +127,7 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 	var _decline = function(order, success, error) {
 		$resource($451.api('order/decline/:id'), {'id': order.ID}, { decline: { method: 'PUT', params: { 'comment': order.ApprovalComment}}}).decline().$promise.then(
 			function(o) {
+                store.set('451Cache.Order.' + o.ID, o);
 				_extend(o);
 				_then(success, o);
 			},
