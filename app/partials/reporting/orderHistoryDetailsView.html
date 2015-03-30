@@ -23,7 +23,7 @@
         <span class="text-info">{{'Cost Center' | r | xlat}}</span>
         <span class="pull-right">{{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</span>
     </p>
-    <p>
+    <p ng-show="order.PaymentMethod != 'Undetermined'">
         <span class="text-info">{{('Payment' | r) + ' ' + ('Method' | r) | xlat}}</span>
         <span class="pull-right">{{order.PaymentMethodText | r | xlat}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong> {{order.AmountOnAccount && order.PaymentMethod != 'BudgetAccount' ? "(" + (order.Total - order.AmountOnAccount | currency) + ")" : ""}}</span>
     </p>

@@ -14,7 +14,7 @@ four51.app.factory('OrderConfig', function() {
     var setPaymentMethod = function(accounts) {
         // logic is that we want to default the payment method to the most likely choice of the user.
         // this order is purely a business requirement. not an api requirement.
-	    if (user.Permissions.contains('SubmitForApproval') && order.Approvals.length > 0) {
+	    if ((user.Permissions.contains('SubmitForApproval') && order.Approvals.length > 0) || (order.Total == 0 && !user.Company.BillZeroPriceOrders)) {
 		    order.PaymentMethod = 'Undetermined'; return;
 	    }
 	    if (user.Permissions.contains('PayByBudgetAccount') && accounts.length > 0) {

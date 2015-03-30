@@ -28,7 +28,7 @@
                     <p ng-show="order.FromUserFirstName || order.FromUserLastName">{{'Created By' | r | xlat}}: {{order.FromUserFirstName + ' ' + order.FromUserLastName}}</p>
                     <p ng-show="order.Comments">{{'Comments' | r | xlat}}: {{order.Comments}}</p>
                     <p ng-show="orderCostCenter">{{'Cost Center' | r | xlat}}: {{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</p>
-                    <p>{{('Payment' | r) + ' ' + ('Method' | r) | xlat}}: {{order.PaymentMethodText}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong></p>
+                    <p ng-show="order.PaymentMethod != 'Undetermined'">{{('Payment' | r) + ' ' + ('Method' | r) | xlat}}: {{order.PaymentMethodText}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong></p>
                     <address ng-show="order.ShipAddress">
                         <span class="text-primary"><strong>{{'Ship to' | r | xlat}}</strong></span><br />
                         <span ng-show="order.LineItems[0].ShipFirstName || order.LineItems[0].ShipLastName">{{order.LineItems[0].ShipFirstName}} {{order.LineItems[0].ShipLastName}}</span>
