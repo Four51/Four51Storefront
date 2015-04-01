@@ -41,7 +41,10 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 				var auto = $scope.currentOrder.autoID;
 				Order.save($scope.currentOrder,
 					function(data) {
+                        //Due to order save race condition, BillAddressID was being set to null
+                        var billAddressID = $scope.currentOrder.BillAddressID;
 						$scope.currentOrder = data;
+                        $scope.currentOrder.BillAddressID = billAddressID;
 						$scope.displayLoadingIndicator = false;
 						if (auto) {
 							$scope.currentOrder.autoID = true;
