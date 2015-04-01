@@ -25,7 +25,11 @@ four51.app.factory('Security', ['$451', '$cookieStore', function($451, $cookieSt
             return !!this.currentUser;
         },
         logout: function() {
-            $cookieStore.remove(_cookieName);
+            function delete_cookie( name ) {
+                document.cookie = name + '=; path=/' + $451.apiName + '; expires=' + new Date(0).toUTCString();
+                document.cookie = name + '=; path=/' + $451.apiName + '/; expires=' + new Date(0).toUTCString();
+            }
+            delete_cookie(_cookieName);
             delete this.currentUser;
         }
     }
