@@ -1,5 +1,5 @@
-four51.app.controller('OrderViewCtrl', ['$scope', '$location', '$routeParams', 'Order', 'FavoriteOrder', 'Address', 'User',
-	function ($scope, $location, $routeParams, Order, FavoriteOrder, Address, User) {
+four51.app.controller('OrderViewCtrl', ['$scope', '$location', '$routeParams', 'Order', 'FavoriteOrder', 'Address', 'User', 'Variant',
+	function ($scope, $location, $routeParams, Order, FavoriteOrder, Address, User, Variant) {
 		$scope.loadingIndicator = true;
 
 
@@ -96,6 +96,14 @@ four51.app.controller('OrderViewCtrl', ['$scope', '$location', '$routeParams', '
 		};
 
         $scope.downloadProof = function(item) {
-            window.location = item.Variant.ProofUrl;
+            $scope.errorMessage = null;
+            Variant.get({VariantInteropID: item.Variant.InteropID, ProductInteropID: item.Product.InteropID }, function(v) {
+                if (v.ProofUrl) {
+                    window.location = v.ProofUrl;
+                }
+                else {
+                    $scope.errorMessage = "Unable to download proof"
+                }
+            });
         };
 	}]);
