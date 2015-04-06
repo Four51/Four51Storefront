@@ -53,10 +53,15 @@ function ($scope, $location, $route, $routeParams, $window, ProductDisplayServic
             if(saveNew) $scope.Variant.InteropID = null;
             Variant.save(variant, function(data){
                 if ($scope.isEditforApproval || $scope.EditingLineItem) {
-                    $scope.currentOrder.LineItems[$scope.LineItemIndex].Variant = data;
-                    Order.save($scope.currentOrder, function(o) {
-                        $location.path('/cart/' + $scope.Product.InteropID + '/' + o.ID + '/' + $scope.LineItemIndex)
-                    });
+                    if (saveNew) {
+                        $location.path('/product/' + $scope.Product.InteropID + '/'+ data.InteropID);
+                    }
+                    else {
+                        $scope.currentOrder.LineItems[$scope.LineItemIndex].Variant = data;
+                        Order.save($scope.currentOrder, function(o) {
+                            $location.path('/cart/' + $scope.Product.InteropID + '/' + o.ID + '/' + $scope.LineItemIndex)
+                        });
+                    }
                 }
                 else {
                     $location.path('/product/' + $scope.Product.InteropID + '/'+ data.InteropID);
