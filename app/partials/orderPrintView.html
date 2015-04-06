@@ -38,7 +38,7 @@
                         {{order.ShipAddress.City}}, {{order.ShipAddress.State}} {{order.ShipAddress.Zip}}
                         <div ng-if="order.ShipAddress.Country != 'US'">{{order.ShipAddress.Country}}</div>
                     </address><br />
-                    <address ng-show="order.BillAddress">
+                    <address ng-show="order.BillAddress && order.BillingEnabled">
                         <span class="text-primary"><strong>{{'Bill to' | r | xlat}}</strong></span><br />
                         <span ng-show="order.BillFirstName || order.BillLastName">{{order.BillFirstName}} {{order.BillLastName}}</span>
                         <span ng-show="!order.BillFirstName || !order.BillLastName">{{order.BillAddress.FirstName}} {{order.BillAddress.LastName}}</span>
