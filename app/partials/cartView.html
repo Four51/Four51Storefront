@@ -129,7 +129,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <span class="btn btn-group" ng-if="item.Variant.IsMpowerVariant">
-                                    <button title="{{'Download' | r | xlat}}" class="btn btn-primary" ng-click="downloadProof(item)">
+                                    <button type="button" title="{{'Download' | r | xlat}}" class="btn btn-primary" ng-click="downloadProof(item)">
                                         <span><i class="fa fa-download"></i> {{'Download' | r | xlat}}</span>
                                     </button>
                                     <button type="button" class="btn btn-default" ng-if="item.SpecsLength > 0" ng-click="item.toggleSpecs = !item.toggleSpecs">
