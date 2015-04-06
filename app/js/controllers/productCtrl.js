@@ -59,7 +59,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 				redirect ? $location.path('/product/' + $scope.LineItem.Product.InteropID) : $route.reload();
 			},
 			function(ex) {
-				$scope.lineItemErrors.unshift(ex.Message);
+				if ($scope.lineItemErrors.indexOf(ex.Message) == -1) $scope.lineItemErrors.unshift(ex.Message);
 				$scope.showAddToCartErrors = true;
 			}
 		);
