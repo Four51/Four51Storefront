@@ -54,7 +54,7 @@ function ($scope, $location, $route, $routeParams, $window, ProductDisplayServic
             Variant.save(variant, function(data){
                 if ($scope.isEditforApproval || $scope.EditingLineItem) {
                     if (saveNew) {
-                        $location.path('/product/' + $scope.Product.InteropID + '/'+ data.InteropID);
+                        $location.path('/product/' + $scope.Product.InteropID + '/'+ data.InteropID + '/' + $scope.currentOrder.ID);
                     }
                     else {
                         $scope.currentOrder.LineItems[$scope.LineItemIndex].Variant = data;

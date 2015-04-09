@@ -1,5 +1,12 @@
 four51.app.controller('ProductCtrl', ['$scope', '$routeParams', '$route', '$location', '$451', 'Product', 'ProductDisplayService', 'Order', 'Variant', 'User',
 function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplayService, Order, Variant, User) {
+    $scope.isEditforApproval = $routeParams.orderID && $scope.user.Permissions.contains('EditApprovalOrder');
+    if ($scope.isEditforApproval) {
+        Order.get($routeParams.orderID, function(order) {
+            $scope.currentOrder = order;
+        });
+    }
+
     $scope.selected = 1;
     $scope.LineItem = {};
 	$scope.addToOrderText = "Add To Cart";
@@ -96,7 +103,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 					$scope.user.CurrentOrderID = o.ID;
 					User.save($scope.user, function(){
 						$scope.addToOrderIndicator = true;
-						$location.path('/cart');
+						$location.path('/cart' + ($scope.isEditforApproval ? '/' + o.ID : ''));
 					});
 				},
 				function(ex) {
