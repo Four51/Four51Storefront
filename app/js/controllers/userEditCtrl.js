@@ -1,6 +1,7 @@
 four51.app.controller('UserEditCtrl', ['$scope', '$location', '$sce', '$injector', 'User',
 function ($scope, $location, $sce, $injector, User) {
     var _AnonRouter;
+    $scope.existingUser = $scope.user.Type != 'TempCustomer';
     try {
         _AnonRouter = $injector.get('AnonRouter');
     }
@@ -53,7 +54,7 @@ function ($scope, $location, $sce, $injector, User) {
                     $scope.displayLoadingIndicator = false;
                     $scope.actionMessage = 'Your changes have been saved';
                     $scope.user.TempUsername = u.Username;
-                    if (_AnonRouter) _AnonRouter.route();
+                    if (_AnonRouter && !$scope.existingUser) _AnonRouter.route();
                 },
                 function (ex) {
                     $scope.displayLoadingIndicator = false;
