@@ -1,10 +1,10 @@
 four51.app.factory('Security', ['$451', '$cookieStore', function($451, $cookieStore) {
-	var _cookieName = 'user.' + $451.apiName;
+    var _cookieName = 'user.' + $451.apiName;
     var logout = false;
     return {
         init: function(user, auth) {
             this.currentUser = {
-	            SiteID: user.SiteID,
+                SiteID: user.SiteID,
                 Username: user.Username,
                 InteropID: user.InteropID,
                 FirstName: user.FirstName,
@@ -12,6 +12,7 @@ four51.app.factory('Security', ['$451', '$cookieStore', function($451, $cookieSt
                 Email: user.Email,
                 Auth: auth
             };
+            logout = false;
             $cookieStore.put(_cookieName, this.currentUser);
         },
         clear: function() {
@@ -22,9 +23,8 @@ four51.app.factory('Security', ['$451', '$cookieStore', function($451, $cookieSt
             return user ? user.Auth : null;
         },
         isAuthenticated: function() {
-            this.currentUser = $cookieStore.get(_cookieName);
-            if (this.currentUser) logout = false;
-            return (!!this.currentUser && !logout);
+            if (!logout) this.currentUser = $cookieStore.get(_cookieName);
+            return (!!this.currentUser);
         },
         logout: function() {
             logout = true;
