@@ -1,4 +1,4 @@
-four51.app.factory('OrderConfig', function() {
+four51.app.factory('OrderConfig', ['Address', function(Address) {
     var user, order;
     var setCostCenter = function() {
         // set the cost center if the user only has 1 assigned to them and the order doesn't already have a cost center assigned
@@ -36,14 +36,25 @@ four51.app.factory('OrderConfig', function() {
 		angular.forEach(user.CostCenters, function(c) {
 			if (c.DefaultAddressID) {
 				if (order.CostCenter) {
-					order.ShipAddressID = order.ShipAddressID || order.CostCenter == c.Name ? c.DefaultAddressID : null;
-					angular.forEach(order.LineItems, function(li) {
-						li.ShipAddressID = order.ShipAddressID;
-					});
+                    if (!order.ShipAddressID && order.CostCenter == c.Name) {
+                        Address.get(c.DefaultAddressID, function(address) {
+                            if (address.IsShipping) {
+                                order.ShipAddressID = address.ID;
+                                angular.forEach(order.LineItems, function(li) {
+                                    li.ShipAddressID = order.ShipAddressID;
+                                });
+                            }
+                        });
+                    }
 				}
 				angular.forEach(order.LineItems, function(li) {
-					if (li.CostCenter)
-						li.ShipAddressID = li.ShipAddressID || li.CostCenter == c.Name ? c.DefaultAddressID : null;
+					if (li.CostCenter && !li.ShipAddressID && li.CostCenter == c.Name) {
+                        Address.get(c.DefaultAddressID, function(address) {
+                           if (address.IsShipping) {
+                               li.ShipAddressID = address.ID;
+                           }
+                        });
+                    }
 				});
 			}
 		});
@@ -92,6 +103,6 @@ four51.app.factory('OrderConfig', function() {
 		    return showOrderDetails();
 	    }
     };
-});
+}]);
 
 
