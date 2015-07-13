@@ -1,5 +1,5 @@
 <div>
-    <label>{{customfield.Label || customfield.Name}}</label>
+    <label ng-class="{required: customfield.Required}">{{customfield.Label || customfield.Name}}</label>
     <div ng-class="{'input-group':((customfield.Prefix && !hideprefix) || (customfield.Suffix && !hidesuffix))}">
         <span class="input-group-addon" ng-if="customfield.Prefix && !hideprefix && !((customfield.Prefix | r) == '')">{{customfield.Prefix}}</span>
         <div ng-model="customfield.Value">

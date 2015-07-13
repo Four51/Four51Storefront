@@ -44,7 +44,7 @@
                         </div>
                         <p ng-show="BillAddress.Street1"><small>{{BillAddress.Street1}}</small></p>
                         <p ng-show="BillAddress.Street2"><small>{{BillAddress.Street2}}</small></p>
-                        <p ng-show="BillAddress.City || BillAddress.State || BillAddress.Zip"><small>{{BillAddress.City}}<span ng-if="ShipAddress.City && ShipAddress.State">, </span> {{BillAddress.State}} {{BillAddress.Zip}}</small></p>
+                        <p ng-show="BillAddress.City || BillAddress.State || BillAddress.Zip"><small>{{BillAddress.City}}<span ng-if="BillAddress.City && BillAddress.State">, </span> {{BillAddress.State}} {{BillAddress.Zip}}</small></p>
                         <p ng-show="BillAddress.Phone"><small>{{BillAddress.Phone}}</small></p>
                     </div>
                 </div>

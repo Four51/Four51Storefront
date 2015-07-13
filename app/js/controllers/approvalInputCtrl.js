@@ -1,9 +1,27 @@
-four51.app.controller('ApprovalInputCtrl', ['$scope', '$location', '$rootScope', 'Order', function ($scope, $location, $rootScope, Order) {
+four51.app.controller('ApprovalInputCtrl', ['$scope', '$location', '$rootScope', 'Order', 'Address', function ($scope, $location, $rootScope, Order, Address) {
 	$scope.approveOrder = function() {
 		$scope.loadingIndicator = true;
 		Order.approve($scope.order,
 			function(data) {
 				$scope.order = data;
+				if ($scope.order.IsMultipleShip()) {
+					angular.forEach(data.LineItems, function(item) {
+						if (item.ShipAddressID) {
+							Address.get(item.ShipAddressID, function(add) {
+								item.ShipAddress = add;
+							});
+						}
+					});
+				}
+				else {
+					Address.get(data.ShipAddressID || data.LineItems[0].ShipAddressID, function(add) {
+						data.ShipAddress = add;
+					});
+				}
+
+				Address.get(data.BillAddressID, function(add){
+					data.BillAddress = add;
+				});
 				$scope.loadingIndicator = false;
 			},
 			function(ex) {
