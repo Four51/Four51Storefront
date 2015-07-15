@@ -96,7 +96,7 @@ four51.app.controller('OrderViewCtrl', ['$scope', '$location', '$routeParams', '
 
         $scope.downloadProof = function(item) {
             $scope.errorMessage = null;
-            Variant.get({VariantInteropID: item.Variant.InteropID, ProductInteropID: item.Product.APIInteropID }, function(v) {
+            Variant.get({VariantInteropID: item.Product.InteropID, ProductInteropID: item.Product.InteropID }, function(v) {
                 if (v.ProofUrl) {
                     window.location = v.ProofUrl;
                 }
