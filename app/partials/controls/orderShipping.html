@@ -143,7 +143,7 @@
                                         <i class="fa fa-truck"></i>
                                     </div>
                                 </div>
-                                <div class="view-form-icon" ng-show="user.ShipMethod.AskForAccountNumber && currentOrder.IsMultipleShip() && item.ShipAddressID">
+                                <div class="view-form-icon" ng-show="user.ShipMethod.AskForAccountNumber && currentOrder.IsMultipleShip()">
                                     <div>
                                         <label ng-show="item.ShipAccount">{{('Shipping' | r) + ' ' + ('Account' | r) | xlat}}: </label>
                                         <input class="form-control" ng-if="user.ShipMethod.AskForAccountNumber" placeholder="{{('Shipping' | r) + ' ' + ('Account' | r) + ' ' + ('Number' | r) | xlat}}" type="text" ng-model="item.ShipAccount" autocomplete="off" />
