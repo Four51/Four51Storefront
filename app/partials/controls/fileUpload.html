@@ -1,4 +1,5 @@
-<img class="fileInput">
+<div>
+    <img class="fileInput">
     <loadingindicator ng-show="uploadFileIndicator" title="{{'Uploading' | r | xlat}}"/>
     <label>{{customfield.Label || customfield.Name | r}}:</label>
     <img ng-show="customfield.File.IsImage && customfield.FileType == 'Image'" ng-src="{{customfield.File.Url}}"></img>
