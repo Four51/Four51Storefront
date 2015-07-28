@@ -130,7 +130,7 @@
                                         <i class="fa fa-map-marker"></i>
                                     </div>
                                 </div>
-                                <div class="view-form-icon" ng-show="item.ShipperName || currentOrder.IsMultipleShip() && user.ShipMethod != null">
+                                <div class="view-form-icon" ng-show="currentOrder.LineItems[0].ShipperName || currentOrder.IsMultipleShip() && user.ShipMethod != null">
                                     <div ng-class="{'view-form-select': !item.ShipperName, '' : item.ShipperName }">
                                         <label ng-class="{required: currentOrder.IsMultipleShip() && user.ShipMethod != null}">{{('Shipping' | r) + ' ' + ('Method' | r) | xlat}}</label>
                                         <select class="form-control" ng-change="updateShipper(item)"
