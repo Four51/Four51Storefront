@@ -62,10 +62,8 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 	};
 
 	var _save = function(order, success, error) {
-		var multiShip = order.IsMultipleShip ? order.IsMultipleShip() : false;
 		$resource($451.api('order')).save(order).$promise.then(
 			function(o) {
-				o.MultiShip = multiShip;
 				store.set('451Cache.Order.' + o.ID, o);
 				store.remove('451Cache.User' + $451.apiName);
                 User.get(function(user) {
