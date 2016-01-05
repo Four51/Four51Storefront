@@ -197,8 +197,8 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 						if (s.Name == li.ShipperName)
 							li.Shipper = s;
 					});
-					li.ShipperName = li.Shipper.Name;
-					li.ShipperID = li.Shipper.ID;
+					if (li.Shipper.Name) li.ShipperName = li.Shipper.Name;
+					if (li.Shipper.ID) li.ShipperID = li.Shipper.ID;
 					saveChanges(function() {
 						$scope.shippingUpdatingIndicator = false;
 						$scope.shippingFetchIndicator = false;
