@@ -11,3 +11,14 @@ node_modules/*
 *resources.js
 *source.css
 localcdn
+app/PDT-ImageRightAccordionView.html
+app/PDT-ImageRightTabbedView.html
+app/PDT-ImageRightView.html
+app/PDT-OneColumnAccordionView.html
+app/PDT-OneColumnTabbedView.html
+app/PDT-OneColumnView.html
+app/PDT-TabbedView.html
+app/PDT-ThreeColumnAccordionView.html
+app/PDT-ThreeColumnTabbedView.html
+app/PDT-ThreeColumnView.html
+app/PDT.html
