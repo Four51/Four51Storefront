@@ -10,6 +10,9 @@ four51.app.factory('Product', ['$resource', '$451', 'Security', 'User', function
 		angular.forEach(product.Specs, function(spec) {
 			if (spec.ControlType == 'File' && spec.File && spec.File.Url.indexOf('auth') == -1)
 				spec.File.Url += "&auth=" + Security.auth();
+
+			if (spec.ControlType == 'File' && spec.DefaultValue)
+				spec.Value = spec.DefaultValue;
 		});
 
 		angular.forEach(product.StaticSpecGroups, function(group) {
