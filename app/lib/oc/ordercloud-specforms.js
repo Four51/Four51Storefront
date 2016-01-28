@@ -562,7 +562,7 @@ function octextboxfield() {
         link: function(scope, elm, attr, ngModel) {
             /* Replace whatever element this directive is on with a ck-editor */
             var ck = CKEDITOR.replace(elm[0], {
-                removeButtons: 'Source'
+                removeButtons: 'Source,NumberedList,BulletedList,Outdent,Indent,Link,Unlink,Anchor'
                 /* remove or add any custom buttons as needed here */
             });
 
