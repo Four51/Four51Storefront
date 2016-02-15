@@ -9,6 +9,7 @@ four51.app.directive('ngMatch', ['$parse', function($parse) {
 			var firstPassword = $parse(attrs['ngMatch']);
 
 			var validator = function (value) {
+				if (!value) return;
 				var temp = firstPassword(scope),
 					v = value === temp;
 				ctrl.$setValidity('match', v);
