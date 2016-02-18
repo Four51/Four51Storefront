@@ -34,6 +34,8 @@
                             <li ng-if="cart_shipping.shippingAddressLineItem.$invalid">{{'Please choose a ' + ('Shipping' | rl) + ' ' + ('Address' | rl) | xlat}}</li>
                             <li ng-if="cart_shipping.shipMethod.$invalid">{{'Please choose a ' + ('Shipping' | rl) + ' ' + ('Method' | rl) | xlat}}</li>
                             <li ng-if="cart_billing.billingAddress.$invalid">{{'Please choose a ' + ('Billing' | rl) + ' ' + ('Address' | rl) | xlat}}</li>
+                            <li ng-if="cart_billing.billingFirstName.$invalid">{{'Please enter a ' + ('Billing' | rl) + ' ' + ('First Name' | rl) | xlat}}</li>
+                            <li ng-if="cart_billing.billingLastName.$invalid">{{'Please enter a ' + ('Billing' | rl) + ' ' + ('Last Name' | rl) | xlat}}</li>
                             <li ng-if="cart_billing.$error.paymentMethod">{{'Please choose a valid ' + ('Payment' | rl) + ' ' + ('Method' | rl) | xlat}}</li>
                             <li ng-if="!user.Permissions.contains('CreateBillToAddress') && billaddresses.length == 0">
                                 {{'You have not been granted permission to create a ' + ('Billing' | r) + ' ' + ('Address' | r) + ', and no ' + ('Billing' | r) + ' ' + ('Addresses' | r) + ' have been assigned to you. Therefore, you are not allowed to place this ' + ('Order' | r) + ' at this time' | xlat}}
