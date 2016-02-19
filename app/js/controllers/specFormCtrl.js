@@ -81,4 +81,15 @@ function ($scope, $location, $route, $routeParams, $window, ProductDisplayServic
             $scope.$apply();
         });
     }
+
+    /*Check for the presence of the null value when there is a custom user field default value and replace it with a blank value.  Case #124640 / SPA-15424*/
+    $scope.$watch('Variant', function(val) {
+        if (!val) return;
+        angular.forEach(val.Specs, function(s){
+            if(s.Value == "null"){
+                s.Value = "";
+            }
+        });
+    });
+
 }]);

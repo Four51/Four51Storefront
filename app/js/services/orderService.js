@@ -23,7 +23,7 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 		}
 		order.IsMultipleShip = function() {
 			var multi = false;
-			if (_multipleShip && order.LineItems[0].ShipAddressID == null) return true;
+			if (_multipleShip) return true;
 			angular.forEach(order.LineItems, function(li, i) {
 				if (multi) return;
 				multi = i > 0 ?
@@ -188,15 +188,21 @@ four51.app.factory('Order', ['$resource', '$rootScope', '$451', 'Security', 'Err
 	var _calcdisc = function(order, acct) {
 		if (acct == null) return order.Total;
 		var discount = 0;
-		if (acct.AccountType.MaxPercentageOfOrderTotal != 100) {
-			var total = order.Total - acct.Balance;
-			if (total < (total / acct.AccountType.MaxPercentageOfOrderTotal))
-				discount = total / acct.AccountType.MaxPercentageOfOrderTotal;
-			else
-				discount = acct.Balance;
+		if (acct.AccountType.MaxPercentageOfOrderTotal && acct.AccountType.MaxPercentageOfOrderTotal != 100) {
+			//console.log('SpendingAcctBalance:' + acct.Balance); //100
+			var total = order.Total;
+			//console.log('Total (orderTotal):' + total); //35
+			var discountAmount = '0.' + acct.AccountType.MaxPercentageOfOrderTotal;
+			//console.log('Discount Amount:' + discountAmount);
+			discount = total * discountAmount;
+			//console.log('Total is less than account balance x discount % amount:' + discount);
+
 		}
-		else
+		else {
+			/*this is correct and applies when the AccountType.MaxPercentageOfOrderTotal is 100% // works fine even if discount is more than the order*/
 			discount = acct.Balance;
+			//console.log('% of Order Total is 100%:' + discount);
+		}
 
 		return order.Total - discount;
 	};

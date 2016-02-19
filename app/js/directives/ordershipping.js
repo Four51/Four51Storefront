@@ -127,6 +127,24 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 				}
 			});
 
+			$scope.$watch('currentOrder.LineItems[0].ShipFirstName', function(newValue) {
+				var shipFirstName = newValue;
+				if ($scope.currentOrder) {
+					angular.forEach($scope.currentOrder.LineItems, function(item) {
+						item.ShipFirstName = shipFirstName;
+					});
+				}
+			});
+
+			$scope.$watch('currentOrder.LineItems[0].ShipLastName', function(newValue) {
+				var shipLastName = newValue;
+				if ($scope.currentOrder) {
+					angular.forEach($scope.currentOrder.LineItems, function(item) {
+						item.ShipLastName = shipLastName;
+					});
+				}
+			});
+
 			$scope.setShipAddressAtLineItem = function(item) {
 				item.ShipFirstName = null;
 				item.ShipLastName = null;
@@ -197,8 +215,8 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 						if (s.Name == li.ShipperName)
 							li.Shipper = s;
 					});
-					li.ShipperName = li.Shipper.Name;
-					li.ShipperID = li.Shipper.ID;
+					if (li.Shipper.Name) li.ShipperName = li.Shipper.Name;
+					if (li.Shipper.ID) li.ShipperID = li.Shipper.ID;
 					saveChanges(function() {
 						$scope.shippingUpdatingIndicator = false;
 						$scope.shippingFetchIndicator = false;
