@@ -7,7 +7,7 @@
                     <h2 class="animated fadeIn text-center"><i class="fa fa-cloud"></i><br />{{'Order Cloud 2.0' | r}}</h2>
                     <p id="451qa_msg_login" ng-show="loginMessage" ng-bind-html="loginMessage" class="alert alert-info"></p>
                     <div>
-                        <div class="view-form-icon" ng-show="!showEmailHelp && !PasswordReset">
+                        <div class="view-form-icon" ng-show="!showEmailHelp && !PasswordReset && (loginMessage != 'Your password has expired and will need to be changed.')">
                             <div>
                                 <label ng-show="credentials.Username">{{'Username' | r}}</label>
                                 <input autofocus class="form-control" type="text" ng-model="credentials.Username" placeholder="{{'Username' | r}}" />
@@ -17,6 +17,29 @@
                                 <label ng-show="credentials.Password">{{'Password' | r}}</label>
                                 <input class="form-control" type="password" ng-model="credentials.Password" placeholder="{{'Password' | r}}" />
                                 <i class="fa fa-lock"></i>
+                            </div>
+                        </div>
+                        <div class="view-form-icon" ng-show="loginMessage == 'Your password has expired and will need to be changed.'">
+                            <div>
+                                <label>{{'Username' | r}}</label>
+                                <input autofocus class="form-control" type="text" ng-model="credentials.Username" placeholder="{{'Username' | r}}" />
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div>
+                                <label>Current {{'Password' | r}}</label>
+                                <input class="form-control" name="current_password" type="password" ng-model="credentials.CurrentPassword" placeholder="Current {{'Password' | r}}" />
+                                <i class="fa fa-lock"></i>
+                            </div>
+                            <div>
+                                <label ng-show="credentials.NewPassword">New {{'Password' | r}}</label>
+                                <input class="form-control" ng-required="PasswordReset" name="new_password" type="password" ng-model="credentials.NewPassword" placeholder="New {{'Password' | r}}" />
+                                <i class="fa fa-lock"></i>
+                            </div>
+                            <div>
+                                <label ng-show="credentials.ConfirmPassword">Confirm {{'Password' | r}}</label>
+                                <input class="form-control" ng-required="PasswordReset" name="confirm_password" type="password" ng-model="credentials.ConfirmPassword"  placeholder="Confirm {{'Password' | r}}" ng-match="credentials.NewPassword" />
+                                <i class="fa fa-lock"></i>
+                                <inlineerror ng-show="login_form.confirm_password.$error.match" title="{{'Password' | r}} do not match!" />
                             </div>
                         </div>
                         <div>
