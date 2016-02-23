@@ -1,4 +1,4 @@
-<div class="panel panel-default" ng-show="specgroups.VisibleSpecGroups">
+<div class="panel panel-default" ng-if="length > 0">
     <div class="panel-heading">
         <h3 class="panel-title">
             {{'Specifications' | r | xlat}}
@@ -7,7 +7,7 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-xs-12">
-                <ul class="list-group" ng-repeat="sg in specgroups.VisibleSpecGroups" ng-show="hasvisiblechild(sg.Specs)">
+                <ul class="list-group" ng-repeat="sg in specgroups" ng-show="hasvisiblechild(sg.Specs)">
                     <li class="list-group-item">
                         <div class="451qa_spec_item" ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
                             <div class="row">

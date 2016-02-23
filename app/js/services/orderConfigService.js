@@ -63,7 +63,7 @@ four51.app.factory('OrderConfig', ['Address', function(Address) {
 	var showOrderDetails = function() {
 		return (user.Permissions.contains('EditPOID') ||
 			user.Permissions.contains('Comments') ||
-			(user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine')) ||
+			(user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine') && user.CostCenters.length > 0) ||
             (order && order.OrderFields.length > 0));
 	}
 

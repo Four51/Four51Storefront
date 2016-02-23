@@ -63,8 +63,9 @@
                     <i class="fa fa-map-marker"></i>
                 </div>
                 <div>
-                    <label ng-class="{required: hasStates && address.IsCustEditable != false}">{{'Zip' | r | xlat}}</label>
-                    <input name="zip" class="form-control" type="text" ng-model="address.Zip" placeholder="{{'Zip' | r | xlat}}" autocomplete="off" ng-required="hasStates() && address.IsCustEditable == false" ng-disabled="address.IsCustEditable == false" />
+                    <label ng-class="{required: hasStates() && address.IsCustEditable != false}">{{'Zip' | r | xlat}}</label>
+                    <input name="zip" class="form-control" type="text" ng-model="address.Zip" placeholder="{{'Zip' | r | xlat}}" autocomplete="off" ng-required="hasStates() && address.IsCustEditable != false"
+                           ng-disabled="address.IsCustEditable == false" />
                     <i class="fa fa-map-marker"></i>
                 </div>
                 <div ng-class="{'view-form-select': !address.Country, '': address.Country }">
