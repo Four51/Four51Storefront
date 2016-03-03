@@ -6,12 +6,15 @@ four51.app.directive('orderbilling', ['Address', 'AddressList', function(Address
 			AddressList.clear();
 			AddressList.billing(function(list) {
 				$scope.billaddresses = list;
-                if (list.length == 1 && !$scope.currentOrder.BillAddressID) {
-                    $scope.currentOrder.BillAddressID = list[0].ID;
-                }
-				if ($scope.isEditforApproval) {
-					if (!AddressList.contains($scope.currentOrder.BillAddress))
-						$scope.billaddresses.push($scope.currentOrder.BillAddress);
+
+				if ($scope.currentOrder) {
+					if (list.length == 1 && !$scope.currentOrder.BillAddressID) {
+						$scope.currentOrder.BillAddressID = list[0].ID;
+					}
+					if ($scope.isEditforApproval) {
+						if (!AddressList.contains($scope.currentOrder.BillAddress))
+							$scope.billaddresses.push($scope.currentOrder.BillAddress);
+					}
 				}
 			});
 			$scope.billaddress = { Country: 'US', IsShipping: false, IsBilling: true };
