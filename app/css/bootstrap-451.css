@@ -8654,6 +8654,20 @@ table[datepicker] {
   border-bottom-left-radius: 0px;
   border-top-left-radius: 0px;
 }
+.report-header{
+  cursor:pointer;
+}
+.report-arrows{
+  margin-left: 1px;
+  opacity: .5;
+}
+.order-header{
+  cursor:pointer;
+}
+.order-arrows{
+  margin-left: 5px;
+  opacity: .5;
+}
 .glyphicon {
   display: inline-block;
   font-family: FontAwesome;
