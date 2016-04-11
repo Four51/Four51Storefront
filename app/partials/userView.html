@@ -160,8 +160,16 @@
                 </div>
             </div>
             <div class="panel-footer text-center">
-                <input class="btn btn-primary pull-right" type="submit" ng-disabled="user_form.$invalid" id="451_btn_user" value="{{(user.Type == 'TempCustomer' ? 'Create Account' : 'Save') | xlat}}" />
-                <span class="alert alert-success" ng-show="actionMessage" ng-bind-html="actionMessage | r | xlat"></span>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <p class="alert alert-success" ng-show="actionMessage" ng-bind-html="actionMessage | r | xlat"></p>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="btn btn-primary pull-right" type="submit" ng-disabled="user_form.$invalid" id="451_btn_user" value="{{(user.Type == 'TempCustomer' ? 'Create Account' : 'Save') | xlat}}" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
