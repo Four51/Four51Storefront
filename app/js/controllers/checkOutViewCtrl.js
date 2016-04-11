@@ -30,7 +30,7 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Orde
 	                $scope.displayLoadingIndicator = false;
 		        });
 		        $scope.currentOrder = null;
-		        $location.path('/order/' + data.ID);
+				$location.path('/order/new/' + data.ID);
 	        },
 	        function(ex) {
 		        $scope.errorMessage = ex.Message;
