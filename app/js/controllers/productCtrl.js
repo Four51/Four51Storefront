@@ -107,6 +107,8 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 					});
 				},
 				function(ex) {
+					//remove the last LineItem added to the cart.
+					$scope.currentOrder.LineItems.pop();
 					$scope.addToOrderIndicator = false;
 					$scope.lineItemErrors.push(ex.Detail);
 					$scope.showAddToCartErrors = true;
