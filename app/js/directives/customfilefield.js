@@ -3,6 +3,7 @@ function($parse, $resource, $451, fileReader, Security) {
 	var obj = {
 		scope: {
 			customfield: '=',
+			label: '@',
 			replace: '@ngModel'
 		},
 		restrict: 'E',
