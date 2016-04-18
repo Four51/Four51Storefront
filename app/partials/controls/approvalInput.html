@@ -3,7 +3,7 @@
     <textarea class="form-control" ng-model="order.ApprovalComment" ng-attr-placeholder="{{('Approval' | r) + ' ' +  ('Comments' | r) | xlat}}"></textarea><br />
     <div class="pull-right btn-group">
         <button class="btn btn-small btn-default" ng-click="editOrder()" ng-if="user.Permissions.contains('EditApprovalOrder')">{{'Edit' | r | xlat}}</button>
-        <button class="btn btn-small btn-action" ng-click="approveOrder()">{{'Approve' | r | xlat}}</button>
+        <button class="btn btn-small btn-action" ng-click="approveOrder()" ng-disabled="approveClicked">{{'Approve' | r | xlat}}</button>
         <button class="btn btn-small btn-danger" ng-click="declineOrder()">{{'Decline' | r | xlat}}</button>
     </div>
     <div class="view-error-message" ng-show="error">{{error}}</div>
