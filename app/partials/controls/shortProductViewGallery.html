@@ -1,6 +1,6 @@
 <div class="451qa_prod_item row">
     <div class="col-xs-12 text-center">
-        <a href="product/{{LineItem.Product.InteropID}}">
+        <a href="{{LineItem.Product.Type == 'Kit' ? 'kit' : 'product'}}/{{LineItem.Product.InteropID}}">
             <figure ng-show="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl" >
                 <img ng-src="{{LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl}}"/>
             </figure>
