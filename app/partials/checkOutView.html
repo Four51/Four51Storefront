@@ -30,6 +30,9 @@
                     <li class="text-center">
                         <ul ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
                             <li ng-if="cart_order.orderid.$invalid">{{'Enter an ' + ('order' | r) + ' ' + ('ID' | r) | xlat}}</li>
+                            <li ng-repeat="field in currentOrder.OrderFields">
+                                <span ng-if="field.Required == true && field.Value == '' || field.Required == true && field.Value == null">Please select or enter {{field.Label}}</span>
+                            </li>
                             <li ng-if="cart_shipping.shippingAddress.$invalid">{{'Please choose a ' + ('Shipping' | rl) + ' ' + ('Address' | rl) | xlat}}</li>
                             <li ng-if="cart_shipping.shippingAddressLineItem.$invalid">{{'Please choose a ' + ('Shipping' | rl) + ' ' + ('Address' | rl) | xlat}}</li>
                             <li ng-if="cart_shipping.shipMethod.$invalid">{{'Please choose a ' + ('Shipping' | rl) + ' ' + ('Method' | rl) | xlat}}</li>
