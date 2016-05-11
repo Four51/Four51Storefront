@@ -145,15 +145,23 @@
                 <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
                             items-per-page="settings.pageSize" direction-links="true"></pagination>
             </div>
-            <div class="row hidden-xs text-info">
+            <div class="row hidden-xs text-info" ng-if="settings.currentPage == 1">
+                <div class="col-xs-12 col-sm-2 order-header" ng-click="orderSort('ExternalID',$event,orderSearchStat)">{{'ID' | r | xlat}}<i class="fa fa-sort order-arrows"></i></div>
+                <div class="col-xs-12 col-sm-2 order-header" ng-click="orderSort('Type',$event,orderSearchStat)">{{'Type' | r | xlat}}<i class="fa fa-sort order-arrows"></i></div>
+                <div class="col-xs-12 col-sm-2 order-header" ng-click="orderSort('Status',$event,orderSearchStat)">{{'Status' | r | xlat}}<i class="fa fa-sort order-arrows"></i></div>
+                <div class="col-xs-12 col-sm-2 order-header" ng-click="orderSort('FromUserFirstName',$event,orderSearchStat)">{{'Submitted' | r | xlat}}<i class="fa fa-sort order-arrows"></i></div>
+                <div class="col-xs-12 col-sm-2 order-header" ng-click="orderSort('DateSubmitted',$event,orderSearchStat)">{{('Submitted' | r) + ' ' + ('Date' | r) | xlat}}<i class="fa fa-sort order-arrows"></i></div>
+                <div class="col-xs-12 col-sm-2 order-header" ng-click="orderSort('Total',$event,orderSearchStat)" ng-if="!(user.Permissions.contains('HidePricing'))">{{'Total' | r | xlat}}<i class="fa fa-sort order-arrows"></i></div>
+            </div>
+            <div class="row hidden-xs text-info" ng-if="settings.currentPage != 1">
                 <div class="col-xs-12 col-sm-2">{{'ID' | r | xlat}}</div>
                 <div class="col-xs-12 col-sm-2">{{'Type' | r | xlat}}</div>
                 <div class="col-xs-12 col-sm-2">{{'Status' | r | xlat}}</div>
                 <div class="col-xs-12 col-sm-2">{{'Submitted' | r | xlat}}</div>
                 <div class="col-xs-12 col-sm-2">{{('Submitted' | r) + ' ' + ('Date' | r) | xlat}}</div>
-                <div class="col-xs-12 col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">{{'Total' | r | xlat}}</div>
+                <div class="col-xs-12 col-sm-2"ng-if="!(user.Permissions.contains('HidePricing'))">{{'Total' | r | xlat}}</div>
             </div>
-            <div class="row" ng-repeat="order in orders | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
+            <div class="row" ng-repeat="order in orders  | orderBy:sortOrder | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
                 <div class="col-sm-2">
                     <span class="visible-xs panel-table-heading-xs text-info">{{'ID' | r | xlat}}</span>
                     <a ng-href="{{currentOrder.ID == order.ID ? 'cart' : 'order/' + order.ID}}">{{order.ExternalID || ('(unspecified)' | xlat)}}</a>
@@ -163,7 +171,7 @@
                     {{order.Type}}
                 </div>
                 <div class="col-sm-2">
-                     <span class="visible-xs panel-table-heading-xs text-info">{{'Status' | r | xlat}}</span>
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Status' | r | xlat}}</span>
                     {{order.StatusText}}
                 </div>
                 <div class="col-sm-2">

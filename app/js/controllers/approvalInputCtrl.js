@@ -1,6 +1,7 @@
 four51.app.controller('ApprovalInputCtrl', ['$scope', '$location', '$rootScope', 'Order', 'Address', function ($scope, $location, $rootScope, Order, Address) {
 	$scope.approveOrder = function() {
 		$scope.loadingIndicator = true;
+		$scope.approveClicked = true;
 		Order.approve($scope.order,
 			function(data) {
 				$scope.order = data;
@@ -25,6 +26,7 @@ four51.app.controller('ApprovalInputCtrl', ['$scope', '$location', '$rootScope',
 				$scope.loadingIndicator = false;
 			},
 			function(ex) {
+				$scope.approveClicked = false;
 				$scope.loadingIndicator = false;
 				$scope.error = ex.Detail;
 			}

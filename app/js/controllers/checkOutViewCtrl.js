@@ -18,6 +18,7 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Orde
 
     function submitOrder() {
 	    $scope.displayLoadingIndicator = true;
+		$scope.submitClicked = true;
 	    $scope.errorMessage = null;
         Order.submit($scope.currentOrder,
 	        function(data) {
@@ -30,9 +31,10 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Orde
 	                $scope.displayLoadingIndicator = false;
 		        });
 		        $scope.currentOrder = null;
-		        $location.path('/order/' + data.ID);
+				$location.path('/order/new/' + data.ID);
 	        },
 	        function(ex) {
+				$scope.submitClicked = false;
 		        $scope.errorMessage = ex.Message;
 		        $scope.displayLoadingIndicator = false;
 		        $scope.shippingUpdatingIndicator = false;
