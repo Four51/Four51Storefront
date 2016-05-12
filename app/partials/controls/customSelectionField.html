@@ -1,7 +1,7 @@
 <!-- removing the 'input-group' class for IE9 - Source: https://github.com/twbs/bootstrap/issues/11340-->
 <div class="view-form-icon">
     <div>
-        <label ng-class="{required: customfield.Required}">{{customfield.Label || customfield.Name | r}}</label>
+        <label ng-class="{required: customfield.Required}">{{label || customfield.Label || customfield.Name | r}}</label>
         <div>
             <span ng-if="customfield.Prefix && !hideprefix && !((customfield.Prefix | r) == '')">{{customfield.Prefix | r}}</span>
             <select class="form-control" ng-init="init()" ng-required="customfield.Required" ng-change="changed()" ng-model="item" ng-options="option.Value for option in customfield.Options"
