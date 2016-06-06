@@ -8231,6 +8231,10 @@ select.ng-invalid:invalid:invalid:focus {
 .file-upload-required:after {
   content: " Required";
 }
+.printable-pdf-link{
+  margin-top:10px;
+  margin-bottom:10px;
+}
 .static-spec-panel-body {
   padding-left: 0;
   padding-right: 0;
