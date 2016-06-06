@@ -1,5 +1,5 @@
 <div class="panel-order-history" ng-repeat="item in order.LineItems">
-    <a href="{{item.ProofUrl}}" target="_blank" title="{{'Download' | r | xlat}}" ng-if="item.ProofUrl"><i class="fa fa-download"></i></a>
+    <a href="{{item.ProofUrl}}" target="_blank" title="{{'Download' | r | xlat}}" ng-if="item.Product.Type == 'VariableText' && item.ProofUrl"><i class="fa fa-download"></i></a>
     <div class="col-sm-6">
         <h3 class="text-primary">
             {{item.ProductIDText}}
