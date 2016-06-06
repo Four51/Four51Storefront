@@ -12,6 +12,9 @@
                 <span ng-if="spec.ControlType != 'File'">{{spec.Value || ('(unspecified)' | xlat)}}</span>
             </li>
         </ul>
+        <a ng-if="item.ProductionURL" class="btn btn-primary printable-pdf-link" href="{{item.ProductionURL}}" target="_blank">
+            <span><i class="fa fa-download"></i> {{'Download Printable File' | r | xlat}}</span>
+        </a>
      </div>
     <div class="col-sm-6">
         <div class="row">
