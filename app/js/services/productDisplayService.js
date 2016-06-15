@@ -183,10 +183,14 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 			angular.forEach(scope.LineItem.Product.Specs, function(item){
 				if(item.CanSetForLineItem || item.DefinesVariant)
 				{
-					hasAddToOrderSpecs = true;
 					scope.LineItem.Specs[item.Name] = item;// Object.create(item);
 				}
 			});
+		}
+
+		//Variant pagination causes hasAddToOrderSpecs to be false unless this value is set after the above if statement
+		if(scope.LineItem.Specs){
+			hasAddToOrderSpecs = true;
 		}
 
 		scope.allowAddFromVariantList =
@@ -273,15 +277,6 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 				if (scope.currentOrder && scope.currentOrder.ID && scope.currentOrder.Type != type) return false;
 				return scope.LineItem.Product[type + 'PriceSchedule'] != null;
 				//return scope.LineItem.PriceSchedule.OrderType == type && scope.user.Permissions.contains(type + 'Order');
-			}
-
-			//static item with variants
-			if(scope.LineItem.Variant && scope.LineItem.Product.Type == 'Static'){
-				if(scope.LineItem.Variant[type + 'PriceSchedule'] != null
-					&& (scope.currentOrder && scope.currentOrder.ID ? scope.currentOrder.Type == type : true)
-					&& (scope.currentOrder && scope.currentOrder.ID ? (scope.variantLineItems ? scope.variantLineItems[scope.LineItem.Product.Variants[0].InteropID].PriceSchedule.OrderType : scope.LineItem.PriceSchedule.OrderType) == scope.currentOrder.Type : true)){
-					return true;
-				}
 			}
 
 			return scope.user.Permissions.contains(type + 'Order')
