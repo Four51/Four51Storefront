@@ -194,7 +194,7 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 		}
 		
 		//used for checking pageinated variants for price schedules
-		scope.currentFirstVariant = (scope.settings.currentPage * scope.settings.pageSize) - scope.settings.pageSize;
+		scope.currentFirstVariant = scope.settings ? (scope.settings.currentPage * scope.settings.pageSize) - scope.settings.pageSize : 0;
 
 		scope.allowAddFromVariantList =
 			(scope.LineItem.Product.ShowSpecsWithVariantList || !hasAddToOrderSpecs)
