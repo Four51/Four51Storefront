@@ -189,7 +189,7 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 		}
 
 		//Variant pagination causes hasAddToOrderSpecs to be false unless this value is set after the above if statement
-		if(scope.LineItem.Specs){
+		if(Object.keys(scope.LineItem.Specs).length){
 			hasAddToOrderSpecs = true;
 		}
 		
@@ -197,7 +197,7 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 		scope.currentFirstVariant = scope.settings ? (scope.settings.currentPage * scope.settings.pageSize) - scope.settings.pageSize : 0;
 
 		scope.allowAddFromVariantList =
-			((scope.LineItem.Product.Type == 'VariableText' && scope.LineItem.Product.ShowSpecsWithVariantList) || (scope.LineItem.Product.Type == 'Static' && scope.LineItem.Product.ShowSpecsWithVariantList && hasAddToOrderSpecs))
+			((scope.LineItem.Product.Type == 'VariableText' && scope.LineItem.Product.ShowSpecsWithVariantList) || (scope.LineItem.Product.Type == 'Static' && scope.LineItem.Product.ShowSpecsWithVariantList && hasAddToOrderSpecs) || !hasAddToOrderSpecs)
 			&& !scope.LineItem.Variant
 			&& scope.LineItem.Product.Variants && scope.LineItem.Product.Variants.length > 0
 			&& ((scope.LineItem.Product.Variants && scope.LineItem.Product.Variants.length > 0) || scope.LineItem.Product.Type == 'VariableText')
