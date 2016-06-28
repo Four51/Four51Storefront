@@ -1,5 +1,5 @@
-four51.app.controller('OrderSearchCtrl', ['$scope', '$location', 'OrderSearchCriteria', 'OrderSearch',
-	function ($scope,  $location, OrderSearchCriteria, OrderSearch) {
+four51.app.controller('OrderSearchCtrl', ['$scope', '$q', '$location', 'OrderSearchCriteria', 'OrderSearch',
+	function ($scope,  $q, $location, OrderSearchCriteria, OrderSearch) {
 		$scope.settings = {
 			currentPage: 1,
 			pageSize: 10
@@ -13,7 +13,9 @@ four51.app.controller('OrderSearchCtrl', ['$scope', '$location', 'OrderSearchCri
 		});
 
 		$scope.$watch('settings.currentPage', function() {
-			Query($scope.currentCriteria);
+			if(!$scope.sortOrder){
+				Query($scope.currentCriteria);
+			}
 		});
 
 		$scope.OrderSearch = function($event, criteria) {
@@ -23,6 +25,10 @@ four51.app.controller('OrderSearchCtrl', ['$scope', '$location', 'OrderSearchCri
 		};
 
 		$scope.orderSort = function(value, $event, orderSearchStat) {
+			var all = [], queue = [], count = 0, total = $scope.settings.listCount, page = 1;
+			$scope.pagedIndicator = true;
+			$event.preventDefault();
+
 			if(value){
 				if($scope.sortOrder){
 					if(value == $scope.sortOrder){
@@ -36,7 +42,27 @@ four51.app.controller('OrderSearchCtrl', ['$scope', '$location', 'OrderSearchCri
 					$scope.sortOrder = value;
 				}
 			}
-			$scope.OrderSearch($event, orderSearchStat);
+
+			while (count < total) {
+				queue.push((function() {
+					var d = $q.defer();
+					OrderSearch.search(orderSearchStat, function (list, count) {
+						angular.forEach(list,function(li){
+							all.push(li);
+						});
+						d.resolve();
+					}, 1, 100);
+					return d.promise;
+				})());
+				count += 100;
+				page += 1;
+			}
+
+			$q.all(queue).then(function() {
+				$scope.orders = all;
+				$scope.pagedIndicator = false;
+			});
+
 		};
 
 		function _hasType(data, type) {
@@ -57,7 +83,7 @@ four51.app.controller('OrderSearchCtrl', ['$scope', '$location', 'OrderSearchCri
 				$scope.settings.listCount = count;
 				$scope.showNoResults = list.length == 0;
 				$scope.pagedIndicator = false;
-			}, $scope.settings.currentPage, 100);
+			}, $scope.settings.currentPage, $scope.settings.pageSize);
 			$scope.orderSearchStat = criteria;
 		}
 	}]);
