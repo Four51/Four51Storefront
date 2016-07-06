@@ -36,26 +36,13 @@ four51.app.controller('ReportCtrl', ['$scope', '$routeParams', '$451', 'Report',
 			);
 		};
 
-		function getData(sortby) {
+		function getData() {
 			$scope.errorMessage = null;
 			$scope.actionMessage = null;
 			$scope.displayLoadingIndicator = true;
 			Report.download($scope.report.ID,
 				function(data, count) {
 					$scope.report = data;
-					if(sortby){
-						if($scope.sortReport){
-							if(sortby == $scope.sortReport){
-								$scope.sortReport = "-"+sortby;
-							}
-							else{
-								$scope.sortReport = sortby;
-							}
-						}
-						else{
-							$scope.sortReport = sortby;
-						}
-					}
 					$scope.settings.listCount = count;
 					$scope.displayLoadingIndicator = false;
 				},
@@ -63,7 +50,7 @@ four51.app.controller('ReportCtrl', ['$scope', '$routeParams', '$451', 'Report',
 					$scope.errorMessage = ex.Message;
 					$scope.displayLoadingIndicator = false;
 				},
-				$scope.settings.currentPage || 1, 100
+				$scope.settings.currentPage || 1, $scope.settings.pageSize
 			);
 		}
 
@@ -75,13 +62,9 @@ four51.app.controller('ReportCtrl', ['$scope', '$routeParams', '$451', 'Report',
 		$scope.download = function() {
 			getData();
 		}
-
-		$scope.reportSort = function(sortby) {
-			getData(sortby);
-		}
 		$scope.$watch('settings.currentPage', function(n,o) {
 			if ($scope.report) {
-				getData();
+				getData(n);
 			}
 		});
 

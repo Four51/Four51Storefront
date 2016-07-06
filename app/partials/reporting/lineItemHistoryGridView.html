@@ -1,5 +1,6 @@
 <div class="panel-order-history" ng-repeat="item in order.LineItems">
-    <a href="{{item.ProofUrl}}" target="_blank" title="{{'Download' | r | xlat}}" ng-if="item.Product.Type == 'VariableText' && item.ProofUrl"><i class="fa fa-download"></i></a>
+    <a href="{{item.ProofUrl}}" target="_blank" title="{{'Download' | r | xlat}}" ng-if="order.Status != 'AwaitingApproval' && (item.Product.Type == 'VariableText' && item.ProofUrl)"><i class="fa fa-download"></i></a>
+    <a href="" title="{{'Download' | r | xlat}}" ng-click="downloadProof(item)" ng-if="order.Status == 'AwaitingApproval' && (item.Variant.IsMpowerVariant)"><i class="fa fa-download"></i></a>
     <div class="col-sm-6">
         <h3 class="text-primary">
             {{item.ProductIDText}}
@@ -15,7 +16,7 @@
         <a ng-if="item.ProductionURL" class="btn btn-primary printable-pdf-link" href="{{item.ProductionURL}}" target="_blank">
             <span><i class="fa fa-download"></i> {{'Download Printable File' | r | xlat}}</span>
         </a>
-     </div>
+    </div>
     <div class="col-sm-6">
         <div class="row">
             <div ng-if="!(user.Permissions.contains('HidePricing'))" class="col-xs-12 col-sm-4">
