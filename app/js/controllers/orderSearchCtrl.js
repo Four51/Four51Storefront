@@ -22,23 +22,6 @@ four51.app.controller('OrderSearchCtrl', ['$scope', '$location', 'OrderSearchCri
 			Query(criteria);
 		};
 
-		$scope.orderSort = function(value, $event, orderSearchStat) {
-			if(value){
-				if($scope.sortOrder){
-					if(value == $scope.sortOrder){
-						$scope.sortOrder = "-"+value;
-					}
-					else{
-						$scope.sortOrder = value;
-					}
-				}
-				else{
-					$scope.sortOrder = value;
-				}
-			}
-			$scope.OrderSearch($event, orderSearchStat);
-		};
-
 		function _hasType(data, type) {
 			var hasType = false;
 			angular.forEach(data, function(o) {
@@ -57,7 +40,7 @@ four51.app.controller('OrderSearchCtrl', ['$scope', '$location', 'OrderSearchCri
 				$scope.settings.listCount = count;
 				$scope.showNoResults = list.length == 0;
 				$scope.pagedIndicator = false;
-			}, $scope.settings.currentPage, 100);
+			}, $scope.settings.currentPage, $scope.settings.pageSize);
 			$scope.orderSearchStat = criteria;
 		}
 	}]);
