@@ -1,5 +1,3 @@
-https://github.com/Four51/four51.github.io/blob/master/img/assign.PNG?raw=true
-
 # AngularJSOrder
 > This repository provides the app code needed for the Four51 OrderCloud Storefront 2.0 Application
 
