@@ -1,3 +1,5 @@
+https://github.com/Four51/four51.github.io/blob/master/img/assign.PNG?raw=true
+
 # AngularJSOrder
 > This repository provides the app code needed for the Four51 OrderCloud Storefront 2.0 Application
 
@@ -7,7 +9,7 @@ There are three primary goals to making this repository open source.
  2. Gives Four51 customers and dev partners the power to a create a new [Branch](https://help.github.com/articles/creating-and-deleting-branches-within-your-repository/) and use Pull Requests to contribute new features to the code.
  3. Gives Four51 customers and dev partners the power to use [Issues](https://guides.github.com/features/issues/) to have control over the development road map to the application.
 
-![](rm_images/header.png)
+![](https://github.com/Four51/four51.github.io/blob/master/img/header.png?raw=true)
 
 ## Important Resources
 [Four51 Storefront API Documentation](http://four51.github.io/#/api/) (The 2.0 API documentation)<br />
@@ -22,17 +24,17 @@ This code base does require the existence of a Four51 OrderCloud 2.0 app to run.
  1. Create a new [Branch](https://help.github.com/articles/creating-and-deleting-branches-within-your-repository/) in this repository
  2. Log on to: [http://www.four51.com/ui/logon.aspx](http://www.four51.com/ui/logon.aspx)
  3. Navigate to the Admin tab
- 4. Click Get File Deployment<br />![](rm_images/deployment.PNG)<br />(*please submit a case with four51 if this is not available*)
+ 4. Click Get File Deployment<br />![](https://github.com/Four51/four51.github.io/blob/master/img/deployment.PNG?raw=true)<br />(*please submit a case with four51 if this is not available*)
  5. Click New Git Repository...
    * Enter the Repository URL (*eg. https://github.com/yourusername/AngularJS.git*)
    * Name the App Code Folder (*this is what will appear in the application drop-down list*)
-   * Set "app" as the Deployment Sub Folder in Repository<br />![](rm_images/deployemnt_settings.PNG)<br />
+   * Set "app" as the Deployment Sub Folder in Repository<br />![](https://github.com/Four51/four51.github.io/blob/master/img/deployemnt_settings.PNG?raw=true)<br />
  6. Click the "Save" button
- 7. Click the newly added App Code Folder<br />![](rm_images/newly_created.PNG)<br />
+ 7. Click the newly added App Code Folder<br />![](https://github.com/Four51/four51.github.io/blob/master/img/newly_created.PNG?raw=true)<br />
  8. Click the "Pull Repository" button
  9. Make sure to select your Branch from the "Branches" selection
- 10. Click the "Deploy Commit" on the top most commit in the list<br />![](rm_images/deploy.PNG)<br />
- 11. Assign the newly added app to your 2.0 application<br />![](rm_images/assign.PNG)
+ 10. Click the "Deploy Commit" on the top most commit in the list<br />![](https://github.com/Four51/four51.github.io/blob/master/img/deploy.PNG?raw=true)<br />
+ 11. Assign the newly added app to your 2.0 application<br />![](https://github.com/Four51/four51.github.io/blob/master/img/assign.PNG?raw=true)
 
 ## Tips
  * Four51 developers use [WebStorm](https://www.jetbrains.com/webstorm/specials/webstorm/webstorm.html?&gclid=CPOpi-GE2M4CFYQAaQodLgsDXg&gclsrc=aw.ds.ds&dclid=CPjjleGE2M4CFVNsAQodrnMEMQ) for developing within a repo.
