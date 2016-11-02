@@ -47,6 +47,15 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Orde
 		OrderConfig.address($scope.currentOrder, $scope.user);
 	});
 
+	$scope.$watch('currentOrder.LineItems',function(item){
+		if(!item)return;
+		if($scope.user.ShipMethod.DefaultShipperAccountNumber){
+			angular.forEach($scope.currentOrder.LineItems, function(li){
+				li.ShipAccount = $scope.user.ShipMethod.DefaultShipperAccountNumber;
+			});
+		}
+	});
+
     function saveChanges(callback) {
 	    $scope.displayLoadingIndicator = true;
 	    $scope.errorMessage = null;
