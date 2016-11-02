@@ -283,10 +283,12 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 			}
             
             //use scope.currentFirstVariant instead of 0
-			return scope.user.Permissions.contains(type + 'Order')
-			&& scope.variantLineItems ? scope.variantLineItems[scope.LineItem.Product.Variants[scope.currentFirstVariant].InteropID].Variant[type + 'PriceSchedule'] != null : scope.LineItem.Product[type + 'PriceSchedule'] != null
-			&& (scope.currentOrder && scope.currentOrder.ID ? scope.currentOrder.Type == type : true)
-			&& (scope.currentOrder && scope.currentOrder.ID ? (scope.variantLineItems ? scope.variantLineItems[scope.LineItem.Product.Variants[scope.currentFirstVariant].InteropID].PriceSchedule.OrderType : scope.LineItem.PriceSchedule.OrderType) == scope.currentOrder.Type : true);
+			if(scope.user){
+				return scope.user.Permissions.contains(type + 'Order')
+				&& scope.variantLineItems ? scope.variantLineItems[scope.LineItem.Product.Variants[scope.currentFirstVariant].InteropID].Variant[type + 'PriceSchedule'] != null : scope.LineItem.Product[type + 'PriceSchedule'] != null
+				&& (scope.currentOrder && scope.currentOrder.ID ? scope.currentOrder.Type == type : true)
+				&& (scope.currentOrder && scope.currentOrder.ID ? (scope.variantLineItems ? scope.variantLineItems[scope.LineItem.Product.Variants[scope.currentFirstVariant].InteropID].PriceSchedule.OrderType : scope.LineItem.PriceSchedule.OrderType) == scope.currentOrder.Type : true);
+			}
 		}
 
 		function canCreateVariant() {
