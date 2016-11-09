@@ -56,6 +56,14 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Orde
 		}
 	});
 
+	$scope.$watch('currentOrder.LineItems[0].ShipAccount',function(){
+		if(!$scope.currentOrder.IsMultipleShip()){
+			angular.forEach($scope.currentOrder.LineItems, function(li){
+				li.ShipAccount = $scope.currentOrder.LineItems[0].ShipAccount;
+			});
+		}
+	});
+
     function saveChanges(callback) {
 	    $scope.displayLoadingIndicator = true;
 	    $scope.errorMessage = null;
