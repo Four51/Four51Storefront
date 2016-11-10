@@ -36,11 +36,11 @@
                         </p>
                         <div class="row" ng-show="user.Permissions.contains('EditBillToName') && !BillAddress.IsCustEditable">
                             <div class="col-sm-2">
-                                <input class="form-control" name="billingFirstName" ng-required="user.Permissions.contains('EditBillToName') && !BillAddress.IsCustEditable" type="text" ng-model="currentOrder.BillFirstName"
+                                <input class="form-control" name="billingFirstName" ng-required="currentOrder.BillingEnabled && user.Permissions.contains('EditBillToName') && !BillAddress.IsCustEditable" type="text" ng-model="currentOrder.BillFirstName"
                                        placeholder="{{('First' | r) + ' ' + ('Name' | r) | xlat}}" autocomplete="off" />
                             </div>
                             <div class="col-sm-2">
-                                <input class="form-control" name="billingLastName" ng-required="user.Permissions.contains('EditBillToName') && !BillAddress.IsCustEditable" type="text" ng-model="currentOrder.BillLastName"
+                                <input class="form-control" name="billingLastName" ng-required="currentOrder.BillingEnabled && user.Permissions.contains('EditBillToName') && !BillAddress.IsCustEditable" type="text" ng-model="currentOrder.BillLastName"
                                        placeholder="{{('Last' | r) + ' ' + ('Name' | r) | xlat}}"  />
                             </div>
                         </div>
