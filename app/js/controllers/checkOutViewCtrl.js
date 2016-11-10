@@ -49,17 +49,18 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Orde
 
 	$scope.$watch('currentOrder.LineItems',function(item){
 		if(!item)return;
-		if($scope.user.ShipMethod.DefaultShipperAccountNumber){
+		if($scope.user.ShipMethod && $scope.user.ShipMethod.DefaultShipperAccountNumber){
 			angular.forEach($scope.currentOrder.LineItems, function(li){
 				li.ShipAccount = $scope.user.ShipMethod.DefaultShipperAccountNumber;
 			});
 		}
 	});
 
-	$scope.$watch('currentOrder.LineItems[0].ShipAccount',function(){
+	$scope.$watch('currentOrder.LineItems[0].ShipAccount',function(val){
+		if(!val)return;
 		if(!$scope.currentOrder.IsMultipleShip()){
 			angular.forEach($scope.currentOrder.LineItems, function(li){
-				li.ShipAccount = $scope.currentOrder.LineItems[0].ShipAccount;
+				li.ShipAccount = val;
 			});
 		}
 	});
