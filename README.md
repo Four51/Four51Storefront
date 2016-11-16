@@ -15,6 +15,7 @@ There are three primary goals to making this repository open source.
 [AngularJS](https://docs.angularjs.org/api/) (The JavaScript framework)<br />
 [Bootstrap CSS](http://getbootstrap.com/css/) (The css guide for the responsive design)<br />
 [UI Bootstrap](http://angular-ui.github.io/bootstrap/#/top) (Tools used throughout the application) 
+[Four51 Storefront Wiki](http://wiki.four51.com) (Description of Four51 resources)<br />
 
 ## Installation
 
