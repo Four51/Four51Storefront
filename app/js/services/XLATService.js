@@ -82,7 +82,7 @@ four51.app.filter('culturecurrency', ['XLATService', function(XLATService) {
             var result = "";
             switch(culture) {
                 case "en-US":
-                    result = value.formatCurrency (0, 0, ',', '.');
+                    result = currencyPrefix + value.formatCurrency(2, 3, ',', '.');
                     break;
                 case "en-GB":
                     result = currencyPrefix + value.formatCurrency(2, 3, ',', '.');
