@@ -13,6 +13,8 @@ four51.app.directive('ordersummary', ['Order', 'Coupon', function(Order, Coupon)
 			};
 
 			$scope.applyCoupon = function() {
+				// COMTOOLS-149
+				var cache = angular.copy($scope.currentOrder);
 				$scope.couponLoadingIndicator = true;
 				$scope.couponError = null;
 				Coupon.apply($scope.currentOrder.CouponCode,
@@ -20,6 +22,7 @@ four51.app.directive('ordersummary', ['Order', 'Coupon', function(Order, Coupon)
 						$scope.currentOrder.Coupon = coupon;
 						save(function() {
 							$scope.couponLoadingIndicator = false;
+							$scope.currentOrder.CreditCard = cache.CreditCard;
 						});
 					},
 					function(ex) {
@@ -30,11 +33,13 @@ four51.app.directive('ordersummary', ['Order', 'Coupon', function(Order, Coupon)
 			};
 
 			$scope.removeCoupon = function() {
+				var cache = angular.copy($scope.currentOrder);
 				$scope.couponError = null;
 				$scope.couponRemoveIndicator = true;
 				Coupon.remove(function() {
 					save(function() {
 						$scope.couponRemoveIndicator = false;
+						$scope.currentOrder.CreditCard = cache.CreditCard;
 					});
 				});
 			};
