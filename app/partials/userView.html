@@ -8,6 +8,7 @@
         </div>
     </div>
     <loadingindicator title="{{'Please wait while we save your changes' | r | xlat}}" ng-show="displayLoadingIndicator"/>
+    <img src="https://www.four51.com/Themes/Custom/0dfb95b2-d4b0-4cdf-8ae8-62bf8173b155/CA-Logo-with-Tag---Color.png" style="display: block; max-width: 300px; margin: auto; margin-top: 18px;"}>
     <identifyusermessage ng-show="user.Type == 'TempCustomer'" />
     <form ng-show="user.Permissions.contains('ViewSelfAdmin')" name="login_existing" ng-submit="loginExisting()" ng-if="user.Type == 'TempCustomer'">
         <div class="panel panel-default" id="user_form">
