@@ -1,5 +1,5 @@
-four51.app.controller('UserEditCtrl', ['$scope', '$location', '$sce', '$injector', 'User',
-    function ($scope, $location, $sce, $injector, User) {
+four51.app.controller('UserEditCtrl', ['$scope', '$location', '$sce', '$injector', 'User', 'Order',
+    function ($scope, $location, $sce, $injector, User, Order) {
         var _AnonRouter;
         if ($scope.user) $scope.existingUser = $scope.user.Type != 'TempCustomer';
         try {
@@ -31,9 +31,20 @@ four51.app.controller('UserEditCtrl', ['$scope', '$location', '$sce', '$injector
             }
             $scope.resetWithToken = function () {
                 $scope.emailResetLoadingIndicator = true;
+                if($scope.currentOrder){
+                    $scope.loginasuser.CurrentOrderID = $scope.currentOrder.ID;
+                }
                 User.reset($scope.loginasuser, function (user) {
                         delete $scope.loginasuser;
-                        $location.path('catalog');
+                        if(user.CurrentOrderID){
+                            $scope.currentOrder.FromUserID = user.ID;
+                            Order.save($scope.currentOrder,function(ordr){
+                                $location.path('checkout');
+                            });
+                        }
+                        else{
+                            $location.path('catalog');
+                        }
                     },
                     function (err) {
                         $scope.emailResetLoadingIndicator = false;
