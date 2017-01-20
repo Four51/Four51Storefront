@@ -11,13 +11,13 @@
         <orderapprovals ng-show="currentOrder.Approvals" />
         <div class="navbar-fixed-bottom">
             <div class="view-response-message alert-success text-center" alert-show="actionMessage">
-                <p>{{actionMessage | r | xlat}}</p>
+                <p ng-bind-html="actionMessage | r | xlat"></p>
             </div>
             <div class="view-response-message alert-danger text-center" alert-show="errorMessage">
-                <p>{{errorMessage | r | xlat}}</p>
+                <p ng-bind-html="errorMessage | r | xlat"></p>
             </div>
             <div class="view-response-message alert-danger text-center" alert-show="couponError">
-                <p>{{couponError | r | xlat}}</p>
+                <p ng-bind-html="couponError | r | xlat"></p>
             </div>
             <div class="view-error-message" ng-show="(cart_order.$error.required.length + cart_billing.$error.required.length + cart_shipping.$error.required.length + cart_billing.$error.paymentMethod.length) > 0">
                 <ul class="alert-warning">
