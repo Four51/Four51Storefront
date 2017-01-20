@@ -1,0 +1,14 @@
+<div class="category-list-simple" ng-show="currentCategory.SubCategories.length">
+    <loadingindicator ng-show="categoryLoadingIndicator" title="{{'Please wait while we fetch all categories' | r | xlat}}" />
+    <div ng-repeat="c in currentCategory.SubCategories">
+        <div style="background-image:url({{c.Image.URL}});">
+            <div>
+                <a ng-href="catalog/{{c.InteropID}}">
+                    <div class="col-sm-6 text-center" ng-class="{'col-sm-offset-6':$odd}">
+                        <h1 ng-bind-html="c.Name" />
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

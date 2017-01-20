@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="col-sm-12 view-form-icon">
+        <div class="input-group">
+            <label>{{'Name' | r | xlat}}</label>
+            <input required class="form-control" type="text" ng-model="report.Name" placeholder="{{'Name' | r | xlat}}" />
+            <i class="fa fa-bookmark-o"></i>
+            <div class="input-group-btn">
+                <button type="submit" ng-disabled="reportForm.$invalid" class="btn btn-primary pull-right">
+                    <span>{{'Save' | r | xlat}}</span>
+                    <i class="fa fa-save"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 view-form-icon">
+        <h3>{{'Conditions' | r | xlat}}</h3>
+        <div>
+            <label>{{('Order' | r) + ' ' + ('ID' | r) | xlat}}</label>
+            <input class="form-control" type="text" ng-model="report.ExternalID" placeholder="{{('Order' | r) + ' ' + ('ID' | r) | xlat}}" />
+            <i class="fa fa-external-link"></i>
+        </div>
+        <div>
+            <label>{{('Order' | r) + ' ' + ('Type' | r) | xlat}}</label>
+            <select class="form-control" ng-options="key as (value | xlat) for (key,value) in report.OrderTypeOptions" ng-model="report.OrderType"><option value=""></option></select>
+            <i class="fa fa-dot-circle-o"></i>
+        </div>
+        <div>
+            <label>{{('Order' | r) + ' ' + ('Status' | r) | xlat}}</label>
+            <select class="form-control" ng-options="(status | xlat) for status in report.OrderStatusOptions" ng-model="report.OrderStatus"><option value=""></option></select>
+            <i class="fa fa-dot-circle-o"></i>
+        </div>
+        <div>
+            <label>{{('Payment' | r) + ' ' + ('Method' | r) | xlat}}</label>
+            <select class="form-control" ng-options="(pm | xlat) for pm in report.PaymentMethodOptions" ng-model="report.PaymentMethod"><option value=""></option></select>
+            <i class="fa fa-dot-circle-o"></i>
+        </div>
+        <div>
+            <label>{{'Categories' | r | xlat}}</label>
+            <select class="form-control" ng-options="cat for cat in report.Categories" ng-model="report.Category"><option value=""></option></select>
+            <i class="fa fa-dot-circle-o"></i>
+        </div>
+        <div>
+            <label ng-show="report.Product">{{'Product' | r | xlat}}</label>
+            <input class="form-control" type="text" ng-model="report.Product" placeholder="{{'Product' | r | xlat}}" />
+            <i class="fa fa-tags"></i>
+        </div>
+        <div>
+            <label>{{'Cost Center' | r | xlat}}</label>
+            <select class="form-control" ng-options="center for center in report.CostCenters" ng-model="report.CostCenter"><option value=""></option></select>
+            <i class="fa fa-dot-circle-o"></i>
+        </div>
+        <div>
+            <label>{{'User' | r | xlat}}</label>
+            <select class="form-control" ng-options="u for u in report.Users" ng-model="report.User"><option value=""></option></select>
+            <i class="fa fa-users"></i>
+        </div>
+        <div>
+            <label>{{('Ship' | r) + ' ' + ('Addresses' | r) | xlat}}</label>
+            <select class="form-control" ng-options="s for s in report.ShipAddresses" ng-model="report.ShipAddress"><option value=""></option></select>
+            <i class="fa fa-truck"></i>
+        </div>
+        <daterange ng-options="report.TimeSpanOptions" fromdate="report.FromDate" todate="report.ToDate" />
+        <hr />
+        <h3>{{'Subtotal Options' | r}}</h3>
+        <div>
+            <label>{{'Subtotal by Column' | r | xlat}}</label>
+            <select class="form-control" ng-options="key as (value | r | xlat) for (key,value) in report.SubtotalOptions" ng-model="report.Subtotal"><option value=""></option></select>
+            <i class="fa fa-tasks"></i>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <h3>{{'Display Columns' | r | xlat}}</h3>
+        <div>
+            <label>&nbsp;</label>
+            <select multiple size="35" required class="form-control" ng-options="key as (value | r | xlat) for (key,value) in report.ColumnOptions" ng-model="report.SelectedColumns"><option value=""></option></select>
+        </div>
+    </div>
+</div>

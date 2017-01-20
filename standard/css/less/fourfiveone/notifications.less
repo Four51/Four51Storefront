@@ -1,0 +1,126 @@
+//
+// Notifications
+// --------------------------------------------------
+
+//== Response message
+.view-response-message {
+  &.ng-hide-add {
+    display:block !important;
+    padding: 15px;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    opacity: .9;
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1;
+    animation-duration: 1s;
+    animation-delay: 3s;
+    -webkit-animation-delay:3s;
+    -moz-animation-delay: 3s;
+    -o-animation-delay: 3s;
+    -ms-animation-delay: 3s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeOutDown;
+    -moz-animation-name: fadeOutDown;
+    -o-animation-name: fadeOutDown;
+    animation-name: fadeOutDown;
+  }
+
+  &.ng-hide-add.ng-hide-add-active {
+    opacity: 1;
+  }
+
+  &.ng-hide-remove {
+    display:block !important;
+    opacity: 0;
+  }
+
+  &.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
+  }
+}
+
+//== Error message
+.view-error-message {
+  ul.alert-warning {
+    border-top: 1px solid #fff;
+    opacity: .9;
+    margin: 0;
+    padding: 0;
+    li {
+      padding: 15px;
+      display: block;
+      &:nth-of-type(1) {
+        width: 16.6667%;
+        .badge {
+          font-size: @font-size-small;
+          line-height: normal;
+          background-color:@brand-danger;
+          i {
+            font-size: 14px;
+          }
+        }
+      }
+      &:nth-of-type(2) {
+        width: 66.6667%;
+        ul li {
+          text-align: center;
+          width: 100%;
+          padding: 0;
+        }
+      }
+      &:nth-of-type(3) {
+        width: 16.6667%;
+        padding: 0;
+        a {
+          display: block;
+          i {
+            width: 100%;
+            height: 100%;
+            padding: 15px;
+          }
+        }
+      }
+      ul {
+        //** display all errors :: class injected by angular ng-click
+        &.two li {
+          display: none;
+        }
+        //** display first error
+        li:first-child {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+//== Inline error message
+.view-inline-error {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  padding: 15px;
+  position: absolute;
+  left: 0; right: 0;
+  top: 100%;
+  white-space: normal;
+  word-break:normal;
+  z-index: 3;
+  background-color: #F2DEDE;
+  border: 1px solid #EBCCD1;
+  color: #A94442;
+  //== arrow
+  &:before {
+    content:"";
+    width:0;
+    height:0;
+    top: -10px;
+    left: 10px;
+    border-bottom:10px solid #F2DEDE;
+    border-left:10px solid transparent;
+    border-right:10px solid transparent;position: absolute;
+  }
+}

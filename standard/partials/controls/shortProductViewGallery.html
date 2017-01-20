@@ -1,0 +1,30 @@
+<div class="451qa_prod_item row">
+    <div class="col-xs-12 text-center">
+        <a href="{{LineItem.Product.Type == 'Kit' ? 'kit' : 'product'}}/{{LineItem.Product.InteropID}}">
+            <figure ng-show="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl" >
+                <img ng-src="{{LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl}}"/>
+            </figure>
+            <div class="empty" ng-hide="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl">
+                <span class="fa empty"><i class="fa fa-camera"></i></span>
+            </div>
+            <div class="product-hover">
+                <h3 class="text-center">{{LineItem.Product.Name}}</h3>
+                <div>
+                    <p ng-bind-html="trustedDescription(LineItem.Product)" ng-show="LineItem.Product.Description" />
+                    <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]" ng-if="!(user.Permissions.contains('HidePricing'))">
+                        {{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
+                        <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>
+                        {{'for' | xlat}} {{LineItem.PriceSchedule.PriceBreaks[0].Price | culturecurrency}}
+                    </p>
+                    <p ng-show="LineItem.Product.UnitOfMeasure">
+                        {{'Unit of Measure' | r | xlat}}: {{LineItem.Product.UnitOfMeasure}}
+                    </p>
+
+                    <p ng-show="LineItem.Product.DisplayInventory && inventoryDisplay(LineItem.Product, LineItem.Variant) != undefined">
+                        {{'Quantity Available' | r | xlat}}: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
+                    </p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

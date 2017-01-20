@@ -1,0 +1,76 @@
+<div class="credit-card-widget row">
+    <div class="col-sm-6">
+        <div class="view-form-icon">
+            <div>
+                <label>{{'Please enter your credit card information' | r | xlat}}</label>
+            </div>
+        </div>
+        <div class="view-form-icon" ng-if="user.Permissions.contains('CardholderName')">
+            <div>
+                <input id="cardholder-name" class="form-control" ng-model="currentOrder.CreditCard.CardholderName"
+                       ng-required="currentOrder.PaymentMethod == 'CreditCard' && !currentOrder.CreditCardID"
+                       type="text" placeholder="{{'Cardholder Name' | r | xlat}}" autocomplete="off" />
+                <i class="fa fa-user"></i>
+            </div>
+        </div>
+        <div class="view-form-icon">
+            <div class="account-number-input">
+                <input id="account-number" class="form-control" ng-model="currentOrder.CreditCard.AccountNumber" name="creditCardNumber"
+                       ng-required="currentOrder.PaymentMethod == 'CreditCard' && !currentOrder.CreditCardID"
+                       type="text" placeholder="{{'Account Number' | r | xlat}}" autocomplete="off" />
+                <i class="fa fa-credit-card"></i>
+                <div class="card-type-icon" style="background-image:url({{creditCardIconUrl}})" ng-class="{'active':creditCardIconUrl}"></div>
+            </div>
+        </div>
+        <div class="view-form-icon double" ng-class="{'row':currentOrder.RequireCVN}">
+            <div ng-class="{'col-xs-6':currentOrder.RequireCVN}">
+                <input id="expiration-date" class="form-control" ng-model="currentOrder.CreditCard.ExpirationDate"
+                       ng-required="currentOrder.PaymentMethod == 'CreditCard' && !currentOrder.CreditCardID" type="text" ui-mask="99/99" />
+                <i class="fa fa-calendar-o"></i>
+            </div>
+            <div class="col-xs-6" ng-if="currentOrder.RequireCVN">
+                <input id="cvn" class="form-control" ng-model="currentOrder.CreditCard.CVN" name="cvnNumber"
+                       ng-required="currentOrder.PaymentMethod == 'CreditCard' && !currentOrder.CreditCardID"
+                       type="text" placeholder="{{'CVN' | r | xlat}}" ng-maxlength="4" autocomplete="off" />
+                <i class="fa fa-lock"></i>
+            </div>
+        </div>
+        <div class="checkbox" ng-if="user.Permissions.contains('AllowSaveCreditCard')" ng-show="!currentOrder.CreditCardID">
+            <label>
+                <input ng-model="currentOrder.CreditCard.Save"  type="checkbox" />
+                <small><b>{{'Save my credit card information' | r | xlat}}</b></small>
+            </label>
+        </div>
+    </div>
+
+    <div class="col-sm-6" ng-show="!creditCardIconUrl && currentOrder.CreditCard.AccountNumber.length >= 4">
+        <div class="view-form-icon">
+            <div ng-class="{'view-form-select': !currentOrder.CreditCard.Type, '': currentOrder.CreditCard.Type }">
+                <label ng-class="{required: currentOrder.PaymentMethod == 'CreditCard'}">{{'Card Type' | r | xlat}}</label>
+                <select id="credit-card-type" class="form-control" ng-model="currentOrder.CreditCard.Type"
+                        ng-options="creditCard.Type as creditCard.DisplayName for creditCard in user.AvailableCreditCards"
+                        ng-required="currentOrder.PaymentMethod == 'CreditCard' && !currentOrder.CreditCardID">
+                </select>
+                <i class="fa fa-credit-card"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="alert alert-warning" ng-show="cart_billing.$error.creditCardNumber || cart_billing.$error.creditCardType|| cart_billing.$error.cvnNumber || cart_billing.$error.expDate">
+    <p ng-show="cart_billing.$error.creditCardNumber">
+        <i class="fa fa-exclamation-circle text-danger pull-left"></i>
+        {{'Please enter a valid ' + ('Credit Card' | rl) + ' ' + ('Number' | rl) | xlat}}
+    </p>
+    <p ng-show="cart_billing.$error.creditCardType && !cart_billing.$error.creditCardNumber">
+        <i class="fa fa-exclamation-circle text-danger pull-left"></i>
+        {{friendlyName(currentOrder.CreditCard.Type) + ' is not supported' | rl | xlat}}
+    </p>
+    <p ng-show="cart_billing.$error.cvnNumber">
+        <i class="fa fa-exclamation-circle text-danger pull-left"></i>
+        {{'Please enter a valid ' + ('CVN' | rl) | xlat}}
+    </p>
+    <p ng-show="cart_billing.$error.expDate">
+        <i class="fa fa-exclamation-circle text-danger pull-left"></i>
+        {{'Please enter a valid ' + ('Expiration Date' | rl) | xlat}}
+    </p>
+</div>

@@ -1,0 +1,92 @@
+//
+// Orders
+// --------------------------------------------------
+
+.panel-order {
+  &:extend(.panel-default all);
+  margin-bottom: 5px;
+
+  .panel-heading {
+    cursor: pointer;
+    i:first-of-type {
+      font-size: ceil((@font-size-base * 1.7));
+    }
+
+    //** valid
+    &.yes i:first-of-type {
+      color:@brand-success;
+    }
+
+    //** invalid
+    &.no i:first-of-type {
+      color:@brand-warning;
+    }
+
+    //** opened
+    &.open {
+      cursor: default;
+    }
+  }
+
+  //** animate orders content
+  .panel-body.ng-hide-remove {
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    animation-duration: 1s;
+    -ms-animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -ms-animation-fill-mode: both;
+    -webkit-animation-name: fadeInDown;
+    -moz-animation-name: fadeInDown;
+    -o-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+    -ms-animation-name: fadeInDown;
+  }
+
+  .order-location {
+    border: 1px solid @panel-default-border;
+    padding: 15px;
+    margin-top: 15px;
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  //** hide unnecessary html in new address form from checkout include
+  .create-address-type {
+    display: none;
+  }
+  .panel-footer {
+    .btn-danger {
+      display: none;
+    }
+  }
+}
+
+.panel-order-history {
+  & > a {
+    position:absolute;
+    top:0;
+    right:0;
+    width:auto;
+    display:block;
+    padding:@padding-base-vertical @padding-base-horizontal;
+    background-color:fade(@fourfiveone-gray-medium, 60);
+    color:@text-color;
+    transition: background-color 300ms;
+    &:hover {
+      background-color:@fourfiveone-gray-medium;
+    }
+  }
+  &:extend(.panel-body all);
+}
+
+.panel-order-shipping-multiple {
+  &:extend(.panel-body all);
+  border-top: 1px solid @panel-default-border;
+  margin-top: 15px;
+}

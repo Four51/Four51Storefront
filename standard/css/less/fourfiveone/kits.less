@@ -1,0 +1,21 @@
+.panel-kit {
+  .kit-item-row {
+    margin-bottom:2px;
+
+    cursor: pointer;
+    &:nth-of-type(even) > div {
+      background-color:@table-bg-accent;
+    }
+    & > div {
+      padding:5px;
+
+      &:hover {
+        background-color:@table-bg-hover;
+      }
+      &.active {
+        background-color:@alert-info-bg;
+        border: @alert-info-border;
+      }
+    }
+  }
+}

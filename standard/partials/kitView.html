@@ -1,0 +1,206 @@
+<section class="product-detail-default">
+	<loadingindicator ng-show="loadingIndicator" title="{{'Please wait while we fetch kit information' | r | xlat}}" />
+	<!-- PRODUCT IMAGE PANEL!-->
+	<div class="col-md-4 col-collapse">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<figure>
+					<img id="451_img_prod_lg" class="product-image-large img-responsive" ng-src="{{Kit.KitParent.LargeImageUrl}}" imageonload />
+				</figure>
+				<div class="empty" ng-hide="Kit.KitParent.LargeImageUrl">
+					<span class="fa empty"><i class="fa fa-camera"></i></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 col-collapse">
+			<div class="panel panel-default panel-kit">
+				<div class="panel-heading">
+					<h3 class="panel-title">{{Kit.KitParent.Name + ' contains the following items' | r}}</h3>
+				</div>
+				<div class="panel-body">
+					<ul>
+						<li class="row hidden-xs">
+							<div class="col-sm-6"><b>Kit Item</b></div>
+							<div class="col-sm-3"><b>Quantity</b></div>
+						</li>
+						<li class="row kit-item-row" ng-repeat="item in Kit.KitItems" ng-click="setItemAsCurrent(item)">
+							<div ng-class="{active: item.ID == ActiveKitItem.ID}">
+								<div class="col-sm-6">{{item.Variant.ExternalID}}</div>
+								<div class="col-xs-6 col-sm-3"><span class="hidden-md hidden-lg hidden-sm">Quantity: </span>{{item.Quantity}}</div>
+								<div class="col-xs-6 col-sm-3">
+									<span ng-hide="item.LineItem.IsConfigurable"><i class="fa fa-ban"></i></span>
+									<span ng-show="item.LineItem.IsConfigurable"><i class="fa {{item.LineItem.IsConfigured ? 'fa-edit' : 'fa-warning'}}"></i> {{item.LineItem.IsConfigured ? 'Edit' : 'Configure'}}</span>
+								</div>
+								<div style="clear:both;"></div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-7 col-md-offset-1 col-collapse">
+		<!-- PRODUCT INFO!-->
+		<div class="row">
+			<div class="col-xs-12">
+				<h2>
+					{{Kit.KitParent.Name}}
+				</h2>
+				<h2 class="text-success" ng-show="LineItem.IsKitParent && Kit.KitParent.PriceSchedule.PriceBreaks.length == 1" ng-if="!(user.Permissions.contains('HidePricing'))">
+					{{Kit.KitParent.PriceSchedule.PriceBreaks[0].Price | culturecurrency}}
+				</h2>
+			</div>
+		</div>
+		<!-- PRODUCT DESCRIPTION PANEL! --->
+		<div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title panel-primary">
+						{{'Description' | r | xlat}}
+					</h3>
+				</div>
+				<div class="panel-body">
+					<h4 ng-show="Kit.KitParent.ExternalID" class="text-info">
+						{{'ID' | r | xlat}}: {{Kit.KitParent.ExternalID}}
+					</h4>
+					<p ng-bind-html="trustedDescription(Kit.KitParent)" />
+				</div>
+				<!-- PRICE SCHEDULE PANEL! --->
+				<priceScheduleTable ng-if="!(user.Permissions.contains('HidePricing')) && LineItem.PriceSchedule.PriceBreaks.length > 1 && LineItem.IsKitParent" ps='LineItem.PriceSchedule' p='Kit.KitParent'/>
+			</div>
+		</div>
+		<!-- STATIC SPECS PANEL! -->
+		<staticspecstable ng-show="StaticSpecGroups && user.Permissions.contains('ViewNonCustomizableSpecs')" specgroups="StaticSpecGroups" length="LineItem.StaticSpecLength"/>
+		<!-- ORDER PANEL! -->
+		<form name="addToOrderForm" novalidate="">
+			<div class="panel panel-default">
+				<div class="panel-heading" ng-if="allowAddToOrder && LineItem.IsKitParent">
+					<h3 class="panel-title">
+						{{'Order' | r | xlat}}
+					</h3>
+				</div>
+				<div class="panel-heading" ng-if="LineItem.IsKitChild">
+					<h3 class="panel-title">
+						{{LineItem.Variant.ExternalID || LineItem.Product.ExternalID | r | xlat}}
+					</h3>
+				</div>
+				<div class="panel-body">
+					<div class="alert alert-danger" ng-show="!allowAddToOrder && !canCreateVariant">
+						<p>
+							<i class="fa fa-ban" />
+							{{'Your current order does not allow this product to be added to your cart' | r | xlat}}
+						</p>
+					</div>
+					<kitaddtoorderspecs template="{{LineItem.Product.InteropID}}" ng-show="allowAddToOrder"></kitaddtoorderspecs>
+					<!-- VARIANT LIST! -->
+					<div ng-if="ActiveKitItem.RequiresVariantSelection">
+						<div class="row">
+							<div class="panel-title col-xs-9" ng-show="ActiveKitItem.Variant.IsDefaultVariant && LineItem.Product.VariantCount > 0">
+								<h4 class="text-info">
+									{{'Select a Variant' | r | xlat}}
+								</h4>
+							</div>
+						</div>
+						<div class="view-form-icon" ng-if="ActiveKitItem.Variant.IsDefaultVariant && (LineItem.Product.VariantCount > settings.pageSize || searchTerm)">
+							<div>
+								<div class="input-group">
+									<input ng-model="searchTerm" type="text" class="form-control" placeholder="{{'Search' | r | xlat}}" />
+									<i class="fa fa-search"></i>
+									<div class="input-group-btn">
+										<button type="button" class="btn btn-default" ng-click="searchVariants(searchTerm)">{{'Search' | r | xlat}}</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="product-variants">
+							<ul>
+								<loadingindicator ng-show="searchIndicator" />
+								<li ng-repeat="v in LineItem.Product.Variants | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize" ng-click="selectVariant(v)">
+									<a>
+										<div class="row">
+											<div class="col-xs-10">
+												<h5>
+													<strong>{{v.ExternalID}}</strong>
+												</h5>
+												<p ng-show="v.Description" ng-bind-html="trustedDescription(v)"></p>
+												<p ng-show="LineItem.Product.DisplayInventory && LineItem.Product.IsVariantLevelInventory">
+													{{'Quantity Available' | r | xlat}}: {{v.QuantityAvailable}}
+												</p>
+											</div>
+											<div class="col-xs-2">
+												<div ng-show="LineItem.Variant.InteropID == v.InteropID" class="alert alert-success text-center" style="padding:5px 2px;">
+													<i class="fa fa-check"></i><br/><small>Selected</small>
+												</div>
+											</div>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div ng-show="ActiveKitItem.Variant.IsDefaultVariant && LineItem.Product.VariantCount > settings.pageSize">
+							<pagination ng-change="paged()" ng-model="settings.currentPage" page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="LineItem.Product.VariantCount"
+							            items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
+						</div>
+					</div>
+					<div class="form-group" ng-show="allowAddToOrder">
+						<p ng-show="LineItem.Product.DisplayInventory && (LineItem.Variant || LineItem.Product.Variants.length == 0)">
+							<span class="text-info">{{'Quantity Available' | r | xlat}}</span> {{inventoryDisplay(LineItem.Product, LineItem.Variant)}}
+						</p>
+						<p ng-show="LineItem.PriceSchedule.MinQuantity > 1 && !LineItem.PriceSchedule.RestrictedQuantity">
+							<span class="text-info">{{'Minimum Quantity' | r | xlat}}</span> {{LineItem.PriceSchedule.MinQuantity}}
+						</p>
+						<p ng-show="LineItem.PriceSchedule.MaxQuantity && !LineItem.PriceSchedule.RestrictedQuantity">
+							<span class="text-info">{{'Maximum Quantity' | r | xlat}}</span> {{LineItem.PriceSchedule.MaxQuantity}}
+						</p>
+						<div class="view-form-icon" ng-if="!allowAddFromVariantList && LineItem.IsKitParent">
+							<div>
+								<label ng-class="{required: !allowAddFromVariantList}" ng-hide="allowAddFromVariantList">{{('Order' | r) + ' ' + ('Quantity' | r) | xlat}}</label>
+								<quantityfield required="true" lineitem="LineItem" class="quantity" />
+							</div>
+						</div>
+						<button ng-show="LineItem.IsKitParent" class="btn btn-success btn-block btn-lg" type="button" ng-click="saveOrder()">
+							<loadingindicator ng-show="addToOrderIndicator" />
+							<i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>
+							{{addToOrderText | r | xlat}}
+                            <span class="badge" ng-if="!(user.Permissions.contains('HidePricing')) && (LineItem.LineTotal || variantLineItemsOrderTotal) > 0">
+                                {{(LineItem.LineTotal || variantLineItemsOrderTotal) | culturecurrency}}
+                            </span>
+						</button>
+						<div class="btn-group" role="group" ng-show="LineItem.IsKitChild">
+							<loadingindicator ng-show="addToOrderIndicator" />
+							<button class="btn btn-success btn-block btn-lg" type="button" ng-click="saveKitItem()" ng-disabled="(ActiveKitItem.RequiresVariantSelection && !LineItem.Variant)">
+								<i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>
+								{{updateKitLineItemText | r | xlat}}
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- ERROR MESSAGING! -->
+	<div class="navbar-fixed-bottom">
+		<div class="view-error-message" ng-show="showAddToCartErrors && lineItemErrors.length > 0">
+			<ul class="alert-warning">
+				<li class="text-center">
+                    <span class="badge">
+                        <i class="fa fa-exclamation-circle fa-inverse"></i>
+                        {{lineItemErrors.length}}
+                    </span>
+				</li>
+				<li class="text-center">
+					<ul ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
+						<li class="alert-warning" ng-repeat="e in lineItemErrors">{{e | xlat}}</li>
+						<li class="alert-warning" ng-show="variantLineItems[v.InteropID].qtyError">{{variantLineItems[v.InteropID].qtyError}}</li>
+					</ul>
+				</li>
+				<li class="text-center">
+					<a ng-show="lineItemErrors.length > 1">
+						<i class="fa fa-caret-down" ng-click="errorSection = 'open'" ng-hide="errorSection == 'open'"></i>
+						<i class="fa fa-caret-up" ng-click="errorSection = ''" ng-show="errorSection == 'open'"></i>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</section>

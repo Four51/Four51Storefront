@@ -1,0 +1,65 @@
+<div class="panel-order-history" ng-repeat="item in order.LineItems">
+    <a href="{{item.ProofUrl}}" target="_blank" title="{{'Download' | r | xlat}}" ng-if="order.Status != 'AwaitingApproval' && (item.Product.Type == 'VariableText' && item.ProofUrl)"><i class="fa fa-download"></i></a>
+    <a href="" title="{{'Download' | r | xlat}}" ng-click="downloadProof(item)" ng-if="order.Status == 'AwaitingApproval' && (item.Variant.IsMpowerVariant)"><i class="fa fa-download"></i></a>
+    <div class="col-sm-6">
+        <h3 class="text-primary">
+            {{item.ProductIDText}}
+        </h3>
+        <span>{{item.Product.Name}}</span>
+        <ul ng-show="item.Specs | filter:{'CanSetForLineItem':true}.length > 0">
+            <li class="text-center" ng-repeat="spec in item.Specs | onproperty:{Property: 'CanSetForLineItem', Value: true} ">
+                <span class="text-info">{{spec.Name}}</span>
+                <span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span>
+                <span ng-if="spec.ControlType != 'File'">{{spec.Value || ('(unspecified)' | xlat)}}</span>
+            </li>
+        </ul>
+        <a ng-if="item.ProductionURL" class="btn btn-primary printable-pdf-link" href="{{item.ProductionURL}}" target="_blank">
+            <span><i class="fa fa-download"></i> {{'Download Printable File' | r | xlat}}</span>
+        </a>
+    </div>
+    <div class="col-sm-6">
+        <div class="row">
+            <div ng-if="!(user.Permissions.contains('HidePricing'))" class="col-xs-12 col-sm-4">
+                <p>
+                    <small class="text-info">{{'Total' | r | xlat}}</small><br />
+                    <span class="text-success">{{item.LineTotal | culturecurrency}}</span>
+                </p>
+            </div>
+            <div ng-if="!(user.Permissions.contains('HidePricing'))" class="col-xs-12 col-sm-4">
+                <p>
+                    <small class="text-info">{{'Unit Price' | r | xlat}}</small><br />
+                    <span class="text-success">{{item.UnitPrice | culturecurrency}}</span> x {{item.Quantity * (item.Product.QuantityMultiplier || 1)}}
+                </p>
+            </div>
+            <div class="col-xs-12 col-sm-4" ng-show="item.TotalShipped">
+                <p>
+                    <small class="text-info">{{('Quantity' | r) + ' ' + ('Shipped' | r) | xlat}}</small><br />
+                    {{item.TotalShipped}}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <p ng-if="item.CostCenter">
+                    <span class="text-info">{{('Item' | r) + ' ' + ('Cost Center' | r) | xlat}}</span> {{item.CostCenter}}
+                </p>
+                <p ng-if="item.ShipperName">
+                    <strong>{{('Shipper' | r) + ' ' + ('Name' | r) | xlat}}</strong><br />
+                    {{item.ShipperName}}
+                </p>
+                <address ng-show="item.ShipAddress">
+                    <strong>{{'Ship to' | r | xlat}}</strong><br>
+                    {{item.ShipAddress.Street1}}<br>
+                    {{item.ShipAddress.Street2}}<br ng-show="item.ShipAddress.Street2">
+                    {{item.ShipAddress.City}}, {{item.ShipAddress.State}} {{item.ShipAddress.Zip}}
+                </address>
+            </div>
+            <div class="col-xs-6">
+                <p ng-if="item.ShipAccount">
+                    <strong>{{('Shipper' | r) + ' ' + ('Account' | r) | xlat}}</strong><br />
+                    {{item.ShipAccount}}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

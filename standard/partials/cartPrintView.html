@@ -1,0 +1,68 @@
+<section class="cart-print-view">
+    <div class="cart-print-view-header">
+        <div>
+            <figure>
+                <img class="branding-print-view-logo" ng-src="{{user.Company.LogoUrl}}" />
+            </figure>
+            <h3>{{user.Company.Name}}</h3>
+        </div>
+        <div>
+            <h5>
+                {{(currentOrder.IncomingStatus) + ' ' + ('Order' | r) | xlat}}<br/>
+                {{'Created On' | r | xlat}} {{currentOrder.DateCreated | date:user.Culture.DateFormat.short}}
+            </h5>
+        </div>
+    </div>
+        <div>
+            <h3>
+                {{'Cart Summary' | r | xlat}}
+            </h3>
+            <div ng-if="!user.Permissions.contains('HidePricing')">
+                <p>
+                    {{'Subtotal' | r | xlat}}: <span>{{currentOrder.Subtotal | culturecurrency}}</span>
+                </p>
+                <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
+                    {{'Shipping, handling and tax may be added to this subtotal.' | r | xlat}}
+                </p>
+            </div>
+        </div>
+        <div>
+            <h3>
+                {{currentOrder.LineItems.length}} {{'item' + (currentOrder.LineItems.length > 1 ? 's' : '') | rl | xlat}} {{'in your' | rl | xlat:(currentOrder.LineItems.length)}} {{'cart' | rl | xlat}}
+            </h3>
+            <div ng-repeat="item in currentOrder.LineItems" class="cart-print-view-line-items-repeater">
+                <div class="cart-print-view-line-items-product">
+                    <p>{{item.ProductIDText}}</p>
+                    <p>{{item.Product.Name}}</p>
+                    <ul class="list-group" ng-show="item.SpecsLength > 0">
+                        <li class="list-group-item" ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
+                            <span class="text-info">{{spec.Label || spec.Name}}: </span>
+                            <span ng-if="spec.ControlType == 'File'">{{spec.File.OriginalName + Extension}}</span>
+                            <span ng-if="spec.ControlType != 'File'">{{spec.Value || ('(unspecified)' | xlat)}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div>
+                        <div ng-if="!(user.Permissions.contains('HidePricing'))">
+                            {{'Unit Price' | r | xlat}}: {{item.UnitPrice | culturecurrency}}
+                        </div>
+                        <div>
+                            {{'Quantity' | r | xlat}}: {{item.Quantity}}
+                        </div>
+                        <div ng-if="!(user.Permissions.contains('HidePricing'))">
+                            {{'Total' | r | xlat}}: {{item.LineTotal | culturecurrency}}
+                        </div>
+                    </div>
+                    <div>
+                        <div ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
+                            <p ng-show="item.DateNeeded">{{'Date Needed' | r | xlat}}: {{item.DateNeeded | date:user.Culture.DateFormat.short}}</p>
+                        </div>
+                        <div ng-if="user.Permissions.contains('CostCenterPerLine')">
+                            <p ng-show="item.CostCenter">{{'Cost Center' | r | xlat}}: {{item.CostCenter}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>

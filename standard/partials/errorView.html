@@ -1,0 +1,15 @@
+<section>
+    <div class="container" modal="isError" close="close()" options="opts">
+            <div class="angular-error">
+                <h3 id="451_err" class="text-center">{{error.Message}}</h3>
+                <div class="well" ng-show="error.Detail">
+                    <h5>{{error.Detail}}</h5>
+                    <h6 ng-show="error.Code">{{'(' + error.Code + ')'}}</h6>
+                </div>
+                <div ng-show="error.StackTrace">
+                    <label><small class="text-warning">Stack Trace</small></label>
+                    <p class="help-block"><small class="text-error">{{error.StackTrace}}</small></p>
+                </div>
+            </div>
+    </div>
+</section>

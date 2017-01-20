@@ -1,0 +1,67 @@
+//
+// Animations
+// --------------------------------------------------
+
+//== Angular
+@-webkit-keyframes view-enter {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+  }
+}
+
+@-moz-keyframes view-enter {
+  0% {
+    opacity: 0;
+    -moz-transform: translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    -moz-transform: translateY(0);
+  }
+}
+
+@-o-keyframes view-enter {
+  0% {
+    opacity: 0;
+    -o-transform: translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    -o-transform: translateY(0);
+  }
+}
+
+@keyframes view-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+//== Login
+@-webkit-keyframes pulsate
+{
+  0%   { color: #ddd; text-shadow: 0 0 0  darken(@gray-light, 30%); }
+  50%  { color: #fff; text-shadow: 0 0 0 #444, 0 0 5px #ffd, 0 0 8px #fff; }
+  100% { color: #ddd; text-shadow: 0 0 0 darken(@gray-light, 30%); }
+}
+
+@keyframes pulsate
+{
+  0%   { color: #ddd; text-shadow: 0 0 0 darken(@gray-light, 30%); }
+  50%  { color: #fff; text-shadow: 0 0 0 #444, 0 0 5px #ffd, 0 0 8px #fff; }
+  100% { color: #ddd; text-shadow: 0 0 0 darken(@gray-light, 30%); }
+}

@@ -1,0 +1,99 @@
+//
+// Line items
+// --------------------------------------------------
+
+.panel-lineitem {
+  &:extend(.panel-body all);
+  // line item top border
+  border: none;
+  // canonical selector to add bordertop on repeating lineitems
+  ~ .panel-lineitem{
+    border-top: 1px solid @panel-default-border;
+  }
+
+  .quantity-total {
+    border: 1px solid @panel-default-border;
+    border-top: 0;
+    padding: 5px 0;
+    background-color:@panel-default-heading-bg;
+  }
+
+  .row {
+    padding-top: 5px;
+  }
+
+  //** first column
+  .col-sm-3 {
+    .row {
+      margin-left: -10px;
+    }
+  }
+  //** second column
+  .col-sm-9 {
+    border-left: 1px solid @panel-default-border;
+    input {
+      font-size: @font-size-small;
+    }
+  }
+
+  //** line item link
+  a.line-item-link {
+    width: 100%;
+    // make room for hover with border
+    border: 1px solid transparent;
+    padding: 5px;
+    &:hover {
+      text-decoration: none;
+      background-color:@panel-default-heading-bg;
+      border-radius: @border-radius-base;
+      border: 1px solid @panel-default-border;
+      -webkit-transition: all ease-in-out .5s;
+      -moz-transition: all ease-in-out .5s;
+      -ms-transition: all ease-in-out .5s;
+      -o-transition: all ease-in-out .5s;
+      transition: all ease-in-out .5s;
+    }
+    //** line item link icon
+    i {
+      color:@fourfiveone-gray-medium;
+    }
+  }
+
+  //** remove line item button
+  .btn-danger {
+    border-radius: 0;
+    margin-bottom: 15px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+  }
+
+  .row {
+    //** line item price and name
+    h2, h3 {
+      margin: 0;
+    }
+  }
+  figure {
+    position:relative;
+    img {
+      max-height:150px;
+      margin:0 auto;
+    }
+    a {
+      position:absolute;
+      bottom:0;
+      right:0;
+      width:auto;
+      display:block;
+      padding:@padding-base-vertical @padding-base-horizontal;
+      background-color:fade(@fourfiveone-gray-medium, 60);
+      color:@text-color;
+      transition: background-color 300ms;
+      &:hover {
+        background-color:@fourfiveone-gray-medium;
+      }
+    }
+  }
+}

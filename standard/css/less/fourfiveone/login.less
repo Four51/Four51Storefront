@@ -1,0 +1,76 @@
+//
+// Login
+// --------------------------------------------------
+.order-cloud-image {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  -webkit-background-size:  cover;
+  -moz-background-size:     cover;
+  -o-background-size:       cover;
+  -ms-background-size:      cover;
+  background-size:          cover;
+}
+
+.order-cloud {
+  padding: 0 5px;
+  h2 {
+    margin-top: 0;
+    color:#fff;
+    -webkit-animation:  pulsate 8s linear infinite;
+    -moz-animation:     pulsate 8s linear infinite;
+    -o-animation:       pulsate 8s linear infinite;
+    -ms-animation:      pulsate 8s linear infinite;
+    animation:          pulsate 8s linear infinite;
+  }
+
+  .form-signin {
+    max-width: 26em;
+    padding: 1em 1em 2em;
+    margin: 2em auto;
+    background: rgba(22, 145, 190, .15);
+    -webkit-border-radius:  @border-radius-large;
+    -moz-border-radius:     @border-radius-large;
+    -o-border-radius:       @border-radius-large;
+    -ms-border-radius:      @border-radius-large;
+    border-radius:          @border-radius-large;
+    box-shadow: 1px 1px 1px lighten(rgba(22, 145, 190, .15), 50%);
+
+    .btn-primary  {
+      padding: 15px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      text-shadow: 0 -1px 0 @gray-light;
+      -webkit-transition:   all 150ms ease;
+      -moz-transition:      all 150ms ease;
+      -o-transition:        all 150ms ease;
+      -ms-transition:       all 150ms ease;
+      transition:           all 150ms ease;
+      &:focus {
+        outline: none;
+      }
+      &:active {
+        text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff;
+        box-shadow: 0 1px 0 #666, 0 1px 0 #444, 0 1px 1px rgba(0,0,0,0.9);
+        -webkit-transform:  translateY(2px);
+        -moz-transform:     translateY(2px);
+        -o-transform:       translateY(2px);
+        -ms-transform:      translateY(2px);
+        transform:          translateY(2px);
+        -webkit-animation:  none;
+        -moz-animation:     none;
+        -o-animation:       none;
+        -ms-animation:      none;
+        animation:          none;
+        outline:            none;
+      }
+    }
+    .btn-info {
+      margin-top: 15px;
+      padding: 15px;
+    }
+  }
+}

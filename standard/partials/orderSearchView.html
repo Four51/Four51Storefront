@@ -1,0 +1,188 @@
+<section class="order-search-view">
+    <div class="panel panel-default" ng-if="!hasStandardTypes && !hasReplenishmentTypes && !hasPriceRequestTypes">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{'Orders' | r | xlat}}</h3>
+        </div>
+        <div class="panel-body">
+            <p class="alert alert-warning">{{'Your search resulted in no records. Please refine your search.' | r | xlat}}</p>
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-primary pull-right" redirect="catalog">{{'Continue Shopping' | r}}</button>
+        </div>
+    </div>
+    <div class="order-types">
+        <div class="panel panel-default" ng-show="hasStandardTypes">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{('Standard' | r) + ' ' + ('Orders' | r) | xlat}}</h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li ng-repeat="criteria in OrderSearchCriteria | filter:{Type:'Standard'}" ng-show="criteria.Count">
+                        <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">{{criteria.DisplayName | r | xlat}} <span class="badge">{{criteria.Count}}</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel panel-default" ng-show="hasReplenishmentTypes">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{('Replenishment' | r) + ' ' + ('Orders' | r) | xlat}}</h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li ng-repeat="criteria in OrderSearchCriteria | filter:{Type:'Replenishment'}" ng-show="criteria.Count">
+                        <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">{{criteria.DisplayName | r | xlat}} <span class="badge" >{{criteria.Count}}</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel panel-default" ng-show="hasPriceRequestTypes">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{'Price Request' | r | xlat}}</h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li ng-repeat="criteria in OrderSearchCriteria | filter:{Type:'PriceRequest'}" ng-show="criteria.Count">
+                        <a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">{{criteria.DisplayName | r | xlat}} <span clas="badge">{{criteria.Count}}</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-show="hasStandardTypes || hasReplenishmentTypes || hasPriceRequestTypes">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{('Search' | r) + ' ' + ('Orders' | r) | xlat}}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-inline">
+                <div class="col-sm-7 col-lg-9">
+                    <div class="view-form-icon">
+                        <div class="form-group">
+                            <label ng-show="criteria.OrderID">{{'Order ID' | r | xlat}}</label>
+                            <input class="form-control" type="text" ng-model="criteria.OrderID" placeholder="{{('Order' | r) + ' ' + ('ID' | r) | xlat}}" autocomplete="off" />
+                            <i class="fa">#</i>
+                        </div>
+                        <div class="form-group">
+                            <label ng-show="criteria.ShippingAddress">{{('Shipping' | r) + ' ' + ('Address' | r) | xlat}}</label>
+                            <input class="form-control" type="text" ng-model="criteria.ShippingAddress" placeholder="{{('Shipping' | r) + ' ' + ('Address' | r) | xlat}}" autocomplete="off" />
+                            <i class="fa fa-map-marker"></i>
+                        </div>
+                        <div class="form-group">
+                            <label ng-show="criteria.DateRangeFrom">{{('Start' | r) + ' ' + ('Date' | r) | xlat}}</label>
+                            <div class="btn btn-default btn-block btn-date hidden-lg hidden-md"
+                                 ng-click="$event.preventDefault();$event.stopPropagation();startopened = !startopened;"
+                                 style="margin:0; height:40px; padding-top:8px;">
+                                {{criteria.DateRangeFrom ? '' : 'Tap'}}
+                                <span class="text-info">{{criteria.DateRangeFrom | date:user.Culture.DateFormat.short}}</span>
+                            </div>
+                            <input name="daterangefrom" placeholder="{{('Start' | r) + ' ' + ('Date' | r) | xlat}}" ng-model="criteria.DateRangeFrom"
+                                   type="text"
+                                   class="form-control"
+                                   datepicker-popup="{{user.Culture.DateFormat.short}}"
+                                   is-open="startopened"/>
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <div class="form-group">
+                            <label ng-show="criteria.DateRangeTo">{{('End' | r) + ' ' + ('Date' | r) | xlat}}</label>
+                            <div class="btn btn-default btn-block btn-date hidden-lg hidden-md"
+                                 ng-click="$event.preventDefault();$event.stopPropagation();endopened = !endopened;"
+                                 style="margin:0; height:40px; padding-top:8px;">
+                                {{criteria.DateRangeTo ? '' : 'Tap'}}
+                                <span class="text-info">{{criteria.DateRangeTo | date:user.Culture.DateFormat.short}}</span>
+                            </div>
+                            <input name="daterangeto" placeholder="{{('End' | r) + ' ' + ('Date' | r) | xlat}}" ng-model="criteria.DateRangeTo"
+                                   type="text"
+                                   class="form-control"
+                                   datepicker-popup="{{user.Culture.DateFormat.short}}"
+                                   is-open="endopened"
+                                   min="criteria.DateRangeFrom"/>
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5 col-lg-3">
+                    <div class="alert alert-info">
+                        <i class="fa fa-info-circle"></i>
+                        {{'Only display last' | r | xlat}}
+                        <div class="view-form-icon">
+                            <div>
+                                <label ng-show="criteria.LastN"># {{'of' | xlat}} {{'Orders' | r | xlat}}</label>
+                                <input class="form-control" type="text" ng-model="criteria.LastN" placeholder="# {{'of' | xlat}} {{'Orders' | r | xlat}}" autocomplete="off" />
+                                <i class="fa fa-edit"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="submit" class="btn btn-primary pull-right" ng-click="OrderSearch($event, criteria)">{{'Search' | r | xlat}}</button>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-show="showNoResults">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <span class="alert alert-info">
+                    {{'Your search resulted in no records. Please refine your search.' | r | xlat}}
+                </span>
+            </h3>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-show="orders">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <span class="text-info" ng-show="orderSearchStat.Type">
+                    {{(orderSearchStat.Type) + ' ' + ('Orders' | rl) | xlat}}:
+                </span>
+                {{orderSearchStat.DisplayName | r | xlat}}
+                <span ng-show="!orderSearchStat.Type">
+                    {{'Search' | r | xlat}}
+                </span>
+            </h3>
+        </div>
+        <div class="panel-table">
+            <loadingindicator ng-show="pagedIndicator" />
+            <div ng-show="settings.listCount > settings.pageSize">
+                <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+                            items-per-page="settings.pageSize" direction-links="true"></pagination>
+            </div>
+            <div class="row hidden-xs text-info">
+                <div class="col-xs-12 col-sm-2">{{'ID' | r | xlat}}</div>
+                <div class="col-xs-12 col-sm-2">{{'Type' | r | xlat}}</div>
+                <div class="col-xs-12 col-sm-2">{{'Status' | r | xlat}}</div>
+                <div class="col-xs-12 col-sm-2">{{'Submitted' | r | xlat}}</div>
+                <div class="col-xs-12 col-sm-2">{{('Submitted' | r) + ' ' + ('Date' | r) | xlat}}</div>
+                <div class="col-xs-12 col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">{{'Total' | r | xlat}}</div>
+            </div>
+            <div class="row" ng-repeat="order in orders | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
+                <div class="col-sm-2">
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'ID' | r | xlat}}</span>
+                    <a ng-href="{{currentOrder.ID == order.ID ? 'cart' : 'order/' + order.ID}}">{{order.ExternalID || ('(unspecified)' | xlat)}}</a>
+                </div>
+                <div class="col-sm-2">
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Type' | r | xlat}}</span>
+                    {{order.Type}}
+                </div>
+                <div class="col-sm-2">
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Status' | r | xlat}}</span>
+                    {{order.StatusText}}
+                </div>
+                <div class="col-sm-2">
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Submitted' | r | xlat}}</span>
+                    {{order.FromUserFirstName + ' ' + order.FromUserLastName}}
+                </div>
+                <div class="col-sm-2">
+                    <span class="visible-xs panel-table-heading-xs text-info">{{('Submitted' | r) + ' ' + ('Date' | r) | xlat}}</span>
+                    {{order.DateSubmitted || order.DateCreated | date:user.Culture.DateFormat.long}}
+                </div>
+                <div class="col-sm-2" ng-if="!(user.Permissions.contains('HidePricing'))">
+                    <span class="visible-xs heading-xs text-info">{{'Total' | r}}</span>
+                    {{order.Total | culturecurrency}}
+                </div>
+            </div>
+            <div ng-show="settings.listCount > settings.pageSize">
+                <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+                            items-per-page="settings.pageSize" direction-links="true"></pagination>
+            </div>
+        </div>
+    </div>
+</section>

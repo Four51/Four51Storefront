@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en" ng-app="451order" ng-controller="Four51Ctrl">
+<head>
+	<!--baseTagToken-->
+	<!--headscriptToken-->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Storefront</title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="css/bootstrap-451.css" data-group="source" />
+	<link rel="stylesheet" href="css/editor.css" data-group="source" />
+	<link rel="stylesheet" href="css/theme.css" data-group="source" />
+	<link rel="stylesheet" href="css/custom.css" data-group="source" />
+    <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css' />
+    <link href='//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="css/animate.min.css" />
+    <!--[if lt IE 9]>
+    <div style="position:absolute; top:0; left:0; right:0; bottom:0; background-position:center center; background-size:cover; background-repeat:no-repeat;"></div>
+    <div style="margin:50px auto 0; max-width:600px; text-align: center; padding:20px; border:3px solid#f58220;font-family: Arial, Helvetica, sans-serif;">
+        <h1 style="color:#f58220; padding:20px;">This site uses advanced technology that requires a modern browser.</h1>
+        <p style="color:#000; font-size:16px;">We recommend that you update your browser to the current release of Internet Explorer, Firefox or Chrome. Beta versions of these browsers may work, but are not formally supported. <br/>
+            <a style="color:#f58220; font-size:16px;" target="_blank" href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">Click here to find your upgrade link <i class="fa fa-external-link-square"></i>
+            </a>
+        </p>
+        <p style="color:#000;">
+            <small>
+                <em>*Site works best with most recent versions of <a style="color:#f58220;" target="_blank" href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">Internet Explorer</a>, <a style="color:#f58220;" target="_blank" href="//www.mozilla.org/en-US/firefox/new/" target="_blank">FireFox</a> and <a style="color:#f58220;"href="//www.google.com/chrome/browser/" target="_blank">Chrome</a>
+                </em>
+            </small>
+        </p>
+    </div>
+    <!--<![endif]-->
+</head>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<body ng-cloak ng-class="ng-cloak">
+<section>
+    <section ng-hide="Four51User.isAuthenticated() || isAnon" class="container">
+        <login />
+    </section>
+    <section ng-if="Four51User.isAuthenticated()" id="content">
+        <section class="hidden-print">
+            <navigation />
+        </section>
+        <section class="hidden-print">
+            <branding />
+        </section>
+        <section class="container-view">
+            <ng-view autoscroll />
+        </section>
+        <section class="hidden-print">
+            <copyright ng-if="!user.Permissions.contains('UnBrandedSite')" />
+        </section>
+    </section>
+</section>
+
+    <!--<script type="text/javascript" src="//dl1d2m8ri9v3j.cloudfront.net/releases/1.2.4/tracker.js" data-customer="bfec7bded14d43a7ace2697594e1369d"></script>-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" data-group="cdn"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js" data-group="cdn"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-sanitize.min.js" data-group="cdn"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-cookies.min.js" data-group="cdn"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-animate.min.js" data-group="cdn"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-resource.min.js" data-group="cdn"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-route.min.js" data-group="cdn"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-touch.min.js" data-group="cdn"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-loader.min.js" data-group="cdn"></script>
+    <script src="//cdn.ckeditor.com/4.4.7/basic/ckeditor.js" data-group="cdn"></script>
+
+    <script src="lib/store.js" data-group="resources"></script>
+    <script src="lib/angular_ui/ui-utils.min.js" data-group="resources"></script>
+    <script src="lib/angular_ui/ui-bootstrap-tpls-0.10.0.min.js" data-group="resources"></script>
+    <script src="lib/angular/plugins/headroom.min.js" data-group="resources"></script>
+    <script src="lib/angular/angular.headroom.min.js" data-group="resources"></script>
+    <script src="lib/angular/angular-ga-analytics.js" data-group="resources"></script>
+    <script src="lib/angular/plugins/Debouncer.js" data-group="resources"></script>
+    <script src="lib/angular/plugins/ngAutocomplete.js" data-group="resources"></script>
+    <script src="lib/oc/anonRouter.js" data-group="resources"></script>
+    <script src="lib/oc/ordercloud-specforms.js" data-group="resources"></script>
+
+    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyCIlcbzwi4Er8psS33a6QmcybuqDtyqjh4&libraries=places"></script>
+
+    <script src="js/app.js" data-group="source"></script>
+    <script src="js/four51consts.js" data-group="source"></script>
+    <script src="js/451.js" data-group="source"></script>
+    <script src="js/filters.js" data-group="source"></script>
+    <script src="js/config.js" data-group="source"></script>
+    <script src="js/routing.js" data-group="source"></script>
+
+    <script src="js/controllers/Four51Ctrl.js" data-group="source"></script>
+    <script src="js/controllers/categoryCtrl.js" data-group="source"></script>
+    <script src="js/controllers/errorCtrl.js" data-group="source"></script>
+    <script src="js/controllers/loginCtrl.js" data-group="source"></script>
+    <script src="js/controllers/orderSearchCtrl.js" data-group="source"></script>
+    <script src="js/controllers/orderHistoryViewCtrl.js" data-group="source"></script>
+    <script src="js/controllers/lineItemHistoryCtrl.js" data-group="source"></script>
+    <script src="js/controllers/navCtrl.js" data-group="source"></script>
+    <script src="js/controllers/productCtrl.js" data-group="source"></script>
+    <script src="js/controllers/productListCtrl.js" data-group="source"></script>
+    <script src="js/controllers/messageListCtrl.js" data-group="source"></script>
+    <script src="js/controllers/messageViewCtrl.js" data-group="source"></script>
+    <script src="js/controllers/favoriteOrderCtrl.js" data-group="source"></script>
+    <script src="js/controllers/userEditCtrl.js" data-group="source"></script>
+	<script src="js/controllers/giftCardRedemptionCtrl.js" data-group="source"></script>
+    <script src="js/controllers/addressInputCtrl.js" data-group="source"></script>
+    <script src="js/controllers/addressListCtrl.js" data-group="source"></script>
+    <script src="js/controllers/addressViewCtrl.js" data-group="source"></script>
+    <script src="js/controllers/cartCtrl.js" data-group="source"></script>
+    <script src="js/controllers/checkOutViewCtrl.js" data-group="source"></script>
+    <script src="js/controllers/approvalInputCtrl.js" data-group="source"></script>
+	<script src="js/controllers/specFormCtrl.js" data-group="source"></script>
+	<script src="js/controllers/conditionsCtrl.js" data-group="source"></script>
+    <script src="js/controllers/reportsCtrl.js" data-group="source"></script>
+	<script src="js/controllers/reportCtrl.js" data-group="source"></script>
+	<script src="js/controllers/productSearchCtrl.js" data-group="source"></script>
+	<script src="js/controllers/lineItemEditCtrl.js" data-group="source"></script>
+	<script src="js/controllers/relatedProductsCtrl.js" data-group="source"></script>
+	<script src="js/controllers/shortProductViewCtrl.js" data-group="source"></script>
+    <script src="js/controllers/securityCtrl.js" data-group="source"></script>
+    <script src="js/controllers/orderTypeSelectorCtrl.js" data-group="source"></script>
+    <script src="js/controllers/reportViewCtrl.js" data-group="source"></script>
+    <script src="js/controllers/kitCtrl.js" data-group="source"></script>
+
+    <script src="js/interceptors.js" data-group="source"></script>
+    <script src="js/services/errorService.js" data-group="source"></script>
+    <script src="js/services/securityService.js" data-group="source"></script>
+    <script src="js/services/userService.js" data-group="source"></script>
+	<script src="js/services/productDisplayService.js" data-group="source"></script>
+    <script src="js/services/orderService.js" data-group="source"></script>
+    <script src="js/services/orderConfigService.js" data-group="source"></script>
+    <script src="js/services/orderSearchService.js" data-group="source"></script>
+    <script src="js/services/orderStatsService.js" data-group="source"></script>
+    <script src="js/services/productService.js" data-group="source"></script>
+	<script src="js/services/variantService.js" data-group="source"></script>
+    <script src="js/services/categoryService.js" data-group="source"></script>
+    <script src="js/services/messageService.js" data-group="source"></script>
+	<script src="js/services/messageListService.js" data-group="source"></script>
+    <script src="js/services/favoriteOrderService.js" data-group="source"></script>
+    <script src="js/services/accountsService.js" data-group="source"></script>
+    <script src="js/services/addressService.js" data-group="source"></script>
+	<script src="js/services/addressListService.js" data-group="source"></script>
+    <script src="js/services/shipperService.js" data-group="source"></script>
+    <script src="js/services/couponService.js" data-group="source"></script>
+    <script src="js/services/giftCardService.js" data-group="source"></script>
+    <script src="js/services/savedCreditCardService.js" data-group="source"></script>
+    <script src="js/services/resourceService.js" data-group="source"></script>
+    <script src="js/services/reportsService.js" data-group="source"></script>
+    <script src="js/services/googleAnalytics.js" data-group="source"></script>
+    <script src="js/services/navService.js" data-group="source"></script>
+    <script src="js/services/whiteLabelService.js" data-group="source"></script>
+    <script src="js/services/XLATTables.js" data-group="source"></script>
+    <script src="js/services/XLATService.js" data-group="source"></script>
+    <script src="js/services/kitService.js" data-group="source"></script>
+
+    <script src="js/factories/fileReader.js" data-group="source"></script>
+
+    <script src="js/directives/match.js" data-group="source"></script>
+    <script src="js/directives/buttonredirect.js" data-group="source"></script>
+    <script src="js/directives/product.js" data-group="source"></script>
+	<script src="js/directives/quantityfield.js" data-group="source"></script>
+    <script src="js/directives/paymentselection.js" data-group="source"></script>
+    <script src="js/directives/customtextfield.js" data-group="source"></script>
+	<script src="js/directives/customselectionfield.js" data-group="source"></script>
+    <script src="js/directives/customcheckboxfield.js" data-group="source"></script>
+    <script src="js/directives/customdatefield.js" data-group="source"></script>
+    <script src="js/directives/customtimefield.js" data-group="source"></script>
+    <script src="js/directives/customphonefield.js" data-group="source"></script>
+    <script src="js/directives/customfilefield.js" data-group="source"></script>
+    <script src="js/directives/approvalrulelist.js" data-group="source"></script>
+    <script src="js/directives/tree.js" data-group="source"></script>
+    <script src="js/directives/addressinput.js" data-group="source"></script>
+    <script src="js/directives/reporting.js" data-group="source"></script>
+    <script src="js/directives/inlineerror.js" data-group="source"></script>
+    <script src="js/directives/nav.js" data-group="source"></script>
+    <script src="js/directives/branding.js" data-group="source"></script>
+    <script src="js/directives/login.js" data-group="source"></script>
+    <script src="js/directives/approval.js" data-group="source"></script>
+    <script src="js/directives/shortCartView.js" data-group="source"></script>
+    <script src="js/directives/loadingindicator.js" data-group="source"></script>
+    <script src="js/directives/alertShow.js" data-group="source"></script>
+    <script src="js/directives/giftcard.js" data-group="source"></script>
+    <script src="js/directives/copyright.js" data-group="source"></script>
+    <script src="js/directives/ordersummary.js" data-group="source"></script>
+    <script src="js/directives/orderdetails.js" data-group="source"></script>
+    <script src="js/directives/ordershipping.js" data-group="source"></script>
+    <script src="js/directives/orderbilling.js" data-group="source"></script>
+    <script src="js/directives/orderapprovals.js" data-group="source"></script>
+    <script src="js/directives/daterange.js" data-group="source"></script>
+    <script src="js/directives/printing.js" data-group="source"></script>
+	<script src="js/directives/addToOrderSpecs.js" data-group="source"></script>
+    <script src="js/directives/imageonload.js" data-group="source"></script>
+    <script src="js/directives/ordertypeselector.js" data-group="source"></script>
+    <script src="js/directives/creditcard.js" data-group="source"></script>
+    <script src="js/directives/neworder.js" data-group="source"></script>
+    <script src="js/directives/orderbuttons.js" data-group="source"></script>
+</body>
+<!-- <![endif]-->
+</html>

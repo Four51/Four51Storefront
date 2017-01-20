@@ -1,0 +1,13 @@
+<div class="view-form-icon" ng-class="{'view-form-icon-input-group':((customfield.Prefix && !hideprefix) || (customfield.Suffix && !hidesuffix))}">
+    <div>
+        <label ng-class="{required: customfield.Required}">{{customfield.Label || customfield.Name | r}}</label>
+        <div ng-class="{'input-group':((customfield.Prefix && !hideprefix) || (customfield.Suffix && !hidesuffix))}">
+            <span class="input-group-addon"  ng-if="customfield.Prefix && !hideprefix && !((customfield.Prefix | r) == '')">{{customfield.Prefix | r}}</span>
+            <select class="form-control" ng-init="init()" ng-required="customfield.Required" ng-change="changed()" ng-model="item" ng-options="option.Value for option in customfield.Options" ng-if="customfield.Options">
+                <option value=""></option></select>
+            <input class="form-control" type="text" ng-change="otherChanged()" ng-model="other" ng-show="customfield.isOtherSelected" autocomplete="off" ng-required="customfield.Required && customfield.isOtherSelected" />
+            <span class="input-group-addon"  ng-if="customfield.Suffix && !hidesuffix && !((customfield.Suffix | r) == '')">{{customfield.Suffix | r}}</span>
+        </div>
+        <i class="fa fa-edit"></i>
+    </div>
+</div>

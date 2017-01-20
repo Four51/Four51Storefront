@@ -1,0 +1,14 @@
+<div class="panel-category-list no-panels" ng-show="currentCategory.SubCategories.length">
+    <loadingindicator ng-show="categoryLoadingIndicator" title="{{'Please wait while we fetch all categories' | r | xlat}}" />
+    <nav class="nav 451_lbl_subcatlist">
+        <ul>
+            <li class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="c in currentCategory.SubCategories">
+                <div class="well image-bg dark" style="background-image:url({{c.Image.URL}});">
+                    <a ng-href="catalog/{{c.InteropID}}">
+                        <h4 ng-bind-html="c.Name" />
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</div>

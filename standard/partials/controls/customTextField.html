@@ -1,0 +1,18 @@
+<div class="view-form-icon" ng-class="{'view-form-icon-input-group':((customfield.Prefix && !hideprefix) || (customfield.Suffix && !hidesuffix))}">
+    <div ng-if="customfield.Lines <= 1">
+        <label ng-class="{required: customfield.Required}">{{customfield.Label || customfield.Name | r}}</label>
+        <div ng-class="{'input-group':((customfield.Prefix && !hideprefix) || (customfield.Suffix && !hidesuffix))}">
+            <span class="input-group-addon" ng-if="customfield.Prefix && !hideprefix && !((customfield.Prefix | r) == '')">{{customfield.Prefix | r}}</span>
+            <input class="form-control" ng-trim="{{autotrim || true}}" placeholder="{{customfield.Label || customfield.Name}}" size="{{customfield.Width * .13}}" ng-maxlength="{{customfield.MaxLength}}" ui-mask="{{customfield.MaskedInput}}" type="text" autocomplete="off" ng-required="customfield.Required" ng-model="customfield.Value" />
+            <span class="input-group-addon" ng-if="customfield.Suffix && !hidesuffix && !((customfield.Suffix | r) == '')">{{customfield.Suffix | r}}</span>
+        </div>
+    </div>
+    <div ng-if="customfield.Lines > 1">
+        <label ng-class="{required: customfield.Required}">{{customfield.Label || customfield.Name | r}}</label>
+        <div ng-class="{'input-group':((customfield.Prefix && !hideprefix) || (customfield.Suffix && !hidesuffix))}">
+            <span class="input-group-addon" ng-if="customfield.Prefix && !hideprefix && !((customfield.Prefix | r) == '')">{{customfield.Prefix | r}}</span>
+            <textarea wrap="hard" class="form-control" ng-attr-placeholder="{customfield.Label || customfield.Name | r}}" cols="{{customfield.Width * .13}} rows={{customfield.Lines}}" ng-maxlength="{{customfield.MaxLength}}" ng-required="customfield.Required" ng-model="customfield.Value"></textarea>
+            <span class="input-group-addon" ng-if="customfield.Suffix && !hidesuffix && !((customfield.Suffix | r) == '')">{{customfield.Suffix | r}}</span>
+        </div>
+    </div>
+</div>

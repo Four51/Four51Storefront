@@ -1,0 +1,66 @@
+<section class="address-list-view">
+    <loadingindicator ng-show="displayLoadingIndicator" />
+    <accountnavigation />
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{'Addresses' | r | xlat}}</h3>
+        </div>
+        <div class="panel-body">
+                <div class="view-form-icon">
+                    <form name="searchForm" ng-submit="search()">
+                        <div class="input-group">
+                            <input type="text" ng-model="searchTerm"  class="form-control" placeholder="{{('Search' | r) + ' ' + ('Addresses' | r) | xlat}}" />
+                            <i class="fa fa-search"></i>
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default">{{'Search' | r | xlat}}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div ng-show="!addresses.length > 0">
+                    <hr/>
+                    <p class="alert alert-warning">{{'No' + ' ' + ('addresses' | rc) + ' ' + 'available' | xlat}}</p>
+                    <div class="panel-footer">
+                        <button type="button" class="btn btn-primary" ng-click="newAddress($event)">{{'Add an' + ' ' + ('address' | rc) + ' ' + 'now' | xlat}}</button>
+                    </div>
+                </div>
+                <div ng-show="addresses.length > 0">
+                    <hr/>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr>
+                                <th><input type='checkbox' ng-click="checkAll($event)" /></th>
+                                <th>{{'Name' | r}}</th>
+                                <th>{{'City' | r}}</th>
+                                <th>{{'State' | r}}</th>
+                                <th>{{'Shipping' | r}}</th>
+                                <th>{{'Billing' | r}}</th>
+                            </tr>
+                            <tr ng-repeat="address in addresses | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
+                                <td><input type='checkbox' ng-model="address.Selected" ng-show="address.IsCustEditable" /></td>
+                                <td><a ng-href="address/{{address.ID}}">{{address.AddressName}}</a></td>
+                                <td>{{address.City}}</td>
+                                <td>{{address.State}}</td>
+                                <td><i ng-class="{'fa fa-check': address.IsShipping }"></i></td>
+                                <td><i ng-class="{'fa fa-check': address.IsBilling }"></i></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel-footer" ng-show="addresses.length > 0">
+                <div ng-show="settings.listCount > settings.pageSize">
+                    <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+                                items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
+                </div>
+                <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-disabled="(addresses | filter:{Selected:true}).length == 0">{{('Delete' | r) + ' ' + ('Selected' | r) | xlat}}</button>
+                <button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" type="button" class="btn btn-primary pull-right" ng-click="newAddress($event)">{{('New' | r) + ' ' + ('Address' | r) | xlat}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="navbar-fixed-bottom">
+        <loadingindicator ng-show="displayLoadingIndicator" />
+        <div class="view-action-message alert-success" ng-show="actionMessage">{{actionMessage | r | xlat}}</div>
+    </div>
+</section>

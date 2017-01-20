@@ -1,0 +1,25 @@
+<div class="container line-item-history-view">
+    <div class="col-md-5">
+        <figure>
+            <img id="451_img_prod_lg" ng-src="{{LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}" >
+        </figure>
+    </div>
+
+
+    <div class="col-md-6 col-md-offset-1">
+        <h2>{{('Product' | r) + ' ' + ('ID' | r) | xlat}} {{LineItem.ProductIDText}}</h2>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title panel-primary">{{'Description' | r | xlat}}</h3>
+            </div>
+            <div class="panel-body">
+                <p ng-bind-html='LineItem.Product.Description'></p>
+                <span ng-if="!(user.Permissions.contains('HidePricing'))">
+                   <priceScheduleTable ps='LineItem.PriceSchedule' p='LineItem.Product' />
+                </span>
+            </div>
+        </div>
+        <staticspecstable specGroups="StaticSpecGroups"></staticspecstable>
+    </div>
+
+</div>

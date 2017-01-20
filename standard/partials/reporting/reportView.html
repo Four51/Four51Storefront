@@ -1,0 +1,62 @@
+<section>
+    <form name="reportForm" ng-submit="saveReport()">
+        <div class="panel panel-default">
+            <loadingindicator ng-show="displayLoadingIndicator" />
+            <div class="panel-heading">
+                <h3 ng-if="!report.ID" class="panel-title panel-primary">{{report.ID ? report.Name : (report.ReportTypeName | r | xlat)}}</h3>
+            </div>
+            <tabset ng-show="report">
+                <tab>
+                    <tab-heading>{{'Conditions' | r | xlat}}</tab-heading>
+                    <div class="panel-body">
+                        <lineitemreport ng-if="report.ReportType == 'LineItem'" />
+                        <orderreport ng-if="report.ReportType == 'Order'" />
+                        <inventoryreport ng-if="report.ReportType == 'Inventory'" />
+                        <pendingapprovalreport ng-if="report.ReportType == 'PendingApproval'" />
+                        <accountStatusReport ng-if="report.ReportType == 'SpendingAccountStatus'" />
+                        <accounttransactionreport ng-if="report.ReportType == 'SpendingAccountTransaction'" />
+                        <shipmentreport ng-if="report.ReportType == 'Shipment'" />
+                    </div>
+                </tab>
+                <tab disabled="!report.ID">
+                    <tab-heading ng-click="downloadReport(report)">
+                        {{('Report' | r) + ' ' + ('Data' | r) | xlat}}
+                    </tab-heading>
+                    <div class="panel-body">
+                        <div class="table-responsive hidden-xs">
+                            <table class="table table-striped table-condensed">
+                                <thead>
+                                <tr class="info">
+                                    <td ng-repeat="(key, value) in report.DataColumns">{{report.DisplayColumns[value] | r | xlat}}</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="row in report.Data | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
+                                    <td ng-repeat="header in report.DataColumns">
+                                        <span ng-if="header.indexOf('Date') == -1">{{row[header]}}</span>
+                                        <span ng-if="header.indexOf('Date') > -1">{{row[header] | date:user.Culture.DateFormat.long}}</span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div ng-show="settings.listCount > settings.pageSize">
+                            <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+                                        items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}"
+                                        first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
+                        </div>
+                        <button ng-hide="errorMessage" type="button" class="btn btn-primary pull-right" ng-click="getDownload()">{{'Download' | r | xlat}}</button>
+                    </div>
+                </tab>
+            </tabset>
+            <div class="view-response-message text-center" ng-show="actionMessage">
+                <p>{{actionMessage | r | xlat}}</p>
+            </div>
+            <div class="view-error-message alert-danger text-center" ng-show="errorMessage">
+                <p>{{errorMessage | r | xlat}}</p>
+            </div>
+        </div>
+    </form>
+</section>
