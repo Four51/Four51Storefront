@@ -67,7 +67,12 @@ four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security',
 		store.clear();
 		$resource($451.api('login')).save(credentials).$promise.then(
 			function(u) {
-				_then(success, u);
+				if(credentials.CurrentOrderID){
+					_setorder(credentials.CurrentOrderID,success,error);
+				}
+				else{
+					_then(success, u);
+				}
 			},
 			function(ex) {
 				if (angular.isFunction(error)) {
