@@ -247,15 +247,26 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 				scope.variantLineItems = {};
 				angular.forEach(p.Variants, function(v){
 					if (!v) return;
-					Variant.get({'ProductInteropID': p.InteropID, 'VariantInteropID': v.InteropID}, function(data){
+					if(p.Type == "VariableText"){
+						Variant.get({'ProductInteropID': p.InteropID, 'VariantInteropID': v.InteropID}, function(data){
+							scope.variantLineItems[v.InteropID] = {
+								PriceSchedule: (scope.currentOrder ? v[scope.currentOrder.Type + 'PriceSchedule'] : (v.StandardPriceSchedule || v.ReplenishmentPriceSchedule))
+								|| (scope.currentOrder ? p[scope.currentOrder.Type + 'PriceSchedule'] : (v.StandardPriceSchedule || v.ReplenishmentPriceSchedule || scope.LineItem.PriceSchedule)),
+								Product: p,
+								Variant: data,
+								Specs: scope.LineItem.Specs
+							};
+						});
+					}
+					else{
 						scope.variantLineItems[v.InteropID] = {
-							PriceSchedule: (scope.currentOrder ? v[scope.currentOrder.Type + 'PriceSchedule'] : (v.StandardPriceSchedule || v.ReplenishmentPriceSchedule))
-							|| (scope.currentOrder ? p[scope.currentOrder.Type + 'PriceSchedule'] : (v.StandardPriceSchedule || v.ReplenishmentPriceSchedule || scope.LineItem.PriceSchedule)),
-							Product: p,
-							Variant: data,
-							Specs: scope.LineItem.Specs
-						};
-					});
+		 					PriceSchedule: (scope.currentOrder ? v[scope.currentOrder.Type + 'PriceSchedule'] : (v.StandardPriceSchedule || v.ReplenishmentPriceSchedule))
+		 					|| (scope.currentOrder ? p[scope.currentOrder.Type + 'PriceSchedule'] : (v.StandardPriceSchedule || v.ReplenishmentPriceSchedule || scope.LineItem.PriceSchedule)),
+		 					Product: p,
+		 					Variant: v,
+		 					Specs: scope.LineItem.Specs
+		 				};
+					}
 				});
 			}
 		}
