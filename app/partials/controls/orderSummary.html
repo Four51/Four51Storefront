@@ -60,7 +60,7 @@
                 <label ng-show="currentOrder.ExternalOrderDetailRecipients">{{('Email' | r) + ' ' + ('Notification' | r) | xlat}}</label>
                 <input class="form-control" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid" type="email" ng-model="currentOrder.ExternalOrderDetailRecipients" placeholder="{{('Email' | r) + ' ' +  ('Address' | r) | xlat}}" autocomplete="off" />
                 <i class="fa fa-envelope-o"></i>
-                <span class="help-block text-left"><small>{{'Provide an email address if you would like to receive ' + ('Notification' | r) + 's concerning this order.' | r | xlat}}</small></span>
+                <span class="help-block text-left"><small>{{'Send a copy of the order details to above email address.' | r | xlat}}</small></span>
             </div>
         </div>
         <button class="btn btn-default" redirect="/security">
