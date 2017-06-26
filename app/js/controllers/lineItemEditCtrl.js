@@ -14,12 +14,20 @@ four51.app.controller('LineItemEditCtrl', ['$scope', '$routeParams', '$location'
         function init() {
             $scope.LineItem = {};
             $scope.LineItem = $scope.currentOrder.LineItems[$routeParams.lineItemIndex];
-            ProductDisplayService.getProductAndVariant($scope.LineItem.Product.InteropID, $scope.LineItem.Variant.InteropID, function (data) {
-    			$scope.LineItem.Product = data.product;
-    			$scope.LineItem.Variant = data.variant;
-    			ProductDisplayService.setNewLineItemScope($scope);
-    			ProductDisplayService.setProductViewScope($scope);
-    		}, 1, 10, null);
+            if($scope.LineItem.Variant && $scope.LineItem.Variant.InteropID){
+                ProductDisplayService.getProductAndVariant($scope.LineItem.Product.InteropID, $scope.LineItem.Variant.InteropID, function (data) {
+                    $scope.LineItem.Product = data.product;
+                    $scope.LineItem.Variant = data.variant;
+                    ProductDisplayService.setNewLineItemScope($scope);
+                    ProductDisplayService.setProductViewScope($scope);
+                }, 1, 10, null);
+            }
+            else{
+                Product.get($scope.LineItem.Product.InteropID, function(product){
+                    $scope.LineItem.Product = product;
+                    ProductDisplayService.setProductViewScope($scope);
+                });
+            }
         }
 
         $scope.allowAddToOrder = true;
