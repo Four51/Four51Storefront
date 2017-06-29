@@ -309,7 +309,7 @@ var XLATTables = {
         'promotions': 'promociones',
         'promo code': 'código de promoción',
         'promotion code': 'código de promoción',
-        'provide an email address if you would like to receive notifications concerning this order.': 'proporcione una dirección de correo electrónico si desea recibir notificaciones acerca de este pedido',
+        'Send a copy of the order details to above email address.': 'Envíe una copia de los detalles del pedido a la dirección de correo electrónico anterior.',
         'purchaseorder': 'orden de compra',
         'purchase order': 'orden de compra',
         'quantity': 'cantidad',

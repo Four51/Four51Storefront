@@ -35,21 +35,24 @@ four51.app.controller('UserEditCtrl', ['$scope', '$location', '$sce', '$injector
                     $scope.loginasuser.CurrentOrderID = $scope.currentOrder.ID;
                 }
                 User.reset($scope.loginasuser, function (user) {
-                        delete $scope.loginasuser;
-                        if(user.CurrentOrderID){
+                    delete $scope.loginasuser;
+                    if(user.CurrentOrderID){
+                        Order.get(user.CurrentOrderID,function(order){
+                            $scope.currentOrder = order;
                             $scope.currentOrder.FromUserID = user.ID;
                             Order.save($scope.currentOrder,function(ordr){
                                 $location.path('checkout');
                             });
-                        }
-                        else{
-                            $location.path('catalog');
-                        }
-                    },
-                    function (err) {
-                        $scope.emailResetLoadingIndicator = false;
-                        $scope.resetPasswordError = $sce.trustAsHtml(err.Message);
-                    });
+                        });
+                    }
+                    else{
+                        $location.path('catalog');
+                    }
+                },
+                function (err) {
+                    $scope.emailResetLoadingIndicator = false;
+                    $scope.resetPasswordError = $sce.trustAsHtml(err.Message);
+                });
             }
             $scope.save = function () {
                 $scope.actionMessage = null;
