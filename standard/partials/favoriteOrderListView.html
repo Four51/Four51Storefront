@@ -1,0 +1,65 @@
+<section>
+    <loadingindicator ng-show="loading" />
+    <accountnavigation />
+    <div class="panel panel-default" ng-if="favoriteorders.length == 0">
+        <div class="panel-heading">
+            <h3 class="panel-title panel-primary">{{('Favorite' | r) + ' ' + ('Orders' | r) | xlat }}</h3>
+        </div>
+        <div class="panel-body">
+            <p class="alert alert-warning">{{'You have no ' + ('Favorite' | rl) + ' ' + ('Orders' | rl) + ' yet!' | xlat}}</p>
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-primary pull-right" redirect="order">{{('View' | r) + ' ' + ('Orders' | r) | xlat}}</button>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-if="favoriteorders.length > 0">
+        <div class="panel-heading">
+            <h3 class="panel-title panel-primary">{{('Favorite' | r) + ' ' + ('Orders' | r) | xlat }}</h3>
+        </div>
+        <div class="panel-body view-form-icon" ng-if="favoriteorders.length > 0">
+            <form role="search">
+                <div class="input-group">
+                    <label ng-show="searchTerm">{{'Search' | r | xlat}}</label>
+                    <input class="form-control" type="text" placeholder="{{'Search' | r | xlat}}" ng-model="searchTerm" autocomplete="off" />
+                    <i class="fa fa-search"></i>
+                    <div class="input-group-btn">
+                        <button type="submit" ng-click="search(searchTerm)" class="btn btn-primary">{{'Search' | r | xlat}}</button>
+                    </div>
+                </div>
+            </form>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tr>
+                        <th><input type='checkbox' ng-click="checkAll($event)" /></th>
+                        <th>{{'Name' | r}}</th>
+                        <th>{{'Order' | r}} {{'ID' | r}}</th>
+                        <th>{{'Date' | r}} {{'Completed' | r}}</th>
+                        <th>{{'Order' | r}} {{'Type' | r}}</th>
+                        <th ng-if="!(user.Permissions.contains('HidePricing'))"></th>
+                    </tr>
+                    <tr ng-repeat="order in favoriteorders | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
+                        <td><input type='checkbox' ng-model="order.Selected" /></td>
+                        <td>{{order.FavoriteName}}</td>
+                        <td><a ng-href="order/{{order.ID}}">{{order.ExternalID}}</a></td>
+                        <td>{{order.DateCompleted | date:'medium'}}</td>
+                        <td> {{order.Type}}</td>
+                        <td class="text-center" ng-if="!(user.Permissions.contains('HidePricing'))">
+                            <button ng-disabled="currentOrder" type="button" class="btn btn-default btn-sm" ng-click="repeat(order)">
+                                <i ng-show="currentOrder" class="fa fa-warning"></i>
+                                {{'Repeat' | r}} {{'Order' | r}}
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div ng-show="settings.listCount > settings.pageSize">
+                <pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+                            items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
+            </div>
+            <button type="button" class="btn btn-small btn-danger" ng-click="deleteSelected($event)" ng-disabled="(favoriteorders | filter:{Selected:true}).length == 0">{{('Delete' | r) + ' ' + ('Selected' | r) | xlat}}</button>
+            <span class="alert alert-success" ng-show="error" ng-bind-html="error | r"></span>
+        </div>
+    </div>
+</section>

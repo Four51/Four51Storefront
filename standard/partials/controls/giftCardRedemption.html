@@ -1,0 +1,17 @@
+<form name="giftcard_redeem" ng-submit="redeemGiftCard()" class="gift-card-redemption-view">
+    <div class="form-group view-form-icon">
+        <div>
+            <label ng-show="giftcard.Code">{{'Gift Card Code' | r | xlat}}</label>
+            <div class="input-group">
+                <input class="form-control" type="text" ng-model="giftcard.Code" placeholder="{{'Gift Card Code' | r | xlat}}" autocomplete="off"/>
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-success"><i class="fa fa-check"></i></button>
+                </span>
+            </div>
+            <i class="fa fa-dollar"></i>
+        </div>
+        <div ng-show="giftcard.Balance" class="alert alert-info">
+            {{'A gift card' | xlat}}, <strong>{{giftcard.Code}}</strong>, {{'with a balance of' | xlat}} <strong>{{giftcard.Balance | culturecurrency}}</strong> {{'has been attached to your account and will be available during the billing step of the checkout process while a balance remains' | xlat}}.
+        </div>
+    </div>
+</form>

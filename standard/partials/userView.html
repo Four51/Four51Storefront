@@ -1,0 +1,176 @@
+<section class="user-view">
+    <div class="hidden-md hidden-lg" ng-class="{'panel panel-default':!user.Permissions.contains('ViewSelfAdmin')}">
+        <div class="panel-heading" ng-show="!user.Permissions.contains('ViewSelfAdmin')">
+            <h3 class="panel-title">{{'My Account' | r | xlat}}</h3>
+        </div>
+        <div ng-class="{'panel-body':!user.Permissions.contains('ViewSelfAdmin')}">
+            <accountnavigation />
+        </div>
+    </div>
+    <loadingindicator title="{{'Please wait while we save your changes' | r | xlat}}" ng-show="displayLoadingIndicator"/>
+    <identifyusermessage ng-show="user.Type == 'TempCustomer'" />
+    <form ng-show="user.Permissions.contains('ViewSelfAdmin')" name="login_existing" ng-submit="loginExisting()" ng-if="user.Type == 'TempCustomer'">
+        <div class="panel panel-default" id="user_form">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{('Logon' | r) + ' ' + ('as existing user' | r) | xlat}}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-6 col-md-offset-3">
+                    <label>{{'Username' | r | xlat}}</label><input name="username" class="form-control" type="text" ng-model="loginasuser.Username" autocomplete="off" required placeholder="{{'Username' | r | xlat}}" /><br />
+                    <label>{{'Password' | r | xlat}}</label><input name="password" class="form-control" type="password" ng-model="loginasuser.Password" autocomplete="off" required placeholder="{{'Password' | r | xlat}}" /><br />
+                </div>
+            </div>
+            <div class="panel-footer">
+                <input class="btn btn-medium btn-primary" type="submit" ng-disabled="login_existing.$invalid" id="451_btn_login_existing" value="{{'Logon' | r | xlat}}" />
+                <inlineerror ng-show="loginAsExistingError" title="{{loginAsExistingError}}" />
+            </div>
+        </div>
+    </form>
+
+    <div ng-show="user.Permissions.contains('ViewSelfAdmin')" ng-if="user.Type == 'TempCustomer'">
+        <form name="login_help" ng-submit="getToken()">
+            <div ng-show="!enterResetToken" class="panel panel-default">
+                <loadingindicator ng-show="emailResetLoadingIndicator" title="{{'Please wait while we email your verification code' | r | xlat}}" />
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{'Lost login information' | r | xlat}}</h3>
+                </div>
+                <div class="panel-body">
+                    <label>{{'Email' | r | xlat}}</label>
+                    <input name="username" required class="form-control" type="text" ng-model="loginasuser.Email" autocomplete="off" placeholder="{{'Email' | r | xlat}}" />
+                    <br/>
+                    <div class="panel-footer">
+                        <input class="btn btn-medium btn-primary" type="submit" ng-disabled="login_help.$invalid" id="451_btn_login_existing" value="{{'Reset' | r | xlat}}" />
+                        <div class="view-inline-error" style="text-align: left" ng-show="resetPasswordError" ng-bind-html="resetPasswordError" />
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form name="resetbytoken" ng-submit="resetWithToken()" >
+            <div class="panel panel-default" ng-show="enterResetToken">
+                <loadingindicator ng-show="emailResetLoadingIndicator" title="{{'Please wait while we reset your password' | r | xlat}}" />
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{'Lost login information' | r | xlat}}</h3>
+                </div>
+                <div class="panel-body">
+                    <p class="alert-warning">{{'An email was sent with your username and verification code.' | r | xlat}}</p>
+                    <div class="row">
+                        <label>{{'Username' | r | xlat}}</label>
+                        <input required name="username" class="form-control" type="text" ng-model="loginasuser.UserName" autocomplete="off" placeholder="{{'Username' | r | xlat}}" />
+                    </div>
+                    <div class="row">
+                        <label>{{'Verification code from email' | r | xlat}}</label>
+                        <input required name="token" class="form-control" type="text" ng-model="loginasuser.PasswordResetToken" autocomplete="off" placeholder="{{'Verification Code' | r | xlat}}" />
+                    </div>
+                    <div class="row">
+                        <label>New {{'Password' | r}}</label>
+                        <input required class="form-control" name="new_password" type="password" ng-model="loginasuser.NewPassword" placeholder="New {{'Password' | r}}" />
+                    </div>
+                    <div class="row">
+                        <label>Confirm {{'Password' | r}}</label>
+                        <input required class="form-control" name="confirm_password" type="password" ng-model="loginasuser.ConfirmPassword"  placeholder="Confirm {{'Password' | r}}" ng-match="loginasuser.NewPassword" />
+                        <inlineerror ng-show="resetbytoken.confirm_password.$error.match" title="{{'Password' | r}}s do not match!" /><br />
+                    </div>
+                    <div xclass="panel-footer">
+                        <input class="btn btn-medium btn-primary" type="submit" ng-disabled="resetbytoken.$invalid" value="{{'Reset' | r | xlat}}" />
+                        <div class="view-inline-error" style="text-align: left" ng-show="resetPasswordError" ng-bind-html="resetPasswordError" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <form ng-show="user.Permissions.contains('ViewSelfAdmin')" name="user_form" ng-submit="save()">
+        <div class="panel panel-default" id="user_form">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{(user.Type == 'TempCustomer' ? 'Create' : 'My') + ' ' + ('Account' | r) | xlat}}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="col-sm-6 view-form-icon">
+                    <div>
+                        <label ng-show="user.FirstName">{{('First' | r) + ' ' + ('Name' | r) | xlat}}</label>
+                        <input name="firstname" class="form-control" type="text" required ng-model="user.FirstName" placeholder="{{('First' | r) + ' ' + ('Name' | r) | xlat}}" autocomplete="off" />
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div>
+                        <label ng-show="user.LastName">{{('Last' | r) + ' ' + ('Name' | r) | xlat}}</label>
+                        <input name="lastname" required class="form-control" type="text" ng-model="user.LastName" placeholder="{{('Last' | r) + ' ' + ('Name' | r) | xlat}}" autocomplete="off" />
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div>
+                        <label ng-show="user.Phone">{{'Phone' | r | xlat}}</label>
+                        <input name="phone" class="form-control" type="text" ng-model="user.Phone" ui-mask="(999) 999-9999" autocomplete="off" />
+                        <i class="fa fa-phone"></i>
+                    </div>
+                    <div>
+                        <label class="required">{{'Email' | r | xlat}}</label>
+                        <input name="email" class="form-control" type="email" ng-model="user.Email" required placeholder="{{'Email' | r | xlat}}" autocomplete="off" />
+                        <i class="fa fa-envelope-o"></i>
+                        <inlineerror ng-show="user_form.email.$invalid" title="{{'Please enter a valid' + ' ' +  ('Email' | rl) + ' ' + ('Address' | rl) | xlat}}" />
+                    </div>
+                </div>
+                <div class="col-sm-6 view-form-icon">
+                    <div>
+                        <label class="required">{{'Username' | r | xlat}}</label>
+                        <input name="username" class="form-control" type="text" ng-model="user.TempUsername" required placeholder="{{'Username' | r | xlat}}" autocomplete="off" />
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <!--TODO username input shouldn't default to temporary usernames, if the user is temp, make the placeholder show instead !-->
+                    <div>
+                        <label ng-show="user.Password">{{'Password' | r | xlat}}</label>
+                        <input name="password" class="form-control" ng-required="user.Type == 'TempCustomer'" type="password" ng-model="user.Password" placeholder="{{'Password' | r | xlat}}" autocomplete="off" />
+                        <i class="fa fa-lock"></i>
+                    </div>
+                    <div>
+                        <label ng-show="user.ConfirmPassword">{{('Confirm' | r) + ' ' + ('Password' | r) | xlat}}</label>
+                        <input name="confirm_password" ng-match="user.Password" ng-required="user.Type == 'TempCustomer' || user.Password" class="form-control" type="password" ng-model="user.ConfirmPassword" placeholder="{{('Confirm' | r) + ' ' + ('Password' | r) | xlat}}" autocomplete="off" />
+                        <i class="fa fa-lock"></i>
+                        <inlineerror ng-show="user_form.confirm_password.$error.match" title="{{('Password' | r) + 's do not match!' | xlat}}" />
+                    </div>
+                    <span class="alert-warning" ng-show="securityWarning">
+                        <ul>
+                            <li>{{'Your password does not meet the requirements set for length or complexity. It must be changed to meet the minimum requirements before continuing.' | xlat}}</li>
+                            <li>{{'There are three distinct password security levels. The rules are defined as:' | xlat}}</li>
+                            <ul>
+                                <li>{{'Low: No restrictions on passwords.' | xlat}}</li>
+                                <li>{{'Medium: A minimum of 6 characters required.' | xlat}}</li>
+                                <li>{{'High:' | xlat}}</li>
+                                <ul>
+                                    <li>{{'Minimum of 8 alphanumeric characters.' | xlat}}</li>
+                                    <li>{{'Two or more of the following kinds of characters' | xlat}}</li>
+                                    <ol>
+                                        <li>{{'Alphabetic (e.g., a-z, A-Z)' | xlat}}</li>
+                                        <li>{{'Numeric (i.e. 0-9)' | xlat}}</li>
+                                        <li>{{'Punctuation and other characters (e.g.,' | xlat}} !@#$%^&*()_+|~-=\`{}[]:";'<>?,./)</li>
+                                    </ol>
+                                    <li>{{'** After 6 failed logon attempts, the user will be locked out for 30 minutes.' | xlat}}</li>
+                                </ul>
+                            </ul>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+            <div class="panel-body" >
+                <div  ng-if="user.CustomFields" class="col-sm-6 view-form-icon">
+                    <div ng-repeat="field in user.CustomFields">
+                        <customfilefield customfield="field" ng-if="field.ControlType == 'File' && field.DisplayToUser"></customfilefield>
+                        <customtextfield customfield="field" ng-if="field.ControlType == 'Text' && field.DisplayToUser"></customtextfield>
+                        <customselectionfield customfield="field" ng-if="field.ControlType == 'Selection' && field.DisplayToUser"></customselectionfield>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <p class="alert alert-success" ng-show="actionMessage" ng-bind-html="actionMessage | r | xlat"></p>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="btn btn-primary pull-right" type="submit" ng-disabled="user_form.$invalid" id="451_btn_user" value="{{(user.Type == 'TempCustomer' ? 'Create Account' : 'Save') | xlat}}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,32 @@
+<div>
+    <img class="fileInput">
+    <loadingindicator ng-show="uploadFileIndicator" title="{{'Uploading' | r | xlat}}"/>
+    <label>{{label || customfield.Label || customfield.Name | r}}:</label>
+    <img ng-show="customfield.File.IsImage && customfield.FileType == 'Image'" ng-src="{{customfield.File.Url}}"></img>
+    <a ng-href="{{customfield.File.Url}}">{{customfield.File.OriginalName}}</a>
+    <div ng-show="customfield.File">
+        <input name="replace" class="replace" type="checkbox" ng-model="replace"></input> {{'Replace' | r | xlat}}
+        <input name="delete" class="delete" type="checkbox"></input> {{'Delete' | r | xlat}}
+    </div>
+    <div ng-show="replace || !customfield.File" ng-class="{'file-upload-required text-danger': customfield.Required }" class="btn btn-default">
+        <i class="fa fa-upload"></i> {{'Upload File' | r | xlat}}
+        <input name="upload" class="upload" type="file"></input>
+    </div>
+    <hr />
+    <input type="hidden" ng-required="customfield.Required" ng-model="customfield.File.ID"></input>
+    <div class="error ui-state-error-text text-danger"></div>
+    <div class="alert alert-info" ng-show="replace || !customfield.File">
+        {{customfield.UploadInstructions}}
+        <ul ng-show="replace || !customfield.File">
+            <li>{{'Allowed File Types' | r | xlat}}: {{customfield.AllowedExt | r}}</li>
+            <li ng-if="customfield.MinSize > 0">{{'Minimum File Size' | r | xlat}}: {{(customfield.MinSize | kb) + ' KB'}}</li>
+            <li ng-if="customfield.MaxSize > 0">{{'Maximum File Size' | r | xlat}}: {{(customfield.MaxSize | kb) + ' KB'}}</li>
+            <li ng-if="customfield.MinHeight > 0 && (customfield.File.IsImage || customfield.FileType == 'Image')">{{'Minimum Height' | xlat}}: {{customfield.MinHeight + ' px'}}</li>
+            <li ng-if="customfield.MaxHeight > 0 && (customfield.File.IsImage || customfield.FileType == 'Image')">{{'Maximum Height' | xlat}}: {{customfield.MaxHeight + ' px'}}</li>
+            <li ng-if="customfield.MinWidth > 0 && (customfield.File.IsImage || customfield.FileType == 'Image')">{{'Minimum Width' | xlat}}: {{customfield.MinWidth + ' px'}}</li>
+            <li ng-if="customfield.MaxWidth > 0 && (customfield.File.IsImage || customfield.FileType == 'Image')">{{'Maximum Width' | xlat}}: {{customfield.MaxWidth + ' px'}}</li>
+            <li ng-if="customfield.MinDPI > 0 && (customfield.File.IsImage || customfield.FileType == 'Image')">{{'Minimum DPI' | xlat}}: {{(customfield.MinDPI) + ' ' + ('dpi' | r | xlat)}}</li>
+            <li ng-if="customfield.MaxDPI > 0 && (customfield.File.IsImage || customfield.FileType == 'Image')">{{'Maximum DPI' | xlat}}: {{(customfield.MaxDPI) + ' ' + ('dpi' | r | xlat)}}</li>
+        </ul>
+    </div>
+</div>

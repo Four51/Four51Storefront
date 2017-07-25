@@ -1,0 +1,14 @@
+<div class="panel panel-default panel-order">
+    <div class="panel-heading" ng-class="{'no': cart_approval.$invalid, 'yes': !cart_approval.$invalid }">
+        <h3 ng-click="checkOutSection = 'approval'" class="panel-title">
+            <i class="fa fa-info-circle pull-left"></i>
+            {{'Approval' | r}} {{'Rules' | r}}
+        </h3>
+    </div>
+    <div collapse="checkOutSection != 'approval'" class="panel-body">
+        <approvalrulelist order="currentOrder" />
+        <div ng-if="user.Permissions.contains('EditApprovalOrder') && currentOrder.Status == 'AwaitingApproval'">
+            <textarea class="form-control" ng-model="currentOrder.ApprovalComment" ng-attr-placeholder="{{'Approval' | r}} {{'Comments' | r}}"></textarea>
+        </div>
+    </div>
+</div>

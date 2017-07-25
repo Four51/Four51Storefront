@@ -1,0 +1,12 @@
+<nav class="nav visible-sm visible-xs account-navigation" ng-init="showFullNav = false;">
+    <span class="expand-account-nav" ng-class="{'visible-xs':!isActive('admin') || (isActive('admin') && user.Permissions.contains('ViewSelfAdmin'))}" ng-click="showFullNav = !showFullNav"><i class="fa fa-2x" ng-class="{'fa-caret-down':!showFullNav, 'fa-caret-up':showFullNav}"></i></span>
+    <span class="btn-group" ng-class="{open:showFullNav || (isActive('admin') && !user.Permissions.contains('ViewSelfAdmin'))}">
+        <button class="btn btn-default" ng-show="user.Permissions.contains('ViewSelfAdmin')" ng-class="{'active': isActive('admin')}" redirect="/admin">{{'User Information' | r}}</button>
+        <button class="btn btn-default" ng-show="user.Type == 'Customer' && (user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress'))" ng-class="{'active': isActive('addresses')}" redirect="/addresses">{{'Addresses' | r}}</button>
+        <button class="btn btn-default" ng-show="user.Type == 'Customer' && user.Permissions.contains('ViewMessaging')" ng-class="{'active': isActive('message')}" redirect="/message">{{'Messages' | r}}</button>
+        <button class="btn btn-default" ng-show="user.Type == 'Customer'" id="451qa_fave_link" ng-class="{'active': isActive('favoriteorders')}" redirect="/favoriteorders">{{'Favorites' | r}}</button>
+        <button class="btn btn-default" ng-show="user.Permissions.contains('ViewContactUs')" ng-class="{'active': isActive('contactus')}" redirect="/contactus">{{'Contact Us' | r}}</button>
+        <button ng-if="AppConst.debug" href="#" class="btn btn-default" ng-click="Clear()">Clear Cache</button>
+        <button class="btn btn-danger pull-right 451_btn_logout" ng-click="Logout()" ng-if="user.Type=='Customer'"><i class="fa fa-power-off"></i> {{'Log Out' | r}}</button>
+    </span>
+</nav>

@@ -1,0 +1,10 @@
+<section class="address-view">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{(address.ID ? 'Edit' : 'Add') + ' ' + ('Address' | r) | xlat}}</h3>
+        </div>
+        <div class="panel-body">
+            <addressinput address='address' user='user' return='return'></addressinput>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,34 @@
+<div class="panel panel-default" ng-show="products">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            {{'Products' | r | xlat}}
+        </h3>
+    </div>
+    <div ng-show="productCount > settings.pageSize">
+        <pagination page="settings.currentPage" max-size="10" rotate="false" boundary-links="true" total-items="productCount"
+                    items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
+    </div>
+    <div class="panel-product-list" ng-show="currentCategory.InteropID">
+        <nav class="nav">
+            <loadingindicator ng-show="searchLoading" title="{{'Please wait while we fetch all products' | r | xlat}}" />
+            <div class="row view-form-icon" ng-show="currentCategory.SortOptions.length > 0">
+                <div class="col-xs-9">
+                    <label>{{'Sort by' | r | xlat}}</label>
+                    <select class="form-control" ng-options="option.SortValue as (option.Display | xlat) for option in currentCategory.SortOptions" ng-model="sort"><option value=""></option></select>
+                    <i class="fa fa-sort"/>
+                </div>
+            </div>
+            <ul>
+                <li class="gallery" id="451_lst_prod" ng-repeat="product in products | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize | orderBy:sorter:direction">
+                    <div class="well">
+                        <shortproductviewgallery p="product" user="user" />
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div ng-show="productCount > settings.pageSize">
+        <pagination page="settings.currentPage" max-size="10" rotate="false" boundary-links="true" total-items="productCount"
+                    items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
+    </div>
+</div>

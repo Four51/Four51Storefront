@@ -1,0 +1,7 @@
+<div class="well" ng-if="SpendingAccounts">
+    <ul class="unstyled">
+        <li ng-repeat="account in SpendingAccounts">
+            {{account.Label}}: {{ account.Balance | culturecurrency }}
+        </li>
+    </ul>
+</div>

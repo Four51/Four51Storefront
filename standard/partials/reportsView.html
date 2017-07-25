@@ -1,0 +1,54 @@
+<section>
+    <loadingindicator ng-show="displayLoadingIndicator" />
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{('Saved' | r) + ' ' + ('Reports' | r) | xlat}}</h3>
+        </div>
+        <div class="panel-body view-form-icon">
+            <div class="input-group">
+                <label ng-show="searchTerm">{{'Search' | r | xlat}}</label>
+                <input class='form-control' type="text" placeholder="{{'Search' | r | xlat}}" ng-model="searchTerm" autocomplete="off" />
+                <i class="fa fa-search"></i>
+                <div class="input-group-btn">
+                    <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">
+                        <span>{{('New' | r) + ' ' + ('Report' | r) | xlat}}</span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu pull-right" role="menu">
+                        <li ng-repeat="(key,value) in Reports.AvailableTypes">
+                            <a role="presentation" tabindex="-1" href="report/{{key}}">{{value | xlat}}</a>
+                        </li>
+                    </ul>
+                </div>
+             </div>
+        </div>
+        <div class="panel-table">
+            <div class="row text-info">
+                <div class="col-sm-1 hidden-xs"></div>
+                <div class="col-sm-2 hidden-xs">{{'Name' | r | xlat}}</div>
+                <div class="col-sm-2 hidden-xs">{{'Type' | r | xlat}}</div>
+            </div>
+            <div class="row" ng-repeat="report in Reports | filter:{'Name': searchTerm}">
+                <div class="col-sm-1">
+                    <input type="checkbox" ng-model="report.Selected" />
+                </div>
+                <div class="col-sm-2">
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Name' | r | xlat}}</span>
+                    <a ng-href="{{'report/' + report.ID}}">{{report.Name}}</a>
+                </div>
+                <div class="col-sm-2">
+                    <span class="visible-xs panel-table-heading-xs text-info">{{'Type' | r | xlat}}</span>
+                    {{report.ReportTypeName | xlat}}
+                </div>
+             </div>
+        </div>
+        <div class="navbar-fixed-bottom">
+            <div class="view-response-message alert-success text-center" alert-show="actionMessage">
+                <p>{{actionMessage | r | xlat}}</p>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-danger" ng-click="deleteSelected($event)" ng-disabled="(Reports | filter:searchTerm | filter:{Selected:true}).length == 0">{{('Delete' | r) + ' ' +  ('Selected' | r) | xlat}}</button>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,29 @@
+<div class="panel panel-default" ng-if="length > 0">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            {{'Specifications' | r | xlat}}
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="list-group" ng-repeat="sg in specgroups" ng-show="hasvisiblechild(sg.Specs)">
+                    <li class="list-group-item text-center"><h5>{{sg.Name | uppercase}}</h5></li>
+                    <li class="list-group-item">
+                        <div class="451qa_spec_item" ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <span class="text-info">{{s.Name | xlat}}</span>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value | xlat}}</a>
+                                    <span ng-if="!s.FileURL">{{s.Value | xlat}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,3 +4,102 @@ Theme name: My SPA Theme
 Version: 1.0
 Template: Howdy
 */
+
+@media (min-width: 768px) {
+    .container,
+    .container-view {
+        width: 730px;
+    }
+}
+@media (min-width: 992px) {
+    .container,
+    .container-view {
+        width: 950px;
+    }
+}
+@media (min-width: 1200px) {
+    .container,
+    .container-view {
+        width: 1150px;
+    }
+}
+
+.order-cloud .form-signin {
+    max-width: 26em;
+    padding: 1em 1em 2em;
+    margin: 2em auto;
+    background: rgba(0,45,86,.5);
+    box-shadow: 1px 1px 1px rgba(216,241,251,.15);
+}
+
+.order-cloud .form-signin .btn-primary {
+    margin-bottom: 0px;
+}
+
+.order-cloud .form-signin {
+    max-width: 26em;
+    padding: 1em 1em 1em;
+    margin: 2em auto;
+    background: rgba(255, 255, 255, .75);
+    box-shadow: 1px 1px 1px rgba(216,241,251,.15);
+}
+
+.fa.fa-arrow-left {
+    color:#ffffff;
+}
+
+.navbar .container .navbar-nav.pull-left li.fadeInLeft a i, .navbar .container-view .navbar-nav.pull-left li.fadeInLeft a i {
+    color: #ffffff;
+}
+
+.jumbotron h2 img {
+    max-height: 100px;
+    max-width: auto;
+    margin: 0;
+}
+
+ li.spending-account {
+   color: #FFFFFF;
+   padding:10px 10px;
+   border-width:0 1px;
+   border-style: dotted;
+   border-color:#FFFFFF;
+}
+li.spending-account span {
+   font-weight: bold;
+}
+
+.thumbnail img {
+    max-height: 250px;
+    max-width: 100%;
+    margin: 0 auto 15px;
+}
+
+.product-image-large {
+    margin: 0 auto;
+    max-height: 340px;
+    max-width: 100%;
+}
+
+ul.galleryimages {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.galleryThumbs {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+}
+
+ul {
+    list-style-type: disc;
+    margin: 0;
+    padding: 0px 20px 10px;
+}
+
+h3, .h3 {
+    font-size: 18px;
+}

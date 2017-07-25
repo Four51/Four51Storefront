@@ -1,0 +1,22 @@
+<div>
+    <p>
+        <span class="text-info">{{'Subtotal' | r | xlat}}</span>
+        <span class="pull-right">{{order.Subtotal | culturecurrency}}</span>
+    </p>
+    <p>
+        <span class="text-info">{{'Shipping & Handling' | r | xlat}}</span>
+        <span class="pull-right">{{order.ShippingCost | culturecurrency}}</span>
+    </p>
+    <p>
+        <span class="text-info">{{'Tax' | r | xlat}}</span>
+        <span class="pull-right">{{order.TaxCost | culturecurrency}}</span>
+    </p>
+    <p ng-if="order.Coupon">
+        <span class="text-info">{{'Coupon' | r | xlat}} ({{order.Coupon.Label}})</span>
+        <span class="pull-right">{{order.Coupon.OrderDiscount * -1 | culturecurrency}}</span>
+    </p>
+    <p><span class="text-info">{{'Total' | r | xlat}}</span>
+        <span class="pull-right">{{order.Total | culturecurrency}}</span>
+    </p>
+</div>
+

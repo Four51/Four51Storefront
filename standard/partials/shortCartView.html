@@ -1,0 +1,35 @@
+<div class="short-cart-view">
+    <div ng-if="currentOrder" class="CartDetail">
+        <form name="cart">
+            <div>
+                <h4>
+                    {{currentOrder.LineItems.length}} {{'item' + (currentOrder.LineItems.length > 1 ? 's' : '') | rl | xlat}} {{'in your' | rl | xlat:(currentOrder.LineItems.length)}} {{'cart' | rl | xlat}}
+                </h4>
+                <div ng-repeat="Item in currentOrder.LineItems">
+                    <h5 class="col-md-2 col-xs-12">
+                        {{Item.ProductIDText}}
+                    </h5>
+                    <div class="col-md-4 col-xs-12">
+                        <p>
+                            {{Item.Product.Name}}
+                        </p>
+                        <ul>
+                            <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">{{spec.Name}} : {{spec.Value}}</li>
+                        </ul>
+
+                    </div>
+                    <div class="col-md-2 col-xs-4" ng-if="!(user.Permissions.contains('HidePricing'))">
+                        {{Item.UnitPrice | culturecurrency}}
+                    </div>
+                    <div class="col-md-2 col-xs-4">
+                        {{Item.Quantity}}
+                    </div>
+                    <div class="col-md-2 col-xs-4" ng-if="!(user.Permissions.contains('HidePricing'))">
+                        {{Item.LineTotal | culturecurrency}}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

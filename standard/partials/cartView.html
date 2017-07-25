@@ -1,0 +1,217 @@
+<section>
+    <div ng-show="currentOrder" class="hidden-print">
+        <nav class="nav">
+            <ul>
+                <li><span class="text-primary">{{'Cart' | r | xlat}}</span></li>
+                <li class="pull-right" ng-click="onPrint()"><span><i class="fa fa-print text-primary" rel="tooltip" title="{{'Print' | r | xlat}}" ></i></span></li>
+            </ul>
+        </nav>
+        <form ng-submit="saveChanges()" name="cart" novalidate="">
+            <loadingindicator  ng-show="displayLoadingIndicator" title="{{'Please wait while we save your order' | r | xlat}}"/>
+            <div>
+                <cartmessage />
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        {{currentOrder.LineItems.length}} {{'item' + (currentOrder.LineItems.length > 1 ? 's' : '') | rl | xlat}} {{'in your' | rl | xlat:(currentOrder.LineItems.length)}} {{'cart' | rl | xlat}}
+                    </h3>
+                </div>
+                <div class="panel-lineitem" ng-repeat="item in currentOrder.LineItems">
+                    <button type="button" title="Remove Item" class="btn btn-danger" ng-click="removeItem(item)">
+                        <span class="fa fa-minus-circle fa-inverse"></span>
+                    </button>
+                    <div class="col-sm-3">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-12 col-md-6">
+                                <div class="view-form-icon">
+                                    <quantityfield required="true" lineitem="item" class="quantity"/>
+                                </div>
+                                <p class="quantity-total text-center">
+                                    <small>{{'Total Quantity' | r | xlat}} <span ng-show="item.Quantity * item.Product.QuantityMultiplier">{{item.Quantity * item.Product.QuantityMultiplier}}</span></small>
+                                </p>
+                            </div>
+                            <div class="col-xs-6 col-sm-12 col-md-6 thumbnail" ng-show="item.Variant.LargeImageUrl || item.Product.SmallImageUrl">
+                                <figure>
+                                    <img ng-src="{{item.Variant.LargeImageUrl || item.Product.SmallImageUrl}}" />
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="row">
+                            <div class="col-md-6" ng-if="currentOrder.Status != 'AwaitingApproval' || isEditforApproval">
+                                <a class="line-item-link" ng-href="{{(item.Product.Type == 'Kit' ? 'kit' : 'cart') + '/' + (item.Product.InteropID) + '/' + (isEditforApproval ? (currentOrder.ID + '/') : '') + ($index)}}">
+                                    <h3 class="text-primary">
+                                        <i ng-show="!item.KitIsInvalid" class="fa fa-edit"></i>
+                                        <i ng-show="item.KitIsInvalid" class="fa fa-exclamation-triangle"></i>
+                                        {{item.ProductIDText}}
+                                    </h3>
+                                    <p>
+                                        {{item.Product.Name}}
+                                    </p>
+                                </a>
+                            </div>
+                            <div class="col-md-6" ng-if="currentOrder.Status == 'AwaitingApproval' && !isEditforApproval">
+                                <h3 class="text-primary">
+                                    {{item.ProductIDText}}
+                                </h3>
+                                <p>
+                                    {{item.Product.Name}}
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row" ng-if="!(user.Permissions.contains('HidePricing'))">
+                                    <div class="col-xs-6">
+                                        <p>
+                                            <small>{{'Unit Price' | r | xlat}}</small>
+                                            <br/>
+                                            {{item.UnitPrice | culturecurrency}}
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div>
+                                            <small>{{'Total' | r | xlat}}</small>
+                                            <h2 class="text-success">
+                                                {{item.LineTotal | culturecurrency}}
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" ng-if="(user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')) || user.Permissions.contains('CostCenterPerLine')">
+                                    <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
+                                        <div class="row view-form-icon">
+                                            <div class="col-xs-9">
+                                                <label ng-class="{required: user.Permissions.contains('DateNeededRequired')}" ng-show="item.DateNeeded || user.Permissions.contains('DateNeededRequired')">{{'Date' | r | xlat}}</label>
+                                                <!--Default Datepicker -->
+                                                <div class="btn btn-default btn-block btn-date hidden-lg hidden-md"
+                                                     ng-click="$event.preventDefault();$event.stopPropagation();opened = !opened;"
+                                                     style="margin:0; height:40px; padding-top:8px;">
+                                                    {{item.DateNeeded ? '' : ('Tap to set a date' | xlat)}}
+                                                    <span class="text-info">{{item.DateNeeded | date:user.Culture.DateFormat.short}}</span>
+                                                </div>
+                                                <input name="dateneeded" placeholder="{{'Date' | xlat}}" ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')"
+                                                       type="text"
+                                                       class="form-control"
+                                                       datepicker-popup="{{user.Culture.DateFormat.short}}"
+                                                       is-open="opened"
+                                                       min="currentDate"/>
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <button type="button" title="{{'copy to all' | r | xlat}}" class="btn btn-default pull-right" value="{{'copy to all' | r | xlat}}" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1 && user.CostCenters.length != 1" >
+                                                    <span class="fa fa-copy text-info"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
+                                        <div class="row view-form-icon">
+                                            <div class="col-xs-9">
+                                                <label class="required" ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" >{{'Cost Center' | r | xlat}}</label>
+                                                <select name="costcenter" class="form-control" style="padding-left: 25px;" required
+                                                        ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')"
+                                                        ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter">
+                                                    <option value=""></option>
+                                                </select>
+                                                <input name="costcenter" class="form-control" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="{{'Cost Center' | r | xlat}}" />
+                                                <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
+                                                <i ng-if="user.CostCenters.length > 1" class="fa fa-money"></i>
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <button type="button" title="{{'copy to all' | r | xlat}}" class="btn btn-default pull-right" value="{{'copy to all' | r | xlat}}" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-hide="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
+                                                    <span class="fa fa-copy text-info"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <span class="btn btn-group" ng-if="item.Variant.IsMpowerVariant">
+                                    <button type="button" title="{{'Download' | r | xlat}}" class="btn btn-primary" ng-click="downloadProof(item)">
+                                        <span><i class="fa fa-download"></i> {{'Download' | r | xlat}}</span>
+                                    </button>
+                                    <button type="button" class="btn btn-default" ng-if="item.SpecsLength > 0" ng-click="item.toggleSpecs = !item.toggleSpecs">
+                                        <span ng-show="!item.toggleSpecs"><i class="fa fa-plus-circle"></i> {{('Show' | r) + ' ' + ('Specification' | r) | xlat}}</span>
+                                        <span ng-show="item.toggleSpecs"><i class="fa fa-minus-circle"></i> {{('Hide' | r) + ' ' + ('Specification' | r) | xlat}}</span>
+                                    </button>
+                                </span>
+                                <button ng-if="!item.Variant.IsMpowerVariant" type="button" class="btn btn-default" ng-show="item.SpecsLength > 0" ng-click="item.toggleSpecs = !item.toggleSpecs">
+                                    <span ng-show="!item.toggleSpecs"><i class="fa fa-plus-circle"></i> {{('Show' | r) + ' ' + ('Specification' | r) | xlat}}</span>
+                                    <span ng-show="item.toggleSpecs"><i class="fa fa-minus-circle"></i> {{('Hide' | r) + ' ' + ('Specification' | r) | xlat}}</span>
+                                </button>
+                                <ul ng-show="item.toggleSpecs == true" class="list-group">
+                                    <li ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} " class="list-group-item">
+                                        <span class="text-info">{{spec.Label || spec.Name}}: </span>
+                                        <span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span></span>
+                                        <span ng-if="spec.ControlType != 'File'">{{spec.Value || ('(unspecified)' | xlat)}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-md-4 col-lg-3">
+                            <giftcardredemption ng-if="user.Permissions.contains('ViewPromotions')" />
+                        </div>
+                        <div class="col-md-3 col-md-offset-5 col-lg-4 text-right" ng-if="!(user.Permissions.contains('HidePricing'))">
+                            <h4 class="text-primary">
+                                <strong>{{'Subtotal' | r | xlat}} <span class="text-success">{{currentOrder.Subtotal | culturecurrency}}</span></strong>
+                            </h4>
+                            <p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
+                                <span class="text-info">{{'Shipping, handling and tax may be added to this subtotal.' | r | xlat}}</span>
+                            </p>
+                            <button type="button" neworder ng-if="user.Permissions.contains('MultipleShoppingCart') && currentOrder" class="btn btn-default" ng-click="newOrderLoadingIndicator = true;startNewOrder()">
+                                <loadingindicator  ng-show="newOrderLoadingIndicator" />
+                                <small>{{"Start" | r | xlat}} {{"New" | r | xlat}} {{"Order" | r | xlat}}</small>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar-fixed-bottom">
+                <div class="alert-warning text-center" style="padding: 10px;" ng-if="currentOrder.RepeatError">
+                    {{'Some items were not added to your repeat order' | r | xlat}}: {{currentOrder.RepeatError}}
+                </div>
+                <div class="view-response-message alert-success text-center" alert-show="actionMessage">
+                    <p>{{actionMessage | r | xlat}}</p>
+                </div>
+                <div class="view-response-message alert-success text-center" alert-show="errorMessage">
+                    <p>{{errorMessage | r | xlat}}</p>
+                </div>
+                <div class="view-response-message alert-danger text-center" alert-show="gcMessage">{{gcMessage}}</div>
+                <div class="view-error-message" ng-show="cart.$error.required.length > 0">
+                    <ul class="alert-warning">
+                        <li class="text-center">
+                            <span class="badge">
+                                <i class="fa fa-exclamation-circle fa-inverse"></i>
+                                {{cart.$error.required.length}}
+                            </span>
+                        </li>
+                        <li class="text-center">
+                            <ul ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
+                                <li ng-if="cart.dateneeded.$invalid">{{('Date needed' | r) +  ' is ' +  ('Required' | rl) | xlat}}</li>
+                                <li ng-if="cart.costcenter.$invalid">{{('Cost Center' | r) + ' is ' + ('Required' | rl) | xlat}}</li>
+                                <li ng-if="cart.qtyInput.$invalid">{{'You have entered an invalid ' + ('Quantity' | rl) | xlat}}</li>
+                                <li ng-if="cart.kitValidation.$invalid">{{'The kit has unconfigured items. You must configure them before continuing.' | r | xlat}}</li>
+                            </ul>
+                        </li>
+                        <li class="text-center">
+                            <a ng-show="cart.$error.required.length + (errorMessage ? 1 : 0) > 1">
+                                <i class="fa fa-caret-down" ng-click="errorSection = 'open'" ng-hide="errorSection == 'open'"></i>
+                                <i class="fa fa-caret-up" ng-click="errorSection = ''" ng-show="errorSection == 'open'"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <orderbuttons view="cart" continue="true"></orderbuttons>
+            </div>
+        </form>
+    </div>
+    <cartprint class="visible-print" />
+</section>

@@ -1,0 +1,39 @@
+<section>
+    <div id="451_msg_read" ng-hide="composing" class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{message.Subject}}</h3>
+        </div>
+        <div class="panel-body">
+            <p><span class="text-info">{{'Date' | r | xlat}}</span> {{message.DateSent | date:user.Culture.DateFormat.long}}</p>
+            <p><span class="text-info">{{'To' | r | xlat}}</span> {{message.ToName}}</p>
+            <p><span class="text-info">{{'From' | r | xlat}}</span> {{message.FromName}}</p>
+            <p><span class="text-info">{{'Subject' | r | xlat}}</span> {{message.Subject}}</p>
+            <pre>{{message.Body}}</pre>
+        </div>
+        <div class="panel-footer text-right">
+            <button id="451_btn_del" ng-click="delete($event)" type="button" class="btn btn-danger pull-left">{{'Delete' | r | xlat}}</button>
+            <button id="451_btn_reply" ng-show="canReply()" type="button" class="btn btn-info" ng-click="reply()">{{'Reply' | r | xlat}}</button>
+            <button id="451_btn_ok" ng-click="ok()" type="button" class="btn btn-success">{{'OK' | r | xlat}}</button>
+        </div>
+    </div>
+    <div id="451_msg_reply" ng-show="composing" class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{'Reply' | r | xlat}}</h3>
+        </div>
+        <div class="panel-body">
+            <p ng-show="message.ID"><span class="text-info">{{'To' | r | xlat}}</span> {{message.FromName}}</p>
+            <p class="text-info">
+                {{'Subject' | r | xlat}}<br />
+                <input id="451_inp_subj" class="form-control" type="text" ng-model="message.Subject" autocomplete="off" />
+            </p>
+            <p class="text-info">
+                {{'Body' | r | xlat}}<br />
+                <textarea class="form-control" rows="10" id="451_inp_body" ng-model="message.Body" />
+            </p>
+        </div>
+        <div class="panel-footer text-right">
+            <button type="button" id="451_btn_cancel" class="btn btn-warning pull-left" ng-click="cancel()">{{'Cancel' | r | xlat}}</button>
+            <button type="button" id="451_btn_send" class="btn  btn-primary" ng-click="send($event)">{{'Send' | r | xlat}}</button>
+        </div>
+    </div>
+</section>

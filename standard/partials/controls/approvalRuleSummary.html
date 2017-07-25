@@ -1,0 +1,23 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>{{'Rule Summary' | r | xlat}}</th>
+        <th>{{'Approver' | r | xlat}}</th>
+        <th>{{'Status' | r | xlat}}</th>
+    </tr>
+    </thead>
+    <tbody class="approval-rule-summary-rule" ng-repeat="rule in order.Approvals">
+    <tr ng-class="{success: rule.Status == 'Approved', danger: rule.Status == 'Declined'}">
+        <td><div ng-repeat="summary in rule.Summary">{{summary | xlat}}</div></td>
+        <td>
+            <span ng-hide="order.Status == 'AwaitingApproval' && (order.UserCanApprove || user.Permissions.contains('ApproveAllOrders'))">{{rule.ApprovingPartyName}}</span>
+            <span ng-show="order.Status == 'AwaitingApproval' && (order.UserCanApprove || user.Permissions.contains('ApproveAllOrders'))">{{'You' | r | xlat}}</span></td>
+        <td>
+            <strong>{{rule.Status | xlat}}</strong><span ng-show="rule.ApprovedByUserName"> {{'by' | xlat}} </span>{{rule.ApprovedByUserName}}<span ng-show="rule.ApprovedByUserName"> {{'on' | xlat}} {{rule.TimeStamp | date:user.Culture.DateFormat.short}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" data-ng-bind="rule.Comments"></td>
+    </tr>
+    </tbody>
+</table>

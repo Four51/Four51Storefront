@@ -1,0 +1,52 @@
+<div class="panel panel-default panel-order">
+    <div class="panel-heading" ng-class="{'no': cart_order.$invalid, 'yes': !cart_order.$invalid, 'open': checkOutSection == 'order' }">
+        <h3 ng-click="checkOutSection = 'order'" class="panel-title panel-primary">
+            <i class="pull-left" ng-class="{'fa fa-warning': cart_order.$invalid, 'fa fa-check-circle': !cart_order.$invalid }"></i>
+            {{'Order' | r | xlat}}
+            <i class="pull-right" ng-class="{'fa fa-caret-up': checkOutSection == 'order', 'fa fa-caret-down': checkOutSection == 'shipping' || checkOutSection == 'billing' }"></i>
+        </h3>
+    </div>
+    <div collapse="checkOutSection != 'order'" class="panel-body">
+        <form name="cart_order" novalidate="">
+            <div class="view-form-icon" ng-if="user.Permissions.contains('EditPOID')" ng-invalid>
+                <div class="col-xs-12 input-group">
+                    <label class="required">{{('Order' | r) + ' '  + ('ID' | r) | xlat}}</label>
+                    <input class="form-control" name="orderid" ng-disabled='currentOrder.autoID' type='text' ng-model="currentOrder.ExternalID"
+                           required ui-mask="{{currentOrder.autoID ? null : user.Company.POIDMask}}"></input>
+                        <span ng-if="user.Permissions.contains('AllowAutoGenPOID')" class="input-group-addon">
+                            <input type='checkbox' ng-click="currentOrder.ExternalID = currentOrder.autoID ? null : 'auto'" ng-model='currentOrder.autoID' />
+                        </span>
+                    <span class="input-group-addon" ng-show="user.Permissions.contains('AllowAutoGenPOID')">{{('Auto' | r) + ' ' + ('ID' | r) | xlat}}</span>
+                    <i class="fa">#</i>
+                </div>
+            </div>
+            <div class="view-form-icon" ng-if="user.Permissions.contains('Comments')">
+                <div>
+                    <label ng-show="currentOrder.Comments">{{'Comments' | r | xlat}}:</label>
+                    <textarea class="form-control" rows="5" cols="100" ng-model="currentOrder.Comments" ng-attr-placeholder="{{'Comments' | r | xlat}}..." />
+                    <i class="fa fa-edit"></i>
+                </div>
+            </div>
+            <div class="view-form-icon" ng-show="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine') && user.CostCenters.length > 0 || user.Permissions.contains('CostCenterPerOrder') && user.Permissions.contains('FreeFormCostCenter')">
+                <div ng-class="{'view-form-select': !currentOrder.CostCenter && user.CostCenters.length > 1, '': currentOrder.CostCenter }">
+                    <label class="required">{{'Cost Center' | r | xlat}}</label>
+                    <select class="form-control" ng-required="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine') && !user.Permissions.contains('FreeFormCostCenter')"
+                            ng-change="updateCostCenter()" ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')"
+                            ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="currentOrder.CostCenter"><option value=""></option></select>
+                    <input class="form-control" ng-show="user.Permissions.contains('FreeFormCostCenter')" ng-model="currentOrder.CostCenter" type='text'
+                           ng-required="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine') && user.Permissions.contains('FreeFormCostCenter')"
+                           placeholder="{{'Cost Center' | r | xlat}}" />
+                    <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{currentOrder.CostCenter}}</span>
+                    <i class="fa fa-arrow-down" ng-show="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')"></i>
+                </div>
+            </div>
+            <div ng-show="currentOrder.OrderFields">
+                <hr />
+                <div ng-repeat="field in currentOrder.OrderFields">
+                    <customtextfield customfield="field" ng-if="field.ControlType == 'Text'" ng-required="field.IsRequired" />
+                    <customselectionfield customfield="field" ng-if="field.ControlType == 'Selection'" ng-required="field.IsRequired" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

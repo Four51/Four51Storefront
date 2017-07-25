@@ -1,0 +1,61 @@
+<div>
+    <p ng-show="order.DateSubmitted">
+        <span class="text-info">{{('Date' | r) + ' ' + ('Submitted' | r) | xlat}}</span>
+        <span class="pull-right">{{order.DateSubmitted | date:user.Culture.DateFormat.short}}</span>
+    </p>
+    <p>
+        <span class="text-info">{{'Status' | r | xlat}}</span>
+        <span class="pull-right">{{order.StatusText | r | xlat}}</span>
+    </p>
+    <p ng-show="order.DateCompleted">
+        <span class="text-info">{{('Date' | r) + ' ' + ('Completed' | r) | xlat}}</span>
+        <span class="pull-right">{{order.DateCompleted | date:user.Culture.DateFormat.short}}</span>
+    </p>
+    <p ng-show="order.FromUserFirstName || order.FromUserLastName">
+        <span class="text-info">{{'Created By' | r}}</span>
+        <span class="pull-right">{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</span>
+    </p>
+    <p ng-show="order.Comments">
+        <span class="text-info">{{'Comments' | r | xlat}}</span>
+        <span class="pull-right">{{order.Comments}}</span>
+    </p>
+    <p ng-show="orderCostCenter">
+        <span class="text-info">{{'Cost Center' | r | xlat}}</span>
+        <span class="pull-right">{{(order.LineItems.length == 1) && order.LineItems[0].CostCenter || null}}</span>
+    </p>
+    <p ng-show="order.PaymentMethod != 'Undetermined'">
+        <span class="text-info">{{('Payment' | r) + ' ' + ('Method' | r) | xlat}}</span>
+        <span class="pull-right">{{order.PaymentMethodText | r | xlat}} <strong ng-show="order.CreditCard.Type">{{':' + order.CreditCard.DisplayName}}</strong> {{order.AmountOnAccount && order.PaymentMethod != 'BudgetAccount' ? "(" + (order.Total - order.AmountOnAccount | currency) + ")" : ""}}</span>
+    </p>
+    <p ng-show="order.AmountOnAccount && order.PaymentMethod != 'BudgetAccount'">
+        <span class="text-info"></span>
+        <span class="pull-right">{{(order.AccountName || order.AccountLabel) + " (" + (order.AmountOnAccount | culturecurrency) + ")"}}</span>
+    </p>
+    <p ng-show="order.CostCenter">
+        <span class="text-info">{{'Cost Center' | r | xlat}}</span>
+        <span class="pull-right">{{order.CostCenter}}</span>
+    </p>
+    <hr />
+    <address ng-show="!order.IsMultipleShip()">
+        <span class="text-primary"><strong>{{'Ship to' | r | xlat}}</strong></span><br />
+        <div>
+            <span ng-show="order.LineItems[0].ShipFirstName || order.LineItems[0].ShipLastName">{{order.LineItems[0].ShipFirstName}} {{order.LineItems[0].ShipLastName}}</span>
+            <span ng-show="!order.LineItems[0].ShipFirstName || !order.LineItems[0].ShipLastName">{{order.ShipAddress.FirstName}} {{order.ShipAddress.LastName}}</span>
+        </div>
+        <div>{{order.ShipAddress.Street1}}</div>
+        <div ng-if="order.ShipAddress.Street2">{{order.ShipAddress.Street2}}</div>
+        <div>{{order.ShipAddress.City}}, {{order.ShipAddress.State}} {{order.ShipAddress.Zip}}</div>
+        <div ng-if="order.ShipAddress.Country != 'US'">{{order.ShipAddress.Country}}</div>
+    </address>
+    <address ng-show="order.BillAddress && order.BillingEnabled">
+        <span class="text-primary"><strong>{{'Bill to' | r | xlat}}</strong></span><br />
+        <div>
+            <span ng-show="order.BillFirstName || order.BillLastName">{{order.BillFirstName}} {{order.BillLastName}}</span>
+            <span ng-show="!order.BillFirstName || !order.BillLastName">{{order.BillAddress.FirstName}} {{order.BillAddress.LastName}}</span>
+        </div>
+        <div>{{order.BillAddress.Street1}}</div>
+        <div ng-if="order.BillAddress.Street2">{{order.BillAddress.Street2}}</div>
+        <div>{{order.BillAddress.City}}, {{order.BillAddress.State}} {{order.BillAddress.Zip}}</div>
+        <div ng-if="order.BillAddress.Country != 'US'">{{order.BillAddress.Country}}</div>
+    </address>
+</div>
