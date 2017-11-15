@@ -112,28 +112,28 @@ function octitlefield() {
         template: template,
         link: function (scope) {
             String.prototype.toTitleCase = function() {
-              var i, j, str, lowers, uppers;
-              str = this.replace(/\b[\w-\']+/g, function(txt) {
-                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-              });
+                var i, j, str, lowers, uppers;
+                str = this.replace(/\b[\w-\']+/g, function(txt) {
+                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                });
 
-              // Certain minor words should be left lowercase unless 
-              // they are the first or last words in the string
-              lowers = ['A', 'An', 'The', 'And', 'But', 'Or', 'For', 'Nor', 'As', 'At', 
-              'By', 'For', 'From', 'In', 'Into', 'Near', 'Of', 'On', 'Onto', 'To', 'With'];
-              for (i = 0, j = lowers.length; i < j; i++)
-                str = str.replace(new RegExp('\\s' + lowers[i] + '\\s', 'g'), 
-                  function(txt) {
-                    return txt.toLowerCase();
-                  });
+                // Certain minor words should be left lowercase unless
+                // they are the first or last words in the string
+                lowers = ['A', 'An', 'The', 'And', 'But', 'Or', 'For', 'Nor', 'As', 'At',
+                    'By', 'For', 'From', 'In', 'Into', 'Near', 'Of', 'On', 'Onto', 'To', 'With'];
+                for (i = 0, j = lowers.length; i < j; i++)
+                    str = str.replace(new RegExp('\\s' + lowers[i] + '\\s', 'g'),
+                        function(txt) {
+                            return txt.toLowerCase();
+                        });
 
-              // Certain words such as initialisms or acronyms should be left uppercase
-              uppers = ['Id', 'Tv'];
-              for (i = 0, j = uppers.length; i < j; i++)
-                str = str.replace(new RegExp('\\b' + uppers[i] + '\\b', 'g'), 
-                  uppers[i].toUpperCase());
+                // Certain words such as initialisms or acronyms should be left uppercase
+                uppers = ['Id', 'Tv'];
+                for (i = 0, j = uppers.length; i < j; i++)
+                    str = str.replace(new RegExp('\\b' + uppers[i] + '\\b', 'g'),
+                        uppers[i].toUpperCase());
 
-              return str;
+                return str;
             }
 
             scope.$watch('customfield.Value', function(val) {
@@ -498,6 +498,12 @@ function octimefield($filter) {
         restrict: 'E',
         template: template,
         link: function (scope) {
+            scope.$watch('customfield',function(field){
+                if(!field) return;
+                if(scope.customfield.Value == ""){
+                    scope.customfield.Value = "12:00 PM";
+                }
+            });
             scope.$watch('customfield.Time', function(newVal) {
                 if (!newVal) return;
                 scope.customfield.Value = $filter('date')(scope.customfield.Time, 'shortTime');
@@ -836,7 +842,7 @@ function getDateFromFormat(val,format) {
                 else { year=2000+(year-0); }
             }
         }
-        else if (token=="MMM"||token=="NNN"){
+        else if (token=="MMM"||token=="NNN" || token=="MMMM"||token=="NNNN"){
             month=0;
             for (var i=0; i<MONTH_NAMES.length; i++) {
                 var month_name=MONTH_NAMES[i];
@@ -847,11 +853,16 @@ function getDateFromFormat(val,format) {
                         i_val += month_name.length;
                         break;
                     }
+                    if (token=="MMMM"||(token=="NNNN"&&i<12)) {
+                        month=i+1;
+                        i_val += month_name.length;
+                        break;
+                    }
                 }
             }
             if ((month < 1)||(month>12)){return 0;}
         }
-        else if (token=="EE"||token=="E"){
+        else if (token=="EEEE" || token=="EEE"|| token=="EE"|| token=="E"){
             for (var i=0; i<DAY_NAMES.length; i++) {
                 var day_name=DAY_NAMES[i];
                 if (val.substring(i_val,i_val+day_name.length).toLowerCase()==day_name.toLowerCase()) {
