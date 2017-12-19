@@ -75,7 +75,15 @@ four51.app.controller('UserEditCtrl', ['$scope', '$location', '$sce', '$injector
                         if (ex.Code.is('PasswordSecurity'))
                             $scope.securityWarning = true;
                         else {
-                            $scope.actionMessage = $sce.trustAsHtml(ex.Message);
+                            user.Password = null;
+                            user.ConfirmPassword = null;
+                            if(ex.Message.indexOf("PasswordAlreadyUsed") != -1){
+                                ex.Message = "Username already exists. Please choose another.";
+                                $scope.actionMessage = $sce.trustAsHtml(ex.Message);
+                            }
+                            else{
+                                $scope.actionMessage = $sce.trustAsHtml(ex.Message);
+                            }
                         }
                     }
                 );
