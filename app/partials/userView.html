@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="panel-footer">
-                <input class="btn btn-medium btn-primary" type="submit" ng-disabled="login_existing.$invalid" id="451_btn_login_existing" value="{{'Logon' | r | xlat}}" />
+                <input class="btn btn-medium btn-primary" type="submit" ng-disabled="login_existing.$invalid || buttonClicked" id="451_btn_login_existing" value="{{'Logon' | r | xlat}}" />
                 <inlineerror ng-show="loginAsExistingError" title="{{loginAsExistingError}}" />
             </div>
         </div>
@@ -39,7 +39,7 @@
                     <input name="username" required class="form-control" type="text" ng-model="loginasuser.Email" autocomplete="off" placeholder="{{'Email' | r | xlat}}" />
                     <br/>
                     <div class="panel-footer">
-                        <input class="btn btn-medium btn-primary" type="submit" ng-disabled="login_help.$invalid" id="451_btn_login_existing" value="{{'Reset' | r | xlat}}" />
+                        <input class="btn btn-medium btn-primary" type="submit" ng-disabled="login_help.$invalid || buttonClicked" id="451_btn_login_existing" value="{{'Reset' | r | xlat}}" />
                         <div class="view-inline-error" style="text-align: left" ng-show="resetPasswordError" ng-bind-html="resetPasswordError" />
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                         <inlineerror ng-show="resetbytoken.confirm_password.$error.match" title="{{'Password' | r}}s do not match!" /><br />
                     </div>
                     <div xclass="panel-footer">
-                        <input class="btn btn-medium btn-primary" type="submit" ng-disabled="resetbytoken.$invalid" value="{{'Reset' | r | xlat}}" />
+                        <input class="btn btn-medium btn-primary" type="submit" ng-disabled="resetbytoken.$invalid || buttonClicked" value="{{'Reset' | r | xlat}}" />
                         <div class="view-inline-error" style="text-align: left" ng-show="resetPasswordError" ng-bind-html="resetPasswordError" />
                     </div>
                 </div>
@@ -166,7 +166,7 @@
                             <p class="alert alert-success" ng-show="actionMessage" ng-bind-html="actionMessage | r | xlat"></p>
                         </div>
                         <div class="col-md-3">
-                            <input class="btn btn-primary pull-right" type="submit" ng-disabled="user_form.$invalid" id="451_btn_user" value="{{(user.Type == 'TempCustomer' ? 'Create Account' : 'Save') | xlat}}" />
+                            <input class="btn btn-primary pull-right" type="submit" ng-disabled="user_form.$invalid || buttonClicked" id="451_btn_user" value="{{(user.Type == 'TempCustomer' ? 'Create Account' : 'Save') | xlat}}" />
                         </div>
                     </div>
                 </div>
