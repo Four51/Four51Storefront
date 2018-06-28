@@ -247,7 +247,7 @@ four51.app.factory('ProductDisplayService', ['$sce', '$451', 'Variant', 'Product
 				scope.variantLineItems = {};
 				angular.forEach(p.Variants, function(v){
 					if (!v) return;
-					if(p.Type == "VariableText"){
+					if(p.Type == "VariableText" && v.InteropID){
 						Variant.get({'ProductInteropID': p.InteropID, 'VariantInteropID': v.InteropID}, function(data){
 							scope.variantLineItems[v.InteropID] = {
 								PriceSchedule: (scope.currentOrder ? v[scope.currentOrder.Type + 'PriceSchedule'] : (v.StandardPriceSchedule || v.ReplenishmentPriceSchedule))

@@ -38,6 +38,7 @@
     <hr />
     <address ng-show="!order.IsMultipleShip()">
         <span class="text-primary"><strong>{{'Ship to' | r | xlat}}</strong></span><br />
+        <div ng-if="order.ShipAddress.CompanyName">{{order.ShipAddress.CompanyName}}</div>
         <div>
             <span ng-show="order.LineItems[0].ShipFirstName || order.LineItems[0].ShipLastName">{{order.LineItems[0].ShipFirstName}} {{order.LineItems[0].ShipLastName}}</span>
             <span ng-show="!order.LineItems[0].ShipFirstName || !order.LineItems[0].ShipLastName">{{order.ShipAddress.FirstName}} {{order.ShipAddress.LastName}}</span>
@@ -49,6 +50,7 @@
     </address>
     <address ng-show="order.BillAddress && order.BillingEnabled">
         <span class="text-primary"><strong>{{'Bill to' | r | xlat}}</strong></span><br />
+        <div ng-if="order.BillAddress.CompanyName">{{order.BillAddress.CompanyName}}</div>
         <div>
             <span ng-show="order.BillFirstName || order.BillLastName">{{order.BillFirstName}} {{order.BillLastName}}</span>
             <span ng-show="!order.BillFirstName || !order.BillLastName">{{order.BillAddress.FirstName}} {{order.BillAddress.LastName}}</span>

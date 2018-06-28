@@ -8061,6 +8061,9 @@ select.ng-invalid:invalid:invalid:focus {
     overflow-y: scroll;
   }
 }
+.category_desc {
+  padding:15px;
+}
 .panel-product-list ul li.minimal .panel-body > div:first-of-type,
 .panel-product-list ul li.minimal .panel-category-list:not(.no-panels) > div:first-of-type,
 .panel-product-list ul li.minimal .panel-product-list:not(.no-panels) > div:first-of-type,
