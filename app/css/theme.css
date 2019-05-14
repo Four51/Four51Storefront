@@ -1,0 +1,72 @@
+/* font override */
+body, span, div, h1, h2, h3, h4, h5, h6, a, b, i, small {
+	font-family: "HelveticaNeue", helvetica, arial, sans-serif;
+	font-weight: 400;
+}
+
+.above-nav {
+	min-height: 32px;
+    background: linear-gradient(112deg,#006e80 0%,#00687a 8%,#136679 10%,#306275 14%,#64596b 27%,#84515e 35%,#84515e 33%,#a34f4e 33%,#af4e49 33%,#af4e49 42%,#a64c4d 42%,#974856 42%,#974856 48%,#8c465c 40%,#71406a 40%,#7d1d5d 81%,#850055 95%,#870052 100%,#9b236c 100%,#fefdfe 100%,#fff 100%);
+}
+
+.navbar-default {
+    background-color: #1a6a7a;
+    border-color: #165865;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: #ffffff;
+	background-color: #1a6a7a;
+}
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus,
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+    color: #ffffff;
+    background-color: #165865;
+}
+
+.text-info {
+	color: #1a6a7a;
+}
+.jumbotron {
+	text-align: center;
+}
+.banner {
+	background: #ffffff;
+}
+.container-view {
+	margin-top: 165px;
+}
+
+.btn-default {
+	color: #ffffff;
+	background-color: #F24900;
+	border-color: #b73a04;
+}
+.panel-primary>.panel-heading {
+	background-color: #800a56;
+	border: solid 1px #7f878c;
+	color: #fff;
+}
+.panel .panel-heading .panel-title {
+	font-size: 18px;
+}
+
+/***** DEV CODE *****/
+/*
+a {
+	outline: 1px dashed blue;
+}
+span {
+	outline: 1px dashed red;
+}
+img {
+	outline: 1px dashed orange;
+}
+div {
+	outline: 1px dashed magenta;
+}
+h1, h2, h3, h4, h5, h6 {
+	outline: 1px dashed green;
+}
+*/
