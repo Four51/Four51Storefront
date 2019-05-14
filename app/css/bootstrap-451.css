@@ -8474,7 +8474,7 @@ select.ng-invalid:invalid:invalid:focus {
   transition: all 0.5s ease-in-out;
 }
 .navbar-fixed-top.headroom.headroom--unpinned {
-  top: -100px;
+  top: -158px;
 }
 .navbar-fixed-top.headroom.headroom--pinned {
   top: 0;
@@ -8483,7 +8483,7 @@ select.ng-invalid:invalid:invalid:focus {
   transition: all 0.5s ease-in-out;
 }
 .navbar-fixed-bottom.headroom.headroom--unpinned {
-  bottom: -100px;
+  bottom: -158px;
 }
 .navbar-fixed-bottom.headroom.headroom--pinned {
   bottom: 0;
