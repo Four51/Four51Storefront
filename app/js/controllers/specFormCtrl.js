@@ -1,4 +1,4 @@
-four51.app.controller('SpecFormCtrl', ['$scope', '$location', '$route', '$routeParams', '$window', 'ProductDisplayService', 'Variant', 'Order',
+﻿four51.app.controller('SpecFormCtrl', ['$scope', '$location', '$route', '$routeParams', '$window', 'ProductDisplayService', 'Variant', 'Order',
 function ($scope, $location, $route, $routeParams, $window, ProductDisplayService, Variant, Order) {
     $scope.isEditforApproval = $routeParams.orderID && $scope.user.Permissions.contains('EditApprovalOrder');
     $scope.EditingLineItem = (typeof($routeParams.lineItemIndex) != 'undefined');
@@ -13,6 +13,10 @@ function ($scope, $location, $route, $routeParams, $window, ProductDisplayServic
 
     function init() {
         $scope.variantErrors = [];
+
+        //used for SpecFormPreview
+        $scope.PreviewVariant = {};
+
         var varID = $routeParams.variantInteropID == 'new' ? null :  $routeParams.variantInteropID;
         $scope.loadingImage = true;
         ProductDisplayService.getProductAndVariant($routeParams.productInteropID, varID, function(data){
@@ -68,12 +72,28 @@ function ($scope, $location, $route, $routeParams, $window, ProductDisplayServic
                 }
             });
         }
-        $scope.save = function(hideErrorWindowAlert){
-            saveVariant($scope.Variant, false, hideErrorWindowAlert);
-        }
 
-        $scope.saveasnew = function(hideErrorAlert) {
-            saveVariant($scope.Variant, true, hideErrorAlert);
+        //accept variant from SpecFormPreview
+        $scope.save = function(hideErrorWindowAlert, previewvariant) {
+            var curVariant = {};
+            if(previewvariant){
+                curVariant = previewvariant.ExternalID ? previewvariant : $scope.Variant;
+            }
+            else{
+                curVariant = $scope.Variant;
+            }
+            saveVariant(curVariant, false, hideErrorWindowAlert);
+        }
+        //accept variant from SpecFormPreview
+        $scope.saveasnew = function(hideErrorAlert, previewvariant) {
+            var curVariant = {};
+            if(previewvariant){
+                curVariant = previewvariant.ExternalID ? previewvariant : $scope.Variant;
+            }
+            else{
+                curVariant = $scope.Variant;
+            }
+            saveVariant(curVariant, true, hideErrorAlert);
         }
 
         $scope.$on('event:imageLoaded', function(event, result) {
@@ -81,15 +101,4 @@ function ($scope, $location, $route, $routeParams, $window, ProductDisplayServic
             $scope.$apply();
         });
     }
-
-    /*Check for the presence of the null value when there is a custom user field default value and replace it with a blank value.  Case #124640 / SPA-15424*/
-    $scope.$watch('Variant', function(val) {
-        if (!val) return;
-        angular.forEach(val.Specs, function(s){
-            if(s.Value == "null"){
-                s.Value = "";
-            }
-        });
-    });
-
 }]);
