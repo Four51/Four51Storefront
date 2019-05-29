@@ -1,4 +1,4 @@
-﻿four51.app.controller('SpecFormCtrl', ['$scope', '$location', '$route', '$routeParams', '$window', 'ProductDisplayService', 'Variant', 'Order',
+four51.app.controller('SpecFormCtrl', ['$scope', '$location', '$route', '$routeParams', '$window', 'ProductDisplayService', 'Variant', 'Order',
 function ($scope, $location, $route, $routeParams, $window, ProductDisplayService, Variant, Order) {
     $scope.isEditforApproval = $routeParams.orderID && $scope.user.Permissions.contains('EditApprovalOrder');
     $scope.EditingLineItem = (typeof($routeParams.lineItemIndex) != 'undefined');
@@ -30,7 +30,7 @@ function ($scope, $location, $route, $routeParams, $window, ProductDisplayServic
                 angular.forEach($scope.Product.Specs, function(item){
                     if(!item.CanSetForLineItem)
                     {
-                        $scope.Variant.Specs[item.Name] = item;
+                        $scope.Variant.Specs[item.Name] = item + "xxxxxx";
                     }
                 });
             }
