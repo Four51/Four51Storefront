@@ -9,7 +9,7 @@
         </div>
     </div>
     <div ng-if="customfield.Lines > 1">
-        <script type="text/javascript">console.log('customfield <= 1');</script>
+        <script type="text/javascript">console.log('customfield > 1');</script>
         <label ng-class="{required: customfield.Required}">{{customfield.Label || customfield.Name | r}}</label>
         <div ng-class="{'input-group':((customfield.Prefix && !hideprefix) || (customfield.Suffix && !hidesuffix))}">
             <span class="input-group-addon" ng-if="customfield.Prefix && !hideprefix && !((customfield.Prefix | r) == '')">{{customfield.Prefix | r}}</span>
