@@ -1,4 +1,5 @@
 <div ng-show="productCount > settings.pageSize">
+    <script type="text/javascript">console.log('productlistgalleryless true');</script>
     <pagination page="settings.currentPage" max-size="10" rotate="false" boundary-links="true" total-items="productCount"
                 items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
 </div>
