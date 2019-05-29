@@ -30,7 +30,7 @@ function ($scope, $location, $route, $routeParams, $window, ProductDisplayServic
                 angular.forEach($scope.Product.Specs, function(item){
                     if(!item.CanSetForLineItem)
                     {
-                        $scope.Variant.Specs[item.Name] = item + "xxxxxx";
+                        $scope.Variant.Specs[item.Name] = item;
                     }
                 });
             }
