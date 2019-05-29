@@ -51,22 +51,90 @@ body, span, div, h1, h2, h3, h4, h5, h6, a, b, i, small {
 .panel .panel-heading .panel-title {
 	font-size: 18px;
 }
-
-/***** DEV CODE *****/
-/*
-a {
-	outline: 1px dashed blue;
+#451_list_vspec #FacNo {
+	width: auto;
 }
-span {
-	outline: 1px dashed red;
+#451_list_vspec #TDDTTY_ABR {
+	width: auto;
 }
-img {
-	outline: 1px dashed orange;
+#451_list_vspec #V01TDDNumber {
+	width: auto;
 }
-div {
-	outline: 1px dashed magenta;
+#451_list_vspec #V02FacilityName {
+	width: auto;
 }
-h1, h2, h3, h4, h5, h6 {
-	outline: 1px dashed green;
+#451_list_vspec #V04StreetAddress {
+	width: auto;
 }
-*/
+#451_list_vspec #V06City {
+	width: auto;
+}
+#451_list_vspec #V07State {
+	width: auto;
+}
+#451_list_vspec #V08ZipCode {
+	width: auto;
+}
+#451_list_vspec #V09Phone1AC {
+	width: 3em;
+}
+#451_list_vspec #V09Phone1EX {
+	width: 3em;
+}
+#451_list_vspec #V09Phone1NUM {
+	width: 4em;
+}
+#451_list_vspec #V10Phone2AC {
+	width: 3em;
+}
+#451_list_vspec #V10Phone2EX {
+	width: 3em;
+}
+#451_list_vspec #V10Phone2NUM {
+	width: 4em;
+}
+#451_list_vspec #V11Phone3AC {
+	width: 3em;
+}
+#451_list_vspec #V11Phone3EX {
+	width: 3em;
+}
+#451_list_vspec #V11Phone3NUM {
+	width: 4em;
+}
+#451_list_vspec #V11Phone3NUMLabel {
+	width: auto;
+}
+#451_list_vspec #V11Phone4AC {
+	width: 3em;
+}
+#451_list_vspec #V11Phone4EX {
+	width: 3em;
+}
+#451_list_vspec #V11Phone4NUM {
+	width: 4em;
+}
+#451_list_vspec #V11Phone4NUMlabel {
+	width: auto;
+}
+#451_list_vspec #V11Phone5AC {
+	width: 3em;
+}
+#451_list_vspec #V11Phone5EX {
+	width: 3em;
+}
+#451_list_vspec #V11Phone5NUM {
+	width: 3em;
+}
+#451_list_vspec #V13WebAddress {
+	width: auto;
+}
+#451_list_vspec #V14LogoFile {
+	width: auto;
+}
+#451_list_vspec #V14LogoRecord {
+	width: auto;
+}
+#451_list_vspec #V14LogoSelection {
+	width: auto;
+}
