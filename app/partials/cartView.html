@@ -108,7 +108,7 @@
                                     <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
                                         <div class="row view-form-icon">
                                             <div class="col-xs-9">
-                                                <label class="required" ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')" >{{'Cost Center' | r | xlat}}</label>
+                                                <label class="required">{{'Cost Center' | r | xlat}}</label>
                                                 <select name="costcenter" class="form-control" style="padding-left: 25px;" required
                                                         ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')"
                                                         ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter">
