@@ -112,7 +112,10 @@
                                                 <select name="costcenter" class="form-control" style="padding-left: 25px;" required
                                                         ng-if="user.CostCenters.length > 1 && !user.Permissions.contains('FreeFormCostCenter')"
                                                         ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter">
-                                                    <option value=""></option>
+                                                    <option value="1">Cost Center 1</option>
+                                                    <option value="2">Cost Center 2</option>
+                                                    <option value="3">Cost Center 3</option>
+                                                    <option value="4">Cost Center 4</option>
                                                 </select>
                                                 <input name="costcenter" class="form-control" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type='text' required placeholder="{{'Cost Center' | r | xlat}}" />
                                                 <span ng-if="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
@@ -127,11 +130,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-x6-12 col-sm-6">
-                                    Custom Cart Stuff Goes Here?
-                                </div>
-                            </div>
+
                         </div>
 
                         <div class="row">
