@@ -105,11 +105,39 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="row view-form-icon">
+                                            <div class="col-xs-9">
+                                                <label class="required">{{'Facility' | r | xlat}}</label>
+                                                <input name="facility" class="form-control" type='text' required placeholder="{{'####' | r | xlat}}" />
+                                                <span>{{item.Facility}}</span>
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <button type="button" title="{{'copy to all' | r | xlat}}" class="btn btn-default pull-right" value="{{'copy to all' | r | xlat}}" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-hide="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
+                                                    <span class="fa fa-copy text-info"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <div class="row view-form-icon">
+                                            <div class="col-xs-9">
+                                                <label class="required">{{'Department' | r | xlat}}</label>
+                                                <input name="department" class="form-control" type='text' required placeholder="{{'###' | r | xlat}}" />
+                                                <span>{{item.Department}}</span>
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <button type="button" title="{{'copy to all' | r | xlat}}" class="btn btn-default pull-right" value="{{'copy to all' | r | xlat}}" ng-click="copyCostCenterToAll()" ng-show="item.CostCenter" ng-hide="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
+                                                    <span class="fa fa-copy text-info"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>                                                                        
                                     <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('CostCenterPerLine')">
                                         <div class="row view-form-icon">
                                             <div class="col-xs-9">
-                                                <label class="required">{{'Cost Center' | r | xlat}}</label>
-                                                <select name="costcenter" class="form-control" style="padding-left: 25px;" required
+                                                <label class="required">{{'GL Code' | r | xlat}}</label>
+                                                <select name="glcode" class="form-control" style="padding-left: 25px;" required
                                                     ng-options="center.Name as center.Name for center in user.CostCenters" ng-model="item.CostCenter">
                                                     <option value="1">Cost Center 1</option>
                                                     <option value="2">Cost Center 2</option>
@@ -127,6 +155,7 @@
                                             </div>
                                         </div>
                                     </div>
+                              
                                 </div>
                             </div>
 
