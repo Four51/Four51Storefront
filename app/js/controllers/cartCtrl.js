@@ -140,6 +140,24 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 		});
 	};
 
+	$scope.copyDepartmentToAll = function() {
+		angular.forEach($scope.currentOrder.LineItems, function(n) {
+			n.Department = $scope.currentOrder.LineItems[0].Department;
+		});
+	};
+
+	$scope.copyFacilityToAll = function() {
+		angular.forEach($scope.currentOrder.LineItems, function(n) {
+			n.Facility = $scope.currentOrder.LineItems[0].Facility;
+		});
+	};
+	
+	$scope.copyGLCodeToAll = function() {
+		angular.forEach($scope.currentOrder.LineItems, function(n) {
+			n.GLCode = $scope.currentOrder.LineItems[0].GLCode;
+		});
+	};	
+
 	$scope.onPrint = function()  {
 		window.print();
 	};
