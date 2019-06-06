@@ -40,7 +40,7 @@
                     </div>
                     <div class="col-sm-10">
                         <div class="row">
-                            <div class="col-md-4" ng-if="currentOrder.Status != 'AwaitingApproval' || isEditforApproval">
+                            <div class="col-md-3" ng-if="currentOrder.Status != 'AwaitingApproval' || isEditforApproval">
                                 <a class="line-item-link" ng-href="{{(item.Product.Type == 'Kit' ? 'kit' : 'cart') + '/' + (item.Product.InteropID) + '/' + (isEditforApproval ? (currentOrder.ID + '/') : '') + ($index)}}">
                                     <h3 class="text-primary">
                                         <i ng-show="!item.KitIsInvalid" class="fa fa-edit"></i>
@@ -52,7 +52,7 @@
                                     </p>
                                 </a>
                             </div>
-                            <div class="col-md-6" ng-if="currentOrder.Status == 'AwaitingApproval' && !isEditforApproval">
+                            <div class="col-md-7" ng-if="currentOrder.Status == 'AwaitingApproval' && !isEditforApproval">
                                 <h3 class="text-primary">
                                     {{item.ProductIDText}}
                                 </h3>
