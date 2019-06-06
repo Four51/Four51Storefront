@@ -111,11 +111,9 @@
                                                         <label class="required">{{'Facility' | r | xlat}}</label>
                                                         <input name="facility" ng-model="item.Facility" class="form-control" type='text' required placeholder="{{'####' | r | xlat}}" />
                                                         <span>{{item.Facility}}</span>
-                                                    </div>
-                                                    <div class="col-xs-3">
                                                         <button type="button" title="{{'copy to all' | r | xlat}}" class="btn btn-default pull-right" value="{{'copy to all' | r | xlat}}" ng-click="copyFacilityToAll()" ng-show="item.CostCenter" ng-hide="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
                                                             <span class="fa fa-copy text-info"></span>
-                                                        </button>
+                                                        </button>                                                        
                                                     </div>
                                                 </div>                                        
                                         <div class="row view-form-icon">
@@ -123,11 +121,9 @@
                                                 <label class="required">{{'Department' | r | xlat}}</label>
                                                 <input name="department" ng-model="item.Department" class="form-control" type='text' required placeholder="{{'###' | r | xlat}}" />
                                                 <span>{{item.Department}}</span>
-                                            </div>
-                                            <div class="col-xs-3">
                                                 <button type="button" title="{{'copy to all' | r | xlat}}" class="btn btn-default pull-right" value="{{'copy to all' | r | xlat}}" ng-click="copyDepartmentToAll()" ng-show="item.CostCenter" ng-hide="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
                                                     <span class="fa fa-copy text-info"></span>
-                                                </button>
+                                                </button>                                                
                                             </div>
                                         </div>
                                         <div class="row view-form-icon">
@@ -137,11 +133,9 @@
                                                     ng-options="center.Name as center.Name for center in user.GLCodes" ng-model="item.GLCode">
                                                 </select>
                                                 <i ng-if="user.CostCenters.length > 1" class="fa fa-money"></i>
-                                            </div>
-                                            <div class="col-xs-3">
                                                 <button type="button" title="{{'copy to all' | r | xlat}}" class="btn btn-default pull-right" value="{{'copy to all' | r | xlat}}" ng-click="copyGLCodeToAll()" ng-show="item.CostCenter" ng-hide="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
                                                     <span class="fa fa-copy text-info"></span>
-                                                </button>
+                                                </button>                                                
                                             </div>
                                         </div>
                                     </div>
