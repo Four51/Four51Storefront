@@ -52,20 +52,28 @@ four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security',
 
     var _login = function(credentials, success, error) {
 	    store.clear();
-		$resource($451.api('login')).get(credentials).$promise.then(
-	        function(u) {
-                if(credentials.CurrentOrderID){
-                    _setorder(credentials.CurrentOrderID,success,error);
-                }
-                else{
-                    _then(success, u);
-                }
-	        },
-	        function(ex) {
-		        if (angular.isFunction(error))
-			        error(Error.format(ex));
-	        }
-        );
+		if(credentials.CurrentPassword){
+			delete credentials.CurrentPassword;
+		}
+		if(!credentials.Username || !credentials.Password){
+			credentials = {};
+			credentials.Username = null;
+			credentials.Password = null;
+		}
+		$resource($451.api('login/user')).save(credentials).$promise.then(
+			function(u) {
+				if(credentials.CurrentOrderID){
+					_setorder(credentials.CurrentOrderID,success,error);
+				}
+				else{
+					_then(success, u);
+				}
+			},
+			function(ex) {
+				if (angular.isFunction(error))
+					error(Error.format(ex));
+			}
+		);
     };
 
 	var _reset = function(credentials, success, error) {

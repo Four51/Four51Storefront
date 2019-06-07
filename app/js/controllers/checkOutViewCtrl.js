@@ -70,16 +70,22 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Orde
 	    $scope.errorMessage = null;
 	    $scope.actionMessage = null;
 	    var auto = $scope.currentOrder.autoID;
+		var cache = angular.copy($scope.currentOrder);
 	    Order.save($scope.currentOrder,
 	        function(data) {
 		        $scope.currentOrder = data;
+				if(cache.CreditCard){
+					$scope.currentOrder.CreditCard = cache.CreditCard;
+				}
 		        if (auto) {
 			        $scope.currentOrder.autoID = true;
 			        $scope.currentOrder.ExternalID = 'auto';
 		        }
 		        $scope.displayLoadingIndicator = false;
 		        if (callback) callback($scope.currentOrder);
-	            $scope.actionMessage = "Your changes have been saved";
+		        else{
+					$scope.actionMessage = "Your changes have been saved";
+				}
 	        },
 	        function(ex) {
 		        $scope.currentOrder.ExternalID = null;
@@ -123,9 +129,11 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Orde
         saveChanges();
     };
 
-    $scope.submitOrder = function() {
-       submitOrder();
-    };
+	$scope.submitOrder = function() {
+		saveChanges(function(data){
+			submitOrder();
+		});
+	};
 
     $scope.saveFavorite = function() {
         FavoriteOrder.save($scope.currentOrder);
