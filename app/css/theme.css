@@ -50,94 +50,10 @@ body, span, div, h1, h2, h3, h4, h5, h6, a, b, i, small {
 }
 .panel .panel-heading .panel-title {
 	font-size: 18px;
-}/*
-.view-form-icon #FacNo {
-	width: auto;
 }
-.view-form-icon #TDDTTY_ABR {
-	width: auto;
-}
-.view-form-icon #V01TDDNumber {
-	width: auto;
-}
-.view-form-icon #V02FacilityName {
-	width: auto;
-}
-.view-form-icon #V04StreetAddress {
-	width: auto;
-}
-.view-form-icon #V06City {
-	width: auto;
-}
-.view-form-icon #V07State {
-	width: auto;
-}
-.view-form-icon #V08ZipCode {
-	width: auto;
-}
-.view-form-icon #V09Phone1AC {
-	width: auto;
-}
-.view-form-icon #V09Phone1EX {
-	width: auto;
-}
-.view-form-icon #V09Phone1NUM {
-	width: auto;
-}
-.view-form-icon #V10Phone2AC {
-	width: auto;
-}
-.view-form-icon #V10Phone2EX {
-	width: auto;
-}
-.view-form-icon #V10Phone2NUM {
-	width: auto;
-}
-.view-form-icon #V11Phone3AC {
-	width: auto;
-}
-.view-form-icon #V11Phone3EX {
-	width: auto;
-}
-.view-form-icon #V11Phone3NUM {
-	width: auto;
-}
-.view-form-icon #V11Phone3NUMLabel {
-	width: auto;
-}
-.view-form-icon #V11Phone4AC {
-	width: auto;
-}
-.view-form-icon #V11Phone4EX {
-	width: auto;
-}
-.view-form-icon #V11Phone4NUM {
-	width: auto;
-}
-.view-form-icon #V11Phone4NUMlabel {
-	width: auto;
-}
-.view-form-icon #V11Phone5AC {
-	width: auto;
-}
-.view-form-icon #V11Phone5EX {
-	width: auto;
-}
-.view-form-icon #V11Phone5NUM {
-	width: auto;
-}
-.view-form-icon #V13WebAddress {
-	width: auto;
-}
-.view-form-icon #V14LogoFile {
-	width: auto;
-}
-.view-form-icon #V14LogoRecord {
-	width: auto;
-}
-.view-form-icon #V14LogoSelection {
-	width: auto;
-}*/
+
+
+/******* dev code, remove before launching *******/
 div {
 	outline: 1px dashed magenta;
 }

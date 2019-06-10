@@ -79,7 +79,7 @@
                                     </div>
                                 </div>
                                 <div class="row" ng-if="(user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')) || user.Permissions.contains('CostCenterPerLine')">
-                                    <div class="col-xs-12 col-sm-6" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
+                                    <div class="col-xs-12 col-sm-3" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
                                         <div class="row view-form-icon">
                                             <div class="col-xs-9">
                                                 <label ng-class="{required: user.Permissions.contains('DateNeededRequired')}" ng-show="item.DateNeeded || user.Permissions.contains('DateNeededRequired')">{{'Date' | r | xlat}}</label>
@@ -105,7 +105,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-6">
+                                    <div class="col-xs-12 col-sm-9">
                                         <div class="row view-form-icon">
                                                 <div class="col-xs-4">
                                                     <label class="required">{{'Facility' | r | xlat}}</label>
@@ -123,7 +123,7 @@
                                                 <span>{{item.Department}}</span>
                                                 <button type="button" title="{{'copy to all' | r | xlat}}" class="btn btn-default pull-right" value="{{'copy to all' | r | xlat}}" ng-click="copyDepartmentToAll()" ng-show="item.CostCenter" ng-hide="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
                                                     <span class="fa fa-copy text-info"></span>
-                                                </button>                                                
+                                                </button>
                                             </div>
                                         </div>
                                         <div class="row view-form-icon">
@@ -135,7 +135,7 @@
                                                 <i ng-if="user.CostCenters.length > 1" class="fa fa-money"></i>
                                                 <button type="button" title="{{'copy to all' | r | xlat}}" class="btn btn-default pull-right" value="{{'copy to all' | r | xlat}}" ng-click="copyGLCodeToAll()" ng-show="item.CostCenter" ng-hide="user.CostCenters.length == 1 && !user.Permissions.contains('FreeFormCostCenter')" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
                                                     <span class="fa fa-copy text-info"></span>
-                                                </button>                                                
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
