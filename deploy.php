@@ -1,19 +1,19 @@
 <?php
 
 // Requires lftp (apt-get install lftp)
-// Place this script in the root of your Four51 application (next to index.html)
+// Place this script in the root of your Four51 application (next to index.html) 
 // Set APP to the Four51 application folder, add your Four51 username and password
 // Run the script once to generate its internal file listing, run it subsequent times to upload modified files
 // Script only supports uploading modified files, not folders
 
-const APP = '<APP FOLDER>';
-const FOUR51USER = '<USER NAME>';
-const FOUR51PASS = '<PASSWORD>';
+const APP = 'KindredStorefront';
+const FOUR51USER = 'brian.hartvigsen';
+const FOUR51PASS = 'nifgW0w5NadsfadsfKzSHjqzNyUKR';
 
 function walkFolders($dir, &$results = []) {
 	$files = scandir($dir);
 	foreach ($files as $key => $value) {
-		if (strpos($value, 'filemtimes.json') !== false || strpos($value, 'deploy.php') !== false) {
+		if (strpos($value, 'filemtimes.json') !== false || strpos($value, 'deploy.php') !== false || strpos($value, '.') === 0) {
 			continue;
 		}
 		$path = realpath($dir . DIRECTORY_SEPARATOR . $value);
