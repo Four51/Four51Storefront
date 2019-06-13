@@ -55,7 +55,7 @@ four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security',
 		if(credentials.CurrentPassword){
 			delete credentials.CurrentPassword;
 		}
-		if(!credentials.Username || !credentials.Password){
+		if(!credentials.Username && !credentials.Password && !credentials.Email){
 			credentials = {};
 			credentials.Username = null;
 			credentials.Password = null;
