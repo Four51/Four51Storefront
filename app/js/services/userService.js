@@ -52,7 +52,7 @@ four51.app.factory('User', ['$q', '$rootScope', '$resource', '$451', 'Security',
 
     var _login = function(credentials, success, error) {
 	    store.clear();
-		if(credentials.CurrentPassword){
+		if(credentials.CurrentPassword && !credentials.NewPassword){
 			delete credentials.CurrentPassword;
 		}
 		if(!credentials.Username && !credentials.Password && !credentials.Email){
