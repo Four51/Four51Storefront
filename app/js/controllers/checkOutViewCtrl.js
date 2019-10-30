@@ -77,6 +77,9 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Orde
 				if(cache.CreditCard){
 					$scope.currentOrder.CreditCard = cache.CreditCard;
 				}
+				if(cache.ExternalOrderDetailRecipients){
+					$scope.currentOrder.ExternalOrderDetailRecipients = cache.ExternalOrderDetailRecipients;
+				}
 		        if (auto) {
 			        $scope.currentOrder.autoID = true;
 			        $scope.currentOrder.ExternalID = 'auto';
