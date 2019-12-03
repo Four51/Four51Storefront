@@ -16,6 +16,9 @@ four51.app.config(['$routeProvider', '$locationProvider', function($routeProvide
         when('/catalog/:categoryInteropID', { templateUrl: 'partials/categoryView.html', controller: 'CategoryCtrl' }).
         when('/kit/:id', {templateUrl: 'partials/kitView.html', controller: 'KitCtrl'}).
         when('/kit/:id/:lineitemid', {templateUrl: 'partials/kitView.html', controller: 'KitCtrl'}).
+        when('/kit/:id/:lineitemid/:productInteropID', {templateUrl: concatSpecFormView, controller: 'KitSpecFormCtrl'}).
+        when('/kit/:id/:lineitemid/:productInteropID/:variantInteropID', {templateUrl: "partials/kitVariantView.html", controller: 'KitVariantCtrl'}).
+        when('/kit/:id/:lineitemid/:productInteropID/:variantInteropID/edit', {templateUrl: concatSpecFormView, controller: 'KitSpecFormCtrl'}).
         when('/product/:productInteropID', {templateUrl: concatProductView, controller: 'ProductCtrl'}).
         when('/product/:productInteropID/:variantInteropID', {templateUrl: concatProductView, controller: 'ProductCtrl'}).
         when('/product/:productInteropID/:variantInteropID/edit', {templateUrl: concatSpecFormView, controller: 'SpecFormCtrl'}).

@@ -1,7 +1,7 @@
 <section class="product-detail-default">
 	<loadingindicator ng-show="loadingIndicator" title="{{'Please wait while we fetch kit information' | r | xlat}}" />
 	<!-- PRODUCT IMAGE PANEL!-->
-	<div class="col-md-4 col-collapse">
+	<div class="col-md-4 col-md-offset-1 col-collapse">
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<figure>
@@ -39,7 +39,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-7 col-md-offset-1 col-collapse">
+	<div class="col-md-5 col-md-offset-1 col-collapse">
 		<!-- PRODUCT INFO!-->
 		<div class="row">
 			<div class="col-xs-12">
@@ -100,6 +100,11 @@
 									{{'Select a Variant' | r | xlat}}
 								</h4>
 							</div>
+							<div class="panel-title" ng-show="ActiveKitItem.Variant.IsDefaultVariant" ng-class="{'col-xs-3 text-right':LineItem.Product.VariantCount > 0,'col-xs-9':!LineItem.Product.VariantCount > 0}">
+								<h4>
+									<a ng-href="kit/{{Kit.KitParent.InteropID}}/{{kitIndex}}/{{ActiveKitItem.LineItem.Product.InteropID}}">Create New</a>
+								</h4>
+							</div>
 						</div>
 						<div class="view-form-icon" ng-if="ActiveKitItem.Variant.IsDefaultVariant && (LineItem.Product.VariantCount > settings.pageSize || searchTerm)">
 							<div>
@@ -139,7 +144,7 @@
 						</div>
 						<div ng-show="ActiveKitItem.Variant.IsDefaultVariant && LineItem.Product.VariantCount > settings.pageSize">
 							<pagination ng-change="paged()" ng-model="settings.currentPage" page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="LineItem.Product.VariantCount"
-							            items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
+										items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
 						</div>
 					</div>
 					<div class="form-group" ng-show="allowAddToOrder">
@@ -162,7 +167,7 @@
 							<loadingindicator ng-show="addToOrderIndicator" />
 							<i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>
 							{{addToOrderText | r | xlat}}
-                            <span class="badge" ng-if="!(user.Permissions.contains('HidePricing')) && (LineItem.LineTotal || variantLineItemsOrderTotal) > 0">
+							<span class="badge" ng-if="!(user.Permissions.contains('HidePricing')) && (LineItem.LineTotal || variantLineItemsOrderTotal) > 0">
                                 {{(LineItem.LineTotal || variantLineItemsOrderTotal) | culturecurrency}}
                             </span>
 						</button>

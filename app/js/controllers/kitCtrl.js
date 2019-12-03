@@ -12,13 +12,26 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 
 	function kitSuccess(kit) {
 		$scope.LineItem = $routeParams.lineitemid ? $scope.currentOrder.LineItems[$routeParams.lineitemid] : {};
+		if($routeParams.lineitemid){
+			$scope.kitIndex = $routeParams.lineitemid;
+		}
 		$scope.LineItem.IsKitParent = true;
 		$scope.Kit = kit;
-		setupProduct(kit.KitParent);
-		if ($scope.LineItem.ID) {
-			$scope.addToOrderText = 'Update Kit';
-			Kit.mapKitToOrder($scope.Kit, $scope.LineItem);
-		}
+		setupProduct(kit.KitParent, null, null, function(){
+			if ($scope.LineItem.ID) {
+				$scope.addToOrderText = 'Update Kit';
+				Kit.mapKitToOrder($scope.Kit, $scope.LineItem);
+				var newVariant = store.get("kitItem");
+				if(newVariant){
+					angular.forEach($scope.Kit.KitItems, function(item){
+						if(item.LineItem && item.LineItem.Product && item.LineItem.Product.InteropID === newVariant){
+							setCurrent(item);
+							store.remove("kitItem");
+						}
+					});
+				}
+			}
+		});
 	}
 
 	$scope.saveOrder = saveOrder;
@@ -58,7 +71,7 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 		setupProduct(item.LineItem.Product, item.LineItem.Variant);
 	}
 
-	function setupProduct(product, variant, searchTerm) {
+	function setupProduct(product, variant, searchTerm, success) {
 		// have to empty this because the scope is held in the service singleton and inherits any previous variants
 		$scope.variantLineItems = null;
 		ProductDisplayService.getProductAndVariant(product.InteropID, variant ? variant.InteropID : null, function (data) {
@@ -72,6 +85,8 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 				});
 			}
 			$scope.setAddToOrderErrors();
+			$scope.allowAddToOrder = true;
+			if(success) success();
 		}, $scope.settings.currentPage, $scope.settings.pageSize, searchTerm);
 	}
 
@@ -102,13 +117,18 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 
 		function success(order) {
 			$scope.currentOrder = order;
-			var currentLineItem = order.LineItems[$routeParams.lineitemid || $scope.currentOrder.LineItems.length - 1];
+			$scope.kitIndex = $routeParams.lineitemid ? $routeParams.lineitemid : $scope.currentOrder.LineItems.length - 1;
+			var currentLineItem = order.LineItems[$scope.kitIndex];
 			Kit.mapKitToOrder($scope.Kit, currentLineItem);
 			$scope.user.CurrentOrderID = order.ID;
 			User.save($scope.user, function () {
 				$scope.addToOrderIndicator = false;
-				if (!$scope.Kit.KitHasConfigurableItems)
+				if (!$scope.Kit.KitHasConfigurableItems){
 					$location.path('/cart');
+				}
+				else{
+					$location.path('/kit/' + $routeParams.id + "/" + $scope.kitIndex);
+				}
 			});
 			setupProduct(currentLineItem.Product, currentLineItem.Variant);
 		}
@@ -127,10 +147,11 @@ four51.app.controller('KitCtrl', ['$scope', '$location', '$routeParams', 'Kit', 
 		Order.save($scope.currentOrder, success, error);
 
 		function success(order) {
+			$scope.kitIndex = $routeParams.lineitemid ? $routeParams.lineitemid : $scope.currentOrder.LineItems.length - 1;
 			$scope.currentOrder = order;
 			$scope.addToOrderIndicator = false;
 			$scope.lineItemErrors = null;
-			Kit.mapKitToOrder($scope.Kit,  order.LineItems[$routeParams.lineitemid || $scope.currentOrder.LineItems.length - 1]);
+			Kit.mapKitToOrder($scope.Kit,  order.LineItems[$scope.kitIndex]);
 		}
 
 		function error(ex) {
