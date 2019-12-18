@@ -1,0 +1,122 @@
+<section class="product-detail-default">
+    <loadingindicator ng-show="loadingIndicator" title="{{'Please wait while we fetch product information' | r | xlat}}" />
+    <div id="message">
+        <div class="view-response-message alert-success text-center" alert-show="actionMessage">
+            <p style="font-size: 20px;">{{actionMessage | r | xlat}}</p>
+        </div>
+    </div>
+    <!-- PRODUCT IMAGE PANEL!-->
+    <div class="col-md-4 col-md-offset-1 col-collapse">
+        <div ng-if="!LineItem.Variant">
+            <div class="panel panel-default" ng-controller="LightboxCtrl">
+                <productlightbox></productlightbox>
+            </div>
+        </div>
+        <div class="panel panel-default">  <!-- Beginning of Panel Panel Default -->
+            <div ng-if="LineItem.Variant">
+                <div class="panel-body">
+                    <loadingindicator ng-show="loadingImage && LineItem.Variant.IsMpowerVariant" />
+                    <figure>
+                        <img id="451_img_prod_lg" style="border: none;" class="product-image-large img-responsive" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}" imageonload />
+                    </figure>
+                    <figure ng-hide="LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl">
+                        <img class="img-responsive" src="https://www.four51.com/Images/Product/01d9531cf7e24718aad221e6734d5817.png" />
+                    </figure>
+                </div>
+            </div>
+            <div class="panel-footer" ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant">
+                <div class="text-center">
+                    <button ng-if="currentOrder.Status != 'AwaitingApproval' && !EditingLineItem" class="btn btn-warning" redirect="/kit/{{kitID}}/{{kitIndex}}/{{kitProductInteropID}}/{{LineItem.Variant.InteropID}}/edit">
+                        {{'Edit' | r | xlat}}
+                    </button>
+                    <button ng-if="currentOrder.Status == 'AwaitingApproval' || EditingLineItem" class="btn btn-warning" redirect="/kit/{{kitID}}/{{kitIndex}}/{{kitProductInteropID}}/{{LineItem.Variant.InteropID}}/edit">
+                        {{'Edit' | r | xlat}}
+                    </button>
+                    <button class="btn btn-danger" ng-if="currentOrder.Status != 'AwaitingApproval' && !EditingLineItem" ng-click="deleteVariant(LineItem.Variant, true)">
+                        {{'Remove' | r | xlat}}
+                    </button>
+                    <button class="btn btn-create" ng-click="getPdf(LineItem.Variant.ProofUrl)">
+                        {{('View' | r) + ' ' + ('PDF' | r) | xlat}}
+                    </button>
+                </div>
+            </div>
+        </div> <!-- End of Panel Panel Default -->
+    </div>
+    <div class="col-md-4 col-md-offset-1 col-collapse">
+        <!-- PRODUCT INFO!-->
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 id="451qa_prod_name" ng-hide="LineItem.Variant.ExternalID" class="animated fadeInUp">
+                    {{LineItem.Product.Name}}
+                </h2>
+                <h2 ng-show="LineItem.Variant.ExternalID">
+                    {{LineItem.Variant.ExternalID}}
+                </h2>
+                <h2 class="text-success" ng-show="LineItem.PriceSchedule.PriceBreaks[0].Price > 0.00">
+                    {{LineItem.PriceSchedule.PriceBreaks[0].Price | culturecurrency}}
+                </h2>
+            </div>
+        </div>
+        <!-- PRODUCT DESCRIPTION PANEL! --->
+        <div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title panel-primary">
+                        {{'Product Description' | r | xlat}}
+                    </h3>
+                </div>
+                <div class="panel-body" id="451_area_prod_desc">
+                    <h4 ng-show="LineItem.Product.ExternalID" class="text-info">
+                        {{'ID' | r | xlat}}: {{LineItem.Product.ExternalID}}
+                    </h4>
+                    <p id="451qa_prod_desc" ng-bind-html="trustedDescription(LineItem.Product)" />
+                    <p ng-show="LineItem.Variant.Description" ng-bind-html="trustedDescription(LineItem.Variant)" />
+                    <staticspecstable ng-show="StaticSpecGroups && user.Permissions.contains('ViewNonCustomizableSpecs')" specgroups="StaticSpecGroups" length="LineItem.Product.StaticSpecLength"/>
+                </div>
+                <!-- PRICE SCHEDULE PANEL! --->
+                <priceScheduleTable ng-if="!(user.Permissions.contains('HidePricing')) && LineItem.PriceSchedule.PriceBreaks.length > 1" ps='LineItem.PriceSchedule' p='LineItem.Product'/>
+            </div>
+        </div>
+        <!-- STATIC SPECS PANEL! -->
+        <!--<staticspecstable ng-show="StaticSpecGroups && user.Permissions.contains('ViewNonCustomizableSpecs')" specgroups="StaticSpecGroups" length="LineItem.Product.StaticSpecLength"/>-->
+        <!-- ORDER PANEL! -->
+        <form name="addToOrderForm" novalidate="">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <button class="btn btn-success btn-block btn-lg" type="button" id="451_btn_orderadd" ng-click="addToOrder()">
+                            <loadingindicator ng-show="addToOrderIndicator" />
+                            <i ng-show="lineItemErrors.length > 1" class="fa fa-warning"></i>
+                            {{addToOrderText | r | xlat}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- ERROR MESSAGING! -->
+    <div class="navbar-fixed-bottom">
+        <div class="view-error-message" ng-show="showAddToCartErrors && lineItemErrors.length > 0">
+            <ul class="alert-warning">
+                <li class="text-center">
+                    <span class="badge">
+                        <i class="fa fa-exclamation-circle fa-inverse"></i>
+                        {{lineItemErrors.length}}
+                    </span>
+                </li>
+                <li class="text-center">
+                    <ul ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
+                        <li class="alert-warning" ng-repeat="e in lineItemErrors">{{e | xlat}}</li>
+                        <li class="alert-warning" ng-show="variantLineItems[v.InteropID].qtyError">{{variantLineItems[v.InteropID].qtyError}}</li>
+                    </ul>
+                </li>
+                <li class="text-center">
+                    <a ng-show="lineItemErrors.length > 1">
+                        <i class="fa fa-caret-down" ng-click="errorSection = 'open'" ng-hide="errorSection == 'open'"></i>
+                        <i class="fa fa-caret-up" ng-click="errorSection = ''" ng-show="errorSection == 'open'"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
