@@ -1,4 +1,4 @@
-![](https://github.com/Four51/Four51StorefrontWiki/blob/master/four51logo2019.png?raw=true)
+![](https://github.com/Four51/Four51StorefrontWiki/blob/master/Four51StorefrontLogo.png?raw=true)
 # Four51Storefront (formerly AngularJSOrder)
 > This repository provides the app code needed for the Four51 Storefront Application
 
