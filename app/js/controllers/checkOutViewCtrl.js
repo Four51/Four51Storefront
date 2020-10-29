@@ -133,6 +133,7 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Orde
     };
 
 	$scope.submitOrder = function() {
+		$scope.submitClicked = true;
 		saveChanges(function(data){
 			submitOrder();
 		});
