@@ -1,5 +1,5 @@
-four51.app.controller('UserEditCtrl', ['$scope', '$location', '$sce', '$injector', 'User', 'Order',
-    function ($scope, $location, $sce, $injector, User, Order) {
+four51.app.controller('UserEditCtrl', ['$scope', '$location', '$sce', '$injector', '$timeout', 'User', 'Order',
+    function ($scope, $location, $sce, $injector, $timeout, User, Order) {
         var _AnonRouter;
         if ($scope.user) $scope.existingUser = $scope.user.Type != 'TempCustomer';
         try {
@@ -62,6 +62,7 @@ four51.app.controller('UserEditCtrl', ['$scope', '$location', '$sce', '$injector
                     });
             }
             $scope.save = function () {
+                var passwordChange = false;
                 $scope.buttonClicked = true;
                 $scope.actionMessage = null;
                 $scope.securityWarning = false;
@@ -74,35 +75,54 @@ four51.app.controller('UserEditCtrl', ['$scope', '$location', '$sce', '$injector
                     $scope.pendingOrder = angular.copy($scope.currentOrder.ID);
                 }
 
+                if(user.Password){
+                    passwordChange = true;
+                }
+
                 User.save($scope.user,
                     function (u) {
                         $scope.user = u;
-                        if($scope.pendingOrder){
-                            Order.get($scope.pendingOrder,function(order){
-                                $scope.currentOrder = order;
-                                $scope.currentOrder.FromUserID = $scope.user.ID;
-                                Order.save($scope.currentOrder,function(ordr){
-                                    $scope.securityWarning = false;
-                                    $scope.displayLoadingIndicator = false;
-                                    $scope.buttonClicked = false;
-                                    $scope.actionMessage = 'Your changes have been saved';
-                                    $scope.user.TempUsername = u.Username;
-                                    if (_AnonRouter && !$scope.existingUser) _AnonRouter.route();
-                                });
+                        if(passwordChange){
+                            User.logout($scope.user, function(u){
+                                if ($scope.isAnon) {
+                                    $timeout(function () {
+                                        $location.path("/catalog");
+                                        location.reload(true);
+                                    }, 500);
+                                }
+                            }, function(ex){
+                                console.log(ex.Message);
                             });
                         }
                         else{
-                            $scope.securityWarning = false;
-                            $scope.displayLoadingIndicator = false;
-                            $scope.buttonClicked = false;
-                            $scope.actionMessage = 'Your changes have been saved';
-                            $scope.user.TempUsername = u.Username;
-                            if (_AnonRouter && !$scope.existingUser) _AnonRouter.route();
+                            if($scope.pendingOrder){
+                                Order.get($scope.pendingOrder,function(order){
+                                    $scope.currentOrder = order;
+                                    $scope.currentOrder.FromUserID = $scope.user.ID;
+                                    Order.save($scope.currentOrder,function(ordr){
+                                        $scope.securityWarning = false;
+                                        $scope.displayLoadingIndicator = false;
+                                        $scope.buttonClicked = false;
+                                        $scope.actionMessage = 'Your changes have been saved';
+                                        $scope.user.TempUsername = u.Username;
+                                        if (_AnonRouter && !$scope.existingUser) _AnonRouter.route();
+                                    });
+                                });
+                            }
+                            else{
+                                $scope.securityWarning = false;
+                                $scope.displayLoadingIndicator = false;
+                                $scope.buttonClicked = false;
+                                $scope.actionMessage = 'Your changes have been saved';
+                                $scope.user.TempUsername = u.Username;
+                                if (_AnonRouter && !$scope.existingUser) _AnonRouter.route();
+                            }
                         }
                     },
                     function (ex) {
                         $scope.displayLoadingIndicator = false;
                         $scope.buttonClicked = false;
+                        passwordChange = false;
                         if (ex.Code.is('PasswordSecurity'))
                             $scope.securityWarning = true;
                         else {
