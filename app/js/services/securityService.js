@@ -21,7 +21,7 @@ four51.app.factory('Security', ['$451', '$cookieStore', function ($451, $cookieS
     return {
         init: function (user, auth) {
             logout = false;
-            var string = _cookieName + " = " + auth + ";SameSite=None; Secure";
+            var string = _cookieName + " = " + auth + ";path=/" + $451.apiName + "/;SameSite=None; Secure";
             document.cookie = string;
         },
         clear: function () {

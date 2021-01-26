@@ -75,7 +75,7 @@ four51.app.controller('UserEditCtrl', ['$scope', '$location', '$sce', '$injector
                     $scope.pendingOrder = angular.copy($scope.currentOrder.ID);
                 }
 
-                if(user.Password){
+                if(user.Password && user.Type === "Customer"){
                     passwordChange = true;
                 }
 
@@ -87,7 +87,6 @@ four51.app.controller('UserEditCtrl', ['$scope', '$location', '$sce', '$injector
                                 if ($scope.isAnon) {
                                     $timeout(function () {
                                         $location.path("/catalog");
-                                        location.reload(true);
                                     }, 500);
                                 }
                             }, function(ex){
