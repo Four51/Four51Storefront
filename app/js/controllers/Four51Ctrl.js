@@ -1,5 +1,5 @@
-four51.app.controller('Four51Ctrl', ['$scope', '$route', '$location', '$451', 'User', 'Order', 'Security', 'OrderConfig', 'Category', 'AppConst','XLATService', 'GoogleAnalytics',
-function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, Category, AppConst, XLATService, GoogleAnalytics) {
+four51.app.controller('Four51Ctrl', ['$scope', '$route', '$rootScope', '$timeout', '$document', '$window', '$location', '$451', 'User', 'Order', 'Security', 'OrderConfig', 'Category', 'AppConst','XLATService', 'GoogleAnalytics',
+function ($scope, $route, $rootScope, $timeout, $document, $window, $location, $451, User, Order, Security, OrderConfig, Category, AppConst, XLATService, GoogleAnalytics) {
 	$scope.AppConst = AppConst;
 	$scope.scroll = 0;
 	$scope.isAnon = $451.isAnon; //need to know this before we have access to the user object
@@ -25,11 +25,11 @@ function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, C
 		if (Security.isAuthenticated()) {
 			User.get(function (user) {
 				$scope.user = user;
-                $scope.user.Culture.CurrencyPrefix = XLATService.getCurrentLanguage(user.CultureUI, user.Culture.Name)[1];
-                $scope.user.Culture.DateFormat = XLATService.getCurrentLanguage(user.CultureUI, user.Culture.Name)[2];
+				$scope.user.Culture.CurrencyPrefix = XLATService.getCurrentLanguage(user.CultureUI, user.Culture.Name)[1];
+				$scope.user.Culture.DateFormat = XLATService.getCurrentLanguage(user.CultureUI, user.Culture.Name)[2];
 
-	            if (!$scope.user.TermsAccepted)
-		            $location.path('conditions');
+				if (!$scope.user.TermsAccepted)
+					$location.path('conditions');
 
 				if (user.CurrentOrderID) {
 					Order.get(user.CurrentOrderID, function (ordr) {
@@ -59,15 +59,48 @@ function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, C
 	}
 	catch(ex) {}
 
-    $scope.errorSection = '';
+	$scope.errorSection = '';
 
-    function cleanup() {
-        Security.clear();
-    }
+	function cleanup() {
+		Security.clear();
+	}
 
-    $scope.$on('event:auth-loginConfirmed', function(){
-        $route.reload();
+	$scope.$on('event:auth-loginConfirmed', function(){
+		$route.reload();
 	});
 	$scope.$on("$routeChangeSuccess", init);
-    $scope.$on('event:auth-loginRequired', cleanup);
+	$scope.$on('event:auth-loginRequired', cleanup);
+
+	// Timeout timer value
+	var TimeOutTimerValue = 15*60*1000;
+
+	// Start a timeout
+	var TimeOut_Thread = $timeout(function(){ LogoutByTimer() } , TimeOutTimerValue);
+	var bodyElement = angular.element($document);
+
+	angular.forEach(['keydown', 'keyup', 'click', 'mousemove', 'DOMMouseScroll', 'mousewheel', 'mousedown', 'touchstart', 'touchmove', 'scroll', 'focus'],
+		function(EventName) {
+			bodyElement.bind(EventName, function (e) { TimeOut_Resetter(e) });
+		});
+
+	function LogoutByTimer(){
+		User.logout($scope.user, function(u){
+			if ($scope.isAnon) {
+				$timeout(function () {
+					$location.path("/catalog");
+					location.reload(true);
+				}, 500);
+			}
+		}, function(ex){
+			console.log(ex.Message);
+		});
+	}
+
+	function TimeOut_Resetter(e){
+		/// Stop the pending timeout
+		$timeout.cancel(TimeOut_Thread);
+
+		/// Reset the timeout
+		TimeOut_Thread = $timeout(function(){ LogoutByTimer() } , TimeOutTimerValue);
+	}
 }]);
