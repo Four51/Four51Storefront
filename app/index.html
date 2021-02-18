@@ -44,7 +44,7 @@
 <!--[if (gte IE 9)|!(IE)]><!-->
 <body ng-cloak ng-class="ng-cloak">
 <section>
-    <section ng-hide="Four51User.isAuthenticated() || isAnon" class="container">
+    <section ng-hide="Four51User.isAuthenticated() || (isAnon && Four51User.isAuthenticated())" class="container">
         <login />
     </section>
     <section ng-if="Four51User.isAuthenticated()" id="content">
