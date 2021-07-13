@@ -4,3 +4,24 @@ Theme name: My SPA Theme
 Version: 1.0
 Template: Howdy
 */
+.categoryItem {
+	background: linear-gradient(rgb(114, 165, 177) 0%, rgb(26, 106, 122) 100%);
+	min-height: 50px;
+	padding: 20px;
+	color: #fff;
+	display: flex!important;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: 16px;
+	min-height: 80px;
+}
+.categoryItem:hover {
+	color: #fff;
+}
+.catList {
+	display: grid;
+	grid-template-columns: 30% 30% 30%;
+	gap: 2vw;
+	justify-content: space-around;
+}
