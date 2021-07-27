@@ -8,7 +8,7 @@
 
 const APP = 'KindredStorefront';
 const FOUR51USER = 'brian.hartvigsen';
-const FOUR51PASS = 'JBL3hj2bdjh2vghv21gvw';
+const FOUR51PASS = 'iu2y3gs23bjhdv2jhbsj1b2hjb';
 
 function walkFolders($dir, &$results = []) {
 	$files = scandir($dir);
