@@ -25,3 +25,17 @@ Template: Howdy
 	gap: 2vw;
 	justify-content: space-around;
 }
+#productGrid {
+	display: grid;
+	grid-template-columns: 23% 23% 23% 23%;;
+	justify-items: center;
+	width: 90%;
+	margin: 0 auto;
+	padding-top: 15px;
+	grid-gap: 2vw 2vw;
+	margin-left: 4%;
+}
+#productGrid img {
+	width: 150px;
+	height: 150px;
+}

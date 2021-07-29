@@ -1,5 +1,8 @@
+var angScope;
+
 four51.app.controller('CategoryCtrl', ['$routeParams', '$sce', '$scope', '$451', 'Category', 'Product', 'Nav',
 function ($routeParams, $sce, $scope, $451, Category, Product, Nav) {
+	$scope.displayMode = 'grid';
 	$scope.productLoadingIndicator = true;
 	$scope.settings = {
 		currentPage: 1,
@@ -25,12 +28,12 @@ function ($routeParams, $sce, $scope, $451, Category, Product, Nav) {
 	});
 
 	if ($routeParams.categoryInteropID) {
-	    $scope.categoryLoadingIndicator = true;
-        Category.get($routeParams.categoryInteropID, function(cat) {
-            $scope.currentCategory = cat;
-	        $scope.categoryLoadingIndicator = false;
-        });
-    }
+		$scope.categoryLoadingIndicator = true;
+		Category.get($routeParams.categoryInteropID, function(cat) {
+			$scope.currentCategory = cat;
+			$scope.categoryLoadingIndicator = false;
+		});
+	}
 	else if($scope.tree){
 		$scope.currentCategory ={SubCategories:$scope.tree};
 	}
@@ -42,9 +45,9 @@ function ($routeParams, $sce, $scope, $451, Category, Product, Nav) {
 		}
 	});
 
-    // panel-nav
-    $scope.navStatus = Nav.status;
-    $scope.toggleNav = Nav.toggle;
+	// panel-nav
+	$scope.navStatus = Nav.status;
+	$scope.toggleNav = Nav.toggle;
 	$scope.$watch('sort', function(s) {
 		if (!s) return;
 		(s.indexOf('Price') > -1) ?
@@ -52,4 +55,5 @@ function ($routeParams, $sce, $scope, $451, Category, Product, Nav) {
 			$scope.sorter = s.replace(' DESC', "");
 		$scope.direction = s.indexOf('DESC') > -1;
 	});
+	angScope = $scope;
 }]);

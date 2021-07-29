@@ -1,0 +1,140 @@
+<section class="product-detail-default" style="margin-top: -30px">
+	<loadingindicator ng-show="loadingIndicator" title="{{'Please wait while we fetch product information' | r | xlat}}" />
+	<!-- PRODUCT IMAGE PANEL!-->
+	<div class="col-md-4 col-collapse" style="margin-top: 15px">
+		<div style="position: relative; left: 40px; top: 25px;" id="uglyBackButtonStaticContainer">
+			<button id="uglyBackButton" onclick="window.history.back()" class="btn btn-default btn-md"><i class="fa fa-undo"></i> Go Back</button>
+		</div>
+		<div class="panel panel-default" style="margin-top: 35px">
+			<div class="panel-body">
+				<loadingindicator ng-show="loadingImage && LineItem.Variant.IsMpowerVariant" />
+				<figure>
+					<img id="451_img_prod_lg" class="img-responsive" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}" imageonload />
+				</figure>
+				<div class="empty" ng-hide="LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl">
+					<span class="fa empty"><i class="fa fa-camera"></i></span>
+				</div>
+			</div>
+			<div class="panel-footer" ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant">
+				<span class="btn-group">
+					<button class="btn btn-default" ng-if="currentOrder.Status != 'AwaitingApproval' && !EditingLineItem" ng-click="deleteVariant(LineItem.Variant, true)">
+						{{'Remove' | r | xlat}}
+					</button>
+					<button class="btn btn-default" ng-click="getPdf(LineItem.Variant.ProofUrl, LineItem)">
+						{{('View' | r) + ' ' + ('PDF' | r) | xlat}}
+					</button>
+				</span>
+			</div>
+		</div>
+		<div style="width: 100%; height: 55px; margin-top: 30px;" id="thumbContainerContainer"></div>
+	</div>
+	<div class="col-md-7 col-md-offset-1 col-collapse" style="margin-top: 15px; margin-bottom: 60px;">
+		<!-- PRODUCT DESCRIPTION PANEL! -->
+		<div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 style="font-size: 20px" class="panel-title panel-primary">
+						 {{LineItem.Product.ExternalID}}
+					</h3>
+				</div>
+				<div class="panel-body" id="451_area_prod_desc">
+					<p id="451qa_prod_desc" ng-bind-html="trustedDescription(LineItem.Product)" />
+					<p ng-show="LineItem.Variant.Description" ng-bind-html="trustedDescription(LineItem.Variant)" />
+				</div>
+				<!-- PRICE SCHEDULE PANEL! -->
+				<priceScheduleTable ng-if="!(user.Permissions.contains('HidePricing')) && LineItem.PriceSchedule.PriceBreaks.length > 1" ps='LineItem.PriceSchedule' p='LineItem.Product'/>
+			</div>
+		</div>
+		<!-- STATIC SPECS PANEL! -->
+		<staticspecstable ng-show="StaticSpecGroups && user.Permissions.contains('ViewNonCustomizableSpecs')" specgroups="StaticSpecGroups" length="LineItem.Product.StaticSpecLength" />
+		<!-- ORDER PANEL! -->
+		<form name="addToOrderForm" novalidate="">
+			<div class="panel panel-default">
+				<div class="panel-heading" ng-if="allowAddToOrder">
+					<h3 class="panel-title">
+						{{'Order' | r | xlat}}
+					</h3>
+				</div>
+				<div class="panel-body">
+					<div class="alert alert-danger" ng-show="(!allowAddToOrder && !canCreateVariant && (!allowAddFromVariantList && (LineItem.Product.Variants.length == 0 || LineItem.Variant)))">
+						<p>
+							<i class="fa fa-ban" />
+							{{'Your current order does not allow this product to be added to your cart' | r | xlat}}
+						</p>
+					</div>
+					<div ng-show="canCreateVariant">
+						<button style="width: 100%" type="button" ng-show="!LineItem.Variant" class="btn btn-info pull-right" redirect="/product/{{LineItem.Product.InteropID}}/new/edit" tabindex="-1">
+							{{'Create New' | r | xlat}}
+						</button>
+					</div>
+					<ordertypeselector ng-show="(canAddToStandardOrder && canAddToReplenishmentOrder && !currentOrder.ID)"></ordertypeselector>
+					<addtoorderspecs ng-show="allowAddToOrder"></addtoorderspecs>
+					<div class="form-group" ng-show="LineItem.covidSku && !isCovidSuperUser">
+						<label for="facilityNumberInput">Enter a facility number for COVID item allocation</label>
+						<input ng-disabled="blockAddToCart" placeholder="Facility Number" autocomplete="off" class="form-control" type="text" ng-required="required" name="facilityNumberInput" ng-model="LineItem.facilityNumber">
+					</div>
+					<div class="form-group" ng-show="allowAddToOrder && !(LineItem.Product.Type == 'VariableText' && !LineItem.Variant)">
+						<p ng-show="LineItem.Product.DisplayInventory && (LineItem.Variant || LineItem.Product.Variants.length == 0)">
+							<span class="text-info">{{'Quantity Available' | r | xlat}}</span> {{inventoryDisplay(LineItem.Product, LineItem.Variant)}}
+						</p>
+						<p ng-show="LineItem.PriceSchedule.MinQuantity > 1 && !LineItem.PriceSchedule.RestrictedQuantity">
+							<span class="text-info">{{'Minimum Quantity' | r | xlat}}</span> {{LineItem.PriceSchedule.MinQuantity}}
+						</p>
+						<p ng-show="LineItem.PriceSchedule.MaxQuantity && !LineItem.PriceSchedule.RestrictedQuantity">
+							<span class="text-info">{{'Maximum Quantity' | r | xlat}}</span> {{LineItem.PriceSchedule.MaxQuantity}}
+						</p>
+						<div class="view-form-icon" ng-if="!allowAddFromVariantList">
+							<div>
+								<label ng-class="{required: !allowAddFromVariantList}" ng-hide="allowAddFromVariantList">{{('Order' | r) + ' ' + ('Quantity' | r) | xlat}}</label>
+								<quantityfield required="true" lineitem="LineItem" class="quantity" />
+							</div>
+						</div>
+						<button ng-disabled="blockAddToCart" ng-hide="LineItem.Product.Type == 'Kit'" class="btn btn-success btn-block btn-lg" type="button" id="451_btn_orderadd" ng-click="addToOrder()">
+							<loadingindicator ng-show="addToOrderIndicator" />
+							<i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>
+							<span ng-if="blockAddToCart">Allocation item is already in cart</span>
+							<span ng-if="!blockAddToCart">Add to cart</span>
+							<span id="451qa_lineitem_total" class="badge" ng-if="!(user.Permissions.contains('HidePricing')) && (LineItem.LineTotal || variantLineItemsOrderTotal) > 0">
+								{{(LineItem.LineTotal || variantLineItemsOrderTotal) | culturecurrency}}
+							</span>
+						</button>
+						<button ng-show="LineItem.Product.Specs.downloadable.Value == 'TRUE'" class="btn btn-warning btn-block btn-lg" type="button" ng-click="downloadPdf()">
+							<i class="fa fa-download"></i>
+							Download as PDF
+						</button>
+						<button ng-show="LineItem.Product.Type == 'Kit'" class="btn btn-success btn-block btn-lg" type="button" ng-click="kitProceed()">
+							{{kitButtonText}}
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!-- RELATED PRODUCTS! -->
+		<relatedproducts ng-if="LineItem.Product.RelatedProductsGroupID" relatedgroupid="LineItem.Product.RelatedProductsGroupID" />
+	</div>
+	<!-- ERROR MESSAGING! -->
+	<div class="navbar-fixed-bottom">
+		<div class="view-error-message" ng-show="showAddToCartErrors && lineItemErrors.length > 0">
+			<ul class="alert-warning">
+				<li class="text-center">
+					<span class="badge">
+						<i class="fa fa-exclamation-circle fa-inverse"></i>
+						{{lineItemErrors.length}}
+					</span>
+				</li>
+				<li class="text-center">
+					<ul ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
+						<li class="alert-warning" ng-repeat="e in lineItemErrors">{{e | xlat}}</li>
+						<li class="alert-warning" ng-show="variantLineItems[v.InteropID].qtyError">{{variantLineItems[v.InteropID].qtyError}}</li>
+					</ul>
+				</li>
+				<li class="text-center">
+					<a ng-show="lineItemErrors.length > 1">
+						<i class="fa fa-caret-down" ng-click="errorSection = 'open'" ng-hide="errorSection == 'open'"></i>
+						<i class="fa fa-caret-up" ng-click="errorSection = ''" ng-show="errorSection == 'open'"></i>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</section>
