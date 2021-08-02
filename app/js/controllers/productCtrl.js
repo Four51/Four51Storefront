@@ -47,24 +47,6 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 				callback();
 			}
 			var ExternalID = $scope.LineItem.Product.ExternalID;
-			$scope.covidSkus = false;
-			$scope.blockAddToCart = false;
-			for (var x in covidSkus) {
-				if (covidSkus[x].sku == ExternalID) {
-					// Item has a COVID SKU
-					$scope.LineItem.covidSku = covidSkus[x];
-					$scope.$watch('orderInitialized', function() {
-						if ($scope.currentOrder && $scope.currentOrder.LineItems) {
-							for (var i in $scope.currentOrder.LineItems) {
-								if ($scope.currentOrder.LineItems[i].Product.ExternalID == ExternalID) {
-									// This allocation is already in the user's cart, don't let them add again
-									$scope.blockAddToCart = true;
-								}
-							}
-						}
-					});
-				}
-			}
 			if (data.product.Type == 'Kit') {
 				$scope.kitButtonText = 'Customize Kit';
 			}
@@ -148,107 +130,34 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 		if (!$scope.currentOrder.LineItems) {
 			$scope.currentOrder.LineItems = [];
 		}
-		if (typeof $scope.LineItem.covidSku !== 'undefined' && $scope.LineItem.covidSku && !$scope.isCovidSuperUser && true == false) {
-			// COVID allocation item order flow
-			if (!$scope.LineItem.facilityNumber) {
-				$scope.addToOrderIndicator = false;
-				alert('Please enter a facility number first');
-				return;
-			}
-			// This is a COVID item, check allocation before allowing user to proceed
-			$.ajax({
-				url: 'https://apps.vividimpact.com/assets/kindredathome/getallowance_v6.php',
-				type: 'get',
-				success: function(facilities) {
-					// Check quantity entered against allocation for facility. If needed, decrement or notify user.
-					facilities = JSON.parse(facilities);
-					var facility = false;
-					for (var i in facilities) {
-						if ($scope.LineItem.facilityNumber == facilities[i].facility_id) {
-							facility = facilities[i];
-						}
-					}
-					if (!facility) {
-						$scope.addToOrderIndicator = false;
-						alert('Facility not found, unable to proceed');
-						return;
-					}
-					var availableQuantity = facility[$scope.LineItem.covidSku.type + '_allowance'] - facility[$scope.LineItem.covidSku.type + '_sold'];
-					if (availableQuantity == 0) {
-						$scope.addToOrderIndicator = false;
-						alert('There are currently no more allocations available for this facility');
-						return;
-					}
-					if ($scope.LineItem.Quantity > availableQuantity) {
-						$scope.LineItem.Quantity = availableQuantity;
-						alert('The available allocation quantity for this item is ' + availableQuantity + ', your order quantity has been updated accordingly');
-					}
-					if ($scope.allowAddFromVariantList) {
-						angular.forEach($scope.variantLineItems, function(item) {
-							if (item.Quantity > 0) {
-								$scope.currentOrder.LineItems.push(item);
-								$scope.currentOrder.Type = item.PriceSchedule.OrderType;
-							}
-						});
-					} else {
-						$scope.currentOrder.LineItems.push($scope.LineItem);
-						$scope.currentOrder.Type = $scope.LineItem.PriceSchedule.OrderType;
-					}
-					Order.clearshipping($scope.currentOrder).
-						save($scope.currentOrder,
-							function(o) {
-								$scope.user.CurrentOrderID = o.ID;
-								User.save($scope.user, function() {
-									$scope.addToOrderIndicator = true;
-									$location.path('/cart' + ($scope.isEditforApproval ? '/' + o.ID : ''));
-								});
-							},
-							function(ex) {
-								// Remove the last LineItem added to the cart.
-								$scope.currentOrder.LineItems.pop();
-								$scope.addToOrderIndicator = false;
-								$scope.lineItemErrors.push(ex.Detail);
-								$scope.showAddToCartErrors = true;
-							}
-					);
-
-				},
-				error: function() {
-					alert('Failed to connect to allocations server');
-					location.reload();
+		if ($scope.allowAddFromVariantList) {
+			angular.forEach($scope.variantLineItems, function(item) {
+				if (item.Quantity > 0) {
+					$scope.currentOrder.LineItems.push(item);
+					$scope.currentOrder.Type = item.PriceSchedule.OrderType;
 				}
 			});
 		} else {
-			// Typical order flow
-			if ($scope.allowAddFromVariantList) {
-				angular.forEach($scope.variantLineItems, function(item) {
-					if (item.Quantity > 0) {
-						$scope.currentOrder.LineItems.push(item);
-						$scope.currentOrder.Type = item.PriceSchedule.OrderType;
-					}
-				});
-			} else {
-				$scope.currentOrder.LineItems.push($scope.LineItem);
-				$scope.currentOrder.Type = $scope.LineItem.PriceSchedule.OrderType;
-			}
-			Order.clearshipping($scope.currentOrder).
-				save($scope.currentOrder,
-					function(o) {
-						$scope.user.CurrentOrderID = o.ID;
-						User.save($scope.user, function() {
-							$scope.addToOrderIndicator = true;
-							$location.path('/cart' + ($scope.isEditforApproval ? '/' + o.ID : ''));
-						});
-					},
-					function(ex) {
-						// Remove the last LineItem added to the cart.
-						$scope.currentOrder.LineItems.pop();
-						$scope.addToOrderIndicator = false;
-						$scope.lineItemErrors.push(ex.Detail);
-						$scope.showAddToCartErrors = true;
-					}
-			);
+			$scope.currentOrder.LineItems.push($scope.LineItem);
+			$scope.currentOrder.Type = $scope.LineItem.PriceSchedule.OrderType;
 		}
+		Order.clearshipping($scope.currentOrder).
+			save($scope.currentOrder,
+				function(o) {
+					$scope.user.CurrentOrderID = o.ID;
+					User.save($scope.user, function() {
+						$scope.addToOrderIndicator = true;
+						$location.path('/cart' + ($scope.isEditforApproval ? '/' + o.ID : ''));
+					});
+				},
+				function(ex) {
+					// Remove the last LineItem added to the cart.
+					$scope.currentOrder.LineItems.pop();
+					$scope.addToOrderIndicator = false;
+					$scope.lineItemErrors.push(ex.Detail);
+					$scope.showAddToCartErrors = true;
+				}
+		);
 	};
 
 	$scope.downloadPdf = function() {
@@ -276,13 +185,5 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 	$scope.$on('event:imageLoaded', function(event, result) {
 		$scope.loadingImage = false;
 		$scope.$apply();
-	});
-	$scope.$watch('userInitialized', function() {
-		$scope.isCovidSuperUser = false;
-		for (var i = 0; i < angUser.Groups.length; i++) {
-			if (angUser.Groups[0].Name == '01_Covid_SuperUsers') {
-				$scope.isCovidSuperUser = true;
-			}
-		}
 	});
 }]);
