@@ -47,6 +47,24 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 				callback();
 			}
 			var ExternalID = $scope.LineItem.Product.ExternalID;
+			$scope.covidSkus = false;
+			$scope.blockAddToCart = false;
+			for (var x in covidSkus) {
+				if (covidSkus[x].sku == ExternalID) {
+					// Item has a COVID SKU
+					$scope.LineItem.covidSku = covidSkus[x];
+					$scope.$watch('orderInitialized', function() {
+						if ($scope.currentOrder && $scope.currentOrder.LineItems) {
+							for (var i in $scope.currentOrder.LineItems) {
+								if ($scope.currentOrder.LineItems[i].Product.ExternalID == ExternalID) {
+									// This allocation is already in the user's cart, don't let them add again
+									$scope.blockAddToCart = true;
+								}
+							}
+						}
+					});
+				}
+			}
 			if (data.product.Type == 'Kit') {
 				$scope.kitButtonText = 'Customize Kit';
 			}
