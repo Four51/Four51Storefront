@@ -1,132 +1,126 @@
-four51.app.controller('SpecFormCtrl', ['$scope', '$location', '$route', '$routeParams', '$window', 'ProductDisplayService', 'Variant', 'Order',
-function ($scope, $location, $route, $routeParams, $window, ProductDisplayService, Variant, Order) {
-	$scope.isEditforApproval = $routeParams.orderID && $scope.user.Permissions.contains('EditApprovalOrder');
-	$scope.EditingLineItem = (typeof($routeParams.lineItemIndex) != 'undefined');
-	if ($scope.EditingLineItem) $scope.LineItemIndex = $routeParams.lineItemIndex;
-	if ($scope.isEditforApproval) {
-		Order.get($routeParams.orderID, function(order) {
-			$scope.currentOrder = order;
-			init();
-		});
-	}
-	else {init()}
+var angLocation;
+var angScope;
+var angCompile;
 
-	function bindDropdownEvents() {
-		var selectMarkup = '<select id="facilityChoiceDropdown"><option value="">Select a facility...</option></select>';
-		$('#451_list_vspec').prepend(selectMarkup);
-		for (var i = 0; i < logoOptions.length; i++) {
-			$("#facilityChoiceDropdown").append('<option value="' + logoOptions[i] + '">' + logoOptions[i] + '</option>');
+four51.app.controller('SpecFormCtrl', ['$451', '$scope', '$resource', '$compile', '$location', '$route', '$routeParams', '$window', 'ProductDisplayService', 'Variant', 'Kit', 'Order', 'User', '$timeout',
+function ($451, $scope, $resource, $compile, $location, $route, $routeParams, $window, ProductDisplayService, Variant, Kit, Order, User, $timeout) {
+	angLocation = $location;
+	angScope = $scope;
+	angCompile = $compile;
+
+	if (typeof $routeParams.variantInteropID !== 'undefined' && $routeParams.variantInteropID !== 'new') {
+		// User is editing an existing variant, likely for a kit item
+		$scope.editingVariant = true;
+	} else {
+		$scope.editingVariant = false;
+	}
+	$scope.validateVariant = function() {
+		if (!$scope.Variant) {
+			return;
 		}
-		$(document).off('change', '#facilityChoiceDropdown');
-		$(document).on('change', '#facilityChoiceDropdown', function() {
-			var selectedChoice = $('#facilityChoiceDropdown').val();
-			$('#V02FacilityName').val(FacNameSpecOptions[selectedChoice]);
-			$('#V14LogoSelection').val(facLogoSpecOptions[selectedChoice]);
-			$('#V04StreetAddress').val(addressSpecOptions[selectedChoice]);
-			$('#V06City').val(citySpecOptions[selectedChoice]);
-			$('#V07State').val(stateSpecOptions[selectedChoice]);
-			var selectedState = $('#V07State').val();
-			$('#V08ZipCode').val(zipSpecOptions[selectedChoice]);
-			$('#V09Phone1AC').val(phoneACSpecOptions[selectedChoice]);
-			$('#V09Phone1EX').val(phoneEXSpecOptions[selectedChoice]);
-			$('#V09Phone1NUM').val(phoneNUMSpecOptions[selectedChoice]);
-			$('#V10Phone2AC').val(faxACSpecOptions[selectedChoice]);
-			$('#V10Phone2EX').val(faxEXSpecOptions[selectedChoice]);
-			$('#V10Phone2NUM').val(faxNUMSpecOptions[selectedChoice]);
-			$('#V01TDDNumber').val(tddSpecOptions[selectedState]); //TDD number is dependant on state facility is located in
-			$('#V13WebAddress').val(webSpecOptions[selectedChoice]);
-		});
-	}
-
-	function init() {
-		bindDropdownEvents();
-		$scope.variantErrors = [];
-
-		//used for SpecFormPreview
-		$scope.PreviewVariant = {};
-
-		var varID = $routeParams.variantInteropID == 'new' ? null :  $routeParams.variantInteropID;
-		$scope.loadingImage = true;
-		ProductDisplayService.getProductAndVariant($routeParams.productInteropID, varID, function(data){
-			$scope.Product = data.product;
-			if(varID)
-				$scope.Variant = data.variant;
-			else{
-				$scope.Variant = {};
-				$scope.Variant.ProductInteropID = $scope.Product.InteropID;
-				$scope.Variant.Specs = {};
-				angular.forEach($scope.Product.Specs, function(item){
-					if(!item.CanSetForLineItem)
-					{
-						$scope.Variant.Specs[item.Name] = item;
-					}
-				});
+		var newErrors = [];
+		angular.forEach($scope.Variant.Specs, function(s) {
+			if (s.Required && !s.Value) {
+				newErrors.push(s.Label || s.Name + ' is a required field');
 			}
 		});
-		function validateVariant(){
-			if(!$scope.Variant) return;
-			var newErrors = [];
-			angular.forEach($scope.Variant.Specs, function(s){
-				if(s.Required && !s.Value)
-					newErrors.push(s.Label || s.Name + ' is a required field');
-			});
-			$scope.variantErrors = newErrors;
-		}
-		$scope.$watch('Variant.Specs', function(o, n){
-			validateVariant();
-		}, true);
-		function saveVariant(variant, saveNew, hideErrorAlert /*for compatibility*/) {
-			if($scope.variantErrors.length){
-				$scope.showVariantErrors = true;
-				if(!hideErrorAlert)
-					$window.alert("please fill in all required fields"); //the default spec form should be made to deal with showing $scope.variantErrors, but it's likely existing spec forms may not deal with $scope.variantErrors
-				return;
-			}
-			if(saveNew) $scope.Variant.InteropID = null;
-			Variant.save(variant, function(data){
-				if ($scope.isEditforApproval || $scope.EditingLineItem) {
-					if (saveNew) {
-						$location.path('/product/' + $scope.Product.InteropID + '/'+ data.InteropID + '/' + $scope.currentOrder.ID);
-					}
-					else {
-						$scope.currentOrder.LineItems[$scope.LineItemIndex].Variant = data;
-						Order.save($scope.currentOrder, function(o) {
-							$location.path('/cart/' + $scope.Product.InteropID + '/' + o.ID + '/' + $scope.LineItemIndex)
-						});
-					}
-				}
-				else {
-					$location.path('/product/' + $scope.Product.InteropID + '/'+ data.InteropID);
+		$scope.variantErrors = newErrors;
+	}
+	$scope.variantErrors = [];
+	$scope.PreviewVariant = {};
+	var varID = $routeParams.variantInteropID == 'new' ? null :  $routeParams.variantInteropID;
+	$scope.loadingImage = true;
+	ProductDisplayService.getProductAndVariant($routeParams.productInteropID, varID, function(data){
+		$scope.Product = data.product;
+		if (varID) {
+			$scope.Variant = data.variant;
+		} else {
+			$scope.Variant = {};
+			$scope.Variant.ProductInteropID = $scope.Product.InteropID;
+			$scope.Variant.Specs = {};
+			angular.forEach($scope.Product.Specs, function(item){
+				if(!item.CanSetForLineItem) {
+					$scope.Variant.Specs[item.Name] = item;
 				}
 			});
 		}
-
-		//accept variant from SpecFormPreview
-		$scope.save = function(hideErrorWindowAlert, previewvariant) {
-			var curVariant = {};
-			if(previewvariant){
-				curVariant = previewvariant.ExternalID ? previewvariant : $scope.Variant;
+		drawCustomForm('textbased', $scope);
+	});
+	function saveVariant(variant, saveNew, hideErrorAlert /*for compatibility*/) {
+		if ($scope.variantErrors.length) {
+			$scope.showVariantErrors = true;
+			if (!hideErrorAlert) {
+				$window.alert('please fill in all required fields');
 			}
-			else{
-				curVariant = $scope.Variant;
-			}
-			saveVariant(curVariant, false, hideErrorWindowAlert);
+			return;
 		}
-		//accept variant from SpecFormPreview
-		$scope.saveasnew = function(hideErrorAlert, previewvariant) {
-			var curVariant = {};
-			if(previewvariant){
-				curVariant = previewvariant.ExternalID ? previewvariant : $scope.Variant;
-			}
-			else{
-				curVariant = $scope.Variant;
-			}
-			saveVariant(curVariant, true, hideErrorAlert);
+		if (saveNew) {
+			$scope.Variant.InteropID = null;
 		}
-
-		$scope.$on('event:imageLoaded', function(event, result) {
-			$scope.loadingImage = !result;
-			$scope.$apply();
+		Variant.save(variant, function(data) {
+			$location.path('/product/' + $scope.Product.InteropID + '/'+ data.InteropID);
 		});
 	}
+	$scope.applyVariantToKitLineItem = function(variant) {
+		if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.Variant = variant;
+		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.Variant = variant;
+		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
+		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
+		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
+		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
+		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
+		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
+		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
+		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
+		}
+	}
+	$scope.saveVariantEdit = function() {
+		Variant.save($scope.Variant, function(variant) {
+			$scope.applyVariantToKitLineItem(variant, false);
+			Order.save($scope.currentOrder, function(order) {
+				$location.path('/kit/' + $routeParams.kitInteropID + '/' + $routeParams.cartLineItem);
+			});
+		});
+	}
+	$scope.saveasnew = function(hideErrorAlert, previewvariant) {
+		var curVariant = {};
+		if (previewvariant) {
+			curVariant = previewvariant.ExternalID ? previewvariant : $scope.Variant;
+		} else {
+			curVariant = $scope.Variant;
+		}
+		saveVariant(curVariant, true, hideErrorAlert);
+	}
+	$scope.uploadCustomPhoto = function(base64Image, filename, customFieldId, sourceType, sourceId, spec) {
+		$resource($451.api('uploadfile')).save({ Data: base64Image, Name: filename, ID: customFieldId, SourceType: sourceType, SourceID: sourceId }).$promise.then(function(u) {
+			$scope.Variant.Specs[spec].Value = u.ID;
+			setTimeout(function() { angular.element('#previewBtn').triggerHandler("click"); }, 500);
+		}).catch(function(ex) {
+
+			var error = ex.data.Message;
+			alert('File validation error: ' + ex.data.Message);
+		});
+	}
+	$scope.uploadDirectMailAddresses = function(base64Image, filename, customFieldId, sourceType, sourceId, spec) {
+		$resource($451.api('uploadfile')).save({ Data: base64Image, Name: filename, ID: customFieldId, SourceType: sourceType, SourceID: sourceId }).$promise.then(function(u) {
+			$scope.Variant.Specs[spec].Value = u.ID;
+		}).catch(function(ex) {
+			var error = ex.data.Message;
+			alert('File validation error: ' + ex.data.Message);
+		});
+	}
+	$scope.$on('event:imageLoaded', function(event, result) {
+		$scope.loadingImage = !result;
+		$scope.$apply();
+	});
 }]);
