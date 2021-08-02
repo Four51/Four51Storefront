@@ -67,7 +67,7 @@ function drawForm_textbased() {
 			<section id="customFormContent" class="specform-default">\
 				<div class="row">\
 					<div class="col-md-1"></div>\
-					<div id="specFormPreviewContainer" class="col-12 col-md-4" style="margin-top: 75px">\
+					<div id="specFormPreviewContainer" class="col-12 col-md-4" style="margin-top: 25px">\
 							<specformpreview style="position: relative" variant="Variant" product="Product" varianterrors="variantErrors" previewvariant="PreviewVariant"></specformpreview>\
 						</div>\
 						<div id="specFormContent" class="col-12 col-md-6" style="padding: 25px 15px 0px 15px;">\
