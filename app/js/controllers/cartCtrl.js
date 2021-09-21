@@ -132,12 +132,15 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 		});
 	};
 
-	$scope.$watch('currentOrder.LineItems', function(newval) {
+	$scope.$watch('currentOrder.LineItems', function (newval) {
 		var newTotal = 0;
+		var invalidKitFound = false;
 		if (!$scope.currentOrder) return newTotal;
-		angular.forEach($scope.currentOrder.LineItems, function(item){
-			if (item.IsKitParent)
+		angular.forEach($scope.currentOrder.LineItems, function (item) {
+			if (item.IsKitParent && !invalidKitFound) {
 				$scope.cart.$setValidity('kitValidation', !item.KitIsInvalid);
+				invalidKitFound = true;
+			}
 			newTotal += item.LineTotal;
 		});
 		$scope.currentOrder.Subtotal = newTotal;
