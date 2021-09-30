@@ -63,13 +63,13 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 			$scope.displayLoadingIndicator = true;
 			OrderConfig.address($scope.currentOrder, $scope.user);
 			Order.save($scope.currentOrder,
-				function(data) {
+				function (data) {
 					$scope.currentOrder = data;
 					$scope.displayLoadingIndicator = false;
 					if (callback) callback();
 					$scope.actionMessage = 'Your Changes Have Been Saved';
 				},
-				function(ex) {
+				function (ex) {
 					$scope.errorMessage = ex.Message;
 					$scope.displayLoadingIndicator = false;
 				}
@@ -105,24 +105,27 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 		if (!$scope.isEditforApproval)
 			OrderConfig.address($scope.currentOrder, $scope.user);
 		Order.save($scope.currentOrder,
-			function(data) {
+			function (data) {
 				$scope.currentOrder = data;
-                $location.path($scope.isEditforApproval ? 'checkout/' + $routeParams.id : 'checkout');
+				$location.path($scope.isEditforApproval ? 'checkout/' + $routeParams.id : 'checkout');
 				$scope.displayLoadingIndicator = false;
 			},
-			function(ex) {
+			function (ex) {
 				$scope.errorMessage = ex.Message;
 				$scope.displayLoadingIndicator = false;
 			}
 		);
 	};
 
-	$scope.$watch('currentOrder.LineItems', function(newval) {
+	$scope.$watch('currentOrder.LineItems', function (newval) {
 		var newTotal = 0;
+		var invalidKitFound = false;
 		if (!$scope.currentOrder) return newTotal;
-		angular.forEach($scope.currentOrder.LineItems, function(item){
-			if (item.IsKitParent)
+		angular.forEach($scope.currentOrder.LineItems, function (item) {
+			if (item.IsKitParent && !invalidKitFound) {
 				$scope.cart.$setValidity('kitValidation', !item.KitIsInvalid);
+				invalidKitFound = true;
+			}
 			newTotal += item.LineTotal;
 		});
 		$scope.currentOrder.Subtotal = newTotal;
