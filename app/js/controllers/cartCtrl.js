@@ -53,6 +53,16 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 		}
 	};
 
+	var cleanDate = function(callback){
+		angular.forEach($scope.currentOrder.LineItems, function(li){
+			if(li.DateNeeded){
+			    var newDate = new Date(li.DateNeeded);
+				li.DateNeeded = newDate.toDateString();
+			}
+		});
+		if (callback) callback();
+	}
+
 	$scope.saveChanges = function(callback) {
 		$scope.actionMessage = null;
 		$scope.errorMessage = null;
@@ -62,18 +72,20 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 		else {
 			$scope.displayLoadingIndicator = true;
 			OrderConfig.address($scope.currentOrder, $scope.user);
-			Order.save($scope.currentOrder,
-				function (data) {
-					$scope.currentOrder = data;
-					$scope.displayLoadingIndicator = false;
-					if (callback) callback();
-					$scope.actionMessage = 'Your Changes Have Been Saved';
-				},
-				function (ex) {
-					$scope.errorMessage = ex.Message;
-					$scope.displayLoadingIndicator = false;
-				}
-			);
+			cleanDate(function(){
+				Order.save($scope.currentOrder,
+					function (data) {
+						$scope.currentOrder = data;
+						$scope.displayLoadingIndicator = false;
+						if (callback) callback();
+						$scope.actionMessage = 'Your Changes Have Been Saved';
+					},
+					function (ex) {
+						$scope.errorMessage = ex.Message;
+						$scope.displayLoadingIndicator = false;
+					}
+				);
+			});
 		}
 	};
 
@@ -104,17 +116,19 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 		$scope.displayLoadingIndicator = true;
 		if (!$scope.isEditforApproval)
 			OrderConfig.address($scope.currentOrder, $scope.user);
-		Order.save($scope.currentOrder,
-			function (data) {
-				$scope.currentOrder = data;
-				$location.path($scope.isEditforApproval ? 'checkout/' + $routeParams.id : 'checkout');
-				$scope.displayLoadingIndicator = false;
-			},
-			function (ex) {
-				$scope.errorMessage = ex.Message;
-				$scope.displayLoadingIndicator = false;
-			}
-		);
+		cleanDate(function(){
+			Order.save($scope.currentOrder,
+				function (data) {
+					$scope.currentOrder = data;
+					$location.path($scope.isEditforApproval ? 'checkout/' + $routeParams.id : 'checkout');
+					$scope.displayLoadingIndicator = false;
+				},
+				function (ex) {
+					$scope.errorMessage = ex.Message;
+					$scope.displayLoadingIndicator = false;
+				}
+			);
+		});
 	};
 
 	$scope.$watch('currentOrder.LineItems', function (newval) {
