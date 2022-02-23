@@ -8,7 +8,7 @@
 		<div class="panel panel-default" style="margin-top: 35px">
 			<div class="panel-body">
 				<loadingindicator ng-show="loadingImage && LineItem.Variant.IsMpowerVariant" />
-				<figure>
+				<figure style="display:flex; justify-content: center;">
 					<img id="451_img_prod_lg" class="img-responsive" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}" imageonload />
 				</figure>
 				<div class="empty" ng-hide="LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl">
@@ -31,7 +31,7 @@
 	<div class="col-md-7 col-md-offset-1 col-collapse" style="margin-top: 15px; margin-bottom: 60px;">
 		<!-- PRODUCT DESCRIPTION PANEL! -->
 		<div>
-			<div class="panel panel-primary">
+			<div class="panel panel-primary" style="margin-top:75px;">
 				<div class="panel-heading">
 					<h3 style="font-size: 20px" class="panel-title panel-primary">
 						 {{LineItem.Product.ExternalID}}

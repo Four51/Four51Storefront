@@ -1,3 +1,4 @@
+var angScope = "";
 four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$451', 'Order', 'OrderConfig', 'User',
 function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 	$scope.isEditforApproval = $routeParams.id != null && $scope.user.Permissions.contains('EditApprovalOrder');
@@ -21,6 +22,21 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 	}
 
 	$scope.currentDate = new Date();
+	function deliveryDate() {
+		var today = $scope.currentDate;
+		const numToAdd = 5;
+			for (let i = 1; i <= numToAdd; i++) {
+			if (today.getDay() === 6) {
+				today.setDate(today.getDate() + 2);
+			}
+			else if (today.getDay() === 0) {
+				today.setDate(currentDate.getDate() + 1);
+			}
+			return today;
+		}
+	}
+	deliveryDate();
+
 	$scope.errorMessage = null;
 	$scope.continueShopping = function() {
 		if (!$scope.cart.$invalid) {
@@ -169,4 +185,5 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
     $scope.downloadProof = function(item) {
         window.location = item.Variant.ProofUrl;
     };
+	angScope = $scope;
 }]);

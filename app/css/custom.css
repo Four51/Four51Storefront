@@ -36,6 +36,6 @@ Template: Howdy
 	margin-left: 4%;
 }
 #productGrid img {
-	width: 150px;
-	height: 150px;
+	width: 100px;
+	height: auto;
 }
