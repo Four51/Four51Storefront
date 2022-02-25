@@ -1,5 +1,23 @@
 var hasLogoSelection = false;
 
+function getMasterFileNameSpace() {
+	try {
+		return angScope.Product.StaticSpecGroups['01-MasterFile'].Specs.JsonUsed.Value;
+	} catch (err) {
+		return '';
+	}
+}
+
+function getMasterFileVariable(variableName) {
+	var namespace = getMasterFileNameSpace();
+
+	if (namespace.length > 0) {
+		return window[namespace][variableName];
+	} else {
+		return window[variableName];
+	}
+}
+
 function drawForm_textbased() {
 	var template = {};
 
@@ -63,6 +81,8 @@ function drawForm_textbased() {
 	function renderSpecFormContent() {
 		// Prepare spec data
 		var content = '';
+		var logoOptions = getMasterFileVariable('logoOptions');
+
 		for (var y in angScope.Product.Specs) {
 			if (y === 'LogoSelection') {
 				hasLogoSelection = true;
@@ -142,10 +162,12 @@ function drawForm_textbased() {
 				//need to update the Product.Spec and the Variant.Spec, however, dont understand why
 				if (spec.Name !== 'LogoSelection' && spec.Name.startsWith('v99') === false) {
 					var specVarName = y + 'SpecOptions';
-					var varspecVarName = y + 'SpecOptions';
+					var masterfileVar = getMasterFileVariable(specVarName);
 
-					if (window[specVarName] !== undefined && window[specVarName][$logoValue] !== undefined)	spec.Value = window[specVarName][$logoValue];
-					if (window[varspecVarName] !== undefined && window[varspecVarName][$logoValue] !== undefined)	varspec.Value = window[varspecVarName][$logoValue];
+					if (masterfileVar !== undefined && masterfileVar[$logoValue] !== undefined) {
+						spec.Value = masterfileVar[$logoValue];
+						if (varspec !== undefined) varspec.Value = masterfileVar[$logoValue];
+					}
 				}
 			}
 
