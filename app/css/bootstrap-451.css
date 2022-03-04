@@ -3519,6 +3519,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   line-height: 1.42857143;
   border: 1px solid transparent;
   border-radius: 4px 4px 0 0;
+  padding: 0;
+}
+.nav-tabs > li > a > tab-heading {
+  display: block;
+padding: 20px 15px;
 }
 .nav-tabs > li > a:hover {
   border-color: #eeeeee #eeeeee #dddddd;
