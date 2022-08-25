@@ -1,11 +1,9 @@
-/*
-Static file for Theme changes
-Theme name: My SPA Theme
-Version: 1.0
-Template: Howdy
-*/
+a:hover {
+	text-decoration: none;
+}
+
 .categoryItem {
-	background: linear-gradient(rgb(114, 165, 177) 0%, rgb(26, 106, 122) 100%);
+	background: linear-gradient(rgb(78, 138, 187) 20%, rgb(0, 70, 132) 100%);
 	min-height: 50px;
 	padding: 20px;
 	color: #fff;
@@ -33,9 +31,86 @@ Template: Howdy
 	margin: 0 auto;
 	padding-top: 15px;
 	grid-gap: 2vw 2vw;
-	margin-left: 4%;
+	justify-content: center;
 }
 #productGrid img {
-	width: 100px;
+	width: 150px;
 	height: auto;
 }
+
+/* font override */
+body, span, div, h1, h2, h3, h4, h5, h6, a, b, i, small {
+	font-family: "HelveticaNeue", helvetica, arial, sans-serif;
+	font-weight: 400;
+}
+
+.navbar-default {
+	background-color: #004684;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: #ffffff !important;
+	background-color: #004684;
+}
+.navbar .container .navbar-nav.pull-left li.fadeInLeft a i, .navbar .container-view .navbar-nav.pull-left li.fadeInLeft a i {
+	color: #ffffff;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus,
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+	color: #ffffff;
+	background-color: #5bad47;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>li>a:hover {
+	color: #ffffff;
+	background-color: #4e8abb;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-mega .dropdown-menu > li > a:hover, .dropdown-mega .dropdown-menu > li > a:focus {
+	text-decoration: none;
+	color: #ffffff;
+	background-color: #4e8abb;
+}
+
+.text-info {
+	color: #004684;
+}
+.jumbotron {
+	text-align: center;
+}
+.banner {
+	background: #ffffff;
+}
+
+.btn-default {
+	color: #ffffff;
+	background-color: #4e8abb;
+	border-color: #004684;
+}
+.panel-primary>.panel-heading {
+	background-color: #f5f5f5;
+	border: solid 1px #dddddd;
+	color: #333333;
+}
+.panel .panel-heading .panel-title {
+	font-size: 18px;
+}
+
+@media (max-width:767px) {
+	#productGrid, .catList {
+		display: flex;
+		flex-direction: column;
+	}
+
+}
+
+/******* dev code, remove before launching *******/
+/*
+div {
+	outline: 1px dashed magenta;
+} */
+

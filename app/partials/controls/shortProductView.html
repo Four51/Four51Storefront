@@ -4,11 +4,15 @@
             <figure ng-show="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl" >
                 <img ng-src="{{LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl}}"/>
             </figure>
+            <div style="display: flex; justify-content: center;">
+                <div style="width: 100px; height: 20px; background: #515151; color: #fff;" ng-show="product.Type == 'VariableText'"><i class="fa fa-gear"></i> Customize</div>
+                <div style="width: 100px; height: 20px; background: #515151; color: #fff;" ng-show="product.Type == 'Static'"><i class="fa fa-shopping-cart"></i> Order</div>
+            </div>
             <div class="empty" ng-hide="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl">
                 <span class="fa empty"><i class="fa fa-camera"></i></span>
             </div>
             <div class="btn btn-default">
-                {{('View' | r) + ' ' + ('Product' | r) | xlat}}
+                {{('Order' | r) | xlat}}
             </div>
         </a>
     </div>

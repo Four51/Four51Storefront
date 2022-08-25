@@ -27,7 +27,6 @@ function specformpreview() {
 				'.btn-sfp{float:none !important;}',
 				'.panel-sfp{background-color: #c0c0c0;padding: 20px;}',
 			'</style>',
-			'<button id="uglyBackButton" onclick="window.history.back()" class="btn btn-default btn-md"><i class="fa fa-undo"></i> Go Back</button>',
 			'<div class="panel panel-default panel-sfp">',
 				'<loadingindicator ng-show="loadingImage" />',
 				'<figure>',

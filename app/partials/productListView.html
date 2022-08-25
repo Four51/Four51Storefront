@@ -25,9 +25,13 @@
 			</div>
 			<div ng-show="displayMode == 'grid'"id="productGrid">
 				<a ng-href="product/{{ product.InteropID }}" style="text-align: center" ng-repeat="product in products | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize | orderBy:sorter:direction">
-					<figure ng-show="product.SmallImageUrl" style="text-align: center">
-						<img style="display: inline" ng-src="{{ product.SmallImageUrl }}" />
+					<figure ng-show="product.LargeImageUrl" style="text-align: center">
+						<img style="display: inline" ng-src="{{ product.LargeImageUrl }}" />
 					</figure>
+					<div style="display: flex; justify-content: center;">
+						<div style="width: 150px; height: 20px; background: #4e8abb; color: #fff;" ng-show="product.Type == 'VariableText'"><i class="fa fa-gear"></i> Customize</div>
+						<div style="width: 150px; height: 20px; background: #4e8abb; color: #fff;" ng-show="product.Type == 'Static'"><i class="fa fa-shopping-cart"></i> Order</div>
+					</div>
 					<strong>{{ product.Name }}</strong>
 					<br>
 					<small>{{ product.ExternalID }}</small>

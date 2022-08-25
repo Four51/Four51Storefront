@@ -2,9 +2,6 @@
 	<loadingindicator ng-show="loadingIndicator" title="{{'Please wait while we fetch product information' | r | xlat}}" />
 	<!-- PRODUCT IMAGE PANEL!-->
 	<div class="col-md-4 col-collapse" style="margin-top: 15px">
-		<div style="position: relative; left: 40px; top: 25px;" id="uglyBackButtonStaticContainer">
-			<button id="uglyBackButton" onclick="window.history.back()" class="btn btn-default btn-md"><i class="fa fa-undo"></i> Go Back</button>
-		</div>
 		<div class="panel panel-default" style="margin-top: 35px">
 			<div class="panel-body">
 				<loadingindicator ng-show="loadingImage && LineItem.Variant.IsMpowerVariant" />
