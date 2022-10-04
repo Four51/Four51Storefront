@@ -38,6 +38,10 @@ a:hover {
 	height: auto;
 }
 
+.no-padding {
+	padding: 0 !important;
+}
+
 /* font override */
 body, span, div, h1, h2, h3, h4, h5, h6, a, b, i, small {
 	font-family: "HelveticaNeue", helvetica, arial, sans-serif;

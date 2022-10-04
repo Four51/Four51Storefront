@@ -1,17 +1,6 @@
 
 <header class="header navbar navbar-inner">
     <nav tolerance='20' offset='200' class="navbar navbar-default navbar-fixed-top" role="navigation" headroom>
-            <section class="banner" ng-class="{'active': isActive('catalog')}" ng-show="user.Company.LogoUrl" style="padding-left: 25px">
-                <div class="container">
-                    <h2 class="thumbnail" ng-show="Four51User.isAuthenticated()" style="padding: 0px">
-                        <a href="catalog">
-                            <img src="img/scion-logo-300.jpeg" alt="Kindred Healthcare" />
-                        </a>
-                    </h2>
-                </div>
-            </section>
-
-
             <section>
             <div class="container">
                 <ul class="nav navbar-nav pull-left">
@@ -108,13 +97,5 @@
                 </ul>
             </div>
         </section>
-    </nav>
-    <nav class="dropdown-mega">
-        <a class="dropdown-toggle text-center" data-toggle="dropdown">
-            <i class="fa fa-angle-down text-primary"></i>
-        </a>
-        <ul class="451qa_topnav dropdown-menu" >
-            <categorytree tree='tree' current='currentCategory' />
-        </ul>
     </nav>
 </header>
