@@ -27,7 +27,7 @@
 			<div class="col-sm-6 view-form-icon">
 				<div>
 					<label ng-show="address.CompanyName">{{('Company' | r) + ' ' + ('Name' | r) | xlat}}</label>
-					<input name="companyname" class="form-control" type="text" ng-model="address.CompanyName" autocomplete="off" placeholder="{{('Company' | r) + ' ' + ('Name' | r) | xlat}}" ng-disabled="address.IsCustEditable == false" />
+					<input name="companyname" class="form-control" type="text" ng-model="address.CompanyName" autocomplete="off" placeholder="{{('Facility/Location' | r) + ' ' + ('Name' | r) | xlat}}" ng-disabled="address.IsCustEditable == false" />
 					<i class="fa fa-user"></i>
 				</div>
 			</div>
@@ -119,10 +119,9 @@
 		</p>
 		<div class="panel-footer">
 			<span class="alert alert-warning" ng-show="objectExists">{{'An address with that name already exists. Please specify another name' | r | xlat}}</span><br />
-				<div>
-					<label ng-class="{'required': address.IsCustEditable != false}">Please give this address a name</label>
+				<div style="margin-bottom: 3vh;">
+					<label ng-class="{'required': address.IsCustEditable != false}">Please give this address a name for your address book</label>
 					<input name="addressname" class="form-control" type="text" ng-model="address.AddressName" placeholder="{{('Address' | r) + ' ' + ('Name' | r) | xlat}}" autocomplete="off" ng-required="address.IsCustEditable != false" ng-disabled="address.IsCustEditable == false" />
-					<i class="fa fa-edit"></i>
 				</div>
 
 

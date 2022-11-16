@@ -1,10 +1,9 @@
 <div class="login">
-    <div class="order-cloud-image" style="background: url('css/images/orderCloud.jpg') center center fixed;"></div>
     <section class="order-cloud">
         <div id="login_box">
             <div id="login_form" class="animated bounceIn">
                 <form class="form-signin" ng-submit="login()" name="login_form">
-                    <h2 class="animated fadeIn text-center">{{'Four51 Storefront 2.0' | r}}</h2>
+                    <h2 class="animated fadeIn text-center">Welcome to <br>Creative House</h2>
                     <p id="451qa_msg_login" ng-show="loginMessage" ng-bind-html="loginMessage" class="alert alert-info"></p>
                     <div>
                         <div class="view-form-icon" ng-show="!showEmailHelp && !PasswordReset && (loginMessage != 'Your password has expired and will need to be changed.')">
@@ -46,9 +45,6 @@
                             <p class="alert alert-info" ng-show="showEmailHelp && (!EmailNotFoundException || !PasswordSecurityException)">
                                 If you would like to be reminded of your {{'Username' | r}} or have the option to reset your {{'Password' | r}}, please provide your email address and your log on information will be emailed to you immediately.
                             </p>
-                            <btn class="btn btn-info btn-block" ng-show="!showEmailHelp && !PasswordReset && !EmailNotFoundException && !PasswordSecurityException" ng-click="showEmailHelp = !showEmailHelp; buttonText = 'Submit'">
-                                Need help logging on?
-                            </btn>
                             <div class="view-form-icon" ng-show="showEmailHelp">
                                 <div>
                                     <label ng-show="credentials.Email">{{'Email' | r}}</label>
@@ -96,6 +92,9 @@
                             </div>
                         </div>
                         <input ng-disabled="login_form.$invalid" class="btn btn-large btn-primary btn-block" id="451_btn_login" type="submit" value="{{buttonText}}" />
+                        <div class="login-help"><a ng-show="!showEmailHelp && !PasswordReset && !EmailNotFoundException && !PasswordSecurityException" ng-click="showEmailHelp = !showEmailHelp; buttonText ='Submit'">
+                            Need help logging on?
+                        </a></div>
                     </div>
                 </form>
             </div>

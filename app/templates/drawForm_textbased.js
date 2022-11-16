@@ -98,7 +98,8 @@ function drawForm_textbased() {
 					if (spec.Name.startsWith('v99')) {
 						//special case spec for group names
 						content += '<div style="margin-top: 10px; font-weight: bold;"><label>' + spec.Label + '</label><hr style="border-bottom: 1px solid #333333" /></div>';
-					} else {
+					}
+					else {
 						var labelText = spec.Label;
 
 						//the initial label value may contain additional meta data to hide or make readonly so we need to strip that info out

@@ -95,6 +95,27 @@ body, span, div, h1, h2, h3, h4, h5, h6, a, b, i, small {
 	background-color: #4e8abb;
 	border-color: #004684;
 }
+
+.btn-primary {
+	background-color: #004684;
+	border: 1px solid #cccccc;
+}
+
+.btn-primary:hover {
+	border: 1px solid #050505;
+	background-color: #004684 !important;
+}
+
+.btn-info {
+	background-color: #4e8abb;
+	border-color: #4e8abb;
+}
+
+.btn-info:hover {
+	background-color: #1c678b;
+	border-color: #1c678b;
+}
+
 .panel-primary>.panel-heading {
 	background-color: #f5f5f5;
 	border: solid 1px #dddddd;
@@ -102,6 +123,37 @@ body, span, div, h1, h2, h3, h4, h5, h6, a, b, i, small {
 }
 .panel .panel-heading .panel-title {
 	font-size: 18px;
+}
+
+.order-cloud .form-signin {
+	max-width: 26em;
+	padding: 1em 1em 2em;
+	margin: 2em auto;
+	background: rgba(49, 62, 70, 0.9);
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-o-border-radius: 6px;
+	-ms-border-radius: 6px;
+	border-radius: 6px;
+	box-shadow: 1px 1px 1px rgba(216, 241, 251, 0.15);
+}
+
+.navbar .container .navbar-nav li.active .fa-caret-down, .navbar .container-view .navbar-nav li.active .fa-caret-down {
+	position: absolute;
+	bottom: -20px;
+	left: 40%;
+	font-size: 32px;
+	color: #5bad47;
+	z-index: 5;
+	display: block;
+}
+
+.login-help {
+	text-align: right;
+}
+
+.login-help a {
+	color: #ffffff;
 }
 
 @media (max-width:767px) {

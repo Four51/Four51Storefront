@@ -21,21 +21,30 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 		});
 	}
 
-	$scope.currentDate = new Date();
-	function deliveryDate() {
-		var today = $scope.currentDate;
-		const numToAdd = 5;
-			for (let i = 1; i <= numToAdd; i++) {
-			if (today.getDay() === 6) {
-				today.setDate(today.getDate() + 2);
-			}
-			else if (today.getDay() === 0) {
-				today.setDate(currentDate.getDate() + 1);
-			}
-			return today;
+	$scope.getDateNeeded = function() {
+		var days = 5; // Number of business days to add to today
+		var today = new Date();
+		var dayOfWeek = today.getDay();
+		var daysToAdd = parseInt(days);
+		if (dayOfWeek === 0) {
+			daysToAdd++;
 		}
+		if (dayOfWeek + daysToAdd >= 6) {
+			var remainingWorkDays = daysToAdd - (5 - dayOfWeek);
+			daysToAdd += 2;
+			if (remainingWorkDays > 5) {
+				daysToAdd += 2 * Math.floor(remainingWorkDays / 5);
+				if (remainingWorkDays % 5 === 0) {
+					daysToAdd -= 2;
+				}
+			}
+		}
+		today.setDate(today.getDate() + daysToAdd);
+		return today;
 	}
-	deliveryDate();
+
+	var dateNeeded = $scope.getDateNeeded();
+	$scope.shipDate =  (dateNeeded.getMonth() + 1) + '/' + dateNeeded.getDate() + '/' + dateNeeded.getFullYear();
 
 	$scope.errorMessage = null;
 	$scope.continueShopping = function() {

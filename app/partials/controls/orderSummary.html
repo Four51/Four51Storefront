@@ -5,6 +5,9 @@
         </h3>
     </div>
     <div class="panel-body">
+        <div class="alert alert-danger">
+            Dear Valued Customer: Due to the automated nature of eCommerce, Print on Demand orders cannot be cancelled beyond two hours of an order being placed. For help with your order please contact orders@vividimpact.com
+        </div>
         <loadingindicator ng-show="couponLoadingIndicator" title="{{'Please wait while we verify and apply your promotion code' | r | xlat}}" />
         <loadingindicator ng-show="couponRemoveIndicator" title="{{'Please wait while we remove your promotion code' | r | xlat}}" />
         <orderconfirmationmessage />
@@ -63,8 +66,5 @@
                 <span class="help-block text-left"><small>{{'Send a copy of the order details to above email address.' | r | xlat}}</small></span>
             </div>
         </div>
-        <button class="btn btn-default" redirect="/security">
-            <span class="fa fa-info-circle"></span> {{'Concerned About Security?' | r | xlat}}
-        </button>
     </div>
 </div>

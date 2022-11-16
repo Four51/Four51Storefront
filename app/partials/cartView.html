@@ -144,9 +144,6 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<span class="btn btn-group" ng-if="item.Variant.IsMpowerVariant">
-									<button type="button" title="{{'Download' | r | xlat}}" class="btn btn-primary" ng-click="downloadProof(item)">
-										<span><i class="fa fa-download"></i> {{'Download' | r | xlat}}</span>
-									</button>
 									<button type="button" class="btn btn-default" ng-if="item.SpecsLength > 0" ng-click="item.toggleSpecs = !item.toggleSpecs">
 										<span ng-show="!item.toggleSpecs"><i class="fa fa-plus-circle"></i> {{('Show' | r) + ' ' + ('Specification' | r) | xlat}}</span>
 										<span ng-show="item.toggleSpecs"><i class="fa fa-minus-circle"></i> {{('Hide' | r) + ' ' + ('Specification' | r) | xlat}}</span>
@@ -179,6 +176,7 @@
 							<p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
 								<span class="text-info">{{'Shipping, handling and tax may be added to this subtotal.' | r | xlat}}</span>
 							</p>
+							<p>Note: This order will ship on {{ shipDate }}</p>
 							<button type="button" neworder ng-if="user.Permissions.contains('MultipleShoppingCart') && currentOrder" class="btn btn-default" ng-click="newOrderLoadingIndicator = true;startNewOrder()">
 								<loadingindicator  ng-show="newOrderLoadingIndicator" />
 								<small>{{"Start" | r | xlat}} {{"New" | r | xlat}} {{"Order" | r | xlat}}</small>
