@@ -26,7 +26,7 @@ $(document).on('click', '#needHelp', function() {
 					10116 Bunsen Way<br>\
 					Louisville, KY 40299<br>\
 					United States<br>\
-					502-263-9746<br>\
+					502-495-6900<br>\
 					orders@vividimpact.com<br>\
 				</div>\
 			</div>\
