@@ -4,7 +4,7 @@ function ($scope, $sce, $route, $location, User) {
 	var codes = ['PasswordSecurityException'];
 
 	$scope.loginMessage = null;
-	$scope.buttonText = $scope.PasswordReset ? 'Reset Password' : "Logon";
+	$scope.buttonText = $scope.PasswordReset ? 'Reset Password' : "Log In";
 	$scope.$on('event:auth-loginFailed', function(event, message) {
 		$scope.loginMessage = message;
 	});
@@ -25,7 +25,7 @@ function ($scope, $sce, $route, $location, User) {
 			function(user) {
 				delete $scope.PasswordReset;
 				delete $scope.credentials;
-                $scope.buttonText = "Logon";
+                $scope.buttonText = "Log In";
 				$location.path('catalog');
 			},
 			function(ex) {

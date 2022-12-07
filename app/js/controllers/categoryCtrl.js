@@ -12,6 +12,9 @@ function ($routeParams, $sce, $scope, $451, Category, Product, Nav) {
 		if(d) return $sce.trustAsHtml(d);
 	}
 
+	$scope.isLifepoint = $scope.user.Groups[0].Name === 'Lifepoint';
+	$scope.isScion = $scope.user.Groups[0].Name === 'Scion Hospitals';
+
 	function _search() {
 		$scope.searchLoading = true;
 		Product.search($routeParams.categoryInteropID, null, null, function (products, count) {
