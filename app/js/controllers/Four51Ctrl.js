@@ -43,7 +43,8 @@ function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, C
 				if (user.Company.GoogleAnalyticsCode) {
 					GoogleAnalytics.analyticsLogin(user.Company.GoogleAnalyticsCode);
 				}
-
+				$scope.isLifepoint = $scope.user.Groups[0].Name === 'Lifepoint';
+				$scope.isScion = $scope.user.Groups[0].Name === 'Scion Hospitals';
 			});
 			Category.tree(function (data) {
 				$scope.tree = data;

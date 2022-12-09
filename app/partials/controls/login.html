@@ -107,11 +107,14 @@
                 </form>
             </div>
         </div>
-        <div id="account_request" style="display: none;" class="animated bounceIn">
-            <div style="display: grid; justify-content: center; padding-top: 3rem;">
-                <a class="btn btn-primary backbtn" style="width: 100px; margin-bottom: 10px;"><i class="fa fa-arrow-circle-left"></i> Go Back</a>
-                <iframe width="364" height="540" scrolling="no" src="https://app.smartsheet.com/b/form/80cf9ecf5e2e436499f0ba1098c2636b" style="border-width: 0; border-radius: 6px; background: #b4b2b2;"></iframe>
-            </div>
+        <div id="req-wrapper" style="display: flex; justify-content: center; padding-top: 3rem;">
+            <div id="account_request" style="display: none;" class="animated bounceIn">
+                <a class="btn btn-primary backbtn" style="margin-bottom: 10px;"><i class="fa fa-arrow-circle-left"></i> Return to Login</a>
+                <div class="alert alert-info">Please enter the information below to request an account. Your request will be reviewed within 48 business hours. You will receive an email with login instructions upon approval.</div>
+                <div style="display: flex; justify-content: center; padding-top: 3rem;">
+                    <iframe width="364" height="620" src="https://app.smartsheet.com/b/form/80cf9ecf5e2e436499f0ba1098c2636b" style="border-width: 0; border-radius: 6px; background: #b4b2b2;"></iframe>
+                </div>
+        </div>
         </div>
     </section>
 </div>
