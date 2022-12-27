@@ -32,10 +32,11 @@
 			<div class="panel panel-primary" style="margin-top:75px;">
 				<div class="panel-heading">
 					<h3 style="font-size: 20px" class="panel-title panel-primary">
-						 {{LineItem.Product.ExternalID}}
+						 {{LineItem.Product.Name}}
 					</h3>
 				</div>
 				<div class="panel-body" id="451_area_prod_desc">
+					{{LineItem.Product.ExternalID}}<br>
 					<p id="451qa_prod_desc" ng-bind-html="trustedDescription(LineItem.Product)" />
 					<p ng-show="LineItem.Variant.Description" ng-bind-html="trustedDescription(LineItem.Variant)" />
 				</div>
