@@ -2,7 +2,6 @@ var angScope;
 
 four51.app.controller('ProductCtrl', ['$scope', '$routeParams', '$route', '$location', '$451', 'Product', 'ProductDisplayService', 'Order', 'Variant', 'User',
 function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplayService, Order, Variant, User) {
-	angScope = $scope;
 
 	$scope.isEditforApproval = $routeParams.orderID && $scope.user.Permissions.contains('EditApprovalOrder');
 	if ($scope.isEditforApproval) {
@@ -186,4 +185,5 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 		$scope.loadingImage = false;
 		$scope.$apply();
 	});
+	angScope = $scope;
 }]);

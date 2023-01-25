@@ -1,6 +1,6 @@
 <section class="product-detail-default" style="margin-top: -30px">
 	<loadingindicator ng-show="loadingIndicator" title="{{'Please wait while we fetch product information' | r | xlat}}" />
-	<div class="alert alert-danger">Please review your final product carefully for errors. Note: The pink lines will not print – these lines indicate the customizable areas only. ONCE YOU HAVE REVIEWED YOUR PROOF AND CLICK ADD TO ORDER, this is your signature approving the proof as you have submitted it. ALL ORDERS ARE FINAL.</div>
+	<div class="alert alert-danger" ng-if="LineItem.Product.Type === 'VariableText'">Please review your final product carefully for errors. Note: The pink lines will not print – these lines indicate the customizable areas only. ONCE YOU HAVE REVIEWED YOUR PROOF AND CLICK ADD TO ORDER, this is your signature approving the proof as you have submitted it. ALL ORDERS ARE FINAL.</div>
 	<!-- PRODUCT IMAGE PANEL!-->
 	<div class="col-md-4 col-collapse" style="margin-top: 15px">
 		<div class="panel panel-default" style="margin-top: 35px">

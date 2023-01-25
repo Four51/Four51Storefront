@@ -78,6 +78,38 @@
 										</div>
 									</div>
 								</div>
+
+								<div id="costCenterRow" class="row">
+									<div class="col-sm-2 col-xs-12">
+										<label style="font-size: 12px" class="required">Facility #</label>
+										<input ng-disabled="item.lockFacilityNumber" ng-model="item.facilityNumber" class="form-control facilityNumber"  type='text' required placeholder="####" maxlength="4" value="{{ item.facilityNumber }}" />
+									</div>
+									<div class="col-sm-1 col-xs-12">
+										<label style="font-size: 12px" class="required">Dept #</label>
+										<input ng-model="item.dept" class="form-control deptNumber"  type='text' required placeholder="###" maxlength="3" value="{{ item.dept }}" />
+									</div>
+									<div class="col-sm-3 col-xs-12">
+										<label style="font-size: 12px" for="glCode" class="required">GL Code</label>
+										<select ng-change="glCodeChanged(item)" ng-model="item.glCode" class="form-control glCode" ng-disabled="item.Product.StaticSpecGroups['Product_Type']['Specs']['Product Type'].Value == 'Covid_PPE'">
+											<option ng-selected="'79016 - Marketing' == item.glCode" value="79016" text="79016 - Marketing">79016 - Marketing</option>
+											<option ng-selected="'72070 - Office Supplies' == item.glCode" value="72070" text="72070 - Office Supplies">72070 - Office Supplies</option>
+											<option ng-selected="'72090 - Other Supplies' == item.glCode" value="72090" text="72090 - Other Supplies">72090 - Other Supplies</option>
+											<option ng-selected="'79014 - Public Relations' == item.glCode" value="79014" text="79014 - Public Relations">79014 - Public Relations</option>
+											<option ng-selected="'79015 - Employee Relations' == item.glCode" value="79015" text="79015 - Employee Relations">79015 - Employee Relations</option>
+											<option ng-selected="'79016 - Marketing' == item.glCode" value="79016" text="79016 - Marketing">79016 - Marketing</option>
+											<option ng-selected="'Other' == item.glCode" id="otherGL" value="Other" text="Other">Other...</option>
+										</select>
+									</div>
+									<div class="col-sm-3 col-xs-12" ng-show="item.showOther">
+										<label for="otherText" class="required">Other</label>
+										<input ng-model="item.otherText" class="form-control otherText"  type='text' value="{{ item.otherText }}" />
+									</div>
+									<div class="col-sm-2 col-xs-12">
+										<label for="copyToAll">&nbsp;</label>
+										<button ng-click="copyToAll(item)" class="btn btn-info form-control" type="button"><i class="fa fa-copy"></i> Copy to all</button>
+									</div>
+								</div>
+
 								<div class="row" ng-if="(user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')) || user.Permissions.contains('CostCenterPerLine')">
 									<div class="col-xs-12 col-sm-3" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
 										<div class="row view-form-icon">
