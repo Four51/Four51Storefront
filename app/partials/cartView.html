@@ -137,39 +137,6 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-xs-12 col-sm-9">
-										<div class="row view-form-icon">
-												<div class="col-xs-3">
-													<label class="required">{{'Facility' | r | xlat}}</label>
-													<input name="facility" ng-model="item.Facility" class="form-control" type='text' required placeholder="{{'####' | r | xlat}}" />
-													<button type="button" title="{{'copy to all' | r | xlat}}" class="btn btn-default pull-right" value="{{'copy to all' | r | xlat}}" ng-click="copyFacilityToAll()" ng-show="item.Facility" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
-														<span class="fa fa-copy text-info"></span>
-													</button>
-												</div>
-											<div class="col-xs-3">
-												<label class="required">{{'Department' | r | xlat}}</label>
-												<input name="department" ng-model="item.Department" class="form-control" type='text' required placeholder="{{'###' | r | xlat}}" />
-												<button type="button" title="{{'copy to all' | r | xlat}}" class="btn btn-default pull-right" value="{{'copy to all' | r | xlat}}" ng-click="copyDepartmentToAll()" ng-show="item.Department" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
-													<span class="fa fa-copy text-info"></span>
-												</button>
-											</div>
-											<div class="col-xs-3">
-												<label class="required">{{'GL Code' | r | xlat}}</label>
-												<select name="glcode" class="form-control" style="padding-left: 25px;" required
-													ng-options="center.Name as center.Name for center in user.GLCodes">
-													<option value="72070">72070 - Office Supplies</option>
-													<option value="72090">72090 - Other Supplies</option>
-													<option value="79014">79014 - Public Relations</option>
-													<option value="79015">79015 - Employee Relations</option>
-													<option value="79016">79016 - Marketing</option>
-												</select>
-												<i ng-if="user.GLCode.length > 1" class="fa fa-money"></i>
-												<button type="button" title="{{'copy to all' | r | xlat}}" class="btn btn-default pull-right" value="{{'copy to all' | r | xlat}}" ng-click="copyGLCodeToAll()" ng-show="item.GLCode" ng-if="$index == 0 && currentOrder.LineItems.length > 1">
-													<span class="fa fa-copy text-info"></span>
-												</button>
-											</div>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>
