@@ -78,3 +78,25 @@ four51.app.filter('paginate', function() {
 		return input.slice(start);
 	}
 });
+
+four51.app.filter('sampleProducts', function() {
+	return function(product) {
+		var output = [];
+		angular.forEach(product, function(p) {
+			if (p.Name.startsWith('Sample'))
+				output.push(p);
+		});
+		return output;
+	}
+});
+
+four51.app.filter('regularProducts', function() {
+	return function(product) {
+		var output = [];
+		angular.forEach(product, function(p) {
+			if (!p.Name.startsWith('Sample'))
+				output.push(p);
+		});
+		return output;
+	}
+});

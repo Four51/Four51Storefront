@@ -85,6 +85,28 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="dropdown admin-user visible-md visible-lg" ng-class="{'active': isActive(['guide', 'contact'])}">
+                        <a id="451qa_help_link2" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-question-circle"></i>
+                            <span class="hidden-xs">{{'Help' | r | xlat}}</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li id="451qa_guide_link" class="guide">
+                                <a href="#">
+                                    {{'User Guide' | r | xlat}}
+                                </a>
+                            </li>
+                            <li id="451qa_contact_link" class="contact">
+                                <a href="#">
+                                    {{'Contact Us' | r | xlat}}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
                 </ul>
                 <ul class="nav navbar-nav pull-right">
                     <li class="cart" ng-class="{'active': isActive(['cart', 'checkout'])}">
