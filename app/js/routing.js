@@ -41,5 +41,6 @@ four51.app.config(['$routeProvider', '$locationProvider', function($routeProvide
 		when('/delivery', { templateUrl: 'partials/deliveryInfo.html' }).
 		when('/balanceAdmin', { templateUrl: 'partials/admin.html', controller: 'AdminCtrl' }).
 		when('/suggestions', { templateUrl: 'partials/userSuggestions.html', controller: 'SuggestionCtrl' }).
+		when('/supportticket', { templateUrl: 'partials/supportTicket.html', controller: 'SupportTicketCtrl' }).
 		otherwise({redirectTo: '/catalog'});
 }]);

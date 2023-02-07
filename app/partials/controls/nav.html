@@ -22,7 +22,7 @@
                         </a>
                     </li>
                     <li class="report" ng-if="user.Type == 'Customer' && user.Permissions.contains('AdvancedReporting')" ng-class="{'active': isActive('reports')}">
-                        <a id="451qa_order_link" href="reports">
+                        <a id="451qa_report_link" href="reports">
                             <i class="fa fa-bar-chart-o"></i>
                             <span class="hidden-xs">{{'Reports' | r | xlat}}</span>
                         </a>
@@ -60,7 +60,7 @@
                                     {{'Favorites' | r | xlat}}
                                 </a>
                             </li>
-                            <li id="451qa_mesg_link" ng-show="user.Permissions.contains('ViewContactUs')" class="contactus">
+                            <li id="451qa_contactus_link" ng-show="user.Permissions.contains('ViewContactUs')" class="contactus">
                                 <a href="contactus">
                                     {{'Contact Us' | r | xlat}}
                                 </a>
@@ -69,6 +69,9 @@
                                 <a href="#" neworder ng-if="user.Permissions.contains('MultipleShoppingCart') && currentOrder" class="neworder" ng-click="newOrderLoadingIndicator = true;startNewOrder()">
                                     {{"Start" | r | xlat}} {{"New" | r | xlat}} {{"Order" | r | xlat}}
                                 </a>
+                            </li>
+                            <li ng-show="user.AllowTicketing">
+                                <a href="supportticket">eCommerce Ticket</a>
                             </li>
                             <li class="divider" ng-show="user.Type!='TempCustomer' || AppConst.debug"></li>
                             <li ng-show="user.Type!='TempCustomer'" class="logout">
@@ -99,7 +102,7 @@
                                 </a>
                             </li>
                             <li id="451qa_contact_link" class="contact">
-                                <a href="#">
+                                <a href="contactus">
                                     {{'Contact Us' | r | xlat}}
                                 </a>
                             </li>

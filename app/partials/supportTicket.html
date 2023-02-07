@@ -1,0 +1,125 @@
+<section>
+  <div class="row">
+    <div class="col-12 col-md-6 col-md-offset-3">
+      <h1>eCommerce Ticket Requests</h1>
+    </div>
+    <div class="col-12 col-md-6 col-md-offset-3">
+      <ul style="margin: 0 auto; margin-top: 15px; margin-bottom: 15px;">
+        <li style="margin-bottom: 15px;">TO CREATE AN ECOMMERCE TICKET REQUEST FOR PRODUCT MAINTENANCE <br><br><button type="button" class="btn btn-centerwell" ng-click="showModal()">Create Ticket</button></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row tickets-container" ng-show="user.TicketingDashboard">
+    <div class="col-12">
+      <h4 class="ticket-request-banner">Ticket Requests</h4>
+      <table id="tblTickets" class="table table-striped">
+        <thead>
+        <tr>
+          <th>Ticket</th>
+          <th>Created</th>
+          <th>Status</th>
+          <th>Request</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="ticket in tickets track by $index">
+          <td>{{ticket.ticket_number}}</td>
+          <td>{{ticket.date_setup}}</td>
+          <td>{{ticket.status}}</td>
+          <td>
+            <div class="notes" ng-repeat="note in ticket.notes.split('<|>') track by $index">
+              <b>{{noteDate(note)}}</b>
+              <xmp>{{noteText(note)}}</xmp>
+            </div>
+          </td>
+          <td>
+            <button ng-show="ticket.unique_id && ticket.status === 'Open'" type="button" class="btn btn-primary" ng-click="showNoteModal(ticket.unique_id)">Add Comment</button>
+          </td>
+        </tr>
+        </tbody>
+        <tfoot ng-show="!hasTickets">
+        <tr><td colspan="4">No Data</td></tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div id="supportTicketModal" class="modal fade" role="dialog" style="background-color: #d3d3d37d;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="border-radius: 5px 5px 0px 0px; color: #fff; background: #333333;">
+        <h4 style="text-align: center" class="modal-title">{{subject}}</h4>
+      </div>
+      <div class="modal-body" style="text-align: left">
+        <form name="frmTicket" ng-submit="createTicket(frmTicket)">
+          <input type="hidden" name="subject" ng-model="ticket.subject" />
+
+          <label>Product Name</label>
+          <input type="text" required name="productName" ng-model="ticket.productName" class="form-control" />
+
+          <label style="margin-top: 20px;">Job Type</label>
+          <input type="radio" style="display: inline-block; min-height: initial;" value="new" required name="jobType" ng-model="ticket.jobType" /><span style="display: inline-block; margin-left: .25em;">New Item</span>
+          <input type="radio" style="display: inline-block; min-height: initial; margin-left: 1.5em;" value="existing" required name="jobType" ng-model="ticket.jobType" /><span style="display: inline-block; margin-left: .25em;">Existing Item</span>
+
+          <label style="margin-top: 20px;">Current SKU</label>
+          <input type="text" name="currentSku" ng-model="ticket.currentSku" class="form-control" />
+
+          <label style="margin-top: 20px;">New SKU</label>
+          <input type="text" name="newSku" ng-model="ticket.newSku" class="form-control" />
+
+          <label style="margin-top: 20px;">Category</label>
+          <select class="form-control" ng-model="ticket.category">
+            <option></option>
+            <option ng-repeat="sc in subcategories track by $index" value="{{sc}}">{{sc}}</option>
+          </select>
+
+          <label style="margin-top: 20px;">Description - Please provide a detail explanation of your issue or request</label>
+          <textarea required name="description" rows="6" ng-model="ticket.description"></textarea>
+
+          <label style="margin-top: 20px;">File Upload</label>
+          <input name="ticketUpload" type="file" style="position: inherit; opacity: initial;" base-sixty-four-input maxsize="50000" ng-model="ticket.upload" do-not-parse-if-oversize/>
+          <span class="text-danger" ng-show="frmTicket.ticketUpload.$error.maxsize">Files must not exceed 50 MB</span>
+
+          <div class="modal-footer">
+            <div class="action-buttons">
+              <button type="submit" class="btn btn-success">Create</button>
+              <button ng-click="closeModal()" type="button" class="btn btn-danger">Cancel</button>
+            </div>
+            <div class="working-message hide">
+              <p>Creating ticket, please wait...</p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="supportTicketNoteModal" class="modal fade" role="dialog" style="background-color: #d3d3d37d;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="border-radius: 5px 5px 0px 0px; color: #fff; background: #53cfe7;">
+        <h4 style="text-align: center" class="modal-title">Add Note</h4>
+      </div>
+      <div class="modal-body" style="text-align: left">
+        <form name="frmTicketNote" ng-submit="createTicketNote(frmTicketNote)">
+          <label style="margin-top: 20px;">Description - Please provide a detail explanation of your issue or request</label>
+          <textarea required name="description" rows="6" ng-model="ticket.description"></textarea>
+
+          <div class="modal-footer">
+            <div class="action-buttons">
+              <button type="submit" class="btn btn-success">Create</button>
+              <button ng-click="closeNoteModal()" type="button" class="btn btn-danger">Cancel</button>
+            </div>
+            <div class="working-message hide">
+              <p>Adding note ticket, please wait...</p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

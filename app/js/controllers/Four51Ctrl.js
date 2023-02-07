@@ -45,6 +45,17 @@ function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, C
 				}
 				$scope.isLifepoint = $scope.user.Groups[0].Name === '01_Lifepoint';
 				$scope.isScion = $scope.user.Groups[0].Name === '02_Scion Hospitals';
+				//Vivid Impact Ticketing System Integration
+				$scope.user.AllowTicketing = false;
+				$scope.user.TicketingDashboard = false;
+				angular.forEach($scope.user.Groups, function (f) {
+					if (f.Name === 'Ticketing') {
+						$scope.user.AllowTicketing = true;
+					}
+					if (f.Name === 'TicketingDashboard') {
+						$scope.user.TicketingDashboard = true;
+					}
+				});
 			});
 			Category.tree(function (data) {
 				$scope.tree = data;
