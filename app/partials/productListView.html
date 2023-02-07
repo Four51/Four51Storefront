@@ -35,11 +35,6 @@
 					<strong>{{ product.Name }}</strong>
 					<br>
 					<small>{{ product.ExternalID }}</small>
-					<p ng-show="product.StandardPriceSchedule.PriceBreaks[0]" ng-if="!(user.Permissions.contains('HidePricing'))">
-						{{ product.StandardPriceSchedule.PriceBreaks[0].Quantity }}
-						<span ng-show="product.QuantityMultiplier > 1">(x {{ LineItem.Product.QuantityMultiplier }})</span>
-						{{'for' | xlat}} {{ product.StandardPriceSchedule.PriceBreaks[0].Price | culturecurrency }}
-					</p>
 					<p ng-show="LineItem.Product.UnitOfMeasure">
 						{{ 'Unit of Measure' | r | xlat }}: {{ product.UnitOfMeasure }}
 					</p>
@@ -59,11 +54,6 @@
 					<strong>{{ product.Name }}</strong>
 					<br>
 					<small>{{ product.ExternalID }}</small>
-					<p ng-show="product.StandardPriceSchedule.PriceBreaks[0]" ng-if="!(user.Permissions.contains('HidePricing'))">
-						{{ product.StandardPriceSchedule.PriceBreaks[0].Quantity }}
-						<span ng-show="product.QuantityMultiplier > 1">(x {{ LineItem.Product.QuantityMultiplier }})</span>
-						{{'for' | xlat}} {{ product.StandardPriceSchedule.PriceBreaks[0].Price | culturecurrency }}
-					</p>
 					<p ng-show="LineItem.Product.UnitOfMeasure">
 						{{ 'Unit of Measure' | r | xlat }}: {{ product.UnitOfMeasure }}
 					</p>
