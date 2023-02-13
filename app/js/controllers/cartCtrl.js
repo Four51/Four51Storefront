@@ -31,9 +31,9 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 					return false;
 				}
 				if (item.glCode == 'Other') {
-					$scope.currentOrder.LineItems[i].CostCenter = item.facilityNumber + '_' + item.dept + '_OTHER:' + item.otherText;
+					$scope.currentOrder.LineItems[i].CostCenter = $scope.companyCode + '_' + item.facilityNumber + '_' + item.dept + '_OTHER:' + item.otherText;
 				} else {
-					$scope.currentOrder.LineItems[i].CostCenter = item.facilityNumber + '_' + item.dept + '_' + item.glCode;
+					$scope.currentOrder.LineItems[i].CostCenter = $scope.companyCode + '_' + item.facilityNumber + '_' + item.dept + '_' + item.glCode;
 				}
 			}
 			return true;
@@ -252,6 +252,13 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 					$scope.currentOrder.LineItems[i].dept = deptID;
 				});
 			}
+
+			angular.forEach($scope.user.Groups, function(g) {
+				if (g.Name.indexOf('Scion') !== -1)
+					$scope.companyCode = 'SH';
+				if (g.Name.indexOf('Lifepoint') !== -1)
+					$scope.companyCode = 'LP';
+			})
 
 		});
 		var dateNeeded = $scope.getDateNeeded();
