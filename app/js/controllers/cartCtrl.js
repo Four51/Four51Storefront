@@ -22,6 +22,7 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 				});
 			});
 		}
+
 		$scope.checkCostCenters = function() {
 			for (var i in $scope.currentOrder.LineItems) {
 				var item = $scope.currentOrder.LineItems[i];
@@ -240,6 +241,18 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 					}
 				}
 			}
+
+			for (var i in $scope.currentOrder.LineItems) {
+				angular.forEach($scope.user.CustomFields, function(f) {
+					if (f.Name === 'LPSH_CostCode')
+						var code = f.Value;
+						var facilityID = code.slice(0,4);
+						var deptID = code.slice(-3);
+					$scope.currentOrder.LineItems[i].facilityNumber = facilityID;
+					$scope.currentOrder.LineItems[i].dept = deptID;
+				});
+			}
+
 		});
 		var dateNeeded = $scope.getDateNeeded();
 		$scope.shipDate =  (dateNeeded.getMonth() + 1) + '/' + dateNeeded.getDate() + '/' + dateNeeded.getFullYear();
