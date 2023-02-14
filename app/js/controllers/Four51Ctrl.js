@@ -56,6 +56,13 @@ function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, C
 						$scope.user.TicketingDashboard = true;
 					}
 				});
+				var userFirst = 'First Name=' + user.FirstName;
+				var userLast = '&Last Name=' + user.LastName;
+				var userCompany = '&Name of Your Organization=' + user.Company.Name;
+				var userEmail = '&Email=' + user.Email;
+				var supportLink = 'https://app.smartsheet.com/b/form/3bfbede69e4148d5ae191cb855aec487?';
+				var encodedSupportLink = encodeURI(supportLink + userFirst + userLast + userEmail + userCompany)
+				$scope.supportURI = encodedSupportLink;
 			});
 			Category.tree(function (data) {
 				$scope.tree = data;

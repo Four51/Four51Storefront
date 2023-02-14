@@ -13,14 +13,15 @@
   <div class="row tickets-container" ng-show="user.TicketingDashboard">
     <div class="col-12">
       <h4 class="ticket-request-banner">Ticket Requests</h4>
+      <div style="padding: 2.5rem;">
       <table id="tblTickets" class="table table-striped">
         <thead>
         <tr>
           <th>Ticket</th>
           <th>Created</th>
           <th>Status</th>
-          <th>Request</th>
-          <th></th>
+          <th class="no-sort">Request</th>
+          <th class="no-sort"></th>
         </tr>
         </thead>
         <tbody>
@@ -43,6 +44,7 @@
         <tr><td colspan="4">No Data</td></tr>
         </tfoot>
       </table>
+      </div>
     </div>
   </div>
 </section>
@@ -123,3 +125,14 @@
     </div>
   </div>
 </div>
+<script>
+  setTimeout(() => {
+    $('#tblTickets').DataTable( {
+      "order": [[1, 'desc']],
+      "columnDefs": [ {
+        "targets"  : 'no-sort',
+        "orderable": false,
+      }]
+    });
+  }, 1000)
+</script>
