@@ -23,6 +23,7 @@
                                 <label ng-show="credentials.Password">{{'Password' | r}}</label>
                                 <input autocomplete="off" class="form-control" type="password" ng-model="credentials.Password" placeholder="{{'Password' | r}}" />
                                 <i class="fa fa-lock"></i>
+                                <div style="text-align: right; margin-top: 10px; color: #FFFFFF;"><a ng-show="!showEmailHelp && !PasswordReset && !EmailNotFoundException && !PasswordSecurityException" ng-click="showEmailHelp = !showEmailHelp; buttonText ='Submit'">Forgot Password?</a></div>
                             </div>
                         </div>
                         <div class="view-form-icon" ng-show="loginMessage == 'Your password has expired and will need to be changed.'">
@@ -100,9 +101,9 @@
                         </div>
                         <input ng-disabled="login_form.$invalid" class="btn btn-large btn-primary btn-block" id="451_btn_login" type="submit" value="{{buttonText}}" />
                         <a class="btn btn-large btn-info btn-block" id="account_req_btn" style="margin-bottom: 20px;">Request an Account</a>
-                        <div class="login-help"><a ng-show="!showEmailHelp && !PasswordReset && !EmailNotFoundException && !PasswordSecurityException" ng-click="showEmailHelp = !showEmailHelp; buttonText ='Submit'">
-                            Need help logging on?
-                        </a></div>
+                        <div class="login-help">
+                            <a style="text-decoration: none; color: #004684; font-size: medium;" href="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/Creative House User Guide F 02-2023.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i> User Guide</a>
+                        </div>
                     </div>
                 </form>
             </div>
