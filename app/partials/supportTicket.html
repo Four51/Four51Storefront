@@ -31,7 +31,7 @@
           <td>
             <div class="notes" ng-repeat="note in ticket.notes.split('<|>') track by $index">
               <b>{{noteDate(note)}}</b>
-              <xmp>{{noteText(note)}}</xmp>
+              <xmp style="white-space: pre-wrap;">{{noteText(note)}}</xmp>
             </div>
           </td>
           <td>
