@@ -41,7 +41,7 @@
 					<p ng-show="LineItem.Variant.Description" ng-bind-html="trustedDescription(LineItem.Variant)" />
 				</div>
 				<!-- PRICE SCHEDULE PANEL! -->
-				<priceScheduleTable ng-if="!(user.Permissions.contains('HidePricing')) && LineItem.PriceSchedule.PriceBreaks.length > 1" ps='LineItem.PriceSchedule' p='LineItem.Product'/>
+				<priceScheduleTable ng-show="LineItem.Product.ViewName !== '_Download Only'" ng-if="!(user.Permissions.contains('HidePricing')) && LineItem.PriceSchedule.PriceBreaks.length > 1" ps='LineItem.PriceSchedule' p='LineItem.Product'/>
 			</div>
 		</div>
 		<!-- STATIC SPECS PANEL! -->
