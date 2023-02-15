@@ -24,7 +24,7 @@
 				</div>
 			</div>
 			<div ng-show="displayMode == 'grid'" id="productGrid">
-				<a ng-href="product/{{ product.InteropID }}" style="text-align: center" ng-repeat="product in products | sampleProducts | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize | orderBy:sorter:direction">
+				<a ng-href="product/{{ product.InteropID }}" style="text-align: center" ng-repeat="product in products | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize | orderBy:sorter:direction">
 					<figure ng-show="product.LargeImageUrl" style="text-align: center">
 						<img style="display: inline" ng-src="{{ product.LargeImageUrl }}" />
 					</figure>
@@ -43,7 +43,7 @@
 					</p>
 				</a>
 
-				<a ng-href="product/{{ product.InteropID }}" style="text-align: center" ng-repeat="product in products | regularProducts | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize | orderBy:sorter:direction">
+				<a ng-href="product/{{ product.InteropID }}" style="text-align: center" ng-repeat="product in products | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize | orderBy:sorter:direction">
 					<figure ng-show="product.LargeImageUrl" style="text-align: center">
 						<img style="display: inline" ng-src="{{ product.LargeImageUrl }}" />
 					</figure>
