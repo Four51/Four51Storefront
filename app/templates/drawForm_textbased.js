@@ -183,8 +183,11 @@ function drawForm_textbased() {
 				return;
 			}
 			if (angScope.editingVariant) {
+				angScope.saveVariantEdit();
+			} else {
 				angScope.saveasnew(true);
 			}
+
 		});
 	})();
 }
