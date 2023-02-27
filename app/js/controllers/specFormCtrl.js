@@ -61,37 +61,37 @@ function ($451, $scope, $resource, $compile, $location, $route, $routeParams, $w
 			$location.path('/product/' + $scope.Product.InteropID + '/'+ data.InteropID);
 		});
 	}
-	$scope.applyVariantToKitLineItem = function(variant) {
-		if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
-			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.Variant = variant;
-		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
-			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.Variant = variant;
-		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
-			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
-		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
-			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
-		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
-			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
-		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
-			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
-		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
-			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
-		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
-			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
-		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
-			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
-		} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
-			$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
-		}
-	}
-	$scope.saveVariantEdit = function() {
-		Variant.save($scope.Variant, function(variant) {
-			$scope.applyVariantToKitLineItem(variant, false);
-			Order.save($scope.currentOrder, function(order) {
-				$location.path('/kit/' + $routeParams.kitInteropID + '/' + $routeParams.cartLineItem);
-			});
-		});
-	}
+	// $scope.applyVariantToKitLineItem = function(variant) {
+	// 	if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+	// 		$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.Variant = variant;
+	// 	} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+	// 		$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.Variant = variant;
+	// 	} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+	// 		$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
+	// 	} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+	// 		$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
+	// 	} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+	// 		$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
+	// 	} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+	// 		$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
+	// 	} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+	// 		$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
+	// 	} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+	// 		$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
+	// 	} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+	// 		$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
+	// 	} else if ($scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Product.InteropID == $scope.Product.InteropID) {
+	// 		$scope.currentOrder.LineItems[$routeParams.cartLineItem].NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.NextKitLineItem.Variant = variant;
+	// 	}
+	// }
+	// $scope.saveVariantEdit = function() {
+	// 	Variant.save($scope.Variant, function(variant) {
+	// 		$scope.applyVariantToKitLineItem(variant, false);
+	// 		Order.save($scope.currentOrder, function(order) {
+	// 			$location.path('/kit/' + $routeParams.kitInteropID + '/' + $routeParams.cartLineItem);
+	// 		});
+	// 	});
+	// }
 	$scope.saveasnew = function(hideErrorAlert, previewvariant) {
 		var curVariant = {};
 		if (previewvariant) {

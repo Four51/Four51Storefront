@@ -15,11 +15,16 @@
 			</div>
 			<div class="panel-footer" ng-show="LineItem.Product.Type=='VariableText' && LineItem.Variant">
 				<span class="btn-group">
-					<button class="btn btn-default" ng-if="currentOrder.Status != 'AwaitingApproval' && !EditingLineItem" ng-click="deleteVariant(LineItem.Variant, true)">
-						{{'Remove' | r | xlat}}
+					<button class="btn btn-danger" ng-if="currentOrder.Status != 'AwaitingApproval' && !EditingLineItem" ng-click="deleteVariant(LineItem.Variant, true)">
+						<i class="fa fa-trash-o"></i> {{'Remove' | r | xlat}}
+					</button>
+					<button ng-if="currentOrder.Status != 'AwaitingApproval' && !EditingLineItem"
+							class="btn btn-default"
+							redirect="/product/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit">
+						<i class="fa fa-edit"></i> {{'Edit' | r | xlat}}
 					</button>
 					<button class="btn btn-default" ng-click="getPdf(LineItem.Variant.ProofUrl, LineItem)">
-						{{('View' | r) + ' ' + ('PDF' | r) | xlat}}
+						<i class="fa fa-file-pdf-o"></i> {{('View' | r) + ' ' + ('PDF' | r) | xlat}}
 					</button>
 				</span>
 			</div>
