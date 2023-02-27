@@ -4,9 +4,9 @@ angular.module('OrderCloud-SpecFormPreview').directive('specformpreview', specfo
 var currentPreview = false;
 var previewHasRun = false;
 
-// function renderError() {
-// 	$('#customFormContent').html('<h1>An error has occured while rendering this product. Please contact Vivid Impact at orders@vividimpact.com</h1><h3 style="text-align: center">PRODUCT: ' + angScope.Product.Name + '</h3><h3 style="text-align: center">ID: ' + angScope.Product.ExternalID + '</h3>');
-// }
+function renderError() {
+	$('#customFormContent').html('<h1>An error has occured while rendering this product. Please contact Vivid Impact at orders@vividimpact.com</h1><h3 style="text-align: center">PRODUCT: ' + angScope.Product.Name + '</h3><h3 style="text-align: center">ID: ' + angScope.Product.ExternalID + '</h3>');
+}
 
 function specformpreview() {
 	var directive = {
