@@ -101,8 +101,8 @@
 										</select>
 									</div>
 									<div class="col-sm-3 col-xs-12" ng-show="item.showOther">
-										<label for="otherText" class="required">Other</label>
-										<input ng-model="item.otherText" id="otherText" class="form-control otherText"  type='text' value="{{ item.otherText }}" />
+										<label for="otherText" class="required">Other (30 characters max)</label>
+										<input ng-model="item.otherText" id="otherText" class="form-control otherText"  type='text' value="{{ item.otherText }}" maxlength="30" />
 									</div>
 									<div class="col-sm-2 col-xs-12">
 										<label for="copyToAll">&nbsp;</label>
