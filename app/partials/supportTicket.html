@@ -36,7 +36,7 @@
             </div>
           </td>
           <td>
-            <button ng-show="ticket.unique_id && ticket.status === 'Open'" type="button" class="btn btn-primary" ng-click="showNoteModal(ticket.unique_id)">Add Comment</button>
+            <button ng-show="ticket.unique_id && (ticket.status === 'Open' || ticket.status === 'Hold')" type="button" class="btn btn-primary" ng-click="showNoteModal(ticket.unique_id)">Add Comment</button>
           </td>
         </tr>
         </tbody>
