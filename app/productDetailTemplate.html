@@ -18,11 +18,11 @@
 					<button class="btn btn-danger" ng-if="currentOrder.Status != 'AwaitingApproval' && !EditingLineItem" ng-click="deleteVariant(LineItem.Variant, true)">
 						<i class="fa fa-trash-o"></i> {{'Remove' | r | xlat}}
 					</button>
-<!--					<button ng-if="currentOrder.Status != 'AwaitingApproval' && !EditingLineItem"-->
-<!--							class="btn btn-default"-->
-<!--							redirect="/product/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit">-->
-<!--						<i class="fa fa-edit"></i> {{'Edit' | r | xlat}}-->
-<!--					</button>-->
+					<button ng-if="currentOrder.Status != 'AwaitingApproval' && !EditingLineItem"
+							class="btn btn-default"
+							redirect="/product/{{LineItem.Product.InteropID}}/{{LineItem.Variant.InteropID}}/edit">
+						<i class="fa fa-edit"></i> {{'Edit' | r | xlat}}
+					</button>
 					<button class="btn btn-default" ng-click="getPdf(LineItem.Variant.ProofUrl, LineItem)">
 						<i class="fa fa-file-pdf-o"></i> {{('View' | r) + ' ' + ('PDF' | r) | xlat}}
 					</button>
@@ -93,7 +93,7 @@
 								<quantityfield required="true" lineitem="LineItem" class="quantity" />
 							</div>
 						</div>
-						<button ng-disabled="blockAddToCart" ng-hide="LineItem.Product.Type == 'Kit'" class="btn btn-success btn-block btn-lg" type="button" id="451_btn_orderadd" ng-click="addToOrder()">
+						<button ng-disabled="lineItemErrors.length > 0" ng-hide="LineItem.Product.Type == 'Kit'" class="btn btn-success btn-block btn-lg" type="button" id="451_btn_orderadd" ng-click="addToOrder()">
 							<loadingindicator ng-show="addToOrderIndicator" />
 							<i ng-show="lineItemErrors.length > 0" class="fa fa-warning"></i>
 							<span ng-if="blockAddToCart">Allocation item is already in cart</span>
