@@ -2,6 +2,9 @@ four51.app.controller('AddressInputCtrl', ['$scope', '$rootScope', '$location', 
 function ($scope, $rootScope, $location, User, Address, Resources) {
     $scope.save = function() {
 	    $scope.objectExists = false;
+        if(!this.address.State){
+            this.address.State  =  '';
+        }
         Address.save(this.address,
 	        function(address) {
                 $rootScope.$broadcast('event:AddressSaved', address);

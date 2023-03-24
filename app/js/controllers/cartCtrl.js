@@ -94,15 +94,19 @@ function ($scope, $routeParams, $location, $451, Order, OrderConfig, User) {
 			Order.deletelineitem($scope.currentOrder.ID, item.ID,
 				function(order) {
 					$scope.currentOrder = order;
-					Order.clearshipping($scope.currentOrder);
-					if (!order) {
-						$scope.user.CurrentOrderID = null;
-						User.save($scope.user, function(){
-							$location.path('catalog');
-						});
+					if(!isEditforApproval){
+						Order.clearshipping($scope.currentOrder);
 					}
-					$scope.displayLoadingIndicator = false;
-					$scope.actionMessage = 'Your Changes Have Been Saved';
+					$scope.saveChanges(function(){
+						if (!order) {
+							$scope.user.CurrentOrderID = null;
+							User.save($scope.user, function(){
+								$location.path('catalog');
+							});
+						}
+						$scope.displayLoadingIndicator = false;
+						$scope.actionMessage = 'Your Changes Have Been Saved';
+					})
 				},
 				function (ex) {
 					$scope.errorMessage = ex.Message.replace(/\<<Approval Page>>/g, 'Approval Page');
