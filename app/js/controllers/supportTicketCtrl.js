@@ -66,7 +66,7 @@ four51.app.controller('SupportTicketCtrl', ['$routeParams', '$location', '$route
 			modal.find('.action-buttons').addClass('hide');
 
 			$.ajax({
-				url: 'https://services.vividimpact.com/vampire/api' + test + '/create-ticket',
+				url: 'https://vampire.vividimpact.com/api' + test + '/create-ticket',
 				type: 'POST',
 				beforeSend: function (xhr) {
 					xhr.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -148,7 +148,7 @@ four51.app.controller('SupportTicketCtrl', ['$routeParams', '$location', '$route
 			modal.find('.action-buttons').addClass('hide');
 
 			$.ajax({
-				url: 'https://services.vividimpact.com/vampire/api' + test + '/add-note',
+				url: 'https://vampire.vividimpact.com/api' + test + '/add-note',
 				type: 'POST',
 				beforeSend: function (xhr) {
 					xhr.setRequestHeader('Authorization', 'Bearer ' + token);
@@ -189,7 +189,7 @@ four51.app.controller('SupportTicketCtrl', ['$routeParams', '$location', '$route
 			var token = (window.location.host === 'teststore.four51.com') ? 'eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJhcHBsaWNhdGlvbklkIjozLCJjbGllbnRJZCI6NSwiYXV0aG9yaXplZCI6dHJ1ZX0.4w9s6Cf_OQYsk8SluOIR5WGpif28j4h_qDmYJrX0OC8' : 'eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJhcHBsaWNhdGlvbklkIjozLCJjbGllbnRJZCI6NSwiYXV0aG9yaXplZCI6dHJ1ZX0.4w9s6Cf_OQYsk8SluOIR5WGpif28j4h_qDmYJrX0OC8';
 
 			$.ajax({
-				url: 'https://services.vividimpact.com/vampire/api' + test + '/tickets',
+				url: 'https://vampire.vividimpact.com/api' + test + '/tickets',
 				type: 'POST',
 				beforeSend: function (xhr) {
 					xhr.setRequestHeader('Authorization', 'Bearer ' + token);
