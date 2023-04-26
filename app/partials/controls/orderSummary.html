@@ -11,22 +11,19 @@
         <loadingindicator ng-show="couponLoadingIndicator" title="{{'Please wait while we verify and apply your promotion code' | r | xlat}}" />
         <loadingindicator ng-show="couponRemoveIndicator" title="{{'Please wait while we remove your promotion code' | r | xlat}}" />
         <orderconfirmationmessage />
-        <p>
-            <span class="text-info">{{'Items' | r | xlat}}</span>
-            <span class="pull-right">{{currentOrder.LineItems.length}}</span>
-        </p>
+        <checkoutitemsummary></checkoutitemsummary>
         <p ng-if="!(user.Permissions.contains('HidePricing'))">
             <span class="text-info">{{'Subtotal' | r | xlat}}</span>
             <span class="pull-right">{{currentOrder.Subtotal | culturecurrency}}</span>
         </p>
-        <p ng-if="!(user.Permissions.contains('HidePricing'))">
-            <span class="text-info">{{('Shipping' | r) + ' ' + ('Costs' | r) | xlat}}</span>
-            <span class="pull-right">{{currentOrder.ShippingCost | culturecurrency}}</span>
-        </p>
-        <p ng-if="!(user.Permissions.contains('HidePricing'))">
-            <span class="text-info">{{'Tax' | r | xlat}}</span>
-            <span class="pull-right">{{currentOrder.TaxCost || 0 | culturecurrency}}</span>
-        </p>
+<!--        <p ng-if="!(user.Permissions.contains('HidePricing'))">-->
+<!--            <span class="text-info">{{('Shipping' | r) + ' ' + ('Costs' | r) | xlat}}</span>-->
+<!--            <span class="pull-right">{{currentOrder.ShippingCost | culturecurrency}}</span>-->
+<!--        </p>-->
+<!--        <p ng-if="!(user.Permissions.contains('HidePricing'))">-->
+<!--            <span class="text-info">{{'Tax' | r | xlat}}</span>-->
+<!--            <span class="pull-right">{{currentOrder.TaxCost || 0 | culturecurrency}}</span>-->
+<!--        </p>-->
         <div ng-show="user.Permissions.contains('ViewPromotions')">
             <div ng-show="!currentOrder.Coupon">
                 <div class="form-group view-form-icon">

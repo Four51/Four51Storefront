@@ -61,11 +61,10 @@
                                 </div>
                             </div>
                             <div class="order-location" ng-show="!currentOrder.IsMultipleShip() && orderShipAddress.ID">
-                                <p><strong><small>{{('Shipping' | r) + ' ' + ('Location' | r) | xlat}}</small></strong></p>
-                                <p ng-show="orderShipAddress.AddressName"><small>{{orderShipAddress.AddressName}}</small></p>
+                                <p style="font-weight: bold;">{{('Shipping' | r) + ' ' + ('Location' | r) | xlat}}</small></b></p>
                                 <p ng-show="orderShipAddress.CompanyName"><small>{{orderShipAddress.CompanyName}}</small></p>
-                                <p ng-show="(orderShipAddress.FirstName || orderShipAddress.LastName) && (!user.Permissions.contains('EditShipToName') && !orderShipAddress.IsCustEditable)">
-                                    <small>{{orderShipAddress.FirstName + ' ' + orderShipAddress.LastName}}</small>
+                                <p ng-show="(orderShipAddress.FirstName || orderShipAddress.LastName)">
+                                    <small>Attn: {{orderShipAddress.FirstName + ' ' + orderShipAddress.LastName}}</small>
                                 </p>
                                 <div class="row" ng-show="!currentOrder.IsMultipleShip() && user.Permissions.contains('EditShipToName') && (orderShipAddress && !orderShipAddress.IsCustEditable)">
                                     <div class="col-sm-2">

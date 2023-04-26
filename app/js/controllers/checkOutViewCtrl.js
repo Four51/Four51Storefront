@@ -1,3 +1,4 @@
+var angScope = '';
 four51.app.controller('CheckOutViewCtrl', ['$scope', '$routeParams', '$location', '$filter', '$rootScope', '$451', 'User', 'Order', 'OrderConfig', 'FavoriteOrder', 'AddressList', 'GoogleAnalytics',
 function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Order, OrderConfig, FavoriteOrder, AddressList, GoogleAnalytics) {
 	$scope.errorSection = 'open';
@@ -134,4 +135,5 @@ function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Orde
 	$scope.cancelEdit = function() {
 		$location.path('order');
 	};
+	angScope = $scope;
 }]);
