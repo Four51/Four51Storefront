@@ -49,8 +49,8 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			if (data.product.Type == 'Kit') {
 				$scope.kitButtonText = 'Customize Kit';
 			}
-			$('#thumbContainerContainer').append('<div class="thumbContainer"><img class="product-thumb" data-src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KAH_Docs/' + $scope.LineItem.Product.ExternalID + '_pvd_01_lrg.jpg" src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KAH_Docs/' + $scope.LineItem.Product.ExternalID + '_pvd_01_sm.jpg" alt=""></div>');
-			$('#thumbContainerContainer').append('<div class="thumbContainer"><img class="product-thumb" data-src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KAH_Docs/' + $scope.LineItem.Product.ExternalID + '_pvd_02_lrg.jpg" src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KAH_Docs/' + $scope.LineItem.Product.ExternalID + '_pvd_02_sm.jpg" alt=""></div>');
+			$('#thumbContainerContainer').append('<div class="thumbContainer"><img class="product-thumb cursorPointer" data-src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KHC_Docs/' + $scope.LineItem.Product.ExternalID + '_pvd_01_lrg.jpg" src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KHC_Docs/' + $scope.LineItem.Product.ExternalID + '_pvd_01_sm.jpg" alt=""></div>');
+			$('#thumbContainerContainer').append('<div class="thumbContainer"><img class="product-thumb cursorPointer" data-src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KHC_Docs/' + $scope.LineItem.Product.ExternalID + '_pvd_02_lrg.jpg" src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KHC_Docs/' + $scope.LineItem.Product.ExternalID + '_pvd_02_sm.jpg" alt=""></div>');
 
 		}, $scope.settings.currentPage, $scope.settings.pageSize, searchTerm);
 	}

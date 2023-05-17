@@ -7,7 +7,7 @@
 			<div class="panel-body">
 				<loadingindicator ng-show="loadingImage && LineItem.Variant.IsMpowerVariant" />
 				<figure style="display:flex; justify-content: center;">
-					<img id="451_img_prod_lg" class="img-responsive product-thumb" data-preview="{{previewUrl}}" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}" imageonload />
+					<img id="451_img_prod_lg" class="img-responsive product-thumb cursorPointer" data-preview="{{previewUrl}}" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}" imageonload />
 				</figure>
 				<div class="empty" ng-hide="LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl">
 					<span class="fa empty"><i class="fa fa-camera"></i></span>
@@ -145,9 +145,9 @@
 <script>
 	$(document).off('click', '.product-thumb');
 	$(document).on('click', '.product-thumb', function() {
-		ImageViewer().show(previewUrl)
+		ImageViewer().show($(this).attr('data-src'));
 		setTimeout(function() {
 			$(window).trigger('resize');
-		}, 400);
+		}, 600);
 	});
 </script>

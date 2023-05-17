@@ -172,6 +172,14 @@ body, span, div, h1, h2, h3, h4, h5, h6, a, b, i, small {
 	text-align: center;
 }
 
+.thumbContainer {
+	padding: 10px;
+}
+
+.cursorPointer:hover {
+	cursor: pointer;
+}
+
 
 /******* dev code, remove before launching *******/
 /*
