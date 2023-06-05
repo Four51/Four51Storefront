@@ -1,6 +1,24 @@
 var angScope = '';
 four51.app.controller('CheckOutViewCtrl', ['$scope', '$routeParams', '$location', '$filter', '$rootScope', '$451', 'User', 'Order', 'OrderConfig', 'FavoriteOrder', 'AddressList', 'GoogleAnalytics',
 function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Order, OrderConfig, FavoriteOrder, AddressList, GoogleAnalytics) {
+        $scope.currentDate = new Date;
+	setTimeout(function() {
+		$scope.csUser = $rootScope.csUser;
+	}, 100);
+	$scope.currentOrder.csUserDateValid = false;
+        $scope.updateDateNeeded = function(){
+		$scope.currentOrder.csUserDateValid = false;
+		try {
+			var userDate = new Date($scope.csUserDateNeeded);
+		} catch(whocares) {}
+		if (userDate instanceof Date && !isNaN(userDate)) {
+			$scope.currentOrder.csUserDateValid = true;
+			$scope.currentOrder.csUserDateNeeded = userDate.toISOString().substr(0,19);
+			angular.forEach($scope.currentOrder.LineItems,function(el){
+				el.DateNeeded = userDate.toISOString().substr(0,19);
+			});
+		}
+        };
 	$scope.errorSection = 'open';
 
 	$scope.isEditforApproval = $routeParams.id != null && $scope.user.Permissions.contains('EditApprovalOrder');

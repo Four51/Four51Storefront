@@ -109,35 +109,6 @@
 										<button ng-click="copyToAll(item)" id="copyToAll" class="btn btn-info form-control" type="button"><i class="fa fa-copy"></i> Copy to all</button>
 									</div>
 								</div>
-
-								<div class="row" ng-if="(user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')) || user.Permissions.contains('CostCenterPerLine')">
-									<div class="col-xs-12 col-sm-3" ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
-										<div class="row view-form-icon">
-											<div class="col-xs-9">
-												<label ng-class="{required: user.Permissions.contains('DateNeededRequired')}" ng-show="item.DateNeeded || user.Permissions.contains('DateNeededRequired')">{{'Date' | r | xlat}}</label>
-												<!--Default Datepicker -->
-												<div class="btn btn-default btn-block btn-date hidden-lg hidden-md"
-													 ng-click="$event.preventDefault();$event.stopPropagation();opened = !opened;"
-													 style="margin:0; height:40px; padding-top:8px;">
-													{{item.DateNeeded ? '' : ('Tap to set a date' | xlat)}}
-													<span class="text-info">{{item.DateNeeded | date:user.Culture.DateFormat.short}}</span>
-												</div>
-												<input name="dateneeded" placeholder="{{'Date' | xlat}}" ng-model="item.DateNeeded" ng-required="user.Permissions.contains('DateNeededRequired')"
-													   type="text"
-													   class="form-control"
-													   datepicker-popup="{{user.Culture.DateFormat.short}}"
-													   is-open="opened"
-													   min="deliveryDate"/>
-												<i class="fa fa-calendar"></i>
-											</div>
-											<div class="col-xs-3">
-												<button type="button" title="{{'copy to all' | r | xlat}}" class="btn btn-default pull-right" value="{{'copy to all' | r | xlat}}" ng-click="copyAddressToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1 && user.CostCenters.length != 1" >
-													<span class="fa fa-copy text-info"></span>
-												</button>
-											</div>
-										</div>
-									</div>
-								</div>
 							</div>
 						</div>
 						<div class="row">
@@ -175,7 +146,6 @@
 							<p ng-show="TaxMethod" ng-if="user.Company.TaxMethod != 'NoTax'">
 								<span class="text-info">{{'Shipping, handling and tax may be added to this subtotal.' | r | xlat}}</span>
 							</p>
-							<p>Note: This order will ship on {{ shipDate }}</p>
 							<button type="button" neworder ng-if="user.Permissions.contains('MultipleShoppingCart') && currentOrder" class="btn btn-default" ng-click="newOrderLoadingIndicator = true;startNewOrder()">
 								<loadingindicator  ng-show="newOrderLoadingIndicator" />
 								<small>{{"Start" | r | xlat}} {{"New" | r | xlat}} {{"Order" | r | xlat}}</small>
@@ -205,7 +175,6 @@
 						</li>
 						<li class="text-center">
 							<ul ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
-								<li ng-if="cart.dateneeded.$invalid">{{('Date needed' | r) +  ' is ' +  ('Required' | rl) | xlat}}</li>
 								<li ng-if="cart.costcenter.$invalid">{{('Cost Center' | r) + ' is ' + ('Required' | rl) | xlat}}</li>
 								<li ng-if="cart.qtyInput.$invalid">{{'You have entered an invalid ' + ('Quantity' | rl) | xlat}}</li>
 								<li ng-if="cart.kitValidation.$invalid">{{'The kit has unconfigured items. You must configure them before continuing.' | r | xlat}}</li>

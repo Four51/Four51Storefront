@@ -129,9 +129,6 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 			if (!$scope.isEditforApproval) {
 				OrderConfig.address($scope.currentOrder, $scope.user);
 			}
-			for (var i in $scope.currentOrder.LineItems) {
-				$scope.currentOrder.LineItems[i].DateNeeded = $scope.getDateNeeded();
-			}
 			Order.save($scope.currentOrder, function(data) {
 					$scope.currentOrder = data;
 					$location.path($scope.isEditforApproval ? 'checkout/' + $routeParams.id : 'checkout');
@@ -166,9 +163,7 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 		}, true);
 
 		$scope.copyAddressToAll = function() {
-			angular.forEach($scope.currentOrder.LineItems, function(n) {
-				n.DateNeeded = $scope.currentOrder.LineItems[0].DateNeeded;
-			});
+			// Noop
 		};
 
 		$scope.onPrint = function() {
@@ -182,27 +177,6 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 		$scope.downloadProof = function(item) {
 			window.location = item.Variant.ProofUrl;
 		};
-		$scope.getDateNeeded = function() {
-			var days = 5; // Number of business days to add to today
-			var today = new Date();
-			var dayOfWeek = today.getDay();
-			var daysToAdd = parseInt(days);
-			if (dayOfWeek == 0) {
-				daysToAdd++;
-			}
-			if (dayOfWeek + daysToAdd >= 6) {
-				var remainingWorkDays = daysToAdd - (5 - dayOfWeek);
-				daysToAdd += 2;
-				if (remainingWorkDays > 5) {
-					daysToAdd += 2 * Math.floor(remainingWorkDays / 5);
-					if (remainingWorkDays % 5 == 0) {
-						daysToAdd -= 2;
-					}
-				}
-			}
-			today.setDate(today.getDate() + daysToAdd);
-			return today;
-		}
 		$scope.glCodeChanged = function(item) {
 			if (item.glCode == 'Other') {
 				item.showOther = true;
@@ -261,7 +235,5 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 			})
 
 		});
-		var dateNeeded = $scope.getDateNeeded();
-		$scope.shipDate =  (dateNeeded.getMonth() + 1) + '/' + dateNeeded.getDate() + '/' + dateNeeded.getFullYear();
 		angScope = $scope;
 	}]);

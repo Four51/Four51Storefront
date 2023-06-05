@@ -1,5 +1,5 @@
-four51.app.controller('Four51Ctrl', ['$scope', '$route', '$location', '$451', 'User', 'Order', 'Security', 'OrderConfig', 'Category', 'AppConst','XLATService', 'GoogleAnalytics',
-function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, Category, AppConst, XLATService, GoogleAnalytics) {
+four51.app.controller('Four51Ctrl', ['$rootScope', '$scope', '$route', '$location', '$451', 'User', 'Order', 'Security', 'OrderConfig', 'Category', 'AppConst','XLATService', 'GoogleAnalytics',
+function ($rootScope, $scope, $route, $location, $451, User, Order, Security, OrderConfig, Category, AppConst, XLATService, GoogleAnalytics) {
 	$scope.AppConst = AppConst;
 	$scope.scroll = 0;
 	$scope.isAnon = $451.isAnon; //need to know this before we have access to the user object
@@ -22,15 +22,19 @@ function ($scope, $route, $location, $451, User, Order, Security, OrderConfig, C
 	}
 
 	function init() {
+		$rootScope.csUser = false;
 		if (Security.isAuthenticated()) {
 			User.get(function (user) {
 				$scope.user = user;
-                $scope.user.Culture.CurrencyPrefix = XLATService.getCurrentLanguage(user.CultureUI, user.Culture.Name)[1];
-                $scope.user.Culture.DateFormat = XLATService.getCurrentLanguage(user.CultureUI, user.Culture.Name)[2];
-
-	            if (!$scope.user.TermsAccepted)
-		            $location.path('conditions');
-
+		                $scope.user.Culture.CurrencyPrefix = XLATService.getCurrentLanguage(user.CultureUI, user.Culture.Name)[1];
+		                $scope.user.Culture.DateFormat = XLATService.getCurrentLanguage(user.CultureUI, user.Culture.Name)[2];
+				for (var i = 0; i < $scope.user.Groups.length; i++) {
+					var groupName = $scope.user.Groups[i].Name;
+					if (groupName == '07_LP_CreativeServices' || groupName == '08_Scion_CreativeServices') {
+						$rootScope.csUser = true;
+					}
+				}
+				if (!$scope.user.TermsAccepted) $location.path('conditions');
 				if (user.CurrentOrderID) {
 					Order.get(user.CurrentOrderID, function (ordr) {
 						$scope.currentOrder = ordr;

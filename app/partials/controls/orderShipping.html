@@ -15,23 +15,12 @@
         </div>
         <div ng-hide="shipaddressform || (shipaddresses.length == 0 && user.Permissions.contains('CreateShipToAddress'))">
             <form name="cart_shipping" novalidate="">
+		<div ng-show="csUser">
+			<label for="dateneeded" class="required">Date Needed</label>
+			<input name="dateneeded" placeholder="Date" ng-model="csUserDateNeeded" ng-change="updateDateNeeded()" type="text" class="form-control" datepicker-popup="yyyy-MM-dd" is-open="opened" ng-required="csUser" />
+		</div>
+
                 <div>
-                    <div>
-                        <span class="btn-group">
-                            <button ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1" class="btn btn-default" type="button" ng-click="setSingleShipAddress()">
-                                <i ng-class="{'fa fa-check': !currentOrder.IsMultipleShip() }"></i>
-                                {{'Single ' + ('Address' | r) | xlat}}
-                            </button>
-                            <button ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1" class="btn btn-default" type="button" ng-click="setMultipleShipAddress()">
-                                <i ng-class="{'fa fa-check': currentOrder.IsMultipleShip() }"></i>
-                                {{'Multiple ' + ('Addresses' | r) | xlat}}
-                            </button>
-                             <button class="btn btn-info pull-right" type="button"
-                                     ng-hide="(shipaddressform || (!shipaddressform && !shipaddresses) || !user.Permissions.contains('CreateShipToAddress'))" ng-click="shipaddressform = true" tabindex="-1">
-                                 {{'New ' + ('Address' | r) | xlat}}
-                             </button>
-                        </span>
-                    </div>
                     <div>
                         <loadingindicator ng-show="shippingUpdatingIndicator" title="{{'Please wait while ' + ('Shipping' | rc) + ' costs are updated' | r | xlat}}" />
                         <loadingindicator ng-show="shippingFetchIndicator" title="{{'Please wait while available shippers are updated' | r | xlat}}" />
@@ -60,6 +49,22 @@
                                     <i class="fa fa-truck"></i>
                                 </div>
                             </div>
+			    <div style="margin-top: 15px">
+				<span class="btn-group">
+				    <button ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1" class="btn btn-default" type="button" ng-click="setSingleShipAddress()">
+					<i ng-class="{'fa fa-check': !currentOrder.IsMultipleShip() }"></i>
+					{{'Single ' + ('Address' | r) | xlat}}
+				    </button>
+				    <button ng-show="user.Permissions.contains('ShipToMultipleAddresses') && currentOrder.LineItems.length > 1" class="btn btn-default" type="button" ng-click="setMultipleShipAddress()">
+					<i ng-class="{'fa fa-check': currentOrder.IsMultipleShip() }"></i>
+					{{'Multiple ' + ('Addresses' | r) | xlat}}
+				    </button>
+				     <button class="btn btn-info pull-right" type="button"
+					     ng-hide="(shipaddressform || (!shipaddressform && !shipaddresses) || !user.Permissions.contains('CreateShipToAddress'))" ng-click="shipaddressform = true" tabindex="-1">
+					 {{'New ' + ('Address' | r) | xlat}}
+				     </button>
+				</span>
+			    </div>
                             <div class="order-location" ng-show="!currentOrder.IsMultipleShip() && orderShipAddress.ID">
                                 <p style="font-weight: bold;">{{('Shipping' | r) + ' ' + ('Location' | r) | xlat}}</small></b></p>
                                 <p ng-show="orderShipAddress.CompanyName"><small>{{orderShipAddress.CompanyName}}</small></p>
