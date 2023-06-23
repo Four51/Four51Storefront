@@ -17,7 +17,7 @@
             <form name="cart_shipping" novalidate="">
 		<div ng-show="csUser">
 			<label for="dateneeded" class="required">Date Needed</label>
-			<input name="dateneeded" placeholder="Date" ng-model="csUserDateNeeded" ng-change="updateDateNeeded()" type="text" class="form-control" datepicker-popup="yyyy-MM-dd" is-open="opened" ng-required="csUser" />
+			<input name="dateneeded" placeholder="Date" ng-model="csUserDateNeeded" ng-change="updateDateNeeded()" type="text" class="form-control" datepicker-popup="yyyy-MM-dd" is-open="opened" min="currentDate" date-disabled="disabled(date, mode)" ng-required="csUser" />
 		</div>
 
                 <div>

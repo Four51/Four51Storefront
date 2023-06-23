@@ -1,7 +1,24 @@
 var angScope = '';
 four51.app.controller('CheckOutViewCtrl', ['$scope', '$routeParams', '$location', '$filter', '$rootScope', '$451', 'User', 'Order', 'OrderConfig', 'FavoriteOrder', 'AddressList', 'GoogleAnalytics',
 function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Order, OrderConfig, FavoriteOrder, AddressList, GoogleAnalytics) {
-        $scope.currentDate = new Date;
+        $scope.currentDate = new Date();
+	const numToAdd = 2;
+
+	for (let i = 1; i <= numToAdd; i++) {
+		$scope.currentDate.setDate($scope.currentDate.getDate() + 1);
+		if ($scope.currentDate.getDay() === 6) {
+			$scope.currentDate.setDate($scope.currentDate.getDate() + 2);
+		}
+		else if ($scope.currentDate.getDay() === 0) {
+			$scope.currentDate.setDate($scope.currentDate.getDate() + 1);
+		}
+	}
+
+	$scope.disabled = function (date, mode) {
+		return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
+	};
+
+
 	setTimeout(function() {
 		$scope.csUser = $rootScope.csUser;
 	}, 100);
