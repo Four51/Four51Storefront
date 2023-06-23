@@ -38,6 +38,15 @@ a:hover {
 	height: auto;
 }
 
+.gallery-thumb {
+	height: 100px;
+}
+
+.thumb-title {
+	font-weight: bold;
+	padding-left: 30px;
+}
+
 .no-padding {
 	padding: 0 !important;
 }

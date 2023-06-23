@@ -36,16 +36,10 @@ function specformpreview() {
 					'<span class="fa empty"><i class="fa fa-camera"></i></span>',
 				'</div>',
 			'</div>',
-		'<div class="text-center">',
-		'Click the image to view a full-size preview<br><br>',
-			'</div>',
 			'<div class="text-center">',
-				'<span class="btn-group">',
-					'<button style="box-shadow: 0px 0px 9px 0px #00ac00;" id="previewBtn" class="btn btn-default btn-sfp" ng-click="previewOnly(variant,true)">Preview first to proceed</button>',
-				'</span>',
 			'</div>',
 			'<div class="text-center" style="margin-top: 15px">',
-				'<button style="display: none" id="proceedToCheckout" class="btn btn-lg btn-success" type="button"><i class="fa fa-shopping-cart" style="border: none!important"></i> Proceed to Next Step</button>',
+				'<button id="proceedToCheckout" class="btn btn-lg btn-success" type="button"><i class="fa fa-shopping-cart" style="border: none!important"></i> Proceed to Next Step</button>',
 			'</div>',
 			'<div class="view-error-message" ng-show="showVariantErrors">',
 				'<ul class="alert-warning">',
@@ -68,7 +62,6 @@ function specformpreview() {
 					'</li>',
 				'</ul>',
 			'</div>',
-			'<div style="width: 100%; height: 55px; margin-top: 30px;" id="thumbContainerContainer"></div>',
 			'<div style="margin-top: 15px" id="productInfoSection"><h1 style="margin-top: 0px; text-align: left;">{{product.Name}}</h1><h3 style="margin-top: 0px; text-align: left; font-size: 15px;">{{product.ExternalID}}</h3><h4 ng-bind-html="product.Description"></h4></div>',
 		].join('');
 	}
@@ -124,22 +117,4 @@ function SpecFormPreviewCtrl($scope, Variant) {
 		}
 		previewVariant(variant, false, hideErrorWindowAlert, []);
 	}
-	$('#thumbContainerContainer').append('<div class="thumbContainer"><img class="product-thumb" data-src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KHC_Docs/' + $scope.product.ExternalID + '_pvd_01_lrg.jpg" src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KHC_Docs/' + $scope.product.ExternalID + '_pvd_01_sm.jpg" alt=""></div>');
-	$('#thumbContainerContainer').append('<div class="thumbContainer"><img class="product-thumb" data-src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KHC_Docs/' + $scope.product.ExternalID + '_pvd_02_lrg.jpg" src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KHC_Docs/' + $scope.product.ExternalID + '_pvd_02_sm.jpg" alt=""></div>');
 }
-$(document).off('click', '.product-thumb');
-$(document).on('click', '.product-thumb', function() {
-	var viewer = ImageViewer();
-	viewer.show($(this).attr('data-src'));
-});
-$(document).off('click', '.product-image-large');
-$(document).on('click', '.product-image-large', function() {
-	var viewer = ImageViewer();
-	if (typeof angScope.PreviewVariant !== 'undefined' && typeof angScope.PreviewVariant.ProofUrl !== 'undefined') {
-		window.open(angScope.PreviewVariant.ProofUrl, '_blank');
-	} else if (typeof angScope.LineItem !== 'undefined' && typeof angScope.LineItem.Variant !== 'undefined' && typeof angScope.LineItem.Variant.ProofUrl !== 'undefined') {
-		window.open(angScope.LineItem.Variant.ProofUrl, '_blank');
-	} else {
-		viewer.show($(this).attr('src'));
-	}
-});

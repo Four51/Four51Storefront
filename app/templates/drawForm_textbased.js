@@ -133,7 +133,6 @@ function drawForm_textbased() {
 		$('#mainContentContainer').append(textFormMarkup);
 
 		$('#specFormContent').append(renderSpecFormContent());
-		$('#specFormContent').append('<div style="margin: 50px; width: 100%; height: 30px; text-align: center;"><button style="box-shadow: 0px 0px 9px 0px #00ac00;" id="secondaryPreviewBtn" class="btn btn-default btn-sfp">Preview first to proceed</button></div>');
 
 		if (hasLogoSelection) {
 			let select2 = $('#logo').select2({width: '100%'});
@@ -182,11 +181,7 @@ function drawForm_textbased() {
 				alert('You must choose a facility / division logo before proceeding.');
 				return;
 			}
-			if (angScope.editingVariant) {
-				angScope.saveVariantEdit();
-			} else {
-				angScope.saveasnew(true);
-			}
+			angScope.saveasnew(true);
 
 		});
 	})();

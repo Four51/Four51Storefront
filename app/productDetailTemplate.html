@@ -1,13 +1,15 @@
 <section class="product-detail-default" style="margin-top: -30px">
 	<loadingindicator ng-show="loadingIndicator" title="{{'Please wait while we fetch product information' | r | xlat}}" />
-	<div class="alert alert-danger" ng-if="LineItem.Product.Type === 'VariableText'">Please review your final product carefully for errors. Note: The pink lines will not print – these lines indicate the customizable areas only. ONCE YOU HAVE REVIEWED YOUR PROOF AND CLICK ADD TO ORDER, this is your signature approving the proof as you have submitted it. ALL ORDERS ARE FINAL.</div>
+	<div class="row">
+	<div class="col-md-6 col-md-offset-3 alert alert-danger" ng-show="LineItem.Product.Type === 'VariableText' && LineItem.Variant">Please review your final product carefully for errors. Note: The pink lines will not print – these lines indicate the customizable areas only. ONCE YOU HAVE REVIEWED YOUR PROOF AND CLICK ADD TO ORDER, this is your signature approving the proof as you have submitted it. ALL ORDERS ARE FINAL.</div>
+	</div>
 	<!-- PRODUCT IMAGE PANEL!-->
-	<div class="col-md-4 col-collapse" style="margin-top: 15px">
+	<div class="col-md-4 col-collapse" style="margin-top: 4em">
 		<div class="panel panel-default" style="margin-top: 35px">
 			<div class="panel-body">
 				<loadingindicator ng-show="loadingImage && LineItem.Variant.IsMpowerVariant" />
-				<figure style="display:flex; justify-content: center;">
-					<img id="451_img_prod_lg" class="img-responsive product-thumb cursorPointer" data-preview="{{previewUrl}}" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}" imageonload />
+				<figure style="display:flex; justify-content: center; height: 400px">
+					<img id="451_img_prod_lg" class="img-responsive product-thumb" data-preview="{{previewUrl}}" ng-src="{{LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl}}" imageonload />
 				</figure>
 				<div class="empty" ng-hide="LineItem.Variant.PreviewUrl || LineItem.Variant.LargeImageUrl || LineItem.Product.LargeImageUrl">
 					<span class="fa empty"><i class="fa fa-camera"></i></span>
@@ -24,12 +26,18 @@
 						<i class="fa fa-edit"></i> {{'Edit' | r | xlat}}
 					</button>
 					<button class="btn btn-default" ng-click="getPdf(LineItem.Variant.ProofUrl, LineItem)">
-						<i class="fa fa-file-pdf-o"></i> {{('View' | r) + ' ' + ('PDF' | r) | xlat}}
+						<i class="fa fa-file-pdf-o"></i> {{('View' | r) + ' ' + ('Proof' | r) | xlat}}
 					</button>
 				</span>
 			</div>
 		</div>
-		<div style="width: 100%; height: 55px; margin-top: 30px;" id="thumbContainerContainer"></div>
+		<div ng-show="!LineItem.Variant">
+		<div ng-show="gallery1" class="thumb-title">Click to Preview</div>
+		<div style="width: 100%; margin-top: 10px; padding-left: 30px; display: flex;" id="thumbContainerContainer">
+			<div ng-show="gallery1" class="thumbContainer"><img class="gallery-thumb cursorPointer" data-ng-lrg="{{galleryUrl1}}" src="img/gallery-1.png" alt=""></div>
+			<div ng-show="gallery2" class="thumbContainer"><img class="gallery-thumb cursorPointer" data-ng-lrg="{{galleryUrl2}}" src="img/gallery-2.png" alt=""></div>
+		</div>
+		</div>
 	</div>
 	<div class="col-md-7 col-md-offset-1 col-collapse" style="margin-top: 15px; margin-bottom: 60px;">
 		<!-- PRODUCT DESCRIPTION PANEL! -->
@@ -143,11 +151,11 @@
 	</div>
 </section>
 <script>
-	$(document).off('click', '.product-thumb');
-	$(document).on('click', '.product-thumb', function() {
-		ImageViewer().show($(this).attr('data-src'));
+	$(document).off('click', '.gallery-thumb');
+	$(document).on('click', '.gallery-thumb', function() {
+		ImageViewer().show($(this).attr('data-ng-lrg'));
 		setTimeout(function() {
 			$(window).trigger('resize');
-		}, 600);
+		}, 100);
 	});
 </script>

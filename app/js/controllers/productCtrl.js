@@ -1,8 +1,8 @@
 var angScope;
-
 four51.app.controller('ProductCtrl', ['$scope', '$routeParams', '$route', '$location', '$451', 'Product', 'ProductDisplayService', 'Order', 'Variant', 'User',
 function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplayService, Order, Variant, User) {
-
+	$scope.gallery1 = false;
+	$scope.gallery2 = false;
 	$scope.isEditforApproval = $routeParams.orderID && $scope.user.Permissions.contains('EditApprovalOrder');
 	if ($scope.isEditforApproval) {
 		Order.get($routeParams.orderID, function(order) {
@@ -39,8 +39,6 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			ProductDisplayService.setNewLineItemScope($scope);
 			ProductDisplayService.setProductViewScope($scope);
 			setDefaultQty($scope.LineItem);
-			$scope.$broadcast('ProductGetComplete');
-			$scope.loadingIndicator = false;
 			$scope.setAddToOrderErrors();
 			if (angular.isFunction(callback)) {
 				callback();
@@ -49,9 +47,48 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			if (data.product.Type == 'Kit') {
 				$scope.kitButtonText = 'Customize Kit';
 			}
-			$('#thumbContainerContainer').append('<div class="thumbContainer"><img class="product-thumb cursorPointer" data-src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KHC_Docs/' + $scope.LineItem.Product.ExternalID + '_pvd_01_lrg.jpg" src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KHC_Docs/' + $scope.LineItem.Product.ExternalID + '_pvd_01_sm.jpg" alt=""></div>');
-			$('#thumbContainerContainer').append('<div class="thumbContainer"><img class="product-thumb cursorPointer" data-src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KHC_Docs/' + $scope.LineItem.Product.ExternalID + '_pvd_02_lrg.jpg" src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KHC_Docs/' + $scope.LineItem.Product.ExternalID + '_pvd_02_sm.jpg" alt=""></div>');
+			$scope.galleryUrl1 = 'https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KHC_Docs/' + $scope.LineItem.Product.ExternalID + '_pvd_01_lrg.jpg';
+			$scope.galleryUrl2 = 'https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KHC_Docs/' + $scope.LineItem.Product.ExternalID + '_pvd_02_lrg.jpg';
 
+			//check if gallery image exist
+			function checkIfImageExists(url, callback) {
+				const img = new Image();
+				img.src = url;
+
+				if (img.complete) {
+					callback(true);
+				} else {
+					img.onload = () => {
+						callback(true);
+					};
+
+					img.onerror = () => {
+						callback(false);
+					};
+				}
+			}
+
+			checkIfImageExists($scope.galleryUrl1, (exists) => {
+				if (exists) {
+					$scope.gallery1 = true;
+					$scope.$apply();
+					// $('#thumbContainerContainer').append('<div class="thumbTitle">Click to zoom</div><div class="thumbContainer"><img class="product-thumb cursorPointer" data-src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KHC_Docs/' + $scope.LineItem.Product.ExternalID + '_pvd_01_lrg.jpg" src="img/gallery-1.jpg" alt=""></div>');
+				} else {
+					console.error('Image 1 does not exist.')
+				}
+			});
+
+			checkIfImageExists($scope.galleryUrl2, (exists) => {
+				if (exists) {
+					$scope.gallery2 = true;
+					$scope.$apply();
+					// $('#thumbContainerContainer').append('<div class="thumbContainer"><img class="product-thumb cursorPointer" data-src="https://www.four51.com/Themes/Custom/700dfe64-2fbd-4bca-9c5c-f423c74b2912/KHC_Docs/' + $scope.LineItem.Product.ExternalID + '_pvd_02_lrg.jpg" src="img/gallery-2.jpg" alt=""></div>');
+				} else {
+					console.error('Image 2 does not exist.')
+				}
+			});
+			$scope.$broadcast('ProductGetComplete');
+			$scope.loadingIndicator = false;
 		}, $scope.settings.currentPage, $scope.settings.pageSize, searchTerm);
 	}
 
