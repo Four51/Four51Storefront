@@ -227,7 +227,7 @@ function drawForm_textbased() {
 		$(document).off('click', '#proceedToCheckout');
 
 		$(document).on('click', '#proceedToCheckout', function() {
-			if (hasLogoSelection && (!$('#logo').val() || !$('#master').val())) {
+			if (hasLogoSelection && (!$('#logo').val() || ($('#master').length > 0 && !$('#master').val()))) {
 				alert('You must choose a facility / division logo before proceeding.');
 				return;
 			}
