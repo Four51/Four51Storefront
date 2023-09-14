@@ -1,4 +1,5 @@
 var hasLogoSelection = false;
+var lpMasterFile = 'LP_AcuteHosp_MarketMstr';
 
 function getMasterFileNameSpace() {
 	try {
@@ -78,10 +79,44 @@ function drawForm_textbased() {
 		return '';
 	}
 
+	function updateFacilityChoices(namespace) {
+		let options = '';
+		let systemNamespace = window[lpMasterFile].facilityOptions[namespace];
+		let logoOptions = window[systemNamespace].logoOptions;
+		let logo = $('#logo');
+
+		logo.empty();
+
+		logo.append('<option value="" selected disabled>Make a selection...</option>');
+
+		for (let lo in logoOptions) {
+			logo.append('<option value="' + logoOptions[lo] + '">' + logoOptions[lo] + '</option>');
+		}
+
+		logo.data('namespace', systemNamespace);
+	}
+
 	function renderSpecFormContent() {
 		// Prepare spec data
-		var content = '';
+		var content = '<div class="logo-selection-options">';
+		var masterFile = getMasterFileNameSpace();
 		var logoOptions = getMasterFileVariable('logoOptions');
+
+		if (masterFile === lpMasterFile) {
+			hasLogoSelection = true;
+
+			//this is a lifepoint masterfile product, need to show an additional select for the healthcare system then show facility options after healthcare system is selected
+			var masterOptions = '';
+			for (var lo in logoOptions) {
+				masterOptions += '<option value="' + logoOptions[lo] + '">' + logoOptions[lo] + '</option>';
+			}
+
+			content = '<div style="font-size: 11px; margin-bottom: 25px;"><label for="logo">Choose Healthcare System</label><select id="master" class="form-control nopad" required><option value="" selected disabled>Make a selection...</option>' + masterOptions + '</select></div>';
+
+			content += '<div class="logo-selection-options" style="display: none;">';
+
+			logoOptions = [];
+		}
 
 		for (var y in angScope.Product.Specs) {
 			if (y === 'LogoSelection') {
@@ -90,7 +125,7 @@ function drawForm_textbased() {
 				for (var z in logoOptions) {
 					options += '<option value="' + logoOptions[z] + '">' + logoOptions[z] + '</option>';
 				}
-				content += '<div style="font-size: 11px; margin-bottom: 25px;"><label for="logo">Choose a facility / division</label><select id="logo" class="form-control nopad" required><option value="" selected disabled>Make a selection...</option>' + options + '</select></div>';
+				content += '<div style="font-size: 11px; margin-bottom: 25px;"><label for="logo">Choose Facility</label><select data-namespace="' + masterFile + '" id="logo" class="form-control nopad" required><option value="" selected disabled>Make a selection...</option>' + options + '</select></div>';
 			} else {
 				var spec = angScope.Product.Specs[y];
 
@@ -123,6 +158,8 @@ function drawForm_textbased() {
 			}
 		}
 
+		content += '</div>';
+
 		return content;
 	}
 
@@ -136,7 +173,10 @@ function drawForm_textbased() {
 
 		if (hasLogoSelection) {
 			let select2 = $('#logo').select2({width: '100%'});
-			select2.data('select2').$selection.css('height', '40px');
+			let masterSelect2 = $('#master').select2({width: '100%'});
+
+			if (select2.length > 0)	select2.data('select2').$selection.css('height', '40px');
+			if (masterSelect2.length > 0)	masterSelect2.data('select2').$selection.css('height', '40px');
 		}
 
 		compileAngularDirectives(['specformpreview', 'octextfield', 'customfilefield', 'customselectionfield', 'ocfilefield', 'ocselectionfield']);
@@ -162,7 +202,7 @@ function drawForm_textbased() {
 				//need to update the Product.Spec and the Variant.Spec, however, dont understand why
 				if (spec.Name !== 'LogoSelection' && spec.Name.startsWith('v99') === false) {
 					var specVarName = y + 'SpecOptions';
-					var masterfileVar = getMasterFileVariable(specVarName);
+					var masterfileVar = window[$(this).data('namespace')][specVarName];
 
 					if (masterfileVar !== undefined && masterfileVar[$logoValue] !== undefined) {
 						spec.Value = masterfileVar[$logoValue];
@@ -174,15 +214,25 @@ function drawForm_textbased() {
 			angScope.$digest();
 		});
 
+		$(document).on('change', '#master', function() {
+			//need to build the standard spec form like we do today, but it will need to be wiped and reset each time this value changes
+			$('div.logo-selection-options input').val('');
+
+			//need to update the possible options for the facility drop down
+			updateFacilityChoices($(this).val());
+
+			$('div.logo-selection-options').show();
+		});
+
 		$(document).off('click', '#proceedToCheckout');
 
 		$(document).on('click', '#proceedToCheckout', function() {
-			if (hasLogoSelection && !$('#logo').val()) {
+			if (hasLogoSelection && (!$('#logo').val() || ($('#master').length > 0 && !$('#master').val()))) {
 				alert('You must choose a facility / division logo before proceeding.');
 				return;
 			}
-			angScope.saveasnew(true);
 
+			angScope.saveasnew(true);
 		});
 	})();
 }
