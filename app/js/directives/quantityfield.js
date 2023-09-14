@@ -14,17 +14,25 @@ four51.app.directive('quantityfield', ['$451', 'ProductDisplayService', function
         link: function(scope){
             scope.getRestrictedQtyText = function(priceBreak, qtyMultiplier){
                 var qtyText = priceBreak.Quantity * qtyMultiplier;
+                if (priceBreak.Quantity === 11 && scope.lineitem.PriceSchedule.Name === 'Downloadable')
+                    qtyText = 'Download';
+                //default behavior
                 if(qtyMultiplier > 1)
                     qtyText += ' (' + priceBreak.Quantity + 'x' + qtyMultiplier +')';
                 return qtyText;
             };
             scope.qtyChanged = function(lineitem){
+                if (lineitem.Product.Type === 'Static' && lineitem.PriceSchedule.Name === 'Downloadable' && lineitem.Quantity === 11) {
+                    let downloadUrl = location.origin.replace('teststore', 'test') + '/UI' + lineitem.Product.StaticSpecGroups['Special'].Specs['04 - Proof'].FileURL;
+                    lineitem.Specs.DownloadUrl.Value = downloadUrl;
+                }
+
                 ProductDisplayService.calculateLineTotal(lineitem);
                 if(scope.calculated)
                     scope.calculated(lineitem);
             };
             scope.validQuantityAddToOrder = function(value, lineItem){
-				if (!value) return;
+                if (!value) return;
                 var variant = lineItem.Variant;
                 var product = lineItem.Product;
                 var priceSchedule = lineItem.PriceSchedule;

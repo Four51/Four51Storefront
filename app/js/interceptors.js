@@ -21,7 +21,10 @@ four51.app.config(['$httpProvider', function($httpProvider) {
 
 				//if ($451.debug && typeof response.data == 'object')
 				//	console.log(response.data);
-
+				if (response.config.url.indexOf('addToOrderSpecForm') !== -1) {
+					// Hide 'downloadable' and 'Bill_Facility_Number' specs, they are not used for user input
+					response.data = response.data.toString().replace('<customtextfield customfield="s" ng-if="s.ControlType == \'Text\'"></customtextfield>', '<customtextfield customfield="s" ng-if="s.ControlType == \'Text\' && s.Name !== \'project_number\' && s.Name !== \'downloadable\' && s.Name !== \'DownloadUrl\'"></customtextfield>');
+				}
 				return response || $q.when(response);
 			},
 			'responseError': function(response) {

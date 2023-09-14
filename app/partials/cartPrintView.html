@@ -35,7 +35,7 @@
                     <p>{{item.ProductIDText}}</p>
                     <p>{{item.Product.Name}}</p>
                     <ul class="list-group" ng-show="item.SpecsLength > 0">
-                        <li class="list-group-item" ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
+                        <li class="list-group-item" ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true}" ng-hide="spec.Name === 'DownloadUrl'">
                             <span class="text-info">{{spec.Label || spec.Name}}: </span>
                             <span ng-if="spec.ControlType == 'File'">{{spec.File.OriginalName + Extension}}</span>
                             <span ng-if="spec.ControlType != 'File'">{{spec.Value || ('(unspecified)' | xlat)}}</span>

@@ -1,5 +1,4 @@
 <div class="panel-order-history" ng-repeat="item in order.LineItems">
-    <a href="{{item.ProofUrl}}" target="_blank" title="{{'Download' | r | xlat}}" ng-if="order.Status != 'AwaitingApproval' && (item.Product.Type == 'VariableText' && item.ProofUrl)"><i class="fa fa-download"></i></a>
     <a href="" title="{{'Download' | r | xlat}}" ng-click="downloadProof(item)" ng-if="order.Status == 'AwaitingApproval' && (item.Variant.IsMpowerVariant)"><i class="fa fa-download"></i></a>
     <div class="col-sm-6">
         <h3 class="text-primary">
@@ -7,15 +6,28 @@
         </h3>
         <span>{{item.Product.Name}}</span>
         <ul ng-show="item.Specs | filter:{'CanSetForLineItem':true}.length > 0">
-            <li class="text-center" ng-repeat="spec in item.Specs | onproperty:{Property: 'CanSetForLineItem', Value: true} ">
+            <li class="text-center" ng-hide="spec.Name == 'downloadable' || spec.Name == 'DownloadUrl'" ng-repeat="spec in item.Specs | onproperty:{Property: 'CanSetForLineItem', Value: true} ">
                 <span class="text-info">{{spec.Name}}</span>
                 <span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span>
                 <span ng-if="spec.ControlType != 'File'">{{spec.Value || ('(unspecified)' | xlat)}}</span>
             </li>
         </ul>
-        <a ng-if="item.ProductionURL" class="btn btn-primary printable-pdf-link" href="{{item.ProductionURL}}" target="_blank">
-            <span><i class="fa fa-download"></i> {{'Download Printable File' | r | xlat}}</span>
-        </a>
+        <div ng-if="item.Product.Type !== 'Static' && item.ProductionURL">
+            <a class="btn btn-primary printable-pdf-link" href="{{item.ProductionURL}}" target="_blank">
+                <span><i class="fa fa-download"></i> {{'Download Printable PDF ' | r | xlat}}</span>
+            </a>
+        </div>
+        <div ng-if="item.Product.Type !== 'Static' && !item.ProductionURL && item.ProofUrl">
+            <a class="btn btn-primary printable-pdf-link" href="{{item.ProofUrl.replace('PDF', 'PDFO')}}" target="_blank">
+                <span><i class="fa fa-download"></i> {{'Download Printable PDF ' | r | xlat}}</span>
+            </a>
+        </div>
+        <div ng-if="item.Product.Type === 'Static' && downloadUrl(item) !== null">
+            <a class="btn btn-primary printable-pdf-link" href="{{downloadUrl(item)}}" target="_blank">
+                <span><i class="fa fa-download"></i> {{'Download File'}}</span>
+            </a>
+        </div>
+
     </div>
     <div class="col-sm-6">
         <div class="row">

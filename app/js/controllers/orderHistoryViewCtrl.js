@@ -107,6 +107,14 @@ four51.app.controller('OrderViewCtrl', ['$scope', '$location', '$routeParams', '
 			window.print();
 		};
 
+		$scope.downloadUrl = function(item) {
+			if ('Specs' in item && 'DownloadUrl' in item.Specs && item.Specs.DownloadUrl.Value.length > 0) {
+				return item.Specs.DownloadUrl.Value;
+			} else {
+				return null;
+			}
+		};
+
         $scope.downloadProof = function(item) {
             $scope.errorMessage = null;
             Variant.get({VariantInteropID: item.Variant.InteropID, ProductInteropID: item.Product.InteropID }, function(v) {
