@@ -6,7 +6,7 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 			AddressList.clear();
 			AddressList.shipping(function(list) {
 				$scope.shipaddresses = list;
-
+//reverted changes
 				if ($scope.currentOrder) {
 					if (list.length == 1 && !$scope.currentOrder.ShipAddressID) {
 						$scope.currentOrder.ShipAddressID = list[0].ID;
