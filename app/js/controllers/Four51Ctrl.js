@@ -26,11 +26,11 @@ function ($rootScope, $scope, $route, $location, $451, User, Order, Security, Or
 		if (Security.isAuthenticated()) {
 			User.get(function (user) {
 				$scope.user = user;
-		                $scope.user.Culture.CurrencyPrefix = XLATService.getCurrentLanguage(user.CultureUI, user.Culture.Name)[1];
-		                $scope.user.Culture.DateFormat = XLATService.getCurrentLanguage(user.CultureUI, user.Culture.Name)[2];
+				$scope.user.Culture.CurrencyPrefix = XLATService.getCurrentLanguage(user.CultureUI, user.Culture.Name)[1];
+				$scope.user.Culture.DateFormat = XLATService.getCurrentLanguage(user.CultureUI, user.Culture.Name)[2];
 				for (var i = 0; i < $scope.user.Groups.length; i++) {
 					var groupName = $scope.user.Groups[i].Name;
-					if (groupName == '07_LP_CreativeServices' || groupName == '08_Scion_CreativeServices') {
+					if (groupName === '07_LP_CreativeServices') {
 						$rootScope.csUser = true;
 					}
 				}
