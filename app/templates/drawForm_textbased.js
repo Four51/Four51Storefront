@@ -144,7 +144,7 @@ function drawForm_textbased() {
 					}
 					else {
 						var labelText = spec.Label;
-
+						var isRequired = spec.Required;
 						//the initial label value may contain additional meta data to hide or make readonly so we need to strip that info out
 						spec.Label = specLabel(labelText);
 
@@ -238,6 +238,15 @@ function drawForm_textbased() {
 			if (hasLogoSelection && (!$('#logo').val() || ($('#master').length > 0 && !$('#master').val()))) {
 				alert('You must choose a facility / division logo before proceeding.');
 				return;
+			}
+
+			for (var y in angScope.Product.Specs) {
+				var spec = angScope.Product.Specs[y];
+
+				if (spec.Required === true && spec.Value === '') {
+					alert('Please complete all required fields before proceeding.');
+					return;
+				}
 			}
 
 			angScope.saveasnew(true);
