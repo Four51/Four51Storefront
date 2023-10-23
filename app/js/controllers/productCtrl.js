@@ -177,6 +177,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			$scope.currentOrder.LineItems.push($scope.LineItem);
 			$scope.currentOrder.Type = $scope.LineItem.PriceSchedule.OrderType;
 		}
+
 		Order.clearshipping($scope.currentOrder).
 			save($scope.currentOrder,
 				function(o) {

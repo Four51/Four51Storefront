@@ -17,13 +17,26 @@ four51.app.directive('quantityfield', ['$451', 'ProductDisplayService', function
                 if (priceBreak.Quantity === 11 && scope.lineitem.PriceSchedule.Name === 'Downloadable')
                     qtyText = 'Download';
                 //default behavior
-                if(qtyMultiplier > 1)
+                if(qtyMultiplier > 1) {
                     qtyText += ' (' + priceBreak.Quantity + 'x' + qtyMultiplier +')';
+                }
+                var download = $('#451qa_input_qty option').filter(function () { return $(this).html() === "Download"; });
+                $(download).remove();
+                $(download).appendTo($('#451qa_input_qty'));
                 return qtyText;
             };
             scope.qtyChanged = function(lineitem){
-                if (lineitem.Product.Type === 'Static' && lineitem.PriceSchedule.Name === 'Downloadable' && lineitem.Quantity === 11) {
-                    let downloadUrl = location.origin.replace('teststore', 'test') + '/UI' + lineitem.Product.StaticSpecGroups['Special'].Specs['04 - Proof'].FileURL;
+                lineitem.Specs.DownloadUrl.Value = '';
+                if (lineitem.Product.Type === 'Static' && lineitem.PriceSchedule.Name === 'Downloadable' && lineitem.Quantity === 11 && lineitem.Product.StaticSpecGroups['Download'].Specs['Paid'].FileURL) {
+                    let downloadUrl = location.origin.replace('teststore', 'test') + '/UI' + lineitem.Product.StaticSpecGroups['Download'].Specs['Paid'].FileURL;
+                    lineitem.Specs.DownloadUrl.Value = downloadUrl;
+                }
+                if (lineitem.Product.Type === 'Static' && lineitem.PriceSchedule.Name === 'Downloadable' && lineitem.Quantity === 11 && $scope.LineItem.Product.StaticSpecGroups['Download'].Specs['Paid'].FileURL === null) {
+                    let downloadUrl = location.origin.replace('teststore', 'test') + '/UI' + lineitem.Product.StaticSpecGroups['Download'].Specs['Paid'].FileURL;
+                    lineitem.Specs.DownloadUrl.Value = downloadUrl;
+                }
+                if (lineitem.Product.Type === 'VariableText' && lineitem.PriceSchedule.Name === 'Downloadable' && lineitem.Quantity === 11) {
+                    let downloadUrl = lineitem.Variant.ProductionURL;
                     lineitem.Specs.DownloadUrl.Value = downloadUrl;
                 }
 
