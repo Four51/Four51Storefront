@@ -27,7 +27,7 @@
 								<div class="view-form-icon">
 									<quantityfield required="true" lineitem="item" class="quantity"/>
 								</div>
-								<p class="quantity-total text-center">
+								<p class="quantity-total text-center" ng-hide="item.PriceSchedule.Name === 'Downloadable' && item.Quantity === 11">
 									<small>{{'Total Quantity' | r | xlat}} <span ng-show="item.Quantity * item.Product.QuantityMultiplier">{{item.Quantity * item.Product.QuantityMultiplier}}</span></small>
 								</p>
 							</div>
