@@ -1,7 +1,9 @@
 a:hover {
 	text-decoration: none;
 }
-
+.select2-container--default .select2-selection--single {
+	height: 42px !important;
+}
 .categoryItem {
 	background: linear-gradient(rgb(78, 138, 187) 20%, rgb(0, 70, 132) 100%);
 	min-height: 50px;

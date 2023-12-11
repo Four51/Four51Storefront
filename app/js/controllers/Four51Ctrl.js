@@ -47,17 +47,46 @@ function ($rootScope, $scope, $route, $location, $451, User, Order, Security, Or
 				if (user.Company.GoogleAnalyticsCode) {
 					GoogleAnalytics.analyticsLogin(user.Company.GoogleAnalyticsCode);
 				}
-				$scope.isLifepoint = $scope.user.Groups[0].Name === '01_Lifepoint';
-				$scope.isScion = $scope.user.Groups[0].Name === '02_Scion Hospitals';
+				$scope.isLifepoint = $scope.user.Groups[0]?.Name === '01_Lifepoint';
+				$scope.isScion = $scope.user.Groups[0]?.Name === '02_Scion Hospitals';
 				//Vivid Impact Ticketing System Integration
 				$scope.user.AllowTicketing = false;
 				$scope.user.TicketingDashboard = false;
+				$scope.hostUser = false;
+				$scope.hostHscUser = false;
+				$scope.sapAruUser = false;
+				$scope.sapAruLtachUser = false;
+				$scope.sapIrfUser = false;
+				$scope.sapBehavioralUser = false;
+				$scope.sapHscUser = false;
+
 				angular.forEach($scope.user.Groups, function (f) {
 					if (f.Name === 'Ticketing') {
 						$scope.user.AllowTicketing = true;
 					}
 					if (f.Name === 'TicketingDashboard') {
 						$scope.user.TicketingDashboard = true;
+					}
+					if (f.Name === '08_HOST_Acute Care Hospital and/or Physician Practice') {
+						$scope.hostUser = true;
+					}
+					if (f.Name === '08_HOST_Lifepoint HSC (South)') {
+						$scope.hostHscUser = true;
+					}
+					if (f.Name === '09_SAP_ARU') {
+						$scope.sapAruUser = true;
+					}
+					if (f.Name === '09_SAP_ARU-LTACH') {
+						$scope.sapAruLtachUser = true;
+					}
+					if (f.Name === '09_SAP_IRF') {
+						$scope.sapIrfUser = true;
+					}
+					if (f.Name === '09_SAP_Lifepoint Behavioral Health') {
+						$scope.sapBehavioralUser = true;
+					}
+					if (f.Name === '09_SAP_Lifepoint HSC (North)') {
+						$scope.sapHscUser = true;
 					}
 				});
 				var userFirst = 'First Name=' + user.FirstName;
