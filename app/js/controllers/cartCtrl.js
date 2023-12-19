@@ -24,18 +24,20 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 		}
 
 		$scope.checkCostCenters = function() {
-			// for (var i in $scope.currentOrder.LineItems) {
-			// 	var item = $scope.currentOrder.LineItems[i];
-			// 	if (!item.facilityNumber || !item.dept || !item.glCode || (item.glCode == 'Other' && !item.otherText)) {
-			// 		alert('Facility, department, and GL Code information is required for all items');
-			// 		return false;
-			// 	}
-			// 	if (item.glCode == 'Other') {
-			// 		$scope.currentOrder.LineItems[i].CostCenter = $scope.companyCode + '_' + item.facilityNumber + '_' + item.dept + '_OTHER:' + item.otherText;
-			// 	} else {
-			// 		$scope.currentOrder.LineItems[i].CostCenter = $scope.companyCode + '_' + item.facilityNumber + '_' + item.dept + '_' + item.glCode;
-			// 	}
-			// }
+			var facilityNumber = '';
+			var dept = '';
+			var glCode = '';
+			var CSglCode = '';
+			for (var i in $scope.currentOrder.LineItems) {
+				var item = $scope.currentOrder.LineItems[i];
+				if (item.facilityNumber) {facilityNumber = item.facilityNumber + '_'}
+				if (item.dept) {dept = item.dept + '_'}
+				if (item.glCode) {glCode = item.glCode}
+				if (item.CSglCode) {CSglCode = item.CSglCode}
+
+				$scope.currentOrder.LineItems[i].CostCenter = facilityNumber + dept + glCode + CSglCode;
+			}
+
 			return true;
 		}
 		$scope.currentDate = new Date();
@@ -189,6 +191,7 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 				$scope.currentOrder.LineItems[i].facilityNumber = item.facilityNumber;
 				$scope.currentOrder.LineItems[i].dept = item.dept;
 				$scope.currentOrder.LineItems[i].glCode = item.glCode;
+				$scope.currentOrder.LineItems[i].CSglCode = item.CSglCode;
 				if (item.glCode == 'Other') {
 					$scope.currentOrder.LineItems[i].showOther = true;
 					$scope.currentOrder.LineItems[i].otherText = item.otherText;
@@ -200,34 +203,34 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 		}
 		$scope.$watch('orderInitialized', function() {
 			// Initiate Facility, Dept and GL Code data if it already exists:
-			for (var i in $scope.currentOrder.LineItems) {
-				$scope.currentOrder.LineItems[i].showOther = false;
-				if ($scope.currentOrder.LineItems[i].CostCenter !== 'undefined' && $scope.currentOrder.LineItems[i].CostCenter) {
-					var elements = $scope.currentOrder.LineItems[i].CostCenter.split('_');
-					$scope.currentOrder.LineItems[i].showOther = false;
-					$scope.currentOrder.LineItems[i].facilityNumber = elements[0];
-					$scope.currentOrder.LineItems[i].dept = elements[1];
-					$scope.currentOrder.LineItems[i].glCode = elements[2];
-					if ($scope.currentOrder.LineItems[i].CostCenter.indexOf('OTHER:') !== -1) {
-						$scope.currentOrder.LineItems[i].glCode = 'Other';
-						$scope.currentOrder.LineItems[i].showOther = true;
-						$scope.currentOrder.LineItems[i].otherText = $scope.currentOrder.LineItems[i].CostCenter.split('OTHER:')[1];
-					}
-				}
-			}
+			// for (var i in $scope.currentOrder.LineItems) {
+			// 	$scope.currentOrder.LineItems[i].showOther = false;
+			// 	if ($scope.currentOrder.LineItems[i].CostCenter !== 'undefined' && $scope.currentOrder.LineItems[i].CostCenter) {
+			// 		var elements = $scope.currentOrder.LineItems[i].CostCenter.split('_');
+			// 		$scope.currentOrder.LineItems[i].showOther = false;
+			// 		$scope.currentOrder.LineItems[i].facilityNumber = elements[0];
+			// 		$scope.currentOrder.LineItems[i].dept = elements[1];
+			// 		$scope.currentOrder.LineItems[i].glCode = elements[2];
+			// 		if ($scope.currentOrder.LineItems[i].CostCenter.indexOf('OTHER:') !== -1) {
+			// 			$scope.currentOrder.LineItems[i].glCode = 'Other';
+			// 			$scope.currentOrder.LineItems[i].showOther = true;
+			// 			$scope.currentOrder.LineItems[i].otherText = $scope.currentOrder.LineItems[i].CostCenter.split('OTHER:')[1];
+			// 		}
+			// 	}
+			// }
 
-			for (var i in $scope.currentOrder.LineItems) {
-				angular.forEach($scope.user.CustomFields, function(f) {
-					if (f.Name === 'LPSH_CostCode')
-						var code = f.Value;
-					if(code && Number(code)){
-						var facilityID = code.slice(0,4);
-						var deptID = code.slice(-3);
-					}
-					$scope.currentOrder.LineItems[i].facilityNumber = facilityID;
-					$scope.currentOrder.LineItems[i].dept = deptID;
-				});
-			}
+			// for (var i in $scope.currentOrder.LineItems) {
+			// 	angular.forEach($scope.user.CustomFields, function(f) {
+			// 		if (f.Name === 'LPSH_CostCode')
+			// 			var code = f.Value;
+			// 		if(code && Number(code)){
+			// 			var facilityID = code.slice(0,4);
+			// 			var deptID = code.slice(-3);
+			// 		}
+			// 		$scope.currentOrder.LineItems[i].facilityNumber = facilityID;
+			// 		$scope.currentOrder.LineItems[i].dept = deptID;
+			// 	});
+			// }
 
 			angular.forEach($scope.user.Groups, function(g) {
 				if (g.Name.indexOf('Scion') !== -1)

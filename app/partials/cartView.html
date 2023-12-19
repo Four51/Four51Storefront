@@ -81,7 +81,7 @@
 							</div>
 						</div>
 						<div id="costCenterRow" class="row">
-							<div class="col-sm-12 col-xs-12 col-md-2">
+							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="!csUser">
 								<label for="facilityNumber"  style="font-size: 12px" class="required">Facility #</label>
 								<select ng-disabled="item.lockFacilityNumber" ng-model="item.facilityNumber" id="facilityNumber" class="form-control facilityNumber" required>
 									<option ng-if="hostUser" ng-selected="'5424 - Ashley Regional Medical Center' == item.facilityNumber" value="5424">5424 - Ashley Regional Medical Center</option>
@@ -246,7 +246,7 @@
 									<option ng-if="sapHscUser" ng-selected="'7038 - Corp Personnel Area 7' == item.facilityNumber" value=7038">7038 - Corp Personnel Area 7</option>
 								</select>
 							</div>
-							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="!hostUser">
+							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="sapHscUser || sapBehavioralUser || sapIrfUser || sapAruLtachUser || sapAruUser ||hostHscUser">
 								<label for="dept" style="font-size: 12px" class="required">Dept #</label>
 								<select ng-model="item.dept" class="form-control deptNumber" id="dept" ng-required="!hostUser">
 									<option ng-if="sapBehavioralUser" ng-selected="'201' == item.dept" value="201">201</option>
@@ -325,10 +325,9 @@
 									<option ng-if="sapHscUser" ng-selected="'987 - Insurance Risk' == item.dept" value="987">987 - Insurance Risk</option>
 									<option ng-if="sapHscUser" ng-selected="'993 - Accounts Payable' == item.dept" value="993">993 - Accounts Payable</option>
 									<option ng-if="sapHscUser" ng-selected="'995 - Human Resources' == item.dept" value="995">995 - Human Resources</option>
-
 								</select>
 							</div>
-							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="!hostUser">
+							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="sapHscUser || sapBehavioralUser || sapIrfUser || sapAruLtachUser || sapAruUser ||hostHscUser">
 								<label style="font-size: 12px" for="glCode" class="required">GL Code</label>
 								<select id="glCode" ng-change="glCodeChanged(item)" ng-model="item.glCode" class="form-control glCode" ng-required="!hostUser">
 									<option ng-if="!hostHscUser" ng-selected="'79016 - Marketing' == item.glCode" value="79016">79016 - Marketing</option>
@@ -338,9 +337,11 @@
 									<option ng-if="!hostHscUser" ng-selected="'79014 - Public Relations' == item.glCode" value="79014">79014 - Public Relations</option>
 									<option ng-if="hostHscUser" ng-selected="'446 - Supplies' == item.glCode" value="446">446 - Supplies</option>
 									<option ng-if="hostHscUser" ng-selected="'801 - Recruiting' == item.glCode" value="801">801 - Recruiting</option>
-
-
 								</select>
+							</div>
+							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="csUser">
+								<label style="font-size: 12px" for="CSglCode" class="required">GL Code</label>
+								<input id="CSglCode" ng-model="item.CSglCode" class="form-control glCode" ng-required="csUser" />
 							</div>
 
 							<div class="col-sm-2 col-xs-12" ng-show="item.showOther">
