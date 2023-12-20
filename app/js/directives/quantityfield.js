@@ -26,7 +26,7 @@ four51.app.directive('quantityfield', ['$451', 'ProductDisplayService', function
                 return qtyText;
             };
             scope.qtyChanged = function(lineitem){
-                lineitem.Specs.DownloadUrl.Value = '';
+                // lineitem.Specs.DownloadUrl.Value = '';
                 if (lineitem.Product.Type === 'Static' && lineitem.PriceSchedule.Name === 'Downloadable' && lineitem.Quantity === 11 && lineitem.Product.StaticSpecGroups['Download'].Specs['Paid'].FileURL) {
                     let downloadUrl = location.origin.replace('teststore', 'test') + '/UI' + lineitem.Product.StaticSpecGroups['Download'].Specs['Paid'].FileURL;
                     lineitem.Specs.DownloadUrl.Value = downloadUrl;
