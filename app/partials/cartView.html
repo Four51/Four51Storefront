@@ -83,7 +83,7 @@
 						<div id="costCenterRow" class="row">
 							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="!csUser">
 								<label for="facilityNumber"  style="font-size: 12px" class="required">Facility #</label>
-								<select ng-disabled="item.lockFacilityNumber" ng-model="item.facilityNumber" id="facilityNumber" class="form-control facilityNumber" required>
+								<select ng-change="facilityNumberChanged(item)" ng-disabled="item.lockFacilityNumber" ng-model="item.facilityNumber" id="facilityNumber" class="form-control facilityNumber" required>
 									<option ng-if="hostUser" ng-selected="'5424 - Ashley Regional Medical Center' == item.facilityNumber" value="5424">5424 - Ashley Regional Medical Center</option>
 									<option ng-if="hostUser" ng-selected="'5452 - Bluegrass Community Hospital' == item.facilityNumber" value="5452">5452 - Bluegrass Community Hospital</option>
 									<option ng-if="hostUser" ng-selected="'5391 - Bourbon Community Hospital' == item.facilityNumber" value="5391">5391 - Bourbon Community Hospital</option>
@@ -170,80 +170,80 @@
 									<option ng-if="sapAruUser" ng-selected="'380J - St. Mary\'s Reno' == item.facilityNumber" value="380J">380J - St. Mary's Reno</option>
 									<option ng-if="sapAruUser" ng-selected="'313J - Stillwater Medical Center' == item.facilityNumber" value="313J">313J - Stillwater Medical Center</option>
 									<option ng-if="sapAruUser" ng-selected="'375J - Sumner Regional Medical Center' == item.facilityNumber" value="375J">375J - Sumner Regional Medical Center</option>
-									<option ng-if="sapAruUser" ng-selected="'445G - Sutter Coast Acute Rehabilitation Center' == item.facilityNumber" value=445G">445G - Sutter Coast Acute Rehabilitation Center</option>
-									<option ng-if="sapAruUser" ng-selected="'581G - Taylor Hospital Acute Rehab Unit' == item.facilityNumber" value=581G">581G - Taylor Hospital Acute Rehab Unit</option>
-									<option ng-if="sapAruUser" ng-selected="'481G - The Jewish Hospital - Bon Secours Mercy Health System' == item.facilityNumber" value=481G">481G - The Jewish Hospital - Bon Secours Mercy Health System</option>
-									<option ng-if="sapAruUser" ng-selected="'418G - The Medical Center of Southeast Texas' == item.facilityNumber" value=418G">418G - The Medical Center of Southeast Texas</option>
-									<option ng-if="sapAruUser" ng-selected="'735G - Trinity RehabCare Center' == item.facilityNumber" value=735G">735G - Trinity RehabCare Center</option>
-									<option ng-if="sapAruUser" ng-selected="'616K - UNC Lenoir Health Care' == item.facilityNumber" value=616K">616K - UNC Lenoir Health Care</option>
-									<option ng-if="sapAruUser" ng-selected="'570G - United General' == item.facilityNumber" value=570G">570G - United General</option>
-									<option ng-if="sapAruUser" ng-selected="'306J - UPHS-Marquette, Inpatient Rehab Unit' == item.facilityNumber" value=306J">306J - UPHS-Marquette, Inpatient Rehab Unit</option>
-									<option ng-if="sapAruUser" ng-selected="'538G - USC Arcadia Hospital' == item.facilityNumber" value=538G">538G - USC Arcadia Hospital</option>
-									<option ng-if="sapAruUser" ng-selected="'674G - Valley Rehabilitation Center' == item.facilityNumber" value=674G">674G - Valley Rehabilitation Center</option>
-									<option ng-if="sapAruUser" ng-selected="'376J - Valley View Acute Rehabilitation Unit' == item.facilityNumber" value=376J">376J - Valley View Acute Rehabilitation Unit</option>
-									<option ng-if="sapAruUser" ng-selected="'302J - West Jefferson Rehab Center' == item.facilityNumber" value=302J">302J - West Jefferson Rehab Center</option>
-									<option ng-if="sapAruUser" ng-selected="'576G - White River Inpatient Acute Rehab' == item.facilityNumber" value=576G">576G - White River Inpatient Acute Rehab</option>
-									<option ng-if="sapIrfUser" ng-selected="'4098 - Anderson Rehabilitation Institute' == item.facilityNumber" value=4098">4098 - Anderson Rehabilitation Institute</option>
-									<option ng-if="sapIrfUser" ng-selected="'4099 - Ascension Saint Thomas Rehabilitation Hospital' == item.facilityNumber" value=4099">4099 - Ascension Saint Thomas Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'4090 - Atlantic Rehabilitation Institute' == item.facilityNumber" value=4090">4090 - Atlantic Rehabilitation Institute</option>
-									<option ng-if="sapIrfUser" ng-selected="'4070 - Baptist Memorial Rehabilitation Hospital' == item.facilityNumber" value=4070">4070 - Baptist Memorial Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'4844 - Central Texas Rehabilitation Hospital' == item.facilityNumber" value=4844">4844 - Central Texas Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'3843 - CHI Franciscan Rehabilitation Hospital' == item.facilityNumber" value=3843">3843 - CHI Franciscan Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'4072 - Community Rehabilitation Hospital North' == item.facilityNumber" value=4072">4072 - Community Rehabilitation Hospital North</option>
-									<option ng-if="sapIrfUser" ng-selected="'4072 - Community Rehabilitation Hospital North' == item.facilityNumber" value=4072">4072 - Community Rehabilitation Hospital North</option>
-									<option ng-if="sapIrfUser" ng-selected="'4089 - Community Rehabilitation Hospital South' == item.facilityNumber" value=4089">4089 - Community Rehabilitation Hospital South</option>
-									<option ng-if="sapIrfUser" ng-selected="'4128 - Community Rehabilitation Hospital West' == item.facilityNumber" value=4128">4128 - Community Rehabilitation Hospital West</option>
-									<option ng-if="sapIrfUser" ng-selected="'3167 - Dignity East Valley Rehabilitation Hospital' == item.facilityNumber" value=3167">3167 - Dignity East Valley Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'4214 - Dignity Health East Valley Rehabilitation Hospital - Gilbert' == item.facilityNumber" value=4214">4214 - Dignity Health East Valley Rehabilitation Hospital - Gilbert</option>
-									<option ng-if="sapIrfUser" ng-selected="'4231 - El Paso Rehabilitation Hospital' == item.facilityNumber" value=4231">4231 - El Paso Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'4217 - Frazier Rehabilitation Hospital – Brownsboro' == item.facilityNumber" value=4217">4217 - Frazier Rehabilitation Hospital – Brownsboro</option>
-									<option ng-if="sapIrfUser" ng-selected="'4097 - Knoxville Rehabilitation Hospital' == item.facilityNumber" value=4097">4097 - Knoxville Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'4073 - Lancaster Rehabilitation Hospital' == item.facilityNumber" value=4073">4073 - Lancaster Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'4092 - Mercy Iowa City Rehabilitation Hospital' == item.facilityNumber" value=4092">4092 - Mercy Iowa City Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'4095 - Mercy Rehabilitation Hospital Fort Smith' == item.facilityNumber" value=4095">4095 - Mercy Rehabilitation Hospital Fort Smith</option>
-									<option ng-if="sapIrfUser" ng-selected="'4079 - Mercy Rehabilitation Hospital OKC' == item.facilityNumber" value=4079">4079 - Mercy Rehabilitation Hospital OKC</option>
-									<option ng-if="sapIrfUser" ng-selected="'4215 - Mercy Rehabilitation Hospital Oklahoma City South' == item.facilityNumber" value=4215">4215 - Mercy Rehabilitation Hospital Oklahoma City South</option>
-									<option ng-if="sapIrfUser" ng-selected="'4213 - Mercy Rehabilitation Hospital South' == item.facilityNumber" value=4213">4213 - Mercy Rehabilitation Hospital South</option>
-									<option ng-if="sapIrfUser" ng-selected="'4075 - Mercy Rehabilitation Hospital Springfield' == item.facilityNumber" value=4075">4075 - Mercy Rehabilitation Hospital Springfield</option>
-									<option ng-if="sapIrfUser" ng-selected="'4076 - Mercy Rehabilitation Hospital St. Louis' == item.facilityNumber" value=4076">4076 - Mercy Rehabilitation Hospital St. Louis</option>
-									<option ng-if="sapIrfUser" ng-selected="'3859 - MercyOne Clive Rehabilitation Hospital' == item.facilityNumber" value=3859">3859 - MercyOne Clive Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'4080 - Methodist Rehabilitation Hospital' == item.facilityNumber" value=4080">4080 - Methodist Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'3844 - Palomar Health Rehabilitation Institute' == item.facilityNumber" value=3844">3844 - Palomar Health Rehabilitation Institute</option>
-									<option ng-if="sapIrfUser" ng-selected="'4096 - Rehabilitation Hospital of Rhode Island' == item.facilityNumber" value=4096">4096 - Rehabilitation Hospital of Rhode Island</option>
-									<option ng-if="sapIrfUser" ng-selected="'4083 - Rehabilitation Hospital of Wisconsin' == item.facilityNumber" value=4083">4083 - Rehabilitation Hospital of Wisconsin</option>
-									<option ng-if="sapIrfUser" ng-selected="'4085 - St. Mary Rehabilitation Hospital' == item.facilityNumber" value=4085">4085 - St. Mary Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'4086 - Texas Rehabilitation Hospital of Arlington' == item.facilityNumber" value=4086">4086 - Texas Rehabilitation Hospital of Arlington</option>
-									<option ng-if="sapIrfUser" ng-selected="'4087 - Texas Rehabilitation Hospital of Ft. Worth' == item.facilityNumber" value=4087">4087 - Texas Rehabilitation Hospital of Ft. Worth</option>
-									<option ng-if="sapIrfUser" ng-selected="'4216 - Texas Rehabilitation Hospital of Keller' == item.facilityNumber" value=4216">4216 - Texas Rehabilitation Hospital of Keller</option>
-									<option ng-if="sapIrfUser" ng-selected="'4212 - TGH Rehabilitation Hospital' == item.facilityNumber" value=4212">4212 - TGH Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'4091 - The Rehabilitation Hospital of Montana' == item.facilityNumber" value=4091">4091 - The Rehabilitation Hospital of Montana</option>
-									<option ng-if="sapIrfUser" ng-selected="'4093 - UC Davis Rehabilitation Hospital' == item.facilityNumber" value=4093">4093 - UC Davis Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'4088 - University Hospitals Avon Rehabilitation Hospital' == item.facilityNumber" value=4088">4088 - University Hospitals Avon Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'4071 - University Hospitals Rehabilitation Hospital' == item.facilityNumber" value=4071">4071 - University Hospitals Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'4074 - UW Health Rehabilitation Hospital' == item.facilityNumber" value=4074">4074 - UW Health Rehabilitation Hospitall</option>
-									<option ng-if="sapIrfUser" ng-selected="'4227 - Liberty Rehabilitation Hospital' == item.facilityNumber" value=4227">4227 - Liberty Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'4229 - Longview Rehabilitation Hospital' == item.facilityNumber" value=4229">4229 - Longview Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'4230 - Rogers Rehabilitation Hospital' == item.facilityNumber" value=4230">4230 - Rogers Rehabilitation Hospital</option>
-									<option ng-if="sapIrfUser" ng-selected="'4228 - Temple Rehabilitation Hospital' == item.facilityNumber" value=4228">4228 - Temple Rehabilitation Hospital</option>
-									<option ng-if="sapHscUser" ng-selected="'249J – Lisa Soucy' == item.facilityNumber" value=249J">249J – Lisa Soucy</option>
-									<option ng-if="sapHscUser" ng-selected="'0142 - Behavioral Health Svc Overhead' == item.facilityNumber" value=0142">0142 - Behavioral Health Svc Overhead</option>
-									<option ng-if="sapHscUser" ng-selected="'0262 - BH Svcs OH Free Standing' == item.facilityNumber" value=0262">0262 - BH Svcs OH Free Standing</option>
-									<option ng-if="sapHscUser" ng-selected="'0262 - BH Svcs OH Free Standing' == item.facilityNumber" value=0262">0262 - BH Svcs OH Free Standing</option>
-									<option ng-if="sapHscUser" ng-selected="'3198 - Corp External' == item.facilityNumber" value=3198">3198 - Corp External</option>
-									<option ng-if="sapHscUser" ng-selected="'3240 - Centerre Healthcare Corp' == item.facilityNumber" value=3240">3240 - Centerre Healthcare Corp</option>
-									<option ng-if="sapHscUser" ng-selected="'3826 - Rehab Corp HRS' == item.facilityNumber" value=3826">3826 - Rehab Corp HRS</option>
-									<option ng-if="sapHscUser" ng-selected="'4014 - AP - LP Hospital Scheduling 1' == item.facilityNumber" value=4014">4014 - AP - LP Hospital Scheduling 1</option>
-									<option ng-if="sapHscUser" ng-selected="'4015 - AP - LP Transfer Center' == item.facilityNumber" value=4015">4015 - AP - LP Transfer Center</option>
-									<option ng-if="sapHscUser" ng-selected="'4978 - Bus Dev - Centerre' == item.facilityNumber" value=4978">4978 - Bus Dev - Centerre</option>
-									<option ng-if="sapHscUser" ng-selected="'4989 - LPH - Centralized Scheduling' == item.facilityNumber" value=4989">4989 - LPH - Centralized Schedulinge</option>
-									<option ng-if="sapHscUser" ng-selected="'4993 - Access Point' == item.facilityNumber" value=4993">4993 - Access Point</option>
-									<option ng-if="sapHscUser" ng-selected="'4997 - Access Point Answering Svcs' == item.facilityNumber" value=4997">4997 - Access Point Answering Svcs</option>
-									<option ng-if="sapHscUser" ng-selected="'5847 - Rehab Corp (C1)' == item.facilityNumber" value=5847">5847 - Rehab Corp (C1)</option>
-									<option ng-if="sapHscUser" ng-selected="'6500 - Legacy Kindred Systems, LLC' == item.facilityNumber" value=6500">6500 - Legacy Kindred Systems, LLC</option>
-									<option ng-if="sapHscUser" ng-selected="'6500 - Legacy Kindred Systems, LLC' == item.facilityNumber" value=6500">6500 - Legacy Kindred Systems, LLC</option>
-									<option ng-if="sapHscUser" ng-selected="'7004 - Corp Personnel Area 2' == item.facilityNumber" value=7004">7004 - Corp Personnel Area 2</option>
-									<option ng-if="sapHscUser" ng-selected="'7006 - Corp Personnel Area 4' == item.facilityNumber" value=7006">7006 - Corp Personnel Area 42</option>
-									<option ng-if="sapHscUser" ng-selected="'7038 - Corp Personnel Area 7' == item.facilityNumber" value=7038">7038 - Corp Personnel Area 7</option>
+									<option ng-if="sapAruUser" ng-selected="'445G - Sutter Coast Acute Rehabilitation Center' == item.facilityNumber" value="445G">445G - Sutter Coast Acute Rehabilitation Center</option>
+									<option ng-if="sapAruUser" ng-selected="'581G - Taylor Hospital Acute Rehab Unit' == item.facilityNumber" value="581G">581G - Taylor Hospital Acute Rehab Unit</option>
+									<option ng-if="sapAruUser" ng-selected="'481G - The Jewish Hospital - Bon Secours Mercy Health System' == item.facilityNumber" value="481G">481G - The Jewish Hospital - Bon Secours Mercy Health System</option>
+									<option ng-if="sapAruUser" ng-selected="'418G - The Medical Center of Southeast Texas' == item.facilityNumber" value="418G">418G - The Medical Center of Southeast Texas</option>
+									<option ng-if="sapAruUser" ng-selected="'735G - Trinity RehabCare Center' == item.facilityNumber" value="735G">735G - Trinity RehabCare Center</option>
+									<option ng-if="sapAruUser" ng-selected="'616K - UNC Lenoir Health Care' == item.facilityNumber" value="616K">616K - UNC Lenoir Health Care</option>
+									<option ng-if="sapAruUser" ng-selected="'570G - United General' == item.facilityNumber" value="570G">570G - United General</option>
+									<option ng-if="sapAruUser" ng-selected="'306J - UPHS-Marquette, Inpatient Rehab Unit' == item.facilityNumber" value="306J">306J - UPHS-Marquette, Inpatient Rehab Unit</option>
+									<option ng-if="sapAruUser" ng-selected="'538G - USC Arcadia Hospital' == item.facilityNumber" value="538G">538G - USC Arcadia Hospital</option>
+									<option ng-if="sapAruUser" ng-selected="'674G - Valley Rehabilitation Center' == item.facilityNumber" value="674G">674G - Valley Rehabilitation Center</option>
+									<option ng-if="sapAruUser" ng-selected="'376J - Valley View Acute Rehabilitation Unit' == item.facilityNumber" value="376J">376J - Valley View Acute Rehabilitation Unit</option>
+									<option ng-if="sapAruUser" ng-selected="'302J - West Jefferson Rehab Center' == item.facilityNumber" value="302J">302J - West Jefferson Rehab Center</option>
+									<option ng-if="sapAruUser" ng-selected="'576G - White River Inpatient Acute Rehab' == item.facilityNumber" value="576G">576G - White River Inpatient Acute Rehab</option>
+									<option ng-if="sapIrfUser" ng-selected="'4098 - Anderson Rehabilitation Institute' == item.facilityNumber" value="4098">4098 - Anderson Rehabilitation Institute</option>
+									<option ng-if="sapIrfUser" ng-selected="'4099 - Ascension Saint Thomas Rehabilitation Hospital' == item.facilityNumber" value="4099">4099 - Ascension Saint Thomas Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'4090 - Atlantic Rehabilitation Institute' == item.facilityNumber" value="4090">4090 - Atlantic Rehabilitation Institute</option>
+									<option ng-if="sapIrfUser" ng-selected="'4070 - Baptist Memorial Rehabilitation Hospital' == item.facilityNumber" value="4070">4070 - Baptist Memorial Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'4844 - Central Texas Rehabilitation Hospital' == item.facilityNumber" value="4844">4844 - Central Texas Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'3843 - CHI Franciscan Rehabilitation Hospital' == item.facilityNumber" value="3843">3843 - CHI Franciscan Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'4072 - Community Rehabilitation Hospital North' == item.facilityNumber" value="4072">4072 - Community Rehabilitation Hospital North</option>
+									<option ng-if="sapIrfUser" ng-selected="'4072 - Community Rehabilitation Hospital North' == item.facilityNumber" value="4072">4072 - Community Rehabilitation Hospital North</option>
+									<option ng-if="sapIrfUser" ng-selected="'4089 - Community Rehabilitation Hospital South' == item.facilityNumber" value="4089">4089 - Community Rehabilitation Hospital South</option>
+									<option ng-if="sapIrfUser" ng-selected="'4128 - Community Rehabilitation Hospital West' == item.facilityNumber" value="4128">4128 - Community Rehabilitation Hospital West</option>
+									<option ng-if="sapIrfUser" ng-selected="'3167 - Dignity East Valley Rehabilitation Hospital' == item.facilityNumber" value="3167">3167 - Dignity East Valley Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'4214 - Dignity Health East Valley Rehabilitation Hospital - Gilbert' == item.facilityNumber" value="4214">4214 - Dignity Health East Valley Rehabilitation Hospital - Gilbert</option>
+									<option ng-if="sapIrfUser" ng-selected="'4231 - El Paso Rehabilitation Hospital' == item.facilityNumber" value="4231">4231 - El Paso Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'4217 - Frazier Rehabilitation Hospital – Brownsboro' == item.facilityNumber" value="4217">4217 - Frazier Rehabilitation Hospital – Brownsboro</option>
+									<option ng-if="sapIrfUser" ng-selected="'4097 - Knoxville Rehabilitation Hospital' == item.facilityNumber" value="4097">4097 - Knoxville Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'4073 - Lancaster Rehabilitation Hospital' == item.facilityNumber" value="4073">4073 - Lancaster Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'4092 - Mercy Iowa City Rehabilitation Hospital' == item.facilityNumber" value="4092">4092 - Mercy Iowa City Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'4095 - Mercy Rehabilitation Hospital Fort Smith' == item.facilityNumber" value="4095">4095 - Mercy Rehabilitation Hospital Fort Smith</option>
+									<option ng-if="sapIrfUser" ng-selected="'4079 - Mercy Rehabilitation Hospital OKC' == item.facilityNumber" value="4079">4079 - Mercy Rehabilitation Hospital OKC</option>
+									<option ng-if="sapIrfUser" ng-selected="'4215 - Mercy Rehabilitation Hospital Oklahoma City South' == item.facilityNumber" value="4215">4215 - Mercy Rehabilitation Hospital Oklahoma City South</option>
+									<option ng-if="sapIrfUser" ng-selected="'4213 - Mercy Rehabilitation Hospital South' == item.facilityNumber" value="4213">4213 - Mercy Rehabilitation Hospital South</option>
+									<option ng-if="sapIrfUser" ng-selected="'4075 - Mercy Rehabilitation Hospital Springfield' == item.facilityNumber" value="4075">4075 - Mercy Rehabilitation Hospital Springfield</option>
+									<option ng-if="sapIrfUser" ng-selected="'4076 - Mercy Rehabilitation Hospital St. Louis' == item.facilityNumber" value="4076">4076 - Mercy Rehabilitation Hospital St. Louis</option>
+									<option ng-if="sapIrfUser" ng-selected="'3859 - MercyOne Clive Rehabilitation Hospital' == item.facilityNumber" value="3859">3859 - MercyOne Clive Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'4080 - Methodist Rehabilitation Hospital' == item.facilityNumber" value="4080">4080 - Methodist Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'3844 - Palomar Health Rehabilitation Institute' == item.facilityNumber" value="3844">3844 - Palomar Health Rehabilitation Institute</option>
+									<option ng-if="sapIrfUser" ng-selected="'4096 - Rehabilitation Hospital of Rhode Island' == item.facilityNumber" value="4096">4096 - Rehabilitation Hospital of Rhode Island</option>
+									<option ng-if="sapIrfUser" ng-selected="'4083 - Rehabilitation Hospital of Wisconsin' == item.facilityNumber" value="4083">4083 - Rehabilitation Hospital of Wisconsin</option>
+									<option ng-if="sapIrfUser" ng-selected="'4085 - St. Mary Rehabilitation Hospital' == item.facilityNumber" value="4085">4085 - St. Mary Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'4086 - Texas Rehabilitation Hospital of Arlington' == item.facilityNumber" value="4086">4086 - Texas Rehabilitation Hospital of Arlington</option>
+									<option ng-if="sapIrfUser" ng-selected="'4087 - Texas Rehabilitation Hospital of Ft. Worth' == item.facilityNumber" value="4087">4087 - Texas Rehabilitation Hospital of Ft. Worth</option>
+									<option ng-if="sapIrfUser" ng-selected="'4216 - Texas Rehabilitation Hospital of Keller' == item.facilityNumber" value="4216">4216 - Texas Rehabilitation Hospital of Keller</option>
+									<option ng-if="sapIrfUser" ng-selected="'4212 - TGH Rehabilitation Hospital' == item.facilityNumber" value="4212">4212 - TGH Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'4091 - The Rehabilitation Hospital of Montana' == item.facilityNumber" value="4091">4091 - The Rehabilitation Hospital of Montana</option>
+									<option ng-if="sapIrfUser" ng-selected="'4093 - UC Davis Rehabilitation Hospital' == item.facilityNumber" value="4093">4093 - UC Davis Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'4088 - University Hospitals Avon Rehabilitation Hospital' == item.facilityNumber" value="4088">4088 - University Hospitals Avon Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'4071 - University Hospitals Rehabilitation Hospital' == item.facilityNumber" value="4071">4071 - University Hospitals Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'4074 - UW Health Rehabilitation Hospital' == item.facilityNumber" value="4074">4074 - UW Health Rehabilitation Hospitall</option>
+									<option ng-if="sapIrfUser" ng-selected="'4227 - Liberty Rehabilitation Hospital' == item.facilityNumber" value="4227">4227 - Liberty Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'4229 - Longview Rehabilitation Hospital' == item.facilityNumber" value="4229">4229 - Longview Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'4230 - Rogers Rehabilitation Hospital' == item.facilityNumber" value="4230">4230 - Rogers Rehabilitation Hospital</option>
+									<option ng-if="sapIrfUser" ng-selected="'4228 - Temple Rehabilitation Hospital' == item.facilityNumber" value="4228">4228 - Temple Rehabilitation Hospital</option>
+									<option ng-if="sapHscUser" ng-selected="'249J – Lisa Soucy' == item.facilityNumber" value="249J">249J – Lisa Soucy</option>
+									<option ng-if="sapHscUser" ng-selected="'0142 - Behavioral Health Svc Overhead' == item.facilityNumber" value="0142">0142 - Behavioral Health Svc Overhead</option>
+									<option ng-if="sapHscUser" ng-selected="'0262 - BH Svcs OH Free Standing' == item.facilityNumber" value="0262">0262 - BH Svcs OH Free Standing</option>
+									<option ng-if="sapHscUser" ng-selected="'0262 - BH Svcs OH Free Standing' == item.facilityNumber" value="0262">0262 - BH Svcs OH Free Standing</option>
+									<option ng-if="sapHscUser" ng-selected="'3198 - Corp External' == item.facilityNumber" value="3198">3198 - Corp External</option>
+									<option ng-if="sapHscUser" ng-selected="'3240 - Centerre Healthcare Corp' == item.facilityNumber" value="3240">3240 - Centerre Healthcare Corp</option>
+									<option ng-if="sapHscUser" ng-selected="'3826 - Rehab Corp HRS' == item.facilityNumber" value="3826">3826 - Rehab Corp HRS</option>
+									<option ng-if="sapHscUser" ng-selected="'4014 - AP - LP Hospital Scheduling 1' == item.facilityNumber" value="4014">4014 - AP - LP Hospital Scheduling 1</option>
+									<option ng-if="sapHscUser" ng-selected="'4015 - AP - LP Transfer Center' == item.facilityNumber" value="4015">4015 - AP - LP Transfer Center</option>
+									<option ng-if="sapHscUser" ng-selected="'4978 - Bus Dev - Centerre' == item.facilityNumber" value="4978">4978 - Bus Dev - Centerre</option>
+									<option ng-if="sapHscUser" ng-selected="'4989 - LPH - Centralized Scheduling' == item.facilityNumber" value="4989">4989 - LPH - Centralized Schedulinge</option>
+									<option ng-if="sapHscUser" ng-selected="'4993 - Access Point' == item.facilityNumber" value="4993">4993 - Access Point</option>
+									<option ng-if="sapHscUser" ng-selected="'4997 - Access Point Answering Svcs' == item.facilityNumber" value="4997">4997 - Access Point Answering Svcs</option>
+									<option ng-if="sapHscUser" ng-selected="'5847 - Rehab Corp (C1)' == item.facilityNumber" value="5847">5847 - Rehab Corp (C1)</option>
+									<option ng-if="sapHscUser" ng-selected="'6500 - Legacy Kindred Systems, LLC' == item.facilityNumber" value="6500">6500 - Legacy Kindred Systems, LLC</option>
+									<option ng-if="sapHscUser" ng-selected="'7004 - Corp Personnel Area 2' == item.facilityNumber" value="7004">7004 - Corp Personnel Area 2</option>
+									<option ng-if="sapHscUser" ng-selected="'7006 - Corp Personnel Area 4' == item.facilityNumber" value="7006">7006 - Corp Personnel Area 42</option>
+									<option ng-if="sapHscUser" ng-selected="'7038 - Corp Personnel Area 7' == item.facilityNumber" value="7038">7038 - Corp Personnel Area 7</option>
+									<option ng-if="hostUser" ng-selected="'Other/Physician Practice' == item.facilityNumber" value="Other">Other/Physician Practice</option>
 								</select>
 							</div>
 							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="sapHscUser || sapBehavioralUser || sapIrfUser || sapAruLtachUser || sapAruUser ||hostHscUser">
@@ -329,7 +329,7 @@
 							</div>
 							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="sapHscUser || sapBehavioralUser || sapIrfUser || sapAruLtachUser || sapAruUser ||hostHscUser">
 								<label style="font-size: 12px" for="glCode" class="required">GL Code</label>
-								<select id="glCode" ng-change="glCodeChanged(item)" ng-model="item.glCode" class="form-control glCode" ng-required="!hostUser">
+								<select id="glCode" ng-model="item.glCode" class="form-control glCode" ng-required="!hostUser">
 									<option ng-if="!hostHscUser" ng-selected="'79016 - Marketing' == item.glCode" value="79016">79016 - Marketing</option>
 									<option ng-if="!hostHscUser" ng-selected="'79015 - Employee Relations' == item.glCode" value="79015">79015 - Employee Relations</option>
 									<option ng-if="!hostHscUser" ng-selected="'72070 - Office Supplies' == item.glCode" value="72070">72070 - Office Supplies</option>
@@ -343,11 +343,21 @@
 								<label style="font-size: 12px" for="CSglCode" class="required">Billing Code</label>
 								<input id="CSglCode" ng-model="item.CSglCode" class="form-control glCode" ng-required="csUser" />
 							</div>
-
 							<div class="col-sm-2 col-xs-12" ng-show="item.showOther">
 								<label for="otherText" class="required">Other (30 characters max)</label>
 								<input ng-model="item.otherText" id="otherText" class="form-control otherText"  type='text' value="{{ item.otherText }}" maxlength="30" />
 							</div>
+
+							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="hostUser">
+								<label style="font-size: 12px" for="hostDept">Dept. Code (3 characters)</label>
+								<input ng-maxlength="3" maxlength="3" id="hostDept" ng-model="item.hostDept" class="form-control glCode" />
+							</div>
+
+							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="hostUser">
+								<label style="font-size: 12px" for="hostGLCode">GL Code/Subaccount (3 characters)</label>
+								<input ng-maxlength="3" maxlength="3" id="hostGLCode" ng-model="item.hostGLCode" class="form-control glCode" />
+							</div>
+
 							<div class="col-sm-2 col-xs-12" style="margin-left: 10px;">
 								<label for="copyToAll">&nbsp;</label>
 								<button ng-click="copyToAll(item)" id="copyToAll" class="btn btn-info form-control" type="button"><i class="fa fa-copy"></i> Copy to all</button>

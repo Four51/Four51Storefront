@@ -28,14 +28,33 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 			var dept = '';
 			var glCode = '';
 			var CSglCode = '';
+			var hostDept = '';
+			var hostGlCode = '';
 			for (var i in $scope.currentOrder.LineItems) {
 				var item = $scope.currentOrder.LineItems[i];
-				if (item.facilityNumber) {facilityNumber = item.facilityNumber + '_'}
-				if (item.dept) {dept = item.dept + '_'}
-				if (item.glCode) {glCode = item.glCode}
-				if (item.CSglCode) {CSglCode = item.CSglCode}
+				if (item.facilityNumber) {
+					facilityNumber = item.facilityNumber + '_'
+				}
+				if (item.dept) {
+					dept = item.dept + '_'
+				}
+				if (item.glCode) {
+					glCode = item.glCode
+				}
+				if (item.CSglCode) {
+					CSglCode = item.CSglCode
+				}
+				if (item.hostDept) {
+					hostDept = item.hostDept + '_'
+				}
+				if (item.hostGLCode) {
+					hostGlCode = item.hostGLCode
+				}
+				if (item.otherText) {
+					facilityNumber = item.otherText + '_'
+				}
 
-				$scope.currentOrder.LineItems[i].CostCenter = facilityNumber + dept + glCode + CSglCode;
+				$scope.currentOrder.LineItems[i].CostCenter = facilityNumber + dept + hostDept + glCode + CSglCode + hostGlCode;
 			}
 
 			return true;
@@ -179,8 +198,8 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 		$scope.downloadProof = function(item) {
 			window.location = item.Variant.ProofUrl;
 		};
-		$scope.glCodeChanged = function(item) {
-			if (item.glCode == 'Other') {
+		$scope.facilityNumberChanged = function(item) {
+			if (item.facilityNumber == 'Other') {
 				item.showOther = true;
 			} else {
 				item.showOther = false;
@@ -192,7 +211,9 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 				$scope.currentOrder.LineItems[i].dept = item.dept;
 				$scope.currentOrder.LineItems[i].glCode = item.glCode;
 				$scope.currentOrder.LineItems[i].CSglCode = item.CSglCode;
-				if (item.glCode == 'Other') {
+				$scope.currentOrder.LineItems[i].hostDept = item.hostDept;
+				$scope.currentOrder.LineItems[i].hostGLCode = item.hostGLCode;
+				if (item.facilityNumber === 'Other') {
 					$scope.currentOrder.LineItems[i].showOther = true;
 					$scope.currentOrder.LineItems[i].otherText = item.otherText;
 				} else {
