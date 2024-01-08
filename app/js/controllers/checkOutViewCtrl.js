@@ -2,7 +2,7 @@ var angScope = '';
 four51.app.controller('CheckOutViewCtrl', ['$scope', '$routeParams', '$location', '$filter', '$rootScope', '$451', 'User', 'Order', 'OrderConfig', 'FavoriteOrder', 'AddressList', 'GoogleAnalytics',
 function ($scope, $routeParams, $location, $filter, $rootScope, $451, User, Order, OrderConfig, FavoriteOrder, AddressList, GoogleAnalytics) {
         $scope.currentDate = new Date();
-	const numToAdd = 2;
+	const numToAdd = 3;
 
 	for (let i = 1; i <= numToAdd; i++) {
 		$scope.currentDate.setDate($scope.currentDate.getDate() + 1);
