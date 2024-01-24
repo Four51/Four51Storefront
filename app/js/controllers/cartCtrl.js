@@ -53,6 +53,9 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 				if (item.otherText) {
 					facilityNumber = item.otherText + '_'
 				}
+				if (item.otherDeptText) {
+					dept = item.otherDeptText + '_'
+				}
 
 				$scope.currentOrder.LineItems[i].CostCenter = facilityNumber + dept + hostDept + glCode + CSglCode + hostGlCode;
 			}
@@ -199,10 +202,17 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 			window.location = item.Variant.ProofUrl;
 		};
 		$scope.facilityNumberChanged = function(item) {
-			if (item.facilityNumber == 'Other') {
+			if (item.facilityNumber === 'Other') {
 				item.showOther = true;
 			} else {
 				item.showOther = false;
+			}
+		}
+		$scope.deptNumberChanged = function(item) {
+			if (item.dept === 'Other') {
+				item.showOtherDept = true;
+			} else {
+				item.showOtherDept = false;
 			}
 		}
 		$scope.copyToAll = function(item) {
@@ -219,6 +229,13 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 				} else {
 					$scope.currentOrder.LineItems[i].showOther = false;
 					$scope.currentOrder.LineItems[i].otherText = null;
+				}
+				if (item.dept === 'Other') {
+					$scope.currentOrder.LineItems[i].showOtherDept = true;
+					$scope.currentOrder.LineItems[i].otherDeptText = item.otherDeptText;
+				} else {
+					$scope.currentOrder.LineItems[i].showOtherDept = false;
+					$scope.currentOrder.LineItems[i].otherDeptText = null;
 				}
 			}
 		}

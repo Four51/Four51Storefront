@@ -244,12 +244,16 @@
 									<option ng-if="sapHscUser" ng-selected="'7004 - Corp Personnel Area 2' == item.facilityNumber" value="7004">7004 - Corp Personnel Area 2</option>
 									<option ng-if="sapHscUser" ng-selected="'7006 - Corp Personnel Area 4' == item.facilityNumber" value="7006">7006 - Corp Personnel Area 42</option>
 									<option ng-if="sapHscUser" ng-selected="'7038 - Corp Personnel Area 7' == item.facilityNumber" value="7038">7038 - Corp Personnel Area 7</option>
-									<option ng-if="hostUser" ng-selected="'Other/Physician Practice' == item.facilityNumber" value="Other">Other/Physician Practice</option>
+									<option ng-if="hostUser || sapHscUser" ng-selected="'Other/Physician Practice' == item.facilityNumber" value="Other">Other/Physician Practice</option>
 								</select>
+								<div class="col-xs-12" ng-show="item.showOther">
+									<label for="otherFacilityText" class="required">Other</label>
+									<input ng-model="item.otherText" id="otherFacilityText" class="form-control otherText"  type='text' value="{{ item.otherText }}" maxlength="30" />
+								</div>
 							</div>
 							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="sapHscUser || sapBehavioralUser || sapIrfUser || sapAruLtachUser || sapAruUser ||hostHscUser">
 								<label for="dept" style="font-size: 12px" class="required">Dept #</label>
-								<select ng-model="item.dept" class="form-control deptNumber" id="dept" ng-required="!hostUser">
+								<select ng-change="deptNumberChanged(item)" ng-model="item.dept" class="form-control deptNumber" id="dept" ng-required="!hostUser">
 									<option ng-if="sapBehavioralUser" ng-selected="'201' == item.dept" value="201">201</option>
 									<option ng-if="sapIrfUser" ng-selected="'201' == item.dept" value="201">201</option>
 									<option ng-if="sapIrfUser" ng-selected="'347' == item.dept" value="347">347</option>
@@ -327,7 +331,12 @@
 									<option ng-if="sapHscUser" ng-selected="'987 - Insurance Risk' == item.dept" value="987">987 - Insurance Risk</option>
 									<option ng-if="sapHscUser" ng-selected="'993 - Accounts Payable' == item.dept" value="993">993 - Accounts Payable</option>
 									<option ng-if="sapHscUser" ng-selected="'995 - Human Resources' == item.dept" value="995">995 - Human Resources</option>
+									<option ng-if="sapHscUser" ng-selected="'Other' == item.dept" value="Other">Other</option>
 								</select>
+								<div class="col-xs-12" ng-show="item.showOtherDept">
+									<label for="otherDeptText" class="required">Other</label>
+									<input ng-model="item.otherDeptText" id="otherDeptText" class="form-control otherText"  type='text' value="{{ item.otherDeptText }}" maxlength="30" />
+								</div>
 							</div>
 							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="sapHscUser || sapBehavioralUser || sapIrfUser || sapAruLtachUser || sapAruUser ||hostHscUser">
 								<label style="font-size: 12px" for="glCode" class="required">GL Code</label>
@@ -345,11 +354,6 @@
 								<label style="font-size: 12px" for="CSglCode" class="required">Billing Code</label>
 								<input id="CSglCode" ng-model="item.CSglCode" class="form-control glCode" ng-required="csUser" />
 							</div>
-							<div class="col-sm-2 col-xs-12" ng-show="item.showOther">
-								<label for="otherText" class="required">Other (30 characters max)</label>
-								<input ng-model="item.otherText" id="otherText" class="form-control otherText"  type='text' value="{{ item.otherText }}" maxlength="30" />
-							</div>
-
 							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="hostUser">
 								<label style="font-size: 12px" for="hostDept">Dept. Code (3 characters)</label>
 								<input ng-maxlength="3" maxlength="3" id="hostDept" ng-model="item.hostDept" class="form-control glCode" />
