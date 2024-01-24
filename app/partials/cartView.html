@@ -244,7 +244,8 @@
 									<option ng-if="sapHscUser" ng-selected="'7004 - Corp Personnel Area 2' == item.facilityNumber" value="7004">7004 - Corp Personnel Area 2</option>
 									<option ng-if="sapHscUser" ng-selected="'7006 - Corp Personnel Area 4' == item.facilityNumber" value="7006">7006 - Corp Personnel Area 42</option>
 									<option ng-if="sapHscUser" ng-selected="'7038 - Corp Personnel Area 7' == item.facilityNumber" value="7038">7038 - Corp Personnel Area 7</option>
-									<option ng-if="hostUser || sapHscUser" ng-selected="'Other/Physician Practice' == item.facilityNumber" value="Other">Other/Physician Practice</option>
+									<option ng-if="hostUser" ng-selected="'Other/Physician Practice' == item.facilityNumber" value="Other">Other/Physician Practice</option>
+									<option ng-if="sapHscUser" ng-selected="'Other' == item.facilityNumber" value="Other">Other</option>
 								</select>
 								<div class="col-xs-12" ng-show="item.showOther">
 									<label for="otherFacilityText" class="required">Other</label>
