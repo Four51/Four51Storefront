@@ -3,20 +3,20 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 		restrict: 'AE',
 		templateUrl: 'partials/controls/orderShipping.html',
 		controller: ['$scope', function($scope) {
-			AddressList.clear();
-			AddressList.shipping(function(list) {
-				$scope.shipaddresses = list;
-//reverted changes
-				if ($scope.currentOrder) {
-					if (list.length == 1 && !$scope.currentOrder.ShipAddressID) {
-						$scope.currentOrder.ShipAddressID = list[0].ID;
-					}
-					if ($scope.isEditforApproval) {
-						if (!AddressList.contains($scope.currentOrder.ShipAddress))
-							$scope.shipaddresses.push($scope.currentOrder.ShipAddress);
-					}
-				}
-			});
+// 			AddressList.clear();
+// 			AddressList.shipping(function(list) {
+// 				$scope.shipaddresses = list;
+// //reverted changes
+// 				if ($scope.currentOrder) {
+// 					if (list.length == 1 && !$scope.currentOrder.ShipAddressID) {
+// 						$scope.currentOrder.ShipAddressID = list[0].ID;
+// 					}
+// 					if ($scope.isEditforApproval) {
+// 						if (!AddressList.contains($scope.currentOrder.ShipAddress))
+// 							$scope.shipaddresses.push($scope.currentOrder.ShipAddress);
+// 					}
+// 				}
+// 			});
 			$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
 			$scope.$on('event:AddressCancel', function() {
 				$scope.shipaddressform = false;
@@ -29,13 +29,13 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 					$scope.shipaddressform = false;
 				}
 
-				AddressList.shipping(function(list) {
-					$scope.shipaddresses = list;
-					if ($scope.isEditforApproval) {
-						$scope.shipaddresses.push($scope.currentOrder.ShipAddress);
-						$scope.shipaddresses.push($scope.currentOrder.BillAddress);
-					}
-				});
+				// AddressList.shipping(function(list) {
+				// 	$scope.shipaddresses = list;
+				// 	if ($scope.isEditforApproval) {
+				// 		$scope.shipaddresses.push($scope.currentOrder.ShipAddress);
+				// 		$scope.shipaddresses.push($scope.currentOrder.BillAddress);
+				// 	}
+				// });
 				$scope.shipaddress = { Country: 'US', IsShipping: true, IsBilling: false };
 			});
 
