@@ -15,6 +15,10 @@
         </div>
         <div ng-hide="shipaddressform || (shipaddresses.length == 0 && user.Permissions.contains('CreateShipToAddress'))">
             <form name="cart_shipping" novalidate="">
+                <div ng-show="csUser">
+                    <label class="required">Date Needed</label>
+                    <input name="dateneeded" placeholder="Date" ng-model="csUserDateNeeded" ng-change="updateDateNeeded()" type="text" class="form-control" datepicker-popup="yyyy-MM-dd" is-open="opened" min="currentDate" date-disabled="disabled(date, mode)" ng-required="csUser" />
+                </div>
                 <div>
                     <div>
                         <span class="btn-group">
@@ -26,10 +30,6 @@
                                 <i ng-class="{'fa fa-check': currentOrder.IsMultipleShip() }"></i>
                                 {{'Multiple ' + ('Addresses' | r) | xlat}}
                             </button>
-                             <button class="btn btn-info pull-right" type="button"
-                                     ng-hide="(shipaddressform || (!shipaddressform && !shipaddresses) || !user.Permissions.contains('CreateShipToAddress'))" ng-click="shipaddressform = true" tabindex="-1">
-                                 {{'New ' + ('Address' | r) | xlat}}
-                             </button>
                         </span>
                     </div>
                     <div>
@@ -48,6 +48,12 @@
                                         <option value=""></option>
                                     </select>
                                     <i class="fa fa-map-marker"></i>
+                                </div>
+                                <div>
+                                    <button class="btn btn-info pull-right" type="button"
+                                            ng-hide="(shipaddressform || (!shipaddressform && !shipaddresses) || !user.Permissions.contains('CreateShipToAddress'))" ng-click="shipaddressform = true" tabindex="-1">
+                                        {{'New ' + ('Address' | r) | xlat}}
+                                    </button>
                                 </div>
                                 <div ng-show="user.ShipMethod != null && shippers" ng-class="{'view-form-select': !currentOrder.LineItems[0].ShipperName, '': currentOrder.LineItems[0].ShipperName }">
                                     <label ng-class="{required: !currentOrder.IsMultipleShip() && user.ShipMethod != null}" ng-show="currentOrder.LineItems[0].ShipperName || !currentOrder.IsMultipleShip() && user.ShipMethod != null">{{('Shipping' | r) + ' Method' | xlat}}</label>
