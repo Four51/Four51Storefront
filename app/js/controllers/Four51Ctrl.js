@@ -59,8 +59,8 @@ four51.app.controller('Four51Ctrl', ['$rootScope', '$scope', '$route', '$locatio
 					$scope.sapIrfUser = false;
 					$scope.sapBehavioralUser = false;
 					$scope.sapHscUser = false;
-					// $scope.sapLtachContract = false;
-					// $scope.sapLOPMedSurg = false;
+					$scope.sapLtachContract = false;
+					$scope.sapLOPMedSurg = false;
 
 					angular.forEach($scope.user.Groups, function (f) {
 						if (f.Name === 'Ticketing') {
@@ -75,19 +75,19 @@ four51.app.controller('Four51Ctrl', ['$rootScope', '$scope', '$route', '$locatio
 						if (f.Name === '08_HOST_Lifepoint HSC (South)') {
 							$scope.hostHscUser = true;
 						}
-						if (f.Name === '09_SAP_ARU') {
-							$scope.sapAruUser = true;
-						}
-						// if (f.Name === '09_SAP_Lifepoint Health - OP/MedSurg') {
-						// 	$scope.sapLOPMedSurg = true;
+						// if (f.Name === '09_SAP_ARU') {
+						// 	$scope.sapAruUser = true;
 						// }
-						// if (f.Name === '09_SAP_Lifepoint Rehabilitation - ARU/LTACH ARU') {
-						if (f.Name === '09_SAP_ARU-LTACH') {
+						if (f.Name === '09_SAP_Lifepoint Health - OP/MedSurg') {
+							$scope.sapLOPMedSurg = true;
+						}
+						if (f.Name === '09_SAP_Lifepoint Rehabilitation - ARU/LTACH ARU') {
+						// if (f.Name === '09_SAP_ARU-LTACH') {
 							$scope.sapAruLtachUser = true;
 						}
-						// if (f.Name === '09_SAP_Lifepoint Rehabilitation - LTACH Contract Services') {
-						// 	$scope.sapLtachContract = true;
-						// }
+						if (f.Name === '09_SAP_Lifepoint Rehabilitation - LTACH Contract Services') {
+							$scope.sapLtachContract = true;
+						}
 						if (f.Name === '09_SAP_IRF') {
 							$scope.sapIrfUser = true;
 						}
