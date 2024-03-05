@@ -56,6 +56,9 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 				if (item.otherDeptText) {
 					dept = item.otherDeptText + '_'
 				}
+				if (item.otherglCode) {
+					dept = item.otherglCode + '_'
+				}
 
 				$scope.currentOrder.LineItems[i].CostCenter = facilityNumber + dept + hostDept + glCode + CSglCode + hostGlCode;
 			}
@@ -215,6 +218,13 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 				item.showOtherDept = false;
 			}
 		}
+		$scope.glCodeChanged = function(item) {
+			if (item.glCode === 'Other') {
+				item.showOtherglCode = true;
+			} else {
+				item.showOtherglCode = false;
+			}
+		}
 		$scope.copyToAll = function(item) {
 			for (var i in $scope.currentOrder.LineItems) {
 				$scope.currentOrder.LineItems[i].facilityNumber = item.facilityNumber;
@@ -236,6 +246,13 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 				} else {
 					$scope.currentOrder.LineItems[i].showOtherDept = false;
 					$scope.currentOrder.LineItems[i].otherDeptText = null;
+				}
+				if (item.glCode === 'Other') {
+					$scope.currentOrder.LineItems[i].showOtherglCode = true;
+					$scope.currentOrder.LineItems[i].otherglCode = item.otherglCode;
+				} else {
+					$scope.currentOrder.LineItems[i].showOtherglCode = false;
+					$scope.currentOrder.LineItems[i].otherglCode = null;
 				}
 			}
 		}
