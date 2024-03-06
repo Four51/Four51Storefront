@@ -131,7 +131,7 @@ function drawForm_textbased() {
 					content += '<div style="font-size: 11px; margin-bottom: 25px;"><label for="logo">' + customLabel + '</label><select data-namespace="' + masterFile + '" id="logo" class="form-control nopad" required><option value="" selected disabled>Make a selection...</option>' + options + '</select></div>';
 				}
 				else {
-				content += '<div style="font-size: 11px; margin-bottom: 25px;"><label for="logo">Choose Facility</label><select data-namespace="' + masterFile + '" id="logo" class="form-control nopad" required><option value="" selected disabled>Make a selection...</option>' + options + '</select></div>';
+					content += '<div style="font-size: 11px; margin-bottom: 25px;"><label for="logo">Choose Facility</label><select data-namespace="' + masterFile + '" id="logo" class="form-control nopad" required><option value="" selected disabled>Make a selection...</option>' + options + '</select></div>';
 				}
 
 			} else {
@@ -167,6 +167,20 @@ function drawForm_textbased() {
 		}
 
 		content += '</div>';
+
+		if(angScope.Product.StaticSpecGroups?.cropperPhotoSpecs?.Specs){
+			content += '\
+\
+\
+<script type="text/javascript">\
+localStorage.setItem("cropperPhotoSpecs",JSON.stringify({target:"#customFormContent",specs:angScope.Product.StaticSpecGroups.cropperPhotoSpecs.Specs}));\
+jQuery(function($){ $.get("lib/oc/cropper/cropper.html",null,null,"html").done(function(data){ $("#customFormContent").append(data); }); });\
+</script>\
+\
+\
+';
+
+		}
 
 		return content;
 	}

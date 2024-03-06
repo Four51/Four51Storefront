@@ -1,0 +1,185 @@
+<script type="text/javascript" src="lib/oc/cropper/cropper.min.js"></script>
+<link href="lib/oc/cropper/cropper.min.css" rel="stylesheet"></href>
+
+<script type="text/javascript">
+
+    jQuery(function($){
+        var imageList = [], $imagePickModal, $images, v, t, $selector, $cropper, $preview, $cropImage, $cropCanvas, cropper, $fileSpecUpload, dataTransfer = new DataTransfer()
+            ,cropperPhotoSpecs = JSON.parse(localStorage.getItem("cropperPhotoSpecs"))
+            ,$image = $("<img />").addClass("item").on("click",function(){
+            $images.find("img.item").not(this).removeClass("selected");
+            $(this).addClass("selected");
+
+            $selector.hide();
+            $cropper.show();
+            cropper.replace($(this).data("src"));
+//	cropper.replace("https://api.coverdalegroup.com/CORSProxy/?url=" + encodeURIComponent($(this).data("src")));
+//	cropper.replace("lib/oc/data/images/aa_family_dinner_healthyjpg.jpg");
+
+
+        }).on("load",function(){
+            $(this).appendTo($images);
+        }).on("error",function(e){
+            console.log("Error loading image",e);
+        });
+
+
+        $.get("lib/data/photoPickList.json",null,null,"json").done(function(data){
+
+            if(data){
+                imageList = data;
+                $.each(imageList,function(i,el){
+                    if(i = /(^.*)(\.[^.]+)$/.exec(el[1])) el[2] = i[1] + "_THUMB" + i[2];
+                });
+            }
+
+        });
+
+
+        t = setInterval(function(){
+
+            $imagePickModal = $("#imagePickModal");
+            if($imagePickModal.length == 0 || imageList.length == 0) return;
+            clearTimeout(t);
+
+            $selector = $imagePickModal.children("[selector]");
+            $cropper = $imagePickModal.children("[cropper]");
+            $preview = $imagePickModal.children("[preview]");
+            $cropImage = $cropper.find("[cropImage]");
+
+            cropper = new Cropper($cropImage[0],{dragMode:"crop",zoomOnWheel:false});
+
+            $images = $selector.find("[images]");
+            $.each(imageList,function(i,el){
+                el.push($image.clone(true).attr("src",el[el.length - 1]).data("src",el[1]));
+            });
+
+            $selector.find("[filterText]").on("keyup",function(){
+
+                v = ($(this).val() || "").trim().toLowerCase();
+                if(2 < v.length){
+                    $.each(imageList,function(i,el){
+                        if(-1 < el[0].indexOf(v)) $(el[el.length - 1]).show();
+                        else $(el[el.length - 1]).hide();
+                    });
+                }
+                else if(v == "") $images.find("img.item").show();
+
+            });
+
+            $.each(cropperPhotoSpecs.specs,function(i,el){
+                el = $(cropperPhotoSpecs.target).find("[customfield=" + JSON.stringify("Variant.Specs." + i) + "]").on("click",function(e){
+                    e.preventDefault();
+                    $imagePickModal.show();
+                    $fileSpecUpload = $(this).find("input[type=file]");
+                }).find("input[type=file]").parent().siblings(".alert").hide().end();
+                if(el.length){
+                    $.each(el[0].childNodes,function(i,el){
+                        if(el.nodeType == 3) el.textContent = "Choose Photo";
+                    });
+                }
+            });
+
+            $selector.find("button[reset]").on("click",function(){
+                $selector.find("[filterText]").val("").trigger("keyup");
+            });
+
+            $selector.find("button[close]").on("click",function(){
+                $imagePickModal.hide().find("[filterText]").val("").trigger("keyup");
+                $images.find("img.item").removeClass("selected");
+            });
+
+            $cropper.find("button[close]").on("click",function(){
+                $cropper.hide();
+                $selector.show();
+                $images.find("img.item").removeClass("selected");
+            });
+
+
+            $cropper.find("button[crop]").on("click",function(){
+                $cropCanvas = $(cropper.getCroppedCanvas({width:800,maxWidth:800})).hide().appendTo("body");
+                $cropper.hide();
+                $preview.find("img[image]").attr("src",$cropCanvas[0].toDataURL("image/jpeg"));
+                $preview.show();
+            });
+
+            $preview.find("button[close]").on("click",function(){
+                $cropper.show();
+                $preview.hide();
+                $cropCanvas.remove();
+            });
+
+            $preview.find("button[save]").on("click",function(){
+                $images.find("img.item").removeClass("selected");
+                $imagePickModal.hide();
+                $selector.show();
+                $preview.hide();
+                dataTransfer.items.clear();
+                $cropCanvas[0].toBlob(function(blob){
+                    dataTransfer.items.add(new File([blob],"cropPhoto.jpg"));
+                    $fileSpecUpload[0].files = dataTransfer.files;
+                    $fileSpecUpload.trigger("change");
+                    $cropCanvas.remove();
+                },"image/jpeg");
+            });
+
+
+
+        },100);
+
+
+    });
+
+</script>
+
+
+<style type="text/css">
+
+    #imagePickModal [images] img.item {
+
+        margin:8px;
+        border:8px solid transparent;
+        border-radius:15px;
+        cursor:pointer;
+
+    }
+
+    #imagePickModal [images] img.item:hover, #imagePickModal [images] img.item.selected {
+
+        border-color:#004684;
+
+    }
+
+
+</style>
+<div id="imagePickModal" style="display:none;position:fixed;top:0px;bottom:0px;left:0px;right:0px;background-color:#00000088;z-index:10000;">
+    <div selector style="position:relative;width:80%;height:80%;margin:100px auto; background-color:white; overflow-y:scroll;">
+        <div style="position:sticky;top:0px;z-index:10;padding:20px;background-color:white;">
+            <input filterText style="width:200px; margin:8px;">
+            <button style="margin:8px;" reset>Clear</button>
+            <button style="margin:8px;" close>Close</button>
+        </div>
+        <div images style="padding:20px;display:flex;flex-wrap:wrap;"></div>
+    </div>
+    <div cropper style="display:none;position:relative;width:80%;height:80%;margin:100px auto; background-color:white; overflow-y:scroll;">
+        <div style="position:sticky;top:0px;z-index:10;padding:20px;background-color:white;">
+            <button style="margin:8px;" crop>Preview cropped image</button>
+            <button style="margin:8px;" close>Close</button>
+        </div>
+        <div image style="">
+            <div style="width:60%;margin:auto;">
+                <img cropImage style="max-width:100%;">
+            </div>
+        </div>
+    </div>
+    <div preview style="display:none;position:relative;width:80%;height:80%;margin:100px auto; background-color:white; overflow-y:scroll;">
+        <div style="position:sticky;top:0px;z-index:10;padding:20px;background-color:white;">
+            <button style="margin:8px;" save>Use this image</button>
+            <button style="margin:8px;" close>discard</button>
+        </div>
+        <div image style="">
+            <img image style="margin:auto;width:800px;">
+        </div>
+    </div>
+</div>
+
