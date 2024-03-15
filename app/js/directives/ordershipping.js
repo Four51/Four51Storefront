@@ -66,6 +66,20 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 				);
 			};
 
+			$scope.isAllDownloads = function() {
+				let result = true;
+
+				$scope.currentOrder.LineItems.forEach(function(line) {
+					if (line.PriceSchedule.Name === 'downloadable' && line.Quantity === 11) {
+						//this is a download item
+					} else {
+						result = false;
+					}
+				});
+
+				return result;
+			}
+
 			Shipper.query($scope.currentOrder, function(list) {
 				$scope.shippers = list;
 				// sometimes the current shipper is not longer available. we need to clear the shipping information in that case

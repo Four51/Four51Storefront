@@ -40,6 +40,9 @@
                     <span ng-show="$last && ps.MaxQuantity"> - {{ps.MaxQuantity}}</span>
                     <span ng-show="$last && !ps.MaxQuantity"> +</span>
                 </span>
+                <span ng-if="pb.Quantity === 11">
+                    Download
+                </span>
             </div>
             <div class="col-xs-6">
                 {{pb.Price * (ps.RestrictedQuantity ? pb.Quantity : 1)| culturecurrency}}
