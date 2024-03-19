@@ -81,6 +81,9 @@ four51.app.controller('Four51Ctrl', ['$rootScope', '$scope', '$route', '$locatio
 						if (f.Name === '09_SAP_Lifepoint Health - OP/MedSurg') {
 							$scope.sapLOPMedSurg = true;
 						}
+						if (f.Name === '09_SAP_ARU') {
+							$scope.sapAruUser = true;
+						}
 						if (f.Name === '09_SAP_Lifepoint Rehabilitation - ARU/LTACH ARU') {
 						// if (f.Name === '09_SAP_ARU-LTACH') {
 							$scope.sapAruLtachUser = true;
