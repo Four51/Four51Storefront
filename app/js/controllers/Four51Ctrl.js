@@ -75,9 +75,6 @@ four51.app.controller('Four51Ctrl', ['$rootScope', '$scope', '$route', '$locatio
 						if (f.Name === '08_HOST_Lifepoint HSC (South)') {
 							$scope.hostHscUser = true;
 						}
-						// if (f.Name === '09_SAP_ARU') {
-						// 	$scope.sapAruUser = true;
-						// }
 						if (f.Name === '09_SAP_Lifepoint Health - OP/MedSurg') {
 							$scope.sapLOPMedSurg = true;
 						}
@@ -85,7 +82,6 @@ four51.app.controller('Four51Ctrl', ['$rootScope', '$scope', '$route', '$locatio
 							$scope.sapAruUser = true;
 						}
 						if (f.Name === '09_SAP_Lifepoint Rehabilitation - ARU/LTACH ARU') {
-						// if (f.Name === '09_SAP_ARU-LTACH') {
 							$scope.sapAruLtachUser = true;
 						}
 						if (f.Name === '09_SAP_Lifepoint Rehabilitation - LTACH Contract Services') {

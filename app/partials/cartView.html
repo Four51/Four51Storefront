@@ -504,7 +504,6 @@
 									<option ng-if="sapLOPMedSurg" ng-selected="'414G - Vibra No California - OP' == item.facilityNumber" value="414G">414G - Vibra No California - OP</option>
 									<option ng-if="sapLOPMedSurg" ng-selected="'271J - West Jefferson - MS' == item.facilityNumber" value="271J">271J - West Jefferson - MS</option>
 									<option ng-if="sapLOPMedSurg" ng-selected="'322J - West Jefferson - OP' == item.facilityNumber" value="322J">322J - West Jefferson - OP</option>
-<!--									<option ng-if="sapLOPMedSurg" ng-selected="'' == item.facilityNumber" value=""></option>-->
 									<option ng-if="sapIrfUser" ng-selected="'4098 - Anderson Rehabilitation Institute' == item.facilityNumber" value="4098">4098 - Anderson Rehabilitation Institute</option>
 									<option ng-if="sapIrfUser" ng-selected="'4099 - Ascension Saint Thomas Rehabilitation Hospital' == item.facilityNumber" value="4099">4099 - Ascension Saint Thomas Rehabilitation Hospital</option>
 									<option ng-if="sapIrfUser" ng-selected="'4090 - Atlantic Rehabilitation Institute' == item.facilityNumber" value="4090">4090 - Atlantic Rehabilitation Institute</option>
@@ -570,6 +569,9 @@
 									<option ng-if="sapIrfUser" ng-selected="'Other' == item.facilityNumber" value="Other">Other</option>
 									<option ng-if="sapAruLtachUser" ng-selected="'Other' == item.facilityNumber" value="Other">Other</option>
 									<option ng-if="sapLOPMedSurg" ng-selected="'Other' == item.facilityNumber" value="Other">Other</option>
+									<option ng-if="sapBehavioralUser" ng-selected="'Other' == item.facilityNumber" value="Other">Other</option>
+									<option ng-if="hostHscUser" ng-selected="'Other' == item.facilityNumber" value="Other">Other</option>
+									<option ng-if="sapLtachContract" ng-selected="'Other' == item.facilityNumber" value="Other">Other</option>
 								</select>
 								<div class="col-xs-12" ng-show="item.showOther">
 									<label for="otherFacilityText" class="required">Other</label>
@@ -667,6 +669,9 @@
 									<option ng-if="sapIrfUser" ng-selected="'Other' == item.dept" value="Other">Other</option>
 									<option ng-if="sapAruLtachUser" ng-selected="'Other' == item.dept" value="Other">Other</option>
 									<option ng-if="sapLOPMedSurg" ng-selected="'Other' == item.dept" value="Other">Other</option>
+									<option ng-if="sapBehavioralUser" ng-selected="'Other' == item.dept" value="Other">Other</option>
+									<option ng-if="hostHscUser" ng-selected="'Other' == item.dept" value="Other">Other</option>
+									<option ng-if="sapLtachContract" ng-selected="'Other' == item.dept" value="Other">Other</option>
 								</select>
 								<div class="col-xs-12" ng-show="item.showOtherDept">
 									<label for="otherDeptText" class="required">Other</label>
@@ -685,6 +690,11 @@
 									<option ng-if="hostHscUser" ng-selected="'801 - Recruiting' == item.glCode" value="801">801 - Recruiting</option>
 									<option ng-if="sapAruLtachUser" ng-selected="'Other' == item.glCode" value="Other">Other</option>
 									<option ng-if="sapLOPMedSurg" ng-selected="'Other' == item.glCode" value="Other">Other</option>
+									<option ng-if="sapBehavioralUser" ng-selected="'Other' == item.glCode" value="Other">Other</option>
+									<option ng-if="sapHscUser" ng-selected="'Other' == item.glCode" value="Other">Other</option>
+									<option ng-if="hostHscUser" ng-selected="'Other' == item.glCode" value="Other">Other</option>
+									<option ng-if="sapIrfUser" ng-selected="'Other' == item.glCode" value="Other">Other</option>
+									<option ng-if="sapLtachContract" ng-selected="'Other' == item.glCode" value="Other">Other</option>
 								</select>
 								<div class="col-xs-12" ng-show="item.showOtherglCode">
 									<label for="otherglCode" class="required">Other</label>
@@ -695,15 +705,15 @@
 								<label style="font-size: 12px" for="CSglCode" class="required">Billing Code</label>
 								<input id="CSglCode" ng-model="item.CSglCode" class="form-control glCode" ng-required="csUser" />
 							</div>
-							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="hostUser">
-								<label style="font-size: 12px" for="hostDept">Dept. Code (3 characters)</label>
-								<input ng-maxlength="3" maxlength="3" id="hostDept" ng-model="item.hostDept" class="form-control glCode" />
-							</div>
+<!--							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="hostUser">-->
+<!--								<label style="font-size: 12px" for="hostDept">Dept. Code (3 characters)</label>-->
+<!--								<input ng-maxlength="3" maxlength="3" id="hostDept" ng-model="item.hostDept" class="form-control glCode" />-->
+<!--							</div>-->
 
-							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="hostUser">
-								<label style="font-size: 12px" for="hostGLCode">GL Code/Subaccount (3 characters)</label>
-								<input ng-maxlength="3" maxlength="3" id="hostGLCode" ng-model="item.hostGLCode" class="form-control glCode" />
-							</div>
+<!--							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="hostUser">-->
+<!--								<label style="font-size: 12px" for="hostGLCode">GL Code/Subaccount (3 characters)</label>-->
+<!--								<input ng-maxlength="3" maxlength="3" id="hostGLCode" ng-model="item.hostGLCode" class="form-control glCode" />-->
+<!--							</div>-->
 							<div class="col-sm-2 col-xs-12" style="margin-left: 10px;">
 								<label for="copyToAll">&nbsp;</label>
 								<button ng-click="copyToAll(item)" id="copyToAll" class="btn btn-info form-control" type="button"><i class="fa fa-copy"></i> Copy to all</button>
