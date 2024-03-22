@@ -578,20 +578,20 @@
 									<input ng-model="item.otherText" id="otherFacilityText" class="form-control otherText"  type='text' value="{{ item.otherText }}" maxlength="30" />
 								</div>
 							</div>
-							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="sapHscUser || sapBehavioralUser || sapIrfUser || sapAruLtachUser || sapAruUser || hostHscUser || sapLOPMedSurg || sapLtachContract">
+							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="sapHscUser || sapBehavioralUser || sapIrfUser || sapAruLtachUser || sapAruUser || hostHscUser || sapLOPMedSurg || sapLtachContract || hostUser">
 								<label for="dept" style="font-size: 12px" class="required">Dept #</label>
 								<select ng-change="deptNumberChanged(item)" ng-model="item.dept" class="form-control deptNumber" id="dept" ng-required="!hostUser">
 									<option ng-if="sapBehavioralUser" ng-selected="'201' == item.dept" value="201">201</option>
-									<option ng-if="sapIrfUser" ng-selected="'201' == item.dept" value="201">201</option>
 									<option ng-if="sapIrfUser" ng-selected="'347' == item.dept" value="347">347</option>
+									<option ng-if="sapIrfUser" ng-selected="'201' == item.dept" value="201">201</option>
 									<option ng-if="sapAruUser" ng-selected="'347' == item.dept" value="347">347</option>
 									<option ng-if="sapAruUser" ng-selected="'201' == item.dept" value="201">201</option>
 									<option ng-if="sapAruUser" ng-selected="'301' == item.dept" value="301">301</option>
 									<option ng-if="sapAruLtachUser" ng-selected="'347' == item.dept" value="347">347</option>
 									<option ng-if="sapAruLtachUser" ng-selected="'201' == item.dept" value="201">201</option>
 									<option ng-if="sapAruLtachUser" ng-selected="'301' == item.dept" value="301">301</option>
-									<option ng-if="sapLtachContract" ng-selected="'201' == item.dept" value="201">201</option>
 									<option ng-if="sapLtachContract" ng-selected="'347' == item.dept" value="347">347</option>
+									<option ng-if="sapLtachContract" ng-selected="'201' == item.dept" value="201">201</option>
 									<option ng-if="sapLtachContract" ng-selected="'301' == item.dept" value="301">301</option>
 									<option ng-if="sapLOPMedSurg" ng-selected="'347' == item.dept" value="347">347</option>
 									<option ng-if="sapLOPMedSurg" ng-selected="'201' == item.dept" value="201">201</option>
@@ -671,6 +671,7 @@
 									<option ng-if="sapLOPMedSurg" ng-selected="'Other' == item.dept" value="Other">Other</option>
 									<option ng-if="sapBehavioralUser" ng-selected="'Other' == item.dept" value="Other">Other</option>
 									<option ng-if="hostHscUser" ng-selected="'Other' == item.dept" value="Other">Other</option>
+									<option ng-if="hostUser" ng-selected="'Other' == item.dept" value="Other">Other</option>
 									<option ng-if="sapLtachContract" ng-selected="'Other' == item.dept" value="Other">Other</option>
 								</select>
 								<div class="col-xs-12" ng-show="item.showOtherDept">
@@ -678,14 +679,14 @@
 									<input ng-model="item.otherDeptText" id="otherDeptText" class="form-control otherText"  type='text' value="{{ item.otherDeptText }}" maxlength="30" />
 								</div>
 							</div>
-							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="sapHscUser || sapBehavioralUser || sapIrfUser || sapAruLtachUser || sapAruUser || hostHscUser || sapLOPMedSurg || sapLtachContract">
+							<div class="col-sm-12 col-xs-12 col-md-2" ng-if="sapHscUser || sapBehavioralUser || sapIrfUser || sapAruLtachUser || sapAruUser || hostHscUser || sapLOPMedSurg || sapLtachContract || hostUser">
 								<label style="font-size: 12px" for="glCode" class="required">GL Code</label>
 								<select ng-change="glCodeChanged(item)" id="glCode" ng-model="item.glCode" class="form-control glCode">
-									<option ng-if="!hostHscUser" ng-selected="'79016 - Marketing' == item.glCode" value="79016">79016 - Marketing</option>
-									<option ng-if="!hostHscUser" ng-selected="'79015 - Employee Relations' == item.glCode" value="79015">79015 - Employee Relations</option>
-									<option ng-if="!hostHscUser" ng-selected="'72070 - Office Supplies' == item.glCode" value="72070">72070 - Office Supplies</option>
-									<option ng-if="!hostHscUser" ng-selected="'79020 - Other Supplies' == item.glCode" value="79020">79020 - Other Supplies</option>
-									<option ng-if="!hostHscUser" ng-selected="'79014 - Public Relations' == item.glCode" value="79014">79014 - Public Relations</option>
+									<option ng-if="!hostHscUser && !hostUser" ng-selected="'79016 - Marketing' == item.glCode" value="79016">79016 - Marketing</option>
+									<option ng-if="!hostHscUser && !hostUser" ng-selected="'79015 - Employee Relations' == item.glCode" value="79015">79015 - Employee Relations</option>
+									<option ng-if="!hostHscUser && !hostUser" ng-selected="'72070 - Office Supplies' == item.glCode" value="72070">72070 - Office Supplies</option>
+									<option ng-if="!hostHscUser && !hostUser" ng-selected="'79020 - Other Supplies' == item.glCode" value="79020">79020 - Other Supplies</option>
+									<option ng-if="!hostHscUser && !hostUser" ng-selected="'79014 - Public Relations' == item.glCode" value="79014">79014 - Public Relations</option>
 									<option ng-if="hostHscUser" ng-selected="'446 - Supplies' == item.glCode" value="446">446 - Supplies</option>
 									<option ng-if="hostHscUser" ng-selected="'801 - Recruiting' == item.glCode" value="801">801 - Recruiting</option>
 									<option ng-if="sapAruLtachUser" ng-selected="'Other' == item.glCode" value="Other">Other</option>
@@ -693,6 +694,7 @@
 									<option ng-if="sapBehavioralUser" ng-selected="'Other' == item.glCode" value="Other">Other</option>
 									<option ng-if="sapHscUser" ng-selected="'Other' == item.glCode" value="Other">Other</option>
 									<option ng-if="hostHscUser" ng-selected="'Other' == item.glCode" value="Other">Other</option>
+									<option ng-if="hostUser" ng-selected="'Other' == item.glCode" value="Other">Other</option>
 									<option ng-if="sapIrfUser" ng-selected="'Other' == item.glCode" value="Other">Other</option>
 									<option ng-if="sapLtachContract" ng-selected="'Other' == item.glCode" value="Other">Other</option>
 								</select>

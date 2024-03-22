@@ -59,6 +59,10 @@ four51.app.controller('CartViewCtrl', ['$scope', '$routeParams', '$location', '$
 				if (item.otherglCode) {
 					dept = item.otherglCode + '_'
 				}
+				if (item.otherDeptText && item.otherglCode) {
+					dept = item.otherDeptText + '_' + item.otherglCode + '_';
+					if (glCode) glCode = '';
+				}
 
 				$scope.currentOrder.LineItems[i].CostCenter = facilityNumber + dept + hostDept + glCode + CSglCode + hostGlCode;
 			}
