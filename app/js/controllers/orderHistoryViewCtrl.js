@@ -115,6 +115,22 @@ four51.app.controller('OrderViewCtrl', ['$scope', '$location', '$routeParams', '
 			}
 		};
 
+		$scope.downloadProductionPrintablePdf = function(item) {
+			if ('Variant' in item && 'ProductionURL' in item.Variant && item.Variant.ProductionURL.Value.length > 0) {
+				return item.Variant.ProductionURL.Value;
+			} else {
+				return null;
+			}
+		};
+
+		$scope.downloadProofPrintablePdf = function(item) {
+			if ('Variant' in item && !('ProductionURL' in item.Variant) && 'ProofUrl' in item.Variant && item.Variant.ProofUrl.Value.length > 0) {
+				return item.Variant.ProofUrl.Value.replace('PDF', 'PDFO');
+			} else {
+				return null;
+			}
+		};
+
         $scope.downloadProof = function(item) {
             $scope.errorMessage = null;
             Variant.get({VariantInteropID: item.Variant.InteropID, ProductInteropID: item.Product.InteropID }, function(v) {

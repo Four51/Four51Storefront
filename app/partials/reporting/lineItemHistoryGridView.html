@@ -12,13 +12,13 @@
                 <span ng-if="spec.ControlType != 'File'">{{spec.Value || ('(unspecified)' | xlat)}}</span>
             </li>
         </ul>
-        <div ng-if="item.Product.Type !== 'Static' && item.ProductionURL">
-            <a class="btn btn-primary printable-pdf-link" href="{{item.ProductionURL}}" target="_blank">
+        <div ng-if="item.Product.Type !== 'Static' && item.Variant.ProductionURL">
+            <a class="btn btn-primary printable-pdf-link" href="{{downloadProductionPrintablePdf(item)}}" target="_blank">
                 <span><i class="fa fa-download"></i> {{'Download Printable PDF ' | r | xlat}}</span>
             </a>
         </div>
-        <div ng-if="item.Product.Type !== 'Static' && !item.ProductionURL && item.ProofUrl">
-            <a class="btn btn-primary printable-pdf-link" href="{{item.ProofUrl.replace('PDF', 'PDFO')}}" target="_blank">
+        <div ng-if="item.Product.Type !== 'Static' && !item.Variant.ProductionURL && item.Variant.ProofUrl">
+            <a class="btn btn-primary printable-pdf-link" href="{{downloadProofPrintablePdf(item)}}" target="_blank">
                 <span><i class="fa fa-download"></i> {{'Download Printable PDF ' | r | xlat}}</span>
             </a>
         </div>
