@@ -130,23 +130,27 @@ four51.app.directive('ordershipping', ['Order', 'Shipper', 'Address', 'AddressLi
 				}
 			});
 
-			$scope.$watch('currentOrder.LineItems[0].ShipFirstName', function(newValue) {
-				var shipFirstName = newValue;
-				if ($scope.currentOrder) {
-					angular.forEach($scope.currentOrder.LineItems, function(item) {
-						item.ShipFirstName = shipFirstName;
-					});
-				}
-			});
-
-			$scope.$watch('currentOrder.LineItems[0].ShipLastName', function(newValue) {
-				var shipLastName = newValue;
-				if ($scope.currentOrder) {
-					angular.forEach($scope.currentOrder.LineItems, function(item) {
-						item.ShipLastName = shipLastName;
-					});
-				}
-			});
+			$scope.onShipFirstNameBlur = function() {
+                var shipFirstName = $scope.currentOrder.LineItems[0].ShipFirstName;
+                if ($scope.currentOrder) {
+                    angular.forEach($scope.currentOrder.LineItems, function(item) {
+                        if (!item.ShipFirstName) {
+                            item.ShipFirstName = shipFirstName;
+                        }
+                    });
+                }
+            };
+            
+            $scope.onShipLastNameBlur = function() {
+                var shipLastName = $scope.currentOrder.LineItems[0].ShipLastName;
+                if ($scope.currentOrder) {
+                    angular.forEach($scope.currentOrder.LineItems, function(item) {
+                        if (!item.ShipLastName) {
+                            item.ShipLastName = shipLastName;
+                        }
+                    });
+                }
+            };
 
 			$scope.setShipAddressAtLineItem = function(item) {
 				item.ShipFirstName = null;
