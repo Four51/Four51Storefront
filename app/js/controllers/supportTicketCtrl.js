@@ -74,6 +74,10 @@ four51.app.controller('SupportTicketCtrl', ['$scope', function ($scope) {
         }
     });
 
-    // In case the iframe loaded before this controller wired up.
-    sendInit();
+    // Also send the init payload once the iframe finishes loading. This covers
+    // the case where the iframe became ready before this controller attached its
+    // message listener. On 'load' the frame is at the app-server origin, so the
+    // targetOrigin matches and no postMessage origin-mismatch error occurs.
+    var ticketingFrameEl = document.getElementById('ticketingFrame');
+    if (ticketingFrameEl) ticketingFrameEl.addEventListener('load', sendInit);
 }]);
