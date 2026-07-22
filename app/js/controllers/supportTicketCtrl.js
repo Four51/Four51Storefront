@@ -40,25 +40,34 @@ four51.app.controller('SupportTicketCtrl', ['$scope', function ($scope) {
     function sendInit() {
         var frame = document.getElementById('ticketingFrame');
         if (!frame || !frame.contentWindow || !$scope.user) return;
-        frame.contentWindow.postMessage({
-            type: 'ticketing:init',
-            payload: {
-                env: env,
-                storefront: window.location.host,
-                vampireToken: VAMPIRE_TOKEN,
-                color: brandColor(),
-                user: {
-                    id: $scope.user.ID,
-                    firstName: $scope.user.FirstName,
-                    lastName: $scope.user.LastName,
-                    email: $scope.user.Email,
-                    companyName: $scope.user.Company && $scope.user.Company.Name,
-                    allowTicketing: $scope.user.AllowTicketing === true,
-                    ticketingDashboard: $scope.user.TicketingDashboard === true
-                },
-                categoryTree: $scope.tree || []
-            }
-        }, IFRAME_ORIGIN);
+        var payload = {
+            env: env,
+            storefront: window.location.host,
+            vampireToken: VAMPIRE_TOKEN,
+            color: brandColor(),
+            user: {
+                id: $scope.user.ID,
+                firstName: $scope.user.FirstName,
+                lastName: $scope.user.LastName,
+                email: $scope.user.Email,
+                companyName: $scope.user.Company && $scope.user.Company.Name,
+                allowTicketing: $scope.user.AllowTicketing === true,
+                ticketingDashboard: $scope.user.TicketingDashboard === true
+            },
+            categoryTree: $scope.tree || []
+        };
+        // postMessage uses structured clone, which throws on functions/Angular
+        // internals that some storefront category trees ($scope.tree) carry
+        // ("Function object could not be cloned"). JSON round-trip to plain data;
+        // if that fails (e.g. a circular tree), drop the tree rather than break init.
+        var safePayload;
+        try {
+            safePayload = JSON.parse(JSON.stringify(payload));
+        } catch (e) {
+            payload.categoryTree = [];
+            safePayload = JSON.parse(JSON.stringify(payload));
+        }
+        frame.contentWindow.postMessage({ type: 'ticketing:init', payload: safePayload }, IFRAME_ORIGIN);
     }
 
     // The iframe announces itself when ready; respond with the init payload.
