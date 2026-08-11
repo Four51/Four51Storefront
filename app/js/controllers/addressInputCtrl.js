@@ -1,15 +1,63 @@
 four51.app.controller('AddressInputCtrl', ['$scope', '$rootScope', '$location', 'User', 'Address', 'Resources',
 function ($scope, $rootScope, $location, User, Address, Resources) {
+    $scope.validatedAddress = null;
+    $scope.originalAddress = null;
+    $scope.showModal = false;
+
+    // Function to validate address
+    $scope.validateAddress = function() {
+        $scope.originalAddress = this.address;
+        Address.validate(this.address,
+            function(address) {
+                if(address.address){
+                    $scope.validatedAddress = angular.copy($scope.originalAddress);
+                    $scope.validatedAddress.Street1 = address.address.streetAddress;
+                    $scope.validatedAddress.Street2 = address.address.secondaryAddress;
+                    $scope.validatedAddress.City = address.address.city;
+                    $scope.validatedAddress.State = address.address.state;
+                    if(address.address.ZIPPlus4){
+                        $scope.validatedAddress.Zip = address.address.ZIPCode + "-" + address.address.ZIPPlus4;
+                    }
+                    else{
+                        $scope.validatedAddress.Zip = address.address.ZIPCode
+                    }
+                }
+                else{
+                    $scope.validatedAddress = null;
+                }
+                $scope.showModal = true; // Show modal
+            },
+            function(ex) {
+                $scope.showModal = false; // Close modal
+                if (ex.Code.is('ObjectExistsException'))
+                    $scope.objectExists = true;
+            }
+        );
+        this.address = $scope.originalAddress;
+    };
+
+    // Function to select an address
+    $scope.selectAddress = function(selectedAddress) {
+        this.address = selectedAddress;
+        $scope.save();
+    };
+
     $scope.save = function() {
 	    $scope.objectExists = false;
+        if(!this.address.State){
+            this.address.State  =  '';
+        }
         Address.save(this.address,
 	        function(address) {
                 $rootScope.$broadcast('event:AddressSaved', address);
+                $scope.showModal = false; // Close modal
                 $location.path($scope.return);
             },
 	        function(ex) {
-	            if (ex.Code.is('ObjectExistsException'))
-	                $scope.objectExists = true;
+	            if (ex.Code.is('ObjectExistsException')){
+                    $scope.objectExists = true;
+                    $scope.showModal = false; // Close modal
+                }
             }
         );
     };

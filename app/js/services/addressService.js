@@ -38,9 +38,22 @@ four51.app.factory('Address', ['$resource', '$451', 'Error', function($resource,
         });
     }
 
+    var _validate = function(address, success, error) {
+        return $resource($451.api('address/validate')).save(address).$promise.then(
+            function(add) {
+                _extend(add);
+                _then(success, add);
+            },
+            function(ex) {
+                error(Error.format(ex));
+            }
+        );
+    }
+
     return {
         get: _get,
         save: _save,
-        delete: _delete
+        delete: _delete,
+        validate: _validate
     };
 }]);

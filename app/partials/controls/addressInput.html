@@ -6,7 +6,7 @@
 			<i class="fa fa-map-marker"></i>
 		</div>
 	</div>
-	<form name="addressEdit" ng-submit="save()">
+	<form name="addressEdit" ng-submit="validateAddress()">
 		<div class="row">
 			<div class="col-sm-6 view-form-icon">
 				<div>
@@ -139,4 +139,66 @@
 			</button>
 		</div>
 	</form>
+    <!-- Modal -->
+    <div class="modal fade in" ng-show="showModal" style="display: block; background: rgba(0,0,0,0.5);">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <h4 class="modal-title">We found a close verified match to the address you entered. Please confirm the address to use.</h4>
+                            </div>
+                            <div class="col-md-1">
+                                <button type="button" class="btn close" ng-click="showModal = false"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row address-validate-row">
+                            <div class="col-md-6 address-validate-col">
+                                <div class="address-validate-address">
+                                    <!-- <div ng-show="validatedAddress.AddressName"><small>{{validatedAddress.AddressName}}</small></div>
+                                    <div ng-show="validatedAddress.CompanyName"><small>{{validatedAddress.CompanyName}}</small></div>
+                                    <div ng-show="(validatedAddress.FirstName || validatedAddress.LastName) && (!user.Permissions.contains('EditShipToName') && !validatedAddress.IsCustEditable)">
+                                        <small>{{validatedAddress.FirstName + ' ' + validatedAddress.LastName}}</small>
+                                    </div> -->
+                                    <div ng-show="!validatedAddress">
+                                        <small>Address could not be validated.</small>
+                                    </div>
+                                    <div ng-show="validatedAddress.Street1"><small>{{validatedAddress.Street1}}</small></div>
+                                    <div ng-show="validatedAddress.Street2"><small>{{validatedAddress.Street2}}</small></div>
+                                    <div ng-show="validatedAddress.City || validatedAddress.State || validatedAddress.Zip">
+                                        <small>{{validatedAddress.City}}<span ng-if="validatedAddress.City && validatedAddress.State">, </span> {{validatedAddress.State}} {{validatedAddress.Zip}}</small>
+                                    </div>
+                                </div>
+                                <button class="btn btn-success btn-block" ng-click="selectAddress(validatedAddress)" ng-disabled="!validatedAddress">
+                                    Use Suggested Address
+                                </button>
+                            </div>
+                            <div class="col-md-6 address-validate-col">
+                                <div class="address-validate-address">
+                                    <!-- <div ng-show="originalAddress.AddressName"><small>{{originalAddress.AddressName}}</small></div>
+                                    <div ng-show="originalAddress.CompanyName"><small>{{originalAddress.CompanyName}}</small></div>
+                                    <div ng-show="(originalAddress.FirstName || originalAddress.LastName) && (!user.Permissions.contains('EditShipToName') && !originalAddress.IsCustEditable)">
+                                        <small>{{originalAddress.FirstName + ' ' + originalAddress.LastName}}</small>
+                                    </div> -->
+                                    <div ng-show="originalAddress.Street1"><small>{{originalAddress.Street1}}</small></div>
+                                    <div ng-show="originalAddress.Street2"><small>{{originalAddress.Street2}}</small></div>
+                                    <div ng-show="originalAddress.City || originalAddress.State || originalAddress.Zip">
+                                        <small>{{originalAddress.City}}<span ng-if="originalAddress.City && originalAddress.State">, </span> {{originalAddress.State}} {{originalAddress.Zip}}</small>
+                                    </div>
+                                </div>
+                                <button class="btn btn-danger btn-block" ng-click="selectAddress(originalAddress)">
+                                    Use Entered Address
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
